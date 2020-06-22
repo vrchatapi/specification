@@ -1,7 +1,13 @@
 openapi: 3.0.1
 info:
   title: VRChat API Documentation
-  description: ''
+  description: "**Official statement from VRChat Team**: *Use of the API using applications other than the approved methods (website, VRChat application) are not officially supported. You may use the API for your own application, but keep these guidelines in mind:*
+  
+  
+  *We do not provide documentation or support for the API, Don't make queries to the API more than once per 60 seconds and abuse of the API may result in account termination. Access to API endpoints may break at any given time, with no warning.*
+  
+  
+  As stated, this documentation was not created with the help of the official VRChat team. Therefore this documentation is not an official documentation of the VRChat API and may not be always up to date with the latest versions. If you find that an endpoint is not longer valid please create an [issue on GitHub](https://github.com/vrchatapi/specification/issues) and so we can fix it."
   termsOfService: https://vrchat.com/legal/
   contact:
     email: me@ruby.js.org
@@ -13,7 +19,9 @@ externalDocs:
   description: Join our Discord
   url: https://discord.gg/WUgGJhS
 servers:
-- url: https://petstore.swagger.io/v2
+- url: https://api.vrchat.cloud/api/1/
+- url: https://vrchat.com/api/1/
+- url: https://dev-api.vrchat.cloud/api/1/
 tags:
 - name: pet
   description: Everything about your Pets
@@ -711,15 +719,7 @@ components:
         message:
           type: string
   securitySchemes:
-    petstore_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: http://petstore.swagger.io/oauth/dialog
-          scopes:
-            write:pets: modify pets in your account
-            read:pets: read your pets
     api_key:
       type: apiKey
-      name: api_key
-      in: header
+      name: apiKey
+      in: query
