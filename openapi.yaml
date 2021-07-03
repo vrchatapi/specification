@@ -1,725 +1,334 @@
-openapi: 3.0.1
+openapi: 3.0.0
 info:
   title: VRChat API Documentation
-  description: "**Official statement from VRChat Team**: *Use of the API using applications other than the approved methods (website, VRChat application) are not officially supported. You may use the API for your own application, but keep these guidelines in mind:*
-  
-  
-  *We do not provide documentation or support for the API, Don't make queries to the API more than once per 60 seconds and abuse of the API may result in account termination. Access to API endpoints may break at any given time, with no warning.*
-  
-  
-  As stated, this documentation was not created with the help of the official VRChat team. Therefore this documentation is not an official documentation of the VRChat API and may not be always up to date with the latest versions. If you find that an endpoint is not longer valid please create an [issue on GitHub](https://github.com/vrchatapi/specification/issues) and so we can fix it."
-  termsOfService: https://vrchat.com/legal/
-  contact:
-    email: me@ruby.js.org
-  license:
-    name: GNU Affero General Public License v3.0
-    url: https://github.com/vrchatapi/specification/blob/master/LICENSE
   version: 1.0.0
-externalDocs:
-  description: Join our Discord
-  url: https://discord.gg/WUgGJhS
+  contact:
+    name: Unofficial VRChat API Documentation Project
+    url: 'https://github.com/VRChatAPI'
+    email: me@ruby.js.org
+  termsOfService: 'https://vrchat.com/legal/'
+  license:
+    url: 'https://github.com/vrchatapi/specification/blob/master/LICENSE'
+    name: GNU Affero General Public License v3.0
+  description: |-
+    **Official statement from VRChat Team**: Use of the API using applications other than the approved methods (website, VRChat application) are not officially supported. You may use the API for your own application, but keep these guidelines in mind:
+
+    * We do not provide documentation or support for the API.
+    * Do not make queries to the API more than once per 60 seconds.
+    * Abuse of the API may result in account termination.
+    * Access to API endpoints may break at any given time, with no warning.
+
+    As stated, this documentation was not created with the help of the official VRChat team. Therefore this documentation is not an official documentation of the VRChat API and may not be always up to date with the latest versions. If you find that a page or endpoint is not longer valid please create an [issue on GitHub](https://github.com/vrchatapi/specification/issues) and tell us so we can fix it.
 servers:
-- url: https://api.vrchat.cloud/api/1/
-- url: https://vrchat.com/api/1/
-- url: https://dev-api.vrchat.cloud/api/1/
-tags:
-- name: pet
-  description: Everything about your Pets
-  externalDocs:
-    description: Find out more
-    url: http://swagger.io
-- name: store
-  description: Access to Petstore orders
-- name: user
-  description: Operations about user
-  externalDocs:
-    description: Find out more about our store
-    url: http://swagger.io
+  - url: 'https://api.vrchat.cloud/api/1'
+  - url: 'https://vrchat.com/api/1'
+    description: ''
 paths:
-  /pet:
-    put:
-      tags:
-      - pet
-      summary: Update an existing pet
-      operationId: updatePet
-      requestBody:
-        description: Pet object that needs to be added to the store
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pet'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Pet'
-        required: true
-      responses:
-        400:
-          description: Invalid ID supplied
-          content: {}
-        404:
-          description: Pet not found
-          content: {}
-        405:
-          description: Validation exception
-          content: {}
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      x-codegen-request-body-name: body
-    post:
-      tags:
-      - pet
-      summary: Add a new pet to the store
-      operationId: addPet
-      requestBody:
-        description: Pet object that needs to be added to the store
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pet'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Pet'
-        required: true
-      responses:
-        405:
-          description: Invalid input
-          content: {}
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      x-codegen-request-body-name: body
-  /pet/findByStatus:
+  /auth:
     get:
+      summary: Verify Auth Token
       tags:
-      - pet
-      summary: Finds Pets by status
-      description: Multiple status values can be provided with comma separated strings
-      operationId: findPetsByStatus
-      parameters:
-      - name: status
-        in: query
-        description: Status values that need to be considered for filter
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: string
-            default: available
-            enum:
-            - available
-            - pending
-            - sold
+        - auth
       responses:
-        200:
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pet'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pet'
-        400:
-          description: Invalid status value
-          content: {}
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-  /pet/findByTags:
-    get:
-      tags:
-      - pet
-      summary: Finds Pets by tags
-      description: Muliple tags can be provided with comma separated strings. Use         tag1,
-        tag2, tag3 for testing.
-      operationId: findPetsByTags
-      parameters:
-      - name: tags
-        in: query
-        description: Tags to filter by
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: string
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pet'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pet'
-        400:
-          description: Invalid tag value
-          content: {}
-      deprecated: true
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-  /pet/{petId}:
-    get:
-      tags:
-      - pet
-      summary: Find pet by ID
-      description: Returns a single pet
-      operationId: getPetById
-      parameters:
-      - name: petId
-        in: path
-        description: ID of pet to return
-        required: true
-        schema:
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Pet'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pet'
-        400:
-          description: Invalid ID supplied
-          content: {}
-        404:
-          description: Pet not found
-          content: {}
-      security:
-      - api_key: []
-    post:
-      tags:
-      - pet
-      summary: Updates a pet in the store with form data
-      operationId: updatePetWithForm
-      parameters:
-      - name: petId
-        in: path
-        description: ID of pet that needs to be updated
-        required: true
-        schema:
-          type: integer
-          format: int64
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              properties:
-                name:
-                  type: string
-                  description: Updated name of the pet
-                status:
-                  type: string
-                  description: Updated status of the pet
-      responses:
-        405:
-          description: Invalid input
-          content: {}
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-    delete:
-      tags:
-      - pet
-      summary: Deletes a pet
-      operationId: deletePet
-      parameters:
-      - name: api_key
-        in: header
-        schema:
-          type: string
-      - name: petId
-        in: path
-        description: Pet id to delete
-        required: true
-        schema:
-          type: integer
-          format: int64
-      responses:
-        400:
-          description: Invalid ID supplied
-          content: {}
-        404:
-          description: Pet not found
-          content: {}
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-  /pet/{petId}/uploadImage:
-    post:
-      tags:
-      - pet
-      summary: uploads an image
-      operationId: uploadFile
-      parameters:
-      - name: petId
-        in: path
-        description: ID of pet to update
-        required: true
-        schema:
-          type: integer
-          format: int64
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              properties:
-                additionalMetadata:
-                  type: string
-                  description: Additional data to pass to server
-                file:
-                  type: string
-                  description: file to upload
-                  format: binary
-      responses:
-        200:
-          description: successful operation
+        '200':
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-  /store/inventory:
-    get:
-      tags:
-      - store
-      summary: Returns pet inventories by status
-      description: Returns a map of status codes to quantities
-      operationId: getInventory
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
+                description: ''
                 type: object
-                additionalProperties:
-                  type: integer
-                  format: int32
+                properties:
+                  ok:
+                    type: boolean
+                  token:
+                    type: string
+                    minLength: 1
+                required:
+                  - ok
+                  - token
+                x-examples:
+                  example-1:
+                    ok: true
+                    token: authcookie_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          headers: {}
+      operationId: get-auth
+      parameters: []
+      description: Verify whether the currently provided Auth Token is valid.
       security:
-      - api_key: []
-  /store/order:
-    post:
+        - auth: []
+  /auth/user:
+    get:
+      summary: Login and/or Get Current User Info
       tags:
-      - store
-      summary: Place an order for a pet
-      operationId: placeOrder
-      requestBody:
-        description: order placed for purchasing the pet
-        content:
-          '*/*':
-            schema:
-              $ref: '#/components/schemas/Order'
-        required: true
+        - auth
       responses:
-        200:
-          description: successful operation
+        '200':
+          description: OK
           content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Order'
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
-        400:
-          description: Invalid Order
-          content: {}
-      x-codegen-request-body-name: body
-  /store/order/{orderId}:
-    get:
-      tags:
-      - store
-      summary: Find purchase order by ID
-      description: For valid response try integer IDs with value >= 1 and <= 10.         Other
-        values will generated exceptions
-      operationId: getOrderById
+                $ref: '#/components/schemas/CurrentUser'
+      operationId: get-auth-user
+      security:
+        - auth: []
+      description: |-
+        Login and/or Get user data from your VRChat account.
+
+        If `Authorization` header is present then a new login session will be generated, and a new `auth` cookie is returned.
+
+        **WARNING: Session Limit:** Each authentication with login credentials counts as a separate session, out of which you have a limited amount. Make sure to save and reuse the `auth` cookie whenever you can, and avoid sending the Authorization header unless strictly neccesary. While the exact number of simultaneous open sessions is secret, expect to **very fast** run into the rate-limit and be temporarily blocked from making new sessions until the old ones expire.
       parameters:
-      - name: orderId
-        in: path
-        description: ID of pet that needs to be fetched
-        required: true
-        schema:
-          maximum: 10.0
-          minimum: 1.0
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Order'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Order'
-        400:
-          description: Invalid ID supplied
-          content: {}
-        404:
-          description: Order not found
-          content: {}
-    delete:
-      tags:
-      - store
-      summary: Delete purchase order by ID
-      description: For valid response try integer IDs with positive integer value.         Negative
-        or non-integer values will generate API errors
-      operationId: deleteOrder
-      parameters:
-      - name: orderId
-        in: path
-        description: ID of the order that needs to be deleted
-        required: true
-        schema:
-          minimum: 1.0
-          type: integer
-          format: int64
-      responses:
-        400:
-          description: Invalid ID supplied
-          content: {}
-        404:
-          description: Order not found
-          content: {}
-  /user:
-    post:
-      tags:
-      - user
-      summary: Create user
-      description: This can only be done by the logged in user.
-      operationId: createUser
-      requestBody:
-        description: Created user object
-        content:
-          '*/*':
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      responses:
-        default:
-          description: successful operation
-          content: {}
-      x-codegen-request-body-name: body
-  /user/createWithArray:
-    post:
-      tags:
-      - user
-      summary: Creates list of users with given input array
-      operationId: createUsersWithArrayInput
-      requestBody:
-        description: List of user object
-        content:
-          '*/*':
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
-        required: true
-      responses:
-        default:
-          description: successful operation
-          content: {}
-      x-codegen-request-body-name: body
-  /user/createWithList:
-    post:
-      tags:
-      - user
-      summary: Creates list of users with given input array
-      operationId: createUsersWithListInput
-      requestBody:
-        description: List of user object
-        content:
-          '*/*':
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
-        required: true
-      responses:
-        default:
-          description: successful operation
-          content: {}
-      x-codegen-request-body-name: body
-  /user/login:
-    get:
-      tags:
-      - user
-      summary: Logs user into the system
-      operationId: loginUser
-      parameters:
-      - name: username
-        in: query
-        description: The user name for login
-        required: true
-        schema:
-          type: string
-      - name: password
-        in: query
-        description: The password for login in clear text
-        required: true
-        schema:
-          type: string
-      responses:
-        200:
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
-          content:
-            application/xml:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Invalid username/password supplied
-          content: {}
-  /user/logout:
-    get:
-      tags:
-      - user
-      summary: Logs out current logged in user session
-      operationId: logoutUser
-      responses:
-        default:
-          description: successful operation
-          content: {}
-  /user/{username}:
-    get:
-      tags:
-      - user
-      summary: Get user by user name
-      operationId: getUserByName
-      parameters:
-      - name: username
-        in: path
-        description: 'The name that needs to be fetched. Use user1 for testing. '
-        required: true
-        schema:
-          type: string
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        400:
-          description: Invalid username supplied
-          content: {}
-        404:
-          description: User not found
-          content: {}
-    put:
-      tags:
-      - user
-      summary: Updated user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      parameters:
-      - name: username
-        in: path
-        description: name that need to be updated
-        required: true
-        schema:
-          type: string
-      requestBody:
-        description: Updated user object
-        content:
-          '*/*':
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      responses:
-        400:
-          description: Invalid user supplied
-          content: {}
-        404:
-          description: User not found
-          content: {}
-      x-codegen-request-body-name: body
-    delete:
-      tags:
-      - user
-      summary: Delete user
-      description: This can only be done by the logged in user.
-      operationId: deleteUser
-      parameters:
-      - name: username
-        in: path
-        description: The name that needs to be deleted
-        required: true
-        schema:
-          type: string
-      responses:
-        400:
-          description: Invalid username supplied
-          content: {}
-        404:
-          description: User not found
-          content: {}
+        - schema:
+            type: string
+            example: Basic Rm9vcmFjazptYXhmYXgyNTI1ISE=
+          in: header
+          name: Authorization
+          description: Authorization header
 components:
   schemas:
-    Order:
+    AvatarID:
+      type: string
+      title: AvatarID
+      pattern: 'avtr_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+    CurrentUser:
+      description: ''
       type: object
+      x-examples: {}
       properties:
         id:
-          type: integer
-          format: int64
-        petId:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int32
-        shipDate:
-          type: string
-          format: date-time
-        status:
-          type: string
-          description: Order Status
-          enum:
-          - placed
-          - approved
-          - delivered
-        complete:
-          type: boolean
-          default: false
-      xml:
-        name: Order
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      xml:
-        name: Category
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/UserID'
         username:
           type: string
-        firstName:
+        displayName:
           type: string
-        lastName:
+        userIcon:
           type: string
-        email:
+        bio:
           type: string
-        password:
-          type: string
-        phone:
-          type: string
-        userStatus:
-          type: integer
-          description: User Status
-          format: int32
-      xml:
-        name: User
-    Tag:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      xml:
-        name: Tag
-    Pet:
-      required:
-      - name
-      - photoUrls
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        category:
-          $ref: '#/components/schemas/Category'
-        name:
-          type: string
-          example: doggie
-        photoUrls:
+        bioLinks:
           type: array
-          xml:
-            name: photoUrl
-            wrapped: true
           items:
             type: string
+        profilePicOverride:
+          type: string
+        statusDescription:
+          type: string
+        pastDisplayNames:
+          type: array
+          items:
+            type: string
+        hasEmail:
+          type: boolean
+        hasPendingEmail:
+          type: boolean
+        obfuscatedEmail:
+          type: string
+        obfuscatedPendingEmail:
+          type: string
+        emailVerified:
+          type: boolean
+        hasBirthday:
+          type: boolean
+        unsubscribe:
+          type: boolean
+        statusHistory:
+          type: array
+          items:
+            type: string
+        statusFirstTime:
+          type: boolean
+        friends:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserID'
+        friendGroupNames:
+          type: array
+          items:
+            type: string
+        currentAvatarImageUrl:
+          type: string
+        currentAvatarThumbnailImageUrl:
+          type: string
+        fallbackAvatar:
+          $ref: '#/components/schemas/AvatarID'
+        currentAvatar:
+          $ref: '#/components/schemas/AvatarID'
+        currentAvatarAssetUrl:
+          type: string
+        accountDeletionDate:
+          oneOf:
+            - $ref: '#/components/schemas/Date'
+            - properties: {}
+              nullable: true
+        acceptedTOSVersion:
+          type: number
+        steamId:
+          type: string
+        steamDetails:
+          type: object
+        oculusId:
+          type: string
+        hasLoggedInFromClient:
+          type: boolean
+        homeLocation:
+          $ref: '#/components/schemas/WorldID'
+        twoFactorAuthEnabled:
+          type: boolean
+        state:
+          $ref: '#/components/schemas/UserState'
         tags:
           type: array
-          xml:
-            name: tag
-            wrapped: true
           items:
-            $ref: '#/components/schemas/Tag'
+            type: string
+        developerType:
+          $ref: '#/components/schemas/DeveloperType'
+        last_login:
+          $ref: '#/components/schemas/DateTime'
+        last_platform:
+          $ref: '#/components/schemas/Platform'
+        allowAvatarCopying:
+          type: boolean
         status:
+          $ref: '#/components/schemas/UserStatus'
+        date_joined:
+          $ref: '#/components/schemas/Date'
+        isFriend:
+          type: boolean
+        friendKey:
           type: string
-          description: pet status in the store
-          enum:
-          - available
-          - pending
-          - sold
-      xml:
-        name: Pet
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
+        onlineFriends:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserID'
+        activeFriends:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserID'
+        offlineFriends:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserID'
+      required:
+        - id
+        - username
+        - displayName
+        - userIcon
+        - bio
+        - bioLinks
+        - profilePicOverride
+        - statusDescription
+        - pastDisplayNames
+        - hasEmail
+        - hasPendingEmail
+        - obfuscatedEmail
+        - obfuscatedPendingEmail
+        - emailVerified
+        - hasBirthday
+        - unsubscribe
+        - statusHistory
+        - statusFirstTime
+        - friends
+        - friendGroupNames
+        - currentAvatarImageUrl
+        - currentAvatarThumbnailImageUrl
+        - fallbackAvatar
+        - currentAvatar
+        - currentAvatarAssetUrl
+        - accountDeletionDate
+        - acceptedTOSVersion
+        - steamId
+        - steamDetails
+        - oculusId
+        - hasLoggedInFromClient
+        - homeLocation
+        - twoFactorAuthEnabled
+        - state
+        - tags
+        - developerType
+        - last_login
+        - last_platform
+        - allowAvatarCopying
+        - status
+        - date_joined
+        - isFriend
+        - friendKey
+        - onlineFriends
+        - activeFriends
+        - offlineFriends
+    DeveloperType:
+      type: string
+      title: DeveloperType
+      enum:
+        - none
+        - trusted
+        - internal
+        - moderator
+      default: none
+    Date:
+      type: string
+      title: Date
+      pattern: '([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))'
+      minLength: 10
+      maxLength: 10
+      example: '1970-01-01'
+      format: date
+      readOnly: true
+    DateTime:
+      type: string
+      title: DateTime
+      pattern: '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]\.[0-9]{3}Z'
+      example: '2011-10-05T14:48:00.000Z'
+      format: date-time
+      readOnly: true
+    Platform:
+      type: string
+      title: Platform
+      enum:
+        - standalonewindows
+        - android
+    UserID:
+      type: string
+      title: UserID
+      example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+      readOnly: true
+    UserState:
+      type: string
+      title: UserState
+      default: offline
+      enum:
+        - offline
+        - active
+        - online
+      description: |-
+        * "online" User is online in VRChat
+        * "active" User is online, but not in VRChat
+        * "offline" User is offline
+    UserStatus:
+      type: string
+      title: UserStatus
+      description: 'Defines the User''s current status, for example "ask me", "join me" or "offline. This status is a combined indicator of their online activity and privacy preference.'
+      enum:
+        - active
+        - join me
+        - ask me
+        - busy
+        - offline
+    WorldID:
+      type: string
+      title: WorldID
+      pattern: 'wrld_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+      example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
   securitySchemes:
-    api_key:
+    apiKey:
+      name: API Key
       type: apiKey
-      name: apiKey
-      in: query
+      in: cookie
+    auth:
+      name: Auth Token
+      type: apiKey
+      in: cookie
+      description: ''
+security:
+  - apiKey: []
+tags:
+  - name: auth
