@@ -50,7 +50,14 @@ paths:
       parameters: []
       description: Verify whether the currently provided Auth Token is valid.
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
   /logout:
     put:
       summary: Logout
@@ -91,7 +98,14 @@ paths:
           $ref: '#/components/responses/Missing-Credentials'
       description: Invalidates the auth cookie.
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       tags:
         - authentication
   /auth/user:
@@ -110,7 +124,14 @@ paths:
           $ref: '#/components/responses/Missing-Credentials'
       operationId: get-user
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       description: |-
         Login and/or Get user data from your VRChat account.
 
@@ -157,6 +178,16 @@ paths:
       description: Finishes the login sequence with a normal 2FA-generated code for accounts with 2FA-protection enabled.
       tags:
         - authentication
+      security:
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
+      parameters: []
   /auth/twofactorauth/otp/verify:
     parameters: []
     post:
@@ -190,6 +221,15 @@ paths:
       description: Finishes the login sequence with an OTP (One Time Password) recovery code for accounts with 2FA-protection enabled.
       tags:
         - authentication
+      security:
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
   '/user/{userId}/delete':
     parameters:
       - schema:
@@ -218,7 +258,14 @@ paths:
 
         **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
   /users:
     get:
       summary: Search All Users
@@ -237,7 +284,14 @@ paths:
           $ref: '#/components/responses/Missing-Credentials'
       operationId: search-users
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       parameters:
         - schema:
             type: string
@@ -287,7 +341,14 @@ paths:
           $ref: '#/components/responses/Missing-Credentials'
       operationId: get-user-by-name
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       description: Get public user information about a specific user using their name.
   '/users/{userId}':
     parameters:
@@ -311,7 +372,14 @@ paths:
           $ref: '#/components/responses/Missing-Credentials'
       operationId: get-user-by-id
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       description: Get public user information about a specific user using their ID.
     put:
       summary: Update User Info
@@ -325,7 +393,14 @@ paths:
                 $ref: '#/components/schemas/CurrentUser'
       description: Update a users information such as the email and birthday.
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       requestBody:
         content:
           application/json:
@@ -372,7 +447,14 @@ paths:
           $ref: '#/components/responses/Invalid-Admin-Credentials'
       operationId: search-users-active
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       parameters:
         - schema:
             type: string
@@ -706,7 +788,14 @@ paths:
                   $ref: '#/components/schemas/LimitedUser'
       operationId: get-friends
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       parameters:
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/number'
@@ -727,7 +816,14 @@ paths:
           $ref: '#/components/responses/Friend-Status'
       operationId: get-friend-status
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       description: 'Retrieve if the user is currently a friend with a given user, if they have an outgoing friend request, and if they have an incoming friend request. The proper way to receive and accept friend request is by checking if the user has an incoming `Notification` of type `friendRequest`, and then accepting that notification.'
   '/user/{userId}/friendRequest':
     parameters:
@@ -743,7 +839,14 @@ paths:
       operationId: send-friend-request
       description: Send a friend request to another user.
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           $ref: '#/components/responses/Notification-Response'
@@ -764,7 +867,14 @@ paths:
           $ref: '#/components/responses/Unfriend-Error'
       description: Unfriend a user by ID.
       security:
-        - auth: []
+        - apiKeyQuery: []
+          authHeader: []
+        - apiKeyCookie: []
+          authHeader: []
+        - apiKeyQuery: []
+          authCookie: []
+        - apiKeyCookie: []
+          authCookie: []
       tags:
         - friends
 components:
@@ -1656,14 +1766,25 @@ components:
         - seen
         - created_at
   securitySchemes:
-    apiKey:
-      name: API Key
+    apiKeyQuery:
+      name: apiKey
+      type: apiKey
+      in: query
+      description: API Key via Query
+    apiKeyCookie:
+      name: apiKey
       type: apiKey
       in: cookie
-    auth:
-      name: Auth Token
+      description: API Key via Cookie
+    authHeader:
+      type: http
+      scheme: basic
+      description: Auth token via Header
+    authCookie:
+      name: auth
       type: apiKey
       in: cookie
+      description: Auth Token via Cookie
   responses:
     Missing-Credentials:
       description: Error response due to missing auth token cookie.
@@ -1806,7 +1927,8 @@ components:
         minimum: 0
       description: Offset of where search results start
 security:
-  - apiKey: []
+  - apiKeyQuery: []
+  - apiKeyCookie: []
 tags:
   - name: authentication
   - name: users
