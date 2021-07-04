@@ -51,7 +51,7 @@ paths:
           headers: {}
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: get-auth
+      operationId: verify-auth-token
       parameters: []
       description: Verify whether the currently provided Auth Token is valid.
       security:
@@ -59,7 +59,7 @@ paths:
   /logout:
     put:
       summary: Logout
-      operationId: put-logout
+      operationId: logout
       responses:
         '200':
           description: OK
@@ -119,7 +119,7 @@ paths:
                 $ref: '#/components/schemas/CurrentUser'
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: get-auth-user
+      operationId: get-user
       security:
         - auth: []
       description: |-
@@ -139,7 +139,7 @@ paths:
     parameters: []
     post:
       summary: Verify 2FA code
-      operationId: post-auth-twofactorauth-totp-verify
+      operationId: verify-2fa
       responses:
         '200':
           description: OK
@@ -172,7 +172,7 @@ paths:
     parameters: []
     post:
       summary: Verify 2FA code with Recovery code
-      operationId: post-auth-twofactorauth-otp-verify
+      operationId: verify-recovery-code
       responses:
         '200':
           description: OK
@@ -210,7 +210,7 @@ paths:
         required: true
     put:
       summary: Delete User
-      operationId: put-user-userId-delete
+      operationId: delete-user
       responses:
         '200':
           description: OK
@@ -250,7 +250,7 @@ paths:
                 $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: get-users-userId
+      operationId: get-user-by-id
       security:
         - auth: []
       description: Get public user information about a specific user using their ID.
@@ -315,7 +315,7 @@ paths:
                 $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: get-users-username-name
+      operationId: get-user-by-name
       security:
         - auth: []
       description: Get public user information about a specific user using their name.
@@ -335,7 +335,7 @@ paths:
                   $ref: '#/components/schemas/LimitedUser'
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: get-users
+      operationId: search-users
       security:
         - auth: []
       parameters:
@@ -381,7 +381,7 @@ paths:
                   $ref: '#/components/schemas/LimitedUser'
         '403':
           $ref: '#/components/responses/Invalid-Admin-Credentials'
-      operationId: get-users-active
+      operationId: search-users-active
       security:
         - auth: []
       parameters:
@@ -422,36 +422,7 @@ paths:
       description: 'Gets the overall health status, the server name, and the current build version tag of the API.'
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  serverName:
-                    type: string
-                    minLength: 1
-                  buildVersionTag:
-                    type: string
-                    minLength: 1
-                required:
-                  - ok
-                  - serverName
-                  - buildVersionTag
-                x-examples:
-                  example-1:
-                    ok: true
-                    serverName: prod-api-green-marsh-dgt
-                    buildVersionTag: master-build-2021-06-24-fred-drakeshoot
-              examples:
-                Example response:
-                  value:
-                    ok: true
-                    serverName: prod-api-green-marsh-dgt
-                    buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+          $ref: '#/components/responses/API-Health'
       security: []
   /config:
     get:
@@ -702,6 +673,43 @@ paths:
         API config contains configuration that the clients needs to work properly.
 
         Currently the most important value here is `clientApiKey` which is used for all other API endpoints.
+      security: []
+  /visits:
+    get:
+      summary: Current Online Users
+      tags:
+        - system
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                description: Number of online users
+      operationId: get-current-online-users
+      security: []
+      description: |-
+        Returns in plain format the number of currently online users.
+
+        **NOTE:** The response type is not of JSON, but is an integer in plain ASCII format.
+  /time:
+    get:
+      summary: Current System Time
+      tags:
+        - system
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DateTime'
+      operationId: get-system-time
+      description: |-
+        Returns in plain format the current time of the API server.
+
+        **NOTE:** The response type is not of JSON, but is a string in plain ASCII format.
       security: []
 components:
   schemas:
@@ -1608,6 +1616,37 @@ components:
                 error:
                   message: '"Invalid Admin Credentials"'
                   status_code: 403
+    API-Health:
+      description: API's Health
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              ok:
+                type: boolean
+              serverName:
+                type: string
+                minLength: 1
+              buildVersionTag:
+                type: string
+                minLength: 1
+            required:
+              - ok
+              - serverName
+              - buildVersionTag
+            x-examples:
+              example-1:
+                ok: true
+                serverName: prod-api-green-marsh-dgt
+                buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+          examples:
+            Example Response:
+              value:
+                ok: true
+                serverName: prod-api-green-marsh-dgt
+                buildVersionTag: master-build-2021-06-24-fred-drakeshoot
 security:
   - apiKey: []
 tags:
