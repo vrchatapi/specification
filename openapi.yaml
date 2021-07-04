@@ -49,6 +49,8 @@ paths:
                     ok: true
                     token: authcookie_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           headers: {}
+        '401':
+          $ref: '#/components/responses/Missing-Credentials'
       operationId: get-auth
       parameters: []
       description: Verify whether the currently provided Auth Token is valid.
@@ -96,6 +98,8 @@ paths:
                     success:
                       message: Ok!
                       status_code: 200
+        '401':
+          $ref: '#/components/responses/Missing-Credentials'
       description: Invalidates the auth cookie.
       security:
         - auth: []
@@ -113,6 +117,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CurrentUser'
+        '401':
+          $ref: '#/components/responses/Missing-Credentials'
       operationId: get-auth-user
       security:
         - auth: []
@@ -146,6 +152,8 @@ paths:
                     type: boolean
                 required:
                   - verified
+        '401':
+          $ref: '#/components/responses/Missing-Credentials'
       requestBody:
         content:
           application/json:
@@ -177,6 +185,8 @@ paths:
                     type: boolean
                 required:
                   - verified
+        '401':
+          $ref: '#/components/responses/Missing-Credentials'
       requestBody:
         content:
           application/json:
@@ -208,6 +218,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CurrentUser'
+        '401':
+          $ref: '#/components/responses/Missing-Credentials'
       tags:
         - authentication
       description: |-
@@ -236,6 +248,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Missing-Credentials'
       operationId: get-users-userId
       security:
         - auth: []
@@ -299,6 +313,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Missing-Credentials'
       operationId: get-users-username-name
       security:
         - auth: []
@@ -317,6 +333,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LimitedUser'
+        '401':
+          $ref: '#/components/responses/Missing-Credentials'
       operationId: get-users
       security:
         - auth: []
@@ -361,6 +379,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LimitedUser'
+        '403':
+          $ref: '#/components/responses/Invalid-Admin-Credentials'
       operationId: get-users-active
       security:
         - auth: []
@@ -391,8 +411,48 @@ paths:
       description: |-
         Search and list any Active users by text query.
 
-        Has been locked down and now always respond with "Invalid Admin Credentials".
+        **Has been locked down and now always respond with "Invalid Admin Credentials".**
       deprecated: true
+  /health:
+    get:
+      summary: Get Server Health
+      tags:
+        - system
+      operationId: get-health
+      description: 'Gets the overall health status, the server name, and the current build version tag of the API.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  serverName:
+                    type: string
+                    minLength: 1
+                  buildVersionTag:
+                    type: string
+                    minLength: 1
+                required:
+                  - ok
+                  - serverName
+                  - buildVersionTag
+                x-examples:
+                  example-1:
+                    ok: true
+                    serverName: prod-api-green-marsh-dgt
+                    buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+              examples:
+                Example response:
+                  value:
+                    ok: true
+                    serverName: prod-api-green-marsh-dgt
+                    buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+      security: []
 components:
   schemas:
     AvatarID:
@@ -764,6 +824,24 @@ components:
       title: WorldID
       pattern: 'wrld_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
       example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
+    Error:
+      description: ''
+      type: object
+      properties:
+        message:
+          type: string
+          minLength: 1
+        status_code:
+          type: number
+      required:
+        - message
+        - status_code
+      x-examples:
+        example-1:
+          message: '"Missing Credentials"'
+          status_code: 401
+      title: Error
+      x-internal: true
   securitySchemes:
     apiKey:
       name: API Key
@@ -774,8 +852,50 @@ components:
       type: apiKey
       in: cookie
       description: ''
+  responses:
+    Missing-Credentials:
+      description: Error response due to missing auth token cookie.
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            x-examples:
+              example-1:
+                error:
+                  message: '"Missing Credentials"'
+                  status_code: 401
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+            required:
+              - error
+          examples:
+            Missing Credentials Example:
+              value:
+                error:
+                  message: '"Missing Credentials"'
+                  status_code: 401
+    Invalid-Admin-Credentials:
+      description: Error response due to missing Administrator credentials.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+            required:
+              - error
+          examples:
+            Invalid Admin Credentials Example:
+              value:
+                error:
+                  message: '"Invalid Admin Credentials"'
+                  status_code: 403
 security:
   - apiKey: []
 tags:
   - name: authentication
   - name: users
+  - name: system
