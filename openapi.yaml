@@ -28,7 +28,7 @@ paths:
     get:
       summary: Verify Auth Token
       tags:
-        - auth
+        - authentication
       responses:
         '200':
           description: OK
@@ -56,11 +56,58 @@ paths:
       description: Verify whether the currently provided Auth Token is valid.
       security:
         - auth: []
+  /logout:
+    put:
+      summary: Logout
+      operationId: put-logout
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    success:
+                      message: Ok!
+                      status_code: 200
+                properties:
+                  success:
+                    type: object
+                    required:
+                      - message
+                      - status_code
+                    properties:
+                      message:
+                        type: string
+                        minLength: 1
+                        readOnly: true
+                      status_code:
+                        type: number
+                        enum:
+                          - 200
+                        default: 200
+                        readOnly: true
+                required:
+                  - success
+              examples:
+                Logout Success:
+                  value:
+                    success:
+                      message: Ok!
+                      status_code: 200
+      description: Invalidates the auth cookie.
+      security:
+        - auth: []
+      tags:
+        - authentication
   /auth/user:
     get:
       summary: Login and/or Get Current User Info
       tags:
-        - auth
+        - authentication
       responses:
         '200':
           description: OK
@@ -84,6 +131,272 @@ paths:
           in: header
           name: Authorization
           description: Authorization header
+  /auth/twofactorauth/totp/verify:
+    parameters: []
+    post:
+      summary: Verify 2FA code
+      operationId: post-auth-twofactorauth-totp-verify
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verified:
+                    type: boolean
+                required:
+                  - verified
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+              required:
+                - code
+            examples: {}
+      description: Finishes the login sequence with a normal 2FA-generated code for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+  /auth/twofactorauth/otp/verify:
+    parameters: []
+    post:
+      summary: Verify 2FA code with Recovery code
+      operationId: post-auth-twofactorauth-otp-verify
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verified:
+                    type: boolean
+                required:
+                  - verified
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+              required:
+                - code
+            examples: {}
+      description: Finishes the login sequence with an OTP (One Time Password) recovery code for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+  '/user/{userId}/delete':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    put:
+      summary: Delete User
+      operationId: put-user-userId-delete
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUser'
+      tags:
+        - authentication
+      description: |-
+        Deletes the account with given ID. Normal users only have permission to delete their own account. Account deletion is 14 days from this request, and will be cancelled if you do an authenticated request with the account afterwards.
+
+        **VRC+ NOTE:** Despite the 14-days cooldown, any VRC+ subscription will be cancelled **immediately**.
+
+        **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
+      security:
+        - auth: []
+  '/users/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Get User by ID
+      tags:
+        - users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      operationId: get-users-userId
+      security:
+        - auth: []
+      description: Get public user information about a specific user using their ID.
+    put:
+      summary: Update User Info
+      operationId: put-users-userId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUser'
+      description: Update a users information such as the email and birthday.
+      security:
+        - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                birthday:
+                  $ref: '#/components/schemas/Date'
+                acceptedTOSVersion:
+                  type: number
+                tags:
+                  type: array
+                  items:
+                    type: string
+                networkSessionId:
+                  type: string
+                status:
+                  $ref: '#/components/schemas/UserStatus'
+                statusDescription:
+                  type: string
+                bio:
+                  type: string
+                bioLinks:
+                  type: array
+                  items:
+                    type: string
+      tags:
+        - users
+  '/users/{username}/name':
+    parameters:
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+    get:
+      summary: Get User by Username
+      tags:
+        - users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      operationId: get-users-username-name
+      security:
+        - auth: []
+      description: Get public user information about a specific user using their name.
+  /users:
+    get:
+      summary: Search All Users
+      tags:
+        - users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LimitedUser'
+      operationId: get-users
+      security:
+        - auth: []
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: search
+          description: Username to search for
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: developerType
+          description: 'Active user by developer type, none for normal users and internal for moderators'
+        - schema:
+            type: integer
+            maximum: 100
+            minimum: 0
+          in: query
+          name: 'n'
+          description: How many users to return
+        - schema:
+            type: integer
+          in: query
+          name: offset
+          description: How many users to skip
+      description: Search and list any users by text query
+    parameters: []
+  /users/active:
+    get:
+      summary: Search Active Users
+      tags:
+        - users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LimitedUser'
+      operationId: get-users-active
+      security:
+        - auth: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: search
+          required: true
+          description: Username to search for
+        - schema:
+            type: string
+          in: query
+          name: developerType
+          description: 'Active user by developer type, none for normal users and internal for moderators'
+        - schema:
+            type: integer
+            maximum: 100
+            minimum: 0
+          in: query
+          name: 'n'
+          description: How many users to return
+        - schema:
+            type: integer
+          in: query
+          name: offset
+          description: How many users to skip
+      description: |-
+        Search and list any Active users by text query.
+
+        Has been locked down and now always respond with "Invalid Admin Credentials".
+      deprecated: true
 components:
   schemas:
     AvatarID:
@@ -94,6 +407,7 @@ components:
       description: ''
       type: object
       x-examples: {}
+      title: CurrentUser
       properties:
         id:
           $ref: '#/components/schemas/UserID'
@@ -158,8 +472,7 @@ components:
         accountDeletionDate:
           oneOf:
             - $ref: '#/components/schemas/Date'
-            - properties: {}
-              nullable: true
+            - nullable: true
         acceptedTOSVersion:
           type: number
         steamId:
@@ -185,7 +498,7 @@ components:
         last_login:
           $ref: '#/components/schemas/DateTime'
         last_platform:
-          $ref: '#/components/schemas/Platform'
+          type: string
         allowAvatarCopying:
           type: boolean
         status:
@@ -255,6 +568,142 @@ components:
         - onlineFriends
         - activeFriends
         - offlineFriends
+    User:
+      description: ''
+      type: object
+      x-examples: {}
+      title: User
+      properties:
+        id:
+          $ref: '#/components/schemas/UserID'
+        username:
+          type: string
+        displayName:
+          type: string
+        userIcon:
+          type: string
+        bio:
+          type: string
+        bioLinks:
+          type: array
+          items:
+            type: string
+        profilePicOverride:
+          type: string
+        statusDescription:
+          type: string
+        currentAvatarImageUrl:
+          type: string
+        currentAvatarThumbnailImageUrl:
+          type: string
+        fallbackAvatar:
+          $ref: '#/components/schemas/AvatarID'
+        state:
+          $ref: '#/components/schemas/UserState'
+        tags:
+          type: array
+          items:
+            type: string
+        developerType:
+          $ref: '#/components/schemas/DeveloperType'
+        last_login:
+          $ref: '#/components/schemas/DateTime'
+        last_platform:
+          type: string
+        allowAvatarCopying:
+          type: boolean
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        date_joined:
+          $ref: '#/components/schemas/Date'
+        isFriend:
+          type: boolean
+        friendKey:
+          type: string
+        worldId:
+          $ref: '#/components/schemas/WorldID'
+        instanceId:
+          type: string
+        location:
+          type: string
+      required:
+        - id
+        - username
+        - displayName
+        - userIcon
+        - bio
+        - bioLinks
+        - profilePicOverride
+        - statusDescription
+        - currentAvatarImageUrl
+        - currentAvatarThumbnailImageUrl
+        - fallbackAvatar
+        - state
+        - tags
+        - developerType
+        - last_login
+        - last_platform
+        - allowAvatarCopying
+        - status
+        - date_joined
+        - isFriend
+        - friendKey
+        - worldId
+        - instanceId
+        - location
+    LimitedUser:
+      description: ''
+      type: object
+      x-examples: {}
+      title: LimitedUser
+      properties:
+        id:
+          $ref: '#/components/schemas/UserID'
+        username:
+          type: string
+        displayName:
+          type: string
+        bio:
+          type: string
+        userIcon:
+          type: string
+        profilePicOverride:
+          type: string
+        statusDescription:
+          type: string
+        currentAvatarImageUrl:
+          type: string
+        currentAvatarThumbnailImageUrl:
+          type: string
+        fallbackAvatar:
+          $ref: '#/components/schemas/AvatarID'
+        developerType:
+          $ref: '#/components/schemas/DeveloperType'
+        last_platform:
+          type: string
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        isFriend:
+          type: boolean
+        tags:
+          type: array
+          description: Always empty
+          items: {}
+      required:
+        - id
+        - username
+        - displayName
+        - userIcon
+        - profilePicOverride
+        - statusDescription
+        - currentAvatarImageUrl
+        - currentAvatarThumbnailImageUrl
+        - fallbackAvatar
+        - developerType
+        - last_platform
+        - status
+        - isFriend
+        - tags
     DeveloperType:
       type: string
       title: DeveloperType
@@ -264,6 +713,13 @@ components:
         - internal
         - moderator
       default: none
+      description: |-
+        "none" User is a normal user
+        "trusted" Unknown
+        "internal" Is a VRChat Developer
+        "moderator" Is a VRChat Moderator
+
+        Staff can hide their developerType at will.
     Date:
       type: string
       title: Date
@@ -280,12 +736,6 @@ components:
       example: '2011-10-05T14:48:00.000Z'
       format: date-time
       readOnly: true
-    Platform:
-      type: string
-      title: Platform
-      enum:
-        - standalonewindows
-        - android
     UserID:
       type: string
       title: UserID
@@ -331,4 +781,5 @@ components:
 security:
   - apiKey: []
 tags:
-  - name: auth
+  - name: authentication
+  - name: users
