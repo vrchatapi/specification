@@ -21,8 +21,6 @@ info:
     As stated, this documentation was not created with the help of the official VRChat team. Therefore this documentation is not an official documentation of the VRChat API and may not be always up to date with the latest versions. If you find that a page or endpoint is not longer valid please create an [issue on GitHub](https://github.com/vrchatapi/specification/issues) and tell us so we can fix it.
 servers:
   - url: 'https://api.vrchat.cloud/api/1'
-  - url: 'https://vrchat.com/api/1'
-    description: ''
 paths:
   /auth:
     get:
