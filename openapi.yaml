@@ -131,7 +131,7 @@ paths:
       parameters:
         - schema:
             type: string
-            example: Basic Rm9vcmFjazptYXhmYXgyNTI1ISE=
+            example: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
           in: header
           name: Authorization
           description: Authorization header
@@ -415,7 +415,7 @@ paths:
       deprecated: true
   /health:
     get:
-      summary: Get Server Health
+      summary: Check API Health
       tags:
         - system
       operationId: get-health
@@ -452,6 +452,256 @@ paths:
                     ok: true
                     serverName: prod-api-green-marsh-dgt
                     buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+      security: []
+  /config:
+    get:
+      summary: Fetch API Configuration
+      tags:
+        - system
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Config'
+              examples:
+                Configuration as of 2021-07-04:
+                  value:
+                    address: '1062 Folsom St., Suite 200, San Francisco, CA, 94103'
+                    announcements:
+                      - name: 220121a_modified_clients
+                        text: |-
+                          As part of our continued commitment to improve
+                          safety and awareness, we want to remind you that
+                          <color='red'>modified clients of any kind are not allowed
+                          on VRChat</color>, for any reason, and are prohibited
+                          by the Terms of Service.
+
+                          There is no such thing as an 'approved'
+                          modification, nor do we permit the use of
+                          any modification, for any purpose, ever.
+                          <color='red'>Using them can and will result in your
+                          account being banned!</color>
+
+                          In addition, modified clients are the single
+                          greatest source of <color='red'>compromised and stolen
+                          accounts</color>-- so please, do not use them!
+                    apiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
+                    appName: VrChat
+                    buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+                    clientApiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
+                    clientBPSCeiling: 18432
+                    clientDisconnectTimeout: 30000
+                    clientReservedPlayerBPS: 7168
+                    clientSentCountAllowance: 15
+                    contactEmail: hello@vrchat.com
+                    copyrightEmail: copyright@vrchat.com
+                    currentTOSVersion: 7
+                    defaultAvatar: avtr_53856003-8ff2-4002-b78f-da5d028b22bd
+                    deploymentGroup: green
+                    devAppVersionStandalone: 0.12.0p3
+                    devDownloadLinkWindows: www.vrchat.net
+                    devSdkUrl: 'https://vrchat.com/home/download'
+                    devSdkVersion: 2020.09.25.00.08
+                    devServerVersionStandalone: dev_server_01
+                    disableAvatarCopying: false
+                    disableAvatarGating: false
+                    disableCommunityLabs: false
+                    disableCommunityLabsPromotion: false
+                    disableEmail: false
+                    disableEventStream: false
+                    disableFeedbackGating: false
+                    disableHello: false
+                    disableRegistration: false
+                    disableSteamNetworking: true
+                    disableTwoFactorAuth: false
+                    disableUdon: false
+                    disableUpgradeAccount: false
+                    downloadLinkWindows: 'https://www.oculus.com/experiences/rift/997678176960598/'
+                    downloadUrls:
+                      sdk2: 'https://files.vrchat.cloud/sdk/VRCSDK2-2021.06.03.14.57_Public.unitypackage'
+                      sdk3-avatars: 'https://files.vrchat.cloud/sdk/VRCSDK3-AVATAR-2021.06.03.14.57_Public.unitypackage'
+                      sdk3-worlds: 'https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2021.06.03.14.57_Public.unitypackage'
+                    dynamicWorldRows:
+                      - index: 1
+                        name: Hot
+                        platform: ThisPlatformSupported
+                        sortHeading: heat
+                        sortOrder: descending
+                        sortOwnership: any
+                      - index: 10
+                        name: Games
+                        platform: ThisPlatformSupported
+                        sortHeading: heat
+                        sortOrder: descending
+                        sortOwnership: any
+                        tag: author_tag_game
+                      - index: 11
+                        name: Updated Recently
+                        platform: ThisPlatformSupported
+                        sortHeading: updated
+                        sortOrder: descending
+                        sortOwnership: any
+                      - index: 12
+                        name: New
+                        platform: ThisPlatformSupported
+                        sortHeading: publication
+                        sortOrder: descending
+                        sortOwnership: any
+                      - index: 13
+                        name: Recent
+                        platform: ThisPlatformSupported
+                        sortHeading: recent
+                        sortOrder: descending
+                        sortOwnership: any
+                      - index: 14
+                        name: Mine
+                        platform: any
+                        sortHeading: updated
+                        sortOrder: descending
+                        sortOwnership: mine
+                      - index: 15
+                        name: Classics
+                        platform: ThisPlatformSupported
+                        sortHeading: trending
+                        sortOrder: descending
+                        sortOwnership: any
+                      - index: 2
+                        name: Exercise
+                        platform: Any
+                        sortHeading: shuffle
+                        sortOrder: descending
+                        sortOwnership: any
+                        tag: admin_exercise_row
+                      - index: 3
+                        name: 'World Jam: Drawing'
+                        platform: ThisPlatformSupported
+                        sortHeading: order
+                        sortOrder: ascending
+                        sortOwnership: any
+                        tag: admin_jam_sketchbook
+                      - index: 4
+                        name: Spotlight
+                        platform: ThisPlatformSupported
+                        sortHeading: updated
+                        sortOrder: descending
+                        sortOwnership: any
+                        tag: admin_community_spotlight
+                      - index: 5
+                        name: Community Labs
+                        platform: ThisPlatformSupported
+                        sortHeading: labs
+                        sortOrder: descending
+                        sortOwnership: any
+                      - index: 6
+                        name: Active Cross Platform
+                        platform: AllPlatforms
+                        sortHeading: active
+                        sortOrder: descending
+                        sortOwnership: any
+                      - index: 7
+                        name: Active My Platform
+                        platform: ThisPlatformOnly
+                        sortHeading: active
+                        sortOrder: descending
+                        sortOwnership: any
+                      - index: 8
+                        name: Random
+                        platform: ThisPlatformSupported
+                        sortHeading: shuffle
+                        sortOrder: descending
+                        sortOwnership: any
+                      - index: 9
+                        name: Avatar Worlds
+                        platform: ThisPlatformSupported
+                        sortHeading: heat
+                        sortOrder: descending
+                        sortOwnership: any
+                        tag: author_tag_avatar
+                    events:
+                      distanceClose: 2
+                      distanceFactor: 100
+                      distanceFar: 80
+                      groupDistance: 3
+                      maximumBunchSize: 247
+                      notVisibleFactor: 100
+                      playerOrderBucketSize: 5
+                      playerOrderFactor: 55
+                      slowUpdateFactorThreshold: 25
+                      viewSegmentLength: 5
+                    gearDemoRoomId: '2282253502'
+                    homepageRedirectTarget: 'https://hello.vrchat.com'
+                    homeWorldId: wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd
+                    hubWorldId: wrld_ba913a96-fac4-4048-a062-9aa5db092812
+                    jobsEmail: jobs@vrchat.com
+                    messageOfTheDay: hello world
+                    moderationEmail: moderation@vrchat.com
+                    moderationQueryPeriod: 60
+                    notAllowedToSelectAvatarInPrivateWorldMessage: 'For security reasons, you''re not yet allowed to select avatars in private worlds or upload content. Please continue to enjoy VRChat and we''ll message you when you''ve been unlocked. Thanks and have fun!'
+                    plugin: no_kick_unlisted
+                    releaseAppVersionStandalone: 0.12.0p3
+                    releaseSdkUrl: 'http://files.vrchat.cloud/sdk/VRCSDK-2019.09.18.12.05_Public.unitypackage'
+                    releaseSdkVersion: VRCSDK-2019.09.18.12.05_Public
+                    releaseServerVersionStandalone: public_server_01
+                    sdkDeveloperFaqUrl: 'https://docs.vrchat.com/docs/frequently-asked-questions#section-why-can-t-i-upload-content-yet-'
+                    sdkDiscordUrl: 'https://discord.gg/vrchat'
+                    sdkNotAllowedToPublishMessage: "Welcome the VRChat SDK!\r\n\r\nBefore you can upload avatars or worlds to VRChat, you'll need to spend more time enjoying the app. We do this for security reasons, and so you can learn more about us.\r\n\r\nWhen you get the ability to upload, we will notify you via email and in VRChat. For now, you can learn and test on your own device.\r\n\r\nTo get started, check out the resources below.\r\n\r\nThank you for your patience, we can't wait to see what you'll build!"
+                    sdkUnityVersion: 2018.4.20f1
+                    serverName: prod-api-green-tree-xgq
+                    supportEmail: support@vrchat.com
+                    timeOutWorldId: wrld_5b89c79e-c340-4510-be1b-476e9fcdedcc
+                    tutorialWorldId: wld_7d3d25ec-663e-406e-96a3-e2c4fc0d8104
+                    updateRateMsMaximum: 1000
+                    updateRateMsMinimum: 50
+                    updateRateMsNormal: 200
+                    updateRateMsUdonManual: 50
+                    uploadAnalysisPercent: 1
+                    urlList:
+                      - assets.vrchat.com
+                      - drive.google.com
+                      - facebook.com
+                      - game.nicovideo.jp
+                      - live.furality.online
+                      - live.nicovideo.jp
+                      - live2.nicovideo.jp
+                      - nicovideo.jp
+                      - soundcloud.com
+                      - tiktok.com
+                      - twitch.tv
+                      - v.youku.com
+                      - vimeo.com
+                      - vrchat.cloud
+                      - www.facebook.com
+                      - www.nicovideo.jp
+                      - www.tiktok.com
+                      - www.twitch.tv
+                      - www.youtube.com
+                      - youku.com
+                      - youtu.be
+                      - youtube.com
+                    useReliableUdpForVoice: false
+                    userUpdatePeriod: 60
+                    userVerificationDelay: 5
+                    userVerificationRetry: 30
+                    userVerificationTimeout: 60
+                    viveWindowsUrl: 'http://store.steampowered.com/app/438100/'
+                    whiteListedAssetUrls:
+                      - 'http://dbinj8iahsbec.cloudfront.net/'
+                      - 'http://dbinj8iahsbec.cloudfront.net/plugins'
+                      - 'https://api.vrchat.cloud/api/1/file/'
+                      - 'https://builds.vrchat.cloud/'
+                      - 'https://dbinj8iahsbec.cloudfront.net/'
+                      - 'https://dev-api.vrchat.cloud/api/1/file/'
+                      - 'https://files.vrchat.cloud/unmanaged/'
+                    worldUpdatePeriod: 60
+                    youtubedl-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
+                    youtubedl-version: '2021-05-16'
+      operationId: get-config
+      description: |-
+        API config contains configuration that the clients needs to work properly.
+
+        Currently the most important value here is `clientApiKey` which is used for all other API endpoints.
       security: []
 components:
   schemas:
@@ -842,6 +1092,701 @@ components:
           status_code: 401
       title: Error
       x-internal: true
+    Config:
+      description: ''
+      type: object
+      x-examples:
+        Config as of 2021-07-04:
+          address: '1062 Folsom St., Suite 200, San Francisco, CA, 94103'
+          announcements:
+            - name: 220121a_modified_clients
+              text: |-
+                As part of our continued commitment to improve
+                safety and awareness, we want to remind you that
+                <color='red'>modified clients of any kind are not allowed
+                on VRChat</color>, for any reason, and are prohibited
+                by the Terms of Service.
+
+                There is no such thing as an 'approved'
+                modification, nor do we permit the use of
+                any modification, for any purpose, ever.
+                <color='red'>Using them can and will result in your
+                account being banned!</color>
+
+                In addition, modified clients are the single
+                greatest source of <color='red'>compromised and stolen
+                accounts</color>-- so please, do not use them!
+          apiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
+          appName: VrChat
+          buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+          clientApiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
+          clientBPSCeiling: 18432
+          clientDisconnectTimeout: 30000
+          clientReservedPlayerBPS: 7168
+          clientSentCountAllowance: 15
+          contactEmail: hello@vrchat.com
+          copyrightEmail: copyright@vrchat.com
+          currentTOSVersion: 7
+          defaultAvatar: avtr_53856003-8ff2-4002-b78f-da5d028b22bd
+          deploymentGroup: green
+          devAppVersionStandalone: 0.12.0p3
+          devDownloadLinkWindows: www.vrchat.net
+          devSdkUrl: 'https://vrchat.com/home/download'
+          devSdkVersion: 2020.09.25.00.08
+          devServerVersionStandalone: dev_server_01
+          disableAvatarCopying: false
+          disableAvatarGating: false
+          disableCommunityLabs: false
+          disableCommunityLabsPromotion: false
+          disableEmail: false
+          disableEventStream: false
+          disableFeedbackGating: false
+          disableHello: false
+          disableRegistration: false
+          disableSteamNetworking: true
+          disableTwoFactorAuth: false
+          disableUdon: false
+          disableUpgradeAccount: false
+          downloadLinkWindows: 'https://www.oculus.com/experiences/rift/997678176960598/'
+          downloadUrls:
+            sdk2: 'https://files.vrchat.cloud/sdk/VRCSDK2-2021.06.03.14.57_Public.unitypackage'
+            sdk3-avatars: 'https://files.vrchat.cloud/sdk/VRCSDK3-AVATAR-2021.06.03.14.57_Public.unitypackage'
+            sdk3-worlds: 'https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2021.06.03.14.57_Public.unitypackage'
+          dynamicWorldRows:
+            - index: 1
+              name: Hot
+              platform: ThisPlatformSupported
+              sortHeading: heat
+              sortOrder: descending
+              sortOwnership: any
+            - index: 10
+              name: Games
+              platform: ThisPlatformSupported
+              sortHeading: heat
+              sortOrder: descending
+              sortOwnership: any
+              tag: author_tag_game
+            - index: 11
+              name: Updated Recently
+              platform: ThisPlatformSupported
+              sortHeading: updated
+              sortOrder: descending
+              sortOwnership: any
+            - index: 12
+              name: New
+              platform: ThisPlatformSupported
+              sortHeading: publication
+              sortOrder: descending
+              sortOwnership: any
+            - index: 13
+              name: Recent
+              platform: ThisPlatformSupported
+              sortHeading: recent
+              sortOrder: descending
+              sortOwnership: any
+            - index: 14
+              name: Mine
+              platform: any
+              sortHeading: updated
+              sortOrder: descending
+              sortOwnership: mine
+            - index: 15
+              name: Classics
+              platform: ThisPlatformSupported
+              sortHeading: trending
+              sortOrder: descending
+              sortOwnership: any
+            - index: 2
+              name: Exercise
+              platform: Any
+              sortHeading: shuffle
+              sortOrder: descending
+              sortOwnership: any
+              tag: admin_exercise_row
+            - index: 3
+              name: 'World Jam: Drawing'
+              platform: ThisPlatformSupported
+              sortHeading: order
+              sortOrder: ascending
+              sortOwnership: any
+              tag: admin_jam_sketchbook
+            - index: 4
+              name: Spotlight
+              platform: ThisPlatformSupported
+              sortHeading: updated
+              sortOrder: descending
+              sortOwnership: any
+              tag: admin_community_spotlight
+            - index: 5
+              name: Community Labs
+              platform: ThisPlatformSupported
+              sortHeading: labs
+              sortOrder: descending
+              sortOwnership: any
+            - index: 6
+              name: Active Cross Platform
+              platform: AllPlatforms
+              sortHeading: active
+              sortOrder: descending
+              sortOwnership: any
+            - index: 7
+              name: Active My Platform
+              platform: ThisPlatformOnly
+              sortHeading: active
+              sortOrder: descending
+              sortOwnership: any
+            - index: 8
+              name: Random
+              platform: ThisPlatformSupported
+              sortHeading: shuffle
+              sortOrder: descending
+              sortOwnership: any
+            - index: 9
+              name: Avatar Worlds
+              platform: ThisPlatformSupported
+              sortHeading: heat
+              sortOrder: descending
+              sortOwnership: any
+              tag: author_tag_avatar
+          events:
+            distanceClose: 2
+            distanceFactor: 100
+            distanceFar: 80
+            groupDistance: 3
+            maximumBunchSize: 247
+            notVisibleFactor: 100
+            playerOrderBucketSize: 5
+            playerOrderFactor: 55
+            slowUpdateFactorThreshold: 25
+            viewSegmentLength: 5
+          gearDemoRoomId: '2282253502'
+          homepageRedirectTarget: 'https://hello.vrchat.com'
+          homeWorldId: wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd
+          hubWorldId: wrld_ba913a96-fac4-4048-a062-9aa5db092812
+          jobsEmail: jobs@vrchat.com
+          messageOfTheDay: hello world
+          moderationEmail: moderation@vrchat.com
+          moderationQueryPeriod: 60
+          notAllowedToSelectAvatarInPrivateWorldMessage: 'For security reasons, you''re not yet allowed to select avatars in private worlds or upload content. Please continue to enjoy VRChat and we''ll message you when you''ve been unlocked. Thanks and have fun!'
+          plugin: no_kick_unlisted
+          releaseAppVersionStandalone: 0.12.0p3
+          releaseSdkUrl: 'http://files.vrchat.cloud/sdk/VRCSDK-2019.09.18.12.05_Public.unitypackage'
+          releaseSdkVersion: VRCSDK-2019.09.18.12.05_Public
+          releaseServerVersionStandalone: public_server_01
+          sdkDeveloperFaqUrl: 'https://docs.vrchat.com/docs/frequently-asked-questions#section-why-can-t-i-upload-content-yet-'
+          sdkDiscordUrl: 'https://discord.gg/vrchat'
+          sdkNotAllowedToPublishMessage: "Welcome the VRChat SDK!\r\n\r\nBefore you can upload avatars or worlds to VRChat, you'll need to spend more time enjoying the app. We do this for security reasons, and so you can learn more about us.\r\n\r\nWhen you get the ability to upload, we will notify you via email and in VRChat. For now, you can learn and test on your own device.\r\n\r\nTo get started, check out the resources below.\r\n\r\nThank you for your patience, we can't wait to see what you'll build!"
+          sdkUnityVersion: 2018.4.20f1
+          serverName: prod-api-green-tree-xgq
+          supportEmail: support@vrchat.com
+          timeOutWorldId: wrld_5b89c79e-c340-4510-be1b-476e9fcdedcc
+          tutorialWorldId: wld_7d3d25ec-663e-406e-96a3-e2c4fc0d8104
+          updateRateMsMaximum: 1000
+          updateRateMsMinimum: 50
+          updateRateMsNormal: 200
+          updateRateMsUdonManual: 50
+          uploadAnalysisPercent: 1
+          urlList:
+            - assets.vrchat.com
+            - drive.google.com
+            - facebook.com
+            - game.nicovideo.jp
+            - live.furality.online
+            - live.nicovideo.jp
+            - live2.nicovideo.jp
+            - nicovideo.jp
+            - soundcloud.com
+            - tiktok.com
+            - twitch.tv
+            - v.youku.com
+            - vimeo.com
+            - vrchat.cloud
+            - www.facebook.com
+            - www.nicovideo.jp
+            - www.tiktok.com
+            - www.twitch.tv
+            - www.youtube.com
+            - youku.com
+            - youtu.be
+            - youtube.com
+          useReliableUdpForVoice: false
+          userUpdatePeriod: 60
+          userVerificationDelay: 5
+          userVerificationRetry: 30
+          userVerificationTimeout: 60
+          viveWindowsUrl: 'http://store.steampowered.com/app/438100/'
+          whiteListedAssetUrls:
+            - 'http://dbinj8iahsbec.cloudfront.net/'
+            - 'http://dbinj8iahsbec.cloudfront.net/plugins'
+            - 'https://api.vrchat.cloud/api/1/file/'
+            - 'https://builds.vrchat.cloud/'
+            - 'https://dbinj8iahsbec.cloudfront.net/'
+            - 'https://dev-api.vrchat.cloud/api/1/file/'
+            - 'https://files.vrchat.cloud/unmanaged/'
+          worldUpdatePeriod: 60
+          youtubedl-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
+          youtubedl-version: '2021-05-16'
+      title: API Config
+      properties:
+        address:
+          type: string
+          minLength: 1
+          description: VRChat's office address
+        announcements:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          description: 'PSA, Public Announcements'
+          items:
+            type: object
+            description: Public Announcement
+            properties:
+              name:
+                type: string
+                minLength: 1
+                description: Announcement name
+              text:
+                type: string
+                minLength: 1
+                description: Announcement text
+            required:
+              - name
+              - text
+        apiKey:
+          type: string
+          minLength: 1
+          description: apiKey to be used for all other requests
+        appName:
+          type: string
+          minLength: 1
+          description: Game name
+          default: VrChat
+          deprecated: true
+        buildVersionTag:
+          type: string
+          minLength: 1
+          description: Build tag of the API server
+        clientApiKey:
+          type: string
+          minLength: 1
+          description: apiKey to be used for all other requests
+        clientBPSCeiling:
+          type: number
+          description: Unknown
+        clientDisconnectTimeout:
+          type: number
+          description: Unknown
+        clientReservedPlayerBPS:
+          type: number
+          description: Unknown
+        clientSentCountAllowance:
+          type: number
+          description: Unknown
+        contactEmail:
+          type: string
+          minLength: 1
+          description: VRChat's contact email
+        copyrightEmail:
+          type: string
+          minLength: 1
+          description: VRChat's copyright-issues-related email
+        currentTOSVersion:
+          type: number
+          description: Current version number of the Terms of Service
+        defaultAvatar:
+          $ref: '#/components/schemas/AvatarID'
+        deploymentGroup:
+          $ref: '#/components/schemas/DeploymentGroup'
+        devAppVersionStandalone:
+          type: string
+          minLength: 1
+          description: Version number for game development build
+          deprecated: true
+        devDownloadLinkWindows:
+          type: string
+          minLength: 1
+          description: Developer Download link
+          deprecated: true
+        devSdkUrl:
+          type: string
+          minLength: 1
+          description: 'Link to download the development SDK, use downloadUrls instead'
+          deprecated: true
+        devSdkVersion:
+          type: string
+          minLength: 1
+          description: Version of the development SDK
+          deprecated: true
+        devServerVersionStandalone:
+          type: string
+          minLength: 1
+          description: Version number for server development build
+          deprecated: true
+        disableAvatarCopying:
+          type: boolean
+          description: Toggles if copying avatars should be disabled
+          default: false
+        disableAvatarGating:
+          type: boolean
+          description: Toggles if avatar gating should be disabled. Avatar gating restricts uploading of avatars to people with the `system_avatar_access` Tag or `admin_avatar_access` Tag
+          default: false
+        disableCommunityLabs:
+          type: boolean
+          description: Toggles if the Community Labs should be disabled
+          default: false
+        disableCommunityLabsPromotion:
+          type: boolean
+          description: Toggles if promotion out of Community Labs should be disabled
+          default: false
+        disableEmail:
+          type: boolean
+          description: Unknown
+          default: false
+        disableEventStream:
+          type: boolean
+          description: Toggles if Analytics should be disabled (this sreportedly not used in the Client)
+          default: false
+        disableFeedbackGating:
+          type: boolean
+          description: Toggles if feedback gating should be disabled. Feedback gating restricts submission of feedback (reporting a World or User) to people with the `system_feedback_access` Tag.
+          default: false
+        disableHello:
+          type: boolean
+          description: Unknown
+          default: false
+        disableRegistration:
+          type: boolean
+          description: Toggles if new user account registration should be disabled
+          default: false
+        disableSteamNetworking:
+          type: boolean
+          default: true
+          description: Toggles if Steam Networking should be disabled. VRChat these days uses Photon Unity Networking (PUN) instead.
+        disableTwoFactorAuth:
+          type: boolean
+          description: Toggles if 2FA should be disabled.
+          deprecated: true
+          default: false
+        disableUdon:
+          type: boolean
+          description: Toggles if Udon should be universally disabled in-game.
+          default: false
+        disableUpgradeAccount:
+          type: boolean
+          default: false
+          description: Toggles if account upgrading "linking with Steam/Oculus" should be disabled.
+        downloadLinkWindows:
+          type: string
+          minLength: 1
+          description: Download link for game on the Oculus Rift website.
+        downloadUrls:
+          type: object
+          description: Download links for various development assets
+          required:
+            - sdk2
+            - sdk3-avatars
+            - sdk3-worlds
+          properties:
+            sdk2:
+              type: string
+              minLength: 1
+              description: Download link for legacy SDK2
+              deprecated: true
+            sdk3-avatars:
+              type: string
+              minLength: 1
+              description: Download link for SDK3 for Avatars
+            sdk3-worlds:
+              type: string
+              minLength: 1
+              description: Download link for SDK3 for Worlds
+        dynamicWorldRows:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          description: 'Array of DynamicWorldRow objects, used by the game to display the list of world rows'
+          items:
+            type: object
+            properties:
+              index:
+                type: number
+              name:
+                type: string
+                minLength: 1
+              platform:
+                type: string
+                minLength: 1
+              sortHeading:
+                type: string
+                minLength: 1
+              sortOrder:
+                type: string
+                minLength: 1
+              sortOwnership:
+                type: string
+                minLength: 1
+              tag:
+                type: string
+                minLength: 1
+                description: Tag to filter worlds for this row
+            required:
+              - index
+              - name
+              - platform
+              - sortHeading
+              - sortOrder
+              - sortOwnership
+              - tag
+        events:
+          type: object
+          properties:
+            distanceClose:
+              type: number
+              description: Unknown
+            distanceFactor:
+              type: number
+              description: Unknown
+            distanceFar:
+              type: number
+              description: Unknown
+            groupDistance:
+              type: number
+              description: Unknown
+            maximumBunchSize:
+              type: number
+              description: Unknown
+            notVisibleFactor:
+              type: number
+              description: Unknown
+            playerOrderBucketSize:
+              type: number
+              description: Unknown
+            playerOrderFactor:
+              type: number
+              description: Unknown
+            slowUpdateFactorThreshold:
+              type: number
+              description: Unknown
+            viewSegmentLength:
+              type: number
+              description: Unknown
+        gearDemoRoomId:
+          type: string
+          minLength: 1
+          description: Unknown
+          deprecated: true
+        homepageRedirectTarget:
+          type: string
+          minLength: 1
+          description: Redirect target if you try to open the base API domain in your browser
+          default: 'https://hello.vrchat.com'
+        homeWorldId:
+          $ref: '#/components/schemas/WorldID'
+        hubWorldId:
+          $ref: '#/components/schemas/WorldID'
+        jobsEmail:
+          type: string
+          minLength: 1
+          description: VRChat's job application email
+        messageOfTheDay:
+          type: string
+          minLength: 1
+          description: MOTD
+          deprecated: true
+        moderationEmail:
+          type: string
+          minLength: 1
+          description: VRChat's moderation related email
+        moderationQueryPeriod:
+          type: number
+          description: Unknown
+        notAllowedToSelectAvatarInPrivateWorldMessage:
+          type: string
+          minLength: 1
+          description: Used in-game to notify a user they aren't allowed to select avatars in private worlds
+        plugin:
+          type: string
+          minLength: 1
+          description: 'Extra plugins to run on the server, comma-separated strings'
+        releaseAppVersionStandalone:
+          type: string
+          minLength: 1
+          description: Version number for game release build
+          deprecated: true
+        releaseSdkUrl:
+          type: string
+          minLength: 1
+          description: Link to download the release SDK
+          deprecated: true
+        releaseSdkVersion:
+          type: string
+          minLength: 1
+          description: Version of the release SDK
+          deprecated: true
+        releaseServerVersionStandalone:
+          type: string
+          minLength: 1
+          description: Version number for server release build
+          deprecated: true
+        sdkDeveloperFaqUrl:
+          type: string
+          minLength: 1
+          description: Link to the developer FAQ
+        sdkDiscordUrl:
+          type: string
+          minLength: 1
+          description: Link to the official VRChat Discord
+        sdkNotAllowedToPublishMessage:
+          type: string
+          minLength: 1
+          description: Used in the SDK to notify a user they aren't allowed to upload avatars/worlds yet
+        sdkUnityVersion:
+          type: string
+          minLength: 1
+          description: Unity version supported by the SDK
+        serverName:
+          type: string
+          minLength: 1
+          description: Server name of the API server currently responding
+        supportEmail:
+          type: string
+          minLength: 1
+          description: VRChat's support email
+        timeOutWorldId:
+          $ref: '#/components/schemas/WorldID'
+        tutorialWorldId:
+          $ref: '#/components/schemas/WorldID'
+        updateRateMsMaximum:
+          type: number
+          description: Unknown
+        updateRateMsMinimum:
+          type: number
+          description: Unknown
+        updateRateMsNormal:
+          type: number
+          description: Unknown
+        updateRateMsUdonManual:
+          type: number
+          description: Unknown
+        uploadAnalysisPercent:
+          type: number
+          description: Unknown
+        urlList:
+          type: array
+          description: List of allowed URLs that bypass the "Allow untrusted URL's" setting in-game
+          items:
+            type: string
+        useReliableUdpForVoice:
+          type: boolean
+          description: Unknown
+          default: false
+        userUpdatePeriod:
+          type: number
+          description: Unknown
+        userVerificationDelay:
+          type: number
+          description: Unknown
+        userVerificationRetry:
+          type: number
+          description: Unknown
+        userVerificationTimeout:
+          type: number
+          description: Unknown
+        viveWindowsUrl:
+          type: string
+          minLength: 1
+          description: Download link for game on the Steam website.
+        whiteListedAssetUrls:
+          type: array
+          description: List of allowed URLs that are allowed to host avatar assets
+          items:
+            type: string
+        worldUpdatePeriod:
+          type: number
+          description: Unknown
+        youtubedl-hash:
+          type: string
+          minLength: 1
+          description: Currently used youtube-dl.exe hash in SHA-256-delimited format
+        youtubedl-version:
+          type: string
+          minLength: 1
+          description: Currently used youtube-dl.exe version
+      required:
+        - address
+        - announcements
+        - apiKey
+        - appName
+        - buildVersionTag
+        - clientApiKey
+        - contactEmail
+        - copyrightEmail
+        - currentTOSVersion
+        - defaultAvatar
+        - deploymentGroup
+        - devAppVersionStandalone
+        - devDownloadLinkWindows
+        - devSdkUrl
+        - devSdkVersion
+        - devServerVersionStandalone
+        - disableAvatarCopying
+        - disableAvatarGating
+        - disableCommunityLabs
+        - disableCommunityLabsPromotion
+        - disableEventStream
+        - disableFeedbackGating
+        - disableRegistration
+        - disableSteamNetworking
+        - disableTwoFactorAuth
+        - disableUdon
+        - disableUpgradeAccount
+        - downloadLinkWindows
+        - downloadUrls
+        - dynamicWorldRows
+        - events
+        - gearDemoRoomId
+        - homepageRedirectTarget
+        - homeWorldId
+        - hubWorldId
+        - jobsEmail
+        - messageOfTheDay
+        - moderationEmail
+        - moderationQueryPeriod
+        - notAllowedToSelectAvatarInPrivateWorldMessage
+        - plugin
+        - releaseAppVersionStandalone
+        - releaseSdkUrl
+        - releaseSdkVersion
+        - releaseServerVersionStandalone
+        - sdkDeveloperFaqUrl
+        - sdkDiscordUrl
+        - sdkNotAllowedToPublishMessage
+        - sdkUnityVersion
+        - serverName
+        - supportEmail
+        - timeOutWorldId
+        - tutorialWorldId
+        - urlList
+        - viveWindowsUrl
+        - whiteListedAssetUrls
+        - youtubedl-hash
+        - youtubedl-version
+    DeploymentGroup:
+      type: string
+      title: DeploymentGroup
+      enum:
+        - blue
+        - green
+        - grape
+        - cherry
+      description: |-
+        Used to identify which API deployment cluster is currently responding.
+
+        `blue` and `green` are used by Production.
+        `grape`and `cherry` are used during Development.
+
+        [Blue Green Deployment by Martin Fowler](https://martinfowler.com/bliki/BlueGreenDeployment.html)
+      readOnly: true
   securitySchemes:
     apiKey:
       name: API Key
