@@ -44,10 +44,6 @@ paths:
                 required:
                   - ok
                   - token
-                x-examples:
-                  example-1:
-                    ok: true
-                    token: authcookie_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           headers: {}
         '401':
           $ref: '#/components/responses/Missing-Credentials'
@@ -68,11 +64,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                x-examples:
-                  example-1:
-                    success:
-                      message: Ok!
-                      status_code: 200
                 properties:
                   success:
                     type: object
@@ -420,10 +411,10 @@ paths:
         - system
       operationId: get-health
       description: 'Gets the overall health status, the server name, and the current build version tag of the API.'
+      security: []
       responses:
         '200':
           $ref: '#/components/responses/API-Health'
-      security: []
   /config:
     get:
       summary: Fetch API Configuration
@@ -720,7 +711,6 @@ components:
     CurrentUser:
       description: ''
       type: object
-      x-examples: {}
       title: CurrentUser
       properties:
         id:
@@ -885,7 +875,6 @@ components:
     Config:
       description: ''
       type: object
-      x-examples: {}
       title: API Config
       properties:
         address:
@@ -1334,7 +1323,6 @@ components:
     User:
       description: ''
       type: object
-      x-examples: {}
       title: User
       properties:
         id:
@@ -1417,7 +1405,6 @@ components:
     LimitedUser:
       description: ''
       type: object
-      x-examples: {}
       title: LimitedUser
       properties:
         id:
@@ -1543,10 +1530,6 @@ components:
       required:
         - message
         - status_code
-      x-examples:
-        example-1:
-          message: '"Missing Credentials"'
-          status_code: 401
       title: Error
       x-internal: true
     DeploymentGroup:
@@ -1583,11 +1566,6 @@ components:
           schema:
             description: ''
             type: object
-            x-examples:
-              example-1:
-                error:
-                  message: '"Missing Credentials"'
-                  status_code: 401
             properties:
               error:
                 $ref: '#/components/schemas/Error'
@@ -1636,11 +1614,6 @@ components:
               - ok
               - serverName
               - buildVersionTag
-            x-examples:
-              example-1:
-                ok: true
-                serverName: prod-api-green-marsh-dgt
-                buildVersionTag: master-build-2021-06-24-fred-drakeshoot
           examples:
             Example Response:
               value:
