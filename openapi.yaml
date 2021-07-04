@@ -271,8 +271,6 @@ paths:
                   type: array
                   items:
                     type: string
-                networkSessionId:
-                  type: string
                 status:
                   $ref: '#/components/schemas/UserStatus'
                 statusDescription:
