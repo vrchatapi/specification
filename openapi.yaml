@@ -346,7 +346,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CurrentUser'
+                $ref: ./openapi/components/schemas/CurrentUser.yaml
       description: Update a users information such as the email and birthday.
       security:
         - apiKeyCookie: []
@@ -360,7 +360,7 @@ paths:
                 email:
                   type: string
                 birthday:
-                  $ref: '#/components/schemas/Date'
+                  $ref: ./openapi/components/schemas/Date.yaml
                 acceptedTOSVersion:
                   type: number
                 tags:
@@ -368,7 +368,7 @@ paths:
                   items:
                     type: string
                 status:
-                  $ref: '#/components/schemas/UserStatus'
+                  $ref: ./openapi/components/schemas/UserStatus.yaml
                 statusDescription:
                   type: string
                 bio:
