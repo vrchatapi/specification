@@ -2,9 +2,9 @@ title: NotificationDetailVoteToKick
 type: object
 properties:
   userToKickId:
-    $ref: ../../../openapi.yaml#/components/schemas/UserID
+    $ref: ./UserID.yaml
   initiatorUserId:
-    $ref: ../../../openapi.yaml#/components/schemas/UserID
+    $ref: ./UserID.yaml
 required:
   - userToKickId
   - initiatorUserId

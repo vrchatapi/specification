@@ -1,0 +1,162 @@
+title: CurrentUser
+type: object
+properties:
+  id:
+    $ref: ./UserID.yaml
+  username:
+    type: string
+  displayName:
+    type: string
+  userIcon:
+    type: string
+  bio:
+    type: string
+  bioLinks:
+    type: array
+    items:
+      type: string
+  profilePicOverride:
+    type: string
+  statusDescription:
+    type: string
+  pastDisplayNames:
+    type: array
+    items:
+      type: string
+  hasEmail:
+    type: boolean
+  hasPendingEmail:
+    type: boolean
+  obfuscatedEmail:
+    type: string
+  obfuscatedPendingEmail:
+    type: string
+  emailVerified:
+    type: boolean
+  hasBirthday:
+    type: boolean
+  unsubscribe:
+    type: boolean
+  statusHistory:
+    type: array
+    items:
+      type: string
+  statusFirstTime:
+    type: boolean
+  friends:
+    type: array
+    items:
+      $ref: ./UserID.yaml
+  friendGroupNames:
+    type: array
+    items:
+      type: string
+  currentAvatarImageUrl:
+    type: string
+  currentAvatarThumbnailImageUrl:
+    type: string
+  fallbackAvatar:
+    $ref: ./AvatarID.yaml
+  currentAvatar:
+    $ref: ./AvatarID.yaml
+  currentAvatarAssetUrl:
+    type: string
+  accountDeletionDate:
+    oneOf:
+      - $ref: ./Date.yaml
+      - nullable: true
+  acceptedTOSVersion:
+    type: number
+  steamId:
+    type: string
+  steamDetails:
+    type: object
+  oculusId:
+    type: string
+  hasLoggedInFromClient:
+    type: boolean
+  homeLocation:
+    $ref: ./WorldID.yaml
+  twoFactorAuthEnabled:
+    type: boolean
+  state:
+    $ref: ./UserState.yaml
+  tags:
+    type: array
+    items:
+      type: string
+  developerType:
+    $ref: ./DeveloperType.yaml
+  last_login:
+    $ref: ./DateTime.yaml
+  last_platform:
+    type: string
+  allowAvatarCopying:
+    type: boolean
+  status:
+    $ref: ./UserStatus.yaml
+  date_joined:
+    $ref: ./Date.yaml
+  isFriend:
+    type: boolean
+  friendKey:
+    type: string
+  onlineFriends:
+    type: array
+    items:
+      $ref: ./UserID.yaml
+  activeFriends:
+    type: array
+    items:
+      $ref: ./UserID.yaml
+  offlineFriends:
+    type: array
+    items:
+      $ref: ./UserID.yaml
+required:
+  - id
+  - username
+  - displayName
+  - userIcon
+  - bio
+  - bioLinks
+  - profilePicOverride
+  - statusDescription
+  - pastDisplayNames
+  - hasEmail
+  - hasPendingEmail
+  - obfuscatedEmail
+  - obfuscatedPendingEmail
+  - emailVerified
+  - hasBirthday
+  - unsubscribe
+  - statusHistory
+  - statusFirstTime
+  - friends
+  - friendGroupNames
+  - currentAvatarImageUrl
+  - currentAvatarThumbnailImageUrl
+  - fallbackAvatar
+  - currentAvatar
+  - currentAvatarAssetUrl
+  - accountDeletionDate
+  - acceptedTOSVersion
+  - steamId
+  - steamDetails
+  - oculusId
+  - hasLoggedInFromClient
+  - homeLocation
+  - twoFactorAuthEnabled
+  - state
+  - tags
+  - developerType
+  - last_login
+  - last_platform
+  - allowAvatarCopying
+  - status
+  - date_joined
+  - isFriend
+  - friendKey
+  - onlineFriends
+  - activeFriends
+  - offlineFriends

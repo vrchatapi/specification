@@ -1,0 +1,446 @@
+type: object
+title: API Config
+properties:
+  address:
+    type: string
+    minLength: 1
+    description: VRChat's office address
+  announcements:
+    type: array
+    uniqueItems: true
+    minItems: 1
+    description: 'PSA, Public Announcements'
+    items:
+      type: object
+      description: Public Announcement
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Announcement name
+        text:
+          type: string
+          minLength: 1
+          description: Announcement text
+      required:
+        - name
+        - text
+  apiKey:
+    type: string
+    minLength: 1
+    description: apiKey to be used for all other requests
+  appName:
+    type: string
+    minLength: 1
+    description: Game name
+    default: VrChat
+    deprecated: true
+  buildVersionTag:
+    type: string
+    minLength: 1
+    description: Build tag of the API server
+  clientApiKey:
+    type: string
+    minLength: 1
+    description: apiKey to be used for all other requests
+  clientBPSCeiling:
+    type: number
+    description: Unknown
+  clientDisconnectTimeout:
+    type: number
+    description: Unknown
+  clientReservedPlayerBPS:
+    type: number
+    description: Unknown
+  clientSentCountAllowance:
+    type: number
+    description: Unknown
+  contactEmail:
+    type: string
+    minLength: 1
+    description: VRChat's contact email
+  copyrightEmail:
+    type: string
+    minLength: 1
+    description: VRChat's copyright-issues-related email
+  currentTOSVersion:
+    type: number
+    description: Current version number of the Terms of Service
+  defaultAvatar:
+    $ref: ./AvatarID.yaml
+  deploymentGroup:
+    $ref: ./DeploymentGroup.yaml
+  devAppVersionStandalone:
+    type: string
+    minLength: 1
+    description: Version number for game development build
+    deprecated: true
+  devDownloadLinkWindows:
+    type: string
+    minLength: 1
+    description: Developer Download link
+    deprecated: true
+  devSdkUrl:
+    type: string
+    minLength: 1
+    description: 'Link to download the development SDK, use downloadUrls instead'
+    deprecated: true
+  devSdkVersion:
+    type: string
+    minLength: 1
+    description: Version of the development SDK
+    deprecated: true
+  devServerVersionStandalone:
+    type: string
+    minLength: 1
+    description: Version number for server development build
+    deprecated: true
+  disableAvatarCopying:
+    type: boolean
+    description: Toggles if copying avatars should be disabled
+    default: false
+  disableAvatarGating:
+    type: boolean
+    description: Toggles if avatar gating should be disabled. Avatar gating restricts uploading of avatars to people with the `system_avatar_access` Tag or `admin_avatar_access` Tag
+    default: false
+  disableCommunityLabs:
+    type: boolean
+    description: Toggles if the Community Labs should be disabled
+    default: false
+  disableCommunityLabsPromotion:
+    type: boolean
+    description: Toggles if promotion out of Community Labs should be disabled
+    default: false
+  disableEmail:
+    type: boolean
+    description: Unknown
+    default: false
+  disableEventStream:
+    type: boolean
+    description: Toggles if Analytics should be disabled (this sreportedly not used in the Client)
+    default: false
+  disableFeedbackGating:
+    type: boolean
+    description: Toggles if feedback gating should be disabled. Feedback gating restricts submission of feedback (reporting a World or User) to people with the `system_feedback_access` Tag.
+    default: false
+  disableHello:
+    type: boolean
+    description: Unknown
+    default: false
+  disableRegistration:
+    type: boolean
+    description: Toggles if new user account registration should be disabled
+    default: false
+  disableSteamNetworking:
+    type: boolean
+    default: true
+    description: Toggles if Steam Networking should be disabled. VRChat these days uses Photon Unity Networking (PUN) instead.
+  disableTwoFactorAuth:
+    type: boolean
+    description: Toggles if 2FA should be disabled.
+    deprecated: true
+    default: false
+  disableUdon:
+    type: boolean
+    description: Toggles if Udon should be universally disabled in-game.
+    default: false
+  disableUpgradeAccount:
+    type: boolean
+    default: false
+    description: Toggles if account upgrading "linking with Steam/Oculus" should be disabled.
+  downloadLinkWindows:
+    type: string
+    minLength: 1
+    description: Download link for game on the Oculus Rift website.
+  downloadUrls:
+    type: object
+    description: Download links for various development assets
+    required:
+      - sdk2
+      - sdk3-avatars
+      - sdk3-worlds
+    properties:
+      sdk2:
+        type: string
+        minLength: 1
+        description: Download link for legacy SDK2
+        deprecated: true
+      sdk3-avatars:
+        type: string
+        minLength: 1
+        description: Download link for SDK3 for Avatars
+      sdk3-worlds:
+        type: string
+        minLength: 1
+        description: Download link for SDK3 for Worlds
+  dynamicWorldRows:
+    type: array
+    uniqueItems: true
+    minItems: 1
+    description: 'Array of DynamicWorldRow objects, used by the game to display the list of world rows'
+    items:
+      type: object
+      properties:
+        index:
+          type: number
+        name:
+          type: string
+          minLength: 1
+        platform:
+          type: string
+          minLength: 1
+        sortHeading:
+          type: string
+          minLength: 1
+        sortOrder:
+          type: string
+          minLength: 1
+        sortOwnership:
+          type: string
+          minLength: 1
+        tag:
+          type: string
+          minLength: 1
+          description: Tag to filter worlds for this row
+      required:
+        - index
+        - name
+        - platform
+        - sortHeading
+        - sortOrder
+        - sortOwnership
+        - tag
+  events:
+    type: object
+    properties:
+      distanceClose:
+        type: number
+        description: Unknown
+      distanceFactor:
+        type: number
+        description: Unknown
+      distanceFar:
+        type: number
+        description: Unknown
+      groupDistance:
+        type: number
+        description: Unknown
+      maximumBunchSize:
+        type: number
+        description: Unknown
+      notVisibleFactor:
+        type: number
+        description: Unknown
+      playerOrderBucketSize:
+        type: number
+        description: Unknown
+      playerOrderFactor:
+        type: number
+        description: Unknown
+      slowUpdateFactorThreshold:
+        type: number
+        description: Unknown
+      viewSegmentLength:
+        type: number
+        description: Unknown
+  gearDemoRoomId:
+    type: string
+    minLength: 1
+    description: Unknown
+    deprecated: true
+  homepageRedirectTarget:
+    type: string
+    minLength: 1
+    description: Redirect target if you try to open the base API domain in your browser
+    default: 'https://hello.vrchat.com'
+  homeWorldId:
+    $ref: ./WorldID.yaml
+  hubWorldId:
+    $ref: ./WorldID.yaml
+  jobsEmail:
+    type: string
+    minLength: 1
+    description: VRChat's job application email
+  messageOfTheDay:
+    type: string
+    minLength: 1
+    description: MOTD
+    deprecated: true
+  moderationEmail:
+    type: string
+    minLength: 1
+    description: VRChat's moderation related email
+  moderationQueryPeriod:
+    type: number
+    description: Unknown
+  notAllowedToSelectAvatarInPrivateWorldMessage:
+    type: string
+    minLength: 1
+    description: Used in-game to notify a user they aren't allowed to select avatars in private worlds
+  plugin:
+    type: string
+    minLength: 1
+    description: 'Extra [plugin](https://doc.photonengine.com/en-us/server/current/plugins/manual) to run in each instance'
+  releaseAppVersionStandalone:
+    type: string
+    minLength: 1
+    description: Version number for game release build
+    deprecated: true
+  releaseSdkUrl:
+    type: string
+    minLength: 1
+    description: Link to download the release SDK
+    deprecated: true
+  releaseSdkVersion:
+    type: string
+    minLength: 1
+    description: Version of the release SDK
+    deprecated: true
+  releaseServerVersionStandalone:
+    type: string
+    minLength: 1
+    description: Version number for server release build
+    deprecated: true
+  sdkDeveloperFaqUrl:
+    type: string
+    minLength: 1
+    description: Link to the developer FAQ
+  sdkDiscordUrl:
+    type: string
+    minLength: 1
+    description: Link to the official VRChat Discord
+  sdkNotAllowedToPublishMessage:
+    type: string
+    minLength: 1
+    description: Used in the SDK to notify a user they aren't allowed to upload avatars/worlds yet
+  sdkUnityVersion:
+    type: string
+    minLength: 1
+    description: Unity version supported by the SDK
+  serverName:
+    type: string
+    minLength: 1
+    description: Server name of the API server currently responding
+  supportEmail:
+    type: string
+    minLength: 1
+    description: VRChat's support email
+  timeOutWorldId:
+    $ref: ./WorldID.yaml
+  tutorialWorldId:
+    $ref: ./WorldID.yaml
+  updateRateMsMaximum:
+    type: number
+    description: Unknown
+  updateRateMsMinimum:
+    type: number
+    description: Unknown
+  updateRateMsNormal:
+    type: number
+    description: Unknown
+  updateRateMsUdonManual:
+    type: number
+    description: Unknown
+  uploadAnalysisPercent:
+    type: number
+    description: Unknown
+  urlList:
+    type: array
+    description: List of allowed URLs that bypass the "Allow untrusted URL's" setting in-game
+    items:
+      type: string
+  useReliableUdpForVoice:
+    type: boolean
+    description: Unknown
+    default: false
+  userUpdatePeriod:
+    type: number
+    description: Unknown
+  userVerificationDelay:
+    type: number
+    description: Unknown
+  userVerificationRetry:
+    type: number
+    description: Unknown
+  userVerificationTimeout:
+    type: number
+    description: Unknown
+  viveWindowsUrl:
+    type: string
+    minLength: 1
+    description: Download link for game on the Steam website.
+  whiteListedAssetUrls:
+    type: array
+    description: List of allowed URLs that are allowed to host avatar assets
+    items:
+      type: string
+  worldUpdatePeriod:
+    type: number
+    description: Unknown
+  youtubedl-hash:
+    type: string
+    minLength: 1
+    description: Currently used youtube-dl.exe hash in SHA-256-delimited format
+  youtubedl-version:
+    type: string
+    minLength: 1
+    description: Currently used youtube-dl.exe version
+required:
+  - address
+  - announcements
+  - apiKey
+  - appName
+  - buildVersionTag
+  - clientApiKey
+  - contactEmail
+  - copyrightEmail
+  - currentTOSVersion
+  - defaultAvatar
+  - deploymentGroup
+  - devAppVersionStandalone
+  - devDownloadLinkWindows
+  - devSdkUrl
+  - devSdkVersion
+  - devServerVersionStandalone
+  - disableAvatarCopying
+  - disableAvatarGating
+  - disableCommunityLabs
+  - disableCommunityLabsPromotion
+  - disableEventStream
+  - disableFeedbackGating
+  - disableRegistration
+  - disableSteamNetworking
+  - disableTwoFactorAuth
+  - disableUdon
+  - disableUpgradeAccount
+  - downloadLinkWindows
+  - downloadUrls
+  - dynamicWorldRows
+  - events
+  - gearDemoRoomId
+  - homepageRedirectTarget
+  - homeWorldId
+  - hubWorldId
+  - jobsEmail
+  - messageOfTheDay
+  - moderationEmail
+  - moderationQueryPeriod
+  - notAllowedToSelectAvatarInPrivateWorldMessage
+  - plugin
+  - releaseAppVersionStandalone
+  - releaseSdkUrl
+  - releaseSdkVersion
+  - releaseServerVersionStandalone
+  - sdkDeveloperFaqUrl
+  - sdkDiscordUrl
+  - sdkNotAllowedToPublishMessage
+  - sdkUnityVersion
+  - serverName
+  - supportEmail
+  - timeOutWorldId
+  - tutorialWorldId
+  - urlList
+  - viveWindowsUrl
+  - whiteListedAssetUrls
+  - youtubedl-hash
+  - youtubedl-version

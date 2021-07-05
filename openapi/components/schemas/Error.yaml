@@ -1,0 +1,6 @@
+title: Error
+type: object
+x-internal: true
+properties:
+  error:
+    $ref: ./Response.yaml

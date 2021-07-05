@@ -1,0 +1,80 @@
+title: User
+type: object
+properties:
+  id:
+    $ref: ./UserID.yaml
+  username:
+    type: string
+  displayName:
+    type: string
+  userIcon:
+    type: string
+  bio:
+    type: string
+  bioLinks:
+    type: array
+    items:
+      type: string
+  profilePicOverride:
+    type: string
+  statusDescription:
+    type: string
+  currentAvatarImageUrl:
+    type: string
+  currentAvatarThumbnailImageUrl:
+    type: string
+  fallbackAvatar:
+    $ref: ./AvatarID.yaml
+  state:
+    $ref: ./UserState.yaml
+  tags:
+    type: array
+    items:
+      type: string
+  developerType:
+    $ref: ./DeveloperType.yaml
+  last_login:
+    $ref: ./DateTime.yaml
+  last_platform:
+    type: string
+  allowAvatarCopying:
+    type: boolean
+  status:
+    $ref: ./UserStatus.yaml
+  date_joined:
+    $ref: ./Date.yaml
+  isFriend:
+    type: boolean
+  friendKey:
+    type: string
+  worldId:
+    $ref: ./WorldID.yaml
+  instanceId:
+    type: string
+  location:
+    type: string
+required:
+  - id
+  - username
+  - displayName
+  - userIcon
+  - bio
+  - bioLinks
+  - profilePicOverride
+  - statusDescription
+  - currentAvatarImageUrl
+  - currentAvatarThumbnailImageUrl
+  - fallbackAvatar
+  - state
+  - tags
+  - developerType
+  - last_login
+  - last_platform
+  - allowAvatarCopying
+  - status
+  - date_joined
+  - isFriend
+  - friendKey
+  - worldId
+  - instanceId
+  - location
