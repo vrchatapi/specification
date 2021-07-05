@@ -1,0 +1,7 @@
+title: NotificationDetailRequestInvite
+type: object
+properties:
+  platform:
+    type: string
+required:
+  - platform

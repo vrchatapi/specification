@@ -1,0 +1,10 @@
+title: NotificationDetailVoteToKick
+type: object
+properties:
+  userToKickId:
+    $ref: ../../../openapi.yaml#/components/schemas/UserID
+  initiatorUserId:
+    $ref: ../../../openapi.yaml#/components/schemas/UserID
+required:
+  - userToKickId
+  - initiatorUserId

@@ -1,0 +1,7 @@
+title: NotificationDetailInvite
+type: object
+properties:
+  worldId:
+    $ref: ../../../openapi.yaml#/components/schemas/WorldID
+required:
+  - worldId

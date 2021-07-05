@@ -1,0 +1,36 @@
+title: Notification
+type: object
+description: ''
+properties:
+  id:
+    type: string
+    minLength: 1
+  senderUserId:
+    $ref: ../../../openapi.yaml#/components/schemas/UserID
+  senderUsername:
+    type: string
+    minLength: 1
+  type:
+    $ref: ./NotificationType.yaml
+  message:
+    type: string
+  details:
+    oneOf:
+      - type: object
+      - $ref: ./NotificationDetailInvite.yaml
+      - $ref: ./NotificationDetailRequestInvite.yaml
+      - $ref: ./NotificationDetailRequestInviteResponse.yaml
+      - $ref: ./NotificationDetailVoteToKick.yaml
+  seen:
+    type: boolean
+  created_at:
+    $ref: ../../../openapi.yaml#/components/schemas/DateTime
+required:
+  - id
+  - senderUserId
+  - senderUsername
+  - type
+  - message
+  - details
+  - seen
+  - created_at
