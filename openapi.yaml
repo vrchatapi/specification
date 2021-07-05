@@ -11,14 +11,30 @@ info:
     url: 'https://github.com/vrchatapi/specification/blob/master/LICENSE'
     name: GNU Affero General Public License v3.0
   description: |-
-    **Official statement from VRChat Team**: Use of the API using applications other than the approved methods (website, VRChat application) are not officially supported. You may use the API for your own application, but keep these guidelines in mind:
+    ![VRChat API Banner](https://raw.githubusercontent.com/vrchatapi/vrchatapi.github.io/master/assets/apibanner.png)
 
-    * We do not provide documentation or support for the API.
-    * Do not make queries to the API more than once per 60 seconds.
-    * Abuse of the API may result in account termination.
-    * Access to API endpoints may break at any given time, with no warning.
+    # VRChat API Documentation
+    This project is an [OPEN Open Source Project](http://openopensource.org)
 
-    As stated, this documentation was not created with the help of the official VRChat team. Therefore this documentation is not an official documentation of the VRChat API and may not be always up to date with the latest versions. If you find that a page or endpoint is not longer valid please create an [issue on GitHub](https://github.com/vrchatapi/specification/issues) and tell us so we can fix it.
+    Individuals making significant and valuable contributions are given
+    commit-access to the project to contribute as they see fit. This project
+    is more like an open wiki than a standard guarded open source project.
+
+    ## Disclaimer
+
+    This is the official response of the VRChat Team (from Tupper more specifically) on the usage of the VRChat API.
+
+    > **Use of the API using applications other than the approved methods (website, VRChat application) are not officially supported. You may use the API for your own application, but keep these guidelines in mind:**
+    > * We do not provide documentation or support for the API.
+    > * Do not make queries to the API more than once per 60 seconds.
+    > * Abuse of the API may result in account termination.
+    > * Access to API endpoints may break at any given time, with no warning.
+
+    As stated, this documentation was not created with the help of the official VRChat team. Therefore this documentation is not an official documentation of the VRChat API and may not be always up to date with the latest versions. If you find that a page or endpoint is not longer valid please create an issue and tell us so we can fix it.
+
+    ## Get in touch with us!
+
+    https://discord.gg/qjZE9C9fkB #vrchat-api
 servers:
   - url: 'https://api.vrchat.cloud/api/1'
 paths:
@@ -50,12 +66,6 @@ paths:
       parameters: []
       description: Verify whether the currently provided Auth Token is valid.
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
   /logout:
@@ -98,14 +108,8 @@ paths:
           $ref: '#/components/responses/Missing-Credentials'
       description: Invalidates the auth cookie.
       security:
-        - apiKeyQuery: []
-          authHeader: []
         - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       tags:
         - authentication
   /auth/user:
@@ -123,28 +127,16 @@ paths:
         '401':
           $ref: '#/components/responses/Missing-Credentials'
       operationId: get-user
-      security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
-        - apiKeyCookie: []
-          authCookie: []
       description: |-
         Login and/or Get user data from your VRChat account.
 
         If `Authorization` header is present then a new login session will be generated, and a new `auth` cookie is returned.
 
         **WARNING: Session Limit:** Each authentication with login credentials counts as a separate session, out of which you have a limited amount. Make sure to save and reuse the `auth` cookie whenever you can, and avoid sending the Authorization header unless strictly neccesary. While the exact number of simultaneous open sessions is secret, expect to **very fast** run into the rate-limit and be temporarily blocked from making new sessions until the old ones expire.
-      parameters:
-        - schema:
-            type: string
-            example: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
-          in: header
-          name: Authorization
-          description: Authorization header
+      parameters: []
+      security:
+        - apiKeyQuery: []
+          authHeader: []
   /auth/twofactorauth/totp/verify:
     parameters: []
     post:
@@ -179,12 +171,6 @@ paths:
       tags:
         - authentication
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       parameters: []
@@ -222,12 +208,6 @@ paths:
       tags:
         - authentication
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
   '/user/{userId}/delete':
@@ -258,12 +238,6 @@ paths:
 
         **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
   /users:
@@ -284,12 +258,6 @@ paths:
           $ref: '#/components/responses/Missing-Credentials'
       operationId: search-users
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       parameters:
@@ -341,12 +309,6 @@ paths:
           $ref: '#/components/responses/Missing-Credentials'
       operationId: get-user-by-name
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       description: Get public user information about a specific user using their name.
@@ -372,12 +334,6 @@ paths:
           $ref: '#/components/responses/Missing-Credentials'
       operationId: get-user-by-id
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       description: Get public user information about a specific user using their ID.
@@ -393,12 +349,6 @@ paths:
                 $ref: '#/components/schemas/CurrentUser'
       description: Update a users information such as the email and birthday.
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       requestBody:
@@ -447,12 +397,6 @@ paths:
           $ref: '#/components/responses/Invalid-Admin-Credentials'
       operationId: search-users-active
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       parameters:
@@ -788,12 +732,6 @@ paths:
                   $ref: '#/components/schemas/LimitedUser'
       operationId: get-friends
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       parameters:
@@ -816,12 +754,6 @@ paths:
           $ref: '#/components/responses/Friend-Status'
       operationId: get-friend-status
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       description: 'Retrieve if the user is currently a friend with a given user, if they have an outgoing friend request, and if they have an incoming friend request. The proper way to receive and accept friend request is by checking if the user has an incoming `Notification` of type `friendRequest`, and then accepting that notification.'
@@ -839,12 +771,6 @@ paths:
       operationId: send-friend-request
       description: Send a friend request to another user.
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       responses:
@@ -867,12 +793,6 @@ paths:
           $ref: '#/components/responses/Unfriend-Error'
       description: Unfriend a user by ID.
       security:
-        - apiKeyQuery: []
-          authHeader: []
-        - apiKeyCookie: []
-          authHeader: []
-        - apiKeyQuery: []
-          authCookie: []
         - apiKeyCookie: []
           authCookie: []
       tags:
@@ -1906,7 +1826,12 @@ components:
               - isFriend
               - outgoingRequest
               - incomingRequest
-          examples: {}
+          examples:
+            Example Response:
+              value:
+                isFriend: false
+                outgoingRequest: false
+                incomingRequest: false
   examples: {}
   parameters:
     number:
@@ -1926,9 +1851,6 @@ components:
         type: integer
         minimum: 0
       description: Offset of where search results start
-security:
-  - apiKeyQuery: []
-  - apiKeyCookie: []
 tags:
   - name: authentication
   - name: users
