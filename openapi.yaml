@@ -123,7 +123,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CurrentUser'
+                $ref: ./openapi/components/schemas/CurrentUser.yaml
         '401':
           $ref: '#/components/responses/Missing-Credentials'
       operationId: getUser
@@ -226,7 +226,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CurrentUser'
+                $ref: ./openapi/components/schemas/CurrentUser.yaml
         '401':
           $ref: '#/components/responses/Missing-Credentials'
       tags:
@@ -253,7 +253,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/LimitedUser'
+                  $ref: ./openapi/components/schemas/LimitedUser.yaml
         '401':
           $ref: '#/components/responses/Missing-Credentials'
       operationId: searchUsers
@@ -304,7 +304,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: ./openapi/components/schemas/User.yaml
         '401':
           $ref: '#/components/responses/Missing-Credentials'
       operationId: getUserByName
@@ -329,7 +329,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: ./openapi/components/schemas/User.yaml
         '401':
           $ref: '#/components/responses/Missing-Credentials'
       operationId: getUserById
@@ -392,7 +392,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/LimitedUser'
+                  $ref: ./openapi/components/schemas/LimitedUser.yaml
         '403':
           $ref: '#/components/responses/Invalid-Admin-Credentials'
       operationId: searchActiveUsers
@@ -440,7 +440,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Config'
+                $ref: ./openapi/components/schemas/Config.yaml
               examples:
                 Configuration as of 2021-07-04:
                   value:
@@ -709,7 +709,7 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/DateTime'
+                $ref: ./openapi/components/schemas/DateTime.yaml
       operationId: getSystemTime
       description: |-
         Returns in plain format the current time of the API server.
@@ -729,7 +729,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/LimitedUser'
+                  $ref: ./openapi/components/schemas/LimitedUser.yaml
       operationId: getFriends
       security:
         - apiKeyCookie: []
