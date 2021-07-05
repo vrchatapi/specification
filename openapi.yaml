@@ -332,7 +332,7 @@ paths:
                 $ref: ./openapi/components/schemas/User.yaml
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: getUserById
+      operationId: getUser
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -768,7 +768,7 @@ paths:
       summary: Send Friend Request
       tags:
         - friends
-      operationId: sendFriendRequest
+      operationId: friend
       description: Send a friend request to another user.
       security:
         - apiKeyCookie: []
