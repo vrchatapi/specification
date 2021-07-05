@@ -62,7 +62,7 @@ paths:
           headers: {}
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: verify-auth-token
+      operationId: verifyAuthToken
       parameters: []
       description: Verify whether the currently provided Auth Token is valid.
       security:
@@ -126,7 +126,7 @@ paths:
                 $ref: '#/components/schemas/CurrentUser'
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: get-user
+      operationId: getUser
       description: |-
         Login and/or Get user data from your VRChat account.
 
@@ -141,7 +141,7 @@ paths:
     parameters: []
     post:
       summary: Verify 2FA code
-      operationId: verify-2fa
+      operationId: verify2FA
       responses:
         '200':
           description: OK
@@ -178,7 +178,7 @@ paths:
     parameters: []
     post:
       summary: Verify 2FA code with Recovery code
-      operationId: verify-recovery-code
+      operationId: verifyRecoveryCode
       responses:
         '200':
           description: OK
@@ -219,7 +219,7 @@ paths:
         required: true
     put:
       summary: Delete User
-      operationId: delete-user
+      operationId: deleteUserById
       responses:
         '200':
           description: OK
@@ -256,7 +256,7 @@ paths:
                   $ref: '#/components/schemas/LimitedUser'
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: search-users
+      operationId: searchUsers
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -307,7 +307,7 @@ paths:
                 $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: get-user-by-name
+      operationId: getUserByName
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -332,14 +332,14 @@ paths:
                 $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: get-user-by-id
+      operationId: getUserById
       security:
         - apiKeyCookie: []
           authCookie: []
       description: Get public user information about a specific user using their ID.
     put:
       summary: Update User Info
-      operationId: put-users-userId
+      operationId: updateUser
       responses:
         '200':
           description: OK
@@ -395,7 +395,7 @@ paths:
                   $ref: '#/components/schemas/LimitedUser'
         '403':
           $ref: '#/components/responses/Invalid-Admin-Credentials'
-      operationId: search-users-active
+      operationId: searchActiveUsers
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -423,7 +423,7 @@ paths:
       summary: Check API Health
       tags:
         - system
-      operationId: get-health
+      operationId: getHealth
       description: 'Gets the overall health status, the server name, and the current build version tag of the API.'
       security: []
       responses:
@@ -673,7 +673,7 @@ paths:
                     worldUpdatePeriod: 60
                     youtubedl-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
                     youtubedl-version: '2021-05-16'
-      operationId: get-config
+      operationId: getConfig
       description: |-
         API config contains configuration that the clients needs to work properly.
 
@@ -692,7 +692,7 @@ paths:
               schema:
                 type: integer
                 description: Number of online users
-      operationId: get-current-online-users
+      operationId: getCurrentOnlineUsers
       security: []
       description: |-
         Returns in plain format the number of currently online users.
@@ -710,7 +710,7 @@ paths:
             text/plain:
               schema:
                 $ref: '#/components/schemas/DateTime'
-      operationId: get-system-time
+      operationId: getSystemTime
       description: |-
         Returns in plain format the current time of the API server.
 
@@ -730,7 +730,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LimitedUser'
-      operationId: get-friends
+      operationId: getFriends
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -752,7 +752,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Friend-Status'
-      operationId: get-friend-status
+      operationId: getFriendStatus
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -768,7 +768,7 @@ paths:
       summary: Send Friend Request
       tags:
         - friends
-      operationId: send-friend-request
+      operationId: sendFriendRequest
       description: Send a friend request to another user.
       security:
         - apiKeyCookie: []
