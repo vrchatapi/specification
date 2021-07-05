@@ -126,7 +126,7 @@ paths:
                 $ref: ./openapi/components/schemas/CurrentUser.yaml
         '401':
           $ref: '#/components/responses/Missing-Credentials'
-      operationId: getUser
+      operationId: getCurrentUser
       description: |-
         Login and/or Get user data from your VRChat account.
 
@@ -295,7 +295,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Get User by Username
+      summary: Get user by username
       tags:
         - users
       responses:
@@ -320,7 +320,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Get User by ID
+      summary: Get user by ID
       tags:
         - users
       responses:
