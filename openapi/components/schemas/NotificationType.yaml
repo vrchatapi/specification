@@ -1,0 +1,10 @@
+type: string
+title: NotificationType
+enum:
+  - all
+  - broadcast
+  - friendRequest
+  - invite
+  - message
+  - RequestInvite
+  - votetokick

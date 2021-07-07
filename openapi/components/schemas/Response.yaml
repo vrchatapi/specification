@@ -1,0 +1,12 @@
+title: Response
+type: object
+properties:
+  message:
+    type: string
+    minLength: 1
+  status_code:
+    type: number
+required:
+  - message
+  - status_code
+x-internal: false

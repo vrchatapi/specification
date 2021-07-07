@@ -1,0 +1,7 @@
+title: NotificationDetailInvite
+type: object
+properties:
+  worldId:
+    $ref: ./WorldID.yaml
+required:
+  - worldId

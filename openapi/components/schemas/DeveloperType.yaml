@@ -1,0 +1,15 @@
+title: DeveloperType
+type: string
+enum:
+  - none
+  - trusted
+  - internal
+  - moderator
+default: none
+description: |-
+  "none" User is a normal user
+  "trusted" Unknown
+  "internal" Is a VRChat Developer
+  "moderator" Is a VRChat Moderator
+
+  Staff can hide their developerType at will.
