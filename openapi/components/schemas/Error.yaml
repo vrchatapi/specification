@@ -1,6 +1,6 @@
 title: Error
 type: object
-x-internal: true
+x-internal: false
 properties:
   error:
     $ref: ./Response.yaml
