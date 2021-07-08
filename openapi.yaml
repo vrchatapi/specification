@@ -61,7 +61,7 @@ paths:
                   - token
           headers: {}
         '401':
-          $ref: '#/components/responses/Missing-Credentials'
+          $ref: '#/components/responses/MissingCredentials'
       operationId: verifyAuthToken
       parameters: []
       description: Verify whether the currently provided Auth Token is valid.
@@ -105,7 +105,7 @@ paths:
                       message: Ok!
                       status_code: 200
         '401':
-          $ref: '#/components/responses/Missing-Credentials'
+          $ref: '#/components/responses/MissingCredentials'
       description: Invalidates the auth cookie.
       security:
         - apiKeyCookie: []
@@ -125,7 +125,7 @@ paths:
               schema:
                 $ref: ./openapi/components/schemas/CurrentUser.yaml
         '401':
-          $ref: '#/components/responses/Missing-Credentials'
+          $ref: '#/components/responses/MissingCredentials'
       operationId: getCurrentUser
       description: |-
         Login and/or Get user data from your VRChat account.
@@ -155,7 +155,7 @@ paths:
                 required:
                   - verified
         '401':
-          $ref: '#/components/responses/Missing-Credentials'
+          $ref: '#/components/responses/MissingCredentials'
       requestBody:
         content:
           application/json:
@@ -192,7 +192,7 @@ paths:
                 required:
                   - verified
         '401':
-          $ref: '#/components/responses/Missing-Credentials'
+          $ref: '#/components/responses/MissingCredentials'
       requestBody:
         content:
           application/json:
@@ -228,7 +228,7 @@ paths:
               schema:
                 $ref: ./openapi/components/schemas/CurrentUser.yaml
         '401':
-          $ref: '#/components/responses/Missing-Credentials'
+          $ref: '#/components/responses/MissingCredentials'
       tags:
         - authentication
       description: |-
@@ -255,7 +255,7 @@ paths:
                 items:
                   $ref: ./openapi/components/schemas/LimitedUser.yaml
         '401':
-          $ref: '#/components/responses/Missing-Credentials'
+          $ref: '#/components/responses/MissingCredentials'
       operationId: searchUsers
       security:
         - apiKeyCookie: []
@@ -306,7 +306,7 @@ paths:
               schema:
                 $ref: ./openapi/components/schemas/User.yaml
         '401':
-          $ref: '#/components/responses/Missing-Credentials'
+          $ref: '#/components/responses/MissingCredentials'
       operationId: getUserByName
       security:
         - apiKeyCookie: []
@@ -331,7 +331,7 @@ paths:
               schema:
                 $ref: ./openapi/components/schemas/User.yaml
         '401':
-          $ref: '#/components/responses/Missing-Credentials'
+          $ref: '#/components/responses/MissingCredentials'
       operationId: getUser
       security:
         - apiKeyCookie: []
@@ -394,7 +394,7 @@ paths:
                 items:
                   $ref: ./openapi/components/schemas/LimitedUser.yaml
         '403':
-          $ref: '#/components/responses/Invalid-Admin-Credentials'
+          $ref: '#/components/responses/InvalidAdminCredentials'
       operationId: searchActiveUsers
       security:
         - apiKeyCookie: []
@@ -428,7 +428,7 @@ paths:
       security: []
       responses:
         '200':
-          $ref: '#/components/responses/API-Health'
+          $ref: '#/components/responses/APIHealth'
   /config:
     get:
       summary: Fetch API Configuration
@@ -730,6 +730,8 @@ paths:
                 type: array
                 items:
                   $ref: ./openapi/components/schemas/LimitedUser.yaml
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
       operationId: getFriends
       security:
         - apiKeyCookie: []
@@ -751,7 +753,9 @@ paths:
         - friends
       responses:
         '200':
-          $ref: '#/components/responses/Friend-Status'
+          $ref: '#/components/responses/FriendStatus'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
       operationId: getFriendStatus
       security:
         - apiKeyCookie: []
@@ -768,6 +772,7 @@ paths:
       summary: Send Friend Request
       tags:
         - friends
+        - notifications
       operationId: friend
       description: Send a friend request to another user.
       security:
@@ -775,7 +780,26 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/Notification-Response'
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: '#/components/responses/Error'
+    delete:
+      summary: Delete Friend Request
+      tags:
+        - friends
+        - notifications
+      operationId: deleteFriendRequest
+      description: Deletes a pending friend request to another user.
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Notification'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
   '/auth/user/friends/{userId}':
     parameters:
       - schema:
@@ -788,15 +812,133 @@ paths:
       operationId: unfriend
       responses:
         '200':
-          $ref: '#/components/responses/Unfriend-Success'
+          $ref: '#/components/responses/Success'
         '400':
-          $ref: '#/components/responses/Unfriend-Error'
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
       description: Unfriend a user by ID.
       security:
         - apiKeyCookie: []
           authCookie: []
       tags:
         - friends
+  /auth/user/notifications:
+    get:
+      summary: List Notifications
+      tags:
+        - notifications
+      responses:
+        '200':
+          $ref: '#/components/responses/NotificationList'
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: getNotifications
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Retrieve all of the current user's notifications.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: Only send notifications of this type (can use `all` for all).
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: sent
+          description: Return notifications sent by the user. Must be false or omitted.
+          deprecated: true
+        - schema:
+            type: string
+            example: five_minutes_ago
+          in: query
+          name: after
+          description: Only return notifications sent after this Date
+  '/auth/user/notifications/{notificationId}/see':
+    parameters:
+      - schema:
+          type: string
+        name: notificationId
+        in: path
+        required: true
+    put:
+      summary: Mark As Read
+      operationId: markNotificationAsRead
+      responses:
+        '200':
+          $ref: '#/components/responses/Notification'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Mark a notification as seen.
+      tags:
+        - notifications
+  '/auth/user/notifications/{notificationId}/hide':
+    parameters:
+      - schema:
+          type: string
+        name: notificationId
+        in: path
+        required: true
+    put:
+      summary: Delete Notification
+      operationId: deleteNotification
+      responses:
+        '200':
+          $ref: '#/components/responses/Notification'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Delete a notification.
+      tags:
+        - notifications
+  '/auth/user/notifications/{notificationId}/accept':
+    parameters:
+      - schema:
+          type: string
+        name: notificationId
+        in: path
+        required: true
+    put:
+      summary: Accept Friend Request
+      operationId: acceptFriendRequest
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: '#/components/responses/Error'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Accept a friend request by notification `frq_` ID. Friend requests can be found using the NotificationsAPI `getNotifications` by filtering of type `friendRequest`.
+      tags:
+        - notifications
+  /auth/user/notifications/clear:
+    put:
+      summary: Clear All Notifications
+      operationId: clearNotifications
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Clear **all** notifications.
+      tags:
+        - notifications
 components:
   schemas: {}
   securitySchemes:
@@ -820,8 +962,8 @@ components:
       in: cookie
       description: Auth Token via Cookie
   responses:
-    Missing-Credentials:
-      description: Error response due to missing auth token cookie.
+    MissingCredentials:
+      description: Error response due to missing apiKey or auth cookie.
       content:
         application/json:
           schema:
@@ -837,7 +979,7 @@ components:
                 error:
                   message: '"Missing Credentials"'
                   status_code: 401
-    Invalid-Admin-Credentials:
+    InvalidAdminCredentials:
       description: Error response due to missing Administrator credentials.
       content:
         application/json:
@@ -854,7 +996,7 @@ components:
                 error:
                   message: '"Invalid Admin Credentials"'
                   status_code: 403
-    API-Health:
+    APIHealth:
       description: API's Health
       content:
         application/json:
@@ -879,20 +1021,30 @@ components:
                 ok: true
                 serverName: prod-api-green-marsh-dgt
                 buildVersionTag: master-build-2021-06-24-fred-drakeshoot
-    Unfriend-Error:
-      description: Error response from an Unfriend request.
+    Error:
+      description: Error response from a request.
       content:
         application/json:
           schema:
             $ref: ./openapi/components/schemas/Error.yaml
           examples:
-            Not Friends Response:
+            400 Not Friends Response:
               value:
                 error:
                   message: These users are not friends
                   status_code: 400
-    Unfriend-Success:
-      description: Successful response from an Unfriend request.
+            404 Accept Friend Request:
+              value:
+                error:
+                  message: that friend request could not be found
+                  status_code: 404
+            404 Delete Friend Request:
+              value:
+                error:
+                  message: that friend request could not be found
+                  status_code: 404
+    Success:
+      description: Successful response from a request.
       content:
         application/json:
           schema:
@@ -903,8 +1055,13 @@ components:
                 success:
                   message: Friendship destroyed
                   status_code: 200
-    Notification-Response:
-      description: Returns a single Notifcation object
+            Cancel Friend Request:
+              value:
+                success:
+                  message: Friendship request deleted
+                  status_code: 200
+    Notification:
+      description: Returns a single Notifcation object.
       content:
         application/json:
           schema:
@@ -920,7 +1077,7 @@ components:
                 details: '{}'
                 seen: false
                 created_at: '2021-01-01T00:00:00.000Z'
-    Friend-Status:
+    FriendStatus:
       description: Friend Status
       content:
         application/json:
@@ -946,6 +1103,14 @@ components:
                 isFriend: false
                 outgoingRequest: false
                 incomingRequest: false
+    NotificationList:
+      description: Returns a list of Notifcation objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./openapi/components/schemas/Notification.yaml
   examples: {}
   parameters:
     number:
@@ -956,6 +1121,7 @@ components:
         type: integer
         maximum: 100
         minimum: 1
+        default: 100
       description: Integer number of results
     offset:
       name: offset
@@ -967,6 +1133,7 @@ components:
       description: Offset of where search results start
 tags:
   - name: authentication
-  - name: users
   - name: friends
+  - name: notifications
   - name: system
+  - name: users

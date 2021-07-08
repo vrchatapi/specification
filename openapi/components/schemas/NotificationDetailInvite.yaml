@@ -3,5 +3,8 @@ type: object
 properties:
   worldId:
     $ref: ./WorldID.yaml
+  worldName:
+    type: string
 required:
   - worldId
+  - worldName

@@ -14,15 +14,16 @@ properties:
     $ref: ./NotificationType.yaml
   message:
     type: string
+    description: ''
+    example: This is a generated invite to VRChat Hub
   details:
-    oneOf:
-      - type: object
-      - $ref: ./NotificationDetailInvite.yaml
-      - $ref: ./NotificationDetailRequestInvite.yaml
-      - $ref: ./NotificationDetailRequestInviteResponse.yaml
-      - $ref: ./NotificationDetailVoteToKick.yaml
+    type: string
+    description: '**NOTICE:** This is not a JSON object, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
+    default: '{}'
+    example: 'See: {}, NotificationDetailInvite, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
   seen:
     type: boolean
+    default: false
   created_at:
     $ref: ./DateTime.yaml
 required:
