@@ -789,7 +789,7 @@ paths:
       tags:
         - friends
       operationId: deleteFriendRequest
-      description: Deletes a pending friend request to another user.
+      description: 'Deletes an outgoing pending friend request to another user. To delete an incoming friend request, use the `deleteNotification` endpoint instead.'
       security:
         - apiKeyCookie: []
           authCookie: []
