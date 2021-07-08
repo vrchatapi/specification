@@ -780,11 +780,11 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          $ref: '#/components/responses/Notification'
         '401':
           $ref: '#/components/responses/MissingCredentials'
         '404':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/UserDoesntExistError'
     delete:
       summary: Delete Friend Request
       tags:
@@ -797,9 +797,11 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/Notification'
+          $ref: '#/components/responses/DeleteFriendRequestSuccess'
         '401':
           $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: '#/components/responses/DeleteFriendRequestError'
   '/auth/user/friends/{userId}':
     parameters:
       - schema:
@@ -812,9 +814,9 @@ paths:
       operationId: unfriend
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          $ref: '#/components/responses/UnfriendSuccess'
         '400':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/NotFriendsError'
         '401':
           $ref: '#/components/responses/MissingCredentials'
       description: Unfriend a user by ID.
@@ -911,11 +913,11 @@ paths:
       operationId: acceptFriendRequest
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          $ref: '#/components/responses/FriendSuccess'
         '401':
           $ref: '#/components/responses/MissingCredentials'
         '404':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/AcceptFriendRequestError'
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -928,7 +930,7 @@ paths:
       operationId: clearNotifications
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          $ref: '#/components/responses/ClearNotificationsSuccess'
         '401':
           $ref: '#/components/responses/MissingCredentials'
       security:
@@ -1019,8 +1021,32 @@ components:
                 ok: true
                 serverName: prod-api-green-marsh-dgt
                 buildVersionTag: master-build-2021-06-24-fred-drakeshoot
-    Error:
-      description: Error response from a request.
+    AcceptFriendRequestError:
+      description: Error response when trying to accept a non-existent friend request.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Error.yaml
+          examples:
+            404 Accept Friend Request:
+              value:
+                error:
+                  message: that friend request could not be found
+                  status_code: 404
+    DeleteFriendRequestError:
+      description: Error response when trying to delete a non-existent friend-request.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Error.yaml
+          examples:
+            404 Delete Friend Request:
+              value:
+                error:
+                  message: that friend request could not be found
+                  status_code: 404
+    NotFriendsError:
+      description: Error response when trying to unfriend someone who is not a friend.
       content:
         application/json:
           schema:
@@ -1031,18 +1057,44 @@ components:
                 error:
                   message: These users are not friends
                   status_code: 400
-            404 Accept Friend Request:
+    UserDoesntExistError:
+      description: Error response when trying to send a friend request to a user which doesn't exist.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Error.yaml
+          examples:
+            404 User Doesn't Exist Response:
               value:
                 error:
-                  message: that friend request could not be found
+                  message: user doesn't existǃ
                   status_code: 404
-            404 Delete Friend Request:
+    ClearNotificationsSuccess:
+      description: Successful response after clearing all notifications.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Success.yaml
+          examples:
+            Unfriend Success:
               value:
-                error:
-                  message: that friend request could not be found
-                  status_code: 404
-    Success:
-      description: Successful response from a request.
+                success:
+                  message: Ok
+                  status_code: 200
+    FriendSuccess:
+      description: Successful response after friending a user.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Success.yaml
+          examples:
+            Unfriend Success:
+              value:
+                success:
+                  message: Ok
+                  status_code: 200
+    UnfriendSuccess:
+      description: Successful response after unfriending a user.
       content:
         application/json:
           schema:
@@ -1053,7 +1105,14 @@ components:
                 success:
                   message: Friendship destroyed
                   status_code: 200
-            Cancel Friend Request:
+    DeleteFriendRequestSuccess:
+      description: Successful response after cancelling a friend request.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Success.yaml
+          examples:
+            Deleted Friend Request:
               value:
                 success:
                   message: Friendship request deleted
