@@ -1,6 +1,5 @@
 title: Success
 type: object
-x-internal: false
 properties:
   success:
     $ref: ./Response.yaml

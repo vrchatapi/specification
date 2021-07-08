@@ -30,7 +30,7 @@ properties:
   tags:
     type: array
     items:
-      type: string
+      $ref: ./Tag.yaml
   developerType:
     $ref: ./DeveloperType.yaml
   last_login:

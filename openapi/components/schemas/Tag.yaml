@@ -4,4 +4,3 @@ description: |-
   Tags are a way to grant various access, assign restrictions or other kinds of metadata to various to objects such as worlds, users and avatars.
 
   System tags starting with `system_` are granted automatically by the system, while admin tags with `admin_` are granted manually. More prefixes such as `language_ ` exists as well.
-x-internal: false

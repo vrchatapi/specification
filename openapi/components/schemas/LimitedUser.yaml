@@ -32,7 +32,8 @@ properties:
   tags:
     type: array
     description: Always empty
-    items: {}
+    items:
+      $ref: ./Tag.yaml
 required:
   - id
   - username
