@@ -831,8 +831,6 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/NotificationList'
-        '400':
-          $ref: '#/components/responses/Error'
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: getNotifications

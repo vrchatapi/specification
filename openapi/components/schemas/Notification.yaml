@@ -20,7 +20,7 @@ properties:
     type: string
     description: '**NOTICE:** This is not a JSON object, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
     default: '{}'
-    example: 'See: {}, NotificationDetailInvite, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
+    example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
   seen:
     type: boolean
     default: false
