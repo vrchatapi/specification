@@ -1133,7 +1133,7 @@ components:
       description: Offset of where search results start
 tags:
   - name: authentication
+  - name: users
   - name: friends
   - name: notifications
   - name: system
-  - name: users
