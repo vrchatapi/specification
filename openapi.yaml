@@ -772,7 +772,6 @@ paths:
       summary: Send Friend Request
       tags:
         - friends
-        - notifications
       operationId: friend
       description: Send a friend request to another user.
       security:
@@ -789,7 +788,6 @@ paths:
       summary: Delete Friend Request
       tags:
         - friends
-        - notifications
       operationId: deleteFriendRequest
       description: Deletes a pending friend request to another user.
       security:
