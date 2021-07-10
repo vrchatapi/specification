@@ -7,20 +7,17 @@ properties:
     minimum: 0
     example: 0
     default: 0
-    description: Incremental version counter
+    description: 'Incremental version counter, can only be increased.'
   status:
     $ref: ./FileStatus.yaml
   created_at:
     $ref: ./DateTime.yaml
   file:
     $ref: ./FileData.yaml
-    description: Usually not present on version 0 by SDK uploads.
   delta:
     $ref: ./FileData.yaml
-    description: Usually not present on version 0 by SDK uploads.
   signature:
     $ref: ./FileData.yaml
-    description: Usually not present on version 0 by SDK uploads.
 required:
   - version
   - status

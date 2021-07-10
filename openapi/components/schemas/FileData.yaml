@@ -15,8 +15,7 @@ properties:
     type: number
     minimum: 0
   status:
-    type: string
-    minLength: 1
+    $ref: ./FileStatus.yaml
   category:
     type: string
     minLength: 1
@@ -28,6 +27,7 @@ properties:
   uploadId:
     type: string
     minLength: 0
+    default: ''
 required:
   - fileName
   - url

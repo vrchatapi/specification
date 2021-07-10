@@ -3,5 +3,6 @@ title: FileStatus
 enum:
   - waiting
   - complete
+  - none
 default: complete
 readOnly: true

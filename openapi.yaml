@@ -712,7 +712,7 @@ paths:
         - notifications
   /files:
     get:
-      summary: Your GET endpoint
+      summary: List Files
       responses:
         '200':
           $ref: '#/components/responses/FileList'
@@ -782,7 +782,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: '#/components/responses/FileList'
+          $ref: '#/components/responses/File'
         '404':
           $ref: '#/components/responses/FileNotFoundError'
       description: 'Shows general information about the "File" object. Each File can have several "Version"''s, and each Version can have multiple real files or "Data" blobs.'
