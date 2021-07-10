@@ -9,4 +9,3 @@ properties:
 required:
   - message
   - status_code
-x-internal: false
