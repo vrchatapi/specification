@@ -1,3 +1,4 @@
-title: AvatarID
 type: string
+title: AvatarID
 pattern: 'avtr_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
