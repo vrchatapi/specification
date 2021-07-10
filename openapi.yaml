@@ -709,6 +709,28 @@ paths:
       description: Clear **all** notifications.
       tags:
         - notifications
+  /files:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          $ref: '#/components/responses/FileList'
+      operationId: getFiles
+      description: Returns a list of files
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: tag
+          description: 'Tag, for example "icon" or "gallery", not included by default.'
+        - schema:
+            type: string
+          in: query
+          name: userId
+          deprecated: true
+          description: 'UserID, will always generate a 500 permission error.'
 components:
   schemas: {}
   securitySchemes:
@@ -938,6 +960,14 @@ components:
             type: array
             items:
               $ref: ./openapi/components/schemas/Notification.yaml
+    FileList:
+      description: Returns a list of File objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./openapi/components/schemas/File.yaml
   examples: {}
   parameters:
     number:
