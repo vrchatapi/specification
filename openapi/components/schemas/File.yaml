@@ -9,18 +9,7 @@ properties:
   ownerId:
     $ref: ./UserID.yaml
   mimeType:
-    type: string
-    default: application/octet-stream
-    enum:
-      - application/octet-stream
-      - application/x-world
-      - application/x-avatar
-      - application/x-msdownload
-      - application/gzip
-      - image/jpg
-      - image/png
-      - application/x-rsync-signature
-      - application/x-rsync-delta
+    $ref: ./MIMEType.yaml
   extension:
     type: string
     minLength: 1
