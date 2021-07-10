@@ -307,6 +307,7 @@ properties:
   currentTOSVersion:
     type: number
     description: Current version number of the Terms of Service
+    readOnly: true
   defaultAvatar:
     $ref: ./AvatarID.yaml
   deploymentGroup:
@@ -434,6 +435,7 @@ properties:
       properties:
         index:
           type: number
+          readOnly: true
         name:
           type: string
           minLength: 1
