@@ -18,6 +18,10 @@ properties:
     $ref: ./FileData.yaml
   signature:
     $ref: ./FileData.yaml
+  deleted:
+    type: boolean
+    description: Usually only present if `true`
+    default: true
 required:
   - version
   - status
