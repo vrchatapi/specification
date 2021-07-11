@@ -6,6 +6,9 @@ properties:
     $ref: ./FileID.yaml
   name:
     type: string
+    description: ''
+    example: Example File
+    minLength: 0
   ownerId:
     $ref: ./UserID.yaml
   mimeType:
@@ -13,8 +16,10 @@ properties:
   extension:
     type: string
     minLength: 1
+    example: .unitypackage
   tags:
     type: array
+    minItems: 0
     items:
       $ref: ./Tag.yaml
   versions:
