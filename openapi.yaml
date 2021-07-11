@@ -803,7 +803,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/File'
-      description: 'Creates a new '
+      description: 'Creates a new FileVersion. Once a Version has been created, proceed to the `/file/{fileId}/{versionId}/file/start` endpoint to start a file upload.'
       tags:
         - files
   '/file/{fileId}/{versionId}':
@@ -838,27 +838,127 @@ paths:
       description: Delete a specific version of a file. You can only delete the latest version.
       tags:
         - files
-  '/file/{fileId}/{versionId}/file/status':
+  '/file/{fileId}/{versionId}/{fileType}/status':
     parameters:
-      - schema:
-          type: string
-        name: fileId
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: versionId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+      - $ref: '#/components/parameters/fileType'
     get:
-      summary: File Version Upload Status
+      summary: Check FileData Upload Status
       tags:
         - files
       responses:
         '200':
           $ref: '#/components/responses/FileVersionUploadInfo'
-      operationId: getFileVersionUploadKey
-      description: Retrieves the upload status during file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
+      operationId: getFileDataUploadStatus
+      description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
+  '/file/{fileId}/{versionId}/{fileType}/start':
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+      - $ref: '#/components/parameters/fileType'
+    put:
+      summary: Start FileData Upload
+      tags:
+        - files
+      responses:
+        '200':
+          description: 'See [https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html](AWS REST docs - PUT Object)'
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  url:
+                    type: string
+                    minLength: 1
+                    description: ''
+                required:
+                  - url
+              examples:
+                Example Response:
+                  value:
+                    url: 'https://s3.amazonaws.com/files.vrchat.cloud/Avatar-MyAvatar-Un.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage?AWSAccessKeyId=XXXXXXXXXXXXXXXXXXXX&Expires=1626028518&Signature=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&partNumber=1&uploadId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx'
+      operationId: startFileDataUpload
+      parameters:
+        - schema:
+            type: integer
+            minimum: 0
+            example: 1
+          in: query
+          name: partNumber
+          required: true
+      description: |-
+        Starts an upload of a specific FilePart. This endpoint will return an AWS URL which you can PUT data to. You need to call this and receive a new AWS API URL for each `partNumber`. Please see AWS's REST documentation on "PUT Object to S3" on how to upload. Once all parts has been uploaded, proceed to `/finish` endpoint.
+
+        **Note:** `nextPartNumber` seems like it is always ignored. Despite it returning 0, first partNumber is always 1.
+  '/file/{fileId}/{versionId}/{fileType}/finish':
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+      - $ref: '#/components/parameters/fileType'
+    put:
+      summary: Finish FileData Upload
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+      operationId: finishFileDataUpload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: ''
+              properties:
+                etags:
+                  type: array
+                  description: Array of ETags uploaded.
+                  minItems: 1
+                  uniqueItems: true
+                  items:
+                    type: string
+                nextPartNumber:
+                  type: string
+                  minLength: 1
+                  default: '0'
+                  example: '0'
+                  enum:
+                    - '0'
+                  deprecated: true
+                  description: 'Always a zero in string form, despite how many parts uploaded.'
+                  maxLength: 1
+                  pattern: '0'
+                maxParts:
+                  type: string
+                  minLength: 1
+                  description: 'Always a zero in string form, despite how many parts uploaded.'
+                  deprecated: true
+                  default: '0'
+                  enum:
+                    - '0'
+                  example: '0'
+                  maxLength: 1
+                  pattern: '0'
+              required:
+                - nextPartNumber
+                - maxParts
+            examples:
+              Example Request:
+                value:
+                  etags:
+                    - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    - yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+                  nextPartNumber: '0'
+                  maxParts: '0'
+        description: |-
+          Please see documentation on ETag's:
+          [https://teppen.io/2018/06/23/aws_s3_etags/](https://teppen.io/2018/06/23/aws_s3_etags/)
+
+          ETag's should NOT be present when uploading a `signature`.
+      description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
 components:
   schemas: {}
   securitySchemes:
@@ -1292,6 +1392,8 @@ components:
       required: true
       schema:
         type: string
+        example: file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        pattern: 'file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
     versionId:
       name: versionId
       in: path
@@ -1300,6 +1402,16 @@ components:
         type: integer
         minimum: 1
         example: 1
+    fileType:
+      name: fileType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+          - file
+          - signature
+        example: file
 tags:
   - name: authentication
   - name: users
