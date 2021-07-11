@@ -880,6 +880,18 @@ paths:
                 Example Response:
                   value:
                     url: 'https://s3.amazonaws.com/files.vrchat.cloud/Avatar-MyAvatar-Un.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage?AWSAccessKeyId=XXXXXXXXXXXXXXXXXXXX&Expires=1626028518&Signature=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&partNumber=1&uploadId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx'
+        '400':
+          description: Error response when trying to start an upload against a FileVersion that is already marked as  `complete`.
+          content:
+            application/json:
+              schema:
+                $ref: ./openapi/components/schemas/Error.yaml
+              examples:
+                Tried To Upload Against Already Finished Version:
+                  value:
+                    error:
+                      message: Cannot upload against a complete version entry․ Create a new version of this file before uploading․
+                      status_code: 400
       operationId: startFileDataUpload
       parameters:
         - schema:
