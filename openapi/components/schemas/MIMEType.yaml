@@ -12,3 +12,6 @@ enum:
   - application⁄x-avatar
   - application⁄x-world
   - application⁄gzip
+  - application/x-rsync-signature
+  - application/x-rsync-delta
+  - application/octet-stream

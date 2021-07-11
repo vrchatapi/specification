@@ -378,6 +378,11 @@ paths:
                   type: array
                   items:
                     type: string
+                userIcon:
+                  type: string
+                  description: MUST be a valid VRChat /file/ url.
+                  example: 'https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1'
+                  minLength: 0
       tags:
         - users
   /users/active:
@@ -442,7 +447,6 @@ paths:
             application/json:
               schema:
                 $ref: ./openapi/components/schemas/Config.yaml
-              examples: {}
       operationId: getConfig
       description: |-
         API config contains configuration that the clients needs to work properly.
@@ -770,11 +774,7 @@ paths:
       description: Creates a new File object
   '/file/{fileId}':
     parameters:
-      - schema:
-          type: string
-        name: fileId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/fileId'
     get:
       summary: Show File
       operationId: getFile
@@ -797,6 +797,68 @@ paths:
       tags:
         - files
       description: Deletes a File object.
+    post:
+      summary: Create File Version
+      operationId: createFileVersion
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+      description: 'Creates a new '
+      tags:
+        - files
+  '/file/{fileId}/{versionId}':
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+    get:
+      summary: Download File Version
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: '#/components/responses/RawFile'
+      operationId: downloadFileVersion
+      description: |-
+        Downloads the file with the provided version number.
+
+        **Version Note:** Version 0 is always when the file was created. The real data is usually always located in version 1 and up.
+
+        **Extension Note:** Files are not guaranteed to have a file extensions. UnityPackage files tends to have it, images through this endpoint do not. You are responsible for appending file extension from the `extension` field when neccesary.
+      security: []
+    delete:
+      summary: Delete File Version
+      operationId: deleteFileVersion
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/FileVersionDeleteInitialError'
+        '500':
+          $ref: '#/components/responses/FileVersionDeleteMiddleError'
+      description: Delete a specific version of a file. You can only delete the latest version.
+      tags:
+        - files
+  '/file/{fileId}/{versionId}/file/status':
+    parameters:
+      - schema:
+          type: string
+        name: fileId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: versionId
+        in: path
+        required: true
+    get:
+      summary: File Version Upload Status
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: '#/components/responses/FileVersionUploadInfo'
+      operationId: getFileVersionUploadKey
+      description: Retrieves the upload status during file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
 components:
   schemas: {}
   securitySchemes:
@@ -1116,6 +1178,94 @@ components:
                 error:
                   message: File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found
                   status_code: 404
+    FileVersionDeleteInitialError:
+      description: Error response when trying to delete the initial version of a file. Delete the main File object instead.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Error.yaml
+          examples:
+            400 Delete Initial File Version:
+              value:
+                error:
+                  message: Cannot delete the initial version of the file‚ just delete the entire file record․
+                  status_code: 400
+    FileVersionDeleteMiddleError:
+      description: Error response when trying to delete any version of a file that is not hte last one.
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
+          examples:
+            409/500 Delete Non-Last File Version:
+              value:
+                error:
+                  message: 409 Cannot delete against anything but the latest version of this file˸ 1‚ 11
+                  status_code: 500
+    RawFile:
+      description: Raw file
+    FileVersionUploadInfo:
+      description: 'Current FileVersion upload status. Contains the uploadId needed for uploading, as well as the already uploaded parts.'
+      content:
+        application/json:
+          schema:
+            type: object
+            description: ''
+            properties:
+              uploadId:
+                type: string
+                minLength: 1
+                example: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+                readOnly: true
+              fileName:
+                type: string
+                minLength: 1
+                example: Avatar-MyAvatar-Un.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage
+                readOnly: true
+              nextPartNumber:
+                type: number
+                minimum: 0
+                example: 0
+                readOnly: true
+              maxParts:
+                type: number
+                minimum: 1
+                example: 1000
+                readOnly: true
+              parts:
+                type: array
+                minItems: 0
+                items:
+                  type: object
+                  readOnly: true
+                readOnly: true
+              etags:
+                type: array
+                description: Unknown
+                minItems: 0
+                items:
+                  type: object
+                  readOnly: true
+                readOnly: true
+            required:
+              - uploadId
+              - fileName
+              - nextPartNumber
+              - maxParts
+              - parts
+              - etags
+            readOnly: true
+          examples:
+            Example Access Key:
+              value:
+                uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+                fileName: Avatar-MyAvatar-Un.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage
+                nextPartNumber: 0
+                maxParts: 1000
+                parts: []
+                etags: []
   examples: {}
   parameters:
     number:
@@ -1136,6 +1286,20 @@ components:
         type: integer
         minimum: 0
       description: Offset of where search results start
+    fileId:
+      name: fileId
+      in: path
+      required: true
+      schema:
+        type: string
+    versionId:
+      name: versionId
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
 tags:
   - name: authentication
   - name: users
