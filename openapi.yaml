@@ -830,7 +830,7 @@ paths:
       operationId: deleteFileVersion
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/File'
         '400':
           $ref: '#/components/responses/FileVersionDeleteInitialError'
         '500':
@@ -1411,6 +1411,7 @@ components:
         enum:
           - file
           - signature
+          - delta
         example: file
 tags:
   - name: authentication
