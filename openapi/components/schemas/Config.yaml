@@ -468,7 +468,6 @@ properties:
         - sortHeading
         - sortOrder
         - sortOwnership
-        - tag
       readOnly: true
     readOnly: true
   events:
