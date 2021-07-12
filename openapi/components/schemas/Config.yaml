@@ -209,7 +209,6 @@ properties:
         - sortHeading
         - sortOrder
         - sortOwnership
-        - tag
   events:
     type: object
     properties:
