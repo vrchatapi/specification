@@ -9,7 +9,7 @@ info:
   termsOfService: 'https://vrchat.com/legal/'
   license:
     url: 'https://github.com/vrchatapi/specification/blob/master/LICENSE'
-    name: GNU Affero General Public License v3.0
+    name: The MIT License (MIT)
   description: |-
     ![VRChat API Banner](https://raw.githubusercontent.com/vrchatapi/vrchatapi.github.io/master/assets/apibanner.png)
 
