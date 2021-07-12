@@ -739,6 +739,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offline'
       description: List information about friends.
   '/user/{userId}/friendStatus':
     parameters:
@@ -1186,6 +1187,14 @@ components:
         type: integer
         minimum: 0
       description: Offset of where search results start
+    offline:
+      name: offline
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Should return offline friends
+
 tags:
   - name: authentication
   - name: users
