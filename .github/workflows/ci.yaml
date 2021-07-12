@@ -1,0 +1,15 @@
+on: [push, pull_request]
+name: Continuous Integration
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    name: Bundle OpenAPI specification
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: OpenAPI CLI Bundle
+        uses: hilary/openapi-cli-bundle-action@v0.0.2
+        with:
+          base-spec: openapi.yaml
+          bundled-spec: dist/openapi-bundled.yml
