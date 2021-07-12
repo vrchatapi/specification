@@ -29,6 +29,8 @@ properties:
     $ref: ./UserStatus.yaml
   isFriend:
     type: boolean
+  location:
+    type: string
   tags:
     type: array
     description: Always empty
@@ -48,4 +50,5 @@ required:
   - last_platform
   - status
   - isFriend
+  - location
   - tags
