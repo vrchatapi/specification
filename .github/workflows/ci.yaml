@@ -13,3 +13,9 @@ jobs:
         with:
           base-spec: openapi.yaml
           bundled-spec: dist/openapi-bundled.yml
+          
+      - name: Store bundled specification
+        uses: actions/upload-artifact@v2
+        with:
+          name: openapi-bundled
+          path: dist/openapi-bundled.yml
