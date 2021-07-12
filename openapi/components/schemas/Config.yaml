@@ -200,6 +200,7 @@ properties:
           minLength: 1
         tag:
           type: string
+          nullable: true
           minLength: 1
           description: Tag to filter worlds for this row
       required:
