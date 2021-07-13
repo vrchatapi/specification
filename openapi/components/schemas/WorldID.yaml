@@ -1,4 +1,4 @@
 title: WorldID
 type: string
-pattern: 'wrld_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+pattern: '(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
 example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
