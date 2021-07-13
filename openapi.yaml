@@ -9,7 +9,7 @@ info:
   termsOfService: 'https://vrchat.com/legal/'
   license:
     url: 'https://github.com/vrchatapi/specification/blob/master/LICENSE'
-    name: GNU Affero General Public License v3.0
+    name: The MIT License (MIT)
   description: |-
     ![VRChat API Banner](https://raw.githubusercontent.com/vrchatapi/vrchatapi.github.io/master/assets/apibanner.png)
 
@@ -516,6 +516,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offline'
       description: List information about friends.
   '/user/{userId}/friendStatus':
     parameters:
@@ -1427,6 +1428,13 @@ components:
         type: integer
         minimum: 0
       description: Offset of where search results start
+    offline:
+      name: offline
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Should return offline friends
     fileId:
       name: fileId
       in: path
@@ -1453,7 +1461,7 @@ components:
           - file
           - signature
           - delta
-        example: file
+        example: fil
 tags:
   - name: authentication
   - name: users
