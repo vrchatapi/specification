@@ -14,7 +14,7 @@ info:
     ![VRChat API Banner](https://raw.githubusercontent.com/vrchatapi/vrchatapi.github.io/master/assets/apibanner.png)
 
     # VRChat API Documentation
-    This project is an [OPEN Open Source Project](http://openopensource.org)
+    This project is an [OPEN Open Source Project](https://openopensource.org)
 
     Individuals making significant and valuable contributions are given
     commit-access to the project to contribute as they see fit. This project
@@ -1461,7 +1461,7 @@ components:
           - file
           - signature
           - delta
-        example: fil
+        example: file
 tags:
   - name: authentication
   - name: users
