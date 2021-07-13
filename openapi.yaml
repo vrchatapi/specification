@@ -721,6 +721,9 @@ paths:
         '200':
           $ref: '#/components/responses/FileList'
       operationId: getFiles
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Returns a list of files
       parameters:
         - schema:
@@ -771,6 +774,9 @@ paths:
                 - name
                 - mimeType
                 - extension
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Creates a new File object
   '/file/{fileId}':
     parameters:
@@ -785,6 +791,9 @@ paths:
           $ref: '#/components/responses/File'
         '404':
           $ref: '#/components/responses/FileNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: 'Shows general information about the "File" object. Each File can have several "Version"''s, and each Version can have multiple real files or "Data" blobs.'
     delete:
       summary: Delete File
@@ -796,6 +805,9 @@ paths:
           $ref: '#/components/responses/FileDeletedError'
       tags:
         - files
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Deletes a File object.
     post:
       summary: Create File Version
@@ -803,6 +815,9 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/File'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: 'Creates a new FileVersion. Once a Version has been created, proceed to the `/file/{fileId}/{versionId}/file/start` endpoint to start a file upload.'
       tags:
         - files
@@ -818,13 +833,15 @@ paths:
         '200':
           $ref: '#/components/responses/RawFile'
       operationId: downloadFileVersion
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: |-
         Downloads the file with the provided version number.
 
         **Version Note:** Version 0 is always when the file was created. The real data is usually always located in version 1 and up.
 
         **Extension Note:** Files are not guaranteed to have a file extensions. UnityPackage files tends to have it, images through this endpoint do not. You are responsible for appending file extension from the `extension` field when neccesary.
-      security: []
     delete:
       summary: Delete File Version
       operationId: deleteFileVersion
@@ -835,6 +852,9 @@ paths:
           $ref: '#/components/responses/FileVersionDeleteInitialError'
         '500':
           $ref: '#/components/responses/FileVersionDeleteMiddleError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Delete a specific version of a file. You can only delete the latest version.
       tags:
         - files
@@ -851,6 +871,9 @@ paths:
         '200':
           $ref: '#/components/responses/FileVersionUploadInfo'
       operationId: getFileDataUploadStatus
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
   '/file/{fileId}/{versionId}/{fileType}/start':
     parameters:
@@ -901,6 +924,9 @@ paths:
           in: query
           name: partNumber
           required: true
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: |-
         Starts an upload of a specific FilePart. This endpoint will return an AWS URL which you can PUT data to. You need to call this and receive a new AWS API URL for each `partNumber`. Please see AWS's REST documentation on "PUT Object to S3" on how to upload. Once all parts has been uploaded, proceed to `/finish` endpoint.
 
@@ -970,6 +996,9 @@ paths:
           [https://teppen.io/2018/06/23/aws_s3_etags/](https://teppen.io/2018/06/23/aws_s3_etags/)
 
           ETag's should NOT be present when uploading a `signature`.
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
 components:
   schemas: {}
