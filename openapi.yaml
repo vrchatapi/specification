@@ -295,7 +295,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Get user by username
+      summary: Get User by Username
       tags:
         - users
       responses:
@@ -320,7 +320,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Get user by ID
+      summary: Get User by ID
       tags:
         - users
       responses:
@@ -366,17 +366,23 @@ paths:
                 tags:
                   type: array
                   items:
-                    type: string
+                    $ref: ./openapi/components/schemas/Tag.yaml
                 status:
                   $ref: ./openapi/components/schemas/UserStatus.yaml
                 statusDescription:
                   type: string
                 bio:
                   type: string
+                  minLength: 0
                 bioLinks:
                   type: array
                   items:
                     type: string
+                userIcon:
+                  type: string
+                  description: MUST be a valid VRChat /file/ url.
+                  example: 'https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1'
+                  minLength: 0
       tags:
         - users
   /users/active:
@@ -441,238 +447,6 @@ paths:
             application/json:
               schema:
                 $ref: ./openapi/components/schemas/Config.yaml
-              examples:
-                Configuration as of 2021-07-04:
-                  value:
-                    address: '1062 Folsom St., Suite 200, San Francisco, CA, 94103'
-                    announcements:
-                      - name: 220121a_modified_clients
-                        text: |-
-                          As part of our continued commitment to improve
-                          safety and awareness, we want to remind you that
-                          <color='red'>modified clients of any kind are not allowed
-                          on VRChat</color>, for any reason, and are prohibited
-                          by the Terms of Service.
-
-                          There is no such thing as an 'approved'
-                          modification, nor do we permit the use of
-                          any modification, for any purpose, ever.
-                          <color='red'>Using them can and will result in your
-                          account being banned!</color>
-
-                          In addition, modified clients are the single
-                          greatest source of <color='red'>compromised and stolen
-                          accounts</color>-- so please, do not use them!
-                    apiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
-                    appName: VrChat
-                    buildVersionTag: master-build-2021-06-24-fred-drakeshoot
-                    clientApiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
-                    clientBPSCeiling: 18432
-                    clientDisconnectTimeout: 30000
-                    clientReservedPlayerBPS: 7168
-                    clientSentCountAllowance: 15
-                    contactEmail: hello@vrchat.com
-                    copyrightEmail: copyright@vrchat.com
-                    currentTOSVersion: 7
-                    defaultAvatar: avtr_53856003-8ff2-4002-b78f-da5d028b22bd
-                    deploymentGroup: green
-                    devAppVersionStandalone: 0.12.0p3
-                    devDownloadLinkWindows: www.vrchat.net
-                    devSdkUrl: 'https://vrchat.com/home/download'
-                    devSdkVersion: 2020.09.25.00.08
-                    devServerVersionStandalone: dev_server_01
-                    disableAvatarCopying: false
-                    disableAvatarGating: false
-                    disableCommunityLabs: false
-                    disableCommunityLabsPromotion: false
-                    disableEmail: false
-                    disableEventStream: false
-                    disableFeedbackGating: false
-                    disableHello: false
-                    disableRegistration: false
-                    disableSteamNetworking: true
-                    disableTwoFactorAuth: false
-                    disableUdon: false
-                    disableUpgradeAccount: false
-                    downloadLinkWindows: 'https://www.oculus.com/experiences/rift/997678176960598/'
-                    downloadUrls:
-                      sdk2: 'https://files.vrchat.cloud/sdk/VRCSDK2-2021.06.03.14.57_Public.unitypackage'
-                      sdk3-avatars: 'https://files.vrchat.cloud/sdk/VRCSDK3-AVATAR-2021.06.03.14.57_Public.unitypackage'
-                      sdk3-worlds: 'https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2021.06.03.14.57_Public.unitypackage'
-                    dynamicWorldRows:
-                      - index: 1
-                        name: Hot
-                        platform: ThisPlatformSupported
-                        sortHeading: heat
-                        sortOrder: descending
-                        sortOwnership: any
-                      - index: 10
-                        name: Games
-                        platform: ThisPlatformSupported
-                        sortHeading: heat
-                        sortOrder: descending
-                        sortOwnership: any
-                        tag: author_tag_game
-                      - index: 11
-                        name: Updated Recently
-                        platform: ThisPlatformSupported
-                        sortHeading: updated
-                        sortOrder: descending
-                        sortOwnership: any
-                      - index: 12
-                        name: New
-                        platform: ThisPlatformSupported
-                        sortHeading: publication
-                        sortOrder: descending
-                        sortOwnership: any
-                      - index: 13
-                        name: Recent
-                        platform: ThisPlatformSupported
-                        sortHeading: recent
-                        sortOrder: descending
-                        sortOwnership: any
-                      - index: 14
-                        name: Mine
-                        platform: any
-                        sortHeading: updated
-                        sortOrder: descending
-                        sortOwnership: mine
-                      - index: 15
-                        name: Classics
-                        platform: ThisPlatformSupported
-                        sortHeading: trending
-                        sortOrder: descending
-                        sortOwnership: any
-                      - index: 2
-                        name: Exercise
-                        platform: Any
-                        sortHeading: shuffle
-                        sortOrder: descending
-                        sortOwnership: any
-                        tag: admin_exercise_row
-                      - index: 3
-                        name: 'World Jam: Drawing'
-                        platform: ThisPlatformSupported
-                        sortHeading: order
-                        sortOrder: ascending
-                        sortOwnership: any
-                        tag: admin_jam_sketchbook
-                      - index: 4
-                        name: Spotlight
-                        platform: ThisPlatformSupported
-                        sortHeading: updated
-                        sortOrder: descending
-                        sortOwnership: any
-                        tag: admin_community_spotlight
-                      - index: 5
-                        name: Community Labs
-                        platform: ThisPlatformSupported
-                        sortHeading: labs
-                        sortOrder: descending
-                        sortOwnership: any
-                      - index: 6
-                        name: Active Cross Platform
-                        platform: AllPlatforms
-                        sortHeading: active
-                        sortOrder: descending
-                        sortOwnership: any
-                      - index: 7
-                        name: Active My Platform
-                        platform: ThisPlatformOnly
-                        sortHeading: active
-                        sortOrder: descending
-                        sortOwnership: any
-                      - index: 8
-                        name: Random
-                        platform: ThisPlatformSupported
-                        sortHeading: shuffle
-                        sortOrder: descending
-                        sortOwnership: any
-                      - index: 9
-                        name: Avatar Worlds
-                        platform: ThisPlatformSupported
-                        sortHeading: heat
-                        sortOrder: descending
-                        sortOwnership: any
-                        tag: author_tag_avatar
-                    events:
-                      distanceClose: 2
-                      distanceFactor: 100
-                      distanceFar: 80
-                      groupDistance: 3
-                      maximumBunchSize: 247
-                      notVisibleFactor: 100
-                      playerOrderBucketSize: 5
-                      playerOrderFactor: 55
-                      slowUpdateFactorThreshold: 25
-                      viewSegmentLength: 5
-                    gearDemoRoomId: '2282253502'
-                    homepageRedirectTarget: 'https://hello.vrchat.com'
-                    homeWorldId: wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd
-                    hubWorldId: wrld_ba913a96-fac4-4048-a062-9aa5db092812
-                    jobsEmail: jobs@vrchat.com
-                    messageOfTheDay: hello world
-                    moderationEmail: moderation@vrchat.com
-                    moderationQueryPeriod: 60
-                    notAllowedToSelectAvatarInPrivateWorldMessage: 'For security reasons, you''re not yet allowed to select avatars in private worlds or upload content. Please continue to enjoy VRChat and we''ll message you when you''ve been unlocked. Thanks and have fun!'
-                    plugin: no_kick_unlisted
-                    releaseAppVersionStandalone: 0.12.0p3
-                    releaseSdkUrl: 'http://files.vrchat.cloud/sdk/VRCSDK-2019.09.18.12.05_Public.unitypackage'
-                    releaseSdkVersion: VRCSDK-2019.09.18.12.05_Public
-                    releaseServerVersionStandalone: public_server_01
-                    sdkDeveloperFaqUrl: 'https://docs.vrchat.com/docs/frequently-asked-questions#section-why-can-t-i-upload-content-yet-'
-                    sdkDiscordUrl: 'https://discord.gg/vrchat'
-                    sdkNotAllowedToPublishMessage: "Welcome the VRChat SDK!\r\n\r\nBefore you can upload avatars or worlds to VRChat, you'll need to spend more time enjoying the app. We do this for security reasons, and so you can learn more about us.\r\n\r\nWhen you get the ability to upload, we will notify you via email and in VRChat. For now, you can learn and test on your own device.\r\n\r\nTo get started, check out the resources below.\r\n\r\nThank you for your patience, we can't wait to see what you'll build!"
-                    sdkUnityVersion: 2018.4.20f1
-                    serverName: prod-api-green-tree-xgq
-                    supportEmail: support@vrchat.com
-                    timeOutWorldId: wrld_5b89c79e-c340-4510-be1b-476e9fcdedcc
-                    tutorialWorldId: wld_7d3d25ec-663e-406e-96a3-e2c4fc0d8104
-                    updateRateMsMaximum: 1000
-                    updateRateMsMinimum: 50
-                    updateRateMsNormal: 200
-                    updateRateMsUdonManual: 50
-                    uploadAnalysisPercent: 1
-                    urlList:
-                      - assets.vrchat.com
-                      - drive.google.com
-                      - facebook.com
-                      - game.nicovideo.jp
-                      - live.furality.online
-                      - live.nicovideo.jp
-                      - live2.nicovideo.jp
-                      - nicovideo.jp
-                      - soundcloud.com
-                      - tiktok.com
-                      - twitch.tv
-                      - v.youku.com
-                      - vimeo.com
-                      - vrchat.cloud
-                      - www.facebook.com
-                      - www.nicovideo.jp
-                      - www.tiktok.com
-                      - www.twitch.tv
-                      - www.youtube.com
-                      - youku.com
-                      - youtu.be
-                      - youtube.com
-                    useReliableUdpForVoice: false
-                    userUpdatePeriod: 60
-                    userVerificationDelay: 5
-                    userVerificationRetry: 30
-                    userVerificationTimeout: 60
-                    viveWindowsUrl: 'http://store.steampowered.com/app/438100/'
-                    whiteListedAssetUrls:
-                      - 'http://dbinj8iahsbec.cloudfront.net/'
-                      - 'http://dbinj8iahsbec.cloudfront.net/plugins'
-                      - 'https://api.vrchat.cloud/api/1/file/'
-                      - 'https://builds.vrchat.cloud/'
-                      - 'https://dbinj8iahsbec.cloudfront.net/'
-                      - 'https://dev-api.vrchat.cloud/api/1/file/'
-                      - 'https://files.vrchat.cloud/unmanaged/'
-                    worldUpdatePeriod: 60
-                    youtubedl-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
-                    youtubedl-version: '2021-05-16'
       operationId: getConfig
       description: |-
         API config contains configuration that the clients needs to work properly.
@@ -692,6 +466,9 @@ paths:
               schema:
                 type: integer
                 description: Number of online users
+                example: 12345
+                minimum: 0
+                readOnly: true
       operationId: getCurrentOnlineUsers
       security: []
       description: |-
@@ -938,6 +715,292 @@ paths:
       description: Clear **all** notifications.
       tags:
         - notifications
+  /files:
+    get:
+      summary: List Files
+      responses:
+        '200':
+          $ref: '#/components/responses/FileList'
+      operationId: getFiles
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns a list of files
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: tag
+          description: 'Tag, for example "icon" or "gallery", not included by default.'
+        - schema:
+            type: string
+          in: query
+          name: userId
+          deprecated: true
+          description: 'UserID, will always generate a 500 permission error.'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      tags:
+        - files
+  /file:
+    post:
+      summary: Create File
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+      operationId: createFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 0
+                mimeType:
+                  $ref: ./openapi/components/schemas/MIMEType.yaml
+                extension:
+                  type: string
+                  minLength: 1
+                tags:
+                  type: array
+                  items:
+                    $ref: ./openapi/components/schemas/Tag.yaml
+              required:
+                - name
+                - mimeType
+                - extension
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Creates a new File object
+  '/file/{fileId}':
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+    get:
+      summary: Show File
+      operationId: getFile
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+        '404':
+          $ref: '#/components/responses/FileNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: 'Shows general information about the "File" object. Each File can have several "Version"''s, and each Version can have multiple real files or "Data" blobs.'
+    delete:
+      summary: Delete File
+      operationId: deleteFile
+      responses:
+        '200':
+          $ref: '#/components/responses/FileDeletedSuccess'
+        '404':
+          $ref: '#/components/responses/FileDeletedError'
+      tags:
+        - files
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Deletes a File object.
+    post:
+      summary: Create File Version
+      operationId: createFileVersion
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: 'Creates a new FileVersion. Once a Version has been created, proceed to the `/file/{fileId}/{versionId}/file/start` endpoint to start a file upload.'
+      tags:
+        - files
+  '/file/{fileId}/{versionId}':
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+    get:
+      summary: Download File Version
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: '#/components/responses/RawFile'
+      operationId: downloadFileVersion
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: |-
+        Downloads the file with the provided version number.
+
+        **Version Note:** Version 0 is always when the file was created. The real data is usually always located in version 1 and up.
+
+        **Extension Note:** Files are not guaranteed to have a file extensions. UnityPackage files tends to have it, images through this endpoint do not. You are responsible for appending file extension from the `extension` field when neccesary.
+    delete:
+      summary: Delete File Version
+      operationId: deleteFileVersion
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+        '400':
+          $ref: '#/components/responses/FileVersionDeleteInitialError'
+        '500':
+          $ref: '#/components/responses/FileVersionDeleteMiddleError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Delete a specific version of a file. You can only delete the latest version.
+      tags:
+        - files
+  '/file/{fileId}/{versionId}/{fileType}/status':
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+      - $ref: '#/components/parameters/fileType'
+    get:
+      summary: Check FileData Upload Status
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: '#/components/responses/FileVersionUploadInfo'
+      operationId: getFileDataUploadStatus
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
+  '/file/{fileId}/{versionId}/{fileType}/start':
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+      - $ref: '#/components/parameters/fileType'
+    put:
+      summary: Start FileData Upload
+      tags:
+        - files
+      responses:
+        '200':
+          description: 'See [https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html](AWS REST docs - PUT Object)'
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  url:
+                    type: string
+                    minLength: 1
+                    description: ''
+                required:
+                  - url
+              examples:
+                Example Response:
+                  value:
+                    url: 'https://s3.amazonaws.com/files.vrchat.cloud/Avatar-MyAvatar-Un.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage?AWSAccessKeyId=XXXXXXXXXXXXXXXXXXXX&Expires=1626028518&Signature=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&partNumber=1&uploadId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx'
+        '400':
+          description: Error response when trying to start an upload against a FileVersion that is already marked as  `complete`.
+          content:
+            application/json:
+              schema:
+                $ref: ./openapi/components/schemas/Error.yaml
+              examples:
+                Tried To Upload Against Already Finished Version:
+                  value:
+                    error:
+                      message: Cannot upload against a complete version entry․ Create a new version of this file before uploading․
+                      status_code: 400
+      operationId: startFileDataUpload
+      parameters:
+        - schema:
+            type: integer
+            minimum: 0
+            example: 1
+          in: query
+          name: partNumber
+          required: true
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: |-
+        Starts an upload of a specific FilePart. This endpoint will return an AWS URL which you can PUT data to. You need to call this and receive a new AWS API URL for each `partNumber`. Please see AWS's REST documentation on "PUT Object to S3" on how to upload. Once all parts has been uploaded, proceed to `/finish` endpoint.
+
+        **Note:** `nextPartNumber` seems like it is always ignored. Despite it returning 0, first partNumber is always 1.
+  '/file/{fileId}/{versionId}/{fileType}/finish':
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+      - $ref: '#/components/parameters/fileType'
+    put:
+      summary: Finish FileData Upload
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: '#/components/responses/File'
+      operationId: finishFileDataUpload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: ''
+              properties:
+                etags:
+                  type: array
+                  description: Array of ETags uploaded.
+                  minItems: 1
+                  uniqueItems: true
+                  items:
+                    type: string
+                nextPartNumber:
+                  type: string
+                  minLength: 1
+                  default: '0'
+                  example: '0'
+                  enum:
+                    - '0'
+                  deprecated: true
+                  description: 'Always a zero in string form, despite how many parts uploaded.'
+                  maxLength: 1
+                  pattern: '0'
+                maxParts:
+                  type: string
+                  minLength: 1
+                  description: 'Always a zero in string form, despite how many parts uploaded.'
+                  deprecated: true
+                  default: '0'
+                  enum:
+                    - '0'
+                  example: '0'
+                  maxLength: 1
+                  pattern: '0'
+              required:
+                - nextPartNumber
+                - maxParts
+            examples:
+              Example Request:
+                value:
+                  etags:
+                    - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    - yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+                  nextPartNumber: '0'
+                  maxParts: '0'
+        description: |-
+          Please see documentation on ETag's:
+          [https://teppen.io/2018/06/23/aws_s3_etags/](https://teppen.io/2018/06/23/aws_s3_etags/)
+
+          ETag's should NOT be present when uploading a `signature`.
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
 components:
   schemas: {}
   securitySchemes:
@@ -1167,6 +1230,184 @@ components:
             type: array
             items:
               $ref: ./openapi/components/schemas/Notification.yaml
+    FileList:
+      description: Returns a list of File objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./openapi/components/schemas/File.yaml
+    File:
+      description: Returns a single File object.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/File.yaml
+          examples:
+            Example Avatar File:
+              value:
+                id: file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+                name: Avatar - Test Avatar - Unity package - 2017․4․28f1_3_standalonewindows_Release
+                ownerId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+                mimeType: application/gzip
+                extension: .unitypackage
+                tags: []
+                versions:
+                  - version: 0
+                    status: complete
+                    created_at: '2019-08-15T11:04:37.910Z'
+                  - version: 1
+                    status: complete
+                    created_at: '2019-08-15T11:04:49.702Z'
+                    file:
+                      fileName: Avatar-Test-Avatar-Unity.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage
+                      url: 'https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage'
+                      md5: xxxxxxxxxxxxxxxxxxx==
+                      sizeInBytes: 303055180
+                      status: complete
+                      category: multipart
+                      uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    delta:
+                      fileName: Avatar-Test-Avatar-Unity.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage.delta
+                      url: 'https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage.delta'
+                      md5: ''
+                      sizeInBytes: 0
+                      status: none
+                      category: queued
+                      uploadId: ''
+                    signature:
+                      fileName: Avatar-Test-Avatar-Unity.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage.signature
+                      url: 'https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage.signature'
+                      md5: xxxxxxxxxxxxxxxx==
+                      sizeInBytes: 532748
+                      status: complete
+                      category: simple
+                      uploadId: ''
+    FileDeletedSuccess:
+      description: Successful response after deleting a File.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Success.yaml
+          examples:
+            File Deleted Success:
+              value:
+                success:
+                  message: File deleted
+                  status_code: 200
+    FileDeletedError:
+      description: Error response when trying to delete a non-existent file.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Error.yaml
+          examples:
+            File Deleted Error:
+              value:
+                error:
+                  message: File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found
+                  status_code: 404
+    FileNotFoundError:
+      description: Error response when trying to show information about a non-existent file.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Error.yaml
+          examples:
+            404 File Not Found:
+              value:
+                error:
+                  message: File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found
+                  status_code: 404
+    FileVersionDeleteInitialError:
+      description: Error response when trying to delete the initial version of a file. Delete the main File object instead.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/Error.yaml
+          examples:
+            400 Delete Initial File Version:
+              value:
+                error:
+                  message: Cannot delete the initial version of the file‚ just delete the entire file record․
+                  status_code: 400
+    FileVersionDeleteMiddleError:
+      description: Error response when trying to delete any version of a file that is not hte last one.
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
+          examples:
+            409/500 Delete Non-Last File Version:
+              value:
+                error:
+                  message: 409 Cannot delete against anything but the latest version of this file˸ 1‚ 11
+                  status_code: 500
+    RawFile:
+      description: Raw file
+    FileVersionUploadInfo:
+      description: 'Current FileVersion upload status. Contains the uploadId needed for uploading, as well as the already uploaded parts.'
+      content:
+        application/json:
+          schema:
+            type: object
+            description: ''
+            properties:
+              uploadId:
+                type: string
+                minLength: 1
+                example: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+                readOnly: true
+              fileName:
+                type: string
+                minLength: 1
+                example: Avatar-MyAvatar-Un.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage
+                readOnly: true
+              nextPartNumber:
+                type: number
+                minimum: 0
+                example: 0
+                readOnly: true
+              maxParts:
+                type: number
+                minimum: 1
+                example: 1000
+                readOnly: true
+              parts:
+                type: array
+                minItems: 0
+                items:
+                  type: object
+                  readOnly: true
+                readOnly: true
+              etags:
+                type: array
+                description: Unknown
+                minItems: 0
+                items:
+                  type: object
+                  readOnly: true
+                readOnly: true
+            required:
+              - uploadId
+              - fileName
+              - nextPartNumber
+              - maxParts
+              - parts
+              - etags
+            readOnly: true
+          examples:
+            Example Access Key:
+              value:
+                uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+                fileName: Avatar-MyAvatar-Un.file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.1.unitypackage
+                nextPartNumber: 0
+                maxParts: 1000
+                parts: []
+                etags: []
   examples: {}
   parameters:
     number:
@@ -1194,10 +1435,37 @@ components:
       schema:
         type: boolean
       description: Should return offline friends
-
+    fileId:
+      name: fileId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: file_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        pattern: 'file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+    versionId:
+      name: versionId
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+    fileType:
+      name: fileType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+          - file
+          - signature
+          - delta
+        example: fil
 tags:
   - name: authentication
   - name: users
   - name: friends
   - name: notifications
+  - name: files
   - name: system

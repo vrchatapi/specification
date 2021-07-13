@@ -1,0 +1,38 @@
+description: ''
+type: object
+title: FileData
+properties:
+  fileName:
+    type: string
+    minLength: 1
+  url:
+    type: string
+    minLength: 1
+  md5:
+    type: string
+    minLength: 0
+  sizeInBytes:
+    type: number
+    minimum: 0
+  status:
+    $ref: ./FileStatus.yaml
+  category:
+    type: string
+    minLength: 1
+    enum:
+      - multipart
+      - queued
+      - simple
+    readOnly: true
+  uploadId:
+    type: string
+    minLength: 0
+    default: ''
+required:
+  - fileName
+  - url
+  - md5
+  - sizeInBytes
+  - status
+  - category
+  - uploadId

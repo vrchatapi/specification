@@ -1,0 +1,28 @@
+description: ''
+type: object
+title: FileVersion
+properties:
+  version:
+    type: number
+    minimum: 0
+    example: 0
+    default: 0
+    description: 'Incremental version counter, can only be increased.'
+  status:
+    $ref: ./FileStatus.yaml
+  created_at:
+    $ref: ./DateTime.yaml
+  file:
+    $ref: ./FileData.yaml
+  delta:
+    $ref: ./FileData.yaml
+  signature:
+    $ref: ./FileData.yaml
+  deleted:
+    type: boolean
+    description: Usually only present if `true`
+    default: true
+required:
+  - version
+  - status
+  - created_at

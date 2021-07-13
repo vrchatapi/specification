@@ -1,0 +1,8 @@
+type: string
+title: FileStatus
+enum:
+  - waiting
+  - complete
+  - none
+example: complete
+readOnly: true
