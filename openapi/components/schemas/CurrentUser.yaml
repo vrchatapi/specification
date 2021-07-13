@@ -62,9 +62,8 @@ properties:
   currentAvatarAssetUrl:
     type: string
   accountDeletionDate:
-    oneOf:
-      - $ref: ./Date.yaml
-      - nullable: true
+    $ref: ./Date.yaml
+    nullable: true
   acceptedTOSVersion:
     type: number
   steamId:
