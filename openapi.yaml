@@ -1434,7 +1434,7 @@ components:
       required: false
       schema:
         type: boolean
-      description: Should return offline friends
+      description: 'Returns *only* offline users if true, returns only online and active users if false'
     fileId:
       name: fileId
       in: path
