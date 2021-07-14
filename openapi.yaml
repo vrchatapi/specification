@@ -590,22 +590,31 @@ paths:
       parameters:
         - schema:
             type: string
+            example: all
           in: query
           name: type
           description: Only send notifications of this type (can use `all` for all).
         - schema:
             type: boolean
-            default: false
+            example: 'false'
           in: query
           name: sent
           description: Return notifications sent by the user. Must be false or omitted.
           deprecated: true
         - schema:
+            type: boolean
+            example: 'false'
+          in: query
+          name: hidden
+          description: Whether to return hiddenr or non-hidden notifications. True only allowed on type `friendRequest`.
+        - schema:
             type: string
             example: five_minutes_ago
           in: query
           name: after
-          description: Only return notifications sent after this Date
+          description: Only return notifications sent after this Date.
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
   '/auth/user/notifications/{notificationId}/see':
     parameters:
       - schema:
