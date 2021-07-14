@@ -596,14 +596,14 @@ paths:
           description: Only send notifications of this type (can use `all` for all).
         - schema:
             type: boolean
-            example: 'false'
+            example: false
           in: query
           name: sent
           description: Return notifications sent by the user. Must be false or omitted.
           deprecated: true
         - schema:
             type: boolean
-            example: 'false'
+            example: false
           in: query
           name: hidden
           description: Whether to return hiddenr or non-hidden notifications. True only allowed on type `friendRequest`.
