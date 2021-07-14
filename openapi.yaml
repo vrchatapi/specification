@@ -92,8 +92,6 @@ paths:
                         readOnly: true
                       status_code:
                         type: number
-                        enum:
-                          - 200
                         default: 200
                         readOnly: true
                 required:
