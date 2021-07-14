@@ -408,7 +408,7 @@ paths:
           $ref: '#/components/responses/APIHealth'
   /config:
     get:
-      summary: Fetch API Configuration
+      summary: Fetch API Config
       tags:
         - system
       responses:
@@ -1308,9 +1308,7 @@ components:
       content:
         application/json:
           schema:
-            properties:
-              id:
-                type: string
+            $ref: ./openapi/components/schemas/Error.yaml
           examples:
             409/500 Delete Non-Last File Version:
               value:
