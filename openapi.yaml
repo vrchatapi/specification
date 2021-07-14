@@ -612,7 +612,7 @@ paths:
             example: five_minutes_ago
           in: query
           name: after
-          description: Only return notifications sent after this Date.
+          description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
   '/auth/user/notifications/{notificationId}/see':
