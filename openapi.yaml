@@ -244,11 +244,10 @@ paths:
       parameters:
         - schema:
             type: string
-            minLength: 1
+            minLength: 0
           in: query
           name: search
-          description: Searches by `displayName`
-          required: true
+          description: Searches by `displayName`. Will return empty array if search query is empty or missing.
         - schema:
             type: string
           in: query
