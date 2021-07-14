@@ -63,7 +63,6 @@ properties:
     type: string
   accountDeletionDate:
     $ref: ./Date.yaml
-    nullable: true
   acceptedTOSVersion:
     type: number
   steamId:
@@ -138,7 +137,6 @@ required:
   - fallbackAvatar
   - currentAvatar
   - currentAvatarAssetUrl
-  - accountDeletionDate
   - acceptedTOSVersion
   - steamId
   - steamDetails
