@@ -78,26 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: object
-                    required:
-                      - message
-                      - status_code
-                    properties:
-                      message:
-                        type: string
-                        minLength: 1
-                        readOnly: true
-                      status_code:
-                        type: number
-                        enum:
-                          - 200
-                        default: 200
-                        readOnly: true
-                required:
-                  - success
+                $ref: ./openapi/components/schemas/Success.yaml
               examples:
                 Logout Success:
                   value:
