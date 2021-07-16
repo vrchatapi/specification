@@ -117,6 +117,7 @@ paths:
       parameters: []
       security:
         - authHeader: []
+        - authCookie: []
   /auth/twofactorauth/totp/verify:
     parameters: []
     post:
@@ -151,7 +152,7 @@ paths:
       tags:
         - authentication
       security:
-        - authHeader: []
+        - authCookie: []
       parameters: []
   /auth/twofactorauth/otp/verify:
     parameters: []
@@ -187,8 +188,7 @@ paths:
       tags:
         - authentication
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/user/{userId}/delete':
     parameters:
       - schema:
