@@ -1,0 +1,10 @@
+formats:
+  - oas3
+extends:
+  - 'spectral:oas'
+rules:
+  contact-properties: warn
+  info-license: warn
+  license-url: warn
+  oas3-parameter-description: info
+  tag-description: hint

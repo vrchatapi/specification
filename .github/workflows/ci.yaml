@@ -2,6 +2,26 @@ on: [push, pull_request]
 name: Continuous Integration
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint OpenAPI specification
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/checkout@v2
+      - name: 'Cache node_modules'
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-v12-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-v12
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Spectral linting
+        run: npm run lint
+
   bundle:
     runs-on: ubuntu-latest
     name: Bundle OpenAPI specification

@@ -1,0 +1,16 @@
+{
+  "name": "vrchat-openapi-test",
+  "version": "1.0.0",
+  "description": "VRChat API OpenAPI Specification Test Suite",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "lint": "node ./node_modules/\\@stoplight/spectral/dist/cli/index.js lint openapi.yaml -F warn"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@stoplight/spectral": "^5.9.1",
+    "mocha": "^9.0.2"
+  }
+}
