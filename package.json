@@ -1,7 +1,7 @@
 {
   "name": "vrchat-openapi-test",
   "version": "1.0.0",
-  "description": "VRChat API OpenAPI Test Suite",
+  "description": "VRChat API OpenAPI Specification Test Suite",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
