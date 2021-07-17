@@ -105,6 +105,12 @@ paths:
             application/json:
               schema:
                 $ref: ./openapi/components/schemas/CurrentUser.yaml
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: 'auth=authcookie_00000000-0000-0000-0000-000000000000; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
+              description: Authenticating returns an `auth` cookie.
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: getCurrentUser
@@ -117,6 +123,8 @@ paths:
       parameters: []
       security:
         - authHeader: []
+        - authHeader: []
+          twoFactorAuthCookie: []
         - authCookie: []
   /auth/twofactorauth/totp/verify:
     parameters: []
@@ -135,6 +143,12 @@ paths:
                     type: boolean
                 required:
                   - verified
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: 'twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
+              description: Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.
         '401':
           $ref: '#/components/responses/MissingCredentials'
       requestBody:
@@ -171,6 +185,12 @@ paths:
                     type: boolean
                 required:
                   - verified
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: 'twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
+              description: Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.
         '401':
           $ref: '#/components/responses/MissingCredentials'
       requestBody:
@@ -415,6 +435,11 @@ paths:
             application/json:
               schema:
                 $ref: ./openapi/components/schemas/Config.yaml
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
       operationId: getConfig
       description: |-
         API config contains configuration that the clients needs to work properly.
@@ -998,6 +1023,11 @@ components:
       type: apiKey
       in: cookie
       description: Auth Token via Cookie
+    twoFactorAuthCookie:
+      name: twoFactorAuth
+      type: apiKey
+      in: cookie
+      description: 2FA device remembrance via Cookie
   responses:
     MissingCredentials:
       description: Error response due to missing apiKey or auth cookie.
@@ -1225,7 +1255,7 @@ components:
                 id: file_00000000-0000-0000-0000-000000000000
                 name: Avatar - Test Avatar - Unity package - 2017․4․28f1_3_standalonewindows_Release
                 ownerId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-                mimeType: 'application⁄gzip'
+                mimeType: application⁄gzip
                 extension: .unitypackage
                 tags: []
                 versions:
