@@ -34,7 +34,8 @@ properties:
   developerType:
     $ref: ./DeveloperType.yaml
   last_login:
-    $ref: ./DateTime.yaml
+    type: string
+    format: date-time
   last_platform:
     type: string
   allowAvatarCopying:
@@ -42,7 +43,9 @@ properties:
   status:
     $ref: ./UserStatus.yaml
   date_joined:
-    $ref: ./Date.yaml
+    type: string
+    format: date
+    readOnly: true
   isFriend:
     type: boolean
   friendKey:

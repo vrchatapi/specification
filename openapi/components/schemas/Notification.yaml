@@ -25,7 +25,9 @@ properties:
     type: boolean
     default: false
   created_at:
-    $ref: ./DateTime.yaml
+    type: string
+    format: date-time
+    readOnly: true
 required:
   - id
   - senderUserId

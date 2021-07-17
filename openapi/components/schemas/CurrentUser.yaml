@@ -62,7 +62,8 @@ properties:
   currentAvatarAssetUrl:
     type: string
   accountDeletionDate:
-    $ref: ./Date.yaml
+    type: string
+    format: date
   acceptedTOSVersion:
     type: number
   steamId:
@@ -86,7 +87,8 @@ properties:
   developerType:
     $ref: ./DeveloperType.yaml
   last_login:
-    $ref: ./DateTime.yaml
+    type: string
+    format: date-time
   last_platform:
     type: string
   allowAvatarCopying:
@@ -94,9 +96,12 @@ properties:
   status:
     $ref: ./UserStatus.yaml
   date_joined:
-    $ref: ./Date.yaml
+    type: string
+    format: date
+    readOnly: true
   isFriend:
     type: boolean
+    default: false
   friendKey:
     type: string
   onlineFriends:
@@ -137,8 +142,8 @@ required:
   - fallbackAvatar
   - currentAvatar
   - currentAvatarAssetUrl
-  # Note: This is technically required, but does not generate as nullable if marked as required
-  # - accountDeletionDate
+# Note: This is technically required, but does not generate as nullable if marked as required
+# - accountDeletionDate
   - acceptedTOSVersion
   - steamId
   - steamDetails
