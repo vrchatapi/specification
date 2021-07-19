@@ -1,9 +1,0 @@
-title: OrderOptions
-name: order
-type: string
-default: descending
-enum:
-  - ascending
-  - descending
-example: descending
-description: Result ordering

@@ -437,26 +437,30 @@ paths:
         - schema:
             type: boolean
           in: query
+          required: false
           name: featured
           description: is the world featured
-        - $ref: ./openapi/components/schemas/SortOptions.yaml
+        - $ref: '#/components/parameters/sortOptions'
         - schema:
             type: string
           in: query
+          required: false
           name: user
           description: Set to `me` for searching own worlds
         - schema:
             type: string
           in: query
+          required: false
           name: userId
           description: Filter by creator id, use `me` for only worlds owned by current user
         - $ref: '#/components/parameters/number'
-        - $ref: ./openapi/components/schemas/OrderOptions.yaml
+        - $ref: '#/components/parameters/orderOptions'
         - $ref: '#/components/parameters/offset'
         - schema:
             type: string
             minLength: 0
           in: query
+          required: false
           name: search
           description: Searches by `name`. Will return empty array if search query is empty or missing.
         - schema:
@@ -464,6 +468,7 @@ paths:
             items:
               type: string
           in: query
+          required: false
           name: tag
           description: Filter by Tag
         - schema:
@@ -471,32 +476,38 @@ paths:
             items:
               type: string
           in: query
+          required: false
           name: notag
           description: Tags to exclude
-        - $ref: ./openapi/components/schemas/ReleaseStatus.yaml
+        - $ref: '#/components/parameters/releaseStatus'
         - schema:
             type: string
           in: query
+          required: false
           name: maxUnityVersion
           description: Current unity version the game is using
         - schema:
             type: string
           in: query
+          required: false
           name: minUnityVersion
           description: The min unity version the world support
         - schema:
             type: string
           in: query
+          required: false
           name: maxAssetVersion
           description: Current asset version the game is using
         - schema:
             type: string
           in: query
+          required: false
           name: minAssetVersion
           description: The min asset version the world support
         - schema:
             type: string
           in: query
+          required: false
           name: platform
           description: The platform the world supports (usually standalonewindows)
       description: Search and list any worlds by text query
@@ -1520,6 +1531,49 @@ components:
         type: integer
         minimum: 0
       description: A zero-based offset from the default object sorting from where search results start.
+    sortOptions:
+      name: sort
+      in: query
+      required: false
+      schema:
+        title: SortOptions
+        type: string
+        default: order
+        enum:
+          - popularity
+          - created
+          - updated
+          - order
+          - _created_at
+          - _updated_at
+        example: order
+        description: How to sort
+    orderOptions:
+      name: order
+      in: query
+      required: false
+      schema:
+        title: OrderOptions
+        type: string
+        default: descending
+        enum:
+          - ascending
+          - descending
+        example: descending
+        description: Result ordering
+    # Tried to make this a reference to ./openapi/components/schemas/ReleaseStatus.yaml and the generator was not happy
+    releaseStatus:
+      name: releaseStatus
+      in: query
+      required: false
+      schema: 
+        type: string
+        default: hidden
+        enum:
+          - public
+          - private
+          - hidden
+        example: hidden
     offline:
       name: offline
       in: query
