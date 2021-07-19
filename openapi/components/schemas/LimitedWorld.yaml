@@ -1,0 +1,69 @@
+title: LimitedWorld
+type: object
+properties:
+  authorId:
+    $ref: ./UserID.yaml
+  authorName:
+    type: string
+  capacity:
+    type: number
+  createdAt:
+    type: string
+    format: date
+  favorites:
+    type: number
+  heat:
+    type: number
+  id:
+    $ref: ./WorldID.yaml
+  imageUrl:
+    type: string
+  labsPublicationDate:
+    type: string
+    format: date
+  name:
+    type: string
+  occupants:
+    type: number
+  organization:
+    type: string
+  popularity:
+    type: number
+  publicationDate:
+    type: string
+    format: date
+  releaseStatus:
+    $ref: ./ReleaseStatus.yaml
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  thumbnailImageUrl:
+    type: string
+  # TODO
+  unityPackages:
+    type: array
+    items:
+      type: string
+  updatedAt:
+    type: string
+    format: date
+required:
+  - authorId
+  - authorName
+  - capacity
+  - createdAt
+  - favorites
+  - heat
+  - id
+  - imageUrl
+  - name
+  - occupants
+  - organization
+  - popularity
+  - publicationDate
+  - releaseStatus
+  - tags
+  - thumbnailImageUrl
+  - unityPackages
+  - updatedAt

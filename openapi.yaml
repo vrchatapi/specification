@@ -413,6 +413,93 @@ paths:
 
         **Has been locked down and now always respond with "Invalid Admin Credentials".**
       deprecated: true
+  /worlds:
+    get:
+      summary: Search all worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./openapi/components/schemas/LimitedWorld.yaml
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: searchWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - schema:
+            type: boolean
+          in: query
+          name: featured
+          description: is the world featured
+        - $ref: ./openapi/components/schemas/SortOptions.yaml
+        - schema:
+            type: string
+          in: query
+          name: user
+          description: Set to `me` for searching own worlds
+        - schema:
+            type: string
+          in: query
+          name: userId
+          description: Filter by creator id, use `me` for only worlds owned by current user
+        - $ref: '#/components/parameters/number'
+        - $ref: ./openapi/components/schemas/OrderOptions.yaml
+        - $ref: '#/components/parameters/offset'
+        - schema:
+            type: string
+            minLength: 0
+          in: query
+          name: search
+          description: Searches by `name`. Will return empty array if search query is empty or missing.
+        - schema:
+            type: array
+            items:
+              type: string
+          in: query
+          name: tag
+          description: Filter by Tag
+        - schema:
+            type: array
+            items:
+              type: string
+          in: query
+          name: notag
+          description: Tags to exclude
+        - $ref: ./openapi/components/schemas/ReleaseStatus.yaml
+        - schema:
+            type: string
+          in: query
+          name: maxUnityVersion
+          description: Current unity version the game is using
+        - schema:
+            type: string
+          in: query
+          name: minUnityVersion
+          description: The min unity version the world support
+        - schema:
+            type: string
+          in: query
+          name: maxAssetVersion
+          description: Current asset version the game is using
+        - schema:
+            type: string
+          in: query
+          name: minAssetVersion
+          description: The min asset version the world support
+        - schema:
+            type: string
+          in: query
+          name: platform
+          description: The platform the world supports (usually standalonewindows)
+      description: Search and list any worlds by text query
   /health:
     get:
       summary: Check API Health
