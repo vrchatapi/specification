@@ -7,7 +7,7 @@ properties:
     type: string
   capacity:
     type: number
-  createdAt:
+  created_at:
     type: string
     format: date
   favorites:
@@ -20,7 +20,9 @@ properties:
     type: string
   labsPublicationDate:
     type: string
-    format: date
+    # This is a date string unless there is no date, then it's 'none'
+    # oneOf: date, string did not generate
+    # format: date
   name:
     type: string
   occupants:
@@ -44,8 +46,9 @@ properties:
   unityPackages:
     type: array
     items:
-      type: string
-  updatedAt:
+      schema:
+        type: object
+  updated_at:
     type: string
     format: date
 required:
