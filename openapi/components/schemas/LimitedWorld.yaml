@@ -60,7 +60,6 @@ required:
   - id
   - imageUrl
   - name
-  - occupants
   - organization
   - popularity
   - publicationDate
