@@ -46,8 +46,7 @@ properties:
   unityPackages:
     type: array
     items:
-      schema:
-        type: object
+      type: object
   updated_at:
     type: string
     format: date
