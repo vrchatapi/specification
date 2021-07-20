@@ -33,7 +33,9 @@ properties:
     type: number
   publicationDate:
     type: string
-    format: date
+    # This is a date string unless there is no date, then it's 'none'
+    # oneOf: date, string did not generate
+    # format: date
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   tags:
