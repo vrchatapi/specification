@@ -19,12 +19,10 @@ properties:
   imageUrl:
     type: string
   labsPublicationDate:
-    oneOf:
-      - enum:
-          - none
-      - properties: {}
-        format: date
     type: string
+    # This is a date string unless there is no date, then it's 'none'
+    # oneOf: date, string did not generate
+    # format: date
   name:
     type: string
   occupants:
@@ -34,13 +32,8 @@ properties:
   popularity:
     type: number
   publicationDate:
-    oneOf:
-      - properties: {}
-        enum:
-          - none
-      - properties: {}
-        format: date
     type: string
+    format: date
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   tags:
@@ -49,6 +42,7 @@ properties:
       $ref: ./Tag.yaml
   thumbnailImageUrl:
     type: string
+  # TODO
   unityPackages:
     type: array
     items:
@@ -60,6 +54,7 @@ required:
   - authorId
   - authorName
   - capacity
+  - createdAt
   - favorites
   - heat
   - id
@@ -67,7 +62,9 @@ required:
   - name
   - organization
   - popularity
+  - publicationDate
   - releaseStatus
   - tags
   - thumbnailImageUrl
   - unityPackages
+  - updatedAt
