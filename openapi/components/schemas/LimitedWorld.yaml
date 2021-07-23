@@ -56,7 +56,7 @@ required:
   - authorId
   - authorName
   - capacity
-  - createdAt
+  - created_at
   - favorites
   - heat
   - id
@@ -69,4 +69,4 @@ required:
   - tags
   - thumbnailImageUrl
   - unityPackages
-  - updatedAt
+  - updated_at
