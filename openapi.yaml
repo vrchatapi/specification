@@ -413,104 +413,6 @@ paths:
 
         **Has been locked down and now always respond with "Invalid Admin Credentials".**
       deprecated: true
-  /worlds:
-    get:
-      summary: Search all worlds
-      tags:
-        - worlds
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: ./openapi/components/schemas/LimitedWorld.yaml
-        '401':
-          $ref: '#/components/responses/MissingCredentials'
-      operationId: searchWorlds
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      parameters:
-        - schema:
-            type: boolean
-          in: query
-          required: false
-          name: featured
-          description: is the world featured
-        - $ref: '#/components/parameters/sortOptions'
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: user
-          description: Set to `me` for searching own worlds
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: userId
-          description: Filter by creator id, use `me` for only worlds owned by current user
-        - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/orderOptions'
-        - $ref: '#/components/parameters/offset'
-        - schema:
-            type: string
-            minLength: 0
-          in: query
-          required: false
-          name: search
-          description: Searches by `name`. Will return empty array if search query is empty or missing.
-        - schema:
-            type: array
-            items:
-              type: string
-          in: query
-          required: false
-          name: tag
-          description: Filter by Tag
-        - schema:
-            type: array
-            items:
-              type: string
-          in: query
-          required: false
-          name: notag
-          description: Tags to exclude
-        - $ref: '#/components/parameters/releaseStatus'
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: maxUnityVersion
-          description: Current unity version the game is using
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: minUnityVersion
-          description: The min unity version the world support
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: maxAssetVersion
-          description: Current asset version the game is using
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: minAssetVersion
-          description: The min asset version the world support
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: platform
-          description: The platform the world supports (usually standalonewindows)
-      description: Search and list any worlds by text query
   /health:
     get:
       summary: Check API Health
@@ -1101,6 +1003,104 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
+  /worlds:
+    get:
+      summary: Search All Worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./openapi/components/schemas/LimitedWorld.yaml
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: searchWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - schema:
+            type: boolean
+          in: query
+          required: false
+          name: featured
+          description: If the world is featured
+        - $ref: '#/components/parameters/sortOptions'
+        - schema:
+            type: string
+          in: query
+          required: false
+          name: user
+          description: Set to `me` for searching own worlds
+        - schema:
+            type: string
+          in: query
+          required: false
+          name: userId
+          description: 'Filter by creator id, use `me` for only worlds owned by current user'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/offset'
+        - schema:
+            type: string
+            minLength: 0
+          in: query
+          required: false
+          name: search
+          description: Searches by `name`. Will return empty array if search query is empty or missing.
+        - schema:
+            type: array
+            items:
+              type: string
+          in: query
+          required: false
+          name: tag
+          description: Filter by Tag
+        - schema:
+            type: array
+            items:
+              type: string
+          in: query
+          required: false
+          name: notag
+          description: Tags to exclude
+        - $ref: '#/components/parameters/releaseStatus'
+        - schema:
+            type: string
+          in: query
+          required: false
+          name: maxUnityVersion
+          description: Current unity version the game is using
+        - schema:
+            type: string
+          in: query
+          required: false
+          name: minUnityVersion
+          description: The min unity version the world support
+        - schema:
+            type: string
+          in: query
+          required: false
+          name: maxAssetVersion
+          description: Current asset version the game is using
+        - schema:
+            type: string
+          in: query
+          required: false
+          name: minAssetVersion
+          description: The min asset version the world support
+        - schema:
+            type: string
+          in: query
+          required: false
+          name: platform
+          description: The platform the world supports (usually standalonewindows)
+      description: Search and list any worlds by text query.
 components:
   schemas: {}
   securitySchemes:
@@ -1538,15 +1538,27 @@ components:
       schema:
         title: SortOptions
         type: string
-        default: order
+        default: popularity
         enum:
           - popularity
+          - heat
+          - trust
+          - shuffle
+          - random
+          - favorites
+          - reportScore
+          - reportCount
+          - publicationDate
+          - labsPublicationDate
           - created
-          - updated
-          - order
           - _created_at
+          - updated
           - _updated_at
-        example: order
+          - order
+          - relevance
+          - magic
+          - name
+        example: popularity
         description: How to sort
     orderOptions:
       name: order
@@ -1561,12 +1573,11 @@ components:
           - descending
         example: descending
         description: Result ordering
-    # Tried to make this a reference to ./openapi/components/schemas/ReleaseStatus.yaml and the generator was not happy
     releaseStatus:
       name: releaseStatus
       in: query
       required: false
-      schema: 
+      schema:
         type: string
         default: hidden
         enum:
