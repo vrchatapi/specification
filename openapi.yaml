@@ -211,11 +211,7 @@ paths:
         - authCookie: []
   '/user/{userId}/delete':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     put:
       summary: Delete User
       operationId: deleteUserById
@@ -302,11 +298,7 @@ paths:
       description: Get public user information about a specific user using their name.
   '/users/{userId}':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     get:
       summary: Get User by ID
       tags:
@@ -515,11 +507,7 @@ paths:
       description: List information about friends.
   '/user/{userId}/friendStatus':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     get:
       summary: Check Friend Status
       tags:
@@ -536,11 +524,7 @@ paths:
       description: 'Retrieve if the user is currently a friend with a given user, if they have an outgoing friend request, and if they have an incoming friend request. The proper way to receive and accept friend request is by checking if the user has an incoming `Notification` of type `friendRequest`, and then accepting that notification.'
   '/user/{userId}/friendRequest':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     post:
       summary: Send Friend Request
       tags:
@@ -575,11 +559,7 @@ paths:
           $ref: '#/components/responses/DeleteFriendRequestError'
   '/auth/user/friends/{userId}':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     delete:
       summary: Unfriend
       operationId: unfriend
@@ -1010,13 +990,7 @@ paths:
         - worlds
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: ./openapi/components/schemas/LimitedWorld.yaml
+          $ref: '#/components/responses/LimitedWorldList'
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: searchWorlds
@@ -1026,23 +1000,26 @@ paths:
       parameters:
         - schema:
             type: boolean
+            default: false
           in: query
           required: false
           name: featured
-          description: If the world is featured
+          description: If the world is featured.
         - $ref: '#/components/parameters/sortOptions'
         - schema:
             type: string
+            enum:
+              - me
           in: query
           required: false
           name: user
-          description: Set to `me` for searching own worlds
+          description: Set to `me` for searching own worlds.
         - schema:
             type: string
           in: query
           required: false
           name: userId
-          description: 'Filter by creator id, use `me` for only worlds owned by current user'
+          description: 'Filter by creator id, use `me` for only worlds owned by current user.'
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/orderOptions'
         - $ref: '#/components/parameters/offset'
@@ -1052,7 +1029,7 @@ paths:
           in: query
           required: false
           name: search
-          description: Searches by `name`. Will return empty array if search query is empty or missing.
+          description: Searches by world name.
         - schema:
             type: array
             items:
@@ -1060,7 +1037,7 @@ paths:
           in: query
           required: false
           name: tag
-          description: Filter by Tag
+          description: Tags to include.
         - schema:
             type: array
             items:
@@ -1068,7 +1045,7 @@ paths:
           in: query
           required: false
           name: notag
-          description: Tags to exclude
+          description: Tags to exclude.
         - $ref: '#/components/parameters/releaseStatus'
         - schema:
             type: string
@@ -1511,6 +1488,14 @@ components:
                 maxParts: 1000
                 parts: []
                 etags: []
+    LimitedWorldList:
+      description: Returns a list of LimitedWorld objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./openapi/components/schemas/LimitedWorld.yaml
   examples: {}
   parameters:
     number:
@@ -1619,6 +1604,12 @@ components:
           - signature
           - delta
         example: file
+    userId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
 tags:
   - name: authentication
   - name: users
