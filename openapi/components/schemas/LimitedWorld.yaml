@@ -1,47 +1,5 @@
 description: ''
 type: object
-x-examples:
-  example-1:
-    id: wrld_ba913a96-fac4-4048-a062-9aa5db092812
-    name: VRChat Hub
-    authorId: 8JoV9XEdpo
-    authorName: vrchat
-    capacity: 8
-    imageUrl: 'https://api.vrchat.cloud/api/1/file/file_314b6fcf-5552-48f0-8362-3b9922bae707/13/file'
-    thumbnailImageUrl: 'https://api.vrchat.cloud/api/1/image/file_314b6fcf-5552-48f0-8362-3b9922bae707/13/256'
-    releaseStatus: public
-    organization: vrchat
-    tags:
-      - content_featured
-      - admin_hide_popular
-      - admin_hide_new
-      - system_approved
-      - admin_approved
-    favorites: 12018
-    created_at: '2019-05-13T20:43:48.204Z'
-    updated_at: '2020-09-15T16:21:23.098Z'
-    publicationDate: '2020-09-15T16:21:37.626Z'
-    labsPublicationDate: none
-    unityPackages:
-      - platform: android
-        unityVersion: 2017.4.15f1
-      - platform: standalonewindows
-        unityVersion: 2017.4.15f1
-      - platform: android
-        unityVersion: 2017.4.28f1
-      - platform: standalonewindows
-        unityVersion: 2017.4.28f1
-      - platform: android
-        unityVersion: 2018.4.12f1
-      - platform: standalonewindows
-        unityVersion: 2018.4.12f1
-      - platform: android
-        unityVersion: 2018.4.14f1
-      - platform: standalonewindows
-        unityVersion: 2018.4.14f1
-    popularity: 8
-    heat: 5
-    occupants: 42
 properties:
   id:
     $ref: ./WorldID.yaml
