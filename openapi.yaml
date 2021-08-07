@@ -1014,47 +1014,17 @@ paths:
           required: false
           name: user
           description: Set to `me` for searching own worlds.
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: userId
-          description: 'Filter by creator id, use `me` for only worlds owned by current user.'
+        - $ref: '#/components/parameters/userIdQuery'
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/orderOptions'
         - $ref: '#/components/parameters/offset'
-        - schema:
-            type: string
-            minLength: 0
-          in: query
-          required: false
-          name: search
-          description: Searches by world name.
-        - schema:
-            type: array
-            items:
-              type: string
-          in: query
-          required: false
-          name: tag
-          description: Tags to include.
-        - schema:
-            type: array
-            items:
-              type: string
-          in: query
-          required: false
-          name: notag
-          description: Tags to exclude.
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/tag'
+        - $ref: '#/components/parameters/notag'
         - $ref: '#/components/parameters/releaseStatus'
         - $ref: '#/components/parameters/maxUnityVersion'
         - $ref: '#/components/parameters/minUnityVersion'
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: platform
-          description: The platform the world supports (usually standalonewindows)
+        - $ref: '#/components/parameters/platform'
       description: Search and list any worlds by text query.
 components:
   schemas: {}
@@ -1609,6 +1579,35 @@ components:
       required: false
       schema:
         type: string
+      description: The platform the asset supports
+    tag:
+      name: tag
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Tags to include (comma-separated).
+    notag:
+      name: notag
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Tags to exclude (comma-separated).
+    search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filters by world name.
+    userIdQuery:
+      name: userId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by author UserID
 tags:
   - name: authentication
   - name: users
