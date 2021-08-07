@@ -1,0 +1,12 @@
+title: WorldNotFoundError
+description: Error response when trying to show information about a non-existent world. Sometimes returns with `model <worldId> not found` instead of `World <worldId not found`.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      404 World Not Found:
+        value:
+          error:
+            message: World wrld_ba913a96-fac4-4048-a062-9aa5db092812 not found
+            status_code: 404
