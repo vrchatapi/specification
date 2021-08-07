@@ -1550,7 +1550,7 @@ components:
                 id: file_00000000-0000-0000-0000-000000000000
                 name: Avatar - Test Avatar - Unity package - 2017․4․28f1_3_standalonewindows_Release
                 ownerId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-                mimeType: application⁄gzip
+                mimeType: application/gzip
                 extension: .unitypackage
                 tags: []
                 versions:
