@@ -112,42 +112,7 @@ properties:
     uniqueItems: true
     minItems: 1
     items:
-      type: object
-      properties:
-        id:
-          type: string
-          minLength: 1
-        assetUrl:
-          type: string
-          minLength: 1
-        assetUrlObject:
-          type: object
-        pluginUrl:
-          type: string
-        pluginUrlObject:
-          type: object
-        unityVersion:
-          type: string
-          minLength: 1
-        unitySortNumber:
-          type: number
-        assetVersion:
-          type: number
-        platform:
-          type: string
-          minLength: 1
-        created_at:
-          type: string
-          minLength: 1
-      required:
-        - id
-        - assetUrl
-        - pluginUrl
-        - unityVersion
-        - unitySortNumber
-        - assetVersion
-        - platform
-        - created_at
+      $ref: ./UnityPackage.yaml
   updated_at:
     type: string
     minLength: 1

@@ -1,75 +1,89 @@
 description: ''
 type: object
-title: LimitedWorld
+x-examples:
+  example-1:
+    id: wrld_ba913a96-fac4-4048-a062-9aa5db092812
+    name: VRChat Hub
+    authorId: 8JoV9XEdpo
+    authorName: vrchat
+    capacity: 8
+    imageUrl: 'https://api.vrchat.cloud/api/1/file/file_314b6fcf-5552-48f0-8362-3b9922bae707/13/file'
+    thumbnailImageUrl: 'https://api.vrchat.cloud/api/1/image/file_314b6fcf-5552-48f0-8362-3b9922bae707/13/256'
+    releaseStatus: public
+    organization: vrchat
+    tags:
+      - content_featured
+      - admin_hide_popular
+      - admin_hide_new
+      - system_approved
+      - admin_approved
+    favorites: 12018
+    created_at: '2019-05-13T20:43:48.204Z'
+    updated_at: '2020-09-15T16:21:23.098Z'
+    publicationDate: '2020-09-15T16:21:37.626Z'
+    labsPublicationDate: none
+    unityPackages:
+      - platform: android
+        unityVersion: 2017.4.15f1
+      - platform: standalonewindows
+        unityVersion: 2017.4.15f1
+      - platform: android
+        unityVersion: 2017.4.28f1
+      - platform: standalonewindows
+        unityVersion: 2017.4.28f1
+      - platform: android
+        unityVersion: 2018.4.12f1
+      - platform: standalonewindows
+        unityVersion: 2018.4.12f1
+      - platform: android
+        unityVersion: 2018.4.14f1
+      - platform: standalonewindows
+        unityVersion: 2018.4.14f1
+    popularity: 8
+    heat: 5
+    occupants: 42
 properties:
-  authorId:
-    $ref: ./UserID.yaml
-  authorName:
-    type: string
-    minLength: 1
-    readOnly: true
-  capacity:
-    type: number
-    minimum: 0
-    example: 8
-    readOnly: true
-  created_at:
-    type: string
-    minLength: 1
-    format: date-time
-    readOnly: true
-  favorites:
-    type: number
-    default: 0
-    example: 12024
-    minimum: 0
-    readOnly: true
-  heat:
-    type: number
-    example: 5
-    minimum: 0
-    default: 0
-    readOnly: true
   id:
     $ref: ./WorldID.yaml
-  imageUrl:
-    type: string
-    minLength: 1
-  labsPublicationDate:
-    type: string
-    minLength: 1
-    example: none
   name:
     type: string
     minLength: 1
-  occupants:
+  authorId:
+    type: string
+    minLength: 1
+  authorName:
+    type: string
+    minLength: 1
+  capacity:
     type: number
-    minimum: 0
-    example: 47
-    default: 0
-    readOnly: true
+  imageUrl:
+    type: string
+    minLength: 1
+  thumbnailImageUrl:
+    type: string
+    minLength: 1
+  releaseStatus:
+    type: string
+    minLength: 1
   organization:
     type: string
     minLength: 1
-    default: vrchat
-    example: vrchat
-  popularity:
-    type: number
-    example: 8
-    minimum: 0
-    default: 0
-    readOnly: true
-  publicationDate:
-    type: string
-    minLength: 1
-    format: date-time
-  releaseStatus:
-    $ref: ./ReleaseStatus.yaml
   tags:
     type: array
     items:
-      $ref: ./Tag.yaml
-  thumbnailImageUrl:
+      type: object
+  favorites:
+    type: number
+  created_at:
+    type: string
+    minLength: 1
+  updated_at:
+    type: string
+    minLength: 1
+  publicationDate:
+    type: string
+    minLength: 1
+  labsPublicationDate:
     type: string
     minLength: 1
   unityPackages:
@@ -77,38 +91,30 @@ properties:
     uniqueItems: true
     minItems: 1
     items:
-      type: object
-      properties:
-        platform:
-          type: string
-          minLength: 1
-        unityVersion:
-          type: string
-          minLength: 1
-      required:
-        - platform
-        - unityVersion
-  updated_at:
-    type: string
-    minLength: 1
-    format: date-time
+      $ref: ./LimitedUnityPackage.yaml
+  popularity:
+    type: number
+  heat:
+    type: number
+  occupants:
+    type: number
 required:
+  - id
+  - name
   - authorId
   - authorName
   - capacity
-  - created_at
-  - favorites
-  - heat
-  - id
   - imageUrl
-  - labsPublicationDate
-  - name
-  - occupants
-  - organization
-  - popularity
-  - publicationDate
-  - releaseStatus
-  - tags
   - thumbnailImageUrl
-  - unityPackages
+  - releaseStatus
+  - organization
+  - tags
+  - favorites
+  - created_at
   - updated_at
+  - publicationDate
+  - labsPublicationDate
+  - unityPackages
+  - popularity
+  - heat
+  - occupants

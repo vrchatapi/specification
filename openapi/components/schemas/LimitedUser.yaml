@@ -24,7 +24,7 @@ properties:
   developerType:
     $ref: ./DeveloperType.yaml
   last_platform:
-    type: string
+    $ref: ./Platform.yaml
   status:
     $ref: ./UserStatus.yaml
   isFriend:
