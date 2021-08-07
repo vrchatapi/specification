@@ -1085,6 +1085,8 @@ paths:
                 - name
         description: ''
       description: 'Create a new world. This endpoint requires `assetUrl` to be a valid File object with `.vrcw` file extension, and `imageUrl` to be a valid File object with an image file extension.'
+      tags:
+        - worlds
   /worlds/active:
     get:
       summary: List Active Worlds
@@ -1180,7 +1182,8 @@ paths:
       - $ref: '#/components/parameters/worldId'
     get:
       summary: Get World by ID
-      tags: []
+      tags:
+        - worlds
       operationId: getWorld
       responses:
         '200':
@@ -1248,6 +1251,8 @@ paths:
                   default: 5.3.4p1
                   example: 2018.4.20f1
       description: Update information about a specific World.
+      tags:
+        - worlds
     delete:
       summary: Delete World
       operationId: deleteWorld
@@ -1259,6 +1264,38 @@ paths:
         '404':
           $ref: ./openapi/components/responses/WorldNotFoundError.yaml
       description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
+      tags:
+        - worlds
+  '/worlds/{worldId}/metadata':
+    parameters:
+      - $ref: '#/components/parameters/worldId'
+    get:
+      summary: Get World Metadata
+      tags:
+        - worlds
+      operationId: getWorldMetadata
+      deprecated: true
+      description: Returns a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  id:
+                    $ref: ./openapi/components/schemas/WorldID.yaml
+                  metadata:
+                    type: object
+                    readOnly: true
+                required:
+                  - id
+                  - metadata
+                readOnly: true
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
 components:
   schemas: {}
   securitySchemes:
