@@ -1324,6 +1324,24 @@ paths:
                 readOnly: true
         '404':
           $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+    put:
+      summary: ''
+      operationId: publishWorld
+      responses:
+        '200':
+          description: OK
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+      description: Publishes a world. You can only publish one world per week.
+    delete:
+      summary: ''
+      operationId: unpublishWorld
+      responses:
+        '200':
+          description: OK
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+      description: Unpublishes a world.
 components:
   schemas: {}
   securitySchemes:
