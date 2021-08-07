@@ -1,0 +1,11 @@
+description: Error response when trying create a world without having the neccesary Trust rank yet.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      400 Can't Create World Yet:
+        value:
+          error:
+            message: \"You can't create a world right now\"
+            status_code: 400

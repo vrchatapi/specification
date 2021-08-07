@@ -1,0 +1,157 @@
+description: ''
+type: object
+title: World
+properties:
+  assetUrl:
+    type: string
+    minLength: 1
+  assetUrlObject:
+    type: object
+  authorId:
+    $ref: ./UserID.yaml
+  authorName:
+    type: string
+    minLength: 1
+    readOnly: true
+  capacity:
+    type: number
+    minimum: 0
+    example: 8
+    readOnly: true
+  created_at:
+    type: string
+    minLength: 1
+    format: date-time
+    readOnly: true
+  description:
+    type: string
+    minLength: 0
+  favorites:
+    type: number
+    minimum: 0
+    default: 0
+    example: 12024
+    readOnly: true
+  featured:
+    type: boolean
+    default: false
+  heat:
+    type: number
+    minimum: 0
+    example: 5
+    default: 0
+    readOnly: true
+  id:
+    $ref: ./WorldID.yaml
+  imageUrl:
+    type: string
+    minLength: 1
+  instances:
+    type: array
+    items:
+      type: object
+  labsPublicationDate:
+    type: string
+    minLength: 1
+    example: none
+  name:
+    type: string
+    minLength: 1
+  namespace:
+    type: string
+  occupants:
+    type: number
+    minimum: 0
+    example: 47
+    default: 0
+    readOnly: true
+  organization:
+    type: string
+    minLength: 1
+    example: vrchat
+    default: vrchat
+  pluginUrlObject:
+    type: object
+  popularity:
+    type: number
+    example: 8
+    default: 0
+    minimum: 0
+    readOnly: true
+  previewYoutubeId:
+    type: string
+  privateOccupants:
+    type: number
+    default: 0
+    minimum: 0
+    example: 1
+    readOnly: true
+  publicOccupants:
+    type: number
+    example: 46
+    default: 0
+    minimum: 0
+    readOnly: true
+  publicationDate:
+    type: string
+    minLength: 1
+    format: date-time
+  releaseStatus:
+    $ref: ./ReleaseStatus.yaml
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  thumbnailImageUrl:
+    type: string
+    minLength: 1
+  unityPackageUrlObject:
+    type: object
+  unityPackages:
+    type: array
+    uniqueItems: true
+    minItems: 1
+    items:
+      $ref: ./UnityPackage.yaml
+  updated_at:
+    type: string
+    minLength: 1
+    format: date-time
+  version:
+    type: number
+    minimum: 0
+    example: 68
+    default: 0
+  visits:
+    type: number
+    minimum: 0
+    example: 9988675
+    default: 0
+    readOnly: true
+required:
+  - assetUrl
+  - assetUrlObject
+  - authorId
+  - authorName
+  - capacity
+  - created_at
+  - description
+  - featured
+  - heat
+  - id
+  - imageUrl
+  - labsPublicationDate
+  - name
+  - namespace
+  - organization
+  - pluginUrlObject
+  - popularity
+  - publicationDate
+  - releaseStatus
+  - tags
+  - thumbnailImageUrl
+  - unityPackageUrlObject
+  - unityPackages
+  - updated_at
+  - version
+  - visits

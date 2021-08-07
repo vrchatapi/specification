@@ -211,11 +211,7 @@ paths:
         - authCookie: []
   '/user/{userId}/delete':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     put:
       summary: Delete User
       operationId: deleteUserById
@@ -302,11 +298,7 @@ paths:
       description: Get public user information about a specific user using their name.
   '/users/{userId}':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     get:
       summary: Get User by ID
       tags:
@@ -413,104 +405,6 @@ paths:
 
         **Has been locked down and now always respond with "Invalid Admin Credentials".**
       deprecated: true
-  /worlds:
-    get:
-      summary: Search all worlds
-      tags:
-        - worlds
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: ./openapi/components/schemas/LimitedWorld.yaml
-        '401':
-          $ref: '#/components/responses/MissingCredentials'
-      operationId: searchWorlds
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      parameters:
-        - schema:
-            type: boolean
-          in: query
-          required: false
-          name: featured
-          description: is the world featured
-        - $ref: '#/components/parameters/sortOptions'
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: user
-          description: Set to `me` for searching own worlds
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: userId
-          description: Filter by creator id, use `me` for only worlds owned by current user
-        - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/orderOptions'
-        - $ref: '#/components/parameters/offset'
-        - schema:
-            type: string
-            minLength: 0
-          in: query
-          required: false
-          name: search
-          description: Searches by `name`. Will return empty array if search query is empty or missing.
-        - schema:
-            type: array
-            items:
-              type: string
-          in: query
-          required: false
-          name: tag
-          description: Filter by Tag
-        - schema:
-            type: array
-            items:
-              type: string
-          in: query
-          required: false
-          name: notag
-          description: Tags to exclude
-        - $ref: '#/components/parameters/releaseStatus'
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: maxUnityVersion
-          description: Current unity version the game is using
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: minUnityVersion
-          description: The min unity version the world support
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: maxAssetVersion
-          description: Current asset version the game is using
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: minAssetVersion
-          description: The min asset version the world support
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: platform
-          description: The platform the world supports (usually standalonewindows)
-      description: Search and list any worlds by text query
   /health:
     get:
       summary: Check API Health
@@ -613,11 +507,7 @@ paths:
       description: List information about friends.
   '/user/{userId}/friendStatus':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     get:
       summary: Check Friend Status
       tags:
@@ -634,11 +524,7 @@ paths:
       description: 'Retrieve if the user is currently a friend with a given user, if they have an outgoing friend request, and if they have an incoming friend request. The proper way to receive and accept friend request is by checking if the user has an incoming `Notification` of type `friendRequest`, and then accepting that notification.'
   '/user/{userId}/friendRequest':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     post:
       summary: Send Friend Request
       tags:
@@ -673,11 +559,7 @@ paths:
           $ref: '#/components/responses/DeleteFriendRequestError'
   '/auth/user/friends/{userId}':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/userId'
     delete:
       summary: Unfriend
       operationId: unfriend
@@ -1101,6 +983,369 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
+  /worlds:
+    get:
+      summary: Search All Worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          $ref: '#/components/responses/LimitedWorldList'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: searchWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/featured'
+        - $ref: '#/components/parameters/sortOptions'
+        - schema:
+            type: string
+            enum:
+              - me
+          in: query
+          required: false
+          name: user
+          description: Set to `me` for searching own worlds.
+        - $ref: '#/components/parameters/userIdQuery'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/tag'
+        - $ref: '#/components/parameters/notag'
+        - $ref: '#/components/parameters/releaseStatus'
+        - $ref: '#/components/parameters/maxUnityVersion'
+        - $ref: '#/components/parameters/minUnityVersion'
+        - $ref: '#/components/parameters/platform'
+      description: Search and list any worlds by query filters.
+    post:
+      summary: Create World
+      operationId: createWorld
+      responses:
+        '200':
+          $ref: '#/components/responses/World'
+        '400':
+          $ref: ./openapi/components/responses/CreateWorldNotAllowedYetError.yaml
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assetUrl:
+                  type: string
+                  minLength: 1
+                assetVersion:
+                  type: string
+                  minLength: 1
+                authorId:
+                  $ref: ./openapi/components/schemas/UserID.yaml
+                authorName:
+                  type: string
+                  minLength: 1
+                capacity:
+                  type: integer
+                  minimum: 1
+                  maximum: 40
+                  default: 16
+                  example: 16
+                description:
+                  type: string
+                id:
+                  $ref: ./openapi/components/schemas/WorldID.yaml
+                imageUrl:
+                  type: string
+                  minLength: 1
+                name:
+                  type: string
+                  minLength: 1
+                platform:
+                  $ref: ./openapi/components/schemas/Platform.yaml
+                releaseStatus:
+                  $ref: ./openapi/components/schemas/ReleaseStatus.yaml
+                tags:
+                  type: array
+                  items:
+                    $ref: ./openapi/components/schemas/Tag.yaml
+                unityPackageUrl:
+                  type: string
+                  minLength: 1
+                unityVersion:
+                  type: string
+                  minLength: 1
+                  default: 5.3.4p1
+                  example: 2018.4.20f1
+              required:
+                - assetUrl
+                - imageUrl
+                - name
+        description: ''
+      description: 'Create a new world. This endpoint requires `assetUrl` to be a valid File object with `.vrcw` file extension, and `imageUrl` to be a valid File object with an image file extension.'
+      tags:
+        - worlds
+  /worlds/active:
+    get:
+      summary: List Active Worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          $ref: '#/components/responses/LimitedWorldList'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: getActiveWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/featured'
+        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/tag'
+        - $ref: '#/components/parameters/notag'
+        - $ref: '#/components/parameters/releaseStatus'
+        - $ref: '#/components/parameters/maxUnityVersion'
+        - $ref: '#/components/parameters/minUnityVersion'
+        - $ref: '#/components/parameters/platform'
+      description: Search and list currently Active worlds by query filters.
+  /worlds/recent:
+    get:
+      summary: List Recent Worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          $ref: '#/components/responses/LimitedWorldList'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '403':
+          $ref: ./openapi/components/responses/SeeOtherUserRecentsError.yaml
+      operationId: getRecentWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/featured'
+        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/tag'
+        - $ref: '#/components/parameters/notag'
+        - $ref: '#/components/parameters/releaseStatus'
+        - $ref: '#/components/parameters/maxUnityVersion'
+        - $ref: '#/components/parameters/minUnityVersion'
+        - $ref: '#/components/parameters/platform'
+        - $ref: '#/components/parameters/userIdAdmin'
+      description: Search and list recently visited worlds by query filters.
+  /worlds/favorites:
+    get:
+      summary: List Favorited Worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          $ref: '#/components/responses/LimitedWorldList'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '403':
+          $ref: ./openapi/components/responses/SeeOtherUserFavoritesError.yaml
+      operationId: getFavoritedWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/featured'
+        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/tag'
+        - $ref: '#/components/parameters/notag'
+        - $ref: '#/components/parameters/releaseStatus'
+        - $ref: '#/components/parameters/maxUnityVersion'
+        - $ref: '#/components/parameters/minUnityVersion'
+        - $ref: '#/components/parameters/platform'
+        - $ref: '#/components/parameters/userIdAdmin'
+      description: Search and list favorited worlds by query filters.
+  '/worlds/{worldId}':
+    parameters:
+      - $ref: '#/components/parameters/worldId'
+    get:
+      summary: Get World by ID
+      tags:
+        - worlds
+      operationId: getWorld
+      responses:
+        '200':
+          $ref: '#/components/responses/World'
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+      description: Get information about a specific World.
+    put:
+      summary: Update World
+      operationId: updateWorld
+      responses:
+        '200':
+          $ref: '#/components/responses/World'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assetUrl:
+                  type: string
+                  minLength: 1
+                assetVersion:
+                  type: string
+                  minLength: 1
+                authorId:
+                  $ref: ./openapi/components/schemas/UserID.yaml
+                authorName:
+                  type: string
+                  minLength: 1
+                capacity:
+                  type: integer
+                  minimum: 1
+                  maximum: 40
+                  default: 16
+                  example: 16
+                description:
+                  type: string
+                id:
+                  $ref: ./openapi/components/schemas/WorldID.yaml
+                imageUrl:
+                  type: string
+                  minLength: 1
+                name:
+                  type: string
+                  minLength: 1
+                platform:
+                  $ref: ./openapi/components/schemas/Platform.yaml
+                releaseStatus:
+                  $ref: ./openapi/components/schemas/ReleaseStatus.yaml
+                tags:
+                  type: array
+                  items:
+                    $ref: ./openapi/components/schemas/Tag.yaml
+                unityPackageUrl:
+                  type: string
+                  minLength: 1
+                unityVersion:
+                  type: string
+                  minLength: 1
+                  default: 5.3.4p1
+                  example: 2018.4.20f1
+      description: Update information about a specific World.
+      tags:
+        - worlds
+    delete:
+      summary: Delete World
+      operationId: deleteWorld
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+      description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
+      tags:
+        - worlds
+  '/worlds/{worldId}/metadata':
+    parameters:
+      - $ref: '#/components/parameters/worldId'
+    get:
+      summary: Get World Metadata
+      tags:
+        - worlds
+      operationId: getWorldMetadata
+      deprecated: true
+      description: Returns a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  id:
+                    $ref: ./openapi/components/schemas/WorldID.yaml
+                  metadata:
+                    type: object
+                    readOnly: true
+                required:
+                  - id
+                  - metadata
+                readOnly: true
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+  '/worlds/{worldId}/publish':
+    parameters:
+      - $ref: '#/components/parameters/worldId'
+    get:
+      summary: Get World Publish Status
+      tags:
+        - worlds
+      operationId: getWorldPublish
+      deprecated: true
+      description: Returns a worlds publish status. This is currently believed to be unused.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  canPubilsh:
+                    type: boolean
+                    default: true
+                    readOnly: true
+                required:
+                  - canPubilsh
+                readOnly: true
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+    put:
+      summary: ''
+      operationId: publishWorld
+      responses:
+        '200':
+          description: OK
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+      description: Publishes a world. You can only publish one world per week.
+      tags:
+        - worlds
+    delete:
+      summary: ''
+      operationId: unpublishWorld
+      responses:
+        '200':
+          description: OK
+        '404':
+          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+      description: Unpublishes a world.
+      tags:
+        - worlds
 components:
   schemas: {}
   securitySchemes:
@@ -1355,7 +1600,7 @@ components:
                 id: file_00000000-0000-0000-0000-000000000000
                 name: Avatar - Test Avatar - Unity package - 2017․4․28f1_3_standalonewindows_Release
                 ownerId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-                mimeType: application⁄gzip
+                mimeType: application/gzip
                 extension: .unitypackage
                 tags: []
                 versions:
@@ -1511,6 +1756,20 @@ components:
                 maxParts: 1000
                 parts: []
                 etags: []
+    LimitedWorldList:
+      description: Returns a list of LimitedWorld objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./openapi/components/schemas/LimitedWorld.yaml
+    World:
+      description: Returns a single World object.
+      content:
+        application/json:
+          schema:
+            $ref: ./openapi/components/schemas/World.yaml
   examples: {}
   parameters:
     number:
@@ -1538,15 +1797,27 @@ components:
       schema:
         title: SortOptions
         type: string
-        default: order
+        default: popularity
         enum:
           - popularity
+          - heat
+          - trust
+          - shuffle
+          - random
+          - favorites
+          - reportScore
+          - reportCount
+          - publicationDate
+          - labsPublicationDate
           - created
-          - updated
-          - order
           - _created_at
+          - updated
           - _updated_at
-        example: order
+          - order
+          - relevance
+          - magic
+          - name
+        example: popularity
         description: How to sort
     orderOptions:
       name: order
@@ -1561,12 +1832,11 @@ components:
           - descending
         example: descending
         description: Result ordering
-    # Tried to make this a reference to ./openapi/components/schemas/ReleaseStatus.yaml and the generator was not happy
     releaseStatus:
       name: releaseStatus
       in: query
       required: false
-      schema: 
+      schema:
         type: string
         default: hidden
         enum:
@@ -1574,6 +1844,7 @@ components:
           - private
           - hidden
         example: hidden
+      description: Filter by ReleaseStatus.
     offline:
       name: offline
       in: query
@@ -1608,6 +1879,81 @@ components:
           - signature
           - delta
         example: file
+    userId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+    maxUnityVersion:
+      name: maxUnityVersion
+      in: query
+      required: false
+      schema:
+        type: string
+      description: The maximum Unity version supported by the asset.
+    minUnityVersion:
+      name: minUnityVersion
+      in: query
+      required: false
+      schema:
+        type: string
+      description: The minimum Unity version supported by the asset.
+    platform:
+      name: platform
+      in: query
+      required: false
+      schema:
+        type: string
+      description: The platform the asset supports.
+    tag:
+      name: tag
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Tags to include (comma-separated).
+    notag:
+      name: notag
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Tags to exclude (comma-separated).
+    search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filters by world name.
+    userIdQuery:
+      name: userId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by author UserID
+    featured:
+      name: featured
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filters on featured results.
+    userIdAdmin:
+      name: userId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 'Target user to see information on, admin-only.'
+    worldId:
+      name: worldId
+      in: path
+      required: true
+      schema:
+        type: string
 tags:
   - name: authentication
   - name: users

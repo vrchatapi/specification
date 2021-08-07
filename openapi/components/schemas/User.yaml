@@ -37,7 +37,7 @@ properties:
     type: string
     format: date-time
   last_platform:
-    type: string
+    $ref: ./Platform.yaml
   allowAvatarCopying:
     type: boolean
   status:

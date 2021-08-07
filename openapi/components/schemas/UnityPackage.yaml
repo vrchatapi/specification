@@ -1,0 +1,53 @@
+description: ''
+type: object
+x-examples:
+  example-1:
+    id: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
+    assetUrl: 'https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file'
+    assetUrlObject: {}
+    pluginUrl: ''
+    pluginUrlObject: {}
+    unityVersion: 2018.4.14f1
+    unitySortNumber: 20180414000
+    assetVersion: 4
+    platform: standalonewindows
+    created_at: '2020-09-10T06:13:27.777Z'
+title: UnityPackage
+properties:
+  id:
+    $ref: ./UnityPackageID.yaml
+  assetUrl:
+    type: string
+    minLength: 1
+  assetUrlObject:
+    type: object
+  pluginUrl:
+    type: string
+  pluginUrlObject:
+    type: object
+  unityVersion:
+    type: string
+    minLength: 1
+    example: 2018.4.12f1
+  unitySortNumber:
+    type: number
+    minimum: 0
+  assetVersion:
+    type: number
+  platform:
+    $ref: ./Platform.yaml
+  created_at:
+    type: string
+    minLength: 1
+    format: date-time
+required:
+  - id
+  - assetUrl
+  - assetUrlObject
+  - pluginUrl
+  - pluginUrlObject
+  - unityVersion
+  - unitySortNumber
+  - assetVersion
+  - platform
+  - created_at

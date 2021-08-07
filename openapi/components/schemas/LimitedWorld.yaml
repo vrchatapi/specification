@@ -1,72 +1,78 @@
-title: LimitedWorld
+description: ''
 type: object
 properties:
-  authorId:
-    $ref: ./UserID.yaml
-  authorName:
-    type: string
-  capacity:
-    type: number
-  created_at:
-    type: string
-    format: date
-  favorites:
-    type: number
-  heat:
-    type: number
   id:
     $ref: ./WorldID.yaml
-  imageUrl:
-    type: string
-  labsPublicationDate:
-    type: string
-    # This is a date string unless there is no date, then it's 'none'
-    # oneOf: date, string did not generate
-    # format: date
   name:
     type: string
-  occupants:
+    minLength: 1
+  authorId:
+    type: string
+    minLength: 1
+  authorName:
+    type: string
+    minLength: 1
+  capacity:
     type: number
+  imageUrl:
+    type: string
+    minLength: 1
+  thumbnailImageUrl:
+    type: string
+    minLength: 1
+  releaseStatus:
+    type: string
+    minLength: 1
   organization:
     type: string
-  popularity:
-    type: number
-  publicationDate:
-    type: string
-    # This is a date string unless there is no date, then it's 'none'
-    # oneOf: date, string did not generate
-    # format: date
-  releaseStatus:
-    $ref: ./ReleaseStatus.yaml
+    minLength: 1
   tags:
     type: array
     items:
-      $ref: ./Tag.yaml
-  thumbnailImageUrl:
-    type: string
-  # TODO
-  unityPackages:
-    type: array
-    items:
       type: object
+  favorites:
+    type: number
+  created_at:
+    type: string
+    minLength: 1
   updated_at:
     type: string
-    format: date
+    minLength: 1
+  publicationDate:
+    type: string
+    minLength: 1
+  labsPublicationDate:
+    type: string
+    minLength: 1
+  unityPackages:
+    type: array
+    uniqueItems: true
+    minItems: 1
+    items:
+      $ref: ./LimitedUnityPackage.yaml
+  popularity:
+    type: number
+  heat:
+    type: number
+  occupants:
+    type: number
 required:
+  - id
+  - name
   - authorId
   - authorName
   - capacity
-  - createdAt
-  - favorites
-  - heat
-  - id
   - imageUrl
-  - name
-  - organization
-  - popularity
-  - publicationDate
-  - releaseStatus
-  - tags
   - thumbnailImageUrl
+  - releaseStatus
+  - organization
+  - tags
+  - favorites
+  - created_at
+  - updated_at
+  - publicationDate
+  - labsPublicationDate
   - unityPackages
-  - updatedAt
+  - popularity
+  - heat
+  - occupants

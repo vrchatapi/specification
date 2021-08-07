@@ -90,7 +90,7 @@ properties:
     type: string
     format: date-time
   last_platform:
-    type: string
+    $ref: ./Platform.yaml
   allowAvatarCopying:
     type: boolean
   status:
@@ -142,8 +142,6 @@ required:
   - fallbackAvatar
   - currentAvatar
   - currentAvatarAssetUrl
-# Note: This is technically required, but does not generate as nullable if marked as required
-# - accountDeletionDate
   - acceptedTOSVersion
   - steamId
   - steamDetails
