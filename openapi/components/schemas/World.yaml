@@ -1,7 +1,12 @@
 description: ''
 type: object
-title: LimitedWorld
+title: World
 properties:
+  assetUrl:
+    type: string
+    minLength: 1
+  assetUrlObject:
+    type: object
   authorId:
     $ref: ./UserID.yaml
   authorName:
@@ -18,16 +23,22 @@ properties:
     minLength: 1
     format: date-time
     readOnly: true
+  description:
+    type: string
+    minLength: 0
   favorites:
     type: number
+    minimum: 0
     default: 0
     example: 12024
-    minimum: 0
     readOnly: true
+  featured:
+    type: boolean
+    default: false
   heat:
     type: number
-    example: 5
     minimum: 0
+    example: 5
     default: 0
     readOnly: true
   id:
@@ -35,6 +46,10 @@ properties:
   imageUrl:
     type: string
     minLength: 1
+  instances:
+    type: array
+    items:
+      type: object
   labsPublicationDate:
     type: string
     minLength: 1
@@ -42,6 +57,8 @@ properties:
   name:
     type: string
     minLength: 1
+  namespace:
+    type: string
   occupants:
     type: number
     minimum: 0
@@ -51,13 +68,29 @@ properties:
   organization:
     type: string
     minLength: 1
-    default: vrchat
     example: vrchat
+    default: vrchat
+  pluginUrlObject:
+    type: object
   popularity:
     type: number
     example: 8
-    minimum: 0
     default: 0
+    minimum: 0
+    readOnly: true
+  previewYoutubeId:
+    type: string
+  privateOccupants:
+    type: number
+    default: 0
+    minimum: 0
+    example: 1
+    readOnly: true
+  publicOccupants:
+    type: number
+    example: 46
+    default: 0
+    minimum: 0
     readOnly: true
   publicationDate:
     type: string
@@ -72,6 +105,8 @@ properties:
   thumbnailImageUrl:
     type: string
     minLength: 1
+  unityPackageUrlObject:
+    type: object
   unityPackages:
     type: array
     uniqueItems: true
@@ -79,36 +114,84 @@ properties:
     items:
       type: object
       properties:
-        platform:
+        id:
           type: string
           minLength: 1
+        assetUrl:
+          type: string
+          minLength: 1
+        assetUrlObject:
+          type: object
+        pluginUrl:
+          type: string
+        pluginUrlObject:
+          type: object
         unityVersion:
           type: string
           minLength: 1
+        unitySortNumber:
+          type: number
+        assetVersion:
+          type: number
+        platform:
+          type: string
+          minLength: 1
+        created_at:
+          type: string
+          minLength: 1
       required:
-        - platform
+        - id
+        - assetUrl
+        - pluginUrl
         - unityVersion
+        - unitySortNumber
+        - assetVersion
+        - platform
+        - created_at
   updated_at:
     type: string
     minLength: 1
     format: date-time
+  version:
+    type: number
+    minimum: 0
+    example: 68
+    default: 0
+  visits:
+    type: number
+    minimum: 0
+    example: 9988675
+    default: 0
+    readOnly: true
 required:
+  - assetUrl
+  - assetUrlObject
   - authorId
   - authorName
   - capacity
   - created_at
+  - description
   - favorites
+  - featured
   - heat
   - id
   - imageUrl
+  - instances
   - labsPublicationDate
   - name
+  - namespace
   - occupants
   - organization
+  - pluginUrlObject
   - popularity
+  - privateOccupants
+  - publicOccupants
   - publicationDate
   - releaseStatus
   - tags
   - thumbnailImageUrl
+  - unityPackageUrlObject
   - unityPackages
   - updated_at
+  - version
+  - visits

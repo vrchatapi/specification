@@ -1047,30 +1047,8 @@ paths:
           name: notag
           description: Tags to exclude.
         - $ref: '#/components/parameters/releaseStatus'
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: maxUnityVersion
-          description: Current unity version the game is using
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: minUnityVersion
-          description: The min unity version the world support
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: maxAssetVersion
-          description: Current asset version the game is using
-        - schema:
-            type: string
-          in: query
-          required: false
-          name: minAssetVersion
-          description: The min asset version the world support
+        - $ref: '#/components/parameters/maxUnityVersion'
+        - $ref: '#/components/parameters/minUnityVersion'
         - schema:
             type: string
           in: query
@@ -1570,6 +1548,7 @@ components:
           - private
           - hidden
         example: hidden
+      description: Filter by ReleaseStatus.
     offline:
       name: offline
       in: query
@@ -1608,6 +1587,26 @@ components:
       name: userId
       in: path
       required: true
+      schema:
+        type: string
+    maxUnityVersion:
+      name: maxUnityVersion
+      in: query
+      required: false
+      schema:
+        type: string
+      description: The maximum Unity version supported by the asset.
+    minUnityVersion:
+      name: minUnityVersion
+      in: query
+      required: false
+      schema:
+        type: string
+      description: The minimum Unity version supported by the asset.
+    platform:
+      name: platform
+      in: query
+      required: false
       schema:
         type: string
 tags:
