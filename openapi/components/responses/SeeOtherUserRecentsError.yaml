@@ -1,4 +1,3 @@
-title: SeeOtherUserRecentsError
 description: Error response when trying to accept a see recently visited worlds of another user without sufficient admin permissions.
 content:
   application/json:

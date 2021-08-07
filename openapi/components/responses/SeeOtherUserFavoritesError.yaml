@@ -1,4 +1,3 @@
-title: SeeOtherUserFavoritesError
 description: Error response when trying to see favourites of another user without sufficient admin permissions.
 content:
   application/json:

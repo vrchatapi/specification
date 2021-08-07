@@ -1,4 +1,3 @@
-title: WorldNotFoundError
 description: Error response when trying to show information about a non-existent world. Sometimes returns with `model <worldId> not found` instead of `World <worldId not found`.
 content:
   application/json:

@@ -1,4 +1,3 @@
-title: CreateWorldNotAllowedYetError
 description: Error response when trying create a world without having the neccesary Trust rank yet.
 content:
   application/json:
