@@ -1333,6 +1333,8 @@ paths:
         '404':
           $ref: ./openapi/components/responses/WorldNotFoundError.yaml
       description: Publishes a world. You can only publish one world per week.
+      tags:
+        - worlds
     delete:
       summary: ''
       operationId: unpublishWorld
@@ -1342,6 +1344,8 @@ paths:
         '404':
           $ref: ./openapi/components/responses/WorldNotFoundError.yaml
       description: Unpublishes a world.
+      tags:
+        - worlds
 components:
   schemas: {}
   securitySchemes:
