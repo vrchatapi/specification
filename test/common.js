@@ -26,7 +26,7 @@ const chaiResponseValidator = require("chai-openapi-response-validator");
 chai.use(chaiResponseValidator(path.resolve("dist/openapi.yaml")));
 
 function request(method, path, data) {
-    let body = undefined;
+    let body = {};
     if (data != undefined) {
         if (method.toUpperCase() == "GET") {
             var queryString = Object.keys(data).map((key) => {
@@ -63,6 +63,10 @@ function satisfyApiSpec(method, path) {
 module.exports = {
     axiosAuth,
     BASE_URL,
+    globalData: {
+        currentUser: null,
+        config: null,
+    },
     satisfyApiSpec,
     request,
 }

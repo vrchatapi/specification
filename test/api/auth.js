@@ -1,6 +1,6 @@
 const axios = require("axios");
 const expect = require("chai").expect;
-const { axiosAuth, BASE_URL, satisfyApiSpec } = require("../common");
+const { axiosAuth, BASE_URL, globalData, satisfyApiSpec } = require("../common");
 
 module.exports = function () {
     describe("GET /auth/user", () => {
@@ -13,6 +13,7 @@ module.exports = function () {
                 // Temporary workaround due to https://github.com/openapi-library/OpenAPIValidators/issues/240
                 // causing accountDeletionDate to fail due to expected string being null
                 expect(res.status).to.equal(200);
+                globalData.currentUser = res.data;
                 done();
             }).catch(err => {
                 console.log(err);

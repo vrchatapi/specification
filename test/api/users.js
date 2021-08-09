@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const { satisfyApiSpec, request } = require("../common");
+const { globalData, request, satisfyApiSpec } = require("../common");
 
 module.exports = function () {
     describe("GET /users", () => {
@@ -32,6 +32,23 @@ module.exports = function () {
                 expect(err.response.status).to.equal(400);
                 done();
             });
+        });
+    });
+
+    describe("GET /users/{userId}", () => {
+        satisfyApiSpec("GET", "/users/usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469");
+    });
+
+    describe("GET /users/{userId}/name", () => {
+        satisfyApiSpec("GET", "/users/tupper/name");
+    });
+
+    describe("PUT /users/{userId}", () => {
+        it("should satisfy OpenAPI spec", (done) => {
+            request("PUT", "/users/" + globalData.currentUser.id).then(res => {
+                expect(res).to.satisfyApiSpec;
+                done();
+            }).catch(err => done(err));
         });
     });
 }
