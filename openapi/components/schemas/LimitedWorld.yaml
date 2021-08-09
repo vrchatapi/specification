@@ -29,7 +29,7 @@ properties:
   tags:
     type: array
     items:
-      type: object
+      $ref: ./Tag.yaml
   favorites:
     type: number
   created_at:
