@@ -78,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./openapi/components/schemas/Success.yaml
+                $ref: ./components/schemas/Success.yaml
               examples:
                 Logout Success:
                   value:
@@ -104,7 +104,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./openapi/components/schemas/CurrentUser.yaml
+                $ref: ./components/schemas/CurrentUser.yaml
           headers:
             Set-Cookie:
               schema:
@@ -221,7 +221,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./openapi/components/schemas/CurrentUser.yaml
+                $ref: ./components/schemas/CurrentUser.yaml
         '401':
           $ref: '#/components/responses/MissingCredentials'
       tags:
@@ -248,7 +248,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./openapi/components/schemas/LimitedUser.yaml
+                  $ref: ./components/schemas/LimitedUser.yaml
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: searchUsers
@@ -288,7 +288,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./openapi/components/schemas/User.yaml
+                $ref: ./components/schemas/User.yaml
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: getUserByName
@@ -309,7 +309,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./openapi/components/schemas/User.yaml
+                $ref: ./components/schemas/User.yaml
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: getUser
@@ -326,7 +326,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./openapi/components/schemas/CurrentUser.yaml
+                $ref: ./components/schemas/CurrentUser.yaml
       description: Update a users information such as the email and birthday.
       security:
         - apiKeyCookie: []
@@ -347,9 +347,9 @@ paths:
                 tags:
                   type: array
                   items:
-                    $ref: ./openapi/components/schemas/Tag.yaml
+                    $ref: ./components/schemas/Tag.yaml
                 status:
-                  $ref: ./openapi/components/schemas/UserStatus.yaml
+                  $ref: ./components/schemas/UserStatus.yaml
                 statusDescription:
                   type: string
                 bio:
@@ -379,7 +379,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./openapi/components/schemas/LimitedUser.yaml
+                  $ref: ./components/schemas/LimitedUser.yaml
         '403':
           $ref: '#/components/responses/InvalidAdminCredentials'
       operationId: searchActiveUsers
@@ -427,7 +427,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./openapi/components/schemas/Config.yaml
+                $ref: ./components/schemas/Config.yaml
           headers:
             Set-Cookie:
               schema:
@@ -493,7 +493,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./openapi/components/schemas/LimitedUser.yaml
+                  $ref: ./components/schemas/LimitedUser.yaml
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: getFriends
@@ -745,14 +745,14 @@ paths:
                   type: string
                   minLength: 0
                 mimeType:
-                  $ref: ./openapi/components/schemas/MIMEType.yaml
+                  $ref: ./components/schemas/MIMEType.yaml
                 extension:
                   type: string
                   minLength: 1
                 tags:
                   type: array
                   items:
-                    $ref: ./openapi/components/schemas/Tag.yaml
+                    $ref: ./components/schemas/Tag.yaml
               required:
                 - name
                 - mimeType
@@ -891,7 +891,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./openapi/components/schemas/Error.yaml
+                $ref: ./components/schemas/Error.yaml
               examples:
                 Tried To Upload Against Already Finished Version:
                   value:
@@ -1027,7 +1027,7 @@ paths:
         '200':
           $ref: '#/components/responses/World'
         '400':
-          $ref: ./openapi/components/responses/CreateWorldNotAllowedYetError.yaml
+          $ref: ./components/responses/CreateWorldNotAllowedYetError.yaml
         '401':
           $ref: '#/components/responses/MissingCredentials'
       requestBody:
@@ -1043,7 +1043,7 @@ paths:
                   type: string
                   minLength: 1
                 authorId:
-                  $ref: ./openapi/components/schemas/UserID.yaml
+                  $ref: ./components/schemas/UserID.yaml
                 authorName:
                   type: string
                   minLength: 1
@@ -1056,7 +1056,7 @@ paths:
                 description:
                   type: string
                 id:
-                  $ref: ./openapi/components/schemas/WorldID.yaml
+                  $ref: ./components/schemas/WorldID.yaml
                 imageUrl:
                   type: string
                   minLength: 1
@@ -1064,13 +1064,13 @@ paths:
                   type: string
                   minLength: 1
                 platform:
-                  $ref: ./openapi/components/schemas/Platform.yaml
+                  $ref: ./components/schemas/Platform.yaml
                 releaseStatus:
-                  $ref: ./openapi/components/schemas/ReleaseStatus.yaml
+                  $ref: ./components/schemas/ReleaseStatus.yaml
                 tags:
                   type: array
                   items:
-                    $ref: ./openapi/components/schemas/Tag.yaml
+                    $ref: ./components/schemas/Tag.yaml
                 unityPackageUrl:
                   type: string
                   minLength: 1
@@ -1126,7 +1126,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentials'
         '403':
-          $ref: ./openapi/components/responses/SeeOtherUserRecentsError.yaml
+          $ref: ./components/responses/SeeOtherUserRecentsError.yaml
       operationId: getRecentWorlds
       security:
         - apiKeyCookie: []
@@ -1157,7 +1157,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentials'
         '403':
-          $ref: ./openapi/components/responses/SeeOtherUserFavoritesError.yaml
+          $ref: ./components/responses/SeeOtherUserFavoritesError.yaml
       operationId: getFavoritedWorlds
       security:
         - apiKeyCookie: []
@@ -1189,7 +1189,7 @@ paths:
         '200':
           $ref: '#/components/responses/World'
         '404':
-          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+          $ref: ./components/responses/WorldNotFoundError.yaml
       description: Get information about a specific World.
     put:
       summary: Update World
@@ -1200,7 +1200,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentials'
         '404':
-          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+          $ref: ./components/responses/WorldNotFoundError.yaml
       requestBody:
         content:
           application/json:
@@ -1214,7 +1214,7 @@ paths:
                   type: string
                   minLength: 1
                 authorId:
-                  $ref: ./openapi/components/schemas/UserID.yaml
+                  $ref: ./components/schemas/UserID.yaml
                 authorName:
                   type: string
                   minLength: 1
@@ -1227,7 +1227,7 @@ paths:
                 description:
                   type: string
                 id:
-                  $ref: ./openapi/components/schemas/WorldID.yaml
+                  $ref: ./components/schemas/WorldID.yaml
                 imageUrl:
                   type: string
                   minLength: 1
@@ -1235,13 +1235,13 @@ paths:
                   type: string
                   minLength: 1
                 platform:
-                  $ref: ./openapi/components/schemas/Platform.yaml
+                  $ref: ./components/schemas/Platform.yaml
                 releaseStatus:
-                  $ref: ./openapi/components/schemas/ReleaseStatus.yaml
+                  $ref: ./components/schemas/ReleaseStatus.yaml
                 tags:
                   type: array
                   items:
-                    $ref: ./openapi/components/schemas/Tag.yaml
+                    $ref: ./components/schemas/Tag.yaml
                 unityPackageUrl:
                   type: string
                   minLength: 1
@@ -1262,7 +1262,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentials'
         '404':
-          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+          $ref: ./components/responses/WorldNotFoundError.yaml
       description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
       tags:
         - worlds
@@ -1286,7 +1286,7 @@ paths:
                 additionalProperties: false
                 properties:
                   id:
-                    $ref: ./openapi/components/schemas/WorldID.yaml
+                    $ref: ./components/schemas/WorldID.yaml
                   metadata:
                     type: object
                     readOnly: true
@@ -1295,7 +1295,7 @@ paths:
                   - metadata
                 readOnly: true
         '404':
-          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+          $ref: ./components/responses/WorldNotFoundError.yaml
   '/worlds/{worldId}/publish':
     parameters:
       - $ref: '#/components/parameters/worldId'
@@ -1323,7 +1323,7 @@ paths:
                   - canPubilsh
                 readOnly: true
         '404':
-          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+          $ref: ./components/responses/WorldNotFoundError.yaml
     put:
       summary: ''
       operationId: publishWorld
@@ -1331,7 +1331,7 @@ paths:
         '200':
           description: OK
         '404':
-          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+          $ref: ./components/responses/WorldNotFoundError.yaml
       description: Publishes a world. You can only publish one world per week.
       tags:
         - worlds
@@ -1342,7 +1342,7 @@ paths:
         '200':
           description: OK
         '404':
-          $ref: ./openapi/components/responses/WorldNotFoundError.yaml
+          $ref: ./components/responses/WorldNotFoundError.yaml
       description: Unpublishes a world.
       tags:
         - worlds
@@ -1382,7 +1382,7 @@ components:
             type: object
             properties:
               error:
-                $ref: ./openapi/components/schemas/Error.yaml
+                $ref: ./components/schemas/Error.yaml
             required:
               - error
           examples:
@@ -1399,7 +1399,7 @@ components:
             type: object
             properties:
               error:
-                $ref: ./openapi/components/schemas/Error.yaml
+                $ref: ./components/schemas/Error.yaml
             required:
               - error
           examples:
@@ -1438,7 +1438,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Error.yaml
+            $ref: ./components/schemas/Error.yaml
           examples:
             404 Accept Friend Request:
               value:
@@ -1450,7 +1450,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Error.yaml
+            $ref: ./components/schemas/Error.yaml
           examples:
             404 Delete Friend Request:
               value:
@@ -1462,7 +1462,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Error.yaml
+            $ref: ./components/schemas/Error.yaml
           examples:
             400 Not Friends Response:
               value:
@@ -1474,7 +1474,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Error.yaml
+            $ref: ./components/schemas/Error.yaml
           examples:
             404 User Doesn't Exist Response:
               value:
@@ -1486,7 +1486,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Success.yaml
+            $ref: ./components/schemas/Success.yaml
           examples:
             Unfriend Success:
               value:
@@ -1498,7 +1498,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Success.yaml
+            $ref: ./components/schemas/Success.yaml
           examples:
             Unfriend Success:
               value:
@@ -1510,7 +1510,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Success.yaml
+            $ref: ./components/schemas/Success.yaml
           examples:
             Unfriend Success:
               value:
@@ -1522,7 +1522,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Success.yaml
+            $ref: ./components/schemas/Success.yaml
           examples:
             Deleted Friend Request:
               value:
@@ -1534,7 +1534,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Notification.yaml
+            $ref: ./components/schemas/Notification.yaml
           examples:
             Example Friend Request Response:
               value:
@@ -1579,7 +1579,7 @@ components:
           schema:
             type: array
             items:
-              $ref: ./openapi/components/schemas/Notification.yaml
+              $ref: ./components/schemas/Notification.yaml
     FileList:
       description: Returns a list of File objects.
       content:
@@ -1587,13 +1587,13 @@ components:
           schema:
             type: array
             items:
-              $ref: ./openapi/components/schemas/File.yaml
+              $ref: ./components/schemas/File.yaml
     File:
       description: Returns a single File object.
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/File.yaml
+            $ref: ./components/schemas/File.yaml
           examples:
             Example Avatar File:
               value:
@@ -1639,7 +1639,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Success.yaml
+            $ref: ./components/schemas/Success.yaml
           examples:
             File Deleted Success:
               value:
@@ -1651,7 +1651,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Error.yaml
+            $ref: ./components/schemas/Error.yaml
           examples:
             File Deleted Error:
               value:
@@ -1663,7 +1663,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Error.yaml
+            $ref: ./components/schemas/Error.yaml
           examples:
             404 File Not Found:
               value:
@@ -1675,7 +1675,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Error.yaml
+            $ref: ./components/schemas/Error.yaml
           examples:
             400 Delete Initial File Version:
               value:
@@ -1687,7 +1687,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/Error.yaml
+            $ref: ./components/schemas/Error.yaml
           examples:
             409/500 Delete Non-Last File Version:
               value:
@@ -1763,13 +1763,13 @@ components:
           schema:
             type: array
             items:
-              $ref: ./openapi/components/schemas/LimitedWorld.yaml
+              $ref: ./components/schemas/LimitedWorld.yaml
     World:
       description: Returns a single World object.
       content:
         application/json:
           schema:
-            $ref: ./openapi/components/schemas/World.yaml
+            $ref: ./components/schemas/World.yaml
   examples: {}
   parameters:
     number:
