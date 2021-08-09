@@ -34,8 +34,10 @@ properties:
   developerType:
     $ref: ./DeveloperType.yaml
   last_login:
-    type: string
-    format: date-time
+    oneOf:
+      - type: string
+      - type: string
+        format: date-time
   last_platform:
     $ref: ./Platform.yaml
   allowAvatarCopying:
