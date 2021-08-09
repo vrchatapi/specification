@@ -1,0 +1,8 @@
+type: string
+title: FavoriteGroupVisibility
+enum:
+  - private
+  - friends
+  - public
+default: private
+example: private

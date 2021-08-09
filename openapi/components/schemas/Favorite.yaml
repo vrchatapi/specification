@@ -1,0 +1,21 @@
+description: ''
+type: object
+properties:
+  id:
+    $ref: ./FavoriteID.yaml
+  type:
+    $ref: ./FavoriteType.yaml
+  favoriteId:
+    oneOf:
+      - $ref: ./AvatarID.yaml
+      - $ref: ./UserID.yaml
+      - $ref: ./WorldID.yaml
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+required:
+  - id
+  - type
+  - favoriteId
+  - tags

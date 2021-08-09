@@ -1,0 +1,5 @@
+type: string
+title: FavoriteID
+pattern: 'fvrt_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
+readOnly: true

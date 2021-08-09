@@ -1,0 +1,34 @@
+description: ''
+type: object
+title: FavoriteGroup
+properties:
+  id:
+    $ref: ./FavoriteGroupID.yaml
+  ownerId:
+    $ref: ./UserID.yaml
+  ownerDisplayName:
+    type: string
+    minLength: 1
+  name:
+    type: string
+    minLength: 1
+  displayName:
+    type: string
+    minLength: 1
+  type:
+    $ref: ./FavoriteType.yaml
+  visibility:
+    $ref: ./FavoriteGroupVisibility.yaml
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+required:
+  - id
+  - ownerId
+  - ownerDisplayName
+  - name
+  - displayName
+  - type
+  - visibility
+  - tags

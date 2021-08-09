@@ -1292,7 +1292,7 @@ paths:
         - worlds
       operationId: getWorldMetadata
       deprecated: true
-      description: Returns a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
+      description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
       responses:
         '200':
           description: OK
@@ -1322,7 +1322,7 @@ paths:
         - worlds
       operationId: getWorldPublish
       deprecated: true
-      description: Returns a worlds publish status. This is currently believed to be unused.
+      description: Return a worlds publish status. This is currently believed to be unused.
       responses:
         '200':
           description: OK
@@ -1353,7 +1353,7 @@ paths:
           $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
-      description: Publishes a world. You can only publish one world per week.
+      description: Publish a world. You can only publish one world per week.
       tags:
         - worlds
     delete:
@@ -1366,9 +1366,108 @@ paths:
           $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
-      description: Unpublishes a world.
+      description: Unpublish a world.
       tags:
         - worlds
+  /favorites:
+    get:
+      summary: List Favorites
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: '#/components/responses/FavoriteList'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: getFavorites
+      description: Returns a list of favorites.
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: 'The type of favorites to return, FavoriteType.'
+        - $ref: '#/components/parameters/tag'
+    post:
+      summary: Add Favorite
+      operationId: addFavorite
+      responses:
+        '200':
+          $ref: '#/components/responses/Favorite'
+      description: Add a new favorite.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  $ref: ./components/schemas/FavoriteType.yaml
+                favoriteId:
+                  oneOf:
+                    - $ref: ./components/schemas/AvatarID.yaml
+                    - $ref: ./components/schemas/UserID.yaml
+                    - $ref: ./components/schemas/WorldID.yaml
+                tags:
+                  type: array
+                  items:
+                    $ref: ./components/schemas/Tag.yaml
+              required:
+                - type
+                - favoriteId
+                - tags
+        description: ''
+      tags:
+        - favorites
+  '/favorites/{favoriteId}':
+    get:
+      summary: Show Favorite
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: '#/components/responses/Favorite'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: ./components/responses/FavoriteNotFoundError.yaml
+      operationId: getFavorite
+      description: Return information about a specific Favorite.
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/favoriteId'
+    delete:
+      summary: Remove Favorite
+      operationId: removeFavorite
+      responses:
+        '200':
+          $ref: ./components/responses/FavoriteRemovedSuccess.yaml
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: ./components/responses/FavoriteNotFoundError.yaml
+      description: Remove a favorite from your favorites list.
+  /favorite/groups:
+    get:
+      summary: List Favorite Groups
+      tags: []
+      responses:
+        '200':
+          $ref: '#/components/responses/FavoriteGroupList'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: getFavoriteGroups
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+        - schema:
+            type: string
+          in: query
+          name: ownerId
+          description: The owner of whoms favorite groups to return. Must be a UserID.
+      description: Return a list of favorite groups owned by a user.
 components:
   schemas: {}
   securitySchemes:
@@ -1799,6 +1898,34 @@ components:
         application/json:
           schema:
             $ref: ./components/schemas/Instance.yaml
+    Favorite:
+      description: Returns a single Favorite object.
+      content:
+        application/json:
+          schema:
+            $ref: ./components/schemas/Favorite.yaml
+    FavoriteList:
+      description: Returns a list of Favorite objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./components/schemas/Favorite.yaml
+    FavoriteGroup:
+      description: Returns a single FavoriteGroup object.
+      content:
+        application/json:
+          schema:
+            $ref: ./components/schemas/FavoriteGroup.yaml
+    FavoriteGroupList:
+      description: Returns a list of FavoriteGroup objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./components/schemas/FavoriteGroup.yaml
   examples: {}
   parameters:
     number:
@@ -1989,11 +2116,18 @@ components:
       required: true
       schema:
         type: string
+    favoriteId:
+      name: favoriteId
+      in: path
+      required: true
+      schema:
+        type: string
 tags:
   - name: authentication
-  - name: users
-  - name: worlds
+  - name: favorites
+  - name: files
   - name: friends
   - name: notifications
-  - name: files
   - name: system
+  - name: users
+  - name: worlds
