@@ -11,7 +11,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@stoplight/spectral": "^5.9.1",
-    "mocha": "^9.0.2"
+    "@stoplight/spectral": "^5.9.1"
+  },
+  "devDependencies": {
+    "axios": "^0.21.1",
+    "axios-cookiejar-support": "^1.0.1",
+    "chai": "^4.3.4",
+    "chai-openapi-response-validator": "^0.13.0",
+    "mocha": "^9.0.3",
+    "tough-cookie": "^4.0.0"
   }
 }
