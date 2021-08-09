@@ -41,7 +41,7 @@ jobs:
           path: dist/openapi.yml
 
       - name: Disable Jekyll for Github Pages
-        run: sudo touch dist/.nojekyll
+        run: sudo touch dist/.nojekyll; sudo touch dist/index.html
         if: ${{ github.ref == 'refs/heads/master' }}
 
       - name: Deploy Bundle to Github Pages 🚀
