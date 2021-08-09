@@ -32,9 +32,7 @@ module.exports = function () {
                 url: BASE_URL + "/auth/user",
                 auth: axiosAuth
             }).then(res => {
-                // Temporary workaround due to https://github.com/openapi-library/OpenAPIValidators/issues/240
-                // causing accountDeletionDate to fail due to expected string being null
-                satisfyApiSpec(res);
+                expect(res).to.satisfyApiSpec;
                 done();
             }).catch(err => {
                 console.log(err);

@@ -16,7 +16,7 @@ describe("Testing Authentication API", () => {
 });
 
 describe("Testing System API", () => {
-    //system();
+    system();
 });
 
 describe("Testing Users API", () => {
