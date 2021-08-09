@@ -109,7 +109,6 @@ properties:
     type: object
   unityPackages:
     type: array
-    uniqueItems: true
     minItems: 1
     items:
       $ref: ./UnityPackage.yaml

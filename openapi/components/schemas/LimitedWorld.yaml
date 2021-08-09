@@ -46,7 +46,6 @@ properties:
     minLength: 1
   unityPackages:
     type: array
-    uniqueItems: true
     minItems: 1
     items:
       $ref: ./LimitedUnityPackage.yaml
