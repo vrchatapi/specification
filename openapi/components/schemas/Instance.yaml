@@ -1,0 +1,101 @@
+description: ''
+type: object
+title: Instance
+properties:
+  active:
+    type: boolean
+    default: true
+  canRequestInvite:
+    type: boolean
+    default: true
+  capacity:
+    type: number
+    minimum: 0
+    maximum: 40
+  clientNumber:
+    type: string
+    minLength: 1
+  full:
+    type: boolean
+    default: false
+  id:
+    type: string
+    minLength: 1
+  instanceId:
+    type: string
+    minLength: 1
+  location:
+    type: string
+    minLength: 1
+  n_users:
+    type: number
+    minimum: 0
+  name:
+    type: string
+    minLength: 1
+  nonce:
+    type: string
+    minLength: 1
+  ownerId:
+    $ref: ./UserID.yaml
+  permanent:
+    type: boolean
+    default: false
+  photonRegion:
+    type: string
+    minLength: 1
+  platforms:
+    type: object
+    required:
+      - android
+      - standalonewindows
+    properties:
+      android:
+        type: number
+      standalonewindows:
+        type: number
+  region:
+    type: string
+    minLength: 1
+  shortName:
+    type: string
+    minLength: 1
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  type:
+    type: string
+    minLength: 1
+  users:
+    type: array
+    deprecated: true
+    description: 'Always empty on non-existing instances, and non-present on existing instances.'
+    items:
+      type: object
+  world:
+    type: object
+    deprecated: true
+    description: 'Only present on non-existing instances, and only contains a very small subject of World object. Use World API instead.'
+  worldId:
+    $ref: ./WorldID.yaml
+required:
+  - active
+  - canRequestInvite
+  - capacity
+  - clientNumber
+  - full
+  - id
+  - instanceId
+  - location
+  - n_users
+  - name
+  - ownerId
+  - permanent
+  - photonRegion
+  - platforms
+  - region
+  - shortName
+  - tags
+  - type
+  - worldId

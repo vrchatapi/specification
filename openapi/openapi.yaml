@@ -1268,6 +1268,20 @@ paths:
       description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
       tags:
         - worlds
+  '/worlds/{worldId}/{instanceId}':
+    parameters:
+      - $ref: '#/components/parameters/instanceId'
+    get:
+      summary: Get World Instance
+      tags:
+        - worlds
+      operationId: getWorldInstance
+      description: Returns a worlds instance.
+      responses:
+        '200':
+          $ref: '#/components/responses/Instance'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
   '/worlds/{worldId}/metadata':
     parameters:
       - $ref: '#/components/parameters/worldId'
@@ -1324,6 +1338,8 @@ paths:
                 required:
                   - canPubilsh
                 readOnly: true
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
     put:
@@ -1331,7 +1347,9 @@ paths:
       operationId: publishWorld
       responses:
         '200':
-          description: OK
+          description: TODO
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
       description: Publishes a world. You can only publish one world per week.
@@ -1343,6 +1361,8 @@ paths:
       responses:
         '200':
           description: OK
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
       description: Unpublishes a world.
@@ -1772,6 +1792,12 @@ components:
         application/json:
           schema:
             $ref: ./components/schemas/World.yaml
+    Instance:
+      description: Returns a single Instance object.
+      content:
+        application/json:
+          schema:
+            $ref: ./components/schemas/Instance.yaml
   examples: {}
   parameters:
     number:
@@ -1952,6 +1978,12 @@ components:
       description: 'Target user to see information on, admin-only.'
     worldId:
       name: worldId
+      in: path
+      required: true
+      schema:
+        type: string
+    instanceId:
+      name: instanceId
       in: path
       required: true
       schema:

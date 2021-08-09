@@ -49,7 +49,16 @@ properties:
   instances:
     type: array
     items:
-      type: object
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        anyOf:
+          - type: string
+            example: '12345'
+          - type: number
+            example: 1
+            minimum: 1
   labsPublicationDate:
     type: string
     minLength: 1
