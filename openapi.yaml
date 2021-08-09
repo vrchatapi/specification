@@ -1523,7 +1523,7 @@ components:
       title: WorldID
       type: string
       pattern: >-
-        (wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        (^$|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
       example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
     UserState:
       title: UserState
@@ -1652,6 +1652,7 @@ components:
         accountDeletionDate:
           type: string
           format: date
+          nullable: true
         acceptedTOSVersion:
           type: number
         steamId:
