@@ -64,6 +64,7 @@ properties:
   accountDeletionDate:
     type: string
     format: date
+    nullable: true
   acceptedTOSVersion:
     type: number
   steamId:
