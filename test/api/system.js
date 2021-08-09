@@ -2,16 +2,16 @@ const expect = require("chai").expect;
 const { satisfyApiSpec } = require("../common");
 
 module.exports = function () {
-    describe("GET /health", () => {
-        satisfyApiSpec("get", "/health");
+    describe("GET /health", async () => {
+        satisfyApiSpec("GET", "/health");
     });
-    describe("GET /config", () => {
-        satisfyApiSpec("get", "/config");
+    describe("GET /config", async () => {
+        satisfyApiSpec("GET", "/config");
     });
-    describe("GET /visits", () => {
-        satisfyApiSpec("get", "/visits");
+    describe("GET /visits", async () => {
+        satisfyApiSpec("GET", "/visits");
     });
-    describe("GET /time", () => {
-        satisfyApiSpec("get", "/time");
+    describe("GET /time", async () => {
+        satisfyApiSpec("GET", "/time");
     });
 }

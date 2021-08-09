@@ -1,22 +1,30 @@
-const path = require("path");
-const axios = require("axios");
+const { satisfyApiSpec } = require("./common");
 
 // Set up Chai
+const path = require("path");
 const chai = require("chai");
-const expect = chai.expect;
 const chaiResponseValidator = require("chai-openapi-response-validator");
 chai.use(chaiResponseValidator(path.resolve("dist/openapi.yaml")));
 
-const BASE_URL = "https://api.vrchat.cloud/api/1";
-
-
+// Import APIs
 const auth = require("./api/auth");
+const users = require("./api/users");
 const system = require("./api/system");
 
 describe("Testing Authentication API", () => {
     auth();
 });
 
-describe("Testing Systems API", () => {
-    system();
+describe("Testing System API", () => {
+    //system();
 });
+
+describe("Testing Users API", () => {
+    users();
+});
+
+after(() => {
+    describe("Logout", () => {
+        satisfyApiSpec("PUT", "/logout");
+    });
+})
