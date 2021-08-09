@@ -1327,7 +1327,7 @@ paths:
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
     put:
-      summary: ''
+      summary: Publish World
       operationId: publishWorld
       responses:
         '200':
@@ -1338,7 +1338,7 @@ paths:
       tags:
         - worlds
     delete:
-      summary: ''
+      summary: Unpublish World
       operationId: unpublishWorld
       responses:
         '200':
