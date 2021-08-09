@@ -160,6 +160,3 @@ required:
   - date_joined
   - isFriend
   - friendKey
-  - onlineFriends
-  - activeFriends
-  - offlineFriends
