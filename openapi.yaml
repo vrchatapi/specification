@@ -1842,10 +1842,7 @@ components:
         developerType:
           $ref: '#/components/schemas/DeveloperType'
         last_login:
-          oneOf:
-            - type: string
-            - type: string
-              format: date-time
+          type: string
         last_platform:
           $ref: '#/components/schemas/Platform'
         allowAvatarCopying:
