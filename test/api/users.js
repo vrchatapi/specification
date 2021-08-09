@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 const { expect } = require("chai");
 const { globalData, request, satisfyApiSpec } = require("../common");
 
@@ -47,6 +48,28 @@ module.exports = function () {
         it("should satisfy OpenAPI spec", (done) => {
             request("PUT", "/users/" + globalData.currentUser.id).then(res => {
                 expect(res).to.satisfyApiSpec;
+                done();
+            }).catch(err => done(err));
+        });
+
+        it("should update tags with language tags", (done) => {
+            const languages = ["language_zho", "language_jpn", "language_kvk"];
+            request("PUT", "/users/" + globalData.currentUser.id, {
+                tags: languages,
+            }).then(res => {
+                expect(res).to.satisfyApiSpec;
+                expect(res.data.tags).to.include.members(languages);
+                done();
+            }).catch(err => done(err));
+        });
+
+        it("should update bio", (done) => {
+            const bio = uuidv4();
+            request("PUT", "/users/" + globalData.currentUser.id, {
+                bio,
+            }).then(res => {
+                expect(res).to.satisfyApiSpec;
+                expect(res.data.bio).to.equal(bio);
                 done();
             }).catch(err => done(err));
         });
