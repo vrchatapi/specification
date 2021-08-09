@@ -1,4 +1,4 @@
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const { satisfyApiSpec, request } = require("../common");
 
 module.exports = function () {
@@ -21,6 +21,17 @@ module.exports = function () {
                 satisfyApiSpec(res);
                 done();
             }).catch(err => done(err));
+        });
+
+        it("n = -1", (done) => {
+            request("GET", "/users", {
+                n: -1,
+            }).then(res => {
+                expect.fail("expected /users?n=-1 to fail");
+            }).catch(err => {
+                expect(err.response.status).to.equal(400);
+                done();
+            });
         });
     });
 }

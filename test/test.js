@@ -23,8 +23,8 @@ describe("Testing Users API", () => {
     users();
 });
 
-after(() => {
+describe("Finishing up...", () => {
     describe("Logout", () => {
         satisfyApiSpec("PUT", "/logout");
     });
-})
+});

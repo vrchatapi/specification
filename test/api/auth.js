@@ -16,28 +16,12 @@ module.exports = function () {
                 done();
             }).catch(err => {
                 console.log(err);
-                done(err)
+                done(err);
             });
         });
-    });
-
-    describe("PUT /logout", () => {
-        satisfyApiSpec("PUT", "/logout");
     });
 
     describe("GET /auth", () => {
-        it("should authenticate", (done) => {
-            axios.request({
-                method: "GET",
-                url: BASE_URL + "/auth/user",
-                auth: axiosAuth
-            }).then(res => {
-                expect(res).to.satisfyApiSpec;
-                done();
-            }).catch(err => {
-                console.log(err);
-                done(err)
-            });
-        });
+        satisfyApiSpec("GET", "/auth");
     });
 }
