@@ -1525,7 +1525,7 @@ components:
       title: WorldID
       type: string
       pattern: >-
-        (^$|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
+        (^$|offline|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
       example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
     UserState:
       title: UserState
@@ -1750,9 +1750,6 @@ components:
         - date_joined
         - isFriend
         - friendKey
-        - onlineFriends
-        - activeFriends
-        - offlineFriends
     LimitedUser:
       title: LimitedUser
       type: object
@@ -1845,8 +1842,10 @@ components:
         developerType:
           $ref: '#/components/schemas/DeveloperType'
         last_login:
-          type: string
-          format: date-time
+          oneOf:
+            - type: string
+            - type: string
+              format: date-time
         last_platform:
           $ref: '#/components/schemas/Platform'
         allowAvatarCopying:
