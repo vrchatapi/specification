@@ -1399,6 +1399,20 @@ paths:
         WorldID is permanently reserved.
       tags:
         - worlds
+  '/worlds/{worldId}/{instanceId}':
+    parameters:
+      - $ref: '#/components/parameters/instanceId'
+    get:
+      summary: Get World Instance
+      tags:
+        - worlds
+      operationId: getWorldInstance
+      description: Returns a worlds instance.
+      responses:
+        '200':
+          $ref: '#/components/responses/Instance'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
   '/worlds/{worldId}/metadata':
     parameters:
       - $ref: '#/components/parameters/worldId'
@@ -1460,6 +1474,8 @@ paths:
                 required:
                   - canPubilsh
                 readOnly: true
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
     put:
@@ -1467,7 +1483,9 @@ paths:
       operationId: publishWorld
       responses:
         '200':
-          description: OK
+          description: TODO
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
       description: Publishes a world. You can only publish one world per week.
@@ -1479,6 +1497,8 @@ paths:
       responses:
         '200':
           description: OK
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
       description: Unpublishes a world.
@@ -3131,7 +3151,16 @@ components:
         instances:
           type: array
           items:
-            type: object
+            type: array
+            minItems: 2
+            maxItems: 2
+            items:
+              anyOf:
+                - type: string
+                  example: '12345'
+                - type: number
+                  example: 1
+                  minimum: 1
         labsPublicationDate:
           type: string
           minLength: 1
@@ -3236,6 +3265,112 @@ components:
         - updated_at
         - version
         - visits
+    Instance:
+      description: ''
+      type: object
+      title: Instance
+      properties:
+        active:
+          type: boolean
+          default: true
+        canRequestInvite:
+          type: boolean
+          default: true
+        capacity:
+          type: number
+          minimum: 0
+          maximum: 40
+        clientNumber:
+          type: string
+          minLength: 1
+        full:
+          type: boolean
+          default: false
+        id:
+          type: string
+          minLength: 1
+        instanceId:
+          type: string
+          minLength: 1
+        location:
+          type: string
+          minLength: 1
+        n_users:
+          type: number
+          minimum: 0
+        name:
+          type: string
+          minLength: 1
+        nonce:
+          type: string
+          minLength: 1
+        ownerId:
+          $ref: '#/components/schemas/UserID'
+        permanent:
+          type: boolean
+          default: false
+        photonRegion:
+          type: string
+          minLength: 1
+        platforms:
+          type: object
+          required:
+            - android
+            - standalonewindows
+          properties:
+            android:
+              type: number
+            standalonewindows:
+              type: number
+        region:
+          type: string
+          minLength: 1
+        shortName:
+          type: string
+          minLength: 1
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        type:
+          type: string
+          minLength: 1
+        users:
+          type: array
+          deprecated: true
+          description: >-
+            Always empty on non-existing instances, and non-present on existing
+            instances.
+          items:
+            type: object
+        world:
+          type: object
+          deprecated: true
+          description: >-
+            Only present on non-existing instances, and only contains a very
+            small subject of World object. Use World API instead.
+        worldId:
+          $ref: '#/components/schemas/WorldID'
+      required:
+        - active
+        - canRequestInvite
+        - capacity
+        - clientNumber
+        - full
+        - id
+        - instanceId
+        - location
+        - n_users
+        - name
+        - ownerId
+        - permanent
+        - photonRegion
+        - platforms
+        - region
+        - shortName
+        - tags
+        - type
+        - worldId
   securitySchemes:
     apiKeyQuery:
       name: apiKey
@@ -3685,6 +3820,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/World'
+    Instance:
+      description: Returns a single Instance object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Instance'
     Users400Error:
       description: >-
         Error response when trying to search list of users with an invalid
@@ -3946,6 +4087,12 @@ components:
       description: 'Target user to see information on, admin-only.'
     worldId:
       name: worldId
+      in: path
+      required: true
+      schema:
+        type: string
+    instanceId:
+      name: instanceId
       in: path
       required: true
       schema:
