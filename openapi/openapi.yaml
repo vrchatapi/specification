@@ -1270,6 +1270,7 @@ paths:
         - worlds
   '/worlds/{worldId}/{instanceId}':
     parameters:
+      - $ref: '#/components/parameters/worldId'
       - $ref: '#/components/parameters/instanceId'
     get:
       summary: Get World Instance
