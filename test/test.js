@@ -10,6 +10,7 @@ chai.use(chaiResponseValidator(path.resolve("dist/openapi.yaml")));
 const auth = require("./api/auth");
 const users = require("./api/users");
 const system = require("./api/system");
+const worlds = require("./api/worlds");
 
 describe("Testing Authentication API", () => {
     auth();
@@ -21,6 +22,10 @@ describe("Testing System API", () => {
 
 describe("Testing Users API", () => {
     users();
+});
+
+describe("Testing Worlds API", () => {
+    worlds();
 });
 
 describe("Finishing up...", () => {
