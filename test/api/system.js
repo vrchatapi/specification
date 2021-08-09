@@ -1,12 +1,18 @@
 const expect = require("chai").expect;
-const { satisfyApiSpec } = require("../common");
+const { globalData, request, satisfyApiSpec } = require("../common");
 
 module.exports = function () {
     describe("GET /health", async () => {
         satisfyApiSpec("GET", "/health");
     });
     describe("GET /config", async () => {
-        satisfyApiSpec("GET", "/config");
+        it("should satisfy OpenAPI spec", (done) => {
+            request("GET", "/config").then(res => {
+                expect(res).to.satisfyApiSpec;
+                globalData.config = res.data;
+                done();
+            }).catch(err => done(err));
+        });
     });
     describe("GET /visits", async () => {
         satisfyApiSpec("GET", "/visits");

@@ -35,7 +35,6 @@ properties:
     $ref: ./DeveloperType.yaml
   last_login:
     type: string
-    format: date-time
   last_platform:
     $ref: ./Platform.yaml
   allowAvatarCopying:
@@ -78,3 +77,6 @@ required:
   - date_joined
   - isFriend
   - friendKey
+  - worldId
+  - instanceId
+  - location
