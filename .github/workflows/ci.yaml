@@ -32,13 +32,13 @@ jobs:
         uses: hilary/openapi-cli-bundle-action@v0.0.2
         with:
           base-spec: openapi/openapi.yaml
-          bundled-spec: dist/openapi.yml
+          bundled-spec: dist/openapi.yaml
 
       - name: Upload Bundled Specification as Artifact 📤
         uses: actions/upload-artifact@v2
         with:
           name: openapi-bundled
-          path: dist/openapi.yml
+          path: dist/openapi.yaml
 
       - name: Disable Jekyll for Github Pages
         run: sudo touch dist/.nojekyll; sudo touch dist/index.html
