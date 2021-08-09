@@ -2963,7 +2963,7 @@ components:
         tags:
           type: array
           items:
-            type: object
+            $ref: '#/components/schemas/Tag'
         favorites:
           type: number
         created_at:
