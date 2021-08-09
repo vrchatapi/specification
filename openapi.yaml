@@ -302,6 +302,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LimitedUser'
+        '400':
+          $ref: '#/components/responses/Users400Error'
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: searchUsers
@@ -3686,6 +3688,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/World'
+    Users400Error:
+      description: >-
+        Error response when trying to search list of users with an invalid
+        request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            400 N is too low:
+              value:
+                error:
+                  message: n must be a positive integer˸ '-1'
+                  status_code: 400
+            400 N is too high:
+              value:
+                error:
+                  message: n＝1000 is much too high․ implement paging you savages․
+                  status_code: 400
     CreateWorldNotAllowedYetError:
       description: >-
         Error response when trying create a world without having the neccesary
