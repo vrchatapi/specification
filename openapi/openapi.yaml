@@ -249,6 +249,8 @@ paths:
                 type: array
                 items:
                   $ref: ./components/schemas/LimitedUser.yaml
+        '400':
+          $ref: ./components/responses/Users400Error.yaml
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: searchUsers
