@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "node ./node_modules/\\@stoplight/spectral/dist/cli/index.js lint openapi/openapi.yaml -F warn"
+    "lint": "node ./node_modules/\\@stoplight/spectral/dist/cli/index.js lint openapi/openapi.yaml -F warn",
+    "bundle": "npx @redocly/openapi-cli bundle openapi/openapi.yaml -o dist/openapi.yaml"
   },
   "author": "",
   "license": "MIT",
