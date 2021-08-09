@@ -77,3 +77,6 @@ required:
   - date_joined
   - isFriend
   - friendKey
+  - worldId
+  - instanceId
+  - location
