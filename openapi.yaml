@@ -1885,6 +1885,9 @@ components:
         - date_joined
         - isFriend
         - friendKey
+        - worldId
+        - instanceId
+        - location
     DeploymentGroup:
       type: string
       title: DeploymentGroup
