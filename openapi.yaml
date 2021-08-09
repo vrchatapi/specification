@@ -2980,7 +2980,6 @@ components:
           minLength: 1
         unityPackages:
           type: array
-          uniqueItems: true
           minItems: 1
           items:
             $ref: '#/components/schemas/LimitedUnityPackage'
@@ -3192,7 +3191,6 @@ components:
           type: object
         unityPackages:
           type: array
-          uniqueItems: true
           minItems: 1
           items:
             $ref: '#/components/schemas/UnityPackage'
