@@ -1441,7 +1441,7 @@ paths:
                 type:
                   $ref: ./components/schemas/FavoriteType.yaml
                 favoriteId:
-                  oneOf:
+                  anyOf:
                     - $ref: ./components/schemas/AvatarID.yaml
                     - $ref: ./components/schemas/UserID.yaml
                     - $ref: ./components/schemas/WorldID.yaml
