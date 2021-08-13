@@ -1570,6 +1570,9 @@ paths:
                   description: Tags on FavoriteGroups are believed to do nothing.
                   items:
                     $ref: ./components/schemas/Tag.yaml
+      tags:
+        - favorites
+      description: Update information about a specific favorite group.
     delete:
       summary: Clear Favorite Group
       operationId: clearFavoriteGroup
@@ -1581,6 +1584,7 @@ paths:
           $ref: ./components/responses/FavoriteGroupClearedSuccess.yaml
       tags:
         - favorites
+      description: Clear ALL contents of a specific favorite group.
   /avatars/favorites:
     get:
       summary: List Favorited Avatars
