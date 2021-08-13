@@ -1566,9 +1566,7 @@ paths:
                 visibility:
                   $ref: ./components/schemas/FavoriteGroupVisibility.yaml
                 tags:
-                  type:
-                    - string
-                    - array
+                  type: array
                   description: Tags on FavoriteGroups are believed to do nothing.
                   items:
                     $ref: ./components/schemas/Tag.yaml
