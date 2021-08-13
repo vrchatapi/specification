@@ -1324,6 +1324,9 @@ paths:
     put:
       summary: Update World
       operationId: updateWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           $ref: '#/components/responses/World'
@@ -1386,6 +1389,9 @@ paths:
     delete:
       summary: Delete World
       operationId: deleteWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           description: OK
@@ -1408,6 +1414,9 @@ paths:
       tags:
         - worlds
       operationId: getWorldInstance
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Returns a worlds instance.
       responses:
         '200':
@@ -1422,9 +1431,12 @@ paths:
       tags:
         - worlds
       operationId: getWorldMetadata
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       deprecated: true
       description: >-
-        Returns a worlds custom metadata. This is currently believed to be
+        Return a worlds custom metadata. This is currently believed to be
         unused. Metadata can be set with `updateWorld` and can be any arbitrary
         object.
       responses:
@@ -1455,6 +1467,9 @@ paths:
       tags:
         - worlds
       operationId: getWorldPublishStatus
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Returns a worlds publish status.
       responses:
         '200':
@@ -1479,6 +1494,9 @@ paths:
     put:
       summary: Publish World
       operationId: publishWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           description: TODO
@@ -1486,12 +1504,15 @@ paths:
           $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
-      description: Publishes a world. You can only publish one world per week.
+      description: Publish a world. You can only publish one world per week.
       tags:
         - worlds
     delete:
       summary: Unpublish World
       operationId: unpublishWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           description: OK
@@ -1499,9 +1520,215 @@ paths:
           $ref: '#/components/responses/MissingCredentials'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
-      description: Unpublishes a world.
+      description: Unpublish a world.
       tags:
         - worlds
+  /favorites:
+    get:
+      summary: List Favorites
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: '#/components/responses/FavoriteList'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: getFavorites
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns a list of favorites.
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: 'The type of favorites to return, FavoriteType.'
+        - $ref: '#/components/parameters/tag'
+    post:
+      summary: Add Favorite
+      operationId: addFavorite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Favorite'
+        '400':
+          $ref: '#/components/responses/FavoriteAddAlreadyFavoritedError'
+        '403':
+          $ref: '#/components/responses/FavoriteAddNotFriendsError'
+      description: >-
+        Add a new favorite.
+
+
+        Friend groups are named `group_0` through `group_3`. Avatar and World
+        groups are named `avatars1` to `avatar4` and `worlds1` to `worlds4`.
+
+
+        You cannot add people whom you are not friends with to your friends
+        list. Destroying a friendship removes the person as favorite on both
+        sides.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  $ref: '#/components/schemas/FavoriteType'
+                favoriteId:
+                  anyOf:
+                    - $ref: '#/components/schemas/AvatarID'
+                    - $ref: '#/components/schemas/UserID'
+                    - $ref: '#/components/schemas/WorldID'
+                tags:
+                  type: array
+                  description: >-
+                    Tags indicate which group this favorite belongs to. Adding
+                    multiple groups makes it show up in all. Removing it from
+                    one in that case removes it from all.
+                  items:
+                    $ref: '#/components/schemas/Tag'
+              required:
+                - type
+                - favoriteId
+                - tags
+            examples:
+              Example Favorite Friend:
+                value:
+                  type: friend
+                  favoriteId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+                  tags:
+                    - group_0
+              Example Favorite Avatar:
+                value:
+                  type: avatar
+                  favoriteId: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
+                  tags:
+                    - avatars1
+        description: ''
+      tags:
+        - favorites
+  '/favorites/{favoriteId}':
+    get:
+      summary: Show Favorite
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: '#/components/responses/Favorite'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: '#/components/responses/FavoriteNotFoundError'
+      operationId: getFavorite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Return information about a specific Favorite.
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/favoriteId'
+    delete:
+      summary: Remove Favorite
+      operationId: removeFavorite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/FavoriteRemovedSuccess'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: '#/components/responses/FavoriteNotFoundError'
+      description: Remove a favorite from your favorites list.
+      tags:
+        - favorites
+  /favorite/groups:
+    get:
+      summary: List Favorite Groups
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: '#/components/responses/FavoriteGroupList'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: getFavoriteGroups
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+        - schema:
+            type: string
+          in: query
+          name: ownerId
+          description: The owner of whoms favorite groups to return. Must be a UserID.
+      description: >-
+        Return a list of favorite groups owned by a user. Returns the same
+        information as `getFavoriteGroups`.
+  '/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}':
+    parameters:
+      - $ref: '#/components/parameters/favoriteGroupType'
+      - $ref: '#/components/parameters/favoriteGroupName'
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Show Favorite Group
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: '#/components/responses/FavoriteGroup'
+      operationId: getFavoriteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Fetch information about a specific favorite group.
+    put:
+      summary: Update Favorite Group
+      operationId: updateFavoriteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                visibility:
+                  $ref: '#/components/schemas/FavoriteGroupVisibility'
+                tags:
+                  type: array
+                  description: Tags on FavoriteGroups are believed to do nothing.
+                  items:
+                    $ref: '#/components/schemas/Tag'
+      tags:
+        - favorites
+      description: Update information about a specific favorite group.
+    delete:
+      summary: Clear Favorite Group
+      operationId: clearFavoriteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/FavoriteGroupClearedSuccess'
+      tags:
+        - favorites
+      description: Clear ALL contents of a specific favorite group.
 components:
   schemas:
     Response:
@@ -2795,11 +3022,12 @@ components:
         - seen
         - created_at
     FileID:
-      title: FileID
       type: string
+      title: FileID
       pattern: >-
         file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
       example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
+      readOnly: true
     MIMEType:
       type: string
       title: MIMEType
@@ -3366,6 +3594,94 @@ components:
         - tags
         - type
         - worldId
+    FavoriteID:
+      type: string
+      title: FavoriteID
+      pattern: >-
+        fvrt_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+      example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
+      readOnly: true
+    FavoriteType:
+      type: string
+      title: FavoriteType
+      enum:
+        - world
+        - friend
+        - avatar
+      readOnly: true
+    Favorite:
+      description: ''
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/FavoriteID'
+        type:
+          $ref: '#/components/schemas/FavoriteType'
+        favoriteId:
+          oneOf:
+            - $ref: '#/components/schemas/AvatarID'
+            - $ref: '#/components/schemas/UserID'
+            - $ref: '#/components/schemas/WorldID'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+      required:
+        - id
+        - type
+        - favoriteId
+        - tags
+    FavoriteGroupID:
+      type: string
+      title: FavoriteGroupID
+      pattern: >-
+        fvgrp_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+      example: fvgrp_8a02a44b-dc3a-4a9a-bc77-77fa37996fc7
+      readOnly: true
+    FavoriteGroupVisibility:
+      type: string
+      title: FavoriteGroupVisibility
+      enum:
+        - private
+        - friends
+        - public
+      default: private
+      example: private
+    FavoriteGroup:
+      description: ''
+      type: object
+      title: FavoriteGroup
+      properties:
+        id:
+          $ref: '#/components/schemas/FavoriteGroupID'
+        ownerId:
+          $ref: '#/components/schemas/UserID'
+        ownerDisplayName:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        displayName:
+          type: string
+          minLength: 1
+        type:
+          $ref: '#/components/schemas/FavoriteType'
+        visibility:
+          $ref: '#/components/schemas/FavoriteGroupVisibility'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+      required:
+        - id
+        - ownerId
+        - ownerDisplayName
+        - name
+        - displayName
+        - type
+        - visibility
+        - tags
   securitySchemes:
     apiKeyQuery:
       name: apiKey
@@ -3821,6 +4137,34 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Instance'
+    Favorite:
+      description: Returns a single Favorite object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Favorite'
+    FavoriteList:
+      description: Returns a list of Favorite objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Favorite'
+    FavoriteGroup:
+      description: Returns a single FavoriteGroup object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FavoriteGroup'
+    FavoriteGroupList:
+      description: Returns a list of FavoriteGroup objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/FavoriteGroup'
     Users400Error:
       description: >-
         Error response when trying to search list of users with an invalid
@@ -3897,6 +4241,72 @@ components:
                 error:
                   message: World wrld_ba913a96-fac4-4048-a062-9aa5db092812 not found
                   status_code: 404
+    FavoriteAddAlreadyFavoritedError:
+      description: >-
+        Error response when trying favorite someone or something when already
+        having it/them favorited.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            400 Already Favorited That Friend:
+              value:
+                error:
+                  message: You already have that friend favorited
+                  status_code: 400
+    FavoriteAddNotFriendsError:
+      description: >-
+        Error response when trying favorite someone whom you are not friends
+        with.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            403 Favorite Add Not Friends Error:
+              value:
+                error:
+                  message: you are not friends with that userǃ
+                  status_code: 403
+    FavoriteNotFoundError:
+      description: >-
+        Error response when trying to show information about a non-existent
+        favorite.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 Favorite not found:
+              value:
+                error:
+                  message: 404 couldn't find that favorite
+                  status_code: 404
+    FavoriteRemovedSuccess:
+      description: Success response after removing a favorite.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            200 Favorite Removed:
+              value:
+                success:
+                  message: favorite deleted!
+                  status_code: 200
+    FavoriteGroupClearedSuccess:
+      description: Success response after clearing a favorite group.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            200 Favorite Group Cleared:
+              value:
+                success:
+                  message: favorite deleted!
+                  status_code: 200
   examples: {}
   parameters:
     number:
@@ -4092,11 +4502,36 @@ components:
       required: true
       schema:
         type: string
+    favoriteId:
+      name: favoriteId
+      in: path
+      required: true
+      schema:
+        type: string
+    favoriteGroupType:
+      name: favoriteGroupType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+          - world
+          - friend
+          - avatar
+      description: 'The type of group to fetch, must be a valid FavoriteType.'
+    favoriteGroupName:
+      name: favoriteGroupName
+      in: path
+      required: true
+      schema:
+        type: string
 tags:
   - name: authentication
-  - name: users
-  - name: worlds
+  - name: avatars
+  - name: favorites
+  - name: files
   - name: friends
   - name: notifications
-  - name: files
   - name: system
+  - name: users
+  - name: worlds
