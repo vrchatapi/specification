@@ -1319,10 +1319,9 @@ paths:
     get:
       summary: Get World Publish Status
       tags:
-        - worlds
-      operationId: getWorldPublish
-      deprecated: true
-      description: Return a worlds publish status. This is currently believed to be unused.
+        - world
+      operationId: getWorldPublishStatus
+      description: Returns a worlds publish status.
       responses:
         '200':
           description: OK
