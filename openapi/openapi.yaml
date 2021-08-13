@@ -1319,7 +1319,7 @@ paths:
     get:
       summary: Get World Publish Status
       tags:
-        - world
+        - worlds
       operationId: getWorldPublishStatus
       description: Returns a worlds publish status.
       responses:
