@@ -1196,6 +1196,9 @@ paths:
     put:
       summary: Update World
       operationId: updateWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           $ref: '#/components/responses/World'
@@ -1258,6 +1261,9 @@ paths:
     delete:
       summary: Delete World
       operationId: deleteWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           description: OK
@@ -1277,6 +1283,9 @@ paths:
       tags:
         - worlds
       operationId: getWorldInstance
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Returns a worlds instance.
       responses:
         '200':
@@ -1291,6 +1300,9 @@ paths:
       tags:
         - worlds
       operationId: getWorldMetadata
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       deprecated: true
       description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
       responses:
@@ -1321,6 +1333,9 @@ paths:
       tags:
         - worlds
       operationId: getWorldPublishStatus
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Returns a worlds publish status.
       responses:
         '200':
@@ -1345,6 +1360,9 @@ paths:
     put:
       summary: Publish World
       operationId: publishWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           description: TODO
@@ -1358,6 +1376,9 @@ paths:
     delete:
       summary: Unpublish World
       operationId: unpublishWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           description: OK
@@ -1379,6 +1400,9 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: getFavorites
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Returns a list of favorites.
       parameters:
         - $ref: '#/components/parameters/number'
@@ -1392,6 +1416,9 @@ paths:
     post:
       summary: Add Favorite
       operationId: addFavorite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           $ref: '#/components/responses/Favorite'
@@ -1456,6 +1483,9 @@ paths:
         '404':
           $ref: ./components/responses/FavoriteNotFoundError.yaml
       operationId: getFavorite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Return information about a specific Favorite.
       parameters: []
     parameters:
@@ -1463,6 +1493,9 @@ paths:
     delete:
       summary: Remove Favorite
       operationId: removeFavorite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           $ref: ./components/responses/FavoriteRemovedSuccess.yaml
@@ -1484,6 +1517,9 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentials'
       operationId: getFavoriteGroups
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       parameters:
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
@@ -1506,10 +1542,16 @@ paths:
         '200':
           $ref: '#/components/responses/FavoriteGroup'
       operationId: getFavoriteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Fetch information about a specific favorite group.
     put:
       summary: Update Favorite Group
       operationId: updateFavoriteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           description: OK
@@ -1533,6 +1575,9 @@ paths:
     delete:
       summary: Clear Favorite Group
       operationId: clearFavoriteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           $ref: ./components/responses/FavoriteGroupClearedSuccess.yaml
