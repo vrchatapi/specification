@@ -1,0 +1,11 @@
+description: Error response when trying favorite someone whom you are not friends with.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      403 Favorite Add Not Friends Error:
+        value:
+          error:
+            message: "you are not friends with that userǃ"
+            status_code: 403

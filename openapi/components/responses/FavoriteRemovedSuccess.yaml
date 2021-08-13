@@ -1,0 +1,11 @@
+description: Success response after removing a favorite.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      200 Favorite Removed:
+        value:
+          success:
+            message: "favorite deleted!"
+            status_code: 200

@@ -1,0 +1,5 @@
+type: string
+title: FavoriteGroupID
+pattern: 'fvgrp_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+example: fvgrp_8a02a44b-dc3a-4a9a-bc77-77fa37996fc7
+readOnly: true
