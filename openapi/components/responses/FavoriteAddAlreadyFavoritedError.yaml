@@ -1,0 +1,11 @@
+description: Error response when trying favorite someone or something when already having it/them favorited.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      400 Already Favorited That Friend:
+        value:
+          error:
+            message: "You already have that friend favorited"
+            status_code: 400

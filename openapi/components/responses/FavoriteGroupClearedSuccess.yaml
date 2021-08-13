@@ -1,10 +1,10 @@
-description: Success response after removing a favorite.
+description: Success response after clearing a favorite group.
 content:
   application/json:
     schema:
       $ref: ../schemas/Error.yaml
     examples:
-      200 Favorite Removed:
+      200 Favorite Group Cleared:
         value:
           success:
             message: "favorite deleted!"

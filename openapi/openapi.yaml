@@ -1396,7 +1396,16 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Favorite'
-      description: Add a new favorite.
+        '400':
+          $ref: ./components/responses/FavoriteAddAlreadyFavoritedError.yaml
+        '403':
+          $ref: ./components/responses/FavoriteAddNotFriendsError.yaml
+      description: |-
+        Add a new favorite.
+
+        Friend groups are named `group_0` through `group_3`. Avatar and World groups are named `avatars1` to `avatar4` and `worlds1` to `worlds4`.
+
+        You cannot add people whom you are not friends with to your friends list. Destroying a friendship removes the person as favorite on both sides.
       requestBody:
         content:
           application/json:
@@ -1412,12 +1421,26 @@ paths:
                     - $ref: ./components/schemas/WorldID.yaml
                 tags:
                   type: array
+                  description: Tags indicate which group this favorite belongs to. Adding multiple groups makes it show up in all. Removing it from one in that case removes it from all.
                   items:
                     $ref: ./components/schemas/Tag.yaml
               required:
                 - type
                 - favoriteId
                 - tags
+            examples:
+              Example Favorite Friend:
+                value:
+                  type: friend
+                  favoriteId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+                  tags:
+                    - group_0
+              Example Favorite Avatar:
+                value:
+                  type: avatar
+                  favoriteId: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
+                  tags:
+                    - avatars1
         description: ''
       tags:
         - favorites
@@ -1449,10 +1472,13 @@ paths:
         '404':
           $ref: ./components/responses/FavoriteNotFoundError.yaml
       description: Remove a favorite from your favorites list.
+      tags:
+        - favorites
   /favorite/groups:
     get:
       summary: List Favorite Groups
-      tags: []
+      tags:
+        - favorites
       responses:
         '200':
           $ref: '#/components/responses/FavoriteGroupList'
@@ -1467,7 +1493,82 @@ paths:
           in: query
           name: ownerId
           description: The owner of whoms favorite groups to return. Must be a UserID.
-      description: Return a list of favorite groups owned by a user.
+      description: Return a list of favorite groups owned by a user. Returns the same information as `getFavoriteGroups`.
+  '/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}':
+    parameters:
+      - $ref: '#/components/parameters/favoriteGroupType'
+      - $ref: '#/components/parameters/favoriteGroupName'
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Show Favorite Group
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: '#/components/responses/FavoriteGroup'
+      operationId: getFavoriteGroup
+      description: Fetch information about a specific favorite group.
+    put:
+      summary: Update Favorite Group
+      operationId: updateFavoriteGroup
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                visibility:
+                  $ref: ./components/schemas/FavoriteGroupVisibility.yaml
+                tags:
+                  type:
+                    - string
+                    - array
+                  description: Tags on FavoriteGroups are believed to do nothing.
+                  items:
+                    $ref: ./components/schemas/Tag.yaml
+    delete:
+      summary: Clear Favorite Group
+      operationId: clearFavoriteGroup
+      responses:
+        '200':
+          $ref: ./components/responses/FavoriteGroupClearedSuccess.yaml
+      tags:
+        - favorites
+  /avatars/favorites:
+    get:
+      summary: List Favorited Avatars
+      tags:
+        - avatars
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: getFavoritedAvatars
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/featured'
+        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/tag'
+        - $ref: '#/components/parameters/notag'
+        - $ref: '#/components/parameters/releaseStatus'
+        - $ref: '#/components/parameters/maxUnityVersion'
+        - $ref: '#/components/parameters/minUnityVersion'
+        - $ref: '#/components/parameters/platform'
+        - $ref: '#/components/parameters/userIdAdmin'
+      description: Search and list favorited avatars by query filters.
+      x-internal: true
 components:
   schemas: {}
   securitySchemes:
@@ -2122,8 +2223,26 @@ components:
       required: true
       schema:
         type: string
+    favoriteGroupType:
+      name: favoriteGroupType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+          - world
+          - friend
+          - avatar
+      description: 'The type of group to fetch, must be a valid FavoriteType.'
+    favoriteGroupName:
+      name: favoriteGroupName
+      in: path
+      required: true
+      schema:
+        type: string
 tags:
   - name: authentication
+  - name: avatars
   - name: favorites
   - name: files
   - name: friends
