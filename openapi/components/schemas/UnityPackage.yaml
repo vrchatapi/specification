@@ -29,6 +29,7 @@ properties:
     type: string
     minLength: 1
     example: 2018.4.12f1
+    default: 5.3.4p1
   unitySortNumber:
     type: number
     minimum: 0
@@ -42,12 +43,9 @@ properties:
     format: date-time
 required:
   - id
-  - assetUrl
-  - assetUrlObject
   - pluginUrl
   - pluginUrlObject
   - unityVersion
-  - unitySortNumber
   - assetVersion
   - platform
   - created_at

@@ -1,0 +1,89 @@
+description: ''
+type: object
+title: Avatar
+properties:
+  assetUrl:
+    type: string
+    minLength: 1
+    description: 'Not present from general serach `/avatars`, only on specific requests `/avatars/{avatarId}`.'
+  assetUrlObject:
+    type: object
+    description: |-
+      Not present from general serach `/avatars`, only on specific requests `/avatars/{avatarId}`.
+      **Deprecation:** `Object` has unknown usage/fields, and is always empty. Use normal `Url` field instead.
+  authorId:
+    $ref: ./UserID.yaml
+  authorName:
+    type: string
+    minLength: 1
+    readOnly: true
+  created_at:
+    type: string
+    minLength: 1
+    format: date-time
+    readOnly: true
+  description:
+    type: string
+    minLength: 0
+  featured:
+    type: boolean
+    default: false
+  id:
+    $ref: ./AvatarID.yaml
+  imageUrl:
+    type: string
+    minLength: 1
+  name:
+    type: string
+    minLength: 1
+  releaseStatus:
+    $ref: ./ReleaseStatus.yaml
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  thumbnailImageUrl:
+    type: string
+    minLength: 1
+  unityPackages:
+    type: array
+    uniqueItems: true
+    minItems: 1
+    items:
+      $ref: ./UnityPackage.yaml
+  unityPackageUrl:
+    type: string
+  unityPackageUrlObject:
+    type: object
+    deprecated: true
+    description: '**Deprecation:** `Object` has unknown usage/fields, and is always empty. Use normal `Url` field instead.'
+    properties:
+      unityPackageUrl:
+        type: string
+  updated_at:
+    type: string
+    minLength: 1
+    format: date-time
+  version:
+    type: number
+    default: 0
+    minimum: 0
+    example: 68
+    readOnly: true
+required:
+  - authorId
+  - authorName
+  - created_at
+  - description
+  - featured
+  - id
+  - imageUrl
+  - name
+  - releaseStatus
+  - tags
+  - thumbnailImageUrl
+  - unityPackages
+  - unityPackageUrl
+  - unityPackageUrlObject
+  - updated_at
+  - version
