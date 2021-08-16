@@ -20,7 +20,6 @@ properties:
     readOnly: true
   created_at:
     type: string
-    minLength: 1
     format: date-time
     readOnly: true
   description:
@@ -98,7 +97,6 @@ properties:
     readOnly: true
   publicationDate:
     type: string
-    minLength: 1
     format: date-time
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
@@ -118,7 +116,6 @@ properties:
       $ref: ./UnityPackage.yaml
   updated_at:
     type: string
-    minLength: 1
     format: date-time
   version:
     type: number
