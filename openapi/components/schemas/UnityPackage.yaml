@@ -38,7 +38,6 @@ properties:
     $ref: ./Platform.yaml
   created_at:
     type: string
-    minLength: 1
     format: date-time
 required:
   - id

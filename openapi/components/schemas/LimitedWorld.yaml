@@ -34,13 +34,13 @@ properties:
     type: number
   created_at:
     type: string
-    minLength: 1
+    format: date-time
   updated_at:
     type: string
-    minLength: 1
+    format: date-time
   publicationDate:
     type: string
-    minLength: 1
+    readOnly: true
   labsPublicationDate:
     type: string
     minLength: 1
