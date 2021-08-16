@@ -1612,7 +1612,7 @@ paths:
         - $ref: '#/components/parameters/platform'
         - $ref: '#/components/parameters/userIdAdmin'
       description: Search and list favorited avatars by query filters.
-      x-internal: true
+      x-internal: false
 components:
   schemas: {}
   securitySchemes:
