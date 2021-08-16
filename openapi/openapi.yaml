@@ -1662,8 +1662,9 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/responses/MissingCredentials'
+                  - $ref: ./components/responses/MissingCredentialsError.yaml
                   - $ref: ./components/responses/FeaturedSetNotAdminError.yaml
+          description: 'Returns either of the following errors:'
       tags:
         - avatars
       requestBody:
