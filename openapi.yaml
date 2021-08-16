@@ -3214,13 +3214,13 @@ components:
           type: number
         created_at:
           type: string
-          minLength: 1
+          format: date-time
         updated_at:
           type: string
-          minLength: 1
+          format: date-time
         publicationDate:
           type: string
-          minLength: 1
+          readOnly: true
         labsPublicationDate:
           type: string
           minLength: 1
@@ -3312,7 +3312,6 @@ components:
           $ref: '#/components/schemas/Platform'
         created_at:
           type: string
-          minLength: 1
           format: date-time
       required:
         - id
@@ -3348,7 +3347,6 @@ components:
           readOnly: true
         created_at:
           type: string
-          minLength: 1
           format: date-time
           readOnly: true
         description:
@@ -3426,7 +3424,6 @@ components:
           readOnly: true
         publicationDate:
           type: string
-          minLength: 1
           format: date-time
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
@@ -3446,7 +3443,6 @@ components:
             $ref: '#/components/schemas/UnityPackage'
         updated_at:
           type: string
-          minLength: 1
           format: date-time
         version:
           type: number
@@ -3616,10 +3612,8 @@ components:
         type:
           $ref: '#/components/schemas/FavoriteType'
         favoriteId:
-          oneOf:
-            - $ref: '#/components/schemas/AvatarID'
-            - $ref: '#/components/schemas/UserID'
-            - $ref: '#/components/schemas/WorldID'
+          description: 'MUST be either AvatarID, UserID or WorldID.'
+          type: string
         tags:
           type: array
           items:
@@ -3629,6 +3623,7 @@ components:
         - type
         - favoriteId
         - tags
+      title: Favorite
     FavoriteGroupID:
       type: string
       title: FavoriteGroupID
