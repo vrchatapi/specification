@@ -1658,13 +1658,7 @@ paths:
         '200':
           $ref: '#/components/responses/Avatar'
         '401':
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - $ref: ./components/responses/MissingCredentialsError.yaml
-                  - $ref: ./components/responses/FeaturedSetNotAdminError.yaml
-          description: 'Returns either of the following errors:'
+          $ref: ./components/responses/FeaturedSetNotAdminError.yaml
       tags:
         - avatars
       requestBody:
