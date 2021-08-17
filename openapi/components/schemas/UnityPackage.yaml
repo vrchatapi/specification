@@ -43,8 +43,6 @@ properties:
     format: date-time
 required:
   - id
-  - pluginUrl
-  - pluginUrlObject
   - unityVersion
   - assetVersion
   - platform
