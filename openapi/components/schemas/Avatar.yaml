@@ -19,7 +19,6 @@ properties:
     readOnly: true
   created_at:
     type: string
-    minLength: 1
     format: date-time
     readOnly: true
   description:
@@ -62,7 +61,6 @@ properties:
         type: string
   updated_at:
     type: string
-    minLength: 1
     format: date-time
   version:
     type: number
