@@ -1,0 +1,21 @@
+description: Error response when trying to show information about a non-existent avatar.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      404 Can't find avatar:
+        value:
+          error:
+            message: "Can't find avatar!"
+            status_code: 404
+      404 Couldn't find that avatar:
+        value:
+          error:
+            message: "We couldn't find that avatar!"
+            status_code: 404
+      404 Avatar Not Found:
+        value:
+          error:
+            message: "Avatar Not Found"
+            status_code: 404
