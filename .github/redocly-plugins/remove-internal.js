@@ -30,7 +30,10 @@ const decorators = {
                     leave(parameter, ctx) {
                         // delete if the parameter itself is marked with x-internal
                         if (parameter['x-internal']) {
-                            delete ctx.parent[ctx.key];
+                            const pos = ctx.parent.findIndex(el => el.name === parameter.name);
+                            if (pos >= 0) {
+                                ctx.parent.splice(pos, 1);
+                            }
                         }
                     }
                 },
