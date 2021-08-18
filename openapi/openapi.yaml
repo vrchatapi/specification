@@ -1807,7 +1807,7 @@ paths:
     get:
       summary: Search Player Moderations
       tags:
-        - playermoderations
+        - playermoderation
       responses:
         '200':
           $ref: '#/components/responses/PlayerModerationList'
@@ -1866,7 +1866,7 @@ paths:
         description: ''
       description: 'Moderate a user, e.g. unmute them or show their avatar.'
       tags:
-        - playermoderations
+        - playermoderation
     delete:
       summary: Clear All Player Moderations
       operationId: clearAllPlayerModerations
@@ -1880,7 +1880,7 @@ paths:
           $ref: '#/components/responses/MissingCredentials'
       description: ⚠️ **This will delete every single player moderation you've ever made.**
       tags:
-        - playermoderations
+        - playermoderation
   /auth/user/unplayermoderate:
     put:
       summary: Unmoderate User
@@ -1907,12 +1907,12 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentials'
       tags:
-        - playermoderations
+        - playermoderation
   '/auth/user/playermoderations/{playerModerationId}':
     get:
       summary: Get Player Moderation
       tags:
-        - playermoderations
+        - playermoderation
       responses:
         '200':
           $ref: '#/components/responses/PlayerModeration'
@@ -1940,7 +1940,7 @@ paths:
           $ref: ./components/responses/PlayerModerationDeleteOthersError.yaml
       description: Deletes a specific player moderation based on it's `pmod_` ID. The website uses `unmoderateUser` instead. You can delete the same player moderation multiple times successfully.
       tags:
-        - playermoderations
+        - playermoderation
     parameters:
       - schema:
           type: string
@@ -2665,7 +2665,7 @@ tags:
   - name: files
   - name: friends
   - name: notifications
-  - name: playermoderations
+  - name: playermoderation
   - name: system
   - name: users
   - name: worlds
