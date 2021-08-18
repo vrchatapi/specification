@@ -1803,6 +1803,150 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Switches into that avatar.
+  /auth/user/playermoderations:
+    get:
+      summary: Search Player Moderations
+      tags:
+        - playermoderations
+      responses:
+        '200':
+          $ref: '#/components/responses/PlayerModerationList'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      operationId: getPlayerModerations
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: 'Must be one of PlayerModerationType, except unblock. Unblocking simply removes a block.'
+        - schema:
+            type: string
+          in: query
+          name: sourceUserId
+          description: Must be valid UserID. Trying to view someone else's moderations results with "Can't view someone else's player moderations" error.
+          x-internal: true
+        - schema:
+            type: string
+          in: query
+          name: targetUserId
+          description: Must be valid UserID.
+      description: |-
+        Returns a list of all player moderations made by **you**.
+
+        This endpoint does not have pagination, and will return *all* results. Use query parameters to limit your query if needed.
+    post:
+      summary: Moderate User
+      operationId: moderateUser
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PlayerModeration'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                moderated:
+                  $ref: ./components/schemas/UserID.yaml
+                type:
+                  $ref: ./components/schemas/PlayerModerationType.yaml
+              required:
+                - moderated
+                - type
+        description: ''
+      description: 'Moderate a user, e.g. unmute them or show their avatar.'
+      tags:
+        - playermoderations
+    delete:
+      summary: Clear All Player Moderations
+      operationId: clearAllPlayerModerations
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ./components/responses/OkSuccess.yaml
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      description: ⚠️ **This will delete every single player moderation you've ever made.**
+      tags:
+        - playermoderations
+  /auth/user/unplayermoderate:
+    put:
+      summary: Unmoderate User
+      operationId: unmoderateUser
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                moderated:
+                  $ref: ./components/schemas/UserID.yaml
+                type:
+                  $ref: ./components/schemas/PlayerModerationType.yaml
+              required:
+                - type
+      description: 'Removes a player moderation previously added through `moderateUser`. E.g if you previuosly have shown their avatar, but now want to reset it to default.'
+      responses:
+        '200':
+          $ref: ./components/responses/PlayerModerationUnmoderatedSuccess.yaml
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+      tags:
+        - playermoderations
+  '/auth/user/playermoderations/{playerModerationId}':
+    get:
+      summary: Get Player Moderation
+      tags:
+        - playermoderations
+      responses:
+        '200':
+          $ref: '#/components/responses/PlayerModeration'
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '404':
+          $ref: ./components/responses/PlayerModerationNotFoundError.yaml
+      operationId: getPlayerModeration
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns a single Player Moderation. This returns the exact same amount of information as the more generalised `getPlayerModerations`.
+    delete:
+      summary: Delete Player Moderation
+      operationId: deletePlayerModeration
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ./components/responses/PlayerModerationRemovedSuccess.yaml
+        '401':
+          $ref: '#/components/responses/MissingCredentials'
+        '403':
+          $ref: ./components/responses/PlayerModerationDeleteOthersError.yaml
+      description: Deletes a specific player moderation based on it's `pmod_` ID. The website uses `unmoderateUser` instead. You can delete the same player moderation multiple times successfully.
+      tags:
+        - playermoderations
+    parameters:
+      - schema:
+          type: string
+        name: playerModerationId
+        in: path
+        required: true
 components:
   schemas: {}
   securitySchemes:
@@ -2281,6 +2425,20 @@ components:
         application/json:
           schema:
             $ref: ./components/schemas/CurrentUser.yaml
+    PlayerModerationList:
+      description: Returns a list of PlayerModeration objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./components/schemas/PlayerModeration.yaml
+    PlayerModeration:
+      description: Returns a single PlayerModeration object.
+      content:
+        application/json:
+          schema:
+            $ref: ./components/schemas/PlayerModeration.yaml
   examples: {}
   parameters:
     number:
@@ -2507,6 +2665,7 @@ tags:
   - name: files
   - name: friends
   - name: notifications
+  - name: playermoderations
   - name: system
   - name: users
   - name: worlds
