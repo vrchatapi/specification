@@ -240,7 +240,7 @@ properties:
     type: array
     uniqueItems: true
     minItems: 1
-    description: 'PSA, Public Announcements'
+    description: 'Public Announcements'
     items:
       type: object
       description: Public Announcement

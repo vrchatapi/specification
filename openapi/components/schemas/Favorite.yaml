@@ -10,6 +10,7 @@ properties:
     type: string
   tags:
     type: array
+    description: ' '
     items:
       $ref: ./Tag.yaml
 required:

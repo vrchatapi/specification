@@ -21,6 +21,7 @@ properties:
     type: string
   pastDisplayNames:
     type: array
+    description: ' '
     items:
       type: string
   hasEmail:

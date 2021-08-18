@@ -19,11 +19,12 @@ properties:
     example: .unitypackage
   tags:
     type: array
-    minItems: 0
+    description: ' '
     items:
       $ref: ./Tag.yaml
   versions:
     type: array
+    description: ' '
     uniqueItems: true
     minItems: 1
     items:

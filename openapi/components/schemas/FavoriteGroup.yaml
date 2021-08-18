@@ -21,6 +21,7 @@ properties:
     $ref: ./FavoriteGroupVisibility.yaml
   tags:
     type: array
+    description: ' '
     items:
       $ref: ./Tag.yaml
 required:

@@ -33,7 +33,9 @@ properties:
     type: string
   tags:
     type: array
-    description: Always empty
+    description: <-
+      Always empty.
+      
     items:
       $ref: ./Tag.yaml
 required:
