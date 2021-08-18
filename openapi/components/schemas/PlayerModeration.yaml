@@ -1,0 +1,28 @@
+type: object
+title: PlayerModeration
+properties:
+  id:
+    $ref: ./PlayerModerationID.yaml
+  type:
+    $ref: ./PlayerModerationType.yaml
+  sourceUserId:
+    $ref: ./UserID.yaml
+  sourceDisplayName:
+    type: string
+    minLength: 1
+  targetUserId:
+    $ref: ./UserID.yaml
+  targetDisplayName:
+    type: string
+    minLength: 1
+  created:
+    type: string
+    format: date-time
+required:
+  - id
+  - type
+  - sourceUserId
+  - sourceDisplayName
+  - targetUserId
+  - targetDisplayName
+  - created

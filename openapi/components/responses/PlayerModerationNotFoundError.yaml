@@ -1,0 +1,11 @@
+description: Error response when trying to show information about a non-existent player moderation.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      404 Player Moderation Not Found:
+        value:
+          error:
+            message: "Can't find playerModerationǃ"
+            status_code: 404
