@@ -49,6 +49,8 @@ properties:
     items:
       $ref: ./UserID.yaml
   friendGroupNames:
+    description: 'Always empty array.'
+    deprecated: true
     type: array
     items:
       type: string
