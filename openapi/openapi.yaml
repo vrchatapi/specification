@@ -75,12 +75,12 @@ info:
 
     # Pagination
 
-    Most endpoints enforce pagination, meaning they will only return 10 entries by default, and never more than 100.
+    Most endpoints enforce pagination, meaning they will only return 10 entries by default, and never more than 100.<br>
     Using both the limit and offset parameters allows you to easily paginate through a large number of objects.
 
     | Query Parameter | Type | Description |
     | ----------|--|------- |
-    | `limit` | integer  | The number of objects to return. This value often defaults to 100. If set too high, requests may fail to prevent excessively large response bodies.|
+    | `limit` | integer  | The number of objects to return. This value often defaults to 10. Highest limit is always 100.|
     | `offset` | integer  | A zero-based offset from the default object sorting.|
 
     If a request returns fewer objects than the `limit` parameter, there are no more items available to return.
