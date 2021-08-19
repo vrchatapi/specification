@@ -30,7 +30,7 @@ info:
     Finally, use of the API using applications other than the approved methods (website, VRChat application, Unity SDK) is not officially supported.
     VRChat provides no guarantee for external applications using the API. Access to API endpoints may break **at any time, without notice**.
     We will make a best effort in keeping this documentation and associated language libraries up to date, but things might be outdated or missing.
-    If you find that something is no longer valid, please contact us on Discord or [create an issue](https://github.com/vrchatapi/specification) and tell us so we can fix it.
+    If you find that something is no longer valid, please contact us on Discord or [create an issue](https://github.com/vrchatapi/specification/issues) and tell us so we can fix it.
 
     # Getting Started
 
