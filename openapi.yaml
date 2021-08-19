@@ -2244,6 +2244,7 @@ components:
         twoFactorAuthEnabled:
           type: boolean
         state:
+          deprecated: true
           $ref: '#/components/schemas/UserState'
         tags:
           type: array
