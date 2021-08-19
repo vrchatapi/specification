@@ -61,7 +61,7 @@ info:
     It is also possible to try out the API in your browser, by first logging in at [vrchat.com/home](https://vrchat.com/home/) and then going to
     [vrchat.com/api/1/auth/user](https://vrchat.com/api/1/auth/user), but the information will be much harder to work with.
 
-    For more permanent operation such as software development it is instead recommended to use one of the existing language SDK's.
+    For more permanent operation such as software development it is instead recommended to use one of the existing language SDKs.
     This community project maintain API libraries in several languages, which allows you to interact with the API with simple function calls
     rather than having to implement the HTTP protocol yourself. Most of these libraries are automatically generated from the API specification,
     sometimes with additional helpful wrapper code to make usage easier. This allows them to be almost automatically updated and expanded upon
