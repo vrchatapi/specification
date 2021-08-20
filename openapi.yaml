@@ -854,6 +854,26 @@ paths:
         upload.
       tags:
         - files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                signatureMd5:
+                  type: string
+                  minLength: 1
+                signatureSizeInBytes:
+                  type: number
+                fileMd5:
+                  type: string
+                  minLength: 1
+                fileSizeInBytes:
+                  type: number
+              required:
+                - signatureMd5
+                - signatureSizeInBytes
   '/file/{fileId}/{versionId}':
     parameters:
       - $ref: '#/components/parameters/fileId'
