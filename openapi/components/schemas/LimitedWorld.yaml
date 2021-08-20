@@ -28,6 +28,7 @@ properties:
     minLength: 1
   tags:
     type: array
+    description: ' '
     items:
       $ref: ./Tag.yaml
   favorites:
@@ -46,6 +47,7 @@ properties:
     minLength: 1
   unityPackages:
     type: array
+    description: ' '
     minItems: 1
     items:
       $ref: ./LimitedUnityPackage.yaml

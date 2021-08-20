@@ -29,6 +29,7 @@ properties:
     $ref: ./UserState.yaml
   tags:
     type: array
+    description: ' '
     items:
       $ref: ./Tag.yaml
   developerType:

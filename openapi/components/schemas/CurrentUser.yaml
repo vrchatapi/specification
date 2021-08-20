@@ -21,6 +21,7 @@ properties:
     type: string
   pastDisplayNames:
     type: array
+    description: ' '
     items:
       type: string
   hasEmail:
@@ -48,6 +49,8 @@ properties:
     items:
       $ref: ./UserID.yaml
   friendGroupNames:
+    description: 'Always empty array.'
+    deprecated: true
     type: array
     items:
       type: string
@@ -80,6 +83,7 @@ properties:
   twoFactorAuthEnabled:
     type: boolean
   state:
+    deprecated: true
     $ref: ./UserState.yaml
   tags:
     type: array

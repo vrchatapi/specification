@@ -102,6 +102,7 @@ properties:
     $ref: ./ReleaseStatus.yaml
   tags:
     type: array
+    description: ' '
     items:
       $ref: ./Tag.yaml
   thumbnailImageUrl:
@@ -111,6 +112,7 @@ properties:
     type: object
   unityPackages:
     type: array
+    description: ' '
     minItems: 1
     items:
       $ref: ./UnityPackage.yaml

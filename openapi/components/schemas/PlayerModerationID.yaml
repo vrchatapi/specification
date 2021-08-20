@@ -1,0 +1,4 @@
+type: string
+title: PlayerModerationID
+pattern: 'pmod_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+example: pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244

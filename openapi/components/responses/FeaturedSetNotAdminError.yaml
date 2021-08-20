@@ -1,0 +1,11 @@
+description: Error response when set featured to true without being an admin.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      401 Cannot Set Featured:
+        value:
+          error:
+            message: cannot set featured tag if you are not an admin
+            status_code: 401
