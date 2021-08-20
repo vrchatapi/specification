@@ -498,6 +498,10 @@ paths:
               schema:
                 type: string
                 format: date-time
+                example: '2021-08-20T12:38:42+00:00'
+                description: >-
+                  Does not return millisecond precision. Always returns time in
+                  UTC.
       operationId: getSystemTime
       description: >-
         Returns in plain format the current time of the API server.
