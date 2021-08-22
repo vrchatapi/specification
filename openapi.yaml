@@ -3677,7 +3677,6 @@ components:
         - unityVersion
         - assetVersion
         - platform
-        - created_at
     World:
       description: ''
       type: object
