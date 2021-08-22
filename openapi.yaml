@@ -2375,7 +2375,7 @@ components:
           $ref: '#/components/schemas/AvatarID'
         developerType:
           $ref: '#/components/schemas/DeveloperType'
-        'last_login: ':
+        last_login:
           type: string
         last_platform:
           $ref: '#/components/schemas/Platform'
@@ -2403,12 +2403,13 @@ components:
         - currentAvatarThumbnailImageUrl
         - fallbackAvatar
         - developerType
-        - 'last_login: '
+        - last_login
         - last_platform
         - status
         - isFriend
         - location
         - tags
+      description: ''
     User:
       title: User
       type: object
