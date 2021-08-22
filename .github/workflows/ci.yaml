@@ -47,6 +47,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Upload OpenAPI specification to GitHub Pages
     steps:
+      - uses: actions/checkout@v2
+
       - uses: actions/download-artifact@v2
         with:
           name: openapi-bundled
