@@ -2375,16 +2375,12 @@ components:
           $ref: '#/components/schemas/AvatarID'
         developerType:
           $ref: '#/components/schemas/DeveloperType'
-        last_login:
-          type: string
         last_platform:
           $ref: '#/components/schemas/Platform'
         status:
           $ref: '#/components/schemas/UserStatus'
         isFriend:
           type: boolean
-        friendKey:
-          type: string
         location:
           type: string
         tags:
@@ -2403,7 +2399,6 @@ components:
         - currentAvatarThumbnailImageUrl
         - fallbackAvatar
         - developerType
-        - last_login
         - last_platform
         - status
         - isFriend
