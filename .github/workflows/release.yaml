@@ -8,7 +8,6 @@ name: OpenAPI Specification Release
 jobs:
   release:
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: bundle
     runs-on: ubuntu-latest
     name: Release Bundle as new Version
     steps:
