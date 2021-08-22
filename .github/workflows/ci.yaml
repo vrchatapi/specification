@@ -43,7 +43,7 @@ jobs:
           path: dist/openapi.yaml
 
   pages:
-    if: startsWith(github.ref, "refs/tags/v1")
+    if: ${{ startsWith(github.ref, "refs/tags/v1") }}
     needs: bundle
     runs-on: ubuntu-latest
     name: Upload OpenAPI specification to GitHub Pages
@@ -66,7 +66,7 @@ jobs:
           folder: dist
 
   release:
-    if: startsWith(github.ref, "refs/tags/v1")
+    if: ${{ startsWith(github.ref, "refs/tags/v1") }}
     needs: bundle
     runs-on: ubuntu-latest
     name: Release Bundle as new Version
