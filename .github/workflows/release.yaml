@@ -1,0 +1,26 @@
+on: 
+  push:
+    tags:
+    - '*'
+
+name: OpenAPI Specification Release
+
+jobs:
+  release:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: bundle
+    runs-on: ubuntu-latest
+    name: Release Bundle as new Version
+    steps:
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: openapi-bundled
+        path: dist/openapi.yaml
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "dist/openapi.yaml"
+        artifactErrorsFailBuild: true
+        bodyFile: "release-body.md"
+        token: ${{ secrets.GITHUB_TOKEN }}

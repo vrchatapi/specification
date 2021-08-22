@@ -50,6 +50,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: openapi-bundled
+          path: dist/openapi.yaml
 
       - name: Disable Jekyll for Github Pages
         run: sudo touch dist/.nojekyll; sudo touch dist/index.html
@@ -60,17 +61,3 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
-
-  release:
-    if: ${{ github.ref == 'refs/heads/main' }}
-    needs: bundle
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/download-artifact@v2
-      with:
-        name: openapi-bundled
-    - uses: ncipollo/release-action@v1
-      with:
-        artifacts: "dist/openapi.yaml"
-        bodyFile: "release-body.md"
-        token: ${{ secrets.GITHUB_TOKEN }}
