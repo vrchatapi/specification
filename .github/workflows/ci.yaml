@@ -1,9 +1,9 @@
 name: OpenAPI Specification CI
 
-on: 
+on:
   push:
     tags-ignore:
-    - 'v1.*'
+    - v1.*
   pull_request:
 
 jobs:
