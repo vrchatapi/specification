@@ -45,4 +45,3 @@ required:
   - unityVersion
   - assetVersion
   - platform
-  - created_at
