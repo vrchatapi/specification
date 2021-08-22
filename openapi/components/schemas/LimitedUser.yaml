@@ -23,12 +23,16 @@ properties:
     $ref: ./AvatarID.yaml
   developerType:
     $ref: ./DeveloperType.yaml
+  'last_login: ':
+    type: string
   last_platform:
     $ref: ./Platform.yaml
   status:
     $ref: ./UserStatus.yaml
   isFriend:
     type: boolean
+  friendKey:
+    type: string
   location:
     type: string
   tags:
@@ -49,6 +53,7 @@ required:
   - currentAvatarThumbnailImageUrl
   - fallbackAvatar
   - developerType
+  - 'last_login: '
   - last_platform
   - status
   - isFriend
