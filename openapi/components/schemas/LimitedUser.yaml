@@ -23,7 +23,7 @@ properties:
     $ref: ./AvatarID.yaml
   developerType:
     $ref: ./DeveloperType.yaml
-  'last_login: ':
+  last_login:
     type: string
   last_platform:
     $ref: ./Platform.yaml
@@ -53,9 +53,10 @@ required:
   - currentAvatarThumbnailImageUrl
   - fallbackAvatar
   - developerType
-  - 'last_login: '
+  - last_login
   - last_platform
   - status
   - isFriend
   - location
   - tags
+description: ''
