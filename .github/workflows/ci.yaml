@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: openapi-bundled
-          path: dist/openapi.yaml
+          path: dist
 
   pages:
     if: ${{ startsWith(github.ref, 'refs/tags/v1') }}
@@ -53,7 +53,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: openapi-bundled
-          path: dist/openapi.yaml
+          path: dist
 
       - name: Disable Jekyll for Github Pages
         run: sudo touch dist/.nojekyll; sudo touch dist/index.html
@@ -75,7 +75,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: openapi-bundled
-        path: dist/openapi.yaml
+        path: dist
 
     - uses: ncipollo/release-action@v1
       with:
