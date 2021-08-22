@@ -1,10 +1,10 @@
-name: OpenAPI Specification CI
-
 on:
   push:
     tags-ignore:
     - v1.*
   pull_request:
+
+name: OpenAPI Specification CI
 
 jobs:
   lint:
