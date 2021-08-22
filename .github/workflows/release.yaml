@@ -1,9 +1,9 @@
+name: OpenAPI Specification Release
+
 on: 
   push:
     tags:
-    - '*'
-
-name: OpenAPI Specification Release
+    - 'v1.*'
 
 jobs:
   release:
