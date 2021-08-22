@@ -70,6 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Release Bundle as new Version
     steps:
+    - uses: actions/checkout@v2
 
     - uses: actions/download-artifact@v2
       with:
