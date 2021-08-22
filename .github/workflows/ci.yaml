@@ -42,11 +42,11 @@ jobs:
 
       - name: Disable Jekyll for Github Pages
         run: sudo touch dist/.nojekyll; sudo touch dist/index.html
-        if: ${{ github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Deploy Bundle to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
-        if: ${{ github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           branch: gh-pages
           folder: dist
