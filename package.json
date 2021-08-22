@@ -1,10 +1,9 @@
 {
   "name": "vrchat-openapi-test",
   "version": "1.0.0",
-  "description": "VRChat API OpenAPI Specification Test Suite",
+  "description": "VRChat API OpenAPI Specification",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
     "lint": "node ./node_modules/\\@stoplight/spectral/dist/cli/index.js lint openapi/openapi.yaml -F warn",
     "bundle": "npx @redocly/openapi-cli bundle openapi/openapi.yaml -o dist/openapi.yaml"
   },
@@ -12,14 +11,5 @@
   "license": "MIT",
   "dependencies": {
     "@stoplight/spectral": "^5.9.1"
-  },
-  "devDependencies": {
-    "axios": "^0.21.1",
-    "axios-cookiejar-support": "^1.0.1",
-    "chai": "^4.3.4",
-    "chai-openapi-response-validator": "^0.13.0",
-    "mocha": "^9.0.3",
-    "tough-cookie": "^4.0.0",
-    "uuid": "^8.3.2"
   }
 }

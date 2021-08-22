@@ -23,8 +23,9 @@ jobs:
         run: npm run lint
 
   bundle:
+    needs: lint
     runs-on: ubuntu-latest
-    name: Bundle and Upload OpenAPI specification
+    name: Bundle and Filter OpenAPI specification
     steps:
       - uses: actions/checkout@v2
 
@@ -40,9 +41,18 @@ jobs:
           name: openapi-bundled
           path: dist/openapi.yaml
 
+  pages:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: bundle
+    runs-on: ubuntu-latest
+    name: Upload OpenAPI specification to GitHub Pages
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: openapi-bundled
+
       - name: Disable Jekyll for Github Pages
         run: sudo touch dist/.nojekyll; sudo touch dist/index.html
-        if: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Deploy Bundle to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
@@ -50,3 +60,17 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
+
+  release:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: bundle
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: openapi-bundled
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "dist/openapi.yaml"
+        bodyFile: "release-body.md"
+        token: ${{ secrets.GITHUB_TOKEN }}
