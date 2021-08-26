@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.0.2
+  version: 1.1.0
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -10,7 +10,7 @@ info:
   license:
     url: 'https://github.com/vrchatapi/specification/blob/master/LICENSE'
     name: The MIT License (MIT)
-  description: "![VRChat API Banner](https://vrchatapi.github.io/assets/img/api_banner_1500x400.png)\n\n# Welcome to the VRChat API\n\nBefore we begin, we would like to state this is a **COMMUNITY DRIVEN PROJECT**.\nThis means that everything you read on here was written by the community itself and is **not** officially supported by VRChat.\nThe documentation is provided \"AS IS\", and any action you take towards VRChat is completely your own responsibility.\n\nThe documentation and additional libraries SHALL ONLY be used for applications interacting with VRChat's API in accordance\nwith their [Terms of Service](https://github.com/VRChatAPI), and MUST NOT be used for modifying the client, \"avatar ripping\", or other illegal activities.\nMalicious usage or spamming the API may result in account termination.\nCertain parts of the API are also more sensitive than others, for example moderation, so please tread extra carefully and read the warnings when present.\n\n![Tupper Policy on API](https://i.imgur.com/yLlW7Ok.png)\n\nFinally, use of the API using applications other than the approved methods (website, VRChat application, Unity SDK) is not officially supported.\nVRChat provides no guarantee or support for external applications using the API. Access to API endpoints may break **at any time, without notice**.\nTherefore, please **do not ping** VRChat Staff in the VRChat Discord if you are having API problems, as they do not provide API support.\nWe will make a best effort in keeping this documentation and associated language libraries up to date, but things might be outdated or missing.\nIf you find that something is no longer valid, please contact us on Discord or [create an issue](https://github.com/vrchatapi/specification/issues) and tell us so we can fix it.\n\n# Getting Started\n\nThe VRChat API can be used to programmatically retrieve or update information regarding your profile, friends, avatars, worlds and more.\nThe API consists of two parts, \"Photon\" which is only used in-game, and the \"Web API\" which is used by both the game and the website.\nThis documentation focuses only on the Web API.\n\nThe API is designed around the REST ideology, providing semi-simple and usually predictable URIs to access and modify objects.\nRequests support standard HTTP methods like GET, PUT, POST, and DELETE and standard status codes.\nResponse bodies are always UTF-8 encoded JSON objects, unless explicitly documented otherwise.\n\n<div class=\"callout callout-error\">\n  <strong>\U0001F6D1 Warning! Do not touch Photon!</strong><br>\n  Photon is only used by the in-game client and should <b>not</b> be touched. Doing so may result in permanent account termination.\n</div>\n\n<div class=\"callout callout-info\">\n  <strong>ℹ️ API Key and Authentication</strong><br>\n  The API Key has always been the same and is currently <code>JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26</code>.\n  Read <a href=\"#tag--authentication\">Authentication</a> for how to log in.\n</div>\n\n# Using the API\n\nFor simply exploring what the API can do it is strongly recommended to download [Insomnia](https://insomnia.rest/download), a free and open-source\nAPI client that's great for sending requests to the API in an orderly fashion.\nInsomnia allows you to send data in the format that's required for VRChat's API.\nIt is also possible to try out the API in your browser, by first logging in at [vrchat.com/home](https://vrchat.com/home/) and then going to\n[vrchat.com/api/1/auth/user](https://vrchat.com/api/1/auth/user), but the information will be much harder to work with.\n\nFor more permanent operation such as software development it is instead recommended to use one of the existing language SDKs.\nThis community project maintains API libraries in several languages, which allows you to interact with the API with simple function calls\nrather than having to implement the HTTP protocol yourself. Most of these libraries are automatically generated from the API specification,\nsometimes with additional helpful wrapper code to make usage easier. This allows them to be almost automatically updated and expanded upon\nas soon as a new feature is introduced in the specification itself. The libraries can be found on [GitHub](https://github.com/vrchatapi) or following:\n\n* [NodeJS (JavaScript)](https://www.npmjs.com/package/vrchat)\n* [Dart](https://pub.dev/packages/vrchat_dart)\n* [Rust](https://crates.io/crates/vrchatapi)\n* [C#](github.com/vrchatapi/vrchatapi-csharp)\n* [Python](https://github.com/vrchatapi/VRChatPython)\n\n# Pagination\n\nMost endpoints enforce pagination, meaning they will only return 10 entries by default, and never more than 100.<br>\nUsing both the limit and offset parameters allows you to easily paginate through a large number of objects.\n\n| Query Parameter | Type | Description |\n| ----------|--|------- |\n| `limit` | integer  | The number of objects to return. This value often defaults to 10. Highest limit is always 100.|\n| `offset` | integer  | A zero-based offset from the default object sorting.|\n\nIf a request returns fewer objects than the `limit` parameter, there are no more items available to return.\n\n# Contribution\n\nDo you want to get involved in the documentation effort? Do you want to help improve one of the language API libraries?\nThis project is an [OPEN Open Source Project](https://openopensource.org)! This means that individuals making significant and valuable contributions are given\ncommit-access to the project. It also means we are very open and welcoming of new people making contributions, unlike some more guarded open-source projects.\n\n[![Discord](https://img.shields.io/static/v1?label=vrchatapi&message=discord&color=blueviolet&style=for-the-badge)](https://discord.gg/qjZE9C9fkB)"
+  description: "![VRChat API Banner](https://vrchatapi.github.io/assets/img/api_banner_1500x400.png)\n\n# Welcome to the VRChat API\n\nBefore we begin, we would like to state this is a **COMMUNITY DRIVEN PROJECT**.\nThis means that everything you read on here was written by the community itself and is **not** officially supported by VRChat.\nThe documentation is provided \"AS IS\", and any action you take towards VRChat is completely your own responsibility.\n\nThe documentation and additional libraries SHALL ONLY be used for applications interacting with VRChat's API in accordance\nwith their [Terms of Service](https://github.com/VRChatAPI), and MUST NOT be used for modifying the client, \"avatar ripping\", or other illegal activities.\nMalicious usage or spamming the API may result in account termination.\nCertain parts of the API are also more sensitive than others, for example moderation, so please tread extra carefully and read the warnings when present.\n\n![Tupper Policy on API](https://i.imgur.com/yLlW7Ok.png)\n\nFinally, use of the API using applications other than the approved methods (website, VRChat application, Unity SDK) is not officially supported.\nVRChat provides no guarantee or support for external applications using the API. Access to API endpoints may break **at any time, without notice**.\nTherefore, please **do not ping** VRChat Staff in the VRChat Discord if you are having API problems, as they do not provide API support.\nWe will make a best effort in keeping this documentation and associated language libraries up to date, but things might be outdated or missing.\nIf you find that something is no longer valid, please contact us on Discord or [create an issue](https://github.com/vrchatapi/specification/issues) and tell us so we can fix it.\n\n# Getting Started\n\nThe VRChat API can be used to programmatically retrieve or update information regarding your profile, friends, avatars, worlds and more.\nThe API consists of two parts, \"Photon\" which is only used in-game, and the \"Web API\" which is used by both the game and the website.\nThis documentation focuses only on the Web API.\n\nThe API is designed around the REST ideology, providing semi-simple and usually predictable URIs to access and modify objects.\nRequests support standard HTTP methods like GET, PUT, POST, and DELETE and standard status codes.\nResponse bodies are always UTF-8 encoded JSON objects, unless explicitly documented otherwise.\n\n<div class=\"callout callout-error\">\n  <strong>\U0001F6D1 Warning! Do not touch Photon!</strong><br>\n  Photon is only used by the in-game client and should <b>not</b> be touched. Doing so may result in permanent account termination.\n</div>\n\n<div class=\"callout callout-info\">\n  <strong>ℹ️ API Key and Authentication</strong><br>\n  The API Key has always been the same and is currently <code>JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26</code>.\n  Read <a href=\"#tag--authentication\">Authentication</a> for how to log in.\n</div>\n\n# Using the API\n\nFor simply exploring what the API can do it is strongly recommended to download [Insomnia](https://insomnia.rest/download), a free and open-source\nAPI client that's great for sending requests to the API in an orderly fashion.\nInsomnia allows you to send data in the format that's required for VRChat's API.\nIt is also possible to try out the API in your browser, by first logging in at [vrchat.com/home](https://vrchat.com/home/) and then going to\n[vrchat.com/api/1/auth/user](https://vrchat.com/api/1/auth/user), but the information will be much harder to work with.\n\nFor more permanent operation such as software development it is instead recommended to use one of the existing language SDKs.\nThis community project maintains API libraries in several languages, which allows you to interact with the API with simple function calls\nrather than having to implement the HTTP protocol yourself. Most of these libraries are automatically generated from the API specification,\nsometimes with additional helpful wrapper code to make usage easier. This allows them to be almost automatically updated and expanded upon\nas soon as a new feature is introduced in the specification itself. The libraries can be found on [GitHub](https://github.com/vrchatapi) or following:\n\n* [NodeJS (JavaScript)](https://www.npmjs.com/package/vrchat)\n* [Dart](https://pub.dev/packages/vrchat_dart)\n* [Rust](https://crates.io/crates/vrchatapi)\n* [C#](https://github.com/vrchatapi/vrchatapi-csharp)\n* [Python](https://github.com/vrchatapi/VRChatPython)\n\n# Pagination\n\nMost endpoints enforce pagination, meaning they will only return 10 entries by default, and never more than 100.<br>\nUsing both the limit and offset parameters allows you to easily paginate through a large number of objects.\n\n| Query Parameter | Type | Description |\n| ----------|--|------- |\n| `limit` | integer  | The number of objects to return. This value often defaults to 10. Highest limit is always 100.|\n| `offset` | integer  | A zero-based offset from the default object sorting.|\n\nIf a request returns fewer objects than the `limit` parameter, there are no more items available to return.\n\n# Contribution\n\nDo you want to get involved in the documentation effort? Do you want to help improve one of the language API libraries?\nThis project is an [OPEN Open Source Project](https://openopensource.org)! This means that individuals making significant and valuable contributions are given\ncommit-access to the project. It also means we are very open and welcoming of new people making contributions, unlike some more guarded open-source projects.\n\n[![Discord](https://img.shields.io/static/v1?label=vrchatapi&message=discord&color=blueviolet&style=for-the-badge)](https://discord.gg/qjZE9C9fkB)"
 servers:
   - url: 'https://api.vrchat.cloud/api/1'
 paths:
@@ -37,13 +37,12 @@ paths:
                   - token
           headers: {}
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: verifyAuthToken
       parameters: []
       description: Verify whether the currently provided Auth Token is valid.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /logout:
     put:
       summary: Logout
@@ -61,11 +60,26 @@ paths:
                     success:
                       message: Ok!
                       status_code: 200
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                default: 'auth=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
+              description: Clears the `auth` cookie.
+            \0Set-Cookie:
+              schema:
+                type: string
+                default: 'age=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
+              description: Clears the `age` cookie.
+            \0\0Set-Cookie:
+              schema:
+                type: string
+                default: 'tos=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
+              description: Clears the `tos` cookie.
         '401':
-          $ref: '#/components/responses/MissingCredentials'
-      description: Invalidates the auth cookie.
+          $ref: '#/components/responses/MissingCredentialsError'
+      description: Invalidates the login session.
       security:
-        - apiKeyCookie: []
         - authCookie: []
       tags:
         - authentication
@@ -89,8 +103,13 @@ paths:
                   auth=authcookie_00000000-0000-0000-0000-000000000000;
                   Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
               description: Authenticating returns an `auth` cookie.
+            \0Set-Cookie:
+              schema:
+                type: string
+                default: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
+              description: Authenticating also sets the `apiKey` if not already set.
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getCurrentUser
       description: >-
         Login and/or Get user data from your VRChat account.
@@ -114,7 +133,6 @@ paths:
           twoFactorAuthCookie: []
         - authCookie: []
   /auth/twofactorauth/totp/verify:
-    parameters: []
     post:
       summary: Verify 2FA code
       operationId: verify2FA
@@ -141,7 +159,7 @@ paths:
                 Provides a `twoFactorAuth` cookie, which can be used to bypasses
                 the 2FA requirement for future logins on the same device.
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       requestBody:
         content:
           application/json:
@@ -162,7 +180,6 @@ paths:
         - authCookie: []
       parameters: []
   /auth/twofactorauth/otp/verify:
-    parameters: []
     post:
       summary: Verify 2FA code with Recovery code
       operationId: verifyRecoveryCode
@@ -189,7 +206,7 @@ paths:
                 Provides a `twoFactorAuth` cookie, which can be used to bypasses
                 the 2FA requirement for future logins on the same device.
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       requestBody:
         content:
           application/json:
@@ -222,7 +239,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CurrentUser'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       tags:
         - authentication
       description: >-
@@ -258,7 +275,7 @@ paths:
         '400':
           $ref: '#/components/responses/Users400Error'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: searchUsers
       security:
         - apiKeyCookie: []
@@ -302,7 +319,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getUserByName
       security:
         - apiKeyCookie: []
@@ -323,7 +340,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getUser
       security:
         - apiKeyCookie: []
@@ -434,7 +451,7 @@ paths:
       security: []
       responses:
         '200':
-          $ref: '#/components/responses/APIHealth'
+          $ref: '#/components/responses/APIHealthResponse'
   /config:
     get:
       summary: Fetch API Config
@@ -525,7 +542,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/LimitedUser'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFriends
       security:
         - apiKeyCookie: []
@@ -546,7 +563,7 @@ paths:
         '200':
           $ref: '#/components/responses/FriendStatus'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFriendStatus
       security:
         - apiKeyCookie: []
@@ -573,7 +590,7 @@ paths:
         '200':
           $ref: '#/components/responses/Notification'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/UserDoesntExistError'
     delete:
@@ -591,7 +608,7 @@ paths:
         '200':
           $ref: '#/components/responses/DeleteFriendRequestSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/DeleteFriendRequestError'
   '/auth/user/friends/{userId}':
@@ -606,7 +623,7 @@ paths:
         '400':
           $ref: '#/components/responses/NotFriendsError'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       description: Unfriend a user by ID.
       security:
         - apiKeyCookie: []
@@ -622,7 +639,7 @@ paths:
         '200':
           $ref: '#/components/responses/NotificationList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getNotifications
       security:
         - apiKeyCookie: []
@@ -672,7 +689,7 @@ paths:
         '200':
           $ref: '#/components/responses/Notification'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -693,7 +710,7 @@ paths:
         '200':
           $ref: '#/components/responses/Notification'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -714,7 +731,7 @@ paths:
         '200':
           $ref: '#/components/responses/FriendSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/AcceptFriendRequestError'
       security:
@@ -734,7 +751,7 @@ paths:
         '200':
           $ref: '#/components/responses/ClearNotificationsSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -1092,7 +1109,7 @@ paths:
         '200':
           $ref: '#/components/responses/LimitedWorldList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: searchWorlds
       security:
         - apiKeyCookie: []
@@ -1129,7 +1146,7 @@ paths:
         '400':
           $ref: '#/components/responses/CreateWorldNotAllowedYetError'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       requestBody:
         content:
           application/json:
@@ -1199,7 +1216,7 @@ paths:
         '200':
           $ref: '#/components/responses/LimitedWorldList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getActiveWorlds
       security:
         - apiKeyCookie: []
@@ -1227,7 +1244,7 @@ paths:
         '200':
           $ref: '#/components/responses/LimitedWorldList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '403':
           $ref: '#/components/responses/SeeOtherUserRecentsError'
       operationId: getRecentWorlds
@@ -1258,7 +1275,7 @@ paths:
         '200':
           $ref: '#/components/responses/LimitedWorldList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '403':
           $ref: '#/components/responses/SeeOtherUserFavoritesError'
       operationId: getFavoritedWorlds
@@ -1304,7 +1321,7 @@ paths:
         '200':
           $ref: '#/components/responses/World'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
       requestBody:
@@ -1369,7 +1386,7 @@ paths:
         '200':
           description: OK
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
       description: >-
@@ -1395,7 +1412,7 @@ paths:
         '200':
           $ref: '#/components/responses/Instance'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
   '/worlds/{worldId}/metadata':
     parameters:
       - $ref: '#/components/parameters/worldId'
@@ -1461,7 +1478,7 @@ paths:
                   - canPubilsh
                 readOnly: true
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
     put:
@@ -1474,7 +1491,7 @@ paths:
         '200':
           description: TODO
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
       description: Publish a world. You can only publish one world per week.
@@ -1490,7 +1507,7 @@ paths:
         '200':
           description: OK
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
       description: Unpublish a world.
@@ -1505,7 +1522,7 @@ paths:
         '200':
           $ref: '#/components/responses/FavoriteList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFavorites
       security:
         - apiKeyCookie: []
@@ -1592,7 +1609,7 @@ paths:
         '200':
           $ref: '#/components/responses/Favorite'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/FavoriteNotFoundError'
       operationId: getFavorite
@@ -1613,7 +1630,7 @@ paths:
         '200':
           $ref: '#/components/responses/FavoriteRemovedSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/FavoriteNotFoundError'
       description: Remove a favorite from your favorites list.
@@ -1628,7 +1645,7 @@ paths:
         '200':
           $ref: '#/components/responses/FavoriteGroupList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFavoriteGroups
       security:
         - apiKeyCookie: []
@@ -1709,7 +1726,7 @@ paths:
         '200':
           description: OK
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFavoritedAvatars
       security:
         - apiKeyCookie: []
@@ -1738,7 +1755,7 @@ paths:
         '200':
           $ref: '#/components/responses/AvatarList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: searchAvatars
       security:
         - apiKeyCookie: []
@@ -1831,7 +1848,7 @@ paths:
         '200':
           $ref: '#/components/responses/Avatar'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/AvatarNotFoundError'
       operationId: getAvatar
@@ -1849,7 +1866,7 @@ paths:
         '200':
           $ref: '#/components/responses/Avatar'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/AvatarNotFoundError'
       description: Update information about a specific avatar.
@@ -1897,7 +1914,7 @@ paths:
         '200':
           $ref: '#/components/responses/Avatar'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/AvatarNotFoundError'
       tags:
@@ -1917,7 +1934,7 @@ paths:
         '200':
           $ref: '#/components/responses/CurrentUser'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/AvatarNotFoundError'
       operationId: selectAvatar
@@ -1934,7 +1951,7 @@ paths:
         '200':
           $ref: '#/components/responses/PlayerModerationList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       operationId: getPlayerModerations
       security:
         - apiKeyCookie: []
@@ -1968,7 +1985,7 @@ paths:
         '200':
           $ref: '#/components/responses/PlayerModeration'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       requestBody:
         content:
           application/json:
@@ -1997,7 +2014,7 @@ paths:
         '200':
           $ref: '#/components/responses/OkSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       description: ⚠️ **This will delete every single player moderation you've ever made.**
       tags:
         - playermoderation
@@ -2028,7 +2045,7 @@ paths:
         '200':
           $ref: '#/components/responses/PlayerModerationUnmoderatedSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
       tags:
         - playermoderation
   '/auth/user/playermoderations/{playerModerationId}':
@@ -2040,7 +2057,7 @@ paths:
         '200':
           $ref: '#/components/responses/PlayerModeration'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/PlayerModerationNotFoundError'
       operationId: getPlayerModeration
@@ -2060,7 +2077,7 @@ paths:
         '200':
           $ref: '#/components/responses/PlayerModerationRemovedSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: '#/components/responses/MissingCredentialsError'
         '403':
           $ref: '#/components/responses/PlayerModerationDeleteOthersError'
       description: >-
@@ -2075,6 +2092,43 @@ paths:
         name: playerModerationId
         in: path
         required: true
+  /auth/permissions:
+    get:
+      summary: Get Assigned Permission
+      operationId: getAssignedPermissions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - permissions
+      description: >-
+        Returns a list of all permissions currently granted by the user.
+        Permissions are assigned e.g. by subscribing to VRC+.
+    parameters: []
+  '/permissions/{permissionId}':
+    parameters:
+      - $ref: '#/components/parameters/permissionId'
+    get:
+      summary: Get Permission
+      tags:
+        - permissions
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getPermission
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: >-
+        Returns a single permission. This endpoint is pretty useless, as it
+        returns the exact same information as `/auth/permissions`.
 components:
   schemas:
     Response:
@@ -4177,6 +4231,40 @@ components:
         - targetUserId
         - targetDisplayName
         - created
+    PermissionID:
+      type: string
+      title: PermissionID
+      pattern: >-
+        prms_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+      example: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
+    Permission:
+      description: ''
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/PermissionID'
+        ownerId:
+          $ref: '#/components/schemas/UserID'
+        name:
+          type: string
+          minLength: 1
+          example: permission-invite-photos
+        data:
+          type: object
+      required:
+        - id
+        - ownerId
+        - name
+      title: Permission
+      example:
+        id: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
+        ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
+        name: permission-extra-favorites-avatar-groups
+        data:
+          maxFavoritesPerGroup:
+            avatar: 25
+          maxFavoriteGroups:
+            avatar: 4
   securitySchemes:
     apiKeyQuery:
       name: apiKey
@@ -4203,23 +4291,6 @@ components:
       in: cookie
       description: 2FA device remembrance via Cookie
   responses:
-    MissingCredentials:
-      description: Error response due to missing apiKey or auth cookie.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                $ref: '#/components/schemas/Error'
-            required:
-              - error
-          examples:
-            Missing Credentials Example:
-              value:
-                error:
-                  message: '"Missing Credentials"'
-                  status_code: 401
     InvalidAdminCredentials:
       description: Error response due to missing Administrator credentials.
       content:
@@ -4237,31 +4308,6 @@ components:
                 error:
                   message: '"Invalid Admin Credentials"'
                   status_code: 403
-    APIHealth:
-      description: API's Health
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              ok:
-                type: boolean
-              serverName:
-                type: string
-                minLength: 1
-              buildVersionTag:
-                type: string
-                minLength: 1
-            required:
-              - ok
-              - serverName
-              - buildVersionTag
-          examples:
-            Example Response:
-              value:
-                ok: true
-                serverName: prod-api-green-marsh-dgt
-                buildVersionTag: master-build-2021-06-24-fred-drakeshoot
     AcceptFriendRequestError:
       description: Error response when trying to accept a non-existent friend request.
       content:
@@ -4694,6 +4740,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/PlayerModeration'
+    MissingCredentialsError:
+      description: Error response due to missing apiKey or auth cookie.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Missing Credentials Example:
+              value:
+                error:
+                  message: '"Missing Credentials"'
+                  status_code: 401
     Users400Error:
       description: >-
         Error response when trying to search list of users with an invalid
@@ -4713,6 +4771,31 @@ components:
                 error:
                   message: n＝1000 is much too high․ implement paging you savages․
                   status_code: 400
+    APIHealthResponse:
+      description: API's Health
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ok:
+                type: boolean
+              serverName:
+                type: string
+                minLength: 1
+              buildVersionTag:
+                type: string
+                minLength: 1
+            required:
+              - ok
+              - serverName
+              - buildVersionTag
+          examples:
+            Example Response:
+              value:
+                ok: true
+                serverName: prod-api-green-marsh-dgt
+                buildVersionTag: master-build-2021-06-24-fred-drakeshoot
     CreateWorldNotAllowedYetError:
       description: >-
         Error response when trying create a world without having the neccesary
@@ -4943,6 +5026,62 @@ components:
                     You definitely can't delete a playerModeration you didn't
                     create
                   status_code: 403
+    PermissionListResponse:
+      description: Returns a list of Permission objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Permission'
+          examples:
+            Standard Permissions Inherited By VRC+:
+              value:
+                - id: prms_fe07c8a7-a4ca-4eda-97e5-e241040ef6f8
+                  ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
+                  name: permission-trust-boost
+                - id: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
+                  ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
+                  name: permission-extra-favorites-avatar-groups
+                  data:
+                    maxFavoritesPerGroup:
+                      avatar: 25
+                    maxFavoriteGroups:
+                      avatar: 4
+                - id: prms_ac88a3e0-c236-47c7-9b47-d795551b7520
+                  ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
+                  name: permission-early-adopter-tags
+                  data:
+                    tags:
+                      - system_early_adopter
+                - id: prms_76f33deb-dd5d-46b7-b79d-e1f8f0a9a1e0
+                  ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
+                  name: permission-supporter-tags
+                  data:
+                    tags:
+                      - system_supporter
+                - id: prms_0d9549db-d30a-48f3-a6b8-6741ce5a4283
+                  ownerId: usr_bc012e97-a292-4abc-b4e6-f9edcc8c0d2b
+                  name: permission-invite-photos
+                  data: {}
+                - id: prms_153ac0b7-c2dd-43f9-96e3-c61fd2e85509
+                  ownerId: usr_bc012e97-a292-4abc-b4e6-f9edcc8c0d2b
+                  name: permission-profile-pic-override
+                  data: {}
+                - id: prms_1d9549db-d30a-48f3-a6b8-6741ce5a4283
+                  ownerId: usr_bc012e97-a292-4abc-b4e6-f9edcc8c0d2b
+                  name: permission-user-icons
+                  data: {}
+                - id: prms_dc02c512-4c03-479c-8c6a-d9329c023baf
+                  ownerId: usr_bc012e97-a292-4abc-b4e6-f9edcc8c0d2b
+                  name: permission-user-gallery
+                  data: {}
+    PermissionResponse:
+      description: Returns a single Permission object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Permission'
   examples: {}
   parameters:
     number:
@@ -5167,6 +5306,12 @@ components:
       required: true
       schema:
         type: string
+    permissionId:
+      name: permissionId
+      in: path
+      required: true
+      schema:
+        type: string
 tags:
   - name: authentication
   - name: avatars
@@ -5174,6 +5319,7 @@ tags:
   - name: files
   - name: friends
   - name: notifications
+  - name: permissions
   - name: playermoderation
   - name: system
   - name: users
