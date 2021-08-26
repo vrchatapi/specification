@@ -2669,8 +2669,8 @@ tags:
   - name: files
   - name: friends
   - name: notifications
-  - name: playermoderation
   - name: permissions
+  - name: playermoderation
   - name: system
   - name: users
   - name: worlds

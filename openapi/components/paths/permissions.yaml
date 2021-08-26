@@ -34,7 +34,8 @@ paths:
       - $ref: '#/components/parameters/permissionId'
     get:
       summary: Get Permission
-      tags: []
+      tags:
+        - permissions
       responses:
         '200':
           $ref: '#/components/responses/PermissionResponse'
