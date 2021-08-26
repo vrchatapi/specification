@@ -29,12 +29,51 @@ paths:
           $ref: '#/components/responses/PermissionListResponse'
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/InvalidAdminCredentials.yaml
       operationId: getPermissions
       security:
         - apiKeyCookie: []
           authCookie: []
       x-internal: true
-      description: '**REQUIRES INTERNAL ADMIN CREDENTIALS**. Returns a list of all existing permissions, just like `/users` with empty search would.'
+      description: '**REQUIRES ADMIN CREDENTIALS**. Returns a list of all existing permissions, just like `/users` with empty search would.'
+    post:
+      summary: Create Permission
+      operationId: createPermission
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionResponse'
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/InvalidAdminCredentials.yaml
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ownerId:
+                  $ref: ../schemas/UserID.yaml
+              required:
+                - name
+      description: '**REQUIRES ADMIN CREDENTIALS**. Creates and returns a new Permission. The permission will by default be owned by the sender of the request unless otherwise specified.'
+      tags:
+        - permissions
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - schema:
+            type: string
+          in: query
+          name: ownerId
+          description: 'Owner of the Permission, MUST be valid UserID.'
   '/permissions/{permissionId}':
     parameters:
       - $ref: '#/components/parameters/permissionId'
@@ -52,6 +91,51 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: 'Returns a single permission. This endpoint is pretty useless, as it returns the exact same information as `/auth/permissions`.'
+    put:
+      summary: Update Permission
+      operationId: updatePermission
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionResponse'
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/InvalidAdminCredentials.yaml
+      x-internal: true
+      description: '**REQUIRES ADMIN CREDENTIALS**. Updates the info on a permission.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ownerId:
+                  $ref: ../schemas/UserID.yaml
+        description: ''
+      tags:
+        - permissions
+    delete:
+      summary: Delete Permission
+      operationId: deletePermission
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionResponse'
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/InvalidAdminCredentials.yaml
+      description: '**REQUIRES ADMIN CREDENTIALS**. Deletes a permission.'
+      x-internal: true
+      tags:
+        - permissions
 tags:
   $ref: ../../openapi.yaml#/tags
 components:
