@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: system
+  version: '1.0'
+  description: ''
+paths:
+  /health:
+    get:
+      summary: Check API Health
+      tags:
+        - system
+      operationId: getHealth
+      description: 'Gets the overall health status, the server name, and the current build version tag of the API.'
+      security: []
+      responses:
+        '200':
+          $ref: '../responses/system/APIHealthResponse.yaml'
+  /config:
+    get:
+      summary: Fetch API Config
+      tags:
+        - system
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/Config.yaml
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
+      operationId: getConfig
+      description: |-
+        API config contains configuration that the clients needs to work properly.
+
+        Currently the most important value here is `clientApiKey` which is used for all other API endpoints.
+      security: []
+  /visits:
+    get:
+      summary: Current Online Users
+      tags:
+        - system
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+                description: Number of online users
+                example: 12345
+                minimum: 0
+                readOnly: true
+      operationId: getCurrentOnlineUsers
+      security: []
+      description: |-
+        Returns in plain format the number of currently online users.
+
+        **NOTE:** The response type is not of JSON, but is an integer in plain ASCII format.
+  /time:
+    get:
+      summary: Current System Time
+      tags:
+        - system
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: date-time
+                example: '2021-08-20T12:38:42+00:00'
+                description: Does not return millisecond precision. Always returns time in UTC.
+      operationId: getSystemTime
+      description: |-
+        Returns in plain format the current time of the API server.
+
+        **NOTE:** The response type is not of JSON, but is a string in plain ASCII format.
+      security: []
+tags:
+  $ref: ../../openapi.yaml#/tags

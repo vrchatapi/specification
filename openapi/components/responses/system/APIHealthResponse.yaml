@@ -1,0 +1,24 @@
+description: API's Health
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        serverName:
+          type: string
+          minLength: 1
+        buildVersionTag:
+          type: string
+          minLength: 1
+      required:
+        - ok
+        - serverName
+        - buildVersionTag
+    examples:
+      Example Response:
+        value:
+          ok: true
+          serverName: prod-api-green-marsh-dgt
+          buildVersionTag: master-build-2021-06-24-fred-drakeshoot

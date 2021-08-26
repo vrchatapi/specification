@@ -384,82 +384,13 @@ paths:
         **Has been locked down and now always respond with "Invalid Admin Credentials".**
       deprecated: true
   /health:
-    get:
-      summary: Check API Health
-      tags:
-        - system
-      operationId: getHealth
-      description: 'Gets the overall health status, the server name, and the current build version tag of the API.'
-      security: []
-      responses:
-        '200':
-          $ref: '#/components/responses/APIHealth'
+    $ref: ./components/paths/system.yaml#/paths/~1health
   /config:
-    get:
-      summary: Fetch API Config
-      tags:
-        - system
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ./components/schemas/Config.yaml
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-                example: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
-      operationId: getConfig
-      description: |-
-        API config contains configuration that the clients needs to work properly.
-
-        Currently the most important value here is `clientApiKey` which is used for all other API endpoints.
-      security: []
+    $ref: ./components/paths/system.yaml#/paths/~1config
   /visits:
-    get:
-      summary: Current Online Users
-      tags:
-        - system
-      responses:
-        '200':
-          description: OK
-          content:
-            text/plain:
-              schema:
-                type: integer
-                description: Number of online users
-                example: 12345
-                minimum: 0
-                readOnly: true
-      operationId: getCurrentOnlineUsers
-      security: []
-      description: |-
-        Returns in plain format the number of currently online users.
-
-        **NOTE:** The response type is not of JSON, but is an integer in plain ASCII format.
+    $ref: ./components/paths/system.yaml#/paths/~1visits
   /time:
-    get:
-      summary: Current System Time
-      tags:
-        - system
-      responses:
-        '200':
-          description: OK
-          content:
-            text/plain:
-              schema:
-                type: string
-                format: date-time
-                example: '2021-08-20T12:38:42+00:00'
-                description: Does not return millisecond precision. Always returns time in UTC.
-      operationId: getSystemTime
-      description: |-
-        Returns in plain format the current time of the API server.
-
-        **NOTE:** The response type is not of JSON, but is a string in plain ASCII format.
-      security: []
+    $ref: ./components/paths/system.yaml#/paths/~1time
   /auth/user/friends:
     get:
       summary: List Friends
@@ -2013,31 +1944,6 @@ components:
                 error:
                   message: '"Invalid Admin Credentials"'
                   status_code: 403
-    APIHealth:
-      description: API's Health
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              ok:
-                type: boolean
-              serverName:
-                type: string
-                minLength: 1
-              buildVersionTag:
-                type: string
-                minLength: 1
-            required:
-              - ok
-              - serverName
-              - buildVersionTag
-          examples:
-            Example Response:
-              value:
-                ok: true
-                serverName: prod-api-green-marsh-dgt
-                buildVersionTag: master-build-2021-06-24-fred-drakeshoot
     AcceptFriendRequestError:
       description: Error response when trying to accept a non-existent friend request.
       content:
