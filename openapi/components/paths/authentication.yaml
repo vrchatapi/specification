@@ -1,0 +1,225 @@
+openapi: 3.0.3
+info:
+  title: authentication
+  version: '1.0'
+  description: A
+paths:
+  /auth:
+    get:
+      summary: Verify Auth Token
+      tags:
+        - authentication
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  token:
+                    type: string
+                    minLength: 1
+                required:
+                  - ok
+                  - token
+          headers: {}
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: verifyAuthToken
+      parameters: []
+      description: Verify whether the currently provided Auth Token is valid.
+      security:
+        - authCookie: []
+  /logout:
+    put:
+      summary: Logout
+      operationId: logout
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/Success.yaml
+              examples:
+                Logout Success:
+                  value:
+                    success:
+                      message: Ok!
+                      status_code: 200
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                default: 'auth=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
+              description: Clears the `auth` cookie.
+            '\0Set-Cookie':
+              schema:
+                type: string
+                default: 'age=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
+              description: Clears the `age` cookie.
+            '\0\0Set-Cookie':
+              schema:
+                type: string
+                default: 'tos=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
+              description: Clears the `tos` cookie.
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: Invalidates the login session.
+      security:
+        - authCookie: []
+      tags:
+        - authentication
+  /auth/user:
+    get:
+      summary: Login and/or Get Current User Info
+      tags:
+        - authentication
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/CurrentUser.yaml
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: 'auth=authcookie_00000000-0000-0000-0000-000000000000; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
+              description: Authenticating returns an `auth` cookie.
+            '\0Set-Cookie':
+              schema:
+                type: string
+                default: 'apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/'
+              description: Authenticating also sets the `apiKey` if not already set.
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getCurrentUser
+      description: |-
+        Login and/or Get user data from your VRChat account.
+
+        If `Authorization` header is present then a new login session will be generated, and a new `auth` cookie is returned.
+
+        **WARNING: Session Limit:** Each authentication with login credentials counts as a separate session, out of which you have a limited amount. Make sure to save and reuse the `auth` cookie whenever you can, and avoid sending the Authorization header unless strictly neccesary. While the exact number of simultaneous open sessions is secret, expect to **very fast** run into the rate-limit and be temporarily blocked from making new sessions until the old ones expire.
+      parameters: []
+      security:
+        - authHeader: []
+        - authHeader: []
+          twoFactorAuthCookie: []
+        - authCookie: []
+  /auth/twofactorauth/totp/verify:
+    post:
+      summary: Verify 2FA code
+      operationId: verify2FA
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verified:
+                    type: boolean
+                required:
+                  - verified
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: 'twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
+              description: 'Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.'
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+              required:
+                - code
+            examples: {}
+      description: Finishes the login sequence with a normal 2FA-generated code for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
+  /auth/twofactorauth/otp/verify:
+    post:
+      summary: Verify 2FA code with Recovery code
+      operationId: verifyRecoveryCode
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verified:
+                    type: boolean
+                required:
+                  - verified
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: 'twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
+              description: 'Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.'
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+              required:
+                - code
+            examples: {}
+      description: Finishes the login sequence with an OTP (One Time Password) recovery code for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+  '/user/{userId}/delete':
+    parameters:
+      - $ref: '../../openapi.yaml#/components/parameters/userId'
+    put:
+      summary: Delete User
+      operationId: deleteUser
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/CurrentUser.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - authentication
+      description: |-
+        Deletes the account with given ID. Normal users only have permission to delete their own account. Account deletion is 14 days from this request, and will be cancelled if you do an authenticated request with the account afterwards.
+
+        **VRC+ NOTE:** Despite the 14-days cooldown, any VRC+ subscription will be cancelled **immediately**.
+
+        **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes

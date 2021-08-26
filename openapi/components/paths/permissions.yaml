@@ -23,8 +23,7 @@ paths:
   /permissions:
     get:
       summary: Get Permissions
-      tags:
-        - permissions
+      tags: []
       responses:
         '200':
           $ref: '#/components/responses/PermissionListResponse'
@@ -140,6 +139,8 @@ paths:
 tags:
   $ref: ../../openapi.yaml#/tags
 components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes
   responses:
     PermissionListResponse:
       description: Returns a list of Permission objects.
