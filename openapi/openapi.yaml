@@ -25,7 +25,7 @@ paths:
   /auth/twofactorauth/otp/verify:
     $ref: './components/paths/authentication.yaml#/paths/~1auth~1twofactorauth~1otp~1verify'
   '/user/{userId}/delete':
-    $ref: 1
+    $ref: './components/paths/authentication.yaml#/paths/~1user~1{userId}~1delete'
   /users:
     get:
       summary: Search All Users
