@@ -3,8 +3,11 @@ formats:
 extends:
   - 'spectral:oas'
 rules:
-  contact-properties: warn
-  info-license: warn
-  license-url: warn
   oas3-parameter-description: info
   tag-description: hint
+
+  # Rules for sub schema
+  info-license: hint
+  license-url: hint
+  oas3-api-servers: hint
+  info-contact: hint
