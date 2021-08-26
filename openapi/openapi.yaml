@@ -14,36 +14,7 @@ info:
 servers:
   - url: 'https://api.vrchat.cloud/api/1'
 paths:
-  /auth:
-    get:
-      summary: Verify Auth Token
-      tags:
-        - authentication
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  token:
-                    type: string
-                    minLength: 1
-                required:
-                  - ok
-                  - token
-          headers: {}
-        '401':
-          $ref: '#/components/responses/MissingCredentials'
-      operationId: verifyAuthToken
-      parameters: []
-      description: Verify whether the currently provided Auth Token is valid.
-      security:
-        - apiKeyCookie: []
-          authCookie: []
+  /auth: null
   /logout:
     put:
       summary: Logout
@@ -62,7 +33,7 @@ paths:
                       message: Ok!
                       status_code: 200
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       description: Invalidates the auth cookie.
       security:
         - apiKeyCookie: []
@@ -88,7 +59,7 @@ paths:
                 example: 'auth=authcookie_00000000-0000-0000-0000-000000000000; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
               description: Authenticating returns an `auth` cookie.
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getCurrentUser
       description: |-
         Login and/or Get user data from your VRChat account.
@@ -126,7 +97,7 @@ paths:
                 example: 'twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
               description: 'Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       requestBody:
         content:
           application/json:
@@ -168,7 +139,7 @@ paths:
                 example: 'twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
               description: 'Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       requestBody:
         content:
           application/json:
@@ -199,7 +170,7 @@ paths:
               schema:
                 $ref: ./components/schemas/CurrentUser.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       tags:
         - authentication
       description: |-
@@ -228,7 +199,7 @@ paths:
         '400':
           $ref: ./components/responses/Users400Error.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: searchUsers
       security:
         - apiKeyCookie: []
@@ -268,7 +239,7 @@ paths:
               schema:
                 $ref: ./components/schemas/User.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getUserByName
       security:
         - apiKeyCookie: []
@@ -289,7 +260,7 @@ paths:
               schema:
                 $ref: ./components/schemas/User.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getUser
       security:
         - apiKeyCookie: []
@@ -406,7 +377,7 @@ paths:
                 items:
                   $ref: ./components/schemas/LimitedUser.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getFriends
       security:
         - apiKeyCookie: []
@@ -427,7 +398,7 @@ paths:
         '200':
           $ref: '#/components/responses/FriendStatus'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getFriendStatus
       security:
         - apiKeyCookie: []
@@ -449,7 +420,7 @@ paths:
         '200':
           $ref: '#/components/responses/Notification'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: '#/components/responses/UserDoesntExistError'
     delete:
@@ -465,7 +436,7 @@ paths:
         '200':
           $ref: '#/components/responses/DeleteFriendRequestSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: '#/components/responses/DeleteFriendRequestError'
   '/auth/user/friends/{userId}':
@@ -480,7 +451,7 @@ paths:
         '400':
           $ref: '#/components/responses/NotFriendsError'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       description: Unfriend a user by ID.
       security:
         - apiKeyCookie: []
@@ -496,7 +467,7 @@ paths:
         '200':
           $ref: '#/components/responses/NotificationList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getNotifications
       security:
         - apiKeyCookie: []
@@ -542,7 +513,7 @@ paths:
         '200':
           $ref: '#/components/responses/Notification'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -563,7 +534,7 @@ paths:
         '200':
           $ref: '#/components/responses/Notification'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -584,7 +555,7 @@ paths:
         '200':
           $ref: '#/components/responses/FriendSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: '#/components/responses/AcceptFriendRequestError'
       security:
@@ -601,7 +572,7 @@ paths:
         '200':
           $ref: '#/components/responses/ClearNotificationsSuccess'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -919,7 +890,7 @@ paths:
         '200':
           $ref: '#/components/responses/LimitedWorldList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: searchWorlds
       security:
         - apiKeyCookie: []
@@ -956,7 +927,7 @@ paths:
         '400':
           $ref: ./components/responses/CreateWorldNotAllowedYetError.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       requestBody:
         content:
           application/json:
@@ -1023,7 +994,7 @@ paths:
         '200':
           $ref: '#/components/responses/LimitedWorldList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getActiveWorlds
       security:
         - apiKeyCookie: []
@@ -1051,7 +1022,7 @@ paths:
         '200':
           $ref: '#/components/responses/LimitedWorldList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '403':
           $ref: ./components/responses/SeeOtherUserRecentsError.yaml
       operationId: getRecentWorlds
@@ -1082,7 +1053,7 @@ paths:
         '200':
           $ref: '#/components/responses/LimitedWorldList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '403':
           $ref: ./components/responses/SeeOtherUserFavoritesError.yaml
       operationId: getFavoritedWorlds
@@ -1128,7 +1099,7 @@ paths:
         '200':
           $ref: '#/components/responses/World'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
       requestBody:
@@ -1193,7 +1164,7 @@ paths:
         '200':
           description: OK
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
       description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
@@ -1216,7 +1187,7 @@ paths:
         '200':
           $ref: '#/components/responses/Instance'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
   '/worlds/{worldId}/metadata':
     parameters:
       - $ref: '#/components/parameters/worldId'
@@ -1279,7 +1250,7 @@ paths:
                   - canPubilsh
                 readOnly: true
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
     put:
@@ -1292,7 +1263,7 @@ paths:
         '200':
           description: TODO
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
       description: Publish a world. You can only publish one world per week.
@@ -1308,7 +1279,7 @@ paths:
         '200':
           description: OK
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/WorldNotFoundError.yaml
       description: Unpublish a world.
@@ -1323,7 +1294,7 @@ paths:
         '200':
           $ref: '#/components/responses/FavoriteList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getFavorites
       security:
         - apiKeyCookie: []
@@ -1402,7 +1373,7 @@ paths:
         '200':
           $ref: '#/components/responses/Favorite'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/FavoriteNotFoundError.yaml
       operationId: getFavorite
@@ -1423,7 +1394,7 @@ paths:
         '200':
           $ref: ./components/responses/FavoriteRemovedSuccess.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/FavoriteNotFoundError.yaml
       description: Remove a favorite from your favorites list.
@@ -1438,7 +1409,7 @@ paths:
         '200':
           $ref: '#/components/responses/FavoriteGroupList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getFavoriteGroups
       security:
         - apiKeyCookie: []
@@ -1517,7 +1488,7 @@ paths:
         '200':
           description: OK
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getFavoritedAvatars
       security:
         - apiKeyCookie: []
@@ -1546,7 +1517,7 @@ paths:
         '200':
           $ref: '#/components/responses/AvatarList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: searchAvatars
       security:
         - apiKeyCookie: []
@@ -1637,7 +1608,7 @@ paths:
         '200':
           $ref: '#/components/responses/Avatar'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/AvatarNotFoundError.yaml
       operationId: getAvatar
@@ -1655,7 +1626,7 @@ paths:
         '200':
           $ref: '#/components/responses/Avatar'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/AvatarNotFoundError.yaml
       description: Update information about a specific avatar.
@@ -1707,7 +1678,7 @@ paths:
         '200':
           $ref: '#/components/responses/Avatar'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/AvatarNotFoundError.yaml
       tags:
@@ -1724,7 +1695,7 @@ paths:
         '200':
           $ref: '#/components/responses/CurrentUser'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/AvatarNotFoundError.yaml
       operationId: selectAvatar
@@ -1741,7 +1712,7 @@ paths:
         '200':
           $ref: '#/components/responses/PlayerModerationList'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       operationId: getPlayerModerations
       security:
         - apiKeyCookie: []
@@ -1777,7 +1748,7 @@ paths:
         '200':
           $ref: '#/components/responses/PlayerModeration'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       requestBody:
         content:
           application/json:
@@ -1806,7 +1777,7 @@ paths:
         '200':
           $ref: ./components/responses/OkSuccess.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       description: ⚠️ **This will delete every single player moderation you've ever made.**
       tags:
         - playermoderation
@@ -1834,7 +1805,7 @@ paths:
         '200':
           $ref: ./components/responses/PlayerModerationUnmoderatedSuccess.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
       tags:
         - playermoderation
   '/auth/user/playermoderations/{playerModerationId}':
@@ -1846,7 +1817,7 @@ paths:
         '200':
           $ref: '#/components/responses/PlayerModeration'
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '404':
           $ref: ./components/responses/PlayerModerationNotFoundError.yaml
       operationId: getPlayerModeration
@@ -1877,11 +1848,11 @@ paths:
         in: path
         required: true
   /auth/permissions:
-      $ref: ./components/paths/permissions.yaml#/paths/~1auth~1permissions
+    $ref: ./components/paths/permissions.yaml#/paths/~1auth~1permissions
   /permissions:
-      $ref: ./components/paths/permissions.yaml#/paths/~1permissions
+    $ref: ./components/paths/permissions.yaml#/paths/~1permissions
   '/permissions/{permissionId}':
-      $ref: ./components/paths/permissions.yaml#/paths/~1permissions~1{permissionId}
+    $ref: './components/paths/permissions.yaml#/paths/~1permissions~1{permissionId}'
 components:
   schemas: {}
   securitySchemes:
@@ -1910,23 +1881,6 @@ components:
       in: cookie
       description: 2FA device remembrance via Cookie
   responses:
-    MissingCredentials:
-      description: Error response due to missing apiKey or auth cookie.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                $ref: ./components/schemas/Error.yaml
-            required:
-              - error
-          examples:
-            Missing Credentials Example:
-              value:
-                error:
-                  message: '"Missing Credentials"'
-                  status_code: 401
     InvalidAdminCredentials:
       description: Error response due to missing Administrator credentials.
       content:

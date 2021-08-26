@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: authentication
+  version: '1.0'
+  description: ''
+paths:
+  /auth:
+    get:
+      summary: Verify Auth Token
+      tags:
+        - authentication
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  token:
+                    type: string
+                    minLength: 1
+                required:
+                  - ok
+                  - token
+          headers: {}
+        '401':
+          $ref: '../responses/MissingCredentialsError.yaml'
+      operationId: verifyAuthToken
+      parameters: []
+      description: Verify whether the currently provided Auth Token is valid.
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+tags:
+  $ref: ../../openapi.yaml#/tags
