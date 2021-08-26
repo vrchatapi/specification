@@ -23,7 +23,8 @@ paths:
   /permissions:
     get:
       summary: Get Permissions
-      tags: []
+      tags:
+        - permissions
       responses:
         '200':
           $ref: '#/components/responses/PermissionListResponse'
