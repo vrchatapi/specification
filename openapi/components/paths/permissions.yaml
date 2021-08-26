@@ -8,6 +8,9 @@ paths:
     get:
       summary: Get Assigned Permission
       operationId: getAssignedPermissions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           $ref: '#/components/responses/PermissionListResponse'
@@ -27,6 +30,9 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getPermissions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       x-internal: true
       description: '**REQUIRES INTERNAL ADMIN CREDENTIALS**. Returns a list of all existing permissions, just like `/users` with empty search would.'
   '/permissions/{permissionId}':
@@ -42,6 +48,9 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getPermission
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: 'Returns a single permission. This endpoint is pretty useless, as it returns the exact same information as `/auth/permissions`.'
 tags:
   $ref: ../../openapi.yaml#/tags
