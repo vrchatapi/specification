@@ -1,0 +1,11 @@
+{
+  "name": "vrchat-openapi-test",
+  "version": "1.0.0",
+  "description": "VRChat API OpenAPI Specification",
+  "main": "index.js",
+  "scripts": {
+    "bundle": "echo ok"
+  },
+  "author": "",
+  "license": "MIT"
+}

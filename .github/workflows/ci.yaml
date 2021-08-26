@@ -43,7 +43,7 @@ jobs:
           path: dist
 
   pages:
-    if: ${{ startsWith(github.ref, 'refs/tags/v1') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
     needs: bundle
     runs-on: ubuntu-latest
     name: Upload OpenAPI specification to GitHub Pages
@@ -58,6 +58,9 @@ jobs:
       - name: Disable Jekyll for Github Pages
         run: sudo touch dist/.nojekyll; sudo touch dist/index.html
 
+      - name: Prevent Cloudflare Pages (used for dev preview) from breaking
+        run: mkdir dist/dist; cp dist/openapi.yaml dist/dist/openapi.yaml; cp .github/files/empty.json dist/package.json
+
       - name: Deploy Bundle to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
@@ -65,7 +68,7 @@ jobs:
           folder: dist
 
   release:
-    if: ${{ startsWith(github.ref, 'refs/tags/v1') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
     needs: bundle
     runs-on: ubuntu-latest
     name: Release Bundle as new Version
