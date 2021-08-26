@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: permissions
+  version: '1.0'
+  description: 'Permissions are a way to individually grant specific access to a user, often through a license such as VRC+ subscription.'
+paths:
+  /auth/permissions:
+    get:
+      summary: Get Assigned Permission
+      operationId: getAssignedPermissions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionListResponse'
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - permissions
+      description: Returns a list of all permissions currently granted by the user. Permissions are assigned e.g. by subscribing to VRC+.
+    parameters: []
+  /permissions:
+    get:
+      summary: Get Permissions
+      tags: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionListResponse'
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getPermissions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      x-internal: true
+      description: '**REQUIRES INTERNAL ADMIN CREDENTIALS**. Returns a list of all existing permissions, just like `/users` with empty search would.'
+  '/permissions/{permissionId}':
+    parameters:
+      - $ref: '#/components/parameters/permissionId'
+    get:
+      summary: Get Permission
+      tags:
+        - permissions
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionResponse'
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getPermission
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: 'Returns a single permission. This endpoint is pretty useless, as it returns the exact same information as `/auth/permissions`.'
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  responses:
+    PermissionListResponse:
+      description: Returns a list of Permission objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../schemas/Permission.yaml
+          examples:
+            Standard Permissions Inherited By VRC+:
+              value:
+                - id: prms_fe07c8a7-a4ca-4eda-97e5-e241040ef6f8
+                  ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
+                  name: permission-trust-boost
+                - id: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
+                  ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
+                  name: permission-extra-favorites-avatar-groups
+                  data:
+                    maxFavoritesPerGroup:
+                      avatar: 25
+                    maxFavoriteGroups:
+                      avatar: 4
+                - id: prms_ac88a3e0-c236-47c7-9b47-d795551b7520
+                  ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
+                  name: permission-early-adopter-tags
+                  data:
+                    tags:
+                      - system_early_adopter
+                - id: prms_76f33deb-dd5d-46b7-b79d-e1f8f0a9a1e0
+                  ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
+                  name: permission-supporter-tags
+                  data:
+                    tags:
+                      - system_supporter
+                - id: prms_0d9549db-d30a-48f3-a6b8-6741ce5a4283
+                  ownerId: usr_bc012e97-a292-4abc-b4e6-f9edcc8c0d2b
+                  name: permission-invite-photos
+                  data: {}
+                - id: prms_153ac0b7-c2dd-43f9-96e3-c61fd2e85509
+                  ownerId: usr_bc012e97-a292-4abc-b4e6-f9edcc8c0d2b
+                  name: permission-profile-pic-override
+                  data: {}
+                - id: prms_1d9549db-d30a-48f3-a6b8-6741ce5a4283
+                  ownerId: usr_bc012e97-a292-4abc-b4e6-f9edcc8c0d2b
+                  name: permission-user-icons
+                  data: {}
+                - id: prms_dc02c512-4c03-479c-8c6a-d9329c023baf
+                  ownerId: usr_bc012e97-a292-4abc-b4e6-f9edcc8c0d2b
+                  name: permission-user-gallery
+                  data: {}
+    PermissionResponse:
+      description: Returns a single Permission object.
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/Permission.yaml
+  parameters:
+    permissionId:
+      name: permissionId
+      in: path
+      required: true
+      schema:
+        type: string

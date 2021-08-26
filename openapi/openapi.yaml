@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: VRChat API Documentation
   version: 1.0.2
@@ -1933,7 +1933,7 @@ paths:
         '200':
           $ref: ./components/responses/PlayerModerationRemovedSuccess.yaml
         '401':
-          $ref: '#/components/responses/MissingCredentials'
+          $ref: ./components/responses/MissingCredentialsError.yaml
         '403':
           $ref: ./components/responses/PlayerModerationDeleteOthersError.yaml
       description: Deletes a specific player moderation based on it's `pmod_` ID. The website uses `unmoderateUser` instead. You can delete the same player moderation multiple times successfully.
@@ -1945,6 +1945,12 @@ paths:
         name: playerModerationId
         in: path
         required: true
+  /auth/permissions:
+      $ref: ./components/paths/permissions.yaml#/paths/~1auth~1permissions
+  /permissions:
+      $ref: ./components/paths/permissions.yaml#/paths/~1permissions
+  '/permissions/{permissionId}':
+      $ref: ./components/paths/permissions.yaml#/paths/~1permissions~1{permissionId}
 components:
   schemas: {}
   securitySchemes:
@@ -2663,6 +2669,7 @@ tags:
   - name: files
   - name: friends
   - name: notifications
+  - name: permissions
   - name: playermoderation
   - name: system
   - name: users
