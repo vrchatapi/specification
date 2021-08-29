@@ -4,4 +4,3 @@ enum:
   - world
   - friend
   - avatar
-readOnly: true
