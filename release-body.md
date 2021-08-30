@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.1.1
+
+* Fixed breaking-bug where `type` was missing from `addFavorite`, causing the request to fail.
+
 ## 1.1.0
 
 * Added Permissions API endpoints
