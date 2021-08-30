@@ -23,7 +23,7 @@ properties:
     type: array
     description: ' '
     items:
-      type: string
+      $ref: ./PastDisplayName.yaml
   hasEmail:
     type: boolean
   hasPendingEmail:
@@ -49,7 +49,7 @@ properties:
     items:
       $ref: ./UserID.yaml
   friendGroupNames:
-    description: 'Always empty array.'
+    description: Always empty array.
     deprecated: true
     type: array
     items:

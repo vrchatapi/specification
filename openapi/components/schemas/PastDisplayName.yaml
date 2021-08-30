@@ -1,0 +1,12 @@
+title: PastDisplayName
+type: object
+properties:
+  displayName:
+    type: string
+    minLength: 1
+  updated_at:
+    type: string
+    format: date-time
+required:
+  - displayName
+  - updated_at
