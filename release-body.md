@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.1.2
+
+* Fix: `pastDisplayNames` should be array of objects, not array of strings.
+
 ## 1.1.1
 
 * Fixed breaking-bug where `type` was missing from `addFavorite`, causing the request to fail.
