@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.1.1
+  version: 1.1.2
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -2160,6 +2160,19 @@ components:
       type: string
       example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       readOnly: true
+    PastDisplayName:
+      title: PastDisplayName
+      type: object
+      properties:
+        displayName:
+          type: string
+          minLength: 1
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - displayName
+        - updated_at
     AvatarID:
       type: string
       title: AvatarID
@@ -2262,7 +2275,7 @@ components:
           type: array
           description: ' '
           items:
-            type: string
+            $ref: '#/components/schemas/PastDisplayName'
         hasEmail:
           type: boolean
         hasPendingEmail:
