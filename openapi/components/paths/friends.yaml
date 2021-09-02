@@ -80,7 +80,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/friends/DeleteFriendError.yaml
+          $ref: ../responses/friends/DeleteFriendRequestError.yaml
   '/auth/user/friends/{userId}':
     parameters:
       - $ref: ../../openapi.yaml#/components/parameters/userId

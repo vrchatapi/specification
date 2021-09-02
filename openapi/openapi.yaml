@@ -51,126 +51,15 @@ paths:
   '/auth/user/friends/{userId}':
     $ref: ./components/paths/friends.yaml#/paths/~1auth~1user~1friends~1{userId}
   /auth/user/notifications:
-    get:
-      summary: List Notifications
-      tags:
-        - notifications
-      responses:
-        '200':
-          $ref: '#/components/responses/NotificationList'
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-      operationId: getNotifications
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      description: Retrieve all of the current user's notifications.
-      parameters:
-        - schema:
-            type: string
-            example: all
-          in: query
-          name: type
-          description: Only send notifications of this type (can use `all` for all).
-        - schema:
-            type: boolean
-          in: query
-          name: sent
-          description: Return notifications sent by the user. Must be false or omitted.
-          deprecated: true
-        - schema:
-            type: boolean
-          in: query
-          name: hidden
-          description: Whether to return hidden or non-hidden notifications. True only allowed on type `friendRequest`.
-        - schema:
-            type: string
-            example: five_minutes_ago
-          in: query
-          name: after
-          description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.
-        - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/offset'
+    $ref: ./components/paths/notifications.yaml#/paths/~1auth~1user~1notifications
   '/auth/user/notifications/{notificationId}/see':
-    parameters:
-      - schema:
-          type: string
-        name: notificationId
-        in: path
-        required: true
-    put:
-      summary: Mark As Read
-      operationId: markNotificationAsRead
-      responses:
-        '200':
-          $ref: '#/components/responses/Notification'
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      description: Mark a notification as seen.
-      tags:
-        - notifications
+    $ref: ./components/paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1see
   '/auth/user/notifications/{notificationId}/hide':
-    parameters:
-      - schema:
-          type: string
-        name: notificationId
-        in: path
-        required: true
-    put:
-      summary: Delete Notification
-      operationId: deleteNotification
-      responses:
-        '200':
-          $ref: '#/components/responses/Notification'
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      description: Delete a notification.
-      tags:
-        - notifications
+    $ref: ./components/paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1hide
   '/auth/user/notifications/{notificationId}/accept':
-    parameters:
-      - schema:
-          type: string
-        name: notificationId
-        in: path
-        required: true
-    put:
-      summary: Accept Friend Request
-      operationId: acceptFriendRequest
-      responses:
-        '200':
-          $ref: '#/components/responses/FriendSuccess'
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-        '404':
-          $ref: '#/components/responses/AcceptFriendRequestError'
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      description: Accept a friend request by notification `frq_` ID. Friend requests can be found using the NotificationsAPI `getNotifications` by filtering of type `friendRequest`.
-      tags:
-        - notifications
+    $ref: ./components/paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1accept
   /auth/user/notifications/clear:
-    put:
-      summary: Clear All Notifications
-      operationId: clearNotifications
-      responses:
-        '200':
-          $ref: '#/components/responses/ClearNotificationsSuccess'
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      description: Clear **all** notifications.
-      tags:
-        - notifications
+    $ref: ./components/paths/notifications.yaml#/paths/~1auth~1user~1notifications~1clear
   /files:
     get:
       summary: List Files
@@ -1473,84 +1362,6 @@ components:
       in: cookie
       description: 2FA device remembrance via Cookie
   responses:
-    InvalidAdminCredentials:
-      description: Error response due to missing Administrator credentials.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                $ref: ./components/schemas/Error.yaml
-            required:
-              - error
-          examples:
-            Invalid Admin Credentials Example:
-              value:
-                error:
-                  message: '"Invalid Admin Credentials"'
-                  status_code: 403
-    AcceptFriendRequestError:
-      description: Error response when trying to accept a non-existent friend request.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Error.yaml
-          examples:
-            404 Accept Friend Request:
-              value:
-                error:
-                  message: that friend request could not be found
-                  status_code: 404
-    ClearNotificationsSuccess:
-      description: Successful response after clearing all notifications.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Success.yaml
-          examples:
-            Unfriend Success:
-              value:
-                success:
-                  message: Ok
-                  status_code: 200
-    FriendSuccess:
-      description: Successful response after friending a user.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Success.yaml
-          examples:
-            Unfriend Success:
-              value:
-                success:
-                  message: Ok
-                  status_code: 200
-    Notification:
-      description: Returns a single Notifcation object.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Notification.yaml
-          examples:
-            Example Friend Request Response:
-              value:
-                id: frq_00000000-0000-0000-0000-000000000000
-                senderUserId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-                senderUsername: tupper
-                type: friendRequest
-                message: ''
-                details: '{}'
-                seen: false
-                created_at: '2021-01-01T00:00:00.000Z'
-    NotificationList:
-      description: Returns a list of Notifcation objects.
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: ./components/schemas/Notification.yaml
     FileList:
       description: Returns a list of File objects.
       content:
@@ -1809,7 +1620,6 @@ components:
         application/json:
           schema:
             $ref: ./components/schemas/PlayerModeration.yaml
-  examples: {}
   parameters:
     number:
       name: 'n'
