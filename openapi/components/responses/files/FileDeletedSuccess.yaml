@@ -1,0 +1,11 @@
+description: Successful response after deleting a File.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Success.yaml
+    examples:
+      File Deleted Success:
+        value:
+          success:
+            message: File deleted
+            status_code: 200

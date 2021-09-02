@@ -136,7 +136,7 @@ paths:
         '200':
           $ref: ./components/responses/files/FileResponse.yaml
         '404':
-          $ref: '#/components/responses/FileNotFoundError'
+          $ref: ./components/responses/files/FileNotFoundError.yaml
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -146,7 +146,7 @@ paths:
       operationId: deleteFile
       responses:
         '200':
-          $ref: '#/components/responses/FileDeletedSuccess'
+          $ref: ./components/responses/files/FileDeletedSuccess.yaml
         '404':
           $ref: ./components/responses/files/FileDeletedError.yaml
       tags:
@@ -215,9 +215,9 @@ paths:
         '200':
           $ref: ./components/responses/files/FileResponse.yaml
         '400':
-          $ref: '#/components/responses/FileVersionDeleteInitialError'
+          $ref: ./components/responses/files/FileVersionDeleteInitialError.yaml
         '500':
-          $ref: '#/components/responses/FileVersionDeleteMiddleError'
+          $ref: ./components/responses/files/FileVersionDeleteMiddleError.yaml
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -1362,54 +1362,6 @@ components:
       in: cookie
       description: 2FA device remembrance via Cookie
   responses:
-    FileDeletedSuccess:
-      description: Successful response after deleting a File.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Success.yaml
-          examples:
-            File Deleted Success:
-              value:
-                success:
-                  message: File deleted
-                  status_code: 200
-    FileNotFoundError:
-      description: Error response when trying to show information about a non-existent file.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Error.yaml
-          examples:
-            404 File Not Found:
-              value:
-                error:
-                  message: File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found
-                  status_code: 404
-    FileVersionDeleteInitialError:
-      description: Error response when trying to delete the initial version of a file. Delete the main File object instead.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Error.yaml
-          examples:
-            400 Delete Initial File Version:
-              value:
-                error:
-                  message: Cannot delete the initial version of the file‚ just delete the entire file record․
-                  status_code: 400
-    FileVersionDeleteMiddleError:
-      description: Error response when trying to delete any version of a file that is not hte last one.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Error.yaml
-          examples:
-            409/500 Delete Non-Last File Version:
-              value:
-                error:
-                  message: 409 Cannot delete against anything but the latest version of this file˸ 1‚ 11
-                  status_code: 500
     RawFile:
       description: Raw file
     FileVersionUploadInfo:
