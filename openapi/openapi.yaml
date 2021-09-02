@@ -65,7 +65,7 @@ paths:
       summary: List Files
       responses:
         '200':
-          $ref: '#/components/responses/FileList'
+          $ref: ./components/responses/files/FileListResponse.yaml
       operationId: getFiles
       security:
         - apiKeyCookie: []
@@ -95,7 +95,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: ./components/responses/files/FileResponse.yaml
       operationId: createFile
       requestBody:
         content:
@@ -134,7 +134,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: ./components/responses/files/FileResponse.yaml
         '404':
           $ref: '#/components/responses/FileNotFoundError'
       security:
@@ -148,7 +148,7 @@ paths:
         '200':
           $ref: '#/components/responses/FileDeletedSuccess'
         '404':
-          $ref: '#/components/responses/FileDeletedError'
+          $ref: ./components/responses/files/FileDeletedError.yaml
       tags:
         - files
       security:
@@ -160,7 +160,7 @@ paths:
       operationId: createFileVersion
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: ./components/responses/files/FileResponse.yaml
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -213,7 +213,7 @@ paths:
       operationId: deleteFileVersion
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: ./components/responses/files/FileResponse.yaml
         '400':
           $ref: '#/components/responses/FileVersionDeleteInitialError'
         '500':
@@ -308,7 +308,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: ./components/responses/files/FileResponse.yaml
       operationId: finishFileDataUpload
       requestBody:
         content:
@@ -1362,60 +1362,6 @@ components:
       in: cookie
       description: 2FA device remembrance via Cookie
   responses:
-    FileList:
-      description: Returns a list of File objects.
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: ./components/schemas/File.yaml
-    File:
-      description: Returns a single File object.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/File.yaml
-          examples:
-            Example Avatar File:
-              value:
-                id: file_00000000-0000-0000-0000-000000000000
-                name: Avatar - Test Avatar - Unity package - 2017․4․28f1_3_standalonewindows_Release
-                ownerId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-                mimeType: application/gzip
-                extension: .unitypackage
-                tags: []
-                versions:
-                  - version: 0
-                    status: complete
-                    created_at: '2019-08-15T11:04:37.910Z'
-                  - version: 1
-                    status: complete
-                    created_at: '2019-08-15T11:04:49.702Z'
-                    file:
-                      fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage
-                      url: 'https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage'
-                      md5: xxxxxxxxxxxxxxxxxxx==
-                      sizeInBytes: 303055180
-                      status: complete
-                      category: multipart
-                      uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                    delta:
-                      fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta
-                      url: 'https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta'
-                      md5: ''
-                      sizeInBytes: 0
-                      status: none
-                      category: queued
-                      uploadId: ''
-                    signature:
-                      fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature
-                      url: 'https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature'
-                      md5: xxxxxxxxxxxxxxxx==
-                      sizeInBytes: 532748
-                      status: complete
-                      category: simple
-                      uploadId: ''
     FileDeletedSuccess:
       description: Successful response after deleting a File.
       content:
@@ -1428,18 +1374,6 @@ components:
                 success:
                   message: File deleted
                   status_code: 200
-    FileDeletedError:
-      description: Error response when trying to delete a non-existent file.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Error.yaml
-          examples:
-            File Deleted Error:
-              value:
-                error:
-                  message: File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found
-                  status_code: 404
     FileNotFoundError:
       description: Error response when trying to show information about a non-existent file.
       content:
