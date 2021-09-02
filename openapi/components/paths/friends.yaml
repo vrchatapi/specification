@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: friends
+  version: '1.0'
+  description: A
+paths:
+  /auth/user/friends:
+    get:
+      summary: List Friends
+      tags:
+        - friends
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../schemas/LimitedUser.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getFriends
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/offline
+      description: List information about friends.
+  '/user/{userId}/friendStatus':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/userId
+    get:
+      summary: Check Friend Status
+      tags:
+        - friends
+      responses:
+        '200':
+          $ref: ../responses/friends/FriendStatusResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getFriendStatus
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: 'Retrieve if the user is currently a friend with a given user, if they have an outgoing friend request, and if they have an incoming friend request. The proper way to receive and accept friend request is by checking if the user has an incoming `Notification` of type `friendRequest`, and then accepting that notification.'
+  '/user/{userId}/friendRequest':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/userId
+    post:
+      summary: Send Friend Request
+      tags:
+        - friends
+      operationId: friend
+      description: Send a friend request to another user.
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/friends/UserDoesntExistError.yaml
+    delete:
+      summary: Delete Friend Request
+      tags:
+        - friends
+      operationId: deleteFriendRequest
+      description: 'Deletes an outgoing pending friend request to another user. To delete an incoming friend request, use the `deleteNotification` endpoint instead.'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/friends/DeleteFriendSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/friends/DeleteFriendError.yaml
+  '/auth/user/friends/{userId}':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/userId
+    delete:
+      summary: Unfriend
+      operationId: unfriend
+      responses:
+        '200':
+          $ref: ../responses/friends/UnfriendSuccess.yaml
+        '400':
+          $ref: ../responses/friends/NotFriendsError.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: Unfriend a user by ID.
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      tags:
+        - friends
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes

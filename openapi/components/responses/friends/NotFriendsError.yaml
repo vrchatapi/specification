@@ -1,0 +1,11 @@
+description: Error response when trying to unfriend someone who is not a friend.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      400 Not Friends Response:
+        value:
+          error:
+            message: These users are not friends
+            status_code: 400

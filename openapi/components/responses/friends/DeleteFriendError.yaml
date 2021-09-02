@@ -1,0 +1,11 @@
+description: Error response when trying to delete a non-existent friend-request.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      404 Delete Friend Request:
+        value:
+          error:
+            message: that friend request could not be found
+            status_code: 404

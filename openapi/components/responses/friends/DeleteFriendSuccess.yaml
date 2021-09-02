@@ -1,0 +1,11 @@
+description: Successful response after cancelling a friend request.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Success.yaml
+    examples:
+      Deleted Friend Request:
+        value:
+          success:
+            message: Friendship request deleted
+            status_code: 200
