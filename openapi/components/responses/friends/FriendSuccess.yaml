@@ -1,0 +1,11 @@
+description: Successful response after friending a user.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Success.yaml
+    examples:
+      Unfriend Success:
+        value:
+          success:
+            message: Ok
+            status_code: 200

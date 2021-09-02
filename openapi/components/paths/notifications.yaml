@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: notifications
+  version: '1.0'
+  description: A
+paths:
+  /auth/user/notifications:
+    get:
+      summary: List Notifications
+      tags:
+        - notifications
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getNotifications
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Retrieve all of the current user's notifications.
+      parameters:
+        - schema:
+            type: string
+            example: all
+          in: query
+          name: type
+          description: Only send notifications of this type (can use `all` for all).
+        - schema:
+            type: boolean
+          in: query
+          name: sent
+          description: Return notifications sent by the user. Must be false or omitted.
+          deprecated: true
+        - schema:
+            type: boolean
+          in: query
+          name: hidden
+          description: Whether to return hidden or non-hidden notifications. True only allowed on type `friendRequest`.
+        - schema:
+            type: string
+            example: five_minutes_ago
+          in: query
+          name: after
+          description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+  '/auth/user/notifications/{notificationId}/see':
+    parameters:
+      - schema:
+          type: string
+        name: notificationId
+        in: path
+        required: true
+    put:
+      summary: Mark As Read
+      operationId: markNotificationAsRead
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Mark a notification as seen.
+      tags:
+        - notifications
+  '/auth/user/notifications/{notificationId}/hide':
+    parameters:
+      - schema:
+          type: string
+        name: notificationId
+        in: path
+        required: true
+    put:
+      summary: Delete Notification
+      operationId: deleteNotification
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Delete a notification.
+      tags:
+        - notifications
+  '/auth/user/notifications/{notificationId}/accept':
+    parameters:
+      - schema:
+          type: string
+        name: notificationId
+        in: path
+        required: true
+    put:
+      summary: Accept Friend Request
+      operationId: acceptFriendRequest
+      responses:
+        '200':
+          $ref: ../responses/friends/FriendSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/friends/AcceptFriendRequestError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Accept a friend request by notification `frq_` ID. Friend requests can be found using the NotificationsAPI `getNotifications` by filtering of type `friendRequest`.
+      tags:
+        - notifications
+  /auth/user/notifications/clear:
+    put:
+      summary: Clear All Notifications
+      operationId: clearNotifications
+      responses:
+        '200':
+          $ref: ../responses/notifications/ClearNotificationsSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Clear **all** notifications.
+      tags:
+        - notifications
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes
