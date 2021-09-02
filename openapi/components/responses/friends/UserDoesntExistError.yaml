@@ -1,0 +1,11 @@
+description: Error response when trying to send a friend request to a user which doesn't exist.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      404 User Doesn't Exist Response:
+        value:
+          error:
+            message: user doesn't existǃ
+            status_code: 404

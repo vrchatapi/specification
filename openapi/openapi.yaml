@@ -43,101 +43,13 @@ paths:
   /time:
     $ref: ./components/paths/system.yaml#/paths/~1time
   /auth/user/friends:
-    get:
-      summary: List Friends
-      tags:
-        - friends
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: ./components/schemas/LimitedUser.yaml
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-      operationId: getFriends
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      parameters:
-        - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/offline'
-      description: List information about friends.
+    $ref: ./components/paths/friends.yaml#/paths/~1auth~1user~1friends
   '/user/{userId}/friendStatus':
-    parameters:
-      - $ref: '#/components/parameters/userId'
-    get:
-      summary: Check Friend Status
-      tags:
-        - friends
-      responses:
-        '200':
-          $ref: '#/components/responses/FriendStatus'
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-      operationId: getFriendStatus
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      description: 'Retrieve if the user is currently a friend with a given user, if they have an outgoing friend request, and if they have an incoming friend request. The proper way to receive and accept friend request is by checking if the user has an incoming `Notification` of type `friendRequest`, and then accepting that notification.'
+    $ref: ./components/paths/friends.yaml#/paths/~1user~1{userId}~1friendStatus
   '/user/{userId}/friendRequest':
-    parameters:
-      - $ref: '#/components/parameters/userId'
-    post:
-      summary: Send Friend Request
-      tags:
-        - friends
-      operationId: friend
-      description: Send a friend request to another user.
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      responses:
-        '200':
-          $ref: '#/components/responses/Notification'
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-        '404':
-          $ref: '#/components/responses/UserDoesntExistError'
-    delete:
-      summary: Delete Friend Request
-      tags:
-        - friends
-      operationId: deleteFriendRequest
-      description: 'Deletes an outgoing pending friend request to another user. To delete an incoming friend request, use the `deleteNotification` endpoint instead.'
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      responses:
-        '200':
-          $ref: '#/components/responses/DeleteFriendRequestSuccess'
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-        '404':
-          $ref: '#/components/responses/DeleteFriendRequestError'
+    $ref: ./components/paths/friends.yaml#/paths/~1user~1{userId}~1friendRequest
   '/auth/user/friends/{userId}':
-    parameters:
-      - $ref: '#/components/parameters/userId'
-    delete:
-      summary: Unfriend
-      operationId: unfriend
-      responses:
-        '200':
-          $ref: '#/components/responses/UnfriendSuccess'
-        '400':
-          $ref: '#/components/responses/NotFriendsError'
-        '401':
-          $ref: ./components/responses/MissingCredentialsError.yaml
-      description: Unfriend a user by ID.
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      tags:
-        - friends
+    $ref: ./components/paths/friends.yaml#/paths/~1auth~1user~1friends~1{userId}
   /auth/user/notifications:
     get:
       summary: List Notifications
@@ -1590,42 +1502,6 @@ components:
                 error:
                   message: that friend request could not be found
                   status_code: 404
-    DeleteFriendRequestError:
-      description: Error response when trying to delete a non-existent friend-request.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Error.yaml
-          examples:
-            404 Delete Friend Request:
-              value:
-                error:
-                  message: that friend request could not be found
-                  status_code: 404
-    NotFriendsError:
-      description: Error response when trying to unfriend someone who is not a friend.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Error.yaml
-          examples:
-            400 Not Friends Response:
-              value:
-                error:
-                  message: These users are not friends
-                  status_code: 400
-    UserDoesntExistError:
-      description: Error response when trying to send a friend request to a user which doesn't exist.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Error.yaml
-          examples:
-            404 User Doesn't Exist Response:
-              value:
-                error:
-                  message: user doesn't existǃ
-                  status_code: 404
     ClearNotificationsSuccess:
       description: Successful response after clearing all notifications.
       content:
@@ -1650,30 +1526,6 @@ components:
                 success:
                   message: Ok
                   status_code: 200
-    UnfriendSuccess:
-      description: Successful response after unfriending a user.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Success.yaml
-          examples:
-            Unfriend Success:
-              value:
-                success:
-                  message: Friendship destroyed
-                  status_code: 200
-    DeleteFriendRequestSuccess:
-      description: Successful response after cancelling a friend request.
-      content:
-        application/json:
-          schema:
-            $ref: ./components/schemas/Success.yaml
-          examples:
-            Deleted Friend Request:
-              value:
-                success:
-                  message: Friendship request deleted
-                  status_code: 200
     Notification:
       description: Returns a single Notifcation object.
       content:
@@ -1691,32 +1543,6 @@ components:
                 details: '{}'
                 seen: false
                 created_at: '2021-01-01T00:00:00.000Z'
-    FriendStatus:
-      description: Friend Status
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              isFriend:
-                type: boolean
-                default: false
-              outgoingRequest:
-                type: boolean
-                default: false
-              incomingRequest:
-                type: boolean
-                default: false
-            required:
-              - isFriend
-              - outgoingRequest
-              - incomingRequest
-          examples:
-            Example Response:
-              value:
-                isFriend: false
-                outgoingRequest: false
-                incomingRequest: false
     NotificationList:
       description: Returns a list of Notifcation objects.
       content:
