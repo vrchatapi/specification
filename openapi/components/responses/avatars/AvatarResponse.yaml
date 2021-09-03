@@ -1,0 +1,5 @@
+description: Returns a single Avatar object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Avatar.yaml
