@@ -2,7 +2,7 @@ description: Error response when trying favorite someone or something when alrea
 content:
   application/json:
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Error.yaml
     examples:
       400 Already Favorited That Friend:
         value:

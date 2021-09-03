@@ -1,8 +1,8 @@
-description: Error response when trying to accept a see recently visited worlds of another user without sufficient admin permissions.
+description: Error response when trying to see recently visited worlds of another user without sufficient admin permissions.
 content:
   application/json:
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Error.yaml
     examples:
       403 Only See Own Recents:
         value:

@@ -76,7 +76,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: ../responses/OkSuccess.yaml
+          $ref: ../responses/playermoderation/PlayerModerationClearAllSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       description: ⚠️ **This will delete every single player moderation you've ever made.**

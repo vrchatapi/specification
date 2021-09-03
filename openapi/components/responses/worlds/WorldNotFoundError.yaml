@@ -2,7 +2,7 @@ description: Error response when trying to show information about a non-existent
 content:
   application/json:
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Error.yaml
     examples:
       404 World Not Found:
         value:

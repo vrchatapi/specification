@@ -2,7 +2,7 @@ description: Error response when trying create a world without having the necces
 content:
   application/json:
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Error.yaml
     examples:
       400 Can't Create World Yet:
         value:

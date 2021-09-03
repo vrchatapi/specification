@@ -2,7 +2,7 @@ description: Success response after removing a favorite.
 content:
   application/json:
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Success.yaml
     examples:
       200 Favorite Removed:
         value:

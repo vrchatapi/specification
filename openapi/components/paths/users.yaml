@@ -19,7 +19,7 @@ paths:
                 items:
                   $ref: ../schemas/LimitedUser.yaml
         '400':
-          $ref: ../responses/Users400Error.yaml
+          $ref: ../responses/users/UsersInvalidSearchError.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: searchUsers

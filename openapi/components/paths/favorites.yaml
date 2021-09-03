@@ -38,9 +38,9 @@ paths:
         '200':
           $ref: ../responses/favorites/FavoriteResponse.yaml
         '400':
-          $ref: ../responses/FavoriteAddAlreadyFavoritedError.yaml
+          $ref: ../responses/favorites/FavoriteAddAlreadyFavoritedError.yaml
         '403':
-          $ref: ../responses/FavoriteAddNotFriendsError.yaml
+          $ref: ../responses/favorites/FavoriteAddNotFriendsError.yaml
       description: |-
         Add a new favorite.
 
@@ -96,7 +96,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/FavoriteNotFoundError.yaml
+          $ref: ../responses/favorites/FavoriteNotFoundError.yaml
       operationId: getFavorite
       security:
         - apiKeyCookie: []
@@ -111,11 +111,11 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: ../responses/FavoriteRemovedSuccess.yaml
+          $ref: ../responses/favorites/FavoriteRemovedSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/FavoriteNotFoundError.yaml
+          $ref: ../responses/favorites/FavoriteNotFoundError.yaml
       description: Remove a favorite from your favorites list.
       tags:
         - favorites
@@ -194,7 +194,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: ../responses/FavoriteGroupClearedSuccess.yaml
+          $ref: ../responses/favorites/FavoriteGroupClearedSuccess.yaml
       tags:
         - favorites
       description: Clear ALL contents of a specific favorite group.
