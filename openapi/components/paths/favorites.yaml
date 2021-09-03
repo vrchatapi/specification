@@ -1,0 +1,205 @@
+openapi: 3.0.3
+info:
+  title: authentication
+  version: '1.0'
+  description: A
+paths:
+  /favorites:
+    get:
+      summary: List Favorites
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: ../responses/favorites/FavoriteListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getFavorites
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns a list of favorites.
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: 'The type of favorites to return, FavoriteType.'
+        - $ref: ../../openapi.yaml#/components/parameters/tag
+    post:
+      summary: Add Favorite
+      operationId: addFavorite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/favorites/FavoriteResponse.yaml
+        '400':
+          $ref: ../responses/FavoriteAddAlreadyFavoritedError.yaml
+        '403':
+          $ref: ../responses/FavoriteAddNotFriendsError.yaml
+      description: |-
+        Add a new favorite.
+
+        Friend groups are named `group_0` through `group_3`. Avatar and World groups are named `avatars1` to `avatar4` and `worlds1` to `worlds4`.
+
+        You cannot add people whom you are not friends with to your friends list. Destroying a friendship removes the person as favorite on both sides.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  $ref: ../schemas/FavoriteType.yaml
+                favoriteId:
+                  type: string
+                  description: 'Must be either AvatarID, WorldID or UserID.'
+                tags:
+                  type: array
+                  description: Tags indicate which group this favorite belongs to. Adding multiple groups makes it show up in all. Removing it from one in that case removes it from all.
+                  items:
+                    $ref: ../schemas/Tag.yaml
+              required:
+                - type
+                - favoriteId
+                - tags
+            examples:
+              Example Favorite Friend:
+                value:
+                  type: friend
+                  favoriteId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+                  tags:
+                    - group_0
+              Example Favorite Avatar:
+                value:
+                  type: avatar
+                  favoriteId: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
+                  tags:
+                    - avatars1
+        description: ''
+      tags:
+        - favorites
+  '/favorites/{favoriteId}':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/favoriteId
+    get:
+      summary: Show Favorite
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: ../responses/favorites/FavoriteResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/FavoriteNotFoundError.yaml
+      operationId: getFavorite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Return information about a specific Favorite.
+      parameters: []
+    delete:
+      summary: Remove Favorite
+      operationId: removeFavorite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/FavoriteRemovedSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/FavoriteNotFoundError.yaml
+      description: Remove a favorite from your favorites list.
+      tags:
+        - favorites
+  /favorite/groups:
+    get:
+      summary: List Favorite Groups
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: ../responses/favorites/FavoriteGroupListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getFavoriteGroups
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - schema:
+            type: string
+          in: query
+          name: ownerId
+          description: The owner of whoms favorite groups to return. Must be a UserID.
+      description: Return a list of favorite groups owned by a user. Returns the same information as `getFavoriteGroups`.
+  '/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/favoriteGroupType
+      - $ref: ../../openapi.yaml#/components/parameters/favoriteGroupName
+      - $ref: ../../openapi.yaml#/components/parameters/userId
+    get:
+      summary: Show Favorite Group
+      tags:
+        - favorites
+      responses:
+        '200':
+          $ref: ../responses/favorites/FavoriteGroupResponse.yaml
+      operationId: getFavoriteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Fetch information about a specific favorite group.
+    put:
+      summary: Update Favorite Group
+      operationId: updateFavoriteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                visibility:
+                  $ref: ../schemas/FavoriteGroupVisibility.yaml
+                tags:
+                  type: array
+                  description: Tags on FavoriteGroups are believed to do nothing.
+                  items:
+                    $ref: ../schemas/Tag.yaml
+      tags:
+        - favorites
+      description: Update information about a specific favorite group.
+    delete:
+      summary: Clear Favorite Group
+      operationId: clearFavoriteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/FavoriteGroupClearedSuccess.yaml
+      tags:
+        - favorites
+      description: Clear ALL contents of a specific favorite group.
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes
