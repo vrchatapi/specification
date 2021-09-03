@@ -2,7 +2,7 @@ description: Error response when trying to delete someone else's player moderati
 content:
   application/json:
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Error.yaml
     examples:
       403 Can't delete Player Moderation You Didn't Create:
         value:

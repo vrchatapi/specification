@@ -1,0 +1,155 @@
+openapi: 3.0.3
+info:
+  title: authentication
+  version: '1.0'
+  description: A
+paths:
+  /auth/user/playermoderations:
+    get:
+      summary: Search Player Moderations
+      tags:
+        - playermoderation
+      responses:
+        '200':
+          $ref: ../responses/playermoderation/PlayerModerationListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getPlayerModerations
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: 'Must be one of PlayerModerationType, except unblock. Unblocking simply removes a block.'
+        - schema:
+            type: string
+          in: query
+          name: sourceUserId
+          description: Must be valid UserID. Trying to view someone else's moderations results with "Can't view someone else's player moderations" error.
+          x-internal: true
+        - schema:
+            type: string
+          in: query
+          name: targetUserId
+          description: Must be valid UserID.
+      description: |-
+        Returns a list of all player moderations made by **you**.
+
+        This endpoint does not have pagination, and will return *all* results. Use query parameters to limit your query if needed.
+    post:
+      summary: Moderate User
+      operationId: moderateUser
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                moderated:
+                  $ref: ../schemas/UserID.yaml
+                type:
+                  $ref: ../schemas/PlayerModerationType.yaml
+              required:
+                - moderated
+                - type
+        description: ''
+      description: 'Moderate a user, e.g. unmute them or show their avatar.'
+      tags:
+        - playermoderation
+    delete:
+      summary: Clear All Player Moderations
+      operationId: clearAllPlayerModerations
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/OkSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: ⚠️ **This will delete every single player moderation you've ever made.**
+      tags:
+        - playermoderation
+  /auth/user/unplayermoderate:
+    put:
+      summary: Unmoderate User
+      operationId: unmoderateUser
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                moderated:
+                  $ref: ../schemas/UserID.yaml
+                type:
+                  $ref: ../schemas/PlayerModerationType.yaml
+              required:
+                - type
+      description: 'Removes a player moderation previously added through `moderateUser`. E.g if you previuosly have shown their avatar, but now want to reset it to default.'
+      responses:
+        '200':
+          $ref: ../responses/playermoderation/PlayerModerationUnmoderatedSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - playermoderation
+  '/auth/user/playermoderations/{playerModerationId}':
+    get:
+      summary: Get Player Moderation
+      tags:
+        - playermoderation
+      responses:
+        '200':
+          $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/playermoderation/PlayerModerationNotFoundError.yaml
+      operationId: getPlayerModeration
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns a single Player Moderation. This returns the exact same amount of information as the more generalised `getPlayerModerations`.
+    delete:
+      summary: Delete Player Moderation
+      operationId: deletePlayerModeration
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/playermoderation/PlayerModerationRemovedSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/playermoderation/PlayerModerationDeleteOthersError.yaml
+      description: Deletes a specific player moderation based on it's `pmod_` ID. The website uses `unmoderateUser` instead. You can delete the same player moderation multiple times successfully.
+      tags:
+        - playermoderation
+    parameters:
+      - schema:
+          type: string
+        name: playerModerationId
+        in: path
+        required: true
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes
