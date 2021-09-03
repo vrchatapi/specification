@@ -1,9 +1,12 @@
 # Release Notes
 
-## UNRELEASED 1.2.0
+## 1.2.0
 
 * **BREAKING:** `FileVersionUploadInfo` renamed to `FileVersionUploadStatus`.
-* Major refactoring on the back-end. This shouldn't be visible to end users, but will make maintenance and fixing merge conflicts *much* easier.
+* **BREAKING:** `InlineResponse2003` renamed to `FriendStatus`.
+* **BREAKING:** Endpoints which should return Success on success were incorrectly defined to return Error on success. This has been fixed, and will therefore change some languages function declarations.
+* Previously deprecated endpoint `searchActiveUsers` has been removed (marked as x-internal).
+* Major refactoring on the back-end. This shouldn't be visible to end users due to bundling, but will make maintenance and fixing future merge conflicts *much* easier.
 
 ## 1.1.2
 
