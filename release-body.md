@@ -1,5 +1,10 @@
 # Release Notes
 
+## UNRELEASED 1.2.0
+
+* **BREAKING:** `FileVersionUploadInfo` renamed to `FileVersionUploadStatus`.
+* Major refactoring on the back-end. This shouldn't be visible to end users, but will make maintenance and fixing merge conflicts *much* easier.
+
 ## 1.1.2
 
 * Fix: `pastDisplayNames` should be array of objects, not array of strings.
