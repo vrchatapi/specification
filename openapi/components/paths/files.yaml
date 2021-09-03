@@ -1,0 +1,313 @@
+openapi: 3.0.3
+info:
+  title: files
+  version: '1.0'
+  description: A
+paths:
+  /files:
+    get:
+      summary: List Files
+      responses:
+        '200':
+          $ref: ../responses/files/FileListResponse.yaml
+      operationId: getFiles
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns a list of files
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: tag
+          description: 'Tag, for example "icon" or "gallery", not included by default.'
+        - schema:
+            type: string
+          in: query
+          name: userId
+          deprecated: true
+          description: 'UserID, will always generate a 500 permission error.'
+        - $ref: '../../openapi.yaml#/components/parameters/number'
+        - $ref: '../../openapi.yaml#/components/parameters/offset'
+      tags:
+        - files
+  /file:
+    post:
+      summary: Create File
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: ../responses/files/FileResponse.yaml
+      operationId: createFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 0
+                mimeType:
+                  $ref: ../schemas/MIMEType.yaml
+                extension:
+                  type: string
+                  minLength: 1
+                tags:
+                  type: array
+                  items:
+                    $ref: ../schemas/Tag.yaml
+              required:
+                - name
+                - mimeType
+                - extension
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Creates a new File object
+  '/file/{fileId}':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/fileId
+    get:
+      summary: Show File
+      operationId: getFile
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: ../responses/files/FileResponse.yaml
+        '404':
+          $ref: ../responses/files/FileNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: 'Shows general information about the "File" object. Each File can have several "Version"''s, and each Version can have multiple real files or "Data" blobs.'
+    delete:
+      summary: Delete File
+      operationId: deleteFile
+      responses:
+        '200':
+          $ref: ../responses/files/FileDeletedSuccess.yaml
+        '404':
+          $ref: ../responses/files/FileDeletedError.yaml
+      tags:
+        - files
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Deletes a File object.
+    post:
+      summary: Create File Version
+      operationId: createFileVersion
+      responses:
+        '200':
+          $ref: ../responses/files/FileResponse.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: 'Creates a new FileVersion. Once a Version has been created, proceed to the `/file/{fileId}/{versionId}/file/start` endpoint to start a file upload.'
+      tags:
+        - files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                signatureMd5:
+                  type: string
+                  minLength: 1
+                signatureSizeInBytes:
+                  type: number
+                fileMd5:
+                  type: string
+                  minLength: 1
+                fileSizeInBytes:
+                  type: number
+              required:
+                - signatureMd5
+                - signatureSizeInBytes
+  '/file/{fileId}/{versionId}':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/fileId
+      - $ref: ../../openapi.yaml#/components/parameters/versionId
+    get:
+      summary: Download File Version
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: ../responses/files/RawFileResponse.yaml
+      operationId: downloadFileVersion
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: |-
+        Downloads the file with the provided version number.
+
+        **Version Note:** Version 0 is always when the file was created. The real data is usually always located in version 1 and up.
+
+        **Extension Note:** Files are not guaranteed to have a file extensions. UnityPackage files tends to have it, images through this endpoint do not. You are responsible for appending file extension from the `extension` field when neccesary.
+    delete:
+      summary: Delete File Version
+      operationId: deleteFileVersion
+      responses:
+        '200':
+          $ref: ../responses/files/FileResponse.yaml
+        '400':
+          $ref: ../responses/files/FileVersionDeleteInitialError.yaml
+        '500':
+          $ref: ../responses/files/FileVersionDeleteMiddleError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Delete a specific version of a file. You can only delete the latest version.
+      tags:
+        - files
+  '/file/{fileId}/{versionId}/{fileType}/status':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/fileId
+      - $ref: ../../openapi.yaml#/components/parameters/versionId
+      - $ref: ../../openapi.yaml#/components/parameters/fileType
+    get:
+      summary: Check FileData Upload Status
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: ../../openapi.yaml#/components/responses/FileVersionUploadInfo
+      operationId: getFileDataUploadStatus
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
+  '/file/{fileId}/{versionId}/{fileType}/start':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/fileId
+      - $ref: ../../openapi.yaml#/components/parameters/versionId
+      - $ref: ../../openapi.yaml#/components/parameters/fileType
+    put:
+      summary: Start FileData Upload
+      tags:
+        - files
+      responses:
+        '200':
+          description: 'See [https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html](AWS REST docs - PUT Object)'
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  url:
+                    type: string
+                    minLength: 1
+                    description: ''
+                required:
+                  - url
+              examples:
+                Example Response:
+                  value:
+                    url: 'https://s3.amazonaws.com/files.vrchat.cloud/Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage?AWSAccessKeyId=XXXXXXXXXXXXXXXXXXXX&Expires=1626028518&Signature=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&partNumber=1&uploadId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx'
+        '400':
+          description: Error response when trying to start an upload against a FileVersion that is already marked as  `complete`.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/Error.yaml
+              examples:
+                Tried To Upload Against Already Finished Version:
+                  value:
+                    error:
+                      message: Cannot upload against a complete version entry․ Create a new version of this file before uploading․
+                      status_code: 400
+      operationId: startFileDataUpload
+      parameters:
+        - schema:
+            type: integer
+            minimum: 0
+            example: 1
+          in: query
+          name: partNumber
+          required: true
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: |-
+        Starts an upload of a specific FilePart. This endpoint will return an AWS URL which you can PUT data to. You need to call this and receive a new AWS API URL for each `partNumber`. Please see AWS's REST documentation on "PUT Object to S3" on how to upload. Once all parts has been uploaded, proceed to `/finish` endpoint.
+
+        **Note:** `nextPartNumber` seems like it is always ignored. Despite it returning 0, first partNumber is always 1.
+  '/file/{fileId}/{versionId}/{fileType}/finish':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/fileId
+      - $ref: ../../openapi.yaml#/components/parameters/versionId
+      - $ref: ../../openapi.yaml#/components/parameters/fileType
+    put:
+      summary: Finish FileData Upload
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: ../responses/files/FileResponse.yaml
+      operationId: finishFileDataUpload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: ''
+              properties:
+                etags:
+                  type: array
+                  description: Array of ETags uploaded.
+                  minItems: 1
+                  uniqueItems: true
+                  items:
+                    type: string
+                nextPartNumber:
+                  type: string
+                  minLength: 1
+                  default: '0'
+                  example: '0'
+                  deprecated: true
+                  description: 'Always a zero in string form, despite how many parts uploaded.'
+                  maxLength: 1
+                  pattern: '0'
+                maxParts:
+                  type: string
+                  minLength: 1
+                  description: 'Always a zero in string form, despite how many parts uploaded.'
+                  deprecated: true
+                  default: '0'
+                  example: '0'
+                  maxLength: 1
+                  pattern: '0'
+              required:
+                - nextPartNumber
+                - maxParts
+            examples:
+              Example Request:
+                value:
+                  etags:
+                    - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    - yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+                  nextPartNumber: '0'
+                  maxParts: '0'
+        description: |-
+          Please see documentation on ETag's:
+          [https://teppen.io/2018/06/23/aws_s3_etags/](https://teppen.io/2018/06/23/aws_s3_etags/)
+
+          ETag's should NOT be present when uploading a `signature`.
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes
