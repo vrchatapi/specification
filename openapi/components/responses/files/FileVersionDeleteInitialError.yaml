@@ -1,0 +1,11 @@
+description: Error response when trying to delete the initial version of a file. Delete the main File object instead.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      400 Delete Initial File Version:
+        value:
+          error:
+            message: Cannot delete the initial version of the file‚ just delete the entire file record․
+            status_code: 400
