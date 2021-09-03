@@ -1,0 +1,40 @@
+openapi: 3.0.3
+info:
+  title: avatars
+  version: '1.0'
+  description: A
+paths:
+  /avatars/favorites:
+    get:
+      summary: List Favorited Avatars
+      tags:
+        - avatars
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getFavoritedAvatars
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/featured
+        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../../openapi.yaml#/components/parameters/search
+        - $ref: ../../openapi.yaml#/components/parameters/tag
+        - $ref: ../../openapi.yaml#/components/parameters/notag
+        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
+        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/platform
+        - $ref: ../../openapi.yaml#/components/parameters/userIdAdmin
+      description: Search and list favorited avatars by query filters.
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes
