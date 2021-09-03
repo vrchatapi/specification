@@ -33,6 +33,201 @@ paths:
         - $ref: ../../openapi.yaml#/components/parameters/platform
         - $ref: ../../openapi.yaml#/components/parameters/userIdAdmin
       description: Search and list favorited avatars by query filters.
+  /avatars:
+    get:
+      summary: Search Avatars
+      tags:
+        - avatars
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: searchAvatars
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/featured
+        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
+        - schema:
+            type: string
+            enum:
+              - me
+          in: query
+          required: false
+          name: user
+          description: Set to `me` for searching own avatars.
+        - $ref: ../../openapi.yaml#/components/parameters/userIdQuery
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../../openapi.yaml#/components/parameters/tag
+        - $ref: ../../openapi.yaml#/components/parameters/notag
+        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
+        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/platform
+      description: Search and list avatars by query filters. You can only search your own or featured avatars. It is not possible as a normal user to search other peoples avatars.
+    post:
+      summary: Create Avatar
+      operationId: createAvatar
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarResponse.yaml
+        '401':
+          $ref: ../responses/FeaturedSetNotAdminError.yaml
+      tags:
+        - avatars
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                assetUrl:
+                  type: string
+                id:
+                  $ref: ../schemas/AvatarID.yaml
+                name:
+                  type: string
+                  minLength: 1
+                description:
+                  type: string
+                  minLength: 1
+                tags:
+                  type: array
+                  items:
+                    $ref: ../schemas/Tag.yaml
+                imageUrl:
+                  type: string
+                  minLength: 1
+                releaseStatus:
+                  $ref: ../schemas/ReleaseStatus.yaml
+                version:
+                  type: number
+                  minimum: 0
+                  default: 1
+                featured:
+                  type: boolean
+                  x-internal: true
+                  description: You cannot set featured tag if you are not an admin.
+                unityPackageUrl:
+                  type: string
+              required:
+                - name
+                - imageUrl
+      description: Create an avatar. It's possible to optionally specify a ID if you want a custom one. Attempting to create an Avatar with an already claimed ID will result in a DB error.
+  '/avatars/{avatarId}':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/avatarId
+    get:
+      summary: Get Avatar
+      tags:
+        - avatars
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/AvatarNotFoundError.yaml
+      operationId: getAvatar
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Get information about a specific Avatar.
+    put:
+      summary: Update Avatar
+      operationId: updateAvatar
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/AvatarNotFoundError.yaml
+      description: Update information about a specific avatar.
+      tags:
+        - avatars
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                assetUrl:
+                  type: string
+                id:
+                  $ref: ../schemas/AvatarID.yaml
+                name:
+                  type: string
+                  minLength: 1
+                description:
+                  type: string
+                  minLength: 1
+                tags:
+                  type: array
+                  items:
+                    $ref: ../schemas/Tag.yaml
+                imageUrl:
+                  type: string
+                  minLength: 1
+                releaseStatus:
+                  $ref: ../schemas/ReleaseStatus.yaml
+                version:
+                  type: number
+                  minimum: 0
+                  default: 1
+                featured:
+                  type: boolean
+                  x-internal: true
+                  description: You cannot set featured tag if you are not an admin.
+                unityPackageUrl:
+                  type: string
+    delete:
+      summary: Delete Avatar
+      operationId: deleteAvatar
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/AvatarNotFoundError.yaml
+      tags:
+        - avatars
+      description: 'Delete an avatar. Notice an avatar is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The AvatarID is permanently reserved.'
+  '/avatars/{avatarId}/select':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/avatarId
+    put:
+      summary: Select Avatar
+      tags:
+        - avatars
+      responses:
+        '200':
+          $ref: ../responses/CurrentUserResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/AvatarNotFoundError.yaml
+      operationId: selectAvatar
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Switches into that avatar.
 tags:
   $ref: ../../openapi.yaml#/tags
 components:
