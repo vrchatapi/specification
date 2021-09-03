@@ -273,7 +273,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/LimitedUser'
         '400':
-          $ref: '#/components/responses/Users400Error'
+          $ref: '#/components/responses/UsersInvalidSearchError'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: searchUsers
@@ -299,7 +299,6 @@ paths:
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
       description: Search and list any users by text query
-    parameters: []
   '/users/{username}/name':
     parameters:
       - schema:
@@ -396,49 +395,6 @@ paths:
                   minLength: 0
       tags:
         - users
-  /users/active:
-    get:
-      summary: Search Active Users
-      tags:
-        - users
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LimitedUser'
-        '403':
-          $ref: '#/components/responses/InvalidAdminCredentials'
-      operationId: searchActiveUsers
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: search
-          required: true
-          description: Username to search for
-        - schema:
-            type: string
-          in: query
-          name: developerType
-          description: >-
-            Active user by developer type, none for normal users and internal
-            for moderators
-        - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/number'
-      description: >-
-        Search and list any Active users by text query.
-
-
-        **Has been locked down and now always respond with "Invalid Admin
-        Credentials".**
-      deprecated: true
   /health:
     get:
       summary: Check API Health
@@ -561,7 +517,7 @@ paths:
         - friends
       responses:
         '200':
-          $ref: '#/components/responses/FriendStatus'
+          $ref: '#/components/responses/FriendStatusResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFriendStatus
@@ -588,7 +544,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/Notification'
+          $ref: '#/components/responses/NotificationResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -606,7 +562,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/DeleteFriendRequestSuccess'
+          $ref: '#/components/responses/DeleteFriendSuccess'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -637,7 +593,7 @@ paths:
         - notifications
       responses:
         '200':
-          $ref: '#/components/responses/NotificationList'
+          $ref: '#/components/responses/NotificationListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getNotifications
@@ -687,7 +643,7 @@ paths:
       operationId: markNotificationAsRead
       responses:
         '200':
-          $ref: '#/components/responses/Notification'
+          $ref: '#/components/responses/NotificationResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
@@ -708,7 +664,7 @@ paths:
       operationId: deleteNotification
       responses:
         '200':
-          $ref: '#/components/responses/Notification'
+          $ref: '#/components/responses/NotificationResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
@@ -763,7 +719,7 @@ paths:
       summary: List Files
       responses:
         '200':
-          $ref: '#/components/responses/FileList'
+          $ref: '#/components/responses/FileListResponse'
       operationId: getFiles
       security:
         - apiKeyCookie: []
@@ -793,7 +749,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: '#/components/responses/FileResponse'
       operationId: createFile
       requestBody:
         content:
@@ -832,7 +788,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: '#/components/responses/FileResponse'
         '404':
           $ref: '#/components/responses/FileNotFoundError'
       security:
@@ -861,7 +817,7 @@ paths:
       operationId: createFileVersion
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: '#/components/responses/FileResponse'
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -901,7 +857,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: '#/components/responses/RawFile'
+          $ref: '#/components/responses/RawFileResponse'
       operationId: downloadFileVersion
       security:
         - apiKeyCookie: []
@@ -923,7 +879,7 @@ paths:
       operationId: deleteFileVersion
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: '#/components/responses/FileResponse'
         '400':
           $ref: '#/components/responses/FileVersionDeleteInitialError'
         '500':
@@ -947,7 +903,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: '#/components/responses/FileVersionUploadInfo'
+          $ref: '#/components/responses/FileVersionUploadStatus'
       operationId: getFileDataUploadStatus
       security:
         - apiKeyCookie: []
@@ -1037,7 +993,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: '#/components/responses/File'
+          $ref: '#/components/responses/FileResponse'
       operationId: finishFileDataUpload
       requestBody:
         content:
@@ -1107,7 +1063,7 @@ paths:
         - worlds
       responses:
         '200':
-          $ref: '#/components/responses/LimitedWorldList'
+          $ref: '#/components/responses/LimitedWorldListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: searchWorlds
@@ -1142,9 +1098,9 @@ paths:
       operationId: createWorld
       responses:
         '200':
-          $ref: '#/components/responses/World'
+          $ref: '#/components/responses/WorldResponse'
         '400':
-          $ref: '#/components/responses/CreateWorldNotAllowedYetError'
+          $ref: '#/components/responses/WorldCreateNotAllowedYetError'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       requestBody:
@@ -1214,7 +1170,7 @@ paths:
         - worlds
       responses:
         '200':
-          $ref: '#/components/responses/LimitedWorldList'
+          $ref: '#/components/responses/LimitedWorldListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getActiveWorlds
@@ -1242,11 +1198,11 @@ paths:
         - worlds
       responses:
         '200':
-          $ref: '#/components/responses/LimitedWorldList'
+          $ref: '#/components/responses/LimitedWorldListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '403':
-          $ref: '#/components/responses/SeeOtherUserRecentsError'
+          $ref: '#/components/responses/WorldSeeOtherUserRecentsError'
       operationId: getRecentWorlds
       security:
         - apiKeyCookie: []
@@ -1273,11 +1229,11 @@ paths:
         - worlds
       responses:
         '200':
-          $ref: '#/components/responses/LimitedWorldList'
+          $ref: '#/components/responses/LimitedWorldListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '403':
-          $ref: '#/components/responses/SeeOtherUserFavoritesError'
+          $ref: '#/components/responses/WorldSeeOtherUserFavoritesError'
       operationId: getFavoritedWorlds
       security:
         - apiKeyCookie: []
@@ -1307,7 +1263,7 @@ paths:
       operationId: getWorld
       responses:
         '200':
-          $ref: '#/components/responses/World'
+          $ref: '#/components/responses/WorldResponse'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
       description: Get information about a specific World.
@@ -1319,7 +1275,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/World'
+          $ref: '#/components/responses/WorldResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -1410,7 +1366,7 @@ paths:
       description: Returns a worlds instance.
       responses:
         '200':
-          $ref: '#/components/responses/Instance'
+          $ref: '#/components/responses/InstanceResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
   '/worlds/{worldId}/metadata':
@@ -1520,7 +1476,7 @@ paths:
         - favorites
       responses:
         '200':
-          $ref: '#/components/responses/FavoriteList'
+          $ref: '#/components/responses/FavoriteListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFavorites
@@ -1545,7 +1501,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/Favorite'
+          $ref: '#/components/responses/FavoriteResponse'
         '400':
           $ref: '#/components/responses/FavoriteAddAlreadyFavoritedError'
         '403':
@@ -1601,13 +1557,15 @@ paths:
       tags:
         - favorites
   '/favorites/{favoriteId}':
+    parameters:
+      - $ref: '#/components/parameters/favoriteId'
     get:
       summary: Show Favorite
       tags:
         - favorites
       responses:
         '200':
-          $ref: '#/components/responses/Favorite'
+          $ref: '#/components/responses/FavoriteResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -1618,8 +1576,6 @@ paths:
           authCookie: []
       description: Return information about a specific Favorite.
       parameters: []
-    parameters:
-      - $ref: '#/components/parameters/favoriteId'
     delete:
       summary: Remove Favorite
       operationId: removeFavorite
@@ -1643,7 +1599,7 @@ paths:
         - favorites
       responses:
         '200':
-          $ref: '#/components/responses/FavoriteGroupList'
+          $ref: '#/components/responses/FavoriteGroupListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFavoriteGroups
@@ -1672,7 +1628,7 @@ paths:
         - favorites
       responses:
         '200':
-          $ref: '#/components/responses/FavoriteGroup'
+          $ref: '#/components/responses/FavoriteGroupResponse'
       operationId: getFavoriteGroup
       security:
         - apiKeyCookie: []
@@ -1724,9 +1680,11 @@ paths:
         - avatars
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/AvatarListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/AvatarSeeOtherUserFavoritesError'
       operationId: getFavoritedAvatars
       security:
         - apiKeyCookie: []
@@ -1753,7 +1711,7 @@ paths:
         - avatars
       responses:
         '200':
-          $ref: '#/components/responses/AvatarList'
+          $ref: '#/components/responses/AvatarListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: searchAvatars
@@ -1793,7 +1751,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/Avatar'
+          $ref: '#/components/responses/AvatarResponse'
         '401':
           $ref: '#/components/responses/FeaturedSetNotAdminError'
       tags:
@@ -1846,7 +1804,7 @@ paths:
         - avatars
       responses:
         '200':
-          $ref: '#/components/responses/Avatar'
+          $ref: '#/components/responses/AvatarResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -1864,7 +1822,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/Avatar'
+          $ref: '#/components/responses/AvatarResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -1912,7 +1870,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/Avatar'
+          $ref: '#/components/responses/AvatarResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -1932,7 +1890,7 @@ paths:
         - avatars
       responses:
         '200':
-          $ref: '#/components/responses/CurrentUser'
+          $ref: '#/components/responses/CurrentUserResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -1949,7 +1907,7 @@ paths:
         - playermoderation
       responses:
         '200':
-          $ref: '#/components/responses/PlayerModerationList'
+          $ref: '#/components/responses/PlayerModerationListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getPlayerModerations
@@ -1983,7 +1941,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/PlayerModeration'
+          $ref: '#/components/responses/PlayerModerationResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       requestBody:
@@ -2012,7 +1970,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/OkSuccess'
+          $ref: '#/components/responses/PlayerModerationClearAllSuccess'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       description: ⚠️ **This will delete every single player moderation you've ever made.**
@@ -2055,7 +2013,7 @@ paths:
         - playermoderation
       responses:
         '200':
-          $ref: '#/components/responses/PlayerModeration'
+          $ref: '#/components/responses/PlayerModerationResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -3384,6 +3342,23 @@ components:
         - worldUpdatePeriod
         - youtubedl-hash
         - youtubedl-version
+    FriendStatus:
+      title: Friend Status
+      type: object
+      properties:
+        isFriend:
+          type: boolean
+          default: false
+        outgoingRequest:
+          type: boolean
+          default: false
+        incomingRequest:
+          type: boolean
+          default: false
+      required:
+        - isFriend
+        - outgoingRequest
+        - incomingRequest
     NotificationType:
       type: string
       title: NotificationType
@@ -4303,6 +4278,37 @@ components:
       in: cookie
       description: 2FA device remembrance via Cookie
   responses:
+    MissingCredentialsError:
+      description: Error response due to missing apiKey or auth cookie.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Missing Credentials Example:
+              value:
+                error:
+                  message: '"Missing Credentials"'
+                  status_code: 401
+    UsersInvalidSearchError:
+      description: >-
+        Error response when trying to search list of users with an invalid
+        request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            400 N is too low:
+              value:
+                error:
+                  message: n must be a positive integer˸ '-1'
+                  status_code: 400
+            400 N is too high:
+              value:
+                error:
+                  message: n＝1000 is much too high․ implement paging you savages․
+                  status_code: 400
     InvalidAdminCredentials:
       description: Error response due to missing Administrator credentials.
       content:
@@ -4320,105 +4326,49 @@ components:
                 error:
                   message: '"Invalid Admin Credentials"'
                   status_code: 403
-    AcceptFriendRequestError:
-      description: Error response when trying to accept a non-existent friend request.
+    APIHealthResponse:
+      description: API's Health
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            type: object
+            properties:
+              ok:
+                type: boolean
+              serverName:
+                type: string
+                minLength: 1
+              buildVersionTag:
+                type: string
+                minLength: 1
+            required:
+              - ok
+              - serverName
+              - buildVersionTag
           examples:
-            404 Accept Friend Request:
+            Example Response:
               value:
-                error:
-                  message: that friend request could not be found
-                  status_code: 404
-    DeleteFriendRequestError:
-      description: Error response when trying to delete a non-existent friend-request.
+                ok: true
+                serverName: prod-api-green-marsh-dgt
+                buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+    FriendStatusResponse:
+      description: Returns a users Friend Status.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/FriendStatus'
           examples:
-            404 Delete Friend Request:
+            Not Friends:
               value:
-                error:
-                  message: that friend request could not be found
-                  status_code: 404
-    NotFriendsError:
-      description: Error response when trying to unfriend someone who is not a friend.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            400 Not Friends Response:
+                isFriend: true
+                outgoingRequest: false
+                incomingRequest: false
+            Is Friend:
               value:
-                error:
-                  message: These users are not friends
-                  status_code: 400
-    UserDoesntExistError:
-      description: >-
-        Error response when trying to send a friend request to a user which
-        doesn't exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            404 User Doesn't Exist Response:
-              value:
-                error:
-                  message: user doesn't existǃ
-                  status_code: 404
-    ClearNotificationsSuccess:
-      description: Successful response after clearing all notifications.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Success'
-          examples:
-            Unfriend Success:
-              value:
-                success:
-                  message: Ok
-                  status_code: 200
-    FriendSuccess:
-      description: Successful response after friending a user.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Success'
-          examples:
-            Unfriend Success:
-              value:
-                success:
-                  message: Ok
-                  status_code: 200
-    UnfriendSuccess:
-      description: Successful response after unfriending a user.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Success'
-          examples:
-            Unfriend Success:
-              value:
-                success:
-                  message: Friendship destroyed
-                  status_code: 200
-    DeleteFriendRequestSuccess:
-      description: Successful response after cancelling a friend request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Success'
-          examples:
-            Deleted Friend Request:
-              value:
-                success:
-                  message: Friendship request deleted
-                  status_code: 200
-    Notification:
+                isFriend: true
+                outgoingRequest: false
+                incomingRequest: false
+    NotificationResponse:
       description: Returns a single Notifcation object.
       content:
         application/json:
@@ -4435,33 +4385,69 @@ components:
                 details: '{}'
                 seen: false
                 created_at: '2021-01-01T00:00:00.000Z'
-    FriendStatus:
-      description: Friend Status
+    UserDoesntExistError:
+      description: >-
+        Error response when trying to send a friend request to a user which
+        doesn't exist.
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              isFriend:
-                type: boolean
-                default: false
-              outgoingRequest:
-                type: boolean
-                default: false
-              incomingRequest:
-                type: boolean
-                default: false
-            required:
-              - isFriend
-              - outgoingRequest
-              - incomingRequest
+            $ref: '#/components/schemas/Error'
           examples:
-            Example Response:
+            404 User Doesn't Exist Response:
               value:
-                isFriend: false
-                outgoingRequest: false
-                incomingRequest: false
-    NotificationList:
+                error:
+                  message: user doesn't existǃ
+                  status_code: 404
+    DeleteFriendSuccess:
+      description: Successful response after cancelling a friend request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Deleted Friend Request:
+              value:
+                success:
+                  message: Friendship request deleted
+                  status_code: 200
+    DeleteFriendRequestError:
+      description: Error response when trying to delete a non-existent friend-request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 Delete Friend Request:
+              value:
+                error:
+                  message: that friend request could not be found
+                  status_code: 404
+    UnfriendSuccess:
+      description: Successful response after unfriending a user.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Unfriend Success:
+              value:
+                success:
+                  message: Friendship destroyed
+                  status_code: 200
+    NotFriendsError:
+      description: Error response when trying to unfriend someone who is not a friend.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            400 Not Friends Response:
+              value:
+                error:
+                  message: These users are not friends
+                  status_code: 400
+    NotificationListResponse:
       description: Returns a list of Notifcation objects.
       content:
         application/json:
@@ -4469,7 +4455,43 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Notification'
-    FileList:
+    FriendSuccess:
+      description: Successful response after friending a user.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Unfriend Success:
+              value:
+                success:
+                  message: Ok
+                  status_code: 200
+    AcceptFriendRequestError:
+      description: Error response when trying to accept a non-existent friend request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 Accept Friend Request:
+              value:
+                error:
+                  message: that friend request could not be found
+                  status_code: 404
+    ClearNotificationsSuccess:
+      description: Successful response after clearing all notifications.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Unfriend Success:
+              value:
+                success:
+                  message: Ok
+                  status_code: 200
+    FileListResponse:
       description: Returns a list of File objects.
       content:
         application/json:
@@ -4477,7 +4499,7 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/File'
-    File:
+    FileResponse:
       description: Returns a single File object.
       content:
         application/json:
@@ -4532,6 +4554,20 @@ components:
                       status: complete
                       category: simple
                       uploadId: ''
+    FileNotFoundError:
+      description: >-
+        Error response when trying to show information about a non-existent
+        file.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 File Not Found:
+              value:
+                error:
+                  message: File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found
+                  status_code: 404
     FileDeletedSuccess:
       description: Successful response after deleting a File.
       content:
@@ -4556,20 +4592,8 @@ components:
                 error:
                   message: File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found
                   status_code: 404
-    FileNotFoundError:
-      description: >-
-        Error response when trying to show information about a non-existent
-        file.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            404 File Not Found:
-              value:
-                error:
-                  message: File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found
-                  status_code: 404
+    RawFileResponse:
+      description: Raw file
     FileVersionDeleteInitialError:
       description: >-
         Error response when trying to delete the initial version of a file.
@@ -4602,9 +4626,7 @@ components:
                     409 Cannot delete against anything but the latest version of
                     this file˸ 1‚ 11
                   status_code: 500
-    RawFile:
-      description: Raw file
-    FileVersionUploadInfo:
+    FileVersionUploadStatus:
       description: >-
         Current FileVersion upload status. Contains the uploadId needed for
         uploading, as well as the already uploaded parts.
@@ -4670,7 +4692,7 @@ components:
                 maxParts: 1000
                 parts: []
                 etags: []
-    LimitedWorldList:
+    LimitedWorldListResponse:
       description: Returns a list of LimitedWorld objects.
       content:
         application/json:
@@ -4678,137 +4700,13 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/LimitedWorld'
-    World:
+    WorldResponse:
       description: Returns a single World object.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/World'
-    Instance:
-      description: Returns a single Instance object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Instance'
-    Favorite:
-      description: Returns a single Favorite object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Favorite'
-    FavoriteList:
-      description: Returns a list of Favorite objects.
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Favorite'
-    FavoriteGroup:
-      description: Returns a single FavoriteGroup object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/FavoriteGroup'
-    FavoriteGroupList:
-      description: Returns a list of FavoriteGroup objects.
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/FavoriteGroup'
-    AvatarList:
-      description: Returns a list of Avatar objects.
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Avatar'
-    Avatar:
-      description: Returns a single Avatar object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Avatar'
-    CurrentUser:
-      description: Returns a single CurrentUser object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CurrentUser'
-    PlayerModerationList:
-      description: Returns a list of PlayerModeration objects.
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/PlayerModeration'
-    PlayerModeration:
-      description: Returns a single PlayerModeration object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PlayerModeration'
-    MissingCredentialsError:
-      description: Error response due to missing apiKey or auth cookie.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            Missing Credentials Example:
-              value:
-                error:
-                  message: '"Missing Credentials"'
-                  status_code: 401
-    Users400Error:
-      description: >-
-        Error response when trying to search list of users with an invalid
-        request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            400 N is too low:
-              value:
-                error:
-                  message: n must be a positive integer˸ '-1'
-                  status_code: 400
-            400 N is too high:
-              value:
-                error:
-                  message: n＝1000 is much too high․ implement paging you savages․
-                  status_code: 400
-    APIHealthResponse:
-      description: API's Health
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              ok:
-                type: boolean
-              serverName:
-                type: string
-                minLength: 1
-              buildVersionTag:
-                type: string
-                minLength: 1
-            required:
-              - ok
-              - serverName
-              - buildVersionTag
-          examples:
-            Example Response:
-              value:
-                ok: true
-                serverName: prod-api-green-marsh-dgt
-                buildVersionTag: master-build-2021-06-24-fred-drakeshoot
-    CreateWorldNotAllowedYetError:
+    WorldCreateNotAllowedYetError:
       description: >-
         Error response when trying create a world without having the neccesary
         Trust rank yet.
@@ -4822,10 +4720,10 @@ components:
                 error:
                   message: \"You can't create a world right now\"
                   status_code: 400
-    SeeOtherUserRecentsError:
+    WorldSeeOtherUserRecentsError:
       description: >-
-        Error response when trying to accept a see recently visited worlds of
-        another user without sufficient admin permissions.
+        Error response when trying to see recently visited worlds of another
+        user without sufficient admin permissions.
       content:
         application/json:
           schema:
@@ -4836,16 +4734,16 @@ components:
                 error:
                   message: \"You can only see your own recent worlds!\"
                   status_code: 403
-    SeeOtherUserFavoritesError:
+    WorldSeeOtherUserFavoritesError:
       description: >-
-        Error response when trying to see favourites of another user without
-        sufficient admin permissions.
+        Error response when trying to see favourited worlds of another user
+        without sufficient admin permissions.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
           examples:
-            404 Cant See Other Users Favorites:
+            404 Cant See Other User Favorite Worlds:
               value:
                 error:
                   message: 403 You can't see another user's favorites
@@ -4865,6 +4763,26 @@ components:
                 error:
                   message: World wrld_ba913a96-fac4-4048-a062-9aa5db092812 not found
                   status_code: 404
+    InstanceResponse:
+      description: Returns a single Instance object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Instance'
+    FavoriteListResponse:
+      description: Returns a list of Favorite objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Favorite'
+    FavoriteResponse:
+      description: Returns a single Favorite object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Favorite'
     FavoriteAddAlreadyFavoritedError:
       description: >-
         Error response when trying favorite someone or something when already
@@ -4912,25 +4830,67 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Success'
           examples:
             200 Favorite Removed:
               value:
                 success:
                   message: favorite deleted!
                   status_code: 200
+    FavoriteGroupListResponse:
+      description: Returns a list of FavoriteGroup objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/FavoriteGroup'
+    FavoriteGroupResponse:
+      description: Returns a single FavoriteGroup object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FavoriteGroup'
     FavoriteGroupClearedSuccess:
       description: Success response after clearing a favorite group.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Success'
           examples:
             200 Favorite Group Cleared:
               value:
                 success:
                   message: favorite deleted!
                   status_code: 200
+    AvatarListResponse:
+      description: Returns a list of Avatar objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Avatar'
+    AvatarSeeOtherUserFavoritesError:
+      description: >-
+        Error response when trying to see favourited avatars of another user
+        without sufficient admin permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 Cant See Other User Favorite Avatars:
+              value:
+                error:
+                  message: \"You can only see your own favorite avatars!\"
+                  status_code: 403
+    AvatarResponse:
+      description: Returns a single Avatar object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Avatar'
     FeaturedSetNotAdminError:
       description: Error response when set featured to true without being an admin.
       content:
@@ -4967,7 +4927,27 @@ components:
                 error:
                   message: Avatar Not Found
                   status_code: 404
-    OkSuccess:
+    CurrentUserResponse:
+      description: Returns a single CurrentUser object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CurrentUser'
+    PlayerModerationListResponse:
+      description: Returns a list of PlayerModeration objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/PlayerModeration'
+    PlayerModerationResponse:
+      description: Returns a single PlayerModeration object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PlayerModeration'
+    PlayerModerationClearAllSuccess:
       description: Success response after e.g. clearing all player moderations.
       content:
         application/json:
@@ -4984,7 +4964,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Success'
           examples:
             200 Specific User Unmoderated:
               value:
@@ -5015,7 +4995,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Success'
           examples:
             200 Player Moderation Removed:
               value:
@@ -5094,7 +5074,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Permission'
-  examples: {}
   parameters:
     number:
       name: 'n'
