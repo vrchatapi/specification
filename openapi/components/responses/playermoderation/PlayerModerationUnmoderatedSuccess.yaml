@@ -2,7 +2,7 @@ description: Success response after unmoderating a player moderation.
 content:
   application/json:
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Success.yaml
     examples:
       200 Specific User Unmoderated:
         value:

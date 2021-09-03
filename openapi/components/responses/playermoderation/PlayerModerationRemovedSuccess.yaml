@@ -2,7 +2,7 @@ description: Success response after removing a PlayerModeration by ID.
 content:
   application/json:
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Success.yaml
     examples:
       200 Player Moderation Removed:
         value:

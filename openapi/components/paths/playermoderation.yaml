@@ -104,7 +104,7 @@ paths:
       description: 'Removes a player moderation previously added through `moderateUser`. E.g if you previuosly have shown their avatar, but now want to reset it to default.'
       responses:
         '200':
-          $ref: ../responses/PlayerModerationUnmoderatedSuccess.yaml
+          $ref: ../responses/playermoderation/PlayerModerationUnmoderatedSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
@@ -120,7 +120,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/PlayerModerationNotFoundError.yaml
+          $ref: ../responses/playermoderation/PlayerModerationNotFoundError.yaml
       operationId: getPlayerModeration
       security:
         - apiKeyCookie: []
@@ -134,11 +134,11 @@ paths:
           authCookie: []
       responses:
         '200':
-          $ref: ../responses/PlayerModerationRemovedSuccess.yaml
+          $ref: ../responses/playermoderation/PlayerModerationRemovedSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '403':
-          $ref: ../responses/PlayerModerationDeleteOthersError.yaml
+          $ref: ../responses/playermoderation/PlayerModerationDeleteOthersError.yaml
       description: Deletes a specific player moderation based on it's `pmod_` ID. The website uses `unmoderateUser` instead. You can delete the same player moderation multiple times successfully.
       tags:
         - playermoderation
