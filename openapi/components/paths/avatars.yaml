@@ -137,7 +137,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/avatar/AvatarNotFoundError.yaml
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: getAvatar
       security:
         - apiKeyCookie: []
@@ -155,7 +155,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/avatar/AvatarNotFoundError.yaml
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
       description: Update information about a specific avatar.
       tags:
         - avatars
@@ -207,7 +207,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/avatar/AvatarNotFoundError.yaml
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
       tags:
         - avatars
       description: 'Delete an avatar. Notice an avatar is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The AvatarID is permanently reserved.'
@@ -224,7 +224,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/avatar/AvatarNotFoundError.yaml
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: selectAvatar
       security:
         - apiKeyCookie: []
