@@ -1,0 +1,5 @@
+description: Returns a single World object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/World.yaml
