@@ -179,7 +179,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: ../../openapi.yaml#/components/responses/FileVersionUploadInfo
+          $ref: ../responses/files/FileVersionUploadStatus.yaml
       operationId: getFileDataUploadStatus
       security:
         - apiKeyCookie: []

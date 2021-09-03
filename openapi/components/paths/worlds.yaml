@@ -1,0 +1,415 @@
+openapi: 3.0.3
+info:
+  title: worlds
+  version: '1.0'
+  description: A
+paths:
+  /worlds:
+    get:
+      summary: Search All Worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          $ref: ../responses/worlds/LimitedWorldListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: searchWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/featured
+        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
+        - schema:
+            type: string
+            enum:
+              - me
+          in: query
+          required: false
+          name: user
+          description: Set to `me` for searching own worlds.
+        - $ref: ../../openapi.yaml#/components/parameters/userIdQuery
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../../openapi.yaml#/components/parameters/search
+        - $ref: ../../openapi.yaml#/components/parameters/tag
+        - $ref: ../../openapi.yaml#/components/parameters/notag
+        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
+        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/platform
+      description: Search and list any worlds by query filters.
+    post:
+      summary: Create World
+      operationId: createWorld
+      responses:
+        '200':
+          $ref: ../responses/worlds/WorldResponse.yaml
+        '400':
+          $ref: ../responses/CreateWorldNotAllowedYetError.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assetUrl:
+                  type: string
+                  minLength: 1
+                assetVersion:
+                  type: string
+                  minLength: 1
+                authorId:
+                  $ref: ../schemas/UserID.yaml
+                authorName:
+                  type: string
+                  minLength: 1
+                capacity:
+                  type: integer
+                  minimum: 1
+                  maximum: 40
+                  default: 16
+                  example: 16
+                description:
+                  type: string
+                id:
+                  $ref: ../schemas/WorldID.yaml
+                imageUrl:
+                  type: string
+                  minLength: 1
+                name:
+                  type: string
+                  minLength: 1
+                platform:
+                  $ref: ../schemas/Platform.yaml
+                releaseStatus:
+                  $ref: ../schemas/ReleaseStatus.yaml
+                tags:
+                  type: array
+                  items:
+                    $ref: ../schemas/Tag.yaml
+                unityPackageUrl:
+                  type: string
+                  minLength: 1
+                unityVersion:
+                  type: string
+                  minLength: 1
+                  default: 5.3.4p1
+                  example: 2018.4.20f1
+              required:
+                - assetUrl
+                - imageUrl
+                - name
+        description: ''
+      description: 'Create a new world. This endpoint requires `assetUrl` to be a valid File object with `.vrcw` file extension, and `imageUrl` to be a valid File object with an image file extension.'
+      tags:
+        - worlds
+  /worlds/active:
+    get:
+      summary: List Active Worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          $ref: ../responses/worlds/LimitedWorldListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getActiveWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/featured
+        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../../openapi.yaml#/components/parameters/search
+        - $ref: ../../openapi.yaml#/components/parameters/tag
+        - $ref: ../../openapi.yaml#/components/parameters/notag
+        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
+        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/platform
+      description: Search and list currently Active worlds by query filters.
+  /worlds/recent:
+    get:
+      summary: List Recent Worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          $ref: ../responses/worlds/LimitedWorldListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/SeeOtherUserRecentsError.yaml
+      operationId: getRecentWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/featured
+        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../../openapi.yaml#/components/parameters/search
+        - $ref: ../../openapi.yaml#/components/parameters/tag
+        - $ref: ../../openapi.yaml#/components/parameters/notag
+        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
+        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/platform
+        - $ref: ../../openapi.yaml#/components/parameters/userIdAdmin
+      description: Search and list recently visited worlds by query filters.
+  /worlds/favorites:
+    get:
+      summary: List Favorited Worlds
+      tags:
+        - worlds
+      responses:
+        '200':
+          $ref: ../responses/worlds/LimitedWorldListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/SeeOtherUserFavoritesError.yaml
+      operationId: getFavoritedWorlds
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      parameters:
+        - $ref: ../../openapi.yaml#/components/parameters/featured
+        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
+        - $ref: ../../openapi.yaml#/components/parameters/number
+        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
+        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../../openapi.yaml#/components/parameters/search
+        - $ref: ../../openapi.yaml#/components/parameters/tag
+        - $ref: ../../openapi.yaml#/components/parameters/notag
+        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
+        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
+        - $ref: ../../openapi.yaml#/components/parameters/platform
+        - $ref: ../../openapi.yaml#/components/parameters/userIdAdmin
+      description: Search and list favorited worlds by query filters.
+  '/worlds/{worldId}':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/worldId
+    get:
+      summary: Get World by ID
+      tags:
+        - worlds
+      operationId: getWorld
+      responses:
+        '200':
+          $ref: ../responses/worlds/WorldResponse.yaml
+        '404':
+          $ref: ../responses/WorldNotFoundError.yaml
+      description: Get information about a specific World.
+    put:
+      summary: Update World
+      operationId: updateWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/worlds/WorldResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/WorldNotFoundError.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assetUrl:
+                  type: string
+                  minLength: 1
+                assetVersion:
+                  type: string
+                  minLength: 1
+                authorId:
+                  $ref: ../schemas/UserID.yaml
+                authorName:
+                  type: string
+                  minLength: 1
+                capacity:
+                  type: integer
+                  minimum: 1
+                  maximum: 40
+                  default: 16
+                  example: 16
+                description:
+                  type: string
+                id:
+                  $ref: ../schemas/WorldID.yaml
+                imageUrl:
+                  type: string
+                  minLength: 1
+                name:
+                  type: string
+                  minLength: 1
+                platform:
+                  $ref: ../schemas/Platform.yaml
+                releaseStatus:
+                  $ref: ../schemas/ReleaseStatus.yaml
+                tags:
+                  type: array
+                  items:
+                    $ref: ../schemas/Tag.yaml
+                unityPackageUrl:
+                  type: string
+                  minLength: 1
+                unityVersion:
+                  type: string
+                  minLength: 1
+                  default: 5.3.4p1
+                  example: 2018.4.20f1
+      description: Update information about a specific World.
+      tags:
+        - worlds
+    delete:
+      summary: Delete World
+      operationId: deleteWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/WorldNotFoundError.yaml
+      description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
+      tags:
+        - worlds
+  '/worlds/{worldId}/{instanceId}':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/worldId
+      - $ref: ../../openapi.yaml#/components/parameters/instanceId
+    get:
+      summary: Get World Instance
+      tags:
+        - worlds
+      operationId: getWorldInstance
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns a worlds instance.
+      responses:
+        '200':
+          $ref: ../responses/worlds/InstanceResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+  '/worlds/{worldId}/metadata':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/worldId
+    get:
+      summary: Get World Metadata
+      tags:
+        - worlds
+      operationId: getWorldMetadata
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      deprecated: true
+      description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  id:
+                    $ref: ../schemas/WorldID.yaml
+                  metadata:
+                    type: object
+                    readOnly: true
+                required:
+                  - id
+                  - metadata
+                readOnly: true
+        '404':
+          $ref: ../responses/WorldNotFoundError.yaml
+  '/worlds/{worldId}/publish':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/worldId
+    get:
+      summary: Get World Publish Status
+      tags:
+        - worlds
+      operationId: getWorldPublishStatus
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns a worlds publish status.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  canPubilsh:
+                    type: boolean
+                    default: true
+                    readOnly: true
+                required:
+                  - canPubilsh
+                readOnly: true
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/WorldNotFoundError.yaml
+    put:
+      summary: Publish World
+      operationId: publishWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          description: TODO
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/WorldNotFoundError.yaml
+      description: Publish a world. You can only publish one world per week.
+      tags:
+        - worlds
+    delete:
+      summary: Unpublish World
+      operationId: unpublishWorld
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/WorldNotFoundError.yaml
+      description: Unpublish a world.
+      tags:
+        - worlds
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes

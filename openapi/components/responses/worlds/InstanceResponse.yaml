@@ -1,0 +1,5 @@
+description: Returns a single Instance object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Instance.yaml
