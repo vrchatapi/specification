@@ -2,7 +2,7 @@ description: Error response when trying to search list of users with an invalid 
 content:
   application/json:
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Error.yaml
     examples:
       400 N is too low:
         value:

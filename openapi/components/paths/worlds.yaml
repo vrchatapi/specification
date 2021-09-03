@@ -48,7 +48,7 @@ paths:
         '200':
           $ref: ../responses/worlds/WorldResponse.yaml
         '400':
-          $ref: ../responses/CreateWorldNotAllowedYetError.yaml
+          $ref: ../responses/worlds/WorldCreateNotAllowedYetError.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       requestBody:
@@ -147,7 +147,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '403':
-          $ref: ../responses/SeeOtherUserRecentsError.yaml
+          $ref: ../responses/worlds/WorldSeeOtherUserRecentsError.yaml
       operationId: getRecentWorlds
       security:
         - apiKeyCookie: []
@@ -178,7 +178,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '403':
-          $ref: ../responses/SeeOtherUserFavoritesError.yaml
+          $ref: ../responses/worlds/WorldSeeOtherUserFavoritesError.yaml
       operationId: getFavoritedWorlds
       security:
         - apiKeyCookie: []
@@ -210,7 +210,7 @@ paths:
         '200':
           $ref: ../responses/worlds/WorldResponse.yaml
         '404':
-          $ref: ../responses/WorldNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
       description: Get information about a specific World.
     put:
       summary: Update World
@@ -224,7 +224,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/WorldNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
       requestBody:
         content:
           application/json:
@@ -289,7 +289,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/WorldNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
       description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
       tags:
         - worlds
@@ -343,7 +343,7 @@ paths:
                   - metadata
                 readOnly: true
         '404':
-          $ref: ../responses/WorldNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
   '/worlds/{worldId}/publish':
     parameters:
       - $ref: ../../openapi.yaml#/components/parameters/worldId
@@ -375,7 +375,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/WorldNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
     put:
       summary: Publish World
       operationId: publishWorld
@@ -388,7 +388,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/WorldNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
       description: Publish a world. You can only publish one world per week.
       tags:
         - worlds
@@ -404,7 +404,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/WorldNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
       description: Unpublish a world.
       tags:
         - worlds

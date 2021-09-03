@@ -1,0 +1,11 @@
+description: Error response when trying to see favourited avatars of another user without sufficient admin permissions.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      404 Cant See Other User Favorite Avatars:
+        value:
+          error:
+            message: \"You can only see your own favorite avatars!\"
+            status_code: 403

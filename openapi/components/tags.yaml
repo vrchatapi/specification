@@ -1,0 +1,11 @@
+- name: authentication
+- name: avatars
+- name: favorites
+- name: files
+- name: friends
+- name: notifications
+- name: permissions
+- name: playermoderation
+- name: system
+- name: users
+- name: worlds
