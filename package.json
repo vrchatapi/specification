@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "lint": "node ./node_modules/\\@stoplight/spectral/dist/cli/index.js lint openapi/openapi.yaml -F warn",
-    "bundle": "npx @redocly/openapi-cli bundle openapi/openapi.yaml -o dist/openapi.yaml"
+    "bundle": "node ./node_modules/\\@redocly/openapi-cli/bin/cli.js bundle openapi/openapi.yaml -o dist/openapi.yaml"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@redocly/openapi-cli": "^1.0.0-beta.58",
     "@stoplight/spectral": "^5.9.1"
   }
 }
