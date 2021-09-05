@@ -1,0 +1,6 @@
+type: string
+title: InviteMessageType
+description: ''
+default: message
+enum:
+  - message
