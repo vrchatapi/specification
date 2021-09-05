@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  title: message
+  version: '1.0'
+  description: A
+paths:
+  '/message/{userId}/message':
+    parameters:
+      - $ref: ../../openapi.yaml#/components/parameters/userId
+    get:
+      summary: Your GET endpoint
+      tags:
+        - message
+      responses: {}
+      operationId: getInviteMessages
+tags:
+  $ref: ../../openapi.yaml#/tags
+components:
+  securitySchemes:
+    $ref: ../../openapi.yaml#/components/securitySchemes
