@@ -1,0 +1,24 @@
+apiKeyQuery:
+  name: apiKey
+  type: apiKey
+  in: query
+  description: API Key via Query
+apiKeyCookie:
+  name: apiKey
+  type: apiKey
+  in: cookie
+  description: API Key via Cookie
+authHeader:
+  type: http
+  scheme: basic
+  description: Auth token via Header
+authCookie:
+  name: auth
+  type: apiKey
+  in: cookie
+  description: Auth Token via Cookie
+twoFactorAuthCookie:
+  name: twoFactorAuth
+  type: apiKey
+  in: cookie
+  description: 2FA device remembrance via Cookie
