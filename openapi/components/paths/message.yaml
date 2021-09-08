@@ -6,7 +6,7 @@ info:
 paths:
   '/message/{userId}/message':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/userId
+      - $ref: ../parameters.yaml#/userId
     get:
       summary: Your GET endpoint
       tags:
@@ -14,7 +14,7 @@ paths:
       responses: {}
       operationId: getInviteMessages
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml
 components:
   securitySchemes:
-    $ref: ../../openapi.yaml#/components/securitySchemes
+    $ref: ../securitySchemes.yaml

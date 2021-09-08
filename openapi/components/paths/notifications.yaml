@@ -43,8 +43,8 @@ paths:
           in: query
           name: after
           description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
   '/auth/user/notifications/{notificationId}/see':
     parameters:
       - schema:
@@ -126,7 +126,7 @@ paths:
       tags:
         - notifications
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml
 components:
   securitySchemes:
-    $ref: ../../openapi.yaml#/components/securitySchemes
+    $ref: ../securitySchemes.yaml

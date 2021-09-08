@@ -19,8 +19,8 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/featured
-        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
+        - $ref: ../parameters.yaml#/featured
+        - $ref: ../parameters.yaml#/sortOptions
         - schema:
             type: string
             enum:
@@ -29,17 +29,17 @@ paths:
           required: false
           name: user
           description: Set to `me` for searching own worlds.
-        - $ref: ../../openapi.yaml#/components/parameters/userIdQuery
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
-        - $ref: ../../openapi.yaml#/components/parameters/offset
-        - $ref: ../../openapi.yaml#/components/parameters/search
-        - $ref: ../../openapi.yaml#/components/parameters/tag
-        - $ref: ../../openapi.yaml#/components/parameters/notag
-        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
-        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/platform
+        - $ref: ../parameters.yaml#/userIdQuery
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/orderOptions
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/search
+        - $ref: ../parameters.yaml#/tag
+        - $ref: ../parameters.yaml#/notag
+        - $ref: ../parameters.yaml#/releaseStatus
+        - $ref: ../parameters.yaml#/maxUnityVersion
+        - $ref: ../parameters.yaml#/minUnityVersion
+        - $ref: ../parameters.yaml#/platform
       description: Search and list any worlds by query filters.
     post:
       summary: Create World
@@ -123,18 +123,18 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/featured
-        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
-        - $ref: ../../openapi.yaml#/components/parameters/offset
-        - $ref: ../../openapi.yaml#/components/parameters/search
-        - $ref: ../../openapi.yaml#/components/parameters/tag
-        - $ref: ../../openapi.yaml#/components/parameters/notag
-        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
-        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/platform
+        - $ref: ../parameters.yaml#/featured
+        - $ref: ../parameters.yaml#/sortOptions
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/orderOptions
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/search
+        - $ref: ../parameters.yaml#/tag
+        - $ref: ../parameters.yaml#/notag
+        - $ref: ../parameters.yaml#/releaseStatus
+        - $ref: ../parameters.yaml#/maxUnityVersion
+        - $ref: ../parameters.yaml#/minUnityVersion
+        - $ref: ../parameters.yaml#/platform
       description: Search and list currently Active worlds by query filters.
   /worlds/recent:
     get:
@@ -153,19 +153,19 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/featured
-        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
-        - $ref: ../../openapi.yaml#/components/parameters/offset
-        - $ref: ../../openapi.yaml#/components/parameters/search
-        - $ref: ../../openapi.yaml#/components/parameters/tag
-        - $ref: ../../openapi.yaml#/components/parameters/notag
-        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
-        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/platform
-        - $ref: ../../openapi.yaml#/components/parameters/userIdAdmin
+        - $ref: ../parameters.yaml#/featured
+        - $ref: ../parameters.yaml#/sortOptions
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/orderOptions
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/search
+        - $ref: ../parameters.yaml#/tag
+        - $ref: ../parameters.yaml#/notag
+        - $ref: ../parameters.yaml#/releaseStatus
+        - $ref: ../parameters.yaml#/maxUnityVersion
+        - $ref: ../parameters.yaml#/minUnityVersion
+        - $ref: ../parameters.yaml#/platform
+        - $ref: ../parameters.yaml#/userIdAdmin
       description: Search and list recently visited worlds by query filters.
   /worlds/favorites:
     get:
@@ -184,23 +184,23 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/featured
-        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
-        - $ref: ../../openapi.yaml#/components/parameters/offset
-        - $ref: ../../openapi.yaml#/components/parameters/search
-        - $ref: ../../openapi.yaml#/components/parameters/tag
-        - $ref: ../../openapi.yaml#/components/parameters/notag
-        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
-        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/platform
-        - $ref: ../../openapi.yaml#/components/parameters/userIdAdmin
+        - $ref: ../parameters.yaml#/featured
+        - $ref: ../parameters.yaml#/sortOptions
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/orderOptions
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/search
+        - $ref: ../parameters.yaml#/tag
+        - $ref: ../parameters.yaml#/notag
+        - $ref: ../parameters.yaml#/releaseStatus
+        - $ref: ../parameters.yaml#/maxUnityVersion
+        - $ref: ../parameters.yaml#/minUnityVersion
+        - $ref: ../parameters.yaml#/platform
+        - $ref: ../parameters.yaml#/userIdAdmin
       description: Search and list favorited worlds by query filters.
   '/worlds/{worldId}':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/worldId
+      - $ref: ../parameters.yaml#/worldId
     get:
       summary: Get World by ID
       tags:
@@ -295,8 +295,8 @@ paths:
         - worlds
   '/worlds/{worldId}/{instanceId}':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/worldId
-      - $ref: ../../openapi.yaml#/components/parameters/instanceId
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
     get:
       summary: Get World Instance
       tags:
@@ -313,7 +313,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
   '/worlds/{worldId}/metadata':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/worldId
+      - $ref: ../parameters.yaml#/worldId
     get:
       summary: Get World Metadata
       tags:
@@ -346,7 +346,7 @@ paths:
           $ref: ../responses/worlds/WorldNotFoundError.yaml
   '/worlds/{worldId}/publish':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/worldId
+      - $ref: ../parameters.yaml#/worldId
     get:
       summary: Get World Publish Status
       tags:
@@ -409,7 +409,7 @@ paths:
       tags:
         - worlds
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml
 components:
   securitySchemes:
-    $ref: ../../openapi.yaml#/components/securitySchemes
+    $ref: ../securitySchemes.yaml

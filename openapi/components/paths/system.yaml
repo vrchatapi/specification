@@ -82,4 +82,4 @@ paths:
         **NOTE:** The response type is not of JSON, but is a string in plain ASCII format.
       security: []
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml

@@ -194,7 +194,7 @@ paths:
         - authCookie: []
   '/user/{userId}/delete':
     parameters:
-      - $ref: '../../openapi.yaml#/components/parameters/userId'
+      - $ref: '../parameters.yaml#/userId'
     put:
       summary: Delete User
       operationId: deleteUser
@@ -219,7 +219,9 @@ paths:
         - apiKeyCookie: []
           authCookie: []
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml
 components:
+  parameters:
+    $ref: ../parameters.yaml
   securitySchemes:
-    $ref: ../../openapi.yaml#/components/securitySchemes
+    $ref: ../securitySchemes.yaml
