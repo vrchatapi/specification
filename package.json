@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "VRChat API OpenAPI Specification",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "lint": "node ./node_modules/\\@stoplight/spectral/dist/cli/index.js lint openapi/openapi.yaml -F warn",
     "bundle": "node ./node_modules/\\@redocly/openapi-cli/bin/cli.js bundle openapi/openapi.yaml -o dist/openapi.yaml"
