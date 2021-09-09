@@ -19,6 +19,9 @@ paths:
         '401':
           $ref: ../responses/NotAuthorizedActionError.yaml
       operationId: getInviteMessages
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Returns a list of all that users Invite Messages. Admin Credentials are required to view messages of other users!
   '/message/{userId}/message/{messageId}':
     parameters:
@@ -36,10 +39,16 @@ paths:
         '401':
           $ref: ../responses/NotAuthorizedActionError.yaml
       operationId: getInviteMessage
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Returns a single Invite Message. This returns the exact same information but less than `getInviteMessages`. Admin Credentials are required to view messages of other users!
     put:
       summary: Update Invite Message
       operationId: updateInviteMessage
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: |-
         Updates a single Invite Message and then returns a list of all of them. Admin Credentials are required to update messages of other users!
 
@@ -58,6 +67,9 @@ paths:
     delete:
       summary: Reset Invite Message
       operationId: resetInviteMessage
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           $ref: ../responses/invite/InviteMessageListResponse.yaml
