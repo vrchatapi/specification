@@ -3,6 +3,7 @@
 - name: favorites
 - name: files
 - name: friends
+- name: invite
 - name: notifications
 - name: permissions
 - name: playermoderation

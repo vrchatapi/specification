@@ -20,14 +20,14 @@ paths:
           authCookie: []
       description: Returns a list of favorites.
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
         - schema:
             type: string
           in: query
           name: type
           description: 'The type of favorites to return, FavoriteType.'
-        - $ref: ../../openapi.yaml#/components/parameters/tag
+        - $ref: ../parameters.yaml#/tag
     post:
       summary: Add Favorite
       operationId: addFavorite
@@ -85,7 +85,7 @@ paths:
         - favorites
   '/favorites/{favoriteId}':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/favoriteId
+      - $ref: ../parameters.yaml#/favoriteId
     get:
       summary: Show Favorite
       tags:
@@ -134,8 +134,8 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
         - schema:
             type: string
           in: query
@@ -144,9 +144,9 @@ paths:
       description: Return a list of favorite groups owned by a user. Returns the same information as `getFavoriteGroups`.
   '/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/favoriteGroupType
-      - $ref: ../../openapi.yaml#/components/parameters/favoriteGroupName
-      - $ref: ../../openapi.yaml#/components/parameters/userId
+      - $ref: ../parameters.yaml#/favoriteGroupType
+      - $ref: ../parameters.yaml#/favoriteGroupName
+      - $ref: ../parameters.yaml#/userId
     get:
       summary: Show Favorite Group
       tags:
@@ -199,7 +199,7 @@ paths:
         - favorites
       description: Clear ALL contents of a specific favorite group.
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml
 components:
   securitySchemes:
-    $ref: ../../openapi.yaml#/components/securitySchemes
+    $ref: ../securitySchemes.yaml

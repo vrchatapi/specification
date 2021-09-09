@@ -1,0 +1,15 @@
+description: Error response when trying to fetch information about an Invite Message whos slot doesn't exist. Note `message` field is missing!
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        error:
+          $ref: ../../schemas/Error.yaml
+      required:
+        - error
+    examples:
+      Invite Message Not Found Error:
+        value:
+          error:
+            status_code: 404

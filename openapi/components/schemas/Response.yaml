@@ -7,5 +7,4 @@ properties:
   status_code:
     type: number
 required:
-  - message
   - status_code

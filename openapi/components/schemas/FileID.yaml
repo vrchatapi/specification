@@ -2,4 +2,3 @@ type: string
 title: FileID
 pattern: 'file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
 example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
-readOnly: true

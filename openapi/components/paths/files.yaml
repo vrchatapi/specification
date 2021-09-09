@@ -28,8 +28,8 @@ paths:
           name: userId
           deprecated: true
           description: 'UserID, will always generate a 500 permission error.'
-        - $ref: '../../openapi.yaml#/components/parameters/number'
-        - $ref: '../../openapi.yaml#/components/parameters/offset'
+        - $ref: '../parameters.yaml#/number'
+        - $ref: '../parameters.yaml#/offset'
       tags:
         - files
   /file:
@@ -70,7 +70,7 @@ paths:
       description: Creates a new File object
   '/file/{fileId}':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/fileId
+      - $ref: ../parameters.yaml#/fileId
     get:
       summary: Show File
       operationId: getFile
@@ -133,8 +133,8 @@ paths:
                 - signatureSizeInBytes
   '/file/{fileId}/{versionId}':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/fileId
-      - $ref: ../../openapi.yaml#/components/parameters/versionId
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
     get:
       summary: Download File Version
       tags:
@@ -170,9 +170,9 @@ paths:
         - files
   '/file/{fileId}/{versionId}/{fileType}/status':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/fileId
-      - $ref: ../../openapi.yaml#/components/parameters/versionId
-      - $ref: ../../openapi.yaml#/components/parameters/fileType
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+      - $ref: ../parameters.yaml#/fileType
     get:
       summary: Check FileData Upload Status
       tags:
@@ -187,9 +187,9 @@ paths:
       description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
   '/file/{fileId}/{versionId}/{fileType}/start':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/fileId
-      - $ref: ../../openapi.yaml#/components/parameters/versionId
-      - $ref: ../../openapi.yaml#/components/parameters/fileType
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+      - $ref: ../parameters.yaml#/fileType
     put:
       summary: Start FileData Upload
       tags:
@@ -243,9 +243,9 @@ paths:
         **Note:** `nextPartNumber` seems like it is always ignored. Despite it returning 0, first partNumber is always 1.
   '/file/{fileId}/{versionId}/{fileType}/finish':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/fileId
-      - $ref: ../../openapi.yaml#/components/parameters/versionId
-      - $ref: ../../openapi.yaml#/components/parameters/fileType
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+      - $ref: ../parameters.yaml#/fileType
     put:
       summary: Finish FileData Upload
       tags:
@@ -307,7 +307,7 @@ paths:
           authCookie: []
       description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml
 components:
   securitySchemes:
-    $ref: ../../openapi.yaml#/components/securitySchemes
+    $ref: ../securitySchemes.yaml

@@ -21,19 +21,19 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/featured
-        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
-        - $ref: ../../openapi.yaml#/components/parameters/offset
-        - $ref: ../../openapi.yaml#/components/parameters/search
-        - $ref: ../../openapi.yaml#/components/parameters/tag
-        - $ref: ../../openapi.yaml#/components/parameters/notag
-        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
-        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/platform
-        - $ref: ../../openapi.yaml#/components/parameters/userIdAdmin
+        - $ref: ../parameters.yaml#/featured
+        - $ref: ../parameters.yaml#/sortOptions
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/orderOptions
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/search
+        - $ref: ../parameters.yaml#/tag
+        - $ref: ../parameters.yaml#/notag
+        - $ref: ../parameters.yaml#/releaseStatus
+        - $ref: ../parameters.yaml#/maxUnityVersion
+        - $ref: ../parameters.yaml#/minUnityVersion
+        - $ref: ../parameters.yaml#/platform
+        - $ref: ../parameters.yaml#/userIdAdmin
       description: Search and list favorited avatars by query filters.
   /avatars:
     get:
@@ -50,8 +50,8 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/featured
-        - $ref: ../../openapi.yaml#/components/parameters/sortOptions
+        - $ref: ../parameters.yaml#/featured
+        - $ref: ../parameters.yaml#/sortOptions
         - schema:
             type: string
             enum:
@@ -60,16 +60,16 @@ paths:
           required: false
           name: user
           description: Set to `me` for searching own avatars.
-        - $ref: ../../openapi.yaml#/components/parameters/userIdQuery
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/orderOptions
-        - $ref: ../../openapi.yaml#/components/parameters/offset
-        - $ref: ../../openapi.yaml#/components/parameters/tag
-        - $ref: ../../openapi.yaml#/components/parameters/notag
-        - $ref: ../../openapi.yaml#/components/parameters/releaseStatus
-        - $ref: ../../openapi.yaml#/components/parameters/maxUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/minUnityVersion
-        - $ref: ../../openapi.yaml#/components/parameters/platform
+        - $ref: ../parameters.yaml#/userIdQuery
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/orderOptions
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/tag
+        - $ref: ../parameters.yaml#/notag
+        - $ref: ../parameters.yaml#/releaseStatus
+        - $ref: ../parameters.yaml#/maxUnityVersion
+        - $ref: ../parameters.yaml#/minUnityVersion
+        - $ref: ../parameters.yaml#/platform
       description: Search and list avatars by query filters. You can only search your own or featured avatars. It is not possible as a normal user to search other peoples avatars.
     post:
       summary: Create Avatar
@@ -126,7 +126,7 @@ paths:
       description: Create an avatar. It's possible to optionally specify a ID if you want a custom one. Attempting to create an Avatar with an already claimed ID will result in a DB error.
   '/avatars/{avatarId}':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/avatarId
+      - $ref: ../parameters.yaml#/avatarId
     get:
       summary: Get Avatar
       tags:
@@ -213,7 +213,7 @@ paths:
       description: 'Delete an avatar. Notice an avatar is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The AvatarID is permanently reserved.'
   '/avatars/{avatarId}/select':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/avatarId
+      - $ref: ../parameters.yaml#/avatarId
     put:
       summary: Select Avatar
       tags:
@@ -231,7 +231,7 @@ paths:
           authCookie: []
       description: Switches into that avatar.
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml
 components:
   securitySchemes:
-    $ref: ../../openapi.yaml#/components/securitySchemes
+    $ref: ../securitySchemes.yaml

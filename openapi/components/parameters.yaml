@@ -1,0 +1,223 @@
+number:
+  name: 'n'
+  in: query
+  required: false
+  schema:
+    type: integer
+    maximum: 100
+    minimum: 1
+    default: 60
+  description: The number of objects to return.
+offset:
+  name: offset
+  in: query
+  required: false
+  schema:
+    type: integer
+    minimum: 0
+  description: A zero-based offset from the default object sorting from where search results start.
+sortOptions:
+  name: sort
+  in: query
+  required: false
+  schema:
+    title: SortOptions
+    type: string
+    default: popularity
+    enum:
+      - popularity
+      - heat
+      - trust
+      - shuffle
+      - random
+      - favorites
+      - reportScore
+      - reportCount
+      - publicationDate
+      - labsPublicationDate
+      - created
+      - _created_at
+      - updated
+      - _updated_at
+      - order
+      - relevance
+      - magic
+      - name
+    example: popularity
+    description: How to sort
+orderOptions:
+  name: order
+  in: query
+  required: false
+  schema:
+    title: OrderOptions
+    type: string
+    default: descending
+    enum:
+      - ascending
+      - descending
+    example: descending
+    description: Result ordering
+releaseStatus:
+  name: releaseStatus
+  in: query
+  required: false
+  schema:
+    type: string
+    default: hidden
+    enum:
+      - public
+      - private
+      - hidden
+    example: hidden
+  description: Filter by ReleaseStatus.
+offline:
+  name: offline
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: 'Returns *only* offline users if true, returns only online and active users if false'
+fileId:
+  name: fileId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: file_00000000-0000-0000-0000-000000000000
+    pattern: 'file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+versionId:
+  name: versionId
+  in: path
+  required: true
+  schema:
+    type: integer
+    minimum: 1
+    example: 1
+fileType:
+  name: fileType
+  in: path
+  required: true
+  schema:
+    type: string
+    enum:
+      - file
+      - signature
+      - delta
+    example: file
+userId:
+  name: userId
+  in: path
+  required: true
+  schema:
+    type: string
+maxUnityVersion:
+  name: maxUnityVersion
+  in: query
+  required: false
+  schema:
+    type: string
+  description: The maximum Unity version supported by the asset.
+minUnityVersion:
+  name: minUnityVersion
+  in: query
+  required: false
+  schema:
+    type: string
+  description: The minimum Unity version supported by the asset.
+platform:
+  name: platform
+  in: query
+  required: false
+  schema:
+    type: string
+  description: The platform the asset supports.
+tag:
+  name: tag
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Tags to include (comma-separated).
+notag:
+  name: notag
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Tags to exclude (comma-separated).
+search:
+  name: search
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Filters by world name.
+userIdQuery:
+  name: userId
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Filter by author UserID
+featured:
+  name: featured
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Filters on featured results.
+userIdAdmin:
+  name: userId
+  in: query
+  required: false
+  schema:
+    type: string
+  description: 'Target user to see information on, admin-only.'
+worldId:
+  name: worldId
+  in: path
+  required: true
+  schema:
+    type: string
+instanceId:
+  name: instanceId
+  in: path
+  required: true
+  schema:
+    type: string
+favoriteId:
+  name: favoriteId
+  in: path
+  required: true
+  schema:
+    type: string
+favoriteGroupType:
+  name: favoriteGroupType
+  in: path
+  required: true
+  schema:
+    type: string
+    enum:
+      - world
+      - friend
+      - avatar
+  description: 'The type of group to fetch, must be a valid FavoriteType.'
+favoriteGroupName:
+  name: favoriteGroupName
+  in: path
+  required: true
+  schema:
+    type: string
+avatarId:
+  name: avatarId
+  in: path
+  required: true
+  schema:
+    type: string
+messageId:
+  name: messageId
+  in: path
+  required: true
+  schema:
+    type: integer

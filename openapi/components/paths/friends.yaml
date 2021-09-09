@@ -25,13 +25,13 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/offset
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/offline
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offline
       description: List information about friends.
   '/user/{userId}/friendStatus':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/userId
+      - $ref: ../parameters.yaml#/userId
     get:
       summary: Check Friend Status
       tags:
@@ -48,7 +48,7 @@ paths:
       description: 'Retrieve if the user is currently a friend with a given user, if they have an outgoing friend request, and if they have an incoming friend request. The proper way to receive and accept friend request is by checking if the user has an incoming `Notification` of type `friendRequest`, and then accepting that notification.'
   '/user/{userId}/friendRequest':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/userId
+      - $ref: ../parameters.yaml#/userId
     post:
       summary: Send Friend Request
       tags:
@@ -83,7 +83,7 @@ paths:
           $ref: ../responses/friends/DeleteFriendRequestError.yaml
   '/auth/user/friends/{userId}':
     parameters:
-      - $ref: ../../openapi.yaml#/components/parameters/userId
+      - $ref: ../parameters.yaml#/userId
     delete:
       summary: Unfriend
       operationId: unfriend
@@ -101,7 +101,7 @@ paths:
       tags:
         - friends
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml
 components:
   securitySchemes:
-    $ref: ../../openapi.yaml#/components/securitySchemes
+    $ref: ../securitySchemes.yaml

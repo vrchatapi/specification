@@ -68,8 +68,8 @@ paths:
       tags:
         - permissions
       parameters:
-        - $ref: ../../openapi.yaml#/components/parameters/number
-        - $ref: ../../openapi.yaml#/components/parameters/offset
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
         - schema:
             type: string
           in: query
@@ -138,10 +138,10 @@ paths:
       tags:
         - permissions
 tags:
-  $ref: ../../openapi.yaml#/tags
+  $ref: ../tags.yaml
 components:
   securitySchemes:
-    $ref: ../../openapi.yaml#/components/securitySchemes
+    $ref: ../securitySchemes.yaml
   responses:
     PermissionListResponse:
       description: Returns a list of Permission objects.
