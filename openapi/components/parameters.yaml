@@ -215,3 +215,9 @@ avatarId:
   required: true
   schema:
     type: string
+messageId:
+  name: messageId
+  in: path
+  required: true
+  schema:
+    type: integer

@@ -1,0 +1,21 @@
+description: Error response when trying to update an Invite Message with invalid slot number.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        error:
+          $ref: ../schemas/Error.yaml
+      required:
+        - error
+    examples:
+      Negative Slot Number Error:
+        value:
+          error:
+            message: 'Really? A negative slot? Tsk-tsk․․․'
+            status_code: 400
+      Too High Slot Number Error:
+        value:
+          error:
+            message: 'That is too high of a slot number․'
+            status_code: 400

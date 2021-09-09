@@ -14,8 +14,44 @@ paths:
       responses:
         '200':
           $ref: ../responses/invite/InviteMessageListResponse.yaml
+        '400':
+          $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
+        '401':
+          $ref: ../responses/NotAuthorizedActionError.yaml
       operationId: getInviteMessages
-      description: Returns a list of all that users Invite Messages. Admin Credentials are required to view messages of other users.
+      description: Returns a list of all that users Invite Messages. Admin Credentials are required to view messages of other users!
+  '/message/{userId}/message/{messageId}':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/messageId
+    get:
+      summary: Get Invite Messages
+      tags:
+        - invite
+      responses:
+        '200':
+          $ref: ../responses/invite/InviteMessageResponse.yaml
+        '400':
+          $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
+        '401':
+          $ref: ../responses/NotAuthorizedActionError.yaml
+      operationId: getInviteMessage
+      description: Returns a single Invite Message. This returns the exact same information but less than `getInviteMessages`. Admin Credentials are required to view messages of other users!
+    put:
+      summary: Update Invite Message
+      operationId: updateInviteMessage
+      description: Updates a single Invite Message and then returns a list of all of them. Admin Credentials are required to update messages of other users!
+      responses:
+        '200':
+          $ref: ../responses/invite/InviteMessageListResponse.yaml
+        '400':
+          $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
+        '401':
+          $ref: ../responses/NotAuthorizedActionError.yaml
+        '429':
+          $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
+      tags:
+        - invite
 tags:
   $ref: ../tags.yaml
 components:

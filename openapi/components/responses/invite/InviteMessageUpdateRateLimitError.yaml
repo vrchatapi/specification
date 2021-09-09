@@ -1,0 +1,16 @@
+description: Error response when trying to update an Invite Message before the cooldown has expired.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        error:
+          $ref: ../schemas/Error.yaml
+      required:
+        - error
+    examples:
+      Update Invite Message Please Wait Error:
+        value:
+          error:
+            message: 'Please wait 60 more minutes until you try again․'
+            status_code: 429
