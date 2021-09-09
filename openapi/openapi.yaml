@@ -20,7 +20,5 @@ components:
   securitySchemes:
     $ref: ./components/securitySchemes.yaml
   responses: {}
-  parameters:
-    $ref: ./components/parameters.yaml
 tags:
   $ref: ./components/tags.yaml
