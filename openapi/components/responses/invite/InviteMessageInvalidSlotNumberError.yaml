@@ -5,7 +5,7 @@ content:
       type: object
       properties:
         error:
-          $ref: ../schemas/Error.yaml
+          $ref: ../../schemas/Error.yaml
       required:
         - error
     examples:

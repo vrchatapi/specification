@@ -102,3 +102,7 @@
   $ref: ./paths/permissions.yaml#/paths/~1permissions
 '/permissions/{permissionId}':
   $ref: './paths/permissions.yaml#/paths/~1permissions~1{permissionId}'
+'/message/{userId}/message':
+  $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1message'
+'/message/{userId}/message/{messageId}':
+  $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1message~1{messageId}'

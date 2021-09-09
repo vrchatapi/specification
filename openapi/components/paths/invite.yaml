@@ -8,7 +8,7 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
-      summary: Get Invite Messages
+      summary: List Invite Messages
       tags:
         - invite
       responses:
@@ -40,7 +40,10 @@ paths:
     put:
       summary: Update Invite Message
       operationId: updateInviteMessage
-      description: Updates a single Invite Message and then returns a list of all of them. Admin Credentials are required to update messages of other users!
+      description: |-
+        Updates a single Invite Message and then returns a list of all of them. Admin Credentials are required to update messages of other users!
+
+        Updating a message automatically sets the cooldown timer to 60 minutes. Trying to edit a message before the cooldown timer expires results in a 429 Too Fast Error.
       responses:
         '200':
           $ref: ../responses/invite/InviteMessageListResponse.yaml
@@ -52,6 +55,24 @@ paths:
           $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
       tags:
         - invite
+    delete:
+      summary: Reset Invite Message
+      operationId: resetInviteMessage
+      responses:
+        '200':
+          $ref: ../responses/invite/InviteMessageListResponse.yaml
+        '400':
+          $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
+        '401':
+          $ref: ../responses/NotAuthorizedActionError.yaml
+        '429':
+          $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
+      tags:
+        - invite
+      description: |-
+        Resets a single Invite Message back to it's original message, and then returns a list of all of them. Admin Credentials are required to update messages of other users!
+
+        Resetting a message respects the rate-limit, but resetting it does not set the rate-limit to 60 like when editing it. It is possible to edit it right after resetting it. Trying to edit a message before the cooldown timer expires results in a 429 Too Fast Error.
 tags:
   $ref: ../tags.yaml
 components:
