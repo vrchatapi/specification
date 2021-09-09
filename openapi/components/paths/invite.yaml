@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: message
+  title: invite
   version: '1.0'
   description: A
 paths:
@@ -8,11 +8,14 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
-      summary: Your GET endpoint
+      summary: Get Invite Messages
       tags:
-        - message
-      responses: {}
+        - invite
+      responses:
+        '200':
+          $ref: ../responses/invite/InviteMessageListResponse.yaml
       operationId: getInviteMessages
+      description: Returns a list of all that users Invite Messages. Admin Credentials are required to view messages of other users.
 tags:
   $ref: ../tags.yaml
 components:
