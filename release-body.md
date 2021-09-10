@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.2.1
+
+* **Minor breaking:** `location` is not returned by LimitedUser (gotten via `searchUsers`)
+
 ## 1.2.0
 
 * **BREAKING:** `FileVersionUploadInfo` renamed to `FileVersionUploadStatus`.
