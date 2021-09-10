@@ -1,5 +1,6 @@
 title: LimitedUser
 type: object
+description: ''
 properties:
   id:
     $ref: ./UserID.yaml
@@ -29,13 +30,9 @@ properties:
     $ref: ./UserStatus.yaml
   isFriend:
     type: boolean
-  location:
-    type: string
   tags:
     type: array
-    description: <-
-      Always empty.
-      
+    description: <- Always empty.
     items:
       $ref: ./Tag.yaml
 required:
@@ -52,6 +49,4 @@ required:
   - last_platform
   - status
   - isFriend
-  - location
   - tags
-description: ''
