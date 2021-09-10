@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.2.2
+
+* **Minor breaking:** `last_platform` can be more than just `standalonewindows` or `android`, but can pretty much be any random Unity version. So changed from Enum to string.
+
 ## 1.2.1
 
 * **Minor breaking:** `location` is not returned by LimitedUser (gotten via `searchUsers`)
