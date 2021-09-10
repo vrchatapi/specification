@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.2.1
+  version: 1.2.2
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -2285,9 +2285,11 @@ components:
     Platform:
       type: string
       title: Platform
-      enum:
-        - standalonewindows
-        - android
+      example: standalonewindows
+      description: >-
+        This can be `standalonewindows` or `android`, but can also pretty much
+        be any random Unity verison such as `2019.2.4-801-Release` or
+        `2019.2.2-772-Release` or even `unknownplatform`.
     UserStatus:
       title: UserStatus
       type: string
