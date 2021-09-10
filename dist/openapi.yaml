@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.1.2
+  version: 1.2.1
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -2087,6 +2087,102 @@ paths:
       description: >-
         Returns a single permission. This endpoint is pretty useless, as it
         returns the exact same information as `/auth/permissions`.
+  '/message/{userId}/message':
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: List Invite Messages
+      tags:
+        - invite
+      responses:
+        '200':
+          $ref: '#/components/responses/InviteMessageListResponse'
+        '400':
+          $ref: '#/components/responses/InviteMessageInvalidSlotNumberError'
+        '401':
+          $ref: '#/components/responses/NotAuthorizedActionError'
+      operationId: getInviteMessages
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: >-
+        Returns a list of all that users Invite Messages. Admin Credentials are
+        required to view messages of other users!
+  '/message/{userId}/message/{messageId}':
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/messageId'
+    get:
+      summary: Get Invite Messages
+      tags:
+        - invite
+      responses:
+        '200':
+          $ref: '#/components/responses/InviteMessageResponse'
+        '400':
+          $ref: '#/components/responses/InviteMessageInvalidSlotNumberError'
+        '401':
+          $ref: '#/components/responses/NotAuthorizedActionError'
+      operationId: getInviteMessage
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: >-
+        Returns a single Invite Message. This returns the exact same information
+        but less than `getInviteMessages`. Admin Credentials are required to
+        view messages of other users!
+    put:
+      summary: Update Invite Message
+      operationId: updateInviteMessage
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: >-
+        Updates a single Invite Message and then returns a list of all of them.
+        Admin Credentials are required to update messages of other users!
+
+
+        Updating a message automatically sets the cooldown timer to 60 minutes.
+        Trying to edit a message before the cooldown timer expires results in a
+        429 Too Fast Error.
+      responses:
+        '200':
+          $ref: '#/components/responses/InviteMessageListResponse'
+        '400':
+          $ref: '#/components/responses/InviteMessageInvalidSlotNumberError'
+        '401':
+          $ref: '#/components/responses/NotAuthorizedActionError'
+        '429':
+          $ref: '#/components/responses/InviteMessageUpdateRateLimitError'
+      tags:
+        - invite
+    delete:
+      summary: Reset Invite Message
+      operationId: resetInviteMessage
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/InviteMessageListResponse'
+        '400':
+          $ref: '#/components/responses/InviteMessageInvalidSlotNumberError'
+        '401':
+          $ref: '#/components/responses/NotAuthorizedActionError'
+        '429':
+          $ref: '#/components/responses/InviteMessageUpdateRateLimitError'
+      tags:
+        - invite
+      description: >-
+        Resets a single Invite Message back to it's original message, and then
+        returns a list of all of them. Admin Credentials are required to update
+        messages of other users!
+
+
+        Resetting a message respects the rate-limit, but resetting it does not
+        set the rate-limit to 60 like when editing it. It is possible to edit it
+        right after resetting it. Trying to edit a message before the cooldown
+        timer expires results in a 429 Too Fast Error.
 components:
   schemas:
     Response:
@@ -2099,7 +2195,6 @@ components:
         status_code:
           type: number
       required:
-        - message
         - status_code
     Error:
       title: Error
@@ -2117,7 +2212,6 @@ components:
       title: UserID
       type: string
       example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-      readOnly: true
     PastDisplayName:
       title: PastDisplayName
       type: object
@@ -2377,6 +2471,7 @@ components:
     LimitedUser:
       title: LimitedUser
       type: object
+      description: ''
       properties:
         id:
           $ref: '#/components/schemas/UserID'
@@ -2406,8 +2501,6 @@ components:
           $ref: '#/components/schemas/UserStatus'
         isFriend:
           type: boolean
-        location:
-          type: string
         tags:
           type: array
           description: <- Always empty.
@@ -2427,9 +2520,7 @@ components:
         - last_platform
         - status
         - isFriend
-        - location
         - tags
-      description: ''
     User:
       title: User
       type: object
@@ -3423,7 +3514,6 @@ components:
       pattern: >-
         file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
       example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
-      readOnly: true
     MIMEType:
       type: string
       title: MIMEType
@@ -3451,7 +3541,6 @@ components:
         - complete
         - none
       example: complete
-      readOnly: true
     FileData:
       description: ''
       type: object
@@ -3993,7 +4082,6 @@ components:
       pattern: >-
         fvrt_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
       example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
-      readOnly: true
     FavoriteType:
       type: string
       title: FavoriteType
@@ -4029,7 +4117,6 @@ components:
       pattern: >-
         fvgrp_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
       example: fvgrp_8a02a44b-dc3a-4a9a-bc77-77fa37996fc7
-      readOnly: true
     FavoriteGroupVisibility:
       type: string
       title: FavoriteGroupVisibility
@@ -4252,6 +4339,55 @@ components:
             avatar: 25
           maxFavoriteGroups:
             avatar: 4
+    InviteMessageID:
+      title: InviteMessageID
+      type: string
+      pattern: >-
+        (default|invm_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
+      example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
+    InviteMessageType:
+      type: string
+      title: InviteMessageType
+      description: ''
+      default: message
+      enum:
+        - message
+    InviteMessage:
+      description: ''
+      type: object
+      title: InviteMessage
+      properties:
+        id:
+          $ref: '#/components/schemas/InviteMessageID'
+        slot:
+          type: integer
+          minimum: 0
+        message:
+          type: string
+          minLength: 1
+        messageType:
+          $ref: '#/components/schemas/InviteMessageType'
+        updatedAt:
+          type: string
+          format: date-time
+        remainingCooldownMinutes:
+          type: integer
+          default: 0
+          minimum: 0
+          description: >-
+            Changes to 60 when updated, although probably server-side
+            configurable.
+        canBeUpdated:
+          type: boolean
+          default: true
+      required:
+        - id
+        - slot
+        - message
+        - messageType
+        - updatedAt
+        - remainingCooldownMinutes
+        - canBeUpdated
   securitySchemes:
     apiKeyQuery:
       name: apiKey
@@ -5074,7 +5210,87 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Permission'
+    InviteMessageListResponse:
+      description: Returns a list of InviteMessage objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/InviteMessage'
+    InviteMessageInvalidSlotNumberError:
+      description: >-
+        Error response when trying to update an Invite Message with invalid slot
+        number.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+            required:
+              - error
+          examples:
+            Negative Slot Number Error:
+              value:
+                error:
+                  message: Really? A negative slot? Tsk-tsk․․․
+                  status_code: 400
+            Too High Slot Number Error:
+              value:
+                error:
+                  message: That is too high of a slot number․
+                  status_code: 400
+    NotAuthorizedActionError:
+      description: Error response due to missing authorization to perform that action.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+            required:
+              - error
+          examples:
+            Not Authorized Example:
+              value:
+                error:
+                  message: You are not authorized to perform that action.
+                  status_code: 401
+    InviteMessageResponse:
+      description: Returns a single InviteMessage object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InviteMessage'
+    InviteMessageUpdateRateLimitError:
+      description: >-
+        Error response when trying to update an Invite Message before the
+        cooldown has expired.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+            required:
+              - error
+          examples:
+            Update Invite Message Please Wait Error:
+              value:
+                error:
+                  message: Please wait 60 more minutes until you try again․
+                  status_code: 429
   parameters:
+    userId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
     number:
       name: 'n'
       in: query
@@ -5095,61 +5311,6 @@ components:
       description: >-
         A zero-based offset from the default object sorting from where search
         results start.
-    sortOptions:
-      name: sort
-      in: query
-      required: false
-      schema:
-        title: SortOptions
-        type: string
-        default: popularity
-        enum:
-          - popularity
-          - heat
-          - trust
-          - shuffle
-          - random
-          - favorites
-          - reportScore
-          - reportCount
-          - publicationDate
-          - labsPublicationDate
-          - created
-          - _created_at
-          - updated
-          - _updated_at
-          - order
-          - relevance
-          - magic
-          - name
-        example: popularity
-        description: How to sort
-    orderOptions:
-      name: order
-      in: query
-      required: false
-      schema:
-        title: OrderOptions
-        type: string
-        default: descending
-        enum:
-          - ascending
-          - descending
-        example: descending
-        description: Result ordering
-    releaseStatus:
-      name: releaseStatus
-      in: query
-      required: false
-      schema:
-        type: string
-        default: hidden
-        enum:
-          - public
-          - private
-          - hidden
-        example: hidden
-      description: Filter by ReleaseStatus.
     offline:
       name: offline
       in: query
@@ -5187,12 +5348,96 @@ components:
           - signature
           - delta
         example: file
-    userId:
-      name: userId
-      in: path
-      required: true
+    featured:
+      name: featured
+      in: query
+      required: false
       schema:
         type: string
+      description: Filters on featured results.
+    sortOptions:
+      name: sort
+      in: query
+      required: false
+      schema:
+        title: SortOptions
+        type: string
+        default: popularity
+        enum:
+          - popularity
+          - heat
+          - trust
+          - shuffle
+          - random
+          - favorites
+          - reportScore
+          - reportCount
+          - publicationDate
+          - labsPublicationDate
+          - created
+          - _created_at
+          - updated
+          - _updated_at
+          - order
+          - relevance
+          - magic
+          - name
+        example: popularity
+        description: How to sort
+    userIdQuery:
+      name: userId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by author UserID
+    orderOptions:
+      name: order
+      in: query
+      required: false
+      schema:
+        title: OrderOptions
+        type: string
+        default: descending
+        enum:
+          - ascending
+          - descending
+        example: descending
+        description: Result ordering
+    search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filters by world name.
+    tag:
+      name: tag
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Tags to include (comma-separated).
+    notag:
+      name: notag
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Tags to exclude (comma-separated).
+    releaseStatus:
+      name: releaseStatus
+      in: query
+      required: false
+      schema:
+        type: string
+        default: hidden
+        enum:
+          - public
+          - private
+          - hidden
+        example: hidden
+      description: Filter by ReleaseStatus.
     maxUnityVersion:
       name: maxUnityVersion
       in: query
@@ -5214,41 +5459,6 @@ components:
       schema:
         type: string
       description: The platform the asset supports.
-    tag:
-      name: tag
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Tags to include (comma-separated).
-    notag:
-      name: notag
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Tags to exclude (comma-separated).
-    search:
-      name: search
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Filters by world name.
-    userIdQuery:
-      name: userId
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Filter by author UserID
-    featured:
-      name: featured
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Filters on featured results.
     userIdAdmin:
       name: userId
       in: query
@@ -5303,12 +5513,19 @@ components:
       required: true
       schema:
         type: string
+    messageId:
+      name: messageId
+      in: path
+      required: true
+      schema:
+        type: integer
 tags:
   - name: authentication
   - name: avatars
   - name: favorites
   - name: files
   - name: friends
+  - name: invite
   - name: notifications
   - name: permissions
   - name: playermoderation
