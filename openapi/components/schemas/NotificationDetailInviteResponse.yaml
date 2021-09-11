@@ -1,0 +1,10 @@
+title: NotificationDetailInviteResponse
+type: object
+properties:
+  inResponseTo:
+    $ref: ./NotificationID.yaml
+  responseMessage:
+    type: string
+required:
+  - inResponseTo
+  - responseMessage

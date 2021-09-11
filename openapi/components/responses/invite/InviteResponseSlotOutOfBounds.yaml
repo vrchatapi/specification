@@ -1,0 +1,16 @@
+description: Error response when trying to respond to an invite with an invalid response slot number, x < 0 or x > 11.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        error:
+          $ref: ../../schemas/Error.yaml
+      required:
+        - error
+    examples:
+      Response Slot Out Of Bounds Error:
+        value:
+          error:
+            message: "\"Response slot is out of bounds.\""
+            status_code: 400

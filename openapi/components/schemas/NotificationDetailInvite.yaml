@@ -5,6 +5,8 @@ properties:
     $ref: ./WorldID.yaml
   worldName:
     type: string
+  inviteMessage:
+    type: string
 required:
   - worldId
   - worldName
