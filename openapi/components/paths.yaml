@@ -106,3 +106,9 @@
   $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1message'
 '/message/{userId}/message/{messageId}':
   $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1message~1{messageId}'
+'/invite/{userId}':
+  $ref: './paths/invite.yaml#/paths/~1invite~1{userId}'
+'/invite/{notificationId}/response':
+  $ref: './paths/invite.yaml#/paths/~1invite~1{notificationId}~1response'
+'/requestInvite/{userId}':
+  $ref: './paths/invite.yaml#/paths/~1requestInvite~1{userId}'
