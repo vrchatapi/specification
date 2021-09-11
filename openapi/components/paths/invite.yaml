@@ -98,6 +98,9 @@ paths:
         '403':
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
       operationId: inviteUser
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Sends an invite to a user. Returns the Notification of type `invite` that was sent.
   '/invite/{notificationId}/response':
     parameters:
@@ -112,6 +115,9 @@ paths:
         '400':
           $ref: ../responses/invite/InviteResponse400Error.yaml
       operationId: respondInvite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Sends a world invite to a user.
   '/requestInvite/{userId}':
     parameters:
@@ -119,6 +125,9 @@ paths:
     post:
       summary: Request Invite
       operationId: requestInvite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       description: Requests an invite from a user. Returns the Notification of type `requestInvite` that was sent.
       tags:
         - invite
