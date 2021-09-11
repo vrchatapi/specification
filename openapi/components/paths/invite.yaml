@@ -95,7 +95,7 @@ paths:
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml
-        MustBeFriendsError:
+        '403':
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
       operationId: inviteUser
       description: Sends an invite to a user. Returns the Notification of type `invite` that was sent.
@@ -109,12 +109,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml
-        CannotRespondSelfError:
-          $ref: ../responses/invite/InviteCannotRespondSelfError.yaml
-        InvalidResponseSlotError:
-          $ref: ../responses/invite/InviteResponseSlotOutOfBounds.yaml
-        AlreadyRespondedError:
-          $ref: ../responses/invite/InviteAlreadyRespondedError.yaml
+        '400':
+          $ref: ../responses/invite/InviteResponse400Error.yaml
       operationId: respondInvite
       description: Sends a world invite to a user.
   '/requestInvite/{userId}':
@@ -129,7 +125,7 @@ paths:
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml
-        MustBeFriendsError:
+        '403':
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
 tags:
   $ref: ../tags.yaml
