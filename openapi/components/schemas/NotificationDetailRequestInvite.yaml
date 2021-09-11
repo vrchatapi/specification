@@ -3,5 +3,7 @@ type: object
 properties:
   platform:
     type: string
-required:
-  - platform
+    description: 'TODO: Does this still exist?'
+  requestMessage:
+    type: string
+    description: Used when using InviteMessage Slot.

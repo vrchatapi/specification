@@ -20,14 +20,13 @@ properties:
     type: string
     description: '**NOTICE:** This is not a JSON object, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
     default: '{}'
-    example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
+    example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailVoteToKick'
   seen:
     type: boolean
     default: false
   created_at:
     type: string
     format: date-time
-    readOnly: true
 required:
   - id
   - senderUserId

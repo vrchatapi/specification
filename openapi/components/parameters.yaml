@@ -221,3 +221,9 @@ messageId:
   required: true
   schema:
     type: integer
+notificationId:
+  name: notificationId
+  in: path
+  required: true
+  schema:
+    type: string

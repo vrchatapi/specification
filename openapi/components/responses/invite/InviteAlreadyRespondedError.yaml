@@ -1,0 +1,16 @@
+description: Error response when trying to respond to an invite you have already responded to.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        error:
+          $ref: ../../schemas/Error.yaml
+      required:
+        - error
+    examples:
+      Response Slot Out Of Bounds Error:
+        value:
+          error:
+            message: "\"You've already responded to that request.\""
+            status_code: 400

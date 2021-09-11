@@ -1,0 +1,16 @@
+description: Error response when trying to invite someome whom you are not friends with.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        error:
+          $ref: ../../schemas/Error.yaml
+      required:
+        - error
+    examples:
+      Must Be Friends Error:
+        value:
+          error:
+            message: "\"You need to be friends with that user first.\""
+            status_code: 403

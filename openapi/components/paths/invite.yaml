@@ -85,6 +85,52 @@ paths:
         Resets a single Invite Message back to it's original message, and then returns a list of all of them. Admin Credentials are required to update messages of other users!
 
         Resetting a message respects the rate-limit, but resetting it does not set the rate-limit to 60 like when editing it. It is possible to edit it right after resetting it. Trying to edit a message before the cooldown timer expires results in a 429 Too Fast Error.
+  '/invite/{userId}':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      summary: Invite User
+      tags:
+        - invite
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        'Must Be Friends Error':
+          $ref: ../responses/invite/InviteMustBeFriendsError.yaml
+      operationId: inviteUser
+      description: Sends an invite to a user. Returns the Notification of type `invite` that was sent.
+  '/invite/{notificationId}/response':
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
+    post:
+      summary: Respond Invite
+      tags:
+        - invite
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        'Cannot Respond Self Error':
+          $ref: ../responses/invite/InviteCannotRespondSelfError.yaml
+        'Invalid Response Slot Error':
+          $ref: ../responses/invite/InviteResponseSlotOutOfBounds.yaml
+        'Already Responded Error':
+          $ref: ../responses/invite/InviteAlreadyRespondedError.yaml
+      operationId: respondInvite
+      description: Sends a world invite to a user.
+  '/requestInvite/{userId}':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      summary: Request Invite
+      operationId: requestInvite
+      description: Requests an invite from a user. Returns the Notification of type `requestInvite` that was sent.
+      tags:
+        - invite
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        'Must Be Friends Error':
+          $ref: ../responses/invite/InviteMustBeFriendsError.yaml
 tags:
   $ref: ../tags.yaml
 components:
