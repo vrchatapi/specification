@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.2.2
+  version: 1.3.0
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -633,11 +633,7 @@ paths:
         - $ref: '#/components/parameters/offset'
   '/auth/user/notifications/{notificationId}/see':
     parameters:
-      - schema:
-          type: string
-        name: notificationId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/notificationId'
     put:
       summary: Mark As Read
       operationId: markNotificationAsRead
@@ -654,11 +650,7 @@ paths:
         - notifications
   '/auth/user/notifications/{notificationId}/hide':
     parameters:
-      - schema:
-          type: string
-        name: notificationId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/notificationId'
     put:
       summary: Delete Notification
       operationId: deleteNotification
@@ -675,11 +667,7 @@ paths:
         - notifications
   '/auth/user/notifications/{notificationId}/accept':
     parameters:
-      - schema:
-          type: string
-        name: notificationId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/notificationId'
     put:
       summary: Accept Friend Request
       operationId: acceptFriendRequest
@@ -2183,6 +2171,61 @@ paths:
         set the rate-limit to 60 like when editing it. It is possible to edit it
         right after resetting it. Trying to edit a message before the cooldown
         timer expires results in a 429 Too Fast Error.
+  '/invite/{userId}':
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    post:
+      summary: Invite User
+      tags:
+        - invite
+      responses:
+        '200':
+          $ref: '#/components/responses/NotificationResponse'
+        '403':
+          $ref: '#/components/responses/InviteMustBeFriendsError'
+      operationId: inviteUser
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: >-
+        Sends an invite to a user. Returns the Notification of type `invite`
+        that was sent.
+  '/invite/{notificationId}/response':
+    parameters:
+      - $ref: '#/components/parameters/notificationId'
+    post:
+      summary: Respond Invite
+      tags:
+        - invite
+      responses:
+        '200':
+          $ref: '#/components/responses/NotificationResponse'
+        '400':
+          $ref: '#/components/responses/InviteResponse400Error'
+      operationId: respondInvite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Sends a world invite to a user.
+  '/requestInvite/{userId}':
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    post:
+      summary: Request Invite
+      operationId: requestInvite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: >-
+        Requests an invite from a user. Returns the Notification of type
+        `requestInvite` that was sent.
+      tags:
+        - invite
+      responses:
+        '200':
+          $ref: '#/components/responses/NotificationResponse'
+        '403':
+          $ref: '#/components/responses/InviteMustBeFriendsError'
 components:
   schemas:
     Response:
@@ -3456,12 +3499,11 @@ components:
       type: string
       title: NotificationType
       enum:
-        - all
-        - broadcast
         - friendRequest
         - invite
-        - message
-        - RequestInvite
+        - inviteResponse
+        - requestInvite
+        - requestInviteResponse
         - votetokick
     Notification:
       title: Notification
@@ -3491,7 +3533,7 @@ components:
           default: '{}'
           example: >-
             OneOf: {}, NotificationDetailInvite,
-            NotificationDetailRequestInvite,
+            NotificationDetailInviteResponse, NotificationDetailRequestInvite,
             NotificationDetailRequestInviteResponse,
             NotificationDetailVoteToKick
         seen:
@@ -3500,7 +3542,6 @@ components:
         created_at:
           type: string
           format: date-time
-          readOnly: true
       required:
         - id
         - senderUserId
@@ -5286,6 +5327,54 @@ components:
                 error:
                   message: Please wait 60 more minutes until you try again․
                   status_code: 429
+    InviteMustBeFriendsError:
+      description: >-
+        Error response when trying to invite someome whom you are not friends
+        with.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+            required:
+              - error
+          examples:
+            Must Be Friends Error:
+              value:
+                error:
+                  message: '"You need to be friends with that user first."'
+                  status_code: 403
+    InviteResponse400Error:
+      description: >-
+        Error response when trying to respond to an invite and something went
+        wrong.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+            required:
+              - error
+          examples:
+            Response Slot Out Of Bounds Error:
+              value:
+                error:
+                  message: '"Response slot is out of bounds."'
+                  status_code: 400
+            Already Responded Error:
+              value:
+                error:
+                  message: '"You''ve already responded to that request."'
+                  status_code: 400
+            Cannot Respond Self Invite Error:
+              value:
+                error:
+                  message: '"You cannot respond to your own invites."'
+                  status_code: 400
   parameters:
     userId:
       name: userId
@@ -5322,6 +5411,12 @@ components:
       description: >-
         Returns *only* offline users if true, returns only online and active
         users if false
+    notificationId:
+      name: notificationId
+      in: path
+      required: true
+      schema:
+        type: string
     fileId:
       name: fileId
       in: path
