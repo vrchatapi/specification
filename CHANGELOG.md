@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.3.0
+
+* Added Invite API endpoits, with `inviteUser`, `requestInvite` and `respondInvite`.
+* Added InviteMessage editing, allowing editing of response messages used to reply to invites.
+
 ## 1.2.2
 
 * **Minor breaking:** `last_platform` can be more than just `standalonewindows` or `android`, but can pretty much be any random Unity version. So changed from Enum to string.

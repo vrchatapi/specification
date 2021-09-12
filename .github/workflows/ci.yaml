@@ -84,5 +84,5 @@ jobs:
       with:
         artifacts: "dist/openapi.yaml"
         artifactErrorsFailBuild: true
-        bodyFile: "release-body.md"
+        bodyFile: "CHANGELOG.md"
         token: ${{ secrets.GITHUB_TOKEN }}
