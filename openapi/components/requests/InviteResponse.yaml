@@ -1,0 +1,9 @@
+type: object
+properties:
+  responseSlot:
+    type: integer
+    minimum: 0
+    maximum: 11
+required:
+  - responseSlot
+title: InviteResponse

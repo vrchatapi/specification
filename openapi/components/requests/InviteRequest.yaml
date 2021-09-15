@@ -1,0 +1,7 @@
+title: InviteRequest
+type: object
+properties:
+  instanceId:
+    $ref: ../schemas/InstanceID.yaml
+required:
+  - instanceId
