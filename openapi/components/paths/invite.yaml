@@ -102,6 +102,12 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Sends an invite to a user. Returns the Notification of type `invite` that was sent.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/InviteRequest.yaml
+        description: Instance ID when inviting a user.
   '/invite/{notificationId}/response':
     parameters:
       - $ref: ../parameters.yaml#/notificationId
@@ -119,6 +125,12 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Sends a world invite to a user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/InviteResponse.yaml
+        description: Instance ID when inviting a user.
   '/requestInvite/{userId}':
     parameters:
       - $ref: ../parameters.yaml#/userId

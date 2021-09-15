@@ -19,8 +19,7 @@ properties:
     type: boolean
     default: false
   id:
-    type: string
-    minLength: 1
+    $ref: ./InstanceID.yaml
   instanceId:
     type: string
     minLength: 1
