@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.3.0
+  version: 1.3.1
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -102,30 +102,31 @@ paths:
                 example: >-
                   auth=authcookie_00000000-0000-0000-0000-000000000000;
                   Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
-              description: Authenticating returns an `auth` cookie.
+              description: Successful authentication returns an `auth` cookie.
             \0Set-Cookie:
               schema:
                 type: string
                 default: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
-              description: Authenticating also sets the `apiKey` if not already set.
+              description: >-
+                This endpoint **always** sets the `apiKey` irrespective if it is
+                already set.
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getCurrentUser
       description: >-
-        Login and/or Get user data from your VRChat account.
-
-
-        If `Authorization` header is present then a new login session will be
-        generated, and a new `auth` cookie is returned.
-
+        This endpoint does the following two operations:
+          1) Checks if you are already logged in by looking for a valid `auth` cookie. If you are have a valid auth cookie then no additional auth-related actions are taken. If you are **not** logged in then it will log you in with the `Authorization` header and set the `auth` cookie. The `auth` cookie will only be sent once.
+          2) If logged in, this function will also return the CurrentUser object containing detailed information about the currently logged in user.
 
         **WARNING: Session Limit:** Each authentication with login credentials
         counts as a separate session, out of which you have a limited amount.
-        Make sure to save and reuse the `auth` cookie whenever you can, and
-        avoid sending the Authorization header unless strictly neccesary. While
-        the exact number of simultaneous open sessions is secret, expect to
-        **very fast** run into the rate-limit and be temporarily blocked from
-        making new sessions until the old ones expire.
+        Make sure to save and reuse the `auth` cookie if you are often
+        restarting the program. The provided API libraries automatically save
+        cookies during runtime, but does not persist during restart. While it
+        can be fine to use username/password during development, expect in
+        production to very fast run into the rate-limit and be temporarily
+        blocked from making new sessions until older ones expire. The exact
+        number of simultaneous sessions is unknown/undisclosed.
       parameters: []
       security:
         - authHeader: []
@@ -2190,6 +2191,12 @@ paths:
       description: >-
         Sends an invite to a user. Returns the Notification of type `invite`
         that was sent.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteRequest'
+        description: Instance ID when inviting a user.
   '/invite/{notificationId}/response':
     parameters:
       - $ref: '#/components/parameters/notificationId'
@@ -2207,6 +2214,12 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Sends a world invite to a user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteResponse'
+        description: Instance ID when inviting a user.
   '/requestInvite/{userId}':
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -2432,7 +2445,6 @@ components:
         twoFactorAuthEnabled:
           type: boolean
         state:
-          deprecated: true
           $ref: '#/components/schemas/UserState'
         tags:
           type: array
@@ -2493,7 +2505,6 @@ components:
         - friendGroupNames
         - currentAvatarImageUrl
         - currentAvatarThumbnailImageUrl
-        - fallbackAvatar
         - currentAvatar
         - currentAvatarAssetUrl
         - acceptedTOSVersion
@@ -4012,6 +4023,12 @@ components:
         - updated_at
         - version
         - visits
+    InstanceID:
+      title: InstanceID
+      type: string
+      pattern: >-
+        (wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}:(\d+)(~region\(([\w]+)\))?(~([\w]+)\(usr_([\w-]+)\)((\~canRequestInvite)?)(~region\(([\w].+)\))?~nonce\((.+)\))?
+      example: 'wrld_ba913a96-fac4-4048-a062-9aa5db092812:123456'
     Instance:
       description: ''
       type: object
@@ -4034,8 +4051,7 @@ components:
           type: boolean
           default: false
         id:
-          type: string
-          minLength: 1
+          $ref: '#/components/schemas/InstanceID'
         instanceId:
           type: string
           minLength: 1
@@ -4405,6 +4421,7 @@ components:
         slot:
           type: integer
           minimum: 0
+          maximum: 11
         message:
           type: string
           minLength: 1
@@ -4431,6 +4448,24 @@ components:
         - updatedAt
         - remainingCooldownMinutes
         - canBeUpdated
+    InviteRequest:
+      title: InviteRequest
+      type: object
+      properties:
+        instanceId:
+          $ref: '#/components/schemas/InstanceID'
+      required:
+        - instanceId
+    InviteResponse:
+      type: object
+      properties:
+        responseSlot:
+          type: integer
+          minimum: 0
+          maximum: 11
+      required:
+        - responseSlot
+      title: InviteResponse
   securitySchemes:
     apiKeyQuery:
       name: apiKey
