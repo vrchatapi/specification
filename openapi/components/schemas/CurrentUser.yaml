@@ -83,7 +83,6 @@ properties:
   twoFactorAuthEnabled:
     type: boolean
   state:
-    deprecated: true
     $ref: ./UserState.yaml
   tags:
     type: array
@@ -144,7 +143,6 @@ required:
   - friendGroupNames
   - currentAvatarImageUrl
   - currentAvatarThumbnailImageUrl
-  - fallbackAvatar
   - currentAvatar
   - currentAvatarAssetUrl
   - acceptedTOSVersion

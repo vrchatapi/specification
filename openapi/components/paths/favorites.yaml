@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: authentication
+  title: favorites
   version: '1.0'
   description: A
 paths:
