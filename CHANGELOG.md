@@ -1,5 +1,11 @@
 # Release Notes
 
+## 1.3.1
+
+* fix: `fallbackAvatar` on `CurrentUser` can be missing
+* fix: Added missing bodies to Invite endpoints
+* docs: Clarified `getCurrentUser` auth-related documentation
+
 ## 1.3.0
 
 * Added Invite API endpoits, with `inviteUser`, `requestInvite` and `respondInvite`.
