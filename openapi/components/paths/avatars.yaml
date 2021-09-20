@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: avatars
   version: '1.0'
-  description: A
+  description: Avatars Docs Here
 paths:
   /avatars/favorites:
     get:

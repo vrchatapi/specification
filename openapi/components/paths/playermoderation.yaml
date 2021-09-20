@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: playermoderation
   version: '1.0'
-  description: A
+  description: Player Moderation Docs
 paths:
   /auth/user/playermoderations:
     get:

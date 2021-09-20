@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: favorites
   version: '1.0'
-  description: A
+  description: Favorites Docs Here
 paths:
   /favorites:
     get:

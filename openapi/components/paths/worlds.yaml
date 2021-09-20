@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: worlds
   version: '1.0'
-  description: A
+  description: Worlds Docs Here
 paths:
   /worlds:
     get:

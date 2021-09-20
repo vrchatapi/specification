@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: system
   version: '1.0'
-  description: ''
+  description: System Docs Here
 paths:
   /health:
     get:
@@ -14,7 +14,7 @@ paths:
       security: []
       responses:
         '200':
-          $ref: '../responses/system/APIHealthResponse.yaml'
+          $ref: ../responses/system/APIHealthResponse.yaml
   /config:
     get:
       summary: Fetch API Config
