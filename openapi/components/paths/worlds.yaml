@@ -212,6 +212,8 @@ paths:
         '404':
           $ref: ../responses/worlds/WorldNotFoundError.yaml
       description: Get information about a specific World.
+      security:
+        - apiKeyCookie: []
     put:
       summary: Update World
       operationId: updateWorld

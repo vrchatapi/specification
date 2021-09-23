@@ -218,6 +218,27 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+  /auth/exists:
+    get:
+      summary: Check If User Exists
+      tags: []
+      responses:
+        '200':
+          $ref: ../responses/authentication/UserExistsResponse.yaml
+        '400':
+          $ref: ../responses/authentication/MissingParameterError.yaml
+      operationId: checkUserExists
+      parameters:
+        - $ref: ../parameters.yaml#/email
+        - $ref: ../parameters.yaml#/displayName
+        - $ref: ../parameters.yaml#/userIdQuery
+        - $ref: ../parameters.yaml#/excludeUserId
+      description: |-
+        Checks if a user by a given `username`, `displayName` or `email` exist. This is used during registration to check if a username has already been taken, during change of displayName to check if a displayName is available, and during change of email to check if the email is already used. In the later two cases the `excludeUserId` is used to exclude oneself, otherwise the result would always be true.
+
+        It is **REQUIRED** to include **AT LEAST** `username`, `displayName` **or** `email` query parameter. Although they can be combined - in addition with `excludeUserId` (generally to exclude yourself) - to further fine-tune the search.
+      security:
+        - apiKeyCookie: []
 tags:
   $ref: ../tags.yaml
 components:
