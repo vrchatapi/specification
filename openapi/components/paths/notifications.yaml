@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: notifications
   version: '1.0'
-  description: A
+  description: Notifiations Docs
 paths:
   /auth/user/notifications:
     get:

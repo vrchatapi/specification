@@ -1,12 +1,36 @@
 - name: authentication
+  description:
+    $ref: ./paths/authentication.yaml#/info/description
 - name: avatars
+  description:
+    $ref: ./paths/avatars.yaml#/info/description
 - name: favorites
+  description:
+    $ref: ./paths/favorites.yaml#/info/description
 - name: files
+  description:
+    $ref: ./paths/files.yaml#/info/description
 - name: friends
+  description:
+    $ref: ./paths/friends.yaml#/info/description
 - name: invite
+  description:
+    $ref: ./paths/invite.yaml#/info/description
 - name: notifications
+  description:
+    $ref: ./paths/notifications.yaml#/info/description
 - name: permissions
+  description:
+    $ref: ./paths/permissions.yaml#/info/description
 - name: playermoderation
+  description:
+    $ref: ./paths/playermoderation.yaml#/info/description
 - name: system
+  description:
+    $ref: ./paths/system.yaml#/info/description
 - name: users
+  description:
+    $ref: ./paths/users.yaml#/info/description
 - name: worlds
+  description:
+    $ref: ./paths/worlds.yaml#/info/description
