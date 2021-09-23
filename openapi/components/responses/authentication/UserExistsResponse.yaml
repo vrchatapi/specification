@@ -1,0 +1,5 @@
+description: Returns a response if a user exists or not.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/UserExists.yaml

@@ -4,6 +4,8 @@
   $ref: ./paths/authentication.yaml#/paths/~1logout
 /auth/user:
   $ref: ./paths/authentication.yaml#/paths/~1auth~1user
+/auth/exists:
+  $ref: ./paths/authentication.yaml#/paths/~1auth~1exists
 /auth/twofactorauth/totp/verify:
   $ref: ./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify
 /auth/twofactorauth/otp/verify:

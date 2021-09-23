@@ -111,6 +111,34 @@ userId:
   required: true
   schema:
     type: string
+userIdQuery:
+  name: userId
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Filter by UserID.
+excludeUserId:
+  name: excludeUserId
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Exclude by UserID.
+displayName:
+  name: displayName
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Filter by displayName.
+email:
+  name: email
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Filter by email.
 maxUnityVersion:
   name: maxUnityVersion
   in: query
@@ -153,13 +181,6 @@ search:
   schema:
     type: string
   description: Filters by world name.
-userIdQuery:
-  name: userId
-  in: query
-  required: false
-  schema:
-    type: string
-  description: Filter by author UserID
 featured:
   name: featured
   in: query
