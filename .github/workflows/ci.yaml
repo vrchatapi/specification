@@ -95,9 +95,10 @@ jobs:
     strategy:
       matrix:
         project:
-          - JavaScript
+          - javascript
+          - csharp
     steps:
-      - name: Dispatching build on ${{ matrix.node }} SDK 
+      - name: Triggering build SDK - ${{ matrix.node }}
         run: |
           curl -X POST https://api.github.com/repos/vrchatapi/vrchatapi-${{ matrix.project }}/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
