@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.3.3
+
+* fix!: `fallbackAvatar` is not present on User (#74)
+
 ## 1.3.2
 
 * feature: add checkUserExists via /auth/exists endpoint to search for username/displayName/email (#73)
