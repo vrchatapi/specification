@@ -97,6 +97,7 @@ jobs:
         project:
           - javascript
           - csharp
+          - python
     steps:
       - name: Triggering build SDK - ${{ matrix.node }}
         run: |
