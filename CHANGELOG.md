@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.3.2
+
+* feature: add checkUserExists via /auth/exists endpoint to search for username/displayName/email (#73)
+* docs: add Tags placeholder descriptions
+
 ## 1.3.1
 
 * fix: `fallbackAvatar` on `CurrentUser` can be missing
