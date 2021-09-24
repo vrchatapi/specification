@@ -42,6 +42,26 @@ jobs:
           name: openapi-bundled
           path: dist
 
+  release:
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+    needs: bundle
+    runs-on: ubuntu-latest
+    name: Release Bundle as new Version
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: openapi-bundled
+        path: dist
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "dist/openapi.yaml"
+        artifactErrorsFailBuild: true
+        bodyFile: "CHANGELOG.md"
+        token: ${{ secrets.GITHUB_TOKEN }}
+
   pages:
     if: ${{ startsWith(github.ref, 'refs/tags/') }}
     needs: bundle
@@ -67,22 +87,19 @@ jobs:
           branch: gh-pages
           folder: dist
 
-  release:
-    if: ${{ startsWith(github.ref, 'refs/tags/') }}
-    needs: bundle
+  # https://blog.marcnuri.com/triggering-github-actions-across-different-repositories
+  sdk_generate:
+    needs: pages
     runs-on: ubuntu-latest
-    name: Release Bundle as new Version
+    name: Trigger Remote SDK builds
+    strategy:
+      matrix:
+        project:
+          - JavaScript
     steps:
-    - uses: actions/checkout@v2
-
-    - uses: actions/download-artifact@v2
-      with:
-        name: openapi-bundled
-        path: dist
-
-    - uses: ncipollo/release-action@v1
-      with:
-        artifacts: "dist/openapi.yaml"
-        artifactErrorsFailBuild: true
-        bodyFile: "CHANGELOG.md"
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Dispatching build on ${{ matrix.node }} SDK 
+        run: |
+          curl -X POST https://api.github.com/repos/vrchatapi/vrchatapi-${{ matrix.project }}/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.ACCESS_TOKEN }} \
+          --data '{"event_type": "spec_release"}'
