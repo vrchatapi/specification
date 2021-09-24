@@ -23,8 +23,6 @@ properties:
     type: string
   currentAvatarThumbnailImageUrl:
     type: string
-  fallbackAvatar:
-    $ref: ./AvatarID.yaml
   state:
     $ref: ./UserState.yaml
   tags:
@@ -67,7 +65,6 @@ required:
   - statusDescription
   - currentAvatarImageUrl
   - currentAvatarThumbnailImageUrl
-  - fallbackAvatar
   - state
   - tags
   - developerType
