@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.3.1
+  version: 1.3.2
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -133,6 +133,37 @@ paths:
         - authHeader: []
           twoFactorAuthCookie: []
         - authCookie: []
+  /auth/exists:
+    get:
+      summary: Check User Exists
+      tags:
+        - authentication
+      responses:
+        '200':
+          $ref: '#/components/responses/UserExistsResponse'
+        '400':
+          $ref: '#/components/responses/MissingParameterError'
+      operationId: checkUserExists
+      parameters:
+        - $ref: '#/components/parameters/email'
+        - $ref: '#/components/parameters/displayName'
+        - $ref: '#/components/parameters/userIdQuery'
+        - $ref: '#/components/parameters/excludeUserId'
+      description: >-
+        Checks if a user by a given `username`, `displayName` or `email` exist.
+        This is used during registration to check if a username has already been
+        taken, during change of displayName to check if a displayName is
+        available, and during change of email to check if the email is already
+        used. In the later two cases the `excludeUserId` is used to exclude
+        oneself, otherwise the result would always be true.
+
+
+        It is **REQUIRED** to include **AT LEAST** `username`, `displayName`
+        **or** `email` query parameter. Although they can be combined - in
+        addition with `excludeUserId` (generally to exclude yourself) - to
+        further fine-tune the search.
+      security:
+        - apiKeyCookie: []
   /auth/twofactorauth/totp/verify:
     post:
       summary: Verify 2FA code
@@ -1256,6 +1287,8 @@ paths:
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
       description: Get information about a specific World.
+      security:
+        - apiKeyCookie: []
     put:
       summary: Update World
       operationId: updateWorld
@@ -2524,6 +2557,21 @@ components:
         - date_joined
         - isFriend
         - friendKey
+    UserExists:
+      title: UserExists
+      type: object
+      description: >-
+        Status object representing if a queried user by username or userId
+        exists or not. This model is primarily used by the `/auth/exists`
+        endpoint, which in turn is used during registration. Please see the
+        documentation on that endpoint for more information on usage.
+      properties:
+        userExists:
+          type: boolean
+          description: Status if a user exist with that username or userId.
+          default: false
+      required:
+        - userExists
     LimitedUser:
       title: LimitedUser
       type: object
@@ -4504,6 +4552,24 @@ components:
                 error:
                   message: '"Missing Credentials"'
                   status_code: 401
+    UserExistsResponse:
+      description: Returns a response if a user exists or not.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserExists'
+    MissingParameterError:
+      description: Error response when missing at least 1 of the required parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            400 At Least One Parameter Required:
+              value:
+                error:
+                  message: '"username, email, or displayName required"'
+                  status_code: 400
     UsersInvalidSearchError:
       description: >-
         Error response when trying to search list of users with an invalid
@@ -5411,6 +5477,34 @@ components:
                   message: '"You cannot respond to your own invites."'
                   status_code: 400
   parameters:
+    email:
+      name: email
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by email.
+    displayName:
+      name: displayName
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by displayName.
+    userIdQuery:
+      name: userId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by UserID.
+    excludeUserId:
+      name: excludeUserId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Exclude by UserID.
     userId:
       name: userId
       in: path
@@ -5516,13 +5610,6 @@ components:
           - name
         example: popularity
         description: How to sort
-    userIdQuery:
-      name: userId
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Filter by author UserID
     orderOptions:
       name: order
       in: query
@@ -5653,14 +5740,28 @@ components:
         type: integer
 tags:
   - name: authentication
+    description: Authentication Docs Here
   - name: avatars
+    description: Avatars Docs Here
   - name: favorites
+    description: Favorites Docs Here
   - name: files
+    description: Files Docs Here
   - name: friends
+    description: Friends Docs Here
   - name: invite
+    description: Invite Docs Here
   - name: notifications
+    description: Notifiations Docs
   - name: permissions
+    description: >-
+      Permissions are a way to individually grant specific access to a user,
+      often through a license such as VRC+ subscription.
   - name: playermoderation
+    description: Player Moderation Docs
   - name: system
+    description: System Docs Here
   - name: users
+    description: Users Docs Here
   - name: worlds
+    description: Worlds Docs Here
