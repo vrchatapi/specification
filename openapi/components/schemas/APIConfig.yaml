@@ -27,16 +27,13 @@ properties:
           type: string
           minLength: 1
           description: Announcement name
-          readOnly: true
         text:
           type: string
           minLength: 1
           description: Announcement text
-          readOnly: true
       required:
         - name
         - text
-      readOnly: true
   apiKey:
     type: string
     minLength: 1
@@ -196,17 +193,14 @@ properties:
         minLength: 1
         description: Download link for legacy SDK2
         deprecated: true
-        readOnly: true
       sdk3-avatars:
         type: string
         minLength: 1
         description: Download link for SDK3 for Avatars
-        readOnly: true
       sdk3-worlds:
         type: string
         minLength: 1
         description: Download link for SDK3 for Worlds
-        readOnly: true
   dynamicWorldRows:
     type: array
     uniqueItems: true
@@ -218,32 +212,25 @@ properties:
       properties:
         index:
           type: number
-          readOnly: true
         name:
           type: string
           minLength: 1
-          readOnly: true
         platform:
           type: string
           minLength: 1
-          readOnly: true
         sortHeading:
           type: string
           minLength: 1
-          readOnly: true
         sortOrder:
           type: string
           minLength: 1
-          readOnly: true
         sortOwnership:
           type: string
           minLength: 1
-          readOnly: true
         tag:
           type: string
           minLength: 1
           description: Tag to filter worlds for this row. Not always present.
-          readOnly: true
       required:
         - index
         - name
@@ -251,7 +238,6 @@ properties:
         - sortHeading
         - sortOrder
         - sortOwnership
-      readOnly: true
   events:
     type: object
     title: APIEventConfig
@@ -270,43 +256,33 @@ properties:
       distanceClose:
         type: number
         description: Unknown
-        readOnly: true
       distanceFactor:
         type: number
         description: Unknown
-        readOnly: true
       distanceFar:
         type: number
         description: Unknown
-        readOnly: true
       groupDistance:
         type: number
         description: Unknown
-        readOnly: true
       maximumBunchSize:
         type: number
         description: Unknown
-        readOnly: true
       notVisibleFactor:
         type: number
         description: Unknown
-        readOnly: true
       playerOrderBucketSize:
         type: number
         description: Unknown
-        readOnly: true
       playerOrderFactor:
         type: number
         description: Unknown
-        readOnly: true
       slowUpdateFactorThreshold:
         type: number
         description: Unknown
-        readOnly: true
       viewSegmentLength:
         type: number
         description: Unknown
-        readOnly: true
   gearDemoRoomId:
     type: string
     minLength: 1
@@ -413,7 +389,6 @@ properties:
     description: List of allowed URLs that bypass the "Allow untrusted URL's" setting in-game
     items:
       type: string
-      readOnly: true
   useReliableUdpForVoice:
     type: boolean
     description: Unknown
@@ -439,7 +414,6 @@ properties:
     description: List of allowed URLs that are allowed to host avatar assets
     items:
       type: string
-      readOnly: true
   worldUpdatePeriod:
     type: number
     description: Unknown
