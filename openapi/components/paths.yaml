@@ -104,10 +104,10 @@
   $ref: ./paths/permissions.yaml#/paths/~1permissions
 '/permissions/{permissionId}':
   $ref: './paths/permissions.yaml#/paths/~1permissions~1{permissionId}'
-'/message/{userId}/message':
-  $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1message'
-'/message/{userId}/message/{messageId}':
-  $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1message~1{messageId}'
+'/message/{userId}/{messageType}':
+  $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}'
+'/message/{userId}/{messageType}/{messageId}':
+  $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{messageId}'
 '/invite/{userId}':
   $ref: './paths/invite.yaml#/paths/~1invite~1{userId}'
 '/invite/{notificationId}/response':
