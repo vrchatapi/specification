@@ -311,7 +311,6 @@ properties:
   currentTOSVersion:
     type: number
     description: Current version number of the Terms of Service
-    example: 7
     default: 7
   defaultAvatar:
     $ref: ./AvatarID.yaml
