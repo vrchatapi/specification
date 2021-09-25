@@ -236,6 +236,17 @@ avatarId:
   required: true
   schema:
     type: string
+messageType:
+  name: messageType
+  in: path
+  required: true
+  schema:
+    type: string
+    enum:
+      - message
+      - response
+      - request
+      - requestResponse
 messageId:
   name: messageId
   in: path
