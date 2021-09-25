@@ -231,16 +231,23 @@ example:
   youtubedl-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
   youtubedl-version: '2021-05-16'
 properties:
+  VoiceEnableDegradation:
+    type: boolean
+    description: 'Unknown, probably voice optimization testing'
+    default: false
+  VoiceEnableReceiverLimiting:
+    type: boolean
+    description: 'Unknown, probably voice optimization testing'
+    default: true
   address:
     type: string
     minLength: 1
     description: VRChat's office address
-    readOnly: true
   announcements:
     type: array
     uniqueItems: true
     minItems: 1
-    description: 'Public Announcements'
+    description: Public Announcements
     items:
       type: object
       description: Public Announcement
@@ -259,55 +266,53 @@ properties:
         - name
         - text
       readOnly: true
-    readOnly: true
   apiKey:
     type: string
     minLength: 1
     description: apiKey to be used for all other requests
-    readOnly: true
   appName:
     type: string
     minLength: 1
     description: Game name
     default: VrChat
     deprecated: true
-    readOnly: true
   buildVersionTag:
     type: string
     minLength: 1
     description: Build tag of the API server
-    readOnly: true
   clientApiKey:
     type: string
     minLength: 1
     description: apiKey to be used for all other requests
-    readOnly: true
   clientBPSCeiling:
     type: number
     description: Unknown
+    default: 18432
   clientDisconnectTimeout:
     type: number
     description: Unknown
+    default: 30000
   clientReservedPlayerBPS:
     type: number
     description: Unknown
+    default: 7168
   clientSentCountAllowance:
     type: number
     description: Unknown
+    default: 15
   contactEmail:
     type: string
     minLength: 1
     description: VRChat's contact email
-    readOnly: true
   copyrightEmail:
     type: string
     minLength: 1
     description: VRChat's copyright-issues-related email
-    readOnly: true
   currentTOSVersion:
     type: number
     description: Current version number of the Terms of Service
-    readOnly: true
+    example: 7
+    default: 7
   defaultAvatar:
     $ref: ./AvatarID.yaml
   deploymentGroup:
@@ -317,31 +322,30 @@ properties:
     minLength: 1
     description: Version number for game development build
     deprecated: true
-    readOnly: true
   devDownloadLinkWindows:
     type: string
     minLength: 1
     description: Developer Download link
     deprecated: true
-    readOnly: true
   devSdkUrl:
     type: string
     minLength: 1
     description: 'Link to download the development SDK, use downloadUrls instead'
     deprecated: true
-    readOnly: true
   devSdkVersion:
     type: string
     minLength: 1
     description: Version of the development SDK
     deprecated: true
-    readOnly: true
   devServerVersionStandalone:
     type: string
     minLength: 1
     description: Version number for server development build
     deprecated: true
-    readOnly: true
+  dis-countdown:
+    type: string
+    description: 'Unknown, "dis" maybe for disconnect?'
+    format: date-time
   disableAvatarCopying:
     type: boolean
     description: Toggles if copying avatars should be disabled
@@ -364,19 +368,27 @@ properties:
     default: false
   disableEventStream:
     type: boolean
-    description: Toggles if Analytics should be disabled (this sreportedly not used in the Client)
+    description: Toggles if Analytics should be disabled.
     default: false
   disableFeedbackGating:
     type: boolean
     description: Toggles if feedback gating should be disabled. Feedback gating restricts submission of feedback (reporting a World or User) to people with the `system_feedback_access` Tag.
     default: false
+  disableFrontendBuilds:
+    type: boolean
+    default: false
+    description: 'Unknown, probably toggles compilation of frontend web builds? So internal flag?'
   disableHello:
     type: boolean
     description: Unknown
     default: false
+  disableOculusSubs:
+    type: boolean
+    default: false
+    description: Toggles if signing up for Subscriptions in Oculus is disabled or not.
   disableRegistration:
     type: boolean
-    description: Toggles if new user account registration should be disabled
+    description: Toggles if new user account registration should be disabled.
     default: false
   disableSteamNetworking:
     type: boolean
@@ -399,14 +411,14 @@ properties:
     type: string
     minLength: 1
     description: Download link for game on the Oculus Rift website.
-    readOnly: true
   downloadUrls:
     type: object
-    description: Download links for various development assets
+    description: Download links for various development assets.
     required:
       - sdk2
       - sdk3-avatars
       - sdk3-worlds
+    additionalProperties: false
     properties:
       sdk2:
         type: string
@@ -424,7 +436,6 @@ properties:
         minLength: 1
         description: Download link for SDK3 for Worlds
         readOnly: true
-    readOnly: true
   dynamicWorldRows:
     type: array
     uniqueItems: true
@@ -459,7 +470,7 @@ properties:
         tag:
           type: string
           minLength: 1
-          description: Tag to filter worlds for this row
+          description: Tag to filter worlds for this row. Not always present.
           readOnly: true
       required:
         - index
@@ -469,7 +480,6 @@ properties:
         - sortOrder
         - sortOwnership
       readOnly: true
-    readOnly: true
   events:
     type: object
     required:
@@ -524,19 +534,16 @@ properties:
         type: number
         description: Unknown
         readOnly: true
-    readOnly: true
   gearDemoRoomId:
     type: string
     minLength: 1
     description: Unknown
     deprecated: true
-    readOnly: true
   homepageRedirectTarget:
     type: string
     minLength: 1
     description: Redirect target if you try to open the base API domain in your browser
     default: 'https://hello.vrchat.com'
-    readOnly: true
   homeWorldId:
     $ref: ./WorldID.yaml
   hubWorldId:
@@ -545,18 +552,15 @@ properties:
     type: string
     minLength: 1
     description: VRChat's job application email
-    readOnly: true
   messageOfTheDay:
     type: string
     minLength: 1
     description: MOTD
     deprecated: true
-    readOnly: true
   moderationEmail:
     type: string
     minLength: 1
     description: VRChat's moderation related email
-    readOnly: true
   moderationQueryPeriod:
     type: number
     description: Unknown
@@ -564,66 +568,54 @@ properties:
     type: string
     minLength: 1
     description: Used in-game to notify a user they aren't allowed to select avatars in private worlds
-    readOnly: true
   plugin:
     type: string
     minLength: 1
     description: 'Extra [plugin](https://doc.photonengine.com/en-us/server/current/plugins/manual) to run in each instance'
-    readOnly: true
   releaseAppVersionStandalone:
     type: string
     minLength: 1
     description: Version number for game release build
     deprecated: true
-    readOnly: true
   releaseSdkUrl:
     type: string
     minLength: 1
     description: Link to download the release SDK
     deprecated: true
-    readOnly: true
   releaseSdkVersion:
     type: string
     minLength: 1
     description: Version of the release SDK
     deprecated: true
-    readOnly: true
   releaseServerVersionStandalone:
     type: string
     minLength: 1
     description: Version number for server release build
     deprecated: true
-    readOnly: true
   sdkDeveloperFaqUrl:
     type: string
     minLength: 1
     description: Link to the developer FAQ
-    readOnly: true
   sdkDiscordUrl:
     type: string
     minLength: 1
     description: Link to the official VRChat Discord
-    readOnly: true
   sdkNotAllowedToPublishMessage:
     type: string
     minLength: 1
     description: Used in the SDK to notify a user they aren't allowed to upload avatars/worlds yet
-    readOnly: true
   sdkUnityVersion:
     type: string
     minLength: 1
     description: Unity version supported by the SDK
-    readOnly: true
   serverName:
     type: string
     minLength: 1
     description: Server name of the API server currently responding
-    readOnly: true
   supportEmail:
     type: string
     minLength: 1
     description: VRChat's support email
-    readOnly: true
   timeOutWorldId:
     $ref: ./WorldID.yaml
   tutorialWorldId:
@@ -631,30 +623,24 @@ properties:
   updateRateMsMaximum:
     type: number
     description: Unknown
-    readOnly: true
   updateRateMsMinimum:
     type: number
     description: Unknown
-    readOnly: true
   updateRateMsNormal:
     type: number
     description: Unknown
-    readOnly: true
   updateRateMsUdonManual:
     type: number
     description: Unknown
-    readOnly: true
   uploadAnalysisPercent:
     type: number
     description: Unknown
-    readOnly: true
   urlList:
     type: array
     description: List of allowed URLs that bypass the "Allow untrusted URL's" setting in-game
     items:
       type: string
       readOnly: true
-    readOnly: true
   useReliableUdpForVoice:
     type: boolean
     description: Unknown
@@ -662,52 +648,49 @@ properties:
   userUpdatePeriod:
     type: number
     description: Unknown
-    readOnly: true
   userVerificationDelay:
     type: number
     description: Unknown
-    readOnly: true
   userVerificationRetry:
     type: number
     description: Unknown
-    readOnly: true
   userVerificationTimeout:
     type: number
     description: Unknown
-    readOnly: true
   viveWindowsUrl:
     type: string
     minLength: 1
     description: Download link for game on the Steam website.
-    readOnly: true
   whiteListedAssetUrls:
     type: array
     description: List of allowed URLs that are allowed to host avatar assets
     items:
       type: string
       readOnly: true
-    readOnly: true
   worldUpdatePeriod:
     type: number
     description: Unknown
-    readOnly: true
   youtubedl-hash:
     type: string
     minLength: 1
     description: Currently used youtube-dl.exe hash in SHA-256-delimited format
-    readOnly: true
   youtubedl-version:
     type: string
     minLength: 1
     description: Currently used youtube-dl.exe version
-    readOnly: true
 required:
+  - VoiceEnableDegradation
+  - VoiceEnableReceiverLimiting
   - address
   - announcements
   - apiKey
   - appName
   - buildVersionTag
   - clientApiKey
+  - clientBPSCeiling
+  - clientDisconnectTimeout
+  - clientReservedPlayerBPS
+  - clientSentCountAllowance
   - contactEmail
   - copyrightEmail
   - currentTOSVersion
@@ -718,12 +701,17 @@ required:
   - devSdkUrl
   - devSdkVersion
   - devServerVersionStandalone
+  - dis-countdown
   - disableAvatarCopying
   - disableAvatarGating
   - disableCommunityLabs
   - disableCommunityLabsPromotion
+  - disableEmail
   - disableEventStream
   - disableFeedbackGating
+  - disableFrontendBuilds
+  - disableHello
+  - disableOculusSubs
   - disableRegistration
   - disableSteamNetworking
   - disableTwoFactorAuth
