@@ -250,6 +250,7 @@ properties:
     description: Public Announcements
     items:
       type: object
+      title: Public Announcement
       description: Public Announcement
       properties:
         name:
@@ -412,6 +413,7 @@ properties:
     description: Download link for game on the Oculus Rift website.
   downloadUrls:
     type: object
+    title: DownloadURLList
     description: Download links for various development assets.
     required:
       - sdk2
@@ -442,6 +444,7 @@ properties:
     description: 'Array of DynamicWorldRow objects, used by the game to display the list of world rows'
     items:
       type: object
+      title: DynamicWorldRow
       properties:
         index:
           type: number
@@ -481,6 +484,7 @@ properties:
       readOnly: true
   events:
     type: object
+    title: APIEventConfig
     required:
       - distanceClose
       - distanceFactor
