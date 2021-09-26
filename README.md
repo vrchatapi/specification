@@ -2,9 +2,9 @@
 
 # 💜 VRChat API Specification 💜
 
-What is this? This is a community-driven "OpenAPI" (formely Swagger) specification. OpenAPI allows to define an API in YAML - a both machine and human-readable format - and then do tons of cool stuff with it! While our primary use is automatically generating the website docs from the specification, we can also use it to automatically generate code! Fully working code!
+What is this? This is a community-driven "OpenAPI" (formerly  Swagger) specification. OpenAPI allows to define an API in YAML - a both machine and human-readable format - and then do tons of cool stuff with it! While our primary use is automatically generating the website docs from the specification, we can also use it to automatically generate code! Fully working code!
 
-This effort has resulted in several language SDK libraries being available, ideally making the development experience with VRChat's API less painful and avoid duplication in effort. These language SDKs can then be automatically re-generated whenever an update is made to the specification, allowing us to have a single source of truth, and then automatically distrubute those changes to all libraries.
+This effort has resulted in several language SDK libraries being available, ideally making the development experience with VRChat's API less painful and avoid duplication in effort. These language SDKs can then be automatically re-generated whenever an update is made to the specification, allowing us to have a single source of truth, and then automatically distribute those changes to all libraries.
 
 ## 🔰 Getting Started
 
