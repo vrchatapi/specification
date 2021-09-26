@@ -64,12 +64,12 @@ releaseStatus:
   required: false
   schema:
     type: string
-    default: hidden
+    default: public
     enum:
       - public
       - private
       - hidden
-    example: hidden
+      - all
   description: Filter by ReleaseStatus.
 offline:
   name: offline
