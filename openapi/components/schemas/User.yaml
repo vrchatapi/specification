@@ -1,20 +1,22 @@
+title: User
+type: object
 properties:
   allowAvatarCopying:
     type: boolean
   bio:
     type: string
   bioLinks:
+    type: array
     items:
       type: string
-    type: array
   currentAvatarImageUrl:
     type: string
   currentAvatarThumbnailImageUrl:
     type: string
   date_joined:
     format: date
-    readOnly: true
     type: string
+    readOnly: true
   developerType:
     $ref: ./DeveloperType.yaml
   displayName:
@@ -43,9 +45,9 @@ properties:
     type: string
   tags:
     description: ' '
+    type: array
     items:
       $ref: ./Tag.yaml
-    type: array
   userIcon:
     type: string
   username:
@@ -53,28 +55,23 @@ properties:
   worldId:
     $ref: ./WorldID.yaml
 required:
-  - id
-  - username
-  - displayName
-  - userIcon
+  - allowAvatarCopying
   - bio
   - bioLinks
-  - profilePicOverride
-  - statusDescription
   - currentAvatarImageUrl
   - currentAvatarThumbnailImageUrl
-  - state
-  - tags
+  - date_joined
   - developerType
+  - displayName
+  - friendKey
+  - id
+  - isFriend
   - last_login
   - last_platform
-  - allowAvatarCopying
+  - profilePicOverride
+  - state
   - status
-  - date_joined
-  - isFriend
-  - friendKey
-  - worldId
-  - instanceId
-  - location
-title: User
-type: object
+  - statusDescription
+  - tags
+  - userIcon
+  - username
