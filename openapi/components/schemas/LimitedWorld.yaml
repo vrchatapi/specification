@@ -13,7 +13,7 @@ properties:
     type: string
     minLength: 1
   capacity:
-    type: number
+    type: integer
   imageUrl:
     type: string
     minLength: 1
@@ -32,7 +32,7 @@ properties:
     items:
       $ref: ./Tag.yaml
   favorites:
-    type: number
+    type: integer
   created_at:
     type: string
     format: date-time
@@ -41,7 +41,6 @@ properties:
     format: date-time
   publicationDate:
     type: string
-    readOnly: true
   labsPublicationDate:
     type: string
     minLength: 1
@@ -52,11 +51,14 @@ properties:
     items:
       $ref: ./LimitedUnityPackage.yaml
   popularity:
-    type: number
+    type: integer
+    example: 8
+    default: 0
+    minimum: 0
   heat:
-    type: number
+    type: integer
   occupants:
-    type: number
+    type: integer
 required:
   - id
   - name
