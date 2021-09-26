@@ -9,10 +9,10 @@ properties:
   capacity:
     maximum: 40
     minimum: 0
-    type: number
+    type: integer
   clientNumber:
     minLength: 1
-    type: string
+    type: integer
   full:
     default: false
     type: boolean
@@ -26,7 +26,7 @@ properties:
     type: string
   n_users:
     minimum: 0
-    type: number
+    type: integer
   name:
     minLength: 1
     type: string
@@ -44,9 +44,9 @@ properties:
   platforms:
     properties:
       android:
-        type: number
+        type: integer
       standalonewindows:
-        type: number
+        type: integer
     required:
       - android
       - standalonewindows

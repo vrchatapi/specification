@@ -16,7 +16,7 @@ properties:
     type: string
   sizeInBytes:
     minimum: 0
-    type: number
+    type: integer
   status:
     $ref: ./FileStatus.yaml
   uploadId:

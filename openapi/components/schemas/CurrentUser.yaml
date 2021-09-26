@@ -1,6 +1,8 @@
 properties:
   acceptedTOSVersion:
-    type: number
+    minimum: 0
+    example: 7
+    type: integer
   accountDeletionDate:
     format: date
     nullable: true
@@ -27,7 +29,6 @@ properties:
     type: string
   date_joined:
     format: date
-    readOnly: true
     type: string
   developerType:
     $ref: ./DeveloperType.yaml
