@@ -88,7 +88,8 @@ paths:
   /js/app.js:
     get:
       summary: Download Frontend JavaScript
-      tags: []
+      tags:
+        - system
       responses:
         '200':
           description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
@@ -106,7 +107,8 @@ paths:
   /css/app.css:
     get:
       summary: Download Frontend CSS
-      tags: []
+      tags:
+        - system
       responses:
         '200':
           description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
