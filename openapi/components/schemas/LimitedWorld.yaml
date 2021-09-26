@@ -49,7 +49,8 @@ properties:
     minimum: 0
     type: integer
   publicationDate:
-    format: date-time
+    example: none
+    minLength: 1
     type: string
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
