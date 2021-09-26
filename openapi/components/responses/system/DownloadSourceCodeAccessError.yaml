@@ -1,0 +1,21 @@
+description: Error response when trying to download non-public and non-main JavaScript or CSS without Admin Credentials.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        error:
+          $ref: ../../schemas/Error.yaml
+      required:
+        - error
+    examples:
+      Only Admins Can Get Non-Public Variants:
+        value:
+          error:
+            message: "only admins can get non-public variants"
+            status_code: 400
+      Only Admins Can Get Non-Main Branches:
+        value:
+          error:
+            message: "only admins can get non-main branches"
+            status_code: 400

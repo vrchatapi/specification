@@ -28,6 +28,10 @@
   $ref: ./paths/system.yaml#/paths/~1visits
 /time:
   $ref: ./paths/system.yaml#/paths/~1time
+/js/app.js:
+  $ref: ./paths/system.yaml#/paths/~1js~1app.js
+/css/app.js:
+  $ref: ./paths/system.yaml#/paths/~1css~1app.css
 /auth/user/friends:
   $ref: ./paths/friends.yaml#/paths/~1auth~1user~1friends
 '/user/{userId}/friendStatus':

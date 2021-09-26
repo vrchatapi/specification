@@ -259,3 +259,24 @@ notificationId:
   required: true
   schema:
     type: string
+variant:
+  name: variant
+  in: query
+  required: false
+  schema:
+    type: string
+    enum:
+      - public
+      - internal
+    default: public
+  allowEmptyValue: true
+  description: 'Specifies which `variant` of the site. Public is the end-user site, while `internal` is the staff-only site with special pages for moderation and management.'
+branch:
+  name: branch
+  in: query
+  required: false
+  schema:
+    type: string
+    default: main
+  allowEmptyValue: true
+  description: Specifies which git branch the site should load frontend source code from.
