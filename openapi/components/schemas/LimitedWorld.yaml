@@ -1,19 +1,26 @@
 description: ''
 properties:
   authorId:
-    minLength: 1
-    type: string
+    $ref: ./UserID.yaml
   authorName:
     minLength: 1
     type: string
   capacity:
+    example: 8
+    minimum: 0
     type: integer
   created_at:
     format: date-time
     type: string
   favorites:
+    default: 0
+    example: 12024
+    minimum: 0
     type: integer
   heat:
+    default: 0
+    example: 5
+    minimum: 0
     type: integer
   id:
     $ref: ./WorldID.yaml
@@ -21,14 +28,19 @@ properties:
     minLength: 1
     type: string
   labsPublicationDate:
+    example: none
     minLength: 1
     type: string
   name:
     minLength: 1
     type: string
   occupants:
+    default: 0
+    example: 47
+    minimum: 0
     type: integer
   organization:
+    default: vrchat
     minLength: 1
     type: string
   popularity:
@@ -37,10 +49,10 @@ properties:
     minimum: 0
     type: integer
   publicationDate:
+    format: date-time
     type: string
   releaseStatus:
-    minLength: 1
-    type: string
+    $ref: ./ReleaseStatus.yaml
   tags:
     description: ' '
     items:
