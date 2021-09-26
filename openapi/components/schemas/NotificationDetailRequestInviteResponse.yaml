@@ -1,10 +1,10 @@
-title: NotificationDetailRequestInviteResponse
-type: object
 properties:
   inResponseTo:
     $ref: ./NotificationID.yaml
   requestMessage:
-    type: string
     description: Used when using InviteMessage Slot.
+    type: string
 required:
   - inResponseTo
+title: NotificationDetailRequestInviteResponse
+type: object

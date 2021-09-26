@@ -1,13 +1,13 @@
 description: ''
-type: object
-title: LimitedUnityPackage
 properties:
   platform:
     $ref: ./Platform.yaml
   unityVersion:
-    type: string
-    minLength: 1
     example: 2018.4.14f1
+    minLength: 1
+    type: string
 required:
   - platform
   - unityVersion
+title: LimitedUnityPackage
+type: object

@@ -1,125 +1,123 @@
-title: CurrentUser
-type: object
 properties:
-  id:
-    $ref: ./UserID.yaml
-  username:
+  acceptedTOSVersion:
+    type: number
+  accountDeletionDate:
+    format: date
+    nullable: true
     type: string
-  displayName:
-    type: string
-  userIcon:
-    type: string
+  activeFriends:
+    items:
+      $ref: ./UserID.yaml
+    type: array
+  allowAvatarCopying:
+    type: boolean
   bio:
     type: string
   bioLinks:
-    type: array
     items:
       type: string
-  profilePicOverride:
-    type: string
-  statusDescription:
-    type: string
-  pastDisplayNames:
     type: array
-    description: ' '
-    items:
-      $ref: ./PastDisplayName.yaml
-  hasEmail:
-    type: boolean
-  hasPendingEmail:
-    type: boolean
-  obfuscatedEmail:
-    type: string
-  obfuscatedPendingEmail:
-    type: string
-  emailVerified:
-    type: boolean
-  hasBirthday:
-    type: boolean
-  unsubscribe:
-    type: boolean
-  statusHistory:
-    type: array
-    items:
-      type: string
-  statusFirstTime:
-    type: boolean
-  friends:
-    type: array
-    items:
-      $ref: ./UserID.yaml
-  friendGroupNames:
-    description: Always empty array.
-    deprecated: true
-    type: array
-    items:
-      type: string
-  currentAvatarImageUrl:
-    type: string
-  currentAvatarThumbnailImageUrl:
-    type: string
-  fallbackAvatar:
-    $ref: ./AvatarID.yaml
   currentAvatar:
     $ref: ./AvatarID.yaml
   currentAvatarAssetUrl:
     type: string
-  accountDeletionDate:
+  currentAvatarImageUrl:
     type: string
+  currentAvatarThumbnailImageUrl:
+    type: string
+  date_joined:
     format: date
-    nullable: true
-  acceptedTOSVersion:
-    type: number
-  steamId:
+    readOnly: true
     type: string
-  steamDetails:
-    type: object
-  oculusId:
+  developerType:
+    $ref: ./DeveloperType.yaml
+  displayName:
     type: string
+  emailVerified:
+    type: boolean
+  fallbackAvatar:
+    $ref: ./AvatarID.yaml
+  friendGroupNames:
+    deprecated: true
+    description: Always empty array.
+    items:
+      type: string
+    type: array
+  friendKey:
+    type: string
+  friends:
+    items:
+      $ref: ./UserID.yaml
+    type: array
+  hasBirthday:
+    type: boolean
+  hasEmail:
+    type: boolean
   hasLoggedInFromClient:
+    type: boolean
+  hasPendingEmail:
     type: boolean
   homeLocation:
     $ref: ./WorldID.yaml
-  twoFactorAuthEnabled:
+  id:
+    $ref: ./UserID.yaml
+  isFriend:
+    default: false
     type: boolean
-  state:
-    $ref: ./UserState.yaml
-  tags:
-    type: array
-    items:
-      $ref: ./Tag.yaml
-  developerType:
-    $ref: ./DeveloperType.yaml
   last_login:
-    type: string
     format: date-time
+    type: string
   last_platform:
     $ref: ./Platform.yaml
-  allowAvatarCopying:
-    type: boolean
+  obfuscatedEmail:
+    type: string
+  obfuscatedPendingEmail:
+    type: string
+  oculusId:
+    type: string
+  offlineFriends:
+    items:
+      $ref: ./UserID.yaml
+    type: array
+  onlineFriends:
+    items:
+      $ref: ./UserID.yaml
+    type: array
+  pastDisplayNames:
+    description: ' '
+    items:
+      $ref: ./PastDisplayName.yaml
+    type: array
+  profilePicOverride:
+    type: string
+  state:
+    $ref: ./UserState.yaml
   status:
     $ref: ./UserStatus.yaml
-  date_joined:
+  statusDescription:
     type: string
-    format: date
-    readOnly: true
-  isFriend:
+  statusFirstTime:
     type: boolean
-    default: false
-  friendKey:
+  statusHistory:
+    items:
+      type: string
+    type: array
+  steamDetails:
+    type: object
+  steamId:
     type: string
-  onlineFriends:
-    type: array
+  tags:
     items:
-      $ref: ./UserID.yaml
-  activeFriends:
+      $ref: ./Tag.yaml
     type: array
-    items:
-      $ref: ./UserID.yaml
-  offlineFriends:
-    type: array
-    items:
-      $ref: ./UserID.yaml
+  twoFactorAuthEnabled:
+    type: boolean
+  unsubscribe:
+    type: boolean
+  userIcon:
+    type: string
+  username:
+    type: string
 required:
   - id
   - username
@@ -162,3 +160,5 @@ required:
   - date_joined
   - isFriend
   - friendKey
+title: CurrentUser
+type: object

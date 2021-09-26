@@ -1,8 +1,8 @@
-type: string
-title: FavoriteGroupVisibility
+default: private
 enum:
   - private
   - friends
   - public
-default: private
 example: private
+title: FavoriteGroupVisibility
+type: string

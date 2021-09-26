@@ -1,29 +1,27 @@
 description: ''
-type: object
-title: InviteMessage
 properties:
+  canBeUpdated:
+    default: true
+    type: boolean
   id:
     $ref: ./InviteMessageID.yaml
-  slot:
-    type: integer
-    minimum: 0
-    maximum: 11
   message:
-    type: string
     minLength: 1
+    type: string
   messageType:
     $ref: ./InviteMessageType.yaml
-  updatedAt:
-    type: string
-    format: date-time
   remainingCooldownMinutes:
-    type: integer
     default: 0
-    minimum: 0
     description: 'Changes to 60 when updated, although probably server-side configurable.'
-  canBeUpdated:
-    type: boolean
-    default: true
+    minimum: 0
+    type: integer
+  slot:
+    maximum: 11
+    minimum: 0
+    type: integer
+  updatedAt:
+    format: date-time
+    type: string
 required:
   - id
   - slot
@@ -32,3 +30,5 @@ required:
   - updatedAt
   - remainingCooldownMinutes
   - canBeUpdated
+title: InviteMessage
+type: object

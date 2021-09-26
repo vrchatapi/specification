@@ -1,10 +1,3 @@
-type: string
-title: DeploymentGroup
-enum:
-- blue
-- green
-- grape
-- cherry
 description: |-
   Used to identify which API deployment cluster is currently responding.
 
@@ -12,4 +5,11 @@ description: |-
   `grape`and `cherry` are used during Development.
 
   [Blue Green Deployment by Martin Fowler](https://martinfowler.com/bliki/BlueGreenDeployment.html)
+enum:
+  - blue
+  - green
+  - grape
+  - cherry
 readOnly: true
+title: DeploymentGroup
+type: string

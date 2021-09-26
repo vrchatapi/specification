@@ -1,21 +1,21 @@
 description: ''
-type: object
 properties:
-  id:
-    $ref: ./FavoriteID.yaml
-  type:
-    $ref: ./FavoriteType.yaml
   favoriteId:
     description: 'MUST be either AvatarID, UserID or WorldID.'
     type: string
+  id:
+    $ref: ./FavoriteID.yaml
   tags:
-    type: array
     description: ' '
     items:
       $ref: ./Tag.yaml
+    type: array
+  type:
+    $ref: ./FavoriteType.yaml
 required:
   - id
   - type
   - favoriteId
   - tags
 title: Favorite
+type: object

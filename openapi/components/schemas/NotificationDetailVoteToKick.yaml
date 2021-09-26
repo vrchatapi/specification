@@ -1,10 +1,10 @@
-title: NotificationDetailVoteToKick
-type: object
 properties:
-  userToKickId:
-    $ref: ./UserID.yaml
   initiatorUserId:
+    $ref: ./UserID.yaml
+  userToKickId:
     $ref: ./UserID.yaml
 required:
   - userToKickId
   - initiatorUserId
+title: NotificationDetailVoteToKick
+type: object

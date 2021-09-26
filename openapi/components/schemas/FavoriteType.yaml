@@ -1,6 +1,6 @@
-type: string
-title: FavoriteType
 enum:
   - world
   - friend
   - avatar
+title: FavoriteType
+type: string

@@ -1,82 +1,80 @@
 description: ''
-type: object
-title: Instance
 properties:
   active:
-    type: boolean
     default: true
+    type: boolean
   canRequestInvite:
-    type: boolean
     default: true
-  capacity:
-    type: number
-    minimum: 0
-    maximum: 40
-  clientNumber:
-    type: string
-    minLength: 1
-  full:
     type: boolean
+  capacity:
+    maximum: 40
+    minimum: 0
+    type: number
+  clientNumber:
+    minLength: 1
+    type: string
+  full:
     default: false
+    type: boolean
   id:
     $ref: ./InstanceID.yaml
   instanceId:
-    type: string
     minLength: 1
+    type: string
   location:
-    type: string
     minLength: 1
+    type: string
   n_users:
-    type: number
     minimum: 0
+    type: number
   name:
-    type: string
     minLength: 1
+    type: string
   nonce:
-    type: string
     minLength: 1
+    type: string
   ownerId:
     $ref: ./UserID.yaml
   permanent:
-    type: boolean
     default: false
+    type: boolean
   photonRegion:
-    type: string
     minLength: 1
+    type: string
   platforms:
-    type: object
-    required:
-      - android
-      - standalonewindows
     properties:
       android:
         type: number
       standalonewindows:
         type: number
+    required:
+      - android
+      - standalonewindows
+    type: object
   region:
-    type: string
     minLength: 1
+    type: string
   shortName:
-    type: string
     minLength: 1
+    type: string
   tags:
-    type: array
     description: ' '
     items:
       $ref: ./Tag.yaml
-  type:
-    type: string
-    minLength: 1
-  users:
     type: array
+  type:
+    minLength: 1
+    type: string
+  users:
     deprecated: true
     description: 'Always empty on non-existing instances, and non-present on existing instances.'
     items:
       type: object
+    type: array
   world:
-    type: object
     deprecated: true
     description: 'Only present on non-existing instances, and only contains a very small subject of World object. Use World API instead.'
+    type: object
   worldId:
     $ref: ./WorldID.yaml
 required:
@@ -99,3 +97,5 @@ required:
   - tags
   - type
   - worldId
+title: Instance
+type: object

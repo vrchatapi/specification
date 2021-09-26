@@ -1,5 +1,4 @@
-type: string
-title: PlayerModerationType
+default: showAvatar
 enum:
   - mute
   - unmute
@@ -7,5 +6,6 @@ enum:
   - unblock
   - hideAvatar
   - showAvatar
-default: showAvatar
 example: showAvatar
+title: PlayerModerationType
+type: string
