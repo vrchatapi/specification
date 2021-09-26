@@ -85,5 +85,43 @@ paths:
 
         **NOTE:** The response type is not of JSON, but is a string in plain ASCII format.
       security: []
+  /js/app.js:
+    get:
+      summary: Download Frontend JavaScript
+      tags:
+        - system
+      responses:
+        '200':
+          description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
+          content:
+            application/javascript:
+              schema:
+                type: string
+        '400':
+          $ref: ../responses/system/DownloadSourceCodeAccessError.yaml
+      operationId: getJavaScript
+      description: Fetches the JavaScript code to the frontend React website.
+      parameters:
+        - $ref: ../parameters.yaml#/variant
+        - $ref: ../parameters.yaml#/branch
+  /css/app.css:
+    get:
+      summary: Download Frontend CSS
+      tags:
+        - system
+      responses:
+        '200':
+          description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
+          content:
+            text/css:
+              schema:
+                type: string
+        '400':
+          $ref: ../responses/system/DownloadSourceCodeAccessError.yaml
+      operationId: getCSS
+      description: Fetches the CSS code to the frontend React website.
+      parameters:
+        - $ref: ../parameters.yaml#/variant
+        - $ref: ../parameters.yaml#/branch
 tags:
   $ref: ../tags.yaml
