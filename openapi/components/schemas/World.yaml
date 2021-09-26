@@ -12,34 +12,29 @@ properties:
   authorName:
     type: string
     minLength: 1
-    readOnly: true
   capacity:
-    type: number
+    type: integer
     minimum: 0
     example: 8
-    readOnly: true
   created_at:
     type: string
     format: date-time
-    readOnly: true
   description:
     type: string
     minLength: 0
   favorites:
-    type: number
+    type: integer
     minimum: 0
     default: 0
     example: 12024
-    readOnly: true
   featured:
     type: boolean
     default: false
   heat:
-    type: number
+    type: integer
     minimum: 0
     example: 5
     default: 0
-    readOnly: true
   id:
     $ref: ./WorldID.yaml
   imageUrl:
@@ -63,11 +58,10 @@ properties:
   namespace:
     type: string
   occupants:
-    type: number
+    type: integer
     minimum: 0
     example: 47
     default: 0
-    readOnly: true
   organization:
     type: string
     minLength: 1
@@ -76,25 +70,22 @@ properties:
   pluginUrlObject:
     type: object
   popularity:
-    type: number
+    type: integer
     example: 8
     default: 0
     minimum: 0
-    readOnly: true
   previewYoutubeId:
     type: string
   privateOccupants:
-    type: number
+    type: integer
     default: 0
     minimum: 0
     example: 1
-    readOnly: true
   publicOccupants:
-    type: number
+    type: integer
     example: 46
     default: 0
     minimum: 0
-    readOnly: true
   publicationDate:
     type: string
     format: date-time
@@ -120,16 +111,15 @@ properties:
     type: string
     format: date-time
   version:
-    type: number
+    type: integer
     minimum: 0
     example: 68
     default: 0
   visits:
-    type: number
+    type: integer
     minimum: 0
     example: 9988675
     default: 0
-    readOnly: true
 required:
   - assetUrl
   - assetUrlObject
