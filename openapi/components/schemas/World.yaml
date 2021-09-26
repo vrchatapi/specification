@@ -1,125 +1,123 @@
 description: ''
-type: object
-title: World
 properties:
   assetUrl:
-    type: string
     minLength: 1
+    type: string
   assetUrlObject:
     type: object
   authorId:
     $ref: ./UserID.yaml
   authorName:
-    type: string
     minLength: 1
+    type: string
   capacity:
-    type: integer
-    minimum: 0
     example: 8
-  created_at:
-    type: string
-    format: date-time
-  description:
-    type: string
-    minLength: 0
-  favorites:
-    type: integer
     minimum: 0
+    type: integer
+  created_at:
+    format: date-time
+    type: string
+  description:
+    minLength: 0
+    type: string
+  favorites:
     default: 0
     example: 12024
-  featured:
-    type: boolean
-    default: false
-  heat:
-    type: integer
     minimum: 0
-    example: 5
+    type: integer
+  featured:
+    default: false
+    type: boolean
+  heat:
     default: 0
+    example: 5
+    minimum: 0
+    type: integer
   id:
     $ref: ./WorldID.yaml
   imageUrl:
-    type: string
     minLength: 1
+    type: string
   instances:
-    type: array
     items:
-      type: array
-      minItems: 2
-      maxItems: 2
       items:
         type: object
+      maxItems: 2
+      minItems: 2
+      type: array
+    type: array
   labsPublicationDate:
-    type: string
-    minLength: 1
     example: none
-  name:
-    type: string
     minLength: 1
+    type: string
+  name:
+    minLength: 1
+    type: string
   namespace:
     type: string
   occupants:
-    type: integer
-    minimum: 0
-    example: 47
     default: 0
+    example: 47
+    minimum: 0
+    type: integer
   organization:
-    type: string
-    minLength: 1
-    example: vrchat
     default: vrchat
+    example: vrchat
+    minLength: 1
+    type: string
   pluginUrlObject:
     type: object
   popularity:
-    type: integer
-    example: 8
     default: 0
+    example: 8
     minimum: 0
+    type: integer
   previewYoutubeId:
     type: string
   privateOccupants:
-    type: integer
     default: 0
-    minimum: 0
     example: 1
-  publicOccupants:
-    type: integer
-    example: 46
-    default: 0
     minimum: 0
+    type: integer
+  publicOccupants:
+    default: 0
+    example: 46
+    minimum: 0
+    type: integer
   publicationDate:
-    type: string
     format: date-time
+    type: string
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   tags:
-    type: array
     description: ' '
     items:
       $ref: ./Tag.yaml
+    type: array
   thumbnailImageUrl:
-    type: string
     minLength: 1
+    type: string
   unityPackageUrlObject:
     type: object
   unityPackages:
-    type: array
     description: ' '
-    minItems: 1
     items:
       $ref: ./UnityPackage.yaml
+    minItems: 1
+    type: array
   updated_at:
-    type: string
     format: date-time
+    type: string
   version:
-    type: integer
-    minimum: 0
+    default: 0
     example: 68
-    default: 0
-  visits:
-    type: integer
     minimum: 0
-    example: 9988675
+    type: integer
+  visits:
     default: 0
+    example: 9988675
+    minimum: 0
+    type: integer
 required:
   - assetUrl
   - assetUrlObject
@@ -147,3 +145,5 @@ required:
   - updated_at
   - version
   - visits
+title: World
+type: object

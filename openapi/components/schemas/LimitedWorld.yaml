@@ -1,64 +1,63 @@
 description: ''
-type: object
 properties:
-  id:
-    $ref: ./WorldID.yaml
-  name:
-    type: string
-    minLength: 1
   authorId:
-    type: string
     minLength: 1
+    type: string
   authorName:
-    type: string
     minLength: 1
+    type: string
   capacity:
     type: integer
+  created_at:
+    format: date-time
+    type: string
+  favorites:
+    type: integer
+  heat:
+    type: integer
+  id:
+    $ref: ./WorldID.yaml
   imageUrl:
-    type: string
     minLength: 1
-  thumbnailImageUrl:
     type: string
+  labsPublicationDate:
     minLength: 1
-  releaseStatus:
     type: string
+  name:
     minLength: 1
+    type: string
+  occupants:
+    type: integer
   organization:
-    type: string
     minLength: 1
+    type: string
+  popularity:
+    default: 0
+    example: 8
+    minimum: 0
+    type: integer
+  publicationDate:
+    type: string
+  releaseStatus:
+    minLength: 1
+    type: string
   tags:
-    type: array
     description: ' '
     items:
       $ref: ./Tag.yaml
-  favorites:
-    type: integer
-  created_at:
-    type: string
-    format: date-time
-  updated_at:
-    type: string
-    format: date-time
-  publicationDate:
-    type: string
-  labsPublicationDate:
-    type: string
-    minLength: 1
-  unityPackages:
     type: array
+  thumbnailImageUrl:
+    minLength: 1
+    type: string
+  unityPackages:
     description: ' '
-    minItems: 1
     items:
       $ref: ./LimitedUnityPackage.yaml
-  popularity:
-    type: integer
-    example: 8
-    default: 0
-    minimum: 0
-  heat:
-    type: integer
-  occupants:
-    type: integer
+    minItems: 1
+    type: array
+  updated_at:
+    format: date-time
+    type: string
 required:
   - id
   - name
@@ -79,3 +78,4 @@ required:
   - popularity
   - heat
   - occupants
+type: object

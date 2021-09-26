@@ -1,9 +1,9 @@
-title: NotificationDetailRequestInvite
-type: object
 properties:
   platform:
-    type: string
     description: 'TODO: Does this still exist?'
-  requestMessage:
     type: string
+  requestMessage:
     description: Used when using InviteMessage Slot.
+    type: string
+title: NotificationDetailRequestInvite
+type: object

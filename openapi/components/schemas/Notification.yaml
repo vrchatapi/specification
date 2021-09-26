@@ -1,32 +1,30 @@
-title: Notification
-type: object
 description: ''
 properties:
-  id:
+  created_at:
+    format: date-time
     type: string
+  details:
+    default: '{}'
+    description: '**NOTICE:** This is not a JSON object, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
+    example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
+    type: string
+  id:
     minLength: 1
+    type: string
+  message:
+    description: ''
+    example: This is a generated invite to VRChat Hub
+    type: string
+  seen:
+    default: false
+    type: boolean
   senderUserId:
     $ref: ./UserID.yaml
   senderUsername:
-    type: string
     minLength: 1
+    type: string
   type:
     $ref: ./NotificationType.yaml
-  message:
-    type: string
-    description: ''
-    example: This is a generated invite to VRChat Hub
-  details:
-    type: string
-    description: '**NOTICE:** This is not a JSON object, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
-    default: '{}'
-    example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
-  seen:
-    type: boolean
-    default: false
-  created_at:
-    type: string
-    format: date-time
 required:
   - id
   - senderUserId
@@ -36,3 +34,5 @@ required:
   - details
   - seen
   - created_at
+title: Notification
+type: object

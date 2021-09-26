@@ -1,59 +1,57 @@
-title: User
-type: object
 properties:
-  id:
-    $ref: ./UserID.yaml
-  username:
-    type: string
-  displayName:
-    type: string
-  userIcon:
-    type: string
+  allowAvatarCopying:
+    type: boolean
   bio:
     type: string
   bioLinks:
-    type: array
     items:
       type: string
-  profilePicOverride:
-    type: string
-  statusDescription:
-    type: string
+    type: array
   currentAvatarImageUrl:
     type: string
   currentAvatarThumbnailImageUrl:
     type: string
-  state:
-    $ref: ./UserState.yaml
-  tags:
-    type: array
-    description: ' '
-    items:
-      $ref: ./Tag.yaml
+  date_joined:
+    format: date
+    readOnly: true
+    type: string
   developerType:
     $ref: ./DeveloperType.yaml
+  displayName:
+    type: string
+  friendKey:
+    type: string
+  id:
+    $ref: ./UserID.yaml
+  instanceId:
+    type: string
+  isFriend:
+    type: boolean
   last_login:
     type: string
   last_platform:
     $ref: ./Platform.yaml
-  allowAvatarCopying:
-    type: boolean
+  location:
+    type: string
+  profilePicOverride:
+    type: string
+  state:
+    $ref: ./UserState.yaml
   status:
     $ref: ./UserStatus.yaml
-  date_joined:
+  statusDescription:
     type: string
-    format: date
-    readOnly: true
-  isFriend:
-    type: boolean
-  friendKey:
+  tags:
+    description: ' '
+    items:
+      $ref: ./Tag.yaml
+    type: array
+  userIcon:
+    type: string
+  username:
     type: string
   worldId:
     $ref: ./WorldID.yaml
-  instanceId:
-    type: string
-  location:
-    type: string
 required:
   - id
   - username
@@ -78,3 +76,5 @@ required:
   - worldId
   - instanceId
   - location
+title: User
+type: object

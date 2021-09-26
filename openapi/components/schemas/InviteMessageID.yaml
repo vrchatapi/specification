@@ -1,4 +1,4 @@
+example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
+pattern: '(default|invm_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})'
 title: InviteMessageID
 type: string
-pattern: '(default|invm_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})'
-example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa

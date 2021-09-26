@@ -1,7 +1,7 @@
-type: string
-title: FileStatus
 enum:
   - waiting
   - complete
   - none
 example: complete
+title: FileStatus
+type: string

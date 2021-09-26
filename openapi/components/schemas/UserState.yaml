@@ -1,13 +1,13 @@
-title: UserState
-type: string
 default: offline
-enum:
-  - offline
-  - active
-  - online
 description: |-
   * "online" User is online in VRChat
   * "active" User is online, but not in VRChat
   * "offline" User is offline
 
   Always offline when returned through `getCurrentUser` (/auth/user).
+enum:
+  - offline
+  - active
+  - online
+title: UserState
+type: string

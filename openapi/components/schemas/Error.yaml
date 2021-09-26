@@ -1,5 +1,5 @@
-title: Error
-type: object
 properties:
   error:
     $ref: ./Response.yaml
+title: Error
+type: object

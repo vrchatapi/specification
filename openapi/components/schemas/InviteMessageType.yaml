@@ -1,6 +1,6 @@
-type: string
-title: InviteMessageType
-description: ''
 default: message
+description: ''
 enum:
   - message
+title: InviteMessageType
+type: string

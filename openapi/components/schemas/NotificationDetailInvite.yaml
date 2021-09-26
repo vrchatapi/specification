@@ -1,12 +1,12 @@
-title: NotificationDetailInvite
-type: object
 properties:
+  inviteMessage:
+    type: string
   worldId:
     $ref: ./WorldID.yaml
   worldName:
     type: string
-  inviteMessage:
-    type: string
 required:
   - worldId
   - worldName
+title: NotificationDetailInvite
+type: object

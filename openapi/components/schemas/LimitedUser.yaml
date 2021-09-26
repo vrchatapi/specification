@@ -1,40 +1,38 @@
-title: LimitedUser
-type: object
 description: ''
 properties:
-  id:
-    $ref: ./UserID.yaml
-  username:
-    type: string
-  displayName:
-    type: string
   bio:
-    type: string
-  userIcon:
-    type: string
-  profilePicOverride:
-    type: string
-  statusDescription:
     type: string
   currentAvatarImageUrl:
     type: string
   currentAvatarThumbnailImageUrl:
     type: string
-  fallbackAvatar:
-    $ref: ./AvatarID.yaml
   developerType:
     $ref: ./DeveloperType.yaml
-  last_platform:
-    $ref: ./Platform.yaml
-  status:
-    $ref: ./UserStatus.yaml
+  displayName:
+    type: string
+  fallbackAvatar:
+    $ref: ./AvatarID.yaml
+  id:
+    $ref: ./UserID.yaml
   isFriend:
     type: boolean
+  last_platform:
+    $ref: ./Platform.yaml
+  profilePicOverride:
+    type: string
+  status:
+    $ref: ./UserStatus.yaml
+  statusDescription:
+    type: string
   tags:
-    type: array
     description: <- Always empty.
     items:
       $ref: ./Tag.yaml
+    type: array
+  userIcon:
+    type: string
+  username:
+    type: string
 required:
   - id
   - username
@@ -50,3 +48,5 @@ required:
   - status
   - isFriend
   - tags
+title: LimitedUser
+type: object

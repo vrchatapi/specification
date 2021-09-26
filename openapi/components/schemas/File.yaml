@@ -1,34 +1,32 @@
 description: ''
-type: object
-title: File
 properties:
+  extension:
+    example: .unitypackage
+    minLength: 1
+    type: string
   id:
     $ref: ./FileID.yaml
+  mimeType:
+    $ref: ./MIMEType.yaml
   name:
-    type: string
     description: ''
     example: Example File
     minLength: 0
+    type: string
   ownerId:
     $ref: ./UserID.yaml
-  mimeType:
-    $ref: ./MIMEType.yaml
-  extension:
-    type: string
-    minLength: 1
-    example: .unitypackage
   tags:
-    type: array
     description: ' '
     items:
       $ref: ./Tag.yaml
-  versions:
     type: array
+  versions:
     description: ' '
-    uniqueItems: true
-    minItems: 1
     items:
       $ref: ./FileVersion.yaml
+    minItems: 1
+    type: array
+    uniqueItems: true
 required:
   - id
   - name
@@ -37,3 +35,5 @@ required:
   - extension
   - tags
   - versions
+title: File
+type: object
