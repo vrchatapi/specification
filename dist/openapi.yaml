@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.3.3
+  version: 1.4.0
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -10,7 +10,7 @@ info:
   license:
     url: 'https://github.com/vrchatapi/specification/blob/master/LICENSE'
     name: The MIT License (MIT)
-  description: "![VRChat API Banner](https://vrchatapi.github.io/assets/img/api_banner_1500x400.png)\n\n# Welcome to the VRChat API\n\nBefore we begin, we would like to state this is a **COMMUNITY DRIVEN PROJECT**.\nThis means that everything you read on here was written by the community itself and is **not** officially supported by VRChat.\nThe documentation is provided \"AS IS\", and any action you take towards VRChat is completely your own responsibility.\n\nThe documentation and additional libraries SHALL ONLY be used for applications interacting with VRChat's API in accordance\nwith their [Terms of Service](https://github.com/VRChatAPI), and MUST NOT be used for modifying the client, \"avatar ripping\", or other illegal activities.\nMalicious usage or spamming the API may result in account termination.\nCertain parts of the API are also more sensitive than others, for example moderation, so please tread extra carefully and read the warnings when present.\n\n![Tupper Policy on API](https://i.imgur.com/yLlW7Ok.png)\n\nFinally, use of the API using applications other than the approved methods (website, VRChat application, Unity SDK) is not officially supported.\nVRChat provides no guarantee or support for external applications using the API. Access to API endpoints may break **at any time, without notice**.\nTherefore, please **do not ping** VRChat Staff in the VRChat Discord if you are having API problems, as they do not provide API support.\nWe will make a best effort in keeping this documentation and associated language libraries up to date, but things might be outdated or missing.\nIf you find that something is no longer valid, please contact us on Discord or [create an issue](https://github.com/vrchatapi/specification/issues) and tell us so we can fix it.\n\n# Getting Started\n\nThe VRChat API can be used to programmatically retrieve or update information regarding your profile, friends, avatars, worlds and more.\nThe API consists of two parts, \"Photon\" which is only used in-game, and the \"Web API\" which is used by both the game and the website.\nThis documentation focuses only on the Web API.\n\nThe API is designed around the REST ideology, providing semi-simple and usually predictable URIs to access and modify objects.\nRequests support standard HTTP methods like GET, PUT, POST, and DELETE and standard status codes.\nResponse bodies are always UTF-8 encoded JSON objects, unless explicitly documented otherwise.\n\n<div class=\"callout callout-error\">\n  <strong>\U0001F6D1 Warning! Do not touch Photon!</strong><br>\n  Photon is only used by the in-game client and should <b>not</b> be touched. Doing so may result in permanent account termination.\n</div>\n\n<div class=\"callout callout-info\">\n  <strong>ℹ️ API Key and Authentication</strong><br>\n  The API Key has always been the same and is currently <code>JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26</code>.\n  Read <a href=\"#tag--authentication\">Authentication</a> for how to log in.\n</div>\n\n# Using the API\n\nFor simply exploring what the API can do it is strongly recommended to download [Insomnia](https://insomnia.rest/download), a free and open-source\nAPI client that's great for sending requests to the API in an orderly fashion.\nInsomnia allows you to send data in the format that's required for VRChat's API.\nIt is also possible to try out the API in your browser, by first logging in at [vrchat.com/home](https://vrchat.com/home/) and then going to\n[vrchat.com/api/1/auth/user](https://vrchat.com/api/1/auth/user), but the information will be much harder to work with.\n\nFor more permanent operation such as software development it is instead recommended to use one of the existing language SDKs.\nThis community project maintains API libraries in several languages, which allows you to interact with the API with simple function calls\nrather than having to implement the HTTP protocol yourself. Most of these libraries are automatically generated from the API specification,\nsometimes with additional helpful wrapper code to make usage easier. This allows them to be almost automatically updated and expanded upon\nas soon as a new feature is introduced in the specification itself. The libraries can be found on [GitHub](https://github.com/vrchatapi) or following:\n\n* [NodeJS (JavaScript)](https://www.npmjs.com/package/vrchat)\n* [Dart](https://pub.dev/packages/vrchat_dart)\n* [Rust](https://crates.io/crates/vrchatapi)\n* [C#](https://github.com/vrchatapi/vrchatapi-csharp)\n* [Python](https://github.com/vrchatapi/VRChatPython)\n\n# Pagination\n\nMost endpoints enforce pagination, meaning they will only return 10 entries by default, and never more than 100.<br>\nUsing both the limit and offset parameters allows you to easily paginate through a large number of objects.\n\n| Query Parameter | Type | Description |\n| ----------|--|------- |\n| `limit` | integer  | The number of objects to return. This value often defaults to 10. Highest limit is always 100.|\n| `offset` | integer  | A zero-based offset from the default object sorting.|\n\nIf a request returns fewer objects than the `limit` parameter, there are no more items available to return.\n\n# Contribution\n\nDo you want to get involved in the documentation effort? Do you want to help improve one of the language API libraries?\nThis project is an [OPEN Open Source Project](https://openopensource.org)! This means that individuals making significant and valuable contributions are given\ncommit-access to the project. It also means we are very open and welcoming of new people making contributions, unlike some more guarded open-source projects.\n\n[![Discord](https://img.shields.io/static/v1?label=vrchatapi&message=discord&color=blueviolet&style=for-the-badge)](https://discord.gg/qjZE9C9fkB)"
+  description: "![VRChat API Banner](https://vrchatapi.github.io/assets/img/api_banner_1500x400.png)\n\n# Welcome to the VRChat API\n\nBefore we begin, we would like to state this is a **COMMUNITY DRIVEN PROJECT**.\nThis means that everything you read on here was written by the community itself and is **not** officially supported by VRChat.\nThe documentation is provided \"AS IS\", and any action you take towards VRChat is completely your own responsibility.\n\nThe documentation and additional libraries SHALL ONLY be used for applications interacting with VRChat's API in accordance\nwith their [Terms of Service](https://hello.vrchat.com/legal) and [Community Guidelines](https://hello.vrchat.com/community-guidelines), and MUST NOT be used for modifying the client, \"avatar ripping\", or other illegal activities.\nMalicious usage or spamming the API may result in account termination.\nCertain parts of the API are also more sensitive than others, for example moderation, so please tread extra carefully and read the warnings when present.\n\n![Tupper Policy on API](https://i.imgur.com/yLlW7Ok.png)\n\nFinally, use of the API using applications other than the approved methods (website, VRChat application, Unity SDK) is not officially supported.\nVRChat provides no guarantee or support for external applications using the API. Access to API endpoints may break **at any time, without notice**.\nTherefore, please **do not ping** VRChat Staff in the VRChat Discord if you are having API problems, as they do not provide API support.\nWe will make a best effort in keeping this documentation and associated language libraries up to date, but things might be outdated or missing.\nIf you find that something is no longer valid, please contact us on Discord or [create an issue](https://github.com/vrchatapi/specification/issues) and tell us so we can fix it.\n\n# Getting Started\n\nThe VRChat API can be used to programmatically retrieve or update information regarding your profile, friends, avatars, worlds and more.\nThe API consists of two parts, \"Photon\" which is only used in-game, and the \"Web API\" which is used by both the game and the website.\nThis documentation focuses only on the Web API.\n\nThe API is designed around the REST ideology, providing semi-simple and usually predictable URIs to access and modify objects.\nRequests support standard HTTP methods like GET, PUT, POST, and DELETE and standard status codes.\nResponse bodies are always UTF-8 encoded JSON objects, unless explicitly documented otherwise.\n\n<div class=\"callout callout-error\">\n  <strong>\U0001F6D1 Warning! Do not touch Photon!</strong><br>\n  Photon is only used by the in-game client and should <b>not</b> be touched. Doing so may result in permanent account termination.\n</div>\n\n<div class=\"callout callout-info\">\n  <strong>ℹ️ API Key and Authentication</strong><br>\n  The API Key has always been the same and is currently <code>JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26</code>.\n  Read <a href=\"#tag--authentication\">Authentication</a> for how to log in.\n</div>\n\n# Using the API\n\nFor simply exploring what the API can do it is strongly recommended to download [Insomnia](https://insomnia.rest/download), a free and open-source\nAPI client that's great for sending requests to the API in an orderly fashion.\nInsomnia allows you to send data in the format that's required for VRChat's API.\nIt is also possible to try out the API in your browser, by first logging in at [vrchat.com/home](https://vrchat.com/home/) and then going to\n[vrchat.com/api/1/auth/user](https://vrchat.com/api/1/auth/user), but the information will be much harder to work with.\n\nFor more permanent operation such as software development it is instead recommended to use one of the existing language SDKs.\nThis community project maintains API libraries in several languages, which allows you to interact with the API with simple function calls\nrather than having to implement the HTTP protocol yourself. Most of these libraries are automatically generated from the API specification,\nsometimes with additional helpful wrapper code to make usage easier. This allows them to be almost automatically updated and expanded upon\nas soon as a new feature is introduced in the specification itself. The libraries can be found on [GitHub](https://github.com/vrchatapi) or following:\n\n* [NodeJS (JavaScript)](https://www.npmjs.com/package/vrchat)\n* [Dart](https://pub.dev/packages/vrchat_dart)\n* [Rust](https://crates.io/crates/vrchatapi)\n* [C#](https://github.com/vrchatapi/vrchatapi-csharp)\n* [Python](https://github.com/vrchatapi/VRChatPython)\n\n# Pagination\n\nMost endpoints enforce pagination, meaning they will only return 10 entries by default, and never more than 100.<br>\nUsing both the limit and offset parameters allows you to easily paginate through a large number of objects.\n\n| Query Parameter | Type | Description |\n| ----------|--|------- |\n| `n` | integer  | The number of objects to return. This value often defaults to 10. Highest limit is always 100.|\n| `offset` | integer  | A zero-based offset from the default object sorting.|\n\nIf a request returns fewer objects than the `limit` parameter, there are no more items available to return.\n\n# Contribution\n\nDo you want to get involved in the documentation effort? Do you want to help improve one of the language API libraries?\nThis project is an [OPEN Open Source Project](https://openopensource.org)! This means that individuals making significant and valuable contributions are given\ncommit-access to the project. It also means we are very open and welcoming of new people making contributions, unlike some more guarded open-source projects.\n\n[![Discord](https://img.shields.io/static/v1?label=vrchatapi&message=discord&color=blueviolet&style=for-the-badge)](https://discord.gg/qjZE9C9fkB)"
 servers:
   - url: 'https://api.vrchat.cloud/api/1'
 paths:
@@ -434,12 +434,17 @@ paths:
         - system
       operationId: getHealth
       description: >-
-        Gets the overall health status, the server name, and the current build
-        version tag of the API.
+        ~~Gets the overall health status, the server name, and the current build
+        version tag of the API.~~
+
+
+        **DEPRECATED:** VRChat has suddenly restricted this endpoint for unknown
+        reasons, and now always return 401 Unauthorized.
       security: []
       responses:
         '200':
           $ref: '#/components/responses/APIHealthResponse'
+      deprecated: true
   /config:
     get:
       summary: Fetch API Config
@@ -451,7 +456,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Config'
+                $ref: '#/components/schemas/APIConfig'
           headers:
             Set-Cookie:
               schema:
@@ -515,6 +520,48 @@ paths:
         **NOTE:** The response type is not of JSON, but is a string in plain
         ASCII format.
       security: []
+  /js/app.js:
+    get:
+      summary: Download Frontend JavaScript
+      tags:
+        - system
+      responses:
+        '200':
+          description: >-
+            **Note:** VRChat uses 302 Redirect to Cloudfront. The implementing
+            library **must** support and follow redirects natively.
+          content:
+            application/javascript:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/DownloadSourceCodeAccessError'
+      operationId: getJavaScript
+      description: Fetches the JavaScript code to the frontend React website.
+      parameters:
+        - $ref: '#/components/parameters/variant'
+        - $ref: '#/components/parameters/branch'
+  /css/app.js:
+    get:
+      summary: Download Frontend CSS
+      tags:
+        - system
+      responses:
+        '200':
+          description: >-
+            **Note:** VRChat uses 302 Redirect to Cloudfront. The implementing
+            library **must** support and follow redirects natively.
+          content:
+            text/css:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/DownloadSourceCodeAccessError'
+      operationId: getCSS
+      description: Fetches the CSS code to the frontend React website.
+      parameters:
+        - $ref: '#/components/parameters/variant'
+        - $ref: '#/components/parameters/branch'
   /auth/user/friends:
     get:
       summary: List Friends
@@ -2109,9 +2156,10 @@ paths:
       description: >-
         Returns a single permission. This endpoint is pretty useless, as it
         returns the exact same information as `/auth/permissions`.
-  '/message/{userId}/message':
+  '/message/{userId}/{messageType}':
     parameters:
       - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/messageType'
     get:
       summary: List Invite Messages
       tags:
@@ -2128,11 +2176,25 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: >-
-        Returns a list of all that users Invite Messages. Admin Credentials are
+        Returns a list of all the users Invite Messages. Admin Credentials are
         required to view messages of other users!
-  '/message/{userId}/message/{messageId}':
+
+
+        Message type refers to a different collection of messages, used during
+        different types of responses.
+
+
+        * `message` = Message during a normal invite
+
+        * `response` = Message when replying to a message
+
+        * `request` = Message when requesting an invite
+
+        * `requestResponse` = Message when replying to a request for invite
+  '/message/{userId}/{messageType}/{messageId}':
     parameters:
       - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/messageType'
       - $ref: '#/components/parameters/messageId'
     get:
       summary: Get Invite Messages
@@ -2153,6 +2215,19 @@ paths:
         Returns a single Invite Message. This returns the exact same information
         but less than `getInviteMessages`. Admin Credentials are required to
         view messages of other users!
+
+
+        Message type refers to a different collection of messages, used during
+        different types of responses.
+
+
+        * `message` = Message during a normal invite
+
+        * `response` = Message when replying to a message
+
+        * `request` = Message when requesting an invite
+
+        * `requestResponse` = Message when replying to a request for invite
     put:
       summary: Update Invite Message
       operationId: updateInviteMessage
@@ -2167,6 +2242,19 @@ paths:
         Updating a message automatically sets the cooldown timer to 60 minutes.
         Trying to edit a message before the cooldown timer expires results in a
         429 Too Fast Error.
+
+
+        Message type refers to a different collection of messages, used during
+        different types of responses.
+
+
+        * `message` = Message during a normal invite
+
+        * `response` = Message when replying to a message
+
+        * `request` = Message when requesting an invite
+
+        * `requestResponse` = Message when replying to a request for invite
       responses:
         '200':
           $ref: '#/components/responses/InviteMessageListResponse'
@@ -2205,6 +2293,19 @@ paths:
         set the rate-limit to 60 like when editing it. It is possible to edit it
         right after resetting it. Trying to edit a message before the cooldown
         timer expires results in a 429 Too Fast Error.
+
+
+        Message type refers to a different collection of messages, used during
+        different types of responses.
+
+
+        * `message` = Message during a normal invite
+
+        * `response` = Message when replying to a message
+
+        * `request` = Message when requesting an invite
+
+        * `requestResponse` = Message when replying to a request for invite
   '/invite/{userId}':
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -2275,74 +2376,110 @@ paths:
 components:
   schemas:
     Response:
-      title: Response
-      type: object
       properties:
         message:
-          type: string
           minLength: 1
+          type: string
         status_code:
-          type: number
+          minimum: 100
+          type: integer
       required:
         - status_code
-    Error:
-      title: Error
+      title: Response
       type: object
+    Error:
       properties:
         error:
           $ref: '#/components/schemas/Response'
-    Success:
-      title: Success
+      title: Error
       type: object
+    Success:
       properties:
         success:
           $ref: '#/components/schemas/Response'
+      title: Success
+      type: object
     UserID:
+      example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: UserID
       type: string
-      example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+    AvatarID:
+      example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
+      pattern: >-
+        avtr_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+      title: AvatarID
+      type: string
+    DeveloperType:
+      default: none
+      description: |-
+        "none" User is a normal user
+        "trusted" Unknown
+        "internal" Is a VRChat Developer
+        "moderator" Is a VRChat Moderator
+
+        Staff can hide their developerType at will.
+      enum:
+        - none
+        - trusted
+        - internal
+        - moderator
+      title: DeveloperType
+      type: string
+    WorldID:
+      example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
+      pattern: >-
+        (^$|offline|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
+      title: WorldID
+      type: string
+    Platform:
+      description: >-
+        This can be `standalonewindows` or `android`, but can also pretty much
+        be any random Unity verison such as `2019.2.4-801-Release` or
+        `2019.2.2-772-Release` or even `unknownplatform`.
+      example: standalonewindows
+      title: Platform
+      type: string
     PastDisplayName:
-      title: PastDisplayName
-      type: object
       properties:
         displayName:
-          type: string
           minLength: 1
-        updated_at:
           type: string
+        updated_at:
           format: date-time
+          type: string
       required:
         - displayName
         - updated_at
-    AvatarID:
-      type: string
-      title: AvatarID
-      pattern: >-
-        avtr_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
-      example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
-    WorldID:
-      title: WorldID
-      type: string
-      pattern: >-
-        (^$|offline|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
-      example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
+      title: PastDisplayName
+      type: object
     UserState:
-      title: UserState
-      type: string
       default: offline
-      enum:
-        - offline
-        - active
-        - online
       description: |-
         * "online" User is online in VRChat
         * "active" User is online, but not in VRChat
         * "offline" User is offline
 
         Always offline when returned through `getCurrentUser` (/auth/user).
-    Tag:
+      enum:
+        - offline
+        - active
+        - online
+      title: UserState
       type: string
-      title: Tag
+    UserStatus:
+      description: >-
+        Defines the User's current status, for example "ask me", "join me" or
+        "offline. This status is a combined indicator of their online activity
+        and privacy preference.
+      enum:
+        - active
+        - join me
+        - ask me
+        - busy
+        - offline
+      title: UserStatus
+      type: string
+    Tag:
       description: >-
         Tags are a way to grant various access, assign restrictions or other
         kinds of metadata to various to objects such as worlds, users and
@@ -2355,166 +2492,130 @@ components:
         tagged language), and `author_tag_` (provided by a world author for
         search and sorting) exist as well.
       minLength: 1
-    DeveloperType:
-      title: DeveloperType
+      title: Tag
       type: string
-      enum:
-        - none
-        - trusted
-        - internal
-        - moderator
-      default: none
-      description: |-
-        "none" User is a normal user
-        "trusted" Unknown
-        "internal" Is a VRChat Developer
-        "moderator" Is a VRChat Moderator
-
-        Staff can hide their developerType at will.
-    Platform:
-      type: string
-      title: Platform
-      example: standalonewindows
-      description: >-
-        This can be `standalonewindows` or `android`, but can also pretty much
-        be any random Unity verison such as `2019.2.4-801-Release` or
-        `2019.2.2-772-Release` or even `unknownplatform`.
-    UserStatus:
-      title: UserStatus
-      type: string
-      description: >-
-        Defines the User's current status, for example "ask me", "join me" or
-        "offline. This status is a combined indicator of their online activity
-        and privacy preference.
-      enum:
-        - active
-        - join me
-        - ask me
-        - busy
-        - offline
     CurrentUser:
-      title: CurrentUser
-      type: object
       properties:
-        id:
-          $ref: '#/components/schemas/UserID'
-        username:
+        acceptedTOSVersion:
+          minimum: 0
+          example: 7
+          type: integer
+        accountDeletionDate:
+          format: date
+          nullable: true
           type: string
-        displayName:
-          type: string
-        userIcon:
-          type: string
+        activeFriends:
+          items:
+            $ref: '#/components/schemas/UserID'
+          type: array
+        allowAvatarCopying:
+          type: boolean
         bio:
           type: string
         bioLinks:
-          type: array
           items:
             type: string
-        profilePicOverride:
-          type: string
-        statusDescription:
-          type: string
-        pastDisplayNames:
           type: array
-          description: ' '
-          items:
-            $ref: '#/components/schemas/PastDisplayName'
-        hasEmail:
-          type: boolean
-        hasPendingEmail:
-          type: boolean
-        obfuscatedEmail:
-          type: string
-        obfuscatedPendingEmail:
-          type: string
-        emailVerified:
-          type: boolean
-        hasBirthday:
-          type: boolean
-        unsubscribe:
-          type: boolean
-        statusHistory:
-          type: array
-          items:
-            type: string
-        statusFirstTime:
-          type: boolean
-        friends:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserID'
-        friendGroupNames:
-          description: Always empty array.
-          deprecated: true
-          type: array
-          items:
-            type: string
-        currentAvatarImageUrl:
-          type: string
-        currentAvatarThumbnailImageUrl:
-          type: string
-        fallbackAvatar:
-          $ref: '#/components/schemas/AvatarID'
         currentAvatar:
           $ref: '#/components/schemas/AvatarID'
         currentAvatarAssetUrl:
           type: string
-        accountDeletionDate:
+        currentAvatarImageUrl:
           type: string
+        currentAvatarThumbnailImageUrl:
+          type: string
+        date_joined:
           format: date
-          nullable: true
-        acceptedTOSVersion:
-          type: number
-        steamId:
           type: string
-        steamDetails:
-          type: object
-        oculusId:
+        developerType:
+          $ref: '#/components/schemas/DeveloperType'
+        displayName:
           type: string
+        emailVerified:
+          type: boolean
+        fallbackAvatar:
+          $ref: '#/components/schemas/AvatarID'
+        friendGroupNames:
+          deprecated: true
+          description: Always empty array.
+          items:
+            type: string
+          type: array
+        friendKey:
+          type: string
+        friends:
+          items:
+            $ref: '#/components/schemas/UserID'
+          type: array
+        hasBirthday:
+          type: boolean
+        hasEmail:
+          type: boolean
         hasLoggedInFromClient:
+          type: boolean
+        hasPendingEmail:
           type: boolean
         homeLocation:
           $ref: '#/components/schemas/WorldID'
-        twoFactorAuthEnabled:
+        id:
+          $ref: '#/components/schemas/UserID'
+        isFriend:
+          default: false
           type: boolean
-        state:
-          $ref: '#/components/schemas/UserState'
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        developerType:
-          $ref: '#/components/schemas/DeveloperType'
         last_login:
-          type: string
           format: date-time
+          type: string
         last_platform:
           $ref: '#/components/schemas/Platform'
-        allowAvatarCopying:
-          type: boolean
+        obfuscatedEmail:
+          type: string
+        obfuscatedPendingEmail:
+          type: string
+        oculusId:
+          type: string
+        offlineFriends:
+          items:
+            $ref: '#/components/schemas/UserID'
+          type: array
+        onlineFriends:
+          items:
+            $ref: '#/components/schemas/UserID'
+          type: array
+        pastDisplayNames:
+          description: ' '
+          items:
+            $ref: '#/components/schemas/PastDisplayName'
+          type: array
+        profilePicOverride:
+          type: string
+        state:
+          $ref: '#/components/schemas/UserState'
         status:
           $ref: '#/components/schemas/UserStatus'
-        date_joined:
+        statusDescription:
           type: string
-          format: date
-          readOnly: true
-        isFriend:
+        statusFirstTime:
           type: boolean
-          default: false
-        friendKey:
+        statusHistory:
+          items:
+            type: string
+          type: array
+        steamDetails:
+          type: object
+        steamId:
           type: string
-        onlineFriends:
-          type: array
+        tags:
           items:
-            $ref: '#/components/schemas/UserID'
-        activeFriends:
+            $ref: '#/components/schemas/Tag'
           type: array
-          items:
-            $ref: '#/components/schemas/UserID'
-        offlineFriends:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserID'
+        twoFactorAuthEnabled:
+          type: boolean
+        unsubscribe:
+          type: boolean
+        userIcon:
+          type: string
+        username:
+          type: string
       required:
         - id
         - username
@@ -2557,9 +2658,9 @@ components:
         - date_joined
         - isFriend
         - friendKey
-    UserExists:
-      title: UserExists
+      title: CurrentUser
       type: object
+    UserExists:
       description: >-
         Status object representing if a queried user by username or userId
         exists or not. This model is primarily used by the `/auth/exists`
@@ -2567,49 +2668,49 @@ components:
         documentation on that endpoint for more information on usage.
       properties:
         userExists:
-          type: boolean
-          description: Status if a user exist with that username or userId.
           default: false
+          description: Status if a user exist with that username or userId.
+          type: boolean
       required:
         - userExists
-    LimitedUser:
-      title: LimitedUser
+      title: UserExists
       type: object
+    LimitedUser:
       description: ''
       properties:
-        id:
-          $ref: '#/components/schemas/UserID'
-        username:
-          type: string
-        displayName:
-          type: string
         bio:
-          type: string
-        userIcon:
-          type: string
-        profilePicOverride:
-          type: string
-        statusDescription:
           type: string
         currentAvatarImageUrl:
           type: string
         currentAvatarThumbnailImageUrl:
           type: string
-        fallbackAvatar:
-          $ref: '#/components/schemas/AvatarID'
         developerType:
           $ref: '#/components/schemas/DeveloperType'
-        last_platform:
-          $ref: '#/components/schemas/Platform'
-        status:
-          $ref: '#/components/schemas/UserStatus'
+        displayName:
+          type: string
+        fallbackAvatar:
+          $ref: '#/components/schemas/AvatarID'
+        id:
+          $ref: '#/components/schemas/UserID'
         isFriend:
           type: boolean
+        last_platform:
+          $ref: '#/components/schemas/Platform'
+        profilePicOverride:
+          type: string
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        statusDescription:
+          type: string
         tags:
-          type: array
           description: <- Always empty.
           items:
             $ref: '#/components/schemas/Tag'
+          type: array
+        userIcon:
+          type: string
+        username:
+          type: string
       required:
         - id
         - username
@@ -2625,63 +2726,63 @@ components:
         - status
         - isFriend
         - tags
-    User:
-      title: User
+      title: LimitedUser
       type: object
+    User:
       properties:
-        id:
-          $ref: '#/components/schemas/UserID'
-        username:
-          type: string
-        displayName:
-          type: string
-        userIcon:
-          type: string
+        allowAvatarCopying:
+          type: boolean
         bio:
           type: string
         bioLinks:
-          type: array
           items:
             type: string
-        profilePicOverride:
-          type: string
-        statusDescription:
-          type: string
+          type: array
         currentAvatarImageUrl:
           type: string
         currentAvatarThumbnailImageUrl:
           type: string
-        state:
-          $ref: '#/components/schemas/UserState'
-        tags:
-          type: array
-          description: ' '
-          items:
-            $ref: '#/components/schemas/Tag'
+        date_joined:
+          format: date
+          readOnly: true
+          type: string
         developerType:
           $ref: '#/components/schemas/DeveloperType'
+        displayName:
+          type: string
+        friendKey:
+          type: string
+        id:
+          $ref: '#/components/schemas/UserID'
+        instanceId:
+          type: string
+        isFriend:
+          type: boolean
         last_login:
           type: string
         last_platform:
           $ref: '#/components/schemas/Platform'
-        allowAvatarCopying:
-          type: boolean
+        location:
+          type: string
+        profilePicOverride:
+          type: string
+        state:
+          $ref: '#/components/schemas/UserState'
         status:
           $ref: '#/components/schemas/UserStatus'
-        date_joined:
+        statusDescription:
           type: string
-          format: date
-          readOnly: true
-        isFriend:
-          type: boolean
-        friendKey:
+        tags:
+          description: ' '
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        userIcon:
+          type: string
+        username:
           type: string
         worldId:
           $ref: '#/components/schemas/WorldID'
-        instanceId:
-          type: string
-        location:
-          type: string
       required:
         - id
         - username
@@ -2706,14 +2807,9 @@ components:
         - worldId
         - instanceId
         - location
+      title: User
+      type: object
     DeploymentGroup:
-      type: string
-      title: DeploymentGroup
-      enum:
-        - blue
-        - green
-        - grape
-        - cherry
       description: >-
         Used to identify which API deployment cluster is currently responding.
 
@@ -2725,11 +2821,18 @@ components:
 
         [Blue Green Deployment by Martin
         Fowler](https://martinfowler.com/bliki/BlueGreenDeployment.html)
+      enum:
+        - blue
+        - green
+        - grape
+        - cherry
       readOnly: true
-    Config:
-      type: object
-      title: API Config
+      title: DeploymentGroup
+      type: string
+    APIConfig:
       example:
+        VoiceEnableDegradation: false
+        VoiceEnableReceiverLimiting: true
         address: '1062 Folsom St., Suite 200, San Francisco, CA, 94103'
         announcements:
           - name: 220121a_modified_clients
@@ -2751,7 +2854,7 @@ components:
               accounts</color>-- so please, do not use them!
         apiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
         appName: VrChat
-        buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+        buildVersionTag: master-build-2021-09-23-edith-x-clickbaitcloud
         clientApiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
         clientBPSCeiling: 18432
         clientDisconnectTimeout: 30000
@@ -2760,13 +2863,14 @@ components:
         contactEmail: hello@vrchat.com
         copyrightEmail: copyright@vrchat.com
         currentTOSVersion: 7
-        defaultAvatar: avtr_53856003-8ff2-4002-b78f-da5d028b22bd
-        deploymentGroup: green
+        defaultAvatar: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
+        deploymentGroup: blue
         devAppVersionStandalone: 0.12.0p3
         devDownloadLinkWindows: www.vrchat.net
         devSdkUrl: 'https://vrchat.com/home/download'
         devSdkVersion: 2020.09.25.00.08
         devServerVersionStandalone: dev_server_01
+        dis-countdown: '2021-01-01T01:01:01.000Z'
         disableAvatarCopying: false
         disableAvatarGating: false
         disableCommunityLabs: false
@@ -2774,7 +2878,9 @@ components:
         disableEmail: false
         disableEventStream: false
         disableFeedbackGating: false
+        disableFrontendBuilds: false
         disableHello: false
+        disableOculusSubs: false
         disableRegistration: false
         disableSteamNetworking: true
         disableTwoFactorAuth: false
@@ -2783,11 +2889,11 @@ components:
         downloadLinkWindows: 'https://www.oculus.com/experiences/rift/997678176960598/'
         downloadUrls:
           sdk2: >-
-            https://files.vrchat.cloud/sdk/VRCSDK2-2021.06.03.14.57_Public.unitypackage
+            https://files.vrchat.cloud/sdk/VRCSDK2-2021.09.03.09.25_Public.unitypackage
           sdk3-avatars: >-
-            https://files.vrchat.cloud/sdk/VRCSDK3-AVATAR-2021.06.03.14.57_Public.unitypackage
+            https://files.vrchat.cloud/sdk/VRCSDK3-AVATAR-2021.09.03.09.25_Public.unitypackage
           sdk3-worlds: >-
-            https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2021.06.03.14.57_Public.unitypackage
+            https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2021.09.03.09.25_Public.unitypackage
         dynamicWorldRows:
           - index: 1
             name: Hot
@@ -2795,57 +2901,20 @@ components:
             sortHeading: heat
             sortOrder: descending
             sortOwnership: any
-          - index: 10
-            name: Games
-            platform: ThisPlatformSupported
-            sortHeading: heat
-            sortOrder: descending
-            sortOwnership: any
-            tag: author_tag_game
-          - index: 11
-            name: Updated Recently
-            platform: ThisPlatformSupported
-            sortHeading: updated
-            sortOrder: descending
-            sortOwnership: any
-          - index: 12
-            name: New
-            platform: ThisPlatformSupported
-            sortHeading: publication
-            sortOrder: descending
-            sortOwnership: any
-          - index: 13
-            name: Recent
-            platform: ThisPlatformSupported
-            sortHeading: recent
-            sortOrder: descending
-            sortOwnership: any
-          - index: 14
-            name: Mine
-            platform: any
-            sortHeading: updated
-            sortOrder: descending
-            sortOwnership: mine
-          - index: 15
-            name: Classics
-            platform: ThisPlatformSupported
-            sortHeading: trending
-            sortOrder: descending
-            sortOwnership: any
           - index: 2
+            name: 'World Jam: Obstacle Course'
+            platform: ThisPlatformSupported
+            sortHeading: order
+            sortOrder: ascending
+            sortOwnership: any
+            tag: admin_jam_obstacle
+          - index: 3
             name: Exercise
             platform: Any
             sortHeading: shuffle
             sortOrder: descending
             sortOwnership: any
             tag: admin_exercise_row
-          - index: 3
-            name: 'World Jam: Drawing'
-            platform: ThisPlatformSupported
-            sortHeading: order
-            sortOrder: ascending
-            sortOwnership: any
-            tag: admin_jam_sketchbook
           - index: 4
             name: Spotlight
             platform: ThisPlatformSupported
@@ -2884,6 +2953,43 @@ components:
             sortOrder: descending
             sortOwnership: any
             tag: author_tag_avatar
+          - index: 10
+            name: Games
+            platform: ThisPlatformSupported
+            sortHeading: heat
+            sortOrder: descending
+            sortOwnership: any
+            tag: author_tag_game
+          - index: 11
+            name: Updated Recently
+            platform: ThisPlatformSupported
+            sortHeading: updated
+            sortOrder: descending
+            sortOwnership: any
+          - index: 12
+            name: New
+            platform: ThisPlatformSupported
+            sortHeading: publication
+            sortOrder: descending
+            sortOwnership: any
+          - index: 13
+            name: Recent
+            platform: ThisPlatformSupported
+            sortHeading: recent
+            sortOrder: descending
+            sortOwnership: any
+          - index: 14
+            name: Mine
+            platform: any
+            sortHeading: updated
+            sortOrder: descending
+            sortOwnership: mine
+          - index: 15
+            name: Classics
+            platform: ThisPlatformSupported
+            sortHeading: trending
+            sortOrder: descending
+            sortOwnership: any
         events:
           distanceClose: 2
           distanceFactor: 100
@@ -2896,8 +3002,8 @@ components:
           slowUpdateFactorThreshold: 25
           viewSegmentLength: 5
         gearDemoRoomId: '2282253502'
-        homepageRedirectTarget: 'https://hello.vrchat.com'
         homeWorldId: wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd
+        homepageRedirectTarget: 'https://hello.vrchat.com'
         hubWorldId: wrld_ba913a96-fac4-4048-a062-9aa5db092812
         jobsEmail: jobs@vrchat.com
         messageOfTheDay: hello world
@@ -2917,8 +3023,8 @@ components:
           https://docs.vrchat.com/docs/frequently-asked-questions#section-why-can-t-i-upload-content-yet-
         sdkDiscordUrl: 'https://discord.gg/vrchat'
         sdkNotAllowedToPublishMessage: "Welcome the VRChat SDK!\r\n\r\nBefore you can upload avatars or worlds to VRChat, you'll need to spend more time enjoying the app. We do this for security reasons, and so you can learn more about us.\r\n\r\nWhen you get the ability to upload, we will notify you via email and in VRChat. For now, you can learn and test on your own device.\r\n\r\nTo get started, check out the resources below.\r\n\r\nThank you for your patience, we can't wait to see what you'll build!"
-        sdkUnityVersion: 2018.4.20f1
-        serverName: prod-api-green-tree-xgq
+        sdkUnityVersion: 2019.4.30f1
+        serverName: prod-api-blue-house-fsm
         supportEmail: support@vrchat.com
         timeOutWorldId: wrld_5b89c79e-c340-4510-be1b-476e9fcdedcc
         tutorialWorldId: wld_7d3d25ec-663e-406e-96a3-e2c4fc0d8104
@@ -2928,28 +3034,34 @@ components:
         updateRateMsUdonManual: 50
         uploadAnalysisPercent: 1
         urlList:
-          - assets.vrchat.com
           - drive.google.com
           - facebook.com
-          - game.nicovideo.jp
-          - live.furality.online
+          - www.facebook.com
+          - nicovideo.jp
+          - www.nicovideo.jp
           - live.nicovideo.jp
           - live2.nicovideo.jp
-          - nicovideo.jp
+          - game.nicovideo.jp
           - soundcloud.com
           - tiktok.com
-          - twitch.tv
-          - v.youku.com
-          - vimeo.com
-          - vrchat.cloud
-          - www.facebook.com
-          - www.nicovideo.jp
           - www.tiktok.com
+          - twitch.tv
           - www.twitch.tv
-          - www.youtube.com
+          - vimeo.com
+          - player.vimeo.com
+          - vrchat.cloud
           - youku.com
-          - youtu.be
+          - v.youku.com
           - youtube.com
+          - www.youtube.com
+          - youtu.be
+          - assets.vrchat.com
+          - www.v-market.work
+          - vket6.v-market.work
+          - mall.v-market.work
+          - cdn.v-market.work
+          - movie.cdn.v-market.work
+          - wrs.nedo.go.jp
         useReliableUdpForVoice: false
         userUpdatePeriod: 60
         userVerificationDelay: 5
@@ -2957,262 +3069,260 @@ components:
         userVerificationTimeout: 60
         viveWindowsUrl: 'http://store.steampowered.com/app/438100/'
         whiteListedAssetUrls:
-          - 'http://dbinj8iahsbec.cloudfront.net/'
           - 'http://dbinj8iahsbec.cloudfront.net/plugins'
-          - 'https://api.vrchat.cloud/api/1/file/'
-          - 'https://builds.vrchat.cloud/'
+          - 'http://dbinj8iahsbec.cloudfront.net/'
           - 'https://dbinj8iahsbec.cloudfront.net/'
           - 'https://dev-api.vrchat.cloud/api/1/file/'
+          - 'https://api.vrchat.cloud/api/1/file/'
           - 'https://files.vrchat.cloud/unmanaged/'
         worldUpdatePeriod: 60
         youtubedl-hash: >-
           E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
         youtubedl-version: '2021-05-16'
       properties:
+        VoiceEnableDegradation:
+          default: false
+          description: 'Unknown, probably voice optimization testing'
+          type: boolean
+        VoiceEnableReceiverLimiting:
+          default: true
+          description: 'Unknown, probably voice optimization testing'
+          type: boolean
         address:
-          type: string
-          minLength: 1
           description: VRChat's office address
-          readOnly: true
+          minLength: 1
+          type: string
         announcements:
-          type: array
-          uniqueItems: true
-          minItems: 1
           description: Public Announcements
           items:
-            type: object
             description: Public Announcement
             properties:
               name:
-                type: string
-                minLength: 1
                 description: Announcement name
-                readOnly: true
-              text:
-                type: string
                 minLength: 1
+                type: string
+              text:
                 description: Announcement text
-                readOnly: true
+                minLength: 1
+                type: string
             required:
               - name
               - text
-            readOnly: true
-          readOnly: true
+            title: Public Announcement
+            type: object
+          minItems: 1
+          type: array
+          uniqueItems: true
         apiKey:
-          type: string
-          minLength: 1
           description: apiKey to be used for all other requests
-          readOnly: true
-        appName:
-          type: string
           minLength: 1
-          description: Game name
+          type: string
+        appName:
           default: VrChat
           deprecated: true
-          readOnly: true
+          description: Game name
+          minLength: 1
+          type: string
         buildVersionTag:
-          type: string
-          minLength: 1
           description: Build tag of the API server
-          readOnly: true
+          minLength: 1
+          type: string
         clientApiKey:
-          type: string
-          minLength: 1
           description: apiKey to be used for all other requests
-          readOnly: true
+          minLength: 1
+          type: string
         clientBPSCeiling:
-          type: number
+          default: 18432
           description: Unknown
+          type: integer
         clientDisconnectTimeout:
-          type: number
+          default: 30000
           description: Unknown
+          type: integer
         clientReservedPlayerBPS:
-          type: number
+          default: 7168
           description: Unknown
+          type: integer
         clientSentCountAllowance:
-          type: number
+          default: 15
           description: Unknown
+          type: integer
         contactEmail:
-          type: string
-          minLength: 1
           description: VRChat's contact email
-          readOnly: true
-        copyrightEmail:
-          type: string
           minLength: 1
+          type: string
+        copyrightEmail:
           description: VRChat's copyright-issues-related email
-          readOnly: true
+          minLength: 1
+          type: string
         currentTOSVersion:
-          type: number
+          example: 7
           description: Current version number of the Terms of Service
-          readOnly: true
+          minimum: 0
+          type: integer
         defaultAvatar:
           $ref: '#/components/schemas/AvatarID'
         deploymentGroup:
           $ref: '#/components/schemas/DeploymentGroup'
         devAppVersionStandalone:
-          type: string
-          minLength: 1
+          deprecated: true
           description: Version number for game development build
-          deprecated: true
-          readOnly: true
+          minLength: 1
+          type: string
         devDownloadLinkWindows:
-          type: string
-          minLength: 1
+          deprecated: true
           description: Developer Download link
-          deprecated: true
-          readOnly: true
+          minLength: 1
+          type: string
         devSdkUrl:
-          type: string
-          minLength: 1
+          deprecated: true
           description: 'Link to download the development SDK, use downloadUrls instead'
-          deprecated: true
-          readOnly: true
+          minLength: 1
+          type: string
         devSdkVersion:
-          type: string
-          minLength: 1
+          deprecated: true
           description: Version of the development SDK
-          deprecated: true
-          readOnly: true
-        devServerVersionStandalone:
-          type: string
           minLength: 1
-          description: Version number for server development build
+          type: string
+        devServerVersionStandalone:
           deprecated: true
-          readOnly: true
+          description: Version number for server development build
+          minLength: 1
+          type: string
+        dis-countdown:
+          description: 'Unknown, "dis" maybe for disconnect?'
+          format: date-time
+          type: string
         disableAvatarCopying:
-          type: boolean
-          description: Toggles if copying avatars should be disabled
           default: false
-        disableAvatarGating:
+          description: Toggles if copying avatars should be disabled
           type: boolean
+        disableAvatarGating:
+          default: false
           description: >-
             Toggles if avatar gating should be disabled. Avatar gating restricts
             uploading of avatars to people with the `system_avatar_access` Tag
             or `admin_avatar_access` Tag
-          default: false
+          type: boolean
         disableCommunityLabs:
-          type: boolean
+          default: false
           description: Toggles if the Community Labs should be disabled
-          default: false
+          type: boolean
         disableCommunityLabsPromotion:
-          type: boolean
+          default: false
           description: Toggles if promotion out of Community Labs should be disabled
-          default: false
+          type: boolean
         disableEmail:
-          type: boolean
+          default: false
           description: Unknown
-          default: false
+          type: boolean
         disableEventStream:
-          type: boolean
-          description: >-
-            Toggles if Analytics should be disabled (this sreportedly not used
-            in the Client)
           default: false
-        disableFeedbackGating:
+          description: Toggles if Analytics should be disabled.
           type: boolean
+        disableFeedbackGating:
+          default: false
           description: >-
             Toggles if feedback gating should be disabled. Feedback gating
             restricts submission of feedback (reporting a World or User) to
             people with the `system_feedback_access` Tag.
+          type: boolean
+        disableFrontendBuilds:
           default: false
+          description: >-
+            Unknown, probably toggles compilation of frontend web builds? So
+            internal flag?
+          type: boolean
         disableHello:
-          type: boolean
+          default: false
           description: Unknown
+          type: boolean
+        disableOculusSubs:
           default: false
+          description: >-
+            Toggles if signing up for Subscriptions in Oculus is disabled or
+            not.
+          type: boolean
         disableRegistration:
-          type: boolean
-          description: Toggles if new user account registration should be disabled
           default: false
-        disableSteamNetworking:
+          description: Toggles if new user account registration should be disabled.
           type: boolean
+        disableSteamNetworking:
           default: true
           description: >-
             Toggles if Steam Networking should be disabled. VRChat these days
             uses Photon Unity Networking (PUN) instead.
+          type: boolean
         disableTwoFactorAuth:
-          type: boolean
-          description: Toggles if 2FA should be disabled.
+          default: false
           deprecated: true
-          default: false
+          description: Toggles if 2FA should be disabled.
+          type: boolean
         disableUdon:
-          type: boolean
-          description: Toggles if Udon should be universally disabled in-game.
           default: false
-        disableUpgradeAccount:
+          description: Toggles if Udon should be universally disabled in-game.
           type: boolean
+        disableUpgradeAccount:
           default: false
           description: >-
             Toggles if account upgrading "linking with Steam/Oculus" should be
             disabled.
+          type: boolean
         downloadLinkWindows:
-          type: string
-          minLength: 1
           description: Download link for game on the Oculus Rift website.
-          readOnly: true
+          minLength: 1
+          type: string
         downloadUrls:
-          type: object
-          description: Download links for various development assets
+          additionalProperties: false
+          description: Download links for various development assets.
+          properties:
+            sdk2:
+              deprecated: true
+              description: Download link for legacy SDK2
+              minLength: 1
+              type: string
+            sdk3-avatars:
+              description: Download link for SDK3 for Avatars
+              minLength: 1
+              type: string
+            sdk3-worlds:
+              description: Download link for SDK3 for Worlds
+              minLength: 1
+              type: string
           required:
             - sdk2
             - sdk3-avatars
             - sdk3-worlds
-          properties:
-            sdk2:
-              type: string
-              minLength: 1
-              description: Download link for legacy SDK2
-              deprecated: true
-              readOnly: true
-            sdk3-avatars:
-              type: string
-              minLength: 1
-              description: Download link for SDK3 for Avatars
-              readOnly: true
-            sdk3-worlds:
-              type: string
-              minLength: 1
-              description: Download link for SDK3 for Worlds
-              readOnly: true
-          readOnly: true
+          title: DownloadURLList
+          type: object
         dynamicWorldRows:
-          type: array
-          uniqueItems: true
-          minItems: 1
           description: >-
             Array of DynamicWorldRow objects, used by the game to display the
             list of world rows
           items:
-            type: object
             properties:
               index:
-                type: number
-                readOnly: true
+                minimum: 0
+                type: integer
               name:
-                type: string
                 minLength: 1
-                readOnly: true
+                type: string
               platform:
-                type: string
                 minLength: 1
-                readOnly: true
+                type: string
               sortHeading:
-                type: string
                 minLength: 1
-                readOnly: true
+                type: string
               sortOrder:
-                type: string
                 minLength: 1
-                readOnly: true
+                type: string
               sortOwnership:
-                type: string
                 minLength: 1
-                readOnly: true
+                type: string
               tag:
-                type: string
+                description: Tag to filter worlds for this row. Not always present.
                 minLength: 1
-                description: Tag to filter worlds for this row
-                readOnly: true
+                type: string
             required:
               - index
               - name
@@ -3220,10 +3330,43 @@ components:
               - sortHeading
               - sortOrder
               - sortOwnership
-            readOnly: true
-          readOnly: true
+            title: DynamicWorldRow
+            type: object
+          minItems: 1
+          type: array
+          uniqueItems: true
         events:
-          type: object
+          properties:
+            distanceClose:
+              description: Unknown
+              type: integer
+            distanceFactor:
+              description: Unknown
+              type: integer
+            distanceFar:
+              description: Unknown
+              type: integer
+            groupDistance:
+              description: Unknown
+              type: integer
+            maximumBunchSize:
+              description: Unknown
+              type: integer
+            notVisibleFactor:
+              description: Unknown
+              type: integer
+            playerOrderBucketSize:
+              description: Unknown
+              type: integer
+            playerOrderFactor:
+              description: Unknown
+              type: integer
+            slowUpdateFactorThreshold:
+              description: Unknown
+              type: integer
+            viewSegmentLength:
+              description: Unknown
+              type: integer
           required:
             - distanceClose
             - distanceFactor
@@ -3235,242 +3378,174 @@ components:
             - playerOrderFactor
             - slowUpdateFactorThreshold
             - viewSegmentLength
-          properties:
-            distanceClose:
-              type: number
-              description: Unknown
-              readOnly: true
-            distanceFactor:
-              type: number
-              description: Unknown
-              readOnly: true
-            distanceFar:
-              type: number
-              description: Unknown
-              readOnly: true
-            groupDistance:
-              type: number
-              description: Unknown
-              readOnly: true
-            maximumBunchSize:
-              type: number
-              description: Unknown
-              readOnly: true
-            notVisibleFactor:
-              type: number
-              description: Unknown
-              readOnly: true
-            playerOrderBucketSize:
-              type: number
-              description: Unknown
-              readOnly: true
-            playerOrderFactor:
-              type: number
-              description: Unknown
-              readOnly: true
-            slowUpdateFactorThreshold:
-              type: number
-              description: Unknown
-              readOnly: true
-            viewSegmentLength:
-              type: number
-              description: Unknown
-              readOnly: true
-          readOnly: true
+          title: APIEventConfig
+          type: object
         gearDemoRoomId:
-          type: string
-          minLength: 1
-          description: Unknown
           deprecated: true
-          readOnly: true
-        homepageRedirectTarget:
-          type: string
+          description: Unknown
           minLength: 1
+          type: string
+        homeWorldId:
+          $ref: '#/components/schemas/WorldID'
+        homepageRedirectTarget:
+          default: 'https://hello.vrchat.com'
           description: >-
             Redirect target if you try to open the base API domain in your
             browser
-          default: 'https://hello.vrchat.com'
-          readOnly: true
-        homeWorldId:
-          $ref: '#/components/schemas/WorldID'
+          minLength: 1
+          type: string
         hubWorldId:
           $ref: '#/components/schemas/WorldID'
         jobsEmail:
-          type: string
-          minLength: 1
           description: VRChat's job application email
-          readOnly: true
+          minLength: 1
+          type: string
         messageOfTheDay:
-          type: string
-          minLength: 1
-          description: MOTD
           deprecated: true
-          readOnly: true
+          description: MOTD
+          minLength: 1
+          type: string
         moderationEmail:
-          type: string
-          minLength: 1
           description: VRChat's moderation related email
-          readOnly: true
-        moderationQueryPeriod:
-          type: number
-          description: Unknown
-        notAllowedToSelectAvatarInPrivateWorldMessage:
-          type: string
           minLength: 1
+          type: string
+        moderationQueryPeriod:
+          description: Unknown
+          type: integer
+        notAllowedToSelectAvatarInPrivateWorldMessage:
           description: >-
             Used in-game to notify a user they aren't allowed to select avatars
             in private worlds
-          readOnly: true
-        plugin:
-          type: string
           minLength: 1
+          type: string
+        plugin:
           description: >-
             Extra
             [plugin](https://doc.photonengine.com/en-us/server/current/plugins/manual)
             to run in each instance
-          readOnly: true
+          minLength: 1
+          type: string
         releaseAppVersionStandalone:
-          type: string
-          minLength: 1
+          deprecated: true
           description: Version number for game release build
-          deprecated: true
-          readOnly: true
+          minLength: 1
+          type: string
         releaseSdkUrl:
-          type: string
-          minLength: 1
+          deprecated: true
           description: Link to download the release SDK
-          deprecated: true
-          readOnly: true
+          minLength: 1
+          type: string
         releaseSdkVersion:
-          type: string
-          minLength: 1
+          deprecated: true
           description: Version of the release SDK
-          deprecated: true
-          readOnly: true
+          minLength: 1
+          type: string
         releaseServerVersionStandalone:
-          type: string
-          minLength: 1
-          description: Version number for server release build
           deprecated: true
-          readOnly: true
+          description: Version number for server release build
+          minLength: 1
+          type: string
         sdkDeveloperFaqUrl:
-          type: string
-          minLength: 1
           description: Link to the developer FAQ
-          readOnly: true
+          minLength: 1
+          type: string
         sdkDiscordUrl:
-          type: string
-          minLength: 1
           description: Link to the official VRChat Discord
-          readOnly: true
-        sdkNotAllowedToPublishMessage:
-          type: string
           minLength: 1
+          type: string
+        sdkNotAllowedToPublishMessage:
           description: >-
             Used in the SDK to notify a user they aren't allowed to upload
             avatars/worlds yet
-          readOnly: true
+          minLength: 1
+          type: string
         sdkUnityVersion:
-          type: string
-          minLength: 1
           description: Unity version supported by the SDK
-          readOnly: true
+          minLength: 1
+          type: string
         serverName:
-          type: string
-          minLength: 1
           description: Server name of the API server currently responding
-          readOnly: true
-        supportEmail:
-          type: string
           minLength: 1
+          type: string
+        supportEmail:
           description: VRChat's support email
-          readOnly: true
+          minLength: 1
+          type: string
         timeOutWorldId:
           $ref: '#/components/schemas/WorldID'
         tutorialWorldId:
           $ref: '#/components/schemas/WorldID'
         updateRateMsMaximum:
-          type: number
           description: Unknown
-          readOnly: true
+          type: integer
         updateRateMsMinimum:
-          type: number
           description: Unknown
-          readOnly: true
+          type: integer
         updateRateMsNormal:
-          type: number
           description: Unknown
-          readOnly: true
+          type: integer
         updateRateMsUdonManual:
-          type: number
           description: Unknown
-          readOnly: true
+          type: integer
         uploadAnalysisPercent:
-          type: number
           description: Unknown
-          readOnly: true
+          type: integer
         urlList:
-          type: array
           description: >-
             List of allowed URLs that bypass the "Allow untrusted URL's" setting
             in-game
           items:
             type: string
-            readOnly: true
-          readOnly: true
-        useReliableUdpForVoice:
-          type: boolean
-          description: Unknown
-          default: false
-        userUpdatePeriod:
-          type: number
-          description: Unknown
-          readOnly: true
-        userVerificationDelay:
-          type: number
-          description: Unknown
-          readOnly: true
-        userVerificationRetry:
-          type: number
-          description: Unknown
-          readOnly: true
-        userVerificationTimeout:
-          type: number
-          description: Unknown
-          readOnly: true
-        viveWindowsUrl:
-          type: string
-          minLength: 1
-          description: Download link for game on the Steam website.
-          readOnly: true
-        whiteListedAssetUrls:
           type: array
+        useReliableUdpForVoice:
+          default: false
+          description: Unknown
+          type: boolean
+        userUpdatePeriod:
+          description: Unknown
+          type: integer
+        userVerificationDelay:
+          description: Unknown
+          type: integer
+        userVerificationRetry:
+          description: Unknown
+          type: integer
+        userVerificationTimeout:
+          description: Unknown
+          type: integer
+        viveWindowsUrl:
+          description: Download link for game on the Steam website.
+          minLength: 1
+          type: string
+        whiteListedAssetUrls:
           description: List of allowed URLs that are allowed to host avatar assets
           items:
             type: string
-            readOnly: true
-          readOnly: true
+          type: array
         worldUpdatePeriod:
-          type: number
           description: Unknown
-          readOnly: true
+          type: integer
         youtubedl-hash:
-          type: string
-          minLength: 1
           description: Currently used youtube-dl.exe hash in SHA-256-delimited format
-          readOnly: true
-        youtubedl-version:
-          type: string
           minLength: 1
+          type: string
+        youtubedl-version:
           description: Currently used youtube-dl.exe version
-          readOnly: true
+          minLength: 1
+          type: string
       required:
+        - VoiceEnableDegradation
+        - VoiceEnableReceiverLimiting
         - address
         - announcements
         - apiKey
         - appName
         - buildVersionTag
         - clientApiKey
+        - clientBPSCeiling
+        - clientDisconnectTimeout
+        - clientReservedPlayerBPS
+        - clientSentCountAllowance
         - contactEmail
         - copyrightEmail
         - currentTOSVersion
@@ -3481,12 +3556,17 @@ components:
         - devSdkUrl
         - devSdkVersion
         - devServerVersionStandalone
+        - dis-countdown
         - disableAvatarCopying
         - disableAvatarGating
         - disableCommunityLabs
         - disableCommunityLabsPromotion
+        - disableEmail
         - disableEventStream
         - disableFeedbackGating
+        - disableFrontendBuilds
+        - disableHello
+        - disableOculusSubs
         - disableRegistration
         - disableSteamNetworking
         - disableTwoFactorAuth
@@ -3534,26 +3614,26 @@ components:
         - worldUpdatePeriod
         - youtubedl-hash
         - youtubedl-version
-    FriendStatus:
-      title: Friend Status
+      title: API Config
       type: object
+    FriendStatus:
       properties:
-        isFriend:
-          type: boolean
-          default: false
-        outgoingRequest:
-          type: boolean
-          default: false
         incomingRequest:
-          type: boolean
           default: false
+          type: boolean
+        isFriend:
+          default: false
+          type: boolean
+        outgoingRequest:
+          default: false
+          type: boolean
       required:
         - isFriend
         - outgoingRequest
         - incomingRequest
+      title: Friend Status
+      type: object
     NotificationType:
-      type: string
-      title: NotificationType
       enum:
         - friendRequest
         - invite
@@ -3561,43 +3641,43 @@ components:
         - requestInvite
         - requestInviteResponse
         - votetokick
+      title: NotificationType
+      type: string
     Notification:
-      title: Notification
-      type: object
       description: ''
       properties:
-        id:
+        created_at:
+          format: date-time
           type: string
-          minLength: 1
-        senderUserId:
-          $ref: '#/components/schemas/UserID'
-        senderUsername:
-          type: string
-          minLength: 1
-        type:
-          $ref: '#/components/schemas/NotificationType'
-        message:
-          type: string
-          description: ''
-          example: This is a generated invite to VRChat Hub
         details:
-          type: string
+          default: '{}'
           description: >-
             **NOTICE:** This is not a JSON object, this is a json **encoded**
             object, meaning you have to json-de-encode to get the
             NotificationDetail object depending on the NotificationType.
-          default: '{}'
           example: >-
             OneOf: {}, NotificationDetailInvite,
             NotificationDetailInviteResponse, NotificationDetailRequestInvite,
             NotificationDetailRequestInviteResponse,
             NotificationDetailVoteToKick
-        seen:
-          type: boolean
-          default: false
-        created_at:
           type: string
-          format: date-time
+        id:
+          minLength: 1
+          type: string
+        message:
+          description: ''
+          example: This is a generated invite to VRChat Hub
+          type: string
+        seen:
+          default: false
+          type: boolean
+        senderUserId:
+          $ref: '#/components/schemas/UserID'
+        senderUsername:
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationType'
       required:
         - id
         - senderUserId
@@ -3607,15 +3687,15 @@ components:
         - details
         - seen
         - created_at
+      title: Notification
+      type: object
     FileID:
-      type: string
-      title: FileID
+      example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
       pattern: >-
         file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
-      example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
-    MIMEType:
+      title: FileID
       type: string
-      title: MIMEType
+    MIMEType:
       enum:
         - image/jpeg
         - image/jpg
@@ -3632,45 +3712,45 @@ components:
         - application/x-rsync-delta
         - application/octet-stream
       example: image/jpeg
-    FileStatus:
+      title: MIMEType
       type: string
-      title: FileStatus
+    FileStatus:
       enum:
         - waiting
         - complete
         - none
       example: complete
+      title: FileStatus
+      type: string
     FileData:
       description: ''
-      type: object
-      title: FileData
       properties:
-        fileName:
-          type: string
-          minLength: 1
-        url:
-          type: string
-          minLength: 1
-        md5:
-          type: string
-          minLength: 0
-        sizeInBytes:
-          type: number
-          minimum: 0
-        status:
-          $ref: '#/components/schemas/FileStatus'
         category:
-          type: string
-          minLength: 1
           enum:
             - multipart
             - queued
             - simple
+          minLength: 1
           readOnly: true
-        uploadId:
           type: string
+        fileName:
+          minLength: 1
+          type: string
+        md5:
           minLength: 0
+          type: string
+        sizeInBytes:
+          minimum: 0
+          type: integer
+        status:
+          $ref: '#/components/schemas/FileStatus'
+        uploadId:
           default: ''
+          minLength: 0
+          type: string
+        url:
+          minLength: 1
+          type: string
       required:
         - fileName
         - url
@@ -3679,69 +3759,67 @@ components:
         - status
         - category
         - uploadId
+      title: FileData
+      type: object
     FileVersion:
       description: ''
-      type: object
-      title: FileVersion
       properties:
-        version:
-          type: number
-          minimum: 0
-          example: 0
-          default: 0
-          description: 'Incremental version counter, can only be increased.'
-        status:
-          $ref: '#/components/schemas/FileStatus'
         created_at:
-          type: string
           format: date-time
-          readOnly: true
-        file:
-          $ref: '#/components/schemas/FileData'
+          type: string
+        deleted:
+          default: true
+          description: Usually only present if `true`
+          type: boolean
         delta:
+          $ref: '#/components/schemas/FileData'
+        file:
           $ref: '#/components/schemas/FileData'
         signature:
           $ref: '#/components/schemas/FileData'
-        deleted:
-          type: boolean
-          description: Usually only present if `true`
-          default: true
+        status:
+          $ref: '#/components/schemas/FileStatus'
+        version:
+          default: 0
+          description: 'Incremental version counter, can only be increased.'
+          minimum: 0
+          type: integer
       required:
         - version
         - status
         - created_at
+      title: FileVersion
+      type: object
     File:
       description: ''
-      type: object
-      title: File
       properties:
+        extension:
+          example: .unitypackage
+          minLength: 1
+          type: string
         id:
           $ref: '#/components/schemas/FileID'
+        mimeType:
+          $ref: '#/components/schemas/MIMEType'
         name:
-          type: string
           description: ''
           example: Example File
           minLength: 0
+          type: string
         ownerId:
           $ref: '#/components/schemas/UserID'
-        mimeType:
-          $ref: '#/components/schemas/MIMEType'
-        extension:
-          type: string
-          minLength: 1
-          example: .unitypackage
         tags:
-          type: array
           description: ' '
           items:
             $ref: '#/components/schemas/Tag'
-        versions:
           type: array
+        versions:
           description: ' '
-          uniqueItems: true
-          minItems: 1
           items:
             $ref: '#/components/schemas/FileVersion'
+          minItems: 1
+          type: array
+          uniqueItems: true
       required:
         - id
         - name
@@ -3750,80 +3828,104 @@ components:
         - extension
         - tags
         - versions
+      title: File
+      type: object
+    ReleaseStatus:
+      default: public
+      enum:
+        - public
+        - private
+        - hidden
+      example: public
+      title: ReleaseStatus
+      type: string
     LimitedUnityPackage:
       description: ''
-      type: object
-      title: LimitedUnityPackage
       properties:
         platform:
           $ref: '#/components/schemas/Platform'
         unityVersion:
-          type: string
-          minLength: 1
           example: 2018.4.14f1
+          minLength: 1
+          type: string
       required:
         - platform
         - unityVersion
+      title: LimitedUnityPackage
+      type: object
     LimitedWorld:
       description: ''
-      type: object
       properties:
+        authorId:
+          $ref: '#/components/schemas/UserID'
+        authorName:
+          minLength: 1
+          type: string
+        capacity:
+          example: 8
+          minimum: 0
+          type: integer
+        created_at:
+          format: date-time
+          type: string
+        favorites:
+          default: 0
+          example: 12024
+          minimum: 0
+          type: integer
+        heat:
+          default: 0
+          example: 5
+          minimum: 0
+          type: integer
         id:
           $ref: '#/components/schemas/WorldID'
-        name:
-          type: string
-          minLength: 1
-        authorId:
-          type: string
-          minLength: 1
-        authorName:
-          type: string
-          minLength: 1
-        capacity:
-          type: number
         imageUrl:
-          type: string
           minLength: 1
-        thumbnailImageUrl:
           type: string
+        labsPublicationDate:
+          example: none
           minLength: 1
-        releaseStatus:
           type: string
+        name:
           minLength: 1
+          type: string
+        occupants:
+          default: 0
+          example: 47
+          minimum: 0
+          type: integer
         organization:
-          type: string
+          default: vrchat
           minLength: 1
+          type: string
+        popularity:
+          default: 0
+          example: 8
+          minimum: 0
+          type: integer
+        publicationDate:
+          format: date-time
+          type: string
+        releaseStatus:
+          $ref: '#/components/schemas/ReleaseStatus'
         tags:
-          type: array
           description: ' '
           items:
             $ref: '#/components/schemas/Tag'
-        favorites:
-          type: number
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        publicationDate:
-          type: string
-          readOnly: true
-        labsPublicationDate:
-          type: string
-          minLength: 1
-        unityPackages:
           type: array
+        thumbnailImageUrl:
+          minLength: 1
+          type: string
+        unityPackages:
           description: ' '
-          minItems: 1
           items:
             $ref: '#/components/schemas/LimitedUnityPackage'
-        popularity:
-          type: number
-        heat:
-          type: number
-        occupants:
-          type: number
+          minItems: 1
+          type: array
+        updated_at:
+          format: date-time
+          type: string
       required:
         - id
         - name
@@ -3844,203 +3946,182 @@ components:
         - popularity
         - heat
         - occupants
-    ReleaseStatus:
-      title: ReleaseStatus
-      type: string
-      default: public
-      enum:
-        - public
-        - private
-        - hidden
-      example: public
+      type: object
     UnityPackageID:
-      title: UnityPackageID
-      type: string
+      example: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
       pattern: >-
         (unp)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
-      example: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
+      title: UnityPackageID
+      type: string
     UnityPackage:
       description: ''
-      type: object
-      x-examples:
-        example-1:
-          id: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
-          assetUrl: >-
-            https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
-          assetUrlObject: {}
-          pluginUrl: ''
-          pluginUrlObject: {}
-          unityVersion: 2018.4.14f1
-          unitySortNumber: 20180414000
-          assetVersion: 4
-          platform: standalonewindows
-          created_at: '2020-09-10T06:13:27.777Z'
-      title: UnityPackage
+      example:
+        assetUrl: >-
+          https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
+        assetUrlObject: {}
+        assetVersion: 4
+        created_at: '2020-09-10T06:13:27.777Z'
+        id: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
+        platform: standalonewindows
+        pluginUrl: ''
+        pluginUrlObject: {}
+        unitySortNumber: 20180414000
+        unityVersion: 2018.4.14f1
       properties:
-        id:
-          $ref: '#/components/schemas/UnityPackageID'
         assetUrl:
-          type: string
           minLength: 1
+          type: string
         assetUrlObject:
           type: object
+        assetVersion:
+          minimum: 0
+          type: integer
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/UnityPackageID'
+        platform:
+          $ref: '#/components/schemas/Platform'
         pluginUrl:
           type: string
         pluginUrlObject:
           type: object
-        unityVersion:
-          type: string
-          minLength: 1
-          example: 2018.4.12f1
-          default: 5.3.4p1
         unitySortNumber:
-          type: number
           minimum: 0
-        assetVersion:
-          type: number
-        platform:
-          $ref: '#/components/schemas/Platform'
-        created_at:
+          type: integer
+        unityVersion:
+          default: 5.3.4p1
+          example: 2018.4.12f1
+          minLength: 1
           type: string
-          format: date-time
       required:
         - id
         - unityVersion
         - assetVersion
         - platform
+      title: UnityPackage
+      type: object
     World:
       description: ''
-      type: object
-      title: World
       properties:
         assetUrl:
-          type: string
           minLength: 1
+          type: string
         assetUrlObject:
           type: object
         authorId:
           $ref: '#/components/schemas/UserID'
         authorName:
-          type: string
           minLength: 1
-          readOnly: true
+          type: string
         capacity:
-          type: number
-          minimum: 0
           example: 8
-          readOnly: true
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        description:
-          type: string
-          minLength: 0
-        favorites:
-          type: number
           minimum: 0
+          type: integer
+        created_at:
+          format: date-time
+          type: string
+        description:
+          minLength: 0
+          type: string
+        favorites:
           default: 0
           example: 12024
-          readOnly: true
-        featured:
-          type: boolean
-          default: false
-        heat:
-          type: number
           minimum: 0
-          example: 5
+          type: integer
+        featured:
+          default: false
+          type: boolean
+        heat:
           default: 0
-          readOnly: true
+          example: 5
+          minimum: 0
+          type: integer
         id:
           $ref: '#/components/schemas/WorldID'
         imageUrl:
-          type: string
           minLength: 1
+          type: string
         instances:
-          type: array
           items:
-            type: array
-            minItems: 2
-            maxItems: 2
             items:
               type: object
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
         labsPublicationDate:
-          type: string
-          minLength: 1
           example: none
-        name:
-          type: string
           minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
         namespace:
           type: string
         occupants:
-          type: number
-          minimum: 0
-          example: 47
           default: 0
-          readOnly: true
+          example: 47
+          minimum: 0
+          type: integer
         organization:
-          type: string
-          minLength: 1
-          example: vrchat
           default: vrchat
+          minLength: 1
+          type: string
         pluginUrlObject:
           type: object
         popularity:
-          type: number
-          example: 8
           default: 0
+          example: 8
           minimum: 0
-          readOnly: true
+          type: integer
         previewYoutubeId:
           type: string
         privateOccupants:
-          type: number
           default: 0
-          minimum: 0
           example: 1
-          readOnly: true
-        publicOccupants:
-          type: number
-          example: 46
-          default: 0
           minimum: 0
-          readOnly: true
+          type: integer
+        publicOccupants:
+          default: 0
+          example: 46
+          minimum: 0
+          type: integer
         publicationDate:
-          type: string
           format: date-time
+          type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
         tags:
-          type: array
           description: ' '
           items:
             $ref: '#/components/schemas/Tag'
+          type: array
         thumbnailImageUrl:
-          type: string
           minLength: 1
+          type: string
         unityPackageUrlObject:
           type: object
         unityPackages:
-          type: array
           description: ' '
-          minItems: 1
           items:
             $ref: '#/components/schemas/UnityPackage'
+          minItems: 1
+          type: array
         updated_at:
-          type: string
           format: date-time
+          type: string
         version:
-          type: number
-          minimum: 0
+          default: 0
           example: 68
-          default: 0
-        visits:
-          type: number
           minimum: 0
-          example: 9988675
+          type: integer
+        visits:
           default: 0
-          readOnly: true
+          example: 9988675
+          minimum: 0
+          type: integer
       required:
         - assetUrl
         - assetUrlObject
@@ -4068,96 +4149,96 @@ components:
         - updated_at
         - version
         - visits
+      title: World
+      type: object
     InstanceID:
-      title: InstanceID
-      type: string
+      example: 'wrld_ba913a96-fac4-4048-a062-9aa5db092812:123456'
       pattern: >-
         (wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}:(\d+)(~region\(([\w]+)\))?(~([\w]+)\(usr_([\w-]+)\)((\~canRequestInvite)?)(~region\(([\w].+)\))?~nonce\((.+)\))?
-      example: 'wrld_ba913a96-fac4-4048-a062-9aa5db092812:123456'
+      title: InstanceID
+      type: string
     Instance:
       description: ''
-      type: object
-      title: Instance
       properties:
         active:
-          type: boolean
           default: true
+          type: boolean
         canRequestInvite:
-          type: boolean
           default: true
-        capacity:
-          type: number
-          minimum: 0
-          maximum: 40
-        clientNumber:
-          type: string
-          minLength: 1
-        full:
           type: boolean
+        capacity:
+          maximum: 40
+          minimum: 0
+          type: integer
+        clientNumber:
+          minLength: 1
+          type: integer
+        full:
           default: false
+          type: boolean
         id:
           $ref: '#/components/schemas/InstanceID'
         instanceId:
-          type: string
           minLength: 1
+          type: string
         location:
-          type: string
           minLength: 1
+          type: string
         n_users:
-          type: number
           minimum: 0
+          type: integer
         name:
-          type: string
           minLength: 1
+          type: string
         nonce:
-          type: string
           minLength: 1
+          type: string
         ownerId:
           $ref: '#/components/schemas/UserID'
         permanent:
-          type: boolean
           default: false
+          type: boolean
         photonRegion:
-          type: string
           minLength: 1
+          type: string
         platforms:
-          type: object
+          properties:
+            android:
+              type: integer
+            standalonewindows:
+              type: integer
           required:
             - android
             - standalonewindows
-          properties:
-            android:
-              type: number
-            standalonewindows:
-              type: number
+          type: object
         region:
-          type: string
           minLength: 1
+          type: string
         shortName:
-          type: string
           minLength: 1
+          type: string
         tags:
-          type: array
           description: ' '
           items:
             $ref: '#/components/schemas/Tag'
-        type:
-          type: string
-          minLength: 1
-        users:
           type: array
+        type:
+          minLength: 1
+          type: string
+        users:
           deprecated: true
           description: >-
             Always empty on non-existing instances, and non-present on existing
             instances.
           items:
             type: object
+          type: array
         world:
-          type: object
           deprecated: true
           description: >-
             Only present on non-existing instances, and only contains a very
             small subject of World object. Use World API instead.
+          type: object
         worldId:
           $ref: '#/components/schemas/WorldID'
       required:
@@ -4180,83 +4261,83 @@ components:
         - tags
         - type
         - worldId
+      title: Instance
+      type: object
     FavoriteID:
-      type: string
-      title: FavoriteID
+      example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
       pattern: >-
         fvrt_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
-      example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
-    FavoriteType:
+      title: FavoriteID
       type: string
-      title: FavoriteType
+    FavoriteType:
       enum:
         - world
         - friend
         - avatar
+      title: FavoriteType
+      type: string
     Favorite:
       description: ''
-      type: object
       properties:
-        id:
-          $ref: '#/components/schemas/FavoriteID'
-        type:
-          $ref: '#/components/schemas/FavoriteType'
         favoriteId:
           description: 'MUST be either AvatarID, UserID or WorldID.'
           type: string
+        id:
+          $ref: '#/components/schemas/FavoriteID'
         tags:
-          type: array
           description: ' '
           items:
             $ref: '#/components/schemas/Tag'
+          type: array
+        type:
+          $ref: '#/components/schemas/FavoriteType'
       required:
         - id
         - type
         - favoriteId
         - tags
       title: Favorite
+      type: object
     FavoriteGroupID:
-      type: string
-      title: FavoriteGroupID
+      example: fvgrp_8a02a44b-dc3a-4a9a-bc77-77fa37996fc7
       pattern: >-
         fvgrp_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
-      example: fvgrp_8a02a44b-dc3a-4a9a-bc77-77fa37996fc7
-    FavoriteGroupVisibility:
+      title: FavoriteGroupID
       type: string
-      title: FavoriteGroupVisibility
+    FavoriteGroupVisibility:
+      default: private
       enum:
         - private
         - friends
         - public
-      default: private
       example: private
+      title: FavoriteGroupVisibility
+      type: string
     FavoriteGroup:
       description: ''
-      type: object
-      title: FavoriteGroup
       properties:
+        displayName:
+          minLength: 1
+          type: string
         id:
           $ref: '#/components/schemas/FavoriteGroupID'
+        name:
+          minLength: 1
+          type: string
+        ownerDisplayName:
+          minLength: 1
+          type: string
         ownerId:
           $ref: '#/components/schemas/UserID'
-        ownerDisplayName:
-          type: string
-          minLength: 1
-        name:
-          type: string
-          minLength: 1
-        displayName:
-          type: string
-          minLength: 1
+        tags:
+          description: ' '
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
         type:
           $ref: '#/components/schemas/FavoriteType'
         visibility:
           $ref: '#/components/schemas/FavoriteGroupVisibility'
-        tags:
-          type: array
-          description: ' '
-          items:
-            $ref: '#/components/schemas/Tag'
       required:
         - id
         - ownerId
@@ -4266,69 +4347,62 @@ components:
         - type
         - visibility
         - tags
+      title: FavoriteGroup
+      type: object
     Avatar:
       description: ''
-      type: object
-      title: Avatar
       properties:
         assetUrl:
-          type: string
-          minLength: 1
           description: >-
             Not present from general serach `/avatars`, only on specific
             requests `/avatars/{avatarId}`.
+          minLength: 1
+          type: string
         assetUrlObject:
-          type: object
           description: >-
             Not present from general serach `/avatars`, only on specific
             requests `/avatars/{avatarId}`.
 
             **Deprecation:** `Object` has unknown usage/fields, and is always
             empty. Use normal `Url` field instead.
+          type: object
         authorId:
           $ref: '#/components/schemas/UserID'
         authorName:
-          type: string
           minLength: 1
           readOnly: true
-        created_at:
           type: string
+        created_at:
           format: date-time
           readOnly: true
-        description:
           type: string
+        description:
           minLength: 0
+          type: string
         featured:
-          type: boolean
           default: false
+          type: boolean
         id:
           $ref: '#/components/schemas/AvatarID'
         imageUrl:
-          type: string
           minLength: 1
+          type: string
         name:
-          type: string
           minLength: 1
+          type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
         tags:
-          type: array
           description: ' '
           items:
             $ref: '#/components/schemas/Tag'
-        thumbnailImageUrl:
-          type: string
-          minLength: 1
-        unityPackages:
           type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/UnityPackage'
+        thumbnailImageUrl:
+          minLength: 1
+          type: string
         unityPackageUrl:
           type: string
         unityPackageUrlObject:
-          type: object
           deprecated: true
           description: >-
             **Deprecation:** `Object` has unknown usage/fields, and is always
@@ -4336,15 +4410,22 @@ components:
           properties:
             unityPackageUrl:
               type: string
+          type: object
+        unityPackages:
+          items:
+            $ref: '#/components/schemas/UnityPackage'
+          minItems: 1
+          type: array
+          uniqueItems: true
         updated_at:
-          type: string
           format: date-time
+          type: string
         version:
-          type: number
           default: 0
-          minimum: 0
           example: 68
+          minimum: 0
           readOnly: true
+          type: integer
       required:
         - authorId
         - authorName
@@ -4362,15 +4443,16 @@ components:
         - unityPackageUrlObject
         - updated_at
         - version
+      title: Avatar
+      type: object
     PlayerModerationID:
-      type: string
-      title: PlayerModerationID
+      example: pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244
       pattern: >-
         pmod_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
-      example: pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244
-    PlayerModerationType:
+      title: PlayerModerationID
       type: string
-      title: PlayerModerationType
+    PlayerModerationType:
+      default: showAvatar
       enum:
         - mute
         - unmute
@@ -4378,29 +4460,28 @@ components:
         - unblock
         - hideAvatar
         - showAvatar
-      default: showAvatar
       example: showAvatar
+      title: PlayerModerationType
+      type: string
     PlayerModeration:
-      type: object
-      title: PlayerModeration
       properties:
+        created:
+          format: date-time
+          type: string
         id:
           $ref: '#/components/schemas/PlayerModerationID'
-        type:
-          $ref: '#/components/schemas/PlayerModerationType'
+        sourceDisplayName:
+          minLength: 1
+          type: string
         sourceUserId:
           $ref: '#/components/schemas/UserID'
-        sourceDisplayName:
-          type: string
+        targetDisplayName:
           minLength: 1
+          type: string
         targetUserId:
           $ref: '#/components/schemas/UserID'
-        targetDisplayName:
-          type: string
-          minLength: 1
-        created:
-          type: string
-          format: date-time
+        type:
+          $ref: '#/components/schemas/PlayerModerationType'
       required:
         - id
         - type
@@ -4409,82 +4490,82 @@ components:
         - targetUserId
         - targetDisplayName
         - created
+      title: PlayerModeration
+      type: object
     PermissionID:
-      type: string
-      title: PermissionID
+      example: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
       pattern: >-
         prms_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
-      example: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
+      title: PermissionID
+      type: string
     Permission:
       description: ''
-      type: object
+      example:
+        data:
+          maxFavoriteGroups:
+            avatar: 4
+          maxFavoritesPerGroup:
+            avatar: 25
+        id: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
+        name: permission-extra-favorites-avatar-groups
+        ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
       properties:
-        id:
-          $ref: '#/components/schemas/PermissionID'
-        ownerId:
-          $ref: '#/components/schemas/UserID'
-        name:
-          type: string
-          minLength: 1
-          example: permission-invite-photos
         data:
           type: object
+        id:
+          $ref: '#/components/schemas/PermissionID'
+        name:
+          example: permission-invite-photos
+          minLength: 1
+          type: string
+        ownerId:
+          $ref: '#/components/schemas/UserID'
       required:
         - id
         - ownerId
         - name
       title: Permission
-      example:
-        id: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
-        ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
-        name: permission-extra-favorites-avatar-groups
-        data:
-          maxFavoritesPerGroup:
-            avatar: 25
-          maxFavoriteGroups:
-            avatar: 4
+      type: object
     InviteMessageID:
-      title: InviteMessageID
-      type: string
+      example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
       pattern: >-
         (default|invm_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
-      example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
-    InviteMessageType:
+      title: InviteMessageID
       type: string
-      title: InviteMessageType
-      description: ''
+    InviteMessageType:
       default: message
+      description: ''
       enum:
         - message
+      title: InviteMessageType
+      type: string
     InviteMessage:
       description: ''
-      type: object
-      title: InviteMessage
       properties:
+        canBeUpdated:
+          default: true
+          type: boolean
         id:
           $ref: '#/components/schemas/InviteMessageID'
-        slot:
-          type: integer
-          minimum: 0
-          maximum: 11
         message:
-          type: string
           minLength: 1
+          type: string
         messageType:
           $ref: '#/components/schemas/InviteMessageType'
-        updatedAt:
-          type: string
-          format: date-time
         remainingCooldownMinutes:
-          type: integer
           default: 0
-          minimum: 0
           description: >-
             Changes to 60 when updated, although probably server-side
             configurable.
-        canBeUpdated:
-          type: boolean
-          default: true
+          minimum: 0
+          type: integer
+        slot:
+          maximum: 11
+          minimum: 0
+          type: integer
+        updatedAt:
+          format: date-time
+          type: string
       required:
         - id
         - slot
@@ -4493,6 +4574,8 @@ components:
         - updatedAt
         - remainingCooldownMinutes
         - canBeUpdated
+      title: InviteMessage
+      type: object
     InviteRequest:
       title: InviteRequest
       type: object
@@ -4628,6 +4711,30 @@ components:
                 ok: true
                 serverName: prod-api-green-marsh-dgt
                 buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+    DownloadSourceCodeAccessError:
+      description: >-
+        Error response when trying to download non-public and non-main
+        JavaScript or CSS without Admin Credentials.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+            required:
+              - error
+          examples:
+            Only Admins Can Get Non-Public Variants:
+              value:
+                error:
+                  message: only admins can get non-public variants
+                  status_code: 400
+            Only Admins Can Get Non-Main Branches:
+              value:
+                error:
+                  message: only admins can get non-main branches
+                  status_code: 400
     FriendStatusResponse:
       description: Returns a users Friend Status.
       content:
@@ -5528,6 +5635,32 @@ components:
       description: >-
         A zero-based offset from the default object sorting from where search
         results start.
+    variant:
+      name: variant
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - public
+          - internal
+        default: public
+      allowEmptyValue: true
+      description: >-
+        Specifies which `variant` of the site. Public is the end-user site,
+        while `internal` is the staff-only site with special pages for
+        moderation and management.
+    branch:
+      name: branch
+      in: query
+      required: false
+      schema:
+        type: string
+        default: main
+      allowEmptyValue: true
+      description: >-
+        Specifies which git branch the site should load frontend source code
+        from.
     offline:
       name: offline
       in: query
@@ -5647,12 +5780,12 @@ components:
       required: false
       schema:
         type: string
-        default: hidden
+        default: public
         enum:
           - public
           - private
           - hidden
-        example: hidden
+          - all
       description: Filter by ReleaseStatus.
     maxUnityVersion:
       name: maxUnityVersion
@@ -5729,6 +5862,17 @@ components:
       required: true
       schema:
         type: string
+    messageType:
+      name: messageType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+          - message
+          - response
+          - request
+          - requestResponse
     messageId:
       name: messageId
       in: path
