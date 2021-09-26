@@ -17,7 +17,8 @@ properties:
   assetUrlObject:
     type: object
   assetVersion:
-    type: number
+    minimum: 0
+    type: integer
   created_at:
     format: date-time
     type: string
@@ -31,7 +32,7 @@ properties:
     type: object
   unitySortNumber:
     minimum: 0
-    type: number
+    type: integer
   unityVersion:
     default: 5.3.4p1
     example: 2018.4.12f1

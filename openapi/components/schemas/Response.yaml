@@ -3,7 +3,8 @@ properties:
     minLength: 1
     type: string
   status_code:
-    type: number
+    minimum: 100
+    type: integer
 required:
   - status_code
 title: Response

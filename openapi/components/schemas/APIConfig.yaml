@@ -293,19 +293,19 @@ properties:
   clientBPSCeiling:
     default: 18432
     description: Unknown
-    type: number
+    type: integer
   clientDisconnectTimeout:
     default: 30000
     description: Unknown
-    type: number
+    type: integer
   clientReservedPlayerBPS:
     default: 7168
     description: Unknown
-    type: number
+    type: integer
   clientSentCountAllowance:
     default: 15
     description: Unknown
-    type: number
+    type: integer
   contactEmail:
     description: VRChat's contact email
     minLength: 1
@@ -315,9 +315,10 @@ properties:
     minLength: 1
     type: string
   currentTOSVersion:
-    default: 7
+    example: 7
     description: Current version number of the Terms of Service
-    type: number
+    minimum: 0
+    type: integer
   defaultAvatar:
     $ref: ./AvatarID.yaml
   deploymentGroup:
@@ -444,7 +445,8 @@ properties:
     items:
       properties:
         index:
-          type: number
+          minimum: 0
+          type: integer
         name:
           minLength: 1
           type: string
@@ -480,34 +482,34 @@ properties:
     properties:
       distanceClose:
         description: Unknown
-        type: number
+        type: integer
       distanceFactor:
         description: Unknown
-        type: number
+        type: integer
       distanceFar:
         description: Unknown
-        type: number
+        type: integer
       groupDistance:
         description: Unknown
-        type: number
+        type: integer
       maximumBunchSize:
         description: Unknown
-        type: number
+        type: integer
       notVisibleFactor:
         description: Unknown
-        type: number
+        type: integer
       playerOrderBucketSize:
         description: Unknown
-        type: number
+        type: integer
       playerOrderFactor:
         description: Unknown
-        type: number
+        type: integer
       slowUpdateFactorThreshold:
         description: Unknown
-        type: number
+        type: integer
       viewSegmentLength:
         description: Unknown
-        type: number
+        type: integer
     required:
       - distanceClose
       - distanceFactor
@@ -550,7 +552,7 @@ properties:
     type: string
   moderationQueryPeriod:
     description: Unknown
-    type: number
+    type: integer
   notAllowedToSelectAvatarInPrivateWorldMessage:
     description: Used in-game to notify a user they aren't allowed to select avatars in private worlds
     minLength: 1
@@ -609,19 +611,19 @@ properties:
     $ref: ./WorldID.yaml
   updateRateMsMaximum:
     description: Unknown
-    type: number
+    type: integer
   updateRateMsMinimum:
     description: Unknown
-    type: number
+    type: integer
   updateRateMsNormal:
     description: Unknown
-    type: number
+    type: integer
   updateRateMsUdonManual:
     description: Unknown
-    type: number
+    type: integer
   uploadAnalysisPercent:
     description: Unknown
-    type: number
+    type: integer
   urlList:
     description: List of allowed URLs that bypass the "Allow untrusted URL's" setting in-game
     items:
@@ -633,16 +635,16 @@ properties:
     type: boolean
   userUpdatePeriod:
     description: Unknown
-    type: number
+    type: integer
   userVerificationDelay:
     description: Unknown
-    type: number
+    type: integer
   userVerificationRetry:
     description: Unknown
-    type: number
+    type: integer
   userVerificationTimeout:
     description: Unknown
-    type: number
+    type: integer
   viveWindowsUrl:
     description: Download link for game on the Steam website.
     minLength: 1
@@ -654,7 +656,7 @@ properties:
     type: array
   worldUpdatePeriod:
     description: Unknown
-    type: number
+    type: integer
   youtubedl-hash:
     description: Currently used youtube-dl.exe hash in SHA-256-delimited format
     minLength: 1

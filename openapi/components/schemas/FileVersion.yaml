@@ -2,7 +2,6 @@ description: ''
 properties:
   created_at:
     format: date-time
-    readOnly: true
     type: string
   deleted:
     default: true
@@ -19,9 +18,8 @@ properties:
   version:
     default: 0
     description: 'Incremental version counter, can only be increased.'
-    example: 0
     minimum: 0
-    type: number
+    type: integer
 required:
   - version
   - status
