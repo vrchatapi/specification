@@ -1,5 +1,24 @@
 # Release Notes
 
+Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
+
+## 1.4.0
+
+* feature!: allow editing of all 4 invite message types (#77)
+* feature: expand LimitedWorld restrictions (#88)
+* feature: allow `all` as releaseStatus query flag on `/avatars` (#85)
+* feature: add JS and CSS download endpoints (#80)
+* feature: add missing API Config fields (#78)
+* fix!: deprecate `/health` (#79)
+* fix: number to integer in World and LimitedWorld (#86)
+* docs: correct `limit` to `n` in API description
+* chore!: replace number with integer where possible (#89)
+
+Project maintenance: (does not affect produced Docs or SDK)
+* docs: add README.md (#81)
+* ci: autogenerate Node, Python, Java and C# API SDK libraries
+* chore: sort yaml data with yq sortKeys (#87)
+
 ## 1.3.3
 
 * fix!: `fallbackAvatar` is not present on User (#74)
@@ -14,6 +33,12 @@
 * fix: `fallbackAvatar` on `CurrentUser` can be missing
 * fix: Added missing bodies to Invite endpoints
 * docs: Clarified `getCurrentUser` auth-related documentation
+
+---
+
+## Switched to [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
+
+---
 
 ## 1.3.0
 
