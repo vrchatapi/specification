@@ -12,7 +12,7 @@ properties:
     type: integer
   clientNumber:
     minLength: 1
-    type: integer
+    type: string
   full:
     default: false
     type: boolean
