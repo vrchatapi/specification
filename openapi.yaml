@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.4.0
+  version: 1.4.1
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -2729,23 +2729,25 @@ components:
       title: LimitedUser
       type: object
     User:
+      title: User
+      type: object
       properties:
         allowAvatarCopying:
           type: boolean
         bio:
           type: string
         bioLinks:
+          type: array
           items:
             type: string
-          type: array
         currentAvatarImageUrl:
           type: string
         currentAvatarThumbnailImageUrl:
           type: string
         date_joined:
           format: date
-          readOnly: true
           type: string
+          readOnly: true
         developerType:
           $ref: '#/components/schemas/DeveloperType'
         displayName:
@@ -2774,9 +2776,9 @@ components:
           type: string
         tags:
           description: ' '
+          type: array
           items:
             $ref: '#/components/schemas/Tag'
-          type: array
         userIcon:
           type: string
         username:
@@ -2784,31 +2786,26 @@ components:
         worldId:
           $ref: '#/components/schemas/WorldID'
       required:
-        - id
-        - username
-        - displayName
-        - userIcon
+        - allowAvatarCopying
         - bio
         - bioLinks
-        - profilePicOverride
-        - statusDescription
         - currentAvatarImageUrl
         - currentAvatarThumbnailImageUrl
-        - state
-        - tags
+        - date_joined
         - developerType
+        - displayName
+        - friendKey
+        - id
+        - isFriend
         - last_login
         - last_platform
-        - allowAvatarCopying
+        - profilePicOverride
+        - state
         - status
-        - date_joined
-        - isFriend
-        - friendKey
-        - worldId
-        - instanceId
-        - location
-      title: User
-      type: object
+        - statusDescription
+        - tags
+        - userIcon
+        - username
     DeploymentGroup:
       description: >-
         Used to identify which API deployment cluster is currently responding.
@@ -3905,7 +3902,8 @@ components:
           minimum: 0
           type: integer
         publicationDate:
-          format: date-time
+          example: none
+          minLength: 1
           type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
@@ -4089,7 +4087,8 @@ components:
           minimum: 0
           type: integer
         publicationDate:
-          format: date-time
+          example: none
+          minLength: 1
           type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
