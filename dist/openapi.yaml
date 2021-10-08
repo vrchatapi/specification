@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.4.1
+  version: 1.4.2
   contact:
     name: Unofficial VRChat API Documentation Project
     url: 'https://github.com/VRChatAPI'
@@ -4171,7 +4171,7 @@ components:
           type: integer
         clientNumber:
           minLength: 1
-          type: integer
+          type: string
         full:
           default: false
           type: boolean
@@ -4251,7 +4251,6 @@ components:
         - location
         - n_users
         - name
-        - ownerId
         - permanent
         - photonRegion
         - platforms
