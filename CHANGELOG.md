@@ -2,6 +2,18 @@
 
 Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
 
+## 1.4.2
+
+* fix!: instance ownerId is not required (#95)
+* fix!: client number can be "unknown" (#94)
+* docs: create CODE_OF_CONDUCT.md (#82)
+
+## 1.4.1
+
+* fix!: publicationDate on LimitedWorld can be none (#92) 
+* fix!: publicationDate on public world can be none (#91) 
+* fix!: mark added-on location fields to User as optional (#90) 
+
 ## 1.4.0
 
 * feature!: allow editing of all 4 invite message types (#77)
