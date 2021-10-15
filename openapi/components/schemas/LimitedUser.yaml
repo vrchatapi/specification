@@ -33,6 +33,10 @@ properties:
     type: string
   username:
     type: string
+  location:
+    type: string
+  friendKey:
+    type: string
 required:
   - id
   - username
