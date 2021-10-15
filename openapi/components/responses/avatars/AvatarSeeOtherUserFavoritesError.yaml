@@ -4,7 +4,7 @@ content:
     schema:
       $ref: ../../schemas/Error.yaml
     examples:
-      404 Cant See Other User Favorite Avatars:
+      403 Cant See Other User Favorite Avatars:
         value:
           error:
             message: \"You can only see your own favorite avatars!\"
