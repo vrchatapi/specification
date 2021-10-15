@@ -1,0 +1,11 @@
+description: Error response when trying to select a fallback avatar that is missing the fallback tag.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      403 Cant Select Non-Fallback as Fallback:
+        value:
+          error:
+            message: "This avatar isn't tagged as a quest fallback avatar."
+            status_code: 403
