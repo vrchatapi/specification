@@ -230,6 +230,27 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Switches into that avatar.
+  '/avatars/{avatarId}/selectFallback':
+    parameters:
+      - $ref: ../parameters.yaml#/avatarId
+    put:
+      summary: Select Fallback Avatar
+      tags:
+        - avatars
+      responses:
+        '200':
+          $ref: ../responses/CurrentUserResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/avatars/AvatarNotTaggedAsFallbackError.yaml
+        '404':
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+      operationId: selectFallbackAvatar
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Switches into that avatar as your fallback avatar.
 tags:
   $ref: ../tags.yaml
 components:

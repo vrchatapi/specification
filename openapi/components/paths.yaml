@@ -96,6 +96,8 @@
   $ref: ./paths/avatars.yaml#/paths/~1avatars~1{avatarId}
 '/avatars/{avatarId}/select':
   $ref: ./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1select
+'/avatars/{avatarId}/selectFallback':
+  $ref: ./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1selectFallback
 /auth/user/playermoderations:
   $ref: ./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations
 /auth/user/unplayermoderate:
