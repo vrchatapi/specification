@@ -11,3 +11,19 @@ rules:
   license-url: hint
   oas3-api-servers: hint
   info-contact: hint
+
+  schema-title:
+    given: "$.components.schemas[*]"
+    severity: error
+    then:
+      field: title
+      function: truthy
+
+  response-no-inline-schemas:
+    given: "$.components.responses[*].content.application/json.schema.type"
+    severity: error
+    resolved: false
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "object"
