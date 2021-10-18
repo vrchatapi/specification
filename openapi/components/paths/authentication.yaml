@@ -11,21 +11,7 @@ paths:
         - authentication
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  token:
-                    type: string
-                    minLength: 1
-                required:
-                  - ok
-                  - token
-          headers: {}
+          $ref: ../responses/authentication/VerifyAuthTokenResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: verifyAuthToken
@@ -39,33 +25,7 @@ paths:
       operationId: logout
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/Success.yaml
-              examples:
-                Logout Success:
-                  value:
-                    success:
-                      message: Ok!
-                      status_code: 200
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-                default: 'auth=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
-              description: Clears the `auth` cookie.
-            \0Set-Cookie:
-              schema:
-                type: string
-                default: 'age=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
-              description: Clears the `age` cookie.
-            \0\0Set-Cookie:
-              schema:
-                type: string
-                default: 'tos=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
-              description: Clears the `tos` cookie.
+          $ref: ../responses/authentication/LogoutSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       description: Invalidates the login session.
@@ -80,22 +40,7 @@ paths:
         - authentication
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/CurrentUser.yaml
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-                example: 'auth=authcookie_00000000-0000-0000-0000-000000000000; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
-              description: Successful authentication returns an `auth` cookie.
-            \0Set-Cookie:
-              schema:
-                type: string
-                default: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
-              description: This endpoint **always** sets the `apiKey` irrespective if it is already set.
+          $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getCurrentUser
@@ -139,22 +84,7 @@ paths:
       operationId: verify2FA
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  verified:
-                    type: boolean
-                required:
-                  - verified
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-                example: 'twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
-              description: 'Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.'
+          $ref: ../responses/authentication/Verify2FAResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       requestBody:
@@ -180,22 +110,7 @@ paths:
       operationId: verifyRecoveryCode
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  verified:
-                    type: boolean
-                required:
-                  - verified
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-                example: 'twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
-              description: 'Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.'
+          $ref: ../responses/authentication/Verify2FAResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       requestBody:
@@ -222,11 +137,7 @@ paths:
       operationId: deleteUser
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/CurrentUser.yaml
+          $ref: ../responses/authentication/DeleteUserResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
@@ -243,7 +154,5 @@ paths:
 tags:
   $ref: ../tags.yaml
 components:
-  parameters:
-    $ref: ../parameters.yaml
   securitySchemes:
     $ref: ../securitySchemes.yaml

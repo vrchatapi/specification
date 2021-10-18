@@ -1,0 +1,27 @@
+description: OK
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Success.yaml
+    examples:
+      Logout Success:
+        value:
+          success:
+            message: Ok!
+            status_code: 200
+headers:
+  Set-Cookie:
+    schema:
+      type: string
+      default: 'auth=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
+    description: Clears the `auth` cookie.
+  \0Set-Cookie:
+    schema:
+      type: string
+      default: 'age=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
+    description: Clears the `age` cookie.
+  \0\0Set-Cookie:
+    schema:
+      type: string
+      default: 'tos=; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/'
+    description: Clears the `tos` cookie.
