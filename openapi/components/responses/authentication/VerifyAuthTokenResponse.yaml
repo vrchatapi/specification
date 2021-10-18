@@ -2,13 +2,4 @@ description: Returns wether a provided auth token is valid or not.
 content:
   application/json:
     schema:
-      type: object
-      properties:
-        ok:
-          type: boolean
-        token:
-          type: string
-          minLength: 1
-      required:
-        - ok
-        - token
+      $ref: ../../schemas/VerifyAuthTokenResult.yaml

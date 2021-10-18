@@ -2,12 +2,7 @@ description: OK
 content:
   application/json:
     schema:
-      type: object
-      properties:
-        verified:
-          type: boolean
-      required:
-        - verified
+      $ref: ../../schemas/Verify2FAResult.yaml
 headers:
   Set-Cookie:
     schema:

@@ -1,0 +1,11 @@
+title: VerifyAuthToken
+type: object
+properties:
+  ok:
+    type: boolean
+  token:
+    type: string
+    minLength: 1
+required:
+  - ok
+  - token

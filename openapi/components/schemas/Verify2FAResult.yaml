@@ -1,0 +1,7 @@
+title: Verify2FAResult
+type: object
+properties:
+  verified:
+    type: boolean
+required:
+  - verified

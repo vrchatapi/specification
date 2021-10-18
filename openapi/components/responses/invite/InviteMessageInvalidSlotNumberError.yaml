@@ -2,12 +2,7 @@ description: Error response when trying to update an Invite Message with invalid
 content:
   application/json:
     schema:
-      type: object
-      properties:
-        error:
-          $ref: ../../schemas/Error.yaml
-      required:
-        - error
+      $ref: ../../schemas/Error.yaml
     examples:
       Negative Slot Number Error:
         value:

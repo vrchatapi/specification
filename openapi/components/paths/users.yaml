@@ -151,7 +151,7 @@ paths:
                 items:
                   $ref: ../schemas/LimitedUser.yaml
         '403':
-          $ref: ../responses/InvalidAdminCredentials.yaml
+          $ref: ../responses/InvalidAdminCredentialsError.yaml
       operationId: searchActiveUsers
       security:
         - apiKeyCookie: []

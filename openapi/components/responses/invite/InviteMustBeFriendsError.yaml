@@ -2,12 +2,7 @@ description: Error response when trying to invite someome whom you are not frien
 content:
   application/json:
     schema:
-      type: object
-      properties:
-        error:
-          $ref: ../../schemas/Error.yaml
-      required:
-        - error
+      $ref: ../../schemas/Error.yaml
     examples:
       Must Be Friends Error:
         value:

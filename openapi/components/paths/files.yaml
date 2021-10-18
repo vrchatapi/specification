@@ -179,7 +179,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: ../responses/files/FileVersionUploadStatus.yaml
+          $ref: ../responses/files/FileVersionUploadStatusResponse.yaml
       operationId: getFileDataUploadStatus
       security:
         - apiKeyCookie: []
