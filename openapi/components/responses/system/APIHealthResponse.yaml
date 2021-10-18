@@ -1,4 +1,4 @@
-description: API's Health
+description: Returns the API's health.
 content:
   application/json:
     schema:

@@ -27,3 +27,10 @@ rules:
       function: pattern
       functionOptions:
         notMatch: "object"
+
+  paths-no-inline-responses:
+    given: "$.paths[*][get,post,put,delete].responses[*].content.application/json.schema"
+    severity: error
+    resolved: false
+    then:
+      function: undefined

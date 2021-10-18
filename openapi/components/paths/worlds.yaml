@@ -328,22 +328,7 @@ paths:
       description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  id:
-                    $ref: ../schemas/WorldID.yaml
-                  metadata:
-                    type: object
-                    readOnly: true
-                required:
-                  - id
-                  - metadata
-                readOnly: true
+          $ref: ../responses/worlds/WorldMetadataResponse.yaml
         '404':
           $ref: ../responses/worlds/WorldNotFoundError.yaml
   '/worlds/{worldId}/publish':
@@ -360,20 +345,7 @@ paths:
       description: Returns a worlds publish status.
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  canPubilsh:
-                    type: boolean
-                    default: true
-                    readOnly: true
-                required:
-                  - canPubilsh
-                readOnly: true
+          $ref: ../responses/worlds/WorldPublishStatusResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':

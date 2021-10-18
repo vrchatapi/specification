@@ -196,35 +196,9 @@ paths:
         - files
       responses:
         '200':
-          description: 'See [https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html](AWS REST docs - PUT Object)'
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  url:
-                    type: string
-                    minLength: 1
-                    description: ''
-                required:
-                  - url
-              examples:
-                Example Response:
-                  value:
-                    url: 'https://s3.amazonaws.com/files.vrchat.cloud/Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage?AWSAccessKeyId=XXXXXXXXXXXXXXXXXXXX&Expires=1626028518&Signature=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&partNumber=1&uploadId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx'
+          $ref: ../responses/files/FileUploadURLResponse.yaml
         '400':
-          description: Error response when trying to start an upload against a FileVersion that is already marked as  `complete`.
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/Error.yaml
-              examples:
-                Tried To Upload Against Already Finished Version:
-                  value:
-                    error:
-                      message: Cannot upload against a complete version entry․ Create a new version of this file before uploading․
-                      status_code: 400
+          $ref: ../responses/files/FileUploadAlreadyFinishedError.yaml
       operationId: startFileDataUpload
       parameters:
         - schema:

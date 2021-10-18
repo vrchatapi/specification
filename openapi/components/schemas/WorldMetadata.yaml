@@ -1,0 +1,11 @@
+title: WorldMetadata
+type: object
+additionalProperties: false
+properties:
+  id:
+    $ref: ./WorldID.yaml
+  metadata:
+    type: object
+required:
+  - id
+  - metadata

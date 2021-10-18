@@ -11,13 +11,7 @@ paths:
         - users
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: ../schemas/LimitedUser.yaml
+          $ref: ../responses/users/LimitedUserListResponse.yaml
         '400':
           $ref: ../responses/users/UsersInvalidSearchError.yaml
         '401':
@@ -54,11 +48,7 @@ paths:
         - users
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/User.yaml
+          $ref: ../responses/users/UserResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserByName
@@ -75,11 +65,7 @@ paths:
         - users
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/User.yaml
+          $ref: ../responses/users/UserResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUser
@@ -92,11 +78,7 @@ paths:
       operationId: updateUser
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/CurrentUser.yaml
+          $ref: ../responses/users/CurrentUserResponse.yaml
       description: Update a users information such as the email and birthday.
       security:
         - apiKeyCookie: []

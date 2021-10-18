@@ -220,7 +220,7 @@ paths:
         - avatars
       responses:
         '200':
-          $ref: ../responses/avatars/CurrentUserResponse.yaml
+          $ref: ../responses/users/CurrentUserResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
@@ -239,7 +239,7 @@ paths:
         - avatars
       responses:
         '200':
-          $ref: ../responses/avatars/CurrentUserResponse.yaml
+          $ref: ../responses/users/CurrentUserResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '403':

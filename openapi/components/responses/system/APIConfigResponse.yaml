@@ -1,0 +1,10 @@
+description: Returns the API's config.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/APIConfig.yaml
+headers:
+  Set-Cookie:
+    schema:
+      type: string
+      example: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
