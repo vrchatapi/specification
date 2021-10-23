@@ -91,12 +91,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                code:
-                  type: string
-              required:
-                - code
+              $ref: ../requests/TwoFactorAuthCode.yaml
             examples: {}
       description: Finishes the login sequence with a normal 2FA-generated code for accounts with 2FA-protection enabled.
       tags:
@@ -117,12 +112,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                code:
-                  type: string
-              required:
-                - code
+              $ref: ../requests/TwoFactorAuthCode.yaml
             examples: {}
       description: Finishes the login sequence with an OTP (One Time Password) recovery code for accounts with 2FA-protection enabled.
       tags:

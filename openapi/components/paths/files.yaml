@@ -45,25 +45,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                name:
-                  type: string
-                  minLength: 0
-                mimeType:
-                  $ref: ../schemas/MIMEType.yaml
-                extension:
-                  type: string
-                  minLength: 1
-                tags:
-                  type: array
-                  items:
-                    $ref: ../schemas/Tag.yaml
-              required:
-                - name
-                - mimeType
-                - extension
+              $ref: ../requests/CreateFileRequest.yaml
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -115,22 +97,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                signatureMd5:
-                  type: string
-                  minLength: 1
-                signatureSizeInBytes:
-                  type: number
-                fileMd5:
-                  type: string
-                  minLength: 1
-                fileSizeInBytes:
-                  type: number
-              required:
-                - signatureMd5
-                - signatureSizeInBytes
+              $ref: ../requests/CreateFileVersionRequest.yaml
   '/file/{fileId}/{versionId}':
     parameters:
       - $ref: ../parameters.yaml#/fileId
@@ -232,37 +199,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              description: ''
-              properties:
-                etags:
-                  type: array
-                  description: Array of ETags uploaded.
-                  minItems: 1
-                  uniqueItems: true
-                  items:
-                    type: string
-                nextPartNumber:
-                  type: string
-                  minLength: 1
-                  default: '0'
-                  example: '0'
-                  deprecated: true
-                  description: 'Always a zero in string form, despite how many parts uploaded.'
-                  maxLength: 1
-                  pattern: '0'
-                maxParts:
-                  type: string
-                  minLength: 1
-                  description: 'Always a zero in string form, despite how many parts uploaded.'
-                  deprecated: true
-                  default: '0'
-                  example: '0'
-                  maxLength: 1
-                  pattern: '0'
-              required:
-                - nextPartNumber
-                - maxParts
+              $ref: ../requests/FinishFileDataUploadRequest.yaml
             examples:
               Example Request:
                 value:

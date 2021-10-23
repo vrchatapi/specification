@@ -1,0 +1,19 @@
+title: CreateFileRequest
+type: object
+properties:
+  name:
+    type: string
+    minLength: 0
+  mimeType:
+    $ref: ../schemas/MIMEType.yaml
+  extension:
+    type: string
+    minLength: 1
+  tags:
+    type: array
+    items:
+      $ref: ../schemas/Tag.yaml
+required:
+  - name
+  - mimeType
+  - extension

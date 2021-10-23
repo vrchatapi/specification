@@ -55,55 +55,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                assetUrl:
-                  type: string
-                  minLength: 1
-                assetVersion:
-                  type: string
-                  minLength: 1
-                authorId:
-                  $ref: ../schemas/UserID.yaml
-                authorName:
-                  type: string
-                  minLength: 1
-                capacity:
-                  type: integer
-                  minimum: 1
-                  maximum: 40
-                  default: 16
-                  example: 16
-                description:
-                  type: string
-                id:
-                  $ref: ../schemas/WorldID.yaml
-                imageUrl:
-                  type: string
-                  minLength: 1
-                name:
-                  type: string
-                  minLength: 1
-                platform:
-                  $ref: ../schemas/Platform.yaml
-                releaseStatus:
-                  $ref: ../schemas/ReleaseStatus.yaml
-                tags:
-                  type: array
-                  items:
-                    $ref: ../schemas/Tag.yaml
-                unityPackageUrl:
-                  type: string
-                  minLength: 1
-                unityVersion:
-                  type: string
-                  minLength: 1
-                  default: 5.3.4p1
-                  example: 2018.4.20f1
-              required:
-                - assetUrl
-                - imageUrl
-                - name
+              $ref: ../requests/CreateWorldRequest.yaml
         description: ''
       description: 'Create a new world. This endpoint requires `assetUrl` to be a valid File object with `.vrcw` file extension, and `imageUrl` to be a valid File object with an image file extension.'
       tags:
@@ -231,51 +183,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                assetUrl:
-                  type: string
-                  minLength: 1
-                assetVersion:
-                  type: string
-                  minLength: 1
-                authorId:
-                  $ref: ../schemas/UserID.yaml
-                authorName:
-                  type: string
-                  minLength: 1
-                capacity:
-                  type: integer
-                  minimum: 1
-                  maximum: 40
-                  default: 16
-                  example: 16
-                description:
-                  type: string
-                id:
-                  $ref: ../schemas/WorldID.yaml
-                imageUrl:
-                  type: string
-                  minLength: 1
-                name:
-                  type: string
-                  minLength: 1
-                platform:
-                  $ref: ../schemas/Platform.yaml
-                releaseStatus:
-                  $ref: ../schemas/ReleaseStatus.yaml
-                tags:
-                  type: array
-                  items:
-                    $ref: ../schemas/Tag.yaml
-                unityPackageUrl:
-                  type: string
-                  minLength: 1
-                unityVersion:
-                  type: string
-                  minLength: 1
-                  default: 5.3.4p1
-                  example: 2018.4.20f1
+              $ref: ../requests/UpdateWorldRequest.yaml
       description: Update information about a specific World.
       tags:
         - worlds

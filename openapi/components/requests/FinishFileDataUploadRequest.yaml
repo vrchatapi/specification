@@ -1,0 +1,32 @@
+title: FinishFileDataUploadRequest
+type: object
+description: ''
+properties:
+  etags:
+    type: array
+    description: Array of ETags uploaded.
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
+  nextPartNumber:
+    type: string
+    minLength: 1
+    default: '0'
+    example: '0'
+    deprecated: true
+    description: 'Always a zero in string form, despite how many parts uploaded.'
+    maxLength: 1
+    pattern: '0'
+  maxParts:
+    type: string
+    minLength: 1
+    description: 'Always a zero in string form, despite how many parts uploaded.'
+    deprecated: true
+    default: '0'
+    example: '0'
+    maxLength: 1
+    pattern: '0'
+required:
+  - nextPartNumber
+  - maxParts

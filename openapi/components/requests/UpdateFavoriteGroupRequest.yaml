@@ -1,0 +1,12 @@
+title: UpdateFavoriteGroupRequest
+type: object
+properties:
+  displayName:
+    type: string
+  visibility:
+    $ref: ../schemas/FavoriteGroupVisibility.yaml
+  tags:
+    type: array
+    description: Tags on FavoriteGroups are believed to do nothing.
+    items:
+      $ref: ../schemas/Tag.yaml
