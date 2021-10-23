@@ -1,122 +1,161 @@
-/auth:
-  $ref: ./paths/authentication.yaml#/paths/~1auth
-/logout:
-  $ref: ./paths/authentication.yaml#/paths/~1logout
-/auth/user:
-  $ref: ./paths/authentication.yaml#/paths/~1auth~1user
-/auth/exists:
-  $ref: ./paths/authentication.yaml#/paths/~1auth~1exists
-/auth/twofactorauth/totp/verify:
-  $ref: ./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify
-/auth/twofactorauth/otp/verify:
-  $ref: ./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1otp~1verify
-'/user/{userId}/delete':
-  $ref: './paths/authentication.yaml#/paths/~1user~1{userId}~1delete'
-/users:
-  $ref: './paths/users.yaml#/paths/~1users'
-'/users/{username}/name':
-  $ref: './paths/users.yaml#/paths/~1users~1{username}~1name'
-'/users/{userId}':
-  $ref: './paths/users.yaml#/paths/~1users~1{userId}'
-/users/active:
-  $ref: './paths/users.yaml#/paths/~1users~1active'
-/health:
-  $ref: ./paths/system.yaml#/paths/~1health
-/config:
-  $ref: ./paths/system.yaml#/paths/~1config
-/visits:
-  $ref: ./paths/system.yaml#/paths/~1visits
-/time:
-  $ref: ./paths/system.yaml#/paths/~1time
-/js/app.js:
-  $ref: ./paths/system.yaml#/paths/~1js~1app.js
-/css/app.js:
-  $ref: ./paths/system.yaml#/paths/~1css~1app.css
-/auth/user/friends:
-  $ref: ./paths/friends.yaml#/paths/~1auth~1user~1friends
-'/user/{userId}/friendStatus':
-  $ref: ./paths/friends.yaml#/paths/~1user~1{userId}~1friendStatus
-'/user/{userId}/friendRequest':
-  $ref: ./paths/friends.yaml#/paths/~1user~1{userId}~1friendRequest
-'/auth/user/friends/{userId}':
-  $ref: ./paths/friends.yaml#/paths/~1auth~1user~1friends~1{userId}
-/auth/user/notifications:
-  $ref: ./paths/notifications.yaml#/paths/~1auth~1user~1notifications
-'/auth/user/notifications/{notificationId}/see':
-  $ref: ./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1see
-'/auth/user/notifications/{notificationId}/hide':
-  $ref: ./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1hide
-'/auth/user/notifications/{notificationId}/accept':
-  $ref: ./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1accept
-/auth/user/notifications/clear:
-  $ref: ./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1clear
-/files:
-  $ref: ./paths/files.yaml#/paths/~1files
-/file:
-  $ref: ./paths/files.yaml#/paths/~1file
-'/file/{fileId}':
-  $ref: ./paths/files.yaml#/paths/~1file~1{fileId}
-'/file/{fileId}/{versionId}':
-  $ref: ./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}
-'/file/{fileId}/{versionId}/{fileType}/status':
-  $ref: ./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1status
-'/file/{fileId}/{versionId}/{fileType}/start':
-  $ref: ./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1start
-'/file/{fileId}/{versionId}/{fileType}/finish':
-  $ref: ./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1finish
-/worlds:
-  $ref: ./paths/worlds.yaml#/paths/~1worlds
-/worlds/active:
-  $ref: ./paths/worlds.yaml#/paths/~1worlds~1active
-/worlds/recent:
-  $ref: ./paths/worlds.yaml#/paths/~1worlds~1recent
-/worlds/favorites:
-  $ref: ./paths/worlds.yaml#/paths/~1worlds~1favorites
-'/worlds/{worldId}':
-  $ref: ./paths/worlds.yaml#/paths/~1worlds~1{worldId}
-'/worlds/{worldId}/{instanceId}':
-  $ref: ./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}
-'/worlds/{worldId}/metadata':
-  $ref: ./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1metadata
-'/worlds/{worldId}/publish':
-  $ref: ./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1publish
-/favorites:
-  $ref: ./paths/favorites.yaml#/paths/~1favorites
-'/favorites/{favoriteId}':
-  $ref: ./paths/favorites.yaml#/paths/~1favorites~1{favoriteId}
-/favorite/groups:
-  $ref: ./paths/favorites.yaml#/paths/~1favorite~1groups
-'/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}':
-  $ref: ./paths/favorites.yaml#/paths/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}
-/avatars/favorites:
-  $ref: ./paths/avatars.yaml#/paths/~1avatars~1favorites
-/avatars:
-  $ref: ./paths/avatars.yaml#/paths/~1avatars
-'/avatars/{avatarId}':
-  $ref: ./paths/avatars.yaml#/paths/~1avatars~1{avatarId}
-'/avatars/{avatarId}/select':
-  $ref: ./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1select
-'/avatars/{avatarId}/selectFallback':
-  $ref: ./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1selectFallback
-/auth/user/playermoderations:
-  $ref: ./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations
-/auth/user/unplayermoderate:
-  $ref: ./paths/playermoderation.yaml#/paths/~1auth~1user~1unplayermoderate
-'/auth/user/playermoderations/{playerModerationId}':
-  $ref: ./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations~1{playerModerationId}
-/auth/permissions:
-  $ref: ./paths/permissions.yaml#/paths/~1auth~1permissions
-/permissions:
-  $ref: ./paths/permissions.yaml#/paths/~1permissions
-'/permissions/{permissionId}':
-  $ref: './paths/permissions.yaml#/paths/~1permissions~1{permissionId}'
-'/message/{userId}/{messageType}':
-  $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}'
-'/message/{userId}/{messageType}/{messageId}':
-  $ref: './paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{messageId}'
-'/invite/{userId}':
-  $ref: './paths/invite.yaml#/paths/~1invite~1{userId}'
-'/invite/{notificationId}/response':
-  $ref: './paths/invite.yaml#/paths/~1invite~1{notificationId}~1response'
-'/requestInvite/{userId}':
-  $ref: './paths/invite.yaml#/paths/~1requestInvite~1{userId}'
+---
+
+# The order on the website is determined by the order of the endpoints in this document.
+
+# authentication
+
+"/auth/exists":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1exists"
+"/auth/user":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user"
+"/auth/twofactorauth/otp/verify":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1otp~1verify"
+"/auth/twofactorauth/totp/verify":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify"
+"/auth":
+  $ref: "./paths/authentication.yaml#/paths/~1auth"
+"/logout":
+  $ref: "./paths/authentication.yaml#/paths/~1logout"
+"/user/{userId}/delete":
+  $ref: "./paths/authentication.yaml#/paths/~1user~1{userId}~1delete"
+
+# avatars
+
+"/avatars":
+  $ref: "./paths/avatars.yaml#/paths/~1avatars"
+"/avatars/{avatarId}":
+  $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}"
+"/avatars/{avatarId}/select":
+  $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1select"
+"/avatars/{avatarId}/selectFallback":
+  $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1selectFallback"
+"/avatars/favorites":
+  $ref: "./paths/avatars.yaml#/paths/~1avatars~1favorites"
+
+# favorites
+
+"/favorites":
+  $ref: "./paths/favorites.yaml#/paths/~1favorites"
+"/favorites/{favoriteId}":
+  $ref: "./paths/favorites.yaml#/paths/~1favorites~1{favoriteId}"
+"/favorite/groups":
+  $ref: "./paths/favorites.yaml#/paths/~1favorite~1groups"
+"/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}":
+  $ref: "./paths/favorites.yaml#/paths/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}"
+
+# files
+
+"/files":
+  $ref: "./paths/files.yaml#/paths/~1files"
+"/file":
+  $ref: "./paths/files.yaml#/paths/~1file"
+"/file/{fileId}":
+  $ref: "./paths/files.yaml#/paths/~1file~1{fileId}"
+"/file/{fileId}/{versionId}":
+  $ref: "./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}"
+"/file/{fileId}/{versionId}/{fileType}/finish":
+  $ref: "./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1finish"
+"/file/{fileId}/{versionId}/{fileType}/start":
+  $ref: "./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1start"
+"/file/{fileId}/{versionId}/{fileType}/status":
+  $ref: "./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1status"
+
+# friends
+
+"/auth/user/friends":
+  $ref: "./paths/friends.yaml#/paths/~1auth~1user~1friends"
+"/user/{userId}/friendRequest":
+  $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendRequest"
+"/user/{userId}/friendStatus":
+  $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendStatus"
+"/auth/user/friends/{userId}":
+  $ref: "./paths/friends.yaml#/paths/~1auth~1user~1friends~1{userId}"
+
+# invite
+
+"/invite/{userId}":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}"
+"/requestInvite/{userId}":
+  $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}"
+"/invite/{notificationId}/response":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response"
+"/message/{userId}/{messageType}":
+  $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
+"/message/{userId}/{messageType}/{messageId}":
+  $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{messageId}"
+
+# notifications
+
+"/auth/user/notifications":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications"
+"/auth/user/notifications/{notificationId}/accept":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1accept"
+"/auth/user/notifications/{notificationId}/see":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1see"
+"/auth/user/notifications/{notificationId}/hide":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1hide"
+"/auth/user/notifications/clear":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1clear"
+
+# permissions
+
+"/auth/permissions":
+  $ref: "./paths/permissions.yaml#/paths/~1auth~1permissions"
+"/permissions":
+  $ref: "./paths/permissions.yaml#/paths/~1permissions"
+"/permissions/{permissionId}":
+  $ref: "./paths/permissions.yaml#/paths/~1permissions~1{permissionId}"
+
+# playermoderation
+
+"/auth/user/playermoderations":
+  $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations"
+"/auth/user/playermoderations/{playerModerationId}":
+  $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations~1{playerModerationId}"
+"/auth/user/unplayermoderate":
+  $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1unplayermoderate"
+
+# system
+
+"/config":
+  $ref: "./paths/system.yaml#/paths/~1config"
+"/css/app.js":
+  $ref: "./paths/system.yaml#/paths/~1css~1app.css"
+"/js/app.js":
+  $ref: "./paths/system.yaml#/paths/~1js~1app.js"
+"/health":
+  $ref: "./paths/system.yaml#/paths/~1health"
+"/visits":
+  $ref: "./paths/system.yaml#/paths/~1visits"
+"/time":
+  $ref: "./paths/system.yaml#/paths/~1time"
+
+# users
+
+"/users":
+  $ref: "./paths/users.yaml#/paths/~1users"
+"/users/active":
+  $ref: "./paths/users.yaml#/paths/~1users~1active"
+"/users/{username}/name":
+  $ref: "./paths/users.yaml#/paths/~1users~1{username}~1name"
+"/users/{userId}":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}"
+
+# worlds
+
+"/worlds":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds"
+"/worlds/active":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1active"
+"/worlds/favorites":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1favorites"
+"/worlds/recent":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1recent"
+"/worlds/{worldId}":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}"
+"/worlds/{worldId}/metadata":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1metadata"
+"/worlds/{worldId}/publish":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1publish"
+"/worlds/{worldId}/{instanceId}":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}"

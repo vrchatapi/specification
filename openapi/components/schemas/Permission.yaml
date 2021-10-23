@@ -9,8 +9,6 @@ example:
   name: permission-extra-favorites-avatar-groups
   ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
 properties:
-  data:
-    type: object
   id:
     $ref: ./PermissionID.yaml
   name:
@@ -19,6 +17,8 @@ properties:
     type: string
   ownerId:
     $ref: ./UserID.yaml
+  data:
+    type: object
 required:
   - id
   - ownerId

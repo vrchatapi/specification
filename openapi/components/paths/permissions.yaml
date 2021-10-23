@@ -6,7 +6,7 @@ info:
 paths:
   /auth/permissions:
     get:
-      summary: Get Assigned Permission
+      summary: Get Assigned Permissions
       operationId: getAssignedPermissions
       security:
         - apiKeyCookie: []
