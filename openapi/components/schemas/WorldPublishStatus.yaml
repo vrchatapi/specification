@@ -1,0 +1,9 @@
+title: WorldPublishStatus
+type: object
+additionalProperties: false
+properties:
+  canPubilsh:
+    type: boolean
+    default: true
+required:
+  - canPubilsh

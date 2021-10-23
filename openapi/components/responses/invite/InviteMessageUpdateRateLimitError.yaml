@@ -2,12 +2,7 @@ description: Error response when trying to update an Invite Message before the c
 content:
   application/json:
     schema:
-      type: object
-      properties:
-        error:
-          $ref: ../../schemas/Error.yaml
-      required:
-        - error
+      $ref: ../../schemas/Error.yaml
     examples:
       Update Invite Message Please Wait Error:
         value:

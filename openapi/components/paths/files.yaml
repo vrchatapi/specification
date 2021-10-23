@@ -45,25 +45,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                name:
-                  type: string
-                  minLength: 0
-                mimeType:
-                  $ref: ../schemas/MIMEType.yaml
-                extension:
-                  type: string
-                  minLength: 1
-                tags:
-                  type: array
-                  items:
-                    $ref: ../schemas/Tag.yaml
-              required:
-                - name
-                - mimeType
-                - extension
+              $ref: ../requests/CreateFileRequest.yaml
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -115,22 +97,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                signatureMd5:
-                  type: string
-                  minLength: 1
-                signatureSizeInBytes:
-                  type: number
-                fileMd5:
-                  type: string
-                  minLength: 1
-                fileSizeInBytes:
-                  type: number
-              required:
-                - signatureMd5
-                - signatureSizeInBytes
+              $ref: ../requests/CreateFileVersionRequest.yaml
   '/file/{fileId}/{versionId}':
     parameters:
       - $ref: ../parameters.yaml#/fileId
@@ -179,7 +146,7 @@ paths:
         - files
       responses:
         '200':
-          $ref: ../responses/files/FileVersionUploadStatus.yaml
+          $ref: ../responses/files/FileVersionUploadStatusResponse.yaml
       operationId: getFileDataUploadStatus
       security:
         - apiKeyCookie: []
@@ -196,35 +163,9 @@ paths:
         - files
       responses:
         '200':
-          description: 'See [https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html](AWS REST docs - PUT Object)'
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  url:
-                    type: string
-                    minLength: 1
-                    description: ''
-                required:
-                  - url
-              examples:
-                Example Response:
-                  value:
-                    url: 'https://s3.amazonaws.com/files.vrchat.cloud/Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage?AWSAccessKeyId=XXXXXXXXXXXXXXXXXXXX&Expires=1626028518&Signature=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&partNumber=1&uploadId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx'
+          $ref: ../responses/files/FileUploadURLResponse.yaml
         '400':
-          description: Error response when trying to start an upload against a FileVersion that is already marked as  `complete`.
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/Error.yaml
-              examples:
-                Tried To Upload Against Already Finished Version:
-                  value:
-                    error:
-                      message: Cannot upload against a complete version entry․ Create a new version of this file before uploading․
-                      status_code: 400
+          $ref: ../responses/files/FileUploadAlreadyFinishedError.yaml
       operationId: startFileDataUpload
       parameters:
         - schema:
@@ -258,37 +199,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              description: ''
-              properties:
-                etags:
-                  type: array
-                  description: Array of ETags uploaded.
-                  minItems: 1
-                  uniqueItems: true
-                  items:
-                    type: string
-                nextPartNumber:
-                  type: string
-                  minLength: 1
-                  default: '0'
-                  example: '0'
-                  deprecated: true
-                  description: 'Always a zero in string form, despite how many parts uploaded.'
-                  maxLength: 1
-                  pattern: '0'
-                maxParts:
-                  type: string
-                  minLength: 1
-                  description: 'Always a zero in string form, despite how many parts uploaded.'
-                  deprecated: true
-                  default: '0'
-                  example: '0'
-                  maxLength: 1
-                  pattern: '0'
-              required:
-                - nextPartNumber
-                - maxParts
+              $ref: ../requests/FinishFileDataUploadRequest.yaml
             examples:
               Example Request:
                 value:

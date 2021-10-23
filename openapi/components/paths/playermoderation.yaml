@@ -54,16 +54,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: false
-              properties:
-                moderated:
-                  $ref: ../schemas/UserID.yaml
-                type:
-                  $ref: ../schemas/PlayerModerationType.yaml
-              required:
-                - moderated
-                - type
+              $ref: ../requests/ModerateUserRequest.yaml
         description: ''
       description: 'Moderate a user, e.g. unmute them or show their avatar.'
       tags:
@@ -93,15 +84,8 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                moderated:
-                  $ref: ../schemas/UserID.yaml
-                type:
-                  $ref: ../schemas/PlayerModerationType.yaml
-              required:
-                - type
-      description: 'Removes a player moderation previously added through `moderateUser`. E.g if you previuosly have shown their avatar, but now want to reset it to default.'
+              $ref: ../requests/ModerateUserRequest.yaml
+      description: 'Removes a player moderation previously added through `moderateUser`. E.g if you previously have shown their avatar, but now want to reset it to default.'
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationUnmoderatedSuccess.yaml

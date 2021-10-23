@@ -2,12 +2,7 @@ description: Error response due to missing authorization to perform that action.
 content:
   application/json:
     schema:
-      type: object
-      properties:
-        error:
-          $ref: ../schemas/Error.yaml
-      required:
-        - error
+      $ref: ../schemas/Error.yaml
     examples:
       Not Authorized Example:
         value:

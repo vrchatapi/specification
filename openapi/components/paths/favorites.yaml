@@ -51,22 +51,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                type:
-                  $ref: ../schemas/FavoriteType.yaml
-                favoriteId:
-                  type: string
-                  description: 'Must be either AvatarID, WorldID or UserID.'
-                tags:
-                  type: array
-                  description: Tags indicate which group this favorite belongs to. Adding multiple groups makes it show up in all. Removing it from one in that case removes it from all.
-                  items:
-                    $ref: ../schemas/Tag.yaml
-              required:
-                - type
-                - favoriteId
-                - tags
+              $ref: ../requests/AddFavoriteRequest.yaml
             examples:
               Example Favorite Friend:
                 value:
@@ -172,17 +157,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                displayName:
-                  type: string
-                visibility:
-                  $ref: ../schemas/FavoriteGroupVisibility.yaml
-                tags:
-                  type: array
-                  description: Tags on FavoriteGroups are believed to do nothing.
-                  items:
-                    $ref: ../schemas/Tag.yaml
+              $ref: ../requests/UpdateFavoriteGroupRequest.yaml
       tags:
         - favorites
       description: Update information about a specific favorite group.

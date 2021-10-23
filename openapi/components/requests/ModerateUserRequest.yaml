@@ -1,0 +1,11 @@
+title: ModerateUserRequest
+type: object
+additionalProperties: false
+properties:
+  moderated:
+    $ref: ../schemas/UserID.yaml
+  type:
+    $ref: ../schemas/PlayerModerationType.yaml
+required:
+  - moderated
+  - type

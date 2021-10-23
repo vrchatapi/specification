@@ -26,16 +26,7 @@ paths:
         - system
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/APIConfig.yaml
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-                example: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
+          $ref: ../responses/system/APIConfigResponse.yaml
       operationId: getConfig
       description: |-
         API config contains configuration that the clients needs to work properly.

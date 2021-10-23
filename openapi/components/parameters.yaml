@@ -259,6 +259,12 @@ notificationId:
   required: true
   schema:
     type: string
+permissionId:
+  name: permissionId
+  in: path
+  required: true
+  schema:
+    type: string
 variant:
   name: variant
   in: query

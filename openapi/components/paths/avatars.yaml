@@ -88,41 +88,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                assetUrl:
-                  type: string
-                id:
-                  $ref: ../schemas/AvatarID.yaml
-                name:
-                  type: string
-                  minLength: 1
-                description:
-                  type: string
-                  minLength: 1
-                tags:
-                  type: array
-                  items:
-                    $ref: ../schemas/Tag.yaml
-                imageUrl:
-                  type: string
-                  minLength: 1
-                releaseStatus:
-                  $ref: ../schemas/ReleaseStatus.yaml
-                version:
-                  type: number
-                  minimum: 0
-                  default: 1
-                featured:
-                  type: boolean
-                  x-internal: true
-                  description: You cannot set featured tag if you are not an admin.
-                unityPackageUrl:
-                  type: string
-              required:
-                - name
-                - imageUrl
+              $ref: ../requests/CreateAvatarRequest.yaml
       description: Create an avatar. It's possible to optionally specify a ID if you want a custom one. Attempting to create an Avatar with an already claimed ID will result in a DB error.
   '/avatars/{avatarId}':
     parameters:
@@ -163,38 +129,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ''
-              type: object
-              properties:
-                assetUrl:
-                  type: string
-                id:
-                  $ref: ../schemas/AvatarID.yaml
-                name:
-                  type: string
-                  minLength: 1
-                description:
-                  type: string
-                  minLength: 1
-                tags:
-                  type: array
-                  items:
-                    $ref: ../schemas/Tag.yaml
-                imageUrl:
-                  type: string
-                  minLength: 1
-                releaseStatus:
-                  $ref: ../schemas/ReleaseStatus.yaml
-                version:
-                  type: number
-                  minimum: 0
-                  default: 1
-                featured:
-                  type: boolean
-                  x-internal: true
-                  description: You cannot set featured tag if you are not an admin.
-                unityPackageUrl:
-                  type: string
+              $ref: ../requests/UpdateAvatarRequest.yaml
     delete:
       summary: Delete Avatar
       operationId: deleteAvatar
@@ -220,7 +155,7 @@ paths:
         - avatars
       responses:
         '200':
-          $ref: ../responses/CurrentUserResponse.yaml
+          $ref: ../responses/users/CurrentUserResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
@@ -239,7 +174,7 @@ paths:
         - avatars
       responses:
         '200':
-          $ref: ../responses/CurrentUserResponse.yaml
+          $ref: ../responses/users/CurrentUserResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '403':

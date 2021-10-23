@@ -1,0 +1,14 @@
+description: 'Current FileVersion upload status. Contains the uploadId needed for uploading, as well as the already uploaded parts.'
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/FileVersionUploadStatus.yaml
+    examples:
+      Example Access Key:
+        value:
+          uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+          fileName: Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage
+          nextPartNumber: 0
+          maxParts: 1000
+          parts: []
+          etags: []

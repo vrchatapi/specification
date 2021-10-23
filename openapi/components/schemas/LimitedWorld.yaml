@@ -91,4 +91,5 @@ required:
   - popularity
   - heat
   - occupants
+title: LimitedWorld
 type: object

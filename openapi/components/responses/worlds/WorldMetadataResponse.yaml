@@ -1,0 +1,5 @@
+description: OK
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/WorldMetadata.yaml

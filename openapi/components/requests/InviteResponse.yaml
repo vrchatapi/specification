@@ -1,3 +1,4 @@
+title: InviteResponse
 type: object
 properties:
   responseSlot:
@@ -6,4 +7,3 @@ properties:
     maximum: 11
 required:
   - responseSlot
-title: InviteResponse

@@ -1,0 +1,5 @@
+description: Returns wether a provided auth token is valid or not.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/VerifyAuthTokenResult.yaml

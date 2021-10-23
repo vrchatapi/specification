@@ -1,21 +1,8 @@
-description: API's Health
+description: Returns the API's health.
 content:
   application/json:
     schema:
-      type: object
-      properties:
-        ok:
-          type: boolean
-        serverName:
-          type: string
-          minLength: 1
-        buildVersionTag:
-          type: string
-          minLength: 1
-      required:
-        - ok
-        - serverName
-        - buildVersionTag
+      $ref: ../../schemas/APIHealth.yaml
     examples:
       Example Response:
         value:
