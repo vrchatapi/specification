@@ -34,3 +34,10 @@ rules:
     resolved: false
     then:
       function: undefined
+
+  paths-no-inline-requests:
+    given: "$.paths[*][get,post,put,delete].requestBody.content.application/json.schema.properties"
+    severity: error
+    resolved: false
+    then:
+      function: undefined
