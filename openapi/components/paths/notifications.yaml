@@ -49,7 +49,7 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/notificationId
     put:
-      summary: Mark As Read
+      summary: Mark Notification As Read
       operationId: markNotificationAsRead
       responses:
         '200':

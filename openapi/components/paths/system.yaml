@@ -78,7 +78,7 @@ paths:
       security: []
   /js/app.js:
     get:
-      summary: Download Frontend JavaScript
+      summary: Download JavaScript
       tags:
         - system
       responses:
@@ -97,7 +97,7 @@ paths:
         - $ref: ../parameters.yaml#/branch
   /css/app.css:
     get:
-      summary: Download Frontend CSS
+      summary: Download CSS
       tags:
         - system
       responses:
