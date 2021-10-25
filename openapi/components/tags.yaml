@@ -16,6 +16,9 @@
 - name: invite
   description:
     $ref: ./paths/invite.yaml#/info/description
+- name: instances
+  description:
+    $ref: ./paths/instances.yaml#/info/description
 - name: notifications
   description:
     $ref: ./paths/notifications.yaml#/info/description

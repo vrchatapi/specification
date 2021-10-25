@@ -1,0 +1,29 @@
+openapi: 3.0.3
+info:
+  title: instances
+  version: '1.0'
+  description: Instances Docs Here
+paths:
+  '/instances/{worldId}:{instanceId}':
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
+    get:
+      summary: Get Instance
+      tags:
+        - instances
+      operationId: getInstance
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns an instance.
+      responses:
+        '200':
+          $ref: ../responses/instances/InstanceResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+tags:
+  $ref: ../tags.yaml
+components:
+  securitySchemes:
+    $ref: ../securitySchemes.yaml

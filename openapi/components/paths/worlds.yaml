@@ -218,7 +218,7 @@ paths:
       description: Returns a worlds instance.
       responses:
         '200':
-          $ref: ../responses/worlds/InstanceResponse.yaml
+          $ref: ../responses/instances/InstanceResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
   '/worlds/{worldId}/metadata':
