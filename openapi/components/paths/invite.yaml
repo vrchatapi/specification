@@ -156,7 +156,7 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-      description: Sends a world invite to a user.
+      description: 'Respond to an invite request by sending a world invite to the requesting user. `:notificationId` is the ID of the requesting notification.'
       requestBody:
         content:
           application/json:
