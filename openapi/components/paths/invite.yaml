@@ -139,7 +139,7 @@ paths:
           application/json:
             schema:
               $ref: ../requests/InviteRequest.yaml
-        description: Instance ID when inviting a user.
+        description: Slot number of the Invite Message to use when inviting a user.
   '/invite/{notificationId}/response':
     parameters:
       - $ref: ../parameters.yaml#/notificationId
