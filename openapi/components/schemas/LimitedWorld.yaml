@@ -7,6 +7,7 @@ properties:
     type: string
   capacity:
     example: 8
+    maximum: 40
     minimum: 0
     type: integer
   created_at:
