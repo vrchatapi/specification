@@ -1,3 +1,4 @@
+type: string
 description: |-
   Used to identify which API deployment cluster is currently responding.
 
@@ -10,6 +11,6 @@ enum:
   - green
   - grape
   - cherry
-readOnly: true
 title: DeploymentGroup
-type: string
+default: blue
+readOnly: true

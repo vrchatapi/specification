@@ -1,3 +1,4 @@
+type: string
 enum:
   - friendRequest
   - invite
@@ -6,4 +7,4 @@ enum:
   - requestInviteResponse
   - votetokick
 title: NotificationType
-type: string
+default: friendRequest
