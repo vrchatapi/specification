@@ -99,6 +99,7 @@ jobs:
           - csharp
           - python
           - java
+          - rust
     steps:
       - name: Triggering build SDK - ${{ matrix.node }}
         run: |
