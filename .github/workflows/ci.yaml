@@ -28,13 +28,20 @@ jobs:
     runs-on: ubuntu-latest
     name: Bundle and Filter OpenAPI specification
     steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
       - uses: actions/checkout@v2
+      - name: 'Cache node_modules'
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-v14-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-v14
 
       - name: Bundle OpenAPI Specification 📦
-        uses: hilary/openapi-cli-bundle-action@v0.0.2
-        with:
-          base-spec: openapi/openapi.yaml
-          bundled-spec: dist/openapi.yaml
+        run: npm run bundle
 
       - name: Upload Bundled Specification as Artifact 📤
         uses: actions/upload-artifact@v2
@@ -88,6 +95,7 @@ jobs:
           folder: dist
 
   # https://blog.marcnuri.com/triggering-github-actions-across-different-repositories
+  # Make sure this is same as in sdk_generate.yaml
   sdk_generate:
     needs: pages
     runs-on: ubuntu-latest
