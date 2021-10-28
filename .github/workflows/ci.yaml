@@ -95,6 +95,7 @@ jobs:
           folder: dist
 
   # https://blog.marcnuri.com/triggering-github-actions-across-different-repositories
+  # Make sure this is same as in sdk_generate.yaml
   sdk_generate:
     needs: pages
     runs-on: ubuntu-latest
