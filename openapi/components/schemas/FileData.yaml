@@ -1,13 +1,16 @@
 description: ''
+title: FileData
+type: object
 properties:
   category:
+    type: string
     enum:
       - multipart
       - queued
       - simple
     minLength: 1
+    default: queued
     readOnly: true
-    type: string
   fileName:
     minLength: 1
     type: string
@@ -27,12 +30,10 @@ properties:
     minLength: 1
     type: string
 required:
+  - category
   - fileName
-  - url
   - md5
   - sizeInBytes
   - status
-  - category
   - uploadId
-title: FileData
-type: object
+  - url

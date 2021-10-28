@@ -2,6 +2,25 @@
 
 Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
 
+## 1.5.0
+
+* **refactor!: remove use of unnamed Inline Requests and Responses (#102)**<br>
+  **This means if you use InlineObject or InlineResponse anywhere in your code, these will need to be changed to the respective classes with actual names.**
+* feature: add "Select Fallback Avatar" endpoint (#99)
+* feature: friends endpoint returns `location` and `friendKey` (#98)
+* fix: world capacity can be zero (#105)
+* docs: specify enum defaults
+* docs: clarify "Respond Invite" docs
+* docs: fix incorrect comment on "Respond Invite" request
+* docs: fix 403 Error message title having wrong status code
+* docs: fixed minor typo in favorites tags documentation
+
+Project maintenance: (does not affect produced Docs or SDK)
+* refactor: sort endpoints in natural order for website (#103)
+* chore(deps): bump @redocly/openapi-cli (#96)
+* ci: auto-deploy to Rust repository<br>
+  (This means the Rust repo will from now on automatically update as well)
+
 ## 1.4.2
 
 * fix!: instance ownerId is not required (#95)

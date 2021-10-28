@@ -13,11 +13,10 @@ properties:
     type: string
     minLength: 1
   capacity:
-    type: integer
-    minimum: 1
+    example: 8
     maximum: 40
-    default: 16
-    example: 16
+    minimum: 0
+    type: integer
   description:
     type: string
   imageUrl:

@@ -139,7 +139,7 @@ paths:
           application/json:
             schema:
               $ref: ../requests/InviteRequest.yaml
-        description: Instance ID when inviting a user.
+        description: Slot number of the Invite Message to use when inviting a user.
   '/invite/{notificationId}/response':
     parameters:
       - $ref: ../parameters.yaml#/notificationId
@@ -156,7 +156,7 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-      description: Sends a world invite to a user.
+      description: 'Respond to an invite request by sending a world invite to the requesting user. `:notificationId` is the ID of the requesting notification.'
       requestBody:
         content:
           application/json:

@@ -1,8 +1,8 @@
-default: public
+type: string
+default: private
 enum:
   - public
   - private
   - hidden
-example: public
 title: ReleaseStatus
-type: string
+example: public
