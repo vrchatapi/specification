@@ -1,0 +1,7 @@
+description: Returns an instance short name.
+content:
+  text/plain:
+    schema:
+      type: string
+      example: 'kidney-grahampizza-64472'
+      minLength: 1

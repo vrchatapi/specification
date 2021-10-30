@@ -22,6 +22,24 @@ paths:
           $ref: ../responses/instances/InstanceResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+  '/instances/{worldId}:{instanceId}/shortName':
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
+    get:
+      summary: Get Instance Short Name
+      tags:
+        - instances
+      operationId: getInstanceShortName
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns an instance short name.
+      responses:
+        '200':
+          $ref: ../responses/instances/InstanceShortNameResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
 tags:
   $ref: ../tags.yaml
 components:
