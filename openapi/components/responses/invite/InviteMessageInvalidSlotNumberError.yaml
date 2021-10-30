@@ -1,15 +1,15 @@
-description: Error response when trying to get, update, or reset an Invite Message with an invalid slot number.
+description: Error response when trying to update an Invite Message with an invalid slot number.
 content:
   application/json:
     schema:
       $ref: ../../schemas/Error.yaml
     examples:
-      Negative Slot Number Error:
+      400 Negative Slot Number Error:
         value:
           error:
             message: 'Really? A negative slot? Tsk-tsk․․․'
             status_code: 400
-      Too High Slot Number Error:
+      400 Too High Slot Number Error:
         value:
           error:
             message: 'That is too high of a slot number․'
