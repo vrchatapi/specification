@@ -38,7 +38,7 @@ paths:
       - $ref: ../parameters.yaml#/messageType
       - $ref: ../parameters.yaml#/messageId
     get:
-      summary: Get Invite Messages
+      summary: Get Invite Message
       tags:
         - invite
       responses:
