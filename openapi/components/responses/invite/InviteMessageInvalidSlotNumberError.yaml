@@ -1,4 +1,4 @@
-description: Error response when trying to update an Invite Message with invalid slot number.
+description: Error response when trying to get, update, or reset an Invite Message with an invalid slot number.
 content:
   application/json:
     schema:
