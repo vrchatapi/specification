@@ -32,11 +32,11 @@ paths:
         * `response` = Message when replying to a message
         * `request` = Message when requesting an invite
         * `requestResponse` = Message when replying to a request for invite
-  '/message/{userId}/{messageType}/{messageId}':
+  '/message/{userId}/{messageType}/{slot}':
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/messageType
-      - $ref: ../parameters.yaml#/messageId
+      - $ref: ../parameters.yaml#/slot
     get:
       summary: Get Invite Message
       tags:

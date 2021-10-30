@@ -247,12 +247,14 @@ messageType:
       - response
       - request
       - requestResponse
-messageId:
-  name: messageId
+slot:
+  name: slot
   in: path
   required: true
   schema:
     type: integer
+    minimum: 0
+    maximum: 11
 notificationId:
   name: notificationId
   in: path
