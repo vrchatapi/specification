@@ -42,7 +42,7 @@ paths:
         '200':
           description: OK
           content:
-            text/plain:
+            application/json:
               schema:
                 type: integer
                 description: Number of online users
@@ -52,9 +52,9 @@ paths:
       operationId: getCurrentOnlineUsers
       security: []
       description: |-
-        Returns in plain format the number of currently online users.
+        Returns the current number of online users.
 
-        **NOTE:** The response type is not of JSON, but is an integer in plain ASCII format.
+        **NOTE:** The response type is not a JSON object, but a simple JSON integer.
   /time:
     get:
       summary: Current System Time
@@ -72,9 +72,9 @@ paths:
                 description: Does not return millisecond precision. Always returns time in UTC.
       operationId: getSystemTime
       description: |-
-        Returns in plain format the current time of the API server.
+        Returns the current time of the API server.
 
-        **NOTE:** The response type is not of JSON, but is a string in plain ASCII format.
+        **NOTE:** The response type is not a JSON object, but a simple JSON string.
       security: []
   /js/app.js:
     get:
