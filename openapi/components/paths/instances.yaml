@@ -30,7 +30,7 @@ paths:
       summary: Get Instance Short Name
       tags:
         - instances
-      operationId: getInstanceShortName
+      operationId: getShortName
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -38,6 +38,24 @@ paths:
       responses:
         '200':
           $ref: ../responses/instances/InstanceShortNameResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+  '/instances/{worldId}:{instanceId}/invite':
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
+    post:
+      summary: Send Self Invite
+      tags:
+        - instances
+      operationId: sendSelfInvite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Sends an invite to the instance to yourself.
+      responses:
+        '200':
+          $ref: ../responses/instances/InstanceSelfInviteSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
 tags:
