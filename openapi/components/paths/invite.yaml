@@ -32,22 +32,24 @@ paths:
         * `response` = Message when replying to a message
         * `request` = Message when requesting an invite
         * `requestResponse` = Message when replying to a request for invite
-  '/message/{userId}/{messageType}/{messageId}':
+  '/message/{userId}/{messageType}/{slot}':
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/messageType
-      - $ref: ../parameters.yaml#/messageId
+      - $ref: ../parameters.yaml#/slot
     get:
-      summary: Get Invite Messages
+      summary: Get Invite Message
       tags:
         - invite
       responses:
         '200':
           $ref: ../responses/invite/InviteMessageResponse.yaml
         '400':
-          $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
+          $ref: ../responses/invite/InviteMessageGetNegativeSlotError.yaml
         '401':
           $ref: ../responses/NotAuthorizedActionError.yaml
+        '404':
+          $ref: ../responses/invite/InviteMessageGetTooHighSlotError.yaml
       operationId: getInviteMessage
       security:
         - apiKeyCookie: []
@@ -70,7 +72,8 @@ paths:
       description: |-
         Updates a single Invite Message and then returns a list of all of them. Admin Credentials are required to update messages of other users!
 
-        Updating a message automatically sets the cooldown timer to 60 minutes. Trying to edit a message before the cooldown timer expires results in a 429 Too Fast Error.
+        Updating a message automatically sets the cooldown timer to 60 minutes.
+        Trying to edit a message before the cooldown timer expires results in a 429 "Too Fast Error".
 
         Message type refers to a different collection of messages, used during different types of responses.
 
@@ -87,6 +90,12 @@ paths:
           $ref: ../responses/NotAuthorizedActionError.yaml
         '429':
           $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateInviteMessageRequest.yaml
+        description: Message of what to set the invite message to.
       tags:
         - invite
     delete:
@@ -102,6 +111,8 @@ paths:
           $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
         '401':
           $ref: ../responses/NotAuthorizedActionError.yaml
+        '404':
+          $ref: ../responses/invite/InviteMessageNoEntryForSlotError.yaml
         '429':
           $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
       tags:
@@ -109,7 +120,10 @@ paths:
       description: |-
         Resets a single Invite Message back to it's original message, and then returns a list of all of them. Admin Credentials are required to update messages of other users!
 
-        Resetting a message respects the rate-limit, but resetting it does not set the rate-limit to 60 like when editing it. It is possible to edit it right after resetting it. Trying to edit a message before the cooldown timer expires results in a 429 Too Fast Error.
+        Resetting a message respects the rate-limit, so it is not possible to reset within the 60 minutes countdown.
+        Resetting it does however not set the rate-limit to 60 like when editing it.
+        It is possible to edit it right after resetting it.
+        Trying to edit a message before the cooldown timer expires results in a 429 "Too Fast Error".
 
         Message type refers to a different collection of messages, used during different types of responses.
 
@@ -117,6 +131,8 @@ paths:
         * `response` = Message when replying to a message
         * `request` = Message when requesting an invite
         * `requestResponse` = Message when replying to a request for invite
+
+        The DELETE endpoint does not have/require any request body.
   '/invite/{userId}':
     parameters:
       - $ref: ../parameters.yaml#/userId

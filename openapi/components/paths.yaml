@@ -81,8 +81,8 @@
   $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response"
 "/message/{userId}/{messageType}":
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
-"/message/{userId}/{messageType}/{messageId}":
-  $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{messageId}"
+"/message/{userId}/{messageType}/{slot}":
+  $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{slot}"
 
 # instances
 

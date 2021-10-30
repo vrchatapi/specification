@@ -1,0 +1,10 @@
+description: Error response when trying to get an Invite Message with a too high slot number.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      404 Slot Number Too High Error:
+        value:
+          error:
+            status_code: 404

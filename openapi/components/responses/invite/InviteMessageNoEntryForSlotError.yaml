@@ -1,4 +1,4 @@
-description: Error response when trying to fetch information about an Invite Message whos slot doesn't exist. Note `message` field is missing!
+description: Error response when trying to reset an Invite Message whos slot doesn't exist.
 content:
   application/json:
     schema:
@@ -9,7 +9,8 @@ content:
       required:
         - error
     examples:
-      404 Invite Message Not Found Error:
+      404 No Custom Invite Message In Slot:
         value:
           error:
+            message: "There's no entry for that slot."
             status_code: 404
