@@ -88,6 +88,10 @@
 
 "/instances/{worldId}:{instanceId}":
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}"
+"/instances/{worldId}:{instanceId}/shortName":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1shortName"
+"/instances/{worldId}:{instanceId}/invite":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1invite"
 
 # notifications
 
