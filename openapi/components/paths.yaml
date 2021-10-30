@@ -8,10 +8,10 @@
   $ref: "./paths/authentication.yaml#/paths/~1auth~1exists"
 "/auth/user":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1user"
-"/auth/twofactorauth/otp/verify":
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1otp~1verify"
 "/auth/twofactorauth/totp/verify":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify"
+"/auth/twofactorauth/otp/verify":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1otp~1verify"
 "/auth":
   $ref: "./paths/authentication.yaml#/paths/~1auth"
 "/logout":
@@ -83,6 +83,15 @@
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
 "/message/{userId}/{messageType}/{messageId}":
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{messageId}"
+
+# instances
+
+"/instances/{worldId}:{instanceId}":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}"
+"/instances/{worldId}:{instanceId}/shortName":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1shortName"
+"/instances/{worldId}:{instanceId}/invite":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1invite"
 
 # notifications
 
