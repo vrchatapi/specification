@@ -267,6 +267,18 @@ permissionId:
   required: true
   schema:
     type: string
+transactionId:
+  name: transactionId
+  in: path
+  required: true
+  schema:
+    type: string
+licenseGroupId:
+  name: licenseGroupId
+  in: path
+  required: true
+  schema:
+    type: string
 variant:
   name: variant
   in: query

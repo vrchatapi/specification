@@ -1,0 +1,5 @@
+description: Returns a single LicenseGroup object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/LicenseGroup.yaml

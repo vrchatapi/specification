@@ -1,0 +1,85 @@
+description: ''
+type: object
+example:
+  agreementId: '1234567890123456789'
+  itemId: 5000
+  status: Active
+  period: year
+  frequency: 1
+  billingType: Steam
+  startDate: '20220301'
+  endDate: Infinite time value
+  recurringAmt: 9999
+  currency: USD
+  timeCreated: '20201201'
+  nextPayment: '20220301'
+  lastPayment: NIL
+  lastAmount: 0
+  lastAmountVat: 0
+  outstanding: 0
+  failedAttempts: 0
+properties:
+  agreementId:
+    type: string
+    minLength: 1
+  itemId:
+    type: number
+  status:
+    type: string
+    minLength: 1
+    description: 'This is NOT TransactionStatus, but whatever Steam return.'
+  period:
+    type: string
+    minLength: 1
+  frequency:
+    type: number
+  billingType:
+    type: string
+    minLength: 1
+  startDate:
+    type: string
+    minLength: 1
+  endDate:
+    type: string
+    minLength: 1
+  recurringAmt:
+    type: number
+  currency:
+    type: string
+    minLength: 1
+  timeCreated:
+    type: string
+    minLength: 1
+  nextPayment:
+    type: string
+    minLength: 1
+  lastPayment:
+    type: string
+    minLength: 1
+  lastAmount:
+    type: number
+  lastAmountVat:
+    type: number
+  outstanding:
+    type: number
+  failedAttempts:
+    type: number
+required:
+  - agreementId
+  - itemId
+  - status
+  - period
+  - frequency
+  - billingType
+  - startDate
+  - endDate
+  - recurringAmt
+  - currency
+  - timeCreated
+  - nextPayment
+  - lastPayment
+  - lastAmount
+  - lastAmountVat
+  - outstanding
+  - failedAttempts
+title: TransactionAgreement

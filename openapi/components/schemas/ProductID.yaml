@@ -1,0 +1,4 @@
+example: prod_bfbc2315-247a-44d7-bfea-5237f8d56cb4
+pattern: 'prod_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+title: ProductID
+type: string

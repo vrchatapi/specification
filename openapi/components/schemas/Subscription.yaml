@@ -1,0 +1,32 @@
+description: ''
+type: object
+example:
+  id: vrchatplus-yearly
+  steamItemId: '5000'
+  amount: 9999
+  description: VRChat Plus (Yearly)
+  period: year
+  tier: 5
+title: Subscription
+properties:
+  id:
+    type: string
+    minLength: 1
+  steamItemId:
+    type: string
+    minLength: 1
+  amount:
+    type: number
+  description:
+    type: string
+  period:
+    $ref: ./SubscriptionPeriod.yaml
+  tier:
+    type: number
+required:
+  - id
+  - steamItemId
+  - amount
+  - description
+  - period
+  - tier
