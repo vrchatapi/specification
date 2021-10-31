@@ -128,7 +128,7 @@
 
 "/config":
   $ref: "./paths/system.yaml#/paths/~1config"
-"/css/app.js":
+"/css/app.css":
   $ref: "./paths/system.yaml#/paths/~1css~1app.css"
 "/js/app.js":
   $ref: "./paths/system.yaml#/paths/~1js~1app.js"
