@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.5.1
+  version: 1.5.2
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -545,6 +545,94 @@ paths:
         - $ref: '#/components/parameters/platform'
         - $ref: '#/components/parameters/userIdAdmin'
       description: Search and list favorited avatars by query filters.
+  /Steam/transactions:
+    get:
+      summary: List Steam Transactions
+      operationId: getSteamTransactions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Get all own Steam transactions.
+  /Steam/transactions/{transactionId}:
+    parameters:
+      - $ref: '#/components/parameters/transactionId'
+    get:
+      summary: Get Steam Transaction
+      operationId: getSteamTransaction
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: >-
+        Get a single Steam transactions by ID. This returns the exact same
+        information as `getSteamTransactions`, so no point in using this
+        endpoint.
+      deprecated: true
+  /Admin/transactions/{transactionId}:
+    parameters:
+      - $ref: '#/components/parameters/transactionId'
+  /auth/user/subscription:
+    get:
+      summary: Get Current Subscriptions
+      operationId: getCurrentSubscriptions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/UserSubscriptionListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Get a list of all current user subscriptions.
+  /subscriptions:
+    get:
+      summary: List Subscriptions
+      operationId: getSubscriptions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/SubscriptionListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: >-
+        List all existing Subscriptions. For example, "vrchatplus-monthly" and
+        "vrchatplus-yearly".
+  /licenseGroups/{licenseGroupId}:
+    parameters:
+      - $ref: '#/components/parameters/licenseGroupId'
+    get:
+      summary: Get License Group
+      operationId: getLicenseGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/LicenseGroupResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Get a single License Group by given ID.
   /favorites:
     get:
       summary: List Favorites
@@ -1267,7 +1355,7 @@ paths:
       tags:
         - invite
       description: >-
-        Resets a single Invite Message back to it's original message, and then
+        Resets a single Invite Message back to its original message, and then
         returns a list of all of them. Admin Credentials are required to update
         messages of other users!
 
@@ -1723,15 +1811,7 @@ paths:
         - system
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: integer
-                description: Number of online users
-                example: 12345
-                minimum: 0
-                readOnly: true
+          $ref: '#/components/responses/CurrentOnlineUsersResponse'
       operationId: getCurrentOnlineUsers
       security: []
       description: >-
@@ -1747,16 +1827,7 @@ paths:
         - system
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: string
-                format: date-time
-                example: 2021-08-20T12:38:42+00:00
-                description: >-
-                  Does not return millisecond precision. Always returns time in
-                  UTC.
+          $ref: '#/components/responses/SystemTimeResponse'
       operationId: getSystemTime
       description: >-
         Returns the current time of the API server.
@@ -2702,6 +2773,417 @@ components:
           default: 1
         unityPackageUrl:
           type: string
+    TransactionID:
+      example: txn_e5c72948-e735-4880-8245-24b2a41198b0
+      pattern: >-
+        txn_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+      title: TransactionID
+      type: string
+    TransactionStatus:
+      type: string
+      title: TransactionStatus
+      enum:
+        - active
+        - failed
+        - expired
+        - chargeback
+      default: active
+    SubscriptionPeriod:
+      type: string
+      title: SubscriptionPeriod
+      default: month
+      enum:
+        - hour
+        - day
+        - week
+        - month
+        - year
+    Subscription:
+      description: ''
+      type: object
+      example:
+        id: vrchatplus-yearly
+        steamItemId: '5000'
+        amount: 9999
+        description: VRChat Plus (Yearly)
+        period: year
+        tier: 5
+      title: Subscription
+      properties:
+        id:
+          type: string
+          minLength: 1
+        steamItemId:
+          type: string
+          minLength: 1
+        amount:
+          type: number
+        description:
+          type: string
+        period:
+          $ref: '#/components/schemas/SubscriptionPeriod'
+        tier:
+          type: number
+      required:
+        - id
+        - steamItemId
+        - amount
+        - description
+        - period
+        - tier
+    TransactionSteamWalletInfo:
+      description: ''
+      type: object
+      example:
+        state: ''
+        country: SE
+        currency: EUR
+        status: Trusted
+      title: TransactionSteamWalletInfo
+      properties:
+        state:
+          type: string
+        country:
+          type: string
+          minLength: 2
+          default: US
+          example: SE
+        currency:
+          type: string
+          minLength: 3
+          example: EUR
+          default: USD
+        status:
+          type: string
+          example: Trusted
+          minLength: 1
+      required:
+        - state
+        - country
+        - currency
+        - status
+    TransactionSteamInfo:
+      description: ''
+      type: object
+      properties:
+        walletInfo:
+          $ref: '#/components/schemas/TransactionSteamWalletInfo'
+        steamId:
+          type: string
+          minLength: 1
+          description: Steam User ID
+        orderId:
+          type: string
+          minLength: 1
+          description: Steam Order ID
+        steamUrl:
+          type: string
+          description: Empty
+        transId:
+          type: string
+          minLength: 1
+          description: Steam Transaction ID, NOT the same as VRChat TransactionID
+      required:
+        - walletInfo
+        - steamId
+        - orderId
+        - steamUrl
+        - transId
+      title: TransactionSteamInfo
+    TransactionAgreement:
+      description: ''
+      type: object
+      example:
+        agreementId: '1234567890123456789'
+        itemId: 5000
+        status: Active
+        period: year
+        frequency: 1
+        billingType: Steam
+        startDate: '20220301'
+        endDate: Infinite time value
+        recurringAmt: 9999
+        currency: USD
+        timeCreated: '20201201'
+        nextPayment: '20220301'
+        lastPayment: NIL
+        lastAmount: 0
+        lastAmountVat: 0
+        outstanding: 0
+        failedAttempts: 0
+      properties:
+        agreementId:
+          type: string
+          minLength: 1
+        itemId:
+          type: number
+        status:
+          type: string
+          minLength: 1
+          description: This is NOT TransactionStatus, but whatever Steam return.
+        period:
+          type: string
+          minLength: 1
+        frequency:
+          type: number
+        billingType:
+          type: string
+          minLength: 1
+        startDate:
+          type: string
+          minLength: 1
+        endDate:
+          type: string
+          minLength: 1
+        recurringAmt:
+          type: number
+        currency:
+          type: string
+          minLength: 1
+        timeCreated:
+          type: string
+          minLength: 1
+        nextPayment:
+          type: string
+          minLength: 1
+        lastPayment:
+          type: string
+          minLength: 1
+        lastAmount:
+          type: number
+        lastAmountVat:
+          type: number
+        outstanding:
+          type: number
+        failedAttempts:
+          type: number
+      required:
+        - agreementId
+        - itemId
+        - status
+        - period
+        - frequency
+        - billingType
+        - startDate
+        - endDate
+        - recurringAmt
+        - currency
+        - timeCreated
+        - nextPayment
+        - lastPayment
+        - lastAmount
+        - lastAmountVat
+        - outstanding
+        - failedAttempts
+      title: TransactionAgreement
+    Transaction:
+      description: ''
+      type: object
+      title: Transaction
+      properties:
+        id:
+          $ref: '#/components/schemas/TransactionID'
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+        sandbox:
+          type: boolean
+          default: false
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        steam:
+          $ref: '#/components/schemas/TransactionSteamInfo'
+        agreement:
+          $ref: '#/components/schemas/TransactionAgreement'
+        error:
+          type: string
+      required:
+        - id
+        - status
+        - subscription
+        - sandbox
+        - created_at
+        - updated_at
+        - error
+    LicenseGroupID:
+      example: lgrp_608513da-b213-4e15-80af-bd88c27f0979
+      pattern: >-
+        lgrp_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+      title: LicenseGroupID
+      type: string
+    UserSubscription:
+      type: object
+      description: ''
+      example:
+        id: vrchatplus-yearly
+        transactionId: txn_63231aa6-8b7a-49ff-a106-d5678f8318b1
+        store: Steam
+        steamItemId: '5000'
+        amount: 9999
+        description: VRChat Plus (Yearly)
+        period: year
+        tier: 5
+        active: true
+        status: active
+        expires: 2022-03-04T00:00:00.000Z
+        created_at: 2020-12-04T13:09:54.344Z
+        updated_at: 2020-12-10T19:53:45.362Z
+        licenseGroups:
+          - lgrp_608513da-b213-4e15-80af-bd88c27f0979
+        isGift: false
+      properties:
+        id:
+          type: string
+          minLength: 1
+        transactionId:
+          $ref: '#/components/schemas/TransactionID'
+        store:
+          type: string
+          minLength: 1
+          description: >-
+            Which "Store" it came from. Right now only Stores are "Steam" and
+            "Admin".
+        steamItemId:
+          type: string
+          minLength: 1
+        amount:
+          type: number
+        description:
+          type: string
+        period:
+          $ref: '#/components/schemas/SubscriptionPeriod'
+        tier:
+          type: number
+        active:
+          type: boolean
+          default: true
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        expires:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        licenseGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseGroupID'
+        isGift:
+          type: boolean
+          default: false
+      required:
+        - id
+        - transactionId
+        - store
+        - amount
+        - description
+        - period
+        - tier
+        - active
+        - status
+        - expires
+        - created_at
+        - updated_at
+        - licenseGroups
+        - isGift
+      title: UserSubscription
+    LicenseType:
+      type: string
+      title: LicenseType
+      default: permission
+      enum:
+        - avatar
+        - licenseGroup
+        - permission
+        - product
+      example: permission
+    LicenseAction:
+      type: string
+      title: LicenseAction
+      default: have
+      enum:
+        - wear
+        - have
+      example: have
+    License:
+      title: License
+      type: object
+      properties:
+        forId:
+          type: string
+          description: >-
+            Either a AvatarID, LicenseGroupID, PermissionID or ProductID. This
+            depends on the `forType` field.
+          minLength: 1
+          pattern: >-
+            (avtr|lgrp|prms|prod)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        forType:
+          $ref: '#/components/schemas/LicenseType'
+        forName:
+          type: string
+          minLength: 1
+        forAction:
+          $ref: '#/components/schemas/LicenseAction'
+      required:
+        - forId
+        - forType
+        - forName
+        - forAction
+    LicenseGroup:
+      description: ''
+      type: object
+      example:
+        id: lgrp_608513da-b213-4e15-80af-bd88c27f0979
+        name: vrcplus
+        description: VRC+ benefits
+        licenses:
+          - forId: prms_1d9549db-d30a-48f3-a6b8-6741ce5a4283
+            forType: permission
+            forName: permission-user-icons
+            forAction: have
+          - forId: prms_76f33deb-dd5d-46b7-b79d-e1f8f0a9a1e0
+            forType: permission
+            forName: permission-supporter-tags
+            forAction: have
+          - forId: prms_0d9549db-d30a-48f3-a6b8-6741ce5a4283
+            forType: permission
+            forName: permission-invite-photos
+            forAction: have
+          - forId: prms_dc02c512-4c03-479c-8c6a-d9329c023baf
+            forType: permission
+            forName: permission-user-gallery
+            forAction: have
+          - forId: prms_153ac0b7-c2dd-43f9-96e3-c61fd2e85509
+            forType: permission
+            forName: permission-profile-pic-override
+            forAction: have
+      title: LicenseGroup
+      properties:
+        id:
+          $ref: '#/components/schemas/LicenseGroupID'
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/License'
+      required:
+        - id
+        - name
+        - description
+        - licenses
     FavoriteID:
       example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
       pattern: >-
@@ -5032,6 +5514,50 @@ components:
                 error:
                   message: \"You can only see your own favorite avatars!\"
                   status_code: 403
+    TransactionListResponse:
+      description: Returns a list of Transaction objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Transaction'
+    TransactionResponse:
+      description: Returns a single Transaction object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Transaction'
+    UserSubscriptionListResponse:
+      description: Returns a list of UserSubscription objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserSubscription'
+    SubscriptionListResponse:
+      description: Returns a list of Subscription objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Subscription'
+    LicenseGroupListResponse:
+      description: Returns a list of LicenseGroup objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/LicenseGroup'
+    LicenseGroupResponse:
+      description: Returns a single LicenseGroup object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LicenseGroup'
     FavoriteListResponse:
       description: Returns a list of Favorite objects.
       content:
@@ -5542,12 +6068,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                $ref: '#/components/schemas/Error'
-            required:
-              - error
+            $ref: '#/components/schemas/Error'
           examples:
             404 No Custom Invite Message In Slot:
               value:
@@ -5819,6 +6340,24 @@ components:
                 ok: true
                 serverName: prod-api-green-marsh-dgt
                 buildVersionTag: master-build-2021-06-24-fred-drakeshoot
+    CurrentOnlineUsersResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: integer
+            description: Number of online users
+            example: 12345
+            minimum: 0
+    SystemTimeResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: string
+            format: date-time
+            example: 2021-08-20T12:38:42+00:00
+            description: Does not return millisecond precision. Always returns time in UTC.
     UsersInvalidSearchError:
       description: >-
         Error response when trying to search list of users with an invalid
@@ -6099,6 +6638,18 @@ components:
       schema:
         type: string
       description: Target user to see information on, admin-only.
+    transactionId:
+      name: transactionId
+      in: path
+      required: true
+      schema:
+        type: string
+    licenseGroupId:
+      name: licenseGroupId
+      in: path
+      required: true
+      schema:
+        type: string
     favoriteId:
       name: favoriteId
       in: path
@@ -6233,6 +6784,8 @@ tags:
     description: Authentication Docs Here
   - name: avatars
     description: Avatars Docs Here
+  - name: economy
+    description: Economy Docs Here
   - name: favorites
     description: Favorites Docs Here
   - name: files
