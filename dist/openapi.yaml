@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.5.0
+  version: 1.5.1
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -251,28 +251,6 @@ paths:
         - authHeader: []
           twoFactorAuthCookie: []
         - authCookie: []
-  /auth/twofactorauth/otp/verify:
-    post:
-      summary: Verify 2FA code with Recovery code
-      operationId: verifyRecoveryCode
-      responses:
-        '200':
-          $ref: '#/components/responses/Verify2FAResponse'
-        '401':
-          $ref: '#/components/responses/MissingCredentialsError'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TwoFactorAuthCode'
-            examples: {}
-      description: >-
-        Finishes the login sequence with an OTP (One Time Password) recovery
-        code for accounts with 2FA-protection enabled.
-      tags:
-        - authentication
-      security:
-        - authCookie: []
   /auth/twofactorauth/totp/verify:
     post:
       summary: Verify 2FA code
@@ -296,6 +274,28 @@ paths:
       security:
         - authCookie: []
       parameters: []
+  /auth/twofactorauth/otp/verify:
+    post:
+      summary: Verify 2FA code with Recovery code
+      operationId: verifyRecoveryCode
+      responses:
+        '200':
+          $ref: '#/components/responses/Verify2FAResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorAuthCode'
+            examples: {}
+      description: >-
+        Finishes the login sequence with an OTP (One Time Password) recovery
+        code for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
   /auth:
     get:
       summary: Verify Auth Token
@@ -1163,22 +1163,24 @@ paths:
         * `request` = Message when requesting an invite
 
         * `requestResponse` = Message when replying to a request for invite
-  /message/{userId}/{messageType}/{messageId}:
+  /message/{userId}/{messageType}/{slot}:
     parameters:
       - $ref: '#/components/parameters/userId'
       - $ref: '#/components/parameters/messageType'
-      - $ref: '#/components/parameters/messageId'
+      - $ref: '#/components/parameters/slot'
     get:
-      summary: Get Invite Messages
+      summary: Get Invite Message
       tags:
         - invite
       responses:
         '200':
           $ref: '#/components/responses/InviteMessageResponse'
         '400':
-          $ref: '#/components/responses/InviteMessageInvalidSlotNumberError'
+          $ref: '#/components/responses/InviteMessageGetNegativeSlotError'
         '401':
           $ref: '#/components/responses/NotAuthorizedActionError'
+        '404':
+          $ref: '#/components/responses/InviteMessageGetTooHighSlotError'
       operationId: getInviteMessage
       security:
         - apiKeyCookie: []
@@ -1212,8 +1214,9 @@ paths:
 
 
         Updating a message automatically sets the cooldown timer to 60 minutes.
+
         Trying to edit a message before the cooldown timer expires results in a
-        429 Too Fast Error.
+        429 "Too Fast Error".
 
 
         Message type refers to a different collection of messages, used during
@@ -1236,6 +1239,12 @@ paths:
           $ref: '#/components/responses/NotAuthorizedActionError'
         '429':
           $ref: '#/components/responses/InviteMessageUpdateRateLimitError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInviteMessageRequest'
+        description: Message of what to set the invite message to.
       tags:
         - invite
     delete:
@@ -1251,6 +1260,8 @@ paths:
           $ref: '#/components/responses/InviteMessageInvalidSlotNumberError'
         '401':
           $ref: '#/components/responses/NotAuthorizedActionError'
+        '404':
+          $ref: '#/components/responses/InviteMessageNoEntryForSlotError'
         '429':
           $ref: '#/components/responses/InviteMessageUpdateRateLimitError'
       tags:
@@ -1261,10 +1272,16 @@ paths:
         messages of other users!
 
 
-        Resetting a message respects the rate-limit, but resetting it does not
-        set the rate-limit to 60 like when editing it. It is possible to edit it
-        right after resetting it. Trying to edit a message before the cooldown
-        timer expires results in a 429 Too Fast Error.
+        Resetting a message respects the rate-limit, so it is not possible to
+        reset within the 60 minutes countdown.
+
+        Resetting it does however not set the rate-limit to 60 like when editing
+        it.
+
+        It is possible to edit it right after resetting it.
+
+        Trying to edit a message before the cooldown timer expires results in a
+        429 "Too Fast Error".
 
 
         Message type refers to a different collection of messages, used during
@@ -1278,6 +1295,63 @@ paths:
         * `request` = Message when requesting an invite
 
         * `requestResponse` = Message when replying to a request for invite
+
+
+        The DELETE endpoint does not have/require any request body.
+  /instances/{worldId}:{instanceId}:
+    parameters:
+      - $ref: '#/components/parameters/worldId'
+      - $ref: '#/components/parameters/instanceId'
+    get:
+      summary: Get Instance
+      tags:
+        - instances
+      operationId: getInstance
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns an instance.
+      responses:
+        '200':
+          $ref: '#/components/responses/InstanceResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+  /instances/{worldId}:{instanceId}/shortName:
+    parameters:
+      - $ref: '#/components/parameters/worldId'
+      - $ref: '#/components/parameters/instanceId'
+    get:
+      summary: Get Instance Short Name
+      tags:
+        - instances
+      operationId: getShortName
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Returns an instance short name.
+      responses:
+        '200':
+          $ref: '#/components/responses/InstanceShortNameResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+  /instances/{worldId}:{instanceId}/invite:
+    parameters:
+      - $ref: '#/components/parameters/worldId'
+      - $ref: '#/components/parameters/instanceId'
+    post:
+      summary: Send Self Invite
+      tags:
+        - instances
+      operationId: sendSelfInvite
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Sends an invite to the instance to yourself.
+      responses:
+        '200':
+          $ref: '#/components/responses/InstanceSelfInviteSuccess'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
   /auth/user/notifications:
     get:
       summary: List Notifications
@@ -1582,7 +1656,7 @@ paths:
         Currently the most important value here is `clientApiKey` which is used
         for all other API endpoints.
       security: []
-  /css/app.js:
+  /css/app.css:
     get:
       summary: Download CSS
       tags:
@@ -1651,7 +1725,7 @@ paths:
         '200':
           description: OK
           content:
-            text/plain:
+            application/json:
               schema:
                 type: integer
                 description: Number of online users
@@ -1661,11 +1735,11 @@ paths:
       operationId: getCurrentOnlineUsers
       security: []
       description: >-
-        Returns in plain format the number of currently online users.
+        Returns the current number of online users.
 
 
-        **NOTE:** The response type is not of JSON, but is an integer in plain
-        ASCII format.
+        **NOTE:** The response type is not a JSON object, but a simple JSON
+        integer.
   /time:
     get:
       summary: Current System Time
@@ -1675,7 +1749,7 @@ paths:
         '200':
           description: OK
           content:
-            text/plain:
+            application/json:
               schema:
                 type: string
                 format: date-time
@@ -1685,11 +1759,11 @@ paths:
                   UTC.
       operationId: getSystemTime
       description: >-
-        Returns in plain format the current time of the API server.
+        Returns the current time of the API server.
 
 
-        **NOTE:** The response type is not of JSON, but is a string in plain
-        ASCII format.
+        **NOTE:** The response type is not a JSON object, but a simple JSON
+        string.
       security: []
   /users:
     get:
@@ -3223,6 +3297,119 @@ components:
         - canBeUpdated
       title: InviteMessage
       type: object
+    UpdateInviteMessageRequest:
+      title: UpdateInviteMessageRequest
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+    Instance:
+      description: ''
+      properties:
+        active:
+          default: true
+          type: boolean
+        canRequestInvite:
+          default: true
+          type: boolean
+        capacity:
+          example: 8
+          minimum: 0
+          type: integer
+        clientNumber:
+          minLength: 1
+          type: string
+        full:
+          default: false
+          type: boolean
+        id:
+          $ref: '#/components/schemas/InstanceID'
+        instanceId:
+          minLength: 1
+          type: string
+        location:
+          minLength: 1
+          type: string
+        n_users:
+          minimum: 0
+          type: integer
+        name:
+          minLength: 1
+          type: string
+        nonce:
+          minLength: 1
+          type: string
+        ownerId:
+          $ref: '#/components/schemas/UserID'
+        permanent:
+          default: false
+          type: boolean
+        photonRegion:
+          minLength: 1
+          type: string
+        platforms:
+          properties:
+            android:
+              type: integer
+            standalonewindows:
+              type: integer
+          required:
+            - android
+            - standalonewindows
+          type: object
+        region:
+          minLength: 1
+          type: string
+        shortName:
+          minLength: 1
+          type: string
+        tags:
+          description: ' '
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        type:
+          minLength: 1
+          type: string
+        users:
+          deprecated: true
+          description: >-
+            Always empty on non-existing instances, and non-present on existing
+            instances.
+          items:
+            type: object
+          type: array
+        world:
+          deprecated: true
+          description: >-
+            Only present on non-existing instances, and only contains a very
+            small subject of World object. Use World API instead.
+          type: object
+        worldId:
+          $ref: '#/components/schemas/WorldID'
+      required:
+        - active
+        - canRequestInvite
+        - capacity
+        - clientNumber
+        - full
+        - id
+        - instanceId
+        - location
+        - n_users
+        - name
+        - permanent
+        - photonRegion
+        - platforms
+        - region
+        - shortName
+        - tags
+        - type
+        - worldId
+      title: Instance
+      type: object
     PermissionID:
       example: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
       pattern: >-
@@ -4628,111 +4815,6 @@ components:
           default: true
       required:
         - canPubilsh
-    Instance:
-      description: ''
-      properties:
-        active:
-          default: true
-          type: boolean
-        canRequestInvite:
-          default: true
-          type: boolean
-        capacity:
-          example: 8
-          minimum: 0
-          type: integer
-        clientNumber:
-          minLength: 1
-          type: string
-        full:
-          default: false
-          type: boolean
-        id:
-          $ref: '#/components/schemas/InstanceID'
-        instanceId:
-          minLength: 1
-          type: string
-        location:
-          minLength: 1
-          type: string
-        n_users:
-          minimum: 0
-          type: integer
-        name:
-          minLength: 1
-          type: string
-        nonce:
-          minLength: 1
-          type: string
-        ownerId:
-          $ref: '#/components/schemas/UserID'
-        permanent:
-          default: false
-          type: boolean
-        photonRegion:
-          minLength: 1
-          type: string
-        platforms:
-          properties:
-            android:
-              type: integer
-            standalonewindows:
-              type: integer
-          required:
-            - android
-            - standalonewindows
-          type: object
-        region:
-          minLength: 1
-          type: string
-        shortName:
-          minLength: 1
-          type: string
-        tags:
-          description: ' '
-          items:
-            $ref: '#/components/schemas/Tag'
-          type: array
-        type:
-          minLength: 1
-          type: string
-        users:
-          deprecated: true
-          description: >-
-            Always empty on non-existing instances, and non-present on existing
-            instances.
-          items:
-            type: object
-          type: array
-        world:
-          deprecated: true
-          description: >-
-            Only present on non-existing instances, and only contains a very
-            small subject of World object. Use World API instead.
-          type: object
-        worldId:
-          $ref: '#/components/schemas/WorldID'
-      required:
-        - active
-        - canRequestInvite
-        - capacity
-        - clientNumber
-        - full
-        - id
-        - instanceId
-        - location
-        - n_users
-        - name
-        - permanent
-        - photonRegion
-        - platforms
-        - region
-        - shortName
-        - tags
-        - type
-        - worldId
-      title: Instance
-      type: object
   securitySchemes:
     apiKeyQuery:
       name: apiKey
@@ -5380,19 +5462,19 @@ components:
               $ref: '#/components/schemas/InviteMessage'
     InviteMessageInvalidSlotNumberError:
       description: >-
-        Error response when trying to update an Invite Message with invalid slot
-        number.
+        Error response when trying to update an Invite Message with an invalid
+        slot number.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
           examples:
-            Negative Slot Number Error:
+            400 Negative Slot Number Error:
               value:
                 error:
                   message: Really? A negative slot? Tsk-tsk․․․
                   status_code: 400
-            Too High Slot Number Error:
+            400 Too High Slot Number Error:
               value:
                 error:
                   message: That is too high of a slot number․
@@ -5415,6 +5497,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InviteMessage'
+    InviteMessageGetNegativeSlotError:
+      description: >-
+        Error response when trying to get an Invite Message with a negative slot
+        number.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            200 Negative Slot Number Error:
+              value: {}
+    InviteMessageGetTooHighSlotError:
+      description: >-
+        Error response when trying to get an Invite Message with a too high slot
+        number.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 Slot Number Too High Error:
+              value:
+                error:
+                  status_code: 404
     InviteMessageUpdateRateLimitError:
       description: >-
         Error response when trying to update an Invite Message before the
@@ -5429,6 +5535,51 @@ components:
                 error:
                   message: Please wait 60 more minutes until you try again․
                   status_code: 429
+    InviteMessageNoEntryForSlotError:
+      description: >-
+        Error response when trying to reset an Invite Message whos slot doesn't
+        exist.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+            required:
+              - error
+          examples:
+            404 No Custom Invite Message In Slot:
+              value:
+                error:
+                  message: There's no entry for that slot.
+                  status_code: 404
+    InstanceResponse:
+      description: Returns a single Instance object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Instance'
+    InstanceShortNameResponse:
+      description: Returns an instance short name.
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: kidney-grahampizza-64472
+            minLength: 1
+    InstanceSelfInviteSuccess:
+      description: Success response after sending an invite to yourself to the instance.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            200 Ok:
+              value:
+                success:
+                  message: Ok
+                  status_code: 200
     NotificationListResponse:
       description: Returns a list of Notifcation objects.
       content:
@@ -5560,7 +5711,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Success'
           examples:
             200 OK:
               value:
@@ -5776,12 +5927,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/WorldPublishStatus'
-    InstanceResponse:
-      description: Returns a single Instance object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Instance'
   parameters:
     email:
       name: email
@@ -6031,12 +6176,26 @@ components:
           - response
           - request
           - requestResponse
-    messageId:
-      name: messageId
+    slot:
+      name: slot
       in: path
       required: true
       schema:
         type: integer
+        minimum: 0
+        maximum: 11
+    worldId:
+      name: worldId
+      in: path
+      required: true
+      schema:
+        type: string
+    instanceId:
+      name: instanceId
+      in: path
+      required: true
+      schema:
+        type: string
     permissionId:
       name: permissionId
       in: path
@@ -6069,18 +6228,6 @@ components:
       description: >-
         Specifies which git branch the site should load frontend source code
         from.
-    worldId:
-      name: worldId
-      in: path
-      required: true
-      schema:
-        type: string
-    instanceId:
-      name: instanceId
-      in: path
-      required: true
-      schema:
-        type: string
 tags:
   - name: authentication
     description: Authentication Docs Here
@@ -6094,6 +6241,8 @@ tags:
     description: Friends Docs Here
   - name: invite
     description: Invite Docs Here
+  - name: instances
+    description: Instances Docs Here
   - name: notifications
     description: Notifiations Docs
   - name: permissions
