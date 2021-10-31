@@ -32,6 +32,25 @@
 "/avatars/favorites":
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1favorites"
 
+# economy
+
+'/Steam/transactions':
+  $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions"
+'/Steam/transactions/{transactionId}':
+  $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions~1{transactionId}"
+'/Admin/transactions':
+  $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions"
+'/Admin/transactions/{transactionId}':
+  $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions~1{transactionId}"
+'/auth/user/subscription':
+  $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
+'/subscriptions':
+  $ref: "./paths/economy.yaml#/paths/~1subscriptions"
+'/licenseGroups':
+  $ref: "./paths/economy.yaml#/paths/~1licenseGroups"
+'/licenseGroups/{licenseGroupId}':
+  $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
+
 # favorites
 
 "/favorites":

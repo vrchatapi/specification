@@ -40,15 +40,7 @@ paths:
         - system
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: integer
-                description: Number of online users
-                example: 12345
-                minimum: 0
-                readOnly: true
+          $ref: ../responses/system/CurrentOnlineUsersResponse.yaml
       operationId: getCurrentOnlineUsers
       security: []
       description: |-
@@ -62,14 +54,7 @@ paths:
         - system
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: string
-                format: date-time
-                example: '2021-08-20T12:38:42+00:00'
-                description: Does not return millisecond precision. Always returns time in UTC.
+          $ref: ../responses/system/SystemTimeResponse.yaml
       operationId: getSystemTime
       description: |-
         Returns the current time of the API server.

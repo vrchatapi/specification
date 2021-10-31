@@ -1,0 +1,4 @@
+example: txn_e5c72948-e735-4880-8245-24b2a41198b0
+pattern: 'txn_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+title: TransactionID
+type: string

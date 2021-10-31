@@ -1,0 +1,30 @@
+description: ''
+type: object
+example:
+  state: ''
+  country: SE
+  currency: EUR
+  status: Trusted
+title: TransactionSteamWalletInfo
+properties:
+  state:
+    type: string
+  country:
+    type: string
+    minLength: 2
+    default: US
+    example: SE
+  currency:
+    type: string
+    minLength: 3
+    example: EUR
+    default: USD
+  status:
+    type: string
+    example: Trusted
+    minLength: 1
+required:
+  - state
+  - country
+  - currency
+  - status

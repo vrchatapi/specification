@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: economy
+  version: '1.0'
+  description: Economy Docs Here
+paths:
+  /Steam/transactions:
+    get:
+      summary: List Steam Transactions
+      operationId: getSteamTransactions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/TransactionListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Get all own Steam transactions.
+  '/Steam/transactions/{transactionId}':
+    parameters:
+      - $ref: ../parameters.yaml#/transactionId
+    get:
+      summary: Get Steam Transaction
+      operationId: getSteamTransaction
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/TransactionResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Get a single Steam transactions by ID owned by you. This returns the exact same information as `getSteamTransactions`, so no point in using this function.'
+      deprecated: true
+  /Admin/transactions:
+    get:
+      summary: Get Admin Transactions
+      operationId: getAdminTransactions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/TransactionListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Get all own Admin transactions.
+      x-internal: true
+  '/Admin/transactions/{transactionId}':
+    parameters:
+      - $ref: ../parameters.yaml#/transactionId
+    get:
+      summary: Get Admin Transactions
+      operationId: getAdminTransaction
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/TransactionResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Get a single Admin transactions by ID owned by you. This returns the exact same information as `getAdminTransactions`, so no point in using this function.'
+      deprecated: true
+      x-internal: true
+  /auth/user/subscription:
+    get:
+      summary: Get Current Subscriptions
+      operationId: getCurrentSubscriptions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/UserSubscriptionListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Get a list of all current user subscriptions.
+  /subscriptions:
+    get:
+      summary: List Subscriptions
+      operationId: getSubscriptions
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/SubscriptionListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'List all existing Subscriptions. For example, "vrchatplus-monthly" and "vrchatplus-yearly".'
+  /licenseGroups:
+    get:
+      summary: List License Groups
+      operationId: getLicenseGroups
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/LicenseGroupListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: |-
+        List all existing license groups.
+
+        **IMPLEMENTATION WARNING:** This endpoint currently return a text/plain array of seven nulls.
+      x-internal: true
+  '/licenseGroups/{licenseGroupId}':
+    parameters:
+      - $ref: ../parameters.yaml#/licenseGroupId
+    get:
+      summary: Get License Group
+      operationId: getLicenseGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/LicenseGroupResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Get a single License Group by given ID.
+tags:
+  $ref: ../tags.yaml
+components:
+  securitySchemes:
+    $ref: ../securitySchemes.yaml
