@@ -2,6 +2,10 @@
 
 Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
 
+## 1.5.2
+
+* feature: add Subscription/Transaction/License API (#111)
+
 ## 1.5.1
 
 * feature: add Instance API (#106)
