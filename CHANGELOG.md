@@ -2,6 +2,13 @@
 
 Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
 
+## 1.5.1
+
+* feature: add Instance API (#106)
+* fix!: fix CSS asset path (#110) 
+* docs: update /time and /visits documentation, no longer plain (#108)
+* docs: fix Invite Message-related documentation (#109) 
+
 ## 1.5.0
 
 * **refactor!: remove use of unnamed Inline Requests and Responses (#102)**<br>
