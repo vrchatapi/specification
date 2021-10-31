@@ -35,7 +35,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Get a single Steam transactions by ID owned by you. This returns the exact same information as `getSteamTransactions`, so no point in using this function.'
+      description: 'Get a single Steam transactions by ID. This returns the exact same information as `getSteamTransactions`, so no point in using this endpoint.'
       deprecated: true
   /Admin/transactions:
     get:
@@ -69,7 +69,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Get a single Admin transactions by ID owned by you. This returns the exact same information as `getAdminTransactions`, so no point in using this function.'
+      description: 'Get a single Admin transactions by ID. This returns the exact same information as `getAdminTransactions`, so no point in using this endpoint.'
       deprecated: true
       x-internal: true
   /auth/user/subscription:
