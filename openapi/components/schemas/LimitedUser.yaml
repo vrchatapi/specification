@@ -3,9 +3,9 @@ properties:
   bio:
     type: string
   currentAvatarImageUrl:
-    type: string
+    $ref: ./CurrentAvatarImageUrl.yaml
   currentAvatarThumbnailImageUrl:
-    type: string
+    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   developerType:
     $ref: ./DeveloperType.yaml
   displayName:

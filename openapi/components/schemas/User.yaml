@@ -10,9 +10,9 @@ properties:
     items:
       type: string
   currentAvatarImageUrl:
-    type: string
+    $ref: ./CurrentAvatarImageUrl.yaml
   currentAvatarThumbnailImageUrl:
-    type: string
+    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   date_joined:
     format: date
     type: string
