@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.5.2
+  version: 1.5.3
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -1744,6 +1744,36 @@ paths:
         Currently the most important value here is `clientApiKey` which is used
         for all other API endpoints.
       security: []
+  /infoPush:
+    get:
+      summary: Show Information Notices
+      tags:
+        - system
+      responses:
+        '200':
+          $ref: '#/components/responses/InfoPushListResponse'
+      operationId: getInfoPush
+      description: >-
+        IPS (Info Push System) is a system for VRChat to push out dynamic
+        information to the client. This is primarily used by the Quick-Menu info
+        banners, but can also be used to e.g. alert you to update your game to
+        the latest version.
+
+
+        `include` is used to query what Information Pushes should be included in
+        the response. If include is missing or empty, then no notices will
+        normally be returned. This is an "any of" search.
+
+
+        `require` is used to limit what Information Pushes should be included in
+        the response. This is usually used in combination with `include`, and is
+        an "all of" search.
+      parameters:
+        - $ref: '#/components/parameters/require'
+        - $ref: '#/components/parameters/include'
+      x-badges:
+        - color: gold
+          label: 'Status: Early Access (Still Under Development)'
   /css/app.css:
     get:
       summary: Download CSS
@@ -2266,6 +2296,18 @@ components:
         avtr_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
       title: AvatarID
       type: string
+    CurrentAvatarImageUrl:
+      description: When profilePicOverride is not empty, use it instead.
+      example: >-
+        https://api.vrchat.cloud/api/1/file/file_ae46d521-7281-4b38-b365-804b32a1d6a7/1/file
+      title: CurrentAvatarImageUrl
+      type: string
+    CurrentAvatarThumbnailImageUrl:
+      description: When profilePicOverride is not empty, use it instead.
+      example: >-
+        https://api.vrchat.cloud/api/1/image/file_aae83ed9-d42d-4d72-9f4b-9f1e41ed17e1/1/256
+      title: CurrentAvatarThumbnailImageUrl
+      type: string
     DeveloperType:
       default: none
       description: |-
@@ -2379,9 +2421,9 @@ components:
         currentAvatarAssetUrl:
           type: string
         currentAvatarImageUrl:
-          type: string
+          $ref: '#/components/schemas/CurrentAvatarImageUrl'
         currentAvatarThumbnailImageUrl:
-          type: string
+          $ref: '#/components/schemas/CurrentAvatarThumbnailImageUrl'
         date_joined:
           format: date
           type: string
@@ -2554,7 +2596,7 @@ components:
       type: object
     ReleaseStatus:
       type: string
-      default: private
+      default: public
       enum:
         - public
         - private
@@ -3577,9 +3619,9 @@ components:
         bio:
           type: string
         currentAvatarImageUrl:
-          type: string
+          $ref: '#/components/schemas/CurrentAvatarImageUrl'
         currentAvatarThumbnailImageUrl:
-          type: string
+          $ref: '#/components/schemas/CurrentAvatarThumbnailImageUrl'
         developerType:
           $ref: '#/components/schemas/DeveloperType'
         displayName:
@@ -4006,6 +4048,45 @@ components:
       title: DeploymentGroup
       default: blue
       readOnly: true
+    DynamicContentRow:
+      title: DynamicContentRow
+      type: object
+      properties:
+        index:
+          minimum: 0
+          type: integer
+        name:
+          minLength: 1
+          type: string
+        platform:
+          minLength: 1
+          type: string
+          description: >-
+            Usually "ThisPlatformSupported", but can also be other values such
+            as "all" or platform specific identifiers.
+        sortHeading:
+          minLength: 1
+          type: string
+        sortOrder:
+          minLength: 1
+          type: string
+        sortOwnership:
+          minLength: 1
+          type: string
+        tag:
+          description: Tag to filter content for this row.
+          minLength: 1
+          type: string
+        type:
+          type: string
+          example: avatar
+          description: Type is not present if it is a world.
+      required:
+        - name
+        - platform
+        - sortHeading
+        - sortOrder
+        - sortOwnership
     APIConfig:
       example:
         VoiceEnableDegradation: false
@@ -4256,6 +4337,8 @@ components:
         youtubedl-hash: >-
           E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
         youtubedl-version: 2021-05-16
+      title: API Config
+      type: object
       properties:
         VoiceEnableDegradation:
           default: false
@@ -4271,8 +4354,13 @@ components:
           type: string
         announcements:
           description: Public Announcements
+          minItems: 1
+          type: array
+          uniqueItems: true
           items:
             description: Public Announcement
+            title: Public Announcement
+            type: object
             properties:
               name:
                 description: Announcement name
@@ -4285,11 +4373,6 @@ components:
             required:
               - name
               - text
-            title: Public Announcement
-            type: object
-          minItems: 1
-          type: array
-          uniqueItems: true
         apiKey:
           description: apiKey to be used for all other requests
           minLength: 1
@@ -4452,6 +4535,12 @@ components:
         downloadUrls:
           additionalProperties: false
           description: Download links for various development assets.
+          title: DownloadURLList
+          type: object
+          required:
+            - sdk2
+            - sdk3-avatars
+            - sdk3-worlds
           properties:
             sdk2:
               deprecated: true
@@ -4466,53 +4555,29 @@ components:
               description: Download link for SDK3 for Worlds
               minLength: 1
               type: string
-          required:
-            - sdk2
-            - sdk3-avatars
-            - sdk3-worlds
-          title: DownloadURLList
-          type: object
         dynamicWorldRows:
           description: >-
             Array of DynamicWorldRow objects, used by the game to display the
             list of world rows
-          items:
-            properties:
-              index:
-                minimum: 0
-                type: integer
-              name:
-                minLength: 1
-                type: string
-              platform:
-                minLength: 1
-                type: string
-              sortHeading:
-                minLength: 1
-                type: string
-              sortOrder:
-                minLength: 1
-                type: string
-              sortOwnership:
-                minLength: 1
-                type: string
-              tag:
-                description: Tag to filter worlds for this row. Not always present.
-                minLength: 1
-                type: string
-            required:
-              - index
-              - name
-              - platform
-              - sortHeading
-              - sortOrder
-              - sortOwnership
-            title: DynamicWorldRow
-            type: object
           minItems: 1
           type: array
           uniqueItems: true
+          items:
+            $ref: '#/components/schemas/DynamicContentRow'
         events:
+          title: APIEventConfig
+          type: object
+          required:
+            - distanceClose
+            - distanceFactor
+            - distanceFar
+            - groupDistance
+            - maximumBunchSize
+            - notVisibleFactor
+            - playerOrderBucketSize
+            - playerOrderFactor
+            - slowUpdateFactorThreshold
+            - viewSegmentLength
           properties:
             distanceClose:
               description: Unknown
@@ -4544,19 +4609,6 @@ components:
             viewSegmentLength:
               description: Unknown
               type: integer
-          required:
-            - distanceClose
-            - distanceFactor
-            - distanceFar
-            - groupDistance
-            - maximumBunchSize
-            - notVisibleFactor
-            - playerOrderBucketSize
-            - playerOrderFactor
-            - slowUpdateFactorThreshold
-            - viewSegmentLength
-          title: APIEventConfig
-          type: object
         gearDemoRoomId:
           deprecated: true
           description: Unknown
@@ -4671,9 +4723,9 @@ components:
           description: >-
             List of allowed URLs that bypass the "Allow untrusted URL's" setting
             in-game
+          type: array
           items:
             type: string
-          type: array
         useReliableUdpForVoice:
           default: false
           description: Unknown
@@ -4696,9 +4748,9 @@ components:
           type: string
         whiteListedAssetUrls:
           description: List of allowed URLs that are allowed to host avatar assets
+          type: array
           items:
             type: string
-          type: array
         worldUpdatePeriod:
           description: Unknown
           type: integer
@@ -4754,8 +4806,8 @@ components:
         - dynamicWorldRows
         - events
         - gearDemoRoomId
-        - homepageRedirectTarget
         - homeWorldId
+        - homepageRedirectTarget
         - hubWorldId
         - jobsEmail
         - messageOfTheDay
@@ -4791,8 +4843,112 @@ components:
         - worldUpdatePeriod
         - youtubedl-hash
         - youtubedl-version
-      title: API Config
+    InfoPushDataClickable:
       type: object
+      title: InfoPushDataClickable
+      properties:
+        command:
+          type: string
+          minLength: 1
+          example: OpenURL
+          enum:
+            - OpenURL
+            - OpenVRCPlusMenu
+            - OpenSafetyMenu
+            - CannedWorldSearch
+        parameters:
+          description: In case of OpenURL, this would contain the link.
+          type: array
+          items:
+            type: string
+      required:
+        - command
+    InfoPushData:
+      description: ''
+      type: object
+      title: InfoPushData
+      properties:
+        contentList:
+          $ref: '#/components/schemas/DynamicContentRow'
+        description:
+          type: string
+        imageUrl:
+          minLength: 1
+          type: string
+        name:
+          type: string
+        onPressed:
+          $ref: '#/components/schemas/InfoPushDataClickable'
+        template:
+          type: string
+        version:
+          example: 2021.3.4
+          minLength: 1
+          type: string
+        article:
+          type: object
+          title: InfoPushDataArticle
+          properties:
+            content:
+              type: object
+              title: InfoPushDataArticleContent
+              properties:
+                text:
+                  type: string
+                imageUrl:
+                  type: string
+                onPressed:
+                  $ref: '#/components/schemas/InfoPushDataClickable'
+    InfoPush:
+      description: ''
+      type: object
+      title: InfoPush
+      properties:
+        id:
+          type: string
+          minLength: 1
+          example: launch-beta
+        isEnabled:
+          type: boolean
+          default: true
+        releaseStatus:
+          $ref: '#/components/schemas/ReleaseStatus'
+        priority:
+          type: integer
+        tags:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        data:
+          $ref: '#/components/schemas/InfoPushData'
+        hash:
+          type: string
+          minLength: 1
+          description: Unknown usage, MD5
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        startDate:
+          type: string
+          format: date-time
+          description: ''
+        endDate:
+          type: string
+          format: date-time
+      required:
+        - id
+        - isEnabled
+        - releaseStatus
+        - priority
+        - tags
+        - data
+        - hash
+        - createdAt
+        - updatedAt
     APIHealth:
       title: APIHealth
       type: object
@@ -4822,9 +4978,9 @@ components:
           items:
             type: string
         currentAvatarImageUrl:
-          type: string
+          $ref: '#/components/schemas/CurrentAvatarImageUrl'
         currentAvatarThumbnailImageUrl:
-          type: string
+          $ref: '#/components/schemas/CurrentAvatarThumbnailImageUrl'
         date_joined:
           format: date
           type: string
@@ -6309,6 +6465,68 @@ components:
           schema:
             type: string
             example: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
+    InfoPushListResponse:
+      description: Returns a list of InfoPush objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/InfoPush'
+          examples:
+            New Quick Menu:
+              value:
+                - id: launch-beta
+                  isEnabled: true
+                  releaseStatus: public
+                  priority: 970
+                  tags:
+                    - quick-menu-banner
+                    - user-all
+                  data:
+                    imageUrl: >-
+                      https://assets.vrchat.com/ips/assets/b5af844263458d3a5b3e01b52ef7fe47f7b3b563eace4ee972205f250474c879.png
+                    onPressed:
+                      command: OpenURL
+                      parameters:
+                        - https://docs.vrchat.com/v2021.4.1/docs/latest-release
+                  hash: 69abf85064503e870124acde330bb0ae
+                  createdAt: 2021-09-13T20:50:40+00:00
+                  updatedAt: 2021-11-08T22:45:25+00:00
+            World Hot Row:
+              value:
+                - id: world-hot
+                  isEnabled: true
+                  releaseStatus: public
+                  priority: 1000
+                  tags:
+                    - world-category
+                  data:
+                    imageUrl: >-
+                      https://assets.vrchat.com/ips/assets/40f8ad117f8d6734ac84039d8ced290b6676486099b7cc56759efe7b259ca05d.png
+                    contentList:
+                      name: Hot
+                      sortHeading: heat
+                      sortOwnership: any
+                      sortOrder: descending
+                      platform: ThisPlatformSupported
+                  hash: f0e97e72c437aa437e92c1184630bec6
+                  createdAt: 2020-06-05T08:23:31+00:00
+                  updatedAt: 2020-08-16T07:04:07+00:00
+            Game Version:
+              value:
+                - id: build-config
+                  isEnabled: true
+                  releaseStatus: public
+                  priority: 1000
+                  tags:
+                    - high-priority
+                    - user-all
+                  data:
+                    version: 2021.3.4
+                  hash: a76e7da333c6a5a8f7ec2adee064cac9
+                  createdAt: 2021-08-21T04:27:05+00:00
+                  updatedAt: 2021-09-18T04:37:29+00:00
     DownloadSourceCodeAccessError:
       description: >-
         Error response when trying to download non-public and non-main
@@ -6576,7 +6794,7 @@ components:
       required: false
       schema:
         type: string
-      description: Tags to include (comma-separated).
+      description: Tags to include (comma-separated). Any of the tags needs to be present.
     notag:
       name: notag
       in: query
@@ -6753,6 +6971,20 @@ components:
       required: true
       schema:
         type: string
+    require:
+      name: require
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Tags to include (comma-separated). All of the tags needs to be present.
+    include:
+      name: include
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Tags to include (comma-separated). Any of the tags needs to be present.
     variant:
       name: variant
       in: query
