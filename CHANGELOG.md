@@ -2,6 +2,11 @@
 
 Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
 
+## 1.5.3
+
+* feature: add IPS (Info Push System) endpoint (#116) 
+* feature: add avatarImageUrl description (#114)
+
 ## 1.5.2
 
 * feature: add Subscription/Transaction/License API (#111)
