@@ -1,0 +1,19 @@
+type: object
+title: InfoPushDataClickable
+properties:
+  command:
+    type: string
+    minLength: 1
+    example: OpenURL
+    enum:
+      - OpenURL
+      - OpenVRCPlusMenu
+      - OpenSafetyMenu
+      - CannedWorldSearch
+  parameters:
+    description: 'In case of OpenURL, this would contain the link.'
+    type: array
+    items:
+      type: string
+required:
+  - command

@@ -238,6 +238,8 @@ example:
   worldUpdatePeriod: 60
   youtubedl-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
   youtubedl-version: '2021-05-16'
+title: API Config
+type: object
 properties:
   VoiceEnableDegradation:
     default: false
@@ -253,8 +255,13 @@ properties:
     type: string
   announcements:
     description: Public Announcements
+    minItems: 1
+    type: array
+    uniqueItems: true
     items:
       description: Public Announcement
+      title: Public Announcement
+      type: object
       properties:
         name:
           description: Announcement name
@@ -267,11 +274,6 @@ properties:
       required:
         - name
         - text
-      title: Public Announcement
-      type: object
-    minItems: 1
-    type: array
-    uniqueItems: true
   apiKey:
     description: apiKey to be used for all other requests
     minLength: 1
@@ -420,6 +422,12 @@ properties:
   downloadUrls:
     additionalProperties: false
     description: Download links for various development assets.
+    title: DownloadURLList
+    type: object
+    required:
+      - sdk2
+      - sdk3-avatars
+      - sdk3-worlds
     properties:
       sdk2:
         deprecated: true
@@ -434,51 +442,27 @@ properties:
         description: Download link for SDK3 for Worlds
         minLength: 1
         type: string
-    required:
-      - sdk2
-      - sdk3-avatars
-      - sdk3-worlds
-    title: DownloadURLList
-    type: object
   dynamicWorldRows:
     description: 'Array of DynamicWorldRow objects, used by the game to display the list of world rows'
-    items:
-      properties:
-        index:
-          minimum: 0
-          type: integer
-        name:
-          minLength: 1
-          type: string
-        platform:
-          minLength: 1
-          type: string
-        sortHeading:
-          minLength: 1
-          type: string
-        sortOrder:
-          minLength: 1
-          type: string
-        sortOwnership:
-          minLength: 1
-          type: string
-        tag:
-          description: Tag to filter worlds for this row. Not always present.
-          minLength: 1
-          type: string
-      required:
-        - index
-        - name
-        - platform
-        - sortHeading
-        - sortOrder
-        - sortOwnership
-      title: DynamicWorldRow
-      type: object
     minItems: 1
     type: array
     uniqueItems: true
+    items:
+      $ref: ./DynamicContentRow.yaml
   events:
+    title: APIEventConfig
+    type: object
+    required:
+      - distanceClose
+      - distanceFactor
+      - distanceFar
+      - groupDistance
+      - maximumBunchSize
+      - notVisibleFactor
+      - playerOrderBucketSize
+      - playerOrderFactor
+      - slowUpdateFactorThreshold
+      - viewSegmentLength
     properties:
       distanceClose:
         description: Unknown
@@ -510,19 +494,6 @@ properties:
       viewSegmentLength:
         description: Unknown
         type: integer
-    required:
-      - distanceClose
-      - distanceFactor
-      - distanceFar
-      - groupDistance
-      - maximumBunchSize
-      - notVisibleFactor
-      - playerOrderBucketSize
-      - playerOrderFactor
-      - slowUpdateFactorThreshold
-      - viewSegmentLength
-    title: APIEventConfig
-    type: object
   gearDemoRoomId:
     deprecated: true
     description: Unknown
@@ -626,9 +597,9 @@ properties:
     type: integer
   urlList:
     description: List of allowed URLs that bypass the "Allow untrusted URL's" setting in-game
+    type: array
     items:
       type: string
-    type: array
   useReliableUdpForVoice:
     default: false
     description: Unknown
@@ -651,9 +622,9 @@ properties:
     type: string
   whiteListedAssetUrls:
     description: List of allowed URLs that are allowed to host avatar assets
+    type: array
     items:
       type: string
-    type: array
   worldUpdatePeriod:
     description: Unknown
     type: integer
@@ -709,8 +680,8 @@ required:
   - dynamicWorldRows
   - events
   - gearDemoRoomId
-  - homepageRedirectTarget
   - homeWorldId
+  - homepageRedirectTarget
   - hubWorldId
   - jobsEmail
   - messageOfTheDay
@@ -746,5 +717,3 @@ required:
   - worldUpdatePeriod
   - youtubedl-hash
   - youtubedl-version
-title: API Config
-type: object

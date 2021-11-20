@@ -147,6 +147,8 @@
 
 "/config":
   $ref: "./paths/system.yaml#/paths/~1config"
+"/infoPush":
+  $ref: "./paths/system.yaml#/paths/~1infoPush"
 "/css/app.css":
   $ref: "./paths/system.yaml#/paths/~1css~1app.css"
 "/js/app.js":

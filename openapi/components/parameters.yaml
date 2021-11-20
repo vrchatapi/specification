@@ -166,7 +166,21 @@ tag:
   required: false
   schema:
     type: string
-  description: Tags to include (comma-separated).
+  description: Tags to include (comma-separated). Any of the tags needs to be present.
+include:
+  name: include
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Tags to include (comma-separated). Any of the tags needs to be present.
+require:
+  name: require
+  in: query
+  required: false
+  schema:
+    type: string
+  description: Tags to include (comma-separated). All of the tags needs to be present.
 notag:
   name: notag
   in: query

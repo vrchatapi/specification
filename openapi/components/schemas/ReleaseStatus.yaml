@@ -1,5 +1,5 @@
 type: string
-default: private
+default: public
 enum:
   - public
   - private
