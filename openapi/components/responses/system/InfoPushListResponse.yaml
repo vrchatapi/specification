@@ -8,52 +8,52 @@ content:
     examples:
       New Quick Menu:
         value:
-          id: launch-beta
-          isEnabled: true
-          releaseStatus: public
-          priority: 970
-          tags:
-          - quick-menu-banner
-          - user-all
-          data:
-            imageUrl: https://assets.vrchat.com/ips/assets/b5af844263458d3a5b3e01b52ef7fe47f7b3b563eace4ee972205f250474c879.png
-            onPressed:
-              command: OpenURL
-              parameters:
-              - https://docs.vrchat.com/v2021.4.1/docs/latest-release
-          hash: 69abf85064503e870124acde330bb0ae
-          createdAt: '2021-09-13T20:50:40+00:00'
-          updatedAt: '2021-11-08T22:45:25+00:00'
+          - id: launch-beta
+            isEnabled: true
+            releaseStatus: public
+            priority: 970
+            tags:
+              - quick-menu-banner
+              - user-all
+            data:
+              imageUrl: https://assets.vrchat.com/ips/assets/b5af844263458d3a5b3e01b52ef7fe47f7b3b563eace4ee972205f250474c879.png
+              onPressed:
+                command: OpenURL
+                parameters:
+                  - https://docs.vrchat.com/v2021.4.1/docs/latest-release
+            hash: 69abf85064503e870124acde330bb0ae
+            createdAt: '2021-09-13T20:50:40+00:00'
+            updatedAt: '2021-11-08T22:45:25+00:00'
       World Hot Row:
         value:
-          id: world-hot
-          isEnabled: true
-          releaseStatus: public
-          priority: 1000
-          tags:
-          - world-category
-          data:
-            imageUrl: https://assets.vrchat.com/ips/assets/40f8ad117f8d6734ac84039d8ced290b6676486099b7cc56759efe7b259ca05d.png
-            contentList:
-              name: Hot
-              sortHeading: heat
-              sortOwnership: any
-              sortOrder: descending
-              platform: ThisPlatformSupported
-          hash: f0e97e72c437aa437e92c1184630bec6
-          createdAt: '2020-06-05T08:23:31+00:00'
-          updatedAt: '2020-08-16T07:04:07+00:00'
+          - id: world-hot
+            isEnabled: true
+            releaseStatus: public
+            priority: 1000
+            tags:
+              - world-category
+            data:
+              imageUrl: https://assets.vrchat.com/ips/assets/40f8ad117f8d6734ac84039d8ced290b6676486099b7cc56759efe7b259ca05d.png
+              contentList:
+                name: Hot
+                sortHeading: heat
+                sortOwnership: any
+                sortOrder: descending
+                platform: ThisPlatformSupported
+            hash: f0e97e72c437aa437e92c1184630bec6
+            createdAt: '2020-06-05T08:23:31+00:00'
+            updatedAt: '2020-08-16T07:04:07+00:00'
       Game Version:
         value:
-          id: build-config
-          isEnabled: true
-          releaseStatus: public
-          priority: 1000
-          tags:
-          - high-priority
-          - user-all
-          data:
-            version: 2021.3.4
-          hash: a76e7da333c6a5a8f7ec2adee064cac9
-          createdAt: '2021-08-21T04:27:05+00:00'
-          updatedAt: '2021-09-18T04:37:29+00:00'
+          - id: build-config
+            isEnabled: true
+            releaseStatus: public
+            priority: 1000
+            tags:
+              - high-priority
+              - user-all
+            data:
+              version: 2021.3.4
+            hash: a76e7da333c6a5a8f7ec2adee064cac9
+            createdAt: '2021-08-21T04:27:05+00:00'
+            updatedAt: '2021-09-18T04:37:29+00:00'
