@@ -1,0 +1,36 @@
+title: DynamicContentRow
+type: object
+properties:
+  index:
+    minimum: 0
+    type: integer
+  name:
+    minLength: 1
+    type: string
+  platform:
+    minLength: 1
+    type: string
+    description: 'Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.'
+  sortHeading:
+    minLength: 1
+    type: string
+  sortOrder:
+    minLength: 1
+    type: string
+  sortOwnership:
+    minLength: 1
+    type: string
+  tag:
+    description: Tag to filter content for this row.
+    minLength: 1
+    type: string
+  type:
+    type: string
+    example: avatar
+    description: Type is not present if it is a world.
+required:
+  - name
+  - platform
+  - sortHeading
+  - sortOrder
+  - sortOwnership
