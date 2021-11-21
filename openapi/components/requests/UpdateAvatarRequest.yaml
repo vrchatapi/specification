@@ -12,6 +12,7 @@ properties:
     type: string
     minLength: 1
   tags:
+    description: ' '
     type: array
     items:
       $ref: ../schemas/Tag.yaml

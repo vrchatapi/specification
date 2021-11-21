@@ -9,6 +9,7 @@ properties:
   acceptedTOSVersion:
     type: number
   tags:
+    description: ' '
     type: array
     items:
       $ref: ../schemas/Tag.yaml

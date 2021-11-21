@@ -3,8 +3,11 @@ type: object
 properties:
   allowAvatarCopying:
     type: boolean
+    default: true
   bio:
     type: string
+    maxLength: 512
+    minLength: 0
   bioLinks:
     type: array
     items:
@@ -16,25 +19,27 @@ properties:
   date_joined:
     format: date
     type: string
-    readOnly: true
   developerType:
     $ref: ./DeveloperType.yaml
   displayName:
     type: string
+    description: 'A users visual display name. This is what shows up in-game, and can different from their `username`. Changing display name is restricted to a cooldown period.'
   friendKey:
     type: string
   id:
     $ref: ./UserID.yaml
   instanceId:
-    type: string
+    $ref: ./InstanceID.yaml
   isFriend:
     type: boolean
+    description: 'Either their `friendKey`, or empty string if you are not friends. Unknown usage.'
   last_login:
     type: string
+    description: Either a date-time or empty string.
   last_platform:
     $ref: ./Platform.yaml
   location:
-    type: string
+    $ref: ./WorldID.yaml
   profilePicOverride:
     type: string
   state:
@@ -52,6 +57,7 @@ properties:
     type: string
   username:
     type: string
+    description: 'A users unique name, used during login. This is different from `displayName` which is what shows up in-game. A users `username` can never be changed.'
   worldId:
     $ref: ./WorldID.yaml
 required:

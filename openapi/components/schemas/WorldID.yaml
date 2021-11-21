@@ -2,3 +2,4 @@ example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
 pattern: '(^$|offline|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})'
 title: WorldID
 type: string
+description: WorldID be "offline" on User profiles if you are not friends with that user.

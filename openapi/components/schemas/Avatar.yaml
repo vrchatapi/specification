@@ -13,11 +13,9 @@ properties:
     $ref: ./UserID.yaml
   authorName:
     minLength: 1
-    readOnly: true
     type: string
   created_at:
     format: date-time
-    readOnly: true
     type: string
   description:
     minLength: 0
@@ -65,7 +63,6 @@ properties:
     default: 0
     example: 68
     minimum: 0
-    readOnly: true
     type: integer
 required:
   - authorId
