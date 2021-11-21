@@ -1,0 +1,9 @@
+type: string
+title: Region
+default: us
+example: eu
+enum:
+  - us
+  - eu
+  - jp
+description: API/Photon region.
