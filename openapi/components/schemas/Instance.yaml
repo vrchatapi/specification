@@ -1,82 +1,94 @@
-description: ''
+description: |-
+  * `hidden` field is only present if InstanceType is `hidden` aka "Friends+", and is instance creator.
+  * `friends` field is only present if InstanceType is `friends` aka "Friends", and is instance creator.
+  * `private` field is only present if InstanceType is `private` aka "Invite" or "Invite+", and is instance creator.
+title: Instance
+type: object
 properties:
   active:
     default: true
+    example: true
     type: boolean
   canRequestInvite:
     default: true
+    example: true
     type: boolean
   capacity:
+    type: integer
     example: 8
     minimum: 0
-    type: integer
   clientNumber:
-    minLength: 1
     type: string
+    minLength: 1
+    deprecated: true
+    description: Always returns "unknown".
   full:
     default: false
     type: boolean
   id:
     $ref: ./InstanceID.yaml
   instanceId:
-    minLength: 1
     type: string
+    minLength: 1
+    example: 12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
   location:
-    minLength: 1
-    type: string
+    $ref: ./InstanceID.yaml
   n_users:
-    minimum: 0
     type: integer
+    minimum: 0
+    example: 6
   name:
-    minLength: 1
     type: string
-  nonce:
     minLength: 1
-    type: string
+    example: '12345'
   ownerId:
     $ref: ./UserID.yaml
   permanent:
     default: false
     type: boolean
   photonRegion:
-    minLength: 1
-    type: string
+    $ref: ./Region.yaml
   platforms:
-    properties:
-      android:
-        type: integer
-      standalonewindows:
-        type: integer
+    type: object
+    title: InstancePlatforms
+    additionalProperties: false
     required:
       - android
       - standalonewindows
-    type: object
+    properties:
+      android:
+        type: integer
+        minimum: 0
+        example: 1
+      standalonewindows:
+        type: integer
+        minimum: 0
+        example: 5
   region:
-    minLength: 1
-    type: string
+    $ref: ./Region.yaml
   shortName:
-    minLength: 1
     type: string
+    minLength: 1
+    example: fortran-grublink-41d83
   tags:
-    description: ' '
+    description: 'The tags array on Instances usually contain the language tags of the people in the instance. '
+    type: array
+    example:
+      - show_social_rank
+      - language_eng
+      - language_jpn
     items:
       $ref: ./Tag.yaml
-    type: array
   type:
-    minLength: 1
-    type: string
-  users:
-    deprecated: true
-    description: 'Always empty on non-existing instances, and non-present on existing instances.'
-    items:
-      type: object
-    type: array
-  world:
-    deprecated: true
-    description: 'Only present on non-existing instances, and only contains a very small subject of World object. Use World API instead.'
-    type: object
+    $ref: ./InstanceType.yaml
   worldId:
     $ref: ./WorldID.yaml
+  hidden:
+    $ref: ./UserID.yaml
+  friends:
+    $ref: ./UserID.yaml
+  private:
+    $ref: ./UserID.yaml
 required:
   - active
   - canRequestInvite
@@ -96,5 +108,3 @@ required:
   - tags
   - type
   - worldId
-title: Instance
-type: object
