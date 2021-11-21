@@ -13,4 +13,3 @@ enum:
   - cherry
 title: DeploymentGroup
 default: blue
-readOnly: true

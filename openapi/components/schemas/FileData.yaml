@@ -10,7 +10,6 @@ properties:
       - simple
     minLength: 1
     default: queued
-    readOnly: true
   fileName:
     minLength: 1
     type: string
