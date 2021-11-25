@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.5.3
+  version: 1.6.0
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -1398,7 +1398,14 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-      description: Returns an instance.
+      description: >-
+        Returns an instance. Please read [Instances
+        Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more
+        information on Instances.
+
+
+        If an invalid instanceId is provided, this endpoint will simply return
+        "null"!
       responses:
         '200':
           $ref: '#/components/responses/InstanceResponse'
@@ -2290,6 +2297,10 @@ components:
       example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: UserID
       type: string
+      description: >-
+        A users unique ID, usually in the form of
+        `usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469`. Legacy players can have old
+        IDs in the form of `8JoV9XEdpo`. The ID can never be changed.
     AvatarID:
       example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
       pattern: >-
@@ -2330,6 +2341,9 @@ components:
         (^$|offline|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
       title: WorldID
       type: string
+      description: >-
+        WorldID be "offline" on User profiles if you are not friends with that
+        user.
     Platform:
       description: >-
         This can be `standalonewindows` or `android`, but can also pretty much
@@ -2679,11 +2693,9 @@ components:
           $ref: '#/components/schemas/UserID'
         authorName:
           minLength: 1
-          readOnly: true
           type: string
         created_at:
           format: date-time
-          readOnly: true
           type: string
         description:
           minLength: 0
@@ -2733,7 +2745,6 @@ components:
           default: 0
           example: 68
           minimum: 0
-          readOnly: true
           type: integer
       required:
         - authorId
@@ -2769,6 +2780,7 @@ components:
           type: string
           minLength: 1
         tags:
+          description: ' '
           type: array
           items:
             $ref: '#/components/schemas/Tag'
@@ -2801,6 +2813,7 @@ components:
           type: string
           minLength: 1
         tags:
+          description: ' '
           type: array
           items:
             $ref: '#/components/schemas/Tag'
@@ -3395,7 +3408,6 @@ components:
             - simple
           minLength: 1
           default: queued
-          readOnly: true
         fileName:
           minLength: 1
           type: string
@@ -3504,6 +3516,7 @@ components:
           type: string
           minLength: 1
         tags:
+          description: ' '
           type: array
           items:
             $ref: '#/components/schemas/Tag'
@@ -3745,11 +3758,16 @@ components:
       title: Friend Status
       type: object
     InstanceID:
-      example: wrld_ba913a96-fac4-4048-a062-9aa5db092812:123456
-      pattern: >-
-        (wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}:(\d+)(~region\(([\w]+)\))?(~([\w]+)\(usr_([\w-]+)\)((\~canRequestInvite)?)(~region\(([\w].+)\))?~nonce\((.+)\))?
-      title: InstanceID
       type: string
+      example: >-
+        wrld_ba913a96-fac4-4048-a062-9aa5db092812:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+      pattern: >-
+        (offline|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}:(\d+)(~region\(([\w]+)\))?(~([\w]+)\(usr_([\w-]+)\)((\~canRequestInvite)?)(~region\(([\w].+)\))?~nonce\((.+)\))?)
+      title: InstanceID
+      minLength: 41
+      description: >-
+        InstanceID be "offline" on User profiles if you are not friends with
+        that user.
     InviteRequest:
       title: InviteRequest
       type: object
@@ -3829,90 +3847,127 @@ components:
           type: string
       required:
         - message
-    Instance:
+    Region:
+      type: string
+      title: Region
+      default: us
+      example: eu
+      enum:
+        - us
+        - use
+        - eu
+        - jp
+      description: API/Photon region.
+    InstanceType:
+      type: string
+      title: InstanceType
+      example: hidden
+      enum:
+        - public
+        - hidden
+        - friends
+        - private
       description: ''
+    Instance:
+      description: >-
+        * `hidden` field is only present if InstanceType is `hidden` aka
+        "Friends+", and is instance creator.
+
+        * `friends` field is only present if InstanceType is `friends` aka
+        "Friends", and is instance creator.
+
+        * `private` field is only present if InstanceType is `private` aka
+        "Invite" or "Invite+", and is instance creator.
+      title: Instance
+      type: object
       properties:
         active:
           default: true
+          example: true
           type: boolean
         canRequestInvite:
           default: true
+          example: true
           type: boolean
         capacity:
+          type: integer
           example: 8
           minimum: 0
-          type: integer
         clientNumber:
-          minLength: 1
           type: string
+          minLength: 1
+          deprecated: true
+          description: Always returns "unknown".
         full:
           default: false
           type: boolean
         id:
           $ref: '#/components/schemas/InstanceID'
         instanceId:
-          minLength: 1
           type: string
+          minLength: 1
+          example: >-
+            12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
         location:
-          minLength: 1
-          type: string
+          $ref: '#/components/schemas/InstanceID'
         n_users:
-          minimum: 0
           type: integer
+          minimum: 0
+          example: 6
         name:
-          minLength: 1
           type: string
-        nonce:
           minLength: 1
-          type: string
+          example: '12345'
         ownerId:
           $ref: '#/components/schemas/UserID'
         permanent:
           default: false
           type: boolean
         photonRegion:
-          minLength: 1
-          type: string
+          $ref: '#/components/schemas/Region'
         platforms:
-          properties:
-            android:
-              type: integer
-            standalonewindows:
-              type: integer
+          type: object
+          title: InstancePlatforms
+          additionalProperties: false
           required:
             - android
             - standalonewindows
-          type: object
+          properties:
+            android:
+              type: integer
+              minimum: 0
+              example: 1
+            standalonewindows:
+              type: integer
+              minimum: 0
+              example: 5
         region:
-          minLength: 1
-          type: string
+          $ref: '#/components/schemas/Region'
         shortName:
-          minLength: 1
           type: string
+          minLength: 1
+          example: fortran-grublink-41d83
         tags:
-          description: ' '
+          description: >-
+            The tags array on Instances usually contain the language tags of the
+            people in the instance. 
+          type: array
+          example:
+            - show_social_rank
+            - language_eng
+            - language_jpn
           items:
             $ref: '#/components/schemas/Tag'
-          type: array
         type:
-          minLength: 1
-          type: string
-        users:
-          deprecated: true
-          description: >-
-            Always empty on non-existing instances, and non-present on existing
-            instances.
-          items:
-            type: object
-          type: array
-        world:
-          deprecated: true
-          description: >-
-            Only present on non-existing instances, and only contains a very
-            small subject of World object. Use World API instead.
-          type: object
+          $ref: '#/components/schemas/InstanceType'
         worldId:
           $ref: '#/components/schemas/WorldID'
+        hidden:
+          $ref: '#/components/schemas/UserID'
+        friends:
+          $ref: '#/components/schemas/UserID'
+        private:
+          $ref: '#/components/schemas/UserID'
       required:
         - active
         - canRequestInvite
@@ -3932,8 +3987,6 @@ components:
         - tags
         - type
         - worldId
-      title: Instance
-      type: object
     PermissionID:
       example: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
       pattern: >-
@@ -4047,7 +4100,6 @@ components:
         - cherry
       title: DeploymentGroup
       default: blue
-      readOnly: true
     DynamicContentRow:
       title: DynamicContentRow
       type: object
@@ -4971,8 +5023,11 @@ components:
       properties:
         allowAvatarCopying:
           type: boolean
+          default: true
         bio:
           type: string
+          maxLength: 512
+          minLength: 0
         bioLinks:
           type: array
           items:
@@ -4984,25 +5039,32 @@ components:
         date_joined:
           format: date
           type: string
-          readOnly: true
         developerType:
           $ref: '#/components/schemas/DeveloperType'
         displayName:
           type: string
+          description: >-
+            A users visual display name. This is what shows up in-game, and can
+            different from their `username`. Changing display name is restricted
+            to a cooldown period.
         friendKey:
           type: string
         id:
           $ref: '#/components/schemas/UserID'
         instanceId:
-          type: string
+          $ref: '#/components/schemas/InstanceID'
         isFriend:
           type: boolean
+          description: >-
+            Either their `friendKey`, or empty string if you are not friends.
+            Unknown usage.
         last_login:
           type: string
+          description: Either a date-time or empty string.
         last_platform:
           $ref: '#/components/schemas/Platform'
         location:
-          type: string
+          $ref: '#/components/schemas/WorldID'
         profilePicOverride:
           type: string
         state:
@@ -5020,6 +5082,10 @@ components:
           type: string
         username:
           type: string
+          description: >-
+            A users unique name, used during login. This is different from
+            `displayName` which is what shows up in-game. A users `username` can
+            never be changed.
         worldId:
           $ref: '#/components/schemas/WorldID'
       required:
@@ -5055,6 +5121,7 @@ components:
         acceptedTOSVersion:
           type: number
         tags:
+          description: ' '
           type: array
           items:
             $ref: '#/components/schemas/Tag'
@@ -5221,6 +5288,7 @@ components:
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
         tags:
+          description: ' '
           type: array
           items:
             $ref: '#/components/schemas/Tag'
@@ -5420,6 +5488,7 @@ components:
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
         tags:
+          description: ' '
           type: array
           items:
             $ref: '#/components/schemas/Tag'
