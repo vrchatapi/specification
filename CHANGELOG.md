@@ -2,6 +2,12 @@
 
 Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
 
+## 1.6.0
+
+* fix!: update Instance documentation (this made `region` and `photonRegion` into enums)
+* feature: add US East region
+* docs: flush out User and Avatar documentation
+
 ## 1.5.3
 
 * feature: add IPS (Info Push System) endpoint (#116) 
