@@ -4,6 +4,7 @@ default: us
 example: eu
 enum:
   - us
+  - use
   - eu
   - jp
 description: API/Photon region.
