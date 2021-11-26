@@ -2,6 +2,10 @@
 
 Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
 
+## 1.6.3
+
+* fix!: fix World-related specification problem
+
 ## 1.6.0
 
 * fix!: update Instance documentation (this made `region` and `photonRegion` into enums)
