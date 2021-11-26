@@ -1,4 +1,4 @@
 example: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
-pattern: '(unp)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+pattern: '(unp)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
 title: UnityPackageID
 type: string

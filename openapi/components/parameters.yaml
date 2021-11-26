@@ -85,7 +85,7 @@ fileId:
   schema:
     type: string
     example: file_00000000-0000-0000-0000-000000000000
-    pattern: 'file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+    pattern: 'file_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
 versionId:
   name: versionId
   in: path

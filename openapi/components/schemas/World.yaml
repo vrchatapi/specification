@@ -1,8 +1,10 @@
 description: ''
+title: World
+type: object
 properties:
   assetUrl:
-    minLength: 1
     type: string
+    description: Empty if unauthenticated.
   assetUrlObject:
     type: object
   authorId:
@@ -40,13 +42,12 @@ properties:
     minLength: 1
     type: string
   instances:
+    type: array
     items:
-      items:
-        type: object
       maxItems: 2
       minItems: 2
       type: array
-    type: array
+      items: {}
   labsPublicationDate:
     example: none
     minLength: 1
@@ -92,20 +93,19 @@ properties:
     $ref: ./ReleaseStatus.yaml
   tags:
     description: ' '
+    type: array
     items:
       $ref: ./Tag.yaml
-    type: array
   thumbnailImageUrl:
     minLength: 1
     type: string
   unityPackageUrlObject:
     type: object
   unityPackages:
-    description: ' '
+    type: array
+    description: Empty if unauthenticated.
     items:
       $ref: ./UnityPackage.yaml
-    minItems: 1
-    type: array
   updated_at:
     format: date-time
     type: string
@@ -146,5 +146,3 @@ required:
   - updated_at
   - version
   - visits
-title: World
-type: object

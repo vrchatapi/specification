@@ -1,4 +1,4 @@
 example: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
-pattern: 'prms_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+pattern: 'prms_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
 title: PermissionID
 type: string

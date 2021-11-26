@@ -5,7 +5,7 @@ properties:
     type: string
     description: 'Either a AvatarID, LicenseGroupID, PermissionID or ProductID. This depends on the `forType` field.'
     minLength: 1
-    pattern: '(avtr|lgrp|prms|prod)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+    pattern: '(avtr|lgrp|prms|prod)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
   forType:
     $ref: ./LicenseType.yaml
   forName:
