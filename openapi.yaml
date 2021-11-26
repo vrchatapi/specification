@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.6.0
+  version: 1.6.3
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -2304,7 +2304,7 @@ components:
     AvatarID:
       example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
       pattern: >-
-        avtr_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        avtr_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: AvatarID
       type: string
     CurrentAvatarImageUrl:
@@ -2338,7 +2338,7 @@ components:
     WorldID:
       example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
       pattern: >-
-        (^$|offline|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
+        (^$|offline|(wrld|wld)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})
       title: WorldID
       type: string
       description: >-
@@ -2620,7 +2620,7 @@ components:
     UnityPackageID:
       example: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
       pattern: >-
-        (unp)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        (unp)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: UnityPackageID
       type: string
     UnityPackage:
@@ -2831,7 +2831,7 @@ components:
     TransactionID:
       example: txn_e5c72948-e735-4880-8245-24b2a41198b0
       pattern: >-
-        txn_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        txn_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: TransactionID
       type: string
     TransactionStatus:
@@ -3068,7 +3068,7 @@ components:
     LicenseGroupID:
       example: lgrp_608513da-b213-4e15-80af-bd88c27f0979
       pattern: >-
-        lgrp_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        lgrp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: LicenseGroupID
       type: string
     UserSubscription:
@@ -3180,7 +3180,7 @@ components:
             depends on the `forType` field.
           minLength: 1
           pattern: >-
-            (avtr|lgrp|prms|prod)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+            (avtr|lgrp|prms|prod)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
         forType:
           $ref: '#/components/schemas/LicenseType'
         forName:
@@ -3242,7 +3242,7 @@ components:
     FavoriteID:
       example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
       pattern: >-
-        fvrt_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        fvrt_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: FavoriteID
       type: string
     FavoriteType:
@@ -3299,7 +3299,7 @@ components:
     FavoriteGroupID:
       example: fvgrp_8a02a44b-dc3a-4a9a-bc77-77fa37996fc7
       pattern: >-
-        fvgrp_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        fvgrp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: FavoriteGroupID
       type: string
     FavoriteGroupVisibility:
@@ -3363,7 +3363,7 @@ components:
     FileID:
       example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
       pattern: >-
-        file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        file_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: FileID
       type: string
     MIMEType:
@@ -3762,7 +3762,7 @@ components:
       example: >-
         wrld_ba913a96-fac4-4048-a062-9aa5db092812:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
       pattern: >-
-        (offline|(wrld|wld)_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}:(\d+)(~region\(([\w]+)\))?(~([\w]+)\(usr_([\w-]+)\)((\~canRequestInvite)?)(~region\(([\w].+)\))?~nonce\((.+)\))?)
+        (offline|(wrld|wld)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}:(\d+)(~region\(([\w]+)\))?(~([\w]+)\(usr_([\w-]+)\)((\~canRequestInvite)?)(~region\(([\w].+)\))?~nonce\((.+)\))?)
       title: InstanceID
       minLength: 41
       description: >-
@@ -3789,7 +3789,7 @@ components:
     InviteMessageID:
       example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
       pattern: >-
-        (default|invm_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})
+        (default|invm_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})
       title: InviteMessageID
       type: string
     InviteMessageType:
@@ -3990,7 +3990,7 @@ components:
     PermissionID:
       example: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
       pattern: >-
-        prms_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        prms_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: PermissionID
       type: string
     Permission:
@@ -4024,7 +4024,7 @@ components:
     PlayerModerationID:
       example: pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244
       pattern: >-
-        pmod_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+        pmod_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: PlayerModerationID
       type: string
     PlayerModerationType:
@@ -5306,10 +5306,12 @@ components:
         - name
     World:
       description: ''
+      title: World
+      type: object
       properties:
         assetUrl:
-          minLength: 1
           type: string
+          description: Empty if unauthenticated.
         assetUrlObject:
           type: object
         authorId:
@@ -5347,13 +5349,12 @@ components:
           minLength: 1
           type: string
         instances:
+          type: array
           items:
-            items:
-              type: object
             maxItems: 2
             minItems: 2
             type: array
-          type: array
+            items: {}
         labsPublicationDate:
           example: none
           minLength: 1
@@ -5399,20 +5400,19 @@ components:
           $ref: '#/components/schemas/ReleaseStatus'
         tags:
           description: ' '
+          type: array
           items:
             $ref: '#/components/schemas/Tag'
-          type: array
         thumbnailImageUrl:
           minLength: 1
           type: string
         unityPackageUrlObject:
           type: object
         unityPackages:
-          description: ' '
+          type: array
+          description: Empty if unauthenticated.
           items:
             $ref: '#/components/schemas/UnityPackage'
-          minItems: 1
-          type: array
         updated_at:
           format: date-time
           type: string
@@ -5453,8 +5453,6 @@ components:
         - updated_at
         - version
         - visits
-      title: World
-      type: object
     UpdateWorldRequest:
       title: UpdateWorldRequest
       type: object
@@ -6968,7 +6966,7 @@ components:
         type: string
         example: file_00000000-0000-0000-0000-000000000000
         pattern: >-
-          file_[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+          file_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
     versionId:
       name: versionId
       in: path
