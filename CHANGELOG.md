@@ -2,6 +2,10 @@
 
 Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
 
+## 1.6.5
+
+* fix: make `youtubePreviewId` truly nullable
+
 ## 1.6.4
 
 * fix: add missing Region type "unknown" (#119) 
