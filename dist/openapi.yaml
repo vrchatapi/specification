@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.6.3
+  version: 1.6.5
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -3857,6 +3857,7 @@ components:
         - use
         - eu
         - jp
+        - unknown
       description: API/Photon region.
     InstanceType:
       type: string
@@ -5382,6 +5383,7 @@ components:
           type: integer
         previewYoutubeId:
           type: string
+          nullable: true
         privateOccupants:
           default: 0
           example: 1
