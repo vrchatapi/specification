@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.6.5
+  version: 1.6.6
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -1184,6 +1184,12 @@ paths:
       description: >-
         Requests an invite from a user. Returns the Notification of type
         `requestInvite` that was sent.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestInviteRequest'
+        description: Slot number of the Request Message to use when request an invite.
       tags:
         - invite
       responses:
@@ -1215,7 +1221,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/InviteResponse'
-        description: Instance ID when inviting a user.
+        description: Slot number of the Response Message to use when responding to a user.
   /message/{userId}/{messageType}:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -3774,6 +3780,20 @@ components:
       properties:
         instanceId:
           $ref: '#/components/schemas/InstanceID'
+        messageSlot:
+          type: integer
+          minimum: 0
+          maximum: 11
+      required:
+        - instanceId
+    RequestInviteRequest:
+      title: RequestInviteRequest
+      type: object
+      properties:
+        messageSlot:
+          type: integer
+          minimum: 0
+          maximum: 11
       required:
         - instanceId
     InviteResponse:
