@@ -1,8 +1,6 @@
-title: InviteRequest
+title: RequestInviteRequest
 type: object
 properties:
-  instanceId:
-    $ref: ../schemas/InstanceID.yaml
   messageSlot:
     type: integer
     minimum: 0

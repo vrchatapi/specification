@@ -178,7 +178,7 @@ paths:
           application/json:
             schema:
               $ref: ../requests/InviteResponse.yaml
-        description: Instance ID when inviting a user.
+        description: Slot number of the Response Message to use when responding to a user.
   '/requestInvite/{userId}':
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -189,6 +189,12 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Requests an invite from a user. Returns the Notification of type `requestInvite` that was sent.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/RequestInviteRequest.yaml
+        description: Slot number of the Request Message to use when request an invite.
       tags:
         - invite
       responses:
