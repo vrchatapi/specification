@@ -2,6 +2,10 @@
 
 Lines with "!:" are to some degree code-**breaking**. Lines with ":" should not be breaking.
 
+## 1.6.6
+
+* fix: add missing fields to invite API
+
 ## 1.6.5
 
 * fix: make `youtubePreviewId` truly nullable
