@@ -174,7 +174,7 @@ paths:
             example: 1
           in: query
           name: partNumber
-          required: true
+          required: false
       security:
         - apiKeyCookie: []
           authCookie: []
