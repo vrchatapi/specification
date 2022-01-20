@@ -3,6 +3,7 @@ enum:
   - waiting
   - complete
   - none
+  - queued
 example: complete
 title: FileStatus
 default: waiting
