@@ -113,6 +113,9 @@ properties:
     type: array
   twoFactorAuthEnabled:
     type: boolean
+  twoFactorAuthEnabledDate:
+    format: date-time
+    type: string
   unsubscribe:
     type: boolean
   userIcon:
@@ -151,6 +154,7 @@ required:
   - hasLoggedInFromClient
   - homeLocation
   - twoFactorAuthEnabled
+  - twoFactorAuthEnabledDate
   - state
   - tags
   - developerType
