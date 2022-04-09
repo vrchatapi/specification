@@ -5,6 +5,7 @@ example: eu
 enum:
   - us
   - use
+  - usw
   - eu
   - jp
   - unknown
