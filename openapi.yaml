@@ -1,11 +1,11 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.6.10
+  version: 1.7.0
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
-    email: me@ruby.js.org
+    email: me@ariesclark.com
   termsOfService: https://vrchat.com/legal/
   license:
     url: https://github.com/vrchatapi/specification/blob/master/LICENSE
@@ -1656,7 +1656,13 @@ paths:
             schema:
               $ref: '#/components/schemas/ModerateUserRequest'
         description: ''
-      description: Moderate a user, e.g. unmute them or show their avatar.
+      description: >-
+        Moderate a user, e.g. unmute them or show their avatar.
+
+
+        Please see the [Player Moderation
+        docs](https://vrchatapi.github.io/docs/api/#tag--playermoderation) on
+        what playerModerations are, and how they differ from staff moderations.
       tags:
         - playermoderation
     delete:
@@ -2571,7 +2577,6 @@ components:
         - hasLoggedInFromClient
         - homeLocation
         - twoFactorAuthEnabled
-        - twoFactorAuthEnabledDate
         - state
         - tags
         - developerType
@@ -4055,6 +4060,7 @@ components:
       title: PlayerModerationID
       type: string
     PlayerModerationType:
+      type: string
       default: showAvatar
       enum:
         - mute
@@ -4063,9 +4069,10 @@ components:
         - unblock
         - hideAvatar
         - showAvatar
+        - interactOn
+        - interactOff
       example: showAvatar
       title: PlayerModerationType
-      type: string
     PlayerModeration:
       properties:
         created:
@@ -7130,7 +7137,49 @@ tags:
       Permissions are a way to individually grant specific access to a user,
       often through a license such as VRC+ subscription.
   - name: playermoderation
-    description: Player Moderation Docs
+    description: >-
+      There are two different moderation API's, "moderation" for Staff actions,
+      and "playermoderation" for players. PlayerModerations are user-generated
+      actions towards others, such as muting them, blocking, or hiding their
+      avatar.
+
+
+      Player moderations are also used for other things, such as in the Avatar
+      Dynamics Interaction system.
+
+      Permissions which affect globally are stored in a Registry key locally on
+      your computer, but player-specific moderations (when you target a player,
+      and allow them specifically to interract with you) is stored in the API.
+
+
+      There are three different user-targetted permission options:
+
+
+      - Force On
+
+      - Force Off
+
+      - User Current Setting
+
+
+      Force On a.k.a `interactOn` and Force Off `interactOff` always or never
+      allow that person to interact with you. These are stored as
+      PlayerModerations. When you select a player and select "Force On", it
+      creates a playerModeration of type `interactOn`.
+
+
+      ## Two important implementation details:
+
+
+      1. When switching between "Force On" and "Force Off", **the previous
+      playerModeration MUST first be deleted before creating the second one.**
+      The game sends these in sequence, first delete the old, then create the
+      new. Attempting to create both `interactOn` and `interactOff` is
+      UNDOCUMENTED behavior.
+
+      2. "Use Current Setting" **does not have it's own type**. It simply
+      removes the previous playerModeration. No playerModeration of either type
+      means fallback to the global setting.
   - name: system
     description: System Docs Here
   - name: users
