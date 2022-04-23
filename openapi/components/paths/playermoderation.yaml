@@ -6,7 +6,7 @@ info:
     There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players. PlayerModerations are user-generated actions towards others, such as muting them, blocking, or hiding their avatar.
 
     Player moderations are also used for other things, such as in the Avatar Dynamics Interaction system.
-    Permissions which affect globally are stored in a Registry key locally on your computer, but player-specific moderations (when you target a player, and allow them specifically to interract with you) is stored in the API.
+    Permissions which affect globally are stored in a Registry key locally on your computer, but player-specific moderations (when you target a player, and allow them specifically to interact with you) is stored in the API.
 
     There are three different user-targetted permission options:
 
