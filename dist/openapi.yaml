@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.7.0
+  version: 1.7.1
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -2538,6 +2538,7 @@ components:
           type: boolean
         twoFactorAuthEnabledDate:
           format: date-time
+          nullable: true
           type: string
         unsubscribe:
           type: boolean
@@ -7149,7 +7150,7 @@ tags:
 
       Permissions which affect globally are stored in a Registry key locally on
       your computer, but player-specific moderations (when you target a player,
-      and allow them specifically to interract with you) is stored in the API.
+      and allow them specifically to interact with you) is stored in the API.
 
 
       There are three different user-targetted permission options:
