@@ -9,6 +9,8 @@ paths:
       summary: List Notifications
       tags:
         - notifications
+      x-codeSamples:
+        $ref: "../codeSamples/notifications.yaml#/~1auth~1user~1notifications/get"
       responses:
         '200':
           $ref: ../responses/notifications/NotificationListResponse.yaml
@@ -51,6 +53,8 @@ paths:
     put:
       summary: Mark Notification As Read
       operationId: markNotificationAsRead
+      x-codeSamples:
+        $ref: "../codeSamples/notifications.yaml#/~1auth~1user~1notifications~1{notificationId}~1see/put"
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml
@@ -68,6 +72,8 @@ paths:
     put:
       summary: Delete Notification
       operationId: deleteNotification
+      x-codeSamples:
+        $ref: "../codeSamples/notifications.yaml#/~1auth~1user~1notifications~1{notificationId}~1hide/put"
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml
@@ -85,6 +91,8 @@ paths:
     put:
       summary: Accept Friend Request
       operationId: acceptFriendRequest
+      x-codeSamples:
+        $ref: "../codeSamples/notifications.yaml#/~1auth~1user~1notifications~1{notificationId}~1accept/put"
       responses:
         '200':
           $ref: ../responses/friends/FriendSuccess.yaml
@@ -102,6 +110,8 @@ paths:
     put:
       summary: Clear All Notifications
       operationId: clearNotifications
+      x-codeSamples:
+        $ref: "../codeSamples/notifications.yaml#/~1auth~1user~1notifications~1notifications~1clear/put"
       responses:
         '200':
           $ref: ../responses/notifications/ClearNotificationsSuccess.yaml

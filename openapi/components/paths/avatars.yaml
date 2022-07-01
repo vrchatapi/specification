@@ -9,6 +9,8 @@ paths:
       summary: List Favorited Avatars
       tags:
         - avatars
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1favorites/get"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarListResponse.yaml
@@ -40,6 +42,8 @@ paths:
       summary: Search Avatars
       tags:
         - avatars
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars/get"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarListResponse.yaml
@@ -77,6 +81,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars/post"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarResponse.yaml
@@ -97,6 +103,8 @@ paths:
       summary: Get Avatar
       tags:
         - avatars
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}/get"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarResponse.yaml
@@ -115,6 +123,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}/put"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarResponse.yaml
@@ -136,6 +146,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}/delete"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarResponse.yaml
@@ -153,6 +165,8 @@ paths:
       summary: Select Avatar
       tags:
         - avatars
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}~1select/put"
       responses:
         '200':
           $ref: ../responses/users/CurrentUserResponse.yaml
@@ -172,6 +186,8 @@ paths:
       summary: Select Fallback Avatar
       tags:
         - avatars
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}~1selectFallback/put"
       responses:
         '200':
           $ref: ../responses/users/CurrentUserResponse.yaml

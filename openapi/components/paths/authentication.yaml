@@ -9,6 +9,8 @@ paths:
       summary: Verify Auth Token
       tags:
         - authentication
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth/get"
       responses:
         '200':
           $ref: ../responses/authentication/VerifyAuthTokenResponse.yaml
@@ -23,6 +25,8 @@ paths:
     put:
       summary: Logout
       operationId: logout
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1logout/put"
       responses:
         '200':
           $ref: ../responses/authentication/LogoutSuccess.yaml
@@ -38,6 +42,8 @@ paths:
       summary: Login and/or Get Current User Info
       tags:
         - authentication
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1user/get"
       responses:
         '200':
           $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
@@ -61,6 +67,8 @@ paths:
       summary: Check User Exists
       tags:
         - authentication
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1exists/get"
       responses:
         '200':
           $ref: ../responses/authentication/UserExistsResponse.yaml
@@ -82,6 +90,8 @@ paths:
     post:
       summary: Verify 2FA code
       operationId: verify2FA
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAResponse.yaml
@@ -103,6 +113,8 @@ paths:
     post:
       summary: Verify 2FA code with Recovery code
       operationId: verifyRecoveryCode
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1otp~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAResponse.yaml
@@ -125,6 +137,8 @@ paths:
     put:
       summary: Delete User
       operationId: deleteUser
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1user~1{userId}~1delete/put"
       responses:
         '200':
           $ref: ../responses/authentication/DeleteUserResponse.yaml
