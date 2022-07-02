@@ -200,7 +200,7 @@ featured:
   in: query
   required: false
   schema:
-    type: string
+    type: boolean
   description: Filters on featured results.
 userIdAdmin:
   name: userId
