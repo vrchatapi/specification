@@ -1,0 +1,63 @@
+/files:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/files?tag={string}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+/file:
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/file" \
+             -H "Content-Type: application/json" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             --data '{"name": "string", "mimeType": "image/jpeg", "extension": "string", "tags": ["string"]}'
+'/file/{fileId}':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+  delete:
+    - lang: cURL
+      source: >-
+        curl -X DELETE "https://api.vrchat.cloud/api/1/file/{fileId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/file/{fileId}" \
+             -H "Content-Type: application/json" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             --data '{"signatureMd5": "string", "signatureSizeInBytes": 0, "fileMd5": "string", "fileSizeInBytes": 0}'
+'/file/{fileId}/{versionId}':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
+          -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+  delete:
+    - lang: cURL
+      source: >-
+        curl -X DELETE "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
+          -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+'/file/{fileId}/{versionId}/{fileType}/finish':
+  put:
+    - lang: cURL
+      source: >-
+        curl -X PUT "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/finish" \
+             -H "Content-Type: application/json" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             --data '{"etags": ["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"], "nextPartNumber": "0", "maxParts": "0"}'
+'/file/{fileId}/{versionId}/{fileType}/start':
+  put:
+    - lang: cURL
+      source: >-
+        curl -X PUT "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/start" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+/file/{fieldId}/{versionId}/{fileType}/status:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/status" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"

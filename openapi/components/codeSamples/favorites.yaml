@@ -1,0 +1,47 @@
+/favorites:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/favorites?type={string}&tag={string}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/favorites" \
+             -H "Content-Type: application/json" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             --data '{"type": "friend", "favoriteId": "userId", "tags": ["string"]}'
+'/favorites/{favoriteId}':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+  delete:
+    - lang: cURL
+      source: >-
+        curl -X DELETE "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+/favorite/groups:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/favorite/groups?ownerId={userId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+'/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+  put:
+    - lang: cURL
+      source: >-
+        curl -X PUT -H "Content-Type: application/json" "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             --data '{"displayName": "string", "visibility": "private", "tags": ["string"]}'
+  delete:
+    - lang: cURL
+      source: >-
+        curl -X DELETE "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"

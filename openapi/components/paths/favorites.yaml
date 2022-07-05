@@ -9,6 +9,8 @@ paths:
       summary: List Favorites
       tags:
         - favorites
+      x-codeSamples:
+        $ref: "../codeSamples/favorites.yaml#/~1favorites/get"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteListResponse.yaml
@@ -34,6 +36,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/favorites.yaml#/~1favorites/post"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteResponse.yaml
@@ -75,6 +79,8 @@ paths:
       summary: Show Favorite
       tags:
         - favorites
+      x-codeSamples:
+        $ref: "../codeSamples/favorites.yaml#/~1favorites~1{favoriteId}/get"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteResponse.yaml
@@ -94,6 +100,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/favorites.yaml#/~1favorites~1{favoriteId}/delete"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteRemovedSuccess.yaml
@@ -109,6 +117,8 @@ paths:
       summary: List Favorite Groups
       tags:
         - favorites
+      x-codeSamples:
+        $ref: "../codeSamples/favorites.yaml#/~1favorite~1groups/get"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteGroupListResponse.yaml
@@ -136,6 +146,8 @@ paths:
       summary: Show Favorite Group
       tags:
         - favorites
+      x-codeSamples:
+        $ref: "../codeSamples/favorites.yaml#/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}/get"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteGroupResponse.yaml
@@ -150,6 +162,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/favorites.yaml#/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}/put"
       responses:
         '200':
           description: OK
@@ -167,6 +181,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/favorites.yaml#/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}/delete"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteGroupClearedSuccess.yaml

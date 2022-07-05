@@ -9,6 +9,8 @@ paths:
       summary: Search All Worlds
       tags:
         - worlds
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1worlds/get"
       responses:
         '200':
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
@@ -44,6 +46,8 @@ paths:
     post:
       summary: Create World
       operationId: createWorld
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1worlds/post"
       responses:
         '200':
           $ref: ../responses/worlds/WorldResponse.yaml
@@ -65,6 +69,8 @@ paths:
       summary: List Active Worlds
       tags:
         - worlds
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1worlds~1active/get"
       responses:
         '200':
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
@@ -93,6 +99,8 @@ paths:
       summary: List Recent Worlds
       tags:
         - worlds
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1worlds~1recend/get"
       responses:
         '200':
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
@@ -124,6 +132,8 @@ paths:
       summary: List Favorited Worlds
       tags:
         - worlds
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1worlds~1favorites/get"
       responses:
         '200':
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
@@ -158,6 +168,8 @@ paths:
       tags:
         - worlds
       operationId: getWorld
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}/get"
       responses:
         '200':
           $ref: ../responses/worlds/WorldResponse.yaml
@@ -172,6 +184,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}/put"
       responses:
         '200':
           $ref: ../responses/worlds/WorldResponse.yaml
@@ -193,6 +207,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}/delete"
       responses:
         '200':
           description: OK
@@ -216,6 +232,8 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Returns a worlds instance.
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}~1{instanceId}/get"
       responses:
         '200':
           $ref: ../responses/instances/InstanceResponse.yaml
@@ -234,6 +252,8 @@ paths:
           authCookie: []
       deprecated: true
       description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1metadata/get"
       responses:
         '200':
           $ref: ../responses/worlds/WorldMetadataResponse.yaml
@@ -251,6 +271,8 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Returns a worlds publish status.
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1publish/get"
       responses:
         '200':
           $ref: ../responses/worlds/WorldPublishStatusResponse.yaml
@@ -264,6 +286,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1publish/put"
       responses:
         '200':
           description: TODO
@@ -280,6 +304,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1publish/delete"
       responses:
         '200':
           description: OK
