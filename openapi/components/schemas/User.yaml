@@ -26,6 +26,8 @@ properties:
     description: 'A users visual display name. This is what shows up in-game, and can different from their `username`. Changing display name is restricted to a cooldown period.'
   friendKey:
     type: string
+  friendRequestStatus:
+    type: string
   id:
     $ref: ./UserID.yaml
   instanceId:
@@ -33,6 +35,9 @@ properties:
   isFriend:
     type: boolean
     description: 'Either their `friendKey`, or empty string if you are not friends. Unknown usage.'
+  last_activity:
+    type: string
+    description: Either a date-time or empty string.
   last_login:
     type: string
     description: Either a date-time or empty string.
@@ -40,6 +45,8 @@ properties:
     $ref: ./Platform.yaml
   location:
     $ref: ./WorldID.yaml
+  note:
+    type: string
   profilePicOverride:
     type: string
   state:
@@ -53,6 +60,12 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  travelingToInstance:
+    type: string
+  travelingToLocation:
+    type: string
+  travelingToWorld:
+    type: string
   userIcon:
     type: string
   username:
@@ -70,8 +83,10 @@ required:
   - developerType
   - displayName
   - friendKey
+  - friendRequestStatus
   - id
   - isFriend
+  - last_activity
   - last_login
   - last_platform
   - profilePicOverride
