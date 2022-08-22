@@ -21,7 +21,7 @@ paths:
 
         If an invalid instanceId is provided, this endpoint will simply return "null"!
       x-codeSamples:
-        $ref: "../codeSamples/instances.yaml#/~1intances~1{worldId}:{instanceId}/get"
+        $ref: '../codeSamples/instances.yaml#/~1intances~1{worldId}:{instanceId}/get'
       responses:
         '200':
           $ref: ../responses/instances/InstanceResponse.yaml
@@ -41,7 +41,7 @@ paths:
           authCookie: []
       description: Returns an instance short name.
       x-codeSamples:
-        $ref: "../codeSamples/instances.yaml#/~1instance~1{worldId}:{instanceId}~1shortName/get"
+        $ref: '../codeSamples/instances.yaml#/~1instance~1{worldId}:{instanceId}~1shortName/get'
       responses:
         '200':
           $ref: ../responses/instances/InstanceShortNameResponse.yaml
@@ -61,12 +61,35 @@ paths:
           authCookie: []
       description: Sends an invite to the instance to yourself.
       x-codeSamples:
-        $ref: "../codeSamples/instances.yaml#/~1instance~1{worldId}:{instanceId}~1invite/post"
+        $ref: '../codeSamples/instances.yaml#/~1instance~1{worldId}:{instanceId}~1invite/post'
       responses:
         '200':
           $ref: ../responses/instances/InstanceSelfInviteSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+  '/instances/s/{shortname}':
+    get:
+      summary: Get Instance By Short Name
+      tags:
+        - instances
+      responses:
+        '200':
+          $ref: ../responses/instances/InstanceResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/instances/InstanceNotFoundError.yaml
+      operationId: getInstanceByShortName
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: 'Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances.'
+    parameters:
+      - schema:
+          type: string
+        name: shortname
+        in: path
+        required: true
 tags:
   $ref: ../tags.yaml
 components:
