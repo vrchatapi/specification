@@ -90,6 +90,31 @@ paths:
         name: shortname
         in: path
         required: true
+  '/invite/myself/to/{worldid}:{instanceid}':
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
+    post:
+      summary: ''
+      operationId: inviteMyselfTo
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                shortName:
+                  type: string
+                  description: Short Name of the Instance; can be retrieved from the Get Instance Short Name endpoint.
+              required:
+                - shortName
+      description: Sends self an invite to an instance
 tags:
   $ref: ../tags.yaml
 components:
