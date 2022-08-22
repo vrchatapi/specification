@@ -1,14 +1,11 @@
 description: ''
-x-stoplight:
-  id: 7a7f748122ca9
-title: SentNotification
-type: object
 properties:
   created_at:
     format: date-time
     type: string
   details:
-    default: {}
+    default: '{}'
+    description: '**NOTICE:** This is not a JSON object, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
     example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
     type: string
   id:
@@ -36,3 +33,5 @@ required:
   - senderUserId
   - senderUsername
   - type
+title: SentNotification
+type: object
