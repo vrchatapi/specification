@@ -166,6 +166,33 @@ paths:
             schema:
               $ref: ../requests/InviteRequest.yaml
         description: Slot number of the Invite Message to use when inviting a user.
+  '/invite/myself/to/{worldId}:{instanceId}':
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
+    post:
+      summary: Invite Myself To Instance
+      tags:
+        - invite
+      operationId: inviteMyselfTo
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Sends self an invite to an instance
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1invite~1myself~1to~1{worldid}:{instanceid}/post"
+      responses:
+        '200':
+          $ref: ../responses/notifications/SendNotificationResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/instances/InstanceNotFoundError.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/InviteMyselfToRequest.yaml
   '/invite/{notificationId}/response':
     parameters:
       - $ref: ../parameters.yaml#/notificationId

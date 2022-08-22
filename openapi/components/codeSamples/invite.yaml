@@ -6,6 +6,14 @@
              -H "Content-Type: application/json" \
              -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
              --data '{"instanceId": "wrld_ba913a96-fac4-4048-a062-9aa5db092812:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)", "messageSlot": 11}'
+'/invite/myself/to/{worldid}:{instanceid}':
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/invite/myself/to/{worldid}:{instanceid}" \
+             -H "Content-Type: application/json" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             --data '{"shortName": "abc123efg"}'
 '/requestInvite/{userId}':
   post:
     - lang: cURL
