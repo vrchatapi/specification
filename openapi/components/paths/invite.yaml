@@ -152,7 +152,7 @@ paths:
         $ref: "../codeSamples/invite.yaml#/~1invite~1{userId}/post"
       responses:
         '200':
-          $ref: ../responses/notifications/NotificationResponse.yaml
+          $ref: ../responses/notifications/SendNotificationResponse.yaml
         '403':
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
       operationId: inviteUser

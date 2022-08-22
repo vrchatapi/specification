@@ -1,0 +1,38 @@
+description: ''
+x-stoplight:
+  id: 7a7f748122ca9
+title: SentNotification
+type: object
+properties:
+  created_at:
+    format: date-time
+    type: string
+  details:
+    default: {}
+    example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
+    type: string
+  id:
+    minLength: 1
+    type: string
+  message:
+    description: ''
+    example: This is a generated invite to VRChat Hub
+    type: string
+  recieverUserId:
+    $ref: ./UserID.yaml
+  senderUserId:
+    $ref: ./UserID.yaml
+  senderUsername:
+    minLength: 1
+    type: string
+  type:
+    $ref: ./NotificationType.yaml
+required:
+  - created_at
+  - details
+  - id
+  - message
+  - recieverUserId
+  - senderUserId
+  - senderUsername
+  - type
