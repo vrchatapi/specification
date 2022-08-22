@@ -77,7 +77,6 @@ paths:
       operationId: getUser
       security:
         - apiKeyCookie: []
-          apiKeyQuery: []
           authCookie: []
       description: Get public user information about a specific user using their ID.
     put:
