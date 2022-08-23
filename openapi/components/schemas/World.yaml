@@ -5,8 +5,6 @@ properties:
   assetUrl:
     type: string
     description: Empty if unauthenticated.
-  assetUrlObject:
-    type: object
   authorId:
     $ref: ./UserID.yaml
   authorName:
@@ -66,8 +64,6 @@ properties:
     default: vrchat
     minLength: 1
     type: string
-  pluginUrlObject:
-    type: object
   popularity:
     default: 0
     example: 8
@@ -100,8 +96,6 @@ properties:
   thumbnailImageUrl:
     minLength: 1
     type: string
-  unityPackageUrlObject:
-    type: object
   unityPackages:
     type: array
     description: Empty if unauthenticated.
