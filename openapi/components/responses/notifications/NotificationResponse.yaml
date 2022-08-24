@@ -1,4 +1,4 @@
-description: Returns a single Notifcation object.
+description: Returns a single Notification object.
 content:
   application/json:
     schema:

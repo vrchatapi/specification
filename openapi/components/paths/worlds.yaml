@@ -100,7 +100,7 @@ paths:
       tags:
         - worlds
       x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds~1recend/get"
+        $ref: "../codeSamples/worlds.yaml#/~1worlds~1recent/get"
       responses:
         '200':
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml

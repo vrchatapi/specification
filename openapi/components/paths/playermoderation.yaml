@@ -3,18 +3,18 @@ info:
   title: playermoderation
   version: '1.0'
   description: |-
-    There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players. PlayerModerations are user-generated actions towards others, such as muting them, blocking, or hiding their avatar.
+    There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players. PlayerModeration's are user-generated actions towards others, such as muting them, blocking, or hiding their avatar.
 
     Player moderations are also used for other things, such as in the Avatar Dynamics Interaction system.
     Permissions which affect globally are stored in a Registry key locally on your computer, but player-specific moderations (when you target a player, and allow them specifically to interact with you) is stored in the API.
 
-    There are three different user-targetted permission options:
+    There are three different user-targeted permission options:
 
     - Force On
     - Force Off
     - User Current Setting
 
-    Force On a.k.a `interactOn` and Force Off `interactOff` always or never allow that person to interact with you. These are stored as PlayerModerations. When you select a player and select "Force On", it creates a playerModeration of type `interactOn`.
+    Force On a.k.a `interactOn` and Force Off `interactOff` always or never allow that person to interact with you. These are stored as PlayerModeration's. When you select a player and select "Force On", it creates a playerModeration of type `interactOn`.
 
     ## Two important implementation details:
 
@@ -23,7 +23,7 @@ info:
 paths:
   /auth/user/playermoderations:
     get:
-      summary: Search Player Moderations
+      summary: Search PlayerModeration's
       tags:
         - playermoderation
       x-codeSamples:
@@ -80,11 +80,11 @@ paths:
       description: |-
         Moderate a user, e.g. unmute them or show their avatar.
 
-        Please see the [Player Moderation docs](https://vrchatapi.github.io/docs/api/#tag--playermoderation) on what playerModerations are, and how they differ from staff moderations.
+        Please see the [Player Moderation docs](https://vrchatapi.github.io/docs/api/#tag--playermoderation) on what PlayerModeration's are, and how they differ from staff moderations.
       tags:
         - playermoderation
     delete:
-      summary: Clear All Player Moderations
+      summary: Clear All PlayerModeration's
       operationId: clearAllPlayerModerations
       security:
         - apiKeyCookie: []
@@ -139,7 +139,7 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-      description: Returns a single Player Moderation. This returns the exact same amount of information as the more generalised `getPlayerModerations`.
+      description: Returns a single Player Moderation. This returns the exact same amount of information as the more generalized `getPlayerModerations`.
     delete:
       summary: Delete Player Moderation
       operationId: deletePlayerModeration

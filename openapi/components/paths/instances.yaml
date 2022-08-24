@@ -21,7 +21,7 @@ paths:
 
         If an invalid instanceId is provided, this endpoint will simply return "null"!
       x-codeSamples:
-        $ref: "../codeSamples/instances.yaml#/~1intances~1{worldId}:{instanceId}/get"
+        $ref: "../codeSamples/instances.yaml#/~1instances~1{worldId}:{instanceId}/get"
       responses:
         '200':
           $ref: ../responses/instances/InstanceResponse.yaml

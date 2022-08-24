@@ -7,5 +7,5 @@ content:
       Unfriend Success:
         value:
           success:
-            message: Friendship destroyed
+            message: "Friendship destroyed."
             status_code: 200

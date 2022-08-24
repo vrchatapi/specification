@@ -7,10 +7,10 @@ content:
       400 Negative Slot Number Error:
         value:
           error:
-            message: 'Really? A negative slot? Tsk-tsk․․․'
+            message: "Really? A negative slot? Tsk-tsk․․․"
             status_code: 400
       400 Too High Slot Number Error:
         value:
           error:
-            message: 'That is too high of a slot number․'
+            message: "That is too high of a slot number․"
             status_code: 400

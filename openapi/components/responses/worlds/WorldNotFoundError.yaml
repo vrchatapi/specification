@@ -7,5 +7,5 @@ content:
       404 World Not Found:
         value:
           error:
-            message: World wrld_ba913a96-fac4-4048-a062-9aa5db092812 not found
+            message: "World wrld_ba913a96-fac4-4048-a062-9aa5db092812 not found."
             status_code: 404

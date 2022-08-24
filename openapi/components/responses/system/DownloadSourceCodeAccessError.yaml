@@ -7,10 +7,10 @@ content:
       Only Admins Can Get Non-Public Variants:
         value:
           error:
-            message: "only admins can get non-public variants"
+            message: "Only admins can get non-public variants."
             status_code: 400
       Only Admins Can Get Non-Main Branches:
         value:
           error:
-            message: "only admins can get non-main branches"
+            message: "Only admins can get non-main branches."
             status_code: 400

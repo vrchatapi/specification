@@ -1,4 +1,4 @@
-description: Error response when trying create a world without having the neccesary Trust rank yet.
+description: Error response when trying create a world without having the necessary Trust rank yet.
 content:
   application/json:
     schema:
@@ -7,5 +7,5 @@ content:
       400 Can't Create World Yet:
         value:
           error:
-            message: \"You can't create a world right now\"
+            message: "You can't create a world right now."
             status_code: 400

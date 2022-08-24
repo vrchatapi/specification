@@ -7,5 +7,5 @@ content:
       200 Favorite Removed:
         value:
           success:
-            message: "favorite deleted!"
+            message: "Favorite deleted!"
             status_code: 200

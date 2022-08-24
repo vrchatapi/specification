@@ -7,5 +7,5 @@ content:
       Tried To Upload Against Already Finished Version:
         value:
           error:
-            message: Cannot upload against a complete version entry․ Create a new version of this file before uploading․
+            message: "Cannot upload against a complete version entry․ Create a new version of this file before uploading․"
             status_code: 400

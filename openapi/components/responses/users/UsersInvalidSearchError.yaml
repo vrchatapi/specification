@@ -7,10 +7,10 @@ content:
       400 N is too low:
         value:
           error:
-            message: "n must be a positive integer˸ '-1'"
+            message: "n must be a positive integer˸ '-1'."
             status_code: 400
       400 N is too high:
         value:
           error:
-            message: "n＝1000 is much too high․ implement paging you savages․"
+            message: "n＝1000 is much too high․ Implement paging you savages․"
             status_code: 400

@@ -7,5 +7,5 @@ content:
       404 Favorite not found:
         value:
           error:
-            message: "404 couldn't find that favorite"
+            message: "404 couldn't find that favorite."
             status_code: 404

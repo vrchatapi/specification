@@ -23,7 +23,7 @@
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/worlds/favorites?featured=false&sort=popularity&order=descending&search={string}&tag={string}&notag={string}&releaseStatus=private&userId={userId}" \
              -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
-/worlds/recend:
+/worlds/recent:
   get:
     - lang: cURL
       source: >-

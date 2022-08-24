@@ -1,4 +1,4 @@
-description: Error response when trying to see favourited worlds of another user without sufficient admin permissions.
+description: Error response when trying to see favorited worlds of another user without sufficient admin permissions.
 content:
   application/json:
     schema:
@@ -7,5 +7,5 @@ content:
       404 Cant See Other User Favorite Worlds:
         value:
           error:
-            message: 403 You can't see another user's favorites
+            message: "403 You can't see another user's favorites."
             status_code: 403

@@ -1,4 +1,4 @@
-description: Error response when trying to reset an Invite Message whos slot doesn't exist.
+description: Error response when trying to reset an Invite Message who's slot doesn't exist.
 content:
   application/json:
     schema:

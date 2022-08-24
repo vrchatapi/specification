@@ -1,4 +1,4 @@
-'/intances/{worldId}:{instanceId}':
+'/instances/{worldId}:{instanceId}':
   get:
     - lang: cURL
       source: >-

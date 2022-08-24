@@ -7,5 +7,5 @@ content:
       403 Can't delete Player Moderation You Didn't Create:
         value:
           error:
-            message: "You definitely can't delete a playerModeration you didn't create"
+            message: "You definitely can't delete a PlayerModeration you didn't create."
             status_code: 403

@@ -7,5 +7,5 @@ content:
       400 Delete Initial File Version:
         value:
           error:
-            message: Cannot delete the initial version of the file‚ just delete the entire file record․
+            message: "Cannot delete the initial version of the file‚ just delete the entire file record․"
             status_code: 400

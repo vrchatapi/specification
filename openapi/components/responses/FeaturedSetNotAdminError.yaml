@@ -7,5 +7,5 @@ content:
       401 Cannot Set Featured:
         value:
           error:
-            message: cannot set featured tag if you are not an admin
+            message: "Cannot set featured tag if you are not an admin."
             status_code: 401
