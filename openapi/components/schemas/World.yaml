@@ -116,7 +116,6 @@ properties:
     type: integer
 required:
   - assetUrl
-  - assetUrlObject
   - authorId
   - authorName
   - capacity
@@ -130,13 +129,11 @@ required:
   - name
   - namespace
   - organization
-  - pluginUrlObject
   - popularity
   - publicationDate
   - releaseStatus
   - tags
   - thumbnailImageUrl
-  - unityPackageUrlObject
   - unityPackages
   - updated_at
   - version
