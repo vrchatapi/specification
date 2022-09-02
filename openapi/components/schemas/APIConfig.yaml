@@ -628,11 +628,11 @@ properties:
   worldUpdatePeriod:
     description: Unknown
     type: integer
-  youtubedl-hash:
+  player-url-resolver-hash:
     description: Currently used youtube-dl.exe hash in SHA-256-delimited format
     minLength: 1
     type: string
-  youtubedl-version:
+  player-url-resolver-version:
     description: Currently used youtube-dl.exe version
     minLength: 1
     type: string
@@ -715,5 +715,5 @@ required:
   - viveWindowsUrl
   - whiteListedAssetUrls
   - worldUpdatePeriod
-  - youtubedl-hash
-  - youtubedl-version
+  - player-url-resolver-hash
+  - player-url-resolver-version
