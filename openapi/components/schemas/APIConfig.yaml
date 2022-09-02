@@ -236,8 +236,8 @@ example:
     - 'https://api.vrchat.cloud/api/1/file/'
     - 'https://files.vrchat.cloud/unmanaged/'
   worldUpdatePeriod: 60
-  youtubedl-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
-  youtubedl-version: '2021-05-16'
+  player-url-resolver-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
+  player-url-resolver-version: '2021-05-16'
 title: API Config
 type: object
 properties:
