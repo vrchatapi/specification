@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.7.2
+  version: 1.7.3
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -1428,7 +1428,7 @@ paths:
                  --data '{"instanceId": "wrld_ba913a96-fac4-4048-a062-9aa5db092812:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)", "messageSlot": 11}'
       responses:
         '200':
-          $ref: '#/components/responses/NotificationResponse'
+          $ref: '#/components/responses/SendNotificationResponse'
         '403':
           $ref: '#/components/responses/InviteMustBeFriendsError'
       operationId: inviteUser
@@ -1444,6 +1444,40 @@ paths:
             schema:
               $ref: '#/components/schemas/InviteRequest'
         description: Slot number of the Invite Message to use when inviting a user.
+  /invite/myself/to/{worldId}:{instanceId}:
+    parameters:
+      - $ref: '#/components/parameters/worldId'
+      - $ref: '#/components/parameters/instanceId'
+    post:
+      summary: Invite Myself To Instance
+      tags:
+        - invite
+      operationId: inviteMyselfTo
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Sends self an invite to an instance
+      x-codeSamples:
+        - lang: cURL
+          source: >-
+            curl -X POST
+            "https://api.vrchat.cloud/api/1/invite/myself/to/{worldid}:{instanceid}"
+            \
+                 -H "Content-Type: application/json" \
+                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 --data '{"shortName": "abc123efg"}'
+      responses:
+        '200':
+          $ref: '#/components/responses/SendNotificationResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/InstanceNotFoundError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteMyselfToRequest'
   /requestInvite/{userId}:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -1790,6 +1824,38 @@ paths:
           $ref: '#/components/responses/InstanceSelfInviteSuccess'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
+  /instances/s/{shortName}:
+    parameters:
+      - schema:
+          type: string
+        name: shortName
+        in: path
+        required: true
+    get:
+      summary: Get Instance By Short Name
+      tags:
+        - instances
+      operationId: getInstanceByShortName
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: >-
+        Returns an instance. Please read [Instances
+        Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more
+        information on Instances.
+      x-codeSamples:
+        - lang: cURL
+          source: >-
+            curl -X GET "https://api.vrchat.cloud/api/1/instances/s/{shortname}"
+            \
+                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/InstanceResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/InstanceNotFoundError'
   /auth/user/notifications:
     get:
       summary: List Notifications
@@ -4355,6 +4421,62 @@ components:
           maximum: 11
       required:
         - instanceId
+    SentNotification:
+      description: ''
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        details:
+          default: '{}'
+          description: >-
+            **NOTICE:** This is not a JSON object, this is a json **encoded**
+            object, meaning you have to json-de-encode to get the
+            NotificationDetail object depending on the NotificationType.
+          example: >-
+            OneOf: {}, NotificationDetailInvite,
+            NotificationDetailInviteResponse, NotificationDetailRequestInvite,
+            NotificationDetailRequestInviteResponse,
+            NotificationDetailVoteToKick
+          type: string
+        id:
+          minLength: 1
+          type: string
+        message:
+          description: ''
+          example: This is a generated invite to VRChat Hub
+          type: string
+        recieverUserId:
+          $ref: '#/components/schemas/UserID'
+        senderUserId:
+          $ref: '#/components/schemas/UserID'
+        senderUsername:
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationType'
+      required:
+        - created_at
+        - details
+        - id
+        - message
+        - recieverUserId
+        - senderUserId
+        - senderUsername
+        - type
+      title: SentNotification
+      type: object
+    InviteMyselfToRequest:
+      title: InviteMyselfToRequest
+      type: object
+      properties:
+        shortName:
+          type: string
+          description: >-
+            Short Name of the Instance; can be retrieved from the Get Instance
+            Short Name endpoint.
+      required:
+        - shortName
     RequestInviteRequest:
       title: RequestInviteRequest
       type: object
@@ -4979,9 +5101,9 @@ components:
           - https://api.vrchat.cloud/api/1/file/
           - https://files.vrchat.cloud/unmanaged/
         worldUpdatePeriod: 60
-        youtubedl-hash: >-
+        player-url-resolver-hash: >-
           E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
-        youtubedl-version: 2021-05-16
+        player-url-resolver-version: 2021-05-16
       title: API Config
       type: object
       properties:
@@ -5399,11 +5521,11 @@ components:
         worldUpdatePeriod:
           description: Unknown
           type: integer
-        youtubedl-hash:
+        player-url-resolver-hash:
           description: Currently used youtube-dl.exe hash in SHA-256-delimited format
           minLength: 1
           type: string
-        youtubedl-version:
+        player-url-resolver-version:
           description: Currently used youtube-dl.exe version
           minLength: 1
           type: string
@@ -5486,8 +5608,8 @@ components:
         - viveWindowsUrl
         - whiteListedAssetUrls
         - worldUpdatePeriod
-        - youtubedl-hash
-        - youtubedl-version
+        - player-url-resolver-hash
+        - player-url-resolver-version
     InfoPushDataClickable:
       type: object
       title: InfoPushDataClickable
@@ -5642,6 +5764,8 @@ components:
             to a cooldown period.
         friendKey:
           type: string
+        friendRequestStatus:
+          type: string
         id:
           $ref: '#/components/schemas/UserID'
         instanceId:
@@ -5651,6 +5775,9 @@ components:
           description: >-
             Either their `friendKey`, or empty string if you are not friends.
             Unknown usage.
+        last_activity:
+          type: string
+          description: Either a date-time or empty string.
         last_login:
           type: string
           description: Either a date-time or empty string.
@@ -5658,6 +5785,8 @@ components:
           $ref: '#/components/schemas/Platform'
         location:
           $ref: '#/components/schemas/WorldID'
+        note:
+          type: string
         profilePicOverride:
           type: string
         state:
@@ -5671,6 +5800,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+        travelingToInstance:
+          type: string
+        travelingToLocation:
+          type: string
+        travelingToWorld:
+          type: string
         userIcon:
           type: string
         username:
@@ -5691,8 +5826,10 @@ components:
         - developerType
         - displayName
         - friendKey
+        - friendRequestStatus
         - id
         - isFriend
+        - last_activity
         - last_login
         - last_platform
         - profilePicOverride
@@ -5905,8 +6042,6 @@ components:
         assetUrl:
           type: string
           description: Empty if unauthenticated.
-        assetUrlObject:
-          type: object
         authorId:
           $ref: '#/components/schemas/UserID'
         authorName:
@@ -5966,8 +6101,6 @@ components:
           default: vrchat
           minLength: 1
           type: string
-        pluginUrlObject:
-          type: object
         popularity:
           default: 0
           example: 8
@@ -6000,8 +6133,6 @@ components:
         thumbnailImageUrl:
           minLength: 1
           type: string
-        unityPackageUrlObject:
-          type: object
         unityPackages:
           type: array
           description: Empty if unauthenticated.
@@ -6022,7 +6153,6 @@ components:
           type: integer
       required:
         - assetUrl
-        - assetUrlObject
         - authorId
         - authorName
         - capacity
@@ -6036,13 +6166,11 @@ components:
         - name
         - namespace
         - organization
-        - pluginUrlObject
         - popularity
         - publicationDate
         - releaseStatus
         - tags
         - thumbnailImageUrl
-        - unityPackageUrlObject
         - unityPackages
         - updated_at
         - version
@@ -6757,6 +6885,23 @@ components:
                 error:
                   message: These users are not friends
                   status_code: 400
+    SendNotificationResponse:
+      description: Returns a single SentNotifcation object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SentNotification'
+          examples:
+            Example Friend Request Response:
+              value:
+                id: frq_00000000-0000-0000-0000-000000000000
+                recieverUserId: usr_00000000-0000-0000-0000-000000000000
+                senderUserId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+                senderUsername: tupper
+                type: friendRequest
+                message: ''
+                details: '{}'
+                created_at: 2021-01-01T00:00:00.000Z
     InviteMustBeFriendsError:
       description: >-
         Error response when trying to invite someome whom you are not friends
@@ -6771,6 +6916,18 @@ components:
                 error:
                   message: '"You need to be friends with that user first."'
                   status_code: 403
+    InstanceNotFoundError:
+      description: Error response due to non existant instance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Instance Not Found Example:
+              value:
+                error:
+                  message: '"Instance not found"'
+                  status_code: 404
     InviteResponse400Error:
       description: >-
         Error response when trying to respond to an invite and something went
@@ -7589,6 +7746,18 @@ components:
       description: >-
         Returns *only* offline users if true, returns only online and active
         users if false
+    worldId:
+      name: worldId
+      in: path
+      required: true
+      schema:
+        type: string
+    instanceId:
+      name: instanceId
+      in: path
+      required: true
+      schema:
+        type: string
     notificationId:
       name: notificationId
       in: path
@@ -7614,18 +7783,6 @@ components:
         type: integer
         minimum: 0
         maximum: 11
-    worldId:
-      name: worldId
-      in: path
-      required: true
-      schema:
-        type: string
-    instanceId:
-      name: instanceId
-      in: path
-      required: true
-      schema:
-        type: string
     permissionId:
       name: permissionId
       in: path
