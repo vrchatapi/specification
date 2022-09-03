@@ -12,8 +12,7 @@
       source: >-
         curl -X POST "https://api.vrchat.cloud/api/1/invite/myself/to/{worldid}:{instanceid}" \
              -H "Content-Type: application/json" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
-             --data '{"shortName": "abc123efg"}'
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"'
 '/requestInvite/{userId}':
   post:
     - lang: cURL

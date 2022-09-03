@@ -188,11 +188,6 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
           $ref: ../responses/instances/InstanceNotFoundError.yaml
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/InviteMyselfToRequest.yaml
   '/invite/{notificationId}/response':
     parameters:
       - $ref: ../parameters.yaml#/notificationId
