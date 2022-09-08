@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.7.3
+  version: 1.7.4
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -1464,8 +1464,7 @@ paths:
             "https://api.vrchat.cloud/api/1/invite/myself/to/{worldid}:{instanceid}"
             \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
-                 --data '{"shortName": "abc123efg"}'
+                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"'
       responses:
         '200':
           $ref: '#/components/responses/SendNotificationResponse'
@@ -1473,11 +1472,6 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/InstanceNotFoundError'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InviteMyselfToRequest'
   /requestInvite/{userId}:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -4466,17 +4460,6 @@ components:
         - type
       title: SentNotification
       type: object
-    InviteMyselfToRequest:
-      title: InviteMyselfToRequest
-      type: object
-      properties:
-        shortName:
-          type: string
-          description: >-
-            Short Name of the Instance; can be retrieved from the Get Instance
-            Short Name endpoint.
-      required:
-        - shortName
     RequestInviteRequest:
       title: RequestInviteRequest
       type: object
@@ -4656,10 +4639,14 @@ components:
               example: 5
         region:
           $ref: '#/components/schemas/Region'
+        secureName:
+          type: string
+          minLength: 1
+          example: 7eavhhng
         shortName:
           type: string
           minLength: 1
-          example: fortran-grublink-41d83
+          example: 02u7yz8j
         tags:
           description: >-
             The tags array on Instances usually contain the language tags of the
@@ -4696,10 +4683,24 @@ components:
         - photonRegion
         - platforms
         - region
-        - shortName
+        - secureName
         - tags
         - type
         - worldId
+    InstanceShortNameResponse:
+      properties:
+        secureName:
+          type: string
+          minLength: 1
+          example: 7eavhhng
+        shortName:
+          type: string
+          minLength: 1
+          example: 02u7yz8j
+      required:
+        - secureName
+      title: InstanceShortNameResponse
+      type: object
     PermissionID:
       example: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
       pattern: >-
@@ -7056,13 +7057,11 @@ components:
           schema:
             $ref: '#/components/schemas/Instance'
     InstanceShortNameResponse:
-      description: Returns an instance short name.
+      description: Returns an instance secureName and/or shortName.
       content:
         text/plain:
           schema:
-            type: string
-            example: kidney-grahampizza-64472
-            minLength: 1
+            $ref: '#/components/schemas/InstanceShortNameResponse'
     InstanceSelfInviteSuccess:
       description: Success response after sending an invite to yourself to the instance.
       content:
