@@ -7,5 +7,5 @@ content:
       200 Ok:
         value:
           success:
-            message: "OK"
+            message: "Ok"
             status_code: 200

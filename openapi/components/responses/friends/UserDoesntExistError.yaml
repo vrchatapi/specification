@@ -7,5 +7,5 @@ content:
       404 User Doesn't Exist Response:
         value:
           error:
-            message: "User doesn't exists!"
+            message: "user doesn't exist"
             status_code: 404

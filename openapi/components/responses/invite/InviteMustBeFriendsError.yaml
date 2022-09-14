@@ -7,5 +7,5 @@ content:
       Must Be Friends Error:
         value:
           error:
-            message: "You need to be friends with that user first."
+            message: "\"You need to be friends with that user first.\""
             status_code: 403

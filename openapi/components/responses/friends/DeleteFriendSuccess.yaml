@@ -7,5 +7,5 @@ content:
       Deleted Friend Request:
         value:
           success:
-            message: "Friendship request deleted."
+            message: "Friendship request deleted"
             status_code: 200

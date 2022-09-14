@@ -7,15 +7,15 @@ content:
       Response Slot Out Of Bounds Error:
         value:
           error:
-            message: "Response slot is out of bounds."
+            message: "\"Response slot is out of bounds.\""
             status_code: 400
       Already Responded Error:
         value:
           error:
-            message: "You've already responded to that request."
+            message: "\"You've already responded to that request.\""
             status_code: 400
       Cannot Respond Self Invite Error:
         value:
           error:
-            message: "You cannot respond to your own invites."
+            message: "\"You cannot respond to your own invites.\""
             status_code: 400

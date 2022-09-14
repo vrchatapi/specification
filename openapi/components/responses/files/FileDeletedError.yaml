@@ -7,5 +7,5 @@ content:
       File Deleted Error:
         value:
           error:
-            message: "File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found."
+            message: "File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found"
             status_code: 404

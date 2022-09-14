@@ -7,5 +7,5 @@ content:
       409/500 Delete Non-Last File Version:
         value:
           error:
-            message: "409 Cannot delete against anything but the latest version of this file˸ 1‚ 11."
+            message: "409 Cannot delete against anything but the latest version of this file˸ 1‚ 11"
             status_code: 500

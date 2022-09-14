@@ -7,5 +7,5 @@ content:
       403 Favorite Add Not Friends Error:
         value:
           error:
-            message: "You are not friends with that userǃ"
+            message: "you are not friends with that userǃ"
             status_code: 403

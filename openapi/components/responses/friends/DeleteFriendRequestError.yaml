@@ -7,5 +7,5 @@ content:
       404 Delete Friend Request:
         value:
           error:
-            message: "That friend request could not be found."
+            message: "that friend request could not be found"
             status_code: 404

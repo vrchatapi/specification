@@ -7,5 +7,5 @@ content:
       404 Cant See Other User Favorite Worlds:
         value:
           error:
-            message: "403 You can't see another user's favorites."
+            message: "403 You can't see another user's favorites"
             status_code: 403

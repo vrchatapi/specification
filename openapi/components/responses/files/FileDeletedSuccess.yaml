@@ -7,5 +7,5 @@ content:
       File Deleted Success:
         value:
           success:
-            message: "File deleted."
+            message: "File deleted"
             status_code: 200

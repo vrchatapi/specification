@@ -7,5 +7,5 @@ content:
       404 Player Moderation Not Found:
         value:
           error:
-            message: "Can't find PlayerModerationǃ"
+            message: "Can't find playerModerationǃ"
             status_code: 404

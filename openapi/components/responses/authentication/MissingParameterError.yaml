@@ -7,5 +7,5 @@ content:
       400 At Least One Parameter Required:
         value:
           error:
-            message: "username, email, or displayName required."
+            message: "\"username, email, or displayName required\""
             status_code: 400

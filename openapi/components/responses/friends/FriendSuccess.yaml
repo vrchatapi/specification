@@ -7,5 +7,5 @@ content:
       Unfriend Success:
         value:
           success:
-            message: "OK"
+            message: "Ok"
             status_code: 200
