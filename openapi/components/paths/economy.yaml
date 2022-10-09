@@ -11,6 +11,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1Steam~1transactions/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionListResponse.yaml
@@ -28,6 +30,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1Steam~1transactions~1{transactionId}/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionResponse.yaml
@@ -44,6 +48,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1Admin~1transactions/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionListResponse.yaml
@@ -62,6 +68,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1Admin~1transactions~1{transactionId}/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionResponse.yaml
@@ -79,6 +87,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1auth~1user~1subscription/get"
       responses:
         '200':
           $ref: ../responses/economy/UserSubscriptionListResponse.yaml
@@ -94,6 +104,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1subscriptions/get"
       responses:
         '200':
           $ref: ../responses/economy/SubscriptionListResponse.yaml
@@ -109,6 +121,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1licenseGroups/get"
       responses:
         '200':
           $ref: ../responses/economy/LicenseGroupListResponse.yaml
@@ -130,6 +144,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1licenseGroups~1{licenseGroupId}/get"
       responses:
         '200':
           $ref: ../responses/economy/LicenseGroupResponse.yaml

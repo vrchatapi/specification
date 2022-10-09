@@ -12,6 +12,8 @@ paths:
       summary: List Invite Messages
       tags:
         - invite
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1message~1{userId}~1{messageType}/get"
       responses:
         '200':
           $ref: ../responses/invite/InviteMessageListResponse.yaml
@@ -41,6 +43,8 @@ paths:
       summary: Get Invite Message
       tags:
         - invite
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1message~1{userId}~1{messageType}~1{slot}/get"
       responses:
         '200':
           $ref: ../responses/invite/InviteMessageResponse.yaml
@@ -81,6 +85,8 @@ paths:
         * `response` = Message when replying to a message
         * `request` = Message when requesting an invite
         * `requestResponse` = Message when replying to a request for invite
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1message~1{userId}~1{messageType}~1{slot}/put"
       responses:
         '200':
           $ref: ../responses/invite/InviteMessageListResponse.yaml
@@ -104,6 +110,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1message~1{userId}~1{messageType}~1{slot}/delete"
       responses:
         '200':
           $ref: ../responses/invite/InviteMessageListResponse.yaml
@@ -140,9 +148,11 @@ paths:
       summary: Invite User
       tags:
         - invite
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1invite~1{userId}/post"
       responses:
         '200':
-          $ref: ../responses/notifications/NotificationResponse.yaml
+          $ref: ../responses/notifications/SendNotificationResponse.yaml
         '403':
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
       operationId: inviteUser
@@ -156,6 +166,28 @@ paths:
             schema:
               $ref: ../requests/InviteRequest.yaml
         description: Slot number of the Invite Message to use when inviting a user.
+  '/invite/myself/to/{worldId}:{instanceId}':
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
+    post:
+      summary: Invite Myself To Instance
+      tags:
+        - invite
+      operationId: inviteMyselfTo
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Sends self an invite to an instance
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1invite~1myself~1to~1{worldid}:{instanceid}/post"
+      responses:
+        '200':
+          $ref: ../responses/notifications/SendNotificationResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/instances/InstanceNotFoundError.yaml
   '/invite/{notificationId}/response':
     parameters:
       - $ref: ../parameters.yaml#/notificationId
@@ -163,6 +195,8 @@ paths:
       summary: Respond Invite
       tags:
         - invite
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1invite~1{notificationId}~1response/post"
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml
@@ -197,6 +231,8 @@ paths:
         description: Slot number of the Request Message to use when request an invite.
       tags:
         - invite
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1requestInvite~1{userId}/post"
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml

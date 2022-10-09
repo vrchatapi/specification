@@ -11,6 +11,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/permissions.yaml#/~1auth~1permissions/get"
       responses:
         '200':
           $ref: ../responses/permissions/PermissionListResponse.yaml
@@ -25,6 +27,8 @@ paths:
       summary: Get Permissions
       tags:
         - permissions
+      x-codeSamples:
+        $ref: "../codeSamples/permissions.yaml#/~1permissions/get"
       responses:
         '200':
           $ref: ../responses/permissions/PermissionListResponse.yaml
@@ -44,6 +48,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/permissions.yaml#/~1permissions/post"
       responses:
         '200':
           $ref: ../responses/permissions/PermissionResponse.yaml
@@ -82,6 +88,8 @@ paths:
       summary: Get Permission
       tags:
         - permissions
+      x-codeSamples:
+        $ref: "../codeSamples/permissions.yaml#/~1permissions~1{permissionId}/get"
       responses:
         '200':
           $ref: ../responses/permissions/PermissionResponse.yaml
@@ -98,6 +106,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/permissions.yaml#/~1permissions~1{permissionId}/put"
       responses:
         '200':
           $ref: ../responses/permissions/PermissionResponse.yaml
@@ -126,6 +136,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/permissions.yaml#/~1permissions~1{permissionId}/delete"
       responses:
         '200':
           $ref: ../responses/permissions/PermissionResponse.yaml

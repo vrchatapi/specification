@@ -7,6 +7,8 @@ paths:
   /files:
     get:
       summary: List Files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1files/get"
       responses:
         '200':
           $ref: ../responses/files/FileListResponse.yaml
@@ -37,6 +39,8 @@ paths:
       summary: Create File
       tags:
         - files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file/post"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -58,6 +62,8 @@ paths:
       operationId: getFile
       tags:
         - files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}/get"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -70,6 +76,8 @@ paths:
     delete:
       summary: Delete File
       operationId: deleteFile
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}/delete"
       responses:
         '200':
           $ref: ../responses/files/FileDeletedSuccess.yaml
@@ -84,6 +92,8 @@ paths:
     post:
       summary: Create File Version
       operationId: createFileVersion
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}/post"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -106,6 +116,8 @@ paths:
       summary: Download File Version
       tags:
         - files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}/get"
       responses:
         '200':
           $ref: ../responses/files/RawFileResponse.yaml
@@ -122,6 +134,8 @@ paths:
     delete:
       summary: Delete File Version
       operationId: deleteFileVersion
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}/delete"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -144,6 +158,8 @@ paths:
       summary: Check FileData Upload Status
       tags:
         - files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file~1{fieldId}~1{versionId}~1{fileType}~1status/get"
       responses:
         '200':
           $ref: ../responses/files/FileVersionUploadStatusResponse.yaml
@@ -161,6 +177,8 @@ paths:
       summary: Start FileData Upload
       tags:
         - files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}~1{fileType}~1start/put"
       responses:
         '200':
           $ref: ../responses/files/FileUploadURLResponse.yaml
@@ -191,6 +209,8 @@ paths:
       summary: Finish FileData Upload
       tags:
         - files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}~1{fileType}~1finish/put"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml

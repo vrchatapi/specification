@@ -1,0 +1,48 @@
+/avatars/favorites:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/avatars/favorites?featured=true" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+/avatars:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/avatars?featured=true" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/avatars" \
+             -H "Content-Type: application/json" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             --data '{"assetUrl": "string", "id": "{avatarId}", "name": "string", "description": "string", "tags": ["string"], "imageUrl": "string", "releaseStatus": "public", "version": 1, "unityPackageUrl": "string"}'
+'/avatars/{avatarId}':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+  put:
+    - lang: cURL
+      source: >-
+        curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
+             -H "Content-Type: application/json" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             --data '{"assetUrl": "string", "id": "{avatarId}", "name": "string", "description": "string", "tags": ["string"], "imageUrl": "string", "releaseStatus": "public", "version": 1, "unityPackageUrl": "string"}'
+  delete:
+    - lang: cURL
+      source: >-
+        curl -X DELETE "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+'/avatars/{avatarId}/select':
+  put:
+    - lang: cURL
+      source: >-
+        curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/select" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+'/avatars/{avatarId}/selectFallback':
+  put:
+    - lang: cURL
+      source: >-
+        curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback"

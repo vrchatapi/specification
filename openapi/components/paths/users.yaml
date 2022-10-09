@@ -9,6 +9,8 @@ paths:
       summary: Search All Users
       tags:
         - users
+      x-codeSamples:
+        $ref: "../codeSamples/users.yaml#/~1users/get"
       responses:
         '200':
           $ref: ../responses/users/LimitedUserListResponse.yaml
@@ -46,6 +48,8 @@ paths:
       summary: Get User by Username
       tags:
         - users
+      x-codeSamples:
+        $ref: "../codeSamples/users.yaml#/~1users~1{username}~1name/get"
       responses:
         '200':
           $ref: ../responses/users/UserResponse.yaml
@@ -63,6 +67,8 @@ paths:
       summary: Get User by ID
       tags:
         - users
+      x-codeSamples:
+        $ref: "../codeSamples/users.yaml#/~1users~1{userId}/get"
       responses:
         '200':
           $ref: ../responses/users/UserResponse.yaml
@@ -76,6 +82,8 @@ paths:
     put:
       summary: Update User Info
       operationId: updateUser
+      x-codeSamples:
+        $ref: "../codeSamples/users.yaml#/~1users~1{userId}/put"
       responses:
         '200':
           $ref: ../responses/users/CurrentUserResponse.yaml
@@ -95,6 +103,8 @@ paths:
       summary: Search Active Users
       tags:
         - users
+      x-codeSamples:
+        $ref: "../codeSamples/users.yaml#/~1users~1active/get"
       responses:
         '200':
           description: OK

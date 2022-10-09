@@ -94,6 +94,8 @@
 
 "/invite/{userId}":
   $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}"
+"/invite/myself/to/{worldId}:{instanceId}":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1myself~1to~1{worldId}:{instanceId}"
 "/requestInvite/{userId}":
   $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}"
 "/invite/{notificationId}/response":
@@ -111,6 +113,8 @@
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1shortName"
 "/instances/{worldId}:{instanceId}/invite":
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1invite"
+"/instances/s/{shortName}":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1s~1{shortName}"
 
 # notifications
 

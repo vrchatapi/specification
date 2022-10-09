@@ -6,7 +6,7 @@ info:
     There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players. PlayerModerations are user-generated actions towards others, such as muting them, blocking, or hiding their avatar.
 
     Player moderations are also used for other things, such as in the Avatar Dynamics Interaction system.
-    Permissions which affect globally are stored in a Registry key locally on your computer, but player-specific moderations (when you target a player, and allow them specifically to interract with you) is stored in the API.
+    Permissions which affect globally are stored in a Registry key locally on your computer, but player-specific moderations (when you target a player, and allow them specifically to interact with you) is stored in the API.
 
     There are three different user-targetted permission options:
 
@@ -26,6 +26,8 @@ paths:
       summary: Search Player Moderations
       tags:
         - playermoderation
+      x-codeSamples:
+        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/get"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationListResponse.yaml
@@ -62,6 +64,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/post"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
@@ -85,6 +89,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/delete"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationClearAllSuccess.yaml
@@ -106,6 +112,8 @@ paths:
             schema:
               $ref: ../requests/ModerateUserRequest.yaml
       description: 'Removes a player moderation previously added through `moderateUser`. E.g if you previously have shown their avatar, but now want to reset it to default.'
+      x-codeSamples:
+        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1unplayermoderate/put"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationUnmoderatedSuccess.yaml
@@ -118,6 +126,8 @@ paths:
       summary: Get Player Moderation
       tags:
         - playermoderation
+      x-codeSamples:
+        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations~1{playerModerationId}/get"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
@@ -136,6 +146,8 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations~1{playerModerationId}/delete"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationRemovedSuccess.yaml

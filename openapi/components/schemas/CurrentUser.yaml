@@ -115,6 +115,7 @@ properties:
     type: boolean
   twoFactorAuthEnabledDate:
     format: date-time
+    nullable: true
     type: string
   unsubscribe:
     type: boolean
