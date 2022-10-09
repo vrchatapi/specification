@@ -2,9 +2,6 @@ description: ''
 title: World
 type: object
 properties:
-  assetUrl:
-    type: string
-    description: Empty if unauthenticated.
   authorId:
     $ref: ./UserID.yaml
   authorName:
@@ -45,7 +42,8 @@ properties:
       maxItems: 2
       minItems: 2
       type: array
-      items: {}
+      items:
+        type: object
   labsPublicationDate:
     example: none
     minLength: 1
@@ -115,7 +113,6 @@ properties:
     minimum: 0
     type: integer
 required:
-  - assetUrl
   - authorId
   - authorName
   - capacity
