@@ -154,7 +154,6 @@ required:
   - hasLoggedInFromClient
   - homeLocation
   - twoFactorAuthEnabled
-  - twoFactorAuthEnabledDate
   - state
   - tags
   - developerType
