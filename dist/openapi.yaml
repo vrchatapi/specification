@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.7.4
+  version: 1.7.5
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -246,6 +246,13 @@ paths:
         This endpoint does the following two operations:
           1) Checks if you are already logged in by looking for a valid `auth` cookie. If you are have a valid auth cookie then no additional auth-related actions are taken. If you are **not** logged in then it will log you in with the `Authorization` header and set the `auth` cookie. The `auth` cookie will only be sent once.
           2) If logged in, this function will also return the CurrentUser object containing detailed information about the currently logged in user.
+
+        The auth string after `Authorization: Basic {string}` is a
+        base64-encoded string of the username and password, both individually
+        url-encoded, and then joined with a colon.
+          
+        > base64(urlencode(username):urlencode(password))
+
 
         **WARNING: Session Limit:** Each authentication with login credentials
         counts as a separate session, out of which you have a limited amount.
@@ -6040,9 +6047,6 @@ components:
       title: World
       type: object
       properties:
-        assetUrl:
-          type: string
-          description: Empty if unauthenticated.
         authorId:
           $ref: '#/components/schemas/UserID'
         authorName:
@@ -6083,7 +6087,8 @@ components:
             maxItems: 2
             minItems: 2
             type: array
-            items: {}
+            items:
+              type: object
         labsPublicationDate:
           example: none
           minLength: 1
@@ -6153,7 +6158,6 @@ components:
           minimum: 0
           type: integer
       required:
-        - assetUrl
         - authorId
         - authorName
         - capacity
