@@ -42,8 +42,7 @@ properties:
       maxItems: 2
       minItems: 2
       type: array
-      items:
-        type: object
+      items: {}
   labsPublicationDate:
     example: none
     minLength: 1
