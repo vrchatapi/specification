@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.7.5
+  version: 1.7.6
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -6087,8 +6087,7 @@ components:
             maxItems: 2
             minItems: 2
             type: array
-            items:
-              type: object
+            items: {}
         labsPublicationDate:
           example: none
           minLength: 1
