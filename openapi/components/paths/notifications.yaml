@@ -28,6 +28,7 @@ paths:
           in: query
           name: type
           description: Only send notifications of this type (can use `all` for all).
+          deprecated: true
         - schema:
             type: boolean
           in: query
