@@ -175,7 +175,9 @@ paths:
           $ref: ../responses/worlds/WorldResponse.yaml
         '404':
           $ref: ../responses/worlds/WorldNotFoundError.yaml
-      description: Get information about a specific World.
+      description: |-
+        Get information about a specific World.
+        Works unauthenticated but when so will always return `0` for certain fields.
       security:
         - apiKeyCookie: []
     put:

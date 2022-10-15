@@ -38,6 +38,7 @@ properties:
     type: string
   instances:
     type: array
+    description: Will always be an empty list when unauthenticated.
     items:
       maxItems: 2
       minItems: 2
@@ -57,6 +58,7 @@ properties:
     example: 47
     minimum: 0
     type: integer
+    description: Will always be `0` when unauthenticated.
   organization:
     default: vrchat
     minLength: 1
@@ -74,11 +76,13 @@ properties:
     example: 1
     minimum: 0
     type: integer
+    description: Will always be `0` when unauthenticated.
   publicOccupants:
     default: 0
     example: 46
     minimum: 0
     type: integer
+    description: Will always be `0` when unauthenticated.
   publicationDate:
     example: none
     minLength: 1
