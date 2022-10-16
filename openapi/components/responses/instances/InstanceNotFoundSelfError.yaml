@@ -1,0 +1,11 @@
+description: Error response due to non existant instance
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      Instance Not Found Example:
+        value:
+          error:
+            message: "Application error"
+            status_code: 404

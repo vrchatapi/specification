@@ -92,6 +92,29 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
           $ref: ../responses/instances/InstanceNotFoundError.yaml
+  '/invite/myself/to/{worldId}:{instanceId}':
+    post:
+      summary: Invite Myself To World
+      tags:
+        - instances
+        - worlds
+      responses:
+        '200':
+          $ref: '../responses/notifications/SendNotificationResponse.yaml'
+        '403':
+          $ref: '../responses/instances/InstanceNoPermissionsError.yaml'
+        '404':
+          $ref: '../response/instances/InstanceNotFoundSelfError.yaml'
+      operationId: inviteMyselfToInstance
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      x-codeSamples:
+        $ref: '../codeSamples/worlds.yaml/~1inivte~1myself~1to~1{worldId}:{instanceId}/post'
+      description: Sends an invite to yourself to an instance.
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
 tags:
   $ref: ../tags.yaml
 components:

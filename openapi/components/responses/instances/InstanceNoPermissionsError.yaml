@@ -1,0 +1,11 @@
+description: Error response due to incorrect nonce (incorrect permissions).
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      Instance Incorrect Permissions Example:
+        value:
+          error:
+            message: "If the instance exists, you're not allowed to access it."
+            status_code: 403

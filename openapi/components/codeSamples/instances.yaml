@@ -22,3 +22,9 @@
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/instances/s/{shortname}" \
              -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+'/invite/myself/to/{worldId}:{instanceId}':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/invite/myself/to/{worldId}:{instanceId}" \
+             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
