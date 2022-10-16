@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.7.6
+  version: 1.7.7
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -1884,7 +1884,10 @@ paths:
             example: all
           in: query
           name: type
-          description: Only send notifications of this type (can use `all` for all).
+          description: >-
+            Only send notifications of this type (can use `all` for all). This
+            parameter no longer does anything, and is deprecated.
+          deprecated: true
         - schema:
             type: boolean
           in: query
@@ -2719,7 +2722,11 @@ paths:
           $ref: '#/components/responses/WorldResponse'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
-      description: Get information about a specific World.
+      description: >-
+        Get information about a specific World.
+
+        Works unauthenticated but when so will always return `0` for certain
+        fields.
       security:
         - apiKeyCookie: []
     put:
@@ -6083,6 +6090,7 @@ components:
           type: string
         instances:
           type: array
+          description: Will always be an empty list when unauthenticated.
           items:
             maxItems: 2
             minItems: 2
@@ -6102,6 +6110,7 @@ components:
           example: 47
           minimum: 0
           type: integer
+          description: Will always be `0` when unauthenticated.
         organization:
           default: vrchat
           minLength: 1
@@ -6119,11 +6128,13 @@ components:
           example: 1
           minimum: 0
           type: integer
+          description: Will always be `0` when unauthenticated.
         publicOccupants:
           default: 0
           example: 46
           minimum: 0
           type: integer
+          description: Will always be `0` when unauthenticated.
         publicationDate:
           example: none
           minLength: 1
