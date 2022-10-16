@@ -1,0 +1,11 @@
+description: Error response when trying to see another users current avatar without sufficient admin permissions.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      403 Cant See Other Users Current Avatar:
+        value:
+          error:
+            message: \"You do not have permission to fetch details about the avatar on this user.\"
+            status_code: 403
