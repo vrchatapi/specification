@@ -4,6 +4,26 @@ info:
   version: '1.0'
   description: Avatars Docs Here
 paths:
+  '/users/{userId}/avatar':
+    get:
+      summary: Get Own Avatar
+      tags:
+        - avatars
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/avatars/AvatarSeeOtherUserCurrentAvatar.yaml
+      operationId: getOwnAvatar
+      x-codeSamples:
+        $ref: '../codeSamples/avatars.yaml#/~1users~1{userId}~1avatar/get'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    parameters:
+      - $ref: ../parameters.yaml#/userId
   /avatars/favorites:
     get:
       summary: List Favorited Avatars
@@ -202,26 +222,6 @@ paths:
         - apiKeyCookie: []
           authCookie: []
       description: Switches into that avatar as your fallback avatar.
-  '/users/{userId}/avatar':
-    get:
-      summary: Get Own Avatar
-      tags:
-        - avatars
-      responses:
-        '200':
-          $ref: ../responses/avatars/AvatarResponse.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
-        '403':
-          $ref: ../responses/avatars/AvatarSeeOtherUserCurrentAvatar.yaml
-      operationId: getOwnAvatar
-      x-codeSamples:
-        $ref: '../codeSamples/avatars.yaml#/~1users~1{userId}~1avatar/get'
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-    parameters:
-      - $ref: ../parameters.yaml#/userId
 tags:
   $ref: ../tags.yaml
 components:
