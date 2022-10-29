@@ -240,6 +240,7 @@ example:
   player-url-resolver-version: '2021-05-16'
 title: API Config
 type: object
+description: ''
 properties:
   VoiceEnableDegradation:
     default: false
@@ -254,14 +255,15 @@ properties:
     minLength: 1
     type: string
   announcements:
-    description: Public Announcements
-    minItems: 1
     type: array
+    description: Public Announcements
     uniqueItems: true
+    minItems: 0
     items:
+      type: object
       description: Public Announcement
       title: Public Announcement
-      type: object
+      deprecated: true
       properties:
         name:
           description: Announcement name
