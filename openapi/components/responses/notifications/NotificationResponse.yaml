@@ -8,7 +8,6 @@ content:
         value:
           id: frq_00000000-0000-0000-0000-000000000000
           senderUserId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-          senderUsername: tupper
           type: friendRequest
           message: ''
           details: '{}'
