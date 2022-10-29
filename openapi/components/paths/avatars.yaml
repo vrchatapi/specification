@@ -22,6 +22,7 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+      description: Get the current avatar for the user. This will return an error for any other user than the one logged in.
     parameters:
       - $ref: ../parameters.yaml#/userId
   /avatars/favorites:
