@@ -15,7 +15,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '403':
-          $ref: ../responses/avatars/AvatarSeeOtherUserCurrentAvatar.yaml
+          $ref: ../responses/avatars/AvatarSeeOtherUserCurrentAvatarError.yaml
       operationId: getOwnAvatar
       x-codeSamples:
         $ref: '../codeSamples/avatars.yaml#/~1users~1{userId}~1avatar/get'
