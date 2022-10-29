@@ -46,3 +46,8 @@
     - lang: cURL
       source: >-
         curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback"
+'/users/{userId}/avatar':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/avatar" -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
