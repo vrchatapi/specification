@@ -59,7 +59,6 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-      description: Get public user information about a specific user using their name.
       description: |-
         ~~Get public user information about a specific user using their name.~~
 
