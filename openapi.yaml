@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.7.7
+  version: 1.8.0
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -2474,7 +2474,16 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-      description: Get public user information about a specific user using their name.
+      description: >-
+        ~~Get public user information about a specific user using their name.~~
+
+
+        **DEPRECATED:** VRChat API no longer return usernames of other users.
+        [See issue by Tupper for more
+        information](https://github.com/pypy-vrc/VRCX/issues/429).
+
+        This endpoint now require Admin Credentials.
+      deprecated: true
   /users/{userId}:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -3177,9 +3186,13 @@ components:
           type: string
         username:
           type: string
+          deprecated: true
+          description: >-
+            -| **DEPRECATED:** VRChat API no longer return usernames of other
+            users. [See issue by Tupper for more
+            information](https://github.com/pypy-vrc/VRCX/issues/429).
       required:
         - id
-        - username
         - displayName
         - userIcon
         - bio
@@ -4311,13 +4324,17 @@ components:
           type: string
         username:
           type: string
+          deprecated: true
+          description: >-
+            -| **DEPRECATED:** VRChat API no longer return usernames of other
+            users. [See issue by Tupper for more
+            information](https://github.com/pypy-vrc/VRCX/issues/429).
         location:
           type: string
         friendKey:
           type: string
       required:
         - id
-        - username
         - displayName
         - userIcon
         - profilePicOverride
@@ -4376,12 +4393,16 @@ components:
         senderUsername:
           minLength: 1
           type: string
+          deprecated: true
+          description: >-
+            -| **DEPRECATED:** VRChat API no longer return usernames of other
+            users. [See issue by Tupper for more
+            information](https://github.com/pypy-vrc/VRCX/issues/429).
         type:
           $ref: '#/components/schemas/NotificationType'
       required:
         - id
         - senderUserId
-        - senderUsername
         - type
         - message
         - details
@@ -4461,6 +4482,11 @@ components:
         senderUsername:
           minLength: 1
           type: string
+          deprecated: true
+          description: >-
+            -| **DEPRECATED:** VRChat API no longer return usernames of other
+            users. [See issue by Tupper for more
+            information](https://github.com/pypy-vrc/VRCX/issues/429).
         type:
           $ref: '#/components/schemas/NotificationType'
       required:
@@ -4470,7 +4496,6 @@ components:
         - message
         - recieverUserId
         - senderUserId
-        - senderUsername
         - type
       title: SentNotification
       type: object
@@ -5121,6 +5146,7 @@ components:
         player-url-resolver-version: 2021-05-16
       title: API Config
       type: object
+      description: ''
       properties:
         VoiceEnableDegradation:
           default: false
@@ -5135,14 +5161,15 @@ components:
           minLength: 1
           type: string
         announcements:
-          description: Public Announcements
-          minItems: 1
           type: array
+          description: Public Announcements
           uniqueItems: true
+          minItems: 0
           items:
+            type: object
             description: Public Announcement
             title: Public Announcement
-            type: object
+            deprecated: true
             properties:
               name:
                 description: Announcement name
@@ -5826,9 +5853,14 @@ components:
         username:
           type: string
           description: >-
-            A users unique name, used during login. This is different from
+            -| A users unique name, used during login. This is different from
             `displayName` which is what shows up in-game. A users `username` can
-            never be changed.
+            never be changed.'
+
+            **DEPRECATED:** VRChat API no longer return usernames of other
+            users. [See issue by Tupper for more
+            information](https://github.com/pypy-vrc/VRCX/issues/429).
+          deprecated: true
         worldId:
           $ref: '#/components/schemas/WorldID'
       required:
@@ -5853,7 +5885,6 @@ components:
         - statusDescription
         - tags
         - userIcon
-        - username
     UpdateUserRequest:
       title: UpdateUserRequest
       type: object
@@ -6815,7 +6846,6 @@ components:
               value:
                 id: frq_00000000-0000-0000-0000-000000000000
                 senderUserId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-                senderUsername: tupper
                 type: friendRequest
                 message: ''
                 details: '{}'
@@ -6912,7 +6942,6 @@ components:
                 id: frq_00000000-0000-0000-0000-000000000000
                 recieverUserId: usr_00000000-0000-0000-0000-000000000000
                 senderUserId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-                senderUsername: tupper
                 type: friendRequest
                 message: ''
                 details: '{}'
