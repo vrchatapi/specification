@@ -3,23 +3,37 @@ info:
   title: playermoderation
   version: '1.0'
   description: |-
-    There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players. PlayerModerations are user-generated actions towards others, such as muting them, blocking, or hiding their avatar.
+    There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players.
+    PlayerModerations are user-generated actions towards others, such as muting them, blocking, or toggling interaction.
 
-    Player moderations are also used for other things, such as in the Avatar Dynamics Interaction system.
-    Permissions which affect globally are stored in a Registry key locally on your computer, but player-specific moderations (when you target a player, and allow them specifically to interact with you) is stored in the API.
+    Your global permission settings are stored locally on your computer.
+    Only player-specific moderations (when you target a player, and allow them specifically to interact with you) are stored in the API.
+
+    ## Implementation details
 
     There are three different user-targetted permission options:
 
-    - Force On
-    - Force Off
-    - User Current Setting
+    - Mode 1: interactOn/showAvatar/unmute
+    - Mode 2: interactOff/hideAvatar/mute
+    - *Default setting*
 
-    Force On a.k.a `interactOn` and Force Off `interactOff` always or never allow that person to interact with you. These are stored as PlayerModerations. When you select a player and select "Force On", it creates a playerModeration of type `interactOn`.
+    **Example:**
+    
+    Force On (`interactOn`) and Force Off (`interactOff`) always or never allow that person to interact with you.
+    These are stored as PlayerModerations. When you select a player and select "Force On", it creates a playerModeration of type `interactOn`.
 
-    ## Two important implementation details:
+    **Important order:**
 
-    1. When switching between "Force On" and "Force Off", **the previous playerModeration MUST first be deleted before creating the second one.** The game sends these in sequence, first delete the old, then create the new. Attempting to create both `interactOn` and `interactOff` is UNDOCUMENTED behavior.
-    2. "Use Current Setting" **does not have it's own type**. It simply removes the previous playerModeration. No playerModeration of either type means fallback to the global setting.
+    1. When switching between one mode from the other, e.g. "Force On" and "Force Off", **the previous playerModeration MUST first be deleted before creating the second.**
+       The game sends these in sequence, first delete the old, then create the new. Attempting to create both `interactOn` and `interactOff` is UNDOCUMENTED behavior.
+    2. "Use Current Setting" **does not have it's own enum**. The game removes any previous playerModeration of same type.
+       No playerModeration of either type means fallback to the global setting.
+
+    ## Deprecation notice
+
+    As of October 2022, `showAvatar` and `hideAvatar` has been moved to local storage.
+    Sending these types to the API will result in a 200 OK response, but the API will **not** store them.
+    More information is avaiable on VRChat's official [documentation on Local Storage](https://docs.vrchat.com/docs/local-vrchat-storage).
 paths:
   /auth/user/playermoderations:
     get:

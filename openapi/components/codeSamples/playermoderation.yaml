@@ -2,7 +2,7 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/auth/user/playermoderations?type=showAvatar&targetUserId={userId}" \
+        curl -X GET "https://api.vrchat.cloud/api/1/auth/user/playermoderations?type=unmute&targetUserId={userId}" \
              -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
   post:
     - lang: cURL
@@ -10,7 +10,7 @@
         curl -X POST "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
              -H "Content-Type: application/json" \
              -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
-             --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "showAvatar"}'
+             --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
   delete:
     - lang: cURL
       source: >-
@@ -34,4 +34,4 @@
         curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/unplayermoderate" \
              -H "Content-Type: application/json" \
              -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
-             --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "showAvatar"}'
+             --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
