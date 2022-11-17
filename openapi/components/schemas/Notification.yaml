@@ -18,6 +18,8 @@ properties:
   seen:
     default: false
     type: boolean
+  receiverUserId:
+    $ref: ./UserID.yaml
   senderUserId:
     $ref: ./UserID.yaml
   senderUsername:
@@ -34,7 +36,6 @@ required:
   - type
   - message
   - details
-  - seen
   - created_at
 title: Notification
 type: object
