@@ -87,7 +87,6 @@ required:
   - developerType
   - displayName
   - friendKey
-  - friendRequestStatus
   - id
   - isFriend
   - last_activity
