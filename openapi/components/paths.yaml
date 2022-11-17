@@ -21,6 +21,8 @@
 
 # avatars
 
+'/users/{userId}/avatar':
+  $ref: "./paths/avatars.yaml#/paths/~1users~1{userId}~1avatar"
 "/avatars":
   $ref: "./paths/avatars.yaml#/paths/~1avatars"
 "/avatars/{avatarId}":
