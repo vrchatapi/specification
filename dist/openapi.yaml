@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.8.0
+  version: 1.9.0
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -403,6 +403,32 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+  /users/{userId}/avatar:
+    get:
+      summary: Get Own Avatar
+      tags:
+        - avatars
+      responses:
+        '200':
+          $ref: '#/components/responses/AvatarResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/AvatarSeeOtherUserCurrentAvatarError'
+      operationId: getOwnAvatar
+      x-codeSamples:
+        - lang: cURL
+          source: >-
+            curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/avatar"
+            -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: >-
+        Get the current avatar for the user. This will return an error for any
+        other user than the one logged in.
+    parameters:
+      - $ref: '#/components/parameters/userId'
   /avatars:
     get:
       summary: Search Avatars
@@ -2067,7 +2093,7 @@ paths:
         - lang: cURL
           source: >-
             curl -X GET
-            "https://api.vrchat.cloud/api/1/auth/user/playermoderations?type=showAvatar&targetUserId={userId}"
+            "https://api.vrchat.cloud/api/1/auth/user/playermoderations?type=unmute&targetUserId={userId}"
             \
                  -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
       responses:
@@ -2111,7 +2137,7 @@ paths:
             "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
                  -H "Content-Type: application/json" \
                  -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
-                 --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "showAvatar"}'
+                 --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
       responses:
         '200':
           $ref: '#/components/responses/PlayerModerationResponse'
@@ -2233,7 +2259,7 @@ paths:
             "https://api.vrchat.cloud/api/1/auth/user/unplayermoderate" \
                  -H "Content-Type: application/json" \
                  -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
-                 --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "showAvatar"}'
+                 --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
       responses:
         '200':
           $ref: '#/components/responses/PlayerModerationUnmoderatedSuccess'
@@ -4782,17 +4808,15 @@ components:
       type: string
     PlayerModerationType:
       type: string
-      default: showAvatar
+      default: unmute
       enum:
         - mute
         - unmute
         - block
         - unblock
-        - hideAvatar
-        - showAvatar
         - interactOn
         - interactOff
-      example: showAvatar
+      example: unmute
       title: PlayerModerationType
     PlayerModeration:
       properties:
@@ -6421,6 +6445,28 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CurrentUser'
+    AvatarResponse:
+      description: Returns a single Avatar object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Avatar'
+    AvatarSeeOtherUserCurrentAvatarError:
+      description: >-
+        Error response when trying to see another users current avatar without
+        sufficient admin permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            403 Cant See Other Users Current Avatar:
+              value:
+                error:
+                  message: >-
+                    \"You do not have permission to fetch details about the
+                    avatar on this user.\"
+                  status_code: 403
     AvatarListResponse:
       description: Returns a list of Avatar objects.
       content:
@@ -6429,12 +6475,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Avatar'
-    AvatarResponse:
-      description: Returns a single Avatar object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Avatar'
     FeaturedSetNotAdminError:
       description: Error response when set featured to true without being an admin.
       content:
@@ -7897,47 +7937,63 @@ tags:
   - name: playermoderation
     description: >-
       There are two different moderation API's, "moderation" for Staff actions,
-      and "playermoderation" for players. PlayerModerations are user-generated
-      actions towards others, such as muting them, blocking, or hiding their
-      avatar.
+      and "playermoderation" for players.
+
+      PlayerModerations are user-generated actions towards others, such as
+      muting them, blocking, or toggling interaction.
 
 
-      Player moderations are also used for other things, such as in the Avatar
-      Dynamics Interaction system.
+      Your global permission settings are stored locally on your computer.
 
-      Permissions which affect globally are stored in a Registry key locally on
-      your computer, but player-specific moderations (when you target a player,
-      and allow them specifically to interact with you) is stored in the API.
+      Only player-specific moderations (when you target a player, and allow them
+      specifically to interact with you) are stored in the API.
+
+
+      ## Implementation details
 
 
       There are three different user-targetted permission options:
 
 
-      - Force On
+      - Mode 1: interactOn/showAvatar/unmute
 
-      - Force Off
+      - Mode 2: interactOff/hideAvatar/mute
 
-      - User Current Setting
-
-
-      Force On a.k.a `interactOn` and Force Off `interactOff` always or never
-      allow that person to interact with you. These are stored as
-      PlayerModerations. When you select a player and select "Force On", it
-      creates a playerModeration of type `interactOn`.
+      - *Default setting*
 
 
-      ## Two important implementation details:
+      **Example:**
 
 
-      1. When switching between "Force On" and "Force Off", **the previous
-      playerModeration MUST first be deleted before creating the second one.**
-      The game sends these in sequence, first delete the old, then create the
-      new. Attempting to create both `interactOn` and `interactOff` is
-      UNDOCUMENTED behavior.
+      Force On (`interactOn`) and Force Off (`interactOff`) always or never
+      allow that person to interact with you.
 
-      2. "Use Current Setting" **does not have it's own type**. It simply
-      removes the previous playerModeration. No playerModeration of either type
-      means fallback to the global setting.
+      These are stored as PlayerModerations. When you select a player and select
+      "Force On", it creates a playerModeration of type `interactOn`.
+
+
+      **Important order:**
+
+
+      1. When switching between one mode from the other, e.g. "Force On" and
+      "Force Off", **the previous playerModeration MUST first be deleted before
+      creating the second.**
+         The game sends these in sequence, first delete the old, then create the new. Attempting to create both `interactOn` and `interactOff` is UNDOCUMENTED behavior.
+      2. "Use Current Setting" **does not have it's own enum**. The game removes
+      any previous playerModeration of same type.
+         No playerModeration of either type means fallback to the global setting.
+
+      ## Deprecation notice
+
+
+      As of October 2022, `showAvatar` and `hideAvatar` has been moved to local
+      storage.
+
+      Sending these types to the API will result in a 200 OK response, but the
+      API will **not** store them.
+
+      More information is avaiable on VRChat's official [documentation on Local
+      Storage](https://docs.vrchat.com/docs/local-vrchat-storage).
   - name: system
     description: System Docs Here
   - name: users
