@@ -10,7 +10,7 @@ paths:
       tags:
         - users
       x-codeSamples:
-        $ref: "../codeSamples/users.yaml#/~1users/get"
+        $ref: '../codeSamples/users.yaml#/~1users/get'
       responses:
         '200':
           $ref: ../responses/users/LimitedUserListResponse.yaml
@@ -49,7 +49,7 @@ paths:
       tags:
         - users
       x-codeSamples:
-        $ref: "../codeSamples/users.yaml#/~1users~1{username}~1name/get"
+        $ref: '../codeSamples/users.yaml#/~1users~1{username}~1name/get'
       responses:
         '200':
           $ref: ../responses/users/UserResponse.yaml
@@ -73,7 +73,7 @@ paths:
       tags:
         - users
       x-codeSamples:
-        $ref: "../codeSamples/users.yaml#/~1users~1{userId}/get"
+        $ref: '../codeSamples/users.yaml#/~1users~1{userId}/get'
       responses:
         '200':
           $ref: ../responses/users/UserResponse.yaml
@@ -88,7 +88,7 @@ paths:
       summary: Update User Info
       operationId: updateUser
       x-codeSamples:
-        $ref: "../codeSamples/users.yaml#/~1users~1{userId}/put"
+        $ref: '../codeSamples/users.yaml#/~1users~1{userId}/put'
       responses:
         '200':
           $ref: ../responses/users/CurrentUserResponse.yaml
@@ -103,13 +103,36 @@ paths:
               $ref: ../requests/UpdateUserRequest.yaml
       tags:
         - users
+  'users/{userId}/groups':
+    get:
+      summary: Get User's groups
+      tags:
+        - users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../schemas/Group.yaml
+      operationId: getUserGuilds
+      description: Get user's public guilds
+      parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
   /users/active:
     get:
       summary: Search Active Users
       tags:
         - users
       x-codeSamples:
-        $ref: "../codeSamples/users.yaml#/~1users~1active/get"
+        $ref: '../codeSamples/users.yaml#/~1users~1active/get'
       responses:
         '200':
           description: OK
