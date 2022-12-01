@@ -19,20 +19,24 @@ properties:
     type: string
     example: default
   ownerId:
-    type: string
+    $ref: ./UserID.yaml
   rules:
     type: string
+    nullable: true
   links:
     type: array
     items:
       type: string
   languages:
     type: array
-    items: {}
+    items:
+      type: string
   iconId:
     type: string
+    nullable: true
   bannerId:
     type: string
+    nullable: true
   memberCount:
     type: integer
   memberCountSyncedAt:
@@ -40,31 +44,17 @@ properties:
     format: date-time
   isVerified:
     type: boolean
+    default: false
   joinState:
-    type: string
-    example: request
+    $ref: ./GroupJoinState.yaml
   tags:
     type: array
-    items: {}
+    items:
+      $ref: ./Tag.yaml
   galleries:
     type: array
     items:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        membersOnly:
-          type: boolean
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
+      $ref: ./GroupGallery.yaml
   createdAt:
     type: string
     format: date-time
