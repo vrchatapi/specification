@@ -16,14 +16,16 @@ properties:
     $ref: ../schemas/GroupJoinState.yaml
   iconId:
     type: string
+    nullable: true
     default: null
   bannerId:
     type: string
+    nullable: true
     default: null
   privacy:
     $ref: ../schemas/GroupPrivacy.yaml
   roleTemplate:
-    $ref: ../schemas/GroupRoleTemplate.yaml 
+    $ref: ../schemas/GroupRoleTemplate.yaml
 required:
   - name
   - shortCode

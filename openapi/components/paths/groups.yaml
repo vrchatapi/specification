@@ -26,6 +26,7 @@ paths:
       - $ref: ../parameters.yaml#/groupId
     get:
       summary: Get Group by ID
+      description: Gets a Group by ID and returns a Group object
       tags:
         - groups
       operationId: getGroup

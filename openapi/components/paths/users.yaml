@@ -10,7 +10,7 @@ paths:
       tags:
         - users
       x-codeSamples:
-        $ref: '../codeSamples/users.yaml#/~1users/get'
+        $ref: ../codeSamples/users.yaml#/~1users/get
       responses:
         '200':
           $ref: ../responses/users/LimitedUserListResponse.yaml
@@ -104,6 +104,8 @@ paths:
       tags:
         - users
   '/users/{userId}/groups':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
     get:
       summary: Get User's groups
       tags:
@@ -119,20 +121,13 @@ paths:
                   $ref: ../schemas/Group.yaml
       operationId: getUserGuilds
       description: Get user's public guilds
-      parameters: []
-    parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
   /users/active:
     get:
       summary: Search Active Users
       tags:
         - users
       x-codeSamples:
-        $ref: '../codeSamples/users.yaml#/~1users~1active/get'
+        $ref: ../codeSamples/users.yaml#/~1users~1active/get
       responses:
         '200':
           description: OK
