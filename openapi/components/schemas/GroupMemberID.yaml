@@ -1,4 +1,0 @@
-example: gmem_95cdb3b4-4643-4eb6-bdab-46a4e1e5ce37
-pattern: 'gmem_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
-title: GroupMemberID
-type: string
