@@ -195,3 +195,8 @@
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1publish"
 "/worlds/{worldId}/{instanceId}":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}"
+
+# groups
+
+"/groups/{groupId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"

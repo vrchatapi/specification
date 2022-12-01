@@ -1,0 +1,10 @@
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      404 World Not Found:
+        value:
+          error:
+            message: Can't find groupǃ
+            status_code: 404

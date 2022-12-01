@@ -39,4 +39,7 @@
     $ref: ./paths/users.yaml#/info/description
 - name: worlds
   description:
-    $ref: ./paths/worlds.yaml#/info/description
+    $ref: ./paths/worlds.yaml#/info/descriptio
+- name: groups
+  description:
+    $ref: ./paths/groups.yaml#/info/description
