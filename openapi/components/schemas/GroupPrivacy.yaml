@@ -1,0 +1,6 @@
+type: string
+enum:
+  - default
+  - private
+title: Privacy
+default: default

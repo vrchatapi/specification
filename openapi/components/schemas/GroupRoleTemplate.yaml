@@ -1,0 +1,8 @@
+type: string
+enum:
+  - default
+  - managedFree
+  - managedInvite
+  - managedRequest
+title: RoleTemplate
+default: default

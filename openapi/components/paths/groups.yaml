@@ -4,6 +4,23 @@ info:
   version: '1.0'
   description: Groups
 paths:
+  /groups:
+    post:
+      summary: Create Group
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Creates a Group and returns a Group object
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupResponse.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateGroupRequest.yaml
   '/groups/{groupId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -14,9 +31,9 @@ paths:
       operationId: getGroup
       responses:
         '200':
-          $ref: ../responses/worlds/GroupResponse.yaml
+          $ref: ../responses/groups/GroupResponse.yaml
         '404':
-          $ref: ../responses/worlds/GroupNotFoundError.yaml
+          $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
         - apiKeyCookie: []
 tags:
@@ -24,3 +41,4 @@ tags:
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+  responses: {}
