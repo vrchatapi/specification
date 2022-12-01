@@ -2,7 +2,7 @@ title: Group
 type: object
 properties:
   id:
-    type: string
+    $ref: ./GroupID.yaml
   name:
     type: string
   shortCode:

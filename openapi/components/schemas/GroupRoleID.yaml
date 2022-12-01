@@ -1,0 +1,4 @@
+example: grol_459d3911-f672-44bc-b84d-e54ffe7960fe
+pattern: 'grol_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+title: GroupRoleID
+type: string
