@@ -1,0 +1,4 @@
+example: grp_916433d3-e1cf-4d1e-af2c-79d3eccbe9b5
+pattern: 'grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+title: GroupID
+type: string
