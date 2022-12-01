@@ -1,14 +1,14 @@
-title: Group
+title: GroupMember
 type: object
 properties:
   id:
     $ref: ./GroupMemberID.yaml
   groupId:
     $ref: ./GroupID.yaml
-  shortCode:
-    $ref: ./GroupShortCode.yaml
-  discriminator:
-    $ref: ./GroupDiscriminator.yaml
+  userId:
+    $ref: ./UserID.yaml
+  isRepresenting:
+    type: boolean
   description:
     type: string
   iconUrl:
@@ -85,7 +85,7 @@ properties:
       roleIds:
         type: array
         items:
-          type: string
+          $ref: ./GroupRoleID.yaml
       managerNotes:
         type: string
       membershipStatus:
