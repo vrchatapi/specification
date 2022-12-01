@@ -103,7 +103,7 @@ paths:
               $ref: ../requests/UpdateUserRequest.yaml
       tags:
         - users
-  'users/{userId}/groups':
+  '/users/{userId}/groups':
     get:
       summary: Get User's groups
       tags:

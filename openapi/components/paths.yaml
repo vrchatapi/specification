@@ -176,6 +176,9 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{username}~1name"
 "/users/{userId}":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}"
+"/users/{userId}/groups":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups"
+
 
 # worlds
 
@@ -198,5 +201,7 @@
 
 # groups
 
+"/groups":
+  $ref: "./paths/groups.yaml#/paths/~1groups"
 "/groups/{groupId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
