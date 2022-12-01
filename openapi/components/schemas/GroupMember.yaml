@@ -9,143 +9,20 @@ properties:
     $ref: ./UserID.yaml
   isRepresenting:
     type: boolean
-  description:
-    type: string
-  iconUrl:
-    type: string
-  bannerUrl:
-    type: string
-  privacy:
-    type: string
-    example: default
-  ownerId:
-    type: string
-  rules:
-    type: string
-  links:
+    default: false
+  roleIds:
     type: array
     items:
-      type: string
-  languages:
-    type: array
-    items: {}
-  iconId:
-    type: string
-  bannerId:
-    type: string
-  memberCount:
-    type: integer
-  memberCountSyncedAt:
+      $ref: ./GroupRoleID.yaml
+  joinedAt:
     type: string
     format: date-time
-  isVerified:
-    type: boolean
-  joinState:
-    type: string
-    example: request
-  tags:
-    type: array
-    items: {}
-  galleries:
-    type: array
-    items:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        membersOnly:
-          type: boolean
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-  createdAt:
-    type: string
-    format: date-time
-  onlineMemberCount:
-    type: integer
   membershipStatus:
     type: string
     example: member
-  myMember:
-    type: object
-    properties:
-      _id:
-        type: string
-      groupId:
-        type: string
-      userId:
-        type: string
-      roleIds:
-        type: array
-        items:
-          $ref: ./GroupRoleID.yaml
-      managerNotes:
-        type: string
-      membershipStatus:
-        type: string
-        example: member
-      isSubscribedToAnnouncements:
-        type: boolean
-      visibility:
-        type: string
-        example: visible
-      isRepresenting:
-        type: boolean
-      joinedAt:
-        type: string
-        format: date-time
-      bannedAt:
-        type: string
-        nullable: true
-      _created_at:
-        type: string
-        format: date-time
-      _updated_at:
-        type: string
-        format: date-time
-      id:
-        type: string
-      has2FA:
-        type: boolean
-      permissions:
-        type: array
-        items:
-          type: string
-          example: group-instance-join
-  roles:
-    type: array
-    items:
-      type: object
-      properties:
-        id:
-          type: string
-        groupId:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        isSelfAssignable:
-          type: boolean
-        permissions:
-          type: array
-          items:
-            type: string
-        isManagementRole:
-          type: boolean
-        requiresTwoFactor:
-          type: boolean
-        requiresPurchase:
-          type: boolean
-        order:
-          type: integer
-        createdAt:
-          type: string
-          format: date-time
+  visibility:
+    type: string
+    example: visible
+  isSubscribedToAnnouncements:
+    type: boolean
+    default: false
