@@ -193,6 +193,8 @@ paths:
           in: query
           name: partNumber
           required: false
+          description: The part number to start uploading. If not provided, the first part will be started.
+          deprecated: true
       security:
         - apiKeyCookie: []
           authCookie: []

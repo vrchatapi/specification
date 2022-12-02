@@ -1,0 +1,43 @@
+title: UpdateGroupRequest
+type: object
+properties:
+  name:
+    type: string
+    minLength: 3
+    maxLength: 64
+  shortCode:
+    type: string
+    minLength: 3
+    maxLength: 6
+  description:
+    type: string
+    maxLength: 250
+  joinState:
+    $ref: ../schemas/GroupJoinState.yaml
+  iconId:
+    type: string
+    nullable: true
+    default: null
+  bannerId:
+    type: string
+    nullable: true
+    default: null
+  languages:
+    type: array
+    maxItems: 3
+    description: 3 letter language code
+    items:
+      type: string
+      maxLength: 3
+  links:
+    type: array
+    maxItems: 3
+    items:
+      type: string
+  rules:
+    type: string
+    
+  
+required:
+  - name
+  - shortCode

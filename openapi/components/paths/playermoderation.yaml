@@ -136,6 +136,13 @@ paths:
       tags:
         - playermoderation
   '/auth/user/playermoderations/{playerModerationId}':
+    parameters:
+      - schema:
+          type: string
+        name: playerModerationId
+        in: path
+        required: true
+        description: 'Must be a valid `pmod_` ID.'
     get:
       summary: Get Player Moderation
       tags:
@@ -172,12 +179,6 @@ paths:
       description: Deletes a specific player moderation based on it's `pmod_` ID. The website uses `unmoderateUser` instead. You can delete the same player moderation multiple times successfully.
       tags:
         - playermoderation
-    parameters:
-      - schema:
-          type: string
-        name: playerModerationId
-        in: path
-        required: true
 tags:
   $ref: ../tags.yaml
 components:

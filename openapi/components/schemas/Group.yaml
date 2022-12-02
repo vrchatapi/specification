@@ -1,0 +1,68 @@
+title: Group
+type: object
+properties:
+  id:
+    $ref: ./GroupMemberID.yaml
+  groupId:
+    $ref: ./GroupID.yaml
+  shortCode:
+    $ref: ./GroupShortCode.yaml
+  discriminator:
+    $ref: ./GroupDiscriminator.yaml
+  description:
+    type: string
+  iconUrl:
+    type: string
+  bannerUrl:
+    type: string
+  privacy:
+    type: string
+    example: default
+  ownerId:
+    $ref: ./UserID.yaml
+  rules:
+    type: string
+    nullable: true
+  links:
+    type: array
+    items:
+      type: string
+  languages:
+    type: array
+    items:
+      type: string
+  iconId:
+    type: string
+    nullable: true
+  bannerId:
+    type: string
+    nullable: true
+  memberCount:
+    type: integer
+  memberCountSyncedAt:
+    type: string
+    format: date-time
+  isVerified:
+    type: boolean
+    default: false
+  joinState:
+    $ref: ./GroupJoinState.yaml
+  tags:
+    description: ' '
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  galleries:
+    type: array
+    items:
+      $ref: ./GroupGallery.yaml
+  createdAt:
+    type: string
+    format: date-time
+  onlineMemberCount:
+    type: integer
+  membershipStatus:
+    type: string
+    example: member
+  myMember:
+    $ref: ./GroupMyMember.yaml

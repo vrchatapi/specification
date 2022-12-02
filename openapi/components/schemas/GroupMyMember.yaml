@@ -1,0 +1,41 @@
+title: GroupMyMember
+type: object
+properties:
+  id:
+    $ref: ./GroupMemberID.yaml
+  groupId:
+    $ref: ./GroupID.yaml
+  userId:
+    $ref: ./UserID.yaml
+  roleIds:
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
+  managerNotes:
+    type: string
+  membershipStatus:
+    type: string
+    example: member
+  isSubscribedToAnnouncements:
+    type: boolean
+    default: true
+  visibility:
+    type: string
+    example: visible
+  isRepresenting:
+    type: boolean
+    default: false
+  joinedAt:
+    type: string
+    format: date-time
+  bannedAt:
+    type: string
+    nullable: true
+  has2FA:
+    type: boolean
+    default: false
+  permissions:
+    type: array
+    items:
+      type: string
+      example: group-instance-join

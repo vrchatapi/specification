@@ -74,6 +74,7 @@ paths:
         name: shortName
         in: path
         required: true
+        description: Must be a valid instance short name.
     get:
       summary: Get Instance By Short Name
       tags:

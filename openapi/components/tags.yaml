@@ -16,6 +16,9 @@
 - name: friends
   description:
     $ref: ./paths/friends.yaml#/info/description
+- name: groups
+  description:
+    $ref: ./paths/groups.yaml#/info/description
 - name: invite
   description:
     $ref: ./paths/invite.yaml#/info/description

@@ -1,0 +1,18 @@
+title: CreateGroupRequest
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  description:
+    type: string
+  isSelfAssignable:
+    type: boolean
+    default: false
+  permissions:
+    type: array
+    items:
+      type: string
+
+

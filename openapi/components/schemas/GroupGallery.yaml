@@ -1,0 +1,42 @@
+title: GroupMember
+type: object
+properties:
+  id:
+    $ref: ./GroupGalleryID.yaml
+  name:
+    type: string
+  description:
+    type: string
+  membersOnly:
+    type: boolean
+    default: false
+  roleIdsToView:
+    description: ' '
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
+    nullable: true
+  roleIdsToSubmit:
+    description: ' '
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
+    nullable: true
+  roleIdsToAutoApprove:
+    description: ' '
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
+    nullable: true
+  roleIdsToManage:
+    description: ' '
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
+    nullable: true
+  createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time

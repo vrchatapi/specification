@@ -1,0 +1,8 @@
+type: string
+enum:
+  - closed
+  - invite
+  - request
+  - open
+title: JoinState
+default: open
