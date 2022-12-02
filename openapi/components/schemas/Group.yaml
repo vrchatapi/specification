@@ -48,6 +48,7 @@ properties:
   joinState:
     $ref: ./GroupJoinState.yaml
   tags:
+    description: ' '
     type: array
     items:
       $ref: ./Tag.yaml
