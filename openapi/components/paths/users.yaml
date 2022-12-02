@@ -110,6 +110,9 @@ paths:
       summary: Get User's groups
       tags:
         - users
+      security:
+        - apiKeyCookie: []
+          authCookie: []
       responses:
         '200':
           description: OK

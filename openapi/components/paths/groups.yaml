@@ -10,7 +10,9 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-      description: Creates a Group and returns a Group object
+      description: |-
+        Creates a Group and returns a Group object
+        **Requires VRC+ Subscription.**
       tags:
         - groups
       operationId: createGroup
@@ -38,6 +40,50 @@ paths:
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
         - apiKeyCookie: []
+          authCookie: []
+    put:
+      summary: Update Group
+      operationId: updateGroup
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupResponse.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      description: Updates a Group
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateGroupRequest.yaml
+    delete:
+      summary: Delete Group
+      operationId: deleteGroup
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      description: Deletes a group
+      responses:
+        '200':
+          description: OK
+  '/groups/{groupId}/roles':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get Group Roles
+      tags: []
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupRoleListResponse.yaml
+      operationId: getGroupRoles
+    post:
+      summary: Create GroupRole
+      operationId: createGroupRole
+      responses:
+        '200':
+          description: OK
 tags:
   $ref: ../tags.yaml
 components:
