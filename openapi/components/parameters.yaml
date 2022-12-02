@@ -86,6 +86,7 @@ fileId:
     type: string
     example: file_00000000-0000-0000-0000-000000000000
     pattern: 'file_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  description: Must be a valid file ID.
 groupId:
   name: groupId
   in: path
@@ -94,6 +95,7 @@ groupId:
     type: string
     example: grp_00000000-0000-0000-0000-000000000000
     pattern: 'grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  description: Must be a valid group ID.
 groupRoleId:
   name: groupRoleId
   in: path
@@ -110,6 +112,7 @@ versionId:
     type: integer
     minimum: 1
     example: 1
+  description: Version ID of the asset.
 fileType:
   name: fileType
   in: path
@@ -121,12 +124,14 @@ fileType:
       - signature
       - delta
     example: file
+  description: Type of file.
 userId:
   name: userId
   in: path
   required: true
   schema:
     type: string
+  description: Must be a valid user ID.
 userIdQuery:
   name: userId
   in: query
@@ -231,6 +236,7 @@ worldId:
   required: true
   schema:
     type: string
+  description: Must be a valid world ID.
 instanceId:
   name: instanceId
   in: path

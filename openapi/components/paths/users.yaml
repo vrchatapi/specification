@@ -44,6 +44,7 @@ paths:
         name: username
         in: path
         required: true
+        description: Username of the user
     get:
       summary: Get User by Username
       tags:
@@ -92,6 +93,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/users/CurrentUserResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
       description: Update a users information such as the email and birthday.
       security:
         - apiKeyCookie: []
@@ -116,6 +119,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/groups/GroupListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserGroups
       description: Get user's public groups
   /users/active:
@@ -134,6 +139,8 @@ paths:
                 type: array
                 items:
                   $ref: ../schemas/LimitedUser.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
         '403':
           $ref: ../responses/InvalidAdminCredentialsError.yaml
       operationId: searchActiveUsers
@@ -159,20 +166,21 @@ paths:
       description: '**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users by text query.'
   '/users/{userId}/groups/requested':
     parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+      - $ref: ../parameters.yaml#/userId
     get:
-      summary: Get User Groups Requests
+      summary: Get User Group Requests
+      description: Returns a list of Groups the user has requested to be invited into.
+      operationId: getUserGroupRequests
       tags:
         - users
       responses:
         '200':
           $ref: ../responses/groups/GroupListResponse.yaml
-      operationId: getGroupRequests
-      description: Returns a list of Group objects the user has requested invite into.
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
 tags:
   $ref: ../tags.yaml
 components:

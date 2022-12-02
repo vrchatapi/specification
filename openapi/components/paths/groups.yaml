@@ -62,101 +62,117 @@ paths:
               $ref: ../requests/UpdateGroupRequest.yaml
     delete:
       summary: Delete Group
+      operationId: deleteGroup
       tags:
         - groups
-      operationId: deleteGroup
       security:
         - apiKeyCookie: []
           authCookie: []
       description: Deletes a Group.
       responses:
         '200':
-          description: OK
+          $ref: ../responses/groups/DeleteGroupSuccess.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
   '/groups/{groupId}/roles':
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
       summary: Get Group Roles
+      description: Returns a Group Role by ID.
       tags:
         - groups
       responses:
         '200':
           $ref: ../responses/groups/GroupRoleListResponse.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
       operationId: getGroupRoles
-      description: Returns a Group Role by ID.
     post:
       summary: Create GroupRole
+      description: Create a Group role.
       operationId: createGroupRole
       tags:
         - groups
       responses:
         '200':
           $ref: ../responses/groups/GroupRoleResponse.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
       requestBody:
         content:
           application/json:
             schema:
               $ref: ../requests/CreateGroupRoleRequest.yaml
-      description: Create a Group role
   '/groups/{groupId}/join':
     parameters:
       - $ref: ../parameters.yaml#/groupId
     post:
       summary: Join Group
+      description: Join a Group by ID and returns the joined Group.
       operationId: joinGroup
       tags:
         - groups
       responses:
         '200':
           $ref: ../responses/groups/GroupResponse.yaml
-      description: Join a Group by ID and returns the joined Group.
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
   '/groups/{groupId}/leave':
     parameters:
       - $ref: ../parameters.yaml#/groupId
     post:
       summary: Leave Group
+      description: Leave a group by ID.
       operationId: leaveGroup
       tags:
         - groups
       responses:
         '200':
           description: OK
-      description: Leave a group by ID.
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
   '/groups/{groupId}/requests':
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
-      description: Returns a list of members that have requested to join the Group.
       summary: Get Requests to Group
+      description: Returns a list of members that have requested to join the Group.
+      operationId: getGroupRequests
       tags:
         - groups
       responses:
         '200':
           $ref: ../responses/groups/GroupMemberListResponse.yaml
-      operationId: getGroupRequests
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
     delete:
       summary: Delete Outbound Group Request
+      description: Deletes a Group Request sent to the requested group.
       operationId: deleteGroupRequest
       tags:
         - groups
       responses:
         '200':
           description: OK
-      description: Deletes a Group Request sent to the requested group.
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
   '/groups/{groupId}/invites':
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
-      description: Returns a list of members that have been invited to the Group.
       summary: Get Group Invited Users
+      description: Returns a list of members that have been invited to the Group.
+      operationId: getGroupInvites
       tags:
         - groups
       responses:
         '200':
           $ref: ../responses/groups/GroupMemberListResponse.yaml
-      operationId: getGroupInvites
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
     post:
-      description: Sends invite to a Group
+      description: Sends an invite to a Group
       summary: Invite User to Group
       tags:
         - groups
@@ -165,6 +181,8 @@ paths:
           description: OK
         '400':
           description: User <displayName> is already invited
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
       operationId: createGroupInvite
       requestBody:
         content:
@@ -176,20 +194,21 @@ paths:
       - $ref: ../parameters.yaml#/groupId
       - $ref: ../parameters.yaml#/userId
     delete:
-      description: Deletes an Group invite sent to a User
       summary: Delete User Invite
+      description: Deletes an Group invite sent to a User
+      operationId: deleteGroupInvite
       tags:
         - groups
       responses:
         '200': 
           description: OK
-      operationId: deleteGroupInvite
   '/groups/{groupId}/roles/{groupRoleId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
       - $ref: ../parameters.yaml#/groupRoleId
     put:
       summary: Update Group Role
+      description: Updates a group role by ID.
       operationId: updateGroupRole
       tags:
         - groups
@@ -201,7 +220,6 @@ paths:
           application/json:
             schema:
               $ref: ../requests/UpdateGroupRoleRequest.yaml
-      description: Updates a group role by ID
     delete:
       description: Deletes a Group Role by ID and returns the remaining roles.
       summary: Delete Group Role

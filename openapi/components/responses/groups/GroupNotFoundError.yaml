@@ -1,4 +1,4 @@
-description: Error response when trying to show information about a non-existent group.
+description: Error response when trying to perform operations on a non-existing group.
 content:
   application/json:
     schema:
