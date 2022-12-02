@@ -1,7 +1,7 @@
 title: GroupMyMember
 type: object
 properties:
-  _id:
+  id:
     $ref: ./GroupMemberID.yaml
   groupId:
     $ref: ./GroupID.yaml
@@ -18,27 +18,22 @@ properties:
     example: member
   isSubscribedToAnnouncements:
     type: boolean
+    default: true
   visibility:
     type: string
     example: visible
   isRepresenting:
     type: boolean
+    default: false
   joinedAt:
     type: string
     format: date-time
   bannedAt:
     type: string
     nullable: true
-  _created_at:
-    type: string
-    format: date-time
-  _updated_at:
-    type: string
-    format: date-time
-  id:
-    type: string
   has2FA:
     type: boolean
+    default: false
   permissions:
     type: array
     items:
