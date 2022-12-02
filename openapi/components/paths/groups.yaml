@@ -13,6 +13,7 @@ paths:
       description: Creates a Group and returns a Group object
       tags:
         - groups
+      operationId: createGroup
       responses:
         '200':
           $ref: ../responses/groups/GroupResponse.yaml
