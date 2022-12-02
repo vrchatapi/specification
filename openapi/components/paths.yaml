@@ -108,6 +108,10 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1leave"
 "/groups/{groupId}/requests":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests"
+"/groups/{groupId}/invites":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites"
+"/groups/{groupId}/invites/{userId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites~1{userId}"
 
 # invite
 

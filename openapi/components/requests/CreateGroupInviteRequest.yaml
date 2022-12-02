@@ -1,0 +1,12 @@
+title: CreateGroupInviteRequest
+x-stoplight:
+  id: s900h6dec562y
+type: object
+properties:
+  userId:
+    $ref: ../schemas/UserID.yaml
+  confirmOverrideBlock:
+    type: boolean
+    default: true
+required:
+  - userId

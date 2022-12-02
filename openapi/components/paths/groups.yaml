@@ -133,6 +133,53 @@ paths:
         '200':
           $ref: ../responses/groups/GroupMemberListResponse.yaml
       operationId: getGroupRequests
+    delete:
+      summary: Deletes outbound Group Request
+      operationId: deleteGroupRequest
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+      description: Deletes a Group Request sent to the requested group.
+  '/groups/{groupId}/invites':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get Invites from Group
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupMemberListResponse.yaml
+      operationId: getGroupInvites
+    post:
+      summary: Invite User to Group
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: User {display-name} is already invited
+      operationId: createGroupInvite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateGroupInviteRequest.yaml
+  '/groups/{groupId}/invites/{userId}':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+      - $ref: ../parameters.yaml#/userId
+    delete:
+      summary: Uninvites user from group
+      tags:
+        - groups
+      responses:
+        '200': 
+          description: OK
+      operationId: deleteGroupInvite
   '/groups/{groupId}/roles/{groupRoleId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
