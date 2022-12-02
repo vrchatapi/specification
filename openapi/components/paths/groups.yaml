@@ -98,6 +98,26 @@ paths:
             schema:
               $ref: ../requests/CreateGroupRoleRequest.yaml
       description: Create a Group role
+  '/groups/{groupId}/join':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    post:
+      summary: Join Group
+      operationId: groupJoin
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupResponse.yaml
+      description: Joins a Group by ID and returns a joined Group object.
+  '/groups/{groupId}/leave':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    post:
+      summary: Leaves a Group
+      operationId: groupLeave
+      responses:
+        '200':
+          description: OK
+      description: Leaves a group by ID.
   '/groups/{groupId}/roles/{groupRoleId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
