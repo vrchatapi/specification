@@ -163,6 +163,19 @@ paths:
       x-internal: true
       deprecated: true
       description: '**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users by text query.'
+  '/users/{userId}/groups/requested':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Get User Guild Requests
+      tags: []
+      responses: {}
+      operationId: getGuildRequests
+      description: Returns a list of Group objects the user has requested invite into.
 tags:
   $ref: ../tags.yaml
 components:
