@@ -110,7 +110,7 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
-      summary: Get User's groups
+      summary: Get User Groups
       tags:
         - users
       security:
