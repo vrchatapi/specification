@@ -92,6 +92,13 @@
 "/auth/user/friends/{userId}":
   $ref: "./paths/friends.yaml#/paths/~1auth~1user~1friends~1{userId}"
 
+# groups
+
+"/groups":
+  $ref: "./paths/groups.yaml#/paths/~1groups"
+"/groups/{groupId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
+
 # invite
 
 "/invite/{userId}":
@@ -199,9 +206,3 @@
 "/worlds/{worldId}/{instanceId}":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}"
 
-# groups
-
-"/groups":
-  $ref: "./paths/groups.yaml#/paths/~1groups"
-"/groups/{groupId}":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
