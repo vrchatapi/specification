@@ -94,6 +94,14 @@ groupId:
     type: string
     example: grp_00000000-0000-0000-0000-000000000000
     pattern: 'grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+groupRoleId:
+  name: groupRoleId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: grol_00000000-0000-0000-0000-000000000000
+    pattern: 'grol_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
 versionId:
   name: versionId
   in: path

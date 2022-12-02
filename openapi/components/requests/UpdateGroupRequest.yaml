@@ -1,14 +1,5 @@
 title: UpdateGroupRequest
 type: object
-examples:
-  - name: string
-    shortCode: string
-    description: string
-    joinState: open
-    iconId: null
-    bannerId: null
-    languages:
-      - string
 properties:
   name:
     type: string
