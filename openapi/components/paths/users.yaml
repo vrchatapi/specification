@@ -119,8 +119,8 @@ paths:
                 type: array
                 items:
                   $ref: ../schemas/Group.yaml
-      operationId: getUserGuilds
-      description: Get user's public guilds
+      operationId: getUserGroups
+      description: Get user's public groups
   /users/active:
     get:
       summary: Search Active Users
