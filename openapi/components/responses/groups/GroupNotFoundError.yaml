@@ -1,3 +1,4 @@
+description: Error response when trying to show information about a non-existent group.
 content:
   application/json:
     schema:
