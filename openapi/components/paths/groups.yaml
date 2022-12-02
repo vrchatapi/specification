@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: groups
   version: '1.0'
-  description: Groups
+  description: Group Docs Here
 paths:
   /groups:
     post:
@@ -29,7 +29,7 @@ paths:
       - $ref: ../parameters.yaml#/groupId
     get:
       summary: Get Group by ID
-      description: Gets a Group by ID and returns a Group object
+      description: Returns a single Group by ID.
       tags:
         - groups
       operationId: getGroup
@@ -51,7 +51,7 @@ paths:
           $ref: ../responses/groups/GroupResponse.yaml
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
-      description: Updates a Group
+      description: Updates a Group and returns it.
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -68,7 +68,7 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-      description: Deletes a group
+      description: Deletes a Group.
       responses:
         '200':
           description: OK
@@ -83,7 +83,7 @@ paths:
         '200':
           $ref: ../responses/groups/GroupRoleListResponse.yaml
       operationId: getGroupRoles
-      description: Gets a Group Role by ID
+      description: Returns a Group Role by ID.
     post:
       summary: Create GroupRole
       operationId: createGroupRole
@@ -109,24 +109,24 @@ paths:
       responses:
         '200':
           $ref: ../responses/groups/GroupResponse.yaml
-      description: Joins a Group by ID and returns a joined Group object.
+      description: Join a Group by ID and returns the joined Group.
   '/groups/{groupId}/leave':
     parameters:
       - $ref: ../parameters.yaml#/groupId
     post:
-      summary: Leaves a Group
+      summary: Leave Group
       operationId: leaveGroup
       tags:
         - groups
       responses:
         '200':
           description: OK
-      description: Leaves a group by ID.
+      description: Leave a group by ID.
   '/groups/{groupId}/requests':
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
-      description: Gets List of Members that have requested to join Group
+      description: Returns a list of members that have requested to join the Group.
       summary: Get Requests to Group
       tags:
         - groups
@@ -135,7 +135,7 @@ paths:
           $ref: ../responses/groups/GroupMemberListResponse.yaml
       operationId: getGroupRequests
     delete:
-      summary: Deletes outbound Group Request
+      summary: Delete Outbound Group Request
       operationId: deleteGroupRequest
       tags:
         - groups
@@ -147,8 +147,8 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
-      description: Gets list of Members that have been invited into a Group.
-      summary: Get Invites from Group
+      description: Returns a list of members that have been invited to the Group.
+      summary: Get Group Invited Users
       tags:
         - groups
       responses:
@@ -164,7 +164,7 @@ paths:
         '200':
           description: OK
         '400':
-          description: User {display-name} is already invited
+          description: User <displayName> is already invited
       operationId: createGroupInvite
       requestBody:
         content:
@@ -176,7 +176,7 @@ paths:
       - $ref: ../parameters.yaml#/groupId
       - $ref: ../parameters.yaml#/userId
     delete:
-      description: Univites a User from a Group
+      description: Deletes an Group invite sent to a User
       summary: Delete User Invite
       tags:
         - groups
