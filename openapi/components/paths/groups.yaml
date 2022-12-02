@@ -104,6 +104,8 @@ paths:
     post:
       summary: Join Group
       operationId: groupJoin
+      tags:
+        - groups
       responses:
         '200':
           $ref: ../responses/groups/GroupResponse.yaml
@@ -114,10 +116,23 @@ paths:
     post:
       summary: Leaves a Group
       operationId: groupLeave
+      tags:
+        - groups
       responses:
         '200':
           description: OK
       description: Leaves a group by ID.
+  '/groups/{groupId}/requests':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get Requests to Group
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupMemberListResponse.yaml
+      operationId: getGroupRequests
   '/groups/{groupId}/roles/{groupRoleId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
