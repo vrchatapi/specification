@@ -120,6 +120,25 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+  '/groups/{groupId}/members':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get Group Members
+      description: Returns a List of all Group Members
+      operationId: getGroupMembers
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupMemberListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
   '/groups/{groupId}/join':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -248,7 +267,7 @@ paths:
       tags:
         - groups
       responses:
-        '200': 
+        '200':
           description: OK
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
@@ -294,7 +313,6 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-      
 tags:
   $ref: ../tags.yaml
 components:
