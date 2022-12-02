@@ -1,4 +1,4 @@
-example: abc123
+example: ABC123
 pattern: '^[A-Z0-9]{6}$'
 title: GroupShortCode
 type: string
