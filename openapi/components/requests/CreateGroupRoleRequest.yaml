@@ -1,6 +1,4 @@
 title: CreateGroupRequest
-x-stoplight:
-  id: uz1bmmzvwfhzc
 type: object
 properties:
   id:

@@ -165,13 +165,13 @@ paths:
         in: path
         required: true
     get:
-      summary: Get User Guild Requests
+      summary: Get User Groups Requests
       tags:
         - users
       responses:
         '200':
           $ref: ../responses/groups/GroupListResponse.yaml
-      operationId: getGuildRequests
+      operationId: getGroupRequests
       description: Returns a list of Group objects the user has requested invite into.
 tags:
   $ref: ../tags.yaml

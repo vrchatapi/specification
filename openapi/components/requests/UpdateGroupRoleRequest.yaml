@@ -1,6 +1,4 @@
 title: UpdateGroupRoleRequest
-x-stoplight:
-  id: 17a7cfa162345
 type: object
 properties:
   name:

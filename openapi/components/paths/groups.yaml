@@ -103,7 +103,7 @@ paths:
       - $ref: ../parameters.yaml#/groupId
     post:
       summary: Join Group
-      operationId: groupJoin
+      operationId: joinGroup
       tags:
         - groups
       responses:
@@ -115,7 +115,7 @@ paths:
       - $ref: ../parameters.yaml#/groupId
     post:
       summary: Leaves a Group
-      operationId: groupLeave
+      operationId: leaveGroup
       tags:
         - groups
       responses:
