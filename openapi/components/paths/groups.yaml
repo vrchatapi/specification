@@ -126,6 +126,7 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
+      description: Gets List of Members that have requested to join Group
       summary: Get Requests to Group
       tags:
         - groups
@@ -146,6 +147,7 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
+      description: Gets list of Members that have been invited into a Group.
       summary: Get Invites from Group
       tags:
         - groups
@@ -154,6 +156,7 @@ paths:
           $ref: ../responses/groups/GroupMemberListResponse.yaml
       operationId: getGroupInvites
     post:
+      description: Sends invite to a Group
       summary: Invite User to Group
       tags:
         - groups
@@ -173,7 +176,8 @@ paths:
       - $ref: ../parameters.yaml#/groupId
       - $ref: ../parameters.yaml#/userId
     delete:
-      summary: Uninvites user from group
+      description: Univites a User from a Group
+      summary: Delete User Invite
       tags:
         - groups
       responses:

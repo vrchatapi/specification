@@ -115,13 +115,7 @@ paths:
           authCookie: []
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: ../schemas/Group.yaml
+          $ref: ../responses/groups/GroupListResponse.yaml
       operationId: getUserGroups
       description: Get user's public groups
   /users/active:
