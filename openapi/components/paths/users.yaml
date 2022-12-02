@@ -172,8 +172,11 @@ paths:
         required: true
     get:
       summary: Get User Guild Requests
-      tags: []
-      responses: {}
+      tags:
+        - users
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupListResponse.yaml
       operationId: getGuildRequests
       description: Returns a list of Group objects the user has requested invite into.
 tags:
