@@ -87,6 +87,25 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+  '/groups/{groupId}/announcement':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: List Group Announcements
+      description: Returns a list of Announcements for a Group.
+      operationId: getGroupAnnouncements
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupAnnouncementListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
   '/groups/{groupId}/invites':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -99,6 +118,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/groups/GroupMemberListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
         '403':
           $ref: ../responses/groups/GroupNotMemberError.yaml
         '404':

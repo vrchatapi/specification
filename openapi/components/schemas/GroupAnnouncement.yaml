@@ -1,0 +1,23 @@
+title: getGroupAnnouncement
+type: object
+properties:
+  id:
+    $ref: ./GroupAnnouncementID.yaml
+  groupId:
+    $ref: ./GroupID.yaml
+  authorId:
+    $ref: ./UserID.yaml
+  title:
+    type: string
+  text:
+    type: string
+  imageId:
+    $ref: ./FileID.yaml
+  imageUrl:
+    type: string
+  createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time

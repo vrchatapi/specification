@@ -98,6 +98,8 @@
   $ref: "./paths/groups.yaml#/paths/~1groups"
 "/groups/{groupId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
+"/groups/{groupId}/announcement":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1announcement"
 "/groups/{groupId}/invites":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites"
 "/groups/{groupId}/invites/{userId}":
