@@ -1,0 +1,5 @@
+title: RespondGroupJoinRequest
+type: object
+properties:
+  action:
+    type: string
