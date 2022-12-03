@@ -91,14 +91,14 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
-      summary: List Group Announcements
-      description: Returns a list of Announcements for a Group.
+      summary: Get Group Announcement
+      description: Returns the announcement for a Group.
       operationId: getGroupAnnouncements
       tags:
         - groups
       responses:
         '200':
-          $ref: ../responses/groups/GroupAnnouncementListResponse.yaml
+          $ref: ../responses/groups/GroupAnnouncementResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
