@@ -1,0 +1,9 @@
+title: InfoPushDataArticleContent
+type: object
+properties:
+  text:
+    type: string
+  imageUrl:
+    type: string
+  onPressed:
+    $ref: ./InfoPushDataClickable.yaml

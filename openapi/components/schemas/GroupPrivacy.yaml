@@ -2,5 +2,5 @@ type: string
 enum:
   - default
   - private
-title: Privacy
+title: GroupPrivacy
 default: default

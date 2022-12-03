@@ -238,7 +238,7 @@ example:
   worldUpdatePeriod: 60
   player-url-resolver-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
   player-url-resolver-version: '2021-05-16'
-title: API Config
+title: APIConfig
 type: object
 description: ''
 properties:
@@ -260,22 +260,7 @@ properties:
     uniqueItems: true
     minItems: 0
     items:
-      type: object
-      description: Public Announcement
-      title: Public Announcement
-      deprecated: true
-      properties:
-        name:
-          description: Announcement name
-          minLength: 1
-          type: string
-        text:
-          description: Announcement text
-          minLength: 1
-          type: string
-      required:
-        - name
-        - text
+      $ref: ./APIConfigAnnouncement.yaml
   apiKey:
     description: apiKey to be used for all other requests
     minLength: 1
@@ -422,28 +407,7 @@ properties:
     minLength: 1
     type: string
   downloadUrls:
-    additionalProperties: false
-    description: Download links for various development assets.
-    title: DownloadURLList
-    type: object
-    required:
-      - sdk2
-      - sdk3-avatars
-      - sdk3-worlds
-    properties:
-      sdk2:
-        deprecated: true
-        description: Download link for legacy SDK2
-        minLength: 1
-        type: string
-      sdk3-avatars:
-        description: Download link for SDK3 for Avatars
-        minLength: 1
-        type: string
-      sdk3-worlds:
-        description: Download link for SDK3 for Worlds
-        minLength: 1
-        type: string
+    $ref: ./APIConfigDownloadURLList.yaml
   dynamicWorldRows:
     description: 'Array of DynamicWorldRow objects, used by the game to display the list of world rows'
     minItems: 1
@@ -452,50 +416,7 @@ properties:
     items:
       $ref: ./DynamicContentRow.yaml
   events:
-    title: APIEventConfig
-    type: object
-    required:
-      - distanceClose
-      - distanceFactor
-      - distanceFar
-      - groupDistance
-      - maximumBunchSize
-      - notVisibleFactor
-      - playerOrderBucketSize
-      - playerOrderFactor
-      - slowUpdateFactorThreshold
-      - viewSegmentLength
-    properties:
-      distanceClose:
-        description: Unknown
-        type: integer
-      distanceFactor:
-        description: Unknown
-        type: integer
-      distanceFar:
-        description: Unknown
-        type: integer
-      groupDistance:
-        description: Unknown
-        type: integer
-      maximumBunchSize:
-        description: Unknown
-        type: integer
-      notVisibleFactor:
-        description: Unknown
-        type: integer
-      playerOrderBucketSize:
-        description: Unknown
-        type: integer
-      playerOrderFactor:
-        description: Unknown
-        type: integer
-      slowUpdateFactorThreshold:
-        description: Unknown
-        type: integer
-      viewSegmentLength:
-        description: Unknown
-        type: integer
+    $ref: ./APIConfigEvents.yaml
   gearDemoRoomId:
     deprecated: true
     description: Unknown

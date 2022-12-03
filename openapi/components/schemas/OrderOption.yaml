@@ -1,0 +1,7 @@
+title: OrderOption
+type: string
+default: descending
+enum:
+  - ascending
+  - descending
+example: descending

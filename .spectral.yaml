@@ -1,7 +1,14 @@
 formats:
   - oas3
+
 extends:
   - 'spectral:oas'
+
+functions: [
+  print,
+  schema_object_name_mismatch_filename,
+]
+
 rules:
   oas3-parameter-description: info
   tag-description: hint
@@ -41,3 +48,12 @@ rules:
     resolved: false
     then:
       function: undefined
+
+  # Fetch ALL objects which have "title", and check if the filename matches the title
+  schema-object-name-mismatch-filename:
+    # Recursively fetch "json.schema" objects that has a "title" field
+    given: "$.paths.[*][get,post,put,delete]..[?(@ != null && @.title)]"
+    severity: error
+    resolved: true
+    then:
+      function: schema_object_name_mismatch_filename

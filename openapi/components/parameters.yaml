@@ -16,60 +16,26 @@ offset:
     type: integer
     minimum: 0
   description: A zero-based offset from the default object sorting from where search results start.
-sortOptions:
+sort:
   name: sort
   in: query
   required: false
   schema:
-    title: SortOptions
-    type: string
-    default: popularity
-    enum:
-      - popularity
-      - heat
-      - trust
-      - shuffle
-      - random
-      - favorites
-      - reportScore
-      - reportCount
-      - publicationDate
-      - labsPublicationDate
-      - created
-      - _created_at
-      - updated
-      - _updated_at
-      - order
-      - relevance
-      - magic
-      - name
-    example: popularity
-    description: How to sort
-orderOptions:
+    $ref: ./schemas/SortOption.yaml
+  description: The sort order of the results.
+order:
   name: order
   in: query
   required: false
   schema:
-    title: OrderOptions
-    type: string
-    default: descending
-    enum:
-      - ascending
-      - descending
-    example: descending
-    description: Result ordering
+    $ref: ./schemas/OrderOption.yaml
+  description: Result ordering
 releaseStatus:
   name: releaseStatus
   in: query
   required: false
   schema:
-    type: string
-    default: public
-    enum:
-      - public
-      - private
-      - hidden
-      - all
+    $ref: ./schemas/ReleaseStatus.yaml
   description: Filter by ReleaseStatus.
 offline:
   name: offline
