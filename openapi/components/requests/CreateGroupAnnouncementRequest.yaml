@@ -1,9 +1,3 @@
-# {
-#    "text":"TestAnnD",
-#    "title":"TestAnnT",
-#    "imageId":"file_aaaaaaaaaaa",
-#    "sendNotification":false
-# }
 title: CreateGroupAnnouncementRequest
 type: object
 properties:
@@ -11,15 +5,19 @@ properties:
     type: string
     description: Announcement title
     minLength: 1
+    example: "Event is starting soon!"
   text:
     type: string
     description: Announcement text
     minLength: 1
+    example: "Come join us for the event!"
   imageId:
     $ref: ../schemas/FileID.yaml
   sendNotification:
     type: boolean
     description: Send notification to group members.
+    default: false
+    example: false
 required:
   - title
   - favoriteId
