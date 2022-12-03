@@ -70,6 +70,7 @@ groupRoleId:
     type: string
     example: grol_00000000-0000-0000-0000-000000000000
     pattern: 'grol_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  description: Must be a valid group role ID.
 versionId:
   name: versionId
   in: path
@@ -209,12 +210,14 @@ instanceId:
   required: true
   schema:
     type: string
+  description: Must be a valid instance ID.
 favoriteId:
   name: favoriteId
   in: path
   required: true
   schema:
     type: string
+  description: Must be a valid favorite ID.
 favoriteGroupType:
   name: favoriteGroupType
   in: path
@@ -232,23 +235,21 @@ favoriteGroupName:
   required: true
   schema:
     type: string
+  description: 'The name of the group to fetch, must be a name of a FavoriteGroup.'
 avatarId:
   name: avatarId
   in: path
   required: true
   schema:
     type: string
+  description: Must be a valid avatar ID.
 messageType:
   name: messageType
   in: path
   required: true
   schema:
-    type: string
-    enum:
-      - message
-      - response
-      - request
-      - requestResponse
+    $ref: ./schemas/InviteMessageType.yaml
+  description: 'The type of message to fetch, must be a valid InviteMessageType.'
 slot:
   name: slot
   in: path
@@ -257,30 +258,35 @@ slot:
     type: integer
     minimum: 0
     maximum: 11
+  description: 'The message slot to fetch of a given message type.'
 notificationId:
   name: notificationId
   in: path
   required: true
   schema:
     type: string
+  description: Must be a valid notification ID.
 permissionId:
   name: permissionId
   in: path
   required: true
   schema:
     type: string
+  description: Must be a valid permission ID.
 transactionId:
   name: transactionId
   in: path
   required: true
   schema:
     type: string
+  description: Must be a valid transaction ID.
 licenseGroupId:
   name: licenseGroupId
   in: path
   required: true
   schema:
     type: string
+  description: Must be a valid license group ID.
 variant:
   name: variant
   in: query
