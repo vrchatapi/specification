@@ -87,140 +87,6 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
-  '/groups/{groupId}/roles':
-    parameters:
-      - $ref: ../parameters.yaml#/groupId
-    get:
-      summary: Get Group Roles
-      description: Returns a Group Role by ID.
-      operationId: getGroupRoles
-      tags:
-        - groups
-      responses:
-        '200':
-          $ref: ../responses/groups/GroupRoleListResponse.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
-        '404':
-          $ref: ../responses/groups/GroupNotFoundError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-    post:
-      summary: Create GroupRole
-      description: Create a Group role.
-      operationId: createGroupRole
-      tags:
-        - groups
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/CreateGroupRoleRequest.yaml
-      responses:
-        '200':
-          $ref: ../responses/groups/GroupRoleResponse.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
-        '404':
-          $ref: ../responses/groups/GroupNotFoundError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-  '/groups/{groupId}/members':
-    parameters:
-      - $ref: ../parameters.yaml#/groupId
-    get:
-      summary: Get Group Members
-      description: Returns a List of all Group Members
-      operationId: getGroupMembers
-      tags:
-        - groups
-      responses:
-        '200':
-          $ref: ../responses/groups/GroupMemberListResponse.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
-        '404':
-          $ref: ../responses/groups/GroupNotFoundError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-  '/groups/{groupId}/join':
-    parameters:
-      - $ref: ../parameters.yaml#/groupId
-    post:
-      summary: Join Group
-      description: Join a Group by ID and returns the joined Group.
-      operationId: joinGroup
-      tags:
-        - groups
-      responses:
-        '200':
-          $ref: ../responses/groups/GroupResponse.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
-        '404':
-          $ref: ../responses/groups/GroupNotFoundError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-  '/groups/{groupId}/leave':
-    parameters:
-      - $ref: ../parameters.yaml#/groupId
-    post:
-      summary: Leave Group
-      description: Leave a group by ID.
-      operationId: leaveGroup
-      tags:
-        - groups
-      responses:
-        '200':
-          description: OK
-        '403':
-          $ref: ../responses/groups/GroupNotMemberError.yaml
-        '404':
-          $ref: ../responses/groups/GroupNotFoundError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-  '/groups/{groupId}/requests':
-    parameters:
-      - $ref: ../parameters.yaml#/groupId
-    get:
-      summary: Get Group Join Requests
-      description: Returns a list of members that have requested to join the Group.
-      operationId: getGroupRequests
-      tags:
-        - groups
-      responses:
-        '200':
-          $ref: ../responses/groups/GroupMemberListResponse.yaml
-        '403':
-          $ref: ../responses/groups/GroupNotMemberError.yaml
-        '404':
-          $ref: ../responses/groups/GroupNotFoundError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
-    delete:
-      summary: Cancel Group Join Request
-      description: Cancels a request sent to join the group.
-      operationId: cancelGroupRequest
-      tags:
-        - groups
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: You can't cancel a join request if you didn't request to join․
-        '403':
-          $ref: ../responses/groups/GroupNotMemberError.yaml
-        '404':
-          $ref: ../responses/groups/GroupNotFoundError.yaml
-      security:
-        - apiKeyCookie: []
-          authCookie: []
   '/groups/{groupId}/invites':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -278,6 +144,140 @@ paths:
           description: OK
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/join':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    post:
+      summary: Join Group
+      description: Join a Group by ID and returns the joined Group.
+      operationId: joinGroup
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/leave':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    post:
+      summary: Leave Group
+      description: Leave a group by ID.
+      operationId: leaveGroup
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: ../responses/groups/GroupNotMemberError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/members':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get Group Members
+      description: Returns a List of all Group Members
+      operationId: getGroupMembers
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupMemberListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/requests':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get Group Join Requests
+      description: Returns a list of members that have requested to join the Group.
+      operationId: getGroupRequests
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupMemberListResponse.yaml
+        '403':
+          $ref: ../responses/groups/GroupNotMemberError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Cancel Group Join Request
+      description: Cancels a request sent to join the group.
+      operationId: cancelGroupRequest
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: You can't cancel a join request if you didn't request to join․
+        '403':
+          $ref: ../responses/groups/GroupNotMemberError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/roles':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get Group Roles
+      description: Returns a Group Role by ID.
+      operationId: getGroupRoles
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupRoleListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    post:
+      summary: Create GroupRole
+      description: Create a Group role.
+      operationId: createGroupRole
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateGroupRoleRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupRoleResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
         - apiKeyCookie: []
           authCookie: []
