@@ -98,20 +98,20 @@
   $ref: "./paths/groups.yaml#/paths/~1groups"
 "/groups/{groupId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
-"/groups/{groupId}/roles":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles"
-"/groups/{groupId}/members":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members"
-"/groups/{groupId}/roles/{groupRoleId}":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
+"/groups/{groupId}/invites":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites"
 "/groups/{groupId}/join":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1join"
 "/groups/{groupId}/leave":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1leave"
+"/groups/{groupId}/members":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members"
 "/groups/{groupId}/requests":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests"
-"/groups/{groupId}/invites":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites"
+"/groups/{groupId}/roles":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles"
+"/groups/{groupId}/roles/{groupRoleId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
 "/groups/{groupId}/invites/{userId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites~1{userId}"
 
