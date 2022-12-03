@@ -1,4 +1,4 @@
-title: VerifyAuthToken
+title: VerifyAuthTokenResult
 type: object
 properties:
   ok:

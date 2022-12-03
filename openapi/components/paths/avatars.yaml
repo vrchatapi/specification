@@ -45,9 +45,9 @@ paths:
           authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/featured
-        - $ref: ../parameters.yaml#/sortOptions
+        - $ref: ../parameters.yaml#/sort
         - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/orderOptions
+        - $ref: ../parameters.yaml#/order
         - $ref: ../parameters.yaml#/offset
         - $ref: ../parameters.yaml#/search
         - $ref: ../parameters.yaml#/tag
@@ -76,7 +76,7 @@ paths:
           authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/featured
-        - $ref: ../parameters.yaml#/sortOptions
+        - $ref: ../parameters.yaml#/sort
         - schema:
             type: string
             enum:
@@ -87,7 +87,7 @@ paths:
           description: Set to `me` for searching own avatars.
         - $ref: ../parameters.yaml#/userIdQuery
         - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/orderOptions
+        - $ref: ../parameters.yaml#/order
         - $ref: ../parameters.yaml#/offset
         - $ref: ../parameters.yaml#/tag
         - $ref: ../parameters.yaml#/notag

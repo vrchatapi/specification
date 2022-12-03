@@ -1,0 +1,16 @@
+title: APIConfigAnnouncement
+type: object
+description: Public Announcement
+deprecated: true
+properties:
+  name:
+    description: Announcement name
+    minLength: 1
+    type: string
+  text:
+    description: Announcement text
+    minLength: 1
+    type: string
+required:
+  - name
+  - text

@@ -12,5 +12,5 @@ required:
   - isFriend
   - outgoingRequest
   - incomingRequest
-title: Friend Status
+title: FriendStatus
 type: object

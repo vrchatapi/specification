@@ -20,16 +20,4 @@ properties:
     minLength: 1
     type: string
   article:
-    type: object
-    title: InfoPushDataArticle
-    properties:
-      content:
-        type: object
-        title: InfoPushDataArticleContent
-        properties:
-          text:
-            type: string
-          imageUrl:
-            type: string
-          onPressed:
-            $ref: ./InfoPushDataClickable.yaml
+    $ref: ./InfoPushDataArticle.yaml

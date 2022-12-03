@@ -49,21 +49,7 @@ properties:
   photonRegion:
     $ref: ./Region.yaml
   platforms:
-    type: object
-    title: InstancePlatforms
-    additionalProperties: false
-    required:
-      - android
-      - standalonewindows
-    properties:
-      android:
-        type: integer
-        minimum: 0
-        example: 1
-      standalonewindows:
-        type: integer
-        minimum: 0
-        example: 5
+    $ref: ./InstancePlatforms.yaml
   region:
     $ref: ./Region.yaml
   secureName:
