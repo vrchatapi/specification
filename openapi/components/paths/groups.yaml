@@ -201,6 +201,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/groups/GroupResponse.yaml
+        '400':
+          $ref: ../responses/groups/GroupAlreadyMemberError.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
