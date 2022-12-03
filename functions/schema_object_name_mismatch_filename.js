@@ -18,6 +18,15 @@ export default createRulesetFunction(
   function schema_object_name_mismatch_filename(input, options, context) {
     const results = [];
     const { title } = input;
+    let prefix;
+    if (context.path[3] === "requestBody" && context.path.length === 7) {
+      prefix = "requests";
+    } else if (context.path[3] === "response" && context.path.length === 7) {
+      prefix = "responses";
+    } else {
+      prefix = "schemas";
+    }
+
     const documents = Object.keys(
       context.documentInventory.referencedDocuments
     );
@@ -25,14 +34,14 @@ export default createRulesetFunction(
     let match = false;
     for (const doc of documents) {
       // console.log(doc);
-      if (doc.endsWith(`schemas/${title}.yaml`)) {
+      if (doc.endsWith(`${prefix}/${title}.yaml`)) {
         match = true;
       }
     }
 
     if (!match) {
       results.push({
-        message: `Schema title "${title}" does not match filename`,
+        message: `Schema title "${title}" does not match filename, expected ${prefix}/${title}.yaml: ${context.path}`,
       });
     }
 

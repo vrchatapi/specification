@@ -52,7 +52,7 @@ rules:
   # Fetch ALL objects which have "title", and check if the filename matches the title
   schema-object-name-mismatch-filename:
     # Recursively fetch "json.schema" objects that has a "title" field
-    given: "$.paths..[?(@ != null && @.title)]"
+    given: "$.paths.[*][get,post,put,delete]..[?(@ != null && @.title)]"
     severity: error
     resolved: true
     then:
