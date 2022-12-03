@@ -1,0 +1,9 @@
+title: UpdateGroupMemberRequest
+type: object
+properties:
+	visibility:
+		$ref: ../schemas/GroupUserVisibility.yaml
+	isSubscribedToAnnouncements:
+		type: boolean
+	managerNotes:
+		type: string
