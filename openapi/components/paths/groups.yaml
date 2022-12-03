@@ -146,6 +146,28 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+  '/groups/{groupId}/auditLogs':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get Group Audit Logs
+      description: Returns a list of audit logs for a Group.
+      operationId: getGroupAuditLogs
+      tags:
+        - groups
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      responses:
+        # '200':
+        #   $ref: ../responses/groups/GroupAuditLogsResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
   '/groups/{groupId}/invites':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -252,14 +274,19 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
-      summary: Get Group Members
+      summary: List Group Members
       description: Returns a List of all Group Members
       operationId: getGroupMembers
       tags:
         - groups
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
       responses:
         '200':
           $ref: ../responses/groups/GroupMemberListResponse.yaml
+        '400':
+          $ref: ../responses/users/UsersInvalidSearchError.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
