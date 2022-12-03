@@ -3,14 +3,19 @@ type: object
 properties:
   id:
     $ref: ./GroupAnnouncementID.yaml
+    nullable: true
   groupId:
     $ref: ./GroupID.yaml
+    nullable: true
   authorId:
     $ref: ./UserID.yaml
+    nullable: true
   title:
     type: string
+    nullable: true
   text:
     type: string
+    nullable: true
   imageId:
     $ref: ./FileID.yaml
     nullable: true
@@ -20,6 +25,8 @@ properties:
   createdAt:
     type: string
     format: date-time
+    nullable: true
   updatedAt:
     type: string
     format: date-time
+    nullable: true
