@@ -106,6 +106,27 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+    post:
+      summary: Create Group Announcement
+      description: Creates an Announcement for a Group.
+      operationId: createGroupAnnouncement
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateGroupAnnouncementRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupAnnouncementResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
   '/groups/{groupId}/invites':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -275,6 +296,8 @@ paths:
       responses:
         '200':
           description: OK
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       requestBody:

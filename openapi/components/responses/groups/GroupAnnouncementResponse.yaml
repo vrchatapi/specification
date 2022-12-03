@@ -1,0 +1,5 @@
+description: Returns a single GroupAnnouncement object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/GroupAnnouncement.yaml

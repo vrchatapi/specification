@@ -1,4 +1,4 @@
-title: getGroupAnnouncement
+title: GroupAnnouncement
 type: object
 properties:
   id:
@@ -13,8 +13,10 @@ properties:
     type: string
   imageId:
     $ref: ./FileID.yaml
+    nullable: true
   imageUrl:
     type: string
+    nullable: true
   createdAt:
     type: string
     format: date-time
