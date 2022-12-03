@@ -110,8 +110,14 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1leave"
 "/groups/{groupId}/members":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members"
+'/groups/{groupId}/members/{userId}':
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}"
+'/groups/{groupId}/members/{userId}/roles/{groupRoleId}':
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}~1roles~1{groupRoleId}"
 "/groups/{groupId}/requests":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests"
+"/groups/{groupId}/requests/{userId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests~1{userId}"
 "/groups/{groupId}/roles":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles"
 "/groups/{groupId}/roles/{groupRoleId}":
