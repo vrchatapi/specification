@@ -30,8 +30,8 @@ paths:
           name: userId
           deprecated: true
           description: 'UserID, will always generate a 500 permission error.'
-        - $ref: '../parameters.yaml#/number'
-        - $ref: '../parameters.yaml#/offset'
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
       tags:
         - files
   /file:
