@@ -33,6 +33,13 @@ paths:
       tags:
         - groups
       operationId: getGroup
+      parameters:
+        - in: query
+          name: includeRoles
+          schema:
+            type: boolean
+          required: false
+          description: Include roles for the Group object. Defaults to false.
       responses:
         '200':
           $ref: ../responses/groups/GroupResponse.yaml

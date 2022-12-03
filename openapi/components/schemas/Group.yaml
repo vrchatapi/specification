@@ -66,3 +66,9 @@ properties:
     example: member
   myMember:
     $ref: ./GroupMyMember.yaml
+  roles:
+    description: 'Only returned if ?includeRoles=true is specified.'
+    type: array
+    nullable: true
+    items:
+      $ref: ./GroupRole.yaml
