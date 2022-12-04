@@ -3,7 +3,7 @@ type: object
 properties:
   visibility:
     $ref: ../schemas/GroupUserVisibility.yaml
-  is SubscribedToAnnouncements:
+  isSubscribedToAnnouncements:
     type: boolean
   managerNotes:
     type: string

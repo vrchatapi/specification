@@ -497,7 +497,9 @@ paths:
       - $ref: ../parameters.yaml#/groupId
     get:
       summary: List Group Members
-      description: Returns a List of all Group Members
+      description: |-
+        Returns a List of all **other** Group Members. This endpoint will never return the user calling the endpoint.
+        Information about the user calling the endpoint must be found in the `myMember` field of the Group object.
       operationId: getGroupMembers
       tags:
         - groups
