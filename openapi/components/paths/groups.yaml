@@ -168,6 +168,69 @@ paths:
       security:
         - apiKeyCookie: []
           authCookie: []
+  '/groups/{groupId}/bans':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get Group Bans
+      description: Returns a list of banned users for a Group.
+      operationId: getGroupBans
+      tags:
+        - groups
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupMemberListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    post:
+      summary: Ban Group Member
+      description: Bans a user from a Group.
+      operationId: banGroupMember
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/BanGroupMemberRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupMemberResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/bans/{userId}':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+      - $ref: ../parameters.yaml#/userId
+    delete:
+      summary: Unban Group Member
+      description: Unbans a user from a Group.
+      operationId: unbanGroupMember
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupMemberResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
   '/groups/{groupId}/invites':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -330,6 +393,24 @@ paths:
           $ref: ../responses/groups/GroupLimitedMemberResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Kick Group Member
+      description: Kicks a Group Member from the Group. The current user must have the "Remove Group Members" permission.
+      operationId: kickGroupMember
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:

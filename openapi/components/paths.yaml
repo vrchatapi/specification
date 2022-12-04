@@ -100,6 +100,12 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
 "/groups/{groupId}/announcement":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1announcement"
+'groups/{groupId}/auditLogs':
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1auditLogs"
+"/groups/{groupId}/bans":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1bans"
+"/groups/{groupId}/bans/{userId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1bans~1{userId}"
 "/groups/{groupId}/invites":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites"
 "/groups/{groupId}/invites/{userId}":
