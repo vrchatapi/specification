@@ -2,6 +2,4 @@ description: Returns a list of GroupRoleID objects.
 content:
   application/json:
     schema:
-      type: array
-      items:
-        $ref: ../../schemas/GroupRoleID.yaml
+      $ref: ../../schemas/GroupRoleIDList.yaml

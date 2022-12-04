@@ -13,11 +13,12 @@ properties:
     type: string
   iconUrl:
     type: string
+    nullable: true
   bannerUrl:
     type: string
+    nullable: true
   privacy:
-    type: string
-    example: default
+    $ref: ./GroupPrivacy.yaml
   ownerId:
     $ref: ./UserID.yaml
   rules:
@@ -53,6 +54,7 @@ properties:
     items:
       $ref: ./Tag.yaml
   galleries:
+    description: ' '
     type: array
     items:
       $ref: ./GroupGallery.yaml
