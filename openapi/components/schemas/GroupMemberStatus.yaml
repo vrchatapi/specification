@@ -1,0 +1,8 @@
+type: string
+enum:
+  - inactive
+  - member
+  - requested
+  - invited
+default: inactive
+example: member

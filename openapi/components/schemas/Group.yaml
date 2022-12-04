@@ -62,10 +62,10 @@ properties:
   onlineMemberCount:
     type: integer
   membershipStatus:
-    type: string
-    example: member
+    $ref: ./GroupMemberStatus.yaml
   myMember:
     $ref: ./GroupMyMember.yaml
+    nullable: true
   roles:
     description: 'Only returned if ?includeRoles=true is specified.'
     type: array
