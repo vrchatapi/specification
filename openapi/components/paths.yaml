@@ -114,6 +114,8 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1galleries~1{groupGalleryId}~1images"
 "/groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1galleries~1{groupGalleryId}~1images~1{groupGalleryImageId}"
+# "/groups/{groupId}/instances":
+#   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1instances"
 "/groups/{groupId}/invites":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites"
 "/groups/{groupId}/invites/{userId}":
