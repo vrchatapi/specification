@@ -16,5 +16,29 @@ properties:
     description: Whether the gallery is members only.
     example: false
     default: false
+  roleIdsToView:
+    description: ' '
+    type: array
+    items:
+      $ref: ../schemas/GroupRoleID.yaml
+    nullable: true
+  roleIdsToSubmit:
+    description: ' '
+    type: array
+    items:
+      $ref: ../schemas/GroupRoleID.yaml
+    nullable: true
+  roleIdsToAutoApprove:
+    description: ' '
+    type: array
+    items:
+      $ref: ../schemas/GroupRoleID.yaml
+    nullable: true
+  roleIdsToManage:
+    description: ' '
+    type: array
+    items:
+      $ref: ../schemas/GroupRoleID.yaml
+    nullable: true
 required:
   - name

@@ -20,23 +20,23 @@ properties:
     description: ' '
     type: array
     items:
-      $ref: ./GroupRoleID.yaml
+      $ref: ../schemas/GroupRoleID.yaml
     nullable: true
   roleIdsToSubmit:
     description: ' '
     type: array
     items:
-      $ref: ./GroupRoleID.yaml
+      $ref: ../schemas/GroupRoleID.yaml
     nullable: true
   roleIdsToAutoApprove:
     description: ' '
     type: array
     items:
-      $ref: ./GroupRoleID.yaml
+      $ref: ../schemas/GroupRoleID.yaml
     nullable: true
   roleIdsToManage:
     description: ' '
     type: array
     items:
-      $ref: ./GroupRoleID.yaml
+      $ref: ../schemas/GroupRoleID.yaml
     nullable: true
