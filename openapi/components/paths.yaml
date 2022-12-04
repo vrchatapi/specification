@@ -98,22 +98,48 @@
   $ref: "./paths/groups.yaml#/paths/~1groups"
 "/groups/{groupId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
-"/groups/{groupId}/roles":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles"
-"/groups/{groupId}/members":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members"
-"/groups/{groupId}/roles/{groupRoleId}":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
-"/groups/{groupId}/join":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1join"
-"/groups/{groupId}/leave":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1leave"
-"/groups/{groupId}/requests":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests"
+"/groups/{groupId}/announcement":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1announcement"
+"/groups/{groupId}/auditLogs":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1auditLogs"
+"/groups/{groupId}/bans":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1bans"
+"/groups/{groupId}/bans/{userId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1bans~1{userId}"
+"/groups/{groupId}/galleries":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1galleries"
+"/groups/{groupId}/galleries/{groupGalleryId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1galleries~1{groupGalleryId}"
+"/groups/{groupId}/galleries/{groupGalleryId}/images":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1galleries~1{groupGalleryId}~1images"
+"/groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1galleries~1{groupGalleryId}~1images~1{groupGalleryImageId}"
+# "/groups/{groupId}/instances":
+#   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1instances"
 "/groups/{groupId}/invites":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites"
 "/groups/{groupId}/invites/{userId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1invites~1{userId}"
+"/groups/{groupId}/join":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1join"
+"/groups/{groupId}/leave":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1leave"
+"/groups/{groupId}/members":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members"
+'/groups/{groupId}/members/{userId}':
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}"
+'/groups/{groupId}/members/{userId}/roles/{groupRoleId}':
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}~1roles~1{groupRoleId}"
+"/groups/{groupId}/permissions":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1permissions"
+"/groups/{groupId}/requests":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests"
+"/groups/{groupId}/requests/{userId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests~1{userId}"
+"/groups/{groupId}/roles":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles"
+"/groups/{groupId}/roles/{groupRoleId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
 
 # invite
 

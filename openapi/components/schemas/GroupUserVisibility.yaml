@@ -1,0 +1,7 @@
+example: visible
+title: GroupUserVisibility
+type: string
+enum:
+  - visible
+  - hidden
+  - friends

@@ -12,6 +12,7 @@ properties:
   description:
     type: string
     maxLength: 250
+    minLength: 0
   joinState:
     $ref: ../schemas/GroupJoinState.yaml
   iconId:
@@ -36,8 +37,8 @@ properties:
       type: string
   rules:
     type: string
-    
-  
-required:
-  - name
-  - shortCode
+  tags:
+    description: ' '
+    type: array
+    items:
+      $ref: ../schemas/Tag.yaml

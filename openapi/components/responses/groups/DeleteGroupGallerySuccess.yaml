@@ -1,0 +1,11 @@
+description: Successful response after deleting a group gallery.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Success.yaml
+    examples:
+      Deleted Group Gallery:
+        value:
+          success:
+            message: Gallery deleted!
+            status_code: 200

@@ -1,0 +1,12 @@
+title: GroupMemberLimitedUser
+type: object
+description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
+properties:
+  id:
+    $ref: ./UserID.yaml
+  displayName:
+    type: string
+  thumbnailUrl:
+    type: string
+  iconUrl:
+    type: string

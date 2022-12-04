@@ -10,6 +10,11 @@ properties:
   isRepresenting:
     type: boolean
     default: false
+    example: true
+    description: Whether the user is representing the group. This makes the group show up above the name tag in-game.
+  user:
+    $ref: ./GroupMemberLimitedUser.yaml
+    nullable: true
   roleIds:
     type: array
     items:
@@ -26,3 +31,17 @@ properties:
   isSubscribedToAnnouncements:
     type: boolean
     default: false
+  createdAt:
+    description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
+    type: string
+    format: date-time
+    nullable: true
+  bannedAt:
+    description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
+    type: string
+    format: date-time
+    nullable: true
+  managerNotes:
+    description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
+    type: string
+    nullable: true

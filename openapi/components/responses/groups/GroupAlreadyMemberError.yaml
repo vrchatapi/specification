@@ -1,0 +1,11 @@
+description: Error response when trying to join a group that the user is already a member of.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      400 User Already Member:
+        value:
+          error:
+            message: You're already a member!
+            status_code: 400

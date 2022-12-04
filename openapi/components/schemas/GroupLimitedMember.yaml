@@ -1,0 +1,12 @@
+title: GroupLimitedMember
+type: object
+properties:
+  id:
+    $ref: ./GroupMemberID.yaml
+  groupId:
+    $ref: ./GroupID.yaml
+  userId:
+    $ref: ./UserID.yaml
+  isRepresenting:
+    type: boolean
+    default: false

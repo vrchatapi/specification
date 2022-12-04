@@ -12,6 +12,7 @@ properties:
   description:
     type: string
     maxLength: 250
+    minLength: 0
   joinState:
     $ref: ../schemas/GroupJoinState.yaml
   iconId:

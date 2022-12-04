@@ -1,0 +1,11 @@
+description: Error response when trying to delete a submission to a group's gallery when the user does not have permission to do so.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      403 Cannot Delete Submission:
+        value:
+          error:
+            message: You can't remove this gallery submission!
+            status_code: 403
