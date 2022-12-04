@@ -450,7 +450,7 @@ paths:
           authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
-        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/sort'
         - schema:
             type: string
             enum:
@@ -461,7 +461,7 @@ paths:
           description: Set to `me` for searching own avatars.
         - $ref: '#/components/parameters/userIdQuery'
         - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/order'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/tag'
         - $ref: '#/components/parameters/notag'
@@ -653,9 +653,9 @@ paths:
           authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
-        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/sort'
         - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/order'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search'
         - $ref: '#/components/parameters/tag'
@@ -1278,6 +1278,10 @@ paths:
           in: query
           name: partNumber
           required: false
+          description: >-
+            The part number to start uploading. If not provided, the first part
+            will be started.
+          deprecated: true
       security:
         - apiKeyCookie: []
           authCookie: []
@@ -1445,6 +1449,771 @@ paths:
           authCookie: []
       tags:
         - friends
+  /groups:
+    post:
+      summary: Create Group
+      description: >-
+        Creates a Group and returns a Group object. **Requires VRC+
+        Subscription.**
+      operationId: createGroup
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get Group by ID
+      description: Returns a single Group by ID.
+      tags:
+        - groups
+      operationId: getGroup
+      parameters:
+        - in: query
+          name: includeRoles
+          schema:
+            type: boolean
+          required: false
+          description: Include roles for the Group object. Defaults to false.
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    put:
+      summary: Update Group
+      description: Updates a Group and returns it.
+      operationId: updateGroup
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroupRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Delete Group
+      operationId: deleteGroup
+      tags:
+        - groups
+      description: Deletes a Group.
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteGroupSuccess'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/announcement:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get Group Announcement
+      description: >-
+        Returns the announcement for a Group.
+
+        If no announcement has been made, then it returns **empty object**. 
+
+        If an announcement exists, then it will always return all fields except
+        `imageId` and `imageUrl` which may be null.
+      operationId: getGroupAnnouncements
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupAnnouncementResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    post:
+      summary: Create Group Announcement
+      description: Creates an Announcement for a Group.
+      operationId: createGroupAnnouncement
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupAnnouncementRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupAnnouncementResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Delete Group Announcement
+      description: Deletes the announcement for a Group.
+      operationId: deleteGroupAnnouncement
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteGroupAnnouncementSuccess'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/auditLogs:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get Group Audit Logs
+      description: Returns a list of audit logs for a Group.
+      operationId: getGroupAuditLogs
+      tags:
+        - groups
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupAuditLogListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/bans:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get Group Bans
+      description: Returns a list of banned users for a Group.
+      operationId: getGroupBans
+      tags:
+        - groups
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupMemberListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    post:
+      summary: Ban Group Member
+      description: Bans a user from a Group.
+      operationId: banGroupMember
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BanGroupMemberRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupMemberResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/bans/{userId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/userId'
+    delete:
+      summary: Unban Group Member
+      description: Unbans a user from a Group.
+      operationId: unbanGroupMember
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupMemberResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/galleries:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    post:
+      summary: Create Group Gallery
+      description: Creates a gallery for a Group.
+      operationId: createGroupGallery
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupGalleryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupGalleryResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/galleries/{groupGalleryId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/groupGalleryId'
+    get:
+      summary: Get Group Gallery Images
+      description: Returns a list of images for a Group gallery.
+      operationId: getGroupGalleryImages
+      tags:
+        - groups
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+        - in: query
+          name: approved
+          required: false
+          schema:
+            type: boolean
+          description: >-
+            If specified, only returns images that have been approved or not
+            approved.
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupGalleryImageListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    put:
+      summary: Update Group Gallery
+      description: Updates a gallery for a Group.
+      operationId: updateGroupGallery
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroupGalleryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupGalleryResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Delete Group Gallery
+      description: Deletes a gallery for a Group.
+      operationId: deleteGroupGallery
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteGroupGallerySuccess'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/galleries/{groupGalleryId}/images:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/groupGalleryId'
+    post:
+      summary: Add Group Gallery Image
+      description: Adds an image to a Group gallery.
+      operationId: addGroupGalleryImage
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddGroupGalleryImageRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupGalleryImageResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/groupGalleryId'
+      - $ref: '#/components/parameters/groupGalleryImageId'
+    delete:
+      summary: Delete Group Gallery Image
+      description: Deletes an image from a Group gallery.
+      operationId: deleteGroupGalleryImage
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteGroupGalleryImageSuccess'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/GroupGalleryImageDeleteForbiddenError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/invites:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get Group Invites Sent
+      description: Returns a list of members that have been invited to the Group.
+      operationId: getGroupInvites
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupMemberListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/GroupNotMemberError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    post:
+      summary: Invite User to Group
+      description: Sends an invite to a user to join the group.
+      operationId: createGroupInvite
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupInviteRequest'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: User <displayName> is already invited
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/invites/{userId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/userId'
+    delete:
+      summary: Delete User Invite
+      description: Deletes an Group invite sent to a User
+      operationId: deleteGroupInvite
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/join:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    post:
+      summary: Join Group
+      description: Join a Group by ID and returns the joined Group.
+      operationId: joinGroup
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupResponse'
+        '400':
+          $ref: '#/components/responses/GroupAlreadyMemberError'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/leave:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    post:
+      summary: Leave Group
+      description: Leave a group by ID.
+      operationId: leaveGroup
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/GroupNotMemberError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/members:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: List Group Members
+      description: >-
+        Returns a List of all **other** Group Members. This endpoint will never
+        return the user calling the endpoint.
+
+        Information about the user calling the endpoint must be found in the
+        `myMember` field of the Group object.
+      operationId: getGroupMembers
+      tags:
+        - groups
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupMemberListResponse'
+        '400':
+          $ref: '#/components/responses/UsersInvalidSearchError'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/members/{userId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get Group Member
+      description: Returns a LimitedGroup Member.
+      operationId: getGroupMember
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupLimitedMemberResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    put:
+      summary: Update Group Member
+      description: Updates a Group Member
+      operationId: updateGroupMember
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroupMemberRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupLimitedMemberResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Kick Group Member
+      description: >-
+        Kicks a Group Member from the Group. The current user must have the
+        "Remove Group Members" permission.
+      operationId: kickGroupMember
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/GroupNotMemberError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/members/{userId}/roles/{groupRoleId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/groupRoleId'
+    put:
+      summary: Add Role to GroupMember
+      description: Adds a Role to a Group Member
+      operationId: addGroupMemberRole
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupRoleIDListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Remove Role from GroupMember
+      description: Removes a Role from a Group Member
+      operationId: removeGroupMemberRole
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupRoleIDListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/permissions:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: List Group Permissions
+      description: Returns a List of all possible/available permissions for a Group.
+      operationId: getGroupPermissions
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupPermissionListResponse'
+        '400':
+          $ref: '#/components/responses/UsersInvalidSearchError'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/requests:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get Group Join Requests
+      description: Returns a list of members that have requested to join the Group.
+      operationId: getGroupRequests
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupMemberListResponse'
+        '403':
+          $ref: '#/components/responses/GroupNotMemberError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Cancel Group Join Request
+      description: Cancels a request sent to join the group.
+      operationId: cancelGroupRequest
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: You can't cancel a join request if you didn't request to join․
+        '403':
+          $ref: '#/components/responses/GroupNotMemberError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/requests/{userId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/userId'
+    put:
+      summary: Respond Group Join request
+      description: Responds to a Group Join Request with Accept/Deny
+      operationId: respondGroupJoinRequest
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespondGroupJoinRequest'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/roles:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get Group Roles
+      description: Returns a Group Role by ID.
+      operationId: getGroupRoles
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupRoleListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    post:
+      summary: Create GroupRole
+      description: Create a Group role.
+      operationId: createGroupRole
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRoleRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupRoleResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  /groups/{groupId}/roles/{groupRoleId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/groupRoleId'
+    put:
+      summary: Update Group Role
+      description: Updates a group role by ID.
+      operationId: updateGroupRole
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroupRoleRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupRoleListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Delete Group Role
+      description: Deletes a Group Role by ID and returns the remaining roles.
+      operationId: deleteGroupRole
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupRoleListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotMemberError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
   /invite/{userId}:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -1858,6 +2627,7 @@ paths:
         name: shortName
         in: path
         required: true
+        description: Must be a valid instance short name.
     get:
       summary: Get Instance By Short Name
       tags:
@@ -2179,6 +2949,13 @@ paths:
       tags:
         - playermoderation
   /auth/user/playermoderations/{playerModerationId}:
+    parameters:
+      - schema:
+          type: string
+        name: playerModerationId
+        in: path
+        required: true
+        description: Must be a valid `pmod_` ID.
     get:
       summary: Get Player Moderation
       tags:
@@ -2230,12 +3007,6 @@ paths:
         moderation multiple times successfully.
       tags:
         - playermoderation
-    parameters:
-      - schema:
-          type: string
-        name: playerModerationId
-        in: path
-        required: true
   /auth/user/unplayermoderate:
     put:
       summary: Unmoderate User
@@ -2482,6 +3253,7 @@ paths:
         name: username
         in: path
         required: true
+        description: Username of the user
     get:
       summary: Get User by Username
       tags:
@@ -2545,6 +3317,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/CurrentUserResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
       description: Update a users information such as the email and birthday.
       security:
         - apiKeyCookie: []
@@ -2556,6 +3330,40 @@ paths:
               $ref: '#/components/schemas/UpdateUserRequest'
       tags:
         - users
+  /users/{userId}/groups:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get User Groups
+      tags:
+        - users
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getUserGroups
+      description: Get user's public groups
+  /users/{userId}/groups/requested:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get User Group Requests
+      description: Returns a list of Groups the user has requested to be invited into.
+      operationId: getUserGroupRequests
+      tags:
+        - users
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - apiKeyCookie: []
+          authCookie: []
   /worlds:
     get:
       summary: Search All Worlds
@@ -2579,7 +3387,7 @@ paths:
           authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
-        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/sort'
         - schema:
             type: string
             enum:
@@ -2590,7 +3398,7 @@ paths:
           description: Set to `me` for searching own worlds.
         - $ref: '#/components/parameters/userIdQuery'
         - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/order'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search'
         - $ref: '#/components/parameters/tag'
@@ -2652,9 +3460,9 @@ paths:
           authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
-        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/sort'
         - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/order'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search'
         - $ref: '#/components/parameters/tag'
@@ -2689,9 +3497,9 @@ paths:
           authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
-        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/sort'
         - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/order'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search'
         - $ref: '#/components/parameters/tag'
@@ -2726,9 +3534,9 @@ paths:
           authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
-        - $ref: '#/components/parameters/sortOptions'
+        - $ref: '#/components/parameters/sort'
         - $ref: '#/components/parameters/number'
-        - $ref: '#/components/parameters/orderOptions'
+        - $ref: '#/components/parameters/order'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search'
         - $ref: '#/components/parameters/tag'
@@ -3277,7 +4085,7 @@ components:
       required:
         - verified
     VerifyAuthTokenResult:
-      title: VerifyAuthToken
+      title: VerifyAuthTokenResult
       type: object
       properties:
         ok:
@@ -3452,6 +4260,38 @@ components:
         - version
       title: Avatar
       type: object
+    SortOption:
+      title: SortOption
+      type: string
+      default: popularity
+      enum:
+        - popularity
+        - heat
+        - trust
+        - shuffle
+        - random
+        - favorites
+        - reportScore
+        - reportCount
+        - publicationDate
+        - labsPublicationDate
+        - created
+        - _created_at
+        - updated
+        - _updated_at
+        - order
+        - relevance
+        - magic
+        - name
+      example: popularity
+    OrderOption:
+      title: OrderOption
+      type: string
+      default: descending
+      enum:
+        - ascending
+        - descending
+      example: descending
     CreateAvatarRequest:
       title: CreateAvatarRequest
       type: object
@@ -4395,9 +5235,11 @@ components:
         details:
           default: '{}'
           description: >-
-            **NOTICE:** This is not a JSON object, this is a json **encoded**
-            object, meaning you have to json-de-encode to get the
-            NotificationDetail object depending on the NotificationType.
+            **NOTICE:** This is not a JSON object when received from the REST
+            API, but it is when received from the Websocket API. When received
+            from the REST API, this is a json **encoded** object, meaning you
+            have to json-de-encode to get the NotificationDetail object
+            depending on the NotificationType.
           example: >-
             OneOf: {}, NotificationDetailInvite,
             NotificationDetailInviteResponse, NotificationDetailRequestInvite,
@@ -4413,7 +5255,11 @@ components:
           type: string
         seen:
           default: false
+          description: Not included in notification objects received from the Websocket API
           type: boolean
+        receiverUserId:
+          description: Not included in notification objects received from the REST API
+          $ref: '#/components/schemas/UserID'
         senderUserId:
           $ref: '#/components/schemas/UserID'
         senderUsername:
@@ -4432,7 +5278,6 @@ components:
         - type
         - message
         - details
-        - seen
         - created_at
       title: Notification
       type: object
@@ -4451,8 +5296,818 @@ components:
         - isFriend
         - outgoingRequest
         - incomingRequest
-      title: Friend Status
+      title: FriendStatus
       type: object
+    GroupJoinState:
+      type: string
+      enum:
+        - closed
+        - invite
+        - request
+        - open
+      title: GroupJoinState
+      default: open
+    GroupPrivacy:
+      type: string
+      enum:
+        - default
+        - private
+      title: GroupPrivacy
+      default: default
+    GroupRoleTemplate:
+      type: string
+      enum:
+        - default
+        - managedFree
+        - managedInvite
+        - managedRequest
+      title: GroupRoleTemplate
+      default: default
+    CreateGroupRequest:
+      title: CreateGroupRequest
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 3
+          maxLength: 64
+        shortCode:
+          type: string
+          minLength: 3
+          maxLength: 6
+        description:
+          type: string
+          maxLength: 250
+          minLength: 0
+        joinState:
+          $ref: '#/components/schemas/GroupJoinState'
+        iconId:
+          type: string
+          nullable: true
+          default: null
+        bannerId:
+          type: string
+          nullable: true
+          default: null
+        privacy:
+          $ref: '#/components/schemas/GroupPrivacy'
+        roleTemplate:
+          $ref: '#/components/schemas/GroupRoleTemplate'
+      required:
+        - name
+        - shortCode
+        - roleTemplate
+    GroupID:
+      example: grp_71a7ff59-112c-4e78-a990-c7cc650776e5
+      pattern: >-
+        grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      title: GroupID
+      type: string
+    GroupShortCode:
+      example: ABC123
+      pattern: ^[A-Z0-9]{3,6}$
+      title: GroupShortCode
+      type: string
+    GroupDiscriminator:
+      example: '1234'
+      pattern: ^[0-9]{4}$
+      title: GroupDiscriminator
+      type: string
+    GroupGalleryID:
+      example: grp_a03a4b55-4ca6-4490-9519-40ba6351a233
+      pattern: >-
+        grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      title: GroupGalleryID
+      type: string
+    GroupRoleID:
+      example: grol_459d3911-f672-44bc-b84d-e54ffe7960fe
+      pattern: >-
+        grol_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      title: GroupRoleID
+      type: string
+    GroupGallery:
+      title: GroupMember
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupGalleryID'
+        name:
+          type: string
+          description: Name of the gallery.
+          example: Example Gallery
+          minLength: 1
+        description:
+          type: string
+          description: Description of the gallery.
+          example: Example Description
+          minLength: 0
+        membersOnly:
+          type: boolean
+          description: Whether the gallery is members only.
+          example: false
+          default: false
+        roleIdsToView:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        roleIdsToSubmit:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        roleIdsToAutoApprove:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        roleIdsToManage:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    GroupMemberStatus:
+      type: string
+      enum:
+        - inactive
+        - member
+        - requested
+        - invited
+      default: inactive
+      example: member
+    GroupMemberID:
+      example: gmem_95cdb3b4-4643-4eb6-bdab-46a4e1e5ce37
+      pattern: >-
+        gmem_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      title: GroupMemberID
+      type: string
+    GroupMyMember:
+      title: GroupMyMember
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupMemberID'
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        roleIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+        managerNotes:
+          type: string
+        membershipStatus:
+          type: string
+          example: member
+        isSubscribedToAnnouncements:
+          type: boolean
+          default: true
+        visibility:
+          type: string
+          example: visible
+        isRepresenting:
+          type: boolean
+          default: false
+        joinedAt:
+          type: string
+          format: date-time
+        bannedAt:
+          type: string
+          nullable: true
+        has2FA:
+          type: boolean
+          default: false
+        permissions:
+          type: array
+          items:
+            type: string
+            example: group-instance-join
+    GroupRole:
+      title: GroupRole
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupRoleID'
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        name:
+          type: string
+        description:
+          type: string
+        isSelfAssignable:
+          type: boolean
+          default: false
+        permissions:
+          type: array
+          items:
+            type: string
+        isManagementRole:
+          type: boolean
+          default: false
+        requiresTwoFactor:
+          type: boolean
+          default: false
+        requiresPurchase:
+          type: boolean
+          default: false
+        order:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Group:
+      title: Group
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupID'
+        name:
+          type: string
+        shortCode:
+          $ref: '#/components/schemas/GroupShortCode'
+        discriminator:
+          $ref: '#/components/schemas/GroupDiscriminator'
+        description:
+          type: string
+        iconUrl:
+          type: string
+          nullable: true
+        bannerUrl:
+          type: string
+          nullable: true
+        privacy:
+          $ref: '#/components/schemas/GroupPrivacy'
+        ownerId:
+          $ref: '#/components/schemas/UserID'
+        rules:
+          type: string
+          nullable: true
+        links:
+          type: array
+          items:
+            type: string
+        languages:
+          type: array
+          items:
+            type: string
+        iconId:
+          type: string
+          nullable: true
+        bannerId:
+          type: string
+          nullable: true
+        memberCount:
+          type: integer
+        memberCountSyncedAt:
+          type: string
+          format: date-time
+        isVerified:
+          type: boolean
+          default: false
+        joinState:
+          $ref: '#/components/schemas/GroupJoinState'
+        tags:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        galleries:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupGallery'
+        createdAt:
+          type: string
+          format: date-time
+        onlineMemberCount:
+          type: integer
+        membershipStatus:
+          $ref: '#/components/schemas/GroupMemberStatus'
+        myMember:
+          $ref: '#/components/schemas/GroupMyMember'
+          nullable: true
+        roles:
+          description: Only returned if ?includeRoles=true is specified.
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GroupRole'
+    UpdateGroupRequest:
+      title: UpdateGroupRequest
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 3
+          maxLength: 64
+        shortCode:
+          type: string
+          minLength: 3
+          maxLength: 6
+        description:
+          type: string
+          maxLength: 250
+          minLength: 0
+        joinState:
+          $ref: '#/components/schemas/GroupJoinState'
+        iconId:
+          type: string
+          nullable: true
+          default: null
+        bannerId:
+          type: string
+          nullable: true
+          default: null
+        languages:
+          type: array
+          maxItems: 3
+          description: 3 letter language code
+          items:
+            type: string
+            maxLength: 3
+        links:
+          type: array
+          maxItems: 3
+          items:
+            type: string
+        rules:
+          type: string
+        tags:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    GroupAnnouncementID:
+      example: gpos_71a7ff59-112c-4e78-a990-c7cc650776e5
+      pattern: >-
+        gpos_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      title: GroupAnnouncementID
+      type: string
+    GroupAnnouncement:
+      title: GroupAnnouncement
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupAnnouncementID'
+          nullable: true
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+          nullable: true
+        authorId:
+          $ref: '#/components/schemas/UserID'
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        text:
+          type: string
+          nullable: true
+        imageId:
+          $ref: '#/components/schemas/FileID'
+          nullable: true
+        imageUrl:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+    CreateGroupAnnouncementRequest:
+      title: CreateGroupAnnouncementRequest
+      type: object
+      properties:
+        title:
+          type: string
+          description: Announcement title
+          minLength: 1
+          example: Event is starting soon!
+        text:
+          type: string
+          description: Announcement text
+          minLength: 1
+          example: Come join us for the event!
+        imageId:
+          $ref: '#/components/schemas/FileID'
+        sendNotification:
+          type: boolean
+          description: Send notification to group members.
+          default: false
+          example: false
+      required:
+        - title
+        - favoriteId
+    GroupAuditLogID:
+      example: gaud_71a7ff59-112c-4e78-a990-c7cc650776e5
+      pattern: >-
+        gaud_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      title: GroupAuditLogID
+      type: string
+    GroupAuditLogEntry:
+      title: GroupAuditLogEntry
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupAuditLogID'
+        created_at:
+          type: string
+          format: date-time
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        actorId:
+          $ref: '#/components/schemas/UserID'
+        actorDisplayname:
+          type: string
+        targetId:
+          description: Typically GroupID or GroupRoleID, but could be other types of IDs.
+          type: string
+        eventType:
+          type: string
+          example: group.role.update
+          default: group.update
+          description: >-
+            The type of event that occurred. This is a string that is prefixed
+            with the type of object that the event occurred on. For example, a
+            group role update event would be prefixed with `group.role`.
+        description:
+          type: string
+          description: A human-readable description of the event.
+          example: Group role updated
+        data:
+          type: object
+          description: >-
+            The data associated with the event. The format of this data is
+            dependent on the event type.
+          example:
+            description:
+              old: My exciting new group.  It's pretty nifty!
+              new: My exciting new group. It's pretty nifty!
+            joinState:
+              old: closed
+              new: request
+    PaginatedGroupAuditLogEntryList:
+      title: PaginatedGroupAuditLogEntryList
+      type: object
+      properties:
+        results:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupAuditLogEntry'
+        totalCount:
+          type: integer
+          description: >-
+            The total number of results that the query would return if there
+            were no pagination.
+        hasNext:
+          type: boolean
+          description: Whether there are more results after this page.
+    GroupMemberLimitedUser:
+      title: GroupMemberLimitedUser
+      type: object
+      description: >-
+        Only visible via the /groups/:groupId/members endpoint, **not** when
+        fetching a specific user.
+      properties:
+        id:
+          $ref: '#/components/schemas/UserID'
+        displayName:
+          type: string
+        thumbnailUrl:
+          type: string
+        iconUrl:
+          type: string
+    GroupMember:
+      title: GroupMember
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupMemberID'
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        isRepresenting:
+          type: boolean
+          default: false
+          example: true
+          description: >-
+            Whether the user is representing the group. This makes the group
+            show up above the name tag in-game.
+        user:
+          $ref: '#/components/schemas/GroupMemberLimitedUser'
+          nullable: true
+        roleIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+        joinedAt:
+          type: string
+          format: date-time
+        membershipStatus:
+          type: string
+          example: member
+        visibility:
+          type: string
+          example: visible
+        isSubscribedToAnnouncements:
+          type: boolean
+          default: false
+        createdAt:
+          description: >-
+            Only visible via the /groups/:groupId/members endpoint, **not** when
+            fetching a specific user.
+          type: string
+          format: date-time
+          nullable: true
+        bannedAt:
+          description: >-
+            Only visible via the /groups/:groupId/members endpoint, **not** when
+            fetching a specific user.
+          type: string
+          format: date-time
+          nullable: true
+        managerNotes:
+          description: >-
+            Only visible via the /groups/:groupId/members endpoint, **not** when
+            fetching a specific user.
+          type: string
+          nullable: true
+    BanGroupMemberRequest:
+      title: BanGroupMemberRequest
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+      required:
+        - userId
+    CreateGroupGalleryRequest:
+      title: CreateGroupGalleryRequest
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the gallery.
+          example: Example Gallery
+          minLength: 1
+        description:
+          type: string
+          description: Description of the gallery.
+          example: Example Description
+          minLength: 0
+        membersOnly:
+          type: boolean
+          description: Whether the gallery is members only.
+          example: false
+          default: false
+        roleIdsToView:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        roleIdsToSubmit:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        roleIdsToAutoApprove:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        roleIdsToManage:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+      required:
+        - name
+    GroupGalleryImageID:
+      example: ggim_71a7ff59-112c-4e78-a990-c7cc650776e5
+      pattern: >-
+        ggim_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      title: GroupGalleryImageID
+      type: string
+    GroupGalleryImage:
+      title: GroupGalleryImage
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupGalleryImageID'
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        galleryId:
+          $ref: '#/components/schemas/GroupGalleryID'
+        fileId:
+          $ref: '#/components/schemas/FileID'
+        imageUrl:
+          type: string
+          example: >-
+            https://api.vrchat.cloud/api/1/file/file_ce35d830-e20a-4df0-a6d4-5aaef4508044/1/file
+          format: uri
+        createdAt:
+          type: string
+          format: date-time
+        submittedByUserId:
+          $ref: '#/components/schemas/UserID'
+        approved:
+          type: boolean
+          default: false
+          example: true
+        approvedByUserId:
+          $ref: '#/components/schemas/UserID'
+        approvedAt:
+          type: string
+          format: date-time
+    UpdateGroupGalleryRequest:
+      title: UpdateGroupGalleryRequest
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the gallery.
+          example: Example Gallery
+          minLength: 1
+        description:
+          type: string
+          description: Description of the gallery.
+          example: Example Description
+          minLength: 0
+        membersOnly:
+          type: boolean
+          description: Whether the gallery is members only.
+          example: false
+          default: false
+        roleIdsToView:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        roleIdsToSubmit:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        roleIdsToAutoApprove:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        roleIdsToManage:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+    AddGroupGalleryImageRequest:
+      title: AddGroupGalleryImageRequest
+      type: object
+      properties:
+        fileId:
+          $ref: '#/components/schemas/FileID'
+      required:
+        - fileId
+    CreateGroupInviteRequest:
+      title: CreateGroupInviteRequest
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        confirmOverrideBlock:
+          type: boolean
+          default: true
+      required:
+        - userId
+    GroupLimitedMember:
+      title: GroupLimitedMember
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupMemberID'
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        isRepresenting:
+          type: boolean
+          default: false
+    GroupUserVisibility:
+      example: visible
+      title: GroupUserVisibility
+      type: string
+      enum:
+        - visible
+        - hidden
+        - friends
+    UpdateGroupMemberRequest:
+      title: UpdateGroupMemberRequest
+      type: object
+      properties:
+        visibility:
+          $ref: '#/components/schemas/GroupUserVisibility'
+        isSubscribedToAnnouncements:
+          type: boolean
+        managerNotes:
+          type: string
+    GroupRoleIDList:
+      title: GroupRoleIDList
+      type: array
+      description: ' '
+      items:
+        $ref: '#/components/schemas/GroupRoleID'
+    GroupPermission:
+      title: GroupPermission
+      type: object
+      description: A permission that can be granted to a role in a group.
+      properties:
+        name:
+          type: string
+          example: group-data-manage
+          description: The name of the permission.
+        displayName:
+          type: string
+          example: Manage Group Data
+          description: The display name of the permission.
+        help:
+          type: string
+          example: >-
+            Allows role to edit group details (name, description, joinState,
+            initialRoles, etc).
+          description: Human-readable description of the permission.
+        isManagementPermission:
+          type: boolean
+          default: false
+          example: true
+          description: Whether this permission is a "management" permission.
+        allowedToAdd:
+          type: boolean
+          default: false
+          example: true
+          description: Whether the user is allowed to add this permission to a role.
+    RespondGroupJoinRequest:
+      title: RespondGroupJoinRequest
+      type: object
+      properties:
+        action:
+          type: string
+    CreateGroupRoleRequest:
+      title: CreateGroupRequest
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        isSelfAssignable:
+          type: boolean
+          default: false
+        permissions:
+          type: array
+          items:
+            type: string
+    UpdateGroupRoleRequest:
+      title: UpdateGroupRoleRequest
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        isSelfAssignable:
+          type: boolean
+          default: false
+        permissions:
+          type: array
+          items:
+            type: string
+        order:
+          type: integer
     InstanceID:
       type: string
       example: >-
@@ -4545,12 +6200,6 @@ components:
           maximum: 11
       required:
         - responseSlot
-    InviteMessageID:
-      example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
-      pattern: >-
-        (default|invm_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})
-      title: InviteMessageID
-      type: string
     InviteMessageType:
       type: string
       default: message
@@ -4561,6 +6210,12 @@ components:
         - request
         - requestResponse
       title: InviteMessageType
+    InviteMessageID:
+      example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
+      pattern: >-
+        (default|invm_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})
+      title: InviteMessageID
+      type: string
     InviteMessage:
       description: ''
       properties:
@@ -4619,6 +6274,22 @@ components:
         - jp
         - unknown
       description: API/Photon region.
+    InstancePlatforms:
+      title: InstancePlatforms
+      type: object
+      additionalProperties: false
+      required:
+        - android
+        - standalonewindows
+      properties:
+        android:
+          type: integer
+          minimum: 0
+          example: 1
+        standalonewindows:
+          type: integer
+          minimum: 0
+          example: 5
     InstanceType:
       type: string
       title: InstanceType
@@ -4687,21 +6358,7 @@ components:
         photonRegion:
           $ref: '#/components/schemas/Region'
         platforms:
-          type: object
-          title: InstancePlatforms
-          additionalProperties: false
-          required:
-            - android
-            - standalonewindows
-          properties:
-            android:
-              type: integer
-              minimum: 0
-              example: 1
-            standalonewindows:
-              type: integer
-              minimum: 0
-              example: 5
+          $ref: '#/components/schemas/InstancePlatforms'
         region:
           $ref: '#/components/schemas/Region'
         secureName:
@@ -4859,6 +6516,23 @@ components:
       required:
         - moderated
         - type
+    APIConfigAnnouncement:
+      title: APIConfigAnnouncement
+      type: object
+      description: Public Announcement
+      deprecated: true
+      properties:
+        name:
+          description: Announcement name
+          minLength: 1
+          type: string
+        text:
+          description: Announcement text
+          minLength: 1
+          type: string
+      required:
+        - name
+        - text
     DeploymentGroup:
       type: string
       description: >-
@@ -4879,6 +6553,29 @@ components:
         - cherry
       title: DeploymentGroup
       default: blue
+    APIConfigDownloadURLList:
+      additionalProperties: false
+      description: Download links for various development assets.
+      title: APIConfigDownloadURLList
+      type: object
+      required:
+        - sdk2
+        - sdk3-avatars
+        - sdk3-worlds
+      properties:
+        sdk2:
+          deprecated: true
+          description: Download link for legacy SDK2
+          minLength: 1
+          type: string
+        sdk3-avatars:
+          description: Download link for SDK3 for Avatars
+          minLength: 1
+          type: string
+        sdk3-worlds:
+          description: Download link for SDK3 for Worlds
+          minLength: 1
+          type: string
     DynamicContentRow:
       title: DynamicContentRow
       type: object
@@ -4918,6 +6615,51 @@ components:
         - sortHeading
         - sortOrder
         - sortOwnership
+    APIConfigEvents:
+      title: APIConfigEvents
+      type: object
+      required:
+        - distanceClose
+        - distanceFactor
+        - distanceFar
+        - groupDistance
+        - maximumBunchSize
+        - notVisibleFactor
+        - playerOrderBucketSize
+        - playerOrderFactor
+        - slowUpdateFactorThreshold
+        - viewSegmentLength
+      properties:
+        distanceClose:
+          description: Unknown
+          type: integer
+        distanceFactor:
+          description: Unknown
+          type: integer
+        distanceFar:
+          description: Unknown
+          type: integer
+        groupDistance:
+          description: Unknown
+          type: integer
+        maximumBunchSize:
+          description: Unknown
+          type: integer
+        notVisibleFactor:
+          description: Unknown
+          type: integer
+        playerOrderBucketSize:
+          description: Unknown
+          type: integer
+        playerOrderFactor:
+          description: Unknown
+          type: integer
+        slowUpdateFactorThreshold:
+          description: Unknown
+          type: integer
+        viewSegmentLength:
+          description: Unknown
+          type: integer
     APIConfig:
       example:
         VoiceEnableDegradation: false
@@ -5168,7 +6910,7 @@ components:
         player-url-resolver-hash: >-
           E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
         player-url-resolver-version: 2021-05-16
-      title: API Config
+      title: APIConfig
       type: object
       description: ''
       properties:
@@ -5190,22 +6932,7 @@ components:
           uniqueItems: true
           minItems: 0
           items:
-            type: object
-            description: Public Announcement
-            title: Public Announcement
-            deprecated: true
-            properties:
-              name:
-                description: Announcement name
-                minLength: 1
-                type: string
-              text:
-                description: Announcement text
-                minLength: 1
-                type: string
-            required:
-              - name
-              - text
+            $ref: '#/components/schemas/APIConfigAnnouncement'
         apiKey:
           description: apiKey to be used for all other requests
           minLength: 1
@@ -5366,28 +7093,7 @@ components:
           minLength: 1
           type: string
         downloadUrls:
-          additionalProperties: false
-          description: Download links for various development assets.
-          title: DownloadURLList
-          type: object
-          required:
-            - sdk2
-            - sdk3-avatars
-            - sdk3-worlds
-          properties:
-            sdk2:
-              deprecated: true
-              description: Download link for legacy SDK2
-              minLength: 1
-              type: string
-            sdk3-avatars:
-              description: Download link for SDK3 for Avatars
-              minLength: 1
-              type: string
-            sdk3-worlds:
-              description: Download link for SDK3 for Worlds
-              minLength: 1
-              type: string
+          $ref: '#/components/schemas/APIConfigDownloadURLList'
         dynamicWorldRows:
           description: >-
             Array of DynamicWorldRow objects, used by the game to display the
@@ -5398,50 +7104,7 @@ components:
           items:
             $ref: '#/components/schemas/DynamicContentRow'
         events:
-          title: APIEventConfig
-          type: object
-          required:
-            - distanceClose
-            - distanceFactor
-            - distanceFar
-            - groupDistance
-            - maximumBunchSize
-            - notVisibleFactor
-            - playerOrderBucketSize
-            - playerOrderFactor
-            - slowUpdateFactorThreshold
-            - viewSegmentLength
-          properties:
-            distanceClose:
-              description: Unknown
-              type: integer
-            distanceFactor:
-              description: Unknown
-              type: integer
-            distanceFar:
-              description: Unknown
-              type: integer
-            groupDistance:
-              description: Unknown
-              type: integer
-            maximumBunchSize:
-              description: Unknown
-              type: integer
-            notVisibleFactor:
-              description: Unknown
-              type: integer
-            playerOrderBucketSize:
-              description: Unknown
-              type: integer
-            playerOrderFactor:
-              description: Unknown
-              type: integer
-            slowUpdateFactorThreshold:
-              description: Unknown
-              type: integer
-            viewSegmentLength:
-              description: Unknown
-              type: integer
+          $ref: '#/components/schemas/APIConfigEvents'
         gearDemoRoomId:
           deprecated: true
           description: Unknown
@@ -5696,6 +7359,22 @@ components:
             type: string
       required:
         - command
+    InfoPushDataArticleContent:
+      title: InfoPushDataArticleContent
+      type: object
+      properties:
+        text:
+          type: string
+        imageUrl:
+          type: string
+        onPressed:
+          $ref: '#/components/schemas/InfoPushDataClickable'
+    InfoPushDataArticle:
+      title: InfoPushDataArticle
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/InfoPushDataArticleContent'
     InfoPushData:
       description: ''
       type: object
@@ -5719,19 +7398,7 @@ components:
           minLength: 1
           type: string
         article:
-          type: object
-          title: InfoPushDataArticle
-          properties:
-            content:
-              type: object
-              title: InfoPushDataArticleContent
-              properties:
-                text:
-                  type: string
-                imageUrl:
-                  type: string
-                onPressed:
-                  $ref: '#/components/schemas/InfoPushDataClickable'
+          $ref: '#/components/schemas/InfoPushDataArticle'
     InfoPush:
       description: ''
       type: object
@@ -6969,6 +8636,215 @@ components:
                 error:
                   message: These users are not friends
                   status_code: 400
+    GroupResponse:
+      description: Returns a single Group object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Group'
+    GroupNotFoundError:
+      description: >-
+        Error response when trying to perform operations on a non-existing
+        group.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 World Not Found:
+              value:
+                error:
+                  message: Can't find groupǃ
+                  status_code: 404
+    DeleteGroupSuccess:
+      description: Successful response after deleting a Group.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Deleted Group:
+              value:
+                success:
+                  message: Group deleted!
+                  status_code: 200
+    GroupAnnouncementResponse:
+      description: Returns a single GroupAnnouncement object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupAnnouncement'
+    DeleteGroupAnnouncementSuccess:
+      description: Successful response after deleting/clearing the group announcement.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Deleted Group Announcement:
+              value:
+                success:
+                  message: Group announcement was cleared!
+                  status_code: 200
+    GroupAuditLogListResponse:
+      description: Returns a list of GroupAudit objects, wrapped in new pagination format.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PaginatedGroupAuditLogEntryList'
+    GroupMemberListResponse:
+      description: Returns a list of GroupMember objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GroupMember'
+    GroupMemberResponse:
+      description: Returns a list of GroupMember objects.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupMember'
+    GroupGalleryResponse:
+      description: Returns a single GroupGallery object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupGallery'
+    GroupGalleryImageListResponse:
+      description: Returns a list of GroupGalleryImage objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GroupGalleryImage'
+    DeleteGroupGallerySuccess:
+      description: Successful response after deleting a group gallery.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Deleted Group Gallery:
+              value:
+                success:
+                  message: Gallery deleted!
+                  status_code: 200
+    GroupGalleryImageResponse:
+      description: Returns a single GroupGalleryImage object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupGalleryImage'
+    DeleteGroupGalleryImageSuccess:
+      description: Successful response after deleting a group gallery image.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Deleted Group Gallery Image:
+              value:
+                success:
+                  message: Gallery image removed!
+                  status_code: 200
+    GroupGalleryImageDeleteForbiddenError:
+      description: >-
+        Error response when trying to delete a submission to a group's gallery
+        when the user does not have permission to do so.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            403 Cannot Delete Submission:
+              value:
+                error:
+                  message: You can't remove this gallery submission!
+                  status_code: 403
+    GroupNotMemberError:
+      description: >-
+        Error response when trying to perform operations on a group you are not
+        member of.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            403 Not Group Member:
+              value:
+                error:
+                  message: You're not a member.
+                  status_code: 403
+    GroupAlreadyMemberError:
+      description: >-
+        Error response when trying to join a group that the user is already a
+        member of.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            400 User Already Member:
+              value:
+                error:
+                  message: You're already a member!
+                  status_code: 400
+    UsersInvalidSearchError:
+      description: >-
+        Error response when trying to search list of users with an invalid
+        request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            400 N is too low:
+              value:
+                error:
+                  message: n must be a positive integer˸ '-1'
+                  status_code: 400
+            400 N is too high:
+              value:
+                error:
+                  message: n＝1000 is much too high․ implement paging you savages․
+                  status_code: 400
+    GroupLimitedMemberResponse:
+      description: Returns a list of GroupMember objects.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupLimitedMember'
+    GroupRoleIDListResponse:
+      description: Returns a list of GroupRoleID objects.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupRoleIDList'
+    GroupPermissionListResponse:
+      description: Returns a list of GroupPermission objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GroupPermission'
+    GroupRoleListResponse:
+      description: Returns a list of GroupRole objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GroupRole'
+    GroupRoleResponse:
+      description: Returns a single GroupRole object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupRole'
     SendNotificationResponse:
       description: Returns a single SentNotifcation object.
       content:
@@ -7475,31 +9351,20 @@ components:
             format: date-time
             example: 2021-08-20T12:38:42+00:00
             description: Does not return millisecond precision. Always returns time in UTC.
-    UsersInvalidSearchError:
-      description: >-
-        Error response when trying to search list of users with an invalid
-        request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            400 N is too low:
-              value:
-                error:
-                  message: n must be a positive integer˸ '-1'
-                  status_code: 400
-            400 N is too high:
-              value:
-                error:
-                  message: n＝1000 is much too high․ implement paging you savages․
-                  status_code: 400
     UserResponse:
       description: Returns a single User object.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/User'
+    GroupListResponse:
+      description: Returns a list of Group objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Group'
     LimitedWorldListResponse:
       description: Returns a list of LimitedWorld objects.
       content:
@@ -7618,6 +9483,7 @@ components:
       required: true
       schema:
         type: string
+      description: Must be a valid user ID.
     featured:
       name: featured
       in: query
@@ -7625,35 +9491,13 @@ components:
       schema:
         type: boolean
       description: Filters on featured results.
-    sortOptions:
+    sort:
       name: sort
       in: query
       required: false
       schema:
-        title: SortOptions
-        type: string
-        default: popularity
-        enum:
-          - popularity
-          - heat
-          - trust
-          - shuffle
-          - random
-          - favorites
-          - reportScore
-          - reportCount
-          - publicationDate
-          - labsPublicationDate
-          - created
-          - _created_at
-          - updated
-          - _updated_at
-          - order
-          - relevance
-          - magic
-          - name
-        example: popularity
-        description: How to sort
+        $ref: '#/components/schemas/SortOption'
+      description: The sort order of the results.
     number:
       name: 'n'
       in: query
@@ -7664,19 +9508,13 @@ components:
         minimum: 1
         default: 60
       description: The number of objects to return.
-    orderOptions:
+    order:
       name: order
       in: query
       required: false
       schema:
-        title: OrderOptions
-        type: string
-        default: descending
-        enum:
-          - ascending
-          - descending
-        example: descending
-        description: Result ordering
+        $ref: '#/components/schemas/OrderOption'
+      description: Result ordering
     offset:
       name: offset
       in: query
@@ -7706,13 +9544,7 @@ components:
       in: query
       required: false
       schema:
-        type: string
-        default: public
-        enum:
-          - public
-          - private
-          - hidden
-          - all
+        $ref: '#/components/schemas/ReleaseStatus'
       description: Filter by ReleaseStatus.
     maxUnityVersion:
       name: maxUnityVersion
@@ -7741,6 +9573,7 @@ components:
       required: true
       schema:
         type: string
+      description: Must be a valid avatar ID.
     search:
       name: search
       in: query
@@ -7761,18 +9594,21 @@ components:
       required: true
       schema:
         type: string
+      description: Must be a valid transaction ID.
     licenseGroupId:
       name: licenseGroupId
       in: path
       required: true
       schema:
         type: string
+      description: Must be a valid license group ID.
     favoriteId:
       name: favoriteId
       in: path
       required: true
       schema:
         type: string
+      description: Must be a valid favorite ID.
     favoriteGroupType:
       name: favoriteGroupType
       in: path
@@ -7790,6 +9626,7 @@ components:
       required: true
       schema:
         type: string
+      description: The name of the group to fetch, must be a name of a FavoriteGroup.
     fileId:
       name: fileId
       in: path
@@ -7799,6 +9636,7 @@ components:
         example: file_00000000-0000-0000-0000-000000000000
         pattern: >-
           file_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      description: Must be a valid file ID.
     versionId:
       name: versionId
       in: path
@@ -7807,6 +9645,7 @@ components:
         type: integer
         minimum: 1
         example: 1
+      description: Version ID of the asset.
     fileType:
       name: fileType
       in: path
@@ -7818,6 +9657,7 @@ components:
           - signature
           - delta
         example: file
+      description: Type of file.
     offline:
       name: offline
       in: query
@@ -7827,35 +9667,90 @@ components:
       description: >-
         Returns *only* offline users if true, returns only online and active
         users if false
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: grp_00000000-0000-0000-0000-000000000000
+        pattern: >-
+          grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      description: Must be a valid group ID.
+    startDate:
+      name: startDate
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+      description: The start date of the search range.
+    endDate:
+      name: endDate
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+      description: The end date of the search range.
+    groupGalleryId:
+      name: groupGalleryId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: ggal_00000000-0000-0000-0000-000000000000
+        pattern: >-
+          ggal_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      description: Must be a valid group gallery ID.
+    groupGalleryImageId:
+      name: groupGalleryImageId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: ggim_00000000-0000-0000-0000-000000000000
+        pattern: >-
+          ggim_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      description: Must be a valid group gallery image ID.
+    groupRoleId:
+      name: groupRoleId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: grol_00000000-0000-0000-0000-000000000000
+        pattern: >-
+          grol_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      description: Must be a valid group role ID.
     worldId:
       name: worldId
       in: path
       required: true
       schema:
         type: string
+      description: Must be a valid world ID.
     instanceId:
       name: instanceId
       in: path
       required: true
       schema:
         type: string
+      description: Must be a valid instance ID.
     notificationId:
       name: notificationId
       in: path
       required: true
       schema:
         type: string
+      description: Must be a valid notification ID.
     messageType:
       name: messageType
       in: path
       required: true
       schema:
-        type: string
-        enum:
-          - message
-          - response
-          - request
-          - requestResponse
+        $ref: '#/components/schemas/InviteMessageType'
+      description: The type of message to fetch, must be a valid InviteMessageType.
     slot:
       name: slot
       in: path
@@ -7864,12 +9759,14 @@ components:
         type: integer
         minimum: 0
         maximum: 11
+      description: The message slot to fetch of a given message type.
     permissionId:
       name: permissionId
       in: path
       required: true
       schema:
         type: string
+      description: Must be a valid permission ID.
     require:
       name: require
       in: query
@@ -7923,6 +9820,8 @@ tags:
     description: Files Docs Here
   - name: friends
     description: Friends Docs Here
+  - name: groups
+    description: Group Docs Here
   - name: invite
     description: Invite Docs Here
   - name: instances
