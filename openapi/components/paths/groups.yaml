@@ -385,6 +385,8 @@ paths:
           $ref: ../responses/groups/DeleteGroupGalleryImageSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/groups/GroupGalleryImageDeleteForbiddenError.yaml
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
