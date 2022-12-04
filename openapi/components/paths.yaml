@@ -100,6 +100,8 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
 "/groups/{groupId}/announcement":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1announcement"
+"/groups/{groupId}/auditLogs":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1auditLogs"
 "/groups/{groupId}/bans":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1bans"
 "/groups/{groupId}/bans/{userId}":
@@ -118,6 +120,8 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}"
 '/groups/{groupId}/members/{userId}/roles/{groupRoleId}':
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}~1roles~1{groupRoleId}"
+"/groups/{groupId}/permissions":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1permissions"
 "/groups/{groupId}/requests":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests"
 "/groups/{groupId}/requests/{userId}":
