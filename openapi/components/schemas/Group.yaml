@@ -2,9 +2,9 @@ title: Group
 type: object
 properties:
   id:
-    $ref: ./GroupMemberID.yaml
-  groupId:
     $ref: ./GroupID.yaml
+  name:
+    type: string
   shortCode:
     $ref: ./GroupShortCode.yaml
   discriminator:
