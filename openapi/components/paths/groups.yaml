@@ -159,8 +159,8 @@ paths:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
       responses:
-        # '200':
-        #   $ref: ../responses/groups/GroupAuditLogsResponse.yaml
+        '200':
+          $ref: ../responses/groups/GroupAuditLogListResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':

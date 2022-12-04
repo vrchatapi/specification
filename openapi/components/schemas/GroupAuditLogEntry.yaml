@@ -1,0 +1,36 @@
+title: GroupAuditLogEntry
+type: object
+properties:
+  id:
+    $ref: ./GroupAuditLogID.yaml
+  created_at:
+    type: string
+    format: date-time
+  groupId:
+    $ref: ./GroupID.yaml
+  actorId:
+    $ref: ./UserID.yaml
+  actorDisplayname:
+    type: string
+  targetId:
+    description: Typically GroupID or GroupRoleID, but could be other types of IDs.
+    type: string
+  eventType:
+    type: string
+    example: group.role.update
+    default: group.update
+    description: The type of event that occurred. This is a string that is prefixed with the type of object that the event occurred on. For example, a group role update event would be prefixed with `group.role`.
+  description:
+    type: string
+    description: A human-readable description of the event.
+    example: "Group role updated"
+  data:
+    type: object
+    description: The data associated with the event. The format of this data is dependent on the event type.
+    example:
+      description:
+        old: "My exciting new group.  It's pretty nifty!"
+        new: "My exciting new group. It's pretty nifty!"
+      joinState:
+        old: "closed"
+        new: "request"

@@ -1,0 +1,5 @@
+description: Returns a list of GroupAudit objects, wrapped in new pagination format.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/PaginatedGroupAuditLogEntryList.yaml
