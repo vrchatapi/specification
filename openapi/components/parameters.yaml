@@ -30,6 +30,22 @@ order:
   schema:
     $ref: ./schemas/OrderOption.yaml
   description: Result ordering
+startDate:
+  name: startDate
+  in: query
+  required: false
+  schema:
+    type: string
+    format: date-time
+  description: The start date of the search range.
+endDate:
+  name: endDate
+  in: query
+  required: false
+  schema:
+    type: string
+    format: date-time
+  description: The end date of the search range.
 releaseStatus:
   name: releaseStatus
   in: query
@@ -71,6 +87,24 @@ groupRoleId:
     example: grol_00000000-0000-0000-0000-000000000000
     pattern: 'grol_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
   description: Must be a valid group role ID.
+groupGalleryId:
+  name: groupGalleryId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: ggal_00000000-0000-0000-0000-000000000000
+    pattern: 'ggal_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  description: Must be a valid group gallery ID.
+groupGalleryImageId:
+  name: groupGalleryImageId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: ggim_00000000-0000-0000-0000-000000000000
+    pattern: 'ggim_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  description: Must be a valid group gallery image ID.
 versionId:
   name: versionId
   in: path

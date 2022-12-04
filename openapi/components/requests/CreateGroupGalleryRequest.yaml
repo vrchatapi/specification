@@ -1,0 +1,20 @@
+title: CreateGroupGalleryRequest
+type: object
+properties:
+  name:
+    type: string
+    description: Name of the gallery.
+    example: Example Gallery
+    minLength: 1
+  description:
+    type: string
+    description: Description of the gallery.
+    example: Example Description
+    minLength: 0
+  membersOnly:
+    type: boolean
+    description: Whether the gallery is members only.
+    example: false
+    default: false
+required:
+  - name

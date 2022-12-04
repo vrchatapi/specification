@@ -158,6 +158,8 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/startDate
+        - $ref: ../parameters.yaml#/endDate
       responses:
         '200':
           $ref: ../responses/groups/GroupAuditLogListResponse.yaml
@@ -224,6 +226,163 @@ paths:
       responses:
         '200':
           $ref: ../responses/groups/GroupMemberResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/galleries':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    post:
+      summary: Create Group Gallery
+      description: Creates a gallery for a Group.
+      operationId: createGroupGallery
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateGroupGalleryRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupGalleryResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/galleries/{groupGalleryId}':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+      - $ref: ../parameters.yaml#/groupGalleryId
+    get:
+      summary: Get Group Gallery Images
+      description: Returns a list of images for a Group gallery.
+      operationId: getGroupGalleryImages
+      tags:
+        - groups
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+        - in: query
+          name: approved
+          required: false
+          schema:
+            type: boolean
+          description: If specified, only returns images that have been approved or not approved.
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupGalleryImageListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    put:
+      summary: Update Group Gallery
+      description: Updates a gallery for a Group.
+      operationId: updateGroupGallery
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateGroupGalleryRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupGalleryResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+    delete:
+      summary: Delete Group Gallery
+      description: Deletes a gallery for a Group.
+      operationId: deleteGroupGallery
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/DeleteGroupGallerySuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/galleries/{groupGalleryId}/images':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+      - $ref: ../parameters.yaml#/groupGalleryId
+    post:
+      summary: Add Group Gallery Image
+      description: Adds an image to a Group gallery.
+      operationId: addGroupGalleryImage
+      tags:
+        - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/AddGroupGalleryImageRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupGalleryImageResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+      security:
+        - apiKeyCookie: []
+          authCookie: []
+  '/groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+      - $ref: ../parameters.yaml#/groupGalleryId
+      - $ref: ../parameters.yaml#/groupGalleryImageId
+    # put:
+    #   summary: Approve Group Gallery Image
+    #   description: Approves an image for a Group gallery.
+    #   operationId: approveGroupGalleryImage
+    #   tags:
+    #     - groups
+    #   requestBody:
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: ../requests/UpdateGroupGalleryImageRequest.yaml
+    #   responses:
+    #     '200':
+    #       $ref: ../responses/groups/GroupGalleryImageResponse.yaml
+    #     '401':
+    #       $ref: ../responses/MissingCredentialsError.yaml
+    #     '404':
+    #       $ref: ../responses/groups/GroupNotFoundError.yaml
+    #   security:
+    #     - apiKeyCookie: []
+    #       authCookie: []
+    delete:
+      summary: Delete Group Gallery Image
+      description: Deletes an image from a Group gallery.
+      operationId: deleteGroupGalleryImage
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/DeleteGroupGalleryImageSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
