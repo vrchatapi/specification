@@ -78,7 +78,7 @@ jobs:
   version_check:
     # Only if tag "release/*" is pushed
     if: ${{ startsWith(github.ref, 'refs/tags/release/') }}
-    needs: pages
+    needs: bundle
     name: Check if OpenAPI specification version is matching tag
     runs-on: ubuntu-latest
     steps:
