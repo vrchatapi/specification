@@ -7,17 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Lint OpenAPI specification
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: 'Cache node_modules'
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-v14-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v14
+            ${{ runner.os }}-node-v16
       - name: Install Dependencies
         run: npm install
       - name: Run Spectral linting
@@ -28,12 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Bundle and Filter OpenAPI specification
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 14
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: 'Cache node_modules'
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-node-v14-${{ hashFiles('**/package-lock.json') }}
@@ -44,7 +44,7 @@ jobs:
         run: npm run bundle
 
       - name: Upload Bundled Specification as Artifact 📤
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: openapi-bundled
           path: dist
@@ -56,9 +56,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Upload OpenAPI specification to GitHub Pages
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: openapi-bundled
           path: dist
@@ -82,7 +82,7 @@ jobs:
     name: Check if OpenAPI specification version is matching tag
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Check if OpenAPI specification version is matching tag
         # Tag will be e.g., "release/1.0.0", check if this matches the version in openapi/openapi.yaml
         run: |
