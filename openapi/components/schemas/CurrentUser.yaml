@@ -7,18 +7,25 @@ properties:
     format: date
     nullable: true
     type: string
+  accountDeletionLog:
+    description: ' '
+    type: array
+    items:
+      $ref: ./AccountDeletionLog.yaml
   activeFriends:
+    description: ' '
+    type: array
     items:
       $ref: ./UserID.yaml
-    type: array
   allowAvatarCopying:
     type: boolean
   bio:
     type: string
   bioLinks:
+    description: ' '
+    type: array  
     items:
       type: string
-    type: array
   currentAvatar:
     $ref: ./AvatarID.yaml
   currentAvatarAssetUrl:
@@ -39,11 +46,11 @@ properties:
   fallbackAvatar:
     $ref: ./AvatarID.yaml
   friendGroupNames:
+    type: array
     deprecated: true
     description: Always empty array.
     items:
       type: string
-    type: array
   friendKey:
     type: string
   friends:
