@@ -3779,6 +3779,29 @@ components:
           $ref: '#/components/schemas/Response'
       title: Error
       type: object
+    AccountDeletionLog:
+      title: AccountDeletionLog
+      type: object
+      properties:
+        message:
+          type: string
+          default: Deletion requested
+          example: Deletion requested
+          description: >-
+            Typically "Deletion requested" or "Deletion canceled". Other
+            messages like "Deletion completed" may exist, but are these are not
+            possible to see as a regular user.
+        deletionScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: >-
+            When the deletion is scheduled to happen, standard is 14 days after
+            the request.
+        dateTime:
+          type: string
+          format: date-time
+          description: Date and time of the deletion request.
     UserID:
       example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: UserID
@@ -3904,18 +3927,25 @@ components:
           format: date
           nullable: true
           type: string
+        accountDeletionLog:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountDeletionLog'
         activeFriends:
+          description: ' '
+          type: array
           items:
             $ref: '#/components/schemas/UserID'
-          type: array
         allowAvatarCopying:
           type: boolean
         bio:
           type: string
         bioLinks:
+          description: ' '
+          type: array
           items:
             type: string
-          type: array
         currentAvatar:
           $ref: '#/components/schemas/AvatarID'
         currentAvatarAssetUrl:
@@ -3936,11 +3966,11 @@ components:
         fallbackAvatar:
           $ref: '#/components/schemas/AvatarID'
         friendGroupNames:
+          type: array
           deprecated: true
           description: Always empty array.
           items:
             type: string
-          type: array
         friendKey:
           type: string
         friends:
