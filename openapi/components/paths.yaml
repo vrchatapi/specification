@@ -16,8 +16,8 @@
   $ref: "./paths/authentication.yaml#/paths/~1auth"
 "/logout":
   $ref: "./paths/authentication.yaml#/paths/~1logout"
-"/user/{userId}/delete":
-  $ref: "./paths/authentication.yaml#/paths/~1user~1{userId}~1delete"
+"/users/{userId}/delete":
+  $ref: "./paths/authentication.yaml#/paths/~1users~1{userId}~1delete"
 
 # avatars
 

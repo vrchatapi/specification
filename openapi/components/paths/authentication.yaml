@@ -135,7 +135,7 @@ paths:
         - authentication
       security:
         - authCookie: []
-  '/user/{userId}/delete':
+  '/users/{userId}/delete':
     parameters:
       - $ref: ../parameters.yaml#/userId
     put:
