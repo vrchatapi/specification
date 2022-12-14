@@ -369,7 +369,7 @@ paths:
         - authCookie: []
       tags:
         - authentication
-  /user/{userId}/delete:
+  /users/{userId}/delete:
     parameters:
       - $ref: '#/components/parameters/userId'
     put:
