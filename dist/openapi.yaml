@@ -9883,9 +9883,9 @@ tags:
       There are three different user-targetted permission options:
 
 
-      - Mode 1: interactOn/showAvatar/unmute
+      - Mode 1: interactOn/unmute/unblock
 
-      - Mode 2: interactOff/hideAvatar/mute
+      - Mode 2: interactOff/mute/block
 
       - *Default setting*
 
