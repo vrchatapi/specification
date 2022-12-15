@@ -13,8 +13,8 @@ info:
 
     There are three different user-targetted permission options:
 
-    - Mode 1: interactOn/showAvatar/unmute
-    - Mode 2: interactOff/hideAvatar/mute
+    - Mode 1: interactOn/unmute/unblock
+    - Mode 2: interactOff/mute/unblock
     - *Default setting*
 
     **Example:**
