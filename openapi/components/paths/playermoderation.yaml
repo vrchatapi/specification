@@ -14,7 +14,7 @@ info:
     There are three different user-targetted permission options:
 
     - Mode 1: interactOn/unmute/unblock
-    - Mode 2: interactOff/mute/unblock
+    - Mode 2: interactOff/mute/block
     - *Default setting*
 
     **Example:**
