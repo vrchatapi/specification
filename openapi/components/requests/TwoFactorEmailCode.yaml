@@ -1,0 +1,7 @@
+title: TwoFactorEmailCode
+type: object
+properties:
+  code:
+    type: string
+required:
+  - code
