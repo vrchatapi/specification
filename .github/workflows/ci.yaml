@@ -30,15 +30,15 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - uses: actions/checkout@v3
       - name: 'Cache node_modules'
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-v14-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v14
+            ${{ runner.os }}-node-v16
 
       - name: Bundle OpenAPI Specification 📦
         run: npm run bundle
