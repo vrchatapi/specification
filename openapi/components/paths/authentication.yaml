@@ -140,7 +140,7 @@ paths:
       summary: Verify 2FA email code
       operationId: verify2FAEmailCode
       x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~emailotp~1verify/post"
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1emailotp~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAEmailCodeResponse.yaml
