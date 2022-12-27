@@ -13,7 +13,7 @@
 "/auth/twofactorauth/otp/verify":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1otp~1verify"
 "/auth/twofactorauth/emailotp/verify":
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~emailotp~1verify"
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1emailotp~1verify"
 "/auth":
   $ref: "./paths/authentication.yaml#/paths/~1auth"
 "/logout":
