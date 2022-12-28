@@ -330,6 +330,36 @@ paths:
         - authentication
       security:
         - authCookie: []
+  /auth/twofactorauth/emailotp/verify:
+    post:
+      summary: Verify 2FA email code
+      operationId: verify2FAEmailCode
+      x-codeSamples:
+        - lang: cURL
+          source: >-
+            curl -X POST
+            "https://api.vrchat.cloud/api/1/auth/twofactorauth/emailotp/verify"
+            \
+                 -H "Content-Type: application/json" \
+                 -b "auth={authCookie}" \
+                 --data '{"code": "string"}'
+      responses:
+        '200':
+          $ref: '#/components/responses/Verify2FAEmailCodeResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorEmailCode'
+            examples: {}
+      description: Finishes the login sequence with an 2FA email code.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
   /auth:
     get:
       summary: Verify Auth Token
@@ -4108,6 +4138,22 @@ components:
         - code
     Verify2FAResult:
       title: Verify2FAResult
+      type: object
+      properties:
+        verified:
+          type: boolean
+      required:
+        - verified
+    TwoFactorEmailCode:
+      title: TwoFactorEmailCode
+      type: object
+      properties:
+        code:
+          type: string
+      required:
+        - code
+    Verify2FAEmailCodeResult:
+      title: Verify2FAEmailCodeResult
       type: object
       properties:
         verified:
@@ -8091,6 +8137,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Verify2FAResult'
+      headers:
+        Set-Cookie:
+          schema:
+            type: string
+            example: >-
+              twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+              Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
+          description: >-
+            Provides a `twoFactorAuth` cookie, which can be used to bypasses the
+            2FA requirement for future logins on the same device.
+    Verify2FAEmailCodeResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Verify2FAEmailCodeResult'
       headers:
         Set-Cookie:
           schema:
