@@ -38,6 +38,14 @@
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"code": "string"}'
+/auth/twofactorauth/emailotp/verify:
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/emailotp/verify" \
+             -H "Content-Type: application/json" \
+             -b "auth={authCookie}" \
+             --data '{"code": "string"}'
 '/user/{userId}/delete':
   put:
     - lang: cURL
