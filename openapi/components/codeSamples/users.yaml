@@ -28,4 +28,4 @@
         curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}" \
              -H "Content-Type: application/json" \
              -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
-             --data '{"email": "string", "birthday": "2019-08-24", "acceptedTOSVersion": 0, "tags": ["string"], "status": "active", "statusDescription": "string", "bio": "string", "bioLinks": ["string"], "userIcon": "https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"}'
+             --data '{"email": "string", "birthday": "2019-08-24", "allowAvatarCopying": true, "acceptedTOSVersion": 0, "tags": ["string"], "status": "active", "statusDescription": "string", "bio": "string", "bioLinks": ["string"], "userIcon": "https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"}'
