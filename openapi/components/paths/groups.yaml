@@ -459,7 +459,7 @@ paths:
       - $ref: ../parameters.yaml#/groupId
     post:
       summary: Join Group
-      description: Join a Group by ID and returns the joined Group.
+      description: Join a Group by ID and returns the member object.
       operationId: joinGroup
       tags:
         - groups
