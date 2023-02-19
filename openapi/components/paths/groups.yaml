@@ -459,13 +459,13 @@ paths:
       - $ref: ../parameters.yaml#/groupId
     post:
       summary: Join Group
-      description: Join a Group by ID and returns the joined Group.
+      description: Join a Group by ID and returns the member object.
       operationId: joinGroup
       tags:
         - groups
       responses:
         '200':
-          $ref: ../responses/groups/GroupResponse.yaml
+          $ref: ../responses/groups/GroupMemberResponse.yaml
         '400':
           $ref: ../responses/groups/GroupAlreadyMemberError.yaml
         '401':
