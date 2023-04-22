@@ -16,6 +16,7 @@ jobs:
           - python
           - java
           - rust
+          - elixir
     steps:
       - name: Triggering build SDK - ${{ matrix.node }}
         run: |
