@@ -3959,6 +3959,7 @@ components:
           type: string
         accountDeletionLog:
           description: ' '
+          nullable: true
           type: array
           items:
             $ref: '#/components/schemas/AccountDeletionLog'
