@@ -4,5 +4,6 @@ enum:
   - public
   - private
   - hidden
+  - all
 title: ReleaseStatus
 example: public
