@@ -4186,6 +4186,7 @@ components:
         - public
         - private
         - hidden
+        - all
       title: ReleaseStatus
       example: public
     UnityPackageID:
