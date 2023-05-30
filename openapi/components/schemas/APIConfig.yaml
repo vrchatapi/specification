@@ -261,10 +261,6 @@ properties:
     minItems: 0
     items:
       $ref: ./APIConfigAnnouncement.yaml
-  apiKey:
-    description: apiKey to be used for all other requests
-    minLength: 1
-    type: string
   appName:
     default: VrChat
     deprecated: true
@@ -564,7 +560,6 @@ required:
   - VoiceEnableReceiverLimiting
   - address
   - announcements
-  - apiKey
   - appName
   - buildVersionTag
   - clientApiKey
