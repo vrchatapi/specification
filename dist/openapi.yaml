@@ -6640,6 +6640,8 @@ components:
         - sdk2
         - sdk3-avatars
         - sdk3-worlds
+        - vcc
+        - bootstrap
       properties:
         sdk2:
           deprecated: true
@@ -6652,6 +6654,14 @@ components:
           type: string
         sdk3-worlds:
           description: Download link for SDK3 for Worlds
+          minLength: 1
+          type: string
+        vcc:
+          description: Download link for the Creator Companion
+          minLength: 1
+          type: string
+        bootstrap:
+          description: Download link for ???
           minLength: 1
           type: string
     DynamicContentRow:
@@ -6803,6 +6813,10 @@ components:
             https://files.vrchat.cloud/sdk/VRCSDK3-AVATAR-2021.09.03.09.25_Public.unitypackage
           sdk3-worlds: >-
             https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2021.09.03.09.25_Public.unitypackage
+          vcc: >-
+            https://vrcpm.vrchat.cloud/vcc/Builds/2.1.1/VRChat_CreatorCompanion_Setup_2.1.1.exe
+          bootstrap: >-
+            https://github.com/vrchat/packages/releases/download/resolvers/latest-resolver.unitypackage
         dynamicWorldRows:
           - index: 1
             name: Hot
