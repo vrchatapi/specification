@@ -6,6 +6,8 @@ required:
   - sdk2
   - sdk3-avatars
   - sdk3-worlds
+  - vcc
+  - bootstrap
 properties:
   sdk2:
     deprecated: true
@@ -18,5 +20,13 @@ properties:
     type: string
   sdk3-worlds:
     description: Download link for SDK3 for Worlds
+    minLength: 1
+    type: string
+  vcc:
+    description: Download link for the Creator Companion
+    minLength: 1
+    type: string
+  bootstrap:
+    description: Download link for ???
     minLength: 1
     type: string
