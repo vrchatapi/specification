@@ -198,8 +198,7 @@ paths:
         - lang: cURL
           source: >-
             curl -X GET
-            "https://api.vrchat.cloud/api/1/auth/exists?email={string}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26"
+            "https://api.vrchat.cloud/api/1/auth/exists?email={string}" 
       responses:
         '200':
           $ref: '#/components/responses/UserExistsResponse'
@@ -224,8 +223,6 @@ paths:
         **or** `email` query parameter. Although they can be combined - in
         addition with `excludeUserId` (generally to exclude yourself) - to
         further fine-tune the search.
-      security:
-        - apiKeyCookie: []
   /auth/user:
     get:
       summary: Login and/or Get Current User Info
@@ -369,7 +366,7 @@ paths:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/auth" \
-                 -b "amplitude_id_a750df50d11f21f712262cbd4c0bab37vrchat.com={string}; apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "amplitude_id_a750df50d11f21f712262cbd4c0bab37vrchat.com={string}; auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/VerifyAuthTokenResponse'
@@ -409,7 +406,7 @@ paths:
         - lang: cURL
           source: |-
             curl -X PUT "https://api.vrchat.cloud/api/1/user/{userId}/delete" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/DeleteUserResponse'
@@ -431,8 +428,7 @@ paths:
         **METHOD NOTE:** Despite this being a Delete action, the method type
         required is PUT.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /users/{userId}/avatar:
     get:
       summary: Get Own Avatar
@@ -450,10 +446,9 @@ paths:
         - lang: cURL
           source: >-
             curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/avatar"
-            -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+            -b "auth={authCookie}"
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Get the current avatar for the user. This will return an error for any
         other user than the one logged in.
@@ -468,7 +463,7 @@ paths:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/avatars?featured=true" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/AvatarListResponse'
@@ -476,8 +471,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: searchAvatars
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
         - $ref: '#/components/parameters/sort'
@@ -507,14 +501,13 @@ paths:
       summary: Create Avatar
       operationId: createAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: |-
             curl -X POST "https://api.vrchat.cloud/api/1/avatars" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"assetUrl": "string", "id": "{avatarId}", "name": "string", "description": "string", "tags": ["string"], "imageUrl": "string", "releaseStatus": "public", "version": 1, "unityPackageUrl": "string"}'
       responses:
         '200':
@@ -543,7 +536,7 @@ paths:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/AvatarResponse'
@@ -553,21 +546,19 @@ paths:
           $ref: '#/components/responses/AvatarNotFoundError'
       operationId: getAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Get information about a specific Avatar.
     put:
       summary: Update Avatar
       operationId: updateAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: |-
             curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"assetUrl": "string", "id": "{avatarId}", "name": "string", "description": "string", "tags": ["string"], "imageUrl": "string", "releaseStatus": "public", "version": 1, "unityPackageUrl": "string"}'
       responses:
         '200':
@@ -588,13 +579,12 @@ paths:
       summary: Delete Avatar
       operationId: deleteAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: |-
             curl -X DELETE "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/AvatarResponse'
@@ -620,7 +610,7 @@ paths:
           source: >-
             curl -X PUT
             "https://api.vrchat.cloud/api/1/avatars/{avatarId}/select" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/CurrentUserResponse'
@@ -630,8 +620,7 @@ paths:
           $ref: '#/components/responses/AvatarNotFoundError'
       operationId: selectAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Switches into that avatar.
   /avatars/{avatarId}/selectFallback:
     parameters:
@@ -656,8 +645,7 @@ paths:
           $ref: '#/components/responses/AvatarNotFoundError'
       operationId: selectFallbackAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Switches into that avatar as your fallback avatar.
   /avatars/favorites:
     get:
@@ -669,7 +657,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/avatars/favorites?featured=true" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/AvatarListResponse'
@@ -679,8 +667,7 @@ paths:
           $ref: '#/components/responses/AvatarSeeOtherUserFavoritesError'
       operationId: getFavoritedAvatars
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
         - $ref: '#/components/parameters/sort'
@@ -701,13 +688,12 @@ paths:
       summary: List Steam Transactions
       operationId: getSteamTransactions
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/Steam/transactions" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/TransactionListResponse'
@@ -723,15 +709,14 @@ paths:
       summary: Get Steam Transaction
       operationId: getSteamTransaction
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/Steam/transactions/{transactionId}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/TransactionResponse'
@@ -752,14 +737,13 @@ paths:
       summary: Get Current Subscriptions
       operationId: getCurrentSubscriptions
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X GET "https://api.vrchat.cloud/api/1/auth/user/subscription"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/UserSubscriptionListResponse'
@@ -773,13 +757,12 @@ paths:
       summary: List Subscriptions
       operationId: getSubscriptions
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/subscriptions" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/SubscriptionListResponse'
@@ -797,14 +780,13 @@ paths:
       summary: Get License Group
       operationId: getLicenseGroup
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/licenseGroups/{licenseGroupId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/LicenseGroupResponse'
@@ -824,7 +806,7 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/favorites?type={string}&tag={string}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FavoriteListResponse'
@@ -832,8 +814,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFavorites
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns a list of favorites.
       parameters:
         - $ref: '#/components/parameters/number'
@@ -848,14 +829,13 @@ paths:
       summary: Add Favorite
       operationId: addFavorite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: |-
             curl -X POST "https://api.vrchat.cloud/api/1/favorites" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"type": "friend", "favoriteId": "userId", "tags": ["string"]}'
       responses:
         '200':
@@ -908,7 +888,7 @@ paths:
           source: >-
             curl -X GET "https://api.vrchat.cloud/api/1/favorites/{favoriteId}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FavoriteResponse'
@@ -918,22 +898,20 @@ paths:
           $ref: '#/components/responses/FavoriteNotFoundError'
       operationId: getFavorite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Return information about a specific Favorite.
       parameters: []
     delete:
       summary: Remove Favorite
       operationId: removeFavorite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X DELETE
             "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FavoriteRemovedSuccess'
@@ -954,7 +932,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/favorite/groups?ownerId={userId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FavoriteGroupListResponse'
@@ -962,8 +940,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFavoriteGroups
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
@@ -990,28 +967,26 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FavoriteGroupResponse'
       operationId: getFavoriteGroup
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Fetch information about a specific favorite group.
     put:
       summary: Update Favorite Group
       operationId: updateFavoriteGroup
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X PUT -H "Content-Type: application/json"
             "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"displayName": "string", "visibility": "private", "tags": ["string"]}'
       responses:
         '200':
@@ -1028,15 +1003,14 @@ paths:
       summary: Clear Favorite Group
       operationId: clearFavoriteGroup
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X DELETE
             "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FavoriteGroupClearedSuccess'
@@ -1050,14 +1024,13 @@ paths:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/files?tag={string}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FileListResponse'
       operationId: getFiles
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns a list of files
       parameters:
         - schema:
@@ -1086,7 +1059,7 @@ paths:
           source: |-
             curl -X POST "https://api.vrchat.cloud/api/1/file" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"name": "string", "mimeType": "image/jpeg", "extension": "string", "tags": ["string"]}'
       responses:
         '200':
@@ -1098,8 +1071,7 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateFileRequest'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Creates a new File object
   /file/{fileId}:
     parameters:
@@ -1113,15 +1085,14 @@ paths:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FileResponse'
         '404':
           $ref: '#/components/responses/FileNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Shows general information about the "File" object. Each File can have
         several "Version"'s, and each Version can have multiple real files or
@@ -1133,7 +1104,7 @@ paths:
         - lang: cURL
           source: |-
             curl -X DELETE "https://api.vrchat.cloud/api/1/file/{fileId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FileDeletedSuccess'
@@ -1142,8 +1113,7 @@ paths:
       tags:
         - files
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Deletes a File object.
     post:
       summary: Create File Version
@@ -1153,14 +1123,13 @@ paths:
           source: |-
             curl -X POST "https://api.vrchat.cloud/api/1/file/{fileId}" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"signatureMd5": "string", "signatureSizeInBytes": 0, "fileMd5": "string", "fileSizeInBytes": 0}'
       responses:
         '200':
           $ref: '#/components/responses/FileResponse'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Creates a new FileVersion. Once a Version has been created, proceed to
         the `/file/{fileId}/{versionId}/file/start` endpoint to start a file
@@ -1185,14 +1154,13 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
-              -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+              -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/RawFileResponse'
       operationId: downloadFileVersion
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Downloads the file with the provided version number.
 
@@ -1213,7 +1181,7 @@ paths:
           source: >-
             curl -X DELETE
             "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
-              -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+              -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FileResponse'
@@ -1222,8 +1190,7 @@ paths:
         '500':
           $ref: '#/components/responses/FileVersionDeleteMiddleError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Delete a specific version of a file. You can only delete the latest
         version.
@@ -1245,7 +1212,7 @@ paths:
             "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/finish"
             \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"etags": ["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"], "nextPartNumber": "0", "maxParts": "0"}'
       responses:
         '200':
@@ -1272,8 +1239,7 @@ paths:
 
           ETag's should NOT be present when uploading a `signature`.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Finish an upload of a FileData. This will mark it as "complete". After
         uploading the `file` for Avatars and Worlds you then have to upload a
@@ -1293,7 +1259,7 @@ paths:
             curl -X PUT
             "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/start"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FileUploadURLResponse'
@@ -1313,8 +1279,7 @@ paths:
             will be started.
           deprecated: true
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Starts an upload of a specific FilePart. This endpoint will return an
         AWS URL which you can PUT data to. You need to call this and receive a
@@ -1340,14 +1305,13 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/status"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FileVersionUploadStatusResponse'
       operationId: getFileDataUploadStatus
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Retrieves the upload status for file upload. Can currently only be
         accessed when `status` is `waiting`. Trying to access it on a file
@@ -1362,7 +1326,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/auth/user/friends?offline=true" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/LimitedUserListResponse'
@@ -1370,8 +1334,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFriends
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/number'
@@ -1387,14 +1350,13 @@ paths:
       operationId: friend
       description: Send a friend request to another user.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X POST
             "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/NotificationResponse'
@@ -1411,14 +1373,13 @@ paths:
         Deletes an outgoing pending friend request to another user. To delete an
         incoming friend request, use the `deleteNotification` endpoint instead.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X DELETE
             "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/DeleteFriendSuccess'
@@ -1438,7 +1399,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/user/{userId}/friendStatus" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FriendStatusResponse'
@@ -1446,8 +1407,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFriendStatus
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Retrieve if the user is currently a friend with a given user, if they
         have an outgoing friend request, and if they have an incoming friend
@@ -1465,7 +1425,7 @@ paths:
           source: >-
             curl -X DELETE
             "https://api.vrchat.cloud/api/1/auth/user/friends/{userId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/UnfriendSuccess'
@@ -1475,8 +1435,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       description: Unfriend a user by ID.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       tags:
         - friends
   /groups:
@@ -1499,8 +1458,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1525,8 +1483,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     put:
       summary: Update Group
       description: Updates a Group and returns it.
@@ -1546,8 +1503,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Delete Group
       operationId: deleteGroup
@@ -1562,8 +1518,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/announcement:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1587,8 +1542,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     post:
       summary: Create Group Announcement
       description: Creates an Announcement for a Group.
@@ -1608,8 +1562,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Delete Group Announcement
       description: Deletes the announcement for a Group.
@@ -1624,8 +1577,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/auditLogs:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1648,8 +1600,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/bans:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1670,8 +1621,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     post:
       summary: Ban Group Member
       description: Bans a user from a Group.
@@ -1691,8 +1641,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/bans/{userId}:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1711,8 +1660,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/galleries:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1735,8 +1683,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/galleries/{groupGalleryId}:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1766,8 +1713,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     put:
       summary: Update Group Gallery
       description: Updates a gallery for a Group.
@@ -1787,8 +1733,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Delete Group Gallery
       description: Deletes a gallery for a Group.
@@ -1803,8 +1748,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/galleries/{groupGalleryId}/images:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1828,8 +1772,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1851,8 +1794,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/invites:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1872,8 +1814,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     post:
       summary: Invite User to Group
       description: Sends an invite to a user to join the group.
@@ -1895,8 +1836,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/invites/{userId}:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1913,8 +1853,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/join:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1934,8 +1873,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/leave:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1953,8 +1891,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/members:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -1982,8 +1919,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/members/{userId}:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -2002,8 +1938,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     put:
       summary: Update Group Member
       description: Updates a Group Member
@@ -2023,8 +1958,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Kick Group Member
       description: >-
@@ -2043,8 +1977,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/members/{userId}/roles/{groupRoleId}:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -2064,8 +1997,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Remove Role from GroupMember
       description: Removes a Role from a Group Member
@@ -2080,8 +2012,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/permissions:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -2101,8 +2032,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/requests:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -2120,8 +2050,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Cancel Group Join Request
       description: Cancels a request sent to join the group.
@@ -2138,8 +2067,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/requests/{userId}:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -2163,8 +2091,7 @@ paths:
             schema:
               $ref: '#/components/schemas/RespondGroupJoinRequest'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/roles:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -2182,8 +2109,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     post:
       summary: Create GroupRole
       description: Create a Group role.
@@ -2203,8 +2129,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /groups/{groupId}/roles/{groupRoleId}:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -2226,8 +2151,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Delete Group Role
       description: Deletes a Group Role by ID and returns the remaining roles.
@@ -2242,8 +2166,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotMemberError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /invite/{userId}:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -2256,7 +2179,7 @@ paths:
           source: |-
             curl -X POST "https://api.vrchat.cloud/api/1/invite/{userId}" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"instanceId": "wrld_ba913a96-fac4-4048-a062-9aa5db092812:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)", "messageSlot": 11}'
       responses:
         '200':
@@ -2265,8 +2188,7 @@ paths:
           $ref: '#/components/responses/InviteMustBeFriendsError'
       operationId: inviteUser
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Sends an invite to a user. Returns the Notification of type `invite`
         that was sent.
@@ -2286,8 +2208,7 @@ paths:
         - invite
       operationId: inviteMyselfTo
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Sends self an invite to an instance
       x-codeSamples:
         - lang: cURL
@@ -2296,7 +2217,7 @@ paths:
             "https://api.vrchat.cloud/api/1/invite/myself/to/{worldid}:{instanceid}"
             \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"'
+                 -b "auth={authCookie}"'
       responses:
         '200':
           $ref: '#/components/responses/SendNotificationResponse'
@@ -2311,8 +2232,7 @@ paths:
       summary: Request Invite
       operationId: requestInvite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Requests an invite from a user. Returns the Notification of type
         `requestInvite` that was sent.
@@ -2330,7 +2250,7 @@ paths:
             curl -X POST "https://api.vrchat.cloud/api/1/requestInvite/{userId}"
             \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"messageSlot": 11}'
       responses:
         '200':
@@ -2350,7 +2270,7 @@ paths:
             curl -X POST
             "https://api.vrchat.cloud/api/1/invite/{notificationId}/response" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"responseSlot": 11}'
       responses:
         '200':
@@ -2359,8 +2279,7 @@ paths:
           $ref: '#/components/responses/InviteResponse400Error'
       operationId: respondInvite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Respond to an invite request by sending a world invite to the requesting
         user. `:notificationId` is the ID of the requesting notification.
@@ -2383,7 +2302,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/InviteMessageListResponse'
@@ -2393,8 +2312,7 @@ paths:
           $ref: '#/components/responses/NotAuthorizedActionError'
       operationId: getInviteMessages
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Returns a list of all the users Invite Messages. Admin Credentials are
         required to view messages of other users!
@@ -2426,7 +2344,7 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/InviteMessageResponse'
@@ -2438,8 +2356,7 @@ paths:
           $ref: '#/components/responses/InviteMessageGetTooHighSlotError'
       operationId: getInviteMessage
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Returns a single Invite Message. This returns the exact same information
         but less than `getInviteMessages`. Admin Credentials are required to
@@ -2461,8 +2378,7 @@ paths:
       summary: Update Invite Message
       operationId: updateInviteMessage
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Updates a single Invite Message and then returns a list of all of them.
         Admin Credentials are required to update messages of other users!
@@ -2492,7 +2408,7 @@ paths:
             "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}"
             \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"message": "string"}'
       responses:
         '200':
@@ -2515,15 +2431,14 @@ paths:
       summary: Reset Invite Message
       operationId: resetInviteMessage
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X DELETE
             "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/InviteMessageListResponse'
@@ -2579,8 +2494,7 @@ paths:
         - instances
       operationId: getInstance
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Returns an instance. Please read [Instances
         Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more
@@ -2594,7 +2508,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/InstanceResponse'
@@ -2610,8 +2524,7 @@ paths:
         - instances
       operationId: getShortName
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns an instance short name.
       x-codeSamples:
         - lang: cURL
@@ -2619,7 +2532,7 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/shortName"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/InstanceShortNameResponse'
@@ -2635,8 +2548,7 @@ paths:
         - instances
       operationId: sendSelfInvite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Sends an invite to the instance to yourself.
       x-codeSamples:
         - lang: cURL
@@ -2644,7 +2556,7 @@ paths:
             curl -X POST
             "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/invite"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/InstanceSelfInviteSuccess'
@@ -2664,8 +2576,7 @@ paths:
         - instances
       operationId: getInstanceByShortName
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Returns an instance. Please read [Instances
         Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more
@@ -2675,7 +2586,7 @@ paths:
           source: >-
             curl -X GET "https://api.vrchat.cloud/api/1/instances/s/{shortname}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/InstanceResponse'
@@ -2693,7 +2604,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/auth/user/notifications?type=all" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/NotificationListResponse'
@@ -2701,8 +2612,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getNotifications
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Retrieve all of the current user's notifications.
       parameters:
         - schema:
@@ -2749,7 +2659,7 @@ paths:
             curl -X PUT
             "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/accept"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/FriendSuccess'
@@ -2758,8 +2668,7 @@ paths:
         '404':
           $ref: '#/components/responses/AcceptFriendRequestError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Accept a friend request by notification `frq_` ID. Friend requests can
         be found using the NotificationsAPI `getNotifications` by filtering of
@@ -2778,15 +2687,14 @@ paths:
             curl -X PUT
             "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/see"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/NotificationResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Mark a notification as seen.
       tags:
         - notifications
@@ -2802,15 +2710,14 @@ paths:
             curl -X PUT
             "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/hide"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/NotificationResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Delete a notification.
       tags:
         - notifications
@@ -2824,15 +2731,14 @@ paths:
             curl -X PUT
             "https://api.vrchat.cloud/api/1/auth/user/notifications/notifications/clear"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/ClearNotificationsSuccess'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Clear **all** notifications.
       tags:
         - notifications
@@ -2841,13 +2747,12 @@ paths:
       summary: Get Assigned Permissions
       operationId: getAssignedPermissions
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/auth/permissions" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/PermissionListResponse'
@@ -2871,7 +2776,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/permissions/{permissionId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/PermissionResponse'
@@ -2879,8 +2784,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getPermission
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Returns a single permission. This endpoint is pretty useless, as it
         returns the exact same information as `/auth/permissions`.
@@ -2895,7 +2799,7 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/auth/user/playermoderations?type=unmute&targetUserId={userId}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/PlayerModerationListResponse'
@@ -2903,8 +2807,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getPlayerModerations
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - schema:
             type: string
@@ -2928,15 +2831,14 @@ paths:
       summary: Moderate User
       operationId: moderateUser
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X POST
             "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
       responses:
         '200':
@@ -2962,14 +2864,13 @@ paths:
       summary: Clear All Player Moderations
       operationId: clearAllPlayerModerations
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X DELETE
             "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/PlayerModerationClearAllSuccess'
@@ -2996,7 +2897,7 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/auth/user/playermoderations/{playerModerationId}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/PlayerModerationResponse'
@@ -3006,8 +2907,7 @@ paths:
           $ref: '#/components/responses/PlayerModerationNotFoundError'
       operationId: getPlayerModeration
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         Returns a single Player Moderation. This returns the exact same amount
         of information as the more generalised `getPlayerModerations`.
@@ -3015,15 +2915,14 @@ paths:
       summary: Delete Player Moderation
       operationId: deletePlayerModeration
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X DELETE
             "https://api.vrchat.cloud/api/1/auth/user/playermoderations/{playerModerationId}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/PlayerModerationRemovedSuccess'
@@ -3042,8 +2941,7 @@ paths:
       summary: Unmoderate User
       operationId: unmoderateUser
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       requestBody:
         content:
           application/json:
@@ -3059,7 +2957,7 @@ paths:
             curl -X PUT
             "https://api.vrchat.cloud/api/1/auth/user/unplayermoderate" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
       responses:
         '200':
@@ -3245,7 +3143,7 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/users?search={string}&developerType=internal"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/LimitedUserListResponse'
@@ -3255,8 +3153,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: searchUsers
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - schema:
             type: string
@@ -3292,7 +3189,7 @@ paths:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/users/{username}/name" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/UserResponse'
@@ -3300,8 +3197,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getUserByName
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: >-
         ~~Get public user information about a specific user using their name.~~
 
@@ -3323,7 +3219,7 @@ paths:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/UserResponse'
@@ -3331,8 +3227,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getUser
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Get public user information about a specific user using their ID.
     put:
       summary: Update User Info
@@ -3342,7 +3237,7 @@ paths:
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"email": "string", "birthday": "2019-08-24", "acceptedTOSVersion": 0, "tags": ["string"], "status": "active", "statusDescription": "string", "bio": "string", "bioLinks": ["string"], "userIcon": "https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"}'
       responses:
         '200':
@@ -3351,8 +3246,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       description: Update a users information such as the email and birthday.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       requestBody:
         content:
           application/json:
@@ -3368,8 +3262,7 @@ paths:
       tags:
         - users
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       responses:
         '200':
           $ref: '#/components/responses/GroupListResponse'
@@ -3392,8 +3285,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   /worlds:
     get:
       summary: Search All Worlds
@@ -3405,7 +3297,7 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/worlds?featured=true&sort=popularity&userId={userId}&order=descending&search={string}&tag={string}&notag={string}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/LimitedWorldListResponse'
@@ -3413,8 +3305,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: searchWorlds
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
         - $ref: '#/components/parameters/sort'
@@ -3446,7 +3337,7 @@ paths:
           source: |-
             curl -X POST "https://api.vrchat.cloud/api/1/worlds" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"assetUrl": "string", "assetVersion": 0, "authorId": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "authorName": "string", "capacity": 8, "description": "string", "id": "wrld_ba913a96-fac4-4048-a062-9aa5db092812", "imageUrl": "string", "name": "string", "platform": "standalonewindows", "releaseStatus": "public", "tags": ["string"], "unityPackageUrl": "string", "unityVersion": "2018.4.20f1"}'
       responses:
         '200':
@@ -3478,7 +3369,7 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/worlds/active?featured=false&sort=heat&order=ascending&search={string}&tag={string}&notag={string}&releaseStatus=all"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/LimitedWorldListResponse'
@@ -3486,8 +3377,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getActiveWorlds
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
         - $ref: '#/components/parameters/sort'
@@ -3513,7 +3403,7 @@ paths:
             curl -X GET
             "https://api.vrchat.cloud/api/1/worlds/favorites?featured=false&sort=popularity&order=descending&search={string}&tag={string}&notag={string}&releaseStatus=private&userId={userId}"
             \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/LimitedWorldListResponse'
@@ -3523,8 +3413,7 @@ paths:
           $ref: '#/components/responses/WorldSeeOtherUserFavoritesError'
       operationId: getFavoritedWorlds
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
         - $ref: '#/components/parameters/sort'
@@ -3550,7 +3439,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/worlds/recent?featured=false" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/LimitedWorldListResponse'
@@ -3560,8 +3449,7 @@ paths:
           $ref: '#/components/responses/WorldSeeOtherUserRecentsError'
       operationId: getRecentWorlds
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: '#/components/parameters/featured'
         - $ref: '#/components/parameters/sort'
@@ -3589,7 +3477,7 @@ paths:
         - lang: cURL
           source: |-
             curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/WorldResponse'
@@ -3600,20 +3488,17 @@ paths:
 
         Works unauthenticated but when so will always return `0` for certain
         fields.
-      security:
-        - apiKeyCookie: []
     put:
       summary: Update World
       operationId: updateWorld
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: |-
             curl -X PUT "https://api.vrchat.cloud/api/1/worlds/{worldId}" \
                  -H "Content-Type: application/json" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+                 -b "auth={authCookie}" \
                  --data '{"assetUrl": "string", "assetVersion": "string","authorId": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "authorName": "string", "capacity": 8, "description": "string", "imageUrl": "string", "name": "string", "platform": "standalonewindows", "releaseStatus": "public", "tags": ["string"], "unityPackageUrl": "string", "unityVersion": "2018.4.20f1"}'
       responses:
         '200':
@@ -3634,13 +3519,12 @@ paths:
       summary: Delete World
       operationId: deleteWorld
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: |-
             curl -X DELETE "https://api.vrchat.cloud/api/1/worlds/{worldId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           description: OK
@@ -3663,8 +3547,7 @@ paths:
         - worlds
       operationId: getWorldMetadata
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       deprecated: true
       description: >-
         Return a worlds custom metadata. This is currently believed to be
@@ -3675,7 +3558,7 @@ paths:
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/worlds/{worldId}/metadata" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/WorldMetadataResponse'
@@ -3690,15 +3573,14 @@ paths:
         - worlds
       operationId: getWorldPublishStatus
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns a worlds publish status.
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/WorldPublishStatusResponse'
@@ -3710,14 +3592,13 @@ paths:
       summary: Publish World
       operationId: publishWorld
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X PUT
             "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           description: TODO
@@ -3732,14 +3613,13 @@ paths:
       summary: Unpublish World
       operationId: unpublishWorld
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X DELETE
             "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           description: OK
@@ -3760,15 +3640,14 @@ paths:
         - worlds
       operationId: getWorldInstance
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns a worlds instance.
       x-codeSamples:
         - lang: cURL
           source: >-
             curl -X GET
             "https://api.vrchat.cloud/api/1/worlds/{worldId}/{instanceId}" \
-                 -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/InstanceResponse'
@@ -6771,7 +6650,6 @@ components:
               In addition, modified clients are the single
               greatest source of <color='red'>compromised and stolen
               accounts</color>-- so please, do not use them!
-        apiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
         appName: VrChat
         buildVersionTag: master-build-2021-09-23-edith-x-clickbaitcloud
         clientApiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
@@ -7025,10 +6903,6 @@ components:
           minItems: 0
           items:
             $ref: '#/components/schemas/APIConfigAnnouncement'
-        apiKey:
-          description: apiKey to be used for all other requests
-          minLength: 1
-          type: string
         appName:
           default: VrChat
           deprecated: true
@@ -7355,7 +7229,6 @@ components:
         - VoiceEnableReceiverLimiting
         - address
         - announcements
-        - apiKey
         - appName
         - buildVersionTag
         - clientApiKey
@@ -8071,16 +7944,6 @@ components:
       required:
         - canPubilsh
   securitySchemes:
-    apiKeyQuery:
-      name: apiKey
-      type: apiKey
-      in: query
-      description: API Key via Query
-    apiKeyCookie:
-      name: apiKey
-      type: apiKey
-      in: cookie
-      description: API Key via Cookie
     authHeader:
       type: http
       scheme: basic
@@ -8128,15 +7991,8 @@ components:
               auth=authcookie_00000000-0000-0000-0000-000000000000; Expires=Tue,
               01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
           description: Successful authentication returns an `auth` cookie.
-        \0Set-Cookie:
-          schema:
-            type: string
-            default: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
-          description: >-
-            This endpoint **always** sets the `apiKey` irrespective if it is
-            already set.
     MissingCredentialsError:
-      description: Error response due to missing apiKey or auth cookie.
+      description: Error response due to missing auth cookie.
       content:
         application/json:
           schema:
@@ -9343,11 +9199,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/APIConfig'
-      headers:
-        Set-Cookie:
-          schema:
-            type: string
-            example: apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; Path=/
     InfoPushListResponse:
       description: Returns a list of InfoPush objects.
       content:
