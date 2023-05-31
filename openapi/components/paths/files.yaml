@@ -14,8 +14,7 @@ paths:
           $ref: ../responses/files/FileListResponse.yaml
       operationId: getFiles
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns a list of files
       parameters:
         - schema:
@@ -51,8 +50,7 @@ paths:
             schema:
               $ref: ../requests/CreateFileRequest.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Creates a new File object
   '/file/{fileId}':
     parameters:
@@ -70,8 +68,7 @@ paths:
         '404':
           $ref: ../responses/files/FileNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: 'Shows general information about the "File" object. Each File can have several "Version"''s, and each Version can have multiple real files or "Data" blobs.'
     delete:
       summary: Delete File
@@ -86,8 +83,7 @@ paths:
       tags:
         - files
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Deletes a File object.
     post:
       summary: Create File Version
@@ -98,8 +94,7 @@ paths:
         '200':
           $ref: ../responses/files/FileResponse.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: 'Creates a new FileVersion. Once a Version has been created, proceed to the `/file/{fileId}/{versionId}/file/start` endpoint to start a file upload.'
       tags:
         - files
@@ -123,8 +118,7 @@ paths:
           $ref: ../responses/files/RawFileResponse.yaml
       operationId: downloadFileVersion
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: |-
         Downloads the file with the provided version number.
 
@@ -144,8 +138,7 @@ paths:
         '500':
           $ref: ../responses/files/FileVersionDeleteMiddleError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Delete a specific version of a file. You can only delete the latest version.
       tags:
         - files
@@ -165,8 +158,7 @@ paths:
           $ref: ../responses/files/FileVersionUploadStatusResponse.yaml
       operationId: getFileDataUploadStatus
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
   '/file/{fileId}/{versionId}/{fileType}/start':
     parameters:
@@ -196,8 +188,7 @@ paths:
           description: The part number to start uploading. If not provided, the first part will be started.
           deprecated: true
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: |-
         Starts an upload of a specific FilePart. This endpoint will return an AWS URL which you can PUT data to. You need to call this and receive a new AWS API URL for each `partNumber`. Please see AWS's REST documentation on "PUT Object to S3" on how to upload. Once all parts has been uploaded, proceed to `/finish` endpoint.
 
@@ -236,8 +227,7 @@ paths:
 
           ETag's should NOT be present when uploading a `signature`.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
 tags:
   $ref: ../tags.yaml

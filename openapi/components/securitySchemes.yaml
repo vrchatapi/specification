@@ -1,13 +1,3 @@
-apiKeyQuery:
-  name: apiKey
-  type: apiKey
-  in: query
-  description: API Key via Query
-apiKeyCookie:
-  name: apiKey
-  type: apiKey
-  in: cookie
-  description: API Key via Cookie
 authHeader:
   type: http
   scheme: basic

@@ -18,8 +18,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getFriends
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/offset
         - $ref: ../parameters.yaml#/number
@@ -41,8 +40,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getFriendStatus
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: 'Retrieve if the user is currently a friend with a given user, if they have an outgoing friend request, and if they have an incoming friend request. The proper way to receive and accept friend request is by checking if the user has an incoming `Notification` of type `friendRequest`, and then accepting that notification.'
   '/user/{userId}/friendRequest':
     parameters:
@@ -54,8 +52,7 @@ paths:
       operationId: friend
       description: Send a friend request to another user.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/friends.yaml#/~1user~1{userId}~1friendRequest/post"
       responses:
@@ -72,8 +69,7 @@ paths:
       operationId: deleteFriendRequest
       description: 'Deletes an outgoing pending friend request to another user. To delete an incoming friend request, use the `deleteNotification` endpoint instead.'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/friends.yaml#/~1user~1{userId}~1friendRequest/delete"
       responses:
@@ -100,8 +96,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       description: Unfriend a user by ID.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       tags:
         - friends
 tags:

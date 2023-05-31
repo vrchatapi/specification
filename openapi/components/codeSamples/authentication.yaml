@@ -3,7 +3,7 @@
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/auth" \
-             -b "amplitude_id_a750df50d11f21f712262cbd4c0bab37vrchat.com={string}; apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "amplitude_id_a750df50d11f21f712262cbd4c0bab37vrchat.com={string}; auth={authCookie}"
 /logout:
   put:
     - lang: cURL
@@ -20,8 +20,7 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/auth/exists?email={string}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26"
+        curl -X GET "https://api.vrchat.cloud/api/1/auth/exists?email={string}" 
 /auth/twofactorauth/totp/verify:
   post:
     - lang: cURL
@@ -51,4 +50,4 @@
     - lang: cURL
       source: >-
         curl -X PUT "https://api.vrchat.cloud/api/1/user/{userId}/delete" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"

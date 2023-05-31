@@ -18,8 +18,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getNotifications
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Retrieve all of the current user's notifications.
       parameters:
         - schema:
@@ -62,8 +61,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Mark a notification as seen.
       tags:
         - notifications
@@ -81,8 +79,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Delete a notification.
       tags:
         - notifications
@@ -102,8 +99,7 @@ paths:
         '404':
           $ref: ../responses/friends/AcceptFriendRequestError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Accept a friend request by notification `frq_` ID. Friend requests can be found using the NotificationsAPI `getNotifications` by filtering of type `friendRequest`.
       tags:
         - notifications
@@ -119,8 +115,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Clear **all** notifications.
       tags:
         - notifications

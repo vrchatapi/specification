@@ -3,35 +3,35 @@
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/auth/permissions" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 /permissions:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/permissions" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
   post:
     - lang: cURL
       source: >-
         curl -X POST "https://api.vrchat.cloud/api/1/permissions" \
              -H "Content-Type: application/json" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             -b "auth={authCookie}" \
              --data '{"name": "string", "ownerId": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469"}'
 /permissions/{permissionId}:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/permissions/{permissionId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
   put:
     - lang: cURL
       source: >-
         curl -X PUT "https://api.vrchat.cloud/api/1/permissions/{permissionId}" \
              -H "Content-Type: application/json" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             -b "auth={authCookie}" \
              --data '{"name": "string", "ownerId": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469"}'
   delete:
     - lang: cURL
       source: >-
         curl -X DELETE "https://api.vrchat.cloud/api/1/permissions/{permissionId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"

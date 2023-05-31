@@ -18,8 +18,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getFavorites
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns a list of favorites.
       parameters:
         - $ref: ../parameters.yaml#/number
@@ -34,8 +33,7 @@ paths:
       summary: Add Favorite
       operationId: addFavorite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/favorites.yaml#/~1favorites/post"
       responses:
@@ -90,16 +88,14 @@ paths:
           $ref: ../responses/favorites/FavoriteNotFoundError.yaml
       operationId: getFavorite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Return information about a specific Favorite.
       parameters: []
     delete:
       summary: Remove Favorite
       operationId: removeFavorite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/favorites.yaml#/~1favorites~1{favoriteId}/delete"
       responses:
@@ -126,8 +122,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getFavoriteGroups
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
@@ -153,15 +148,13 @@ paths:
           $ref: ../responses/favorites/FavoriteGroupResponse.yaml
       operationId: getFavoriteGroup
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Fetch information about a specific favorite group.
     put:
       summary: Update Favorite Group
       operationId: updateFavoriteGroup
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/favorites.yaml#/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}/put"
       responses:
@@ -179,8 +172,7 @@ paths:
       summary: Clear Favorite Group
       operationId: clearFavoriteGroup
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/favorites.yaml#/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}/delete"
       responses:

@@ -20,8 +20,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: searchUsers
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - schema:
             type: string
@@ -58,8 +57,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserByName
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: |-
         ~~Get public user information about a specific user using their name.~~
 
@@ -82,8 +80,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUser
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Get public user information about a specific user using their ID.
     put:
       summary: Update User Info
@@ -97,8 +94,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       description: Update a users information such as the email and birthday.
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       requestBody:
         content:
           application/json:
@@ -114,8 +110,7 @@ paths:
       tags:
         - users
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       responses:
         '200':
           $ref: ../responses/groups/GroupListResponse.yaml
@@ -145,8 +140,7 @@ paths:
           $ref: ../responses/InvalidAdminCredentialsError.yaml
       operationId: searchActiveUsers
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - schema:
             type: string
@@ -179,8 +173,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
 tags:
   $ref: ../tags.yaml
 components:

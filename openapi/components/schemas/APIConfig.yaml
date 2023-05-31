@@ -20,7 +20,6 @@ example:
         In addition, modified clients are the single
         greatest source of <color='red'>compromised and stolen
         accounts</color>-- so please, do not use them!
-  apiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
   appName: VrChat
   buildVersionTag: master-build-2021-09-23-edith-x-clickbaitcloud
   clientApiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
@@ -263,10 +262,6 @@ properties:
     minItems: 0
     items:
       $ref: ./APIConfigAnnouncement.yaml
-  apiKey:
-    description: apiKey to be used for all other requests
-    minLength: 1
-    type: string
   appName:
     default: VrChat
     deprecated: true
@@ -566,7 +561,6 @@ required:
   - VoiceEnableReceiverLimiting
   - address
   - announcements
-  - apiKey
   - appName
   - buildVersionTag
   - clientApiKey

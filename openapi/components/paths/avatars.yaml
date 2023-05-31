@@ -20,8 +20,7 @@ paths:
       x-codeSamples:
         $ref: '../codeSamples/avatars.yaml#/~1users~1{userId}~1avatar/get'
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Get the current avatar for the user. This will return an error for any other user than the one logged in.
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -41,8 +40,7 @@ paths:
           $ref: ../responses/avatars/AvatarSeeOtherUserFavoritesError.yaml
       operationId: getFavoritedAvatars
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/featured
         - $ref: ../parameters.yaml#/sort
@@ -72,8 +70,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: searchAvatars
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/featured
         - $ref: ../parameters.yaml#/sort
@@ -100,8 +97,7 @@ paths:
       summary: Create Avatar
       operationId: createAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/avatars.yaml#/~1avatars/post"
       responses:
@@ -135,15 +131,13 @@ paths:
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: getAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Get information about a specific Avatar.
     put:
       summary: Update Avatar
       operationId: updateAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}/put"
       responses:
@@ -165,8 +159,7 @@ paths:
       summary: Delete Avatar
       operationId: deleteAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}/delete"
       responses:
@@ -197,8 +190,7 @@ paths:
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: selectAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Switches into that avatar.
   '/avatars/{avatarId}/selectFallback':
     parameters:
@@ -220,8 +212,7 @@ paths:
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: selectFallbackAvatar
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Switches into that avatar as your fallback avatar.
 tags:
   $ref: ../tags.yaml

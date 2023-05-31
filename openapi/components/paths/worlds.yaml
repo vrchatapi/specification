@@ -18,8 +18,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: searchWorlds
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/featured
         - $ref: ../parameters.yaml#/sort
@@ -78,8 +77,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getActiveWorlds
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/featured
         - $ref: ../parameters.yaml#/sort
@@ -110,8 +108,7 @@ paths:
           $ref: ../responses/worlds/WorldSeeOtherUserRecentsError.yaml
       operationId: getRecentWorlds
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/featured
         - $ref: ../parameters.yaml#/sort
@@ -143,8 +140,7 @@ paths:
           $ref: ../responses/worlds/WorldSeeOtherUserFavoritesError.yaml
       operationId: getFavoritedWorlds
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/featured
         - $ref: ../parameters.yaml#/sort
@@ -178,14 +174,11 @@ paths:
       description: |-
         Get information about a specific World.
         Works unauthenticated but when so will always return `0` for certain fields.
-      security:
-        - apiKeyCookie: []
     put:
       summary: Update World
       operationId: updateWorld
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}/put"
       responses:
@@ -207,8 +200,7 @@ paths:
       summary: Delete World
       operationId: deleteWorld
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}/delete"
       responses:
@@ -231,8 +223,7 @@ paths:
         - worlds
       operationId: getWorldInstance
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns a worlds instance.
       x-codeSamples:
         $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}~1{instanceId}/get"
@@ -250,8 +241,7 @@ paths:
         - worlds
       operationId: getWorldMetadata
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       deprecated: true
       description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
       x-codeSamples:
@@ -270,8 +260,7 @@ paths:
         - worlds
       operationId: getWorldPublishStatus
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns a worlds publish status.
       x-codeSamples:
         $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1publish/get"
@@ -286,8 +275,7 @@ paths:
       summary: Publish World
       operationId: publishWorld
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1publish/put"
       responses:
@@ -304,8 +292,7 @@ paths:
       summary: Unpublish World
       operationId: unpublishWorld
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1publish/delete"
       responses:

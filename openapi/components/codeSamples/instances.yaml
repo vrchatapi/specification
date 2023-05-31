@@ -3,22 +3,22 @@
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/instance/{worldId}:{instanceId}/shortName':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/shortName" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/instance/{worldId}:{instanceId}/invite':
   post:
     - lang: cURL
       source: >-
         curl -X POST "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/invite" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/instances/s/{shortname}':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/instances/s/{shortname}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
