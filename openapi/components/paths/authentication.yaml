@@ -178,7 +178,7 @@ paths:
 
         **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
       security:
-          authCookie: []
+        - authCookie: []
 tags:
   $ref: ../tags.yaml
 components:
