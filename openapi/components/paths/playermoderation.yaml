@@ -49,8 +49,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getPlayerModerations
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       parameters:
         - schema:
             type: string
@@ -76,8 +75,7 @@ paths:
       summary: Moderate User
       operationId: moderateUser
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/post"
       responses:
@@ -101,8 +99,7 @@ paths:
       summary: Clear All Player Moderations
       operationId: clearAllPlayerModerations
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/delete"
       responses:
@@ -118,8 +115,7 @@ paths:
       summary: Unmoderate User
       operationId: unmoderateUser
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       requestBody:
         content:
           application/json:
@@ -158,15 +154,13 @@ paths:
           $ref: ../responses/playermoderation/PlayerModerationNotFoundError.yaml
       operationId: getPlayerModeration
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Returns a single Player Moderation. This returns the exact same amount of information as the more generalised `getPlayerModerations`.
     delete:
       summary: Delete Player Moderation
       operationId: deletePlayerModeration
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations~1{playerModerationId}/delete"
       responses:

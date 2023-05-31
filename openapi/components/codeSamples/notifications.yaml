@@ -3,28 +3,28 @@
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/auth/user/notifications?type=all" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/auth/user/notifications/{notificationId}/accept':
   put:
     - lang: cURL
       source: >-
         curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/accept" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/auth/user/notifications/{notificationId}/see':
   put:
     - lang: cURL
       source: >-
         curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/see" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/auth/user/notifications/{notificationId}/hide':
   put:
     - lang: cURL
       source: >-
         curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/hide" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/auth/user/notifications/notifications/clear':
   put:
     - lang: cURL
       source: >-
         curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/notifications/clear" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"

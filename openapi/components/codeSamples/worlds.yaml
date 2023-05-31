@@ -3,75 +3,75 @@
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/worlds?featured=true&sort=popularity&userId={userId}&order=descending&search={string}&tag={string}&notag={string}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
   post:
     - lang: cURL
       source: >-
         curl -X POST "https://api.vrchat.cloud/api/1/worlds" \
              -H "Content-Type: application/json" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             -b "auth={authCookie}" \
              --data '{"assetUrl": "string", "assetVersion": 0, "authorId": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "authorName": "string", "capacity": 8, "description": "string", "id": "wrld_ba913a96-fac4-4048-a062-9aa5db092812", "imageUrl": "string", "name": "string", "platform": "standalonewindows", "releaseStatus": "public", "tags": ["string"], "unityPackageUrl": "string", "unityVersion": "2018.4.20f1"}'
 /worlds/active:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/worlds/active?featured=false&sort=heat&order=ascending&search={string}&tag={string}&notag={string}&releaseStatus=all" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 /worlds/favorites:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/worlds/favorites?featured=false&sort=popularity&order=descending&search={string}&tag={string}&notag={string}&releaseStatus=private&userId={userId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 /worlds/recend:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/worlds/recent?featured=false" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/worlds/{worldId}':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
   put:
     - lang: cURL
       source: >-
         curl -X PUT "https://api.vrchat.cloud/api/1/worlds/{worldId}" \
              -H "Content-Type: application/json" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}" \
+             -b "auth={authCookie}" \
              --data '{"assetUrl": "string", "assetVersion": "string","authorId": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "authorName": "string", "capacity": 8, "description": "string", "imageUrl": "string", "name": "string", "platform": "standalonewindows", "releaseStatus": "public", "tags": ["string"], "unityPackageUrl": "string", "unityVersion": "2018.4.20f1"}'
   delete:
     - lang: cURL
       source: >-
         curl -X DELETE "https://api.vrchat.cloud/api/1/worlds/{worldId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/world/{worldId}/metadata':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}/metadata" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/world/{worldId}/publish':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
   put:
     - lang: cURL
       source: >-
         curl -X PUT "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
   delete:
     - lang: cURL
       source: >-
         curl -X DELETE "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/worlds/{worldId}/{instanceId}':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}/{instanceId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"

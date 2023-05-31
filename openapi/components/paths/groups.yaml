@@ -22,8 +22,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -48,8 +47,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     put:
       summary: Update Group
       description: Updates a Group and returns it.
@@ -69,8 +67,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Delete Group
       operationId: deleteGroup
@@ -85,8 +82,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/announcement':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -107,8 +103,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     post:
       summary: Create Group Announcement
       description: Creates an Announcement for a Group.
@@ -128,8 +123,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Delete Group Announcement
       description: Deletes the announcement for a Group.
@@ -144,8 +138,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/auditLogs':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -168,8 +161,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/bans':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -190,8 +182,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     post:
       summary: Ban Group Member
       description: Bans a user from a Group.
@@ -211,8 +202,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/bans/{userId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -231,8 +221,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/galleries':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -255,8 +244,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/galleries/{groupGalleryId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -284,8 +272,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     put:
       summary: Update Group Gallery
       description: Updates a gallery for a Group.
@@ -305,8 +292,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Delete Group Gallery
       description: Deletes a gallery for a Group.
@@ -321,8 +307,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/galleries/{groupGalleryId}/images':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -346,8 +331,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -372,8 +356,7 @@ paths:
     #     '404':
     #       $ref: ../responses/groups/GroupNotFoundError.yaml
     #   security:
-    #     - apiKeyCookie: []
-    #       authCookie: []
+    #     - authCookie: []
     delete:
       summary: Delete Group Gallery Image
       description: Deletes an image from a Group gallery.
@@ -390,8 +373,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/invites':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -411,8 +393,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     post:
       summary: Invite User to Group
       description: Sends an invite to a user to join the group.
@@ -434,8 +415,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/invites/{userId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -452,8 +432,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/join':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -473,8 +452,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/leave':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -492,8 +470,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/members':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -518,8 +495,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/members/{userId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -538,8 +514,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     put:
       summary: Update Group Member
       description: Updates a Group Member
@@ -559,8 +534,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Kick Group Member
       description: Kicks a Group Member from the Group. The current user must have the "Remove Group Members" permission.
@@ -577,8 +551,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/members/{userId}/roles/{groupRoleId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -598,8 +571,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Remove Role from GroupMember
       description: Removes a Role from a Group Member
@@ -614,8 +586,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/permissions':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -635,8 +606,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/requests':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -654,8 +624,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Cancel Group Join Request
       description: Cancels a request sent to join the group.
@@ -672,8 +641,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/requests/{userId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -697,8 +665,7 @@ paths:
             schema:
               $ref: ../requests/RespondGroupJoinRequest.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/roles':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -716,8 +683,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     post:
       summary: Create GroupRole
       description: Create a Group role.
@@ -737,8 +703,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
   '/groups/{groupId}/roles/{groupRoleId}':
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -760,8 +725,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
     delete:
       summary: Delete Group Role
       description: Deletes a Group Role by ID and returns the remaining roles.
@@ -776,8 +740,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotMemberError.yaml
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
 tags:
   $ref: ../tags.yaml
 components:

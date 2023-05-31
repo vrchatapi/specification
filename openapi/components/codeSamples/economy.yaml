@@ -3,46 +3,46 @@
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/Steam/transactions" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/Steam/transactions/{transactionId}':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/Steam/transactions/{transactionId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 /Admin/transactions:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/Admin/transactions" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth=auth={authCookie}"
+             -b "auth=auth={authCookie}"
 '/Admin/transactions/{transactionId}':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/Admin/transactions/{transactionId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 /auth/user/subscription:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/auth/user/subscription" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 /subscriptions:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/subscriptions" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 /licenseGroups:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/licenseGroups" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"
 '/licenseGroups/{licenseGroupId}':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/licenseGroups/{licenseGroupId}" \
-             -b "apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth={authCookie}"
+             -b "auth={authCookie}"

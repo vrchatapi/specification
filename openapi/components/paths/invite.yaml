@@ -23,8 +23,7 @@ paths:
           $ref: ../responses/NotAuthorizedActionError.yaml
       operationId: getInviteMessages
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: |-
         Returns a list of all the users Invite Messages. Admin Credentials are required to view messages of other users!
 
@@ -56,8 +55,7 @@ paths:
           $ref: ../responses/invite/InviteMessageGetTooHighSlotError.yaml
       operationId: getInviteMessage
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: |-
         Returns a single Invite Message. This returns the exact same information but less than `getInviteMessages`. Admin Credentials are required to view messages of other users!
 
@@ -71,8 +69,7 @@ paths:
       summary: Update Invite Message
       operationId: updateInviteMessage
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: |-
         Updates a single Invite Message and then returns a list of all of them. Admin Credentials are required to update messages of other users!
 
@@ -108,8 +105,7 @@ paths:
       summary: Reset Invite Message
       operationId: resetInviteMessage
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/invite.yaml#/~1message~1{userId}~1{messageType}~1{slot}/delete"
       responses:
@@ -157,8 +153,7 @@ paths:
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
       operationId: inviteUser
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Sends an invite to a user. Returns the Notification of type `invite` that was sent.
       requestBody:
         content:
@@ -176,8 +171,7 @@ paths:
         - invite
       operationId: inviteMyselfTo
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Sends self an invite to an instance
       x-codeSamples:
         $ref: "../codeSamples/invite.yaml#/~1invite~1myself~1to~1{worldid}:{instanceid}/post"
@@ -204,8 +198,7 @@ paths:
           $ref: ../responses/invite/InviteResponse400Error.yaml
       operationId: respondInvite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: 'Respond to an invite request by sending a world invite to the requesting user. `:notificationId` is the ID of the requesting notification.'
       requestBody:
         content:
@@ -220,8 +213,7 @@ paths:
       summary: Request Invite
       operationId: requestInvite
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: Requests an invite from a user. Returns the Notification of type `requestInvite` that was sent.
       requestBody:
         content:

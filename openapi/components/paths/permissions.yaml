@@ -9,8 +9,7 @@ paths:
       summary: Get Assigned Permissions
       operationId: getAssignedPermissions
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/permissions.yaml#/~1auth~1permissions/get"
       responses:
@@ -38,16 +37,14 @@ paths:
           $ref: ../responses/InvalidAdminCredentialsError.yaml
       operationId: getPermissions
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-internal: true
       description: '**REQUIRES ADMIN CREDENTIALS**. Returns a list of all existing permissions, just like `/users` with empty search would.'
     post:
       summary: Create Permission
       operationId: createPermission
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/permissions.yaml#/~1permissions/post"
       responses:
@@ -97,15 +94,13 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getPermission
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       description: 'Returns a single permission. This endpoint is pretty useless, as it returns the exact same information as `/auth/permissions`.'
     put:
       summary: Update Permission
       operationId: updatePermission
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/permissions.yaml#/~1permissions~1{permissionId}/put"
       responses:
@@ -134,8 +129,7 @@ paths:
       summary: Delete Permission
       operationId: deletePermission
       security:
-        - apiKeyCookie: []
-          authCookie: []
+        - authCookie: []
       x-codeSamples:
         $ref: "../codeSamples/permissions.yaml#/~1permissions~1{permissionId}/delete"
       responses:
