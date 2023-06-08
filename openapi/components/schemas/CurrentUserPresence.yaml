@@ -14,7 +14,7 @@ properties:
   id:
     $ref: ./UserID.yaml
   instance:
-    $ref: ./InstanceID.yaml
+    type: string
     nullable: true
   instanceType:
     $ref: ./InstanceType.yaml
@@ -31,7 +31,7 @@ properties:
   status:
     $ref: ./UserStatus.yaml
   travelingToInstance:
-    $ref: ./InstanceID.yaml
+    type: string
     nullable: true
   travelingToWorld:
     $ref: ./WorldID.yaml
