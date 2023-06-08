@@ -3,6 +3,10 @@ properties:
     minimum: 0
     example: 7
     type: integer
+  acceptedPrivacyVersion:
+    minimum: 0
+    example: 0
+    type: integer
   accountDeletionDate:
     format: date
     nullable: true
@@ -73,6 +77,9 @@ properties:
   isFriend:
     default: false
     type: boolean
+  last_activity:
+    format: date-time
+    type: string
   last_login:
     format: date-time
     type: string
@@ -97,6 +104,8 @@ properties:
     items:
       $ref: ./PastDisplayName.yaml
     type: array
+  presence:
+    $ref: ./CurrentUserPresence.yaml
   profilePicOverride:
     type: string
   state:
@@ -127,6 +136,9 @@ properties:
     type: string
   unsubscribe:
     type: boolean
+  updated_at:
+    format: date-time
+    type: string
   userIcon:
     type: string
   username:

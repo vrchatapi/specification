@@ -1,0 +1,41 @@
+title: CurrentUserPresence
+type: object
+properties:
+  avatarThumbnail:
+    type: string
+    nullable: true
+  displayName:
+    type: string
+  groups:
+    type: array
+    nullable: true
+    items:
+      $ref: ./GroupID.yaml
+  id:
+    $ref: ./UserID.yaml
+  instance:
+    $ref: ./InstanceID.yaml
+    nullable: true
+  instanceType:
+    $ref: ./InstanceType.yaml
+    nullable: true
+  isRejoining:
+    type: string
+    nullable: true
+  platform:
+    $ref: ./Platform.yaml
+    nullable: true
+  profilePicOverride:
+    type: string
+    nullable: true
+  status:
+    $ref: ./UserStatus.yaml
+  travelingToInstance:
+    $ref: ./InstanceID.yaml
+    nullable: true
+  travelingToWorld:
+    $ref: ./WorldID.yaml
+    nullable: true
+  world:
+    $ref: ./WorldID.yaml
+    nullable: true
