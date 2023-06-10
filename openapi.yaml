@@ -3783,20 +3783,22 @@ components:
         - updated_at
       title: PastDisplayName
       type: object
-    UserState:
-      default: offline
-      description: |-
-        * "online" User is online in VRChat
-        * "active" User is online, but not in VRChat
-        * "offline" User is offline
-
-        Always offline when returned through `getCurrentUser` (/auth/user).
-      enum:
-        - offline
-        - active
-        - online
-      title: UserState
+    GroupID:
+      example: grp_71a7ff59-112c-4e78-a990-c7cc650776e5
+      pattern: >-
+        grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
+      title: GroupID
       type: string
+    InstanceType:
+      type: string
+      title: InstanceType
+      example: hidden
+      enum:
+        - public
+        - hidden
+        - friends
+        - private
+      description: ''
     UserStatus:
       type: string
       description: >-
@@ -3811,6 +3813,62 @@ components:
         - offline
       title: UserStatus
       default: offline
+    CurrentUserPresence:
+      title: CurrentUserPresence
+      type: object
+      properties:
+        avatarThumbnail:
+          type: string
+          nullable: true
+        displayName:
+          type: string
+        groups:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/GroupID'
+        id:
+          $ref: '#/components/schemas/UserID'
+        instance:
+          type: string
+          nullable: true
+        instanceType:
+          $ref: '#/components/schemas/InstanceType'
+          nullable: true
+        isRejoining:
+          type: string
+          nullable: true
+        platform:
+          $ref: '#/components/schemas/Platform'
+          nullable: true
+        profilePicOverride:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        travelingToInstance:
+          type: string
+          nullable: true
+        travelingToWorld:
+          $ref: '#/components/schemas/WorldID'
+          nullable: true
+        world:
+          $ref: '#/components/schemas/WorldID'
+          nullable: true
+    UserState:
+      default: offline
+      description: |-
+        * "online" User is online in VRChat
+        * "active" User is online, but not in VRChat
+        * "offline" User is offline
+
+        Always offline when returned through `getCurrentUser` (/auth/user).
+      enum:
+        - offline
+        - active
+        - online
+      title: UserState
+      type: string
     Tag:
       description: >-
         Tags are a way to grant various access, assign restrictions or other
@@ -3831,6 +3889,10 @@ components:
         acceptedTOSVersion:
           minimum: 0
           example: 7
+          type: integer
+        acceptedPrivacyVersion:
+          minimum: 0
+          example: 0
           type: integer
         accountDeletionDate:
           format: date
@@ -3902,6 +3964,9 @@ components:
         isFriend:
           default: false
           type: boolean
+        last_activity:
+          format: date-time
+          type: string
         last_login:
           format: date-time
           type: string
@@ -3926,6 +3991,8 @@ components:
           items:
             $ref: '#/components/schemas/PastDisplayName'
           type: array
+        presence:
+          $ref: '#/components/schemas/CurrentUserPresence'
         profilePicOverride:
           type: string
         state:
@@ -3956,6 +4023,9 @@ components:
           type: string
         unsubscribe:
           type: boolean
+        updated_at:
+          format: date-time
+          type: string
         userIcon:
           type: string
         username:
@@ -5314,12 +5384,6 @@ components:
         - name
         - shortCode
         - roleTemplate
-    GroupID:
-      example: grp_71a7ff59-112c-4e78-a990-c7cc650776e5
-      pattern: >-
-        grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
-      title: GroupID
-      type: string
     GroupShortCode:
       example: ABC123
       pattern: ^[A-Z0-9]{3,6}$
@@ -6247,16 +6311,6 @@ components:
           type: integer
           minimum: 0
           example: 5
-    InstanceType:
-      type: string
-      title: InstanceType
-      example: hidden
-      enum:
-        - public
-        - hidden
-        - friends
-        - private
-      description: ''
     Instance:
       description: >-
         * `hidden` field is only present if InstanceType is `hidden` aka
