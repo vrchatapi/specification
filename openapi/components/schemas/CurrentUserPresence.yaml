@@ -17,7 +17,8 @@ properties:
     type: string
     nullable: true
   instanceType:
-    $ref: ./InstanceType.yaml
+    type: string
+    description: either an InstanceType or an empty string
     nullable: true
   isRejoining:
     type: string
