@@ -31,8 +31,8 @@ properties:
     nullable: true
   status:
     type: string
-    nullable: true
     description: either a UserStatus or empty string
+    nullable: true
   travelingToInstance:
     type: string
     nullable: true
