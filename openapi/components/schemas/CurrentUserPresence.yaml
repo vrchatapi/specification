@@ -17,19 +17,23 @@ properties:
     type: string
     nullable: true
   instanceType:
-    $ref: ./InstanceType.yaml
+    type: string
+    description: either an InstanceType or an empty string
     nullable: true
   isRejoining:
     type: string
     nullable: true
   platform:
-    $ref: ./Platform.yaml
+    type: string
+    description: either a Platform or an empty string
     nullable: true
   profilePicOverride:
     type: string
     nullable: true
   status:
-    $ref: ./UserStatus.yaml
+    type: string
+    description: either a UserStatus or empty string
+    nullable: true
   travelingToInstance:
     type: string
     nullable: true
