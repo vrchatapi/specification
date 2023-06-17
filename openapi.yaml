@@ -3789,30 +3789,6 @@ components:
         grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: GroupID
       type: string
-    InstanceType:
-      type: string
-      title: InstanceType
-      example: hidden
-      enum:
-        - public
-        - hidden
-        - friends
-        - private
-      description: ''
-    UserStatus:
-      type: string
-      description: >-
-        Defines the User's current status, for example "ask me", "join me" or
-        "offline. This status is a combined indicator of their online activity
-        and privacy preference.
-      enum:
-        - active
-        - join me
-        - ask me
-        - busy
-        - offline
-      title: UserStatus
-      default: offline
     CurrentUserPresence:
       title: CurrentUserPresence
       type: object
@@ -3833,19 +3809,23 @@ components:
           type: string
           nullable: true
         instanceType:
-          $ref: '#/components/schemas/InstanceType'
+          type: string
+          description: either an InstanceType or an empty string
           nullable: true
         isRejoining:
           type: string
           nullable: true
         platform:
-          $ref: '#/components/schemas/Platform'
+          type: string
+          description: either a Platform or an empty string
           nullable: true
         profilePicOverride:
           type: string
           nullable: true
         status:
-          $ref: '#/components/schemas/UserStatus'
+          type: string
+          description: either a UserStatus or empty string
+          nullable: true
         travelingToInstance:
           type: string
           nullable: true
@@ -3869,6 +3849,20 @@ components:
         - online
       title: UserState
       type: string
+    UserStatus:
+      type: string
+      description: >-
+        Defines the User's current status, for example "ask me", "join me" or
+        "offline. This status is a combined indicator of their online activity
+        and privacy preference.
+      enum:
+        - active
+        - join me
+        - ask me
+        - busy
+        - offline
+      title: UserStatus
+      default: offline
     Tag:
       description: >-
         Tags are a way to grant various access, assign restrictions or other
@@ -6311,6 +6305,16 @@ components:
           type: integer
           minimum: 0
           example: 5
+    InstanceType:
+      type: string
+      title: InstanceType
+      example: hidden
+      enum:
+        - public
+        - hidden
+        - friends
+        - private
+      description: ''
     Instance:
       description: >-
         * `hidden` field is only present if InstanceType is `hidden` aka
