@@ -48,7 +48,6 @@ required:
   - statusDescription
   - currentAvatarImageUrl
   - currentAvatarThumbnailImageUrl
-  - fallbackAvatar
   - developerType
   - last_platform
   - status
