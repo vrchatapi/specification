@@ -5228,7 +5228,6 @@ components:
         - statusDescription
         - currentAvatarImageUrl
         - currentAvatarThumbnailImageUrl
-        - fallbackAvatar
         - developerType
         - last_platform
         - status
@@ -7805,8 +7804,9 @@ components:
           type: string
         capacity:
           example: 8
-          maximum: 40
-          minimum: 0
+          type: integer
+        recommendedCapacity:
+          example: 4
           type: integer
         created_at:
           format: date-time
@@ -7915,6 +7915,7 @@ components:
         - authorId
         - authorName
         - capacity
+        - recommendedCapacity
         - created_at
         - description
         - featured
