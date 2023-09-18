@@ -9,13 +9,10 @@ properties:
     type: string
   capacity:
     example: 8
-    maximum: 80
-    minimum: 0
     type: integer
   recommendedCapacity:
     example: 4
-    maximum: 80
-    minimum: 0
+    type: integer
   created_at:
     format: date-time
     type: string
