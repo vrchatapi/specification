@@ -6313,6 +6313,7 @@ components:
         - hidden
         - friends
         - private
+        - group
       description: ''
     Instance:
       description: >-
