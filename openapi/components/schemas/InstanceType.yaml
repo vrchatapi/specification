@@ -6,4 +6,5 @@ enum:
   - hidden
   - friends
   - private
+  - group
 description: ''
