@@ -189,14 +189,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  $ref: ../schemas/representedGroup.yaml
+                $ref: ../schemas/representedGroup.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
       security:
         - authCookie: []
-
 tags:
   $ref: ../tags.yaml
 components:
