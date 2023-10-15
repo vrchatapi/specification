@@ -1,0 +1,35 @@
+title: RepresentedGroup
+type: object
+properties:
+  name:
+    type: string
+  shortCode:
+    $ref: ./GroupShortCode.yaml
+  discriminator:
+    $ref: ./GroupDiscriminator.yaml
+  description:
+    type: string
+  iconId:
+    type: string
+    nullable: true
+  iconUrl:
+    type: string
+    nullable: true
+  bannerId:
+    type: string
+    nullable: true
+  bannerUrl:
+    type: string
+    nullable: true
+  privacy:
+    $ref: ./GroupPrivacy.yaml
+  ownerId:
+    $ref: ./UserID.yaml
+  memberCount:
+    type: integer
+  groupId:
+    $ref: ./GroupID.yaml
+  memberVisibility:
+    $ref: ./GroupUserVisibility.yaml
+  isRepresenting:
+    type: boolean
