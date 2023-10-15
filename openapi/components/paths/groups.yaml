@@ -5,31 +5,6 @@ info:
   description: Group Docs Here
 paths:
   /groups:
-    get:
-      summary: Search groups
-      description: Search the API for groups
-      operationId: searchGroups
-      parameters:
-        - schema:
-            type: string
-            minLength: 0
-          in: query
-          name: query
-          description: Searches for groups with names containing the query. If no query is provided, the API will return a bunch of random groups
-        - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/offset
-      tags:
-        - groups
-      responses:
-        "200":
-          $ref: ../responses/groups/GroupSearchResponse.yaml
-        "400":
-          $ref: ../responses/groups/InvalidGroupSearchError.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      security:
-        - authCookie: []
-
     post:
       summary: Create Group
       description: Creates a Group and returns a Group object. **Requires VRC+ Subscription.**
