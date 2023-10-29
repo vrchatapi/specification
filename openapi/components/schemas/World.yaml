@@ -136,7 +136,6 @@ required:
   - releaseStatus
   - tags
   - thumbnailImageUrl
-  - unityPackages
   - updated_at
   - version
   - visits
