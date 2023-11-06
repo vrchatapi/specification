@@ -1,4 +1,3 @@
 example: ABC123
-pattern: '^[A-Z0-9]{3,6}$'
 title: GroupShortCode
 type: string

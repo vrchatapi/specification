@@ -1,4 +1,3 @@
 example: not_00000000-0000-0000-0000-000000000000
-pattern: '(not|frq)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
 title: NotificationID
 type: string
