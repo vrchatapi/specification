@@ -39,6 +39,10 @@ properties:
     $ref: ./CurrentAvatarImageUrl.yaml
   currentAvatarThumbnailImageUrl:
     $ref: ./CurrentAvatarThumbnailImageUrl.yaml
+  currentAvatarTags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
   date_joined:
     format: date
     type: string
@@ -64,6 +68,14 @@ properties:
     type: array
   hasBirthday:
     type: boolean
+  hideContentFilterSettings:
+    type: boolean
+  userLanguage:
+    nullable: true
+    type: string
+  userLanguageCode:
+    nullable: true
+    type: string
   hasEmail:
     type: boolean
   hasLoggedInFromClient:
@@ -90,6 +102,12 @@ properties:
   obfuscatedPendingEmail:
     type: string
   oculusId:
+    type: string
+  googleId:
+    type: string
+  picoId:
+    type: string
+  viveId:
     type: string
   offlineFriends:
     items:

@@ -1,4 +1,3 @@
 example: ggal_a03a4b55-4ca6-4490-9519-40ba6351a233
-pattern: 'ggal_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
 title: GroupGalleryID
 type: string

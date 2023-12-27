@@ -17,7 +17,6 @@ properties:
     deprecated: true
     description: 'Always a zero in string form, despite how many parts uploaded.'
     maxLength: 1
-    pattern: '0'
   maxParts:
     type: string
     minLength: 1
@@ -26,7 +25,6 @@ properties:
     default: '0'
     example: '0'
     maxLength: 1
-    pattern: '0'
 required:
   - nextPartNumber
   - maxParts
