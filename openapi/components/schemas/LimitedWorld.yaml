@@ -7,8 +7,9 @@ properties:
     type: string
   capacity:
     example: 8
-    maximum: 40
-    minimum: 0
+    type: integer
+  recommendedCapacity:
+    example: 16
     type: integer
   created_at:
     format: date-time
@@ -72,6 +73,10 @@ properties:
   updated_at:
     format: date-time
     type: string
+  udonProducts:
+    type: array
+    items:
+      $ref: ./UdonProductId.yaml
 required:
   - id
   - name

@@ -116,6 +116,10 @@ properties:
     example: 9988675
     minimum: 0
     type: integer
+  udonProducts:
+    type: array
+    items:
+      $ref: ./UdonProductId.yaml
 required:
   - authorId
   - authorName
