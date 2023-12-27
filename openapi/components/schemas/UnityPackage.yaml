@@ -11,6 +11,8 @@ example:
   unitySortNumber: 20180414000
   unityVersion: 2018.4.14f1
 properties:
+  id:
+    $ref: ./UnityPackageID.yaml
   assetUrl:
     minLength: 1
     type: string
@@ -22,8 +24,6 @@ properties:
   created_at:
     format: date-time
     type: string
-  id:
-    $ref: ./UnityPackageID.yaml
   platform:
     $ref: ./Platform.yaml
   pluginUrl:
@@ -38,6 +38,10 @@ properties:
     default: 5.3.4p1
     example: 2018.4.12f1
     minLength: 1
+    type: string
+  impostorUrl:
+    type: string
+  scanStatus:
     type: string
 required:
   - id
