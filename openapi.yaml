@@ -3721,8 +3721,6 @@ components:
         IDs in the form of `8JoV9XEdpo`. The ID can never be changed.
     AvatarID:
       example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
-      pattern: >-
-        avtr_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: AvatarID
       type: string
     CurrentAvatarImageUrl:
@@ -3736,6 +3734,21 @@ components:
       example: >-
         https://api.vrchat.cloud/api/1/image/file_aae83ed9-d42d-4d72-9f4b-9f1e41ed17e1/1/256
       title: CurrentAvatarThumbnailImageUrl
+      type: string
+    Tag:
+      description: >-
+        Tags are a way to grant various access, assign restrictions or other
+        kinds of metadata to various to objects such as worlds, users and
+        avatars.
+
+
+        System tags starting with `system_` are granted automatically by the
+        system, while admin tags with `admin_` are granted manually. More
+        prefixes such as `language_ ` (to indicate that a player can speak the
+        tagged language), and `author_tag_` (provided by a world author for
+        search and sorting) exist as well.
+      minLength: 1
+      title: Tag
       type: string
     DeveloperType:
       default: none
@@ -3755,8 +3768,6 @@ components:
       type: string
     WorldID:
       example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
-      pattern: >-
-        (^$|offline|(wrld|wld)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})
       title: WorldID
       type: string
       description: >-
@@ -3785,8 +3796,6 @@ components:
       type: object
     GroupID:
       example: grp_71a7ff59-112c-4e78-a990-c7cc650776e5
-      pattern: >-
-        grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: GroupID
       type: string
     CurrentUserPresence:
@@ -3863,21 +3872,6 @@ components:
         - offline
       title: UserStatus
       default: offline
-    Tag:
-      description: >-
-        Tags are a way to grant various access, assign restrictions or other
-        kinds of metadata to various to objects such as worlds, users and
-        avatars.
-
-
-        System tags starting with `system_` are granted automatically by the
-        system, while admin tags with `admin_` are granted manually. More
-        prefixes such as `language_ ` (to indicate that a player can speak the
-        tagged language), and `author_tag_` (provided by a world author for
-        search and sorting) exist as well.
-      minLength: 1
-      title: Tag
-      type: string
     CurrentUser:
       properties:
         acceptedTOSVersion:
@@ -3920,6 +3914,10 @@ components:
           $ref: '#/components/schemas/CurrentAvatarImageUrl'
         currentAvatarThumbnailImageUrl:
           $ref: '#/components/schemas/CurrentAvatarThumbnailImageUrl'
+        currentAvatarTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
         date_joined:
           format: date
           type: string
@@ -3945,6 +3943,14 @@ components:
           type: array
         hasBirthday:
           type: boolean
+        hideContentFilterSettings:
+          type: boolean
+        userLanguage:
+          nullable: true
+          type: string
+        userLanguageCode:
+          nullable: true
+          type: string
         hasEmail:
           type: boolean
         hasLoggedInFromClient:
@@ -3971,6 +3977,12 @@ components:
         obfuscatedPendingEmail:
           type: string
         oculusId:
+          type: string
+        googleId:
+          type: string
+        picoId:
+          type: string
+        viveId:
           type: string
         offlineFriends:
           items:
@@ -4134,8 +4146,6 @@ components:
       example: public
     UnityPackageID:
       example: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
-      pattern: >-
-        (unp)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: UnityPackageID
       type: string
     UnityPackage:
@@ -4153,6 +4163,8 @@ components:
         unitySortNumber: 20180414000
         unityVersion: 2018.4.14f1
       properties:
+        id:
+          $ref: '#/components/schemas/UnityPackageID'
         assetUrl:
           minLength: 1
           type: string
@@ -4164,8 +4176,6 @@ components:
         created_at:
           format: date-time
           type: string
-        id:
-          $ref: '#/components/schemas/UnityPackageID'
         platform:
           $ref: '#/components/schemas/Platform'
         pluginUrl:
@@ -4180,6 +4190,10 @@ components:
           default: 5.3.4p1
           example: 2018.4.12f1
           minLength: 1
+          type: string
+        impostorUrl:
+          type: string
+        scanStatus:
           type: string
       required:
         - id
@@ -4378,8 +4392,6 @@ components:
           type: string
     TransactionID:
       example: txn_e5c72948-e735-4880-8245-24b2a41198b0
-      pattern: >-
-        txn_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: TransactionID
       type: string
     TransactionStatus:
@@ -4615,8 +4627,6 @@ components:
         - error
     LicenseGroupID:
       example: lgrp_608513da-b213-4e15-80af-bd88c27f0979
-      pattern: >-
-        lgrp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: LicenseGroupID
       type: string
     UserSubscription:
@@ -4727,8 +4737,6 @@ components:
             Either a AvatarID, LicenseGroupID, PermissionID or ProductID. This
             depends on the `forType` field.
           minLength: 1
-          pattern: >-
-            (avtr|lgrp|prms|prod)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
         forType:
           $ref: '#/components/schemas/LicenseType'
         forName:
@@ -4789,8 +4797,6 @@ components:
         - licenses
     FavoriteID:
       example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
-      pattern: >-
-        fvrt_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: FavoriteID
       type: string
     FavoriteType:
@@ -4846,8 +4852,6 @@ components:
         - tags
     FavoriteGroupID:
       example: fvgrp_8a02a44b-dc3a-4a9a-bc77-77fa37996fc7
-      pattern: >-
-        fvgrp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: FavoriteGroupID
       type: string
     FavoriteGroupVisibility:
@@ -4910,8 +4914,6 @@ components:
             $ref: '#/components/schemas/Tag'
     FileID:
       example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
-      pattern: >-
-        file_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: FileID
       type: string
     MIMEType:
@@ -5110,7 +5112,6 @@ components:
           deprecated: true
           description: Always a zero in string form, despite how many parts uploaded.
           maxLength: 1
-          pattern: '0'
         maxParts:
           type: string
           minLength: 1
@@ -5119,7 +5120,6 @@ components:
           default: '0'
           example: '0'
           maxLength: 1
-          pattern: '0'
       required:
         - nextPartNumber
         - maxParts
@@ -5379,24 +5379,18 @@ components:
         - roleTemplate
     GroupShortCode:
       example: ABC123
-      pattern: ^[A-Z0-9]{3,6}$
       title: GroupShortCode
       type: string
     GroupDiscriminator:
       example: '1234'
-      pattern: ^[0-9]{4}$
       title: GroupDiscriminator
       type: string
     GroupGalleryID:
       example: ggal_a03a4b55-4ca6-4490-9519-40ba6351a233
-      pattern: >-
-        ggal_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: GroupGalleryID
       type: string
     GroupRoleID:
       example: grol_459d3911-f672-44bc-b84d-e54ffe7960fe
-      pattern: >-
-        grol_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: GroupRoleID
       type: string
     GroupGallery:
@@ -5461,8 +5455,6 @@ components:
       example: member
     GroupMemberID:
       example: gmem_95cdb3b4-4643-4eb6-bdab-46a4e1e5ce37
-      pattern: >-
-        gmem_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: GroupMemberID
       type: string
     GroupMyMember:
@@ -5667,8 +5659,6 @@ components:
             $ref: '#/components/schemas/Tag'
     GroupAnnouncementID:
       example: gpos_71a7ff59-112c-4e78-a990-c7cc650776e5
-      pattern: >-
-        gpos_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: GroupAnnouncementID
       type: string
     GroupAnnouncement:
@@ -5730,8 +5720,6 @@ components:
         - favoriteId
     GroupAuditLogID:
       example: gaud_71a7ff59-112c-4e78-a990-c7cc650776e5
-      pattern: >-
-        gaud_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: GroupAuditLogID
       type: string
     GroupAuditLogEntry:
@@ -5919,8 +5907,6 @@ components:
         - name
     GroupGalleryImageID:
       example: ggim_71a7ff59-112c-4e78-a990-c7cc650776e5
-      pattern: >-
-        ggim_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: GroupGalleryImageID
       type: string
     GroupGalleryImage:
@@ -6125,9 +6111,7 @@ components:
     InstanceID:
       type: string
       example: >-
-        wrld_ba913a96-fac4-4048-a062-9aa5db092812:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
-      pattern: >-
-        (private|offline|(wrld|wld)_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}:(\d+)(~region\(([\w]+)\))?(~([\w]+)\(usr_([\w-]+)\)((\~canRequestInvite)?)(~region\(([\w].+)\))?~nonce\((.+)\))?)
+        12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
       title: InstanceID
       description: >-
         InstanceID can be "offline" on User profiles if you are not friends with
@@ -6226,8 +6210,6 @@ components:
       title: InviteMessageType
     InviteMessageID:
       example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
-      pattern: >-
-        (default|invm_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})
       title: InviteMessageID
       type: string
     InviteMessage:
@@ -6440,8 +6422,6 @@ components:
       type: object
     PermissionID:
       example: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
-      pattern: >-
-        prms_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: PermissionID
       type: string
     Permission:
@@ -6474,8 +6454,6 @@ components:
       type: object
     PlayerModerationID:
       example: pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244
-      pattern: >-
-        pmod_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       title: PlayerModerationID
       type: string
     PlayerModerationType:
@@ -7645,6 +7623,11 @@ components:
         - unityVersion
       title: LimitedUnityPackage
       type: object
+    UdonProductId:
+      example: prod_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+      title: UdonProductId
+      type: string
+      description: A unique ID of a Udon Product
     LimitedWorld:
       description: ''
       properties:
@@ -7655,8 +7638,9 @@ components:
           type: string
         capacity:
           example: 8
-          maximum: 40
-          minimum: 0
+          type: integer
+        recommendedCapacity:
+          example: 16
           type: integer
         created_at:
           format: date-time
@@ -7720,6 +7704,10 @@ components:
         updated_at:
           format: date-time
           type: string
+        udonProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/UdonProductId'
       required:
         - id
         - name
@@ -7912,6 +7900,10 @@ components:
           example: 9988675
           minimum: 0
           type: integer
+        udonProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/UdonProductId'
       required:
         - authorId
         - authorName
@@ -9652,8 +9644,6 @@ components:
       schema:
         type: string
         example: file_00000000-0000-0000-0000-000000000000
-        pattern: >-
-          file_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       description: Must be a valid file ID.
     versionId:
       name: versionId
@@ -9692,8 +9682,6 @@ components:
       schema:
         type: string
         example: grp_00000000-0000-0000-0000-000000000000
-        pattern: >-
-          grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       description: Must be a valid group ID.
     startDate:
       name: startDate
@@ -9718,8 +9706,6 @@ components:
       schema:
         type: string
         example: ggal_00000000-0000-0000-0000-000000000000
-        pattern: >-
-          ggal_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       description: Must be a valid group gallery ID.
     groupGalleryImageId:
       name: groupGalleryImageId
@@ -9728,8 +9714,6 @@ components:
       schema:
         type: string
         example: ggim_00000000-0000-0000-0000-000000000000
-        pattern: >-
-          ggim_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       description: Must be a valid group gallery image ID.
     groupRoleId:
       name: groupRoleId
@@ -9738,8 +9722,6 @@ components:
       schema:
         type: string
         example: grol_00000000-0000-0000-0000-000000000000
-        pattern: >-
-          grol_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}
       description: Must be a valid group role ID.
     worldId:
       name: worldId
