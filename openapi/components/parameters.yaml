@@ -67,7 +67,6 @@ fileId:
   schema:
     type: string
     example: file_00000000-0000-0000-0000-000000000000
-    pattern: 'file_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
   description: Must be a valid file ID.
 groupId:
   name: groupId
@@ -76,7 +75,6 @@ groupId:
   schema:
     type: string
     example: grp_00000000-0000-0000-0000-000000000000
-    pattern: 'grp_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
   description: Must be a valid group ID.
 groupRoleId:
   name: groupRoleId
@@ -85,7 +83,6 @@ groupRoleId:
   schema:
     type: string
     example: grol_00000000-0000-0000-0000-000000000000
-    pattern: 'grol_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
   description: Must be a valid group role ID.
 groupGalleryId:
   name: groupGalleryId
@@ -94,7 +91,6 @@ groupGalleryId:
   schema:
     type: string
     example: ggal_00000000-0000-0000-0000-000000000000
-    pattern: 'ggal_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
   description: Must be a valid group gallery ID.
 groupGalleryImageId:
   name: groupGalleryImageId
@@ -103,7 +99,6 @@ groupGalleryImageId:
   schema:
     type: string
     example: ggim_00000000-0000-0000-0000-000000000000
-    pattern: 'ggim_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
   description: Must be a valid group gallery image ID.
 versionId:
   name: versionId
