@@ -4168,6 +4168,7 @@ components:
         assetUrl:
           minLength: 1
           type: string
+          nullable: true
         assetUrlObject:
           type: object
         assetVersion:
@@ -4193,6 +4194,7 @@ components:
           type: string
         impostorUrl:
           type: string
+          nullable: true
         scanStatus:
           type: string
       required:
