@@ -5,6 +5,26 @@ info:
   description: Group Docs Here
 paths:
   /groups:
+    get:
+      summary: Search Group
+      description: Searches Groups by name or shortCode
+      operationId: searchGroups
+      tags:
+        - groups
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          required: false
+          description: Query to search for, can be either Group Name or Group shortCode
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/number
+      responses:
+        '200':
+          $ref: ../responses/groups/LimitedGroupListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
     post:
       summary: Create Group
       description: Creates a Group and returns a Group object. **Requires VRC+ Subscription.**
