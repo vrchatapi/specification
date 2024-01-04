@@ -1,0 +1,7 @@
+description: Returns a single Group object.
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        $ref: ../../schemas/LimitedGroup.yaml
