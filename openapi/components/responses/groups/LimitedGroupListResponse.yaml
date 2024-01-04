@@ -1,4 +1,4 @@
-description: Returns a single Group object.
+description: Returns a list of LimitedGroup objects.
 content:
   application/json:
     schema:
