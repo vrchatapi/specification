@@ -1439,6 +1439,26 @@ paths:
       tags:
         - friends
   /groups:
+    get:
+      summary: Search Group
+      description: Searches Groups by name or shortCode
+      operationId: searchGroups
+      tags:
+        - groups
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          required: false
+          description: Query to search for, can be either Group Name or Group shortCode
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/number'
+      responses:
+        '200':
+          $ref: '#/components/responses/LimitedGroupListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
     post:
       summary: Create Group
       description: >-
@@ -5320,65 +5340,6 @@ components:
         - incomingRequest
       title: FriendStatus
       type: object
-    GroupJoinState:
-      type: string
-      enum:
-        - closed
-        - invite
-        - request
-        - open
-      title: GroupJoinState
-      default: open
-    GroupPrivacy:
-      type: string
-      enum:
-        - default
-        - private
-      title: GroupPrivacy
-      default: default
-    GroupRoleTemplate:
-      type: string
-      enum:
-        - default
-        - managedFree
-        - managedInvite
-        - managedRequest
-      title: GroupRoleTemplate
-      default: default
-    CreateGroupRequest:
-      title: CreateGroupRequest
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 3
-          maxLength: 64
-        shortCode:
-          type: string
-          minLength: 3
-          maxLength: 6
-        description:
-          type: string
-          maxLength: 250
-          minLength: 0
-        joinState:
-          $ref: '#/components/schemas/GroupJoinState'
-        iconId:
-          type: string
-          nullable: true
-          default: null
-        bannerId:
-          type: string
-          nullable: true
-          default: null
-        privacy:
-          $ref: '#/components/schemas/GroupPrivacy'
-        roleTemplate:
-          $ref: '#/components/schemas/GroupRoleTemplate'
-      required:
-        - name
-        - shortCode
-        - roleTemplate
     GroupShortCode:
       example: ABC123
       title: GroupShortCode
@@ -5387,6 +5348,15 @@ components:
       example: '1234'
       title: GroupDiscriminator
       type: string
+    GroupMemberStatus:
+      type: string
+      enum:
+        - inactive
+        - member
+        - requested
+        - invited
+      default: inactive
+      example: member
     GroupGalleryID:
       example: ggal_a03a4b55-4ca6-4490-9519-40ba6351a233
       title: GroupGalleryID
@@ -5446,15 +5416,115 @@ components:
         updatedAt:
           type: string
           format: date-time
-    GroupMemberStatus:
+    LimitedGroup:
+      title: LimitedGroup
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupID'
+        name:
+          type: string
+        shortCode:
+          $ref: '#/components/schemas/GroupShortCode'
+        discriminator:
+          $ref: '#/components/schemas/GroupDiscriminator'
+        description:
+          type: string
+        iconUrl:
+          type: string
+          nullable: true
+        bannerUrl:
+          type: string
+          nullable: true
+        ownerId:
+          $ref: '#/components/schemas/UserID'
+        rules:
+          type: string
+          nullable: true
+        iconId:
+          type: string
+          nullable: true
+        bannerId:
+          type: string
+          nullable: true
+        memberCount:
+          type: integer
+        tags:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        createdAt:
+          type: string
+          format: date-time
+        membershipStatus:
+          $ref: '#/components/schemas/GroupMemberStatus'
+        isSearchable:
+          type: boolean
+        galleries:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupGallery'
+    GroupJoinState:
       type: string
       enum:
-        - inactive
-        - member
-        - requested
-        - invited
-      default: inactive
-      example: member
+        - closed
+        - invite
+        - request
+        - open
+      title: GroupJoinState
+      default: open
+    GroupPrivacy:
+      type: string
+      enum:
+        - default
+        - private
+      title: GroupPrivacy
+      default: default
+    GroupRoleTemplate:
+      type: string
+      enum:
+        - default
+        - managedFree
+        - managedInvite
+        - managedRequest
+      title: GroupRoleTemplate
+      default: default
+    CreateGroupRequest:
+      title: CreateGroupRequest
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 3
+          maxLength: 64
+        shortCode:
+          type: string
+          minLength: 3
+          maxLength: 6
+        description:
+          type: string
+          maxLength: 250
+          minLength: 0
+        joinState:
+          $ref: '#/components/schemas/GroupJoinState'
+        iconId:
+          type: string
+          nullable: true
+          default: null
+        bannerId:
+          type: string
+          nullable: true
+          default: null
+        privacy:
+          $ref: '#/components/schemas/GroupPrivacy'
+        roleTemplate:
+          $ref: '#/components/schemas/GroupRoleTemplate'
+      required:
+        - name
+        - shortCode
+        - roleTemplate
     GroupMemberID:
       example: gmem_95cdb3b4-4643-4eb6-bdab-46a4e1e5ce37
       title: GroupMemberID
@@ -8653,6 +8723,14 @@ components:
                 error:
                   message: These users are not friends
                   status_code: 400
+    LimitedGroupListResponse:
+      description: Returns a list of LimitedGroup objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/LimitedGroup'
     GroupResponse:
       description: Returns a single Group object.
       content:
