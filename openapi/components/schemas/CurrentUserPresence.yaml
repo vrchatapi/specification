@@ -32,13 +32,8 @@ properties:
     nullable: true
   status:
     type: string
-<<<<<<< HEAD
     description: either a UserStatus or empty string
     nullable: true
-=======
-    nullable: true
-    description: either a UserStatus or empty string
->>>>>>> 188f03f (Change CurrentUserPresence instanceType and status properties to nullable string)
   travelingToInstance:
     type: string
     nullable: true
