@@ -3,6 +3,7 @@ enum:
   - friendRequest
   - invite
   - inviteResponse
+  - message
   - requestInvite
   - requestInviteResponse
   - votetokick
