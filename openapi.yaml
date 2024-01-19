@@ -5263,6 +5263,7 @@ components:
         - friendRequest
         - invite
         - inviteResponse
+        - message
         - requestInvite
         - requestInviteResponse
         - votetokick
