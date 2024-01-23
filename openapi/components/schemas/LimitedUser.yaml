@@ -43,11 +43,7 @@ properties:
 required:
   - id
   - displayName
-  - userIcon
-  - profilePicOverride
   - statusDescription
-  - currentAvatarImageUrl
-  - currentAvatarThumbnailImageUrl
   - developerType
   - last_platform
   - status
