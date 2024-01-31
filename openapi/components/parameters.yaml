@@ -23,6 +23,13 @@ sort:
   schema:
     $ref: ./schemas/SortOption.yaml
   description: The sort order of the results.
+groupMemberSort:
+  name: sort
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/GroupSearchSort.yaml
+  description: The sort order of Group Member results
 order:
   name: order
   in: query

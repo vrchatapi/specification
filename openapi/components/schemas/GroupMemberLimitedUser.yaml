@@ -10,3 +10,11 @@ properties:
     type: string
   iconUrl:
     type: string
+  profilePicOverride:
+    type: string
+  currentAvatarThumbnailImageUrl:
+    type: string
+  currentAvatarTags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
