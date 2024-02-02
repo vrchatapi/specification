@@ -1929,6 +1929,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/groupMemberSort'
       responses:
         '200':
           $ref: '#/components/responses/GroupMemberListResponse'
@@ -5865,6 +5866,14 @@ components:
           type: string
         iconUrl:
           type: string
+        profilePicOverride:
+          type: string
+        currentAvatarThumbnailImageUrl:
+          type: string
+        currentAvatarTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
     GroupMember:
       title: GroupMember
       type: object
@@ -5886,6 +5895,10 @@ components:
           $ref: '#/components/schemas/GroupMemberLimitedUser'
           nullable: true
         roleIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+        mRoleIds:
           type: array
           items:
             $ref: '#/components/schemas/GroupRoleID'
@@ -5921,6 +5934,11 @@ components:
             fetching a specific user.
           type: string
           nullable: true
+        lastPostReadAt:
+          type: string
+          format: date-time
+        hasJoinedFromPurchase:
+          type: boolean
     BanGroupMemberRequest:
       title: BanGroupMemberRequest
       type: object
@@ -6071,6 +6089,13 @@ components:
           default: true
       required:
         - userId
+    GroupSearchSort:
+      title: GroupSearchSort
+      type: string
+      enum:
+        - joinedAt:asc
+        - joinedAt:desc
+      example: joinedAt:asc
     GroupLimitedMember:
       title: GroupLimitedMember
       type: object
@@ -9792,6 +9817,13 @@ components:
         type: string
         example: ggim_00000000-0000-0000-0000-000000000000
       description: Must be a valid group gallery image ID.
+    groupMemberSort:
+      name: sort
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/GroupSearchSort'
+      description: The sort order of Group Member results
     groupRoleId:
       name: groupRoleId
       in: path
