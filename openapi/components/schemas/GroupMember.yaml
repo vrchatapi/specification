@@ -19,6 +19,10 @@ properties:
     type: array
     items:
       $ref: ./GroupRoleID.yaml
+  mRoleIds:
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
   joinedAt:
     type: string
     format: date-time
@@ -45,3 +49,8 @@ properties:
     description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
     type: string
     nullable: true
+  lastPostReadAt:
+    type: string
+    format: date-time
+  hasJoinedFromPurchase:
+    type: boolean
