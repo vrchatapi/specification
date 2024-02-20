@@ -41,4 +41,4 @@ properties:
     type: string
     minLength: 1
     default: 5.3.4p1
-    example: 2018.4.20f1
+    example: 2022.3.6f1

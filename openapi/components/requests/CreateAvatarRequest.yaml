@@ -31,6 +31,11 @@ properties:
     description: Enabling featured tag requires Admin Credentials.
   unityPackageUrl:
     type: string
+  unityVersion:
+    type: string
+    minLength: 1
+    default: 5.3.4p1
+    example: 2022.3.6f1
 required:
   - name
   - imageUrl
