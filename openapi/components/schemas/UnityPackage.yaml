@@ -9,7 +9,7 @@ example:
   pluginUrl: ''
   pluginUrlObject: {}
   unitySortNumber: 20180414000
-  unityVersion: 2018.4.14f1
+  unityVersion: 2022.3.6f1
 properties:
   id:
     $ref: ./UnityPackageID.yaml
@@ -37,7 +37,7 @@ properties:
     format: int64
   unityVersion:
     default: 5.3.4p1
-    example: 2018.4.12f1
+    example: 2022.3.6f1
     minLength: 1
     type: string
   impostorUrl:
