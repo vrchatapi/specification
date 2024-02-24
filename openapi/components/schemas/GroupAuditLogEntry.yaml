@@ -10,7 +10,7 @@ properties:
     $ref: ./GroupID.yaml
   actorId:
     $ref: ./UserID.yaml
-  actorDisplayname:
+  actorDisplayName:
     type: string
   targetId:
     description: Typically GroupID or GroupRoleID, but could be other types of IDs.
