@@ -3307,6 +3307,26 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       security:
         - authCookie: []
+  /users/{userId}/groups/represented:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get user's current represented group
+      description: Returns the current group that the user is currently representing
+      operationId: getUserRepresentedGroup
+      tags:
+        - users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/representedGroup'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - authCookie: []
   /worlds:
     get:
       summary: Search All Worlds
@@ -7762,6 +7782,42 @@ components:
           example: >-
             https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1
           minLength: 0
+    representedGroup:
+      title: RepresentedGroup
+      type: object
+      properties:
+        name:
+          type: string
+        shortCode:
+          $ref: '#/components/schemas/GroupShortCode'
+        discriminator:
+          $ref: '#/components/schemas/GroupDiscriminator'
+        description:
+          type: string
+        iconId:
+          type: string
+          nullable: true
+        iconUrl:
+          type: string
+          nullable: true
+        bannerId:
+          type: string
+          nullable: true
+        bannerUrl:
+          type: string
+          nullable: true
+        privacy:
+          $ref: '#/components/schemas/GroupPrivacy'
+        ownerId:
+          $ref: '#/components/schemas/UserID'
+        memberCount:
+          type: integer
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        memberVisibility:
+          $ref: '#/components/schemas/GroupUserVisibility'
+        isRepresenting:
+          type: boolean
     LimitedUnityPackage:
       description: ''
       properties:
