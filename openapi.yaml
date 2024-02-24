@@ -4182,7 +4182,7 @@ components:
         pluginUrl: ''
         pluginUrlObject: {}
         unitySortNumber: 20180414000
-        unityVersion: 2018.4.14f1
+        unityVersion: 2022.3.6f1
       properties:
         id:
           $ref: '#/components/schemas/UnityPackageID'
@@ -4210,7 +4210,7 @@ components:
           format: int64
         unityVersion:
           default: 5.3.4p1
-          example: 2018.4.12f1
+          example: 2022.3.6f1
           minLength: 1
           type: string
         impostorUrl:
@@ -4380,6 +4380,11 @@ components:
           default: 1
         unityPackageUrl:
           type: string
+        unityVersion:
+          type: string
+          minLength: 1
+          default: 5.3.4p1
+          example: 2022.3.6f1
       required:
         - name
         - imageUrl
@@ -4413,6 +4418,11 @@ components:
           default: 1
         unityPackageUrl:
           type: string
+        unityVersion:
+          type: string
+          minLength: 1
+          default: 5.3.4p1
+          example: 2022.3.6f1
     TransactionID:
       example: txn_e5c72948-e735-4880-8245-24b2a41198b0
       title: TransactionID
@@ -5805,7 +5815,7 @@ components:
           $ref: '#/components/schemas/GroupID'
         actorId:
           $ref: '#/components/schemas/UserID'
-        actorDisplayname:
+        actorDisplayName:
           type: string
         targetId:
           description: Typically GroupID or GroupRoleID, but could be other types of IDs.
@@ -7758,7 +7768,7 @@ components:
         platform:
           $ref: '#/components/schemas/Platform'
         unityVersion:
-          example: 2018.4.14f1
+          example: 2022.3.6f1
           minLength: 1
           type: string
       required:
@@ -7919,7 +7929,7 @@ components:
           type: string
           minLength: 1
           default: 5.3.4p1
-          example: 2018.4.20f1
+          example: 2022.3.6f1
       required:
         - assetUrl
         - imageUrl
@@ -8114,7 +8124,7 @@ components:
           type: string
           minLength: 1
           default: 5.3.4p1
-          example: 2018.4.20f1
+          example: 2022.3.6f1
     WorldMetadata:
       title: WorldMetadata
       type: object
