@@ -16,7 +16,7 @@ If you are simply looking to **use** the VRChat API, please instead check out on
 [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="100">](https://github.com/vrchatapi/vrchatapi-python)
 [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="100">](https://github.com/vrchatapi/vrchatapi-java)
 [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" width="100">](https://github.com/vrchatapi/vrchatapi-dart)
-[<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg" width="100">](https://github.com/vrchatapi/vrchatapi-rust)
+[<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" width="100">](https://github.com/vrchatapi/vrchatapi-rust)
 [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" width="100">](https://github.com/vrchatapi/vrchatapi-csharp)
 (click, they are links!)
 
