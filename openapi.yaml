@@ -5967,6 +5967,7 @@ components:
         lastPostReadAt:
           type: string
           format: date-time
+          nullable: true
         hasJoinedFromPurchase:
           type: boolean
     BanGroupMemberRequest:
@@ -6186,6 +6187,7 @@ components:
         lastPostReadAt:
           type: string
           format: date-time
+          nullable: true
         hasJoinedFromPurchase:
           type: boolean
     GroupUserVisibility:
