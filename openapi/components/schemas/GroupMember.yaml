@@ -52,5 +52,6 @@ properties:
   lastPostReadAt:
     type: string
     format: date-time
+    nullable: true
   hasJoinedFromPurchase:
     type: boolean
