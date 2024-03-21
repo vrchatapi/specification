@@ -1824,6 +1824,9 @@ paths:
       operationId: getGroupInvites
       tags:
         - groups
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
       responses:
         '200':
           $ref: '#/components/responses/GroupMemberListResponse'
@@ -2063,6 +2066,9 @@ paths:
       operationId: getGroupRequests
       tags:
         - groups
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
       responses:
         '200':
           $ref: '#/components/responses/GroupMemberListResponse'
