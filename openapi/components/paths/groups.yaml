@@ -403,6 +403,9 @@ paths:
       operationId: getGroupInvites
       tags:
         - groups
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
       responses:
         '200':
           $ref: ../responses/groups/GroupMemberListResponse.yaml
@@ -637,6 +640,9 @@ paths:
       operationId: getGroupRequests
       tags:
         - groups
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
       responses:
         '200':
           $ref: ../responses/groups/GroupMemberListResponse.yaml
