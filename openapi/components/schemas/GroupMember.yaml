@@ -26,6 +26,7 @@ properties:
   joinedAt:
     type: string
     format: date-time
+    nullable: true
   membershipStatus:
     type: string
     example: member
