@@ -6248,12 +6248,21 @@ components:
           default: false
           example: true
           description: Whether the user is allowed to add this permission to a role.
+    GroupJoinRequestAction:
+      example: accept
+      title: GroupJoinRequestAction
+      type: string
+      enum:
+        - accept
+        - reject
     RespondGroupJoinRequest:
       title: RespondGroupJoinRequest
       type: object
       properties:
         action:
-          type: string
+          $ref: '#/components/schemas/GroupJoinRequestAction'
+      required:
+        - action
     CreateGroupRoleRequest:
       title: CreateGroupRequest
       type: object
