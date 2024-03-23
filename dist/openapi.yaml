@@ -5943,8 +5943,7 @@ components:
           format: date-time
           nullable: true
         membershipStatus:
-          type: string
-          example: member
+          $ref: '#/components/schemas/GroupMemberStatus'
         visibility:
           type: string
           example: visible
@@ -6163,8 +6162,7 @@ components:
           type: string
           format: date-time
         membershipStatus:
-          type: string
-          example: member
+          $ref: '#/components/schemas/GroupMemberStatus'
         visibility:
           type: string
           example: visible
