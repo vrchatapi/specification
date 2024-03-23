@@ -24,8 +24,7 @@ properties:
     type: string
     format: date-time
   membershipStatus:
-    type: string
-    example: member
+    $ref: ./GroupMemberStatus.yaml
   visibility:
     type: string
     example: visible
