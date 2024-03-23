@@ -32,6 +32,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -131,6 +132,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -210,6 +212,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -252,6 +255,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -339,6 +343,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -424,6 +429,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -687,6 +693,7 @@ paths:
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -718,6 +725,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
