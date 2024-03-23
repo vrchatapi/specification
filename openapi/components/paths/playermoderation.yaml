@@ -84,6 +84,7 @@ paths:
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -117,6 +118,7 @@ paths:
       security:
         - authCookie: []
       requestBody:
+        required: true
         content:
           application/json:
             schema:
