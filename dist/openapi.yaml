@@ -5389,6 +5389,7 @@ components:
         - member
         - requested
         - invited
+        - banned
       default: inactive
       example: member
     GroupGalleryID:
