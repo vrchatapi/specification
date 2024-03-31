@@ -5907,6 +5907,7 @@ components:
           type: string
         currentAvatarThumbnailImageUrl:
           type: string
+          nullable: true
         currentAvatarTags:
           type: array
           items:
