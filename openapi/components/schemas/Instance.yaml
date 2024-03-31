@@ -79,6 +79,31 @@ properties:
     $ref: ./UserID.yaml
   private:
     $ref: ./UserID.yaml
+  queueEnabled:
+    type: boolean
+  queueSize:
+    type: integer
+    minimum: 0
+    example: 6
+  recommendedCapacity:
+    type: integer
+    minimum: 0
+    example: 6
+  roleRestricted:
+    type: boolean
+  strict:
+    type: boolean
+  userCount:
+    type: integer
+    minimum: 0
+    example: 6
+  world:
+    $ref: ./World.yaml
+  users:
+    description: 'The users field is present on instances created by the requesting user.'
+    type: array
+    items:
+      $ref: ./LimitedUser.yaml
 required:
   - active
   - canRequestInvite
@@ -98,3 +123,10 @@ required:
   - tags
   - type
   - worldId
+  - queueEnabled
+  - queueSize
+  - recommendedCapacity
+  - roleRestricted
+  - strict
+  - userCount
+  - world
