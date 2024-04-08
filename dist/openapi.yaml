@@ -6488,6 +6488,157 @@ components:
         - private
         - group
       description: ''
+    UdonProductId:
+      example: prod_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+      title: UdonProductId
+      type: string
+      description: A unique ID of a Udon Product
+    World:
+      description: ''
+      title: World
+      type: object
+      properties:
+        authorId:
+          $ref: '#/components/schemas/UserID'
+        authorName:
+          minLength: 1
+          type: string
+        capacity:
+          example: 8
+          type: integer
+        recommendedCapacity:
+          example: 4
+          type: integer
+        created_at:
+          format: date-time
+          type: string
+        description:
+          minLength: 0
+          type: string
+        favorites:
+          default: 0
+          example: 12024
+          minimum: 0
+          type: integer
+        featured:
+          default: false
+          type: boolean
+        heat:
+          default: 0
+          example: 5
+          minimum: 0
+          type: integer
+        id:
+          $ref: '#/components/schemas/WorldID'
+        imageUrl:
+          minLength: 1
+          type: string
+        instances:
+          type: array
+          description: Will always be an empty list when unauthenticated.
+          items:
+            maxItems: 2
+            minItems: 2
+            type: array
+            items: {}
+        labsPublicationDate:
+          example: none
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+        namespace:
+          type: string
+        occupants:
+          default: 0
+          example: 47
+          minimum: 0
+          type: integer
+          description: Will always be `0` when unauthenticated.
+        organization:
+          default: vrchat
+          minLength: 1
+          type: string
+        popularity:
+          default: 0
+          example: 8
+          minimum: 0
+          type: integer
+        previewYoutubeId:
+          type: string
+          nullable: true
+        privateOccupants:
+          default: 0
+          example: 1
+          minimum: 0
+          type: integer
+          description: Will always be `0` when unauthenticated.
+        publicOccupants:
+          default: 0
+          example: 46
+          minimum: 0
+          type: integer
+          description: Will always be `0` when unauthenticated.
+        publicationDate:
+          example: none
+          minLength: 1
+          type: string
+        releaseStatus:
+          $ref: '#/components/schemas/ReleaseStatus'
+        tags:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        thumbnailImageUrl:
+          minLength: 1
+          type: string
+        unityPackages:
+          type: array
+          description: Empty if unauthenticated.
+          items:
+            $ref: '#/components/schemas/UnityPackage'
+        updated_at:
+          format: date-time
+          type: string
+        version:
+          default: 0
+          example: 68
+          minimum: 0
+          type: integer
+        visits:
+          default: 0
+          example: 9988675
+          minimum: 0
+          type: integer
+        udonProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/UdonProductId'
+      required:
+        - authorId
+        - authorName
+        - capacity
+        - recommendedCapacity
+        - created_at
+        - description
+        - featured
+        - heat
+        - id
+        - imageUrl
+        - labsPublicationDate
+        - name
+        - namespace
+        - organization
+        - popularity
+        - publicationDate
+        - releaseStatus
+        - tags
+        - thumbnailImageUrl
+        - updated_at
+        - version
+        - visits
     Instance:
       description: >-
         * `hidden` field is only present if InstanceType is `hidden` aka
@@ -6578,6 +6729,33 @@ components:
           $ref: '#/components/schemas/UserID'
         private:
           $ref: '#/components/schemas/UserID'
+        queueEnabled:
+          type: boolean
+        queueSize:
+          type: integer
+          minimum: 0
+          example: 6
+        recommendedCapacity:
+          type: integer
+          minimum: 0
+          example: 6
+        roleRestricted:
+          type: boolean
+        strict:
+          type: boolean
+        userCount:
+          type: integer
+          minimum: 0
+          example: 6
+        world:
+          $ref: '#/components/schemas/World'
+        users:
+          description: >-
+            The users field is present on instances created by the requesting
+            user.
+          type: array
+          items:
+            $ref: '#/components/schemas/LimitedUser'
       required:
         - active
         - canRequestInvite
@@ -6597,6 +6775,13 @@ components:
         - tags
         - type
         - worldId
+        - queueEnabled
+        - queueSize
+        - recommendedCapacity
+        - roleRestricted
+        - strict
+        - userCount
+        - world
     InstanceShortNameResponse:
       properties:
         secureName:
@@ -7850,11 +8035,6 @@ components:
         - unityVersion
       title: LimitedUnityPackage
       type: object
-    UdonProductId:
-      example: prod_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-      title: UdonProductId
-      type: string
-      description: A unique ID of a Udon Product
     LimitedWorld:
       description: ''
       properties:
@@ -8008,152 +8188,6 @@ components:
         - assetUrl
         - imageUrl
         - name
-    World:
-      description: ''
-      title: World
-      type: object
-      properties:
-        authorId:
-          $ref: '#/components/schemas/UserID'
-        authorName:
-          minLength: 1
-          type: string
-        capacity:
-          example: 8
-          type: integer
-        recommendedCapacity:
-          example: 4
-          type: integer
-        created_at:
-          format: date-time
-          type: string
-        description:
-          minLength: 0
-          type: string
-        favorites:
-          default: 0
-          example: 12024
-          minimum: 0
-          type: integer
-        featured:
-          default: false
-          type: boolean
-        heat:
-          default: 0
-          example: 5
-          minimum: 0
-          type: integer
-        id:
-          $ref: '#/components/schemas/WorldID'
-        imageUrl:
-          minLength: 1
-          type: string
-        instances:
-          type: array
-          description: Will always be an empty list when unauthenticated.
-          items:
-            maxItems: 2
-            minItems: 2
-            type: array
-            items: {}
-        labsPublicationDate:
-          example: none
-          minLength: 1
-          type: string
-        name:
-          minLength: 1
-          type: string
-        namespace:
-          type: string
-        occupants:
-          default: 0
-          example: 47
-          minimum: 0
-          type: integer
-          description: Will always be `0` when unauthenticated.
-        organization:
-          default: vrchat
-          minLength: 1
-          type: string
-        popularity:
-          default: 0
-          example: 8
-          minimum: 0
-          type: integer
-        previewYoutubeId:
-          type: string
-          nullable: true
-        privateOccupants:
-          default: 0
-          example: 1
-          minimum: 0
-          type: integer
-          description: Will always be `0` when unauthenticated.
-        publicOccupants:
-          default: 0
-          example: 46
-          minimum: 0
-          type: integer
-          description: Will always be `0` when unauthenticated.
-        publicationDate:
-          example: none
-          minLength: 1
-          type: string
-        releaseStatus:
-          $ref: '#/components/schemas/ReleaseStatus'
-        tags:
-          description: ' '
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        thumbnailImageUrl:
-          minLength: 1
-          type: string
-        unityPackages:
-          type: array
-          description: Empty if unauthenticated.
-          items:
-            $ref: '#/components/schemas/UnityPackage'
-        updated_at:
-          format: date-time
-          type: string
-        version:
-          default: 0
-          example: 68
-          minimum: 0
-          type: integer
-        visits:
-          default: 0
-          example: 9988675
-          minimum: 0
-          type: integer
-        udonProducts:
-          type: array
-          items:
-            $ref: '#/components/schemas/UdonProductId'
-      required:
-        - authorId
-        - authorName
-        - capacity
-        - recommendedCapacity
-        - created_at
-        - description
-        - featured
-        - heat
-        - id
-        - imageUrl
-        - labsPublicationDate
-        - name
-        - namespace
-        - organization
-        - popularity
-        - publicationDate
-        - releaseStatus
-        - tags
-        - thumbnailImageUrl
-        - updated_at
-        - version
-        - visits
     UpdateWorldRequest:
       title: UpdateWorldRequest
       type: object
