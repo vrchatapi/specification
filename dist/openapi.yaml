@@ -1471,6 +1471,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1573,6 +1574,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1652,6 +1654,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1694,6 +1697,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1783,6 +1787,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1848,6 +1853,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -2116,6 +2122,7 @@ paths:
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -2147,6 +2154,7 @@ paths:
       tags:
         - groups
       requestBody:
+        required: true
         content:
           application/json:
             schema:
