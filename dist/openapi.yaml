@@ -284,6 +284,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -315,6 +316,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -346,6 +348,7 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       requestBody:
+        required: true
         content:
           application/json:
             schema:
