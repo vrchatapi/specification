@@ -2223,6 +2223,7 @@ paths:
         Sends an invite to a user. Returns the Notification of type `invite`
         that was sent.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -2314,6 +2315,7 @@ paths:
         Respond to an invite request by sending a world invite to the requesting
         user. `:notificationId` is the ID of the requesting notification.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
