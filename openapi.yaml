@@ -6644,7 +6644,6 @@ components:
         - imageUrl
         - labsPublicationDate
         - name
-        - namespace
         - organization
         - popularity
         - publicationDate
