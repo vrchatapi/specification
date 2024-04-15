@@ -6499,6 +6499,14 @@ components:
           type: string
       required:
         - message
+    InstanceOwnerId:
+      example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+      title: InstanceOwnerId
+      type: string
+      description: >-
+        A groupId if the instance type is "group", null if instance type is
+        public, or a userId otherwise
+      nullable: true
     Region:
       type: string
       title: Region
@@ -6750,7 +6758,7 @@ components:
           minLength: 1
           example: '12345'
         ownerId:
-          $ref: '#/components/schemas/UserID'
+          $ref: '#/components/schemas/InstanceOwnerId'
         permanent:
           default: false
           type: boolean
