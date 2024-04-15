@@ -126,7 +126,6 @@ required:
   - queueEnabled
   - queueSize
   - recommendedCapacity
-  - roleRestricted
   - strict
   - userCount
   - world
