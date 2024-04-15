@@ -104,6 +104,15 @@ properties:
     type: array
     items:
       $ref: ./LimitedUser.yaml
+  nonce:
+    type: string
+  closedAt:
+    format: date-time
+    type: string
+    nullable: true
+  hardClose:
+    type: boolean
+    nullable: true
 required:
   - active
   - canRequestInvite
