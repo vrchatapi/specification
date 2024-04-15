@@ -4,6 +4,26 @@ info:
   version: '1.0'
   description: Instances Docs Here
 paths:
+  '/instances':
+    post:
+      summary: Create Instance
+      tags:
+        - instances
+      operationId: createInstance
+      security:
+        - authCookie: []
+      description: Create an instance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateInstanceRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/instances/InstanceResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
   '/instances/{worldId}:{instanceId}':
     parameters:
       - $ref: ../parameters.yaml#/worldId
