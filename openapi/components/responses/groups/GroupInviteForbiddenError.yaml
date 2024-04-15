@@ -1,0 +1,11 @@
+description: Forbidden error response when creating a group invite.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      Forbidden to Invite User:
+        value:
+          error:
+            message: You can't invite that user․
+            status_code: 403
