@@ -1,0 +1,16 @@
+description: Error response due to not being allowed to close an instance
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      Not Allowed to Close Instance Example:
+        value:
+          error:
+            message: "You're not allowed to close this instance․"
+            status_code: 403
+      Instance Already Closed Example:
+        value:
+          error:
+            message: "You're not allowed to close an already closed instance․"
+            status_code: 403
