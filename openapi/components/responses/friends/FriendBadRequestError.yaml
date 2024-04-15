@@ -1,0 +1,16 @@
+description: Bad request error response when sending a friend request
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      Users Already Friends:
+        value:
+          error:
+            message: Users are already friends
+            status_code: 400
+      Already Sent a Friend Request:
+        value:
+          error:
+            message: This user has already been sent a friend request
+            status_code: 400

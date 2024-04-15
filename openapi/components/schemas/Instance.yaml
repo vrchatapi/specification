@@ -109,6 +109,15 @@ properties:
     $ref: ./GroupAccessType.yaml
   hasCapacityForYou:
     type: boolean
+  nonce:
+    type: string
+  closedAt:
+    format: date-time
+    type: string
+    nullable: true
+  hardClose:
+    type: boolean
+    nullable: true
 required:
   - active
   - canRequestInvite
