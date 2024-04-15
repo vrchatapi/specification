@@ -58,6 +58,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml
+        '400':
+          $ref: ../responses/friends/FriendBadRequestError.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
