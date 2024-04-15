@@ -220,6 +220,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/groups/GroupMemberResponse.yaml
+        '400':
+          $ref: ../responses/groups/BanGroupMemberBadRequestError.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
