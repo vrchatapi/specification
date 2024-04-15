@@ -6689,6 +6689,16 @@ components:
         - updated_at
         - version
         - visits
+    GroupAccessType:
+      type: string
+      title: GroupAccessType
+      example: member
+      enum:
+        - public
+        - plus
+        - member
+      description: Group access type when the instance type is "group"
+      default: member
     Instance:
       description: >-
         * `hidden` field is only present if InstanceType is `hidden` aka
@@ -6758,6 +6768,7 @@ components:
           type: string
           minLength: 1
           example: 02u7yz8j
+          nullable: true
         tags:
           description: >-
             The tags array on Instances usually contain the language tags of the
@@ -6806,6 +6817,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LimitedUser'
+        groupAccessType:
+          $ref: '#/components/schemas/GroupAccessType'
+        hasCapacityForYou:
+          type: boolean
         nonce:
           type: string
         closedAt:
