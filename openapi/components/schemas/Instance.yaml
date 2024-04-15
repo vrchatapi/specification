@@ -42,7 +42,7 @@ properties:
     minLength: 1
     example: '12345'
   ownerId:
-    $ref: ./UserID.yaml
+    $ref: ./InstanceOwnerId.yaml
   permanent:
     default: false
     type: boolean
