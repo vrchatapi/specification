@@ -2554,6 +2554,36 @@ paths:
           $ref: '#/components/responses/InstanceResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
+    delete:
+      summary: Close Instance
+      tags:
+        - instances
+      operationId: closeInstance
+      security:
+        - authCookie: []
+      parameters:
+        - in: query
+          name: hardClose
+          schema:
+            type: boolean
+          required: false
+          description: Whether to hard close the instance. Defaults to false.
+      description: >-
+        Close an instance.
+
+
+        You can only close an instance if the ownerId is yourself or if the
+        instance owner is a group and you have the `group-instance-moderate`
+        permission.
+      responses:
+        '200':
+          $ref: '#/components/responses/InstanceResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/InstanceCloseForbiddenError'
+        '404':
+          $ref: '#/components/responses/InstanceNotFoundError'
   /instances/{worldId}:{instanceId}/shortName:
     parameters:
       - $ref: '#/components/parameters/worldId'
@@ -6770,6 +6800,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LimitedUser'
+        nonce:
+          type: string
+        closedAt:
+          format: date-time
+          type: string
+          nullable: true
+        hardClose:
+          type: boolean
+          nullable: true
       required:
         - active
         - canRequestInvite
@@ -9312,6 +9351,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Instance'
+    InstanceCloseForbiddenError:
+      description: Error response due to not being allowed to close an instance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Not Allowed to Close Instance Example:
+              value:
+                error:
+                  message: You're not allowed to close this instance․
+                  status_code: 403
+            Instance Already Closed Example:
+              value:
+                error:
+                  message: You're not allowed to close an already closed instance․
+                  status_code: 403
     InstanceShortNameResponse:
       description: Returns an instance secureName and/or shortName.
       content:
