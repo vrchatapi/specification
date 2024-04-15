@@ -1,0 +1,26 @@
+title: CreateInstanceRequest
+type: object
+properties:
+  worldId:
+    $ref: ../schemas/WorldID.yaml
+  type:
+    $ref: ../schemas/InstanceType.yaml
+  region:
+    $ref: ../schemas/Region.yaml
+  ownerId:
+    description: A groupId if type is "group" else a userId
+    type: string
+  roleIds:
+    description: Group roleIds that are allowed to join if the type is "group" and groupAccessType is "member"
+    type: array
+    items:
+      $ref: ../schemas/GroupRoleID.yaml
+  groupAccessType:
+    $ref: ../schemas/GroupAccessType.yaml
+  queueEnabled:
+    type: boolean
+    default: false
+required:
+  - worldId
+  - type
+  - region

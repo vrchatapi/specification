@@ -60,6 +60,7 @@ properties:
     type: string
     minLength: 1
     example: 02u7yz8j
+    nullable: true
   tags:
     description: 'The tags array on Instances usually contain the language tags of the people in the instance. '
     type: array
@@ -104,6 +105,10 @@ properties:
     type: array
     items:
       $ref: ./LimitedUser.yaml
+  groupAccessType:
+    $ref: ./GroupAccessType.yaml
+  hasCapacityForYou:
+    type: boolean
 required:
   - active
   - canRequestInvite
