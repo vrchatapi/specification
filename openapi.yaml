@@ -6860,7 +6860,6 @@ components:
         - queueEnabled
         - queueSize
         - recommendedCapacity
-        - roleRestricted
         - strict
         - userCount
         - world
