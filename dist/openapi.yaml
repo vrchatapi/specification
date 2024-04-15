@@ -1363,6 +1363,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/NotificationResponse'
+        '400':
+          $ref: '#/components/responses/FriendBadRequestError'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -8890,6 +8892,23 @@ components:
                 details: '{}'
                 seen: false
                 created_at: 2021-01-01T00:00:00.000Z
+    FriendBadRequestError:
+      description: Bad request error response when sending a friend request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Users Already Friends:
+              value:
+                error:
+                  message: Users are already friends
+                  status_code: 400
+            Already Sent a Friend Request:
+              value:
+                error:
+                  message: This user has already been sent a friend request
+                  status_code: 400
     UserDoesntExistError:
       description: >-
         Error response when trying to send a friend request to a user which
