@@ -1,0 +1,11 @@
+description: Bad request error response when banning a user
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      User Already Banned:
+        value:
+          error:
+            message: User is already banned․
+            status_code: 400
