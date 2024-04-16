@@ -1664,6 +1664,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/GroupMemberResponse'
+        '400':
+          $ref: '#/components/responses/BanGroupMemberBadRequestError'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
@@ -9088,6 +9090,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GroupMember'
+    BanGroupMemberBadRequestError:
+      description: Bad request error response when banning a user
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            User Already Banned:
+              value:
+                error:
+                  message: User is already banned․
+                  status_code: 400
     GroupGalleryResponse:
       description: Returns a single GroupGallery object.
       content:
