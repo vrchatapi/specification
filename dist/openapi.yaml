@@ -5954,6 +5954,7 @@ components:
           type: string
         thumbnailUrl:
           type: string
+          nullable: true
         iconUrl:
           type: string
         profilePicOverride:
