@@ -1827,6 +1827,24 @@ paths:
           $ref: '#/components/responses/GroupNotFoundError'
       security:
         - authCookie: []
+  /groups/{groupId}/instances:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get Group Instances
+      description: Returns a list of group instances
+      operationId: getGroupInstances
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupInstanceListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupNotFoundError'
+      security:
+        - authCookie: []
   /groups/{groupId}/invites:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -6171,6 +6189,187 @@ components:
           $ref: '#/components/schemas/FileID'
       required:
         - fileId
+    InstanceID:
+      type: string
+      example: >-
+        12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+      title: InstanceID
+      description: >-
+        InstanceID can be "offline" on User profiles if you are not friends with
+        that user and "private" if you are friends and user is in private
+        instance.
+    UdonProductId:
+      example: prod_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+      title: UdonProductId
+      type: string
+      description: A unique ID of a Udon Product
+    World:
+      description: ''
+      title: World
+      type: object
+      properties:
+        authorId:
+          $ref: '#/components/schemas/UserID'
+        authorName:
+          minLength: 1
+          type: string
+        capacity:
+          example: 8
+          type: integer
+        recommendedCapacity:
+          example: 4
+          type: integer
+        created_at:
+          format: date-time
+          type: string
+        description:
+          minLength: 0
+          type: string
+        favorites:
+          default: 0
+          example: 12024
+          minimum: 0
+          type: integer
+        featured:
+          default: false
+          type: boolean
+        heat:
+          default: 0
+          example: 5
+          minimum: 0
+          type: integer
+        id:
+          $ref: '#/components/schemas/WorldID'
+        imageUrl:
+          minLength: 1
+          type: string
+        instances:
+          type: array
+          description: Will always be an empty list when unauthenticated.
+          items:
+            maxItems: 2
+            minItems: 2
+            type: array
+            items: {}
+        labsPublicationDate:
+          example: none
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+        namespace:
+          type: string
+        occupants:
+          default: 0
+          example: 47
+          minimum: 0
+          type: integer
+          description: Will always be `0` when unauthenticated.
+        organization:
+          default: vrchat
+          minLength: 1
+          type: string
+        popularity:
+          default: 0
+          example: 8
+          minimum: 0
+          type: integer
+        previewYoutubeId:
+          type: string
+          nullable: true
+        privateOccupants:
+          default: 0
+          example: 1
+          minimum: 0
+          type: integer
+          description: Will always be `0` when unauthenticated.
+        publicOccupants:
+          default: 0
+          example: 46
+          minimum: 0
+          type: integer
+          description: Will always be `0` when unauthenticated.
+        publicationDate:
+          example: none
+          minLength: 1
+          type: string
+        releaseStatus:
+          $ref: '#/components/schemas/ReleaseStatus'
+        tags:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        thumbnailImageUrl:
+          minLength: 1
+          type: string
+        unityPackages:
+          type: array
+          description: Empty if unauthenticated.
+          items:
+            $ref: '#/components/schemas/UnityPackage'
+        updated_at:
+          format: date-time
+          type: string
+        version:
+          default: 0
+          example: 68
+          minimum: 0
+          type: integer
+        visits:
+          default: 0
+          example: 9988675
+          minimum: 0
+          type: integer
+        udonProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/UdonProductId'
+      required:
+        - authorId
+        - authorName
+        - capacity
+        - recommendedCapacity
+        - created_at
+        - description
+        - featured
+        - heat
+        - id
+        - imageUrl
+        - labsPublicationDate
+        - name
+        - organization
+        - popularity
+        - publicationDate
+        - releaseStatus
+        - tags
+        - thumbnailImageUrl
+        - updated_at
+        - version
+        - visits
+    GroupInstance:
+      title: GroupInstance
+      type: object
+      properties:
+        instanceId:
+          type: string
+          minLength: 1
+          example: >-
+            12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+        location:
+          $ref: '#/components/schemas/InstanceID'
+        world:
+          $ref: '#/components/schemas/World'
+        memberCount:
+          type: integer
+          minimum: 0
+          example: 6
+      required:
+        - instanceId
+        - location
+        - world
+        - memberCount
     CreateGroupInviteRequest:
       title: CreateGroupInviteRequest
       type: object
@@ -6353,15 +6552,6 @@ components:
             type: string
         order:
           type: integer
-    InstanceID:
-      type: string
-      example: >-
-        12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
-      title: InstanceID
-      description: >-
-        InstanceID can be "offline" on User profiles if you are not friends with
-        that user and "private" if you are friends and user is in private
-        instance.
     InviteRequest:
       title: InviteRequest
       type: object
@@ -6550,156 +6740,6 @@ components:
         - private
         - group
       description: ''
-    UdonProductId:
-      example: prod_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-      title: UdonProductId
-      type: string
-      description: A unique ID of a Udon Product
-    World:
-      description: ''
-      title: World
-      type: object
-      properties:
-        authorId:
-          $ref: '#/components/schemas/UserID'
-        authorName:
-          minLength: 1
-          type: string
-        capacity:
-          example: 8
-          type: integer
-        recommendedCapacity:
-          example: 4
-          type: integer
-        created_at:
-          format: date-time
-          type: string
-        description:
-          minLength: 0
-          type: string
-        favorites:
-          default: 0
-          example: 12024
-          minimum: 0
-          type: integer
-        featured:
-          default: false
-          type: boolean
-        heat:
-          default: 0
-          example: 5
-          minimum: 0
-          type: integer
-        id:
-          $ref: '#/components/schemas/WorldID'
-        imageUrl:
-          minLength: 1
-          type: string
-        instances:
-          type: array
-          description: Will always be an empty list when unauthenticated.
-          items:
-            maxItems: 2
-            minItems: 2
-            type: array
-            items: {}
-        labsPublicationDate:
-          example: none
-          minLength: 1
-          type: string
-        name:
-          minLength: 1
-          type: string
-        namespace:
-          type: string
-        occupants:
-          default: 0
-          example: 47
-          minimum: 0
-          type: integer
-          description: Will always be `0` when unauthenticated.
-        organization:
-          default: vrchat
-          minLength: 1
-          type: string
-        popularity:
-          default: 0
-          example: 8
-          minimum: 0
-          type: integer
-        previewYoutubeId:
-          type: string
-          nullable: true
-        privateOccupants:
-          default: 0
-          example: 1
-          minimum: 0
-          type: integer
-          description: Will always be `0` when unauthenticated.
-        publicOccupants:
-          default: 0
-          example: 46
-          minimum: 0
-          type: integer
-          description: Will always be `0` when unauthenticated.
-        publicationDate:
-          example: none
-          minLength: 1
-          type: string
-        releaseStatus:
-          $ref: '#/components/schemas/ReleaseStatus'
-        tags:
-          description: ' '
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        thumbnailImageUrl:
-          minLength: 1
-          type: string
-        unityPackages:
-          type: array
-          description: Empty if unauthenticated.
-          items:
-            $ref: '#/components/schemas/UnityPackage'
-        updated_at:
-          format: date-time
-          type: string
-        version:
-          default: 0
-          example: 68
-          minimum: 0
-          type: integer
-        visits:
-          default: 0
-          example: 9988675
-          minimum: 0
-          type: integer
-        udonProducts:
-          type: array
-          items:
-            $ref: '#/components/schemas/UdonProductId'
-      required:
-        - authorId
-        - authorName
-        - capacity
-        - recommendedCapacity
-        - created_at
-        - description
-        - featured
-        - heat
-        - id
-        - imageUrl
-        - labsPublicationDate
-        - name
-        - organization
-        - popularity
-        - publicationDate
-        - releaseStatus
-        - tags
-        - thumbnailImageUrl
-        - updated_at
-        - version
-        - visits
     GroupAccessType:
       type: string
       title: GroupAccessType
@@ -9161,6 +9201,14 @@ components:
                 error:
                   message: You can't remove this gallery submission!
                   status_code: 403
+    GroupInstanceListResponse:
+      description: Returns a list of GroupInstance objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GroupInstance'
     GroupNotMemberError:
       description: >-
         Error response when trying to perform operations on a group you are not
