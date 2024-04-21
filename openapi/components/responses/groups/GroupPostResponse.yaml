@@ -1,0 +1,5 @@
+description: Returns a GroupPost object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/GroupPost.yaml

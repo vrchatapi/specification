@@ -1,0 +1,11 @@
+description: Response after deleting a group post.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Success.yaml
+    examples:
+      Deleted Group Post:
+        value:
+          success:
+            message: Group Post was deleted!
+            status_code: 200
