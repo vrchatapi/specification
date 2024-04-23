@@ -462,6 +462,8 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          $ref: ../responses/groups/DeleteGroupInviteBadRequestError.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       security:
