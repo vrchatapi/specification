@@ -2092,6 +2092,68 @@ paths:
           $ref: '#/components/responses/GroupNotFoundError'
       security:
         - authCookie: []
+  /groups/{groupId}/posts:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get posts from a Group
+      description: Get posts from a Group
+      operationId: getGroupPost
+      tags:
+        - groups
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+        - schema:
+            type: boolean
+          in: query
+          name: publicOnly
+          description: See public posts only.
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupPostResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - authCookie: []
+    post:
+      summary: Create a post in a Group
+      description: Create a post in a Group.
+      operationId: addGroupPost
+      tags:
+        - groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupPostRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupPostResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - authCookie: []
+  /groups/{groupId}/posts/{notificationId}:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/notificationId'
+    delete:
+      summary: Delete a Group post
+      description: Delete a Group post
+      operationId: deleteGroupPost
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteGroupPostResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/DeleteGroupPostResponse'
+      security:
+        - authCookie: []
   /groups/{groupId}/requests:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -6505,6 +6567,80 @@ components:
           default: false
           example: true
           description: Whether the user is allowed to add this permission to a role.
+    NotificationID:
+      example: not_00000000-0000-0000-0000-000000000000
+      title: NotificationID
+      type: string
+    GroupPostVisibility:
+      example: public
+      title: GroupPostVisibility
+      type: string
+      enum:
+        - group
+        - public
+    GroupPost:
+      title: GroupPost
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/NotificationID'
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        authorId:
+          $ref: '#/components/schemas/UserID'
+        editorId:
+          $ref: '#/components/schemas/UserID'
+          nullable: true
+        visibility:
+          $ref: '#/components/schemas/GroupPostVisibility'
+        roleId:
+          $ref: '#/components/schemas/GroupRoleIDList'
+        title:
+          type: string
+        text:
+          type: string
+        imageId:
+          $ref: '#/components/schemas/FileID'
+          nullable: true
+        imageUrl:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateGroupPostRequest:
+      title: CreateGroupPostRequest
+      type: object
+      properties:
+        title:
+          type: string
+          description: Post title
+          minLength: 1
+          example: Event is starting soon!
+        text:
+          type: string
+          description: Post text
+          minLength: 1
+          example: Come join us for the event!
+        imageId:
+          $ref: '#/components/schemas/FileID'
+        sendNotification:
+          type: boolean
+          description: Send notification to group members.
+          default: false
+          example: false
+        roleIds:
+          $ref: '#/components/schemas/GroupRoleIDList'
+        visibility:
+          $ref: '#/components/schemas/GroupPostVisibility'
+      required:
+        - title
+        - text
+        - sendNotification
+        - visibility
     GroupJoinRequestAction:
       example: accept
       title: GroupJoinRequestAction
@@ -9319,6 +9455,24 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/GroupPermission'
+    GroupPostResponse:
+      description: Returns a GroupPost object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupPost'
+    DeleteGroupPostResponse:
+      description: Response after deleting a group post.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Deleted Group Post:
+              value:
+                success:
+                  message: Group Post was deleted!
+                  status_code: 200
     GroupJoinRequestResponseBadRequestError:
       description: Bad request error response when responding to a group join request
       content:
@@ -10234,6 +10388,13 @@ components:
         type: string
         example: grol_00000000-0000-0000-0000-000000000000
       description: Must be a valid group role ID.
+    notificationId:
+      name: notificationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Must be a valid notification ID.
     worldId:
       name: worldId
       in: path
@@ -10248,13 +10409,6 @@ components:
       schema:
         type: string
       description: Must be a valid instance ID.
-    notificationId:
-      name: notificationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Must be a valid notification ID.
     messageType:
       name: messageType
       in: path
