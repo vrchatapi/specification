@@ -1906,6 +1906,8 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          $ref: '#/components/responses/DeleteGroupInviteBadRequestError'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
@@ -9252,6 +9254,18 @@ components:
                 error:
                   message: You can't invite that user․
                   status_code: 403
+    DeleteGroupInviteBadRequestError:
+      description: Bad request error response when deleting a group invite
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            User Not Invited:
+              value:
+                error:
+                  message: You can't uninvite a user who wasn't invited․
+                  status_code: 400
     GroupAlreadyMemberError:
       description: >-
         Error response when trying to join a group that the user is already a
