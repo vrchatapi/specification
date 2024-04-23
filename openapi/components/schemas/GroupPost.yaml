@@ -3,28 +3,21 @@ type: object
 properties:
   id:
     $ref: ./NotificationID.yaml
-    nullable: true
   groupId:
     $ref: ./GroupID.yaml
-    nullable: true
   authorId:
     $ref: ./UserID.yaml
-    nullable: true
   editorId:
     $ref: ./UserID.yaml
     nullable: true
   visibility:
     $ref: ./GroupPostVisibility.yaml
-    nullable: false
   roleId:
     $ref: ./GroupRoleIDList.yaml
-    nullable: false
   title:
     type: string
-    nullable: true
   text:
     type: string
-    nullable: true
   imageId:
     $ref: ./FileID.yaml
     nullable: true
@@ -34,8 +27,6 @@ properties:
   createdAt:
     type: string
     format: date-time
-    nullable: true
   updatedAt:
     type: string
     format: date-time
-    nullable: true
