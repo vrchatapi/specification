@@ -1,0 +1,6 @@
+example: public
+title: GroupPostVisibility
+type: string
+enum:
+  - group
+  - public

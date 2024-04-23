@@ -1,0 +1,29 @@
+title: CreateGroupPostRequest
+type: object
+properties:
+  title:
+    type: string
+    description: Post title
+    minLength: 1
+    example: "Event is starting soon!"
+  text:
+    type: string
+    description: Post text
+    minLength: 1
+    example: "Come join us for the event!"
+  imageId:
+    $ref: ../schemas/FileID.yaml
+  sendNotification:
+    type: boolean
+    description: Send notification to group members.
+    default: false
+    example: false
+  roleIds:
+    $ref: ../schemas/GroupRoleIDList.yaml
+  visibility:
+    $ref: ../schemas/GroupPostVisibility.yaml
+required:
+  - title
+  - text
+  - sendNotification
+  - visibility

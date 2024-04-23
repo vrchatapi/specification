@@ -643,6 +643,68 @@ paths:
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
         - authCookie: []
+  '/groups/{groupId}/posts':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get posts from a Group
+      description: Get posts from a Group
+      operationId: getGroupPost
+      tags:
+        - groups
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+        - schema:
+            type: boolean
+          in: query
+          name: publicOnly
+          description: See public posts only.
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupPostResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      security:
+        - authCookie: []
+    post:
+      summary: Create a post in a Group
+      description: Create a post in a Group.
+      operationId: addGroupPost
+      tags:
+        - groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateGroupPostRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupPostResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      security:
+        - authCookie: []
+  '/groups/{groupId}/posts/{notificationId}':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+      - $ref: ../parameters.yaml#/notificationId
+    delete:
+      summary: Delete a Group post
+      description: Delete a Group post
+      operationId: deleteGroupPost
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: ../responses/groups/DeleteGroupPostResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/DeleteGroupPostResponse.yaml
+      security:
+        - authCookie: []
   '/groups/{groupId}/requests':
     parameters:
       - $ref: ../parameters.yaml#/groupId

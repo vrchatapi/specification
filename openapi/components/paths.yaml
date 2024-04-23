@@ -134,6 +134,10 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}~1roles~1{groupRoleId}"
 "/groups/{groupId}/permissions":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1permissions"
+"/groups/{groupId}/posts":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1posts"
+"/groups/{groupId}/posts/{notificationId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1posts~1{notificationId}"
 "/groups/{groupId}/requests":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests"
 "/groups/{groupId}/requests/{userId}":
