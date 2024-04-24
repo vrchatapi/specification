@@ -43,3 +43,9 @@ rules:
     resolved: false
     then:
       function: undefined
+
+overrides:
+  - files:
+      - "openapi/openapi.yaml#/components/schemas/$ref"
+    rules:
+      oas3-unused-component: "off"
