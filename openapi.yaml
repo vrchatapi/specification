@@ -10,86 +10,42 @@ info:
   license:
     url: https://github.com/vrchatapi/specification/blob/master/LICENSE
     name: MIT
-  description: >-
-    ![VRChat API
-    Banner](https://vrchatapi.github.io/assets/img/api_banner_1500x400.png)
-
+  description: |-
+    ![VRChat API Banner](https://vrchatapi.github.io/assets/img/api_banner_1500x400.png)
 
     # Welcome to the VRChat API
 
+    Before we begin, we would like to state this is a **COMMUNITY DRIVEN PROJECT**.
+    This means that everything you read on here was written by the community itself and is **not** officially supported by VRChat.
+    The documentation is provided "AS IS", and any action you take towards VRChat is completely your own responsibility.
 
-    Before we begin, we would like to state this is a **COMMUNITY DRIVEN
-    PROJECT**.
-
-    This means that everything you read on here was written by the community
-    itself and is **not** officially supported by VRChat.
-
-    The documentation is provided "AS IS", and any action you take towards
-    VRChat is completely your own responsibility.
-
-
-    The documentation and additional libraries SHALL ONLY be used for
-    applications interacting with VRChat's API in accordance
-
-    with their [Terms of Service](https://hello.vrchat.com/legal) and [Community
-    Guidelines](https://hello.vrchat.com/community-guidelines), and MUST NOT be
-    used for modifying the client, "avatar ripping", or other illegal
-    activities.
-
+    The documentation and additional libraries SHALL ONLY be used for applications interacting with VRChat's API in accordance
+    with their [Terms of Service](https://hello.vrchat.com/legal) and [Community Guidelines](https://hello.vrchat.com/community-guidelines), and MUST NOT be used for modifying the client, "avatar ripping", or other illegal activities.
     Malicious usage or spamming the API may result in account termination.
-
-    Certain parts of the API are also more sensitive than others, for example
-    moderation, so please tread extra carefully and read the warnings when
-    present.
-
+    Certain parts of the API are also more sensitive than others, for example moderation, so please tread extra carefully and read the warnings when present.
 
     ![Tupper Policy on API](https://i.imgur.com/yLlW7Ok.png)
 
-
-    Finally, use of the API using applications other than the approved methods
-    (website, VRChat application, Unity SDK) is not officially supported.
-
-    VRChat provides no guarantee or support for external applications using the
-    API. Access to API endpoints may break **at any time, without notice**.
-
-    Therefore, please **do not ping** VRChat Staff in the VRChat Discord if you
-    are having API problems, as they do not provide API support.
-
-    We will make a best effort in keeping this documentation and associated
-    language libraries up to date, but things might be outdated or missing.
-
-    If you find that something is no longer valid, please contact us on Discord
-    or [create an issue](https://github.com/vrchatapi/specification/issues) and
-    tell us so we can fix it.
-
+    Finally, use of the API using applications other than the approved methods (website, VRChat application, Unity SDK) is not officially supported.
+    VRChat provides no guarantee or support for external applications using the API. Access to API endpoints may break **at any time, without notice**.
+    Therefore, please **do not ping** VRChat Staff in the VRChat Discord if you are having API problems, as they do not provide API support.
+    We will make a best effort in keeping this documentation and associated language libraries up to date, but things might be outdated or missing.
+    If you find that something is no longer valid, please contact us on Discord or [create an issue](https://github.com/vrchatapi/specification/issues) and tell us so we can fix it.
 
     # Getting Started
 
-
-    The VRChat API can be used to programmatically retrieve or update
-    information regarding your profile, friends, avatars, worlds and more.
-
-    The API consists of two parts, "Photon" which is only used in-game, and the
-    "Web API" which is used by both the game and the website.
-
+    The VRChat API can be used to programmatically retrieve or update information regarding your profile, friends, avatars, worlds and more.
+    The API consists of two parts, "Photon" which is only used in-game, and the "Web API" which is used by both the game and the website.
     This documentation focuses only on the Web API.
 
-
-    The API is designed around the REST ideology, providing semi-simple and
-    usually predictable URIs to access and modify objects.
-
-    Requests support standard HTTP methods like GET, PUT, POST, and DELETE and
-    standard status codes.
-
-    Response bodies are always UTF-8 encoded JSON objects, unless explicitly
-    documented otherwise.
-
+    The API is designed around the REST ideology, providing semi-simple and usually predictable URIs to access and modify objects.
+    Requests support standard HTTP methods like GET, PUT, POST, and DELETE and standard status codes.
+    Response bodies are always UTF-8 encoded JSON objects, unless explicitly documented otherwise.
 
     <div class="callout callout-error">
       <strong>🛑 Warning! Do not touch Photon!</strong><br>
       Photon is only used by the in-game client and should <b>not</b> be touched. Doing so may result in permanent account termination.
     </div>
-
 
     <div class="callout callout-info">
       <strong>ℹ️ API Key and Authentication</strong><br>
@@ -97,97 +53,109 @@ info:
       Read <a href="#tag--authentication">Authentication</a> for how to log in.
     </div>
 
-
     # Using the API
 
+    For simply exploring what the API can do it is strongly recommended to download [Insomnia](https://insomnia.rest/download), a free and open-source
+    API client that's great for sending requests to the API in an orderly fashion.
+    Insomnia allows you to send data in the format that's required for VRChat's API.
+    It is also possible to try out the API in your browser, by first logging in at [vrchat.com/home](https://vrchat.com/home/) and then going to
+    [vrchat.com/api/1/auth/user](https://vrchat.com/api/1/auth/user), but the information will be much harder to work with.
 
-    For simply exploring what the API can do it is strongly recommended to
-    download [Insomnia](https://insomnia.rest/download), a free and open-source
-
-    API client that's great for sending requests to the API in an orderly
-    fashion.
-
-    Insomnia allows you to send data in the format that's required for VRChat's
-    API.
-
-    It is also possible to try out the API in your browser, by first logging in
-    at [vrchat.com/home](https://vrchat.com/home/) and then going to
-
-    [vrchat.com/api/1/auth/user](https://vrchat.com/api/1/auth/user), but the
-    information will be much harder to work with.
-
-
-    For more permanent operation such as software development it is instead
-    recommended to use one of the existing language SDKs.
-
-    This community project maintains API libraries in several languages, which
-    allows you to interact with the API with simple function calls
-
-    rather than having to implement the HTTP protocol yourself. Most of these
-    libraries are automatically generated from the API specification,
-
-    sometimes with additional helpful wrapper code to make usage easier. This
-    allows them to be almost automatically updated and expanded upon
-
-    as soon as a new feature is introduced in the specification itself. The
-    libraries can be found on [GitHub](https://github.com/vrchatapi) or
-    following:
-
+    For more permanent operation such as software development it is instead recommended to use one of the existing language SDKs.
+    This community project maintains API libraries in several languages, which allows you to interact with the API with simple function calls
+    rather than having to implement the HTTP protocol yourself. Most of these libraries are automatically generated from the API specification,
+    sometimes with additional helpful wrapper code to make usage easier. This allows them to be almost automatically updated and expanded upon
+    as soon as a new feature is introduced in the specification itself. The libraries can be found on [GitHub](https://github.com/vrchatapi) or following:
 
     * [NodeJS (JavaScript)](https://www.npmjs.com/package/vrchat)
-
     * [Dart](https://pub.dev/packages/vrchat_dart)
-
     * [Rust](https://crates.io/crates/vrchatapi)
-
     * [C#](https://github.com/vrchatapi/vrchatapi-csharp)
-
     * [Python](https://github.com/vrchatapi/vrchatapi-python)
-
 
     # Pagination
 
-
-    Most endpoints enforce pagination, meaning they will only return 10 entries
-    by default, and never more than 100.<br>
-
-    Using both the limit and offset parameters allows you to easily paginate
-    through a large number of objects.
-
+    Most endpoints enforce pagination, meaning they will only return 10 entries by default, and never more than 100.<br>
+    Using both the limit and offset parameters allows you to easily paginate through a large number of objects.
 
     | Query Parameter | Type | Description |
-
     | ----------|--|------- |
+    | `n` | integer  | The number of objects to return. This value often defaults to 10. Highest limit is always 100.|
+    | `offset` | integer  | A zero-based offset from the default object sorting.|
 
-    | `n` | integer  | The number of objects to return. This value often
-    defaults to 10. Highest limit is always 100.|
-
-    | `offset` | integer  | A zero-based offset from the default object
-    sorting.|
-
-
-    If a request returns fewer objects than the `limit` parameter, there are no
-    more items available to return.
-
+    If a request returns fewer objects than the `limit` parameter, there are no more items available to return.
 
     # Contribution
 
-
-    Do you want to get involved in the documentation effort? Do you want to help
-    improve one of the language API libraries?
-
-    This project is an [OPEN Open Source Project](https://openopensource.org)!
-    This means that individuals making significant and valuable contributions
-    are given
-
-    commit-access to the project. It also means we are very open and welcoming
-    of new people making contributions, unlike some more guarded open-source
-    projects.
-
+    Do you want to get involved in the documentation effort? Do you want to help improve one of the language API libraries?
+    This project is an [OPEN Open Source Project](https://openopensource.org)! This means that individuals making significant and valuable contributions are given
+    commit-access to the project. It also means we are very open and welcoming of new people making contributions, unlike some more guarded open-source projects.
 
     [![Discord](https://img.shields.io/static/v1?label=vrchatapi&message=discord&color=blueviolet&style=for-the-badge)](https://discord.gg/qjZE9C9fkB)
 servers:
   - url: https://api.vrchat.cloud/api/1
+tags:
+  - name: authentication
+    description: Authentication Docs Here
+  - name: avatars
+    description: Avatars Docs Here
+  - name: economy
+    description: Economy Docs Here
+  - name: favorites
+    description: Favorites Docs Here
+  - name: files
+    description: Files Docs Here
+  - name: friends
+    description: Friends Docs Here
+  - name: groups
+    description: Group Docs Here
+  - name: invite
+    description: Invite Docs Here
+  - name: instances
+    description: Instances Docs Here
+  - name: notifications
+    description: Notifiations Docs
+  - name: permissions
+    description: Permissions are a way to individually grant specific access to a user, often through a license such as VRC+ subscription.
+  - name: playermoderation
+    description: |-
+      There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players.
+      PlayerModerations are user-generated actions towards others, such as muting them, blocking, or toggling interaction.
+
+      Your global permission settings are stored locally on your computer.
+      Only player-specific moderations (when you target a player, and allow them specifically to interact with you) are stored in the API.
+
+      ## Implementation details
+
+      There are three different user-targetted permission options:
+
+      - Mode 1: interactOn/unmute/unblock
+      - Mode 2: interactOff/mute/block
+      - *Default setting*
+
+      **Example:**
+
+      Force On (`interactOn`) and Force Off (`interactOff`) always or never allow that person to interact with you.
+      These are stored as PlayerModerations. When you select a player and select "Force On", it creates a playerModeration of type `interactOn`.
+
+      **Important order:**
+
+      1. When switching between one mode from the other, e.g. "Force On" and "Force Off", **the previous playerModeration MUST first be deleted before creating the second.**
+         The game sends these in sequence, first delete the old, then create the new. Attempting to create both `interactOn` and `interactOff` is UNDOCUMENTED behavior.
+      2. "Use Current Setting" **does not have it's own enum**. The game removes any previous playerModeration of same type.
+         No playerModeration of either type means fallback to the global setting.
+
+      ## Deprecation notice
+
+      As of October 2022, `showAvatar` and `hideAvatar` has been moved to local storage.
+      Sending these types to the API will result in a 200 OK response, but the API will **not** store them.
+      More information is avaiable on VRChat's official [documentation on Local Storage](https://docs.vrchat.com/docs/local-vrchat-storage).
+  - name: system
+    description: System Docs Here
+  - name: users
+    description: Users Docs Here
+  - name: worlds
+    description: Worlds Docs Here
 paths:
   /auth/exists:
     get:
@@ -196,9 +164,7 @@ paths:
         - authentication
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/auth/exists?email={string}" 
+          source: 'curl -X GET "https://api.vrchat.cloud/api/1/auth/exists?email={string}" '
       responses:
         '200':
           $ref: '#/components/responses/UserExistsResponse'
@@ -210,19 +176,10 @@ paths:
         - $ref: '#/components/parameters/displayName'
         - $ref: '#/components/parameters/userIdQuery'
         - $ref: '#/components/parameters/excludeUserId'
-      description: >-
-        Checks if a user by a given `username`, `displayName` or `email` exist.
-        This is used during registration to check if a username has already been
-        taken, during change of displayName to check if a displayName is
-        available, and during change of email to check if the email is already
-        used. In the later two cases the `excludeUserId` is used to exclude
-        oneself, otherwise the result would always be true.
+      description: |-
+        Checks if a user by a given `username`, `displayName` or `email` exist. This is used during registration to check if a username has already been taken, during change of displayName to check if a displayName is available, and during change of email to check if the email is already used. In the later two cases the `excludeUserId` is used to exclude oneself, otherwise the result would always be true.
 
-
-        It is **REQUIRED** to include **AT LEAST** `username`, `displayName`
-        **or** `email` query parameter. Although they can be combined - in
-        addition with `excludeUserId` (generally to exclude yourself) - to
-        further fine-tune the search.
+        It is **REQUIRED** to include **AT LEAST** `username`, `displayName` **or** `email` query parameter. Although they can be combined - in addition with `excludeUserId` (generally to exclude yourself) - to further fine-tune the search.
   /auth/user:
     get:
       summary: Login and/or Get Current User Info
@@ -239,27 +196,16 @@ paths:
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getCurrentUser
-      description: >-
+      description: |-
         This endpoint does the following two operations:
           1) Checks if you are already logged in by looking for a valid `auth` cookie. If you are have a valid auth cookie then no additional auth-related actions are taken. If you are **not** logged in then it will log you in with the `Authorization` header and set the `auth` cookie. The `auth` cookie will only be sent once.
           2) If logged in, this function will also return the CurrentUser object containing detailed information about the currently logged in user.
 
-        The auth string after `Authorization: Basic {string}` is a
-        base64-encoded string of the username and password, both individually
-        url-encoded, and then joined with a colon.
+        The auth string after `Authorization: Basic {string}` is a base64-encoded string of the username and password, both individually url-encoded, and then joined with a colon.
           
         > base64(urlencode(username):urlencode(password))
 
-
-        **WARNING: Session Limit:** Each authentication with login credentials
-        counts as a separate session, out of which you have a limited amount.
-        Make sure to save and reuse the `auth` cookie if you are often
-        restarting the program. The provided API libraries automatically save
-        cookies during runtime, but does not persist during restart. While it
-        can be fine to use username/password during development, expect in
-        production to very fast run into the rate-limit and be temporarily
-        blocked from making new sessions until older ones expire. The exact
-        number of simultaneous sessions is unknown/undisclosed.
+        **WARNING: Session Limit:** Each authentication with login credentials counts as a separate session, out of which you have a limited amount. Make sure to save and reuse the `auth` cookie if you are often restarting the program. The provided API libraries automatically save cookies during runtime, but does not persist during restart. While it can be fine to use username/password during development, expect in production to very fast run into the rate-limit and be temporarily blocked from making new sessions until older ones expire. The exact number of simultaneous sessions is unknown/undisclosed.
       parameters: []
       security:
         - authHeader: []
@@ -272,9 +218,8 @@ paths:
       operationId: verify2FA
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X POST
-            "https://api.vrchat.cloud/api/1/auth/twofactorauth/totp/verify" \
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/totp/verify" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"code": "string"}'
@@ -290,9 +235,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TwoFactorAuthCode'
             examples: {}
-      description: >-
-        Finishes the login sequence with a normal 2FA-generated code for
-        accounts with 2FA-protection enabled.
+      description: Finishes the login sequence with a normal 2FA-generated code for accounts with 2FA-protection enabled.
       tags:
         - authentication
       security:
@@ -304,9 +247,8 @@ paths:
       operationId: verifyRecoveryCode
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X POST
-            "https://api.vrchat.cloud/api/1/auth/twofactorauth/otp/verify" \
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/otp/verify" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"code": "string"}'
@@ -322,9 +264,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TwoFactorAuthCode'
             examples: {}
-      description: >-
-        Finishes the login sequence with an OTP (One Time Password) recovery
-        code for accounts with 2FA-protection enabled.
+      description: Finishes the login sequence with an OTP (One Time Password) recovery code for accounts with 2FA-protection enabled.
       tags:
         - authentication
       security:
@@ -335,10 +275,8 @@ paths:
       operationId: verify2FAEmailCode
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X POST
-            "https://api.vrchat.cloud/api/1/auth/twofactorauth/emailotp/verify"
-            \
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/emailotp/verify" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"code": "string"}'
@@ -417,19 +355,12 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       tags:
         - authentication
-      description: >-
-        Deletes the account with given ID. Normal users only have permission to
-        delete their own account. Account deletion is 14 days from this request,
-        and will be cancelled if you do an authenticated request with the
-        account afterwards.
+      description: |-
+        Deletes the account with given ID. Normal users only have permission to delete their own account. Account deletion is 14 days from this request, and will be cancelled if you do an authenticated request with the account afterwards.
 
+        **VRC+ NOTE:** Despite the 14-days cooldown, any VRC+ subscription will be cancelled **immediately**.
 
-        **VRC+ NOTE:** Despite the 14-days cooldown, any VRC+ subscription will
-        be cancelled **immediately**.
-
-
-        **METHOD NOTE:** Despite this being a Delete action, the method type
-        required is PUT.
+        **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
       security:
         - authCookie: []
   /users/{userId}/avatar:
@@ -447,14 +378,10 @@ paths:
       operationId: getOwnAvatar
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/avatar"
-            -b "auth={authCookie}"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/avatar" -b "auth={authCookie}"
       security:
         - authCookie: []
-      description: >-
-        Get the current avatar for the user. This will return an error for any
-        other user than the one logged in.
+      description: Get the current avatar for the user. This will return an error for any other user than the one logged in.
     parameters:
       - $ref: '#/components/parameters/userId'
   /avatars:
@@ -496,10 +423,7 @@ paths:
         - $ref: '#/components/parameters/maxUnityVersion'
         - $ref: '#/components/parameters/minUnityVersion'
         - $ref: '#/components/parameters/platform'
-      description: >-
-        Search and list avatars by query filters. You can only search your own
-        or featured avatars. It is not possible as a normal user to search other
-        peoples avatars.
+      description: Search and list avatars by query filters. You can only search your own or featured avatars. It is not possible as a normal user to search other peoples avatars.
     post:
       summary: Create Avatar
       operationId: createAvatar
@@ -524,10 +448,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAvatarRequest'
-      description: >-
-        Create an avatar. It's possible to optionally specify a ID if you want a
-        custom one. Attempting to create an Avatar with an already claimed ID
-        will result in a DB error.
+      description: Create an avatar. It's possible to optionally specify a ID if you want a custom one. Attempting to create an Avatar with an already claimed ID will result in a DB error.
   /avatars/{avatarId}:
     parameters:
       - $ref: '#/components/parameters/avatarId'
@@ -597,10 +518,7 @@ paths:
           $ref: '#/components/responses/AvatarNotFoundError'
       tags:
         - avatars
-      description: >-
-        Delete an avatar. Notice an avatar is never fully "deleted", only its
-        ReleaseStatus is set to "hidden" and the linked Files are deleted. The
-        AvatarID is permanently reserved.
+      description: Delete an avatar. Notice an avatar is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The AvatarID is permanently reserved.
   /avatars/{avatarId}/select:
     parameters:
       - $ref: '#/components/parameters/avatarId'
@@ -610,9 +528,8 @@ paths:
         - avatars
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/avatars/{avatarId}/select" \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/select" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -634,9 +551,7 @@ paths:
         - avatars
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback"
+          source: curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback"
       responses:
         '200':
           $ref: '#/components/responses/CurrentUserResponse'
@@ -657,9 +572,8 @@ paths:
         - avatars
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/avatars/favorites?featured=true" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/avatars/favorites?featured=true" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -715,10 +629,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/Steam/transactions/{transactionId}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/Steam/transactions/{transactionId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -727,10 +639,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       tags:
         - economy
-      description: >-
-        Get a single Steam transactions by ID. This returns the exact same
-        information as `getSteamTransactions`, so no point in using this
-        endpoint.
+      description: Get a single Steam transactions by ID. This returns the exact same information as `getSteamTransactions`, so no point in using this endpoint.
       deprecated: true
   /Admin/transactions/{transactionId}:
     parameters:
@@ -743,9 +652,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/subscription"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/subscription" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -773,9 +681,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       tags:
         - economy
-      description: >-
-        List all existing Subscriptions. For example, "vrchatplus-monthly" and
-        "vrchatplus-yearly".
+      description: List all existing Subscriptions. For example, "vrchatplus-monthly" and "vrchatplus-yearly".
   /licenseGroups/{licenseGroupId}:
     parameters:
       - $ref: '#/components/parameters/licenseGroupId'
@@ -786,9 +692,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/licenseGroups/{licenseGroupId}" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/licenseGroups/{licenseGroupId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -805,10 +710,8 @@ paths:
         - favorites
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/favorites?type={string}&tag={string}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/favorites?type={string}&tag={string}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -847,17 +750,12 @@ paths:
           $ref: '#/components/responses/FavoriteAddAlreadyFavoritedError'
         '403':
           $ref: '#/components/responses/FavoriteAddNotFriendsError'
-      description: >-
+      description: |-
         Add a new favorite.
 
+        Friend groups are named `group_0` through `group_3`. Avatar and World groups are named `avatars1` to `avatars4` and `worlds1` to `worlds4`.
 
-        Friend groups are named `group_0` through `group_3`. Avatar and World
-        groups are named `avatars1` to `avatars4` and `worlds1` to `worlds4`.
-
-
-        You cannot add people whom you are not friends with to your friends
-        list. Destroying a friendship removes the person as favorite on both
-        sides.
+        You cannot add people whom you are not friends with to your friends list. Destroying a friendship removes the person as favorite on both sides.
       requestBody:
         content:
           application/json:
@@ -888,9 +786,8 @@ paths:
         - favorites
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET "https://api.vrchat.cloud/api/1/favorites/{favoriteId}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -911,9 +808,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X DELETE
-            "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -932,9 +828,8 @@ paths:
         - favorites
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/favorite/groups?ownerId={userId}" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/favorite/groups?ownerId={userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -952,9 +847,7 @@ paths:
           in: query
           name: ownerId
           description: The owner of whoms favorite groups to return. Must be a UserID.
-      description: >-
-        Return a list of favorite groups owned by a user. Returns the same
-        information as `getFavoriteGroups`.
+      description: Return a list of favorite groups owned by a user. Returns the same information as `getFavoriteGroups`.
   /favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}:
     parameters:
       - $ref: '#/components/parameters/favoriteGroupType'
@@ -966,10 +859,8 @@ paths:
         - favorites
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -985,10 +876,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT -H "Content-Type: application/json"
-            "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}"
-            \
+          source: |-
+            curl -X PUT -H "Content-Type: application/json" "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
                  -b "auth={authCookie}" \
                  --data '{"displayName": "string", "visibility": "private", "tags": ["string"]}'
       responses:
@@ -1009,10 +898,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X DELETE
-            "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}"
-            \
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1096,10 +983,7 @@ paths:
           $ref: '#/components/responses/FileNotFoundError'
       security:
         - authCookie: []
-      description: >-
-        Shows general information about the "File" object. Each File can have
-        several "Version"'s, and each Version can have multiple real files or
-        "Data" blobs.
+      description: Shows general information about the "File" object. Each File can have several "Version"'s, and each Version can have multiple real files or "Data" blobs.
     delete:
       summary: Delete File
       operationId: deleteFile
@@ -1133,10 +1017,7 @@ paths:
           $ref: '#/components/responses/FileResponse'
       security:
         - authCookie: []
-      description: >-
-        Creates a new FileVersion. Once a Version has been created, proceed to
-        the `/file/{fileId}/{versionId}/file/start` endpoint to start a file
-        upload.
+      description: Creates a new FileVersion. Once a Version has been created, proceed to the `/file/{fileId}/{versionId}/file/start` endpoint to start a file upload.
       tags:
         - files
       requestBody:
@@ -1154,9 +1035,8 @@ paths:
         - files
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
               -b "auth={authCookie}"
       responses:
         '200':
@@ -1164,26 +1044,19 @@ paths:
       operationId: downloadFileVersion
       security:
         - authCookie: []
-      description: >-
+      description: |-
         Downloads the file with the provided version number.
 
+        **Version Note:** Version 0 is always when the file was created. The real data is usually always located in version 1 and up.
 
-        **Version Note:** Version 0 is always when the file was created. The
-        real data is usually always located in version 1 and up.
-
-
-        **Extension Note:** Files are not guaranteed to have a file extensions.
-        UnityPackage files tends to have it, images through this endpoint do
-        not. You are responsible for appending file extension from the
-        `extension` field when neccesary.
+        **Extension Note:** Files are not guaranteed to have a file extensions. UnityPackage files tends to have it, images through this endpoint do not. You are responsible for appending file extension from the `extension` field when neccesary.
     delete:
       summary: Delete File Version
       operationId: deleteFileVersion
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X DELETE
-            "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
               -b "auth={authCookie}"
       responses:
         '200':
@@ -1194,9 +1067,7 @@ paths:
           $ref: '#/components/responses/FileVersionDeleteMiddleError'
       security:
         - authCookie: []
-      description: >-
-        Delete a specific version of a file. You can only delete the latest
-        version.
+      description: Delete a specific version of a file. You can only delete the latest version.
       tags:
         - files
   /file/{fileId}/{versionId}/{fileType}/finish:
@@ -1210,10 +1081,8 @@ paths:
         - files
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/finish"
-            \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/finish" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"etags": ["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"], "nextPartNumber": "0", "maxParts": "0"}'
@@ -1234,19 +1103,14 @@ paths:
                     - yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
                   nextPartNumber: '0'
                   maxParts: '0'
-        description: >-
+        description: |-
           Please see documentation on ETag's:
-
           [https://teppen.io/2018/06/23/aws_s3_etags/](https://teppen.io/2018/06/23/aws_s3_etags/)
-
 
           ETag's should NOT be present when uploading a `signature`.
       security:
         - authCookie: []
-      description: >-
-        Finish an upload of a FileData. This will mark it as "complete". After
-        uploading the `file` for Avatars and Worlds you then have to upload a
-        `signature` file.
+      description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
   /file/{fileId}/{versionId}/{fileType}/start:
     parameters:
       - $ref: '#/components/parameters/fileId'
@@ -1258,10 +1122,8 @@ paths:
         - files
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/start"
-            \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/start" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1277,22 +1139,14 @@ paths:
           in: query
           name: partNumber
           required: false
-          description: >-
-            The part number to start uploading. If not provided, the first part
-            will be started.
+          description: The part number to start uploading. If not provided, the first part will be started.
           deprecated: true
       security:
         - authCookie: []
-      description: >-
-        Starts an upload of a specific FilePart. This endpoint will return an
-        AWS URL which you can PUT data to. You need to call this and receive a
-        new AWS API URL for each `partNumber`. Please see AWS's REST
-        documentation on "PUT Object to S3" on how to upload. Once all parts has
-        been uploaded, proceed to `/finish` endpoint.
+      description: |-
+        Starts an upload of a specific FilePart. This endpoint will return an AWS URL which you can PUT data to. You need to call this and receive a new AWS API URL for each `partNumber`. Please see AWS's REST documentation on "PUT Object to S3" on how to upload. Once all parts has been uploaded, proceed to `/finish` endpoint.
 
-
-        **Note:** `nextPartNumber` seems like it is always ignored. Despite it
-        returning 0, first partNumber is always 1.
+        **Note:** `nextPartNumber` seems like it is always ignored. Despite it returning 0, first partNumber is always 1.
   /file/{fileId}/{versionId}/{fileType}/status:
     parameters:
       - $ref: '#/components/parameters/fileId'
@@ -1304,10 +1158,8 @@ paths:
         - files
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/status"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/status" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1315,10 +1167,7 @@ paths:
       operationId: getFileDataUploadStatus
       security:
         - authCookie: []
-      description: >-
-        Retrieves the upload status for file upload. Can currently only be
-        accessed when `status` is `waiting`. Trying to access it on a file
-        version already uploaded currently times out.
+      description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
   /auth/user/friends:
     get:
       summary: List Friends
@@ -1326,9 +1175,8 @@ paths:
         - friends
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/auth/user/friends?offline=true" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/friends?offline=true" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1356,9 +1204,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X POST
-            "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1374,16 +1221,13 @@ paths:
       tags:
         - friends
       operationId: deleteFriendRequest
-      description: >-
-        Deletes an outgoing pending friend request to another user. To delete an
-        incoming friend request, use the `deleteNotification` endpoint instead.
+      description: Deletes an outgoing pending friend request to another user. To delete an incoming friend request, use the `deleteNotification` endpoint instead.
       security:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X DELETE
-            "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1401,9 +1245,8 @@ paths:
         - friends
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/user/{userId}/friendStatus" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/user/{userId}/friendStatus" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1413,12 +1256,7 @@ paths:
       operationId: getFriendStatus
       security:
         - authCookie: []
-      description: >-
-        Retrieve if the user is currently a friend with a given user, if they
-        have an outgoing friend request, and if they have an incoming friend
-        request. The proper way to receive and accept friend request is by
-        checking if the user has an incoming `Notification` of type
-        `friendRequest`, and then accepting that notification.
+      description: Retrieve if the user is currently a friend with a given user, if they have an outgoing friend request, and if they have an incoming friend request. The proper way to receive and accept friend request is by checking if the user has an incoming `Notification` of type `friendRequest`, and then accepting that notification.
   /auth/user/friends/{userId}:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -1427,9 +1265,8 @@ paths:
       operationId: unfriend
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X DELETE
-            "https://api.vrchat.cloud/api/1/auth/user/friends/{userId}" \
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/auth/user/friends/{userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1466,9 +1303,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
     post:
       summary: Create Group
-      description: >-
-        Creates a Group and returns a Group object. **Requires VRC+
-        Subscription.**
+      description: Creates a Group and returns a Group object. **Requires VRC+ Subscription.**
       operationId: createGroup
       tags:
         - groups
@@ -1550,13 +1385,10 @@ paths:
       - $ref: '#/components/parameters/groupId'
     get:
       summary: Get Group Announcement
-      description: >-
+      description: |-
         Returns the announcement for a Group.
-
         If no announcement has been made, then it returns **empty object**. 
-
-        If an announcement exists, then it will always return all fields except
-        `imageId` and `imageUrl` which may be null.
+        If an announcement exists, then it will always return all fields except `imageId` and `imageUrl` which may be null.
       operationId: getGroupAnnouncements
       tags:
         - groups
@@ -1733,9 +1565,7 @@ paths:
           required: false
           schema:
             type: boolean
-          description: >-
-            If specified, only returns images that have been approved or not
-            approved.
+          description: If specified, only returns images that have been approved or not approved.
       responses:
         '200':
           $ref: '#/components/responses/GroupGalleryImageListResponse'
@@ -1955,12 +1785,9 @@ paths:
       - $ref: '#/components/parameters/groupId'
     get:
       summary: List Group Members
-      description: >-
-        Returns a List of all **other** Group Members. This endpoint will never
-        return the user calling the endpoint.
-
-        Information about the user calling the endpoint must be found in the
-        `myMember` field of the Group object.
+      description: |-
+        Returns a List of all **other** Group Members. This endpoint will never return the user calling the endpoint.
+        Information about the user calling the endpoint must be found in the `myMember` field of the Group object.
       operationId: getGroupMembers
       tags:
         - groups
@@ -2020,9 +1847,7 @@ paths:
         - authCookie: []
     delete:
       summary: Kick Group Member
-      description: >-
-        Kicks a Group Member from the Group. The current user must have the
-        "Remove Group Members" permission.
+      description: Kicks a Group Member from the Group. The current user must have the "Remove Group Members" permission.
       operationId: kickGroupMember
       tags:
         - groups
@@ -2317,9 +2142,7 @@ paths:
       operationId: inviteUser
       security:
         - authCookie: []
-      description: >-
-        Sends an invite to a user. Returns the Notification of type `invite`
-        that was sent.
+      description: Sends an invite to a user. Returns the Notification of type `invite` that was sent.
       requestBody:
         required: true
         content:
@@ -2341,10 +2164,8 @@ paths:
       description: Sends self an invite to an instance
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X POST
-            "https://api.vrchat.cloud/api/1/invite/myself/to/{worldid}:{instanceid}"
-            \
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/invite/myself/to/{worldid}:{instanceid}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}"'
       responses:
@@ -2362,9 +2183,7 @@ paths:
       operationId: requestInvite
       security:
         - authCookie: []
-      description: >-
-        Requests an invite from a user. Returns the Notification of type
-        `requestInvite` that was sent.
+      description: Requests an invite from a user. Returns the Notification of type `requestInvite` that was sent.
       requestBody:
         content:
           application/json:
@@ -2375,9 +2194,8 @@ paths:
         - invite
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X POST "https://api.vrchat.cloud/api/1/requestInvite/{userId}"
-            \
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/requestInvite/{userId}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"messageSlot": 11}'
@@ -2395,9 +2213,8 @@ paths:
         - invite
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X POST
-            "https://api.vrchat.cloud/api/1/invite/{notificationId}/response" \
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/invite/{notificationId}/response" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"responseSlot": 11}'
@@ -2409,9 +2226,7 @@ paths:
       operationId: respondInvite
       security:
         - authCookie: []
-      description: >-
-        Respond to an invite request by sending a world invite to the requesting
-        user. `:notificationId` is the ID of the requesting notification.
+      description: Respond to an invite request by sending a world invite to the requesting user. `:notificationId` is the ID of the requesting notification.
       requestBody:
         required: true
         content:
@@ -2429,9 +2244,8 @@ paths:
         - invite
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2443,21 +2257,14 @@ paths:
       operationId: getInviteMessages
       security:
         - authCookie: []
-      description: >-
-        Returns a list of all the users Invite Messages. Admin Credentials are
-        required to view messages of other users!
+      description: |-
+        Returns a list of all the users Invite Messages. Admin Credentials are required to view messages of other users!
 
-
-        Message type refers to a different collection of messages, used during
-        different types of responses.
-
+        Message type refers to a different collection of messages, used during different types of responses.
 
         * `message` = Message during a normal invite
-
         * `response` = Message when replying to a message
-
         * `request` = Message when requesting an invite
-
         * `requestResponse` = Message when replying to a request for invite
   /message/{userId}/{messageType}/{slot}:
     parameters:
@@ -2470,10 +2277,8 @@ paths:
         - invite
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2487,56 +2292,36 @@ paths:
       operationId: getInviteMessage
       security:
         - authCookie: []
-      description: >-
-        Returns a single Invite Message. This returns the exact same information
-        but less than `getInviteMessages`. Admin Credentials are required to
-        view messages of other users!
+      description: |-
+        Returns a single Invite Message. This returns the exact same information but less than `getInviteMessages`. Admin Credentials are required to view messages of other users!
 
-
-        Message type refers to a different collection of messages, used during
-        different types of responses.
-
+        Message type refers to a different collection of messages, used during different types of responses.
 
         * `message` = Message during a normal invite
-
         * `response` = Message when replying to a message
-
         * `request` = Message when requesting an invite
-
         * `requestResponse` = Message when replying to a request for invite
     put:
       summary: Update Invite Message
       operationId: updateInviteMessage
       security:
         - authCookie: []
-      description: >-
-        Updates a single Invite Message and then returns a list of all of them.
-        Admin Credentials are required to update messages of other users!
-
+      description: |-
+        Updates a single Invite Message and then returns a list of all of them. Admin Credentials are required to update messages of other users!
 
         Updating a message automatically sets the cooldown timer to 60 minutes.
+        Trying to edit a message before the cooldown timer expires results in a 429 "Too Fast Error".
 
-        Trying to edit a message before the cooldown timer expires results in a
-        429 "Too Fast Error".
-
-
-        Message type refers to a different collection of messages, used during
-        different types of responses.
-
+        Message type refers to a different collection of messages, used during different types of responses.
 
         * `message` = Message during a normal invite
-
         * `response` = Message when replying to a message
-
         * `request` = Message when requesting an invite
-
         * `requestResponse` = Message when replying to a request for invite
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}"
-            \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"message": "string"}'
@@ -2564,10 +2349,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X DELETE
-            "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}"
-            \
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2582,36 +2365,20 @@ paths:
           $ref: '#/components/responses/InviteMessageUpdateRateLimitError'
       tags:
         - invite
-      description: >-
-        Resets a single Invite Message back to its original message, and then
-        returns a list of all of them. Admin Credentials are required to update
-        messages of other users!
+      description: |-
+        Resets a single Invite Message back to its original message, and then returns a list of all of them. Admin Credentials are required to update messages of other users!
 
-
-        Resetting a message respects the rate-limit, so it is not possible to
-        reset within the 60 minutes countdown.
-
-        Resetting it does however not set the rate-limit to 60 like when editing
-        it.
-
+        Resetting a message respects the rate-limit, so it is not possible to reset within the 60 minutes countdown.
+        Resetting it does however not set the rate-limit to 60 like when editing it.
         It is possible to edit it right after resetting it.
+        Trying to edit a message before the cooldown timer expires results in a 429 "Too Fast Error".
 
-        Trying to edit a message before the cooldown timer expires results in a
-        429 "Too Fast Error".
-
-
-        Message type refers to a different collection of messages, used during
-        different types of responses.
-
+        Message type refers to a different collection of messages, used during different types of responses.
 
         * `message` = Message during a normal invite
-
         * `response` = Message when replying to a message
-
         * `request` = Message when requesting an invite
-
         * `requestResponse` = Message when replying to a request for invite
-
 
         The DELETE endpoint does not have/require any request body.
   /instances/{worldId}:{instanceId}:
@@ -2625,19 +2392,14 @@ paths:
       operationId: getInstance
       security:
         - authCookie: []
-      description: >-
-        Returns an instance. Please read [Instances
-        Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more
-        information on Instances.
+      description: |-
+        Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances.
 
-
-        If an invalid instanceId is provided, this endpoint will simply return
-        "null"!
+        If an invalid instanceId is provided, this endpoint will simply return "null"!
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2658,13 +2420,10 @@ paths:
             type: boolean
           required: false
           description: Whether to hard close the instance. Defaults to false.
-      description: >-
+      description: |-
         Close an instance.
 
-
-        You can only close an instance if the ownerId is yourself or if the
-        instance owner is a group and you have the `group-instance-moderate`
-        permission.
+        You can only close an instance if the ownerId is yourself or if the instance owner is a group and you have the `group-instance-moderate` permission.
       responses:
         '200':
           $ref: '#/components/responses/InstanceResponse'
@@ -2688,10 +2447,8 @@ paths:
       description: Returns an instance short name.
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/shortName"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/shortName" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2712,10 +2469,8 @@ paths:
       description: Sends an invite to the instance to yourself.
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X POST
-            "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/invite"
-            \
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/invite" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2737,15 +2492,11 @@ paths:
       operationId: getInstanceByShortName
       security:
         - authCookie: []
-      description: >-
-        Returns an instance. Please read [Instances
-        Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more
-        information on Instances.
+      description: Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances.
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET "https://api.vrchat.cloud/api/1/instances/s/{shortname}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/instances/s/{shortname}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2761,9 +2512,8 @@ paths:
         - notifications
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/auth/user/notifications?type=all" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/notifications?type=all" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2780,9 +2530,7 @@ paths:
             example: all
           in: query
           name: type
-          description: >-
-            Only send notifications of this type (can use `all` for all). This
-            parameter no longer does anything, and is deprecated.
+          description: Only send notifications of this type (can use `all` for all). This parameter no longer does anything, and is deprecated.
           deprecated: true
         - schema:
             type: boolean
@@ -2794,17 +2542,13 @@ paths:
             type: boolean
           in: query
           name: hidden
-          description: >-
-            Whether to return hidden or non-hidden notifications. True only
-            allowed on type `friendRequest`.
+          description: Whether to return hidden or non-hidden notifications. True only allowed on type `friendRequest`.
         - schema:
             type: string
             example: five_minutes_ago
           in: query
           name: after
-          description: >-
-            Only return notifications sent after this Date. Ignored if type is
-            `friendRequest`.
+          description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
   /auth/user/notifications/{notificationId}/accept:
@@ -2815,10 +2559,8 @@ paths:
       operationId: acceptFriendRequest
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/accept"
-            \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/accept" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2829,10 +2571,7 @@ paths:
           $ref: '#/components/responses/AcceptFriendRequestError'
       security:
         - authCookie: []
-      description: >-
-        Accept a friend request by notification `frq_` ID. Friend requests can
-        be found using the NotificationsAPI `getNotifications` by filtering of
-        type `friendRequest`.
+      description: Accept a friend request by notification `frq_` ID. Friend requests can be found using the NotificationsAPI `getNotifications` by filtering of type `friendRequest`.
       tags:
         - notifications
   /auth/user/notifications/{notificationId}/see:
@@ -2843,10 +2582,8 @@ paths:
       operationId: markNotificationAsRead
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/see"
-            \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/see" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2866,10 +2603,8 @@ paths:
       operationId: deleteNotification
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/hide"
-            \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/hide" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2887,10 +2622,8 @@ paths:
       operationId: clearNotifications
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/auth/user/notifications/notifications/clear"
-            \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/notifications/clear" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2920,9 +2653,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       tags:
         - permissions
-      description: >-
-        Returns a list of all permissions currently granted by the user.
-        Permissions are assigned e.g. by subscribing to VRC+.
+      description: Returns a list of all permissions currently granted by the user. Permissions are assigned e.g. by subscribing to VRC+.
     parameters: []
   /permissions/{permissionId}:
     parameters:
@@ -2933,9 +2664,8 @@ paths:
         - permissions
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/permissions/{permissionId}" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/permissions/{permissionId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2945,9 +2675,7 @@ paths:
       operationId: getPermission
       security:
         - authCookie: []
-      description: >-
-        Returns a single permission. This endpoint is pretty useless, as it
-        returns the exact same information as `/auth/permissions`.
+      description: Returns a single permission. This endpoint is pretty useless, as it returns the exact same information as `/auth/permissions`.
   /auth/user/playermoderations:
     get:
       summary: Search Player Moderations
@@ -2955,10 +2683,8 @@ paths:
         - playermoderation
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/auth/user/playermoderations?type=unmute&targetUserId={userId}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/playermoderations?type=unmute&targetUserId={userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2973,20 +2699,16 @@ paths:
             type: string
           in: query
           name: type
-          description: >-
-            Must be one of PlayerModerationType, except unblock. Unblocking
-            simply removes a block.
+          description: Must be one of PlayerModerationType, except unblock. Unblocking simply removes a block.
         - schema:
             type: string
           in: query
           name: targetUserId
           description: Must be valid UserID.
-      description: >-
+      description: |-
         Returns a list of all player moderations made by **you**.
 
-
-        This endpoint does not have pagination, and will return *all* results.
-        Use query parameters to limit your query if needed.
+        This endpoint does not have pagination, and will return *all* results. Use query parameters to limit your query if needed.
     post:
       summary: Moderate User
       operationId: moderateUser
@@ -2994,9 +2716,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X POST
-            "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
@@ -3012,13 +2733,10 @@ paths:
             schema:
               $ref: '#/components/schemas/ModerateUserRequest'
         description: ''
-      description: >-
+      description: |-
         Moderate a user, e.g. unmute them or show their avatar.
 
-
-        Please see the [Player Moderation
-        docs](https://vrchatapi.github.io/docs/api/#tag--playermoderation) on
-        what playerModerations are, and how they differ from staff moderations.
+        Please see the [Player Moderation docs](https://vrchatapi.github.io/docs/api/#tag--playermoderation) on what playerModerations are, and how they differ from staff moderations.
       tags:
         - playermoderation
     delete:
@@ -3028,9 +2746,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X DELETE
-            "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3054,10 +2771,8 @@ paths:
         - playermoderation
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/auth/user/playermoderations/{playerModerationId}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/playermoderations/{playerModerationId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3069,9 +2784,7 @@ paths:
       operationId: getPlayerModeration
       security:
         - authCookie: []
-      description: >-
-        Returns a single Player Moderation. This returns the exact same amount
-        of information as the more generalised `getPlayerModerations`.
+      description: Returns a single Player Moderation. This returns the exact same amount of information as the more generalised `getPlayerModerations`.
     delete:
       summary: Delete Player Moderation
       operationId: deletePlayerModeration
@@ -3079,10 +2792,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X DELETE
-            "https://api.vrchat.cloud/api/1/auth/user/playermoderations/{playerModerationId}"
-            \
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/auth/user/playermoderations/{playerModerationId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3091,10 +2802,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
         '403':
           $ref: '#/components/responses/PlayerModerationDeleteOthersError'
-      description: >-
-        Deletes a specific player moderation based on it's `pmod_` ID. The
-        website uses `unmoderateUser` instead. You can delete the same player
-        moderation multiple times successfully.
+      description: Deletes a specific player moderation based on it's `pmod_` ID. The website uses `unmoderateUser` instead. You can delete the same player moderation multiple times successfully.
       tags:
         - playermoderation
   /auth/user/unplayermoderate:
@@ -3109,15 +2817,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ModerateUserRequest'
-      description: >-
-        Removes a player moderation previously added through `moderateUser`. E.g
-        if you previously have shown their avatar, but now want to reset it to
-        default.
+      description: Removes a player moderation previously added through `moderateUser`. E.g if you previously have shown their avatar, but now want to reset it to default.
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/auth/user/unplayermoderate" \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/unplayermoderate" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
@@ -3140,13 +2844,10 @@ paths:
         '200':
           $ref: '#/components/responses/APIConfigResponse'
       operationId: getConfig
-      description: >-
-        API config contains configuration that the clients needs to work
-        properly.
+      description: |-
+        API config contains configuration that the clients needs to work properly.
 
-
-        Currently the most important value here is `clientApiKey` which is used
-        for all other API endpoints.
+        Currently the most important value here is `clientApiKey` which is used for all other API endpoints.
       security: []
   /infoPush:
     get:
@@ -3155,28 +2856,17 @@ paths:
         - system
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/infoPush?require={string}&include={string}"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/infoPush?require={string}&include={string}"
       responses:
         '200':
           $ref: '#/components/responses/InfoPushListResponse'
       operationId: getInfoPush
-      description: >-
-        IPS (Info Push System) is a system for VRChat to push out dynamic
-        information to the client. This is primarily used by the Quick-Menu info
-        banners, but can also be used to e.g. alert you to update your game to
-        the latest version.
+      description: |-
+        IPS (Info Push System) is a system for VRChat to push out dynamic information to the client. This is primarily used by the Quick-Menu info banners, but can also be used to e.g. alert you to update your game to the latest version.
 
+        `include` is used to query what Information Pushes should be included in the response. If include is missing or empty, then no notices will normally be returned. This is an "any of" search.
 
-        `include` is used to query what Information Pushes should be included in
-        the response. If include is missing or empty, then no notices will
-        normally be returned. This is an "any of" search.
-
-
-        `require` is used to limit what Information Pushes should be included in
-        the response. This is usually used in combination with `include`, and is
-        an "all of" search.
+        `require` is used to limit what Information Pushes should be included in the response. This is usually used in combination with `include`, and is an "all of" search.
       parameters:
         - $ref: '#/components/parameters/require'
         - $ref: '#/components/parameters/include'
@@ -3190,14 +2880,10 @@ paths:
         - system
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/css/app.css?variant=public&branch=main"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/css/app.css?variant=public&branch=main"
       responses:
         '200':
-          description: >-
-            **Note:** VRChat uses 302 Redirect to Cloudfront. The implementing
-            library **must** support and follow redirects natively.
+          description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
           content:
             text/css:
               schema:
@@ -3216,14 +2902,10 @@ paths:
         - system
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/js/app.js?variant=internal&branch=main"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/js/app.js?variant=internal&branch=main"
       responses:
         '200':
-          description: >-
-            **Note:** VRChat uses 302 Redirect to Cloudfront. The implementing
-            library **must** support and follow redirects natively.
+          description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
           content:
             application/javascript:
               schema:
@@ -3241,13 +2923,10 @@ paths:
       tags:
         - system
       operationId: getHealth
-      description: >-
-        ~~Gets the overall health status, the server name, and the current build
-        version tag of the API.~~
+      description: |-
+        ~~Gets the overall health status, the server name, and the current build version tag of the API.~~
 
-
-        **DEPRECATED:** VRChat has suddenly restricted this endpoint for unknown
-        reasons, and now always return 401 Unauthorized.
+        **DEPRECATED:** VRChat has suddenly restricted this endpoint for unknown reasons, and now always return 401 Unauthorized.
       security: []
       x-codeSamples:
         - lang: cURL
@@ -3269,12 +2948,10 @@ paths:
           $ref: '#/components/responses/CurrentOnlineUsersResponse'
       operationId: getCurrentOnlineUsers
       security: []
-      description: >-
+      description: |-
         Returns the current number of online users.
 
-
-        **NOTE:** The response type is not a JSON object, but a simple JSON
-        integer.
+        **NOTE:** The response type is not a JSON object, but a simple JSON integer.
   /time:
     get:
       summary: Current System Time
@@ -3287,12 +2964,10 @@ paths:
         '200':
           $ref: '#/components/responses/SystemTimeResponse'
       operationId: getSystemTime
-      description: >-
+      description: |-
         Returns the current time of the API server.
 
-
-        **NOTE:** The response type is not a JSON object, but a simple JSON
-        string.
+        **NOTE:** The response type is not a JSON object, but a simple JSON string.
       security: []
   /users:
     get:
@@ -3301,10 +2976,8 @@ paths:
         - users
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/users?search={string}&developerType=internal"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/users?search={string}&developerType=internal" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3322,16 +2995,12 @@ paths:
             minLength: 0
           in: query
           name: search
-          description: >-
-            Searches by `displayName`. Will return empty array if search query
-            is empty or missing.
+          description: Searches by `displayName`. Will return empty array if search query is empty or missing.
         - schema:
             type: string
           in: query
           name: developerType
-          description: >-
-            Active user by developer type, none for normal users and internal
-            for moderators
+          description: Active user by developer type, none for normal users and internal for moderators
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
       description: Search and list any users by text query
@@ -3360,14 +3029,10 @@ paths:
       operationId: getUserByName
       security:
         - authCookie: []
-      description: >-
+      description: |-
         ~~Get public user information about a specific user using their name.~~
 
-
-        **DEPRECATED:** VRChat API no longer return usernames of other users.
-        [See issue by Tupper for more
-        information](https://github.com/pypy-vrc/VRCX/issues/429).
-
+        **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
         This endpoint now require Admin Credentials.
       deprecated: true
   /users/{userId}:
@@ -3475,10 +3140,8 @@ paths:
         - worlds
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/worlds?featured=true&sort=popularity&userId={userId}&order=descending&search={string}&tag={string}&notag={string}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds?featured=true&sort=popularity&userId={userId}&order=descending&search={string}&tag={string}&notag={string}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3534,10 +3197,7 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateWorldRequest'
         description: ''
-      description: >-
-        Create a new world. This endpoint requires `assetUrl` to be a valid File
-        object with `.vrcw` file extension, and `imageUrl` to be a valid File
-        object with an image file extension.
+      description: Create a new world. This endpoint requires `assetUrl` to be a valid File object with `.vrcw` file extension, and `imageUrl` to be a valid File object with an image file extension.
       tags:
         - worlds
   /worlds/active:
@@ -3547,10 +3207,8 @@ paths:
         - worlds
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/worlds/active?featured=false&sort=heat&order=ascending&search={string}&tag={string}&notag={string}&releaseStatus=all"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/active?featured=false&sort=heat&order=ascending&search={string}&tag={string}&notag={string}&releaseStatus=all" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3581,10 +3239,8 @@ paths:
         - worlds
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/worlds/favorites?featured=false&sort=popularity&order=descending&search={string}&tag={string}&notag={string}&releaseStatus=private&userId={userId}"
-            \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/favorites?featured=false&sort=popularity&order=descending&search={string}&tag={string}&notag={string}&releaseStatus=private&userId={userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3618,9 +3274,8 @@ paths:
         - worlds
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/worlds/recent?featured=false" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/recent?featured=false" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3665,11 +3320,9 @@ paths:
           $ref: '#/components/responses/WorldResponse'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
-      description: >-
+      description: |-
         Get information about a specific World.
-
-        Works unauthenticated but when so will always return `0` for certain
-        fields.
+        Works unauthenticated but when so will always return `0` for certain fields.
     put:
       summary: Update World
       operationId: updateWorld
@@ -3714,10 +3367,7 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
           $ref: '#/components/responses/WorldNotFoundError'
-      description: >-
-        Delete a world. Notice a world is never fully "deleted", only its
-        ReleaseStatus is set to "hidden" and the linked Files are deleted. The
-        WorldID is permanently reserved.
+      description: Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.
       tags:
         - worlds
   /worlds/{worldId}/metadata:
@@ -3731,15 +3381,11 @@ paths:
       security:
         - authCookie: []
       deprecated: true
-      description: >-
-        Return a worlds custom metadata. This is currently believed to be
-        unused. Metadata can be set with `updateWorld` and can be any arbitrary
-        object.
+      description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/worlds/{worldId}/metadata" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}/metadata" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3759,9 +3405,8 @@ paths:
       description: Returns a worlds publish status.
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3777,9 +3422,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X PUT
-            "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3798,9 +3442,8 @@ paths:
         - authCookie: []
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X DELETE
-            "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3826,9 +3469,8 @@ paths:
       description: Returns a worlds instance.
       x-codeSamples:
         - lang: cURL
-          source: >-
-            curl -X GET
-            "https://api.vrchat.cloud/api/1/worlds/{worldId}/{instanceId}" \
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}/{instanceId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3838,11 +3480,7 @@ paths:
 components:
   schemas:
     UserExists:
-      description: >-
-        Status object representing if a queried user by username or userId
-        exists or not. This model is primarily used by the `/auth/exists`
-        endpoint, which in turn is used during registration. Please see the
-        documentation on that endpoint for more information on usage.
+      description: Status object representing if a queried user by username or userId exists or not. This model is primarily used by the `/auth/exists` endpoint, which in turn is used during registration. Please see the documentation on that endpoint for more information on usage.
       properties:
         userExists:
           default: false
@@ -3878,17 +3516,12 @@ components:
           type: string
           default: Deletion requested
           example: Deletion requested
-          description: >-
-            Typically "Deletion requested" or "Deletion canceled". Other
-            messages like "Deletion completed" may exist, but are these are not
-            possible to see as a regular user.
+          description: Typically "Deletion requested" or "Deletion canceled". Other messages like "Deletion completed" may exist, but are these are not possible to see as a regular user.
         deletionScheduled:
           type: string
           format: date-time
           nullable: true
-          description: >-
-            When the deletion is scheduled to happen, standard is 14 days after
-            the request.
+          description: When the deletion is scheduled to happen, standard is 14 days after the request.
         dateTime:
           type: string
           format: date-time
@@ -3897,38 +3530,26 @@ components:
       example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: UserID
       type: string
-      description: >-
-        A users unique ID, usually in the form of
-        `usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469`. Legacy players can have old
-        IDs in the form of `8JoV9XEdpo`. The ID can never be changed.
+      description: A users unique ID, usually in the form of `usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469`. Legacy players can have old IDs in the form of `8JoV9XEdpo`. The ID can never be changed.
     AvatarID:
       example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
       title: AvatarID
       type: string
     CurrentAvatarImageUrl:
       description: When profilePicOverride is not empty, use it instead.
-      example: >-
-        https://api.vrchat.cloud/api/1/file/file_ae46d521-7281-4b38-b365-804b32a1d6a7/1/file
+      example: https://api.vrchat.cloud/api/1/file/file_ae46d521-7281-4b38-b365-804b32a1d6a7/1/file
       title: CurrentAvatarImageUrl
       type: string
     CurrentAvatarThumbnailImageUrl:
       description: When profilePicOverride is not empty, use it instead.
-      example: >-
-        https://api.vrchat.cloud/api/1/image/file_aae83ed9-d42d-4d72-9f4b-9f1e41ed17e1/1/256
+      example: https://api.vrchat.cloud/api/1/image/file_aae83ed9-d42d-4d72-9f4b-9f1e41ed17e1/1/256
       title: CurrentAvatarThumbnailImageUrl
       type: string
     Tag:
-      description: >-
-        Tags are a way to grant various access, assign restrictions or other
-        kinds of metadata to various to objects such as worlds, users and
-        avatars.
+      description: |-
+        Tags are a way to grant various access, assign restrictions or other kinds of metadata to various to objects such as worlds, users and avatars.
 
-
-        System tags starting with `system_` are granted automatically by the
-        system, while admin tags with `admin_` are granted manually. More
-        prefixes such as `language_ ` (to indicate that a player can speak the
-        tagged language), and `author_tag_` (provided by a world author for
-        search and sorting) exist as well.
+        System tags starting with `system_` are granted automatically by the system, while admin tags with `admin_` are granted manually. More prefixes such as `language_ ` (to indicate that a player can speak the tagged language), and `author_tag_` (provided by a world author for search and sorting) exist as well.
       minLength: 1
       title: Tag
       type: string
@@ -3952,14 +3573,9 @@ components:
       example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
       title: WorldID
       type: string
-      description: >-
-        WorldID be "offline" on User profiles if you are not friends with that
-        user.
+      description: WorldID be "offline" on User profiles if you are not friends with that user.
     Platform:
-      description: >-
-        This can be `standalonewindows` or `android`, but can also pretty much
-        be any random Unity verison such as `2019.2.4-801-Release` or
-        `2019.2.2-772-Release` or even `unknownplatform`.
+      description: This can be `standalonewindows` or `android`, but can also pretty much be any random Unity verison such as `2019.2.4-801-Release` or `2019.2.2-772-Release` or even `unknownplatform`.
       example: standalonewindows
       title: Platform
       type: string
@@ -4042,10 +3658,7 @@ components:
       type: string
     UserStatus:
       type: string
-      description: >-
-        Defines the User's current status, for example "ask me", "join me" or
-        "offline. This status is a combined indicator of their online activity
-        and privacy preference.
+      description: Defines the User's current status, for example "ask me", "join me" or "offline. This status is a combined indicator of their online activity and privacy preference.
       enum:
         - active
         - join me
@@ -4219,10 +3832,7 @@ components:
         username:
           type: string
           deprecated: true
-          description: >-
-            -| **DEPRECATED:** VRChat API no longer return usernames of other
-            users. [See issue by Tupper for more
-            information](https://github.com/pypy-vrc/VRCX/issues/429).
+          description: '-| **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).'
       required:
         - id
         - displayName
@@ -4333,11 +3943,10 @@ components:
     UnityPackage:
       description: ''
       example:
-        assetUrl: >-
-          https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
+        assetUrl: https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
         assetUrlObject: {}
         assetVersion: 4
-        created_at: 2020-09-10T06:13:27.777Z
+        created_at: '2020-09-10T06:13:27.777Z'
         id: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
         platform: standalonewindows
         pluginUrl: ''
@@ -4390,18 +3999,13 @@ components:
       description: ''
       properties:
         assetUrl:
-          description: >-
-            Not present from general serach `/avatars`, only on specific
-            requests `/avatars/{avatarId}`.
+          description: Not present from general serach `/avatars`, only on specific requests `/avatars/{avatarId}`.
           minLength: 1
           type: string
         assetUrlObject:
-          description: >-
-            Not present from general serach `/avatars`, only on specific
-            requests `/avatars/{avatarId}`.
-
-            **Deprecation:** `Object` has unknown usage/fields, and is always
-            empty. Use normal `Url` field instead.
+          description: |-
+            Not present from general serach `/avatars`, only on specific requests `/avatars/{avatarId}`.
+            **Deprecation:** `Object` has unknown usage/fields, and is always empty. Use normal `Url` field instead.
           type: object
         authorId:
           $ref: '#/components/schemas/UserID'
@@ -4439,9 +4043,7 @@ components:
           type: string
         unityPackageUrlObject:
           deprecated: true
-          description: >-
-            **Deprecation:** `Object` has unknown usage/fields, and is always
-            empty. Use normal `Url` field instead.
+          description: '**Deprecation:** `Object` has unknown usage/fields, and is always empty. Use normal `Url` field instead.'
           properties:
             unityPackageUrl:
               type: string
@@ -4837,9 +4439,9 @@ components:
         tier: 5
         active: true
         status: active
-        expires: 2022-03-04T00:00:00.000Z
-        created_at: 2020-12-04T13:09:54.344Z
-        updated_at: 2020-12-10T19:53:45.362Z
+        expires: '2022-03-04T00:00:00.000Z'
+        created_at: '2020-12-04T13:09:54.344Z'
+        updated_at: '2020-12-10T19:53:45.362Z'
         licenseGroups:
           - lgrp_608513da-b213-4e15-80af-bd88c27f0979
         isGift: false
@@ -4852,9 +4454,7 @@ components:
         store:
           type: string
           minLength: 1
-          description: >-
-            Which "Store" it came from. Right now only Stores are "Steam" and
-            "Admin".
+          description: Which "Store" it came from. Right now only Stores are "Steam" and "Admin".
         steamItemId:
           type: string
           minLength: 1
@@ -4927,9 +4527,7 @@ components:
       properties:
         forId:
           type: string
-          description: >-
-            Either a AvatarID, LicenseGroupID, PermissionID or ProductID. This
-            depends on the `forType` field.
+          description: Either a AvatarID, LicenseGroupID, PermissionID or ProductID. This depends on the `forType` field.
           minLength: 1
         forType:
           $ref: '#/components/schemas/LicenseType'
@@ -5034,10 +4632,7 @@ components:
           description: Must be either AvatarID, WorldID or UserID.
         tags:
           type: array
-          description: >-
-            Tags indicate which group this favorite belongs to. Adding multiple
-            groups makes it show up in all. Removing it from one in that case
-            removes it from all.
+          description: Tags indicate which group this favorite belongs to. Adding multiple groups makes it show up in all. Removing it from one in that case removes it from all.
           items:
             $ref: '#/components/schemas/Tag'
       required:
@@ -5336,13 +4931,11 @@ components:
         uploadId:
           type: string
           minLength: 1
-          example: >-
-            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+          example: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
         fileName:
           type: string
           minLength: 1
-          example: >-
-            Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage
+          example: Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage
         nextPartNumber:
           type: number
           minimum: 0
@@ -5406,10 +4999,7 @@ components:
         username:
           type: string
           deprecated: true
-          description: >-
-            -| **DEPRECATED:** VRChat API no longer return usernames of other
-            users. [See issue by Tupper for more
-            information](https://github.com/pypy-vrc/VRCX/issues/429).
+          description: '-| **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).'
         location:
           type: string
         friendKey:
@@ -5445,17 +5035,8 @@ components:
           type: string
         details:
           default: '{}'
-          description: >-
-            **NOTICE:** This is not a JSON object when received from the REST
-            API, but it is when received from the Websocket API. When received
-            from the REST API, this is a json **encoded** object, meaning you
-            have to json-de-encode to get the NotificationDetail object
-            depending on the NotificationType.
-          example: >-
-            OneOf: {}, NotificationDetailInvite,
-            NotificationDetailInviteResponse, NotificationDetailRequestInvite,
-            NotificationDetailRequestInviteResponse,
-            NotificationDetailVoteToKick
+          description: '**NOTICE:** This is not a JSON object when received from the REST API, but it is when received from the Websocket API. When received from the REST API, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
+          example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
           type: string
         id:
           minLength: 1
@@ -5477,10 +5058,7 @@ components:
           minLength: 1
           type: string
           deprecated: true
-          description: >-
-            -| **DEPRECATED:** VRChat API no longer return usernames of other
-            users. [See issue by Tupper for more
-            information](https://github.com/pypy-vrc/VRCX/issues/429).
+          description: '-| **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).'
         type:
           $ref: '#/components/schemas/NotificationType'
       required:
@@ -5986,19 +5564,14 @@ components:
           type: string
           example: group.role.update
           default: group.update
-          description: >-
-            The type of event that occurred. This is a string that is prefixed
-            with the type of object that the event occurred on. For example, a
-            group role update event would be prefixed with `group.role`.
+          description: The type of event that occurred. This is a string that is prefixed with the type of object that the event occurred on. For example, a group role update event would be prefixed with `group.role`.
         description:
           type: string
           description: A human-readable description of the event.
           example: Group role updated
         data:
           type: object
-          description: >-
-            The data associated with the event. The format of this data is
-            dependent on the event type.
+          description: The data associated with the event. The format of this data is dependent on the event type.
           example:
             description:
               old: My exciting new group.  It's pretty nifty!
@@ -6017,18 +5590,14 @@ components:
             $ref: '#/components/schemas/GroupAuditLogEntry'
         totalCount:
           type: integer
-          description: >-
-            The total number of results that the query would return if there
-            were no pagination.
+          description: The total number of results that the query would return if there were no pagination.
         hasNext:
           type: boolean
           description: Whether there are more results after this page.
     GroupMemberLimitedUser:
       title: GroupMemberLimitedUser
       type: object
-      description: >-
-        Only visible via the /groups/:groupId/members endpoint, **not** when
-        fetching a specific user.
+      description: Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user.
       properties:
         id:
           $ref: '#/components/schemas/UserID'
@@ -6062,9 +5631,7 @@ components:
           type: boolean
           default: false
           example: true
-          description: >-
-            Whether the user is representing the group. This makes the group
-            show up above the name tag in-game.
+          description: Whether the user is representing the group. This makes the group show up above the name tag in-game.
         user:
           $ref: '#/components/schemas/GroupMemberLimitedUser'
           nullable: true
@@ -6089,23 +5656,17 @@ components:
           type: boolean
           default: false
         createdAt:
-          description: >-
-            Only visible via the /groups/:groupId/members endpoint, **not** when
-            fetching a specific user.
+          description: Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user.
           type: string
           format: date-time
           nullable: true
         bannedAt:
-          description: >-
-            Only visible via the /groups/:groupId/members endpoint, **not** when
-            fetching a specific user.
+          description: Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user.
           type: string
           format: date-time
           nullable: true
         managerNotes:
-          description: >-
-            Only visible via the /groups/:groupId/members endpoint, **not** when
-            fetching a specific user.
+          description: Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user.
           type: string
           nullable: true
         lastPostReadAt:
@@ -6185,8 +5746,7 @@ components:
           $ref: '#/components/schemas/FileID'
         imageUrl:
           type: string
-          example: >-
-            https://api.vrchat.cloud/api/1/file/file_ce35d830-e20a-4df0-a6d4-5aaef4508044/1/file
+          example: https://api.vrchat.cloud/api/1/file/file_ce35d830-e20a-4df0-a6d4-5aaef4508044/1/file
           format: uri
         createdAt:
           type: string
@@ -6255,13 +5815,9 @@ components:
         - fileId
     InstanceID:
       type: string
-      example: >-
-        12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+      example: 12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
       title: InstanceID
-      description: >-
-        InstanceID can be "offline" on User profiles if you are not friends with
-        that user and "private" if you are friends and user is in private
-        instance.
+      description: InstanceID can be "offline" on User profiles if you are not friends with that user and "private" if you are friends and user is in private instance.
     UdonProductId:
       example: prod_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: UdonProductId
@@ -6419,8 +5975,7 @@ components:
         instanceId:
           type: string
           minLength: 1
-          example: >-
-            12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+          example: 12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
         location:
           $ref: '#/components/schemas/InstanceID'
         world:
@@ -6466,9 +6021,7 @@ components:
           type: boolean
           default: false
           example: true
-          description: >-
-            Whether the user is representing the group. This makes the group
-            show up above the name tag in-game.
+          description: Whether the user is representing the group. This makes the group show up above the name tag in-game.
         roleIds:
           type: array
           items:
@@ -6489,23 +6042,17 @@ components:
           type: boolean
           default: false
         createdAt:
-          description: >-
-            Only visible via the /groups/:groupId/members endpoint, **not** when
-            fetching a specific user.
+          description: Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user.
           type: string
           format: date-time
           nullable: true
         bannedAt:
-          description: >-
-            Only visible via the /groups/:groupId/members endpoint, **not** when
-            fetching a specific user.
+          description: Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user.
           type: string
           format: date-time
           nullable: true
         managerNotes:
-          description: >-
-            Only visible via the /groups/:groupId/members endpoint, **not** when
-            fetching a specific user.
+          description: Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user.
           type: string
           nullable: true
         lastPostReadAt:
@@ -6553,9 +6100,7 @@ components:
           description: The display name of the permission.
         help:
           type: string
-          example: >-
-            Allows role to edit group details (name, description, joinState,
-            initialRoles, etc).
+          example: Allows role to edit group details (name, description, joinState, initialRoles, etc).
           description: Human-readable description of the permission.
         isManagementPermission:
           type: boolean
@@ -6710,15 +6255,8 @@ components:
           type: string
         details:
           default: '{}'
-          description: >-
-            **NOTICE:** This is not a JSON object, this is a json **encoded**
-            object, meaning you have to json-de-encode to get the
-            NotificationDetail object depending on the NotificationType.
-          example: >-
-            OneOf: {}, NotificationDetailInvite,
-            NotificationDetailInviteResponse, NotificationDetailRequestInvite,
-            NotificationDetailRequestInviteResponse,
-            NotificationDetailVoteToKick
+          description: '**NOTICE:** This is not a JSON object, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
+          example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
           type: string
         id:
           minLength: 1
@@ -6735,10 +6273,7 @@ components:
           minLength: 1
           type: string
           deprecated: true
-          description: >-
-            -| **DEPRECATED:** VRChat API no longer return usernames of other
-            users. [See issue by Tupper for more
-            information](https://github.com/pypy-vrc/VRCX/issues/429).
+          description: '-| **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).'
         type:
           $ref: '#/components/schemas/NotificationType'
       required:
@@ -6800,9 +6335,7 @@ components:
           $ref: '#/components/schemas/InviteMessageType'
         remainingCooldownMinutes:
           default: 0
-          description: >-
-            Changes to 60 when updated, although probably server-side
-            configurable.
+          description: Changes to 60 when updated, although probably server-side configurable.
           minimum: 0
           type: integer
         slot:
@@ -6834,9 +6367,7 @@ components:
       example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: InstanceOwnerId
       type: string
-      description: >-
-        A groupId if the instance type is "group", null if instance type is
-        public, or a userId otherwise
+      description: A groupId if the instance type is "group", null if instance type is public, or a userId otherwise
       nullable: true
     Region:
       type: string
@@ -6889,15 +6420,10 @@ components:
       description: Group access type when the instance type is "group"
       default: member
     Instance:
-      description: >-
-        * `hidden` field is only present if InstanceType is `hidden` aka
-        "Friends+", and is instance creator.
-
-        * `friends` field is only present if InstanceType is `friends` aka
-        "Friends", and is instance creator.
-
-        * `private` field is only present if InstanceType is `private` aka
-        "Invite" or "Invite+", and is instance creator.
+      description: |-
+        * `hidden` field is only present if InstanceType is `hidden` aka "Friends+", and is instance creator.
+        * `friends` field is only present if InstanceType is `friends` aka "Friends", and is instance creator.
+        * `private` field is only present if InstanceType is `private` aka "Invite" or "Invite+", and is instance creator.
       title: Instance
       type: object
       properties:
@@ -6926,8 +6452,7 @@ components:
         instanceId:
           type: string
           minLength: 1
-          example: >-
-            12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+          example: 12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
         location:
           $ref: '#/components/schemas/InstanceID'
         n_users:
@@ -6959,9 +6484,7 @@ components:
           example: 02u7yz8j
           nullable: true
         tags:
-          description: >-
-            The tags array on Instances usually contain the language tags of the
-            people in the instance. 
+          description: 'The tags array on Instances usually contain the language tags of the people in the instance. '
           type: array
           example:
             - show_social_rank
@@ -7000,9 +6523,7 @@ components:
         world:
           $ref: '#/components/schemas/World'
         users:
-          description: >-
-            The users field is present on instances created by the requesting
-            user.
+          description: The users field is present on instances created by the requesting user.
           type: array
           items:
             $ref: '#/components/schemas/LimitedUser'
@@ -7166,17 +6687,13 @@ components:
         - text
     DeploymentGroup:
       type: string
-      description: >-
+      description: |-
         Used to identify which API deployment cluster is currently responding.
 
-
         `blue` and `green` are used by Production.
-
         `grape`and `cherry` are used during Development.
 
-
-        [Blue Green Deployment by Martin
-        Fowler](https://martinfowler.com/bliki/BlueGreenDeployment.html)
+        [Blue Green Deployment by Martin Fowler](https://martinfowler.com/bliki/BlueGreenDeployment.html)
       enum:
         - blue
         - green
@@ -7230,9 +6747,7 @@ components:
         platform:
           minLength: 1
           type: string
-          description: >-
-            Usually "ThisPlatformSupported", but can also be other values such
-            as "all" or platform specific identifiers.
+          description: Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.
         sortHeading:
           minLength: 1
           type: string
@@ -7341,7 +6856,7 @@ components:
         devSdkUrl: https://vrchat.com/home/download
         devSdkVersion: 2020.09.25.00.08
         devServerVersionStandalone: dev_server_01
-        dis-countdown: 2021-01-01T01:01:01.000Z
+        dis-countdown: '2021-01-01T01:01:01.000Z'
         disableAvatarCopying: false
         disableAvatarGating: false
         disableCommunityLabs: false
@@ -7359,16 +6874,11 @@ components:
         disableUpgradeAccount: false
         downloadLinkWindows: https://www.oculus.com/experiences/rift/997678176960598/
         downloadUrls:
-          sdk2: >-
-            https://files.vrchat.cloud/sdk/VRCSDK2-2021.09.03.09.25_Public.unitypackage
-          sdk3-avatars: >-
-            https://files.vrchat.cloud/sdk/VRCSDK3-AVATAR-2021.09.03.09.25_Public.unitypackage
-          sdk3-worlds: >-
-            https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2021.09.03.09.25_Public.unitypackage
-          vcc: >-
-            https://vrcpm.vrchat.cloud/vcc/Builds/2.1.1/VRChat_CreatorCompanion_Setup_2.1.1.exe
-          bootstrap: >-
-            https://github.com/vrchat/packages/releases/download/resolvers/latest-resolver.unitypackage
+          sdk2: https://files.vrchat.cloud/sdk/VRCSDK2-2021.09.03.09.25_Public.unitypackage
+          sdk3-avatars: https://files.vrchat.cloud/sdk/VRCSDK3-AVATAR-2021.09.03.09.25_Public.unitypackage
+          sdk3-worlds: https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2021.09.03.09.25_Public.unitypackage
+          vcc: https://vrcpm.vrchat.cloud/vcc/Builds/2.1.1/VRChat_CreatorCompanion_Setup_2.1.1.exe
+          bootstrap: https://github.com/vrchat/packages/releases/download/resolvers/latest-resolver.unitypackage
         dynamicWorldRows:
           - index: 1
             name: Hot
@@ -7484,18 +6994,13 @@ components:
         messageOfTheDay: hello world
         moderationEmail: moderation@vrchat.com
         moderationQueryPeriod: 60
-        notAllowedToSelectAvatarInPrivateWorldMessage: >-
-          For security reasons, you're not yet allowed to select avatars in
-          private worlds or upload content. Please continue to enjoy VRChat and
-          we'll message you when you've been unlocked. Thanks and have fun!
+        notAllowedToSelectAvatarInPrivateWorldMessage: For security reasons, you're not yet allowed to select avatars in private worlds or upload content. Please continue to enjoy VRChat and we'll message you when you've been unlocked. Thanks and have fun!
         plugin: no_kick_unlisted
         releaseAppVersionStandalone: 0.12.0p3
-        releaseSdkUrl: >-
-          http://files.vrchat.cloud/sdk/VRCSDK-2019.09.18.12.05_Public.unitypackage
+        releaseSdkUrl: http://files.vrchat.cloud/sdk/VRCSDK-2019.09.18.12.05_Public.unitypackage
         releaseSdkVersion: VRCSDK-2019.09.18.12.05_Public
         releaseServerVersionStandalone: public_server_01
-        sdkDeveloperFaqUrl: >-
-          https://docs.vrchat.com/docs/frequently-asked-questions#section-why-can-t-i-upload-content-yet-
+        sdkDeveloperFaqUrl: https://docs.vrchat.com/docs/frequently-asked-questions#section-why-can-t-i-upload-content-yet-
         sdkDiscordUrl: https://discord.gg/vrchat
         sdkNotAllowedToPublishMessage: "Welcome the VRChat SDK!\r\n\r\nBefore you can upload avatars or worlds to VRChat, you'll need to spend more time enjoying the app. We do this for security reasons, and so you can learn more about us.\r\n\r\nWhen you get the ability to upload, we will notify you via email and in VRChat. For now, you can learn and test on your own device.\r\n\r\nTo get started, check out the resources below.\r\n\r\nThank you for your patience, we can't wait to see what you'll build!"
         sdkUnityVersion: 2019.4.30f1
@@ -7551,9 +7056,8 @@ components:
           - https://api.vrchat.cloud/api/1/file/
           - https://files.vrchat.cloud/unmanaged/
         worldUpdatePeriod: 60
-        player-url-resolver-hash: >-
-          E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
-        player-url-resolver-version: 2021-05-16
+        player-url-resolver-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
+        player-url-resolver-version: '2021-05-16'
       title: APIConfig
       type: object
       description: ''
@@ -7659,10 +7163,7 @@ components:
           type: boolean
         disableAvatarGating:
           default: false
-          description: >-
-            Toggles if avatar gating should be disabled. Avatar gating restricts
-            uploading of avatars to people with the `system_avatar_access` Tag
-            or `admin_avatar_access` Tag
+          description: Toggles if avatar gating should be disabled. Avatar gating restricts uploading of avatars to people with the `system_avatar_access` Tag or `admin_avatar_access` Tag
           type: boolean
         disableCommunityLabs:
           default: false
@@ -7682,16 +7183,11 @@ components:
           type: boolean
         disableFeedbackGating:
           default: false
-          description: >-
-            Toggles if feedback gating should be disabled. Feedback gating
-            restricts submission of feedback (reporting a World or User) to
-            people with the `system_feedback_access` Tag.
+          description: Toggles if feedback gating should be disabled. Feedback gating restricts submission of feedback (reporting a World or User) to people with the `system_feedback_access` Tag.
           type: boolean
         disableFrontendBuilds:
           default: false
-          description: >-
-            Unknown, probably toggles compilation of frontend web builds? So
-            internal flag?
+          description: Unknown, probably toggles compilation of frontend web builds? So internal flag?
           type: boolean
         disableHello:
           default: false
@@ -7699,9 +7195,7 @@ components:
           type: boolean
         disableOculusSubs:
           default: false
-          description: >-
-            Toggles if signing up for Subscriptions in Oculus is disabled or
-            not.
+          description: Toggles if signing up for Subscriptions in Oculus is disabled or not.
           type: boolean
         disableRegistration:
           default: false
@@ -7709,9 +7203,7 @@ components:
           type: boolean
         disableSteamNetworking:
           default: true
-          description: >-
-            Toggles if Steam Networking should be disabled. VRChat these days
-            uses Photon Unity Networking (PUN) instead.
+          description: Toggles if Steam Networking should be disabled. VRChat these days uses Photon Unity Networking (PUN) instead.
           type: boolean
         disableTwoFactorAuth:
           default: false
@@ -7724,9 +7216,7 @@ components:
           type: boolean
         disableUpgradeAccount:
           default: false
-          description: >-
-            Toggles if account upgrading "linking with Steam/Oculus" should be
-            disabled.
+          description: Toggles if account upgrading "linking with Steam/Oculus" should be disabled.
           type: boolean
         downloadLinkWindows:
           description: Download link for game on the Oculus Rift website.
@@ -7735,9 +7225,7 @@ components:
         downloadUrls:
           $ref: '#/components/schemas/APIConfigDownloadURLList'
         dynamicWorldRows:
-          description: >-
-            Array of DynamicWorldRow objects, used by the game to display the
-            list of world rows
+          description: Array of DynamicWorldRow objects, used by the game to display the list of world rows
           minItems: 1
           type: array
           uniqueItems: true
@@ -7754,9 +7242,7 @@ components:
           $ref: '#/components/schemas/WorldID'
         homepageRedirectTarget:
           default: https://hello.vrchat.com
-          description: >-
-            Redirect target if you try to open the base API domain in your
-            browser
+          description: Redirect target if you try to open the base API domain in your browser
           minLength: 1
           type: string
         hubWorldId:
@@ -7778,16 +7264,11 @@ components:
           description: Unknown
           type: integer
         notAllowedToSelectAvatarInPrivateWorldMessage:
-          description: >-
-            Used in-game to notify a user they aren't allowed to select avatars
-            in private worlds
+          description: Used in-game to notify a user they aren't allowed to select avatars in private worlds
           minLength: 1
           type: string
         plugin:
-          description: >-
-            Extra
-            [plugin](https://doc.photonengine.com/en-us/server/current/plugins/manual)
-            to run in each instance
+          description: Extra [plugin](https://doc.photonengine.com/en-us/server/current/plugins/manual) to run in each instance
           minLength: 1
           type: string
         releaseAppVersionStandalone:
@@ -7819,9 +7300,7 @@ components:
           minLength: 1
           type: string
         sdkNotAllowedToPublishMessage:
-          description: >-
-            Used in the SDK to notify a user they aren't allowed to upload
-            avatars/worlds yet
+          description: Used in the SDK to notify a user they aren't allowed to upload avatars/worlds yet
           minLength: 1
           type: string
         sdkUnityVersion:
@@ -7856,9 +7335,7 @@ components:
           description: Unknown
           type: integer
         urlList:
-          description: >-
-            List of allowed URLs that bypass the "Allow untrusted URL's" setting
-            in-game
+          description: List of allowed URLs that bypass the "Allow untrusted URL's" setting in-game
           type: array
           items:
             type: string
@@ -8130,10 +7607,7 @@ components:
           $ref: '#/components/schemas/DeveloperType'
         displayName:
           type: string
-          description: >-
-            A users visual display name. This is what shows up in-game, and can
-            different from their `username`. Changing display name is restricted
-            to a cooldown period.
+          description: A users visual display name. This is what shows up in-game, and can different from their `username`. Changing display name is restricted to a cooldown period.
         friendKey:
           type: string
         friendRequestStatus:
@@ -8144,9 +7618,7 @@ components:
           $ref: '#/components/schemas/InstanceID'
         isFriend:
           type: boolean
-          description: >-
-            Either their `friendKey`, or empty string if you are not friends.
-            Unknown usage.
+          description: Either their `friendKey`, or empty string if you are not friends. Unknown usage.
         last_activity:
           type: string
           description: Either a date-time or empty string.
@@ -8182,14 +7654,9 @@ components:
           type: string
         username:
           type: string
-          description: >-
-            -| A users unique name, used during login. This is different from
-            `displayName` which is what shows up in-game. A users `username` can
-            never be changed.'
-
-            **DEPRECATED:** VRChat API no longer return usernames of other
-            users. [See issue by Tupper for more
-            information](https://github.com/pypy-vrc/VRCX/issues/429).
+          description: |-
+            -| A users unique name, used during login. This is different from `displayName` which is what shows up in-game. A users `username` can never be changed.'
+            **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
           deprecated: true
         worldId:
           $ref: '#/components/schemas/WorldID'
@@ -8244,8 +7711,7 @@ components:
         userIcon:
           type: string
           description: MUST be a valid VRChat /file/ url.
-          example: >-
-            https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1
+          example: https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1
           minLength: 0
     representedGroup:
       title: RepresentedGroup
@@ -8517,6 +7983,62 @@ components:
           default: true
       required:
         - canPubilsh
+    NotificationDetailInvite:
+      properties:
+        inviteMessage:
+          type: string
+        worldId:
+          $ref: '#/components/schemas/WorldID'
+        worldName:
+          type: string
+      required:
+        - worldId
+        - worldName
+      title: NotificationDetailInvite
+      type: object
+    NotificationDetailInviteResponse:
+      properties:
+        inResponseTo:
+          $ref: '#/components/schemas/NotificationID'
+        responseMessage:
+          type: string
+      required:
+        - inResponseTo
+        - responseMessage
+      title: NotificationDetailInviteResponse
+      type: object
+    NotificationDetailRequestInvite:
+      properties:
+        platform:
+          description: 'TODO: Does this still exist?'
+          type: string
+        requestMessage:
+          description: Used when using InviteMessage Slot.
+          type: string
+      title: NotificationDetailRequestInvite
+      type: object
+    NotificationDetailRequestInviteResponse:
+      properties:
+        inResponseTo:
+          $ref: '#/components/schemas/NotificationID'
+        requestMessage:
+          description: Used when using InviteMessage Slot.
+          type: string
+      required:
+        - inResponseTo
+      title: NotificationDetailRequestInviteResponse
+      type: object
+    NotificationDetailVoteToKick:
+      properties:
+        initiatorUserId:
+          $ref: '#/components/schemas/UserID'
+        userToKickId:
+          $ref: '#/components/schemas/UserID'
+      required:
+        - userToKickId
+        - initiatorUserId
+      title: NotificationDetailVoteToKick
+      type: object
   securitySchemes:
     authHeader:
       type: http
@@ -8561,9 +8083,7 @@ components:
         Set-Cookie:
           schema:
             type: string
-            example: >-
-              auth=authcookie_00000000-0000-0000-0000-000000000000; Expires=Tue,
-              01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
+            example: auth=authcookie_00000000-0000-0000-0000-000000000000; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
           description: Successful authentication returns an `auth` cookie.
     MissingCredentialsError:
       description: Error response due to missing auth cookie.
@@ -8587,12 +8107,8 @@ components:
         Set-Cookie:
           schema:
             type: string
-            example: >-
-              twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
-              Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
-          description: >-
-            Provides a `twoFactorAuth` cookie, which can be used to bypasses the
-            2FA requirement for future logins on the same device.
+            example: twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
+          description: Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.
     Verify2FAEmailCodeResponse:
       description: OK
       content:
@@ -8603,12 +8119,8 @@ components:
         Set-Cookie:
           schema:
             type: string
-            example: >-
-              twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
-              Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
-          description: >-
-            Provides a `twoFactorAuth` cookie, which can be used to bypasses the
-            2FA requirement for future logins on the same device.
+            example: twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
+          description: Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.
     VerifyAuthTokenResponse:
       description: Returns wether a provided auth token is valid or not.
       content:
@@ -8656,9 +8168,7 @@ components:
           schema:
             $ref: '#/components/schemas/Avatar'
     AvatarSeeOtherUserCurrentAvatarError:
-      description: >-
-        Error response when trying to see another users current avatar without
-        sufficient admin permissions.
+      description: Error response when trying to see another users current avatar without sufficient admin permissions.
       content:
         application/json:
           schema:
@@ -8667,9 +8177,7 @@ components:
             403 Cant See Other Users Current Avatar:
               value:
                 error:
-                  message: >-
-                    \"You do not have permission to fetch details about the
-                    avatar on this user.\"
+                  message: \"You do not have permission to fetch details about the avatar on this user.\"
                   status_code: 403
     AvatarListResponse:
       description: Returns a list of Avatar objects.
@@ -8692,9 +8200,7 @@ components:
                   message: cannot set featured tag if you are not an admin
                   status_code: 401
     AvatarNotFoundError:
-      description: >-
-        Error response when trying to show information about a non-existent
-        avatar.
+      description: Error response when trying to show information about a non-existent avatar.
       content:
         application/json:
           schema:
@@ -8722,9 +8228,7 @@ components:
           schema:
             $ref: '#/components/schemas/CurrentUser'
     AvatarNotTaggedAsFallbackError:
-      description: >-
-        Error response when trying to select a fallback avatar that is missing
-        the fallback tag.
+      description: Error response when trying to select a fallback avatar that is missing the fallback tag.
       content:
         application/json:
           schema:
@@ -8736,9 +8240,7 @@ components:
                   message: This avatar isn't tagged as a quest fallback avatar.
                   status_code: 403
     AvatarSeeOtherUserFavoritesError:
-      description: >-
-        Error response when trying to see favourited avatars of another user
-        without sufficient admin permissions.
+      description: Error response when trying to see favourited avatars of another user without sufficient admin permissions.
       content:
         application/json:
           schema:
@@ -8808,9 +8310,7 @@ components:
           schema:
             $ref: '#/components/schemas/Favorite'
     FavoriteAddAlreadyFavoritedError:
-      description: >-
-        Error response when trying favorite someone or something when already
-        having it/them favorited.
+      description: Error response when trying favorite someone or something when already having it/them favorited.
       content:
         application/json:
           schema:
@@ -8822,9 +8322,7 @@ components:
                   message: You already have that friend favorited
                   status_code: 400
     FavoriteAddNotFriendsError:
-      description: >-
-        Error response when trying favorite someone whom you are not friends
-        with.
+      description: Error response when trying favorite someone whom you are not friends with.
       content:
         application/json:
           schema:
@@ -8836,9 +8334,7 @@ components:
                   message: you are not friends with that userǃ
                   status_code: 403
     FavoriteNotFoundError:
-      description: >-
-        Error response when trying to show information about a non-existent
-        favorite.
+      description: Error response when trying to show information about a non-existent favorite.
       content:
         application/json:
           schema:
@@ -8905,9 +8401,7 @@ components:
             Example Avatar File:
               value:
                 id: file_00000000-0000-0000-0000-000000000000
-                name: >-
-                  Avatar - Test Avatar - Unity package -
-                  2017․4․28f1_3_standalonewindows_Release
+                name: Avatar - Test Avatar - Unity package - 2017․4․28f1_3_standalonewindows_Release
                 ownerId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
                 mimeType: application/gzip
                 extension: .unitypackage
@@ -8915,45 +8409,36 @@ components:
                 versions:
                   - version: 0
                     status: complete
-                    created_at: 2019-08-15T11:04:37.910Z
+                    created_at: '2019-08-15T11:04:37.910Z'
                   - version: 1
                     status: complete
-                    created_at: 2019-08-15T11:04:49.702Z
+                    created_at: '2019-08-15T11:04:49.702Z'
                     file:
-                      fileName: >-
-                        Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage
-                      url: >-
-                        https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage
+                      fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage
+                      url: https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage
                       md5: xxxxxxxxxxxxxxxxxxx==
                       sizeInBytes: 303055180
                       status: complete
                       category: multipart
-                      uploadId: >-
-                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                      uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                     delta:
-                      fileName: >-
-                        Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta
-                      url: >-
-                        https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta
+                      fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta
+                      url: https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta
                       md5: ''
                       sizeInBytes: 0
                       status: none
                       category: queued
                       uploadId: ''
                     signature:
-                      fileName: >-
-                        Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature
-                      url: >-
-                        https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature
+                      fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature
+                      url: https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature
                       md5: xxxxxxxxxxxxxxxx==
                       sizeInBytes: 532748
                       status: complete
                       category: simple
                       uploadId: ''
     FileNotFoundError:
-      description: >-
-        Error response when trying to show information about a non-existent
-        file.
+      description: Error response when trying to show information about a non-existent file.
       content:
         application/json:
           schema:
@@ -8991,9 +8476,7 @@ components:
     RawFileResponse:
       description: Raw file
     FileVersionDeleteInitialError:
-      description: >-
-        Error response when trying to delete the initial version of a file.
-        Delete the main File object instead.
+      description: Error response when trying to delete the initial version of a file. Delete the main File object instead.
       content:
         application/json:
           schema:
@@ -9002,14 +8485,10 @@ components:
             400 Delete Initial File Version:
               value:
                 error:
-                  message: >-
-                    Cannot delete the initial version of the file‚ just delete
-                    the entire file record․
+                  message: Cannot delete the initial version of the file‚ just delete the entire file record․
                   status_code: 400
     FileVersionDeleteMiddleError:
-      description: >-
-        Error response when trying to delete any version of a file that is not
-        hte last one.
+      description: Error response when trying to delete any version of a file that is not hte last one.
       content:
         application/json:
           schema:
@@ -9018,15 +8497,10 @@ components:
             409/500 Delete Non-Last File Version:
               value:
                 error:
-                  message: >-
-                    409 Cannot delete against anything but the latest version of
-                    this file˸ 1‚ 11
+                  message: 409 Cannot delete against anything but the latest version of this file˸ 1‚ 11
                   status_code: 500
     FileUploadURLResponse:
-      description: >-
-        See
-        [https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html](AWS
-        REST docs - PUT Object)
+      description: See [https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html](AWS REST docs - PUT Object)
       content:
         application/json:
           schema:
@@ -9034,12 +8508,9 @@ components:
           examples:
             Example Response:
               value:
-                url: >-
-                  https://s3.amazonaws.com/files.vrchat.cloud/Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage?AWSAccessKeyId=XXXXXXXXXXXXXXXXXXXX&Expires=1626028518&Signature=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&partNumber=1&uploadId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+                url: https://s3.amazonaws.com/files.vrchat.cloud/Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage?AWSAccessKeyId=XXXXXXXXXXXXXXXXXXXX&Expires=1626028518&Signature=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&partNumber=1&uploadId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
     FileUploadAlreadyFinishedError:
-      description: >-
-        Error response when trying to start an upload against a FileVersion that
-        is already marked as  `complete`.
+      description: Error response when trying to start an upload against a FileVersion that is already marked as  `complete`.
       content:
         application/json:
           schema:
@@ -9048,14 +8519,10 @@ components:
             Tried To Upload Against Already Finished Version:
               value:
                 error:
-                  message: >-
-                    Cannot upload against a complete version entry․ Create a new
-                    version of this file before uploading․
+                  message: Cannot upload against a complete version entry․ Create a new version of this file before uploading․
                   status_code: 400
     FileVersionUploadStatusResponse:
-      description: >-
-        Current FileVersion upload status. Contains the uploadId needed for
-        uploading, as well as the already uploaded parts.
+      description: Current FileVersion upload status. Contains the uploadId needed for uploading, as well as the already uploaded parts.
       content:
         application/json:
           schema:
@@ -9063,10 +8530,8 @@ components:
           examples:
             Example Access Key:
               value:
-                uploadId: >-
-                  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
-                fileName: >-
-                  Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage
+                uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+                fileName: Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage
                 nextPartNumber: 0
                 maxParts: 1000
                 parts: []
@@ -9094,7 +8559,7 @@ components:
                 message: ''
                 details: '{}'
                 seen: false
-                created_at: 2021-01-01T00:00:00.000Z
+                created_at: '2021-01-01T00:00:00.000Z'
     FriendBadRequestError:
       description: Bad request error response when sending a friend request
       content:
@@ -9113,9 +8578,7 @@ components:
                   message: This user has already been sent a friend request
                   status_code: 400
     UserDoesntExistError:
-      description: >-
-        Error response when trying to send a friend request to a user which
-        doesn't exist.
+      description: Error response when trying to send a friend request to a user which doesn't exist.
       content:
         application/json:
           schema:
@@ -9206,9 +8669,7 @@ components:
           schema:
             $ref: '#/components/schemas/Group'
     GroupNotFoundError:
-      description: >-
-        Error response when trying to perform operations on a non-existing
-        group.
+      description: Error response when trying to perform operations on a non-existing group.
       content:
         application/json:
           schema:
@@ -9326,9 +8787,7 @@ components:
                   message: Gallery image removed!
                   status_code: 200
     GroupGalleryImageDeleteForbiddenError:
-      description: >-
-        Error response when trying to delete a submission to a group's gallery
-        when the user does not have permission to do so.
+      description: Error response when trying to delete a submission to a group's gallery when the user does not have permission to do so.
       content:
         application/json:
           schema:
@@ -9348,9 +8807,7 @@ components:
             items:
               $ref: '#/components/schemas/GroupInstance'
     GroupNotMemberError:
-      description: >-
-        Error response when trying to perform operations on a group you are not
-        member of.
+      description: Error response when trying to perform operations on a group you are not member of.
       content:
         application/json:
           schema:
@@ -9403,9 +8860,7 @@ components:
                   message: You can't uninvite a user who wasn't invited․
                   status_code: 400
     GroupAlreadyMemberError:
-      description: >-
-        Error response when trying to join a group that the user is already a
-        member of.
+      description: Error response when trying to join a group that the user is already a member of.
       content:
         application/json:
           schema:
@@ -9417,9 +8872,7 @@ components:
                   message: You're already a member!
                   status_code: 400
     UsersInvalidSearchError:
-      description: >-
-        Error response when trying to search list of users with an invalid
-        request.
+      description: Error response when trying to search list of users with an invalid request.
       content:
         application/json:
           schema:
@@ -9483,9 +8936,7 @@ components:
             User Join Request Not Exist:
               value:
                 error:
-                  message: >-
-                    You can't accept a join request for a user who hasn't
-                    requested to join․
+                  message: You can't accept a join request for a user who hasn't requested to join․
                   status_code: 400
     GroupRoleListResponse:
       description: Returns a list of GroupRole objects.
@@ -9516,11 +8967,9 @@ components:
                 type: friendRequest
                 message: ''
                 details: '{}'
-                created_at: 2021-01-01T00:00:00.000Z
+                created_at: '2021-01-01T00:00:00.000Z'
     InviteMustBeFriendsError:
-      description: >-
-        Error response when trying to invite someome whom you are not friends
-        with.
+      description: Error response when trying to invite someome whom you are not friends with.
       content:
         application/json:
           schema:
@@ -9544,9 +8993,7 @@ components:
                   message: '"Instance not found"'
                   status_code: 404
     InviteResponse400Error:
-      description: >-
-        Error response when trying to respond to an invite and something went
-        wrong.
+      description: Error response when trying to respond to an invite and something went wrong.
       content:
         application/json:
           schema:
@@ -9576,9 +9023,7 @@ components:
             items:
               $ref: '#/components/schemas/InviteMessage'
     InviteMessageInvalidSlotNumberError:
-      description: >-
-        Error response when trying to update an Invite Message with an invalid
-        slot number.
+      description: Error response when trying to update an Invite Message with an invalid slot number.
       content:
         application/json:
           schema:
@@ -9613,9 +9058,7 @@ components:
           schema:
             $ref: '#/components/schemas/InviteMessage'
     InviteMessageGetNegativeSlotError:
-      description: >-
-        Error response when trying to get an Invite Message with a negative slot
-        number.
+      description: Error response when trying to get an Invite Message with a negative slot number.
       content:
         application/json:
           schema:
@@ -9624,9 +9067,7 @@ components:
             200 Negative Slot Number Error:
               value: {}
     InviteMessageGetTooHighSlotError:
-      description: >-
-        Error response when trying to get an Invite Message with a too high slot
-        number.
+      description: Error response when trying to get an Invite Message with a too high slot number.
       content:
         application/json:
           schema:
@@ -9637,9 +9078,7 @@ components:
                 error:
                   status_code: 404
     InviteMessageUpdateRateLimitError:
-      description: >-
-        Error response when trying to update an Invite Message before the
-        cooldown has expired.
+      description: Error response when trying to update an Invite Message before the cooldown has expired.
       content:
         application/json:
           schema:
@@ -9651,9 +9090,7 @@ components:
                   message: Please wait 60 more minutes until you try again․
                   status_code: 429
     InviteMessageNoEntryForSlotError:
-      description: >-
-        Error response when trying to reset an Invite Message whos slot doesn't
-        exist.
+      description: Error response when trying to reset an Invite Message whos slot doesn't exist.
       content:
         application/json:
           schema:
@@ -9844,9 +9281,7 @@ components:
                   message: OK
                   status_code: 200
     PlayerModerationNotFoundError:
-      description: >-
-        Error response when trying to show information about a non-existent
-        player moderation.
+      description: Error response when trying to show information about a non-existent player moderation.
       content:
         application/json:
           schema:
@@ -9867,9 +9302,7 @@ components:
             200 Player Moderation Removed:
               value:
                 success:
-                  message: >-
-                    PlayerModeration pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244
-                    removed
+                  message: PlayerModeration pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244 removed
                   status_code: 200
     PlayerModerationDeleteOthersError:
       description: Error response when trying to delete someone else's player moderation.
@@ -9881,9 +9314,7 @@ components:
             403 Can't delete Player Moderation You Didn't Create:
               value:
                 error:
-                  message: >-
-                    You definitely can't delete a playerModeration you didn't
-                    create
+                  message: You definitely can't delete a playerModeration you didn't create
                   status_code: 403
     PlayerModerationUnmoderatedSuccess:
       description: Success response after unmoderating a player moderation.
@@ -9927,15 +9358,14 @@ components:
                     - quick-menu-banner
                     - user-all
                   data:
-                    imageUrl: >-
-                      https://assets.vrchat.com/ips/assets/b5af844263458d3a5b3e01b52ef7fe47f7b3b563eace4ee972205f250474c879.png
+                    imageUrl: https://assets.vrchat.com/ips/assets/b5af844263458d3a5b3e01b52ef7fe47f7b3b563eace4ee972205f250474c879.png
                     onPressed:
                       command: OpenURL
                       parameters:
                         - https://docs.vrchat.com/v2021.4.1/docs/latest-release
                   hash: 69abf85064503e870124acde330bb0ae
-                  createdAt: 2021-09-13T20:50:40+00:00
-                  updatedAt: 2021-11-08T22:45:25+00:00
+                  createdAt: '2021-09-13T20:50:40+00:00'
+                  updatedAt: '2021-11-08T22:45:25+00:00'
             World Hot Row:
               value:
                 - id: world-hot
@@ -9945,8 +9375,7 @@ components:
                   tags:
                     - world-category
                   data:
-                    imageUrl: >-
-                      https://assets.vrchat.com/ips/assets/40f8ad117f8d6734ac84039d8ced290b6676486099b7cc56759efe7b259ca05d.png
+                    imageUrl: https://assets.vrchat.com/ips/assets/40f8ad117f8d6734ac84039d8ced290b6676486099b7cc56759efe7b259ca05d.png
                     contentList:
                       name: Hot
                       sortHeading: heat
@@ -9954,8 +9383,8 @@ components:
                       sortOrder: descending
                       platform: ThisPlatformSupported
                   hash: f0e97e72c437aa437e92c1184630bec6
-                  createdAt: 2020-06-05T08:23:31+00:00
-                  updatedAt: 2020-08-16T07:04:07+00:00
+                  createdAt: '2020-06-05T08:23:31+00:00'
+                  updatedAt: '2020-08-16T07:04:07+00:00'
             Game Version:
               value:
                 - id: build-config
@@ -9968,12 +9397,10 @@ components:
                   data:
                     version: 2021.3.4
                   hash: a76e7da333c6a5a8f7ec2adee064cac9
-                  createdAt: 2021-08-21T04:27:05+00:00
-                  updatedAt: 2021-09-18T04:37:29+00:00
+                  createdAt: '2021-08-21T04:27:05+00:00'
+                  updatedAt: '2021-09-18T04:37:29+00:00'
     DownloadSourceCodeAccessError:
-      description: >-
-        Error response when trying to download non-public and non-main
-        JavaScript or CSS without Admin Credentials.
+      description: Error response when trying to download non-public and non-main JavaScript or CSS without Admin Credentials.
       content:
         application/json:
           schema:
@@ -10017,7 +9444,7 @@ components:
           schema:
             type: string
             format: date-time
-            example: 2021-08-20T12:38:42+00:00
+            example: '2021-08-20T12:38:42+00:00'
             description: Does not return millisecond precision. Always returns time in UTC.
     UserResponse:
       description: Returns a single User object.
@@ -10048,9 +9475,7 @@ components:
           schema:
             $ref: '#/components/schemas/World'
     WorldCreateNotAllowedYetError:
-      description: >-
-        Error response when trying create a world without having the neccesary
-        Trust rank yet.
+      description: Error response when trying create a world without having the neccesary Trust rank yet.
       content:
         application/json:
           schema:
@@ -10062,9 +9487,7 @@ components:
                   message: \"You can't create a world right now\"
                   status_code: 400
     WorldSeeOtherUserFavoritesError:
-      description: >-
-        Error response when trying to see favourited worlds of another user
-        without sufficient admin permissions.
+      description: Error response when trying to see favourited worlds of another user without sufficient admin permissions.
       content:
         application/json:
           schema:
@@ -10076,9 +9499,7 @@ components:
                   message: 403 You can't see another user's favorites
                   status_code: 403
     WorldSeeOtherUserRecentsError:
-      description: >-
-        Error response when trying to see recently visited worlds of another
-        user without sufficient admin permissions.
+      description: Error response when trying to see recently visited worlds of another user without sufficient admin permissions.
       content:
         application/json:
           schema:
@@ -10090,10 +9511,7 @@ components:
                   message: \"You can only see your own recent worlds!\"
                   status_code: 403
     WorldNotFoundError:
-      description: >-
-        Error response when trying to show information about a non-existent
-        world. Sometimes returns with `model <worldId> not found` instead of
-        `World <worldId not found`.
+      description: Error response when trying to show information about a non-existent world. Sometimes returns with `model <worldId> not found` instead of `World <worldId not found`.
       content:
         application/json:
           schema:
@@ -10190,9 +9608,7 @@ components:
       schema:
         type: integer
         minimum: 0
-      description: >-
-        A zero-based offset from the default object sorting from where search
-        results start.
+      description: A zero-based offset from the default object sorting from where search results start.
     tag:
       name: tag
       in: query
@@ -10330,9 +9746,7 @@ components:
       required: false
       schema:
         type: boolean
-      description: >-
-        Returns *only* offline users if true, returns only online and active
-        users if false
+      description: Returns *only* offline users if true, returns only online and active users if false
     groupId:
       name: groupId
       in: path
@@ -10457,10 +9871,7 @@ components:
           - internal
         default: public
       allowEmptyValue: true
-      description: >-
-        Specifies which `variant` of the site. Public is the end-user site,
-        while `internal` is the staff-only site with special pages for
-        moderation and management.
+      description: Specifies which `variant` of the site. Public is the end-user site, while `internal` is the staff-only site with special pages for moderation and management.
     branch:
       name: branch
       in: query
@@ -10469,97 +9880,4 @@ components:
         type: string
         default: main
       allowEmptyValue: true
-      description: >-
-        Specifies which git branch the site should load frontend source code
-        from.
-tags:
-  - name: authentication
-    description: Authentication Docs Here
-  - name: avatars
-    description: Avatars Docs Here
-  - name: economy
-    description: Economy Docs Here
-  - name: favorites
-    description: Favorites Docs Here
-  - name: files
-    description: Files Docs Here
-  - name: friends
-    description: Friends Docs Here
-  - name: groups
-    description: Group Docs Here
-  - name: invite
-    description: Invite Docs Here
-  - name: instances
-    description: Instances Docs Here
-  - name: notifications
-    description: Notifiations Docs
-  - name: permissions
-    description: >-
-      Permissions are a way to individually grant specific access to a user,
-      often through a license such as VRC+ subscription.
-  - name: playermoderation
-    description: >-
-      There are two different moderation API's, "moderation" for Staff actions,
-      and "playermoderation" for players.
-
-      PlayerModerations are user-generated actions towards others, such as
-      muting them, blocking, or toggling interaction.
-
-
-      Your global permission settings are stored locally on your computer.
-
-      Only player-specific moderations (when you target a player, and allow them
-      specifically to interact with you) are stored in the API.
-
-
-      ## Implementation details
-
-
-      There are three different user-targetted permission options:
-
-
-      - Mode 1: interactOn/unmute/unblock
-
-      - Mode 2: interactOff/mute/block
-
-      - *Default setting*
-
-
-      **Example:**
-
-
-      Force On (`interactOn`) and Force Off (`interactOff`) always or never
-      allow that person to interact with you.
-
-      These are stored as PlayerModerations. When you select a player and select
-      "Force On", it creates a playerModeration of type `interactOn`.
-
-
-      **Important order:**
-
-
-      1. When switching between one mode from the other, e.g. "Force On" and
-      "Force Off", **the previous playerModeration MUST first be deleted before
-      creating the second.**
-         The game sends these in sequence, first delete the old, then create the new. Attempting to create both `interactOn` and `interactOff` is UNDOCUMENTED behavior.
-      2. "Use Current Setting" **does not have it's own enum**. The game removes
-      any previous playerModeration of same type.
-         No playerModeration of either type means fallback to the global setting.
-
-      ## Deprecation notice
-
-
-      As of October 2022, `showAvatar` and `hideAvatar` has been moved to local
-      storage.
-
-      Sending these types to the API will result in a 200 OK response, but the
-      API will **not** store them.
-
-      More information is avaiable on VRChat's official [documentation on Local
-      Storage](https://docs.vrchat.com/docs/local-vrchat-storage).
-  - name: system
-    description: System Docs Here
-  - name: users
-    description: Users Docs Here
-  - name: worlds
-    description: Worlds Docs Here
+      description: Specifies which git branch the site should load frontend source code from.
