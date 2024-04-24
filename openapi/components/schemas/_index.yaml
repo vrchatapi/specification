@@ -1,0 +1,10 @@
+NotificationDetailInvite:
+  $ref: ./NotificationDetailInvite.yaml
+NotificationDetailInviteResponse:
+  $ref: ./NotificationDetailInviteResponse.yaml
+NotificationDetailRequestInvite:
+  $ref: ./NotificationDetailRequestInvite.yaml
+NotificationDetailRequestInviteResponse:
+  $ref: ./NotificationDetailRequestInviteResponse.yaml
+NotificationDetailVoteToKick:
+  $ref: ./NotificationDetailVoteToKick.yaml
