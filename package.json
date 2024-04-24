@@ -6,12 +6,12 @@
   "private": true,
   "scripts": {
     "lint": "node ./node_modules/\\@stoplight/spectral-cli/dist/ lint openapi/openapi.yaml -F warn",
-    "bundle": "node ./node_modules/\\@redocly/openapi-cli/bin/cli.js bundle openapi/openapi.yaml -o dist/openapi.yaml"
+    "bundle": "node ./node_modules/\\@redocly/cli/bin/cli.js bundle openapi/openapi.yaml -o dist/openapi.yaml"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@redocly/openapi-cli": "^1.0.0-beta.59",
+    "@redocly/cli": "^1.11.0",
     "@stoplight/spectral-cli": "^6.6.0"
   }
 }

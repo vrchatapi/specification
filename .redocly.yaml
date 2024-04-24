@@ -1,10 +1,12 @@
 # See https://redoc.ly/docs/cli/configuration/ for more information.
-apiDefinitions:
-  main: openapi/openapi.yaml
-lint:
-  extends:
-    - recommended
-  plugins:
-    - './.github/redocly-plugins/remove-internal.js'
-  decorators:
-    remove-internal/remove-internal: error
+extends:
+  - recommended
+
+apis:
+  main:
+    root: openapi/openapi.yaml
+
+plugins:
+  - './.github/redocly-plugins/remove-internal.js'
+decorators:
+  remove-internal/remove-internal: error
