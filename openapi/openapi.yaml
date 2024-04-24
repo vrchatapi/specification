@@ -16,7 +16,8 @@ servers:
 paths:
   $ref: ./components/paths.yaml
 components:
-  schemas: {}
+  schemas:
+    $ref: ./components/schemas/_index.yaml
   securitySchemes:
     $ref: ./components/securitySchemes.yaml
   responses: {}
