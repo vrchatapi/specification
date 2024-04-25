@@ -698,11 +698,32 @@ paths:
         - groups
       responses:
         '200':
-          $ref: ../responses/groups/DeleteGroupPostResponse.yaml
+          $ref: ../responses/groups/GroupPostResponseSuccess.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
-          $ref: ../responses/groups/DeleteGroupPostResponse.yaml
+          $ref: ../responses/groups/GroupPostResponseSuccess.yaml
+      security:
+        - authCookie: []
+    put:
+      summary: Edits a Group post
+      description: Edits a Group post
+      operationId: updateGroupPost
+      tags:
+        - groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateGroupPostRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/groups/GroupPostResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/groups/GroupPostResponseSuccess.yaml
       security:
         - authCookie: []
   '/groups/{groupId}/requests':
