@@ -1972,11 +1972,32 @@ paths:
         - groups
       responses:
         '200':
-          $ref: '#/components/responses/DeleteGroupPostResponse'
+          $ref: '#/components/responses/GroupPostResponseSuccess'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
         '404':
-          $ref: '#/components/responses/DeleteGroupPostResponse'
+          $ref: '#/components/responses/GroupPostResponseSuccess'
+      security:
+        - authCookie: []
+    put:
+      summary: Edits a Group post
+      description: Edits a Group post
+      operationId: updateGroupPost
+      tags:
+        - groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupPostRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupPostResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/GroupPostResponseSuccess'
       security:
         - authCookie: []
   /groups/{groupId}/requests:
@@ -8914,7 +8935,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GroupPost'
-    DeleteGroupPostResponse:
+    GroupPostResponseSuccess:
       description: Response after deleting a group post.
       content:
         application/json:
