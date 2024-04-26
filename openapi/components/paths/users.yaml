@@ -113,7 +113,7 @@ paths:
         - authCookie: []
       responses:
         '200':
-          $ref: ../responses/groups/LimitedGroupListResponse.yaml.yaml
+          $ref: ../responses/groups/LimitedGroupListResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserGroups
