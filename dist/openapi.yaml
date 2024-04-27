@@ -3113,7 +3113,7 @@ paths:
         - authCookie: []
       responses:
         '200':
-          $ref: '#/components/responses/GroupListResponse'
+          $ref: '#/components/responses/LimitedGroupListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getUserGroups
