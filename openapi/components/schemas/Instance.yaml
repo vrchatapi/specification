@@ -92,6 +92,7 @@ properties:
     example: 6
   roleRestricted:
     type: boolean
+    nullable: true
   strict:
     type: boolean
   userCount:
