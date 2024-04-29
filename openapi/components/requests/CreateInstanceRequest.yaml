@@ -8,7 +8,7 @@ properties:
   region:
     $ref: ../schemas/Region.yaml
   ownerId:
-    $ref: ./InstanceOwnerId.yaml
+    $ref: ../schemas/InstanceOwnerId.yaml
   roleIds:
     description: Group roleIds that are allowed to join if the type is "group" and groupAccessType is "member"
     type: array
