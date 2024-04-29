@@ -2402,6 +2402,26 @@ paths:
         * `requestResponse` = Message when replying to a request for invite
 
         The DELETE endpoint does not have/require any request body.
+  /instances:
+    post:
+      summary: Create Instance
+      tags:
+        - instances
+      operationId: createInstance
+      security:
+        - authCookie: []
+      description: Create an instance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstanceRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InstanceResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
   /instances/{worldId}:{instanceId}:
     parameters:
       - $ref: '#/components/parameters/worldId'
@@ -6384,12 +6404,17 @@ components:
           type: string
       required:
         - message
-    InstanceOwnerId:
-      example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-      title: InstanceOwnerId
+    InstanceType:
       type: string
-      description: A groupId if the instance type is "group", null if instance type is public, or a userId otherwise
-      nullable: true
+      title: InstanceType
+      example: hidden
+      enum:
+        - public
+        - hidden
+        - friends
+        - private
+        - group
+      description: ''
     Region:
       type: string
       title: Region
@@ -6403,6 +6428,48 @@ components:
         - jp
         - unknown
       description: API/Photon region.
+    InstanceOwnerId:
+      example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+      title: InstanceOwnerId
+      type: string
+      description: A groupId if the instance type is "group", null if instance type is public, or a userId otherwise
+      nullable: true
+    GroupAccessType:
+      type: string
+      title: GroupAccessType
+      example: member
+      enum:
+        - public
+        - plus
+        - member
+      description: Group access type when the instance type is "group"
+      default: member
+    CreateInstanceRequest:
+      title: CreateInstanceRequest
+      type: object
+      properties:
+        worldId:
+          $ref: '#/components/schemas/WorldID'
+        type:
+          $ref: '#/components/schemas/InstanceType'
+        region:
+          $ref: '#/components/schemas/Region'
+        ownerId:
+          $ref: '#/components/schemas/InstanceOwnerId'
+        roleIds:
+          description: Group roleIds that are allowed to join if the type is "group" and groupAccessType is "member"
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+        groupAccessType:
+          $ref: '#/components/schemas/GroupAccessType'
+        queueEnabled:
+          type: boolean
+          default: false
+      required:
+        - worldId
+        - type
+        - region
     InstancePlatforms:
       title: InstancePlatforms
       type: object
@@ -6419,27 +6486,6 @@ components:
           type: integer
           minimum: 0
           example: 5
-    InstanceType:
-      type: string
-      title: InstanceType
-      example: hidden
-      enum:
-        - public
-        - hidden
-        - friends
-        - private
-        - group
-      description: ''
-    GroupAccessType:
-      type: string
-      title: GroupAccessType
-      example: member
-      enum:
-        - public
-        - plus
-        - member
-      description: Group access type when the instance type is "group"
-      default: member
     Instance:
       description: |-
         * `hidden` field is only present if InstanceType is `hidden` aka "Friends+", and is instance creator.
