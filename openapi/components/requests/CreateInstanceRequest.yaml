@@ -19,6 +19,10 @@ properties:
   queueEnabled:
     type: boolean
     default: false
+  closedAt:
+    description: The time after which users won't be allowed to join the instance
+    type: string
+    format: date-time
 required:
   - worldId
   - type

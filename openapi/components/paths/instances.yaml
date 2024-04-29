@@ -60,8 +60,16 @@ paths:
             type: boolean
           required: false
           description: Whether to hard close the instance. Defaults to false.
+        - in: query
+          name: closedAt
+          schema:
+            type: string
+            format: date-time
+          description: |-
+            The time after which users won't be allowed to join the instances.
+            If omitted, the instance will be closed immediately.
       description: |-
-        Close an instance.
+        Close an instance or update the closedAt time when it will be closed.
 
         You can only close an instance if the ownerId is yourself or if the instance owner is a group and you have the `group-instance-moderate` permission.
       responses:
