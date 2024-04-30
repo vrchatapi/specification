@@ -1,0 +1,47 @@
+title: LimitedUserGroups
+type: object
+properties:
+  id:
+    $ref: ./GroupMemberID.yaml
+  name:
+    type: string
+  shortCode:
+    $ref: ./GroupShortCode.yaml
+  discriminator:
+    $ref: ./GroupDiscriminator.yaml
+  description:
+    type: string
+  iconId:
+    type: string
+    nullable: true
+  iconUrl:
+    type: string
+    nullable: true
+  bannerId:
+    type: string
+    nullable: true
+  bannerUrl:
+    type: string
+    nullable: true
+  privacy:
+    type: string
+  lastPostCreatedAt:
+    type: string
+    format: date-time
+    nullable: true
+  ownerId:
+    $ref: ./UserID.yaml
+  memberCount:
+    type: integer
+  groupId:
+    $ref: ./GroupID.yaml
+  memberVisibility:
+    type: string
+  isRepresenting:
+    type: boolean
+  mutualGroup:
+    type: boolean
+  lastPostReadAt:
+    type: string
+    format: date-time
+    nullable: true

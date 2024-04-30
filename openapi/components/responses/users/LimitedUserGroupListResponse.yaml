@@ -1,0 +1,7 @@
+description: Returns a list of LimitedUserGroups objects.
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        $ref: ../../schemas/LimitedUserGroups.yaml
