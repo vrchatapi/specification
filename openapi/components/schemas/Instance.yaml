@@ -118,6 +118,14 @@ properties:
   hardClose:
     type: boolean
     nullable: true
+  displayName:
+    type: string
+  playerPersistenceEnabled:
+    type: string
+  instancePersistenceEnabled:
+    type: string
+  gameServerVersion:
+    type: integer
 required:
   - active
   - canRequestInvite
