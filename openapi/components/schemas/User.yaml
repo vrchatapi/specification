@@ -4,6 +4,11 @@ properties:
   allowAvatarCopying:
     type: boolean
     default: true
+  badges:
+    description: ' '
+    type: array
+    items:
+      $ref: ./Badge.yaml
   bio:
     type: string
     maxLength: 512
@@ -16,6 +21,10 @@ properties:
     $ref: ./CurrentAvatarImageUrl.yaml
   currentAvatarThumbnailImageUrl:
     $ref: ./CurrentAvatarThumbnailImageUrl.yaml
+  currentAvatarTags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
   date_joined:
     format: date
     type: string
@@ -81,10 +90,12 @@ properties:
     $ref: ./WorldID.yaml
 required:
   - allowAvatarCopying
+  - badges
   - bio
   - bioLinks
   - currentAvatarImageUrl
   - currentAvatarThumbnailImageUrl
+  - currentAvatarTags
   - date_joined
   - developerType
   - displayName

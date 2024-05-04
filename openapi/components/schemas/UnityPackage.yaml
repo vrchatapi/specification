@@ -45,6 +45,8 @@ properties:
     nullable: true
   scanStatus:
     type: string
+  variant:
+    type: string
 required:
   - id
   - unityVersion

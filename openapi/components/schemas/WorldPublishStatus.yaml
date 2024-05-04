@@ -2,8 +2,8 @@ title: WorldPublishStatus
 type: object
 additionalProperties: false
 properties:
-  canPubilsh:
+  canPublish:
     type: boolean
     default: true
 required:
-  - canPubilsh
+  - canPublish

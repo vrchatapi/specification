@@ -15,6 +15,17 @@ properties:
   steamItemId:
     type: string
     minLength: 1
+  oculusSku:
+    type: string
+    minLength: 1
+  googleProductId:
+    type: string
+    minLength: 1
+  googlePlanId:
+    type: string
+  picoSku:
+    type: string
+    minLength: 1
   amount:
     type: number
   description:
