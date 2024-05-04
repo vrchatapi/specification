@@ -49,6 +49,8 @@ properties:
     type: string
   profilePicOverride:
     type: string
+  pronouns:
+    type: string
   state:
     $ref: ./UserState.yaml
   status:
@@ -93,6 +95,7 @@ required:
   - last_login
   - last_platform
   - profilePicOverride
+  - pronouns
   - state
   - status
   - statusDescription

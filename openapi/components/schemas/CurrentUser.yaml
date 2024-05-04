@@ -126,6 +126,8 @@ properties:
     $ref: ./CurrentUserPresence.yaml
   profilePicOverride:
     type: string
+  pronouns:
+    type: string
   state:
     $ref: ./UserState.yaml
   status:
@@ -171,6 +173,7 @@ required:
   - bio
   - bioLinks
   - profilePicOverride
+  - pronouns
   - statusDescription
   - pastDisplayNames
   - hasEmail
