@@ -3580,6 +3580,45 @@ components:
       title: UserID
       type: string
       description: A users unique ID, usually in the form of `usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469`. Legacy players can have old IDs in the form of `8JoV9XEdpo`. The ID can never be changed.
+    BadgeID:
+      example: bdg_a60e514a-8cb7-4702-8f24-2786992be1a8
+      title: BadgeID
+      type: string
+    Badge:
+      title: Badge
+      type: object
+      properties:
+        assignedAt:
+          type: string
+          format: date-time
+          description: only present in CurrentUser badges
+          nullable: true
+        badgeDescription:
+          type: string
+        badgeId:
+          $ref: '#/components/schemas/BadgeID'
+        badgeImageUrl:
+          type: string
+          description: direct url to image
+        badgeName:
+          type: string
+        hidden:
+          type: boolean
+          description: only present in CurrentUser badges
+          nullable: true
+        showcased:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+          description: only present in CurrentUser badges
+          nullable: true
+      required:
+        - badgeDescription
+        - badgeId
+        - badgeImageUrl
+        - badgeName
+        - showcased
     AvatarID:
       example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
       title: AvatarID
@@ -3743,6 +3782,11 @@ components:
             $ref: '#/components/schemas/UserID'
         allowAvatarCopying:
           type: boolean
+        badges:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/Badge'
         bio:
           type: string
         bioLinks:
@@ -3814,6 +3858,10 @@ components:
         last_login:
           format: date-time
           type: string
+        last_mobile:
+          format: date-time
+          type: string
+          nullable: true
         last_platform:
           $ref: '#/components/schemas/Platform'
         obfuscatedEmail:
@@ -3824,6 +3872,8 @@ components:
           type: string
         googleId:
           type: string
+        googleDetails:
+          type: object
         picoId:
           type: string
         viveId:
@@ -3844,6 +3894,8 @@ components:
         presence:
           $ref: '#/components/schemas/CurrentUserPresence'
         profilePicOverride:
+          type: string
+        pronouns:
           type: string
         state:
           $ref: '#/components/schemas/UserState'
@@ -3886,9 +3938,11 @@ components:
         - id
         - displayName
         - userIcon
+        - badges
         - bio
         - bioLinks
         - profilePicOverride
+        - pronouns
         - statusDescription
         - pastDisplayNames
         - hasEmail
@@ -3904,6 +3958,7 @@ components:
         - friendGroupNames
         - currentAvatarImageUrl
         - currentAvatarThumbnailImageUrl
+        - currentAvatarTags
         - currentAvatar
         - currentAvatarAssetUrl
         - acceptedTOSVersion
@@ -3917,6 +3972,7 @@ components:
         - tags
         - developerType
         - last_login
+        - last_mobile
         - last_platform
         - allowAvatarCopying
         - status
@@ -4036,6 +4092,8 @@ components:
           type: string
           nullable: true
         scanStatus:
+          type: string
+        variant:
           type: string
       required:
         - id
@@ -4276,6 +4334,17 @@ components:
         steamItemId:
           type: string
           minLength: 1
+        oculusSku:
+          type: string
+          minLength: 1
+        googleProductId:
+          type: string
+          minLength: 1
+        googlePlanId:
+          type: string
+        picoSku:
+          type: string
+          minLength: 1
         amount:
           type: number
         description:
@@ -4443,6 +4512,10 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/TransactionID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userDisplayName:
+          type: string
         status:
           $ref: '#/components/schemas/TransactionStatus'
         subscription:
@@ -4462,6 +4535,12 @@ components:
           $ref: '#/components/schemas/TransactionAgreement'
         error:
           type: string
+        isGift:
+          type: boolean
+          default: false
+        isTokens:
+          type: boolean
+          default: false
       required:
         - id
         - status
@@ -5033,6 +5112,8 @@ components:
         last_platform:
           $ref: '#/components/schemas/Platform'
         profilePicOverride:
+          type: string
+        pronouns:
           type: string
         status:
           $ref: '#/components/schemas/UserStatus'
@@ -7667,6 +7748,11 @@ components:
         allowAvatarCopying:
           type: boolean
           default: true
+        badges:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/Badge'
         bio:
           type: string
           maxLength: 512
@@ -7679,6 +7765,10 @@ components:
           $ref: '#/components/schemas/CurrentAvatarImageUrl'
         currentAvatarThumbnailImageUrl:
           $ref: '#/components/schemas/CurrentAvatarThumbnailImageUrl'
+        currentAvatarTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
         date_joined:
           format: date
           type: string
@@ -7712,6 +7802,8 @@ components:
           type: string
         profilePicOverride:
           type: string
+        pronouns:
+          type: string
         state:
           $ref: '#/components/schemas/UserState'
         status:
@@ -7741,10 +7833,12 @@ components:
           $ref: '#/components/schemas/WorldID'
       required:
         - allowAvatarCopying
+        - badges
         - bio
         - bioLinks
         - currentAvatarImageUrl
         - currentAvatarThumbnailImageUrl
+        - currentAvatarTags
         - date_joined
         - developerType
         - displayName
@@ -7755,6 +7849,7 @@ components:
         - last_login
         - last_platform
         - profilePicOverride
+        - pronouns
         - state
         - status
         - statusDescription
@@ -7864,6 +7959,11 @@ components:
           example: 12024
           minimum: 0
           type: integer
+        visits:
+          default: 0
+          example: 9988675
+          minimum: 0
+          type: integer
         heat:
           default: 0
           example: 5
@@ -7895,6 +7995,9 @@ components:
           example: 8
           minimum: 0
           type: integer
+        previewYoutubeId:
+          type: string
+          nullable: true
         publicationDate:
           example: none
           minLength: 1
@@ -8057,11 +8160,11 @@ components:
       type: object
       additionalProperties: false
       properties:
-        canPubilsh:
+        canPublish:
           type: boolean
           default: true
       required:
-        - canPubilsh
+        - canPublish
     NotificationDetailInvite:
       properties:
         inviteMessage:
