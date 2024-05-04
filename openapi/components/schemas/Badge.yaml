@@ -1,0 +1,34 @@
+title: Badge
+type: object
+properties:
+  assignedAt:
+    type: string
+    format: date-time
+    description: only present in CurrentUser badges
+    nullable: true
+  badgeDescription:
+    type: string
+  badgeId:
+    $ref: ./BadgeID.yaml
+  badgeImageUrl:
+    type: string
+    description: direct url to image
+  badgeName:
+    type: string
+  hidden:
+    type: boolean
+    description: only present in CurrentUser badges
+    nullable: true
+  showcased:
+    type: boolean
+  updatedAt:
+    type: string
+    format: date-time
+    description: only present in CurrentUser badges
+    nullable: true
+required:
+  - badgeDescription
+  - badgeId
+  - badgeImageUrl
+  - badgeName
+  - showcased

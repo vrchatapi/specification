@@ -19,6 +19,11 @@ properties:
     example: 12024
     minimum: 0
     type: integer
+  visits:
+    default: 0
+    example: 9988675
+    minimum: 0
+    type: integer
   heat:
     default: 0
     example: 5
@@ -50,6 +55,9 @@ properties:
     example: 8
     minimum: 0
     type: integer
+  previewYoutubeId:
+    type: string
+    nullable: true
   publicationDate:
     example: none
     minLength: 1

@@ -20,6 +20,8 @@ properties:
     $ref: ./Platform.yaml
   profilePicOverride:
     type: string
+  pronouns:
+    type: string
   status:
     $ref: ./UserStatus.yaml
   statusDescription:

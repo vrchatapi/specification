@@ -4,6 +4,10 @@ title: Transaction
 properties:
   id:
     $ref: ./TransactionID.yaml
+  userId:
+    $ref: ./UserID.yaml
+  userDisplayName:
+    type: string
   status:
     $ref: ./TransactionStatus.yaml
   subscription:
@@ -23,6 +27,12 @@ properties:
     $ref: ./TransactionAgreement.yaml
   error:
     type: string
+  isGift:
+    type: boolean
+    default: false
+  isTokens:
+    type: boolean
+    default: false
 required:
   - id
   - status
