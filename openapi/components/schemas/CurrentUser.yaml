@@ -181,7 +181,6 @@ required:
   - id
   - displayName
   - userIcon
-  - badges
   - bio
   - bioLinks
   - profilePicOverride
