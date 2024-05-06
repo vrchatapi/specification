@@ -24,6 +24,10 @@ properties:
     type: array
     items:
       type: string
+  pronouns:
+    type: string
+    minLength: 0
+    maxLength: 32
   userIcon:
     type: string
     description: MUST be a valid VRChat /file/ url.
