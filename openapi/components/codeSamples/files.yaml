@@ -2,13 +2,13 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/files?tag={string}" \
+        curl -X GET "https://vrchat.com/api/1/files?tag={string}" \
              -b "auth={authCookie}"
 /file:
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://api.vrchat.cloud/api/1/file" \
+        curl -X POST "https://vrchat.com/api/1/file" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"name": "string", "mimeType": "image/jpeg", "extension": "string", "tags": ["string"]}'
@@ -16,17 +16,17 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}" \
+        curl -X GET "https://vrchat.com/api/1/file/{fileId}" \
              -b "auth={authCookie}"
   delete:
     - lang: cURL
       source: >-
-        curl -X DELETE "https://api.vrchat.cloud/api/1/file/{fileId}" \
+        curl -X DELETE "https://vrchat.com/api/1/file/{fileId}" \
              -b "auth={authCookie}"
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://api.vrchat.cloud/api/1/file/{fileId}" \
+        curl -X POST "https://vrchat.com/api/1/file/{fileId}" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"signatureMd5": "string", "signatureSizeInBytes": 0, "fileMd5": "string", "fileSizeInBytes": 0}'
@@ -34,18 +34,18 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
+        curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}" \
           -b "auth={authCookie}"
   delete:
     - lang: cURL
       source: >-
-        curl -X DELETE "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
+        curl -X DELETE "https://vrchat.com/api/1/file/{fileId}/{versionId}" \
           -b "auth={authCookie}"
 '/file/{fileId}/{versionId}/{fileType}/finish':
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/finish" \
+        curl -X PUT "https://vrchat.com/api/1/file/{fileId}/{versionId}/{fileType}/finish" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"etags": ["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"], "nextPartNumber": "0", "maxParts": "0"}'
@@ -53,11 +53,11 @@
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/start" \
+        curl -X PUT "https://vrchat.com/api/1/file/{fileId}/{versionId}/{fileType}/start" \
              -b "auth={authCookie}"
 /file/{fieldId}/{versionId}/{fileType}/status:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/status" \
+        curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}/{fileType}/status" \
              -b "auth={authCookie}"

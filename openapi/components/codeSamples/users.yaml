@@ -2,30 +2,30 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/users?search={string}&developerType=internal" \
+        curl -X GET "https://vrchat.com/api/1/users?search={string}&developerType=internal" \
              -b "auth={authCookie}"
 /users/active:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/users/active?search={string}&developerType=none" \
+        curl -X GET "https://vrchat.com/api/1/users/active?search={string}&developerType=none" \
              -b "auth={authCookie}"
 '/users/{username}/name':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/users/{username}/name" \
+        curl -X GET "https://vrchat.com/api/1/users/{username}/name" \
              -b "auth={authCookie}"
 '/users/{userId}':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}" \
+        curl -X GET "https://vrchat.com/api/1/users/{userId}" \
              -b "auth={authCookie}"
   put:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}" \
+        curl -X GET "https://vrchat.com/api/1/users/{userId}" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
-             --data '{"email": "string", "birthday": "2019-08-24", "acceptedTOSVersion": 0, "tags": ["string"], "status": "active", "statusDescription": "string", "bio": "string", "bioLinks": ["string"], "userIcon": "https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"}'
+             --data '{"email": "string", "birthday": "2019-08-24", "acceptedTOSVersion": 0, "tags": ["string"], "status": "active", "statusDescription": "string", "bio": "string", "bioLinks": ["string"], "userIcon": "https://vrchat.com/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"}'

@@ -1,6 +1,6 @@
 description: ''
 example:
-  assetUrl: 'https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file'
+  assetUrl: 'https://vrchat.com/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file'
   assetUrlObject: {}
   assetVersion: 4
   created_at: '2020-09-10T06:13:27.777Z'
