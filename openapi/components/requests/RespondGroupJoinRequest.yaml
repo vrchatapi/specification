@@ -3,5 +3,8 @@ type: object
 properties:
   action:
     $ref: ../schemas/GroupJoinRequestAction.yaml
+  block:
+    type: boolean
+    description: Whether to block the user from requesting again
 required:
   - action

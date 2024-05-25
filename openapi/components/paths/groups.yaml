@@ -738,6 +738,11 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
+        - schema:
+            type: boolean
+          in: query
+          name: blocked
+          description: See blocked join requests
       responses:
         '200':
           $ref: ../responses/groups/GroupMemberListResponse.yaml
