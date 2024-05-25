@@ -6556,9 +6556,20 @@ components:
           type: boolean
           default: false
         closedAt:
-          description: The time after which users won't be allowed to join the instance
+          description: The time after which users won't be allowed to join the instance. This doesn't work for public instances.
           type: string
           format: date-time
+        canRequestInvite:
+          type: boolean
+          description: Only applies to invite type instances to make them invite+
+          default: false
+        hardClose:
+          type: boolean
+          description: Currently unused, but will eventually be a flag to set if the closing of the instance should kick people.
+          default: false
+        inviteOnly:
+          type: boolean
+          default: false
       required:
         - worldId
         - type
