@@ -7865,7 +7865,6 @@ components:
           $ref: '#/components/schemas/WorldID'
       required:
         - allowAvatarCopying
-        - badges
         - bio
         - bioLinks
         - currentAvatarImageUrl
