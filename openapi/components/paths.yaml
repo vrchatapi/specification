@@ -239,8 +239,6 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1requested"
 "/users/{userId}/groups/represented":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1represented"
-"/users/{userId}/instances/groups":
-  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups"
 
 # worlds
 
