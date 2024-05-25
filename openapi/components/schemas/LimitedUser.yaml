@@ -2,10 +2,19 @@ description: ''
 properties:
   bio:
     type: string
+  bioLinks:
+    description: ' '
+    type: array  
+    items:
+      type: string
   currentAvatarImageUrl:
     $ref: ./CurrentAvatarImageUrl.yaml
   currentAvatarThumbnailImageUrl:
     $ref: ./CurrentAvatarThumbnailImageUrl.yaml
+  currentAvatarTags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
   developerType:
     $ref: ./DeveloperType.yaml
   displayName:
