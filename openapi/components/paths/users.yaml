@@ -194,24 +194,6 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       security:
         - authCookie: []
-  '/user/{userId}/instances/groups':
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-    get:
-      summary: Get User Group Instances
-      description: Returns a list of group instances for a user
-      operationId: getUserGroupInstances
-      tags:
-        - users
-      responses:
-        '200':
-          $ref: ../responses/user/UserGroupInstanceListResponse.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
-        '404':
-          $ref: ../responses/user/UserNotFoundError.yaml
-      security:
-        - authCookie: []
 tags:
   $ref: ../tags.yaml
 components:
