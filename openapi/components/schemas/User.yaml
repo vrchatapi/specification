@@ -90,7 +90,6 @@ properties:
     $ref: ./WorldID.yaml
 required:
   - allowAvatarCopying
-  - badges
   - bio
   - bioLinks
   - currentAvatarImageUrl
