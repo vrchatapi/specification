@@ -2,30 +2,30 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/auth" \
+        curl -X GET "https://vrchat.com/api/1/auth" \
              -b "amplitude_id_a750df50d11f21f712262cbd4c0bab37vrchat.com={string}; auth={authCookie}"
 /logout:
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://api.vrchat.cloud/api/1/logout" \
+        curl -X PUT "https://vrchat.com/api/1/logout" \
              -b "auth={authCookie}"
 /auth/user:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/auth/user" \
+        curl -X GET "https://vrchat.com/api/1/auth/user" \
              -H "Authorization: Basic {string}"
 /auth/exists:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/auth/exists?email={string}" 
+        curl -X GET "https://vrchat.com/api/1/auth/exists?email={string}" 
 /auth/twofactorauth/totp/verify:
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/totp/verify" \
+        curl -X POST "https://vrchat.com/api/1/auth/twofactorauth/totp/verify" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"code": "string"}'
@@ -33,7 +33,7 @@
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/otp/verify" \
+        curl -X POST "https://vrchat.com/api/1/auth/twofactorauth/otp/verify" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"code": "string"}'
@@ -41,7 +41,7 @@
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/emailotp/verify" \
+        curl -X POST "https://vrchat.com/api/1/auth/twofactorauth/emailotp/verify" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"code": "string"}'
@@ -49,5 +49,5 @@
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://api.vrchat.cloud/api/1/user/{userId}/delete" \
+        curl -X PUT "https://vrchat.com/api/1/user/{userId}/delete" \
              -b "auth={authCookie}"

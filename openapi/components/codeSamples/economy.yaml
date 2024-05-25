@@ -2,47 +2,47 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/Steam/transactions" \
+        curl -X GET "https://vrchat.com/api/1/Steam/transactions" \
              -b "auth={authCookie}"
 '/Steam/transactions/{transactionId}':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/Steam/transactions/{transactionId}" \
+        curl -X GET "https://vrchat.com/api/1/Steam/transactions/{transactionId}" \
              -b "auth={authCookie}"
 /Admin/transactions:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/Admin/transactions" \
+        curl -X GET "https://vrchat.com/api/1/Admin/transactions" \
              -b "auth=auth={authCookie}"
 '/Admin/transactions/{transactionId}':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/Admin/transactions/{transactionId}" \
+        curl -X GET "https://vrchat.com/api/1/Admin/transactions/{transactionId}" \
              -b "auth={authCookie}"
 /auth/user/subscription:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/auth/user/subscription" \
+        curl -X GET "https://vrchat.com/api/1/auth/user/subscription" \
              -b "auth={authCookie}"
 /subscriptions:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/subscriptions" \
+        curl -X GET "https://vrchat.com/api/1/subscriptions" \
              -b "auth={authCookie}"
 /licenseGroups:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/licenseGroups" \
+        curl -X GET "https://vrchat.com/api/1/licenseGroups" \
              -b "auth={authCookie}"
 '/licenseGroups/{licenseGroupId}':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/licenseGroups/{licenseGroupId}" \
+        curl -X GET "https://vrchat.com/api/1/licenseGroups/{licenseGroupId}" \
              -b "auth={authCookie}"

@@ -2,18 +2,18 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/avatars/favorites?featured=true" \
+        curl -X GET "https://vrchat.com/api/1/avatars/favorites?featured=true" \
              -b "auth={authCookie}"
 /avatars:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/avatars?featured=true" \
+        curl -X GET "https://vrchat.com/api/1/avatars?featured=true" \
              -b "auth={authCookie}"
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://api.vrchat.cloud/api/1/avatars" \
+        curl -X POST "https://vrchat.com/api/1/avatars" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"assetUrl": "string", "id": "{avatarId}", "name": "string", "description": "string", "tags": ["string"], "imageUrl": "string", "releaseStatus": "public", "version": 1, "unityPackageUrl": "string"}'
@@ -21,33 +21,33 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
+        curl -X GET "https://vrchat.com/api/1/avatars/{avatarId}" \
              -b "auth={authCookie}"
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
+        curl -X PUT "https://vrchat.com/api/1/avatars/{avatarId}" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"assetUrl": "string", "id": "{avatarId}", "name": "string", "description": "string", "tags": ["string"], "imageUrl": "string", "releaseStatus": "public", "version": 1, "unityPackageUrl": "string"}'
   delete:
     - lang: cURL
       source: >-
-        curl -X DELETE "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
+        curl -X DELETE "https://vrchat.com/api/1/avatars/{avatarId}" \
              -b "auth={authCookie}"
 '/avatars/{avatarId}/select':
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/select" \
+        curl -X PUT "https://vrchat.com/api/1/avatars/{avatarId}/select" \
              -b "auth={authCookie}"
 '/avatars/{avatarId}/selectFallback':
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback"
+        curl -X PUT "https://vrchat.com/api/1/avatars/{avatarId}/selectFallback"
 '/users/{userId}/avatar':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/avatar" -b "auth={authCookie}"
+        curl -X GET "https://vrchat.com/api/1/users/{userId}/avatar" -b "auth={authCookie}"

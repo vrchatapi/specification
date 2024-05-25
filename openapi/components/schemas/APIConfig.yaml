@@ -234,7 +234,7 @@ example:
     - 'http://dbinj8iahsbec.cloudfront.net/'
     - 'https://dbinj8iahsbec.cloudfront.net/'
     - 'https://dev-api.vrchat.cloud/api/1/file/'
-    - 'https://api.vrchat.cloud/api/1/file/'
+    - 'https://vrchat.com/api/1/file/'
     - 'https://files.vrchat.cloud/unmanaged/'
   worldUpdatePeriod: 60
   player-url-resolver-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36

@@ -2,28 +2,28 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/auth/user/friends?offline=true" \
+        curl -X GET "https://vrchat.com/api/1/auth/user/friends?offline=true" \
              -b "auth={authCookie}"
 '/user/{userId}/friendRequest':
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
+        curl -X POST "https://vrchat.com/api/1/user/{userId}/friendRequest" \
              -b "auth={authCookie}"
   delete:
     - lang: cURL
       source: >-
-        curl -X DELETE "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
+        curl -X DELETE "https://vrchat.com/api/1/user/{userId}/friendRequest" \
              -b "auth={authCookie}"
 '/user/{userId}/friendStatus':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/user/{userId}/friendStatus" \
+        curl -X GET "https://vrchat.com/api/1/user/{userId}/friendStatus" \
              -b "auth={authCookie}"
 '/auth/user/friends/{userId}':
   delete:
     - lang: cURL
       source: >-
-        curl -X DELETE "https://api.vrchat.cloud/api/1/auth/user/friends/{userId}" \
+        curl -X DELETE "https://vrchat.com/api/1/auth/user/friends/{userId}" \
              -b "auth={authCookie}"

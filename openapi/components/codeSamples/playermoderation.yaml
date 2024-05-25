@@ -2,36 +2,36 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/auth/user/playermoderations?type=unmute&targetUserId={userId}" \
+        curl -X GET "https://vrchat.com/api/1/auth/user/playermoderations?type=unmute&targetUserId={userId}" \
              -b "auth={authCookie}"
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
+        curl -X POST "https://vrchat.com/api/1/auth/user/playermoderations" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
   delete:
     - lang: cURL
       source: >-
-        curl -X DELETE "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
+        curl -X DELETE "https://vrchat.com/api/1/auth/user/playermoderations" \
              -b "auth={authCookie}"
 '/auth/user/playermoderations/{playerModerationId}':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/auth/user/playermoderations/{playerModerationId}" \
+        curl -X GET "https://vrchat.com/api/1/auth/user/playermoderations/{playerModerationId}" \
              -b "auth={authCookie}"
   delete:
     - lang: cURL
       source: >-
-        curl -X DELETE "https://api.vrchat.cloud/api/1/auth/user/playermoderations/{playerModerationId}" \
+        curl -X DELETE "https://vrchat.com/api/1/auth/user/playermoderations/{playerModerationId}" \
              -b "auth={authCookie}"
 /auth/user/unplayermoderate:
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/unplayermoderate" \
+        curl -X PUT "https://vrchat.com/api/1/auth/user/unplayermoderate" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
