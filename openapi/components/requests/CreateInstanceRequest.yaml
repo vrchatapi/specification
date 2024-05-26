@@ -6,7 +6,7 @@ properties:
   type:
     $ref: ../schemas/InstanceType.yaml
   region:
-    $ref: ../schemas/Region.yaml
+    $ref: ../schemas/InstanceRegion.yaml
   ownerId:
     $ref: ../schemas/InstanceOwnerId.yaml
   roleIds:

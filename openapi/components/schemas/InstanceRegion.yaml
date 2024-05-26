@@ -1,0 +1,10 @@
+type: string
+title: InstanceRegion
+default: us
+example: us
+enum:
+  - us
+  - use
+  - eu
+  - jp
+description: Instance region
