@@ -6525,19 +6525,17 @@ components:
         - private
         - group
       description: ''
-    Region:
+    InstanceRegion:
       type: string
-      title: Region
+      title: InstanceRegion
       default: us
-      example: eu
+      example: us
       enum:
         - us
         - use
-        - usw
         - eu
         - jp
-        - unknown
-      description: API/Photon region.
+      description: Instance region
     InstanceOwnerId:
       example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: InstanceOwnerId
@@ -6563,7 +6561,7 @@ components:
         type:
           $ref: '#/components/schemas/InstanceType'
         region:
-          $ref: '#/components/schemas/Region'
+          $ref: '#/components/schemas/InstanceRegion'
         ownerId:
           $ref: '#/components/schemas/InstanceOwnerId'
         roleIds:
@@ -6595,6 +6593,19 @@ components:
         - worldId
         - type
         - region
+    Region:
+      type: string
+      title: Region
+      default: us
+      example: eu
+      enum:
+        - us
+        - use
+        - usw
+        - eu
+        - jp
+        - unknown
+      description: API/Photon region.
     InstancePlatforms:
       title: InstancePlatforms
       type: object
@@ -6665,7 +6676,7 @@ components:
         platforms:
           $ref: '#/components/schemas/InstancePlatforms'
         region:
-          $ref: '#/components/schemas/Region'
+          $ref: '#/components/schemas/InstanceRegion'
         secureName:
           type: string
           minLength: 1
