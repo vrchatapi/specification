@@ -1,0 +1,9 @@
+title: PipelineNotificationV2Delete
+type: object
+properties:
+  ids:
+    type: array
+    items:
+      $ref: ./NotificationID.yaml
+required:
+  - ids

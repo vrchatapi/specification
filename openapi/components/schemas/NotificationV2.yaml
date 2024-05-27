@@ -1,0 +1,112 @@
+title: NotificationV2
+type: object
+properties:
+  id:
+    $ref: ./NotificationID.yaml
+  version:
+    type: integer
+    example: 2
+  type:
+    type: string
+    description: 'almost certainly an enum'
+  category:
+    type: string
+    description: 'almost certainly an enum'
+  isSystem:
+    type: boolean
+    default: false
+  ignoreDND:
+    type: boolean
+    default: false
+  senderUserId:
+    $ref: ./UserID.yaml
+    nullable: true
+  senderUsername:
+    type: string
+    nullable: true
+    minLength: 1
+    deprecated: true
+    description: -|
+      **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
+  receiverUserId:
+    description: 'Not included in notification objects received from the REST API'
+    $ref: ./UserID.yaml
+  relatedNotificationsId:
+    $ref: ./NotificationID.yaml
+    nullable: true
+  title:
+    type: string
+  titleKey:
+    type: string
+    nullable: true
+    description: 'almost certainly an enum'
+  message:
+    type: string
+  messageKey:
+    type: string
+    nullable: true
+    description: 'almost certainly an enum'
+  imageUrl:
+    type: string
+  data:
+    type: object
+  link:
+    type: string
+  linkText:
+    type: string
+  linkTextKey:
+    type: string
+    nullable: true
+    description: 'almost certainly an enum'
+  responses:
+    type: array
+    items:
+      $ref: ./NotificationV2Response.yaml
+  expiresAt:
+    format: date-time
+    type: string
+  expiryAfterSeen:
+    type: integer
+    nullable: true
+  requireSeen:
+    type: boolean
+    default: false
+  seen:
+    type: boolean
+    default: false
+  canDelete:
+    type: boolean
+    default: false
+  createdAt:
+    format: date-time
+    type: string
+  updatedAt:
+    format: date-time
+    type: string
+required:
+  - id
+  - version
+  - type
+  - category
+  - isSystem
+  - ignoreDND
+  - senderUserId
+  - senderUsername
+  - receiverUserId
+  - relatedNotificationsId
+  - title
+  - titleKey
+  - message
+  - messageKey
+  - imageUrl
+  - link
+  - linkText
+  - linkTextKey
+  - responses
+  - expiresAt
+  - expiryAfterSeen
+  - requireSeen
+  - seen
+  - canDelete
+  - createdAt
+  - updatedAt

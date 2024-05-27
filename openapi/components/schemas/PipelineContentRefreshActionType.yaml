@@ -1,0 +1,6 @@
+title: PipelineContentRefreshActionType
+type: string
+enum:
+  - created
+  - deleted
+default: created

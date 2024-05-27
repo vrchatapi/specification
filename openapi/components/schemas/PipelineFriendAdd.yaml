@@ -1,0 +1,10 @@
+title: PipelineFriendAdd
+type: object
+properties:
+  userId:
+    $ref: ./UserID.yaml
+  user:
+    $ref: ./User.yaml
+required:
+  - userId
+  - user

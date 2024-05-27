@@ -1,0 +1,7 @@
+title: PipelineGroupMemberUpdated
+type: object
+properties:
+  member:
+    $ref: ./GroupMember.yaml
+required:
+  - member

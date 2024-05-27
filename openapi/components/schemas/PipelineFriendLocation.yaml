@@ -1,0 +1,27 @@
+title: PipelineFriendLocation
+type: object
+properties:
+  userId:
+    $ref: ./UserID.yaml
+  user:
+    $ref: ./User.yaml
+  platform:
+    $ref: ./Platform.yaml
+  location:
+    $ref: ./Location.yaml
+  canRequestInvite:
+    type: boolean
+    default: false
+  travelingToLocation:
+    $ref: ./Location.yaml
+    nullable: true
+  worldId:
+    $ref: ./WorldID.yaml
+required:
+  - userId
+  - user
+  - platform
+  - location
+  - canRequestInvite
+  - travelingToLocation
+  - worldId

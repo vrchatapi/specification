@@ -1,0 +1,7 @@
+title: PipelineMessageUserBadgeUnassigned
+type: object
+properties:
+  badgeId:
+    $ref: ./BadgeID.yaml
+required:
+  - badgeId

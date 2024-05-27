@@ -1,0 +1,10 @@
+title: PipelineContentRefresh
+type: object
+properties:
+  contentType:
+    $ref: ./PipelineContentRefreshContentType.yaml
+  actionType:
+    $ref: ./PipelineContentRefreshActionType.yaml
+required:
+  - contentType
+  - actionType

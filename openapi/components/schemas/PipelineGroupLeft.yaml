@@ -1,0 +1,7 @@
+title: PipelineGroupLeft
+type: object
+properties:
+  groupId:
+    $ref: ./GroupID.yaml
+required:
+  - groupId

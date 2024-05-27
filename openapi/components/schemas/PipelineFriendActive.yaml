@@ -1,0 +1,13 @@
+title: PipelineFriendActive
+type: object
+properties:
+  userId:
+    $ref: ./UserID.yaml
+  user:
+    $ref: ./User.yaml
+  platform:
+    $ref: ./Platform.yaml
+required:
+  - userId
+  - user
+  - platform

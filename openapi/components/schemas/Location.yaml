@@ -1,0 +1,4 @@
+type: string
+example: 'wrld_f73f6193-0b84-4f58-834c-2d6d411909c0:42069~hidden(usr_9664d091-ca57-43a5-8524-6a8f2a14de48)'
+title: Location
+description: Location can be: the empty string "", "offline", "traveling", "private", or "{WorldID}:{InstanceID}"
