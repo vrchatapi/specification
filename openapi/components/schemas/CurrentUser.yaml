@@ -91,6 +91,9 @@ properties:
     $ref: ./WorldID.yaml
   id:
     $ref: ./UserID.yaml
+  isBoopingEnabled:
+    default: true
+    type: boolean
   isFriend:
     default: false
     type: boolean
