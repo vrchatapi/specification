@@ -6176,6 +6176,7 @@ components:
         joinedAt:
           type: string
           format: date-time
+          nullable: true
         membershipStatus:
           $ref: '#/components/schemas/GroupMemberStatus'
         visibility:
