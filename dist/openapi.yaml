@@ -3854,6 +3854,9 @@ components:
           $ref: '#/components/schemas/WorldID'
         id:
           $ref: '#/components/schemas/UserID'
+        isBoopingEnabled:
+          default: true
+          type: boolean
         isFriend:
           default: false
           type: boolean
@@ -7929,6 +7932,8 @@ components:
           type: string
           minLength: 0
           maxLength: 32
+        isBoopingEnabled:
+          type: boolean
         userIcon:
           type: string
           description: MUST be a valid VRChat /file/ url.
