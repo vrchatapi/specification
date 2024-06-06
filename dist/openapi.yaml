@@ -3903,6 +3903,8 @@ components:
           $ref: '#/components/schemas/CurrentUserPresence'
         profilePicOverride:
           type: string
+        profilePicOverrideThumbnail:
+          type: string
         pronouns:
           type: string
         state:
@@ -3949,6 +3951,7 @@ components:
         - bio
         - bioLinks
         - profilePicOverride
+        - profilePicOverrideThumbnail
         - pronouns
         - statusDescription
         - pastDisplayNames
@@ -7850,6 +7853,8 @@ components:
           type: string
         profilePicOverride:
           type: string
+        profilePicOverrideThumbnail:
+          type: string
         pronouns:
           type: string
         state:
@@ -7896,6 +7901,7 @@ components:
         - last_login
         - last_platform
         - profilePicOverride
+        - profilePicOverrideThumbnail
         - pronouns
         - state
         - status
