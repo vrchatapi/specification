@@ -5249,6 +5249,7 @@ components:
         - requested
         - invited
         - banned
+        - userblocked
       default: inactive
       example: member
     GroupGalleryID:
