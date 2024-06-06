@@ -58,6 +58,8 @@ properties:
     type: string
   profilePicOverride:
     type: string
+  profilePicOverrideThumbnail:
+    type: string
   pronouns:
     type: string
   state:
@@ -105,6 +107,7 @@ required:
   - last_login
   - last_platform
   - profilePicOverride
+  - profilePicOverrideThumbnail
   - pronouns
   - state
   - status
