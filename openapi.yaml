@@ -4072,7 +4072,6 @@ components:
         id:
           $ref: '#/components/schemas/UnityPackageID'
         assetUrl:
-          minLength: 1
           type: string
           nullable: true
         assetUrlObject:
