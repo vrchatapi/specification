@@ -1,0 +1,28 @@
+title: PipelineMessageType
+type: string
+enum:
+  - notification
+  - notification-v2-update
+  - notification-v2-delete
+  - see-notification
+  - hide-notification
+  - clear-notification
+  - response-notification
+  - friend-add
+  - friend-delete
+  - friend-online
+  - friend-active
+  - friend-offline
+  - friend-update
+  - friend-location
+  - user-update
+  - user-location
+  - user-badge-assigned
+  - user-badge-unassigned
+  - content-refresh
+  - group-joined
+  - group-left
+  - group-member-updated
+  - group-role-updated
+  - instance-queue-joined
+  - instance-queue-ready

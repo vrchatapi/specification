@@ -1,0 +1,37 @@
+title: PipelineMessage
+type: object
+properties:
+  type:
+    $ref: ./PipelineMessageType.yaml
+  content:
+    type: string
+    nullable: true
+    description: |-
+      "notification": Notification (with objectified details field)
+      "notification-v2": NotificationV2
+      "notification-v2-update": PipelineNotificationV2Update
+      "notification-v2-delete": PipelineNotificationV2Delete
+      "see-notification": NotificationID (string)
+      "hide-notification": NotificationID (string)
+      "clear-notification": N/A
+      "response-notification": PipelineNotificationResponse
+      "friend-add": PipelineFriendAdd
+      "friend-delete": PipelineFriendDelete
+      "friend-online": PipelineFriendOnline
+      "friend-active": PipelineFriendActive
+      "friend-offline": PipelineFriendOffline
+      "friend-update": PipelineFriendUpdate
+      "friend-location": PipelineFriendLocation
+      "user-update": PipelineUserUpdate
+      "user-location": PipelineUserLocation
+      "user-badge-assigned": PipelineUserBadgeAssigned
+      "user-badge-unassigned": PipelineUserBadgeUnassigned
+      "content-refresh": PipelineContentRefresh
+      "group-joined": PipelineGroupJoined
+      "group-left": PipelineGroupLeft
+      "group-member-updated": PipelineGroupMemberUpdated
+      "group-role-updated": PipelineGroupRoleUpdated
+      "instance-queue-joined": PipelineInstanceQueueJoined
+      "instance-queue-ready": PipelineInstanceQueueReady
+required:
+  - type

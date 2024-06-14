@@ -1,0 +1,11 @@
+title: PipelineNotificationV2Update
+type: object
+properties:
+  id:
+    $ref: ./NotificationID.yaml
+  updates:
+    type: object
+    description: 'The contents of his object are to be merged with the NotificationV2 with the gived id'
+required:
+  - id
+  - updates

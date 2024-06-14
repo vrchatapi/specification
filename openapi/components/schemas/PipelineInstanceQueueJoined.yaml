@@ -1,0 +1,10 @@
+title: PipelineInstanceQueueJoined
+type: object
+properties:
+  instanceLocation:
+    $ref: ./Location.yaml
+  position:
+    type: integer
+required:
+  - instanceLocation
+  - position

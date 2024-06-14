@@ -1,0 +1,9 @@
+title: PipelineContentRefreshContentType
+type: string
+enum:
+  - gallery
+  - icon
+  - emoji
+  - avatar
+  - world
+default: gallery

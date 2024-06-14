@@ -1,0 +1,23 @@
+title: NotificationV2Response
+type: object
+properties:
+  type:
+    type: string
+    description: 'almost certainly an enum'
+  data:
+    type: string
+  icon:
+    type: string
+    description: 'almost certainly an enum'
+  text:
+    type: string
+  textKey:
+    type: string
+    nullable: true
+    description: 'almost certainly an enum'
+required:
+  - type
+  - data
+  - icon
+  - text
+  - textKey

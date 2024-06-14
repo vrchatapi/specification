@@ -1,0 +1,13 @@
+title: PipelineNotificationResponse
+type: object
+properties:
+  notificationId:
+    $ref: ./NotificationID.yaml
+  receiverId:
+    $ref: ./UserID.yaml
+  responseId:
+    $ref: ./NotificationID.yaml
+required:
+  - notificationId
+  - receiverId
+  - responseId

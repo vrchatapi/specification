@@ -1,0 +1,19 @@
+title: PipelineMessageUserLocation
+type: object
+properties:
+  userId:
+    $ref: ./UserID.yaml
+  user:
+    $ref: ./CurrentUser.yaml
+  platform:
+    $ref: ./Platform.yaml
+  location:
+    $ref: ./Location.yaml
+  worldId:
+    $ref: ./WorldID.yaml
+required:
+  - userId
+  - user
+  - platform
+  - location
+  - worldId

@@ -1,0 +1,7 @@
+title: PipelineFriendDelete
+type: object
+properties:
+  userId:
+    $ref: ./UserID.yaml
+required:
+  - userId

@@ -1,0 +1,7 @@
+title: PipelineGroupRoleUpdated
+type: object
+properties:
+  role:
+    $ref: ./GroupRole.yaml
+required:
+  - role

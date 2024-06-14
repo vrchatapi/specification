@@ -1,0 +1,11 @@
+title: PipelineInstanceQueueReady
+type: object
+properties:
+  instanceLocation:
+    $ref: ./Location.yaml
+  expiry:
+    format: date-time
+    type: string
+required:
+  - instanceLocation
+  - expiry
