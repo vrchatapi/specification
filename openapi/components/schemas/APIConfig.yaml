@@ -21,10 +21,46 @@ example:
         greatest source of <color='red'>compromised and stolen
         accounts</color>-- so please, do not use them!
   appName: VrChat
+  availableLanguageCodes:
+    - en
+    - fr
+    - es
+    - it
+    - ko
+    - de
+    - ja
+    - pl
+    - ru
+    - pt-BR
+    - zh-CN
+    - zh-HK
+    - tok
+  availableLanguages:
+    - English
+    - French
+    - Spanish
+    - Italian
+    - Korean
+    - German
+    - Japanese
+    - Polish
+    - Russian
+    - Portuguese, Brazilian
+    - Chinese Simplified
+  availableLanguages:
   buildVersionTag: master-build-2021-09-23-edith-x-clickbaitcloud
   clientApiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
   clientBPSCeiling: 18432
   clientDisconnectTimeout: 30000
+  clientNetDispatchThread: false
+  clientNetInThread: false
+  clientNetInThread2: false
+  clientNetInThreadMobile: false
+  clientNetInThreadMobile2: false
+  clientNetOutThread: false
+  clientNetOutThread2: false
+  clientNetOutThreadMobile: false
+  clientNetOutThreadMobile2: false
   clientReservedPlayerBPS: 7168
   clientSentCountAllowance: 15
   contactEmail: hello@vrchat.com
@@ -167,6 +203,30 @@ example:
   homeWorldId: wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd
   homepageRedirectTarget: 'https://hello.vrchat.com'
   hubWorldId: wrld_ba913a96-fac4-4048-a062-9aa5db092812
+  imageHostUrlList:
+    - "assets.vrchat.com"
+    - "i.imgur.com"
+    - "pbs.twimg.com"
+    - "cdn.discordapp.com"
+    - "i.redd.it"
+    - "images2.imgbox.com"
+    - "i.ibb.co"
+    - "i.postimg.cc"
+    - "images4.imagebam.com"
+    - "dl.dropbox.com"
+    - "*.github.io"
+    - "*.xr-marketplace.com"
+    - "*.uroom.online"
+    - "*.v-market.work"
+    - "*.vket.chat"
+    - "*.poly.jp"
+    - "*.vazar.jp"
+    - "*.catsudon.net"
+    - "dl.dropboxusercontent.com"
+    - "*.vazarapi.com"
+    - "ciel.topaz.chat"
+    - "vr-static.anique.jp"
+    - "*.vrcdn.cloud"
   jobsEmail: jobs@vrchat.com
   moderationEmail: moderation@vrchat.com
   notAllowedToSelectAvatarInPrivateWorldMessage: 'For security reasons, you''re not yet allowed to select avatars in private worlds or upload content. Please continue to enjoy VRChat and we''ll message you when you''ve been unlocked. Thanks and have fun!'
@@ -175,6 +235,22 @@ example:
   sdkNotAllowedToPublishMessage: "Welcome the VRChat SDK!\r\n\r\nBefore you can upload avatars or worlds to VRChat, you'll need to spend more time enjoying the app. We do this for security reasons, and so you can learn more about us.\r\n\r\nWhen you get the ability to upload, we will notify you via email and in VRChat. For now, you can learn and test on your own device.\r\n\r\nTo get started, check out the resources below.\r\n\r\nThank you for your patience, we can't wait to see what you'll build!"
   sdkUnityVersion: 2019.4.30f1
   serverName: prod-api-blue-house-fsm
+  stringHostUrlList:
+    - "*.github.io"
+    - "pastebin.com"
+    - "gist.githubusercontent.com"
+    - "api.fynn.ai"
+    - "api-dev.fynn.ai"
+    - "*.xr-marketplace.com"
+    - "*.uroom.online"
+    - "*.v-market.work"
+    - "*.vket.chat"
+    - "*.poly.jp"
+    - "*.vazar.jp"
+    - "*.catsudon.net"
+    - "*.vazarapi.com"
+    - "vr.anique.jp"
+    - "*.vrcdn.cloud"
   supportEmail: support@vrchat.com
   timeOutWorldId: wrld_5b89c79e-c340-4510-be1b-476e9fcdedcc
   tutorialWorldId: wld_7d3d25ec-663e-406e-96a3-e2c4fc0d8104
@@ -222,6 +298,7 @@ example:
     - 'https://vrchat.com/api/1/file/'
     - 'https://files.vrchat.cloud/unmanaged/'
   player-url-resolver-version: '2021-05-16'
+  player-url-resolver-sha1: 'CA-24-0C-BA-B0-46-5A-FE-84-A6-02-62-E3-56-36-E8-34-0E-B7-EA'
 title: APIConfig
 type: object
 description: ''
@@ -251,6 +328,16 @@ properties:
     description: Game name
     minLength: 1
     type: string
+  availableLanguageCodes:
+    description: List of supported Languages
+    type: array
+    items:
+      type: string
+  availableLanguages:
+    description: List of supported Languages
+    type: array
+    items:
+      type: string
   buildVersionTag:
     description: Build tag of the API server
     minLength: 1
@@ -267,6 +354,42 @@ properties:
     default: 30000
     description: Unknown
     type: integer
+  clientNetDispatchThread:
+    default: false
+    description: Unknown
+    type: boolean
+  clientNetInThread:
+    default: false
+    description: Unknown
+    type: boolean
+  clientNetInThread2:
+    default: false
+    description: Unknown
+    type: boolean
+  clientNetInThreadMobile:
+    default: false
+    description: Unknown
+    type: boolean
+  clientNetInThreadMobile2:
+    default: false
+    description: Unknown
+    type: boolean
+  clientNetOutThread:
+    default: false
+    description: Unknown
+    type: boolean
+  clientNetOutThread2:
+    default: false
+    description: Unknown
+    type: boolean
+  clientNetOutThreadMobile:
+    default: false
+    description: Unknown
+    type: boolean
+  clientNetOutThreadMobile2:
+    default: false
+    description: Unknown
+    type: boolean
   clientReservedPlayerBPS:
     default: 7168
     description: Unknown
@@ -391,6 +514,11 @@ properties:
     type: string
   hubWorldId:
     $ref: ./WorldID.yaml
+  imageHostUrlList:
+    description: Allowed hosts, where string data can be loaded from.
+    type: array
+    items:
+      type: string
   jobsEmail:
     description: VRChat's job application email
     minLength: 1
@@ -423,6 +551,11 @@ properties:
     description: Server name of the API server currently responding
     minLength: 1
     type: string
+  stringHostUrlList:
+    description: Allowed hosts, where string data can be loaded from.
+    type: array
+    items:
+      type: string
   supportEmail:
     description: VRChat's support email
     minLength: 1
@@ -468,6 +601,10 @@ properties:
     description: Currently used youtube-dl.exe version
     minLength: 1
     type: string
+  player-url-resolver-sha1:
+    description: Currently used youtube-dl.exe hash in SHA1-delimited format
+    minLength: 1
+    type: string
 required:
   - VoiceEnableDegradation
   - VoiceEnableReceiverLimiting
@@ -510,6 +647,7 @@ required:
   - homeWorldId
   - homepageRedirectTarget
   - hubWorldId
+  - imageHostUrlList
   - jobsEmail
   - moderationEmail
   - notAllowedToSelectAvatarInPrivateWorldMessage
@@ -518,6 +656,7 @@ required:
   - sdkNotAllowedToPublishMessage
   - sdkUnityVersion
   - serverName
+  - stringHostUrlList
   - supportEmail
   - timeOutWorldId
   - tutorialWorldId
