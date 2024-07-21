@@ -245,7 +245,7 @@ properties:
   hubWorldId:
     $ref: ./WorldID.yaml
   imageHostUrlList:
-    description: Allowed hosts, where string data can be loaded from.
+    description: A list of explicitly allowed origins that worlds can request images from via the Udon's [VRCImageDownloader#DownloadImage](https://creators.vrchat.com/worlds/udon/image-loading/#downloadimage).
     type: array
     items:
       type: string
@@ -282,7 +282,7 @@ properties:
     minLength: 1
     type: string
   stringHostUrlList:
-    description: Allowed hosts, where string data can be loaded from.
+    description: A list of explicitly allowed origins that worlds can request strings from via the Udon's [VRCStringDownloader.LoadUrl](https://creators.vrchat.com/worlds/udon/string-loading/#ivrcstringdownload).
     type: array
     items:
       type: string
