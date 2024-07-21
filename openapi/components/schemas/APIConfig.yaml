@@ -89,6 +89,10 @@ properties:
     default: false
     description: Unknown
     type: boolean
+  clientQR:
+    default: 1
+    description: Unknown
+    type: integer
   clientReservedPlayerBPS:
     default: 7168
     description: Unknown
@@ -105,6 +109,10 @@ properties:
     description: VRChat's copyright-issues-related email
     minLength: 1
     type: string
+  currentPrivacyVersion:
+    default: 1
+    description: Current version number of the Privacy Agreement
+    type: integer
   currentTOSVersion:
     example: 7
     description: Current version number of the Terms of Service
@@ -114,6 +122,11 @@ properties:
     $ref: ./AvatarID.yaml
   deploymentGroup:
     $ref: ./DeploymentGroup.yaml
+  devLanguageCodes:
+   type: array
+   description: Unknown
+   items:
+     type: string
   devSdkUrl:
     deprecated: true
     description: 'Link to download the development SDK, use downloadUrls instead'
@@ -128,6 +141,10 @@ properties:
     description: 'Unknown, "dis" maybe for disconnect?'
     format: date-time
     type: string
+  disableAVProInProton:
+    default: false
+    description: Unknown
+    type: boolean
   disableAvatarCopying:
     default: false
     description: Toggles if copying avatars should be disabled
@@ -146,6 +163,10 @@ properties:
     type: boolean
   disableEmail:
     default: false
+    description: Unknown
+    type: boolean
+  disableCaptcha:
+    default: true
     description: Unknown
     type: boolean
   disableEventStream:
@@ -202,6 +223,16 @@ properties:
     uniqueItems: true
     items:
       $ref: ./DynamicContentRow.yaml
+  economyPauseEnd:
+    description: Unknown
+    type: string
+  economyPauseStart:
+    description: Unknown
+    type: string
+  economyState:
+    default: 1
+    description: Unknown
+    type: integer
   events:
     $ref: ./APIConfigEvents.yaml
   homeWorldId:
