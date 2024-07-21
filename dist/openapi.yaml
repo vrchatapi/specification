@@ -7850,6 +7850,8 @@ components:
           $ref: '#/components/schemas/WorldID'
         note:
           type: string
+        platform:
+          type: string
         profilePicOverride:
           type: string
         profilePicOverrideThumbnail:
@@ -7899,6 +7901,7 @@ components:
         - last_activity
         - last_login
         - last_platform
+        - platform
         - profilePicOverride
         - profilePicOverrideThumbnail
         - pronouns
