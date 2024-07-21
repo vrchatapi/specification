@@ -611,6 +611,8 @@ required:
   - address
   - announcements
   - appName
+  - availableLanguageCodes
+  - availableLanguages
   - buildVersionTag
   - clientApiKey
   - clientBPSCeiling
