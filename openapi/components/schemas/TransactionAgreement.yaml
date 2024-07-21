@@ -3,6 +3,7 @@ type: object
 example:
   agreementId: '1234567890123456789'
   itemId: 5000
+  agreement: ''
   status: Active
   period: year
   frequency: 1
@@ -24,6 +25,8 @@ properties:
     minLength: 1
   itemId:
     type: number
+  agreement:
+    type: string
   status:
     type: string
     minLength: 1
@@ -67,6 +70,7 @@ properties:
 required:
   - agreementId
   - itemId
+  - agreement
   - status
   - period
   - frequency
