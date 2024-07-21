@@ -402,3 +402,4 @@ required:
   - viveWindowsUrl
   - whiteListedAssetUrls
   - player-url-resolver-version
+  - player-url-resolver-sha1
