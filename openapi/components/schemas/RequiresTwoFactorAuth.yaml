@@ -1,0 +1,9 @@
+title: RequiresTwoFactorAuth
+type: object
+properties:
+  requiresTwoFactorAuth:
+    type: array
+    items:
+      type: string
+required:
+  - requiresTwoFactorAuth
