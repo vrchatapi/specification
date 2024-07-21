@@ -77,7 +77,7 @@ paths:
         $ref: "../codeSamples/files.yaml#/~1file~1{fileId}/delete"
       responses:
         '200':
-          $ref: ../responses/files/FileDeletedSuccess.yaml
+          $ref: ../responses/files/FileResponse.yaml
         '404':
           $ref: ../responses/files/FileDeletedError.yaml
       tags:
@@ -116,6 +116,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/files/RawFileResponse.yaml
+        '404':
+          $ref: ../responses/files/FileNotFoundError.yaml
       operationId: downloadFileVersion
       security:
         - authCookie: []
