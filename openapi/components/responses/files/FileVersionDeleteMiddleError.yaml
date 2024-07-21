@@ -1,4 +1,4 @@
-description: Error response when trying to delete any version of a file that is not hte last one.
+description: Error response when trying to delete any version of a file that is not the last one.
 content:
   application/json:
     schema:
