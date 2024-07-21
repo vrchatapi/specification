@@ -32,11 +32,8 @@ example:
   currentTOSVersion: 7
   defaultAvatar: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
   deploymentGroup: blue
-  devAppVersionStandalone: 0.12.0p3
-  devDownloadLinkWindows: www.vrchat.net
   devSdkUrl: 'https://vrchat.com/home/download'
   devSdkVersion: 2020.09.25.00.08
-  devServerVersionStandalone: dev_server_01
   dis-countdown: '2021-01-01T01:01:01.000Z'
   disableAvatarCopying: false
   disableAvatarGating: false
@@ -167,20 +164,12 @@ example:
     playerOrderFactor: 55
     slowUpdateFactorThreshold: 25
     viewSegmentLength: 5
-  gearDemoRoomId: '2282253502'
   homeWorldId: wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd
   homepageRedirectTarget: 'https://hello.vrchat.com'
   hubWorldId: wrld_ba913a96-fac4-4048-a062-9aa5db092812
   jobsEmail: jobs@vrchat.com
-  messageOfTheDay: hello world
   moderationEmail: moderation@vrchat.com
-  moderationQueryPeriod: 60
   notAllowedToSelectAvatarInPrivateWorldMessage: 'For security reasons, you''re not yet allowed to select avatars in private worlds or upload content. Please continue to enjoy VRChat and we''ll message you when you''ve been unlocked. Thanks and have fun!'
-  plugin: no_kick_unlisted
-  releaseAppVersionStandalone: 0.12.0p3
-  releaseSdkUrl: 'http://files.vrchat.cloud/sdk/VRCSDK-2019.09.18.12.05_Public.unitypackage'
-  releaseSdkVersion: VRCSDK-2019.09.18.12.05_Public
-  releaseServerVersionStandalone: public_server_01
   sdkDeveloperFaqUrl: 'https://docs.vrchat.com/docs/frequently-asked-questions#section-why-can-t-i-upload-content-yet-'
   sdkDiscordUrl: 'https://discord.gg/vrchat'
   sdkNotAllowedToPublishMessage: "Welcome the VRChat SDK!\r\n\r\nBefore you can upload avatars or worlds to VRChat, you'll need to spend more time enjoying the app. We do this for security reasons, and so you can learn more about us.\r\n\r\nWhen you get the ability to upload, we will notify you via email and in VRChat. For now, you can learn and test on your own device.\r\n\r\nTo get started, check out the resources below.\r\n\r\nThank you for your patience, we can't wait to see what you'll build!"
@@ -224,10 +213,6 @@ example:
     - movie.cdn.v-market.work
     - wrs.nedo.go.jp
   useReliableUdpForVoice: false
-  userUpdatePeriod: 60
-  userVerificationDelay: 5
-  userVerificationRetry: 30
-  userVerificationTimeout: 60
   viveWindowsUrl: 'http://store.steampowered.com/app/438100/'
   whiteListedAssetUrls:
     - 'http://dbinj8iahsbec.cloudfront.net/plugins'
@@ -236,8 +221,6 @@ example:
     - 'https://dev-api.vrchat.cloud/api/1/file/'
     - 'https://vrchat.com/api/1/file/'
     - 'https://files.vrchat.cloud/unmanaged/'
-  worldUpdatePeriod: 60
-  player-url-resolver-hash: E3-C6-63-C3-27-3F-1C-47-48-C6-A7-52-A1-53-03-A5-10-6C-45-37-B1-C3-14-70-BA-44-1F-AE-0E-B2-32-36
   player-url-resolver-version: '2021-05-16'
 title: APIConfig
 type: object
@@ -309,16 +292,6 @@ properties:
     $ref: ./AvatarID.yaml
   deploymentGroup:
     $ref: ./DeploymentGroup.yaml
-  devAppVersionStandalone:
-    deprecated: true
-    description: Version number for game development build
-    minLength: 1
-    type: string
-  devDownloadLinkWindows:
-    deprecated: true
-    description: Developer Download link
-    minLength: 1
-    type: string
   devSdkUrl:
     deprecated: true
     description: 'Link to download the development SDK, use downloadUrls instead'
@@ -327,11 +300,6 @@ properties:
   devSdkVersion:
     deprecated: true
     description: Version of the development SDK
-    minLength: 1
-    type: string
-  devServerVersionStandalone:
-    deprecated: true
-    description: Version number for server development build
     minLength: 1
     type: string
   dis-countdown:
@@ -414,11 +382,6 @@ properties:
       $ref: ./DynamicContentRow.yaml
   events:
     $ref: ./APIConfigEvents.yaml
-  gearDemoRoomId:
-    deprecated: true
-    description: Unknown
-    minLength: 1
-    type: string
   homeWorldId:
     $ref: ./WorldID.yaml
   homepageRedirectTarget:
@@ -432,44 +395,12 @@ properties:
     description: VRChat's job application email
     minLength: 1
     type: string
-  messageOfTheDay:
-    deprecated: true
-    description: MOTD
-    minLength: 1
-    type: string
   moderationEmail:
     description: VRChat's moderation related email
     minLength: 1
     type: string
-  moderationQueryPeriod:
-    description: Unknown
-    type: integer
   notAllowedToSelectAvatarInPrivateWorldMessage:
     description: Used in-game to notify a user they aren't allowed to select avatars in private worlds
-    minLength: 1
-    type: string
-  plugin:
-    description: 'Extra [plugin](https://doc.photonengine.com/en-us/server/current/plugins/manual) to run in each instance'
-    minLength: 1
-    type: string
-  releaseAppVersionStandalone:
-    deprecated: true
-    description: Version number for game release build
-    minLength: 1
-    type: string
-  releaseSdkUrl:
-    deprecated: true
-    description: Link to download the release SDK
-    minLength: 1
-    type: string
-  releaseSdkVersion:
-    deprecated: true
-    description: Version of the release SDK
-    minLength: 1
-    type: string
-  releaseServerVersionStandalone:
-    deprecated: true
-    description: Version number for server release build
     minLength: 1
     type: string
   sdkDeveloperFaqUrl:
@@ -524,18 +455,6 @@ properties:
     default: false
     description: Unknown
     type: boolean
-  userUpdatePeriod:
-    description: Unknown
-    type: integer
-  userVerificationDelay:
-    description: Unknown
-    type: integer
-  userVerificationRetry:
-    description: Unknown
-    type: integer
-  userVerificationTimeout:
-    description: Unknown
-    type: integer
   viveWindowsUrl:
     description: Download link for game on the Steam website.
     minLength: 1
@@ -545,13 +464,6 @@ properties:
     type: array
     items:
       type: string
-  worldUpdatePeriod:
-    description: Unknown
-    type: integer
-  player-url-resolver-hash:
-    description: Currently used youtube-dl.exe hash in SHA-256-delimited format
-    minLength: 1
-    type: string
   player-url-resolver-version:
     description: Currently used youtube-dl.exe version
     minLength: 1
@@ -573,11 +485,8 @@ required:
   - currentTOSVersion
   - defaultAvatar
   - deploymentGroup
-  - devAppVersionStandalone
-  - devDownloadLinkWindows
   - devSdkUrl
   - devSdkVersion
-  - devServerVersionStandalone
   - dis-countdown
   - disableAvatarCopying
   - disableAvatarGating
@@ -598,20 +507,12 @@ required:
   - downloadUrls
   - dynamicWorldRows
   - events
-  - gearDemoRoomId
   - homeWorldId
   - homepageRedirectTarget
   - hubWorldId
   - jobsEmail
-  - messageOfTheDay
   - moderationEmail
-  - moderationQueryPeriod
   - notAllowedToSelectAvatarInPrivateWorldMessage
-  - plugin
-  - releaseAppVersionStandalone
-  - releaseSdkUrl
-  - releaseSdkVersion
-  - releaseServerVersionStandalone
   - sdkDeveloperFaqUrl
   - sdkDiscordUrl
   - sdkNotAllowedToPublishMessage
@@ -627,12 +528,6 @@ required:
   - uploadAnalysisPercent
   - urlList
   - useReliableUdpForVoice
-  - userUpdatePeriod
-  - userVerificationDelay
-  - userVerificationRetry
-  - userVerificationTimeout
   - viveWindowsUrl
   - whiteListedAssetUrls
-  - worldUpdatePeriod
-  - player-url-resolver-hash
   - player-url-resolver-version
