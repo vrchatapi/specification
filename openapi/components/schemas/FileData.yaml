@@ -31,7 +31,6 @@ properties:
 required:
   - category
   - fileName
-  - md5
   - sizeInBytes
   - status
   - uploadId
