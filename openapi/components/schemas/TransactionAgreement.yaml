@@ -1,4 +1,4 @@
-description: ''
+description: 'Represents a single Transaction, which is likely between VRChat and Steam.'
 type: object
 properties:
   agreementId:
