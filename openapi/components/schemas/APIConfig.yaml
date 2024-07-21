@@ -47,7 +47,6 @@ example:
     - Russian
     - Portuguese, Brazilian
     - Chinese Simplified
-  availableLanguages:
   buildVersionTag: master-build-2021-09-23-edith-x-clickbaitcloud
   clientApiKey: JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26
   clientBPSCeiling: 18432
