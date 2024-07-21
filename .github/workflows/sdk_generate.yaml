@@ -17,8 +17,9 @@ jobs:
           - java
           - rust
           - elixir
+          - dart
     steps:
-      - name: Triggering build SDK - ${{ matrix.node }}
+      - name: Triggering build SDK - ${{ matrix.project }}
         run: |
           curl -X POST https://api.github.com/repos/vrchatapi/vrchatapi-${{ matrix.project }}/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
