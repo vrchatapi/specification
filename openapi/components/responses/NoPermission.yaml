@@ -4,7 +4,7 @@ content:
     schema:
       $ref: ../schemas/Error.yaml
     examples:
-      NoPermission:
+      No Permission Example:
         value:
           error:
             message: You don't have permission․
