@@ -344,3 +344,9 @@ branch:
     default: main
   allowEmptyValue: true
   description: Specifies which git branch the site should load frontend source code from.
+fuzzy:
+  name: fuzzy
+  in: query
+  required: false
+  schema:
+    type: boolean
