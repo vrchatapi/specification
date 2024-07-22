@@ -1,29 +1,13 @@
-description: ''
+description: 'Represents a single Transaction, which is likely between VRChat and Steam.'
 type: object
-example:
-  agreementId: '1234567890123456789'
-  itemId: 5000
-  status: Active
-  period: year
-  frequency: 1
-  billingType: Steam
-  startDate: '20220301'
-  endDate: Infinite time value
-  recurringAmt: 9999
-  currency: USD
-  timeCreated: '20201201'
-  nextPayment: '20220301'
-  lastPayment: NIL
-  lastAmount: 0
-  lastAmountVat: 0
-  outstanding: 0
-  failedAttempts: 0
 properties:
   agreementId:
     type: string
     minLength: 1
   itemId:
     type: number
+  agreement:
+    type: string
   status:
     type: string
     minLength: 1
@@ -67,6 +51,7 @@ properties:
 required:
   - agreementId
   - itemId
+  - agreement
   - status
   - period
   - frequency
