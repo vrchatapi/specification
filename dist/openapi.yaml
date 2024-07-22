@@ -3231,6 +3231,7 @@ paths:
         - $ref: '#/components/parameters/maxUnityVersion'
         - $ref: '#/components/parameters/minUnityVersion'
         - $ref: '#/components/parameters/platform'
+        - $ref: '#/components/parameters/fuzzy'
       description: Search and list any worlds by query filters.
     post:
       summary: Create World
@@ -10172,3 +10173,9 @@ components:
         default: main
       allowEmptyValue: true
       description: Specifies which git branch the site should load frontend source code from.
+    fuzzy:
+      name: fuzzy
+      in: query
+      required: false
+      schema:
+        type: boolean
