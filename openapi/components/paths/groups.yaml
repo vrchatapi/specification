@@ -547,6 +547,8 @@ paths:
           $ref: ../responses/groups/GroupLimitedMemberResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         '404':
           $ref: ../responses/groups/GroupNotFoundError.yaml
       security:
