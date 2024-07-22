@@ -1823,6 +1823,8 @@ paths:
           $ref: '#/components/responses/GroupLimitedMemberResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/GroupNotMemberError'
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
