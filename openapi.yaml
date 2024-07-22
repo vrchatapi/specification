@@ -4572,58 +4572,54 @@ components:
     UserSubscription:
       type: object
       description: ''
-      example:
-        id: vrchatplus-yearly
-        transactionId: txn_63231aa6-8b7a-49ff-a106-d5678f8318b1
-        store: Steam
-        steamItemId: '5000'
-        amount: 9999
-        description: VRChat Plus (Yearly)
-        period: year
-        tier: 5
-        active: true
-        status: active
-        expires: '2022-03-04T00:00:00.000Z'
-        created_at: '2020-12-04T13:09:54.344Z'
-        updated_at: '2020-12-10T19:53:45.362Z'
-        licenseGroups:
-          - lgrp_608513da-b213-4e15-80af-bd88c27f0979
-        isGift: false
       properties:
         id:
           type: string
           minLength: 1
+          example: vrchatplus-yearly
         transactionId:
           $ref: '#/components/schemas/TransactionID'
         store:
           type: string
           minLength: 1
           description: Which "Store" it came from. Right now only Stores are "Steam" and "Admin".
+          example: Steam
         steamItemId:
           type: string
           minLength: 1
+          example: '5000'
         amount:
           type: number
+          example: 9999
         description:
           type: string
+          example: VRChat Plus (Yearly)
         period:
           $ref: '#/components/schemas/SubscriptionPeriod'
         tier:
           type: number
+          example: 5
         active:
           type: boolean
           default: true
         status:
           $ref: '#/components/schemas/TransactionStatus'
+        starts:
+          type: string
+          format: date-time
+          example: '2022-03-04T00:00:00.000Z'
         expires:
           type: string
           format: date-time
+          example: '2022-03-04T00:00:00.000Z'
         created_at:
           type: string
           format: date-time
+          example: '2022-03-04T00:00:00.000Z'
         updated_at:
           type: string
           format: date-time
+          example: '2022-03-04T00:00:00.000Z'
         licenseGroups:
           type: array
           items:
