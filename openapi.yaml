@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.18.0
+  version: 1.18.1
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -48,8 +48,7 @@ info:
     </div>
 
     <div class="callout callout-info">
-      <strong>ℹ️ API Key and Authentication</strong><br>
-      The API Key has always been the same and is currently <code>JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26</code>.
+      <strong>ℹ️ Authentication</strong><br>
       Read <a href="#tag--authentication">Authentication</a> for how to log in.
     </div>
 
