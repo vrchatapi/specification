@@ -35,7 +35,6 @@ properties:
     $ref: ./TransactionStatus.yaml
   starts:
     type: string
-    minLength: 1
     format: date-time
     example: '2022-03-04T00:00:00.000Z'
   expires:
