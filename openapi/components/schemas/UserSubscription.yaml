@@ -37,7 +37,7 @@ properties:
   period:
     $ref: ./SubscriptionPeriod.yaml
   tier:
-    type: number
+    type: integer
   active:
     type: boolean
     default: true

@@ -5,12 +5,12 @@ properties:
     type: string
     minLength: 1
   signatureSizeInBytes:
-    type: number
+    type: integer
   fileMd5:
     type: string
     minLength: 1
   fileSizeInBytes:
-    type: number
+    type: integer
 required:
   - signatureMd5
   - signatureSizeInBytes
