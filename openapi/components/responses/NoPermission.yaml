@@ -1,0 +1,11 @@
+description: Error response due to missing permissions.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      Missing Credentials Example:
+        value:
+          error:
+            message: '"You don't have permission․"'
+            status_code: 403
