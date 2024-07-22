@@ -26,6 +26,9 @@ properties:
     default: true
   status:
     $ref: ./TransactionStatus.yaml
+  starts:
+    type: string
+    format: date-time
   expires:
     type: string
     format: date-time
