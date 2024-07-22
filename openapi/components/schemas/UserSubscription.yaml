@@ -28,6 +28,7 @@ properties:
     $ref: ./TransactionStatus.yaml
   starts:
     type: string
+    minLength: 1
     format: date-time
   expires:
     type: string
