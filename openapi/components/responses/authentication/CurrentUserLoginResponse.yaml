@@ -4,7 +4,7 @@ content:
     schema:
       oneOf:
         - $ref: ../../schemas/CurrentUser.yaml
-        - $ref: ../../schemas/RequiresTwoFactorAuth.yaml
+        - $ref: ../../schemas/TwoFactorRequired.yaml
 headers:
   Set-Cookie:
     schema:

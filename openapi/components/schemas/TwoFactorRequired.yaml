@@ -1,4 +1,4 @@
-title: RequiresTwoFactorAuth
+title: TwoFactorRequired
 type: object
 properties:
   requiresTwoFactorAuth:
