@@ -1,22 +1,5 @@
 type: object
 description: ''
-example:
-  id: vrchatplus-yearly
-  transactionId: txn_63231aa6-8b7a-49ff-a106-d5678f8318b1
-  store: Steam
-  steamItemId: '5000'
-  amount: 9999
-  description: VRChat Plus (Yearly)
-  period: year
-  tier: 5
-  active: true
-  status: active
-  expires: '2022-03-04T00:00:00.000Z'
-  created_at: '2020-12-04T13:09:54.344Z'
-  updated_at: '2020-12-10T19:53:45.362Z'
-  licenseGroups:
-    - lgrp_608513da-b213-4e15-80af-bd88c27f0979
-  isGift: false
 properties:
   id:
     type: string
