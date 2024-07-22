@@ -30,7 +30,6 @@ properties:
   active:
     type: boolean
     default: true
-    example: true
   status:
     $ref: ./TransactionStatus.yaml
   starts:
@@ -56,7 +55,6 @@ properties:
   isGift:
     type: boolean
     default: false
-    example: false
 required:
   - id
   - transactionId
