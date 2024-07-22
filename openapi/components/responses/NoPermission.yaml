@@ -7,5 +7,5 @@ content:
       Missing Credentials Example:
         value:
           error:
-            message: '"You don't have permission․"'
+            message: You don't have permission․
             status_code: 403
