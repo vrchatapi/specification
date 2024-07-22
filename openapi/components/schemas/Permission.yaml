@@ -11,6 +11,8 @@ example:
 properties:
   id:
     $ref: ./PermissionID.yaml
+  ownerDisplayName:
+    type: string
   name:
     example: permission-invite-photos
     minLength: 1
@@ -22,6 +24,7 @@ properties:
 required:
   - id
   - ownerId
+  - ownerDisplayName
   - name
 title: Permission
 type: object
