@@ -174,7 +174,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/email'
         - $ref: '#/components/parameters/displayName'
-        - $ref: '#/components/parameters/userIdQuery'
+        - $ref: '#/components/parameters/usernameQuery'
         - $ref: '#/components/parameters/excludeUserId'
       description: |-
         Checks if a user by a given `username`, `displayName` or `email` exist. This is used during registration to check if a username has already been taken, during change of displayName to check if a displayName is available, and during change of email to check if the email is already used. In the later two cases the `excludeUserId` is used to exclude oneself, otherwise the result would always be true.
@@ -9836,13 +9836,13 @@ components:
       schema:
         type: string
       description: Filter by displayName.
-    userIdQuery:
-      name: userId
+    usernameQuery:
+      name: username
       in: query
       required: false
       schema:
         type: string
-      description: Filter by UserID.
+      description: Filter by Username.
     excludeUserId:
       name: excludeUserId
       in: query
@@ -9871,6 +9871,13 @@ components:
       schema:
         $ref: '#/components/schemas/SortOption'
       description: The sort order of the results.
+    userIdQuery:
+      name: userId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by UserID.
     number:
       name: 'n'
       in: query
