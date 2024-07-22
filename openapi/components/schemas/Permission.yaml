@@ -1,13 +1,4 @@
 description: ''
-example:
-  data:
-    maxFavoriteGroups:
-      avatar: 4
-    maxFavoritesPerGroup:
-      avatar: 25
-  id: prms_804ba021-9f47-4e25-9847-1f42fdb2e6ff
-  name: permission-extra-favorites-avatar-groups
-  ownerId: usr_17f19d1e-fd48-493b-a8ad-807a3d8bdd1b
 properties:
   id:
     $ref: ./PermissionID.yaml
