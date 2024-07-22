@@ -5,5 +5,9 @@ properties:
     type: array
     items:
       type: string
+      enum:
+        - totp
+        - otp
+        - emailOtp
 required:
   - requiresTwoFactorAuth
