@@ -4590,20 +4590,15 @@ components:
           $ref: '#/components/schemas/TransactionStatus'
         starts:
           type: string
-          format: date-time
-          example: '2022-03-04T00:00:00.000Z'
         expires:
           type: string
           format: date-time
-          example: '2022-03-04T00:00:00.000Z'
         created_at:
           type: string
           format: date-time
-          example: '2022-03-04T00:00:00.000Z'
         updated_at:
           type: string
           format: date-time
-          example: '2022-03-04T00:00:00.000Z'
         licenseGroups:
           type: array
           items:
@@ -5428,8 +5423,10 @@ components:
             $ref: '#/components/schemas/GroupRoleID'
         acceptedByDisplayName:
           type: string
+          nullable: true
         acceptedById:
           $ref: '#/components/schemas/UserID'
+          nullable: true
         createdAt:
           type: string
           format: date-time
@@ -5462,6 +5459,7 @@ components:
         lastPostReadAt:
           type: string
           format: date-time
+          nullable: true
         mRoleIds:
           type: array
           items:
@@ -5559,14 +5557,13 @@ components:
         joinState:
           $ref: '#/components/schemas/GroupJoinState'
         tags:
-          description: ' '
           type: array
           items:
             $ref: '#/components/schemas/Tag'
         transferTargetId:
           $ref: '#/components/schemas/UserID'
+          nullable: true
         galleries:
-          description: ' '
           type: array
           items:
             $ref: '#/components/schemas/GroupGallery'
@@ -5579,6 +5576,7 @@ components:
         lastPostCreatedAt:
           type: string
           format: date-time
+          nullable: true
         onlineMemberCount:
           type: integer
         membershipStatus:
