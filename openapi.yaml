@@ -1479,6 +1479,8 @@ paths:
           $ref: '#/components/responses/GroupMemberListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/NoPermission'
         '404':
           $ref: '#/components/responses/GroupNotFoundError'
       security:
@@ -9000,6 +9002,18 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/GroupMember'
+    NoPermission:
+      description: Error response due to missing permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            No Permission Example:
+              value:
+                error:
+                  message: You don't have permission․
+                  status_code: 403
     GroupMemberResponse:
       description: Returns a list of GroupMember objects.
       content:
