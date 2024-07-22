@@ -7902,7 +7902,6 @@ components:
         - last_activity
         - last_login
         - last_platform
-        - platform
         - profilePicOverride
         - profilePicOverrideThumbnail
         - pronouns
