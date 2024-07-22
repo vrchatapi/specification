@@ -13,8 +13,10 @@ properties:
       $ref: ./GroupRoleID.yaml
   acceptedByDisplayName:
     type: string
+    nullable: true
   acceptedById:
     $ref: ./UserID.yaml
+    nullable: true
   createdAt:
     type: string
     format: date-time
@@ -47,6 +49,7 @@ properties:
   lastPostReadAt:
     type: string
     format: date-time
+    nullable: true
   mRoleIds:
     type: array
     items:

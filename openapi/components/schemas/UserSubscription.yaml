@@ -1,27 +1,27 @@
 type: object
-description: ''
+description: ""
 properties:
   id:
     type: string
     minLength: 1
-    example: 'vrchatplus-yearly'
+    example: "vrchatplus-yearly"
   transactionId:
     $ref: ./TransactionID.yaml
   store:
     type: string
     minLength: 1
     description: Which "Store" it came from. Right now only Stores are "Steam" and "Admin".
-    example: 'Steam'
+    example: "Steam"
   steamItemId:
     type: string
     minLength: 1
-    example: '5000'
+    example: "5000"
   amount:
     type: number
     example: 9999
   description:
     type: string
-    example: 'VRChat Plus (Yearly)'
+    example: "VRChat Plus (Yearly)"
   period:
     $ref: ./SubscriptionPeriod.yaml
   tier:
@@ -34,20 +34,15 @@ properties:
     $ref: ./TransactionStatus.yaml
   starts:
     type: string
-    format: date-time
-    example: '2022-03-04T00:00:00.000Z'
   expires:
     type: string
     format: date-time
-    example: '2022-03-04T00:00:00.000Z'
   created_at:
     type: string
     format: date-time
-    example: '2022-03-04T00:00:00.000Z'
   updated_at:
     type: string
     format: date-time
-    example: '2022-03-04T00:00:00.000Z'
   licenseGroups:
     type: array
     items:
