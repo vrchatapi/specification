@@ -56,6 +56,8 @@ properties:
     $ref: ./WorldID.yaml
   note:
     type: string
+  platform:
+    type: string
   profilePicOverride:
     type: string
   profilePicOverrideThumbnail:
