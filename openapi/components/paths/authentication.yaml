@@ -82,7 +82,7 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/email
         - $ref: ../parameters.yaml#/displayName
-        - $ref: ../parameters.yaml#/userIdQuery
+        - $ref: ../parameters.yaml#/usernameQuery
         - $ref: ../parameters.yaml#/excludeUserId
       description: |-
         Checks if a user by a given `username`, `displayName` or `email` exist. This is used during registration to check if a username has already been taken, during change of displayName to check if a displayName is available, and during change of email to check if the email is already used. In the later two cases the `excludeUserId` is used to exclude oneself, otherwise the result would always be true.
