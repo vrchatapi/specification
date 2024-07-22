@@ -53,12 +53,20 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  transferTargetId:
+    $ref: ./UserID.yaml
   galleries:
     description: ' '
     type: array
     items:
       $ref: ./GroupGallery.yaml
   createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time
+  lastPostCreatedAt:
     type: string
     format: date-time
   onlineMemberCount:
