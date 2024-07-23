@@ -51,6 +51,9 @@ properties:
     type: string
   friendKey:
     type: string
+  last_login:
+    type: string
+    format: date-time
 required:
   - id
   - displayName
