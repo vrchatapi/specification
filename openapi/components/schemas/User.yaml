@@ -52,6 +52,10 @@ properties:
     description: Either a date-time or empty string.
   last_platform:
     $ref: ./Platform.yaml
+  last_mobile:
+    type: string
+    format: date-time
+    description: Either a date-time or empty string.
   location:
     $ref: ./WorldID.yaml
   note:
