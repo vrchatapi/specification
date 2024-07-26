@@ -25,7 +25,7 @@ properties:
   period:
     $ref: ./SubscriptionPeriod.yaml
   tier:
-    type: number
+    type: integer
     example: 5
   active:
     type: boolean

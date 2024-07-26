@@ -33,7 +33,7 @@ properties:
   period:
     $ref: ./SubscriptionPeriod.yaml
   tier:
-    type: number
+    type: integer
 required:
   - id
   - steamItemId

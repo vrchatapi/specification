@@ -22,7 +22,7 @@ properties:
   releaseStatus:
     $ref: ../schemas/ReleaseStatus.yaml
   version:
-    type: number
+    type: integer
     minimum: 0
     default: 1
   featured:
