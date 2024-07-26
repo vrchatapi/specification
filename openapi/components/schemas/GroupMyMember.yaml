@@ -11,6 +11,15 @@ properties:
     type: array
     items:
       $ref: ./GroupRoleID.yaml
+  acceptedByDisplayName:
+    type: string
+    nullable: true
+  acceptedById:
+    $ref: ./UserID.yaml
+    nullable: true
+  createdAt:
+    type: string
+    format: date-time
   managerNotes:
     type: string
   membershipStatus:
@@ -34,6 +43,17 @@ properties:
   has2FA:
     type: boolean
     default: false
+  hasJoinedFromPurchase:
+    type: boolean
+    default: false
+  lastPostReadAt:
+    type: string
+    format: date-time
+    nullable: true
+  mRoleIds:
+    type: array
+    items:
+      type: string
   permissions:
     type: array
     items:
