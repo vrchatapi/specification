@@ -4,6 +4,11 @@ properties:
   avatarThumbnail:
     type: string
     nullable: true
+  currentAvatarTags:
+    type: string
+  debugflag:
+    type: string
+    nullable: true
   displayName:
     type: string
   groups:
@@ -39,6 +44,9 @@ properties:
     nullable: true
   travelingToWorld:
     $ref: ./WorldID.yaml
+    nullable: true
+  userIcon:
+    type: string
     nullable: true
   world:
     $ref: ./WorldID.yaml
