@@ -6,9 +6,6 @@ properties:
     nullable: true
   currentAvatarTags:
     type: string
-  debugflag:
-    type: string
-    nullable: true
   displayName:
     type: string
   groups:
