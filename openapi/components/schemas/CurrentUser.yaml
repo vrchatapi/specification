@@ -144,6 +144,11 @@ properties:
     type: string
   pronouns:
     type: string
+  queuedInstance:
+    type: string
+    nullable: true
+  receiveMobileInvitations:
+    type: boolean
   state:
     $ref: ./UserState.yaml
   status:
