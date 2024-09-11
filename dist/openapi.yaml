@@ -3707,6 +3707,8 @@ components:
         avatarThumbnail:
           type: string
           nullable: true
+        currentAvatarTags:
+          type: string
         displayName:
           type: string
         groups:
@@ -3742,6 +3744,9 @@ components:
           nullable: true
         travelingToWorld:
           $ref: '#/components/schemas/WorldID'
+          nullable: true
+        userIcon:
+          type: string
           nullable: true
         world:
           $ref: '#/components/schemas/WorldID'
@@ -3918,6 +3923,11 @@ components:
           type: string
         pronouns:
           type: string
+        queuedInstance:
+          type: string
+          nullable: true
+        receiveMobileInvitations:
+          type: boolean
         state:
           $ref: '#/components/schemas/UserState'
         status:
@@ -7619,6 +7629,9 @@ components:
         last_login:
           type: string
           description: Either a date-time or empty string.
+        last_mobile:
+          type: string
+          nullable: true
         last_platform:
           $ref: '#/components/schemas/Platform'
         location:
