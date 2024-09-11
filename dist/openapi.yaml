@@ -4068,41 +4068,40 @@ components:
       type: string
     UnityPackage:
       description: ''
-      example:
-        assetUrl: https://vrchat.com/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
-        assetUrlObject: {}
-        assetVersion: 4
-        created_at: '2020-09-10T06:13:27.777Z'
-        id: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
-        platform: standalonewindows
-        pluginUrl: ''
-        pluginUrlObject: {}
-        unitySortNumber: 20180414000
-        unityVersion: 2022.3.6f1
       properties:
         id:
           $ref: '#/components/schemas/UnityPackageID'
         assetUrl:
           type: string
           nullable: true
+          example: https://vrchat.com/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
         assetUrlObject:
           type: object
+          example: {}
         assetVersion:
           minimum: 0
           type: integer
+          example: 4
         created_at:
           format: date-time
           type: string
+          example: '2020-09-10T06:13:27.777Z'
+        impostorizerVersion:
+          type: string
+          example: 0.17.0
         platform:
           $ref: '#/components/schemas/Platform'
         pluginUrl:
           type: string
+          example: ''
         pluginUrlObject:
           type: object
+          example: {}
         unitySortNumber:
           minimum: 0
           type: integer
           format: int64
+          example: 20180414000
         unityVersion:
           default: 5.3.4p1
           example: 2022.3.6f1
