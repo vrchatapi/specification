@@ -6556,6 +6556,7 @@ components:
         - use
         - eu
         - jp
+        - unknown
       description: Instance region
     InstanceOwnerId:
       example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
@@ -7676,7 +7677,6 @@ components:
         - last_activity
         - last_login
         - last_platform
-        - platform
         - profilePicOverride
         - profilePicOverrideThumbnail
         - pronouns
