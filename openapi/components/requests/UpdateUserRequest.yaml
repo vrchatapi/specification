@@ -7,7 +7,7 @@ properties:
     type: string
     format: date
   acceptedTOSVersion:
-    type: number
+    type: integer
   tags:
     description: ' '
     type: array
