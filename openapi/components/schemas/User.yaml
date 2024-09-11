@@ -50,6 +50,9 @@ properties:
   last_login:
     type: string
     description: Either a date-time or empty string.
+  last_mobile:
+    type: string
+    nullable: true
   last_platform:
     $ref: ./Platform.yaml
   location:
