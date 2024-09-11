@@ -7,4 +7,5 @@ enum:
   - use
   - eu
   - jp
+  - unknown
 description: Instance region
