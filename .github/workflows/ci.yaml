@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Lint OpenAPI specification
     steps:
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 16
-      - uses: actions/checkout@v3
-      - name: 'Cache node_modules'
-        uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - name: Cache node_modules
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
@@ -28,12 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Bundle and Filter OpenAPI specification
     steps:
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 16
-      - uses: actions/checkout@v3
-      - name: 'Cache node_modules'
-        uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - name: Cache node_modules
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
@@ -44,7 +44,7 @@ jobs:
         run: npm run bundle
 
       - name: Upload Bundled Specification as Artifact 📤
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: openapi-bundled
           path: dist
@@ -56,9 +56,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Upload OpenAPI specification to GitHub Pages
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v4.1.7
+      - uses: actions/download-artifact@v4
         with:
           name: openapi-bundled
           path: dist
@@ -70,7 +70,7 @@ jobs:
         run: mkdir dist/dist; cp dist/openapi.yaml dist/dist/openapi.yaml; cp .github/files/empty.json dist/package.json
 
       - name: Deploy Bundle to Github Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: dist
@@ -82,7 +82,7 @@ jobs:
     name: Check if OpenAPI specification version is matching tag
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Check if OpenAPI specification version is matching tag
         # Tag will be e.g., "release/1.0.0", check if this matches the version in openapi/openapi.yaml
         run: |
