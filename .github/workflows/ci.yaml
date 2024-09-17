@@ -105,6 +105,7 @@ jobs:
           - python
           - java
           - rust
+          - dart
     steps:
       - name: Triggering build SDK - ${{ matrix.node }}
         run: |
