@@ -20,6 +20,8 @@ properties:
   impostorizerVersion:
     type: string
     example: 0.17.0
+  performanceRating:
+    $ref: ./PerformanceRatings.yaml
   platform:
     $ref: ./Platform.yaml
   pluginUrl:
