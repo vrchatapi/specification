@@ -4077,6 +4077,18 @@ components:
       example: unp_52b12c39-4163-457d-a4a9-630e7aff1bff
       title: UnityPackageID
       type: string
+    PerformanceRatings:
+      type: string
+      title: PerformanceRatings
+      example: Excellent
+      enum:
+        - None
+        - Excellent
+        - Good
+        - Medium
+        - Poor
+        - VeryPoor
+      description: Avatar Performance ratings.
     UnityPackage:
       description: ''
       properties:
@@ -4100,6 +4112,8 @@ components:
         impostorizerVersion:
           type: string
           example: 0.17.0
+        performanceRating:
+          $ref: '#/components/schemas/PerformanceRatings'
         platform:
           $ref: '#/components/schemas/Platform'
         pluginUrl:
