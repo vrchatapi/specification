@@ -27,6 +27,10 @@ properties:
     type: boolean
   last_platform:
     $ref: ./Platform.yaml
+  last_login:
+    type: string
+    nullable: true
+    format: date-time
   profilePicOverride:
     type: string
   pronouns:
