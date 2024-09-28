@@ -100,25 +100,6 @@ paths:
           $ref: ../responses/instances/InstanceShortNameResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
-  '/instances/{worldId}:{instanceId}/invite':
-    parameters:
-      - $ref: ../parameters.yaml#/worldId
-      - $ref: ../parameters.yaml#/instanceId
-    post:
-      summary: Send Self Invite
-      tags:
-        - instances
-      operationId: sendSelfInvite
-      security:
-        - authCookie: []
-      description: Sends an invite to the instance to yourself.
-      x-codeSamples:
-        $ref: "../codeSamples/instances.yaml#/~1instance~1{worldId}:{instanceId}~1invite/post"
-      responses:
-        '200':
-          $ref: ../responses/instances/InstanceSelfInviteSuccess.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
   '/instances/s/{shortName}':
     parameters:
       - schema:
