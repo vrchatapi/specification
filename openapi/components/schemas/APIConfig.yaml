@@ -21,6 +21,12 @@ properties:
     minItems: 0
     items:
       $ref: ./APIConfigAnnouncement.yaml
+  analyticsSegment_NewUI_PctOfUsers:
+    description: Unknown
+    type: integer
+  analyticsSegment_NewUI_Salt:
+    description: Unknown
+    type: string
   appName:
     default: VrChat
     deprecated: true
@@ -41,6 +47,10 @@ properties:
     description: Build tag of the API server
     minLength: 1
     type: string
+  chatboxLogBufferSeconds:
+    default: 40
+    description: Unknown
+    type: integer
   clientApiKey:
     description: apiKey to be used for all other requests
     minLength: 1
@@ -55,6 +65,10 @@ properties:
     type: integer
   clientNetDispatchThread:
     default: false
+    description: Unknown
+    type: boolean
+  clientNetDispatchThreadMobile:
+    default: true
     description: Unknown
     type: boolean
   clientNetInThread:
@@ -101,6 +115,8 @@ properties:
     default: 15
     description: Unknown
     type: integer
+  constants:
+    $ref: ./APIConfigConstants.yaml
   contactEmail:
     description: VRChat's contact email
     minLength: 1
@@ -235,6 +251,14 @@ properties:
     type: integer
   events:
     $ref: ./APIConfigEvents.yaml
+  forceUseLatestWorld:
+    default: true
+    description: Unknown
+    type: boolean
+  googleApiClientId:
+    type: string
+    description: Unknown
+    default: "827942544393-r2ouvckvouldn9dg9uruseje575e878f.apps.googleusercontent.com"
   homeWorldId:
     $ref: ./WorldID.yaml
   homepageRedirectTarget:
@@ -253,6 +277,48 @@ properties:
     description: VRChat's job application email
     minLength: 1
     type: string
+  minSupportedClientBuildNumber:
+    type: object
+    description: Minimum supported client build number for various platforms
+    properties:
+      AppStore:
+        $ref: './PlatformBuildInfo.yaml'
+      Default:
+        $ref: './PlatformBuildInfo.yaml'
+      Firebase:
+        $ref: './PlatformBuildInfo.yaml'
+      FirebaseiOS:
+        $ref: './PlatformBuildInfo.yaml'
+      GooglePlay:
+        $ref: './PlatformBuildInfo.yaml'
+      PC:
+        $ref: './PlatformBuildInfo.yaml'
+      PicoStore:
+        $ref: './PlatformBuildInfo.yaml'
+      QuestAppLab:
+        $ref: './PlatformBuildInfo.yaml'
+      QuestStore:
+        $ref: './PlatformBuildInfo.yaml'
+      TestFlight:
+        $ref: './PlatformBuildInfo.yaml'
+      XRElite:
+        $ref: './PlatformBuildInfo.yaml'
+    required:
+      - AppStore
+      - Default
+      - Firebase
+      - FirebaseiOS
+      - GooglePlay
+      - PC
+      - PicoStore
+      - QuestAppLab
+      - QuestStore
+      - TestFlight
+      - XRElite
+  minimumUnityVersionForUploads:
+    type: string
+    description: Minimum Unity version required for uploading assets
+    default: "2019.0.0f1"
   moderationEmail:
     description: VRChat's moderation related email
     minLength: 1
@@ -261,6 +327,132 @@ properties:
     description: Used in-game to notify a user they aren't allowed to select avatars in private worlds
     minLength: 1
     type: string
+  offlineAnalysis:
+    type: object
+    description: Whether to allow offline analysis
+    properties:
+      android:
+        type: boolean
+        description: Whether to allow offline analysis
+        default: true
+      standalonewindows:
+        type: boolean
+        description: Whether to allow offline analysis
+        default: true
+  photonNameserverOverrides:
+    type: array
+    description: Unknown
+    items:
+      type: string
+  photonPublicKeys:
+    type: array
+    description: Unknown
+    items:
+      type: string
+  reportCategories:
+    type: object
+    description: Categories available for reporting objectionable content
+    properties:
+      avatar:
+        $ref: './ReportCategory.yaml'
+      behavior:
+        $ref: './ReportCategory.yaml'
+      chat:
+        $ref: './ReportCategory.yaml'
+      environment:
+        $ref: './ReportCategory.yaml'
+      groupstore:
+        $ref: './ReportCategory.yaml'
+      image:
+        $ref: './ReportCategory.yaml'
+      text:
+        $ref: './ReportCategory.yaml'
+      warnings:
+        $ref: './ReportCategory.yaml'
+      worldimage:
+        $ref: './ReportCategory.yaml'
+      worldstore:
+        $ref: './ReportCategory.yaml'
+    required:
+      - avatar
+      - behavior
+      - chat
+      - environment
+      - groupstore
+      - image
+      - text
+      - warnings
+      - worldimage
+      - worldstore
+  reportFormUrl:
+    type: string
+    description: URL to the report form
+    default: "https://help.vrchat.com/hc/en-us/requests/new?ticket_form_id=1500000182242&tf_360056455174=user_report&tf_360057451993={userId}&tf_1500001445142={reportedId}&tf_subject={reason} {category} By {contentType} {reportedName}&tf_description={description}"
+  reportOptions:
+    type: object
+    description: Options for reporting content
+  reportReasons:
+    type: object
+    description: Reasons available for reporting users
+    properties:
+      billing:
+        $ref: './ReportReason.yaml'
+      botting:
+        $ref: './ReportReason.yaml'
+      cancellation:
+        $ref: './ReportReason.yaml'
+      gore:
+        $ref: './ReportReason.yaml'
+      hacking:
+        $ref: './ReportReason.yaml'
+      harassing:
+        $ref: './ReportReason.yaml'
+      hateful:
+        $ref: './ReportReason.yaml'
+      impersonation:
+        $ref: './ReportReason.yaml'
+      inappropriate:
+        $ref: './ReportReason.yaml'
+      leaking:
+        $ref: './ReportReason.yaml'
+      malicious:
+        $ref: './ReportReason.yaml'
+      missing:
+        $ref: './ReportReason.yaml'
+      nudity:
+        $ref: './ReportReason.yaml'
+      renewal:
+        $ref: './ReportReason.yaml'
+      security:
+        $ref: './ReportReason.yaml'
+      service:
+        $ref: './ReportReason.yaml'
+      sexual:
+        $ref: './ReportReason.yaml'
+      threatening:
+        $ref: './ReportReason.yaml'
+      visuals:
+        $ref: './ReportReason.yaml'
+    required:
+      - billing
+      - botting
+      - cancellation
+      - gore
+      - hacking
+      - harassing
+      - hateful
+      - impersonation
+      - inappropriate
+      - leaking
+      - malicious
+      - missing
+      - nudity
+      - renewal
+      - security
+      - service
+      - sexual
+      - threatening
+      - visuals
   sdkDeveloperFaqUrl:
     description: Link to the developer FAQ
     minLength: 1
@@ -290,6 +482,10 @@ properties:
     description: VRChat's support email
     minLength: 1
     type: string
+  timekeeping:
+    type: boolean
+    description: Unknown
+    default: true
   timeOutWorldId:
     $ref: ./WorldID.yaml
   tutorialWorldId:
@@ -335,21 +531,38 @@ properties:
     description: Currently used youtube-dl.exe hash in SHA1-delimited format
     minLength: 1
     type: string
+  websocketMaxFriendsRefreshDelay:
+    type: integer
+    description: Unknown
+    default: 900
+  websocketQuickReconnectTime:
+    type: integer
+    description: Unknown
+    default: 2
+  websocketReconnectMaxDelay:
+    type: integer
+    description: Unknown
+    default: 2
 required:
   - VoiceEnableDegradation
   - VoiceEnableReceiverLimiting
   - address
   - announcements
+  - analyticsSegment_NewUI_PctOfUsers
+  - analyticsSegment_NewUI_Salt
   - appName
   - availableLanguageCodes
   - availableLanguages
   - buildVersionTag
+  - chatboxLogBufferSeconds
   - clientApiKey
   - clientBPSCeiling
+  - clientNetDispatchThreadMobile
   - clientDisconnectTimeout
   - clientReservedPlayerBPS
   - clientSentCountAllowance
   - contactEmail
+  - constants
   - copyrightEmail
   - currentTOSVersion
   - defaultAvatar
@@ -376,13 +589,24 @@ required:
   - downloadUrls
   - dynamicWorldRows
   - events
+  - forceUseLatestWorld
+  - googleApiClientId
   - homeWorldId
   - homepageRedirectTarget
   - hubWorldId
   - imageHostUrlList
   - jobsEmail
+  - minSupportedClientBuildNumber
+  - minimumUnityVersionForUploads
   - moderationEmail
   - notAllowedToSelectAvatarInPrivateWorldMessage
+  - offlineAnalysis
+  - photonNameserverOverrides
+  - photonPublicKeys
+  - reportCategories
+  - reportFormUrl
+  - reportOptions
+  - reportReasons
   - sdkDeveloperFaqUrl
   - sdkDiscordUrl
   - sdkNotAllowedToPublishMessage
@@ -390,6 +614,7 @@ required:
   - serverName
   - stringHostUrlList
   - supportEmail
+  - timekeeping
   - timeOutWorldId
   - tutorialWorldId
   - updateRateMsMaximum
@@ -403,3 +628,6 @@ required:
   - whiteListedAssetUrls
   - player-url-resolver-version
   - player-url-resolver-sha1
+  - websocketMaxFriendsRefreshDelay
+  - websocketQuickReconnectTime
+  - websocketReconnectMaxDelay

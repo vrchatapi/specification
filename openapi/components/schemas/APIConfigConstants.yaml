@@ -1,0 +1,99 @@
+title: APIConfigConstants
+type: object
+description: Constants
+properties:
+  GROUPS:
+    type: object
+    description: Group-related constants
+    properties:
+      CAPACITY:
+        type: integer
+        description: Maximum group capacity
+        default: 100000
+      GROUP_TRANSFER_REQUIREMENTS:
+        type: array
+        description: Requirements for transferring group ownership
+        items:
+          type: string
+          description: Requirement for transferring group ownership
+      MAX_INVITES_REQUESTS:
+        type: integer
+        description: Maximum number of invite requests
+        default: 50
+      MAX_JOINED:
+        type: integer
+        description: Maximum number of joined groups
+        default: 100
+      MAX_JOINED_PLUS:
+        type: integer
+        description: Maximum number of joined groups for VRChat Plus members
+        default: 200
+      MAX_LANGUAGES:
+        type: integer
+        description: Maximum number of supported languages
+        default: 10
+      MAX_LINKS:
+        type: integer
+        description: Maximum number of group links
+        default: 3
+      MAX_MANAGEMENT_ROLES:
+        type: integer
+        description: Maximum number of management roles in a group
+        default: 5
+      MAX_OWNED:
+        type: integer
+        description: Maximum number of groups a user can own
+        default: 5
+      MAX_ROLES:
+        type: integer
+        description: Maximum number of roles in a group
+        default: 50
+  INSTANCE:
+    type: object
+    description: Instance-related constants
+    properties:
+      POPULATION_BRACKETS:
+        type: object
+        description: Population brackets based on instance population
+        properties:
+          CROWDED:
+            type: object
+            description: Crowded population range
+            properties:
+              max:
+                type: integer
+                description: Maximum population for a crowded instance
+              min:
+                type: integer
+                description: Minimum population for a crowded instance
+          FEW:
+            type: object
+            description: Few population range
+            properties:
+              max:
+                type: integer
+                description: Maximum population for a few instance
+              min:
+                type: integer
+                description: Minimum population for a few instance
+          MANY:
+            type: object
+            description: Many population range
+            properties:
+              max:
+                type: integer
+                description: Maximum population for a many instance
+              min:
+                type: integer
+                description: Minimum population for a many instance
+  LANGUAGE:
+    type: object
+    description: Language-related constants
+    properties:
+      SPOKEN_LANGUAGE_OPTIONS:
+        type: object
+        description: Supported spoken language options
+required:
+  - GROUPS
+  - INSTANCE
+  - LANGUAGE

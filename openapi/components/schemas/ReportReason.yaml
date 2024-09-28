@@ -1,0 +1,13 @@
+ReportReason:
+  type: object
+  description: A reason for reporting objectionable content
+  properties:
+    text:
+      type: string
+      description: The label or name of the report reason
+    tooltip:
+      type: string
+      description: A brief explanation of what this reason entails
+  required:
+    - text
+    - tooltip
