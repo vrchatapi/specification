@@ -1,0 +1,13 @@
+title: ReportCategory
+type: object
+description: A category used for reporting content
+properties:
+  text:
+    type: string
+    description: The label of the report category
+  tooltip:
+    type: string
+    description: The tooltip that describes the category
+required:
+  - text
+  - tooltip

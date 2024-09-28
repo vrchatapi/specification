@@ -22,15 +22,23 @@ properties:
     minLength: 1
     deprecated: true
     description: Always returns "unknown".
+  displayName:
+    type: string
+    nullable: true
   full:
     default: false
     type: boolean
+  gameServerVersion:
+    type: integer
   id:
     $ref: ./InstanceID.yaml
   instanceId:
     type: string
     minLength: 1
     example: 12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+  instancePersistenceEnabled:
+    type: string
+    nullable: true
   location:
     $ref: ./InstanceID.yaml
   n_users:
@@ -50,6 +58,9 @@ properties:
     $ref: ./Region.yaml
   platforms:
     $ref: ./InstancePlatforms.yaml
+  playerPersistenceEnabled:
+    type: string
+    nullable: true
   region:
     $ref: ./InstanceRegion.yaml
   secureName:
@@ -123,15 +134,19 @@ required:
   - canRequestInvite
   - capacity
   - clientNumber
+  - displayName
   - full
+  - gameServerVersion
   - id
   - instanceId
+  - instancePersistenceEnabled
   - location
   - n_users
   - name
   - permanent
   - photonRegion
   - platforms
+  - playerPersistenceEnabled
   - region
   - secureName
   - tags

@@ -1,0 +1,13 @@
+title: ReportReason
+type: object
+description: A reason used for reporting users
+properties:
+  text:
+    type: string
+    description: The label or name of the report reason
+  tooltip:
+    type: string
+    description: A brief explanation of what this reason entails
+required:
+  - text
+  - tooltip
