@@ -93,6 +93,8 @@ properties:
       SPOKEN_LANGUAGE_OPTIONS:
         type: object
         description: Supported spoken language options
+        additionalProperties:
+          type: string
 required:
   - GROUPS
   - INSTANCE
