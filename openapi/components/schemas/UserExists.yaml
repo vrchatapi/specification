@@ -4,6 +4,10 @@ properties:
     default: false
     description: Status if a user exist with that username or userId.
     type: boolean
+  nameOk:
+    default: false
+    description: Is the username valid?
+    type: boolean
 required:
   - userExists
 title: UserExists
