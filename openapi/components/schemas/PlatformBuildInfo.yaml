@@ -1,13 +1,10 @@
-PlatformBuildInfo:
-  type: object
-  description: Build information for a platform
-  properties:
-    minBuildNumber:
-      type: integer
-      description: Minimum build number required for the platform
-    redirectionAddress:
-      type: string
-      description: Redirection URL for updating the app
-  required:
-    - minBuildNumber
-    - redirectionAddress
+properties:
+  minBuildNumber:
+    type: integer
+    description: Minimum build number required for the platform
+  redirectionAddress:
+    type: string
+    description: Redirection URL for updating the app
+required:
+  - minBuildNumber
+  - redirectionAddress
