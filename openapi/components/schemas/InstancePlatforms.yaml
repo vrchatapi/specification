@@ -9,6 +9,10 @@ properties:
     type: integer
     minimum: 0
     example: 1
+  ios:
+    type: integer
+    minimum: 0
+    example: 1
   standalonewindows:
     type: integer
     minimum: 0
