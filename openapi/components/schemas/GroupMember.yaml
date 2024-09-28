@@ -1,6 +1,10 @@
 title: GroupMember
 type: object
 properties:
+  acceptedByDisplayName:
+    type: string
+  acceptedById:
+    $ref: ./UserID.yaml
   id:
     $ref: ./GroupMemberID.yaml
   groupId:
