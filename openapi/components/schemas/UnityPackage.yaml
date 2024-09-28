@@ -43,6 +43,7 @@ properties:
   worldSignature:
     example: 'AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ=='
     type: string
+    nullable: true
   impostorUrl:
     type: string
     nullable: true
