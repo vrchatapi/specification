@@ -40,6 +40,9 @@ properties:
     example: 2022.3.6f1
     minLength: 1
     type: string
+  worldSignature:
+    example: 'AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ=='
+    type: string
   impostorUrl:
     type: string
     nullable: true
