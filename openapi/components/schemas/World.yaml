@@ -90,6 +90,8 @@ properties:
     type: string
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
+  storeId:
+    type: string
   tags:
     description: ' '
     type: array
@@ -137,6 +139,7 @@ required:
   - popularity
   - publicationDate
   - releaseStatus
+  - storeId
   - tags
   - thumbnailImageUrl
   - updated_at
