@@ -1,3 +1,6 @@
+title: ReportCategory
+type: object
+description: A category used for reporting content
 properties:
   text:
     type: string

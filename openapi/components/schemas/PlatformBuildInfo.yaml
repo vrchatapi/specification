@@ -1,3 +1,6 @@
+title: PlatformBuildInfo
+type: object
+description: Build information for a platform
 properties:
   minBuildNumber:
     type: integer

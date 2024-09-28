@@ -1,3 +1,6 @@
+title: ReportReason
+type: object
+description: A reason used for reporting users
 properties:
   text:
     type: string
