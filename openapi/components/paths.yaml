@@ -50,8 +50,6 @@
   $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
 '/subscriptions':
   $ref: "./paths/economy.yaml#/paths/~1subscriptions"
-'/licenseGroups':
-  $ref: "./paths/economy.yaml#/paths/~1licenseGroups"
 '/licenseGroups/{licenseGroupId}':
   $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
 
