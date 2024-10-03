@@ -8774,14 +8774,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Subscription'
-    LicenseGroupListResponse:
-      description: Returns a list of LicenseGroup objects.
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/LicenseGroup'
     LicenseGroupResponse:
       description: Returns a single LicenseGroup object.
       content:
