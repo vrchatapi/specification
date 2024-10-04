@@ -134,7 +134,7 @@ paths:
         $ref: "../codeSamples/worlds.yaml#/~1worlds~1favorites/get"
       responses:
         '200':
-          $ref: ../responses/worlds/LimitedWorldListResponse.yaml
+          $ref: ../responses/worlds/FavoritedWorldListResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '403':
