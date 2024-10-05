@@ -66,6 +66,7 @@ paths:
           $ref: ../responses/notifications/NotificationNotFoundError.yaml
       security:
         - authCookie: []
+      description: Get a notification by notification `not_` ID.
   '/auth/user/notifications/{notificationId}/see':
     parameters:
       - $ref: ../parameters.yaml#/notificationId
