@@ -175,6 +175,8 @@
 
 "/auth/user/notifications":
   $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications"
+"/auth/user/notifications/{notificationId}":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}"
 "/auth/user/notifications/{notificationId}/accept":
   $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1accept"
 "/auth/user/notifications/{notificationId}/see":

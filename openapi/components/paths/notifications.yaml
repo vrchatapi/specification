@@ -47,6 +47,25 @@ paths:
           description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
+  '/auth/user/notifications/{notificationId}':
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
+    get:
+      summary: Show notification
+      operationId: getNotification
+      tags:
+        - notifications
+      x-codeSamples:
+        $ref: "../codeSamples/notifications.yaml#/~1auth~1user~1notifications~1{notificationId}/get"
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
+      security:
+        - authCookie: []
   '/auth/user/notifications/{notificationId}/see':
     parameters:
       - $ref: ../parameters.yaml#/notificationId
