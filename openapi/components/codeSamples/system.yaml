@@ -12,7 +12,7 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/jams?isActive={bool}&type={string}"
+        curl -X GET "https://vrchat.com/api/1/jams?type={string}"
 /jams/{jamId}:
   get:
     - lang: cURL
