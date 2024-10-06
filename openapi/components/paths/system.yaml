@@ -49,12 +49,6 @@ paths:
         ``
       parameters:
         - schema:
-            type: boolean
-            example: false
-          in: query
-          name: isActive
-          description: 'Only show jams that are currently active or have already ended.'
-        - schema:
             type: string
             example: avatar
           in: query
