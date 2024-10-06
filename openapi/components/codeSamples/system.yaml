@@ -8,6 +8,21 @@
     - lang: cURL
       source: >-
         curl -X GET "https://vrchat.com/api/1/infoPush?require={string}&include={string}"
+/jams:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/jams?isActive={bool}&type={string}"
+/jams/{jamId}:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/jams/{jamId}"
+/jams/{jamId}/submissions:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/jams/{jamId}/submissions"
 /css/app.css:
   get:
     - lang: cURL

@@ -364,3 +364,11 @@ fuzzy:
   required: false
   schema:
     type: boolean
+jamId:
+  name: jamId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+  description: Must be a valid query ID.

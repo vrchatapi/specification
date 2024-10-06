@@ -27,6 +27,75 @@ paths:
       x-badges:
         - color: gold
           label: 'Status: Early Access (Still Under Development)'
+  /jams:
+    get:
+      summary: Show jams list
+      tags:
+        - system
+      x-codeSamples:
+        $ref: "../codeSamples/system.yaml#/~1jams/get"
+      responses:
+        '200':
+          $ref: ../responses/system/JamListResponse.yaml
+      security:
+        - authCookie: []
+      operationId: getJams
+      description: |-
+        Lists World Jams or Avatar Jams, both currently running and ones that have ended.
+        
+        `isActive` is used to select only active or already ended jams.
+        
+        `type` is used to select only world or avatar jams, and can only take `world` or `avatar`.
+        ``
+      parameters:
+        - schema:
+            type: boolean
+            example: false
+          in: query
+          name: isActive
+          description: 'Only show jams that are currently active or have already ended.'
+        - schema:
+            type: string
+            example: avatar
+          in: query
+          name: type
+          description: 'Only show jams of this type (`avatar` or `world`).'
+  /jams/{jamId}:
+    parameters:
+      - $ref: ../parameters.yaml#/jamId
+    get:
+      summary: Show jam information
+      tags:
+        - system
+      x-codeSamples:
+        $ref: "../codeSamples/system.yaml#/~1jams~1{jamId}/get"
+      responses:
+        '200':
+          $ref: ../responses/system/JamResponse.yaml
+        '404':
+          $ref: ../responses/system/JamNotFoundError.yaml
+      security:
+        - authCookie: []
+      operationId: getJam
+      description: Returns a jam.
+  /jams/{jamId}/submissions:
+    parameters:
+      - $ref: ../parameters.yaml#/jamId
+    get:
+      summary: Show jam submissions
+      tags:
+        - system
+      x-codeSamples:
+        $ref: "../codeSamples/system.yaml#/~1jams~1{jamId}~1submissions/get"
+      responses:
+        '200':
+          $ref: ../responses/system/SubmissionListResponse.yaml
+        '404':
+          $ref: ../responses/system/JamNotFoundError.yaml
+      security:
+        - authCookie: []
+      operationId: getJamSubmissions
+      description: Returns all submissions of a jam.
   /health:
     get:
       summary: Check API Health

@@ -1,0 +1,67 @@
+description: ''
+properties:
+  description:
+    minLength: 1
+    type: string
+  id:
+    type: string
+    minLength: 1
+    example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+  isVisible:
+    type: boolean
+  moreInfo:
+    type: string
+    minLength: 1
+  state:
+    type: string
+    minLength: 1
+    description: |-
+      One of:
+      - submissions_open
+      - closed
+  stateChangeDates:
+    type: object
+    properties:
+      closed:
+        type: string
+        format: date-time
+        nullable: true
+      submissionsClosed:
+        type: string
+        format: date-time
+        nullable: true
+      submissionsOpened:
+        type: string
+        format: date-time
+        nullable: true
+      winnersSelected:
+        type: string
+        format: date-time
+        nullable: true
+        example: null
+  submissionContentGateDate:
+    type: string
+    format: date-time
+    nullable: true
+  submissionContentGated:
+    type: boolean
+  title:
+    type: string
+    minLength: 1
+  updated_at:
+    type: string
+    format: date-time
+required:
+  - description
+  - id
+  - isVisible
+  - moreInfo
+  - state
+  - stateChangeDates
+  - submissionContentGateDate
+  - submissionContentGated
+  - title
+  - type
+  - updated_at
+title: Jam
+type: object
