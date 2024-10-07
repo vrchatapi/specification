@@ -1,0 +1,132 @@
+description: ''
+properties:
+  authorId:
+    $ref: ./UserID.yaml
+  authorName:
+    minLength: 1
+    type: string
+  capacity:
+    example: 8
+    type: integer
+  description:
+    minLength: 1
+    type: string
+  recommendedCapacity:
+    example: 16
+    type: integer
+  created_at:
+    format: date-time
+    type: string
+  favorites:
+    default: 0
+    example: 12024
+    minimum: 0
+    type: integer
+  favoriteGroup:
+    minLength: 1
+    type: string
+  favoriteId:
+    $ref: ./FavoriteID.yaml
+  featured:
+    default: false
+    type: boolean
+  visits:
+    default: 0
+    example: 9988675
+    minimum: 0
+    type: integer
+  heat:
+    default: 0
+    example: 5
+    minimum: 0
+    type: integer
+  id:
+    $ref: ./WorldID.yaml
+  imageUrl:
+    minLength: 1
+    type: string
+  labsPublicationDate:
+    example: none
+    minLength: 1
+    type: string
+  name:
+    minLength: 1
+    type: string
+  occupants:
+    default: 0
+    example: 47
+    minimum: 0
+    type: integer
+  organization:
+    default: vrchat
+    minLength: 1
+    type: string
+  popularity:
+    default: 0
+    example: 8
+    minimum: 0
+    type: integer
+  previewYoutubeId:
+    type: string
+    nullable: true
+  publicationDate:
+    example: none
+    minLength: 1
+    type: string
+  releaseStatus:
+    $ref: ./ReleaseStatus.yaml
+  storeId:
+    type: string
+    nullable: true
+  tags:
+    description: ' '
+    items:
+      $ref: ./Tag.yaml
+    type: array
+  thumbnailImageUrl:
+    minLength: 1
+    type: string
+  unityPackages:
+    description: ' '
+    items:
+      $ref: ./UnityPackage.yaml
+    minItems: 1
+    type: array
+  updated_at:
+    format: date-time
+    type: string
+  udonProducts:
+    type: array
+    items:
+      $ref: ./UdonProductId.yaml
+  version:
+    minimum: 1
+    type: integer
+required:
+  - id
+  - description
+  - name
+  - authorId
+  - authorName
+  - capacity
+  - imageUrl
+  - thumbnailImageUrl
+  - releaseStatus
+  - storeId
+  - organization
+  - tags
+  - favorites
+  - favoriteGroup
+  - favoriteId
+  - featured
+  - created_at
+  - updated_at
+  - publicationDate
+  - labsPublicationDate
+  - unityPackages
+  - popularity
+  - heat
+  - occupants
+  - version
+title: FavoritedWorld
+type: object
