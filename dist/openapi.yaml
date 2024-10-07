@@ -2589,6 +2589,29 @@ paths:
           description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
+  /auth/user/notifications/{notificationId}:
+    parameters:
+      - $ref: '#/components/parameters/notificationId'
+    get:
+      summary: Show notification
+      operationId: getNotification
+      tags:
+        - notifications
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/auth/user/notifications/{notificationId}" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/NotificationResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/NotificationNotFoundError'
+      security:
+        - authCookie: []
+      description: Get a notification by notification `not_` ID.
   /auth/user/notifications/{notificationId}/accept:
     parameters:
       - $ref: '#/components/parameters/notificationId'
@@ -9708,6 +9731,18 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Notification'
+    NotificationNotFoundError:
+      description: Error response when trying to perform operations on a non-existing notification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 World Not Found:
+              value:
+                error:
+                  message: Notification not found
+                  status_code: 404
     FriendSuccess:
       description: Successful response after friending a user.
       content:
