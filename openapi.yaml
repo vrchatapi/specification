@@ -2795,54 +2795,6 @@ paths:
       description: ⚠️ **This will delete every single player moderation you've ever made.**
       tags:
         - playermoderation
-  /auth/user/playermoderations/{playerModerationId}:
-    parameters:
-      - schema:
-          type: string
-        name: playerModerationId
-        in: path
-        required: true
-        description: Must be a valid `pmod_` ID.
-    get:
-      summary: Get Player Moderation
-      tags:
-        - playermoderation
-      x-codeSamples:
-        - lang: cURL
-          source: |-
-            curl -X GET "https://vrchat.com/api/1/auth/user/playermoderations/{playerModerationId}" \
-                 -b "auth={authCookie}"
-      responses:
-        '200':
-          $ref: '#/components/responses/PlayerModerationResponse'
-        '401':
-          $ref: '#/components/responses/MissingCredentialsError'
-        '404':
-          $ref: '#/components/responses/PlayerModerationNotFoundError'
-      operationId: getPlayerModeration
-      security:
-        - authCookie: []
-      description: Returns a single Player Moderation. This returns the exact same amount of information as the more generalised `getPlayerModerations`.
-    delete:
-      summary: Delete Player Moderation
-      operationId: deletePlayerModeration
-      security:
-        - authCookie: []
-      x-codeSamples:
-        - lang: cURL
-          source: |-
-            curl -X DELETE "https://vrchat.com/api/1/auth/user/playermoderations/{playerModerationId}" \
-                 -b "auth={authCookie}"
-      responses:
-        '200':
-          $ref: '#/components/responses/PlayerModerationRemovedSuccess'
-        '401':
-          $ref: '#/components/responses/MissingCredentialsError'
-        '403':
-          $ref: '#/components/responses/PlayerModerationDeleteOthersError'
-      description: Deletes a specific player moderation based on it's `pmod_` ID. The website uses `unmoderateUser` instead. You can delete the same player moderation multiple times successfully.
-      tags:
-        - playermoderation
   /auth/user/unplayermoderate:
     put:
       summary: Unmoderate User
@@ -9894,42 +9846,6 @@ components:
                 success:
                   message: OK
                   status_code: 200
-    PlayerModerationNotFoundError:
-      description: Error response when trying to show information about a non-existent player moderation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            404 Player Moderation Not Found:
-              value:
-                error:
-                  message: Can't find playerModerationǃ
-                  status_code: 404
-    PlayerModerationRemovedSuccess:
-      description: Success response after removing a PlayerModeration by ID.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Success'
-          examples:
-            200 Player Moderation Removed:
-              value:
-                success:
-                  message: PlayerModeration pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244 removed
-                  status_code: 200
-    PlayerModerationDeleteOthersError:
-      description: Error response when trying to delete someone else's player moderation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            403 Can't delete Player Moderation You Didn't Create:
-              value:
-                error:
-                  message: You definitely can't delete a playerModeration you didn't create
-                  status_code: 403
     PlayerModerationUnmoderatedSuccess:
       description: Success response after unmoderating a player moderation.
       content:
