@@ -219,6 +219,15 @@
 "/time":
   $ref: "./paths/system.yaml#/paths/~1time"
 
+# jams
+
+"/jams":
+  $ref: "./paths/jams.yaml#/paths/~1jams"
+"/jams/{jamId}":
+  $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}"
+"/jams/{jamId}/submissions":
+  $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}~1submissions"
+
 # users
 
 "/users":

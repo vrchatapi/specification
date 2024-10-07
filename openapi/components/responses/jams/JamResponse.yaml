@@ -1,0 +1,5 @@
+description: Returns a Jam object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Jam.yaml
