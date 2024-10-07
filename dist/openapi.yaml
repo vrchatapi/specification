@@ -112,6 +112,8 @@ tags:
     description: Invite Docs Here
   - name: instances
     description: Instances Docs Here
+  - name: jams
+    description: Jams Docs Here
   - name: notifications
     description: Notifiations Docs
   - name: permissions
@@ -2982,6 +2984,72 @@ paths:
 
         **NOTE:** The response type is not a JSON object, but a simple JSON string.
       security: []
+  /jams:
+    get:
+      summary: Show jams list
+      tags:
+        - jams
+      x-codeSamples:
+        - lang: cURL
+          source: curl -X GET "https://vrchat.com/api/1/jams?type={string}"
+      responses:
+        '200':
+          $ref: '#/components/responses/JamListResponse'
+      security:
+        - authCookie: []
+      operationId: getJams
+      description: |-
+        Lists World Jams or Avatar Jams, both currently running and ones that have ended.
+
+        `isActive` is used to select only active or already ended jams.
+
+        `type` is used to select only world or avatar jams, and can only take `world` or `avatar`.
+        ``
+      parameters:
+        - schema:
+            type: string
+            example: avatar
+          in: query
+          name: type
+          description: Only show jams of this type (`avatar` or `world`).
+  /jams/{jamId}:
+    parameters:
+      - $ref: '#/components/parameters/jamId'
+    get:
+      summary: Show jam information
+      tags:
+        - jams
+      x-codeSamples:
+        - lang: cURL
+          source: curl -X GET "https://vrchat.com/api/1/jams/{jamId}"
+      responses:
+        '200':
+          $ref: '#/components/responses/JamResponse'
+        '404':
+          $ref: '#/components/responses/JamNotFoundError'
+      security:
+        - authCookie: []
+      operationId: getJam
+      description: Returns a jam.
+  /jams/{jamId}/submissions:
+    parameters:
+      - $ref: '#/components/parameters/jamId'
+    get:
+      summary: Show jam submissions
+      tags:
+        - jams
+      x-codeSamples:
+        - lang: cURL
+          source: curl -X GET "https://vrchat.com/api/1/jams/{jamId}/submissions"
+      responses:
+        '200':
+          $ref: '#/components/responses/SubmissionListResponse'
+        '404':
+          $ref: '#/components/responses/JamNotFoundError'
+      security:
+        - authCookie: []
+      operationId: getJamSubmissions
+      description: Returns all submissions of a jam.
   /users:
     get:
       summary: Search All Users
@@ -7962,6 +8030,109 @@ components:
         - ok
         - serverName
         - buildVersionTag
+    Jam:
+      description: ''
+      properties:
+        description:
+          minLength: 1
+          type: string
+        id:
+          type: string
+          minLength: 1
+          example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+        isVisible:
+          type: boolean
+        moreInfo:
+          type: string
+          minLength: 1
+        state:
+          type: string
+          minLength: 1
+          description: |-
+            One of:
+            - submissions_open
+            - closed
+        stateChangeDates:
+          type: object
+          properties:
+            closed:
+              type: string
+              format: date-time
+              nullable: true
+            submissionsClosed:
+              type: string
+              format: date-time
+              nullable: true
+            submissionsOpened:
+              type: string
+              format: date-time
+              nullable: true
+            winnersSelected:
+              type: string
+              format: date-time
+              nullable: true
+              example: null
+        submissionContentGateDate:
+          type: string
+          format: date-time
+          nullable: true
+        submissionContentGated:
+          type: boolean
+        title:
+          type: string
+          minLength: 1
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - description
+        - id
+        - isVisible
+        - moreInfo
+        - state
+        - stateChangeDates
+        - submissionContentGateDate
+        - submissionContentGated
+        - title
+        - type
+        - updated_at
+      title: Jam
+      type: object
+    Submission:
+      description: ''
+      properties:
+        contentId:
+          minLength: 1
+          type: string
+          description: Either world ID or avatar ID
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+          minLength: 1
+          example: jsub_f01f44fa-89fa-443c-ab4c-7fed9245970f
+        jamId:
+          type: string
+          minLength: 1
+          example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+        ratingScore:
+          type: integer
+          minimum: 0
+        submitterId:
+          $ref: '#/components/schemas/UserID'
+      required:
+        - contentId
+        - created_at
+        - description
+        - id
+        - jamId
+        - ratingsScore
+        - submitterId
+      title: Submission
+      type: object
     User:
       title: User
       type: object
@@ -10011,6 +10182,40 @@ components:
             format: date-time
             example: '2021-08-20T12:38:42+00:00'
             description: Does not return millisecond precision. Always returns time in UTC.
+    JamListResponse:
+      description: Returns a list of Jam objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Jam'
+    JamResponse:
+      description: Returns a Jam object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Jam'
+    JamNotFoundError:
+      description: Error response when trying to show information about a non-existent jam.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 Jam not found:
+              value:
+                error:
+                  message: 404 id must be an ID˸ 'invalid_id_here'
+                  status_code: 404
+    SubmissionListResponse:
+      description: Returns a list of Submission objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Submission'
     UserResponse:
       description: Returns a single User object.
       content:
@@ -10476,6 +10681,14 @@ components:
         default: main
       allowEmptyValue: true
       description: Specifies which git branch the site should load frontend source code from.
+    jamId:
+      name: jamId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+      description: Must be a valid query ID.
     fuzzy:
       name: fuzzy
       in: query
