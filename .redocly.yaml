@@ -7,6 +7,9 @@ apis:
     root: openapi/openapi.yaml
 
 plugins:
-  - './.github/redocly-plugins/remove-internal.js'
+  - "./.github/redocly-plugins/remove-internal.js"
+  - "./.github/redocly-plugins/x-feature.js"
 decorators:
   remove-internal/remove-internal: error
+  x-feature/fallback-replace:
+    available_features: [oneOf]
