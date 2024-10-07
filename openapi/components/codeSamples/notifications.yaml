@@ -4,6 +4,12 @@
       source: >-
         curl -X GET "https://vrchat.com/api/1/auth/user/notifications?type=all" \
              -b "auth={authCookie}"
+/auth/user/notifications/{notificationId}:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/auth/user/notifications/{notificationId}" \
+             -b "auth={authCookie}"
 '/auth/user/notifications/{notificationId}/accept':
   put:
     - lang: cURL
