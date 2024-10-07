@@ -16,17 +16,6 @@
       source: >-
         curl -X DELETE "https://vrchat.com/api/1/auth/user/playermoderations" \
              -b "auth={authCookie}"
-'/auth/user/playermoderations/{playerModerationId}':
-  get:
-    - lang: cURL
-      source: >-
-        curl -X GET "https://vrchat.com/api/1/auth/user/playermoderations/{playerModerationId}" \
-             -b "auth={authCookie}"
-  delete:
-    - lang: cURL
-      source: >-
-        curl -X DELETE "https://vrchat.com/api/1/auth/user/playermoderations/{playerModerationId}" \
-             -b "auth={authCookie}"
 /auth/user/unplayermoderate:
   put:
     - lang: cURL

@@ -197,8 +197,6 @@
 
 "/auth/user/playermoderations":
   $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations"
-"/auth/user/playermoderations/{playerModerationId}":
-  $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations~1{playerModerationId}"
 "/auth/user/unplayermoderate":
   $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1unplayermoderate"
 
