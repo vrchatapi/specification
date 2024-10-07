@@ -25,6 +25,9 @@
 - name: instances
   description:
     $ref: ./paths/instances.yaml#/info/description
+- name: jams
+  description:
+    $ref: ./paths/jams.yaml#/info/description
 - name: notifications
   description:
     $ref: ./paths/notifications.yaml#/info/description
