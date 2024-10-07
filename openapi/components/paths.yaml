@@ -208,12 +208,6 @@
   $ref: "./paths/system.yaml#/paths/~1config"
 "/infoPush":
   $ref: "./paths/system.yaml#/paths/~1infoPush"
-"/jams":
-  $ref: "./paths/system.yaml#/paths/~1jams"
-"/jams/{jamId}":
-  $ref: "./paths/system.yaml#/paths/~1jams~1{jamId}"
-"/jams/{jamId}/submissions":
-  $ref: "./paths/system.yaml#/paths/~1jams~1{jamId}~1submissions"
 "/css/app.css":
   $ref: "./paths/system.yaml#/paths/~1css~1app.css"
 "/js/app.js":
@@ -224,6 +218,15 @@
   $ref: "./paths/system.yaml#/paths/~1visits"
 "/time":
   $ref: "./paths/system.yaml#/paths/~1time"
+
+# jams
+
+"/jams":
+  $ref: "./paths/jams.yaml#/paths/~1jams"
+"/jams/{jamId}":
+  $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}"
+"/jams/{jamId}/submissions":
+  $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}~1submissions"
 
 # users
 
