@@ -140,7 +140,6 @@ required:
   - popularity
   - publicationDate
   - releaseStatus
-  - storeId
   - tags
   - thumbnailImageUrl
   - updated_at

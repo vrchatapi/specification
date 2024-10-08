@@ -97,7 +97,6 @@ required:
   - imageUrl
   - thumbnailImageUrl
   - releaseStatus
-  - storeId
   - organization
   - tags
   - favorites
