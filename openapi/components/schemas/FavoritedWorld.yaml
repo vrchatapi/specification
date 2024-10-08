@@ -75,9 +75,6 @@ properties:
     type: string
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
-  storeId:
-    type: string
-    nullable: true
   tags:
     description: ' '
     items:
