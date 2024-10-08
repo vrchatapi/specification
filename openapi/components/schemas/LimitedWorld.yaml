@@ -64,9 +64,6 @@ properties:
     type: string
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
-  storeId:
-    type: string
-    nullable: true
   tags:
     description: ' '
     items:
@@ -97,7 +94,6 @@ required:
   - imageUrl
   - thumbnailImageUrl
   - releaseStatus
-  - storeId
   - organization
   - tags
   - favorites
