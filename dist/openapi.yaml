@@ -6139,9 +6139,6 @@ components:
           type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
-        storeId:
-          type: string
-          nullable: true
         tags:
           description: ' '
           type: array
@@ -6189,7 +6186,6 @@ components:
         - popularity
         - publicationDate
         - releaseStatus
-        - storeId
         - tags
         - thumbnailImageUrl
         - updated_at
@@ -8457,9 +8453,6 @@ components:
           type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
-        storeId:
-          type: string
-          nullable: true
         tags:
           description: ' '
           items:
@@ -8490,7 +8483,6 @@ components:
         - imageUrl
         - thumbnailImageUrl
         - releaseStatus
-        - storeId
         - organization
         - tags
         - favorites
@@ -8633,9 +8625,6 @@ components:
           type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
-        storeId:
-          type: string
-          nullable: true
         tags:
           description: ' '
           items:
@@ -8670,7 +8659,6 @@ components:
         - imageUrl
         - thumbnailImageUrl
         - releaseStatus
-        - storeId
         - organization
         - tags
         - favorites
