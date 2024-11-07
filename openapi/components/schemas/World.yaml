@@ -106,6 +106,10 @@ properties:
   updated_at:
     format: date-time
     type: string
+  urlList:
+    type: array
+    items:
+      type: string
   version:
     default: 0
     example: 68

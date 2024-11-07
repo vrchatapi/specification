@@ -14,6 +14,10 @@ properties:
     description: VRChat's office address
     minLength: 1
     type: string
+  ageVerificationP:
+    type: boolean
+  ageVerificationStatusVisible:
+    type: boolean
   announcements:
     type: array
     description: Public Announcements
@@ -43,6 +47,28 @@ properties:
     type: array
     items:
       type: string
+  avatarPerfLimiter:
+    type: object
+    properties:
+      AndroidMobile:
+        $ref: './PerformanceLimiterInfo.yaml'
+      PC:
+        $ref: './PerformanceLimiterInfo.yaml'
+      Pico:
+        $ref: './PerformanceLimiterInfo.yaml'
+      Quest:
+        $ref: './PerformanceLimiterInfo.yaml'
+      XRElite:
+        $ref: './PerformanceLimiterInfo.yaml'
+      iOSMobile:
+        $ref: './PerformanceLimiterInfo.yaml'
+    required:
+      - AndroidMobile
+      - PC
+      - Pico
+      - Quest
+      - XRElite
+      - iOSMobile
   buildVersionTag:
     description: Build tag of the API server
     minLength: 1
@@ -136,6 +162,8 @@ properties:
     type: integer
   defaultAvatar:
     $ref: ./AvatarID.yaml
+  defaultStickerSet:
+    type: string
   deploymentGroup:
     $ref: ./DeploymentGroup.yaml
   devLanguageCodes:
@@ -359,6 +387,8 @@ properties:
         $ref: './ReportCategory.yaml'
       chat:
         $ref: './ReportCategory.yaml'
+      emoji:
+        $ref: './ReportCategory.yaml'
       environment:
         $ref: './ReportCategory.yaml'
       groupstore:
@@ -366,6 +396,8 @@ properties:
       image:
         $ref: './ReportCategory.yaml'
       text:
+        $ref: './ReportCategory.yaml'
+      sticker:
         $ref: './ReportCategory.yaml'
       warnings:
         $ref: './ReportCategory.yaml'
@@ -482,6 +514,9 @@ properties:
     description: VRChat's support email
     minLength: 1
     type: string
+  supportFormUrl:
+    description: VRChat's support form
+    type: string
   timekeeping:
     type: boolean
     description: Unknown
@@ -547,12 +582,15 @@ required:
   - VoiceEnableDegradation
   - VoiceEnableReceiverLimiting
   - address
+  - ageVerificationP
+  - ageVerificationStatusVisible
   - announcements
   - analyticsSegment_NewUI_PctOfUsers
   - analyticsSegment_NewUI_Salt
   - appName
   - availableLanguageCodes
   - availableLanguages
+  - avatarPerfLimiter
   - buildVersionTag
   - chatboxLogBufferSeconds
   - clientApiKey
@@ -566,6 +604,7 @@ required:
   - copyrightEmail
   - currentTOSVersion
   - defaultAvatar
+  - defaultStickerSet
   - deploymentGroup
   - devSdkUrl
   - devSdkVersion
@@ -614,6 +653,7 @@ required:
   - serverName
   - stringHostUrlList
   - supportEmail
+  - supportFormUrl
   - timekeeping
   - timeOutWorldId
   - tutorialWorldId

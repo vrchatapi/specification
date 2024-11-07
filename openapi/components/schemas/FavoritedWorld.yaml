@@ -92,6 +92,10 @@ properties:
   updated_at:
     format: date-time
     type: string
+  urlList:
+    type: array
+    items:
+      type: string
   udonProducts:
     type: array
     items:
@@ -120,6 +124,7 @@ required:
   - publicationDate
   - labsPublicationDate
   - unityPackages
+  - urlList
   - popularity
   - heat
   - occupants
