@@ -92,7 +92,7 @@ info:
 
     [![Discord](https://img.shields.io/static/v1?label=vrchatapi&message=discord&color=blueviolet&style=for-the-badge)](https://discord.gg/qjZE9C9fkB)
 servers:
-  - url: https://vrchat.com/api/1
+  - url: https://api.vrchat.cloud/api/1
 tags:
   - name: authentication
     description: Authentication Docs Here
