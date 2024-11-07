@@ -1,5 +1,9 @@
 description: ''
 properties:
+  displayName:
+    type: string
+  description:
+    type: string
   id:
     $ref: ./PermissionID.yaml
   ownerDisplayName:
@@ -10,6 +14,8 @@ properties:
     type: string
   ownerId:
     $ref: ./UserID.yaml
+  type: 
+    type: string
   data:
     type: object
 required:

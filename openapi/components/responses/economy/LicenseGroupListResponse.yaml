@@ -1,7 +1,0 @@
-description: Returns a list of LicenseGroup objects.
-content:
-  application/json:
-    schema:
-      type: array
-      items:
-        $ref: ../../schemas/LicenseGroup.yaml

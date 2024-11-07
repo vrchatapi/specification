@@ -133,48 +133,6 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - playermoderation
-  '/auth/user/playermoderations/{playerModerationId}':
-    parameters:
-      - schema:
-          type: string
-        name: playerModerationId
-        in: path
-        required: true
-        description: 'Must be a valid `pmod_` ID.'
-    get:
-      summary: Get Player Moderation
-      tags:
-        - playermoderation
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations~1{playerModerationId}/get"
-      responses:
-        '200':
-          $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
-        '404':
-          $ref: ../responses/playermoderation/PlayerModerationNotFoundError.yaml
-      operationId: getPlayerModeration
-      security:
-        - authCookie: []
-      description: Returns a single Player Moderation. This returns the exact same amount of information as the more generalised `getPlayerModerations`.
-    delete:
-      summary: Delete Player Moderation
-      operationId: deletePlayerModeration
-      security:
-        - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations~1{playerModerationId}/delete"
-      responses:
-        '200':
-          $ref: ../responses/playermoderation/PlayerModerationRemovedSuccess.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
-        '403':
-          $ref: ../responses/playermoderation/PlayerModerationDeleteOthersError.yaml
-      description: Deletes a specific player moderation based on it's `pmod_` ID. The website uses `unmoderateUser` instead. You can delete the same player moderation multiple times successfully.
-      tags:
-        - playermoderation
 tags:
   $ref: ../tags.yaml
 components:

@@ -1,6 +1,10 @@
 title: Group
 type: object
 properties:
+  badges:
+    type: array
+    items:
+      type: string
   id:
     $ref: ./GroupID.yaml
   name:

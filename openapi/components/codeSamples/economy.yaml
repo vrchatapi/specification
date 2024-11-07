@@ -34,12 +34,6 @@
       source: >-
         curl -X GET "https://vrchat.com/api/1/subscriptions" \
              -b "auth={authCookie}"
-/licenseGroups:
-  get:
-    - lang: cURL
-      source: >-
-        curl -X GET "https://vrchat.com/api/1/licenseGroups" \
-             -b "auth={authCookie}"
 '/licenseGroups/{licenseGroupId}':
   get:
     - lang: cURL

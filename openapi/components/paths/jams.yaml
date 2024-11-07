@@ -1,0 +1,69 @@
+openapi: 3.0.3
+info:
+  title: jams
+  version: '1.0'
+  description: Jams Docs Here
+paths:
+  /jams:
+    get:
+      summary: Show jams list
+      tags:
+        - jams
+      x-codeSamples:
+        $ref: "../codeSamples/jams.yaml#/~1jams/get"
+      responses:
+        '200':
+          $ref: ../responses/jams/JamListResponse.yaml
+      security:
+        - authCookie: []
+      operationId: getJams
+      description: |-
+        Lists World Jams or Avatar Jams, both currently running and ones that have ended.
+        
+        `isActive` is used to select only active or already ended jams.
+        
+        `type` is used to select only world or avatar jams, and can only take `world` or `avatar`.
+        ``
+      parameters:
+        - schema:
+            type: string
+            example: avatar
+          in: query
+          name: type
+          description: 'Only show jams of this type (`avatar` or `world`).'
+  /jams/{jamId}:
+    parameters:
+      - $ref: ../parameters.yaml#/jamId
+    get:
+      summary: Show jam information
+      tags:
+        - jams
+      x-codeSamples:
+        $ref: "../codeSamples/jams.yaml#/~1jams~1{jamId}/get"
+      responses:
+        '200':
+          $ref: ../responses/jams/JamResponse.yaml
+        '404':
+          $ref: ../responses/jams/JamNotFoundError.yaml
+      security:
+        - authCookie: []
+      operationId: getJam
+      description: Returns a jam.
+  /jams/{jamId}/submissions:
+    parameters:
+      - $ref: ../parameters.yaml#/jamId
+    get:
+      summary: Show jam submissions
+      tags:
+        - jams
+      x-codeSamples:
+        $ref: "../codeSamples/jams.yaml#/~1jams~1{jamId}~1submissions/get"
+      responses:
+        '200':
+          $ref: ../responses/jams/SubmissionListResponse.yaml
+        '404':
+          $ref: ../responses/jams/JamNotFoundError.yaml
+      security:
+        - authCookie: []
+      operationId: getJamSubmissions
+      description: Returns all submissions of a jam.

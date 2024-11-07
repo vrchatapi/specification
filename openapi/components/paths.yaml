@@ -50,8 +50,6 @@
   $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
 '/subscriptions':
   $ref: "./paths/economy.yaml#/paths/~1subscriptions"
-'/licenseGroups':
-  $ref: "./paths/economy.yaml#/paths/~1licenseGroups"
 '/licenseGroups/{licenseGroupId}':
   $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
 
@@ -170,8 +168,6 @@
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}"
 "/instances/{worldId}:{instanceId}/shortName":
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1shortName"
-"/instances/{worldId}:{instanceId}/invite":
-  $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1invite"
 "/instances/s/{shortName}":
   $ref: "./paths/instances.yaml#/paths/~1instances~1s~1{shortName}"
 
@@ -179,6 +175,8 @@
 
 "/auth/user/notifications":
   $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications"
+"/auth/user/notifications/{notificationId}":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}"
 "/auth/user/notifications/{notificationId}/accept":
   $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1accept"
 "/auth/user/notifications/{notificationId}/see":
@@ -201,8 +199,6 @@
 
 "/auth/user/playermoderations":
   $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations"
-"/auth/user/playermoderations/{playerModerationId}":
-  $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations~1{playerModerationId}"
 "/auth/user/unplayermoderate":
   $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1unplayermoderate"
 
@@ -222,6 +218,15 @@
   $ref: "./paths/system.yaml#/paths/~1visits"
 "/time":
   $ref: "./paths/system.yaml#/paths/~1time"
+
+# jams
+
+"/jams":
+  $ref: "./paths/jams.yaml#/paths/~1jams"
+"/jams/{jamId}":
+  $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}"
+"/jams/{jamId}/submissions":
+  $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}~1submissions"
 
 # users
 

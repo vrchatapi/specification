@@ -10,12 +10,6 @@
       source: >-
         curl -X GET "https://vrchat.com/api/1/instances/{worldId}:{instanceId}/shortName" \
              -b "auth={authCookie}"
-'/instance/{worldId}:{instanceId}/invite':
-  post:
-    - lang: cURL
-      source: >-
-        curl -X POST "https://vrchat.com/api/1/instances/{worldId}:{instanceId}/invite" \
-             -b "auth={authCookie}"
 '/instances/s/{shortname}':
   get:
     - lang: cURL

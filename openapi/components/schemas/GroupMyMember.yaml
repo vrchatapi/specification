@@ -15,7 +15,7 @@ properties:
     type: string
     nullable: true
   acceptedById:
-    $ref: ./UserID.yaml
+    type: string
     nullable: true
   createdAt:
     type: string

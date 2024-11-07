@@ -1,6 +1,12 @@
 title: GroupMember
 type: object
 properties:
+  acceptedByDisplayName:
+    type: string
+    nullable: true
+  acceptedById:
+    type: string
+    nullable: true
   id:
     $ref: ./GroupMemberID.yaml
   groupId:
