@@ -1,3 +1,5 @@
+title: CurrentUser
+type: object
 properties:
   acceptedTOSVersion:
     minimum: 0
@@ -22,6 +24,10 @@ properties:
     type: array
     items:
       $ref: ./UserID.yaml
+  ageVerificationStatus:
+    type: string
+  ageVerified:
+    type: boolean
   allowAvatarCopying:
     type: boolean
   badges:
@@ -91,6 +97,8 @@ properties:
     $ref: ./WorldID.yaml
   id:
     $ref: ./UserID.yaml
+  isAdult:
+    type: boolean
   isBoopingEnabled:
     default: true
     type: boolean
@@ -232,5 +240,6 @@ required:
   - date_joined
   - isFriend
   - friendKey
-title: CurrentUser
-type: object
+  - isAdult
+  - ageVerificationStatus
+  - ageVerified

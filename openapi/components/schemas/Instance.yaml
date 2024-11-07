@@ -9,6 +9,9 @@ properties:
     default: true
     example: true
     type: boolean
+  ageGate:
+    nullable: true
+    type: string
   canRequestInvite:
     default: true
     example: true
@@ -59,7 +62,7 @@ properties:
   platforms:
     $ref: ./InstancePlatforms.yaml
   playerPersistenceEnabled:
-    type: string
+    type: boolean
     nullable: true
   region:
     $ref: ./InstanceRegion.yaml

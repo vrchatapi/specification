@@ -1,6 +1,8 @@
 title: User
 type: object
 properties:
+  ageVerificationStatus:
+    type: string
   allowAvatarCopying:
     type: boolean
     default: true
@@ -96,6 +98,7 @@ properties:
   worldId:
     $ref: ./WorldID.yaml
 required:
+  - ageVerificationStatus
   - allowAvatarCopying
   - bio
   - bioLinks
