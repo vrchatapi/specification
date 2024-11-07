@@ -427,8 +427,6 @@ properties:
     type: object
     description: Reasons available for reporting users
     properties:
-      avatar:
-        $ref: './ReportReason.yaml'
       billing:
         $ref: './ReportReason.yaml'
       botting:
@@ -436,8 +434,6 @@ properties:
       cancellation:
         $ref: './ReportReason.yaml'
       gore:
-        $ref: './ReportReason.yaml'
-      group:
         $ref: './ReportReason.yaml'
       hacking:
         $ref: './ReportReason.yaml'
@@ -467,11 +463,7 @@ properties:
         $ref: './ReportReason.yaml'
       threatening:
         $ref: './ReportReason.yaml'
-      user:
-        $ref: './ReportReason.yaml'
       visuals:
-        $ref: './ReportReason.yaml'
-      world:
         $ref: './ReportReason.yaml'
     required:
       - billing
