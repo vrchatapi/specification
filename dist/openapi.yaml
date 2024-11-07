@@ -3798,6 +3798,8 @@ components:
       title: UserStatus
       default: offline
     CurrentUser:
+      title: CurrentUser
+      type: object
       properties:
         acceptedTOSVersion:
           minimum: 0
@@ -3822,6 +3824,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserID'
+        ageVerificationStatus:
+          type: string
+        ageVerified:
+          type: boolean
         allowAvatarCopying:
           type: boolean
         badges:
@@ -3891,6 +3897,8 @@ components:
           $ref: '#/components/schemas/WorldID'
         id:
           $ref: '#/components/schemas/UserID'
+        isAdult:
+          type: boolean
         isBoopingEnabled:
           default: true
           type: boolean
@@ -4031,8 +4039,9 @@ components:
         - date_joined
         - isFriend
         - friendKey
-      title: CurrentUser
-      type: object
+        - isAdult
+        - ageVerificationStatus
+        - ageVerified
     TwoFactorAuthCode:
       title: TwoFactorAuthCode
       type: object
@@ -6157,6 +6166,10 @@ components:
         updated_at:
           format: date-time
           type: string
+        urlList:
+          type: array
+          items:
+            type: string
         version:
           default: 0
           example: 68
@@ -6723,6 +6736,9 @@ components:
           default: true
           example: true
           type: boolean
+        ageGate:
+          nullable: true
+          type: string
         canRequestInvite:
           default: true
           example: true
@@ -6773,7 +6789,7 @@ components:
         platforms:
           $ref: '#/components/schemas/InstancePlatforms'
         playerPersistenceEnabled:
-          type: string
+          type: boolean
           nullable: true
         region:
           $ref: '#/components/schemas/InstanceRegion'
@@ -6993,6 +7009,19 @@ components:
       required:
         - name
         - text
+    PerformanceLimiterInfo:
+      title: PerformanceLimiterInfo
+      type: object
+      description: Info about the performance limits on a platform
+      properties:
+        allowed:
+          type: boolean
+        maxSeats:
+          type: integer
+          description: Maximum amount of seats. -1 means no limit.
+      required:
+        - allowed
+        - maxSeats
     APIConfigConstants:
       title: APIConfigConstants
       type: object
@@ -7285,6 +7314,10 @@ components:
           description: VRChat's office address
           minLength: 1
           type: string
+        ageVerificationP:
+          type: boolean
+        ageVerificationStatusVisible:
+          type: boolean
         announcements:
           type: array
           description: Public Announcements
@@ -7314,6 +7347,28 @@ components:
           type: array
           items:
             type: string
+        avatarPerfLimiter:
+          type: object
+          properties:
+            AndroidMobile:
+              $ref: '#/components/schemas/PerformanceLimiterInfo'
+            PC:
+              $ref: '#/components/schemas/PerformanceLimiterInfo'
+            Pico:
+              $ref: '#/components/schemas/PerformanceLimiterInfo'
+            Quest:
+              $ref: '#/components/schemas/PerformanceLimiterInfo'
+            XRElite:
+              $ref: '#/components/schemas/PerformanceLimiterInfo'
+            iOSMobile:
+              $ref: '#/components/schemas/PerformanceLimiterInfo'
+          required:
+            - AndroidMobile
+            - PC
+            - Pico
+            - Quest
+            - XRElite
+            - iOSMobile
         buildVersionTag:
           description: Build tag of the API server
           minLength: 1
@@ -7407,6 +7462,8 @@ components:
           type: integer
         defaultAvatar:
           $ref: '#/components/schemas/AvatarID'
+        defaultStickerSet:
+          type: string
         deploymentGroup:
           $ref: '#/components/schemas/DeploymentGroup'
         devLanguageCodes:
@@ -7630,6 +7687,8 @@ components:
               $ref: '#/components/schemas/ReportCategory'
             chat:
               $ref: '#/components/schemas/ReportCategory'
+            emoji:
+              $ref: '#/components/schemas/ReportCategory'
             environment:
               $ref: '#/components/schemas/ReportCategory'
             groupstore:
@@ -7637,6 +7696,8 @@ components:
             image:
               $ref: '#/components/schemas/ReportCategory'
             text:
+              $ref: '#/components/schemas/ReportCategory'
+            sticker:
               $ref: '#/components/schemas/ReportCategory'
             warnings:
               $ref: '#/components/schemas/ReportCategory'
@@ -7753,6 +7814,9 @@ components:
           description: VRChat's support email
           minLength: 1
           type: string
+        supportFormUrl:
+          description: VRChat's support form
+          type: string
         timekeeping:
           type: boolean
           description: Unknown
@@ -7818,12 +7882,15 @@ components:
         - VoiceEnableDegradation
         - VoiceEnableReceiverLimiting
         - address
+        - ageVerificationP
+        - ageVerificationStatusVisible
         - announcements
         - analyticsSegment_NewUI_PctOfUsers
         - analyticsSegment_NewUI_Salt
         - appName
         - availableLanguageCodes
         - availableLanguages
+        - avatarPerfLimiter
         - buildVersionTag
         - chatboxLogBufferSeconds
         - clientApiKey
@@ -7837,6 +7904,7 @@ components:
         - copyrightEmail
         - currentTOSVersion
         - defaultAvatar
+        - defaultStickerSet
         - deploymentGroup
         - devSdkUrl
         - devSdkVersion
@@ -7885,6 +7953,7 @@ components:
         - serverName
         - stringHostUrlList
         - supportEmail
+        - supportFormUrl
         - timekeeping
         - timeOutWorldId
         - tutorialWorldId
@@ -8135,6 +8204,8 @@ components:
       title: User
       type: object
       properties:
+        ageVerificationStatus:
+          type: string
         allowAvatarCopying:
           type: boolean
           default: true
@@ -8229,6 +8300,7 @@ components:
         worldId:
           $ref: '#/components/schemas/WorldID'
       required:
+        - ageVerificationStatus
         - allowAvatarCopying
         - bio
         - bioLinks
@@ -8644,6 +8716,10 @@ components:
         updated_at:
           format: date-time
           type: string
+        urlList:
+          type: array
+          items:
+            type: string
         udonProducts:
           type: array
           items:
@@ -8672,6 +8748,7 @@ components:
         - publicationDate
         - labsPublicationDate
         - unityPackages
+        - urlList
         - popularity
         - heat
         - occupants
