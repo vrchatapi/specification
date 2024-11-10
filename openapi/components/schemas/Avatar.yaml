@@ -33,6 +33,19 @@ properties:
     type: string
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
+  styles:
+    type: object
+    properties:
+      primary:
+        type: string
+        nullable: true
+      secondary:
+        type: string
+        nullable: true
+      supplementary:
+        type: array
+        items:
+          type: string
   tags:
     description: ' '
     items:
@@ -74,6 +87,7 @@ required:
   - imageUrl
   - name
   - releaseStatus
+  - styles
   - tags
   - thumbnailImageUrl
   - unityPackages
