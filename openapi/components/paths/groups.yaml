@@ -127,7 +127,7 @@ paths:
         - authCookie: []
     post:
       summary: Create Group Announcement
-      description: Creates an Announcement for a Group.
+      description: 'Creates an Announcement for a Group. Warning: This will also remove all announcements. To make proper announcements, user the posts endpoint instead'
       operationId: createGroupAnnouncement
       tags:
         - groups
