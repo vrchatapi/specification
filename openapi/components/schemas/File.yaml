@@ -1,5 +1,11 @@
 description: ''
 properties:
+  animationStyle:
+    type: string
+    example: bats
+  maskTag:
+    type: string
+    example: square
   extension:
     example: .unitypackage
     minLength: 1

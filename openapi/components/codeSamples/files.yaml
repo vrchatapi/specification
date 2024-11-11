@@ -79,3 +79,25 @@
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/analysis/{fileId}/{versionId}/standard" \
              -b "auth={authCookie}"
+/icon:
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/icon" \
+             -b "auth={authCookie}" \
+             -F "file=@/path/to/image.png"
+/gallery:
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/gallery" \
+             -b "auth={authCookie}" \
+             -F "file=@/path/to/image.png"
+/file/image:
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/file/image" \
+             -b "auth={authCookie}" \
+             -F "file=@/path/to/image.png" \ 
+             -F "tag=icon"
