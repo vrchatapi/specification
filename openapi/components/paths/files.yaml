@@ -329,6 +329,9 @@ paths:
               required:
                 - file
                 - tag
+      security:
+        - authCookie: []
+      description: Upload an image, which can be an icon, gallery image, sticker or emoji
   '/icon':
     post:
       summary: Upload icon
@@ -352,6 +355,9 @@ paths:
                   description: The binary blob of the png file.
               required:
                 - file
+      security:
+        - authCookie: [ ]
+      description: Upload an icon
   '/gallery':
     post:
       summary: Upload gallery image
@@ -375,6 +381,9 @@ paths:
                   description: The binary blob of the png file.
               required:
                 - file
+      security:
+        - authCookie: [ ]
+      description: Upload a gallery image
 tags:
   $ref: ../tags.yaml
 components:
