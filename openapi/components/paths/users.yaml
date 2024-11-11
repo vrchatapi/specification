@@ -274,6 +274,24 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserNote
       description: Get a particular user note
+  "/users/{userId}/instances/groups":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      summary: Get User Group Instances
+      description: Returns a list of group instances for a user
+      operationId: getUserGroupInstances
+      tags:
+        - users
+      responses:
+        '200':
+          $ref: ../responses/users/UserGroupInstanceListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/users/UserMustBeOwnError.yaml
+      security:
+        - authCookie: []
 tags:
   $ref: ../tags.yaml
 components:

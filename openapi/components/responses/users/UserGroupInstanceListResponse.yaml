@@ -1,0 +1,13 @@
+description: Returns a list of Instance objects with a fetched at time.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        fetchedAt:
+          type: string
+          format: date-time
+        instances:
+          type: array
+          items:
+            $ref: ../../schemas/Instance.yaml
