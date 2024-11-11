@@ -4215,6 +4215,19 @@ components:
           type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
+        styles:
+          type: object
+          properties:
+            primary:
+              type: string
+              nullable: true
+            secondary:
+              type: string
+              nullable: true
+            supplementary:
+              type: array
+              items:
+                type: string
         tags:
           description: ' '
           items:
@@ -4256,6 +4269,7 @@ components:
         - imageUrl
         - name
         - releaseStatus
+        - styles
         - tags
         - thumbnailImageUrl
         - unityPackages
