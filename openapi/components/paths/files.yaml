@@ -321,11 +321,11 @@ paths:
                 animationStyle:
                   type: string
                   example: bats
-                  description: Animation style for sticker, required for sticker.
+                  description: Animation style for sticker, required for emoji.
                 maskTag:
                   type: string
                   example: square
-                  description: Mask of the sticker, optional for sticker.
+                  description: Mask of the sticker, optional for emoji.
               required:
                 - file
                 - tag
