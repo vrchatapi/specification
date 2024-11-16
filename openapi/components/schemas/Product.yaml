@@ -1,0 +1,63 @@
+title: Product
+type: object
+properties:
+  archived:
+    type: boolean
+  created:
+    type: string
+    format: date-time
+  description:
+    type: string
+  displayName:
+    type: string
+  groupAccess:
+    type: boolean
+  groupAccess:
+    type: boolean
+    default: false
+  groupAccessRemove:
+    type: boolean
+    default: false
+  groupId:
+    $ref: ./GroupID.yaml
+  groupRoleId:
+    $ref: ./GroupRoleID.yaml
+  id:
+    $ref: ./ProductID.yaml
+  imageId:
+    $ref: ./FileID.yaml
+    nullable: true
+  parentListings:
+    type: array
+    items:
+      $ref: ./ProductID.yaml
+  productType:
+    $ref: ./ProductType.yaml
+  sellerDisplayName:
+    type: string
+  sellerId:
+    type: string
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  updated:
+    type: string
+    format: date-time
+    nullable: true
+  useForSubscriberList:
+    type: boolean
+    default: false
+required:
+  - archived
+  - created
+  - description
+  - displayName
+  - id
+  - imageId
+  - parentListings
+  - productType
+  - sellerDisplayName
+  - sellerId
+  - tags
+  - updated

@@ -1,0 +1,23 @@
+title: ProductListingVariant
+type: object
+properties:
+  effectiveFrom:
+    type: string
+    format: date-time
+  listingVariantId:
+    $ref: ./ProductListingVariantID.yaml
+    nullable: true
+  nonRefundable:
+    type: boolean
+  quantity:
+    type: integer
+  sellerVariant:
+    type: boolean
+  unitPriceTokens:
+    type: integer
+required:
+  - listingVariantId
+  - nonRefundable
+  - quantity
+  - sellerVariant
+  - unitPriceTokens

@@ -126,6 +126,116 @@ paths:
       tags:
         - economy
       description: Get a single License Group by given ID.
+  '/listing/{productId}':
+    parameters:
+      - $ref: ../parameters.yaml#/productId
+      - $ref: ../parameters.yaml#/hydrate
+    get:
+      summary: Get Product Listing
+      operationId: getProductListing
+      security:
+        - authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1listing~1{listingId}/get"
+      responses:
+        '200':
+          $ref: ../responses/economy/ProductListingResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets a product listing'
+  '/user/{userId}/listings':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+      - $ref: ../parameters.yaml#/hydrate
+      - $ref: ../parameters.yaml#/groupIdFilter
+      - $ref: ../parameters.yaml#/active
+    get:
+      summary: Get User's Product Listings
+      operationId: getProductListings
+      security:
+        - authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1user~1{userId}~1listings/get"
+      responses:
+        '200':
+          $ref: ../responses/economy/ProductListingListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets a user's product listings'
+  '/tokenBundles':
+    get:
+      summary: List Token Bundles
+      operationId: getTokenBundles
+      security:
+        - authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1tokenBundles/get"
+      responses:
+        '200':
+          $ref: ../responses/economy/TokenBundleListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets the list of token bundles'
+  '/tilia/status':
+    get:
+      summary: Get Tilia Status
+      operationId: getTiliaStatus
+      security:
+        - authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1tilia~1status/get"
+      responses:
+        '200':
+          $ref: ../responses/economy/TiliaStatusResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets the status of Tilia integration'
+  '/user/{userId}/tilia/tos':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      summary: Get Tilia TOS Agreement Status
+      operationId: getTiliaTos
+      security:
+        - authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1user~1{userId}~1tilia~1tos/get"
+      responses:
+        '200':
+          $ref: ../responses/economy/TiliaTOSResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets the status of a user's agreement to the Tilia TOS'
+  '/user/{userId}/balance':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      summary: Get Balance
+      operationId: getBalance
+      security:
+        - authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/economy.yaml#/~1user~1{userId}~1balance/get"
+      responses:
+        '200':
+          $ref: ../responses/economy/BalanceResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets a user's balance'
 tags:
   $ref: ../tags.yaml
 components:

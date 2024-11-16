@@ -23,6 +23,13 @@ sort:
   schema:
     $ref: ./schemas/SortOption.yaml
   description: The sort order of the results.
+hydrate:
+  name: hydrate
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Populates some fields and changes types of others for certain objects.
 groupMemberSort:
   name: sort
   in: query
@@ -86,6 +93,14 @@ groupId:
   name: groupId
   in: path
   required: true
+  schema:
+    type: string
+    example: grp_00000000-0000-0000-0000-000000000000
+  description: Must be a valid group ID.
+groupIdFilter:
+  name: groupId
+  in: query
+  required: false
   schema:
     type: string
     example: grp_00000000-0000-0000-0000-000000000000
@@ -337,6 +352,20 @@ licenseGroupId:
   schema:
     type: string
   description: Must be a valid license group ID.
+listingId:
+  name: listingId
+  in: path
+  required: true
+  schema:
+    type: string
+  description: Must be a valid listing ID.
+active:
+  name: active
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Filter for users' listings.
 variant:
   name: variant
   in: query

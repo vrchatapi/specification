@@ -1,0 +1,111 @@
+title: Listing
+type: object
+properties:
+  active:
+    type: boolean
+  archived:
+    type: boolean
+  buyerRefundable:
+    type: boolean
+  created:
+    type: string
+    format: date-time
+  description:
+    type: string
+  displayName:
+    type: string
+  duration:
+    type: integer
+  durationType:
+    type: string
+  groupIcon:
+    $ref: ./FileID.yaml
+    nullable: true
+  groupId:
+    $ref: ./GroupID.yaml
+  groupName:
+    type: string
+  hydratedProducts:
+    type: array
+    items:
+      $ref: ./Product.yaml
+  id:
+    $ref: ./ProductID.yaml
+  imageId:
+    $ref: ./FileID.yaml
+    nullable: true
+  instant:
+    type: boolean
+  listingType:
+    $ref: ./ProductListingType.yaml
+  listingVariants:
+    type: array
+    items:
+      $ref: ./ProductListingVariant.yaml
+  permenant:
+    type: boolean
+  priceTokens:
+    type: integer
+  productIds:
+    type: array
+    items:
+      $ref: ./ProductID.yaml
+  productType:
+    $ref: ./ProductType.yaml
+  products:
+    type: array
+    items:
+      type: object
+      description: Either a ProductID or a Product, depending on hydration
+  quantifiable:
+    type: boolean
+  recurrable:
+    type: boolean
+  refundable:
+    type: boolean
+  sellerDisplayName:
+    type: string
+  sellerId:
+    type: string
+  stackable:
+    type: boolean
+  storeIds:
+    type: array
+    items:
+      type: string
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  updated:
+    type: string
+    format: date-time
+    nullable: true
+required:
+  - active
+  - archived
+  - buyerRefundable
+  - created
+  - description
+  - displayName
+  - groupIcon
+  - groupId
+  - groupName
+  - id
+  - imageId
+  - instant
+  - listingType
+  - listingVariants
+  - permanent
+  - priceTokens
+  - productIds
+  - productType
+  - products
+  - recurrable
+  - refundable
+  - sellerDisplayName
+  - sellerId
+  - stackable
+  - storeIds
+  - tags
+  - updated

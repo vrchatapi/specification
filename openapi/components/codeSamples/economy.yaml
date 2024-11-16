@@ -40,3 +40,39 @@
       source: >-
         curl -X GET "https://vrchat.com/api/1/licenseGroups/{licenseGroupId}" \
              -b "auth={authCookie}"
+'/listing/{listingId}':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/listing/{listingId}" \
+             -b "auth={authCookie}"
+'/user/{userId}/listings':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/user/{userId}/listings?hydrated=true" \
+             -b "auth={authCookie}"
+'/tokenBundles':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/tokenBundles" \
+             -b "auth={authCookie}"
+'/tilia/status':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/tilia/status" \
+             -b "auth={authCookie}"
+'/user/{userId}/tilia/tos':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/user/{userId}/tilia/tos" \
+             -b "auth={authCookie}"
+'/user/{userId}/balance':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/user/{userId}/balance" \
+             -b "auth={authCookie}"
