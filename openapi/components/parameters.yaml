@@ -352,13 +352,13 @@ licenseGroupId:
   schema:
     type: string
   description: Must be a valid license group ID.
-listingId:
-  name: listingId
+productId:
+  name: productId
   in: path
   required: true
   schema:
     type: string
-  description: Must be a valid listing ID.
+  description: Must be a valid product ID.
 active:
   name: active
   in: query
