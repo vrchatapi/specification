@@ -136,7 +136,7 @@ paths:
       security:
         - authCookie: []
       x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1listing~1{listingId}/get"
+        $ref: "../codeSamples/economy.yaml#/~1listing~1{productId}/get"
       responses:
         '200':
           $ref: ../responses/economy/ProductListingResponse.yaml
@@ -154,7 +154,7 @@ paths:
       - $ref: ../parameters.yaml#/groupIdFilter
       - $ref: ../parameters.yaml#/active
     get:
-      summary: Get User's Product Listings
+      summary: Get User Product Listings
       operationId: getProductListings
       security:
         - authCookie: []
@@ -167,7 +167,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets a user's product listings'
+      description: Gets the product listings of a given user
   '/tokenBundles':
     get:
       summary: List Token Bundles
@@ -217,7 +217,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets the status of a user's agreement to the Tilia TOS'
+      description: 'Gets the status of the agreement of a user to the Tilia TOS'
   '/user/{userId}/balance':
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -235,7 +235,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets a user's balance'
+      description: 'Gets the balance of a user'
 tags:
   $ref: ../tags.yaml
 components:

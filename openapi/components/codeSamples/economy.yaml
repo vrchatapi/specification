@@ -40,11 +40,11 @@
       source: >-
         curl -X GET "https://vrchat.com/api/1/licenseGroups/{licenseGroupId}" \
              -b "auth={authCookie}"
-'/listing/{listingId}':
+'/listing/{productId}':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/listing/{listingId}" \
+        curl -X GET "https://vrchat.com/api/1/listing/{productId}" \
              -b "auth={authCookie}"
 '/user/{userId}/listings':
   get:

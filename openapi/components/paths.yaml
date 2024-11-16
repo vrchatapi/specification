@@ -53,7 +53,7 @@
 '/licenseGroups/{licenseGroupId}':
   $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
 '/listing/{productId}':
-  $ref: "./paths/economy.yaml#/paths/~1listing~1{listingId}"
+  $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}"
 '/user/{userId}/listings':
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1listings"
 '/tokenBundles':

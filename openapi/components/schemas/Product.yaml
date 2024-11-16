@@ -12,8 +12,6 @@ properties:
     type: string
   groupAccess:
     type: boolean
-  groupAccess:
-    type: boolean
     default: false
   groupAccessRemove:
     type: boolean
