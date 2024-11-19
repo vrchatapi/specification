@@ -42,7 +42,7 @@ properties:
     type: array
     items:
       $ref: ./ProductListingVariant.yaml
-  permenant:
+  permanent:
     type: boolean
   priceTokens:
     type: integer
