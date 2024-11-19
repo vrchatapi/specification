@@ -4810,6 +4810,9 @@ components:
         isGift:
           type: boolean
           default: false
+        isGiftDrop:
+          type: boolean
+          default: false
       required:
         - id
         - transactionId
@@ -4825,6 +4828,7 @@ components:
         - updated_at
         - licenseGroups
         - isGift
+        - isGiftDrop
       title: UserSubscription
     LicenseType:
       type: string
