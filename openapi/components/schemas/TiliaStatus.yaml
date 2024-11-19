@@ -1,0 +1,8 @@
+description: ''
+type: object
+title: TiliaStatus
+properties:
+  economyOnline:
+    type: boolean
+required:
+  - economyOnline

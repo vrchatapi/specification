@@ -1,0 +1,28 @@
+title: TokenBundle
+type: object
+properties:
+  id:
+    type: string
+  steamItemId:
+    type: string
+  oculusSku:
+    type: string
+  amount:
+    type: integer
+    description: price of the bundle
+  description:
+    type: string
+  tokens:
+    type: integer
+    description: number of tokens received
+  imageUrl:
+    type: string
+    description: direct url to image
+required:
+  - id
+  - steamItemId
+  - oculusSku
+  - amount
+  - description
+  - tokens
+  - imageUrl

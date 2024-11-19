@@ -1,0 +1,5 @@
+type: string
+title: ProductListingType
+default: subscription
+enum:
+  - subscription

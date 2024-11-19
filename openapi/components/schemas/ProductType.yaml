@@ -1,0 +1,7 @@
+type: string
+title: ProductType
+default: udon
+enum:
+  - listing
+  - role
+  - udon

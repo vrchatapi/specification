@@ -1,0 +1,8 @@
+description: ''
+type: object
+title: TiliaTOS
+properties:
+  signed_tos:
+    type: boolean
+required:
+  - signed_tos
