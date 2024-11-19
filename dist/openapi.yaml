@@ -704,6 +704,134 @@ paths:
       tags:
         - economy
       description: Get a single License Group by given ID.
+  /listing/{productId}:
+    parameters:
+      - $ref: '#/components/parameters/productId'
+      - $ref: '#/components/parameters/hydrate'
+    get:
+      summary: Get Product Listing
+      operationId: getProductListing
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/listing/{productId}" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductListingResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets a product listing
+  /user/{userId}/listings:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/number'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/hydrate'
+      - $ref: '#/components/parameters/groupIdFilter'
+      - $ref: '#/components/parameters/active'
+    get:
+      summary: Get User Product Listings
+      operationId: getProductListings
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/user/{userId}/listings?hydrate=true" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductListingListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets the product listings of a given user
+  /tokenBundles:
+    get:
+      summary: List Token Bundles
+      operationId: getTokenBundles
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/tokenBundles" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/TokenBundleListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets the list of token bundles
+  /tilia/status:
+    get:
+      summary: Get Tilia Status
+      operationId: getTiliaStatus
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/tilia/status" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/TiliaStatusResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets the status of Tilia integration
+  /user/{userId}/tilia/tos:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get Tilia TOS Agreement Status
+      operationId: getTiliaTos
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/user/{userId}/tilia/tos" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/TiliaTOSResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets the status of the agreement of a user to the Tilia TOS
+  /user/{userId}/balance:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get Balance
+      operationId: getBalance
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/user/{userId}/balance" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets the balance of a user
   /favorites:
     get:
       summary: List Favorites
@@ -4782,6 +4910,295 @@ components:
         - name
         - description
         - licenses
+    FileID:
+      example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
+      title: FileID
+      type: string
+    GroupRoleID:
+      example: grol_459d3911-f672-44bc-b84d-e54ffe7960fe
+      title: GroupRoleID
+      type: string
+    ProductID:
+      example: prod_bfbc2315-247a-44d7-bfea-5237f8d56cb4
+      title: ProductID
+      type: string
+    ProductType:
+      type: string
+      title: ProductType
+      default: udon
+      enum:
+        - listing
+        - role
+        - udon
+    Product:
+      title: Product
+      type: object
+      properties:
+        archived:
+          type: boolean
+        created:
+          type: string
+          format: date-time
+        description:
+          type: string
+        displayName:
+          type: string
+        groupAccess:
+          type: boolean
+          default: false
+        groupAccessRemove:
+          type: boolean
+          default: false
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        groupRoleId:
+          $ref: '#/components/schemas/GroupRoleID'
+        id:
+          $ref: '#/components/schemas/ProductID'
+        imageId:
+          $ref: '#/components/schemas/FileID'
+          nullable: true
+        parentListings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductID'
+        productType:
+          $ref: '#/components/schemas/ProductType'
+        sellerDisplayName:
+          type: string
+        sellerId:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        updated:
+          type: string
+          format: date-time
+          nullable: true
+        useForSubscriberList:
+          type: boolean
+          default: false
+      required:
+        - archived
+        - created
+        - description
+        - displayName
+        - id
+        - imageId
+        - parentListings
+        - productType
+        - sellerDisplayName
+        - sellerId
+        - tags
+        - updated
+    ProductListingType:
+      type: string
+      title: ProductListingType
+      default: subscription
+      enum:
+        - subscription
+    ProductListingVariantID:
+      example: listvar_e8658b56-1662-436c-935a-afcf6a7d4fed
+      title: ProductListingVariantID
+      type: string
+    ProductListingVariant:
+      title: ProductListingVariant
+      type: object
+      properties:
+        effectiveFrom:
+          type: string
+          format: date-time
+        listingVariantId:
+          $ref: '#/components/schemas/ProductListingVariantID'
+          nullable: true
+        nonRefundable:
+          type: boolean
+        quantity:
+          type: integer
+        sellerVariant:
+          type: boolean
+        unitPriceTokens:
+          type: integer
+      required:
+        - listingVariantId
+        - nonRefundable
+        - quantity
+        - sellerVariant
+        - unitPriceTokens
+    ProductListing:
+      title: Listing
+      type: object
+      properties:
+        active:
+          type: boolean
+        archived:
+          type: boolean
+        buyerRefundable:
+          type: boolean
+        created:
+          type: string
+          format: date-time
+        description:
+          type: string
+        displayName:
+          type: string
+        duration:
+          type: integer
+        durationType:
+          type: string
+        groupIcon:
+          $ref: '#/components/schemas/FileID'
+          nullable: true
+        groupId:
+          $ref: '#/components/schemas/GroupID'
+        groupName:
+          type: string
+        hydratedProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        id:
+          $ref: '#/components/schemas/ProductID'
+        imageId:
+          $ref: '#/components/schemas/FileID'
+          nullable: true
+        instant:
+          type: boolean
+        listingType:
+          $ref: '#/components/schemas/ProductListingType'
+        listingVariants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductListingVariant'
+        permanent:
+          type: boolean
+        priceTokens:
+          type: integer
+        productIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductID'
+        productType:
+          $ref: '#/components/schemas/ProductType'
+        products:
+          type: array
+          items:
+            type: object
+            description: Either a ProductID or a Product, depending on hydration
+        quantifiable:
+          type: boolean
+        recurrable:
+          type: boolean
+        refundable:
+          type: boolean
+        sellerDisplayName:
+          type: string
+        sellerId:
+          type: string
+        stackable:
+          type: boolean
+        storeIds:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        updated:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - active
+        - archived
+        - buyerRefundable
+        - created
+        - description
+        - displayName
+        - groupIcon
+        - groupId
+        - groupName
+        - id
+        - imageId
+        - instant
+        - listingType
+        - listingVariants
+        - permanent
+        - priceTokens
+        - productIds
+        - productType
+        - products
+        - recurrable
+        - refundable
+        - sellerDisplayName
+        - sellerId
+        - stackable
+        - storeIds
+        - tags
+        - updated
+    TokenBundle:
+      title: TokenBundle
+      type: object
+      properties:
+        id:
+          type: string
+        steamItemId:
+          type: string
+        oculusSku:
+          type: string
+        amount:
+          type: integer
+          description: price of the bundle
+        description:
+          type: string
+        tokens:
+          type: integer
+          description: number of tokens received
+        imageUrl:
+          type: string
+          description: direct url to image
+      required:
+        - id
+        - steamItemId
+        - oculusSku
+        - amount
+        - description
+        - tokens
+        - imageUrl
+    TiliaStatus:
+      description: ''
+      type: object
+      title: TiliaStatus
+      properties:
+        economyOnline:
+          type: boolean
+      required:
+        - economyOnline
+    TiliaTOS:
+      description: ''
+      type: object
+      title: TiliaTOS
+      properties:
+        signed_tos:
+          type: boolean
+      required:
+        - signed_tos
+    Balance:
+      description: ''
+      type: object
+      title: Balance
+      properties:
+        balance:
+          default: 0
+          type: integer
+        noTransactions:
+          type: boolean
+        tiliaResponse:
+          type: boolean
+      required:
+        - balance
     FavoriteID:
       example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
       title: FavoriteID
@@ -4896,10 +5313,6 @@ components:
           description: Tags on FavoriteGroups are believed to do nothing.
           items:
             $ref: '#/components/schemas/Tag'
-    FileID:
-      example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
-      title: FileID
-      type: string
     MIMEType:
       type: string
       enum:
@@ -5318,10 +5731,6 @@ components:
     GroupGalleryID:
       example: ggal_a03a4b55-4ca6-4490-9519-40ba6351a233
       title: GroupGalleryID
-      type: string
-    GroupRoleID:
-      example: grol_459d3911-f672-44bc-b84d-e54ffe7960fe
-      title: GroupRoleID
       type: string
     GroupGallery:
       title: GroupMember
@@ -9140,6 +9549,46 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/LicenseGroup'
+    ProductListingResponse:
+      description: Returns a single ProductListing object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductListing'
+    ProductListingListResponse:
+      description: Returns a list of ProductListing objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ProductListing'
+    TokenBundleListResponse:
+      description: Returns a list of TokenBundle objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TokenBundle'
+    TiliaStatusResponse:
+      description: Returns a single TiliaStatus object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TiliaStatus'
+    TiliaTOSResponse:
+      description: Returns a single TiliaTOS object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TiliaTOS'
+    BalanceResponse:
+      description: Returns a single Balance object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Balance'
     FavoriteListResponse:
       description: Returns a list of Favorite objects.
       content:
@@ -10560,6 +11009,35 @@ components:
       schema:
         type: string
       description: Must be a valid license group ID.
+    productId:
+      name: productId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Must be a valid product ID.
+    hydrate:
+      name: hydrate
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Populates some fields and changes types of others for certain objects.
+    groupIdFilter:
+      name: groupId
+      in: query
+      required: false
+      schema:
+        type: string
+        example: grp_00000000-0000-0000-0000-000000000000
+      description: Must be a valid group ID.
+    active:
+      name: active
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Filter for users' listings.
     favoriteId:
       name: favoriteId
       in: path
