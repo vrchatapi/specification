@@ -34,6 +34,5 @@ required:
   - createdAt
   - id
   - note
-  - targetUser
   - targetUserId
   - userId
