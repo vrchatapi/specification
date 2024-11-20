@@ -8,6 +8,24 @@ properties:
     $ref: ./UserNoteID.yaml
   note:
     type: string
+  targetUser:
+    type: object
+    properties:
+      "currentAvatarTags":
+        type: array
+        items:
+          $ref: ./Tag.yaml
+      "currentAvatarThumbnailImageUrl":
+        $ref: ./CurrentAvatarThumbnailImageUrl.yaml
+      "displayName":
+        type: string
+      "id":
+        $ref: ./UserNoteID.yaml
+      "profilePicOverride":
+        type: string
+        nullable: true
+      "userIcon":
+        type: string
   targetUserId:
     $ref: ./UserID.yaml
   userId:
@@ -16,5 +34,6 @@ required:
   - createdAt
   - id
   - note
+  - targetUser
   - targetUserId
   - userId
