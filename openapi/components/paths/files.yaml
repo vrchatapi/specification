@@ -268,7 +268,7 @@ paths:
       operationId: getFileAnalysisSecurity
       security:
         - authCookie: []
-      description: Get the security  performance analysis for the uploaded assets of an avatar
+      description: Get the security performance analysis for the uploaded assets of an avatar
   '/analysis/{fileId}/{versionId}/standard':
     parameters:
       - $ref: ../parameters.yaml#/fileId
@@ -287,7 +287,7 @@ paths:
       operationId: getFileAnalysisStandard
       security:
         - authCookie: []
-      description: Get the standard  performance analysis for the uploaded assets of an avatar
+      description: Get the standard performance analysis for the uploaded assets of an avatar
 tags:
   $ref: ../tags.yaml
 components:
