@@ -195,6 +195,7 @@ paths:
       security:
         - authCookie: []
   '/users/{userId}/feedback':
+    depricated: true
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/contentId
