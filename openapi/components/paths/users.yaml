@@ -195,7 +195,6 @@ paths:
       security:
         - authCookie: []
   '/users/{userId}/feedback':
-    deprecated: true
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/contentId
@@ -207,6 +206,7 @@ paths:
         $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1feedback/get
       tags:
         - users
+      deprecated: true
       security:
         - authCookie: []
       responses:
