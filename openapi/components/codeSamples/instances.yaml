@@ -2,17 +2,17 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/instances/{worldId}:{instanceId}" \
+        curl -X GET "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}" \
              -b "auth={authCookie}"
 '/instance/{worldId}:{instanceId}/shortName':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/instances/{worldId}:{instanceId}/shortName" \
+        curl -X GET "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/shortName" \
              -b "auth={authCookie}"
 '/instances/s/{shortname}':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/instances/s/{shortname}" \
+        curl -X GET "https://api.vrchat.cloud/api/1/instances/s/{shortname}" \
              -b "auth={authCookie}"

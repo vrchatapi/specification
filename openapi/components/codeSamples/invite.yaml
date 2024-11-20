@@ -2,7 +2,7 @@
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://vrchat.com/api/1/invite/{userId}" \
+        curl -X POST "https://api.vrchat.cloud/api/1/invite/{userId}" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"instanceId": "wrld_ba913a96-fac4-4048-a062-9aa5db092812:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)", "messageSlot": 11}'
@@ -10,14 +10,14 @@
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://vrchat.com/api/1/invite/myself/to/{worldid}:{instanceid}" \
+        curl -X POST "https://api.vrchat.cloud/api/1/invite/myself/to/{worldid}:{instanceid}" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}"'
 '/requestInvite/{userId}':
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://vrchat.com/api/1/requestInvite/{userId}" \
+        curl -X POST "https://api.vrchat.cloud/api/1/requestInvite/{userId}" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"messageSlot": 11}'
@@ -25,7 +25,7 @@
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://vrchat.com/api/1/invite/{notificationId}/response" \
+        curl -X POST "https://api.vrchat.cloud/api/1/invite/{notificationId}/response" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"responseSlot": 11}'
@@ -33,23 +33,23 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/message/{userId}/{messageType}" \
+        curl -X GET "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}" \
              -b "auth={authCookie}"
 '/message/{userId}/{messageType}/{slot}':
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/message/{userId}/{messageType}/{slot}" \
+        curl -X GET "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}" \
              -b "auth={authCookie}"
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://vrchat.com/api/1/message/{userId}/{messageType}/{slot}" \
+        curl -X PUT "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"message": "string"}'
   delete:
     - lang: cURL
       source: >-
-        curl -X DELETE "https://vrchat.com/api/1/message/{userId}/{messageType}/{slot}" \
+        curl -X DELETE "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}" \
              -b "auth={authCookie}"

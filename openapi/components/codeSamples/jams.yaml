@@ -2,14 +2,14 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/jams?type={string}"
+        curl -X GET "https://api.vrchat.cloud/api/1/jams?type={string}"
 /jams/{jamId}:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/jams/{jamId}"
+        curl -X GET "https://api.vrchat.cloud/api/1/jams/{jamId}"
 /jams/{jamId}/submissions:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/jams/{jamId}/submissions"
+        curl -X GET "https://api.vrchat.cloud/api/1/jams/{jamId}/submissions"

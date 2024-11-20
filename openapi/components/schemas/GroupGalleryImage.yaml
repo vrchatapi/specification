@@ -11,7 +11,7 @@ properties:
     $ref: ./FileID.yaml
   imageUrl:
     type: string
-    example: 'https://vrchat.com/api/1/file/file_ce35d830-e20a-4df0-a6d4-5aaef4508044/1/file'
+    example: 'https://api.vrchat.cloud/api/1/file/file_ce35d830-e20a-4df0-a6d4-5aaef4508044/1/file'
     format: uri
   createdAt:
     type: string

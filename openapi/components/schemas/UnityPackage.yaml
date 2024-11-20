@@ -5,7 +5,7 @@ properties:
   assetUrl:
     type: string
     nullable: true
-    example: https://vrchat.com/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
+    example: https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
   assetUrlObject:
     type: object
     example: {}
