@@ -45,3 +45,9 @@
       source: >-
         curl -X DELETE "https://vrchat.com/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
              -b "auth={authCookie}"
+'/auth/user/favoritelimits':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/auth/user/favoritelimits" \
+             -b "auth={authCookie}"

@@ -25,7 +25,32 @@
   put:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/users/{userId}" \
+        curl -X PUT "https://vrchat.com/api/1/users/{userId}" \
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"email": "string", "birthday": "2019-08-24", "acceptedTOSVersion": 0, "tags": ["string"], "status": "active", "statusDescription": "string", "bio": "string", "bioLinks": ["string"], "userIcon": "https://vrchat.com/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"}'
+'/users/{userId}/feedback':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/users/{userId}/feedback?n=100" \
+             -b "auth={authCookie}"
+'/userNotes':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/userNotes?n=100" \
+             -b "auth={authCookie}"
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://vrchat.com/api/1/userNotes" \
+             -H "Content-Type: application/json" \
+             -b "auth={authCookie}" \
+             --data '{"targetUserId": "userId", "note": "string"}'
+'/userNotes/{userNoteId}':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/userNotes/{userNoteId}" \
+             -b "auth={authCookie}"

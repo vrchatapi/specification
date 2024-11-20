@@ -1,0 +1,47 @@
+title: Feedback
+type: object
+properties:
+  commenterId:
+    $ref: ./UserID.yaml
+  commenterName:
+    type: string
+  contentAuthorId:
+    $ref: ./UserID.yaml
+    nullable: true
+  contentAuthorName:
+    type: string
+    nullable: true
+  contentId:
+    type: string
+  contentName:
+    type: string
+  contentType:
+    type: string
+  contentVersion:
+    type: integer
+    nullable: true
+  description:
+    type: string
+    nullable: true
+  id:
+    $ref: ./FeedbackID.yaml
+  reason:
+    type: string
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  type:
+    type: string
+required:
+  - commenterId
+  - commenterName
+  - contentAuthorId
+  - contentAuthorName
+  - contentId
+  - contentType
+  - contentVersion
+  - id
+  - reason
+  - tags
+  - type

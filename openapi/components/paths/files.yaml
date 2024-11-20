@@ -154,7 +154,7 @@ paths:
       tags:
         - files
       x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fieldId}~1{versionId}~1{fileType}~1status/get"
+        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}~1{fileType}~1status/get"
       responses:
         '200':
           $ref: ../responses/files/FileVersionUploadStatusResponse.yaml
@@ -231,6 +231,63 @@ paths:
       security:
         - authCookie: []
       description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
+  '/analysis/{fileId}/{versionId}':
+    parameters:
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+    get:
+      summary: Get File Version Analysis
+      tags:
+        - files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1analysis~1{fileId}~1{versionId}/get"
+      responses:
+        '200':
+          $ref: ../responses/files/FileAnalysisResponse.yaml
+        '404':
+          $ref: ../responses/files/FileNotFoundError.yaml
+      operationId: getFileAnalysis
+      security:
+        - authCookie: []
+      description: Get the performance analysis for the uploaded assets of an avatar
+  '/analysis/{fileId}/{versionId}/security':
+    parameters:
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+    get:
+      summary: Get File Version Analysis Security
+      tags:
+        - files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1analysis~1{fileId}~1{versionId}~1security/get"
+      responses:
+        '200':
+          $ref: ../responses/files/FileAnalysisResponse.yaml
+        '404':
+          $ref: ../responses/files/FileNotFoundError.yaml
+      operationId: getFileAnalysisSecurity
+      security:
+        - authCookie: []
+      description: Get the security  performance analysis for the uploaded assets of an avatar
+  '/analysis/{fileId}/{versionId}/standard':
+    parameters:
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+    get:
+      summary: Get File Version Analysis Standard
+      tags:
+        - files
+      x-codeSamples:
+        $ref: "../codeSamples/files.yaml#/~1file~1{fieldId}~1{versionId}~1standard/get"
+      responses:
+        '200':
+          $ref: ../responses/files/FileAnalysisResponse.yaml
+        '404':
+          $ref: ../responses/files/FileNotFoundError.yaml
+      operationId: getFileAnalysisStandard
+      security:
+        - authCookie: []
+      description: Get the standard  performance analysis for the uploaded assets of an avatar
 tags:
   $ref: ../tags.yaml
 components:

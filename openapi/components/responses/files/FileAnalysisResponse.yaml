@@ -1,0 +1,5 @@
+description: Returns a single FileAnalysis object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/FileAnalysis.yaml

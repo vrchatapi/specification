@@ -1,0 +1,5 @@
+description: Returns a single UserNote object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/UserNote.yaml

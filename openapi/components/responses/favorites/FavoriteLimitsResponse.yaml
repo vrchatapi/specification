@@ -1,0 +1,5 @@
+description: Returns a single FavoriteLimits object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/FavoriteLimits.yaml
