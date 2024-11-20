@@ -278,7 +278,7 @@ paths:
       tags:
         - files
       x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fieldId}~1{versionId}~1standard/get"
+        $ref: "../codeSamples/files.yaml#/~1analysis~1{fileId}~1{versionId}~1standard/get"
       responses:
         '200':
           $ref: ../responses/files/FileAnalysisResponse.yaml

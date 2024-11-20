@@ -212,7 +212,7 @@ paths:
           $ref: ../responses/users/FeedbackListResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getUserGroups
+      operationId: getUserFeedback
       description: Get user's submitted feedback
   '/userNotes':
     get:
@@ -241,7 +241,7 @@ paths:
         $ref: ../codeSamples/users.yaml#/~1userNotes/post
       responses:
         '200':
-          $ref: ../responses/notifications/UserNoteResponse.yaml
+          $ref: ../responses/users/UserNoteResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: updateUserNote
