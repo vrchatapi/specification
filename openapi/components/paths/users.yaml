@@ -197,6 +197,7 @@ paths:
   '/users/{userId}/feedback':
     parameters:
       - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/contentId
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/offset
     get:
