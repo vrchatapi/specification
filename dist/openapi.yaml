@@ -1036,6 +1036,27 @@ paths:
       tags:
         - favorites
       description: Clear ALL contents of a specific favorite group.
+  /auth/user/favoritelimits:
+    parameters: []
+    get:
+      summary: Get Favorite Limits
+      tags:
+        - favorites
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/auth/user/favoritelimits" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/FavoriteLimitsResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getFavoriteLimits
+      security:
+        - authCookie: []
+      description: Return information about a specific Favorite.
+      parameters: []
   /files:
     get:
       summary: List Files
@@ -1299,6 +1320,72 @@ paths:
       security:
         - authCookie: []
       description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
+  /analysis/{fileId}/{versionId}:
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+    get:
+      summary: Get File Version Analysis
+      tags:
+        - files
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/FileAnalysisResponse'
+        '404':
+          $ref: '#/components/responses/FileNotFoundError'
+      operationId: getFileAnalysis
+      security:
+        - authCookie: []
+      description: Get the performance analysis for the uploaded assets of an avatar
+  /analysis/{fileId}/{versionId}/security:
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+    get:
+      summary: Get File Version Analysis Security
+      tags:
+        - files
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}/security" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/FileAnalysisResponse'
+        '404':
+          $ref: '#/components/responses/FileNotFoundError'
+      operationId: getFileAnalysisSecurity
+      security:
+        - authCookie: []
+      description: Get the security performance analysis for the uploaded assets of an avatar
+  /analysis/{fileId}/{versionId}/standard:
+    parameters:
+      - $ref: '#/components/parameters/fileId'
+      - $ref: '#/components/parameters/versionId'
+    get:
+      summary: Get File Version Analysis Standard
+      tags:
+        - files
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}/standard" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/FileAnalysisResponse'
+        '404':
+          $ref: '#/components/responses/FileNotFoundError'
+      operationId: getFileAnalysisStandard
+      security:
+        - authCookie: []
+      description: Get the standard performance analysis for the uploaded assets of an avatar
   /auth/user/friends:
     get:
       summary: List Friends
@@ -3271,7 +3358,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/users/{userId}" \
+            curl -X PUT "https://vrchat.com/api/1/users/{userId}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"email": "string", "birthday": "2019-08-24", "acceptedTOSVersion": 0, "tags": ["string"], "status": "active", "statusDescription": "string", "bio": "string", "bioLinks": ["string"], "userIcon": "https://vrchat.com/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"}'
@@ -3342,6 +3429,100 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       security:
         - authCookie: []
+  /users/{userId}/feedback:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/contentId'
+      - $ref: '#/components/parameters/number'
+      - $ref: '#/components/parameters/offset'
+    get:
+      summary: Get User Feedback
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/users/{userId}/feedback?n=100" \
+                 -b "auth={authCookie}"
+      tags:
+        - users
+      deprecated: true
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/FeedbackListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getUserFeedback
+      description: Get user's submitted feedback
+  /userNotes:
+    get:
+      summary: Get User Notes
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/userNotes?n=100" \
+                 -b "auth={authCookie}"
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/UserNoteListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getUserNotes
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      description: Get recently updated user notes
+    post:
+      summary: Update User Note
+      tags:
+        - users
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://vrchat.com/api/1/userNotes" \
+                 -H "Content-Type: application/json" \
+                 -b "auth={authCookie}" \
+                 --data '{"targetUserId": "userId", "note": "string"}'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserNoteResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: updateUserNote
+      security:
+        - authCookie: []
+      description: Updates the currently authenticated user's note on a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserNoteRequest'
+  /userNotes/{userNoteId}:
+    parameters:
+      - $ref: '#/components/parameters/userNoteId'
+    get:
+      summary: Get User Note
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://vrchat.com/api/1/userNotes/{userNoteId}" \
+                 -b "auth={authCookie}"
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/UserNoteResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getUserNote
+      description: Get a particular user note
   /worlds:
     get:
       summary: Search All Worlds
@@ -5317,6 +5498,37 @@ components:
           description: Tags on FavoriteGroups are believed to do nothing.
           items:
             $ref: '#/components/schemas/Tag'
+    FavoriteGroupLimits:
+      title: FavoriteGroupLimits
+      type: object
+      properties:
+        avatar:
+          type: integer
+        friend:
+          type: integer
+        world:
+          type: integer
+      required:
+        - avatar
+        - friend
+        - world
+    FavoriteLimits:
+      title: FavoriteLimits
+      type: object
+      properties:
+        defaultMaxFavoriteGroups:
+          type: integer
+        defaultMaxFavoritesPerGroup:
+          type: integer
+        maxFavoriteGroups:
+          $ref: '#/components/schemas/FavoriteGroupLimits'
+        maxFavoritesPerGroup:
+          $ref: '#/components/schemas/FavoriteGroupLimits'
+      required:
+        - defaultMaxFavoriteGroups
+        - defaultMaxFavoritesPerGroup
+        - maxFavoriteGroups
+        - maxFavoritesPerGroup
     MIMEType:
       type: string
       enum:
@@ -5573,6 +5785,161 @@ components:
         - maxParts
         - parts
         - etags
+    FileAnalysisAvatarStats:
+      title: FileAnalysisAvatarStats
+      type: object
+      properties:
+        animatorCount:
+          type: integer
+        audioSourceCount:
+          type: integer
+        blendShapeCount:
+          type: integer
+        boneCount:
+          type: integer
+        bounds:
+          type: array
+          items:
+            type: number
+        cameraCount:
+          type: integer
+        clothCount:
+          type: integer
+        constraintCount:
+          type: integer
+        contactCount:
+          type: integer
+        customExpressions:
+          type: boolean
+        customizeAnimationLayers:
+          type: boolean
+        enableEyeLook:
+          type: boolean
+        lightCount:
+          type: integer
+        lineRendererCount:
+          type: integer
+        lipSync:
+          type: integer
+        materialCount:
+          type: integer
+        materialSlotsUsed:
+          type: integer
+        meshCount:
+          type: integer
+        meshIndices:
+          type: integer
+        meshParticleMaxPolygons:
+          type: integer
+        meshPolygons:
+          type: integer
+        meshVertices:
+          type: integer
+        particleCollisionEnabled:
+          type: boolean
+        particleSystemCount:
+          type: integer
+        particleTrailsEnabled:
+          type: boolean
+        physBoneColliderCount:
+          type: integer
+        physBoneCollisionCheckCount:
+          type: integer
+        physBoneComponentCount:
+          type: integer
+        physBoneTransformCount:
+          type: integer
+        physicsColliders:
+          type: integer
+        physicsRigidbodies:
+          type: integer
+        skinnedMeshCount:
+          type: integer
+        skinnedMeshIndices:
+          type: integer
+        skinnedMeshPolygons:
+          type: integer
+        skinnedMeshVertices:
+          type: integer
+        totalClothVertices:
+          type: integer
+        totalIndices:
+          type: integer
+        totalMaxParticles:
+          type: integer
+        totalPolygons:
+          type: integer
+        totalTextureUsage:
+          type: integer
+        totalVertices:
+          type: integer
+        trailRendererCount:
+          type: integer
+        writeDefaultsUsed:
+          type: boolean
+      required:
+        - animatorCount
+        - audioSourceCount
+        - blendShapeCount
+        - boneCount
+        - bounds
+        - clothCount
+        - constraintCount
+        - contactCount
+        - customExpressions
+        - customizeAnimationLayers
+        - enableEyeLook
+        - lightCount
+        - lineRendererCount
+        - lipSync
+        - materialCount
+        - materialSlotsUsed
+        - meshCount
+        - meshIndices
+        - meshParticleMaxPolygons
+        - meshPolygons
+        - meshVertices
+        - particleCollisionEnabled
+        - particleSystemCount
+        - particleTrailsEnabled
+        - physBoneColliderCount
+        - physBoneCollisionCheckCount
+        - physBoneComponentCount
+        - physBoneTransformCount
+        - physicsColliders
+        - physicsRigidbodies
+        - skinnedMeshCount
+        - skinnedMeshIndices
+        - skinnedMeshPolygons
+        - skinnedMeshVertices
+        - totalClothVertices
+        - totalIndices
+        - totalMaxParticles
+        - totalPolygons
+        - totalTextureUsage
+        - totalVertices
+        - trailRendererCount
+        - writeDefaultsUsed
+    FileAnalysis:
+      title: FileAnalysis
+      type: object
+      properties:
+        avatarStats:
+          $ref: '#/components/schemas/FileAnalysisAvatarStats'
+        created_at:
+          type: string
+          format: date-time
+        fileSize:
+          type: integer
+        success:
+          type: boolean
+        uncompressedSize:
+          type: integer
+      required:
+        - avatarStats
+        - fileSize
+        - success
+        - uncompressedSize
     LimitedUser:
       description: ''
       properties:
@@ -8873,6 +9240,112 @@ components:
           $ref: '#/components/schemas/GroupUserVisibility'
         isRepresenting:
           type: boolean
+    FeedbackID:
+      example: feedback_8cffb23a-f961-444e-b496-0196d1c90adb
+      title: FeedbackID
+      type: string
+    Feedback:
+      title: Feedback
+      type: object
+      properties:
+        commenterId:
+          $ref: '#/components/schemas/UserID'
+        commenterName:
+          type: string
+        contentAuthorId:
+          $ref: '#/components/schemas/UserID'
+          nullable: true
+        contentAuthorName:
+          type: string
+          nullable: true
+        contentId:
+          type: string
+        contentName:
+          type: string
+        contentType:
+          type: string
+        contentVersion:
+          type: integer
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        id:
+          $ref: '#/components/schemas/FeedbackID'
+        reason:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        type:
+          type: string
+      required:
+        - commenterId
+        - commenterName
+        - contentAuthorId
+        - contentAuthorName
+        - contentId
+        - contentType
+        - contentVersion
+        - id
+        - reason
+        - tags
+        - type
+    UserNoteID:
+      example: unt_e9074848-d107-4019-b4aa-bbd19e67660d
+      title: UserNoteID
+      type: string
+    UserNote:
+      title: UserNote
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          $ref: '#/components/schemas/UserNoteID'
+        note:
+          type: string
+        targetUser:
+          type: object
+          properties:
+            currentAvatarTags:
+              type: array
+              items:
+                $ref: '#/components/schemas/Tag'
+            currentAvatarThumbnailImageUrl:
+              $ref: '#/components/schemas/CurrentAvatarThumbnailImageUrl'
+            displayName:
+              type: string
+            id:
+              $ref: '#/components/schemas/UserNoteID'
+            profilePicOverride:
+              type: string
+              nullable: true
+            userIcon:
+              type: string
+        targetUserId:
+          $ref: '#/components/schemas/UserID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+      required:
+        - createdAt
+        - id
+        - note
+        - targetUserId
+        - userId
+    UpdateUserNoteRequest:
+      title: UpdateUserNoteRequest
+      type: object
+      properties:
+        targetUserId:
+          $ref: '#/components/schemas/UserID'
+        note:
+          type: string
+      required:
+        - targetUserId
+        - note
     LimitedUnityPackage:
       description: ''
       properties:
@@ -9681,6 +10154,12 @@ components:
                 success:
                   message: favorite deleted!
                   status_code: 200
+    FavoriteLimitsResponse:
+      description: Returns a single FavoriteLimits object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FavoriteLimits'
     FileListResponse:
       description: Returns a list of File objects.
       content:
@@ -9822,6 +10301,12 @@ components:
                 maxParts: 1000
                 parts: []
                 etags: []
+    FileAnalysisResponse:
+      description: Returns a single FileAnalysis object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FileAnalysis'
     LimitedUserListResponse:
       description: Returns a list of LimitedUser objects.
       content:
@@ -10772,6 +11257,28 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Group'
+    FeedbackListResponse:
+      description: Returns a list of Feedback objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Feedback'
+    UserNoteListResponse:
+      description: Returns a list of UserNote objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserNote'
+    UserNoteResponse:
+      description: Returns a single UserNote object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserNote'
     LimitedWorldListResponse:
       description: Returns a list of LimitedWorld objects.
       content:
@@ -11252,6 +11759,20 @@ components:
         type: string
         example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
       description: Must be a valid query ID.
+    contentId:
+      name: contentId
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Filter for users' previously submitted feedback, e.g., a groupId, useeId, avatarId, etc.
+    userNoteId:
+      name: userNoteId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Must be a valid user note ID.
     fuzzy:
       name: fuzzy
       in: query
