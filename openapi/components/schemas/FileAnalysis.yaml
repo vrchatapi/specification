@@ -1,0 +1,19 @@
+title: FileAnalysis
+type: object
+properties:
+  avatarStats:
+    $ref: ./FileAnalysisAvatarStats.yaml
+  created_at:
+    type: string
+    format: date-time
+  fileSize:
+    type: integer
+  success:
+    type: boolean
+  uncompressedSize:
+    type: integer
+required:
+  - avatarStats
+  - fileSize
+  - success
+  - uncompressedSize

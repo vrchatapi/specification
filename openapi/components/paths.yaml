@@ -75,6 +75,8 @@
   $ref: "./paths/favorites.yaml#/paths/~1favorite~1groups"
 "/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}":
   $ref: "./paths/favorites.yaml#/paths/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}"
+"/auth/user/favoritelimits":
+  $ref: "./paths/favorites.yaml#/paths/~1auth~1user~1favoritelimits"
 
 # files
 
@@ -92,6 +94,12 @@
   $ref: "./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1start"
 "/file/{fileId}/{versionId}/{fileType}/status":
   $ref: "./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1status"
+"/analysis/{fileId}/{versionId}":
+  $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}"
+"/analysis/{fileId}/{versionId}/security":
+  $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1security"
+"/analysis/{fileId}/{versionId}/standard":
+  $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1standard"
 
 # friends
 
@@ -256,6 +264,12 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1requested"
 "/users/{userId}/groups/represented":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1represented"
+"/users/{userId}/feedback":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1feedback"
+"/userNotes":
+  $ref: "./paths/users.yaml#/paths/~1userNotes"
+"/userNotes/{userNoteId}":
+  $ref: "./paths/users.yaml#/paths/~1userNotes~1{userNoteId}"
 
 # worlds
 

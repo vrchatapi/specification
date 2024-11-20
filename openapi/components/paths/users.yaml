@@ -194,6 +194,86 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       security:
         - authCookie: []
+  '/users/{userId}/feedback':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/contentId
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+    get:
+      summary: Get User Feedback
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1feedback/get
+      tags:
+        - users
+      deprecated: true
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/users/FeedbackListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getUserFeedback
+      description: Get user's submitted feedback
+  '/userNotes':
+    get:
+      summary: Get User Notes
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1userNotes/get
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/users/UserNoteListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getUserNotes
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      description: Get recently updated user notes
+    post:
+      summary: Update User Note
+      tags:
+        - users
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1userNotes/post
+      responses:
+        '200':
+          $ref: ../responses/users/UserNoteResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: updateUserNote
+      security:
+        - authCookie: []
+      description: Updates the currently authenticated user's note on a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateUserNoteRequest.yaml
+  '/userNotes/{userNoteId}':
+    parameters:
+      - $ref: ../parameters.yaml#/userNoteId
+    get:
+      summary: Get User Note
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1userNotes~1{userNoteId}/get
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/users/UserNoteResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getUserNote
+      description: Get a particular user note
 tags:
   $ref: ../tags.yaml
 components:

@@ -1,0 +1,10 @@
+title: UpdateUserNoteRequest
+type: object
+properties:
+  targetUserId:
+    $ref: ../schemas/UserID.yaml
+  note:
+    type: string
+required:
+  - targetUserId
+  - note

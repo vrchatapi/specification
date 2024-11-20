@@ -1,0 +1,134 @@
+title: FileAnalysisAvatarStats
+type: object
+properties:
+  animatorCount:
+    type: integer
+  audioSourceCount:
+    type: integer
+  blendShapeCount:
+    type: integer
+  boneCount:
+    type: integer
+  bounds:
+    type: array
+    items:
+      type: number
+  cameraCount:
+    type: integer
+  clothCount:
+    type: integer
+  constraintCount:
+    type: integer
+  contactCount:
+    type: integer
+  customExpressions:
+    type: boolean
+  customizeAnimationLayers:
+    type: boolean
+  enableEyeLook:
+    type: boolean
+  lightCount:
+    type: integer
+  lineRendererCount:
+    type: integer
+  lipSync:
+    type: integer
+  materialCount:
+    type: integer
+  materialSlotsUsed:
+    type: integer
+  meshCount:
+    type: integer
+  meshIndices:
+    type: integer
+  meshParticleMaxPolygons:
+    type: integer
+  meshPolygons:
+    type: integer
+  meshVertices:
+    type: integer
+  particleCollisionEnabled:
+    type: boolean
+  particleSystemCount:
+    type: integer
+  particleTrailsEnabled:
+    type: boolean
+  physBoneColliderCount:
+    type: integer
+  physBoneCollisionCheckCount:
+    type: integer
+  physBoneComponentCount:
+    type: integer
+  physBoneTransformCount:
+    type: integer
+  physicsColliders:
+    type: integer
+  physicsRigidbodies:
+    type: integer
+  skinnedMeshCount:
+    type: integer
+  skinnedMeshIndices:
+    type: integer
+  skinnedMeshPolygons:
+    type: integer
+  skinnedMeshVertices:
+    type: integer
+  totalClothVertices:
+    type: integer
+  totalIndices:
+    type: integer
+  totalMaxParticles:
+    type: integer
+  totalPolygons:
+    type: integer
+  totalTextureUsage:
+    type: integer
+  totalVertices:
+    type: integer
+  trailRendererCount:
+    type: integer
+  writeDefaultsUsed:
+    type: boolean
+required:
+  - animatorCount
+  - audioSourceCount
+  - blendShapeCount
+  - boneCount
+  - bounds
+  - clothCount
+  - constraintCount
+  - contactCount
+  - customExpressions
+  - customizeAnimationLayers
+  - enableEyeLook
+  - lightCount
+  - lineRendererCount
+  - lipSync
+  - materialCount
+  - materialSlotsUsed
+  - meshCount
+  - meshIndices
+  - meshParticleMaxPolygons
+  - meshPolygons
+  - meshVertices
+  - particleCollisionEnabled
+  - particleSystemCount
+  - particleTrailsEnabled
+  - physBoneColliderCount
+  - physBoneCollisionCheckCount
+  - physBoneComponentCount
+  - physBoneTransformCount
+  - physicsColliders
+  - physicsRigidbodies
+  - skinnedMeshCount
+  - skinnedMeshIndices
+  - skinnedMeshPolygons
+  - skinnedMeshVertices
+  - totalClothVertices
+  - totalIndices
+  - totalMaxParticles
+  - totalPolygons
+  - totalTextureUsage
+  - totalVertices
+  - trailRendererCount
+  - writeDefaultsUsed

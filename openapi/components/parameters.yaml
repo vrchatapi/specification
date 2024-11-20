@@ -164,6 +164,13 @@ userIdQuery:
   schema:
     type: string
   description: Filter by UserID.
+userNoteId:
+  name: userNoteId
+  in: path
+  required: true
+  schema:
+    type: string
+  description: Must be a valid user note ID.
 usernameQuery:
   name: username
   in: query
@@ -359,6 +366,13 @@ productId:
   schema:
     type: string
   description: Must be a valid product ID.
+contentId:
+  name: contentId
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Filter for users' previously submitted feedback, e.g., a groupId, useeId, avatarId, etc.
 active:
   name: active
   in: query

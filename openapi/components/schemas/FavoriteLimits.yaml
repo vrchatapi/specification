@@ -1,0 +1,16 @@
+title: FavoriteLimits
+type: object
+properties:
+  defaultMaxFavoriteGroups:
+    type: integer
+  defaultMaxFavoritesPerGroup:
+    type: integer
+  maxFavoriteGroups:
+    $ref: ./FavoriteGroupLimits.yaml
+  maxFavoritesPerGroup:
+    $ref: ./FavoriteGroupLimits.yaml
+required:
+  - defaultMaxFavoriteGroups
+  - defaultMaxFavoritesPerGroup
+  - maxFavoriteGroups
+  - maxFavoritesPerGroup

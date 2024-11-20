@@ -181,6 +181,24 @@ paths:
       tags:
         - favorites
       description: Clear ALL contents of a specific favorite group.
+  '/auth/user/favoritelimits':
+    parameters: []
+    get:
+      summary: Get Favorite Limits
+      tags:
+        - favorites
+      x-codeSamples:
+        $ref: "../codeSamples/favorites.yaml#/~1auth~1user~1favoritelimits/get"
+      responses:
+        '200':
+          $ref: ../responses/favorites/FavoriteLimitsResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getFavoriteLimits
+      security:
+        - authCookie: []
+      description: Return information about a specific Favorite.
+      parameters: []
 tags:
   $ref: ../tags.yaml
 components:

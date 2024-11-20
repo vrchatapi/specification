@@ -1,0 +1,13 @@
+title: FavoriteGroupLimits
+type: object
+properties:
+  avatar:
+    type: integer
+  friend:
+    type: integer
+  world:
+    type: integer
+required:
+  - avatar
+  - friend
+  - world

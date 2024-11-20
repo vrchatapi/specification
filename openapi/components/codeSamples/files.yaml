@@ -55,9 +55,27 @@
       source: >-
         curl -X PUT "https://vrchat.com/api/1/file/{fileId}/{versionId}/{fileType}/start" \
              -b "auth={authCookie}"
-/file/{fieldId}/{versionId}/{fileType}/status:
+/file/{fileId}/{versionId}/{fileType}/status:
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}/{fileType}/status" \
+             -b "auth={authCookie}"
+/analysis/{fileId}/{versionId}:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}" \
+             -b "auth={authCookie}"
+/analysis/{fileId}/{versionId}/security:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}/security" \
+             -b "auth={authCookie}"
+/analysis/{fileId}/{versionId}/standard:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}/standard" \
              -b "auth={authCookie}"
