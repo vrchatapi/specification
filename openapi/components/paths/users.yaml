@@ -254,7 +254,6 @@ paths:
           application/json:
             schema:
               $ref: ../requests/UpdateUserNoteRequest.yaml
-        description: Slot number of the Invite Message to use when inviting a user.
   '/userNotes/{userNoteId}':
     parameters:
       - $ref: ../parameters.yaml#/userNoteId
