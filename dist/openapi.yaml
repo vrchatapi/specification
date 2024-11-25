@@ -3523,6 +3523,29 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getUserNote
       description: Get a particular user note
+  /users/{userId}/instances/groups:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get User Group Instances
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/instances/groups" \
+                 -b "auth={authCookie}"
+      description: Returns a list of group instances for a user
+      operationId: getUserGroupInstances
+      tags:
+        - users
+      responses:
+        '200':
+          $ref: '#/components/responses/UserGroupInstanceListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/UserMustBeOwnError'
+      security:
+        - authCookie: []
   /worlds:
     get:
       summary: Search All Worlds
@@ -11279,6 +11302,32 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserNote'
+    UserGroupInstanceListResponse:
+      description: Returns a list of Instance objects with a fetched at time.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              fetchedAt:
+                type: string
+                format: date-time
+              instances:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Instance'
+    UserMustBeOwnError:
+      description: Error response when trying get group instances of another user.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            User Id must be your own:
+              value:
+                error:
+                  message: User ID must be your own․
+                  status_code: 403
     LimitedWorldListResponse:
       description: Returns a list of LimitedWorld objects.
       content:
