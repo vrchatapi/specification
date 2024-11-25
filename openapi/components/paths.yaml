@@ -270,6 +270,8 @@
   $ref: "./paths/users.yaml#/paths/~1userNotes"
 "/userNotes/{userNoteId}":
   $ref: "./paths/users.yaml#/paths/~1userNotes~1{userNoteId}"
+"/users/{userId}/instances/groups":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups"
 
 # worlds
 

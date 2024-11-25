@@ -54,3 +54,9 @@
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/userNotes/{userNoteId}" \
              -b "auth={authCookie}"
+'/users/{userId}/instances/groups':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/instances/groups" \
+             -b "auth={authCookie}"
