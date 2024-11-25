@@ -165,7 +165,7 @@ paths:
         - authentication
       x-codeSamples:
         - lang: cURL
-          source: 'curl -X GET "https://vrchat.com/api/1/auth/exists?email={string}" '
+          source: 'curl -X GET "https://api.vrchat.cloud/api/1/auth/exists?email={string}" '
       responses:
         '200':
           $ref: '#/components/responses/UserExistsResponse'
@@ -189,7 +189,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/auth/user" \
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user" \
                  -H "Authorization: Basic {string}"
       responses:
         '200':
@@ -220,7 +220,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/auth/twofactorauth/totp/verify" \
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/totp/verify" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"code": "string"}'
@@ -249,7 +249,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/auth/twofactorauth/otp/verify" \
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/otp/verify" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"code": "string"}'
@@ -277,7 +277,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/auth/twofactorauth/emailotp/verify" \
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/emailotp/verify" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"code": "string"}'
@@ -307,7 +307,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/auth" \
+            curl -X GET "https://api.vrchat.cloud/api/1/auth" \
                  -b "amplitude_id_a750df50d11f21f712262cbd4c0bab37vrchat.com={string}; auth={authCookie}"
       responses:
         '200':
@@ -326,7 +326,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/logout" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/logout" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -347,7 +347,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/user/{userId}/delete" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/user/{userId}/delete" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -379,7 +379,7 @@ paths:
       operationId: getOwnAvatar
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/users/{userId}/avatar" -b "auth={authCookie}"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/avatar" -b "auth={authCookie}"
       security:
         - authCookie: []
       description: Get the current avatar for the user. This will return an error for any other user than the one logged in.
@@ -393,7 +393,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/avatars?featured=true" \
+            curl -X GET "https://api.vrchat.cloud/api/1/avatars?featured=true" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -433,7 +433,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/avatars" \
+            curl -X POST "https://api.vrchat.cloud/api/1/avatars" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"assetUrl": "string", "id": "{avatarId}", "name": "string", "description": "string", "tags": ["string"], "imageUrl": "string", "releaseStatus": "public", "version": 1, "unityPackageUrl": "string"}'
@@ -460,7 +460,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/avatars/{avatarId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -481,7 +481,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/avatars/{avatarId}" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"assetUrl": "string", "id": "{avatarId}", "name": "string", "description": "string", "tags": ["string"], "imageUrl": "string", "releaseStatus": "public", "version": 1, "unityPackageUrl": "string"}'
@@ -508,7 +508,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/avatars/{avatarId}" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/avatars/{avatarId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -530,7 +530,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/avatars/{avatarId}/select" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/select" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -552,7 +552,7 @@ paths:
         - avatars
       x-codeSamples:
         - lang: cURL
-          source: curl -X PUT "https://vrchat.com/api/1/avatars/{avatarId}/selectFallback"
+          source: curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback"
       responses:
         '200':
           $ref: '#/components/responses/CurrentUserResponse'
@@ -574,7 +574,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/avatars/favorites?featured=true" \
+            curl -X GET "https://api.vrchat.cloud/api/1/avatars/favorites?featured=true" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -610,7 +610,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/Steam/transactions" \
+            curl -X GET "https://api.vrchat.cloud/api/1/Steam/transactions" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -631,7 +631,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/Steam/transactions/{transactionId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/Steam/transactions/{transactionId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -654,7 +654,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/auth/user/subscription" \
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/subscription" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -673,7 +673,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/subscriptions" \
+            curl -X GET "https://api.vrchat.cloud/api/1/subscriptions" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -694,7 +694,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/licenseGroups/{licenseGroupId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/licenseGroups/{licenseGroupId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -716,7 +716,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/listing/{productId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/listing/{productId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -742,7 +742,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/user/{userId}/listings?hydrate=true" \
+            curl -X GET "https://api.vrchat.cloud/api/1/user/{userId}/listings?hydrate=true" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -761,7 +761,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/tokenBundles" \
+            curl -X GET "https://api.vrchat.cloud/api/1/tokenBundles" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -780,7 +780,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/tilia/status" \
+            curl -X GET "https://api.vrchat.cloud/api/1/tilia/status" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -801,7 +801,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/user/{userId}/tilia/tos" \
+            curl -X GET "https://api.vrchat.cloud/api/1/user/{userId}/tilia/tos" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -822,7 +822,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/user/{userId}/balance" \
+            curl -X GET "https://api.vrchat.cloud/api/1/user/{userId}/balance" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -840,7 +840,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/favorites?type={string}&tag={string}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/favorites?type={string}&tag={string}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -868,7 +868,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/favorites" \
+            curl -X POST "https://api.vrchat.cloud/api/1/favorites" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"type": "friend", "favoriteId": "userId", "tags": ["string"]}'
@@ -916,7 +916,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/favorites/{favoriteId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -938,7 +938,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/favorites/{favoriteId}" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -958,7 +958,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/favorite/groups?ownerId={userId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/favorite/groups?ownerId={userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -989,7 +989,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1006,7 +1006,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT -H "Content-Type: application/json" "https://vrchat.com/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
+            curl -X PUT -H "Content-Type: application/json" "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
                  -b "auth={authCookie}" \
                  --data '{"displayName": "string", "visibility": "private", "tags": ["string"]}'
       responses:
@@ -1028,7 +1028,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1045,7 +1045,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/auth/user/favoritelimits" \
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/favoritelimits" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1063,7 +1063,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/files?tag={string}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/files?tag={string}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1097,7 +1097,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/file" \
+            curl -X POST "https://api.vrchat.cloud/api/1/file" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"name": "string", "mimeType": "image/jpeg", "extension": "string", "tags": ["string"]}'
@@ -1124,7 +1124,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/file/{fileId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1140,7 +1140,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/file/{fileId}" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/file/{fileId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1158,7 +1158,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/file/{fileId}" \
+            curl -X POST "https://api.vrchat.cloud/api/1/file/{fileId}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"signatureMd5": "string", "signatureSizeInBytes": 0, "fileMd5": "string", "fileSizeInBytes": 0}'
@@ -1186,7 +1186,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
               -b "auth={authCookie}"
       responses:
         '200':
@@ -1208,7 +1208,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/file/{fileId}/{versionId}" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
               -b "auth={authCookie}"
       responses:
         '200':
@@ -1234,7 +1234,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/file/{fileId}/{versionId}/{fileType}/finish" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/finish" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"etags": ["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"], "nextPartNumber": "0", "maxParts": "0"}'
@@ -1275,7 +1275,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/file/{fileId}/{versionId}/{fileType}/start" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/start" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1311,7 +1311,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}/{fileType}/status" \
+            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/{fileType}/status" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1331,7 +1331,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1353,7 +1353,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}/security" \
+            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/security" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1375,7 +1375,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/file/{fileId}/{versionId}/standard" \
+            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/standard" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1394,7 +1394,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/auth/user/friends?offline=true" \
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/friends?offline=true" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1423,7 +1423,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/user/{userId}/friendRequest" \
+            curl -X POST "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1445,7 +1445,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/user/{userId}/friendRequest" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/user/{userId}/friendRequest" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1464,7 +1464,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/user/{userId}/friendStatus" \
+            curl -X GET "https://api.vrchat.cloud/api/1/user/{userId}/friendStatus" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1484,7 +1484,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/auth/user/friends/{userId}" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/auth/user/friends/{userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2379,7 +2379,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/invite/{userId}" \
+            curl -X POST "https://api.vrchat.cloud/api/1/invite/{userId}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"instanceId": "wrld_ba913a96-fac4-4048-a062-9aa5db092812:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)", "messageSlot": 11}'
@@ -2414,7 +2414,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/invite/myself/to/{worldid}:{instanceid}" \
+            curl -X POST "https://api.vrchat.cloud/api/1/invite/myself/to/{worldid}:{instanceid}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}"'
       responses:
@@ -2444,7 +2444,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/requestInvite/{userId}" \
+            curl -X POST "https://api.vrchat.cloud/api/1/requestInvite/{userId}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"messageSlot": 11}'
@@ -2463,7 +2463,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/invite/{notificationId}/response" \
+            curl -X POST "https://api.vrchat.cloud/api/1/invite/{notificationId}/response" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"responseSlot": 11}'
@@ -2494,7 +2494,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/message/{userId}/{messageType}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2527,7 +2527,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/message/{userId}/{messageType}/{slot}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2570,7 +2570,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/message/{userId}/{messageType}/{slot}" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"message": "string"}'
@@ -2599,7 +2599,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/message/{userId}/{messageType}/{slot}" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/message/{userId}/{messageType}/{slot}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2668,7 +2668,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/instances/{worldId}:{instanceId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2725,7 +2725,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/instances/{worldId}:{instanceId}/shortName" \
+            curl -X GET "https://api.vrchat.cloud/api/1/instances/{worldId}:{instanceId}/shortName" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2751,7 +2751,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/instances/s/{shortname}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/instances/s/{shortname}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2768,7 +2768,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/auth/user/notifications?type=all" \
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/notifications?type=all" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2817,7 +2817,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/auth/user/notifications/{notificationId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2838,7 +2838,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/auth/user/notifications/{notificationId}/accept" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/accept" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2861,7 +2861,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/auth/user/notifications/{notificationId}/see" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/see" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2882,7 +2882,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/auth/user/notifications/{notificationId}/hide" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/hide" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2901,7 +2901,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/auth/user/notifications/notifications/clear" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/notifications/clear" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2922,7 +2922,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/auth/permissions" \
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/permissions" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2943,7 +2943,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/permissions/{permissionId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/permissions/{permissionId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2962,7 +2962,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/auth/user/playermoderations?type=unmute&targetUserId={userId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/playermoderations?type=unmute&targetUserId={userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -2995,7 +2995,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/auth/user/playermoderations" \
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
@@ -3025,7 +3025,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/auth/user/playermoderations" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/auth/user/playermoderations" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3051,7 +3051,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/auth/user/unplayermoderate" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/unplayermoderate" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"moderated": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "type": "unmute"}'
@@ -3069,7 +3069,7 @@ paths:
         - system
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/config"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/config"
       responses:
         '200':
           $ref: '#/components/responses/APIConfigResponse'
@@ -3086,7 +3086,7 @@ paths:
         - system
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/infoPush?require={string}&include={string}"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/infoPush?require={string}&include={string}"
       responses:
         '200':
           $ref: '#/components/responses/InfoPushListResponse'
@@ -3110,7 +3110,7 @@ paths:
         - system
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/css/app.css?variant=public&branch=main"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/css/app.css?variant=public&branch=main"
       responses:
         '200':
           description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
@@ -3132,7 +3132,7 @@ paths:
         - system
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/js/app.js?variant=internal&branch=main"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/js/app.js?variant=internal&branch=main"
       responses:
         '200':
           description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
@@ -3160,7 +3160,7 @@ paths:
       security: []
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/health"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/health"
       responses:
         '200':
           $ref: '#/components/responses/APIHealthResponse'
@@ -3172,7 +3172,7 @@ paths:
         - system
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/visits"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/visits"
       responses:
         '200':
           $ref: '#/components/responses/CurrentOnlineUsersResponse'
@@ -3189,7 +3189,7 @@ paths:
         - system
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/time"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/time"
       responses:
         '200':
           $ref: '#/components/responses/SystemTimeResponse'
@@ -3206,7 +3206,7 @@ paths:
         - jams
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/jams?type={string}"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/jams?type={string}"
       responses:
         '200':
           $ref: '#/components/responses/JamListResponse'
@@ -3236,7 +3236,7 @@ paths:
         - jams
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/jams/{jamId}"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/jams/{jamId}"
       responses:
         '200':
           $ref: '#/components/responses/JamResponse'
@@ -3255,7 +3255,7 @@ paths:
         - jams
       x-codeSamples:
         - lang: cURL
-          source: curl -X GET "https://vrchat.com/api/1/jams/{jamId}/submissions"
+          source: curl -X GET "https://api.vrchat.cloud/api/1/jams/{jamId}/submissions"
       responses:
         '200':
           $ref: '#/components/responses/SubmissionListResponse'
@@ -3273,7 +3273,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/users?search={string}&developerType=internal" \
+            curl -X GET "https://api.vrchat.cloud/api/1/users?search={string}&developerType=internal" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3315,7 +3315,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/users/{username}/name" \
+            curl -X GET "https://api.vrchat.cloud/api/1/users/{username}/name" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3341,7 +3341,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/users/{userId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3358,10 +3358,10 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/users/{userId}" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/users/{userId}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
-                 --data '{"email": "string", "birthday": "2019-08-24", "acceptedTOSVersion": 0, "tags": ["string"], "status": "active", "statusDescription": "string", "bio": "string", "bioLinks": ["string"], "userIcon": "https://vrchat.com/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"}'
+                 --data '{"email": "string", "birthday": "2019-08-24", "acceptedTOSVersion": 0, "tags": ["string"], "status": "active", "statusDescription": "string", "bio": "string", "bioLinks": ["string"], "userIcon": "https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"}'
       responses:
         '200':
           $ref: '#/components/responses/CurrentUserResponse'
@@ -3440,7 +3440,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/users/{userId}/feedback?n=100" \
+            curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/feedback?n=100" \
                  -b "auth={authCookie}"
       tags:
         - users
@@ -3460,7 +3460,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/userNotes?n=100" \
+            curl -X GET "https://api.vrchat.cloud/api/1/userNotes?n=100" \
                  -b "auth={authCookie}"
       tags:
         - users
@@ -3483,7 +3483,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/userNotes" \
+            curl -X POST "https://api.vrchat.cloud/api/1/userNotes" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"targetUserId": "userId", "note": "string"}'
@@ -3510,7 +3510,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/userNotes/{userNoteId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/userNotes/{userNoteId}" \
                  -b "auth={authCookie}"
       tags:
         - users
@@ -3531,7 +3531,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/worlds?featured=true&sort=popularity&userId={userId}&order=descending&search={string}&tag={string}&notag={string}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds?featured=true&sort=popularity&userId={userId}&order=descending&search={string}&tag={string}&notag={string}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3571,7 +3571,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X POST "https://vrchat.com/api/1/worlds" \
+            curl -X POST "https://api.vrchat.cloud/api/1/worlds" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"assetUrl": "string", "assetVersion": 0, "authorId": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "authorName": "string", "capacity": 8, "description": "string", "id": "wrld_ba913a96-fac4-4048-a062-9aa5db092812", "imageUrl": "string", "name": "string", "platform": "standalonewindows", "releaseStatus": "public", "tags": ["string"], "unityPackageUrl": "string", "unityVersion": "2018.4.20f1"}'
@@ -3599,7 +3599,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/worlds/active?featured=false&sort=heat&order=ascending&search={string}&tag={string}&notag={string}&releaseStatus=all" \
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/active?featured=false&sort=heat&order=ascending&search={string}&tag={string}&notag={string}&releaseStatus=all" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3631,7 +3631,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/worlds/favorites?featured=false&sort=popularity&order=descending&search={string}&tag={string}&notag={string}&releaseStatus=private&userId={userId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/favorites?featured=false&sort=popularity&order=descending&search={string}&tag={string}&notag={string}&releaseStatus=private&userId={userId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3666,7 +3666,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/worlds/recent?featured=false" \
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/recent?featured=false" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3704,7 +3704,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/worlds/{worldId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3722,7 +3722,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/worlds/{worldId}" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/worlds/{worldId}" \
                  -H "Content-Type: application/json" \
                  -b "auth={authCookie}" \
                  --data '{"assetUrl": "string", "assetVersion": "string","authorId": "usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469", "authorName": "string", "capacity": 8, "description": "string", "imageUrl": "string", "name": "string", "platform": "standalonewindows", "releaseStatus": "public", "tags": ["string"], "unityPackageUrl": "string", "unityVersion": "2018.4.20f1"}'
@@ -3749,7 +3749,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/worlds/{worldId}" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/worlds/{worldId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3776,7 +3776,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/worlds/{worldId}/metadata" \
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}/metadata" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3797,7 +3797,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/worlds/{worldId}/publish" \
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3814,7 +3814,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X PUT "https://vrchat.com/api/1/worlds/{worldId}/publish" \
+            curl -X PUT "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3834,7 +3834,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X DELETE "https://vrchat.com/api/1/worlds/{worldId}/publish" \
+            curl -X DELETE "https://api.vrchat.cloud/api/1/worlds/{worldId}/publish" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3861,7 +3861,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://vrchat.com/api/1/worlds/{worldId}/{instanceId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/worlds/{worldId}/{instanceId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -3971,12 +3971,12 @@ components:
       type: string
     CurrentAvatarImageUrl:
       description: When profilePicOverride is not empty, use it instead.
-      example: https://vrchat.com/api/1/file/file_ae46d521-7281-4b38-b365-804b32a1d6a7/1/file
+      example: https://api.vrchat.cloud/api/1/file/file_ae46d521-7281-4b38-b365-804b32a1d6a7/1/file
       title: CurrentAvatarImageUrl
       type: string
     CurrentAvatarThumbnailImageUrl:
       description: When profilePicOverride is not empty, use it instead.
-      example: https://vrchat.com/api/1/image/file_aae83ed9-d42d-4d72-9f4b-9f1e41ed17e1/1/256
+      example: https://api.vrchat.cloud/api/1/image/file_aae83ed9-d42d-4d72-9f4b-9f1e41ed17e1/1/256
       title: CurrentAvatarThumbnailImageUrl
       type: string
     Tag:
@@ -4435,7 +4435,7 @@ components:
         assetUrl:
           type: string
           nullable: true
-          example: https://vrchat.com/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
+          example: https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
         assetUrlObject:
           type: object
           example: {}
@@ -6774,7 +6774,7 @@ components:
           $ref: '#/components/schemas/FileID'
         imageUrl:
           type: string
-          example: https://vrchat.com/api/1/file/file_ce35d830-e20a-4df0-a6d4-5aaef4508044/1/file
+          example: https://api.vrchat.cloud/api/1/file/file_ce35d830-e20a-4df0-a6d4-5aaef4508044/1/file
           format: uri
         createdAt:
           type: string
@@ -9154,7 +9154,7 @@ components:
         userIcon:
           type: string
           description: MUST be a valid VRChat /file/ url.
-          example: https://vrchat.com/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1
+          example: https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1
           minLength: 0
     LimitedUserGroups:
       title: LimitedUserGroups
