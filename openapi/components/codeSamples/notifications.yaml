@@ -2,35 +2,35 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/auth/user/notifications?type=all" \
+        curl -X GET "https://api.vrchat.cloud/api/1/auth/user/notifications?type=all" \
              -b "auth={authCookie}"
 /auth/user/notifications/{notificationId}:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://vrchat.com/api/1/auth/user/notifications/{notificationId}" \
+        curl -X GET "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}" \
              -b "auth={authCookie}"
 '/auth/user/notifications/{notificationId}/accept':
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://vrchat.com/api/1/auth/user/notifications/{notificationId}/accept" \
+        curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/accept" \
              -b "auth={authCookie}"
 '/auth/user/notifications/{notificationId}/see':
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://vrchat.com/api/1/auth/user/notifications/{notificationId}/see" \
+        curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/see" \
              -b "auth={authCookie}"
 '/auth/user/notifications/{notificationId}/hide':
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://vrchat.com/api/1/auth/user/notifications/{notificationId}/hide" \
+        curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/{notificationId}/hide" \
              -b "auth={authCookie}"
 '/auth/user/notifications/notifications/clear':
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://vrchat.com/api/1/auth/user/notifications/notifications/clear" \
+        curl -X PUT "https://api.vrchat.cloud/api/1/auth/user/notifications/notifications/clear" \
              -b "auth={authCookie}"
