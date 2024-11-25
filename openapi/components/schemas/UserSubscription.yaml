@@ -50,7 +50,7 @@ properties:
   isGift:
     type: boolean
     default: false
-  isGiftDrop:
+  isBulkGift:
     type: boolean
     default: false
 required:
@@ -68,5 +68,5 @@ required:
   - updated_at
   - licenseGroups
   - isGift
-  - isGiftDrop
+  - isBulkGift
 title: UserSubscription
