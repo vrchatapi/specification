@@ -279,6 +279,8 @@ paths:
       - $ref: ../parameters.yaml#/userId
     get:
       summary: Get User Group Instances
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1instances~1groups/get
       description: Returns a list of group instances for a user
       operationId: getUserGroupInstances
       tags:
