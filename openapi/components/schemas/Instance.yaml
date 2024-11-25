@@ -11,7 +11,7 @@ properties:
     type: boolean
   ageGate:
     nullable: true
-    type: string
+    type: boolean
   canRequestInvite:
     default: true
     example: true
