@@ -12,11 +12,6 @@
              -b "auth={authCookie}" \
              --data '{"type": "friend", "favoriteId": "userId", "tags": ["string"]}'
 '/favorites/{favoriteId}':
-  get:
-    - lang: cURL
-      source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
-             -b "auth={authCookie}"
   delete:
     - lang: cURL
       source: >-
