@@ -25,11 +25,7 @@ properties:
     items:
       $ref: ./UserID.yaml
   ageVerificationStatus:
-    type: string
-    enum:
-      - hidden
-      - verified
-      - 18+
+    $ref: ./AgeVerificationStatus.yaml
   ageVerified:
     type: boolean
   allowAvatarCopying:

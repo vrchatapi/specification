@@ -1,0 +1,6 @@
+title: AgeVerificationStatus
+type: string
+enum:
+  - hidden
+  - verified
+  - 18+
