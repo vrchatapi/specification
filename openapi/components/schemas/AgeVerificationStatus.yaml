@@ -4,3 +4,7 @@ enum:
   - hidden
   - verified
   - 18+
+x-enum-varnames:
+  - hidden
+  - verified
+  - plus18
