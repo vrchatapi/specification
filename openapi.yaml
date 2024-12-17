@@ -3949,6 +3949,17 @@ components:
       title: UserID
       type: string
       description: A users unique ID, usually in the form of `usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469`. Legacy players can have old IDs in the form of `8JoV9XEdpo`. The ID can never be changed.
+    AgeVerificationStatus:
+      title: AgeVerificationStatus
+      type: string
+      enum:
+        - hidden
+        - verified
+        - 18+
+      x-enum-varnames:
+        - hidden
+        - verified
+        - plus18
     BadgeID:
       example: bdg_a60e514a-8cb7-4702-8f24-2786992be1a8
       title: BadgeID
@@ -4157,7 +4168,7 @@ components:
           items:
             $ref: '#/components/schemas/UserID'
         ageVerificationStatus:
-          type: string
+          $ref: '#/components/schemas/AgeVerificationStatus'
         ageVerified:
           type: boolean
         allowAvatarCopying:
@@ -6290,6 +6301,34 @@ components:
       example: gmem_95cdb3b4-4643-4eb6-bdab-46a4e1e5ce37
       title: GroupMemberID
       type: string
+    GroupPermissions:
+      type: array
+      items:
+        type: string
+        enum:
+          - group-announcement-manage
+          - group-audit-view
+          - group-bans-manage
+          - group-data-manage
+          - group-default-role-manage
+          - group-galleries-manage
+          - group-instance-age-gated-create
+          - group-instance-join
+          - group-instance-manage
+          - group-instance-moderate
+          - group-instance-open-create
+          - group-instance-plus-create
+          - group-instance-plus-portal
+          - group-instance-plus-portal-unlocked
+          - group-instance-public-create
+          - group-instance-queue-priority
+          - group-instance-restricted-create
+          - group-invites-manage
+          - group-members-manage
+          - group-members-remove
+          - group-members-viewall
+          - group-roles-assign
+          - group-roles-manage
     GroupMyMember:
       title: GroupMyMember
       type: object
@@ -6348,10 +6387,7 @@ components:
           items:
             type: string
         permissions:
-          type: array
-          items:
-            type: string
-            example: group-instance-join
+          $ref: '#/components/schemas/GroupPermissions'
     GroupRole:
       title: GroupRole
       type: object
@@ -6368,9 +6404,7 @@ components:
           type: boolean
           default: false
         permissions:
-          type: array
-          items:
-            type: string
+          $ref: '#/components/schemas/GroupPermissions'
         isManagementRole:
           type: boolean
           default: false
@@ -6392,6 +6426,14 @@ components:
       title: Group
       type: object
       properties:
+        ageVerificationSlotsAvailable:
+          type: boolean
+        ageVerificationBetaCode:
+          type: string
+          example: abc1234
+        ageVerificationBetaSlots:
+          type: number
+          example: 500
         badges:
           type: array
           items:
@@ -7274,9 +7316,7 @@ components:
           type: boolean
           default: false
         permissions:
-          type: array
-          items:
-            type: string
+          $ref: '#/components/schemas/GroupPermissions'
     UpdateGroupRoleRequest:
       title: UpdateGroupRoleRequest
       type: object
@@ -7289,9 +7329,7 @@ components:
           type: boolean
           default: false
         permissions:
-          type: array
-          items:
-            type: string
+          $ref: '#/components/schemas/GroupPermissions'
         order:
           type: integer
     InviteRequest:
@@ -9022,7 +9060,7 @@ components:
       type: object
       properties:
         ageVerificationStatus:
-          type: string
+          $ref: '#/components/schemas/AgeVerificationStatus'
         allowAvatarCopying:
           type: boolean
           default: true
