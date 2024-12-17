@@ -13,9 +13,7 @@ properties:
     type: boolean
     default: false
   permissions:
-    type: array
-    items:
-      type: string
+    $ref: ./GroupPermissions.yaml
   isManagementRole:
     type: boolean
     default: false

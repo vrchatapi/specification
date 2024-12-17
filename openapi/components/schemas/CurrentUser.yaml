@@ -25,7 +25,7 @@ properties:
     items:
       $ref: ./UserID.yaml
   ageVerificationStatus:
-    type: string
+    $ref: ./AgeVerificationStatus.yaml
   ageVerified:
     type: boolean
   allowAvatarCopying:

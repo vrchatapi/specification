@@ -2,7 +2,7 @@ title: User
 type: object
 properties:
   ageVerificationStatus:
-    type: string
+    $ref: ./AgeVerificationStatus.yaml
   allowAvatarCopying:
     type: boolean
     default: true

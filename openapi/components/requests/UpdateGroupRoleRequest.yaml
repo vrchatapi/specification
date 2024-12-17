@@ -9,8 +9,6 @@ properties:
     type: boolean
     default: false
   permissions:
-    type: array
-    items:
-      type: string
+    $ref: ../schemas/GroupPermissions.yaml
   order:
     type: integer
