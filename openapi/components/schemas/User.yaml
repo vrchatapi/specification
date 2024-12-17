@@ -3,6 +3,10 @@ type: object
 properties:
   ageVerificationStatus:
     type: string
+    enum:
+      - hidden
+      - verified
+      - 18+
   allowAvatarCopying:
     type: boolean
     default: true

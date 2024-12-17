@@ -1,6 +1,8 @@
 title: Group
 type: object
 properties:
+  ageVerificationSlotsAvailable:
+    type: boolean
   badges:
     type: array
     items:
