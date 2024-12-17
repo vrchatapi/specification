@@ -55,7 +55,4 @@ properties:
     items:
       type: string
   permissions:
-    type: array
-    items:
-      type: string
-      example: group-instance-join
+    $ref: ./GroupPermissions.yaml
