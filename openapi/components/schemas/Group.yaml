@@ -3,6 +3,12 @@ type: object
 properties:
   ageVerificationSlotsAvailable:
     type: boolean
+  ageVerificationBetaCode:
+    type: string
+    example: abc1234
+  ageVerificationBetaSlots:
+    type: number
+    example: 500
   badges:
     type: array
     items:
