@@ -2,6 +2,32 @@ type: array
 items:
   type: string
   enum:
+    - *
+    - group-announcement-manage
+    - group-audit-view
+    - group-bans-manage
+    - group-data-manage
+    - group-default-role-manage
+    - group-galleries-manage
+    - group-instance-age-gated-create
+    - group-instance-join
+    - group-instance-manage
+    - group-instance-moderate
+    - group-instance-open-create
+    - group-instance-plus-create
+    - group-instance-plus-portal
+    - group-instance-plus-portal-unlocked
+    - group-instance-public-create
+    - group-instance-queue-priority
+    - group-instance-restricted-create
+    - group-invites-manage
+    - group-members-manage
+    - group-members-remove
+    - group-members-viewall
+    - group-roles-assign
+    - group-roles-manage
+  x-enum-varnames:
+    - group-all
     - group-announcement-manage
     - group-audit-view
     - group-bans-manage
