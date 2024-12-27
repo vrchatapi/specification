@@ -65,17 +65,17 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
+        curl -X GET "https://api.vrchat.cloud/api/1/analysis/{fileId}/{versionId}" \
              -b "auth={authCookie}"
 /analysis/{fileId}/{versionId}/security:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/security" \
+        curl -X GET "https://api.vrchat.cloud/api/1/analysis/{fileId}/{versionId}/security" \
              -b "auth={authCookie}"
 /analysis/{fileId}/{versionId}/standard:
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/standard" \
+        curl -X GET "https://api.vrchat.cloud/api/1/analysis/{fileId}/{versionId}/standard" \
              -b "auth={authCookie}"
