@@ -1331,7 +1331,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}" \
+            curl -X GET "https://api.vrchat.cloud/api/1/analysis/{fileId}/{versionId}" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1353,7 +1353,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/security" \
+            curl -X GET "https://api.vrchat.cloud/api/1/analysis/{fileId}/{versionId}/security" \
                  -b "auth={authCookie}"
       responses:
         '200':
@@ -1375,7 +1375,7 @@ paths:
       x-codeSamples:
         - lang: cURL
           source: |-
-            curl -X GET "https://api.vrchat.cloud/api/1/file/{fileId}/{versionId}/standard" \
+            curl -X GET "https://api.vrchat.cloud/api/1/analysis/{fileId}/{versionId}/standard" \
                  -b "auth={authCookie}"
       responses:
         '200':
