@@ -175,6 +175,9 @@ paths:
         - $ref: ../parameters.yaml#/offset
         - $ref: ../parameters.yaml#/startDate
         - $ref: ../parameters.yaml#/endDate
+        - $ref: ../parameters.yaml#/actorIds
+        - $ref: ../parameters.yaml#/eventTypes
+        - $ref: ../parameters.yaml#/targetIds
       responses:
         '200':
           $ref: ../responses/groups/GroupAuditLogListResponse.yaml

@@ -67,6 +67,30 @@ endDate:
     type: string
     format: date-time
   description: The end date of the search range.
+actorIds:
+  name: actorIds
+  in: query
+  required: false
+  schema:
+    type: string
+    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+  description: The comma-separated actor id to search for.
+eventTypes:
+  name: eventTypes
+  in: query
+  required: false
+  schema:
+    type: string
+    example: group.member.remove,group.instance.kick
+  description: The comma-separated event types to search for.
+targetIds:
+  name: targetIds
+  in: query
+  required: false
+  schema:
+    type: string
+    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+  description: The comma-separated target ids to search for.
 releaseStatus:
   name: releaseStatus
   in: query
