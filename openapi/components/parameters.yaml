@@ -74,7 +74,7 @@ actorIds:
   schema:
     type: string
     example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
-  description: The comma-separated actor id to search for.
+  description: The comma-separated actor ids to search for.
 eventTypes:
   name: eventTypes
   in: query
