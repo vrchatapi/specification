@@ -13,7 +13,7 @@ properties:
   actorDisplayName:
     type: string
   targetId:
-    description: Typically GroupID or GroupRoleID, but could be other types of IDs.
+    description: Typically a UserID, GroupID, GroupRoleID, or Location, but could be other types of IDs.
     type: string
   eventType:
     type: string
