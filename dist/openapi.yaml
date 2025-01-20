@@ -1669,6 +1669,9 @@ paths:
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/startDate'
         - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/actorIds'
+        - $ref: '#/components/parameters/eventTypes'
+        - $ref: '#/components/parameters/targetIds'
       responses:
         '200':
           $ref: '#/components/responses/GroupAuditLogListResponse'
@@ -6645,7 +6648,7 @@ components:
         actorDisplayName:
           type: string
         targetId:
-          description: Typically GroupID or GroupRoleID, but could be other types of IDs.
+          description: Typically a UserID, GroupID, GroupRoleID, or Location, but could be other types of IDs.
           type: string
         eventType:
           type: string
@@ -11721,6 +11724,30 @@ components:
         type: string
         format: date-time
       description: The end date of the search range.
+    actorIds:
+      name: actorIds
+      in: query
+      required: false
+      schema:
+        type: string
+        example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+      description: The comma-separated actor ids to search for.
+    eventTypes:
+      name: eventTypes
+      in: query
+      required: false
+      schema:
+        type: string
+        example: group.member.remove,group.instance.kick
+      description: The comma-separated event types to search for.
+    targetIds:
+      name: targetIds
+      in: query
+      required: false
+      schema:
+        type: string
+        example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+      description: The comma-separated target ids to search for.
     groupGalleryId:
       name: groupGalleryId
       in: path
