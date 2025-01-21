@@ -1,7 +1,7 @@
 title: GroupPermissions
 type: string
 enum:
-  - \*
+  - "*"
   - group-announcement-manage
   - group-audit-view
   - group-bans-manage
