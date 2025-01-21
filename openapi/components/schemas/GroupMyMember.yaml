@@ -55,4 +55,6 @@ properties:
     items:
       type: string
   permissions:
-    $ref: ./GroupPermissions.yaml
+    type: array
+    items:
+      $ref: ./GroupPermissions.yaml

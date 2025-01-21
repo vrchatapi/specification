@@ -11,6 +11,6 @@ properties:
     type: boolean
     default: false
   permissions:
-    $ref: ../schemas/GroupPermissions.yaml
-
-
+    type: array
+    items:
+      $ref: ../schemas/GroupPermissions.yaml
