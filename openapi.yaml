@@ -1336,6 +1336,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/FileAnalysisResponse'
+        '202':
+          $ref: '#/components/responses/AnalysisNotYetAvailableError'
         '404':
           $ref: '#/components/responses/FileNotFoundError'
       operationId: getFileAnalysis
@@ -1358,6 +1360,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/FileAnalysisResponse'
+        '202':
+          $ref: '#/components/responses/AnalysisNotYetAvailableError'
         '404':
           $ref: '#/components/responses/FileNotFoundError'
       operationId: getFileAnalysisSecurity
@@ -1380,6 +1384,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/FileAnalysisResponse'
+        '202':
+          $ref: '#/components/responses/AnalysisNotYetAvailableError'
         '404':
           $ref: '#/components/responses/FileNotFoundError'
       operationId: getFileAnalysisStandard
@@ -10523,6 +10529,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/FileAnalysis'
+    AnalysisNotYetAvailableError:
+      description: Error response when requesting file Analysis that is not yet available.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Analysis Not Yet Available Error:
+              value:
+                error:
+                  message: Analysis not yet available
+                  status_code: 202
     LimitedUserListResponse:
       description: Returns a list of LimitedUser objects.
       content:
