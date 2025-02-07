@@ -3,6 +3,8 @@ type: object
 properties:
   ageVerificationStatus:
     $ref: ./AgeVerificationStatus.yaml
+  ageVerified:
+    type: boolean
   allowAvatarCopying:
     type: boolean
     default: true
@@ -99,6 +101,7 @@ properties:
     $ref: ./WorldID.yaml
 required:
   - ageVerificationStatus
+  - ageVerified
   - allowAvatarCopying
   - bio
   - bioLinks
