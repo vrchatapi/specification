@@ -10,4 +10,3 @@ properties:
     description: Redirection URL for updating the app
 required:
   - minBuildNumber
-  - redirectionAddress
