@@ -7905,13 +7905,10 @@ components:
       type: object
       description: Info about the performance limits on a platform
       properties:
-        allowed:
-          type: boolean
         maxSeats:
           type: integer
           description: Maximum amount of seats. -1 means no limit.
       required:
-        - allowed
         - maxSeats
     APIConfigConstants:
       title: APIConfigConstants
@@ -8159,7 +8156,6 @@ components:
           description: Redirection URL for updating the app
       required:
         - minBuildNumber
-        - redirectionAddress
     ReportCategory:
       title: ReportCategory
       type: object
@@ -8201,14 +8197,41 @@ components:
           default: true
           description: Unknown, probably voice optimization testing
           type: boolean
+        accessLogsUrls:
+          type: object
+          properties:
+            Default:
+              type: string
+              format: uri
+              example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+            Pico:
+              type: string
+              format: uri
+              example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+            Quest:
+              type: string
+              format: uri
+              example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+            XRElite:
+              type: string
+              format: uri
+              example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
         address:
           description: VRChat's office address
           minLength: 1
           type: string
+        ageVerificationInviteVisible:
+          type: boolean
         ageVerificationP:
           type: boolean
         ageVerificationStatusVisible:
           type: boolean
+        analysisMaxRetries:
+          type: integer
+          description: Max retries for avatar analysis requests
+        analysisRetryInterval:
+          type: integer
+          description: Interval between retries for avatar analysis requests
         announcements:
           type: array
           description: Public Announcements
@@ -8416,6 +8439,10 @@ components:
           default: false
           description: Unknown, probably toggles compilation of frontend web builds? So internal flag?
           type: boolean
+        disableGiftDrops:
+          default: false
+          description: Toggles if gift drops should be disabled
+          type: boolean
         disableHello:
           default: false
           description: Unknown
@@ -8474,6 +8501,9 @@ components:
           default: true
           description: Unknown
           type: boolean
+        giftDisplayType:
+          description: Display type of gifts
+          type: string
         googleApiClientId:
           type: string
           description: Unknown
@@ -8614,6 +8644,83 @@ components:
         reportOptions:
           type: object
           description: Options for reporting content
+          properties:
+            avatar:
+              type: object
+              properties:
+                avatar:
+                  type: array
+                  items:
+                    type: string
+                warnings:
+                  type: array
+                  items:
+                    type: string
+            group:
+              type: object
+              properties:
+                groupstore:
+                  type: array
+                  items:
+                    type: string
+                image:
+                  type: array
+                  items:
+                    type: string
+                text:
+                  type: array
+                  items:
+                    type: string
+            user:
+              type: object
+              properties:
+                behavior:
+                  type: array
+                  items:
+                    type: string
+                chat:
+                  type: array
+                  items:
+                    type: string
+                emoji:
+                  type: array
+                  items:
+                    type: string
+                image:
+                  type: array
+                  items:
+                    type: string
+                sticker:
+                  type: array
+                  items:
+                    type: string
+                text:
+                  type: array
+                  items:
+                    type: string
+            world:
+              type: object
+              properties:
+                environment:
+                  type: array
+                  items:
+                    type: string
+                text:
+                  type: array
+                  items:
+                    type: string
+                warnings:
+                  type: array
+                  items:
+                    type: string
+                worldimage:
+                  type: array
+                  items:
+                    type: string
+                worldstore:
+                  type: array
+                  items:
+                    type: string
         reportReasons:
           type: object
           description: Reasons available for reporting users
@@ -8676,6 +8783,8 @@ components:
             - sexual
             - threatening
             - visuals
+        requireAgeVerificationBetaTag:
+          type: boolean
         sdkDeveloperFaqUrl:
           description: Link to the developer FAQ
           minLength: 1
@@ -8772,9 +8881,13 @@ components:
       required:
         - VoiceEnableDegradation
         - VoiceEnableReceiverLimiting
+        - accessLogsUrls
         - address
+        - ageVerificationInviteVisible
         - ageVerificationP
         - ageVerificationStatusVisible
+        - analysisMaxRetries
+        - analysisRetryInterval
         - announcements
         - analyticsSegment_NewUI_PctOfUsers
         - analyticsSegment_NewUI_Salt
@@ -8808,6 +8921,7 @@ components:
         - disableEventStream
         - disableFeedbackGating
         - disableFrontendBuilds
+        - disableGiftDrops
         - disableHello
         - disableOculusSubs
         - disableRegistration
@@ -8820,6 +8934,7 @@ components:
         - dynamicWorldRows
         - events
         - forceUseLatestWorld
+        - giftDisplayType
         - googleApiClientId
         - homeWorldId
         - homepageRedirectTarget
@@ -8837,6 +8952,7 @@ components:
         - reportFormUrl
         - reportOptions
         - reportReasons
+        - requireAgeVerificationBetaTag
         - sdkDeveloperFaqUrl
         - sdkDiscordUrl
         - sdkNotAllowedToPublishMessage
