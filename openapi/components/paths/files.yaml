@@ -244,6 +244,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/files/FileAnalysisResponse.yaml
+        '202':
+          $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
         '404':
           $ref: ../responses/files/FileNotFoundError.yaml
       operationId: getFileAnalysis
@@ -263,6 +265,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/files/FileAnalysisResponse.yaml
+        '202':
+          $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
         '404':
           $ref: ../responses/files/FileNotFoundError.yaml
       operationId: getFileAnalysisSecurity
@@ -282,6 +286,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/files/FileAnalysisResponse.yaml
+        '202':
+          $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
         '404':
           $ref: ../responses/files/FileNotFoundError.yaml
       operationId: getFileAnalysisStandard
