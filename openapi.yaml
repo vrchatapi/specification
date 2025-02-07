@@ -9097,6 +9097,8 @@ components:
       properties:
         ageVerificationStatus:
           $ref: '#/components/schemas/AgeVerificationStatus'
+        ageVerified:
+          type: boolean
         allowAvatarCopying:
           type: boolean
           default: true
@@ -9192,6 +9194,7 @@ components:
           $ref: '#/components/schemas/WorldID'
       required:
         - ageVerificationStatus
+        - ageVerified
         - allowAvatarCopying
         - bio
         - bioLinks
