@@ -1,5 +1,10 @@
 title: AgeVerificationStatus
 type: string
+description: |
+  obsolete, use `ageVerified` instead.
+
+  `ageVerificationStatus == "18+"` => `ageVerified == true`
+  `ageVerificationStatus != "18+"` => `ageVerified == false`
 enum:
   - hidden
   - verified

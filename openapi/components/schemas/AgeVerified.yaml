@@ -1,0 +1,3 @@
+title: AgeVerified
+type: bool
+description: `true` if, user is age verified. but `false`, when status is not shared. Otherwise always `false`.
