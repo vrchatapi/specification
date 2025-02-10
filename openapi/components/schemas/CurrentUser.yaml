@@ -27,7 +27,7 @@ properties:
   ageVerificationStatus:
     $ref: ./AgeVerificationStatus.yaml
   ageVerified:
-    type: boolean
+    $ref: ./AgeVerified.yaml
   allowAvatarCopying:
     type: boolean
   badges:
