@@ -3961,6 +3961,11 @@ components:
     AgeVerificationStatus:
       title: AgeVerificationStatus
       type: string
+      description: |
+        obsolete, use `ageVerified` instead.
+
+        `ageVerificationStatus == "18+"` => `ageVerified == true`
+        `ageVerificationStatus != "18+"` => `ageVerified == false`
       enum:
         - hidden
         - verified
@@ -3969,6 +3974,10 @@ components:
         - hidden
         - verified
         - plus18
+    AgeVerified:
+      title: AgeVerified
+      type: boolean
+      description: '`true` if, user is age verified 18 or above. but `false`, when status is not shared. Otherwise always `false`.'
     BadgeID:
       example: bdg_a60e514a-8cb7-4702-8f24-2786992be1a8
       title: BadgeID
@@ -4179,7 +4188,7 @@ components:
         ageVerificationStatus:
           $ref: '#/components/schemas/AgeVerificationStatus'
         ageVerified:
-          type: boolean
+          $ref: '#/components/schemas/AgeVerified'
         allowAvatarCopying:
           type: boolean
         badges:
@@ -9220,7 +9229,7 @@ components:
         ageVerificationStatus:
           $ref: '#/components/schemas/AgeVerificationStatus'
         ageVerified:
-          type: boolean
+          $ref: '#/components/schemas/AgeVerified'
         allowAvatarCopying:
           type: boolean
           default: true
