@@ -3962,10 +3962,9 @@ components:
       title: AgeVerificationStatus
       type: string
       description: |
-        obsolete, use `ageVerified` instead.
+        `verified` is obsolete.
 
-        `ageVerificationStatus == "18+"` => `ageVerified == true`
-        `ageVerificationStatus != "18+"` => `ageVerified == false`
+        User who have verified and are 18+ can switch to `plus18` status.
       enum:
         - hidden
         - verified
@@ -3977,7 +3976,7 @@ components:
     AgeVerified:
       title: AgeVerified
       type: boolean
-      description: '`true` if, user is age verified 18 or above. but `false`, when status is not shared. Otherwise always `false`.'
+      description: '`true` if, user is age verified (not 18+).'
     BadgeID:
       example: bdg_a60e514a-8cb7-4702-8f24-2786992be1a8
       title: BadgeID
