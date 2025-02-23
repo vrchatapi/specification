@@ -146,6 +146,19 @@ properties:
     type: array
   presence:
     $ref: ./CurrentUserPresence.yaml
+  platform_history:
+    type: array
+    items:
+      type: object
+      properties:
+        isMobile:
+          type: boolean
+        platform:
+          type: string
+          nullable: true
+        recorded:
+          type: string
+          format: date-time
   profilePicOverride:
     type: string
   profilePicOverrideThumbnail:
