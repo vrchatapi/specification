@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.19.0
+  version: 1.19.1
   contact:
     name: Unofficial VRChat API Documentation Project
     url: "https://github.com/VRChatAPI"
