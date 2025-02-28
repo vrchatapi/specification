@@ -37,6 +37,9 @@
 - name: playermoderation
   description:
     $ref: ./paths/playermoderation.yaml#/info/description
+- name: prints
+  description:
+    $ref: ./paths/prints.yaml#/info/description
 - name: system
   description:
     $ref: ./paths/system.yaml#/info/description

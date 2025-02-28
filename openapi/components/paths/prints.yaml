@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: prints
+  version: '1.0'
+  description: 'Prints are a way to print photos directly from the VRChat camera.'
+paths:
+  /prints/user/{userId}:
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      summary: Get Own Prints
+      operationId: getUserPrints
+      security:
+        - authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/prints.yaml#/~1prints~1user~1{userId}/get"
+      responses:
+        '200':
+          $ref: ../responses/prints/PrintListResponse.yaml
+        '403':
+          $ref: ../responses/prints/UnableToRequestOtherUsersPrintsError.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - prints
+      description: Returns a list of all prints of the user. User id has to be your own userId, as you can't request other user's prints.
+  /prints/{printId}:
+    parameters:
+      - $ref: ../parameters.yaml#/printId
+    get:
+      summary: Get Print
+      operationId: getPrint
+      security:
+        - authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/prints.yaml#/~1prints~1{printId}/get"
+      responses:
+        '200':
+          $ref: ../responses/prints/PrintResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - prints
+      description: Returns a print.
+    delete:
+      summary: Delete Print
+      operationId: deletePrint
+      security:
+        - authCookie: []
+      x-codeSamples:
+        $ref: "../codeSamples/prints.yaml#/~1prints~1{printId}/delete"
+      responses:
+        '200':
+          description: Empty response if successful
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - prints
+      description: Returns a print.
+tags:
+  $ref: ../tags.yaml
+components:
+  securitySchemes:
+    $ref: ../securitySchemes.yaml

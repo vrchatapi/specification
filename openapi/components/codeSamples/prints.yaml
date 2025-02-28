@@ -1,0 +1,17 @@
+/prints/user/{userId}:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/prints/user/{userId}" \
+             -b "auth={authCookie}"
+/prints/{printId}:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/prints/{printId}" \
+             -b "auth={authCookie}"
+  delete:
+    - lang: cURL
+      source: >-
+        curl -X DELETE "https://api.vrchat.cloud/api/1/prints/{printId}" \
+             -b "auth={authCookie}"

@@ -1,0 +1,11 @@
+description: Error response when trying to request another user's prints.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      403 Unable to request another user's prints:
+        value:
+          error:
+            message: "Unable to request another user's prints."
+            status_code: 403
