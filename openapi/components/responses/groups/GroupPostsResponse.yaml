@@ -1,0 +1,10 @@
+description: Returns a GroupPost Array.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        posts:
+          type: array
+          items:
+            $ref: ../../schemas/GroupPost.yaml
