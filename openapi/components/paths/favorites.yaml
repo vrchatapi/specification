@@ -73,24 +73,6 @@ paths:
   '/favorites/{favoriteId}':
     parameters:
       - $ref: ../parameters.yaml#/favoriteId
-    get:
-      summary: Show Favorite
-      tags:
-        - favorites
-      x-codeSamples:
-        $ref: "../codeSamples/favorites.yaml#/~1favorites~1{favoriteId}/get"
-      responses:
-        '200':
-          $ref: ../responses/favorites/FavoriteResponse.yaml
-        '401':
-          $ref: ../responses/MissingCredentialsError.yaml
-        '404':
-          $ref: ../responses/favorites/FavoriteNotFoundError.yaml
-      operationId: getFavorite
-      security:
-        - authCookie: []
-      description: Return information about a specific Favorite.
-      parameters: []
     delete:
       summary: Remove Favorite
       operationId: removeFavorite
