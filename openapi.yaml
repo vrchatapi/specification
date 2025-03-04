@@ -151,6 +151,8 @@ tags:
       As of October 2022, `showAvatar` and `hideAvatar` has been moved to local storage.
       Sending these types to the API will result in a 200 OK response, but the API will **not** store them.
       More information is avaiable on VRChat's official [documentation on Local Storage](https://docs.vrchat.com/docs/local-vrchat-storage).
+  - name: prints
+    description: Prints are a way to print photos directly from the VRChat camera.
   - name: system
     description: System Docs Here
   - name: users
@@ -3050,6 +3052,68 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       tags:
         - playermoderation
+  /prints/user/{userId}:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get Own Prints
+      operationId: getUserPrints
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/prints/user/{userId}" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/PrintListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/UnableToRequestOtherUsersPrintsError'
+      tags:
+        - prints
+      description: Returns a list of all prints of the user. User id has to be your own userId, as you can't request other user's prints.
+  /prints/{printId}:
+    parameters:
+      - $ref: '#/components/parameters/printId'
+    get:
+      summary: Get Print
+      operationId: getPrint
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/prints/{printId}" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/PrintResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - prints
+      description: Returns a print.
+    delete:
+      summary: Delete Print
+      operationId: deletePrint
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/prints/{printId}" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          description: Empty response if successful
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - prints
+      description: Returns a print.
   /config:
     get:
       summary: Fetch API Config
@@ -7888,6 +7952,53 @@ components:
       required:
         - moderated
         - type
+    PrintID:
+      type: string
+      example: prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa
+      title: PrintID
+    Print:
+      title: Print
+      type: object
+      description: Info about a print
+      properties:
+        authorId:
+          $ref: '#/components/schemas/UserID'
+        authorName:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        files:
+          type: object
+          properties:
+            fileId:
+              $ref: '#/components/schemas/FileID'
+            image:
+              type: string
+              description: Link to file, e.g. https://api.vrchat.cloud/api/1/file/file_66fe782d-f2bd-4462-9761-1d766d7b2b26/1/file
+        id:
+          $ref: '#/components/schemas/PrintID'
+        note:
+          type: string
+        ownerId:
+          $ref: '#/components/schemas/UserID'
+        timestamp:
+          type: string
+          format: date-time
+        worldId:
+          $ref: '#/components/schemas/WorldID'
+        worldName:
+          type: string
+      required:
+        - authorId
+        - authorName
+        - createdAt
+        - files
+        - id
+        - note
+        - timestamp
+        - worldId
+        - worldName
     APIConfigAnnouncement:
       title: APIConfigAnnouncement
       type: object
@@ -11321,6 +11432,32 @@ components:
                 success:
                   message: PlayerModerations of type undefined removed
                   status_code: 200
+    PrintListResponse:
+      description: Returns a list of Print objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Print'
+    UnableToRequestOtherUsersPrintsError:
+      description: Error response when trying to request another user's prints.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            403 Unable to request another user's prints:
+              value:
+                error:
+                  message: Unable to request another user's prints.
+                  status_code: 403
+    PrintResponse:
+      description: Returns a single Print object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Print'
     APIConfigResponse:
       description: Returns the API's config.
       content:
@@ -11999,6 +12136,14 @@ components:
       schema:
         type: string
       description: Must be a valid permission ID.
+    printId:
+      name: printId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa
+      description: Print ID.
     require:
       name: require
       in: query
