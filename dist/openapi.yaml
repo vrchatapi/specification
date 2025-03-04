@@ -2136,7 +2136,7 @@ paths:
     get:
       summary: Get posts from a Group
       description: Get posts from a Group
-      operationId: getGroupPost
+      operationId: getGroupPosts
       tags:
         - groups
       parameters:
@@ -2149,7 +2149,7 @@ paths:
           description: See public posts only.
       responses:
         '200':
-          $ref: '#/components/responses/GroupPostResponse'
+          $ref: '#/components/responses/GroupPostsResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
@@ -11035,6 +11035,17 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/GroupPermission'
+    GroupPostsResponse:
+      description: Returns a GroupPost Array.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              posts:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupPost'
     GroupPostResponse:
       description: Returns a GroupPost object.
       content:
