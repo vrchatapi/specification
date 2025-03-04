@@ -909,27 +909,6 @@ paths:
   /favorites/{favoriteId}:
     parameters:
       - $ref: '#/components/parameters/favoriteId'
-    get:
-      summary: Show Favorite
-      tags:
-        - favorites
-      x-codeSamples:
-        - lang: cURL
-          source: |-
-            curl -X GET "https://api.vrchat.cloud/api/1/favorites/{favoriteId}" \
-                 -b "auth={authCookie}"
-      responses:
-        '200':
-          $ref: '#/components/responses/FavoriteResponse'
-        '401':
-          $ref: '#/components/responses/MissingCredentialsError'
-        '404':
-          $ref: '#/components/responses/FavoriteNotFoundError'
-      operationId: getFavorite
-      security:
-        - authCookie: []
-      description: Return information about a specific Favorite.
-      parameters: []
     delete:
       summary: Remove Favorite
       operationId: removeFavorite
@@ -10347,18 +10326,6 @@ components:
                 error:
                   message: you are not friends with that userǃ
                   status_code: 403
-    FavoriteNotFoundError:
-      description: Error response when trying to show information about a non-existent favorite.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            404 Favorite not found:
-              value:
-                error:
-                  message: 404 couldn't find that favorite
-                  status_code: 404
     FavoriteRemovedSuccess:
       description: Success response after removing a favorite.
       content:
@@ -10371,6 +10338,18 @@ components:
                 success:
                   message: favorite deleted!
                   status_code: 200
+    FavoriteNotFoundError:
+      description: Error response when trying to show information about a non-existent favorite.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 Favorite not found:
+              value:
+                error:
+                  message: 404 couldn't find that favorite
+                  status_code: 404
     FavoriteGroupListResponse:
       description: Returns a list of FavoriteGroup objects.
       content:
