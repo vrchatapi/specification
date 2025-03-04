@@ -7763,7 +7763,6 @@ components:
         - clientNumber
         - displayName
         - full
-        - gameServerVersion
         - id
         - instanceId
         - instancePersistenceEnabled
