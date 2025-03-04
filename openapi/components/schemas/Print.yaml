@@ -1,0 +1,42 @@
+title: Print
+type: object
+description: Info about a print
+properties:
+  authorId:
+    $ref: ./UserID.yaml
+  authorName:
+    type: string
+  createdAt:
+    type: string
+    format: date-time
+  files:
+    type: object
+    properties:
+      fileId:
+        $ref: ./FileID.yaml
+      image:
+        type: string
+        description: "Link to file, e.g. https://api.vrchat.cloud/api/1/file/file_66fe782d-f2bd-4462-9761-1d766d7b2b26/1/file"
+  id:
+    $ref: ./PrintID.yaml
+  note:
+    type: string
+  ownerId:
+    $ref: ./UserID.yaml
+  timestamp:
+    type: string
+    format: date-time
+  worldId:
+    $ref: ./WorldID.yaml
+  worldName:
+    type: string
+required:
+  - authorId
+  - authorName
+  - createdAt
+  - files
+  - id
+  - note
+  - timestamp
+  - worldId
+  - worldName

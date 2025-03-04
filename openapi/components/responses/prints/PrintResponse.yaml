@@ -1,0 +1,5 @@
+description: Returns a single Print object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Print.yaml

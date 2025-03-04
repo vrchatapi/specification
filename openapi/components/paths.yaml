@@ -222,6 +222,13 @@
 "/auth/user/unplayermoderate":
   $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1unplayermoderate"
 
+# prints
+
+"/prints/user/{userId}":
+  $ref: "./paths/prints.yaml#/paths/~1prints~1user~1{userId}"
+"/prints/{printId}":
+  $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
+
 # system
 
 "/config":
