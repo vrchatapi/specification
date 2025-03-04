@@ -657,7 +657,7 @@ paths:
     get:
       summary: Get posts from a Group
       description: Get posts from a Group
-      operationId: getGroupPost
+      operationId: getGroupPosts
       tags:
         - groups
       parameters:
@@ -670,7 +670,7 @@ paths:
           description: See public posts only.
       responses:
         '200':
-          $ref: ../responses/groups/GroupPostResponse.yaml
+          $ref: ../responses/groups/GroupPostsResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       security:
