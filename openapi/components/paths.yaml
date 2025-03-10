@@ -289,6 +289,8 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1addTags"
 "/users/{userId}/removeTags":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1removeTags"
+"/users/{userId}/badges/{badgeId}":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1badges~1{badgeId}"
 "/users/{userId}/instances/groups":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups"
 "/users/{userId}/{worldId}/persist/exists":

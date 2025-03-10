@@ -68,6 +68,13 @@
         curl -X POST "https://api.vrchat.cloud/api/1/users/{userId}/removeTags" \
              -b "auth={authCookie}" \
              --data '{"tags": [ "language_zxx" ] }'
+'/users/{userId}/badges/{badgeId}':
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/users/{userId}/badges/{badgeId}" \
+             -b "auth={authCookie}" \
+             --data '{"hidden": true, "showcased": false }'
 '/users/{userId}/instances/groups':
   get:
     - lang: cURL

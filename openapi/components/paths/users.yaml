@@ -326,6 +326,35 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       security:
         - authCookie: []
+  '/users/{userId}/badges/{badgeId}':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/badgeId
+    post:
+      summary: Update User Badge
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1badges~1{badgeId}/post
+      description: Updates a user's badge
+      operationId: updateBadge
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateUserBadgeRequest.yaml
+      responses:
+        '200':
+          description: The user's badge is updated.
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/users/UserMustBeOwnError.yaml
+        '404':
+          description: The user does not have the badge.
+      security:
+        - authCookie: []
   "/users/{userId}/instances/groups":
     parameters:
       - $ref: ../parameters.yaml#/userId

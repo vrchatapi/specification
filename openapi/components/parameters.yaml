@@ -195,6 +195,13 @@ userNoteId:
   schema:
     type: string
   description: Must be a valid user note ID.
+badgeId:
+  name: badgeId
+  in: path
+  required: true
+  schema:
+    type: string
+  description: Must be a valid badge ID.
 usernameQuery:
   name: username
   in: query
