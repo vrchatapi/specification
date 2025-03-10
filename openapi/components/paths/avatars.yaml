@@ -280,7 +280,7 @@ paths:
         $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}~1impostor/delete"
       responses:
         '200':
-          $ref: ../responses/avatars/AvatarImpostorDeleteResponse.yaml
+          description: The Impostors generated for that avatar are deleted.
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
