@@ -330,10 +330,10 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/badgeId
-    post:
+    put:
       summary: Update User Badge
       x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1badges~1{badgeId}/post
+        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1badges~1{badgeId}/put
       description: Updates a user's badge
       operationId: updateBadge
       tags:

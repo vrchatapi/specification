@@ -8,7 +8,7 @@
   get:
     - lang: cURL
       source: >-
-        curl -X GET "https://api.vrchat.cloud/api/1/licensed" \
+        curl -X GET "https://api.vrchat.cloud/api/1/avatars/licensed" \
              -b "auth={authCookie}"
 /avatars:
   get:

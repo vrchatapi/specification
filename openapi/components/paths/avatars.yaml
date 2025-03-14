@@ -183,7 +183,7 @@ paths:
         $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}/delete"
       responses:
         '200':
-          description: Operation succeeded.
+          $ref: ../responses/avatars/AvatarResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '404':
