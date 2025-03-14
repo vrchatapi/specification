@@ -554,7 +554,9 @@ paths:
         - avatars
       x-codeSamples:
         - lang: cURL
-          source: curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback"
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback" \
+                 -b "auth={authCookie}"
       responses:
         '200':
           $ref: '#/components/responses/CurrentUserResponse'
@@ -603,6 +605,93 @@ paths:
         - $ref: '#/components/parameters/platform'
         - $ref: '#/components/parameters/userIdAdmin'
       description: Search and list favorited avatars by query filters.
+  /avatars/licensed:
+    get:
+      summary: List Licensed Avatars
+      tags:
+        - avatars
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/avatars/licensed" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/AvatarListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getLicensedAvatars
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      description: List licensed avatars.
+  /avatars/{avatarId}/impostor/enqueue:
+    parameters:
+      - $ref: '#/components/parameters/avatarId'
+    post:
+      summary: Enqueue Impostor generation
+      tags:
+        - avatars
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/avatars/{avatarId}/impostor/enqueue" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/AvatarImpostorEnqueueResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/AvatarNotFoundError'
+      operationId: enqueueImpostor
+      security:
+        - authCookie: []
+      description: Enqueue Impostor generation for that avatar.
+  /avatars/impostor/queue/stats:
+    get:
+      summary: Get Impostor Queue Stats
+      tags:
+        - avatars
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/avatars/impostor/queue/stats" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/AvatarImpostorQueueStatsResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getImpostorQueueStats
+      security:
+        - authCookie: []
+      description: Gets service stats for queued impostor.
+  /avatars/{avatarId}/impostor:
+    parameters:
+      - $ref: '#/components/parameters/avatarId'
+    delete:
+      summary: Delete generated Impostor
+      tags:
+        - avatars
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/avatars/{avatarId}/impostor" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          description: The Impostors generated for that avatar are deleted.
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/AvatarNotFoundError'
+      operationId: deleteImpostor
+      security:
+        - authCookie: []
+      description: Delete generated Impostor for that avatar.
   /Steam/transactions:
     get:
       summary: List Steam Transactions
@@ -3575,6 +3664,99 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getUserNote
       description: Get a particular user note
+  /users/{userId}/addTags:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    post:
+      summary: Add User Tags
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/users/{userId}/addTags" \
+                 -b "auth={authCookie}" \
+                 --data '{"tags": [ "language_zxx" ] }'
+      description: Adds tags to the user's profile
+      operationId: addTags
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeUserTagsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CurrentUserResponse'
+        '400':
+          $ref: '#/components/responses/UserTagInvalidError'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - authCookie: []
+  /users/{userId}/removeTags:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    post:
+      summary: Remove User Tags
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/users/{userId}/removeTags" \
+                 -b "auth={authCookie}" \
+                 --data '{"tags": [ "language_zxx" ] }'
+      description: Removes tags from the user's profile
+      operationId: removeTags
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeUserTagsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CurrentUserResponse'
+        '400':
+          $ref: '#/components/responses/UserTagInvalidError'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - authCookie: []
+  /users/{userId}/badges/{badgeId}:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/badgeId'
+    put:
+      summary: Update User Badge
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X PUT "https://api.vrchat.cloud/api/1/users/{userId}/badges/{badgeId}" \
+                 -b "auth={authCookie}" \
+                 --data '{"hidden": true, "showcased": false }'
+      description: Updates a user's badge
+      operationId: updateBadge
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserBadgeRequest'
+      responses:
+        '200':
+          description: The user's badge is updated.
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/UserMustBeOwnError'
+        '404':
+          description: The user does not have the badge.
+      security:
+        - authCookie: []
   /users/{userId}/instances/groups:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -3596,6 +3778,56 @@ paths:
           $ref: '#/components/responses/MissingCredentialsError'
         '403':
           $ref: '#/components/responses/UserMustBeOwnError'
+      security:
+        - authCookie: []
+  /users/{userId}/{worldId}/persist/exists:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/worldId'
+    get:
+      summary: Check User Persistence Exists
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/{worldId}/persist/exists" \
+                 -b "auth={authCookie}"
+      description: Checks whether the user has persistence data for a given world
+      operationId: checkUserPersistenceExists
+      tags:
+        - users
+        - worlds
+      responses:
+        '200':
+          description: The user has persistence data for the given world.
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          description: The user does not have persistence data for the given world.
+      security:
+        - authCookie: []
+  /users/{userId}/{worldId}/persist:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/worldId'
+    delete:
+      summary: Delete User Persistence
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/users/{userId}/{worldId}/persist" \
+                 -b "auth={authCookie}"
+      description: Deletes the user's persistence data for a given world
+      operationId: deleteUserPersistence
+      tags:
+        - users
+        - worlds
+      responses:
+        '200':
+          description: The user's persistence data for the given world is deleted.
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          description: The user does not have persistence data for the given world.
       security:
         - authCookie: []
   /worlds:
@@ -4800,6 +5032,57 @@ components:
           minLength: 1
           default: 5.3.4p1
           example: 2022.3.6f1
+    ServiceStatus:
+      title: ServiceStatus
+      type: object
+      description: Status information for a service request
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          description: The id of this service, NOT the id of the thing this service was requested for.
+          type: string
+        progress:
+          type: array
+          items:
+            type: object
+        requesterUserId:
+          description: The id of the user who requested this service.
+          $ref: '#/components/schemas/UserID'
+        state:
+          type: string
+        subjectId:
+          description: The id of the thing this service was requested for.
+          type: string
+        subjectType:
+          description: The kind of the thing this service was requested for.
+          type: string
+        type:
+          description: The kind of service that was requested.
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+        - created_at
+        - id
+        - progress
+        - requesterUserId
+        - state
+        - subjectId
+        - subjectType
+        - type
+        - updated_at
+    ServiceQueueStats:
+      title: ServiceQueueStats
+      type: object
+      description: Statistics about the user's currently queued service request
+      properties:
+        estimatedServiceDurationSeconds:
+          type: integer
+      required:
+        - estimatedServiceDurationSeconds
     TransactionID:
       example: txn_e5c72948-e735-4880-8245-24b2a41198b0
       title: TransactionID
@@ -9678,6 +9961,25 @@ components:
       required:
         - targetUserId
         - note
+    ChangeUserTagsRequest:
+      title: ChangeUserTagsRequest
+      type: object
+      properties:
+        tags:
+          description: The tags being added or removed.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+      required:
+        - tags
+    UpdateUserBadgeRequest:
+      title: UpdateUserBadgeRequest
+      type: object
+      properties:
+        hidden:
+          type: boolean
+        showcased:
+          type: boolean
     LimitedUnityPackage:
       description: ''
       properties:
@@ -10322,6 +10624,18 @@ components:
                 error:
                   message: \"You can only see your own favorite avatars!\"
                   status_code: 403
+    AvatarImpostorEnqueueResponse:
+      description: Returns a Service Status.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServiceStatus'
+    AvatarImpostorQueueStatsResponse:
+      description: Returns a Service Queue Stats.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServiceQueueStats'
     TransactionListResponse:
       description: Returns a list of Transaction objects.
       content:
@@ -11660,6 +11974,24 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserNote'
+    UserTagInvalidError:
+      description: Error response when a user attempts to add an invalid, restricted, or duplicate tag to their profile, attempts to add tags above the limit for their profile, or attempts to remove invalid, restricted, or absent tag from their profile.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UserMustBeOwnError:
+      description: Error response when trying get group instances of another user.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            User Id must be your own:
+              value:
+                error:
+                  message: User ID must be your own․
+                  status_code: 403
     UserGroupInstanceListResponse:
       description: Returns a list of Instance objects with a fetched at time.
       content:
@@ -11674,18 +12006,6 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Instance'
-    UserMustBeOwnError:
-      description: Error response when trying get group instances of another user.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            User Id must be your own:
-              value:
-                error:
-                  message: User ID must be your own․
-                  status_code: 403
     LimitedWorldListResponse:
       description: Returns a list of LimitedWorld objects.
       content:
@@ -12212,6 +12532,13 @@ components:
       schema:
         type: string
       description: Must be a valid user note ID.
+    badgeId:
+      name: badgeId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Must be a valid badge ID.
     fuzzy:
       name: fuzzy
       in: query
