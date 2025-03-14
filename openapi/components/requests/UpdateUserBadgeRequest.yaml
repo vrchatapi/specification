@@ -1,0 +1,7 @@
+title: UpdateUserBadgeRequest
+type: object
+properties:
+  hidden:
+    type: boolean
+  showcased:
+    type: boolean

@@ -54,9 +54,42 @@
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/userNotes/{userNoteId}" \
              -b "auth={authCookie}"
+'/users/{userId}/addTags':
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/users/{userId}/addTags" \
+             -b "auth={authCookie}" \
+             --data '{"tags": [ "language_zxx" ] }'
+'/users/{userId}/removeTags':
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/users/{userId}/removeTags" \
+             -b "auth={authCookie}" \
+             --data '{"tags": [ "language_zxx" ] }'
+'/users/{userId}/badges/{badgeId}':
+  put:
+    - lang: cURL
+      source: >-
+        curl -X PUT "https://api.vrchat.cloud/api/1/users/{userId}/badges/{badgeId}" \
+             -b "auth={authCookie}" \
+             --data '{"hidden": true, "showcased": false }'
 '/users/{userId}/instances/groups':
   get:
     - lang: cURL
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/instances/groups" \
+             -b "auth={authCookie}"
+'/users/{userId}/{worldId}/persist/exists':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/users/{userId}/{worldId}/persist/exists" \
+             -b "auth={authCookie}"
+'/users/{userId}/{worldId}/persist':
+  delete:
+    - lang: cURL
+      source: >-
+        curl -X DELETE "https://api.vrchat.cloud/api/1/users/{userId}/{worldId}/persist" \
              -b "auth={authCookie}"

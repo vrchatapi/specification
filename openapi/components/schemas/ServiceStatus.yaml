@@ -1,0 +1,41 @@
+title: ServiceStatus
+type: object
+description: 'Status information for a service request'
+properties:
+  created_at:
+    format: date-time
+    type: string
+  id:
+    description: 'The id of this service, NOT the id of the thing this service was requested for.'
+    type: string
+  progress:
+    type: array
+    items:
+      type: object
+  requesterUserId:
+    description: 'The id of the user who requested this service.'
+    $ref: ./UserID.yaml
+  state:
+    type: string
+  subjectId:
+    description: 'The id of the thing this service was requested for.'
+    type: string
+  subjectType:
+    description: 'The kind of the thing this service was requested for.'
+    type: string
+  type:
+    description: 'The kind of service that was requested.'
+    type: string
+  updated_at:
+    format: date-time
+    type: string
+required:
+  - created_at
+  - id
+  - progress
+  - requesterUserId
+  - state
+  - subjectId
+  - subjectType
+  - type
+  - updated_at

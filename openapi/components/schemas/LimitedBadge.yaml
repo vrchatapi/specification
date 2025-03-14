@@ -1,0 +1,21 @@
+title: LimitedBadge
+type: object
+properties:
+  assignedAt:
+    type: string
+    format: date-time
+  badgeId:
+    $ref: ./BadgeID.yaml
+  hidden:
+    type: boolean
+  showcased:
+    type: boolean
+  updatedAt:
+    type: string
+    format: date-time
+required:
+  - assignedAt
+  - badgeId
+  - hidden
+  - showcased
+  - updatedAt

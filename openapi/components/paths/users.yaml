@@ -274,6 +274,87 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserNote
       description: Get a particular user note
+  '/users/{userId}/addTags':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      summary: Add User Tags
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1addTags/post
+      description: Adds tags to the user's profile
+      operationId: addTags
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ChangeUserTagsRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/users/CurrentUserResponse.yaml
+        '400':
+          $ref: ../responses/users/UserTagInvalidError.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      security:
+        - authCookie: []
+  '/users/{userId}/removeTags':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      summary: Remove User Tags
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1removeTags/post
+      description: Removes tags from the user's profile
+      operationId: removeTags
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ChangeUserTagsRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/users/CurrentUserResponse.yaml
+        '400':
+          $ref: ../responses/users/UserTagInvalidError.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      security:
+        - authCookie: []
+  '/users/{userId}/badges/{badgeId}':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/badgeId
+    put:
+      summary: Update User Badge
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1badges~1{badgeId}/put
+      description: Updates a user's badge
+      operationId: updateBadge
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateUserBadgeRequest.yaml
+      responses:
+        '200':
+          description: The user's badge is updated.
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/users/UserMustBeOwnError.yaml
+        '404':
+          description: The user does not have the badge.
+      security:
+        - authCookie: []
   "/users/{userId}/instances/groups":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -292,6 +373,50 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         '403':
           $ref: ../responses/users/UserMustBeOwnError.yaml
+      security:
+        - authCookie: []
+  '/users/{userId}/{worldId}/persist/exists':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/worldId
+    get:
+      summary: Check User Persistence Exists
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1{worldId}~1persist~1exists/get
+      description: Checks whether the user has persistence data for a given world
+      operationId: checkUserPersistenceExists
+      tags:
+        - users
+        - worlds
+      responses:
+        '200':
+          description: The user has persistence data for the given world.
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          description: The user does not have persistence data for the given world.
+      security:
+        - authCookie: []
+  '/users/{userId}/{worldId}/persist':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/worldId
+    delete:
+      summary: Delete User Persistence
+      x-codeSamples:
+        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1{worldId}~1persist/delete
+      description: Deletes the user's persistence data for a given world
+      operationId: deleteUserPersistence
+      tags:
+        - users
+        - worlds
+      responses:
+        '200':
+          description: The user's persistence data for the given world is deleted.
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          description: The user does not have persistence data for the given world.
       security:
         - authCookie: []
 tags:

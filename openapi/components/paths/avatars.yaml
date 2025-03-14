@@ -56,6 +56,25 @@ paths:
         - $ref: ../parameters.yaml#/platform
         - $ref: ../parameters.yaml#/userIdAdmin
       description: Search and list favorited avatars by query filters.
+  /avatars/licensed:
+    get:
+      summary: List Licensed Avatars
+      tags:
+        - avatars
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1licensed/get"
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getLicensedAvatars
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      description: List licensed avatars.
   /avatars:
     get:
       summary: Search Avatars
@@ -214,6 +233,62 @@ paths:
       security:
         - authCookie: []
       description: Switches into that avatar as your fallback avatar.
+  '/avatars/{avatarId}/impostor/enqueue':
+    parameters:
+      - $ref: ../parameters.yaml#/avatarId
+    post:
+      summary: Enqueue Impostor generation
+      tags:
+        - avatars
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}~1impostor~1enqueue/post"
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarImpostorEnqueueResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+      operationId: enqueueImpostor
+      security:
+        - authCookie: []
+      description: Enqueue Impostor generation for that avatar.
+  /avatars/impostor/queue/stats:
+    get:
+      summary: Get Impostor Queue Stats
+      tags:
+        - avatars
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1impostor~1queue~1stats/get"
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarImpostorQueueStatsResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getImpostorQueueStats
+      security:
+        - authCookie: []
+      description: Gets service stats for queued impostor.
+  '/avatars/{avatarId}/impostor':
+    parameters:
+      - $ref: ../parameters.yaml#/avatarId
+    delete:
+      summary: Delete generated Impostor
+      tags:
+        - avatars
+      x-codeSamples:
+        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}~1impostor/delete"
+      responses:
+        '200':
+          description: The Impostors generated for that avatar are deleted.
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+      operationId: deleteImpostor
+      security:
+        - authCookie: []
+      description: Delete generated Impostor for that avatar.
 tags:
   $ref: ../tags.yaml
 components:

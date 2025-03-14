@@ -1,0 +1,5 @@
+description: Returns a Service Status.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/ServiceStatus.yaml

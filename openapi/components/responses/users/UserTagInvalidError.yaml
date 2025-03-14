@@ -1,0 +1,5 @@
+description: Error response when a user attempts to add an invalid, restricted, or duplicate tag to their profile, attempts to add tags above the limit for their profile, or attempts to remove invalid, restricted, or absent tag from their profile.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml

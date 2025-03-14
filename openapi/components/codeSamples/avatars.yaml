@@ -4,6 +4,12 @@
       source: >-
         curl -X GET "https://api.vrchat.cloud/api/1/avatars/favorites?featured=true" \
              -b "auth={authCookie}"
+/avatars/licensed:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/avatars/licensed" \
+             -b "auth={authCookie}"
 /avatars:
   get:
     - lang: cURL
@@ -45,7 +51,26 @@
   put:
     - lang: cURL
       source: >-
-        curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback"
+        curl -X PUT "https://api.vrchat.cloud/api/1/avatars/{avatarId}/selectFallback" \
+             -b "auth={authCookie}"
+'/avatars/{avatarId}/impostor/enqueue':
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/avatars/{avatarId}/impostor/enqueue" \
+             -b "auth={authCookie}"
+'/avatars/{avatarId}/impostor':
+  delete:
+    - lang: cURL
+      source: >-
+        curl -X DELETE "https://api.vrchat.cloud/api/1/avatars/{avatarId}/impostor" \
+             -b "auth={authCookie}"
+'/avatars/impostor/queue/stats':
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/avatars/impostor/queue/stats" \
+             -b "auth={authCookie}"
 '/users/{userId}/avatar':
   get:
     - lang: cURL
