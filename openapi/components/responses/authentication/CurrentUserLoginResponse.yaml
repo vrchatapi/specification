@@ -2,10 +2,12 @@ description: OK
 content:
   application/json:
     schema:
-      $ref: ../../schemas/CurrentUser.yaml
+      oneOf:
+        - $ref: ../../schemas/CurrentUser.yaml
+        - $ref: ../../schemas/TwoFactorRequired.yaml
 headers:
   Set-Cookie:
     schema:
       type: string
-      example: 'auth=authcookie_00000000-0000-0000-0000-000000000000; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly'
+      example: "auth=authcookie_00000000-0000-0000-0000-000000000000; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly"
     description: Successful authentication returns an `auth` cookie.
