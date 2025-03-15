@@ -58,12 +58,6 @@ properties:
   analyticsSegment_NewUI_Salt:
     description: Unknown
     type: string
-  appName:
-    default: VrChat
-    deprecated: true
-    description: Game name
-    minLength: 1
-    type: string
   availableLanguageCodes:
     description: List of supported Languages
     type: array
@@ -96,10 +90,6 @@ properties:
       - Quest
       - XRElite
       - iOSMobile
-  buildVersionTag:
-    description: Build tag of the API server
-    minLength: 1
-    type: string
   chatboxLogBufferSeconds:
     default: 40
     description: Unknown
@@ -191,8 +181,6 @@ properties:
     $ref: ./AvatarID.yaml
   defaultStickerSet:
     type: string
-  deploymentGroup:
-    $ref: ./DeploymentGroup.yaml
   devLanguageCodes:
    type: array
    description: Unknown
@@ -417,6 +405,8 @@ properties:
     properties:
       avatar:
         $ref: './ReportCategory.yaml'
+      avatarpage:
+        $ref: './ReportCategory.yaml'
       behavior:
         $ref: './ReportCategory.yaml'
       chat:
@@ -462,6 +452,10 @@ properties:
         type: object
         properties:
           avatar:
+            type: array
+            items:
+              type: string
+          avatarpage:
             type: array
             items:
               type: string
@@ -544,6 +538,10 @@ properties:
         $ref: './ReportReason.yaml'
       cancellation:
         $ref: './ReportReason.yaml'
+      copyright:
+        $ref: './ReportReason.yaml'
+      fraud:
+        $ref: './ReportReason.yaml'
       gore:
         $ref: './ReportReason.yaml'
       hacking:
@@ -571,6 +569,8 @@ properties:
       service:
         $ref: './ReportReason.yaml'
       sexual:
+        $ref: './ReportReason.yaml'
+      technical:
         $ref: './ReportReason.yaml'
       threatening:
         $ref: './ReportReason.yaml'
@@ -612,10 +612,6 @@ properties:
     type: string
   sdkUnityVersion:
     description: Unity version supported by the SDK
-    minLength: 1
-    type: string
-  serverName:
-    description: Server name of the API server currently responding
     minLength: 1
     type: string
   stringHostUrlList:
@@ -679,6 +675,9 @@ properties:
     description: Currently used youtube-dl.exe hash in SHA1-delimited format
     minLength: 1
     type: string
+  publicKey:
+    type: string
+    description: Public key, hex encoded
   websocketMaxFriendsRefreshDelay:
     type: integer
     description: Unknown
@@ -704,11 +703,9 @@ required:
   - announcements
   - analyticsSegment_NewUI_PctOfUsers
   - analyticsSegment_NewUI_Salt
-  - appName
   - availableLanguageCodes
   - availableLanguages
   - avatarPerfLimiter
-  - buildVersionTag
   - chatboxLogBufferSeconds
   - clientApiKey
   - clientBPSCeiling
@@ -722,7 +719,6 @@ required:
   - currentTOSVersion
   - defaultAvatar
   - defaultStickerSet
-  - deploymentGroup
   - devSdkUrl
   - devSdkVersion
   - dis-countdown
@@ -770,7 +766,6 @@ required:
   - sdkDiscordUrl
   - sdkNotAllowedToPublishMessage
   - sdkUnityVersion
-  - serverName
   - stringHostUrlList
   - supportEmail
   - supportFormUrl
@@ -788,6 +783,7 @@ required:
   - whiteListedAssetUrls
   - player-url-resolver-version
   - player-url-resolver-sha1
+  - publicKey
   - websocketMaxFriendsRefreshDelay
   - websocketQuickReconnectTime
   - websocketReconnectMaxDelay
