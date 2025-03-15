@@ -8,6 +8,8 @@
   $ref: "./paths/authentication.yaml#/paths/~1auth~1exists"
 "/auth/user":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1user"
+"/auth/{userLoginPath}":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1{userLoginPath}"
 "/auth/twofactorauth/totp/verify":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify"
 "/auth/twofactorauth/otp/verify":

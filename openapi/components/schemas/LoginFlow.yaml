@@ -1,0 +1,13 @@
+title: LoginFlow
+type: object
+additionalProperties: true
+description: If 2fa is required to complete the login process, the `requiresTwoFactorAuth` property will contain the 2fa method options for the current account.
+properties:
+  displayName:
+    type: string
+  id:
+    $ref: ./UserID.yaml
+  requiresTwoFactorAuth:
+    type: array
+    items:
+      $ref: ./TwoFactorMethod.yaml
