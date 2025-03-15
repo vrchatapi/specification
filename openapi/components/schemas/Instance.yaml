@@ -25,6 +25,8 @@ properties:
     minLength: 1
     deprecated: true
     description: Always returns "unknown".
+  contentSettings:
+    type: object
   displayName:
     type: string
     nullable: true

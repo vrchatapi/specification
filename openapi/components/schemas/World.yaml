@@ -19,6 +19,8 @@ properties:
   description:
     minLength: 0
     type: string
+  defaultContentSettings:
+    type: object
   favorites:
     default: 0
     example: 12024
@@ -131,6 +133,7 @@ required:
   - recommendedCapacity
   - created_at
   - description
+  - defaultContentSettings
   - featured
   - heat
   - id

@@ -11,6 +11,8 @@ properties:
   description:
     minLength: 1
     type: string
+  defaultContentSettings:
+    type: object
   recommendedCapacity:
     example: 16
     type: integer
@@ -106,6 +108,7 @@ properties:
 required:
   - id
   - description
+  - defaultContentSettings
   - name
   - authorId
   - authorName

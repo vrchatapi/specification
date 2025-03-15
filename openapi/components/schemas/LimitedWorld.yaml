@@ -8,6 +8,8 @@ properties:
   capacity:
     example: 8
     type: integer
+  defaultContentSettings:
+    type: object
   recommendedCapacity:
     example: 16
     type: integer
@@ -72,6 +74,8 @@ properties:
   thumbnailImageUrl:
     minLength: 1
     type: string
+  storeId:
+    type: string
   unityPackages:
     description: ' '
     items:
@@ -91,6 +95,7 @@ required:
   - authorId
   - authorName
   - capacity
+  - defaultContentSettings
   - imageUrl
   - thumbnailImageUrl
   - releaseStatus
