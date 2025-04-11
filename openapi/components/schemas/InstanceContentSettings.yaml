@@ -1,4 +1,4 @@
-description: 
+description: Types of dynamic user content permitted in an insance
 title: InstanceContentSettings
 type: object
 properties:
@@ -17,4 +17,3 @@ properties:
   stickers:
     default: true
     type: boolean
-required:
