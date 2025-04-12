@@ -9,15 +9,15 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
       - uses: actions/checkout@v4
       - name: Cache node_modules
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-v20-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v16
+            ${{ runner.os }}-node-v20
       - name: Install Dependencies
         run: npm install
       - name: Run Spectral linting
@@ -30,15 +30,15 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
       - uses: actions/checkout@v4
       - name: Cache node_modules
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-v20-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v16
+            ${{ runner.os }}-node-v20
 
       - name: Bundle OpenAPI Specification 📦
         run: npm run bundle
