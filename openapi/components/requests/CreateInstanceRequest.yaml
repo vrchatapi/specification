@@ -34,6 +34,17 @@ properties:
   inviteOnly:
     type: boolean
     default: false
+  ageGate:
+    type: boolean
+    default: false
+  instancePersistenceEnabled:
+    type: boolean
+    nullable: true
+  displayName:
+    type: string
+    nullable: true
+  contentSettings:
+    $ref: ../schemas/InstanceContentSettings.yaml
 required:
   - worldId
   - type

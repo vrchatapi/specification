@@ -16,6 +16,8 @@ properties:
   created_at:
     format: date-time
     type: string
+  defaultContentSettings:
+    $ref: ./InstanceContentSettings.yaml
   description:
     minLength: 0
     type: string
