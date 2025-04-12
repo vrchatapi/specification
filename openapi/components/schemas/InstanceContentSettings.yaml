@@ -1,4 +1,4 @@
-description: Types of dynamic user content permitted in an insance
+description: Types of dynamic user content permitted in an instance
 title: InstanceContentSettings
 type: object
 properties:
