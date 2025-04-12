@@ -8,6 +8,8 @@ properties:
     format: date-time
   fileSize:
     type: integer
+  performanceRating:
+    type: string
   success:
     type: boolean
   uncompressedSize:
