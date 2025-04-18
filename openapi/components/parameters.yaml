@@ -454,3 +454,12 @@ printId:
     type: string
     example: 'prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa'
   description: Print ID.
+userLoginPath:
+  name: userLoginPath
+  in: path
+  required: true
+  schema:
+    type: string
+    enum:
+      - user
+  description: This only exists to avoid a path collision in the specification.
