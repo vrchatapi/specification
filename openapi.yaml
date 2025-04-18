@@ -4479,8 +4479,6 @@ components:
             type: string
         currentAvatar:
           $ref: '#/components/schemas/AvatarID'
-        currentAvatarAssetUrl:
-          type: string
         currentAvatarImageUrl:
           $ref: '#/components/schemas/CurrentAvatarImageUrl'
         currentAvatarThumbnailImageUrl:
@@ -4668,7 +4666,6 @@ components:
         - currentAvatarThumbnailImageUrl
         - currentAvatarTags
         - currentAvatar
-        - currentAvatarAssetUrl
         - acceptedTOSVersion
         - steamId
         - steamDetails
