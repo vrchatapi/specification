@@ -44,8 +44,6 @@ properties:
       type: string
   currentAvatar:
     $ref: ./AvatarID.yaml
-  currentAvatarAssetUrl:
-    type: string
   currentAvatarImageUrl:
     $ref: ./CurrentAvatarImageUrl.yaml
   currentAvatarThumbnailImageUrl:
@@ -234,7 +232,6 @@ required:
   - currentAvatarThumbnailImageUrl
   - currentAvatarTags
   - currentAvatar
-  - currentAvatarAssetUrl
   - acceptedTOSVersion
   - steamId
   - steamDetails
