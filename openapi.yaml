@@ -1462,6 +1462,109 @@ paths:
       security:
         - authCookie: []
       description: Get the standard performance analysis for the uploaded assets of an avatar
+  /file/image:
+    post:
+      summary: Upload gallery image, icon, emoji or sticker
+      tags:
+        - files
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/file/image" \
+                 -b "auth={authCookie}" \
+                 -F "file=@/path/to/image.png" \ 
+                 -F "tag=icon"
+      responses:
+        '200':
+          $ref: '#/components/responses/FileResponse'
+      operationId: uploadImage
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                tag:
+                  type: string
+                  description: Needs to be either icon, gallery, sticker or emoji
+                animationStyle:
+                  type: string
+                  example: bats
+                  description: Animation style for sticker, required for emoji.
+                maskTag:
+                  type: string
+                  example: square
+                  description: Mask of the sticker, optional for emoji.
+              required:
+                - file
+                - tag
+      security:
+        - authCookie: []
+      description: Upload an image, which can be an icon, gallery image, sticker or emoji
+  /icon:
+    post:
+      summary: Upload icon
+      tags:
+        - files
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/icon" \
+                 -b "auth={authCookie}" \
+                 -F "file=@/path/to/image.png"
+      responses:
+        '200':
+          $ref: '#/components/responses/FileResponse'
+      operationId: uploadIcon
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+              required:
+                - file
+      security:
+        - authCookie: []
+      description: Upload an icon
+  /gallery:
+    post:
+      summary: Upload gallery image
+      tags:
+        - files
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/gallery" \
+                 -b "auth={authCookie}" \
+                 -F "file=@/path/to/image.png"
+      responses:
+        '200':
+          $ref: '#/components/responses/FileResponse'
+      operationId: uploadGalleryImage
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+              required:
+                - file
+      security:
+        - authCookie: []
+      description: Upload a gallery image
   /auth/user/friends:
     get:
       summary: List Friends
@@ -6016,6 +6119,12 @@ components:
     File:
       description: ''
       properties:
+        animationStyle:
+          type: string
+          example: bats
+        maskTag:
+          type: string
+          example: square
         extension:
           example: .unitypackage
           minLength: 1
