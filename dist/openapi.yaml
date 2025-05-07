@@ -7404,6 +7404,26 @@ components:
       example: 12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
       title: InstanceID
       description: InstanceID can be "offline" on User profiles if you are not friends with that user and "private" if you are friends and user is in private instance.
+    InstanceContentSettings:
+      description: Types of dynamic user content permitted in an instance
+      title: InstanceContentSettings
+      type: object
+      properties:
+        drones:
+          default: true
+          type: boolean
+        emoji:
+          default: true
+          type: boolean
+        pedestals:
+          default: true
+          type: boolean
+        prints:
+          default: true
+          type: boolean
+        stickers:
+          default: true
+          type: boolean
     UdonProductId:
       example: prod_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: UdonProductId
@@ -7428,6 +7448,8 @@ components:
         created_at:
           format: date-time
           type: string
+        defaultContentSettings:
+          $ref: '#/components/schemas/InstanceContentSettings'
         description:
           minLength: 0
           type: string
@@ -8038,6 +8060,17 @@ components:
         inviteOnly:
           type: boolean
           default: false
+        ageGate:
+          type: boolean
+          default: false
+        instancePersistenceEnabled:
+          type: boolean
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        contentSettings:
+          $ref: '#/components/schemas/InstanceContentSettings'
       required:
         - worldId
         - type
@@ -8104,6 +8137,8 @@ components:
           minLength: 1
           deprecated: true
           description: Always returns "unknown".
+        contentSettings:
+          $ref: '#/components/schemas/InstanceContentSettings'
         displayName:
           type: string
           nullable: true
@@ -8216,6 +8251,7 @@ components:
         - canRequestInvite
         - capacity
         - clientNumber
+        - contentSettings
         - displayName
         - full
         - id
@@ -10105,6 +10141,8 @@ components:
         created_at:
           format: date-time
           type: string
+        defaultContentSettings:
+          $ref: '#/components/schemas/InstanceContentSettings'
         favorites:
           default: 0
           example: 12024
@@ -10269,6 +10307,8 @@ components:
         created_at:
           format: date-time
           type: string
+        defaultContentSettings:
+          $ref: '#/components/schemas/InstanceContentSettings'
         favorites:
           default: 0
           example: 12024
