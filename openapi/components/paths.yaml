@@ -108,6 +108,12 @@
   $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1security"
 "/analysis/{fileId}/{versionId}/standard":
   $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1standard"
+"/file/image":
+  $ref: "./paths/files.yaml#/paths/~1file~1image"
+"/icon":
+  $ref: "./paths/files.yaml#/paths/~1icon"
+"/gallery":
+  $ref: "./paths/files.yaml#/paths/~1gallery"
 
 # friends
 
