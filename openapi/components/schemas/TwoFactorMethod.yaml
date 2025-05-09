@@ -1,0 +1,11 @@
+title: TwoFactorMethod
+type: string
+description: A method of Two Factor Authentication required to complete the login process
+enum:
+  - totp
+  - emailOtp
+  - otp
+x-enum-varnames:
+  - time_based_otp
+  - email_otp
+  - recovery_otp
