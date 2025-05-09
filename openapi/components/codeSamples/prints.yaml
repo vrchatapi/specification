@@ -15,3 +15,18 @@
       source: >-
         curl -X DELETE "https://api.vrchat.cloud/api/1/prints/{printId}" \
              -b "auth={authCookie}"
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/prints/{printId}" \
+             -b "auth={authCookie}"
+             -F "image=@/path/to/image.png" \ 
+             -F "note={note}"
+/prints:
+  post:
+    - lang: cURL
+      source: >-
+        curl -X POST "https://api.vrchat.cloud/api/1/prints" \
+             -b "auth={authCookie}"
+             -F "image=@/path/to/image.png" \ 
+             -F "timestamp={timestamp}"

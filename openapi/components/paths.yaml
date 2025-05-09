@@ -242,6 +242,8 @@
   $ref: "./paths/prints.yaml#/paths/~1prints~1user~1{userId}"
 "/prints/{printId}":
   $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
+"/prints":
+  $ref: "./paths/prints.yaml#/paths/~1prints"
 
 # system
 
