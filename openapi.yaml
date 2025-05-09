@@ -3306,6 +3306,88 @@ paths:
       tags:
         - prints
       description: Returns a print.
+    post:
+      summary: Edit Print
+      operationId: editPrint
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                note:
+                  type: string
+                  description: The caption for the image.
+              required:
+                - image
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/prints/{printId}" \
+                 -b "auth={authCookie}"
+                 -F "image=@/path/to/image.png" \ 
+                 -F "note={note}"
+      responses:
+        '200':
+          $ref: '#/components/responses/PrintResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - prints
+      description: Edits a print.
+  /prints:
+    post:
+      summary: Upload Print
+      operationId: uploadPrint
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                timestamp:
+                  type: string
+                  format: date-time
+                  description: The time the image was captured.
+                note:
+                  type: string
+                  description: The caption for the image.
+                worldId:
+                  type: string
+                  description: The id of the world in which the image was captured.
+                worldName:
+                  type: string
+                  description: The name of the world in which the image was captured.
+              required:
+                - image
+                - timestamp
+      security:
+        - authCookie: []
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/prints" \
+                 -b "auth={authCookie}"
+                 -F "image=@/path/to/image.png" \ 
+                 -F "timestamp={timestamp}"
+      responses:
+        '200':
+          $ref: '#/components/responses/PrintResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - prints
+      description: Uploads and creates a print.
   /config:
     get:
       summary: Fetch API Config
