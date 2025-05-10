@@ -2581,6 +2581,45 @@ paths:
             schema:
               $ref: '#/components/schemas/InviteRequest'
         description: Slot number of the Invite Message to use when inviting a user.
+  /invite/{userId}/photo:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    post:
+      summary: Invite User with photo
+      tags:
+        - invite
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/invite/{userId}/photo" \
+                 -b "auth={authCookie}" \
+                 -F "image=@/path/to/image.png" \ 
+                 -F 'data={"instanceId": "wrld_ba913a96-fac4-4048-a062-9aa5db092812:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)", "messageSlot": 11}'
+      responses:
+        '200':
+          $ref: '#/components/responses/SendNotificationResponse'
+        '403':
+          $ref: '#/components/responses/InviteMustBeFriendsError'
+      operationId: inviteUserWithPhoto
+      security:
+        - authCookie: []
+      description: Sends an photo invite to a user. Returns the Notification of type `invite` that was sent.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                data:
+                  $ref: '#/components/schemas/InviteRequest'
+              required:
+                - image
+                - data
   /invite/myself/to/{worldId}:{instanceId}:
     parameters:
       - $ref: '#/components/parameters/worldId'
@@ -2635,6 +2674,44 @@ paths:
           $ref: '#/components/responses/NotificationResponse'
         '403':
           $ref: '#/components/responses/InviteMustBeFriendsError'
+  /requestInvite/{userId}/photo:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    post:
+      summary: Request Invite with photo
+      operationId: requestInviteWithPhoto
+      security:
+        - authCookie: []
+      description: Requests with photo an invite from a user. Returns the Notification of type `requestInvite` that was sent.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                data:
+                  $ref: '#/components/schemas/RequestInviteRequest'
+              required:
+                - image
+                - data
+      tags:
+        - invite
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/requestInvite/{userId}/photo" \
+                 -b "auth={authCookie}" \
+                 -F "image=@/path/to/image.png" \ 
+                 -F 'data={"messageSlot": 11}'
+      responses:
+        '200':
+          $ref: '#/components/responses/NotificationResponse'
+        '403':
+          $ref: '#/components/responses/InviteMustBeFriendsError'
   /invite/{notificationId}/response:
     parameters:
       - $ref: '#/components/parameters/notificationId'
@@ -2665,6 +2742,45 @@ paths:
             schema:
               $ref: '#/components/schemas/InviteResponse'
         description: Slot number of the Response Message to use when responding to a user.
+  /invite/{notificationId}/response/photo:
+    parameters:
+      - $ref: '#/components/parameters/notificationId'
+    post:
+      summary: Respond Invite with photo
+      tags:
+        - invite
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/invite/{notificationId}/response/photo" \
+                 -b "auth={authCookie}" \
+                 -F "image=@/path/to/image.png" \ 
+                 -F 'data={"responseSlot": 11}'
+      responses:
+        '200':
+          $ref: '#/components/responses/NotificationResponse'
+        '400':
+          $ref: '#/components/responses/InviteResponse400Error'
+      operationId: respondInviteWithPhoto
+      security:
+        - authCookie: []
+      description: Respond with photo to an invite request by sending a world invite to the requesting user. `:notificationId` is the ID of the requesting notification.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                data:
+                  $ref: '#/components/schemas/InviteResponse'
+              required:
+                - image
+                - data
   /message/{userId}/{messageType}:
     parameters:
       - $ref: '#/components/parameters/userId'
