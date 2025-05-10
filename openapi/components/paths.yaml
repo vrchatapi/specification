@@ -183,12 +183,18 @@
 
 "/invite/{userId}":
   $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}"
+"/invite/{userId}/photo":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}~1photo"
 "/invite/myself/to/{worldId}:{instanceId}":
   $ref: "./paths/invite.yaml#/paths/~1invite~1myself~1to~1{worldId}:{instanceId}"
 "/requestInvite/{userId}":
   $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}"
+"/requestInvite/{userId}/photo":
+  $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}~1photo"
 "/invite/{notificationId}/response":
   $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response"
+"/invite/{notificationId}/response/photo":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response~1photo"
 "/message/{userId}/{messageType}":
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
 "/message/{userId}/{messageType}/{slot}":
