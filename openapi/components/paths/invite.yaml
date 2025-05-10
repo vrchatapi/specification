@@ -162,6 +162,40 @@ paths:
             schema:
               $ref: ../requests/InviteRequest.yaml
         description: Slot number of the Invite Message to use when inviting a user.
+  '/invite/{userId}/photo':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      summary: Invite User with photo
+      tags:
+        - invite
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1invite~1{userId}~1photo/post"
+      responses:
+        '200':
+          $ref: ../responses/notifications/SendNotificationResponse.yaml
+        '403':
+          $ref: ../responses/invite/InviteMustBeFriendsError.yaml
+      operationId: inviteUserWithPhoto
+      security:
+        - authCookie: []
+      description: Sends an photo invite to a user. Returns the Notification of type `invite` that was sent.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                data:
+                  $ref: ../requests/InviteRequest.yaml
+              required:
+                - image
+                - data
   '/invite/myself/to/{worldId}:{instanceId}':
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -208,6 +242,40 @@ paths:
             schema:
               $ref: ../requests/InviteResponse.yaml
         description: Slot number of the Response Message to use when responding to a user.
+  '/invite/{notificationId}/response/photo':
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
+    post:
+      summary: Respond Invite with photo
+      tags:
+        - invite
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1invite~1{notificationId}~1response~1photo/post"
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        '400':
+          $ref: ../responses/invite/InviteResponse400Error.yaml
+      operationId: respondInviteWithPhoto
+      security:
+        - authCookie: []
+      description: 'Respond with photo to an invite request by sending a world invite to the requesting user. `:notificationId` is the ID of the requesting notification.'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                data:
+                  $ref: ../requests/InviteResponse.yaml
+              required:
+                - image
+                - data
   '/requestInvite/{userId}':
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -227,6 +295,39 @@ paths:
         - invite
       x-codeSamples:
         $ref: "../codeSamples/invite.yaml#/~1requestInvite~1{userId}/post"
+      responses:
+        '200':
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        '403':
+          $ref: ../responses/invite/InviteMustBeFriendsError.yaml
+  '/requestInvite/{userId}/photo':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      summary: Request Invite with photo
+      operationId: requestInviteWithPhoto
+      security:
+        - authCookie: []
+      description: Requests with photo an invite from a user. Returns the Notification of type `requestInvite` that was sent.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                data:
+                  $ref: ../requests/RequestInviteRequest.yaml
+              required:
+                - image
+                - data
+      tags:
+        - invite
+      x-codeSamples:
+        $ref: "../codeSamples/invite.yaml#/~1requestInvite~1{userId}~1photo/post"
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml
