@@ -90,6 +90,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/users/CurrentUserResponse.yaml
+        '400':
+          $ref: ../responses/users/CurrentPasswordRequiredError.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       description: Update a users information such as the email and birthday.

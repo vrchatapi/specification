@@ -1,0 +1,5 @@
+description: Returns the two factor recovery codes
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/TwoFactorRecoveryCodes.yaml

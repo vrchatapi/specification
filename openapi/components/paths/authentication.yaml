@@ -112,6 +112,22 @@ paths:
       security:
         - authCookie: []
       parameters: []
+  /auth/user/twofactorauth/otp:
+    get:
+      summary: Get 2FA Recovery codes
+      operationId: getRecoveryCodes
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1user~1twofactorauth~1otp/get"
+      responses:
+        '200':
+          $ref: ../responses/authentication/Get2FARecoveryCodesResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: Gets the OTP (One Time Password) recovery codes for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
   /auth/twofactorauth/otp/verify:
     post:
       summary: Verify 2FA code with Recovery code

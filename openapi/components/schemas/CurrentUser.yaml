@@ -42,6 +42,11 @@ properties:
     type: array  
     items:
       type: string
+  contentFilters:
+    description: These tags begin with `content_` and control content gating
+    type: array
+    items:
+      $ref: ./Tag.yaml
   currentAvatar:
     $ref: ./AvatarID.yaml
   currentAvatarImageUrl:

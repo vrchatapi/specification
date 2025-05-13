@@ -29,6 +29,13 @@
              -H "Content-Type: application/json" \
              -b "auth={authCookie}" \
              --data '{"code": "string"}'
+/auth/user/twofactorauth/otp:
+  get:
+    - lang: cURL
+      source: >-
+        curl -X GET "https://api.vrchat.cloud/api/1/auth/user/twofactorauth/otp" \
+             -H "Content-Type: application/json" \
+             -b "auth={authCookie}"
 /auth/twofactorauth/otp/verify:
   post:
     - lang: cURL
