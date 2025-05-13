@@ -244,6 +244,26 @@ paths:
       security:
         - authCookie: []
       parameters: []
+  /auth/user/twofactorauth/otp:
+    get:
+      summary: Get 2FA Recovery codes
+      operationId: getRecoveryCodes
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET "https://api.vrchat.cloud/api/1/auth/user/twofactorauth/otp" \
+                 -H "Content-Type: application/json" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/Get2FARecoveryCodesResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      description: Gets the OTP (One Time Password) recovery codes for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
   /auth/twofactorauth/otp/verify:
     post:
       summary: Verify 2FA code with Recovery code
@@ -2998,7 +3018,7 @@ paths:
       description: |-
         Close an instance or update the closedAt time when it will be closed.
 
-        You can only close an instance if the ownerId is yourself or if the instance owner is a group and you have the `group-instance-moderate` permission.
+        You can only close an instance if the ownerId is yourself or if the instance owner is a group and you have the `group-instance-manage` permission.
       responses:
         '200':
           $ref: '#/components/responses/InstanceResponse'
@@ -3807,6 +3827,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/CurrentUserResponse'
+        '400':
+          $ref: '#/components/responses/CurrentPasswordRequiredError'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       description: Update a users information such as the email and birthday.
@@ -4592,6 +4614,14 @@ components:
         - badgeImageUrl
         - badgeName
         - showcased
+    Tag:
+      description: |-
+        Tags are a way to grant various access, assign restrictions or other kinds of metadata to various to objects such as worlds, users and avatars.
+
+        System tags starting with `system_` are granted automatically by the system, while admin tags with `admin_` are granted manually. More prefixes such as `language_ ` (to indicate that a player can speak the tagged language), and `author_tag_` (provided by a world author for search and sorting) exist as well.
+      minLength: 1
+      title: Tag
+      type: string
     AvatarID:
       example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
       title: AvatarID
@@ -4605,14 +4635,6 @@ components:
       description: When profilePicOverride is not empty, use it instead.
       example: https://api.vrchat.cloud/api/1/image/file_aae83ed9-d42d-4d72-9f4b-9f1e41ed17e1/1/256
       title: CurrentAvatarThumbnailImageUrl
-      type: string
-    Tag:
-      description: |-
-        Tags are a way to grant various access, assign restrictions or other kinds of metadata to various to objects such as worlds, users and avatars.
-
-        System tags starting with `system_` are granted automatically by the system, while admin tags with `admin_` are granted manually. More prefixes such as `language_ ` (to indicate that a player can speak the tagged language), and `author_tag_` (provided by a world author for search and sorting) exist as well.
-      minLength: 1
-      title: Tag
       type: string
     DeveloperType:
       default: none
@@ -4778,6 +4800,11 @@ components:
           type: array
           items:
             type: string
+        contentFilters:
+          description: These tags begin with `content_` and control content gating
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
         currentAvatar:
           $ref: '#/components/schemas/AvatarID'
         currentAvatarImageUrl:
@@ -5004,6 +5031,26 @@ components:
           type: boolean
       required:
         - verified
+    TwoFactorRecoveryCodes:
+      title: TwoFactorRecoveryCodes
+      type: object
+      properties:
+        requiresTwoFactorAuth:
+          type: array
+          items:
+            type: string
+        otp:
+          type: array
+          items:
+            type: object
+            required:
+              - code
+              - used
+            properties:
+              code:
+                type: string
+              used:
+                type: boolean
     TwoFactorEmailCode:
       title: TwoFactorEmailCode
       type: object
@@ -10067,6 +10114,8 @@ components:
       properties:
         email:
           type: string
+        unsubscribe:
+          type: boolean
         birthday:
           type: string
           format: date
@@ -10099,6 +10148,22 @@ components:
           description: MUST be a valid VRChat /file/ url.
           example: https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1
           minLength: 0
+        contentFilters:
+          description: These tags begin with `content_` and control content gating
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        displayName:
+          description: MUST specify currentPassword as well to change display name
+          type: string
+        revertDisplayName:
+          description: MUST specify currentPassword as well to revert display name
+          type: boolean
+        password:
+          description: MUST specify currentPassword as well to change password
+          type: string
+        currentPassword:
+          type: string
     LimitedUserGroups:
       title: LimitedUserGroups
       type: object
@@ -10814,6 +10879,12 @@ components:
             type: string
             example: twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
           description: Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.
+    Get2FARecoveryCodesResponse:
+      description: Returns the two factor recovery codes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TwoFactorRecoveryCodes'
     Verify2FAEmailCodeResponse:
       description: OK
       content:
@@ -12268,6 +12339,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/User'
+    CurrentPasswordRequiredError:
+      description: Error response when a user attempts to change a property without supplying their current password.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     LimitedUserGroupListResponse:
       description: Returns a list of LimitedUserGroups objects.
       content:
