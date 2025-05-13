@@ -112,12 +112,12 @@ paths:
       security:
         - authCookie: []
       parameters: []
-  /auth/twofactorauth/otp:
+  /auth/user/twofactorauth/otp:
     get:
       summary: Get 2FA Recovery codes
       operationId: getRecoveryCodes
       x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1otp/get"
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1user~1twofactorauth~1otp/get"
       responses:
         '200':
           $ref: ../responses/authentication/Get2FARecoveryCodesResponse.yaml
