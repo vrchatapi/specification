@@ -3,6 +3,8 @@ type: object
 properties:
   email:
     type: string
+  unsubscribe:
+    type: boolean
   birthday:
     type: string
     format: date
@@ -35,3 +37,19 @@ properties:
     description: MUST be a valid VRChat /file/ url.
     example: 'https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1'
     minLength: 0
+  contentFilters:
+    description: These tags begin with `content_` and control content gating
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  displayName:
+    description: MUST specify currentPassword as well to change display name
+    type: string
+  revertDisplayName:
+    description: MUST specify currentPassword as well to revert display name
+    type: boolean
+  password:
+    description: MUST specify currentPassword as well to change password
+    type: string
+  currentPassword:
+    type: string

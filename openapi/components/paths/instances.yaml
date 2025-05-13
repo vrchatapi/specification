@@ -71,7 +71,7 @@ paths:
       description: |-
         Close an instance or update the closedAt time when it will be closed.
 
-        You can only close an instance if the ownerId is yourself or if the instance owner is a group and you have the `group-instance-moderate` permission.
+        You can only close an instance if the ownerId is yourself or if the instance owner is a group and you have the `group-instance-manage` permission.
       responses:
         '200':
           $ref: ../responses/instances/InstanceResponse.yaml
