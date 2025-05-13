@@ -2754,7 +2754,11 @@ paths:
       operationId: respondInvite
       security:
         - authCookie: []
-      description: Respond to an invite request by sending a world invite to the requesting user. `:notificationId` is the ID of the requesting notification.
+      description: |-
+        Respond to an invite or invite request without accepting it. `:notificationId` is the ID of the requesting notification.
+
+        In case the notification being replied to is an invite, the `responseSlot` refers to a response message from the the `message` collection.
+        In case the notification is an invite request, it will refer to one from the `requestResponse` collection instead.
       requestBody:
         required: true
         content:
@@ -2784,7 +2788,11 @@ paths:
       operationId: respondInviteWithPhoto
       security:
         - authCookie: []
-      description: Respond with photo to an invite request by sending a world invite to the requesting user. `:notificationId` is the ID of the requesting notification.
+      description: |-
+        Respond with photo to an invite or invite request without accepting it. `:notificationId` is the ID of the requesting notification.
+
+        In case the notification being replied to is an invite, the `responseSlot` refers to a response message from the the `message` collection.
+        In case the notification is an invite request, it will refer to one from the `requestResponse` collection instead.'
       requestBody:
         required: true
         content:
