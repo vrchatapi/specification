@@ -1061,6 +1061,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/userIdAdmin'
         - schema:
             type: string
           in: query
@@ -1733,6 +1734,20 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/GroupResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      security:
+        - authCookie: []
+  /groups/roleTemplates:
+    get:
+      summary: Get Group Role Templates
+      description: Obtain predefined templates for group roles
+      operationId: getGroupRoleTemplates
+      tags:
+        - groups
+      responses:
+        '200':
+          $ref: '#/components/responses/GroupRoleTemplatesResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       security:
@@ -7265,6 +7280,37 @@ components:
           nullable: true
           items:
             $ref: '#/components/schemas/GroupRole'
+    GroupRoleTemplateValues:
+      title: GroupRoleTemplateValues
+      type: object
+      properties:
+        basePermissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupPermissions'
+        description:
+          type: string
+        name:
+          type: string
+        roles:
+          type: object
+          properties:
+            description:
+              type: string
+            name:
+              type: string
+            basePermissions:
+              type: array
+              items:
+                $ref: '#/components/schemas/GroupPermissions'
+            isAddedOnJoin:
+              type: boolean
+              default: false
+      required:
+        - basePermissions
+        - description
+        - name
+        - roles
     UpdateGroupRequest:
       title: UpdateGroupRequest
       type: object
@@ -11508,6 +11554,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Group'
+    GroupRoleTemplatesResponse:
+      description: Returns a dictionary of GroupRoleTemplate objects.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/GroupRoleTemplateValues'
     GroupNotFoundError:
       description: Error response when trying to perform operations on a non-existing group.
       content:
