@@ -321,7 +321,7 @@ paths:
         $ref: "../codeSamples/authentication.yaml#/~1auth~1verifyLoginPlace/get"
       responses:
         '302':
-          $ref: ../responses/authentication/ConfirmLoginResponse.yaml
+          $ref: ../responses/authentication/VerifyLoginPlaceResponse.yaml
       tags:
         - authentication
       description: Verifies a login attempt for a user
