@@ -8,8 +8,14 @@
   $ref: "./paths/authentication.yaml#/paths/~1auth~1exists"
 "/auth/user":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1user"
+"/auth/twofactorauth":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth"
 "/auth/twofactorauth/totp/verify":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify"
+"/auth/twofactorauth/totp/pending":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1pending"
+"/auth/twofactorauth/totp/pending/verify":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1pending~1verify"
 "/auth/user/twofactorauth/otp":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1twofactorauth~1otp"
 "/auth/twofactorauth/otp/verify":
@@ -22,6 +28,14 @@
   $ref: "./paths/authentication.yaml#/paths/~1logout"
 "/users/{userId}/delete":
   $ref: "./paths/authentication.yaml#/paths/~1users~1{userId}~1delete"
+"/auth/register":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1register"
+"/auth/user/resendEmail":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1resendEmail"
+"/auth/confirmEmail":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1confirmEmail"
+"/auth/verifyLoginPlace":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1verifyLoginPlace"
 
 # avatars
 

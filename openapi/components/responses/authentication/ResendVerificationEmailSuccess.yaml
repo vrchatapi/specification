@@ -1,0 +1,11 @@
+description: OK
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Success.yaml
+    examples:
+      Resend Verification Email Success:
+        value:
+          success:
+            message: Verification Email Sent!
+            status_code: 200

@@ -112,6 +112,63 @@ paths:
       security:
         - authCookie: []
       parameters: []
+  /auth/twofactorauth/totp/pending:
+    post:
+      summary: Enable time-based 2FA codes
+      operationId: enable2FA
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1pending/post"
+      responses:
+        '200':
+          $ref: ../responses/authentication/Pending2FAResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: Begins the sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
+    delete:
+      summary: Cancel pending enabling of time-based 2FA codes
+      operationId: cancelPending2FA
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1pending/delete"
+      responses:
+        '200':
+          $ref: ../responses/authentication/Disable2FAResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: Cancels the sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
+  /auth/twofactorauth/totp/pending/verify:
+    post:
+      summary: Verify Pending 2FA code
+      operationId: verifyPending2FA
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1pending~1verify/post"
+      responses:
+        '200':
+          $ref: ../responses/authentication/Verify2FAResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/TwoFactorAuthCode.yaml
+            examples: {}
+      description: Finishes sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
   /auth/user/twofactorauth/otp:
     get:
       summary: Get 2FA Recovery codes
@@ -175,6 +232,22 @@ paths:
       security:
         - authCookie: [ ]
       parameters: [ ]
+  '/auth/twofactorauth':
+    delete:
+      summary: Disable 2FA
+      operationId: disable2FA
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth/delete"
+      responses:
+        '200':
+          $ref: ../responses/authentication/Disable2FAResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - authentication
+      description: Disables 2FA for the currently logged in account
+      security:
+        - authCookie: []
   '/users/{userId}/delete':
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -198,6 +271,76 @@ paths:
         **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
       security:
         - authCookie: []
+  /auth/register:
+    post:
+      summary: Register User Account
+      description: |-
+        ~~Register a new user account.~~
+        
+        **DEPRECATED:** Automated creation of accounts has no legitimate public third-party use case, and would be in violation of ToS §13.2:
+        *By using the Platform, you agree not to: i. [...] use the Platform in a manner inconsistent with individual human usage*
+        This endpoint is documented in the interest of completeness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/RegisterUserAccountRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: registerUserAccount
+      parameters: []
+      tags:
+        - authentication
+      deprecated: true
+  /auth/user/resendEmail:
+    post:
+      summary: Resend Email Confirmation
+      description: Requests a resend of pending email address confirmation email
+      responses:
+        '200':
+          $ref: ../responses/authentication/ResendVerificationEmailSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: resendEmailConfirmation
+      parameters: []
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+  '/auth/confirmEmail':
+    get:
+      summary: Confirm Email
+      operationId: confirmEmail
+      parameters:
+        - $ref: ../parameters.yaml#/confirmEmailUserId
+        - $ref: ../parameters.yaml#/confirmEmailToken
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1confirmEmail/get"
+      responses:
+        '302':
+          $ref: ../responses/authentication/ConfirmEmailResponse.yaml
+      tags:
+        - authentication
+      description: Confirms the email address for a user
+  '/auth/verifyLoginPlace':
+    get:
+      summary: Verify Login Place
+      operationId: verifyLoginPlace
+      parameters:
+        - $ref: ../parameters.yaml#/userIdQuery
+        - $ref: ../parameters.yaml#/verifyLoginPlaceToken
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1verifyLoginPlace/get"
+      responses:
+        '302':
+          $ref: ../responses/authentication/VerifyLoginPlaceResponse.yaml
+      tags:
+        - authentication
+      description: Verifies a login attempt for a user
 tags:
   $ref: ../tags.yaml
 components:
