@@ -167,7 +167,7 @@ paths:
         - authentication
       x-codeSamples:
         - lang: cURL
-          source: 'curl -X GET "https://api.vrchat.cloud/api/1/auth/exists?email={string}" '
+          source: curl -X GET "https://api.vrchat.cloud/api/1/auth/exists?email={string}"
       responses:
         '200':
           $ref: '#/components/responses/UserExistsResponse'
@@ -215,6 +215,25 @@ paths:
         - authHeader: []
           twoFactorAuthCookie: []
         - authCookie: []
+  /auth/twofactorauth:
+    delete:
+      summary: Disable 2FA
+      operationId: disable2FA
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/auth/twofactorauth" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/Disable2FAResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - authentication
+      description: Disables 2FA for the currently logged in account
+      security:
+        - authCookie: []
   /auth/twofactorauth/totp/verify:
     post:
       summary: Verify 2FA code
@@ -239,6 +258,74 @@ paths:
               $ref: '#/components/schemas/TwoFactorAuthCode'
             examples: {}
       description: Finishes the login sequence with a normal 2FA-generated code for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
+  /auth/twofactorauth/totp/pending:
+    post:
+      summary: Enable time-based 2FA codes
+      operationId: enable2FA
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/totp/pending" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/Pending2FAResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      description: Begins the sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
+    delete:
+      summary: Cancel pending enabling of time-based 2FA codes
+      operationId: cancelPending2FA
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X DELETE "https://api.vrchat.cloud/api/1/auth/twofactorauth/totp/pending" \
+                 -b "auth={authCookie}"
+      responses:
+        '200':
+          $ref: '#/components/responses/Disable2FAResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      description: Cancels the sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
+  /auth/twofactorauth/totp/pending/verify:
+    post:
+      summary: Verify Pending 2FA code
+      operationId: verifyPending2FA
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/totp/pending/verify" \
+                 -H "Content-Type: application/json" \
+                 -b "auth={authCookie}" \
+                 --data '{"code": "string"}'
+      responses:
+        '200':
+          $ref: '#/components/responses/Verify2FAResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorAuthCode'
+            examples: {}
+      description: Finishes sequence for enabling time-based 2FA.
       tags:
         - authentication
       security:
@@ -386,6 +473,78 @@ paths:
         **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
       security:
         - authCookie: []
+  /auth/register:
+    post:
+      summary: Register User Account
+      description: |-
+        ~~Register a new user account.~~
+
+        **DEPRECATED:** Automated creation of accounts has no legitimate public third-party use case, and would be in violation of ToS §13.2:
+        *By using the Platform, you agree not to: i. [...] use the Platform in a manner inconsistent with individual human usage*
+        This endpoint is documented in the interest of completeness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserAccountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CurrentUserLoginResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: registerUserAccount
+      parameters: []
+      tags:
+        - authentication
+      deprecated: true
+  /auth/user/resendEmail:
+    post:
+      summary: Resend Email Confirmation
+      description: Requests a resend of pending email address confirmation email
+      responses:
+        '200':
+          $ref: '#/components/responses/ResendVerificationEmailSuccess'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: resendEmailConfirmation
+      parameters: []
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+  /auth/confirmEmail:
+    get:
+      summary: Confirm Email
+      operationId: confirmEmail
+      parameters:
+        - $ref: '#/components/parameters/confirmEmailUserId'
+        - $ref: '#/components/parameters/confirmEmailToken'
+      x-codeSamples:
+        - lang: cURL
+          source: curl -X GET "https://api.vrchat.cloud/api/1/auth/confirmEmail?id={userId}&verify_email={token}"
+      responses:
+        '302':
+          $ref: '#/components/responses/ConfirmEmailResponse'
+      tags:
+        - authentication
+      description: Confirms the email address for a user
+  /auth/verifyLoginPlace:
+    get:
+      summary: Verify Login Place
+      operationId: verifyLoginPlace
+      parameters:
+        - $ref: '#/components/parameters/userIdQuery'
+        - $ref: '#/components/parameters/verifyLoginPlaceToken'
+      x-codeSamples:
+        - lang: cURL
+          source: curl -X GET "https://api.vrchat.cloud/api/1/auth/verifyLoginPlace?userId={userId}&token={token}"
+      responses:
+        '302':
+          $ref: '#/components/responses/VerifyLoginPlaceResponse'
+      tags:
+        - authentication
+      description: Verifies a login attempt for a user
   /users/{userId}/avatar:
     get:
       summary: Get Own Avatar
@@ -4811,6 +4970,9 @@ components:
           $ref: '#/components/schemas/AgeVerified'
         allowAvatarCopying:
           type: boolean
+        authToken:
+          description: The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)
+          type: string
         badges:
           description: ' '
           type: array
@@ -5038,6 +5200,14 @@ components:
         - isAdult
         - ageVerificationStatus
         - ageVerified
+    Disable2FAResult:
+      title: Disable2FAResult
+      type: object
+      properties:
+        removed:
+          type: boolean
+      required:
+        - removed
     TwoFactorAuthCode:
       title: TwoFactorAuthCode
       type: object
@@ -5052,8 +5222,22 @@ components:
       properties:
         verified:
           type: boolean
+        enabled:
+          type: boolean
+          default: true
       required:
         - verified
+    Pending2FAResult:
+      title: Pending2FAResult
+      type: object
+      properties:
+        qrCodeDataUrl:
+          type: string
+        secret:
+          type: string
+      required:
+        - qrCodeDataUrl
+        - secret
     TwoFactorRecoveryCodes:
       title: TwoFactorRecoveryCodes
       type: object
@@ -5108,6 +5292,50 @@ components:
           $ref: '#/components/schemas/Response'
       title: Success
       type: object
+    RegisterUserAccountRequest:
+      title: RegisterUserAccountRequest
+      type: object
+      properties:
+        username:
+          description: Display Name / Username (Username is a sanitized version)
+          type: string
+          minLength: 4
+          maxLength: 15
+        password:
+          description: Password
+          type: string
+          minLength: 8
+        email:
+          description: Email address
+          type: string
+        year:
+          description: Birth year
+          type: string
+        month:
+          description: Birth month of year
+          type: string
+        day:
+          description: Birth day of month
+          type: string
+        captchaCode:
+          description: Captcha code
+          type: string
+        subscribe:
+          description: Whether to recieve promotional emails
+          type: boolean
+        acceptedTOSVersion:
+          description: The most recent version of the TOS
+          type: integer
+      required:
+        - username
+        - password
+        - email
+        - year
+        - month
+        - day
+        - captchaCode
+        - subscribe
+        - acceptedTOSVersion
     ReleaseStatus:
       type: string
       default: public
@@ -10921,6 +11149,12 @@ components:
                 error:
                   message: '"Missing Credentials"'
                   status_code: 401
+    Disable2FAResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Disable2FAResult'
     Verify2FAResponse:
       description: OK
       content:
@@ -10933,6 +11167,12 @@ components:
             type: string
             example: twoFactorAuth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx; Expires=Tue, 01 Jan 2030 00:00:00 GMT; Path=/; HttpOnly
           description: Provides a `twoFactorAuth` cookie, which can be used to bypasses the 2FA requirement for future logins on the same device.
+    Pending2FAResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pending2FAResult'
     Get2FARecoveryCodesResponse:
       description: Returns the two factor recovery codes
       content:
@@ -10991,6 +11231,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CurrentUser'
+    ResendVerificationEmailSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Resend Verification Email Success:
+              value:
+                success:
+                  message: Verification Email Sent!
+                  status_code: 200
+    ConfirmEmailResponse:
+      description: OK
+    VerifyLoginPlaceResponse:
+      description: OK
     AvatarResponse:
       description: Returns a single Avatar object.
       content:
@@ -12595,6 +12851,36 @@ components:
       schema:
         type: string
       description: Must be a valid user ID.
+    confirmEmailUserId:
+      name: id
+      in: query
+      required: true
+      schema:
+        type: string
+        example: usr_00000000-0000-0000-0000-000000000000
+      description: Target user for which to verify email.
+    confirmEmailToken:
+      name: verify_email
+      in: query
+      required: true
+      schema:
+        type: string
+        example: eml_00000000-0000-0000-0000-000000000000
+      description: Token to verify email.
+    userIdQuery:
+      name: userId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by UserID.
+    verifyLoginPlaceToken:
+      name: token
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Token to verify login attempt.
     featured:
       name: featured
       in: query
@@ -12609,13 +12895,6 @@ components:
       schema:
         $ref: '#/components/schemas/SortOption'
       description: The sort order of the results.
-    userIdQuery:
-      name: userId
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Filter by UserID.
     number:
       name: 'n'
       in: query
