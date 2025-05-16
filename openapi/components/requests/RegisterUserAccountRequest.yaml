@@ -1,0 +1,43 @@
+title: RegisterUserAccountRequest
+type: object
+properties:
+  username:
+    description: Display Name / Username (Username is a sanitized version)
+    type: string
+    minLength: 4
+    maxLength: 15
+  password:
+    description: Password
+    type: string
+    minLength: 8
+  email:
+    description: Email address
+    type: string
+  year:
+    description: Birth year
+    type: string
+  month:
+    description: Birth month of year
+    type: string
+  day:
+    description: Birth day of month
+    type: string
+  captchaCode:
+    description: Captcha code
+    type: string
+  subscribe:
+    description: Whether to recieve promotional emails
+    type: boolean
+  acceptedTOSVersion:
+    description: The most recent version of the TOS
+    type: integer
+required:
+  - username
+  - password
+  - email
+  - year
+  - month
+  - day
+  - captchaCode
+  - subscribe
+  - acceptedTOSVersion

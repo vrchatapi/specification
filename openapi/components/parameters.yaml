@@ -454,3 +454,26 @@ printId:
     type: string
     example: 'prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa'
   description: Print ID.
+confirmEmailUserId:
+  name: id
+  in: query
+  required: true
+  schema:
+    type: string
+    example: 'usr_00000000-0000-0000-0000-000000000000'
+  description: 'Target user for which to verify email.'
+confirmEmailToken:
+  name: verify_email
+  in: query
+  required: true
+  schema:
+    type: string
+    example: 'eml_00000000-0000-0000-0000-000000000000'
+  description: 'Token to verify email.'
+verifyLoginPlaceToken:
+  name: token
+  in: query
+  required: true
+  schema:
+    type: string
+  description: 'Token to verify login attempt.'

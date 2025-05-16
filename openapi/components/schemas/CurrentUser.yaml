@@ -30,6 +30,9 @@ properties:
     $ref: ./AgeVerified.yaml
   allowAvatarCopying:
     type: boolean
+  authToken:
+    description: The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)
+    type: string
   badges:
     description: ' '
     type: array

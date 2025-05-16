@@ -1,0 +1,10 @@
+title: Pending2FAResult
+type: object
+properties:
+  qrCodeDataUrl:
+    type: string
+  secret:
+    type: string
+required:
+  - qrCodeDataUrl
+  - secret
