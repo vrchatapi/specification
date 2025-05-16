@@ -108,6 +108,7 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/userIdAdmin
         - schema:
             type: string
           in: query
