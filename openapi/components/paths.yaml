@@ -132,6 +132,8 @@
 
 "/groups":
   $ref: "./paths/groups.yaml#/paths/~1groups"
+"/groups/roleTemplates":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1roleTemplates"
 "/groups/{groupId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
 "/groups/{groupId}/announcement":
