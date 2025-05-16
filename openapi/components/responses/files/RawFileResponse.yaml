@@ -1,1 +1,6 @@
 description: Raw file
+content:
+  image/*:
+    schema:
+      type: string
+      format: binary
