@@ -30,8 +30,8 @@
   $ref: "./paths/authentication.yaml#/paths/~1users~1{userId}~1delete"
 "/auth/register":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1register"
-"/auth/resendEmail":
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1resendEmail"
+"/auth/user/resendEmail":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1resendEmail"
 "/auth/confirmEmail":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1confirmEmail"
 "/auth/verifyLoginPlace":

@@ -129,6 +129,22 @@ paths:
       security:
         - authCookie: []
       parameters: []
+    delete:
+      summary: Cancel pending enabling of time-based 2FA codes
+      operationId: cancelPending2FA
+      x-codeSamples:
+        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1pending/delete"
+      responses:
+        '200':
+          $ref: ../responses/authentication/Disable2FAResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: Cancels the sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
   /auth/twofactorauth/totp/pending/verify:
     post:
       summary: Verify Pending 2FA code
@@ -258,7 +274,12 @@ paths:
   /auth/register:
     post:
       summary: Register User Account
-      description: Verify whether the currently provided Auth Token is valid.
+      description: |-
+        ~~Register a new user account.~~
+        
+        **DEPRECATED:** Automated creation of accounts has no legitimate public third-party use case, and would be in violation of ToS §13.2:
+        *By using the Platform, you agree not to: i. [...] use the Platform in a manner inconsistent with individual human usage*
+        This endpoint is documented in the interest of completeness
       requestBody:
         required: true
         content:
@@ -274,16 +295,11 @@ paths:
       parameters: []
       tags:
         - authentication
-  /auth/resendEmail:
+      deprecated: true
+  /auth/user/resendEmail:
     post:
       summary: Resend Email Confirmation
-      description: Verify whether the currently provided Auth Token is valid.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/ResendEmailConfirmationRequest.yaml
+      description: Requests a resend of pending email address confirmation email
       responses:
         '200':
           $ref: ../responses/authentication/ResendVerificationEmailSuccess.yaml

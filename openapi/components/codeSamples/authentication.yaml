@@ -28,13 +28,11 @@
         curl -X POST "https://api.vrchat.cloud/api/1/auth/register" \
              -H "Content-Type: application/json" \
              --data '{"username": "{userAndDisplayName}", "password": "{password}", "email": "{emailAddress}", "year": "{birthYear}", "month": "{birthMonth}", "day": "{birthDay}", "captchaCode": "{captchaCode}", "subscribe": true, "acceptedTOSVersion": 10}'
-/auth/resendEmail:
+/auth/user/resendEmail:
   post:
     - lang: cURL
       source: >-
-        curl -X POST "https://api.vrchat.cloud/api/1/auth/resendEmail" \
-             -H "Content-Type: application/json" \
-             --data '{}'
+        curl -X POST "https://api.vrchat.cloud/api/1/auth/user/resendEmail"
 /auth/confirmEmail:
   get:
     - lang: cURL
@@ -64,6 +62,11 @@
     - lang: cURL
       source: >-
         curl -X POST "https://api.vrchat.cloud/api/1/auth/twofactorauth/totp/pending" \
+             -b "auth={authCookie}"
+  delete:
+    - lang: cURL
+      source: >-
+        curl -X DELETE "https://api.vrchat.cloud/api/1/auth/twofactorauth/totp/pending" \
              -b "auth={authCookie}"
 /auth/twofactorauth/totp/pending/verify:
   post:
