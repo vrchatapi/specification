@@ -320,14 +320,10 @@ paths:
                   description: Needs to be either icon, gallery, sticker, emoji, or emojianimated
                 frames:
                   type: integer
-                  minValue: 2
-                  maxValue: 64
-                  description: Required for emojianimated. Total number of frames to be animated
+                  description: Required for emojianimated. Total number of frames to be animated (2-64)
                 framesOverTime:
                   type: integer
-                  minValue: 1
-                  maxValue: 64
-                  description: Required for emojianimated. Animation frames per second
+                  description: Required for emojianimated. Animation frames per second (1-64)
                 animationStyle:
                   type: string
                   example: bats
