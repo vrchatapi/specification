@@ -92,6 +92,8 @@ properties:
     type: string
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
+  storeId:
+    $ref: ./StoreID.yaml
   tags:
     description: ' '
     type: array

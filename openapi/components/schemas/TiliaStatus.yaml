@@ -4,5 +4,13 @@ title: TiliaStatus
 properties:
   economyOnline:
     type: boolean
+  economyState:
+    type: integer
+  plannedOfflineWindowStart:
+    type: string
+    format: date-time
+  plannedOfflineWindowEnd:
+    type: string
+    format: date-time
 required:
   - economyOnline

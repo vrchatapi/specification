@@ -33,6 +33,9 @@ properties:
     type: string
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
+  searchable:
+    type: boolean
+    default: false
   styles:
     type: object
     properties:

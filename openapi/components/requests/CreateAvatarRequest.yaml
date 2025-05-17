@@ -3,6 +3,14 @@ type: object
 properties:
   assetUrl:
     type: string
+  assetVersion:
+    type: string
+  platform:
+    $ref: ../schemas/Platform.yaml
+  created_at:
+    $ref: ../schemas/LocalDateTime.yaml
+  updated_at:
+    $ref: ../schemas/LocalDateTime.yaml
   id:
     $ref: ../schemas/AvatarID.yaml
   name:
@@ -17,6 +25,9 @@ properties:
     items:
       $ref: ../schemas/Tag.yaml
   imageUrl:
+    type: string
+    minLength: 1
+  thumbnailImageUrl:
     type: string
     minLength: 1
   releaseStatus:
