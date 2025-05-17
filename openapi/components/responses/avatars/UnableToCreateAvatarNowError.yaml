@@ -1,0 +1,11 @@
+description: Error response due to missing permissions.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml
+    examples:
+      Unable To Create Avatar Now Example:
+        value:
+          error:
+            message: "You can't create an avatar right now"
+            status_code: 400
