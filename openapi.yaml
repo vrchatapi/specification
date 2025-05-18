@@ -621,6 +621,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/AvatarResponse'
+        '400':
+          $ref: '#/components/responses/UnableToCreateAvatarNowError'
         '401':
           $ref: '#/components/responses/FeaturedSetNotAdminError'
       tags:
@@ -1670,7 +1672,13 @@ paths:
                   description: The binary blob of the png file.
                 tag:
                   type: string
-                  description: Needs to be either icon, gallery, sticker or emoji
+                  description: Needs to be either icon, gallery, sticker, emoji, or emojianimated
+                frames:
+                  type: integer
+                  description: Required for emojianimated. Total number of frames to be animated (2-64)
+                framesOverTime:
+                  type: integer
+                  description: Required for emojianimated. Animation frames per second (1-64)
                 animationStyle:
                   type: string
                   example: bats
@@ -5459,6 +5467,9 @@ components:
           type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
+        searchable:
+          type: boolean
+          default: false
         styles:
           type: object
           properties:
@@ -5555,12 +5566,25 @@ components:
         - ascending
         - descending
       example: descending
+    LocalDateTime:
+      title: LocalDateTime
+      type: string
+      description: A date and time of the pattern `M/d/yyyy h:mm:ss tt` (see C Sharp `System.DateTime`)
+      example: 12/12/2021 1:23:43 AM
     CreateAvatarRequest:
       title: CreateAvatarRequest
       type: object
       properties:
         assetUrl:
           type: string
+        assetVersion:
+          type: string
+        platform:
+          $ref: '#/components/schemas/Platform'
+        created_at:
+          $ref: '#/components/schemas/LocalDateTime'
+        updated_at:
+          $ref: '#/components/schemas/LocalDateTime'
         id:
           $ref: '#/components/schemas/AvatarID'
         name:
@@ -5575,6 +5599,9 @@ components:
           items:
             $ref: '#/components/schemas/Tag'
         imageUrl:
+          type: string
+          minLength: 1
+        thumbnailImageUrl:
           type: string
           minLength: 1
         releaseStatus:
@@ -6345,6 +6372,14 @@ components:
       properties:
         economyOnline:
           type: boolean
+        economyState:
+          type: integer
+        plannedOfflineWindowStart:
+          type: string
+          format: date-time
+        plannedOfflineWindowEnd:
+          type: string
+          format: date-time
       required:
         - economyOnline
     TiliaTOS:
@@ -7951,6 +7986,10 @@ components:
         stickers:
           default: true
           type: boolean
+    StoreID:
+      example: esto_713b247d-2b5d-41a0-bba3-50db28dc1498
+      title: StoreID
+      type: string
     UdonProductId:
       example: prod_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: UdonProductId
@@ -8051,6 +8090,8 @@ components:
           type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
+        storeId:
+          $ref: '#/components/schemas/StoreID'
         tags:
           description: ' '
           type: array
@@ -10738,6 +10779,8 @@ components:
           type: string
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
+        storeId:
+          $ref: '#/components/schemas/StoreID'
         tags:
           description: ' '
           items:
@@ -11273,6 +11316,18 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Avatar'
+    UnableToCreateAvatarNowError:
+      description: Error response due to missing permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unable To Create Avatar Now Example:
+              value:
+                error:
+                  message: You can't create an avatar right now
+                  status_code: 400
     FeaturedSetNotAdminError:
       description: Error response when set featured to true without being an admin.
       content:
