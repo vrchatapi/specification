@@ -317,7 +317,13 @@ paths:
                   description: The binary blob of the png file.
                 tag:
                   type: string
-                  description: Needs to be either icon, gallery, sticker or emoji
+                  description: Needs to be either icon, gallery, sticker, emoji, or emojianimated
+                frames:
+                  type: integer
+                  description: Required for emojianimated. Total number of frames to be animated (2-64)
+                framesOverTime:
+                  type: integer
+                  description: Required for emojianimated. Animation frames per second (1-64)
                 animationStyle:
                   type: string
                   example: bats

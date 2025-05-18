@@ -122,6 +122,8 @@ paths:
       responses:
         '200':
           $ref: ../responses/avatars/AvatarResponse.yaml
+        '400':
+          $ref: ../responses/avatars/UnableToCreateAvatarNowError.yaml
         '401':
           $ref: ../responses/FeaturedSetNotAdminError.yaml
       tags:
