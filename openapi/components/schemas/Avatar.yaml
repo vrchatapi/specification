@@ -60,8 +60,6 @@ properties:
           type: number
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
-  searchable:
-    type: boolean
   styles:
     type: object
     properties:
@@ -116,7 +114,6 @@ required:
   - imageUrl
   - name
   - releaseStatus
-  - searchable
   - styles
   - tags
   - thumbnailImageUrl
