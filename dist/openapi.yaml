@@ -11654,6 +11654,11 @@ components:
                   status_code: 404
     RawFileResponse:
       description: Raw file
+      content:
+        image/*:
+          schema:
+            type: string
+            format: binary
     FileVersionDeleteInitialError:
       description: Error response when trying to delete the initial version of a file. Delete the main File object instead.
       content:
