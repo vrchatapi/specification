@@ -26,7 +26,7 @@ properties:
     default: false
     type: boolean
   highestPrice:
-    type: number
+    type: integer
   id:
     $ref: ./AvatarID.yaml
   imageUrl:
@@ -35,7 +35,7 @@ properties:
   lock:
     type: boolean
   lowestPrice:
-    type: number
+    type: integer
   name:
     minLength: 1
     type: string
@@ -57,7 +57,7 @@ properties:
         listingType:
           type: string
         priceTokens:
-          type: number
+          type: integer
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   styles:
