@@ -5434,13 +5434,15 @@ components:
     Avatar:
       description: ''
       properties:
+        acknowledgements:
+          type: string
         assetUrl:
-          description: Not present from general serach `/avatars`, only on specific requests `/avatars/{avatarId}`.
+          description: Not present from general search `/avatars`, only on specific requests `/avatars/{avatarId}`.
           minLength: 1
           type: string
         assetUrlObject:
           description: |-
-            Not present from general serach `/avatars`, only on specific requests `/avatars/{avatarId}`.
+            Not present from general search `/avatars`, only on specific requests `/avatars/{avatarId}`.
             **Deprecation:** `Object` has unknown usage/fields, and is always empty. Use normal `Url` field instead.
           type: object
         authorId:
@@ -5457,14 +5459,39 @@ components:
         featured:
           default: false
           type: boolean
+        highestPrice:
+          type: integer
         id:
           $ref: '#/components/schemas/AvatarID'
         imageUrl:
           minLength: 1
           type: string
+        lock:
+          type: boolean
+        lowestPrice:
+          type: integer
         name:
           minLength: 1
           type: string
+        productId:
+          type: string
+        publishedListings:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+              displayName:
+                type: string
+              imageId:
+                type: string
+              listingId:
+                type: string
+              listingType:
+                type: string
+              priceTokens:
+                type: integer
         releaseStatus:
           $ref: '#/components/schemas/ReleaseStatus'
         searchable:
@@ -6956,6 +6983,8 @@ components:
         created_at:
           type: string
           format: date-time
+        encryptionKey:
+          type: string
         fileSize:
           type: integer
         performanceRating:
