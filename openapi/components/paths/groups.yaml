@@ -880,6 +880,39 @@ paths:
           $ref: ../responses/groups/GroupNotMemberError.yaml
       security:
         - authCookie: []
+  '/groups/{groupId}/representation':
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    put:
+      summary: Update Group Representation
+      description: |-
+        Updates whether the user is representing the group.
+
+        When `isRepresenting` is set to `true`, this flag will be set to `false` for all other groups
+      operationId: updateGroupRepresentation
+      tags:
+        - groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isRepresenting:
+                  type: boolean
+                  description: Whether the user is representing the group.
+              required:
+                - isRepresenting
+      responses:
+        '200':
+          $ref: ../responses/groups/UpdateGroupRepresentationSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/groups/GroupNotMemberError.yaml
+      security:
+        - authCookie: []
   '/groups/{groupId}/instances':
     parameters:
       - $ref: ../parameters.yaml#/groupId

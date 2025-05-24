@@ -170,6 +170,8 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1posts"
 "/groups/{groupId}/posts/{notificationId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1posts~1{notificationId}"
+"/groups/{groupId}/representation":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1representation"
 "/groups/{groupId}/requests":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests"
 "/groups/{groupId}/requests/{userId}":
