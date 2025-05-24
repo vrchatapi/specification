@@ -1,0 +1,11 @@
+description: Successful response after updating group representation.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Success.yaml
+    examples:
+      Updated Group Representation:
+        value:
+          success:
+            message: Group representation updated!
+            status_code: 200
