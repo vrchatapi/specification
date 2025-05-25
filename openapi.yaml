@@ -2607,6 +2607,39 @@ paths:
           $ref: '#/components/responses/GroupPostResponseSuccess'
       security:
         - authCookie: []
+  /groups/{groupId}/representation:
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+    put:
+      summary: Update Group Representation
+      description: |-
+        Updates whether the user is representing the group.
+
+        When `isRepresenting` is set to `true`, this flag will be set to `false` for all other groups
+      operationId: updateGroupRepresentation
+      tags:
+        - groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isRepresenting:
+                  type: boolean
+                  description: Whether the user is representing the group.
+              required:
+                - isRepresenting
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateGroupRepresentationSuccess'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/GroupNotMemberError'
+      security:
+        - authCookie: []
   /groups/{groupId}/requests:
     parameters:
       - $ref: '#/components/parameters/groupId'
@@ -12187,6 +12220,18 @@ components:
               value:
                 success:
                   message: Group Post was deleted!
+                  status_code: 200
+    UpdateGroupRepresentationSuccess:
+      description: Successful response after updating group representation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Updated Group Representation:
+              value:
+                success:
+                  message: Group representation updated!
                   status_code: 200
     GroupJoinRequestResponseBadRequestError:
       description: Bad request error response when responding to a group join request
