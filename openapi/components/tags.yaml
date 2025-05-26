@@ -31,21 +31,18 @@
 - name: notifications
   description:
     $ref: ./paths/notifications.yaml#/info/description
-- name: permissions
-  description:
-    $ref: ./paths/permissions.yaml#/info/description
 - name: playermoderation
   description:
     $ref: ./paths/playermoderation.yaml#/info/description
 - name: prints
   description:
     $ref: ./paths/prints.yaml#/info/description
-- name: system
-  description:
-    $ref: ./paths/system.yaml#/info/description
 - name: users
   description:
     $ref: ./paths/users.yaml#/info/description
 - name: worlds
   description:
     $ref: ./paths/worlds.yaml#/info/description
+- name: miscellaneous
+  description:
+    $ref: ./paths/miscellaneous.yaml#/info/description

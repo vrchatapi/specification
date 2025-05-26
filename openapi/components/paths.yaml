@@ -246,15 +246,6 @@
 "/auth/user/notifications/clear":
   $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1clear"
 
-# permissions
-
-"/auth/permissions":
-  $ref: "./paths/permissions.yaml#/paths/~1auth~1permissions"
-"/permissions":
-  $ref: "./paths/permissions.yaml#/paths/~1permissions"
-"/permissions/{permissionId}":
-  $ref: "./paths/permissions.yaml#/paths/~1permissions~1{permissionId}"
-
 # playermoderation
 
 "/auth/user/playermoderations":
@@ -270,23 +261,6 @@
   $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
 "/prints":
   $ref: "./paths/prints.yaml#/paths/~1prints"
-
-# system
-
-"/config":
-  $ref: "./paths/system.yaml#/paths/~1config"
-"/infoPush":
-  $ref: "./paths/system.yaml#/paths/~1infoPush"
-"/css/app.css":
-  $ref: "./paths/system.yaml#/paths/~1css~1app.css"
-"/js/app.js":
-  $ref: "./paths/system.yaml#/paths/~1js~1app.js"
-"/health":
-  $ref: "./paths/system.yaml#/paths/~1health"
-"/visits":
-  $ref: "./paths/system.yaml#/paths/~1visits"
-"/time":
-  $ref: "./paths/system.yaml#/paths/~1time"
 
 # jams
 
@@ -351,3 +325,25 @@
 "/worlds/{worldId}/{instanceId}":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}"
 
+# miscellaneous
+
+"/config":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1config"
+"/infoPush":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1infoPush"
+"/css/app.css":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1css~1app.css"
+"/js/app.js":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1js~1app.js"
+"/health":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1health"
+"/visits":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1visits"
+"/time":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1time"
+"/auth/permissions":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1auth~1permissions"
+"/permissions":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1permissions"
+"/permissions/{permissionId}":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1permissions~1{permissionId}"
