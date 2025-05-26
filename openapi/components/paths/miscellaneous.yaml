@@ -120,7 +120,7 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/variant
         - $ref: ../parameters.yaml#/branch
-    /auth/permissions:
+  /auth/permissions:
     get:
       summary: Get Assigned Permissions
       operationId: getAssignedPermissions
