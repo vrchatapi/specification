@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: miscellaneous
   version: '1.0'
-  description:
+  description: Miscellaneous endpoints that do not fit into any other category.
 paths:
   /infoPush:
     get:
