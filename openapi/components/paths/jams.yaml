@@ -9,8 +9,6 @@ paths:
       summary: Show jams list
       tags:
         - jams
-      x-codeSamples:
-        $ref: "../codeSamples/jams.yaml#/~1jams/get"
       responses:
         '200':
           $ref: ../responses/jams/JamListResponse.yaml
@@ -38,8 +36,6 @@ paths:
       summary: Show jam information
       tags:
         - jams
-      x-codeSamples:
-        $ref: "../codeSamples/jams.yaml#/~1jams~1{jamId}/get"
       responses:
         '200':
           $ref: ../responses/jams/JamResponse.yaml
@@ -56,8 +52,6 @@ paths:
       summary: Show jam submissions
       tags:
         - jams
-      x-codeSamples:
-        $ref: "../codeSamples/jams.yaml#/~1jams~1{jamId}~1submissions/get"
       responses:
         '200':
           $ref: ../responses/jams/SubmissionListResponse.yaml

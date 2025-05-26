@@ -9,8 +9,6 @@ paths:
       summary: Show Information Notices
       tags:
         - system
-      x-codeSamples:
-        $ref: "../codeSamples/system.yaml#/~1infoPush/get"
       responses:
         '200':
           $ref: ../responses/system/InfoPushListResponse.yaml
@@ -38,8 +36,6 @@ paths:
 
         **DEPRECATED:** VRChat has suddenly restricted this endpoint for unknown reasons, and now always return 401 Unauthorized.
       security: []
-      x-codeSamples:
-        $ref: "../codeSamples/system.yaml#/~1health/get"
       responses:
         '200':
           $ref: ../responses/system/APIHealthResponse.yaml
@@ -49,8 +45,6 @@ paths:
       summary: Fetch API Config
       tags:
         - system
-      x-codeSamples:
-        $ref: "../codeSamples/system.yaml#/~1config/get"
       responses:
         '200':
           $ref: ../responses/system/APIConfigResponse.yaml
@@ -65,8 +59,6 @@ paths:
       summary: Current Online Users
       tags:
         - system
-      x-codeSamples:
-        $ref: "../codeSamples/system.yaml#/~1visits/get"
       responses:
         '200':
           $ref: ../responses/system/CurrentOnlineUsersResponse.yaml
@@ -81,8 +73,6 @@ paths:
       summary: Current System Time
       tags:
         - system
-      x-codeSamples:
-        $ref: "../codeSamples/system.yaml#/~1time/get"
       responses:
         '200':
           $ref: ../responses/system/SystemTimeResponse.yaml
@@ -97,8 +87,6 @@ paths:
       summary: Download JavaScript
       tags:
         - system
-      x-codeSamples:
-        $ref: "../codeSamples/system.yaml#/~1js~1app.js/get"
       responses:
         '200':
           description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
@@ -118,8 +106,6 @@ paths:
       summary: Download CSS
       tags:
         - system
-      x-codeSamples:
-        $ref: "../codeSamples/system.yaml#/~1css~1app.css/get"
       responses:
         '200':
           description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'

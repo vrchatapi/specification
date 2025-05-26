@@ -9,8 +9,6 @@ paths:
       summary: Verify Auth Token
       tags:
         - authentication
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth/get"
       responses:
         '200':
           $ref: ../responses/authentication/VerifyAuthTokenResponse.yaml
@@ -25,8 +23,6 @@ paths:
     put:
       summary: Logout
       operationId: logout
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1logout/put"
       responses:
         '200':
           $ref: ../responses/authentication/LogoutSuccess.yaml
@@ -42,8 +38,6 @@ paths:
       summary: Login and/or Get Current User Info
       tags:
         - authentication
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1user/get"
       responses:
         '200':
           $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
@@ -71,8 +65,6 @@ paths:
       summary: Check User Exists
       tags:
         - authentication
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1exists/get"
       responses:
         '200':
           $ref: ../responses/authentication/UserExistsResponse.yaml
@@ -92,8 +84,6 @@ paths:
     post:
       summary: Verify 2FA code
       operationId: verify2FA
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAResponse.yaml
@@ -116,8 +106,6 @@ paths:
     post:
       summary: Enable time-based 2FA codes
       operationId: enable2FA
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1pending/post"
       responses:
         '200':
           $ref: ../responses/authentication/Pending2FAResponse.yaml
@@ -132,8 +120,6 @@ paths:
     delete:
       summary: Cancel pending enabling of time-based 2FA codes
       operationId: cancelPending2FA
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1pending/delete"
       responses:
         '200':
           $ref: ../responses/authentication/Disable2FAResponse.yaml
@@ -149,8 +135,6 @@ paths:
     post:
       summary: Verify Pending 2FA code
       operationId: verifyPending2FA
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1pending~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAResponse.yaml
@@ -173,8 +157,6 @@ paths:
     get:
       summary: Get 2FA Recovery codes
       operationId: getRecoveryCodes
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1user~1twofactorauth~1otp/get"
       responses:
         '200':
           $ref: ../responses/authentication/Get2FARecoveryCodesResponse.yaml
@@ -189,8 +171,6 @@ paths:
     post:
       summary: Verify 2FA code with Recovery code
       operationId: verifyRecoveryCode
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1otp~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAResponse.yaml
@@ -212,8 +192,6 @@ paths:
     post:
       summary: Verify 2FA email code
       operationId: verify2FAEmailCode
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1emailotp~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAEmailCodeResponse.yaml
@@ -236,8 +214,6 @@ paths:
     delete:
       summary: Disable 2FA
       operationId: disable2FA
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth/delete"
       responses:
         '200':
           $ref: ../responses/authentication/Disable2FAResponse.yaml
@@ -254,8 +230,6 @@ paths:
     put:
       summary: Delete User
       operationId: deleteUser
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1user~1{userId}~1delete/put"
       responses:
         '200':
           $ref: ../responses/authentication/DeleteUserResponse.yaml
@@ -318,8 +292,6 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/confirmEmailUserId
         - $ref: ../parameters.yaml#/confirmEmailToken
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1confirmEmail/get"
       responses:
         '302':
           $ref: ../responses/authentication/ConfirmEmailResponse.yaml
@@ -333,8 +305,6 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/userIdQuery
         - $ref: ../parameters.yaml#/verifyLoginPlaceToken
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1verifyLoginPlace/get"
       responses:
         '302':
           $ref: ../responses/authentication/VerifyLoginPlaceResponse.yaml

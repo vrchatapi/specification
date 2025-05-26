@@ -40,8 +40,6 @@ paths:
       summary: Search Player Moderations
       tags:
         - playermoderation
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/get"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationListResponse.yaml
@@ -76,8 +74,6 @@ paths:
       operationId: moderateUser
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/post"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
@@ -101,8 +97,6 @@ paths:
       operationId: clearAllPlayerModerations
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/delete"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationClearAllSuccess.yaml
@@ -124,8 +118,6 @@ paths:
             schema:
               $ref: ../requests/ModerateUserRequest.yaml
       description: 'Removes a player moderation previously added through `moderateUser`. E.g if you previously have shown their avatar, but now want to reset it to default.'
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1unplayermoderate/put"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationUnmoderatedSuccess.yaml

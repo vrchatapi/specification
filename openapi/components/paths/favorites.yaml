@@ -9,8 +9,6 @@ paths:
       summary: List Favorites
       tags:
         - favorites
-      x-codeSamples:
-        $ref: "../codeSamples/favorites.yaml#/~1favorites/get"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteListResponse.yaml
@@ -34,8 +32,6 @@ paths:
       operationId: addFavorite
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/favorites.yaml#/~1favorites/post"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteResponse.yaml
@@ -78,8 +74,6 @@ paths:
       operationId: removeFavorite
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/favorites.yaml#/~1favorites~1{favoriteId}/delete"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteRemovedSuccess.yaml
@@ -95,8 +89,6 @@ paths:
       summary: List Favorite Groups
       tags:
         - favorites
-      x-codeSamples:
-        $ref: "../codeSamples/favorites.yaml#/~1favorite~1groups/get"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteGroupListResponse.yaml
@@ -124,8 +116,6 @@ paths:
       summary: Show Favorite Group
       tags:
         - favorites
-      x-codeSamples:
-        $ref: "../codeSamples/favorites.yaml#/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}/get"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteGroupResponse.yaml
@@ -138,8 +128,6 @@ paths:
       operationId: updateFavoriteGroup
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/favorites.yaml#/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}/put"
       responses:
         '200':
           description: OK
@@ -156,8 +144,6 @@ paths:
       operationId: clearFavoriteGroup
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/favorites.yaml#/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}/delete"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteGroupClearedSuccess.yaml
@@ -170,8 +156,6 @@ paths:
       summary: Get Favorite Limits
       tags:
         - favorites
-      x-codeSamples:
-        $ref: "../codeSamples/favorites.yaml#/~1auth~1user~1favoritelimits/get"
       responses:
         '200':
           $ref: ../responses/favorites/FavoriteLimitsResponse.yaml

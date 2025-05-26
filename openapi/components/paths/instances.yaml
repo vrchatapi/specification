@@ -39,8 +39,6 @@ paths:
         Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances.
 
         If an invalid instanceId is provided, this endpoint will simply return "null"!
-      x-codeSamples:
-        $ref: "../codeSamples/instances.yaml#/~1intances~1{worldId}:{instanceId}/get"
       responses:
         '200':
           $ref: ../responses/instances/InstanceResponse.yaml
@@ -93,8 +91,6 @@ paths:
       security:
         - authCookie: []
       description: Returns an instance short name.
-      x-codeSamples:
-        $ref: "../codeSamples/instances.yaml#/~1instance~1{worldId}:{instanceId}~1shortName/get"
       responses:
         '200':
           $ref: ../responses/instances/InstanceShortNameResponse.yaml
@@ -116,8 +112,6 @@ paths:
       security:
         - authCookie: []
       description: 'Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances.'
-      x-codeSamples:
-        $ref: "../codeSamples/instances.yaml#/~1instances~1s~1{shortname}/get"
       responses:
         '200':
           $ref: ../responses/instances/InstanceResponse.yaml

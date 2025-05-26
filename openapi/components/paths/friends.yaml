@@ -9,8 +9,6 @@ paths:
       summary: List Friends
       tags:
         - friends
-      x-codeSamples:
-        $ref: "../codeSamples/friends.yaml#/~1auth~1user~1friends/get"
       responses:
         '200':
           $ref: ../responses/users/LimitedUserListResponse.yaml
@@ -31,8 +29,6 @@ paths:
       summary: Check Friend Status
       tags:
         - friends
-      x-codeSamples:
-        $ref: "../codeSamples/friends.yaml#/~1user~1{userId}~1friendStatus/get"
       responses:
         '200':
           $ref: ../responses/friends/FriendStatusResponse.yaml
@@ -53,8 +49,6 @@ paths:
       description: Send a friend request to another user.
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/friends.yaml#/~1user~1{userId}~1friendRequest/post"
       responses:
         '200':
           $ref: ../responses/notifications/NotificationResponse.yaml
@@ -72,8 +66,6 @@ paths:
       description: 'Deletes an outgoing pending friend request to another user. To delete an incoming friend request, use the `deleteNotification` endpoint instead.'
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/friends.yaml#/~1user~1{userId}~1friendRequest/delete"
       responses:
         '200':
           $ref: ../responses/friends/DeleteFriendSuccess.yaml
@@ -87,8 +79,6 @@ paths:
     delete:
       summary: Unfriend
       operationId: unfriend
-      x-codeSamples:
-        $ref: "../codeSamples/friends.yaml#/~1auth~1user~1friends~1{userId}/delete"
       responses:
         '200':
           $ref: ../responses/friends/UnfriendSuccess.yaml

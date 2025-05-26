@@ -10,8 +10,6 @@ paths:
       operationId: getSteamTransactions
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1Steam~1transactions/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionListResponse.yaml
@@ -28,8 +26,6 @@ paths:
       operationId: getSteamTransaction
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1Steam~1transactions~1{transactionId}/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionResponse.yaml
@@ -45,8 +41,6 @@ paths:
       operationId: getAdminTransactions
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1Admin~1transactions/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionListResponse.yaml
@@ -64,8 +58,6 @@ paths:
       operationId: getAdminTransaction
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1Admin~1transactions~1{transactionId}/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionResponse.yaml
@@ -82,8 +74,6 @@ paths:
       operationId: getCurrentSubscriptions
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1auth~1user~1subscription/get"
       responses:
         '200':
           $ref: ../responses/economy/UserSubscriptionListResponse.yaml
@@ -98,8 +88,6 @@ paths:
       operationId: getSubscriptions
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1subscriptions/get"
       responses:
         '200':
           $ref: ../responses/economy/SubscriptionListResponse.yaml
@@ -116,8 +104,6 @@ paths:
       operationId: getLicenseGroup
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1licenseGroups~1{licenseGroupId}/get"
       responses:
         '200':
           $ref: ../responses/economy/LicenseGroupResponse.yaml
@@ -135,8 +121,6 @@ paths:
       operationId: getProductListing
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1listing~1{productId}/get"
       responses:
         '200':
           $ref: ../responses/economy/ProductListingResponse.yaml
@@ -158,8 +142,6 @@ paths:
       operationId: getProductListings
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1user~1{userId}~1listings/get"
       responses:
         '200':
           $ref: ../responses/economy/ProductListingListResponse.yaml
@@ -174,8 +156,6 @@ paths:
       operationId: getTokenBundles
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1tokenBundles/get"
       responses:
         '200':
           $ref: ../responses/economy/TokenBundleListResponse.yaml
@@ -190,8 +170,6 @@ paths:
       operationId: getTiliaStatus
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1tilia~1status/get"
       responses:
         '200':
           $ref: ../responses/economy/TiliaStatusResponse.yaml
@@ -208,8 +186,6 @@ paths:
       operationId: getTiliaTos
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1user~1{userId}~1tilia~1tos/get"
       responses:
         '200':
           $ref: ../responses/economy/TiliaTOSResponse.yaml
@@ -226,8 +202,6 @@ paths:
       operationId: getBalance
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1user~1{userId}~1balance/get"
       responses:
         '200':
           $ref: ../responses/economy/BalanceResponse.yaml

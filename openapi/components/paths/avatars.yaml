@@ -17,8 +17,6 @@ paths:
         '403':
           $ref: ../responses/avatars/AvatarSeeOtherUserCurrentAvatarError.yaml
       operationId: getOwnAvatar
-      x-codeSamples:
-        $ref: '../codeSamples/avatars.yaml#/~1users~1{userId}~1avatar/get'
       security:
         - authCookie: []
       description: Get the current avatar for the user. This will return an error for any other user than the one logged in.
@@ -29,8 +27,6 @@ paths:
       summary: List Favorited Avatars
       tags:
         - avatars
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1favorites/get"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarListResponse.yaml
@@ -61,8 +57,6 @@ paths:
       summary: List Licensed Avatars
       tags:
         - avatars
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1licensed/get"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarListResponse.yaml
@@ -80,8 +74,6 @@ paths:
       summary: Search Avatars
       tags:
         - avatars
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars/get"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarListResponse.yaml
@@ -117,8 +109,6 @@ paths:
       operationId: createAvatar
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars/post"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarResponse.yaml
@@ -141,8 +131,6 @@ paths:
       summary: Get Avatar
       tags:
         - avatars
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}/get"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarResponse.yaml
@@ -159,8 +147,6 @@ paths:
       operationId: updateAvatar
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}/put"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarResponse.yaml
@@ -181,8 +167,6 @@ paths:
       operationId: deleteAvatar
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}/delete"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarResponse.yaml
@@ -200,8 +184,6 @@ paths:
       summary: Select Avatar
       tags:
         - avatars
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}~1select/put"
       responses:
         '200':
           $ref: ../responses/users/CurrentUserResponse.yaml
@@ -220,8 +202,6 @@ paths:
       summary: Select Fallback Avatar
       tags:
         - avatars
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}~1selectFallback/put"
       responses:
         '200':
           $ref: ../responses/users/CurrentUserResponse.yaml
@@ -242,8 +222,6 @@ paths:
       summary: Enqueue Impostor generation
       tags:
         - avatars
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}~1impostor~1enqueue/post"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarImpostorEnqueueResponse.yaml
@@ -260,8 +238,6 @@ paths:
       summary: Get Impostor Queue Stats
       tags:
         - avatars
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1impostor~1queue~1stats/get"
       responses:
         '200':
           $ref: ../responses/avatars/AvatarImpostorQueueStatsResponse.yaml
@@ -278,8 +254,6 @@ paths:
       summary: Delete generated Impostor
       tags:
         - avatars
-      x-codeSamples:
-        $ref: "../codeSamples/avatars.yaml#/~1avatars~1{avatarId}~1impostor/delete"
       responses:
         '200':
           description: The Impostors generated for that avatar are deleted.
