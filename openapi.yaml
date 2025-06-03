@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: VRChat API Documentation
-  version: 1.19.3
+  version: 1.19.4
   contact:
     name: Unofficial VRChat API Documentation Project
     url: https://github.com/VRChatAPI
@@ -614,6 +614,7 @@ paths:
       - $ref: '#/components/parameters/avatarId'
     put:
       summary: Select Fallback Avatar
+      deprecated: true
       tags:
         - avatars
       responses:
@@ -4337,6 +4338,7 @@ components:
         emailVerified:
           type: boolean
         fallbackAvatar:
+          deprecated: true
           $ref: '#/components/schemas/AvatarID'
         friendGroupNames:
           type: array
@@ -6340,6 +6342,7 @@ components:
         displayName:
           type: string
         fallbackAvatar:
+          deprecated: true
           $ref: '#/components/schemas/AvatarID'
         id:
           $ref: '#/components/schemas/UserID'
