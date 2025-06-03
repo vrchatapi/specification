@@ -200,6 +200,7 @@ paths:
       - $ref: ../parameters.yaml#/avatarId
     put:
       summary: Select Fallback Avatar
+      deprecated: true
       tags:
         - avatars
       responses:

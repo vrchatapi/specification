@@ -20,6 +20,7 @@ properties:
   displayName:
     type: string
   fallbackAvatar:
+    deprecated: true
     $ref: ./AvatarID.yaml
   id:
     $ref: ./UserID.yaml
