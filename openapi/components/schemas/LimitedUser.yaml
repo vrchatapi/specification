@@ -26,13 +26,27 @@ properties:
     $ref: ./UserID.yaml
   isFriend:
     type: boolean
+  imageUrl:
+    type: string
   last_platform:
     $ref: ./Platform.yaml
   last_login:
     type: string
     nullable: true
     format: date-time
+  last_activity:
+    type: string
+    nullable: true
+    format: date-time
+  last_mobile:
+    type: string
+    nullable: true
+    format: date-time
+  platform:
+    type: string
   profilePicOverride:
+    type: string
+  profilePicOverrideThumbnail:
     type: string
   pronouns:
     type: string
@@ -58,10 +72,14 @@ properties:
     type: string
 required:
   - id
+  - imageUrl
   - displayName
   - statusDescription
   - developerType
+  - platform
   - last_platform
+  - last_activity
+  - last_mobile
   - status
   - isFriend
   - tags

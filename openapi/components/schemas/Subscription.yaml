@@ -26,6 +26,9 @@ properties:
   picoSku:
     type: string
     minLength: 1
+  appleProductId:
+    type: string
+    minLength: 1
   amount:
     type: number
   description:

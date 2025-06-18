@@ -39,6 +39,21 @@ properties:
   name:
     minLength: 1
     type: string
+  performance:
+    type: object
+    properties:
+      android:
+        type: string
+      android-sort:
+        type: integer
+      ios:
+        type: string
+      ios-sort:
+        type: integer
+      standalonewindows:
+        type: string
+      standalonewindows-sort:
+        type: integer
   productId:
     type: string
   publishedListings:
@@ -116,6 +131,7 @@ required:
   - id
   - imageUrl
   - name
+  - performance
   - releaseStatus
   - styles
   - tags

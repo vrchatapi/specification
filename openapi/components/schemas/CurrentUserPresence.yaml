@@ -8,6 +8,8 @@ properties:
     type: string
   displayName:
     type: string
+  debugflag:
+    type: string
   groups:
     type: array
     nullable: true
