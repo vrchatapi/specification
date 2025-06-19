@@ -17,3 +17,6 @@ properties:
   stickers:
     default: true
     type: boolean
+  props:
+    default: true
+    type: boolean
