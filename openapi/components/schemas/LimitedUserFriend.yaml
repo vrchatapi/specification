@@ -62,7 +62,6 @@ properties:
     type: string
 required:
   - currentAvatarImageUrl
-  - currentAvatarThumbnailImageUrl
   - developerType
   - displayName
   - friendKey
