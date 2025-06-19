@@ -4,6 +4,8 @@ properties:
     $ref: ./AgeVerificationStatus.yaml
   ageVerified:
     $ref: ./AgeVerified.yaml
+  allowAvatarCopying:
+    type: boolean
   bio:
     type: string
   bioLinks:
@@ -29,9 +31,6 @@ properties:
     type: string
   friendKey:
     type: string
-  fallbackAvatar:
-    deprecated: true
-    $ref: ./AvatarID.yaml
   id:
     $ref: ./UserID.yaml
   isFriend:
@@ -40,10 +39,6 @@ properties:
     type: string
   last_platform:
     $ref: ./Platform.yaml
-  last_login:
-    type: string
-    nullable: true
-    format: date-time
   last_activity:
     type: string
     nullable: true
@@ -75,6 +70,7 @@ properties:
 required:
   - ageVerificationStatus
   - ageVerified
+  - allowAvatarCopying
   - currentAvatarImageUrl
   - currentAvatarThumbnailImageUrl
   - currentAvatarTags
@@ -82,15 +78,11 @@ required:
   - developerType
   - displayName
   - friendKey
-  - fallbackAvatar
   - id
   - isFriend
-  - imageUrl
   - last_platform
-  - last_login
   - last_activity
   - last_mobile
-  - platform
   - profilePicOverride
   - profilePicOverrideThumbnail
   - pronouns
