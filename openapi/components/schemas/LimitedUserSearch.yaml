@@ -1,4 +1,4 @@
-description: ''
+description: 'User object received when searching'
 properties:
   bio:
     type: string

@@ -1,4 +1,4 @@
-description: ''
+description: 'User object received when querying your own instance'
 properties:
   ageVerificationStatus:
     $ref: ./AgeVerificationStatus.yaml

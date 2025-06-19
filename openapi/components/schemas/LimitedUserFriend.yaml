@@ -1,4 +1,4 @@
-description: ''
+description: 'User object received when querying your friends list'
 properties:
   bio:
     type: string
