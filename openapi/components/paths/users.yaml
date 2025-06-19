@@ -11,7 +11,7 @@ paths:
         - users
       responses:
         '200':
-          $ref: ../responses/users/LimitedUserListResponse.yaml
+          $ref: ../responses/users/LimitedUserSearchListResponse.yaml
         '400':
           $ref: ../responses/users/UsersInvalidSearchError.yaml
         '401':
@@ -125,7 +125,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../schemas/LimitedUser.yaml
+                  $ref: ../schemas/LimitedUserFriend.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '403':

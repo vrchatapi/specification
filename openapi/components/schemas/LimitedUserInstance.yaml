@@ -1,5 +1,9 @@
 description: ''
 properties:
+  ageVerificationStatus:
+    $ref: ./AgeVerificationStatus.yaml
+  ageVerified:
+    $ref: ./AgeVerified.yaml
   bio:
     type: string
   bioLinks:
@@ -15,9 +19,15 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  date_joined:
+    type: string
+    nullable: true
+    format: date-time
   developerType:
     $ref: ./DeveloperType.yaml
   displayName:
+    type: string
+  friendKey:
     type: string
   fallbackAvatar:
     deprecated: true
@@ -50,38 +60,44 @@ properties:
     type: string
   pronouns:
     type: string
+  state:
+    $ref: ./UserState.yaml
   status:
     $ref: ./UserStatus.yaml
   statusDescription:
     type: string
   tags:
-    description: <- Always empty.
     items:
       $ref: ./Tag.yaml
     type: array
   userIcon:
     type: string
-  username:
-    type: string
-    deprecated: true
-    description: -|
-      **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
-  location:
-    type: string
-  friendKey:
-    type: string
 required:
-  - id
-  - imageUrl
-  - displayName
-  - statusDescription
+  - ageVerificationStatus
+  - ageVerified
+  - currentAvatarImageUrl
+  - currentAvatarThumbnailImageUrl
+  - currentAvatarTags
+  - date_joined
   - developerType
-  - platform
+  - displayName
+  - friendKey
+  - fallbackAvatar
+  - id
+  - isFriend
+  - imageUrl
   - last_platform
+  - last_login
   - last_activity
   - last_mobile
+  - platform
+  - profilePicOverride
+  - profilePicOverrideThumbnail
+  - pronouns
+  - state
   - status
-  - isFriend
+  - statusDescription
   - tags
-title: LimitedUser
+  - userIcon
+title: LimitedUserInstance
 type: object
