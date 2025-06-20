@@ -88,6 +88,7 @@ paths:
         - $ref: ../parameters.yaml#/maxUnityVersion
         - $ref: ../parameters.yaml#/minUnityVersion
         - $ref: ../parameters.yaml#/platform
+        - $ref: ../parameters.yaml#/noplatform
       description: Search and list currently Active worlds by query filters.
   /worlds/recent:
     get:
