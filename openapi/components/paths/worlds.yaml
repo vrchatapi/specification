@@ -39,7 +39,9 @@ paths:
         - $ref: ../parameters.yaml#/maxUnityVersion
         - $ref: ../parameters.yaml#/minUnityVersion
         - $ref: ../parameters.yaml#/platform
+        - $ref: ../parameters.yaml#/noplatform
         - $ref: ../parameters.yaml#/fuzzy
+        - $ref: ../parameters.yaml#/avatarSpecific
       description: Search and list any worlds by query filters.
     post:
       summary: Create World
