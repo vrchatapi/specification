@@ -120,7 +120,7 @@ properties:
     description: 'The users field is present on instances created by the requesting user.'
     type: array
     items:
-      $ref: ./LimitedUser.yaml
+      $ref: ./LimitedUserInstance.yaml
   groupAccessType:
     $ref: ./GroupAccessType.yaml
   hasCapacityForYou:

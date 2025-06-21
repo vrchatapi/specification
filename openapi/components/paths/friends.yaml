@@ -11,7 +11,7 @@ paths:
         - friends
       responses:
         '200':
-          $ref: ../responses/users/LimitedUserListResponse.yaml
+          $ref: ../responses/friends/LimitedUserFriendListResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getFriends

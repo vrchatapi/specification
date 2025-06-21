@@ -1,4 +1,4 @@
-description: ''
+description: 'User object received when searching'
 properties:
   bio:
     type: string
@@ -19,19 +19,12 @@ properties:
     $ref: ./DeveloperType.yaml
   displayName:
     type: string
-  fallbackAvatar:
-    deprecated: true
-    $ref: ./AvatarID.yaml
   id:
     $ref: ./UserID.yaml
   isFriend:
     type: boolean
   last_platform:
     $ref: ./Platform.yaml
-  last_login:
-    type: string
-    nullable: true
-    format: date-time
   profilePicOverride:
     type: string
   pronouns:
@@ -47,23 +40,19 @@ properties:
     type: array
   userIcon:
     type: string
-  username:
-    type: string
-    deprecated: true
-    description: -|
-      **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
-  location:
-    type: string
-  friendKey:
-    type: string
 required:
-  - id
-  - displayName
-  - statusDescription
+  - currentAvatarImageUrl
+  - currentAvatarThumbnailImageUrl
+  - currentAvatarTags
   - developerType
-  - last_platform
-  - status
+  - displayName
+  - id
   - isFriend
+  - last_platform
+  - profilePicOverride
+  - status
+  - statusDescription
   - tags
-title: LimitedUser
+  - userIcon
+title: LimitedUserSearch
 type: object
