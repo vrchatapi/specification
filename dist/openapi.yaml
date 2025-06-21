@@ -1426,7 +1426,7 @@ paths:
         - friends
       responses:
         '200':
-          $ref: '#/components/responses/LimitedUserListResponse'
+          $ref: '#/components/responses/LimitedUserFriendListResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
       operationId: getFriends
@@ -3243,7 +3243,7 @@ paths:
         - users
       responses:
         '200':
-          $ref: '#/components/responses/LimitedUserListResponse'
+          $ref: '#/components/responses/LimitedUserSearchListResponse'
         '400':
           $ref: '#/components/responses/UsersInvalidSearchError'
         '401':
@@ -4200,6 +4200,8 @@ components:
           type: string
         displayName:
           type: string
+        debugflag:
+          type: string
         groups:
           type: array
           nullable: true
@@ -4794,6 +4796,21 @@ components:
         name:
           minLength: 1
           type: string
+        performance:
+          type: object
+          properties:
+            android:
+              type: string
+            android-sort:
+              type: integer
+            ios:
+              type: string
+            ios-sort:
+              type: integer
+            standalonewindows:
+              type: string
+            standalonewindows-sort:
+              type: integer
         productId:
           type: string
         publishedListings:
@@ -4871,6 +4888,7 @@ components:
         - id
         - imageUrl
         - name
+        - performance
         - releaseStatus
         - styles
         - tags
@@ -5104,6 +5122,9 @@ components:
         googlePlanId:
           type: string
         picoSku:
+          type: string
+          minLength: 1
+        appleProductId:
           type: string
           minLength: 1
         amount:
@@ -5693,6 +5714,8 @@ components:
         steamItemId:
           type: string
         oculusSku:
+          type: string
+        googleProductId:
           type: string
         amount:
           type: integer
@@ -6319,8 +6342,8 @@ components:
         - fileSize
         - success
         - uncompressedSize
-    LimitedUser:
-      description: ''
+    LimitedUserFriend:
+      description: User object received when querying your friends list
       properties:
         bio:
           type: string
@@ -6341,22 +6364,35 @@ components:
           $ref: '#/components/schemas/DeveloperType'
         displayName:
           type: string
-        fallbackAvatar:
-          deprecated: true
-          $ref: '#/components/schemas/AvatarID'
+        friendKey:
+          type: string
         id:
           $ref: '#/components/schemas/UserID'
         isFriend:
           type: boolean
+        imageUrl:
+          type: string
         last_platform:
           $ref: '#/components/schemas/Platform'
+        location:
+          type: string
         last_login:
           type: string
           nullable: true
           format: date-time
+        last_activity:
+          type: string
+          nullable: true
+          format: date-time
+        last_mobile:
+          type: string
+          nullable: true
+          format: date-time
+        platform:
+          type: string
         profilePicOverride:
           type: string
-        pronouns:
+        profilePicOverrideThumbnail:
           type: string
         status:
           $ref: '#/components/schemas/UserStatus'
@@ -6369,24 +6405,27 @@ components:
           type: array
         userIcon:
           type: string
-        username:
-          type: string
-          deprecated: true
-          description: '-| **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).'
-        location:
-          type: string
-        friendKey:
-          type: string
       required:
-        - id
-        - displayName
-        - statusDescription
+        - currentAvatarImageUrl
         - developerType
-        - last_platform
-        - status
+        - displayName
+        - friendKey
+        - id
         - isFriend
+        - imageUrl
+        - last_platform
+        - location
+        - last_login
+        - last_activity
+        - last_mobile
+        - platform
+        - profilePicOverride
+        - profilePicOverrideThumbnail
+        - status
+        - statusDescription
         - tags
-      title: LimitedUser
+        - userIcon
+      title: LimitedUserFriend
       type: object
     NotificationType:
       type: string
@@ -7337,6 +7376,9 @@ components:
         stickers:
           default: true
           type: boolean
+        props:
+          default: true
+          type: boolean
     StoreID:
       example: esto_713b247d-2b5d-41a0-bba3-50db28dc1498
       title: StoreID
@@ -8028,6 +8070,102 @@ components:
           type: integer
           minimum: 0
           example: 5
+    LimitedUserInstance:
+      description: User object received when querying your own instance
+      properties:
+        ageVerificationStatus:
+          $ref: '#/components/schemas/AgeVerificationStatus'
+        ageVerified:
+          $ref: '#/components/schemas/AgeVerified'
+        allowAvatarCopying:
+          type: boolean
+        bio:
+          type: string
+        bioLinks:
+          description: ' '
+          type: array
+          items:
+            type: string
+        currentAvatarImageUrl:
+          $ref: '#/components/schemas/CurrentAvatarImageUrl'
+        currentAvatarThumbnailImageUrl:
+          $ref: '#/components/schemas/CurrentAvatarThumbnailImageUrl'
+        currentAvatarTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        date_joined:
+          type: string
+          nullable: true
+          format: date-time
+        developerType:
+          $ref: '#/components/schemas/DeveloperType'
+        displayName:
+          type: string
+        friendKey:
+          type: string
+        id:
+          $ref: '#/components/schemas/UserID'
+        isFriend:
+          type: boolean
+        imageUrl:
+          type: string
+        last_platform:
+          $ref: '#/components/schemas/Platform'
+        last_activity:
+          type: string
+          nullable: true
+          format: date-time
+        last_mobile:
+          type: string
+          nullable: true
+          format: date-time
+        platform:
+          type: string
+        profilePicOverride:
+          type: string
+        profilePicOverrideThumbnail:
+          type: string
+        pronouns:
+          type: string
+        state:
+          $ref: '#/components/schemas/UserState'
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        statusDescription:
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        userIcon:
+          type: string
+      required:
+        - ageVerificationStatus
+        - ageVerified
+        - allowAvatarCopying
+        - currentAvatarImageUrl
+        - currentAvatarThumbnailImageUrl
+        - currentAvatarTags
+        - date_joined
+        - developerType
+        - displayName
+        - friendKey
+        - id
+        - isFriend
+        - last_platform
+        - last_activity
+        - last_mobile
+        - profilePicOverride
+        - profilePicOverrideThumbnail
+        - pronouns
+        - state
+        - status
+        - statusDescription
+        - tags
+        - userIcon
+      title: LimitedUserInstance
+      type: object
     Instance:
       description: |-
         * `hidden` field is only present if InstanceType is `hidden` aka "Friends+", and is instance creator.
@@ -8151,7 +8289,7 @@ components:
           description: The users field is present on instances created by the requesting user.
           type: array
           items:
-            $ref: '#/components/schemas/LimitedUser'
+            $ref: '#/components/schemas/LimitedUserInstance'
         groupAccessType:
           $ref: '#/components/schemas/GroupAccessType'
         hasCapacityForYou:
@@ -8415,6 +8553,65 @@ components:
         - ratingsScore
         - submitterId
       title: Submission
+      type: object
+    LimitedUserSearch:
+      description: User object received when searching
+      properties:
+        bio:
+          type: string
+        bioLinks:
+          description: ' '
+          type: array
+          items:
+            type: string
+        currentAvatarImageUrl:
+          $ref: '#/components/schemas/CurrentAvatarImageUrl'
+        currentAvatarThumbnailImageUrl:
+          $ref: '#/components/schemas/CurrentAvatarThumbnailImageUrl'
+        currentAvatarTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        developerType:
+          $ref: '#/components/schemas/DeveloperType'
+        displayName:
+          type: string
+        id:
+          $ref: '#/components/schemas/UserID'
+        isFriend:
+          type: boolean
+        last_platform:
+          $ref: '#/components/schemas/Platform'
+        profilePicOverride:
+          type: string
+        pronouns:
+          type: string
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        statusDescription:
+          type: string
+        tags:
+          description: <- Always empty.
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        userIcon:
+          type: string
+      required:
+        - currentAvatarImageUrl
+        - currentAvatarThumbnailImageUrl
+        - currentAvatarTags
+        - developerType
+        - displayName
+        - id
+        - isFriend
+        - last_platform
+        - profilePicOverride
+        - status
+        - statusDescription
+        - tags
+        - userIcon
+      title: LimitedUserSearch
       type: object
     User:
       title: User
@@ -11089,14 +11286,14 @@ components:
                 error:
                   message: Analysis not yet available
                   status_code: 202
-    LimitedUserListResponse:
-      description: Returns a list of LimitedUser objects.
+    LimitedUserFriendListResponse:
+      description: Returns a list of LimitedUserFriend objects.
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/LimitedUser'
+              $ref: '#/components/schemas/LimitedUserFriend'
     NotificationResponse:
       description: Returns a single Notifcation object.
       content:
@@ -11885,6 +12082,14 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Submission'
+    LimitedUserSearchListResponse:
+      description: Returns a list of LimitedUserSearch objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/LimitedUserSearch'
     InvalidAdminCredentialsError:
       description: Error response due to missing Administrator credentials.
       content:
