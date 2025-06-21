@@ -251,6 +251,20 @@ platform:
   schema:
     type: string
   description: The platform the asset supports.
+noplatform:
+  name: noplatform
+  in: query
+  required: false
+  schema:
+    type: string
+  description: The platform the asset does not support.
+avatarSpecific:
+  name: avatarSpecific
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Only search for avatar worlds.
 tag:
   name: tag
   in: query
