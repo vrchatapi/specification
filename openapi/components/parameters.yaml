@@ -531,5 +531,5 @@ inventorySpawnItemId:
   in: query
   required: true
   schema:
-    $ref: ./schemas/InventoryItemId.yaml
+    $ref: ./schemas/InventoryItemID.yaml
   description: Id for inventory item spawning.
