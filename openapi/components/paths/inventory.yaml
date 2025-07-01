@@ -27,8 +27,8 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/inventoryItemId
     get:
-      summary: Get Inventory Item
-      operationId: getInventoryItem
+      summary: Get Own Inventory Item
+      operationId: getOwnInventoryItem
       security:
         - authCookie: []
       responses:
@@ -38,7 +38,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - inventory
-      description: Returns an InventoryItem object.
+      description: Returns an InventoryItem object held by the currently logged in user.
   /users/{userId}/inventory/{inventoryItemId}:
     parameters:
       - $ref: ../parameters.yaml#/userId

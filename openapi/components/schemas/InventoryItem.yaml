@@ -43,7 +43,7 @@ properties:
     items:
       $ref: ./Tag.yaml
   templateId:
-    $ref: ./TemplateID.yaml
+    $ref: ./InventoryTemplateID.yaml
   template_created_at:
     format: date-time
     type: string
