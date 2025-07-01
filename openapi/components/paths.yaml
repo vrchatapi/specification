@@ -205,15 +205,15 @@
 
 # inventory
 
-"inventory":
+"/inventory":
   $ref: "./paths/inventory.yaml#/paths/~1inventory"
-"inventory/{inventoryItemId}":
+"/inventory/{inventoryItemId}":
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}"
-"inventory/drops":
+"/inventory/drops":
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1drops"
-"inventory/template/{inventoryTemplateId}":
+"/inventory/template/{inventoryTemplateId}":
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1template~1{inventoryTemplateId}"
-"inventory/spawn":
+"/inventory/spawn":
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1spawn"
 
 # invite
