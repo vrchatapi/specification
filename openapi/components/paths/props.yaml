@@ -4,7 +4,7 @@ info:
   version: '1.0'
   description: 'Props are interactable items users can spawn into instances.'
 paths:
-  /props/{propId}:
+  '/props/{propId}':
     parameters:
       - $ref: ../parameters.yaml#/propId
     get:

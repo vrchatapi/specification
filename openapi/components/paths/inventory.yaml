@@ -4,7 +4,7 @@ info:
   version: '1.0'
   description: 'The inventory manages collectable items, such as drop bundles and their contents.'
 paths:
-  /inventory:
+  '/inventory':
     parameters:
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/offset
@@ -23,7 +23,7 @@ paths:
       tags:
         - inventory
       description: Returns an Inventory object.
-  /inventory/{inventoryItemId}:
+  '/inventory/{inventoryItemId}':
     parameters:
       - $ref: ../parameters.yaml#/inventoryItemId
     get:
@@ -39,7 +39,7 @@ paths:
       tags:
         - inventory
       description: Returns an InventoryItem object held by the currently logged in user.
-  /users/{userId}/inventory/{inventoryItemId}:
+  '/users/{userId}/inventory/{inventoryItemId}':
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/inventoryItemId
@@ -56,7 +56,7 @@ paths:
       tags:
         - inventory
       description: Returns an InventoryItem object held by the given user.
-  /inventory/drops:
+  '/inventory/drops':
     parameters:
       - $ref: ../parameters.yaml#/active
     get:
@@ -72,7 +72,7 @@ paths:
       tags:
         - inventory
       description: Returns a list of InventoryDrop objects.
-  /inventory/template/{inventoryTemplateId}:
+  '/inventory/template/{inventoryTemplateId}':
     parameters:
       - $ref: ../parameters.yaml#/inventoryTemplateId
     get:
@@ -88,7 +88,7 @@ paths:
       tags:
         - inventory
       description: Returns an InventoryTemplate object.
-  /inventory/spawn:
+  '/inventory/spawn':
     parameters:
       - $ref: ../parameters.yaml#/inventorySpawnItemId
     get:
