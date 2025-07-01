@@ -1,0 +1,53 @@
+title: AdminAssetBundle
+type: object
+description: ''
+properties:
+  _created_at:
+    type: string
+    format: date-time
+  _updated_at:
+    type: string
+    format: date-time
+  assetType:
+    type: string
+  authorId:
+    $ref: ./UserID.yaml
+  authorName:
+    type: string
+  description:
+    type: string
+  imageUrl:
+    type: string
+  name:
+    type: string
+  releaseStatus:
+    $ref: ./ReleaseStatus.yaml
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  thumbnailImageUrl:
+    type: string
+  unityPackageUrl:
+    type: string
+    nullable: true
+  unityPackages:
+    type: array
+    items:
+      $ref: ./AdminUnityPackage.yaml
+    minItems: 1
+    uniqueItems: true
+required:
+  - _created_at
+  - _updated_at
+  - assetType
+  - authorId
+  - authorName
+  - description
+  - imageUrl
+  - name
+  - releaseStatus
+  - tags
+  - thumbnailImageUrl
+  - unityPackageUrl
+  - unityPackages

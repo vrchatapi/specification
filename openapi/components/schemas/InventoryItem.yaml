@@ -1,0 +1,78 @@
+title: InventoryItem
+type: object
+properties:
+  collections:
+    type: array
+    items:
+      type: string
+  created_at:
+    format: date-time
+    type: string
+    example: '2025-06-13T05:00:45.455Z'
+  description:
+    type: string
+  expiryDate:
+    format: date-time
+    type: string
+    example: '2025-06-13T05:00:45.455Z'
+    nullable: true
+  flags:
+    type: array
+    items:
+      type: string
+  holderId:
+    $ref: ./UserID.yaml
+  id:
+    $ref: ./InventoryItemID.yaml
+  imageUrl:
+    type: string
+  isArchived:
+    type: boolean
+  isSeen:
+    type: boolean
+  itemType:
+    $ref: ./InventoryItemType.yaml
+  itemTypeLabel:
+    type: string
+  metadata:
+    $ref: ./InventoryMetadata.yaml
+  name:
+    type: string
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  templateId:
+    $ref: ./TemplateID.yaml
+  template_created_at:
+    format: date-time
+    type: string
+    example: '2025-06-09T16:31:40.785Z'
+  template_updated_at:
+    format: date-time
+    type: string
+    example: '2025-06-25T00:34:14.578Z'
+  updated_at:
+    format: date-time
+    type: string
+    example: '2025-06-25T00:34:15.965Z'
+required:
+  - collections
+  - created_at
+  - description
+  - expiryDate
+  - flags
+  - holderId
+  - id
+  - imageUrl
+  - isArchived
+  - isSeen
+  - itemType
+  - itemTypeLabel
+  - metadata
+  - name
+  - tags
+  - templateId
+  - template_created_at
+  - template_updated_at
+  - updated_at

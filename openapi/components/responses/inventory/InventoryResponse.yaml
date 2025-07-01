@@ -1,0 +1,5 @@
+description: Returns an Inventory object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Inventory.yaml

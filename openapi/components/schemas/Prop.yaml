@@ -1,0 +1,65 @@
+title: Prop
+type: object
+description: ''
+properties:
+  _created_at:
+    type: string
+    format: date-time
+  _updated_at:
+    type: string
+    format: date-time
+  authorId:
+    $ref: ./UserID.yaml
+  authorName:
+    type: string
+  description:
+    type: string
+  id:
+    $ref: ./PropID.yaml
+  imageUrl:
+    type: string
+  maxCountPerUser:
+    type: integer
+    default: 1
+  name:
+    type: string
+  releaseStatus:
+    $ref: ./ReleaseStatus.yaml
+  spawnType:
+    type: integer
+    default: 0
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  thumbnailImageUrl:
+    type: string
+  unityPackageUrl:
+    type: string
+    nullable: true
+  unityPackages:
+    type: array
+    items:
+      $ref: ./PropUnityPackage.yaml
+    minItems: 1
+    uniqueItems: true
+  worldPlacementMask:
+    type: integer
+    default: 1
+required:
+  - _created_at
+  - _updated_at
+  - authorId
+  - authorName
+  - description
+  - id
+  - imageUrl
+  - maxCountPerUser
+  - name
+  - releaseStatus
+  - spawnType
+  - tags
+  - thumbnailImageUrl
+  - unityPackageUrl
+  - unityPackages
+  - worldPlacementMask

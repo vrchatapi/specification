@@ -1,0 +1,58 @@
+title: InventoryTemplate
+type: object
+properties:
+  authorId:
+    $ref: ./UserID.yaml
+  collections:
+    type: array
+    items:
+      type: string
+  created_at:
+    format: date-time
+    type: string
+    example: '2025-06-12T20:21:15.056Z'
+  description:
+    type: string
+  flags:
+    type: array
+    items:
+      type: string
+  id:
+    $ref: ./InventoryTemplateID.yaml
+  imageUrl:
+    type: string
+  itemType:
+    $ref: ./InventoryItemType.yaml
+  itemTypeLabel:
+    type: string
+  metadata:
+    $ref: ./InventoryMetadata.yaml
+  name:
+    type: string
+  notificationDetails:
+    $ref: ./InventoryNotificationDetails.yaml
+  status:
+    type: string
+    example: 'live'
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  updated_at:
+    format: date-time
+    type: string
+    example: '2025-06-10T20:37:31.837Z'
+required:
+  - authorId
+  - collections
+  - created_at
+  - description
+  - flags
+  - id
+  - imageUrl
+  - itemType
+  - itemTypeLabel
+  - name
+  - status
+  - tags
+  - updated_at
