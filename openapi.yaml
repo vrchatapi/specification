@@ -108,6 +108,8 @@ tags:
     description: Friends Docs Here
   - name: groups
     description: Group Docs Here
+  - name: inventory
+    description: The inventory manages collectable items, such as drop bundles and their contents.
   - name: invite
     description: Invite Docs Here
   - name: instances
@@ -151,6 +153,8 @@ tags:
       More information is avaiable on VRChat's official [documentation on Local Storage](https://docs.vrchat.com/docs/local-vrchat-storage).
   - name: prints
     description: Prints are a way to print photos directly from the VRChat camera.
+  - name: props
+    description: Props are interactable items users can spawn into instances.
   - name: users
     description: Users Docs Here
   - name: worlds
@@ -538,6 +542,16 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateAvatarRequest'
       description: Create an avatar. It's possible to optionally specify a ID if you want a custom one. Attempting to create an Avatar with an already claimed ID will result in a DB error.
+  /avatarStyles:
+    get:
+      summary: Get Avatar Styles
+      tags:
+        - avatars
+      responses:
+        '200':
+          $ref: '#/components/responses/AvatarStyleListResponse'
+      operationId: getAvatarStyles
+      description: List avatar styles.
   /avatars/{avatarId}:
     parameters:
       - $ref: '#/components/parameters/avatarId'
@@ -1419,6 +1433,20 @@ paths:
       security:
         - authCookie: []
       description: Upload a gallery image
+  /adminassetbundles/{adminAssetBundleId}:
+    get:
+      summary: Get AdminAssetBundle
+      responses:
+        '200':
+          $ref: '#/components/responses/AdminAssetBundleResponse'
+      operationId: getAdminAssetBundle
+      security:
+        - authCookie: []
+      description: Returns an AdminAssetBundle
+      parameters:
+        - $ref: '#/components/parameters/adminAssetBundleId'
+      tags:
+        - files
   /auth/user/friends:
     get:
       summary: List Friends
@@ -2427,6 +2455,89 @@ paths:
           $ref: '#/components/responses/GroupNotMemberError'
       security:
         - authCookie: []
+  /inventory:
+    parameters:
+      - $ref: '#/components/parameters/number'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/inventorySortOrder'
+      - $ref: '#/components/parameters/inventoryItemType'
+    get:
+      summary: Get Inventory
+      operationId: getInventory
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/InventoryResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - inventory
+      description: Returns an Inventory object.
+  /inventory/{inventoryItemId}:
+    parameters:
+      - $ref: '#/components/parameters/inventoryItemId'
+    get:
+      summary: Get Own Inventory Item
+      operationId: getOwnInventoryItem
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/InventoryItemResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - inventory
+      description: Returns an InventoryItem object held by the currently logged in user.
+  /inventory/drops:
+    parameters:
+      - $ref: '#/components/parameters/active'
+    get:
+      summary: List Inventory Drops
+      operationId: getInventoryDrops
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/InventoryDropListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - inventory
+      description: Returns a list of InventoryDrop objects.
+  /inventory/template/{inventoryTemplateId}:
+    parameters:
+      - $ref: '#/components/parameters/inventoryTemplateId'
+    get:
+      summary: Get Inventory Template
+      operationId: getInventoryTemplate
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/InventoryTemplateResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - inventory
+      description: Returns an InventoryTemplate object.
+  /inventory/spawn:
+    parameters:
+      - $ref: '#/components/parameters/inventorySpawnItemId'
+    get:
+      summary: Spawn Inventory Item
+      operationId: spawnInventoryItem
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/InventorySpawnResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - inventory
+      description: Returns an InventorySpawn object.
   /invite/{userId}:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -3179,6 +3290,22 @@ paths:
       tags:
         - prints
       description: Uploads and creates a print.
+  /props/{propId}:
+    parameters:
+      - $ref: '#/components/parameters/propId'
+    get:
+      summary: Get Prop
+      operationId: getProp
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PropResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - props
+      description: Returns a Prop object.
   /jams:
     get:
       summary: Show jams list
@@ -4986,6 +5113,22 @@ components:
       required:
         - name
         - imageUrl
+    AvatarStyleID:
+      example: avst_f0659ed2-094d-48fb-9e40-de05564d96c7
+      title: AvatarStyleID
+      type: string
+    AvatarStyle:
+      title: AvatarStyle
+      type: object
+      description: ''
+      properties:
+        id:
+          $ref: '#/components/schemas/AvatarStyleID'
+        styleName:
+          type: string
+      required:
+        - id
+        - styleName
     UpdateAvatarRequest:
       title: UpdateAvatarRequest
       type: object
@@ -6342,6 +6485,87 @@ components:
         - fileSize
         - success
         - uncompressedSize
+    AdminUnityPackage:
+      title: AdminUnityPackage
+      type: object
+      description: ''
+      properties:
+        assetUrl:
+          type: string
+          example: https://assets.vrchat.com/adminfiles/adfl_fba880f3-7d8c-4429-87e6-0e2d50000076ie_chad_rat_standalonewindows
+        assetVersion:
+          minimum: 0
+          type: integer
+          example: 4
+        platform:
+          $ref: '#/components/schemas/Platform'
+        unityVersion:
+          default: 2022.3.22f1-DWR
+          example: 2022.3.22f1-DWR
+          minLength: 1
+          type: string
+        variant:
+          type: string
+      required:
+        - assetUrl
+        - assetVersion
+        - platform
+        - unityVersion
+        - variant
+    AdminAssetBundle:
+      title: AdminAssetBundle
+      type: object
+      description: ''
+      properties:
+        _created_at:
+          type: string
+          format: date-time
+        _updated_at:
+          type: string
+          format: date-time
+        assetType:
+          type: string
+        authorId:
+          $ref: '#/components/schemas/UserID'
+        authorName:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        name:
+          type: string
+        releaseStatus:
+          $ref: '#/components/schemas/ReleaseStatus'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        thumbnailImageUrl:
+          type: string
+        unityPackageUrl:
+          type: string
+          nullable: true
+        unityPackages:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminUnityPackage'
+          minItems: 1
+          uniqueItems: true
+      required:
+        - _created_at
+        - _updated_at
+        - assetType
+        - authorId
+        - authorName
+        - description
+        - imageUrl
+        - name
+        - releaseStatus
+        - tags
+        - thumbnailImageUrl
+        - unityPackageUrl
+        - unityPackages
     LimitedUserFriend:
       description: User object received when querying your friends list
       properties:
@@ -7812,6 +8036,292 @@ components:
             $ref: '#/components/schemas/GroupPermissions'
         order:
           type: integer
+    InventoryItemType:
+      title: InventoryItemType
+      type: string
+      enum:
+        - bundle
+        - prop
+        - emoji
+        - sticker
+      default: bundle
+      example: prop
+    InventoryItemID:
+      example: inv_10bce5b0-2d2b-44e0-900d-db6534615162
+      title: InventoryItemID
+      type: string
+    InventoryTemplateID:
+      example: invt_b80ce14b-038b-4f56-b970-d232771d62e3
+      title: InventoryTemplateID
+      type: string
+    PropID:
+      example: prop_829ba6f6-b837-49d9-b9a9-056b82103b58
+      title: PropID
+      type: string
+    InventoryMetadata:
+      title: InventoryMetadata
+      type: object
+      properties:
+        inventoryItemsToInstantiate:
+          description: Only in bundles
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryTemplateID'
+        animated:
+          type: boolean
+        animationStyle:
+          type: string
+        assetBundleId:
+          type: string
+        fileId:
+          type: string
+        imageUrl:
+          type: string
+        maskTag:
+          type: string
+        propId:
+          $ref: '#/components/schemas/PropID'
+      additionalProperties: true
+    InventoryItem:
+      title: InventoryItem
+      type: object
+      properties:
+        collections:
+          type: array
+          items:
+            type: string
+        created_at:
+          format: date-time
+          type: string
+          example: '2025-06-13T05:00:45.455Z'
+        description:
+          type: string
+        expiryDate:
+          format: date-time
+          type: string
+          example: '2025-06-13T05:00:45.455Z'
+          nullable: true
+        flags:
+          type: array
+          items:
+            type: string
+        holderId:
+          $ref: '#/components/schemas/UserID'
+        id:
+          $ref: '#/components/schemas/InventoryItemID'
+        imageUrl:
+          type: string
+        isArchived:
+          type: boolean
+        isSeen:
+          type: boolean
+        itemType:
+          $ref: '#/components/schemas/InventoryItemType'
+        itemTypeLabel:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/InventoryMetadata'
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        templateId:
+          $ref: '#/components/schemas/InventoryTemplateID'
+        template_created_at:
+          format: date-time
+          type: string
+          example: '2025-06-09T16:31:40.785Z'
+        template_updated_at:
+          format: date-time
+          type: string
+          example: '2025-06-25T00:34:14.578Z'
+        updated_at:
+          format: date-time
+          type: string
+          example: '2025-06-25T00:34:15.965Z'
+      required:
+        - collections
+        - created_at
+        - description
+        - expiryDate
+        - flags
+        - holderId
+        - id
+        - imageUrl
+        - isArchived
+        - isSeen
+        - itemType
+        - itemTypeLabel
+        - metadata
+        - name
+        - tags
+        - templateId
+        - template_created_at
+        - template_updated_at
+        - updated_at
+    Inventory:
+      title: Inventory
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+        totalCount:
+          type: integer
+      required:
+        - data
+        - totalCount
+    InventoryDropID:
+      example: invd_ee3a8f7f-1454-4748-a935-99bf9865f33d
+      title: InventoryDropID
+      type: string
+    InventoryNotificationDetails:
+      title: InventoryNotificationDetails
+      type: object
+      properties:
+        body:
+          type: string
+        imageUrl:
+          type: string
+        title:
+          type: string
+      required:
+        - body
+        - imageUrl
+        - title
+    InventoryDrop:
+      title: InventoryDrop
+      type: object
+      properties:
+        authorId:
+          $ref: '#/components/schemas/UserID'
+        created_at:
+          format: date-time
+          type: string
+          example: '2025-06-10T20:37:31.837Z'
+        dropExpiryDate:
+          format: date-time
+          type: string
+          nullable: true
+        endDropDate:
+          format: date-time
+          type: string
+          example: '2184-07-24T00:00:00.000Z'
+        id:
+          $ref: '#/components/schemas/InventoryDropID'
+        name:
+          type: string
+        notificationDetails:
+          $ref: '#/components/schemas/InventoryNotificationDetails'
+        startDropDate:
+          format: date-time
+          type: string
+          example: '2025-06-09T10:00:00.000Z'
+        status:
+          type: string
+          example: active
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        targetGroup:
+          type: string
+          example: everyone
+        templateIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryTemplateID'
+        updated_at:
+          format: date-time
+          type: string
+          example: '2025-06-10T20:37:31.837Z'
+      required:
+        - authorId
+        - created_at
+        - dropExpiryDate
+        - endDropDate
+        - id
+        - name
+        - notificationDetails
+        - startDropDate
+        - status
+        - tags
+        - targetGroup
+        - templateIds
+        - updated_at
+    InventoryTemplate:
+      title: InventoryTemplate
+      type: object
+      properties:
+        authorId:
+          $ref: '#/components/schemas/UserID'
+        collections:
+          type: array
+          items:
+            type: string
+        created_at:
+          format: date-time
+          type: string
+          example: '2025-06-12T20:21:15.056Z'
+        description:
+          type: string
+        flags:
+          type: array
+          items:
+            type: string
+        id:
+          $ref: '#/components/schemas/InventoryTemplateID'
+        imageUrl:
+          type: string
+        itemType:
+          $ref: '#/components/schemas/InventoryItemType'
+        itemTypeLabel:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/InventoryMetadata'
+        name:
+          type: string
+        notificationDetails:
+          $ref: '#/components/schemas/InventoryNotificationDetails'
+        status:
+          type: string
+          example: live
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        updated_at:
+          format: date-time
+          type: string
+          example: '2025-06-10T20:37:31.837Z'
+      required:
+        - authorId
+        - collections
+        - created_at
+        - description
+        - flags
+        - id
+        - imageUrl
+        - itemType
+        - itemTypeLabel
+        - name
+        - status
+        - tags
+        - updated_at
+    InventorySpawn:
+      title: InventorySpawn
+      type: object
+      properties:
+        token:
+          type: string
+        version:
+          type: integer
+      required:
+        - token
+        - version
     InviteRequest:
       title: InviteRequest
       type: object
@@ -8451,6 +8961,102 @@ components:
         - timestamp
         - worldId
         - worldName
+    PropUnityPackage:
+      title: PropUnityPackage
+      type: object
+      description: ''
+      properties:
+        assetUrl:
+          type: string
+          example: https://api.vrchat.cloud/api/1/file/file_c991c050-8b43-4046-8182-24d068524ac5/24/file
+        assetVersion:
+          minimum: 0
+          type: integer
+          example: 4
+        propSignature:
+          type: string
+        platform:
+          $ref: '#/components/schemas/Platform'
+        unityVersion:
+          default: 2022.3.22f1
+          example: 2022.3.22f1
+          minLength: 1
+          type: string
+        variant:
+          type: string
+      required:
+        - assetUrl
+        - assetVersion
+        - platform
+        - propSignature
+        - unityVersion
+        - variant
+    Prop:
+      title: Prop
+      type: object
+      description: ''
+      properties:
+        _created_at:
+          type: string
+          format: date-time
+        _updated_at:
+          type: string
+          format: date-time
+        authorId:
+          $ref: '#/components/schemas/UserID'
+        authorName:
+          type: string
+        description:
+          type: string
+        id:
+          $ref: '#/components/schemas/PropID'
+        imageUrl:
+          type: string
+        maxCountPerUser:
+          type: integer
+          default: 1
+        name:
+          type: string
+        releaseStatus:
+          $ref: '#/components/schemas/ReleaseStatus'
+        spawnType:
+          type: integer
+          default: 0
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        thumbnailImageUrl:
+          type: string
+        unityPackageUrl:
+          type: string
+          nullable: true
+        unityPackages:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropUnityPackage'
+          minItems: 1
+          uniqueItems: true
+        worldPlacementMask:
+          type: integer
+          default: 1
+      required:
+        - _created_at
+        - _updated_at
+        - authorId
+        - authorName
+        - description
+        - id
+        - imageUrl
+        - maxCountPerUser
+        - name
+        - releaseStatus
+        - spawnType
+        - tags
+        - thumbnailImageUrl
+        - unityPackageUrl
+        - unityPackages
+        - worldPlacementMask
     Jam:
       description: ''
       properties:
@@ -10888,6 +11494,14 @@ components:
                 error:
                   message: cannot set featured tag if you are not an admin
                   status_code: 401
+    AvatarStyleListResponse:
+      description: Returns a list of AvatarStyle objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AvatarStyle'
     AvatarNotFoundError:
       description: Error response when trying to show information about a non-existent avatar.
       content:
@@ -11286,6 +11900,12 @@ components:
                 error:
                   message: Analysis not yet available
                   status_code: 202
+    AdminAssetBundleResponse:
+      description: Returns a single AdminAssetBundle object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AdminAssetBundle'
     LimitedUserFriendListResponse:
       description: Returns a list of LimitedUserFriend objects.
       content:
@@ -11745,6 +12365,38 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GroupRole'
+    InventoryResponse:
+      description: Returns an Inventory object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Inventory'
+    InventoryItemResponse:
+      description: Returns an InventoryItem object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InventoryItem'
+    InventoryDropListResponse:
+      description: Returns a list of InventoryDrop objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/InventoryDrop'
+    InventoryTemplateResponse:
+      description: Returns an InventoryTemplate object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InventoryTemplate'
+    InventorySpawnResponse:
+      description: Returns an InventorySpawn object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InventorySpawn'
     SendNotificationResponse:
       description: Returns a single SentNotifcation object.
       content:
@@ -12048,6 +12700,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Print'
+    PropResponse:
+      description: Returns a single Prop object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Prop'
     JamListResponse:
       description: Returns a list of Jam objects.
       content:
@@ -12653,7 +13311,7 @@ components:
       required: false
       schema:
         type: boolean
-      description: Filter for users' listings.
+      description: Filter for users' listings and inventory bundles.
     favoriteId:
       name: favoriteId
       in: path
@@ -12708,6 +13366,14 @@ components:
           - delta
         example: file
       description: Type of file.
+    adminAssetBundleId:
+      name: adminAssetBundleId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d
+      description: Must be a valid admin asset bundle ID.
     offline:
       name: offline
       in: query
@@ -12808,6 +13474,46 @@ components:
       schema:
         type: string
       description: Must be a valid notification ID.
+    inventorySortOrder:
+      name: inventorySortOrder
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - newest
+          - oldest
+      description: Sort order for inventory retrieval.
+    inventoryItemType:
+      name: inventoryItemType
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/InventoryItemType'
+      description: Filter for inventory retrieval.
+    inventoryItemId:
+      name: inventoryItemId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: inv_00000000-0000-0000-0000-000000000000
+      description: Must be a valid inventory item ID.
+    inventoryTemplateId:
+      name: inventoryTemplateId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: invt_00000000-0000-0000-0000-000000000000
+      description: Must be a valid inventory template ID.
+    inventorySpawnItemId:
+      name: id
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/InventoryItemID'
+      description: Id for inventory item spawning.
     worldId:
       name: worldId
       in: path
@@ -12846,6 +13552,14 @@ components:
         type: string
         example: prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa
       description: Print ID.
+    propId:
+      name: propId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: prop_829ba6f6-b837-49d9-b9a9-056b82103b58
+      description: Prop ID.
     jamId:
       name: jamId
       in: path
@@ -12860,7 +13574,7 @@ components:
       required: false
       schema:
         type: boolean
-      description: Filter for users' previously submitted feedback, e.g., a groupId, useeId, avatarId, etc.
+      description: Filter for users' previously submitted feedback, e.g., a groupId, userId, avatarId, etc.
     userNoteId:
       name: userNoteId
       in: path
