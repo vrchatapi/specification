@@ -403,14 +403,14 @@ contentId:
   required: false
   schema:
     type: boolean
-  description: Filter for users' previously submitted feedback, e.g., a groupId, useeId, avatarId, etc.
+  description: Filter for users' previously submitted feedback, e.g., a groupId, userId, avatarId, etc.
 active:
   name: active
   in: query
   required: false
   schema:
     type: boolean
-  description: Filter for users' listings.
+  description: Filter for users' listings and inventory bundles.
 variant:
   name: variant
   in: query
@@ -477,3 +477,59 @@ verifyLoginPlaceToken:
   schema:
     type: string
   description: 'Token to verify login attempt.'
+propId:
+  name: propId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: 'prop_829ba6f6-b837-49d9-b9a9-056b82103b58'
+  description: Prop ID.
+adminAssetBundleId:
+  name: adminAssetBundleId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: 'aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d'
+  description: Must be a valid admin asset bundle ID.
+inventoryItemId:
+  name: inventoryItemId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: inv_00000000-0000-0000-0000-000000000000
+  description: Must be a valid inventory item ID.
+inventoryTemplateId:
+  name: inventoryTemplateId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: invt_00000000-0000-0000-0000-000000000000
+  description: Must be a valid inventory template ID.
+inventorySortOrder:
+  name: inventorySortOrder
+  in: query
+  required: false
+  schema:
+    type: string
+    enum:
+      - newest
+      - oldest
+  description: Sort order for inventory retrieval.
+inventoryItemType:
+  name: inventoryItemType
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/InventoryItemType.yaml
+  description: Filter for inventory retrieval.
+inventorySpawnItemId:
+  name: id
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/InventoryItemID.yaml
+  description: Id for inventory item spawning.

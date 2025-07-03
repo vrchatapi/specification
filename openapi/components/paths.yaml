@@ -43,6 +43,8 @@
   $ref: "./paths/avatars.yaml#/paths/~1users~1{userId}~1avatar"
 "/avatars":
   $ref: "./paths/avatars.yaml#/paths/~1avatars"
+"/avatarStyles":
+  $ref: "./paths/avatars.yaml#/paths/~1avatarStyles"
 "/avatars/{avatarId}":
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}"
 "/avatars/{avatarId}/select":
@@ -130,6 +132,8 @@
   $ref: "./paths/files.yaml#/paths/~1icon"
 "/gallery":
   $ref: "./paths/files.yaml#/paths/~1gallery"
+"/adminassetbundles/{adminAssetBundleId}":
+  $ref: "./paths/files.yaml#/paths/~1adminassetbundles~1{adminAssetBundleId}"
 
 # friends
 
@@ -199,6 +203,19 @@
 "/groups/{groupId}/roles/{groupRoleId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
 
+# inventory
+
+"/inventory":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory"
+"/inventory/{inventoryItemId}":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}"
+"/inventory/drops":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1drops"
+"/inventory/template/{inventoryTemplateId}":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1template~1{inventoryTemplateId}"
+"/inventory/spawn":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1spawn"
+
 # invite
 
 "/invite/{userId}":
@@ -261,6 +278,11 @@
   $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
 "/prints":
   $ref: "./paths/prints.yaml#/paths/~1prints"
+
+# props
+
+"/props/{propId}":
+  $ref: "./paths/props.yaml#/paths/~1props~1{propId}"
 
 # jams
 

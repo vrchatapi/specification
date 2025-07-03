@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: inventory
+  version: '1.0'
+  description: 'The inventory manages collectable items, such as drop bundles and their contents.'
+paths:
+  '/inventory':
+    parameters:
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+      - $ref: ../parameters.yaml#/inventorySortOrder
+      - $ref: ../parameters.yaml#/inventoryItemType
+    get:
+      summary: Get Inventory
+      operationId: getInventory
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/InventoryResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      description: Returns an Inventory object.
+  '/inventory/{inventoryItemId}':
+    parameters:
+      - $ref: ../parameters.yaml#/inventoryItemId
+    get:
+      summary: Get Own Inventory Item
+      operationId: getOwnInventoryItem
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/InventoryItemResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      description: Returns an InventoryItem object held by the currently logged in user.
+  '/users/{userId}/inventory/{inventoryItemId}':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/inventoryItemId
+    get:
+      summary: Get User Inventory Item
+      operationId: getUserInventoryItem
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/InventoryItemResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      description: Returns an InventoryItem object held by the given user.
+  '/inventory/drops':
+    parameters:
+      - $ref: ../parameters.yaml#/active
+    get:
+      summary: List Inventory Drops
+      operationId: getInventoryDrops
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/InventoryDropListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      description: Returns a list of InventoryDrop objects.
+  '/inventory/template/{inventoryTemplateId}':
+    parameters:
+      - $ref: ../parameters.yaml#/inventoryTemplateId
+    get:
+      summary: Get Inventory Template
+      operationId: getInventoryTemplate
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/InventoryTemplateResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      description: Returns an InventoryTemplate object.
+  '/inventory/spawn':
+    parameters:
+      - $ref: ../parameters.yaml#/inventorySpawnItemId
+    get:
+      summary: Spawn Inventory Item
+      operationId: spawnInventoryItem
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/InventorySpawnResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      description: Returns an InventorySpawn object.
+tags:
+  $ref: ../tags.yaml
+components:
+  securitySchemes:
+    $ref: ../securitySchemes.yaml

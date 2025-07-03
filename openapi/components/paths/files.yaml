@@ -358,6 +358,20 @@ paths:
       security:
         - authCookie: [ ]
       description: Upload a gallery image
+  /adminassetbundles/{adminAssetBundleId}:
+    get:
+      summary: Get AdminAssetBundle
+      responses:
+        '200':
+          $ref: ../responses/files/AdminAssetBundleResponse.yaml
+      operationId: getAdminAssetBundle
+      security:
+        - authCookie: []
+      description: Returns an AdminAssetBundle
+      parameters:
+        - $ref: ../parameters.yaml#/adminAssetBundleId
+      tags:
+        - files
 tags:
   $ref: ../tags.yaml
 components:

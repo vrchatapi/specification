@@ -1,0 +1,10 @@
+title: InventorySpawn
+type: object
+properties:
+  token:
+    type: string
+  version:
+    type: integer
+required:
+  - token
+  - version

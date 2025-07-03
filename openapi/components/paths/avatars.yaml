@@ -124,6 +124,16 @@ paths:
             schema:
               $ref: ../requests/CreateAvatarRequest.yaml
       description: Create an avatar. It's possible to optionally specify a ID if you want a custom one. Attempting to create an Avatar with an already claimed ID will result in a DB error.
+  /avatarStyles:
+    get:
+      summary: Get Avatar Styles
+      tags:
+        - avatars
+      responses:
+        '200':
+          $ref: ../responses/avatars/AvatarStyleListResponse.yaml
+      operationId: getAvatarStyles
+      description: List avatar styles.
   '/avatars/{avatarId}':
     parameters:
       - $ref: ../parameters.yaml#/avatarId

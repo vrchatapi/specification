@@ -1,0 +1,12 @@
+title: Inventory
+type: object
+properties:
+  data:
+    type: array
+    items:
+      $ref: ./InventoryItem.yaml
+  totalCount:
+    type: integer
+required:
+  - data
+  - totalCount

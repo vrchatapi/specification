@@ -19,6 +19,9 @@
 - name: groups
   description:
     $ref: ./paths/groups.yaml#/info/description
+- name: inventory
+  description:
+    $ref: ./paths/inventory.yaml#/info/description
 - name: invite
   description:
     $ref: ./paths/invite.yaml#/info/description
@@ -37,6 +40,9 @@
 - name: prints
   description:
     $ref: ./paths/prints.yaml#/info/description
+- name: props
+  description:
+    $ref: ./paths/props.yaml#/info/description
 - name: users
   description:
     $ref: ./paths/users.yaml#/info/description
