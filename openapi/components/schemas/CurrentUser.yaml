@@ -172,6 +172,10 @@ properties:
     type: string
   pronouns:
     type: string
+  pronounsHistory:
+    type: array
+    items:
+      type: string
   queuedInstance:
     type: string
     nullable: true
@@ -224,6 +228,7 @@ required:
   - profilePicOverride
   - profilePicOverrideThumbnail
   - pronouns
+  - pronounsHistory
   - statusDescription
   - pastDisplayNames
   - hasEmail
