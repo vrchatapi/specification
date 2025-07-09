@@ -19,6 +19,8 @@ properties:
     type: integer
   constraintCount:
     type: integer
+  constraintDepth:
+    type: integer
   contactCount:
     type: integer
   customExpressions:
@@ -97,6 +99,7 @@ required:
   - bounds
   - clothCount
   - constraintCount
+  - constraintDepth
   - contactCount
   - customExpressions
   - customizeAnimationLayers
