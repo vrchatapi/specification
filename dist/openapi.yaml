@@ -8382,7 +8382,7 @@ components:
       title: RequestInviteRequest
       type: object
       properties:
-        messageSlot:
+        requestSlot:
           type: integer
           minimum: 0
           maximum: 11
