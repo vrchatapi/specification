@@ -1,0 +1,5 @@
+title: UpdateInventoryItemRequest
+type: object
+properties:
+  isArchived:
+    type: boolean
