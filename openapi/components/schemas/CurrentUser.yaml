@@ -161,7 +161,7 @@ properties:
         isMobile:
           type: boolean
         platform:
-          type: string
+          $ref: ./Platform.yaml
           nullable: true
         recorded:
           type: string
