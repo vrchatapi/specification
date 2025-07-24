@@ -249,35 +249,35 @@ platform:
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Platform.yaml
   description: The platform the asset supports.
 tag:
   name: tag
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to include (comma-separated). Any of the tags needs to be present.
 include:
   name: include
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to include (comma-separated). Any of the tags needs to be present.
 require:
   name: require
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to include (comma-separated). All of the tags needs to be present.
 notag:
   name: notag
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to exclude (comma-separated).
 search:
   name: search

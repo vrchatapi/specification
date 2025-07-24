@@ -1,7 +1,7 @@
 properties:
   platform:
     description: 'TODO: Does this still exist?'
-    type: string
+    $ref: ./Platform.yaml
   requestMessage:
     description: Used when using InviteMessage Slot.
     type: string
