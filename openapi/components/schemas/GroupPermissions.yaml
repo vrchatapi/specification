@@ -25,6 +25,7 @@ enum:
   - group-members-viewall
   - group-roles-assign
   - group-roles-manage
+  - group-calendar-manage
 x-enum-varnames:
   - group_all
   - group_announcement_manage
@@ -50,3 +51,4 @@ x-enum-varnames:
   - group_members_viewall
   - group_roles_assign
   - group_roles_manage
+  - group_calendar_manage
