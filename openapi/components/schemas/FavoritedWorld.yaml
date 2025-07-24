@@ -109,7 +109,6 @@ required:
   - id
   - description
   - name
-  - authorId
   - authorName
   - capacity
   - imageUrl
