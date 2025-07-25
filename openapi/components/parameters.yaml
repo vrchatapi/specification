@@ -510,22 +510,52 @@ inventoryTemplateId:
     example: invt_00000000-0000-0000-0000-000000000000
   description: Must be a valid inventory template ID.
 inventorySortOrder:
-  name: inventorySortOrder
+  name: order
   in: query
   required: false
   schema:
     type: string
     enum:
       - newest
+      - newest_created
       - oldest
+      - oldest_created
   description: Sort order for inventory retrieval.
-inventoryItemType:
-  name: inventoryItemType
+inventoryItemTypes:
+  name: types
   in: query
   required: false
   schema:
     $ref: ./schemas/InventoryItemType.yaml
   description: Filter for inventory retrieval.
+inventoryItemTags:
+  name: tags
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/Tag.yaml
+  description: Filter tags for inventory retrieval (comma-separated).
+inventoryItemFlags:
+  name: flags
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/InventoryFlag.yaml
+  description: Filter flags for inventory retrieval (comma-separated).
+inventoryItemNotFlags:
+  name: notFlags
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/InventoryFlag.yaml
+  description: Filter out flags for inventory retrieval (comma-separated).
+inventoryItemArchived:
+  name: archived
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Filter archived status for inventory retrieval.
 inventorySpawnItemId:
   name: id
   in: query
