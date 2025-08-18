@@ -62,6 +62,27 @@
 "/avatars/{avatarId}/impostor":
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1impostor"
 
+# calendar
+
+'/calendar':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar"
+'/calendar/featured':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1featured"
+'/calendar/following':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1following"
+'/calendar/{groupId}':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}"
+'/calendar/{groupId}/event':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1event"
+'/calendar/{groupId}/{calendarId}':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}"
+'/calendar/{groupId}/{calendarId}.ics':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}.ics"
+'/calendar/{groupId}/{calendarId}/event':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}~1event"
+'/calendar/{groupId}/{calendarId}/follow':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}~1follow"
+
 # economy
 
 '/Steam/transactions':

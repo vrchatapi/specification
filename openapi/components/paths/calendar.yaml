@@ -1,0 +1,202 @@
+openapi: 3.0.3
+info:
+  title: calendar
+  version: '1.0'
+  description: Calendar docs here
+paths:
+  /calendar:
+    get:
+      summary: List calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/CalendarEventListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: ../parameters.yaml#/monthDate
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      description: Get a list of a user's calendar events for the month in ?date
+  /calendar/featured:
+    get:
+      summary: List featured calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/CalendarEventListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getFeaturedCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: ../parameters.yaml#/monthDate
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      description: Get a list of a featured calendar events for the month in ?date
+  /calendar/following:
+    get:
+      summary: List followed calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/CalendarEventListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getFollowedCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: ../parameters.yaml#/monthDate
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      description: Get a list of a followed calendar events for the month in ?date
+  '/calendar/{groupId}/event':
+    post:
+      summary: Create a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/CalendarEventResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: createGroupCalendarEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateCalendarEventRequest.yaml
+      security:
+        - authCookie: []
+      description: Creates an event for a group on the calendar
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+  '/calendar/{groupId}/{calendarId}/follow':
+    post:
+      summary: Follow a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/CalendarEventResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: followGroupCalendarEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/FollowCalendarEventRequest.yaml
+      security:
+        - authCookie: []
+      description: Follow or unfollow an event on a group's calendar
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+      - $ref: ../parameters.yaml#/calendarId
+  '/calendar/{groupId}/{calendarId}/event':
+    put:
+      summary: Update a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/CalendarEventResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: updateGroupCalendarEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateCalendarEventRequest.yaml
+      security:
+        - authCookie: []
+      description: Updates an event for a group on the calendar
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+      - $ref: ../parameters.yaml#/calendarId
+  '/calendar/{groupId}':
+    get:
+      summary: List a group's calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/CalendarEventListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getGroupCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: ../parameters.yaml#/groupId
+        - $ref: ../parameters.yaml#/monthDate
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      description: Get a list of a group's calendar events
+  '/calendar/{groupId}/{calendarId}.ics':
+    get:
+      summary: Download calendar event as ICS
+      tags:
+        - calendar
+      description: Returns the specified calendar in iCalendar (ICS) format.
+      parameters:
+        - $ref: ../parameters.yaml#/groupId
+        - $ref: ../parameters.yaml#/calendarId
+      operationId: getGroupCalendarEventICS
+      responses:
+        '200':
+          $ref: ../responses/calendar/ICSResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '404':
+          $ref: ../responses/calendar/ICSNotFoundError.yaml
+  '/calendar/{groupId}/{calendarId}':
+    get:
+      summary: Get a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/CalendarEventResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: getGroupCalendarEvent
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: ../parameters.yaml#/groupId
+        - $ref: ../parameters.yaml#/calendarId
+      description: Get a group calendar event
+    delete:
+      summary: Delete a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/DeleteCalendarEventSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: deleteGroupCalendarEvent
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: ../parameters.yaml#/groupId
+        - $ref: ../parameters.yaml#/calendarId
+      description: Delete a group calendar event
+tags:
+  $ref: ../tags.yaml
+components:
+  securitySchemes:
+    $ref: ../securitySchemes.yaml

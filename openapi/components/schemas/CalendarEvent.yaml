@@ -1,0 +1,95 @@
+description: ''
+properties:
+  accessType:
+    type: string
+    example: group
+  category:
+    type: string
+    example: performance
+  closeInstanceAfterEndMinutes:
+    type: integer
+  createdAt:
+    type: string
+    format: date-time
+  deletedAt:
+    type: string
+    format: date-time
+    nullable: true
+  description:
+    type: string
+  endsAt:
+    type: string
+    format: date-time
+  featured:
+    type: boolean
+  guestEarlyJoinMinutes:
+    type: integer
+  hostEarlyJoinMinutes:
+    type: integer
+  id:
+    $ref: ./CalendarID.yaml
+  imageId:
+    $ref: ./FileID.yaml
+    nullable: true
+  imageUrl:
+    type: string
+    nullable: true
+  interestedUserCount:
+    type: integer
+  isDraft:
+    type: boolean
+  languages:
+    description: ' '
+    type: array
+    items:
+      type: string
+  ownerId:
+    $ref: ./GroupID.yaml
+  platforms:
+    description: ' '
+    type: array
+    items:
+      type: string
+  roleIds:
+    description: ' '
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
+    nullable: true
+  startsAt:
+    type: string
+    format: date-time
+  tags:
+    description: ' '
+    items:
+      $ref: ./Tag.yaml
+    type: array
+  title:
+    type: string
+    minLength: 1
+  type:
+    type: string
+    example: event
+  updatedAt:
+    type: string
+    format: date-time
+  usesInstanceOverflow:
+    type: boolean
+  userInterest:
+    type: object
+    properties:
+      createdAt:
+        type: string
+        format: date-time
+      isFollowing:
+        type: boolean
+      updatedAt:
+        type: string
+        format: date-time
+required:
+  - id
+  - title
+  - accessType
+  - createdAt
+title: CalendarEvent
+type: object

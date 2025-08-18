@@ -1,0 +1,14 @@
+title: PaginatedCalendarEventList
+type: object
+properties:
+  results:
+    description: ' '
+    type: array
+    items:
+      $ref: ./CalendarEvent.yaml
+  totalCount:
+    type: integer
+    description: The total number of results that the query would return if there were no pagination.
+  hasNext:
+    type: boolean
+    description: Whether there are more results after this page.
