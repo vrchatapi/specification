@@ -98,6 +98,8 @@ tags:
     description: Authentication Docs Here
   - name: avatars
     description: Avatars Docs Here
+  - name: calendar
+    description: Calendar docs here
   - name: economy
     description: Economy Docs Here
   - name: favorites
@@ -741,6 +743,197 @@ paths:
       security:
         - authCookie: []
       description: Delete generated Impostor for that avatar.
+  /calendar:
+    get:
+      summary: List calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/CalendarEventListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/monthDate'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      description: Get a list of a user's calendar events for the month in ?date
+  /calendar/featured:
+    get:
+      summary: List featured calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/CalendarEventListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getFeaturedCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/monthDate'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      description: Get a list of a featured calendar events for the month in ?date
+  /calendar/following:
+    get:
+      summary: List followed calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/CalendarEventListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getFollowedCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/monthDate'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      description: Get a list of a followed calendar events for the month in ?date
+  /calendar/{groupId}:
+    get:
+      summary: List a group's calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/CalendarEventListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getGroupCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/monthDate'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      description: Get a list of a group's calendar events
+  /calendar/{groupId}/event:
+    post:
+      summary: Create a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/CalendarEventResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: createGroupCalendarEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCalendarEventRequest'
+      security:
+        - authCookie: []
+      description: Creates an event for a group on the calendar
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+  /calendar/{groupId}/{calendarId}:
+    get:
+      summary: Get a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/CalendarEventResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: getGroupCalendarEvent
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/calendarId'
+      description: Get a group calendar event
+    delete:
+      summary: Delete a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteCalendarEventSuccess'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: deleteGroupCalendarEvent
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/calendarId'
+      description: Delete a group calendar event
+  /calendar/{groupId}/{calendarId}.ics:
+    get:
+      summary: Download calendar event as ICS
+      tags:
+        - calendar
+      description: Returns the specified calendar in iCalendar (ICS) format.
+      parameters:
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/calendarId'
+      operationId: getGroupCalendarEventICS
+      responses:
+        '200':
+          $ref: '#/components/responses/ICSResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '404':
+          $ref: '#/components/responses/ICSNotFoundError'
+  /calendar/{groupId}/{calendarId}/event:
+    put:
+      summary: Update a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/CalendarEventResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: updateGroupCalendarEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCalendarEventRequest'
+      security:
+        - authCookie: []
+      description: Updates an event for a group on the calendar
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/calendarId'
+  /calendar/{groupId}/{calendarId}/follow:
+    post:
+      summary: Follow a calendar event
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/CalendarEventResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: followGroupCalendarEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FollowCalendarEventRequest'
+      security:
+        - authCookie: []
+      description: Follow or unfollow an event on a group's calendar
+    parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/calendarId'
   /Steam/transactions:
     get:
       summary: List Steam Transactions
@@ -5215,6 +5408,278 @@ components:
           type: integer
       required:
         - estimatedServiceDurationSeconds
+    CalendarID:
+      example: cal_6b182f0c-61ef-4bdf-97fe-94f63bcba27b
+      title: CalendarID
+      type: string
+    FileID:
+      example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
+      title: FileID
+      type: string
+    GroupRoleID:
+      example: grol_459d3911-f672-44bc-b84d-e54ffe7960fe
+      title: GroupRoleID
+      type: string
+    CalendarEvent:
+      description: ''
+      properties:
+        accessType:
+          type: string
+          example: group
+        category:
+          type: string
+          example: performance
+        closeInstanceAfterEndMinutes:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        description:
+          type: string
+        endsAt:
+          type: string
+          format: date-time
+        featured:
+          type: boolean
+        guestEarlyJoinMinutes:
+          type: integer
+        hostEarlyJoinMinutes:
+          type: integer
+        id:
+          $ref: '#/components/schemas/CalendarID'
+        imageId:
+          $ref: '#/components/schemas/FileID'
+          nullable: true
+        imageUrl:
+          type: string
+          nullable: true
+        interestedUserCount:
+          type: integer
+        isDraft:
+          type: boolean
+        languages:
+          description: ' '
+          type: array
+          items:
+            type: string
+        ownerId:
+          $ref: '#/components/schemas/GroupID'
+        platforms:
+          description: ' '
+          type: array
+          items:
+            type: string
+        roleIds:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleID'
+          nullable: true
+        startsAt:
+          type: string
+          format: date-time
+        tags:
+          description: ' '
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        title:
+          type: string
+          minLength: 1
+        type:
+          type: string
+          example: event
+        updatedAt:
+          type: string
+          format: date-time
+        usesInstanceOverflow:
+          type: boolean
+        userInterest:
+          type: object
+          properties:
+            createdAt:
+              type: string
+              format: date-time
+            isFollowing:
+              type: boolean
+            updatedAt:
+              type: string
+              format: date-time
+      required:
+        - id
+        - title
+        - accessType
+        - createdAt
+      title: CalendarEvent
+      type: object
+    PaginatedCalendarEventList:
+      title: PaginatedCalendarEventList
+      type: object
+      properties:
+        results:
+          description: ' '
+          type: array
+          items:
+            $ref: '#/components/schemas/CalendarEvent'
+        totalCount:
+          type: integer
+          description: The total number of results that the query would return if there were no pagination.
+        hasNext:
+          type: boolean
+          description: Whether there are more results after this page.
+    CreateCalendarEventRequest:
+      title: CreateCalendarEventRequest
+      type: object
+      properties:
+        title:
+          type: string
+          description: Event title
+          minLength: 1
+          example: Performance Event!
+        startsAt:
+          type: string
+          format: date-time
+          description: Time the event starts at
+        description:
+          type: string
+          minLength: 1
+        endsAt:
+          type: string
+          format: date-time
+          description: Time the event ends at
+        category:
+          type: string
+          example: performance
+        tags:
+          type: array
+          items:
+            type: string
+        isDraft:
+          type: boolean
+        imageId:
+          $ref: '#/components/schemas/FileID'
+        roleIds:
+          type: array
+          items:
+            type: string
+        parentId:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        languages:
+          type: array
+          items:
+            type: string
+        sendCreationNotification:
+          type: boolean
+          description: Send notification to group members.
+          example: false
+        featured:
+          type: boolean
+        hostEarlyJoinMinutes:
+          type: integer
+          example: 60
+        guestEarlyJoinMinutes:
+          type: integer
+          example: 5
+        closeInstanceAfterEndMinutes:
+          type: integer
+          example: 5
+        usesInstanceOverflow:
+          type: boolean
+          example: true
+        accessType:
+          type: string
+          enum:
+            - public
+            - group
+      required:
+        - title
+        - accessType
+        - startsAt
+        - endsAt
+        - description
+        - category
+        - sendCreationNotification
+    UpdateCalendarEventRequest:
+      title: UpdateCalendarEventRequest
+      type: object
+      properties:
+        title:
+          type: string
+          description: Event title
+          minLength: 1
+          example: Performance Event!
+        startsAt:
+          type: string
+          format: date-time
+          description: Time the vent starts at
+        description:
+          type: string
+          minLength: 1
+        endsAt:
+          type: string
+          format: date-time
+          description: Time the vent starts at
+        category:
+          type: string
+          example: performance
+        tags:
+          type: array
+          items:
+            type: string
+        isDraft:
+          type: boolean
+        imageId:
+          $ref: '#/components/schemas/FileID'
+        roleIds:
+          type: array
+          items:
+            type: string
+        parentId:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        languages:
+          type: array
+          items:
+            type: string
+        sendCreationNotification:
+          type: boolean
+          description: Send notification to group members.
+          default: false
+          example: false
+        featured:
+          type: boolean
+        hostEarlyJoinMinutes:
+          type: integer
+          example: 60
+        guestEarlyJoinMinutes:
+          type: integer
+          example: 5
+        closeInstanceAfterEndMinutes:
+          type: integer
+          example: 5
+        usesInstanceOverflow:
+          type: boolean
+          example: true
+    FollowCalendarEventRequest:
+      title: FollowCalendarEventRequest
+      type: object
+      properties:
+        isFollowing:
+          type: boolean
+          example: true
+      required:
+        - isFollowing
     TransactionID:
       example: txn_e5c72948-e735-4880-8245-24b2a41198b0
       title: TransactionID
@@ -5620,14 +6085,6 @@ components:
         - name
         - description
         - licenses
-    FileID:
-      example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
-      title: FileID
-      type: string
-    GroupRoleID:
-      example: grol_459d3911-f672-44bc-b84d-e54ffe7960fe
-      title: GroupRoleID
-      type: string
     ProductID:
       example: prod_bfbc2315-247a-44d7-bfea-5237f8d56cb4
       title: ProductID
@@ -11568,6 +12025,49 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ServiceQueueStats'
+    CalendarEventListResponse:
+      description: Returns a list of CalendarEvent objects.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PaginatedCalendarEventList'
+    CalendarEventResponse:
+      description: Returns a single CalendarEvent object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CalendarEvent'
+    DeleteCalendarEventSuccess:
+      description: Successful response after deleting a calendar event.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+          examples:
+            Deleted Calendar Entry:
+              value:
+                success:
+                  message: Calendar Entry deleted!
+                  status_code: 200
+    ICSResponse:
+      description: iCalendar file download
+      content:
+        text/calendar:
+          schema:
+            type: string
+            format: binary
+    ICSNotFoundError:
+      description: Error response when trying to download ICS calendar of a non-existent calendar entry.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 File Not Found:
+              value:
+                error:
+                  message: Calendar Entry not foundǃ
+                  status_code: 404
     TransactionListResponse:
       description: Returns a list of Transaction objects.
       content:
@@ -13271,6 +13771,30 @@ components:
       schema:
         type: string
       description: Target user to see information on, admin-only.
+    monthDate:
+      name: date
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+      description: The month to search in.
+    groupId:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: grp_00000000-0000-0000-0000-000000000000
+      description: Must be a valid group ID.
+    calendarId:
+      name: calendarId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: cal_00000000-0000-0000-0000-000000000000
+      description: Must be a valid calendar ID.
     transactionId:
       name: transactionId
       in: path
@@ -13383,14 +13907,6 @@ components:
       schema:
         type: boolean
       description: Returns *only* offline users if true, returns only online and active users if false
-    groupId:
-      name: groupId
-      in: path
-      required: true
-      schema:
-        type: string
-        example: grp_00000000-0000-0000-0000-000000000000
-      description: Must be a valid group ID.
     startDate:
       name: startDate
       in: query
