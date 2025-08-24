@@ -9,7 +9,10 @@ paths:
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/offset
       - $ref: ../parameters.yaml#/inventorySortOrder
-      - $ref: ../parameters.yaml#/inventoryItemType
+      - $ref: ../parameters.yaml#/inventoryItemTypes
+      - $ref: ../parameters.yaml#/inventoryItemFlags
+      - $ref: ../parameters.yaml#/inventoryItemNotFlags
+      - $ref: ../parameters.yaml#/inventoryItemArchived
     get:
       summary: Get Inventory
       operationId: getInventory
@@ -39,6 +42,24 @@ paths:
       tags:
         - inventory
       description: Returns an InventoryItem object held by the currently logged in user.
+    put:
+      summary: Update Own Inventory Item
+      operationId: updateOwnInventoryItem
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/InventoryItemResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateInventoryItemRequest.yaml
+      description: Returns the modified InventoryItem object as held by the currently logged in user.
   '/users/{userId}/inventory/{inventoryItemId}':
     parameters:
       - $ref: ../parameters.yaml#/userId
