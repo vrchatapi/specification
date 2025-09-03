@@ -32,6 +32,9 @@ properties:
   imageUrl:
     minLength: 1
     type: string
+  listingDate:
+    type: string
+    nullable: true
   lock:
     type: boolean
   lowestPrice:
@@ -130,6 +133,7 @@ required:
   - featured
   - id
   - imageUrl
+  - listingDate
   - name
   - performance
   - releaseStatus
