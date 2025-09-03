@@ -4762,6 +4762,10 @@ components:
           type: string
         pronouns:
           type: string
+        pronounsHistory:
+          type: array
+          items:
+            type: string
         queuedInstance:
           type: string
           nullable: true
@@ -4813,6 +4817,7 @@ components:
         - profilePicOverride
         - profilePicOverrideThumbnail
         - pronouns
+        - pronounsHistory
         - statusDescription
         - pastDisplayNames
         - hasEmail
@@ -5109,6 +5114,9 @@ components:
         imageUrl:
           minLength: 1
           type: string
+        listingDate:
+          type: string
+          nullable: true
         lock:
           type: boolean
         lowestPrice:
@@ -5207,6 +5215,7 @@ components:
         - featured
         - id
         - imageUrl
+        - listingDate
         - name
         - performance
         - releaseStatus
@@ -5910,6 +5919,7 @@ components:
           $ref: '#/components/schemas/TransactionAgreement'
         error:
           type: string
+          nullable: true
         isGift:
           type: boolean
           default: false
@@ -6199,21 +6209,18 @@ components:
       properties:
         active:
           type: boolean
-        archived:
-          type: boolean
         buyerRefundable:
           type: boolean
-        created:
-          type: string
-          format: date-time
         description:
           type: string
         displayName:
           type: string
         duration:
           type: integer
+          nullable: true
         durationType:
           type: string
+          nullable: true
         groupIcon:
           $ref: '#/components/schemas/FileID'
           nullable: true
@@ -6221,6 +6228,11 @@ components:
           $ref: '#/components/schemas/GroupID'
         groupName:
           type: string
+          nullable: true
+        hasAvatar:
+          type: boolean
+        hasUdon:
+          type: boolean
         hydratedProducts:
           type: array
           items:
@@ -6230,8 +6242,9 @@ components:
         imageId:
           $ref: '#/components/schemas/FileID'
           nullable: true
-        instant:
-          type: boolean
+        imageUrl:
+          type: string
+          nullable: true
         listingType:
           $ref: '#/components/schemas/ProductListingType'
         listingVariants:
@@ -6273,26 +6286,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-        updated:
-          type: string
-          format: date-time
-          nullable: true
       required:
         - active
-        - archived
         - buyerRefundable
-        - created
         - description
         - displayName
-        - groupIcon
-        - groupId
-        - groupName
+        - hasAvatar
+        - hasUdon
         - id
-        - imageId
-        - instant
         - listingType
-        - listingVariants
-        - permanent
         - priceTokens
         - productIds
         - productType
@@ -6303,13 +6305,13 @@ components:
         - sellerId
         - stackable
         - storeIds
-        - tags
-        - updated
     TokenBundle:
       title: TokenBundle
       type: object
       properties:
         id:
+          type: string
+        appleProductId:
           type: string
         steamItemId:
           type: string
@@ -6330,6 +6332,7 @@ components:
           description: direct url to image
       required:
         - id
+        - appleProductId
         - steamItemId
         - oculusSku
         - amount
@@ -6805,6 +6808,8 @@ components:
           type: integer
         constraintCount:
           type: integer
+        constraintDepth:
+          type: integer
         contactCount:
           type: integer
         customExpressions:
@@ -6883,6 +6888,7 @@ components:
         - bounds
         - clothCount
         - constraintCount
+        - constraintDepth
         - contactCount
         - customExpressions
         - customizeAnimationLayers
@@ -7453,6 +7459,8 @@ components:
         isSubscribedToAnnouncements:
           type: boolean
           default: true
+        isSubscribedToEventAnnouncements:
+          type: boolean
         visibility:
           type: string
           example: visible
@@ -7876,6 +7884,8 @@ components:
         isSubscribedToAnnouncements:
           type: boolean
           default: false
+        isSubscribedToEventAnnouncements:
+          type: boolean
         createdAt:
           description: Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user.
           type: string
@@ -8298,6 +8308,8 @@ components:
         isSubscribedToAnnouncements:
           type: boolean
           default: false
+        isSubscribedToEventAnnouncements:
+          type: boolean
         createdAt:
           description: Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user.
           type: string
@@ -8333,6 +8345,8 @@ components:
         visibility:
           $ref: '#/components/schemas/GroupUserVisibility'
         isSubscribedToAnnouncements:
+          type: boolean
+        isSubscribedToEventAnnouncements:
           type: boolean
         managerNotes:
           type: string
@@ -10073,6 +10087,10 @@ components:
     LimitedUnityPackage:
       description: ''
       properties:
+        created_at:
+          format: date-time
+          type: string
+          nullable: true
         platform:
           $ref: '#/components/schemas/Platform'
         unityVersion:
@@ -10080,6 +10098,7 @@ components:
           minLength: 1
           type: string
       required:
+        - created_at
         - platform
         - unityVersion
       title: LimitedUnityPackage
@@ -10361,7 +10380,6 @@ components:
         - id
         - description
         - name
-        - authorId
         - authorName
         - capacity
         - imageUrl
