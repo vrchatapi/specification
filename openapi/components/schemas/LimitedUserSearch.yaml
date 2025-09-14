@@ -49,7 +49,6 @@ required:
   - id
   - isFriend
   - last_platform
-  - profilePicOverride
   - status
   - statusDescription
   - tags

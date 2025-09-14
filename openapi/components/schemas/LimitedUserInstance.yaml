@@ -83,8 +83,6 @@ required:
   - last_platform
   - last_activity
   - last_mobile
-  - profilePicOverride
-  - profilePicOverrideThumbnail
   - pronouns
   - state
   - status
