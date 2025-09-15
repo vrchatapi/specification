@@ -77,6 +77,5 @@ required:
   - status
   - statusDescription
   - tags
-  - userIcon
 title: LimitedUserFriend
 type: object

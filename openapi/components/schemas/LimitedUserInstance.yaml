@@ -88,6 +88,5 @@ required:
   - status
   - statusDescription
   - tags
-  - userIcon
 title: LimitedUserInstance
 type: object

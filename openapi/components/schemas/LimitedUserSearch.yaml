@@ -52,6 +52,5 @@ required:
   - status
   - statusDescription
   - tags
-  - userIcon
 title: LimitedUserSearch
 type: object
