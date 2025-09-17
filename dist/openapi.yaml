@@ -7106,12 +7106,9 @@ components:
         - last_activity
         - last_mobile
         - platform
-        - profilePicOverride
-        - profilePicOverrideThumbnail
         - status
         - statusDescription
         - tags
-        - userIcon
       title: LimitedUserFriend
       type: object
     NotificationType:
@@ -9139,14 +9136,11 @@ components:
         - last_platform
         - last_activity
         - last_mobile
-        - profilePicOverride
-        - profilePicOverrideThumbnail
         - pronouns
         - state
         - status
         - statusDescription
         - tags
-        - userIcon
       title: LimitedUserInstance
       type: object
     Instance:
@@ -9685,11 +9679,9 @@ components:
         - id
         - isFriend
         - last_platform
-        - profilePicOverride
         - status
         - statusDescription
         - tags
-        - userIcon
       title: LimitedUserSearch
       type: object
     User:
