@@ -83,13 +83,10 @@ required:
   - last_platform
   - last_activity
   - last_mobile
-  - profilePicOverride
-  - profilePicOverrideThumbnail
   - pronouns
   - state
   - status
   - statusDescription
   - tags
-  - userIcon
 title: LimitedUserInstance
 type: object
