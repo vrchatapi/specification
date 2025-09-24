@@ -9,8 +9,10 @@ paths:
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/offset
       - $ref: ../parameters.yaml#/inventorySortOrder
+      - $ref: ../parameters.yaml#/inventoryItemTags
       - $ref: ../parameters.yaml#/inventoryItemTypes
       - $ref: ../parameters.yaml#/inventoryItemFlags
+      - $ref: ../parameters.yaml#/inventoryItemNotTypes
       - $ref: ../parameters.yaml#/inventoryItemNotFlags
       - $ref: ../parameters.yaml#/inventoryItemArchived
     get:

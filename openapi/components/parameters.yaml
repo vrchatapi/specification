@@ -542,6 +542,13 @@ inventoryItemFlags:
   schema:
     $ref: ./schemas/InventoryFlag.yaml
   description: Filter flags for inventory retrieval (comma-separated).
+inventoryItemNotTypes:
+  name: notTypes
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/InventoryItemType.yaml
+  description: Filter out types for inventory retrieval (comma-separated).
 inventoryItemNotFlags:
   name: notFlags
   in: query
