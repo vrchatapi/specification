@@ -58,6 +58,25 @@ paths:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
       description: Get a list of a followed calendar events for the month in ?date
+  /calendar/search:
+    get:
+      summary: Search for calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: ../responses/calendar/CalendarEventListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: searchCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: ../parameters.yaml#/calendarSearchTerm
+        - $ref: ../parameters.yaml#/utcOffset
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      description: Get a list of calendar events by search terms
   '/calendar/{groupId}/event':
     post:
       summary: Create a calendar event

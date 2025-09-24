@@ -70,6 +70,8 @@
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1featured"
 '/calendar/following':
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1following"
+'/calendar/search':
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1search"
 '/calendar/{groupId}':
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}"
 '/calendar/{groupId}/event':
