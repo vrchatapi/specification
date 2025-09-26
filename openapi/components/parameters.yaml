@@ -16,6 +16,15 @@ offset:
     type: integer
     minimum: 0
   description: A zero-based offset from the default object sorting from where search results start.
+utcOffset:
+  name: utcOffset
+  in: query
+  required: false
+  schema:
+    type: integer
+    minimum: -12
+    maximum: 12
+  description: The offset from UTC in hours of the client or authenticated user.
 sort:
   name: sort
   in: query
@@ -549,3 +558,11 @@ inventorySpawnItemId:
   schema:
     $ref: ./schemas/InventoryItemID.yaml
   description: Id for inventory item spawning.
+calendarSearchTerm:
+  name: searchTerm
+  in: query
+  required: true
+  schema:
+    type: string
+    example: game night
+  description: Search term for calendar events.

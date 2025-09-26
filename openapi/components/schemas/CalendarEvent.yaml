@@ -90,6 +90,5 @@ required:
   - id
   - title
   - accessType
-  - createdAt
 title: CalendarEvent
 type: object
