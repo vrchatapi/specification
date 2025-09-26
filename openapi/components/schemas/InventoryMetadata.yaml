@@ -20,4 +20,3 @@ properties:
     type: string
   propId:
     $ref: ./PropID.yaml
-additionalProperties: true
