@@ -797,6 +797,25 @@ paths:
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
       description: Get a list of a followed calendar events for the month in ?date
+  /calendar/search:
+    get:
+      summary: Search for calendar events
+      tags:
+        - calendar
+      responses:
+        '200':
+          $ref: '#/components/responses/CalendarEventListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      operationId: searchCalendarEvents
+      security:
+        - authCookie: []
+      parameters:
+        - $ref: '#/components/parameters/calendarSearchTerm'
+        - $ref: '#/components/parameters/utcOffset'
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      description: Get a list of calendar events by search terms
   /calendar/{groupId}:
     get:
       summary: List a group's calendar events
@@ -5522,7 +5541,6 @@ components:
         - id
         - title
         - accessType
-        - createdAt
       title: CalendarEvent
       type: object
     PaginatedCalendarEventList:
@@ -13789,6 +13807,23 @@ components:
         type: string
         format: date-time
       description: The month to search in.
+    calendarSearchTerm:
+      name: searchTerm
+      in: query
+      required: true
+      schema:
+        type: string
+        example: game night
+      description: Search term for calendar events.
+    utcOffset:
+      name: utcOffset
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: -12
+        maximum: 12
+      description: The offset from UTC in hours of the client or authenticated user.
     groupId:
       name: groupId
       in: path
