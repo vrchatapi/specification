@@ -258,6 +258,17 @@ paths:
       tags:
         - economy
       description: 'Gets the economy account of a user'
+  '/economy/licenses/active':
+    get:
+      summary: Get Active Licenses
+      operationId: getActiveLicenses
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/LicenseListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
   '/economy/store':
     parameters:
       - $ref: ../parameters.yaml#/storeId

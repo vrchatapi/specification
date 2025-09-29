@@ -119,6 +119,8 @@
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
 '/user/{userId}/economy/account':
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
+'/economy/licenses/active':
+  $ref: "./paths/economy.yaml#/paths/~1economy~1licenses~1active"
 '/economy/store':
   $ref: "./paths/economy.yaml#/paths/~1economy~1store"
 '/economy/store/shelves':
