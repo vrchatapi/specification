@@ -1,0 +1,6 @@
+description: iCalendar file download
+content:
+  text/calendar:
+    schema:
+      type: string
+      format: binary

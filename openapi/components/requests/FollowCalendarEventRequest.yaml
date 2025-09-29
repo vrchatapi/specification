@@ -1,0 +1,8 @@
+title: FollowCalendarEventRequest
+type: object
+properties:
+  isFollowing:
+    type: boolean
+    example: true
+required:
+  - isFollowing

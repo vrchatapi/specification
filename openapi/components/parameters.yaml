@@ -16,6 +16,15 @@ offset:
     type: integer
     minimum: 0
   description: A zero-based offset from the default object sorting from where search results start.
+utcOffset:
+  name: utcOffset
+  in: query
+  required: false
+  schema:
+    type: integer
+    minimum: -12
+    maximum: 12
+  description: The offset from UTC in hours of the client or authenticated user.
 sort:
   name: sort
   in: query
@@ -51,6 +60,14 @@ order:
   schema:
     $ref: ./schemas/OrderOption.yaml
   description: Result ordering
+monthDate:
+  name: date
+  in: query
+  required: false
+  schema:
+    type: string
+    format: date-time
+  description: The month to search in.
 startDate:
   name: startDate
   in: query
@@ -121,6 +138,14 @@ groupId:
     type: string
     example: grp_00000000-0000-0000-0000-000000000000
   description: Must be a valid group ID.
+calendarId:
+  name: calendarId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: cal_00000000-0000-0000-0000-000000000000
+  description: Must be a valid calendar ID.
 groupIdFilter:
   name: groupId
   in: query
@@ -570,3 +595,11 @@ inventorySpawnItemId:
   schema:
     $ref: ./schemas/InventoryItemID.yaml
   description: Id for inventory item spawning.
+calendarSearchTerm:
+  name: searchTerm
+  in: query
+  required: true
+  schema:
+    type: string
+    example: game night
+  description: Search term for calendar events.

@@ -32,6 +32,8 @@ properties:
   isSubscribedToAnnouncements:
     type: boolean
     default: false
+  isSubscribedToEventAnnouncements:
+    type: boolean
   createdAt:
     description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
     type: string

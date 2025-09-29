@@ -1,0 +1,11 @@
+description: Error response when trying to download ICS calendar of a non-existent calendar entry.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml
+    examples:
+      404 File Not Found:
+        value:
+          error:
+            message: Calendar Entry not foundǃ # U+01c3 as per the API
+            status_code: 404

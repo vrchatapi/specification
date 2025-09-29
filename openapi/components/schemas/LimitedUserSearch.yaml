@@ -49,10 +49,8 @@ required:
   - id
   - isFriend
   - last_platform
-  - profilePicOverride
   - status
   - statusDescription
   - tags
-  - userIcon
 title: LimitedUserSearch
 type: object

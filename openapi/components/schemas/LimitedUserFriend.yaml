@@ -74,11 +74,8 @@ required:
   - last_activity
   - last_mobile
   - platform
-  - profilePicOverride
-  - profilePicOverrideThumbnail
   - status
   - statusDescription
   - tags
-  - userIcon
 title: LimitedUserFriend
 type: object

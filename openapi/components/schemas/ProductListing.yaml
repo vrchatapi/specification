@@ -3,21 +3,18 @@ type: object
 properties:
   active:
     type: boolean
-  archived:
-    type: boolean
   buyerRefundable:
     type: boolean
-  created:
-    type: string
-    format: date-time
   description:
     type: string
   displayName:
     type: string
   duration:
     type: integer
+    nullable: true
   durationType:
     type: string
+    nullable: true
   groupIcon:
     $ref: ./FileID.yaml
     nullable: true
@@ -25,6 +22,11 @@ properties:
     $ref: ./GroupID.yaml
   groupName:
     type: string
+    nullable: true
+  hasAvatar:
+    type: boolean
+  hasUdon:
+    type: boolean
   hydratedProducts:
     type: array
     items:
@@ -34,8 +36,9 @@ properties:
   imageId:
     $ref: ./FileID.yaml
     nullable: true
-  instant:
-    type: boolean
+  imageUrl:
+    type: string
+    nullable: true
   listingType:
     $ref: ./ProductListingType.yaml
   listingVariants:
@@ -77,26 +80,15 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
-  updated:
-    type: string
-    format: date-time
-    nullable: true
 required:
   - active
-  - archived
   - buyerRefundable
-  - created
   - description
   - displayName
-  - groupIcon
-  - groupId
-  - groupName
+  - hasAvatar
+  - hasUdon
   - id
-  - imageId
-  - instant
   - listingType
-  - listingVariants
-  - permanent
   - priceTokens
   - productIds
   - productType
@@ -107,5 +99,3 @@ required:
   - sellerId
   - stackable
   - storeIds
-  - tags
-  - updated

@@ -4,6 +4,9 @@
 - name: avatars
   description:
     $ref: ./paths/avatars.yaml#/info/description
+- name: calendar
+  description:
+    $ref: ./paths/calendar.yaml#/info/description
 - name: economy
   description:
     $ref: ./paths/economy.yaml#/info/description
