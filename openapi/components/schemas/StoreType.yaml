@@ -1,0 +1,6 @@
+title: StoreType
+type: string
+default: house
+enum:
+  - house
+  - world

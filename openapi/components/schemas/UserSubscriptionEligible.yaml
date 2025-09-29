@@ -1,0 +1,22 @@
+title: UserSubscriptionEligible
+type: object
+properties:
+  activeCancelledSubscription:
+    type: boolean
+  giftEligible:
+    type: boolean
+  nonExtendVendorWillLoseGiftTime:
+    type: boolean
+  purchaseEligible:
+    type: boolean
+  subscriptionEligible:
+    type: boolean
+  subscriptionOnAltAccount:
+    type: boolean
+required:
+  - activeCancelledSubscription
+  - giftEligible
+  - nonExtendVendorWillLoseGiftTime
+  - purchaseEligible
+  - subscriptionEligible
+  - subscriptionOnAltAccount

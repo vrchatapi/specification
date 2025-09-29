@@ -1,0 +1,35 @@
+title: StoreShelf
+type: object
+properties:
+  id:
+    $ref: ./StoreShelfID.yaml
+  listingIds:
+    type: array
+    items:
+      $ref: ./ProductID.yaml
+  listings:
+    type: array
+    items:
+      $ref: ./ProductListing.yaml
+  worldId:
+    description: Only for store type world
+    type: string
+  shelfIds:
+    description: Only for store type house
+    type: array
+    items:
+      $ref: ./ShelfID.yaml
+  shelves:
+    description: Only for store type house
+    type: array
+    items:
+      $ref: ./StoreShelf.yaml
+required:
+  - description
+  - displayName
+  - id
+  - sellerDisplayName
+  - sellerId
+  - storeId
+  - storeType
+  - worldId

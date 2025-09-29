@@ -104,6 +104,46 @@ paths:
       tags:
         - inventory
       description: Returns an InventorySpawn object.
+  '/inventory/cloning/pedestal':
+    parameters:
+      - $ref: ../parameters.yaml#/inventoryPedestalItemId
+      - $ref: ../parameters.yaml#/inventoryPedestalDuration
+    get:
+      summary: Share Inventory Item by Pedestal
+      operationId: shareInventoryItemPedestal
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/InventorySpawnResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      description: Returns an InventorySpawn object.
+  '/inventory/cloning/direct':
+    parameters:
+      - $ref: ../parameters.yaml#/inventoryPedestalItemId
+      - $ref: ../parameters.yaml#/inventoryPedestalDuration
+    post:
+      summary: Share Inventory Item Direct
+      operationId: shareInventoryItemDirect
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ShareInventoryItemDirectRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/InventoryShareResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      description: Share content directly with other users.
 tags:
   $ref: ../tags.yaml
 components:

@@ -558,6 +558,23 @@ inventorySpawnItemId:
   schema:
     $ref: ./schemas/InventoryItemID.yaml
   description: Id for inventory item spawning.
+inventoryPedestalItemId:
+  name: itemId
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/InventoryItemID.yaml
+  description: Id for inventory item sharing.
+inventoryPedestalDuration:
+  name: duration
+  in: query
+  required: true
+  schema:
+    type: integer
+    minimum: 30
+    maximum: 86400
+    default: 90
+  description: The duration before the sharing pedestal despawns.
 calendarSearchTerm:
   name: searchTerm
   in: query
@@ -566,3 +583,31 @@ calendarSearchTerm:
     type: string
     example: game night
   description: Search term for calendar events.
+steamId:
+  name: steamId
+  in: query
+  required: false
+  schema:
+    type: string
+    example: game night
+  description: The Steam ID of the user.
+hydrateListings:
+  name: hydrateListings
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Listings fields will be populated.
+hydrateProducts:
+  name: hydrateProducts
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Products fields will be populated.
+storeView:
+  name: fetch
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/StoreView.yaml

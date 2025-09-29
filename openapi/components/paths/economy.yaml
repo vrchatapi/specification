@@ -82,6 +82,22 @@ paths:
       tags:
         - economy
       description: Get a list of all current user subscriptions.
+  '/users/{userId}/subscription/eligible':
+    parameters:
+      - $ref: ../parameters.yaml#/steamId
+    get:
+      summary: Get User Subscription Eligiblity
+      operationId: getUserSubscriptionEligible
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/UserSubscriptionEligibleResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Get the user's eligibility status for subscriptions.
   /subscriptions:
     get:
       summary: List Subscriptions
@@ -210,6 +226,74 @@ paths:
       tags:
         - economy
       description: 'Gets the balance of a user'
+  '/user/{userId}/balance/earnings':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      summary: Get Balance Earnings
+      operationId: getBalanceEarnings
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/BalanceResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets the balance of a user from earnings'
+  '/user/{userId}/economy/account':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      summary: Get Economy Account
+      operationId: getEconomyAccount
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/EconomyAccountResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets the economy account of a user'
+  '/economy/store':
+    parameters:
+      - $ref: ../parameters.yaml#/storeId
+      - $ref: ../parameters.yaml#/hydrateListings
+      - $ref: ../parameters.yaml#/hydrateProducts
+    get:
+      summary: Get Store
+      operationId: getStore
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/StoreResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Gets a store
+  '/economy/store/shelves':
+    parameters:
+      - $ref: ../parameters.yaml#/storeId
+      - $ref: ../parameters.yaml#/hydrateListings
+      - $ref: ../parameters.yaml#/storeView
+    get:
+      summary: Get Store Shelves
+      operationId: getStoreShelves
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/StoreShelfListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Gets the shelves for a store
 tags:
   $ref: ../tags.yaml
 components:
