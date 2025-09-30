@@ -97,6 +97,8 @@
   $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions~1{transactionId}"
 '/auth/user/subscription':
   $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
+'/users/{userId}/subscription/eligible':
+  $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1subscription~1eligible"
 '/subscriptions':
   $ref: "./paths/economy.yaml#/paths/~1subscriptions"
 '/licenseGroups/{licenseGroupId}':
@@ -113,6 +115,16 @@
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1tilia~1tos"
 '/user/{userId}/balance':
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance"
+'/user/{userId}/balance/earnings':
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
+'/user/{userId}/economy/account':
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
+'/economy/licenses/active':
+  $ref: "./paths/economy.yaml#/paths/~1economy~1licenses~1active"
+'/economy/store':
+  $ref: "./paths/economy.yaml#/paths/~1economy~1store"
+'/economy/store/shelves':
+  $ref: "./paths/economy.yaml#/paths/~1economy~1store~1shelves"
 
 # favorites
 
@@ -238,6 +250,11 @@
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1template~1{inventoryTemplateId}"
 "/inventory/spawn":
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1spawn"
+"/inventory/cloning/pedestal":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1pedestal"
+"/inventory/cloning/direct":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1direct"
+
 
 # invite
 
