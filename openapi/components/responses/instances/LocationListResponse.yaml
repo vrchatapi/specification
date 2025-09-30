@@ -1,4 +1,4 @@
-description: Returns a list of InstanceID strings representing recent instance locations.
+description: Returns a list of Locations.
 content:
   application/json:
     schema:
