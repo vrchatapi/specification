@@ -2771,7 +2771,12 @@ paths:
       - $ref: '#/components/parameters/number'
       - $ref: '#/components/parameters/offset'
       - $ref: '#/components/parameters/inventorySortOrder'
-      - $ref: '#/components/parameters/inventoryItemType'
+      - $ref: '#/components/parameters/inventoryItemTags'
+      - $ref: '#/components/parameters/inventoryItemTypes'
+      - $ref: '#/components/parameters/inventoryItemFlags'
+      - $ref: '#/components/parameters/inventoryItemNotTypes'
+      - $ref: '#/components/parameters/inventoryItemNotFlags'
+      - $ref: '#/components/parameters/inventoryItemArchived'
     get:
       summary: Get Inventory
       operationId: getInventory
@@ -2801,6 +2806,24 @@ paths:
       tags:
         - inventory
       description: Returns an InventoryItem object held by the currently logged in user.
+    put:
+      summary: Update Own Inventory Item
+      operationId: updateOwnInventoryItem
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/InventoryItemResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - inventory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInventoryItemRequest'
+      description: Returns the modified InventoryItem object as held by the currently logged in user.
   /inventory/drops:
     parameters:
       - $ref: '#/components/parameters/active'
@@ -8831,6 +8854,18 @@ components:
         - sticker
       default: bundle
       example: prop
+    InventoryFlag:
+      title: InventoryFlag
+      type: string
+      enum:
+        - instantiatable
+        - archivable
+        - consumable
+        - trashable
+        - cloneable
+        - ugc
+      default: instantiatable
+      example: consumable
     InventoryItemID:
       example: inv_10bce5b0-2d2b-44e0-900d-db6534615162
       title: InventoryItemID
@@ -8866,7 +8901,6 @@ components:
           type: string
         propId:
           $ref: '#/components/schemas/PropID'
-      additionalProperties: true
     InventoryItem:
       title: InventoryItem
       type: object
@@ -8959,6 +8993,12 @@ components:
       required:
         - data
         - totalCount
+    UpdateInventoryItemRequest:
+      title: UpdateInventoryItemRequest
+      type: object
+      properties:
+        isArchived:
+          type: boolean
     InventoryDropID:
       example: invd_ee3a8f7f-1454-4748-a935-99bf9865f33d
       title: InventoryDropID
@@ -14433,22 +14473,59 @@ components:
         type: string
       description: Must be a valid notification ID.
     inventorySortOrder:
-      name: inventorySortOrder
+      name: order
       in: query
       required: false
       schema:
         type: string
         enum:
           - newest
+          - newest_created
           - oldest
+          - oldest_created
       description: Sort order for inventory retrieval.
-    inventoryItemType:
-      name: inventoryItemType
+    inventoryItemTags:
+      name: tags
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/Tag'
+      description: Filter tags for inventory retrieval (comma-separated).
+    inventoryItemTypes:
+      name: types
       in: query
       required: false
       schema:
         $ref: '#/components/schemas/InventoryItemType'
       description: Filter for inventory retrieval.
+    inventoryItemFlags:
+      name: flags
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/InventoryFlag'
+      description: Filter flags for inventory retrieval (comma-separated).
+    inventoryItemNotTypes:
+      name: notTypes
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/InventoryItemType'
+      description: Filter out types for inventory retrieval (comma-separated).
+    inventoryItemNotFlags:
+      name: notFlags
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/InventoryFlag'
+      description: Filter out flags for inventory retrieval (comma-separated).
+    inventoryItemArchived:
+      name: archived
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Filter archived status for inventory retrieval.
     inventoryItemId:
       name: inventoryItemId
       in: path
