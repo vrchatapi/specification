@@ -1001,6 +1001,23 @@ paths:
       tags:
         - economy
       description: Get a list of all current user subscriptions.
+  /users/{userId}/subscription/eligible:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/steamId'
+    get:
+      summary: Get User Subscription Eligiblity
+      operationId: getUserSubscriptionEligible
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/UserSubscriptionEligibleResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Get the user's eligibility status for subscriptions.
   /subscriptions:
     get:
       summary: List Subscriptions
@@ -1129,6 +1146,88 @@ paths:
       tags:
         - economy
       description: Gets the balance of a user
+  /user/{userId}/balance/earnings:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get Balance Earnings
+      operationId: getBalanceEarnings
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets the balance of a user from earnings
+  /user/{userId}/economy/account:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      summary: Get Economy Account
+      operationId: getEconomyAccount
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/EconomyAccountResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets the economy account of a user
+  /economy/licenses/active:
+    get:
+      summary: Get Active Licenses
+      operationId: getActiveLicenses
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/LicenseListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets active licenses
+  /economy/store:
+    parameters:
+      - $ref: '#/components/parameters/storeId'
+      - $ref: '#/components/parameters/hydrateListings'
+      - $ref: '#/components/parameters/hydrateProducts'
+    get:
+      summary: Get Store
+      operationId: getStore
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/StoreResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets a store
+  /economy/store/shelves:
+    parameters:
+      - $ref: '#/components/parameters/storeId'
+      - $ref: '#/components/parameters/hydrateListings'
+      - $ref: '#/components/parameters/storeView'
+    get:
+      summary: Get Store Shelves
+      operationId: getStoreShelves
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/StoreShelfListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Gets the shelves for a store
   /favorites:
     get:
       summary: List Favorites
@@ -2750,6 +2849,46 @@ paths:
       tags:
         - inventory
       description: Returns an InventorySpawn object.
+  /inventory/cloning/pedestal:
+    parameters:
+      - $ref: '#/components/parameters/inventoryPedestalItemId'
+      - $ref: '#/components/parameters/inventoryPedestalDuration'
+    get:
+      summary: Share Inventory Item by Pedestal
+      operationId: shareInventoryItemPedestal
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/InventorySpawnResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - inventory
+      description: Returns an InventorySpawn object.
+  /inventory/cloning/direct:
+    parameters:
+      - $ref: '#/components/parameters/inventoryPedestalItemId'
+      - $ref: '#/components/parameters/inventoryPedestalDuration'
+    post:
+      summary: Share Inventory Item Direct
+      operationId: shareInventoryItemDirect
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareInventoryItemDirectRequest'
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/InventoryShareResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - inventory
+      description: Share content directly with other users.
   /invite/{userId}:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -6029,6 +6168,29 @@ components:
         - isGift
         - isBulkGift
       title: UserSubscription
+    UserSubscriptionEligible:
+      title: UserSubscriptionEligible
+      type: object
+      properties:
+        activeCancelledSubscription:
+          type: boolean
+        giftEligible:
+          type: boolean
+        nonExtendVendorWillLoseGiftTime:
+          type: boolean
+        purchaseEligible:
+          type: boolean
+        subscriptionEligible:
+          type: boolean
+        subscriptionOnAltAccount:
+          type: boolean
+      required:
+        - activeCancelledSubscription
+        - giftEligible
+        - nonExtendVendorWillLoseGiftTime
+        - purchaseEligible
+        - subscriptionEligible
+        - subscriptionOnAltAccount
     LicenseType:
       type: string
       title: LicenseType
@@ -6397,6 +6559,145 @@ components:
           type: boolean
       required:
         - balance
+    EconomyAccount:
+      title: EconomyAccount
+      type: object
+      properties:
+        accountActivatedOn:
+          type: string
+          format: date-time
+          nullable: true
+        accountId:
+          type: string
+          nullable: true
+        blocked:
+          type: boolean
+        canSpend:
+          type: boolean
+        source:
+          type: string
+        userId:
+          $ref: '#/components/schemas/UserID'
+      required:
+        - accountActivatedOn
+        - accountId
+        - blocked
+        - canSpend
+        - source
+        - userId
+    StoreID:
+      example: esto_713b247d-2b5d-41a0-bba3-50db28dc1498
+      title: StoreID
+      type: string
+    StoreType:
+      title: StoreType
+      type: string
+      default: group
+      enum:
+        - house
+        - world
+        - group
+    StoreShelfID:
+      example: ess_964dd7aa-f881-4ba1-adf7-261e906b9189
+      title: StoreShelfID
+      type: string
+    StoreShelf:
+      title: StoreShelf
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/StoreShelfID'
+        listingIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductID'
+        listings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductListing'
+        shelfDescription:
+          type: string
+        shelfLayout:
+          type: string
+        shelfTitle:
+          type: string
+        updatedAt:
+          type: string
+          format: data-time
+      required:
+        - id
+        - listingIds
+        - shelfDescription
+        - shelfLayout
+        - shelfTitle
+        - updatedAt
+    Store:
+      title: Store
+      type: object
+      properties:
+        description:
+          type: string
+        displayName:
+          type: string
+        id:
+          $ref: '#/components/schemas/StoreID'
+        sellerDisplayName:
+          type: string
+        sellerId:
+          $ref: '#/components/schemas/UserID'
+        storeId:
+          $ref: '#/components/schemas/StoreID'
+        storeType:
+          $ref: '#/components/schemas/StoreType'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        listingIds:
+          description: Only for store type world and group
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductID'
+        listings:
+          description: Only for store type world and group
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductListing'
+        worldId:
+          description: Only for store type world
+          $ref: '#/components/schemas/WorldID'
+        groupId:
+          description: Only for store type group
+          $ref: '#/components/schemas/GroupID'
+        shelfIds:
+          description: Only for store type house
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreShelfID'
+        shelves:
+          description: Only for store type house
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreShelf'
+      required:
+        - description
+        - displayName
+        - id
+        - sellerDisplayName
+        - sellerId
+        - storeId
+        - storeType
+        - tags
+    StoreView:
+      title: StoreView
+      type: string
+      default: public
+      enum:
+        - all
+        - publicPreview
+        - public
+        - preview
+        - draft
     FavoriteID:
       example: fvrt_9568d189-8776-44a5-a8c8-defc981e44de
       title: FavoriteID
@@ -8087,10 +8388,6 @@ components:
         props:
           default: true
           type: boolean
-    StoreID:
-      example: esto_713b247d-2b5d-41a0-bba3-50db28dc1498
-      title: StoreID
-      type: string
     UdonProductId:
       example: prod_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
       title: UdonProductId
@@ -8810,6 +9107,30 @@ components:
       required:
         - token
         - version
+    ShareInventoryItemDirectRequest:
+      title: ShareInventoryItemDirectRequest
+      type: object
+      properties:
+        itemId:
+          $ref: '#/components/schemas/InventoryItemID'
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserID'
+      required:
+        - itemId
+        - users
+    OkStatus:
+      title: OkStatus
+      type: object
+      description: A status response consisting of solely a string description of whether the result of an operation was ok.
+      properties:
+        ok:
+          type: string
+          default: maybe?
+          description: The actual status itself
+      required:
+        - ok
     InviteRequest:
       title: InviteRequest
       type: object
@@ -12118,6 +12439,12 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/UserSubscription'
+    UserSubscriptionEligibleResponse:
+      description: Returns a single UserSubscriptionEligible object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserSubscriptionEligible'
     SubscriptionListResponse:
       description: Returns a list of Subscription objects.
       content:
@@ -12172,6 +12499,34 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Balance'
+    EconomyAccountResponse:
+      description: Returns a single EconomyAccount object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EconomyAccount'
+    LicenseListResponse:
+      description: Returns a list of License objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/License'
+    StoreResponse:
+      description: Returns a single Store object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Store'
+    StoreShelfListResponse:
+      description: Returns a list of StoreShelf objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/StoreShelf'
     FavoriteListResponse:
       description: Returns a list of Favorite objects.
       content:
@@ -12927,6 +13282,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InventorySpawn'
+    InventoryShareResponse:
+      description: Returns an OkStatus object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OkStatus'
     SendNotificationResponse:
       description: Returns a single SentNotifcation object.
       content:
@@ -13847,6 +14208,14 @@ components:
       schema:
         type: string
       description: Must be a valid transaction ID.
+    steamId:
+      name: steamId
+      in: query
+      required: false
+      schema:
+        type: string
+        example: game night
+      description: The Steam ID of the user.
     licenseGroupId:
       name: licenseGroupId
       in: path
@@ -13883,6 +14252,32 @@ components:
       schema:
         type: boolean
       description: Filter for users' listings and inventory bundles.
+    storeId:
+      name: storeId
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/StoreID'
+    hydrateListings:
+      name: hydrateListings
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Listings fields will be populated.
+    hydrateProducts:
+      name: hydrateProducts
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Products fields will be populated.
+    storeView:
+      name: fetch
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/StoreView'
     favoriteId:
       name: favoriteId
       in: path
@@ -14077,6 +14472,23 @@ components:
       schema:
         $ref: '#/components/schemas/InventoryItemID'
       description: Id for inventory item spawning.
+    inventoryPedestalItemId:
+      name: itemId
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/InventoryItemID'
+      description: Id for inventory item sharing.
+    inventoryPedestalDuration:
+      name: duration
+      in: query
+      required: true
+      schema:
+        type: integer
+        minimum: 30
+        maximum: 86400
+        default: 90
+      description: The duration before the sharing pedestal despawns.
     worldId:
       name: worldId
       in: path
