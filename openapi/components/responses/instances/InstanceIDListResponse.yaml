@@ -1,0 +1,7 @@
+description: Returns a list of InstanceID strings representing recent instance locations.
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        $ref: ../../schemas/InstanceID.yaml
