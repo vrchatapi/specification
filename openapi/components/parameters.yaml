@@ -605,7 +605,7 @@ hydrateProducts:
   schema:
     type: boolean
   description: Products fields will be populated.
-storeIdQuery:
+storeId:
   name: storeId
   in: query
   required: true

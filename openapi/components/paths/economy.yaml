@@ -270,6 +270,8 @@ paths:
           $ref: ../responses/economy/LicenseListResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
       description: 'Gets active licenses'
   '/economy/store':
     parameters:
