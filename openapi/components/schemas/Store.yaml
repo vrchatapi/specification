@@ -20,18 +20,21 @@ properties:
     items:
       $ref: ./Tag.yaml
   listingIds:
-    description: Only for store type world
+    description: Only for store type world and group
     type: array
     items:
       $ref: ./ProductID.yaml
   listings:
-    description: Only for store type world
+    description: Only for store type world and group
     type: array
     items:
       $ref: ./ProductListing.yaml
   worldId:
     description: Only for store type world
-    type: string
+    $ref: ./WorldID.yaml
+  groupId:
+    description: Only for store type group
+    $ref: ./GroupID.yaml
   shelfIds:
     description: Only for store type house
     type: array
