@@ -29,6 +29,9 @@ paths:
       summary: List Recent Instances
       tags:
         - instances
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
       operationId: getRecentInstances
       security:
         - authCookie: []
