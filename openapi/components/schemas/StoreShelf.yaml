@@ -11,25 +11,19 @@ properties:
     type: array
     items:
       $ref: ./ProductListing.yaml
-  worldId:
-    description: Only for store type world
+  shelfDescription:
     type: string
-  shelfIds:
-    description: Only for store type house
-    type: array
-    items:
-      $ref: ./ShelfID.yaml
-  shelves:
-    description: Only for store type house
-    type: array
-    items:
-      $ref: ./StoreShelf.yaml
+  shelfLayout:
+    type: string
+  shelfTitle:
+    type: string
+  updatedAt:
+    type: string
+    format: data-time
 required:
-  - description
-  - displayName
   - id
-  - sellerDisplayName
-  - sellerId
-  - storeId
-  - storeType
-  - worldId
+  - listingIds
+  - shelfDescription
+  - shelfLayout
+  - shelfTitle
+  - updatedAt

@@ -605,6 +605,12 @@ hydrateProducts:
   schema:
     type: boolean
   description: Products fields will be populated.
+storeIdQuery:
+  name: storeId
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/StoreID.yaml
 storeView:
   name: fetch
   in: query

@@ -84,6 +84,7 @@ paths:
       description: Get a list of all current user subscriptions.
   '/users/{userId}/subscription/eligible':
     parameters:
+      - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/steamId
     get:
       summary: Get User Subscription Eligiblity
@@ -269,6 +270,7 @@ paths:
           $ref: ../responses/economy/LicenseListResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+      description: 'Gets active licenses'
   '/economy/store':
     parameters:
       - $ref: ../parameters.yaml#/storeId

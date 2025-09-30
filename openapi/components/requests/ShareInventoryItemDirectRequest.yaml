@@ -6,7 +6,7 @@ properties:
   users:
     type: array
     items:
-      $ref: ./UserID.yaml
+      $ref: ../schemas/UserID.yaml
 required:
   - itemId
   - users
