@@ -60,7 +60,7 @@ properties:
   last_platform:
     $ref: ./Platform.yaml
   location:
-    $ref: ./WorldID.yaml
+    $ref: ./LocationID.yaml
   note:
     type: string
   platform:

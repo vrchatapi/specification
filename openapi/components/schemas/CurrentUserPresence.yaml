@@ -42,7 +42,7 @@ properties:
     type: string
     nullable: true
   travelingToWorld:
-    $ref: ./WorldID.yaml
+    $ref: ./LocationID.yaml
     nullable: true
   userIcon:
     type: string
