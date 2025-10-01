@@ -39,7 +39,7 @@ paths:
         Returns a list of recently visited locations.
       responses:
         '200':
-          $ref: ../responses/instances/LocationListResponse.yaml
+          $ref: ../responses/instances/LocationIDListResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
   '/instances/{worldId}:{instanceId}':
