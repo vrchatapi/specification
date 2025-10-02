@@ -281,6 +281,8 @@
 
 "/instances":
   $ref: "./paths/instances.yaml#/paths/~1instances"
+"/instances/recent":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1recent"
 "/instances/{worldId}:{instanceId}":
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}"
 "/instances/{worldId}:{instanceId}/shortName":

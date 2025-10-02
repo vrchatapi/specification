@@ -2,7 +2,7 @@ properties:
   inviteMessage:
     type: string
   worldId:
-    $ref: ./WorldID.yaml
+    $ref: ./LocationID.yaml
   worldName:
     type: string
 required:

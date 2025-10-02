@@ -24,6 +24,24 @@ paths:
           $ref: ../responses/instances/InstanceResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+  '/instances/recent':
+    get:
+      summary: List Recent Locations
+      tags:
+        - instances
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      operationId: getRecentLocations
+      security:
+        - authCookie: []
+      description: |-
+        Returns a list of recently visited locations.
+      responses:
+        '200':
+          $ref: ../responses/instances/LocationIDListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
   '/instances/{worldId}:{instanceId}':
     parameters:
       - $ref: ../parameters.yaml#/worldId
