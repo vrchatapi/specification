@@ -3247,6 +3247,23 @@ paths:
           $ref: '#/components/responses/InstanceResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
+  /instances/recent:
+    get:
+      summary: List Recent Locations
+      tags:
+        - instances
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+      operationId: getRecentLocations
+      security:
+        - authCookie: []
+      description: Returns a list of recently visited locations.
+      responses:
+        '200':
+          $ref: '#/components/responses/LocationIDListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
   /instances/{worldId}:{instanceId}:
     parameters:
       - $ref: '#/components/parameters/worldId'
@@ -4664,7 +4681,7 @@ components:
       title: DeveloperType
       type: string
     WorldID:
-      example: wrld_ba913a96-fac4-4048-a062-9aa5db092812
+      example: wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd
       title: WorldID
       type: string
       description: WorldID be "offline" on User profiles if you are not friends with that user.
@@ -4690,6 +4707,11 @@ components:
       example: grp_71a7ff59-112c-4e78-a990-c7cc650776e5
       title: GroupID
       type: string
+    LocationID:
+      type: string
+      example: wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd:12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+      title: LocationID
+      description: Represents a unique location, consisting of a world identifier and an instance identifier, or "offline" if the user is not on your friends list.
     CurrentUserPresence:
       title: CurrentUserPresence
       type: object
@@ -4735,7 +4757,7 @@ components:
           type: string
           nullable: true
         travelingToWorld:
-          $ref: '#/components/schemas/WorldID'
+          $ref: '#/components/schemas/LocationID'
           nullable: true
         userIcon:
           type: string
@@ -8574,11 +8596,9 @@ components:
       type: object
       properties:
         instanceId:
-          type: string
-          minLength: 1
-          example: 12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
-        location:
           $ref: '#/components/schemas/InstanceID'
+        location:
+          $ref: '#/components/schemas/LocationID'
         world:
           $ref: '#/components/schemas/World'
         memberCount:
@@ -9563,14 +9583,12 @@ components:
         id:
           $ref: '#/components/schemas/InstanceID'
         instanceId:
-          type: string
-          minLength: 1
-          example: 12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+          $ref: '#/components/schemas/InstanceID'
         instancePersistenceEnabled:
           type: string
           nullable: true
         location:
-          $ref: '#/components/schemas/InstanceID'
+          $ref: '#/components/schemas/LocationID'
         n_users:
           type: integer
           minimum: 0
@@ -10126,7 +10144,7 @@ components:
         last_platform:
           $ref: '#/components/schemas/Platform'
         location:
-          $ref: '#/components/schemas/WorldID'
+          $ref: '#/components/schemas/LocationID'
         note:
           type: string
         platform:
@@ -12085,7 +12103,7 @@ components:
         inviteMessage:
           type: string
         worldId:
-          $ref: '#/components/schemas/WorldID'
+          $ref: '#/components/schemas/LocationID'
         worldName:
           type: string
       required:
@@ -13483,6 +13501,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Instance'
+    LocationIDListResponse:
+      description: Returns a list of LocationIDs.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/LocationID'
     InstanceCloseForbiddenError:
       description: Error response due to not being allowed to close an instance
       content:
