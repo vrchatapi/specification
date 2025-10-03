@@ -82,6 +82,20 @@ paths:
       tags:
         - economy
       description: Get a list of all current user subscriptions.
+  /user/subscription/recent:
+    get:
+      summary: Get Recent Subscription
+      operationId: getRecentSubscription
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/UserSubscriptionResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Get the most recent user subscription.
   '/users/{userId}/subscription/eligible':
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -99,6 +113,23 @@ paths:
       tags:
         - economy
       description: Get the user's eligibility status for subscriptions.
+  '/users/{userId}/credits/eligible':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/subscriptionId
+    get:
+      summary: Get User Credits Eligiblity
+      operationId: getUserCreditsEligible
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/UserCreditsEligibleResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Get the user's eligibility status for subscriptions based on available credits.
   /subscriptions:
     get:
       summary: List Subscriptions
@@ -211,6 +242,24 @@ paths:
       tags:
         - economy
       description: 'Gets the status of the agreement of a user to the Tilia TOS'
+    put:
+      summary: Update Tilia TOS Agreement Status
+      operationId: updateTiliaTos
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/UpdateTiliaTOSResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateTiliaTOSRequest.yaml
+      description: 'Updates the status of the agreement of a user to the Tilia TOS'
   '/user/{userId}/balance':
     parameters:
       - $ref: ../parameters.yaml#/userId

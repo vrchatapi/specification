@@ -1,0 +1,9 @@
+title: UserCreditsEligible
+type: object
+properties:
+  eligible:
+    type: boolean
+  reason:
+    type: string
+required:
+  - eligible
