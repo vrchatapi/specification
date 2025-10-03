@@ -99,6 +99,8 @@
   $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
 '/user/subscription/recent':
   $ref: "./paths/economy.yaml#/paths/~1user~1subscription~1recent"
+'/user/bulk/gift/purchases':
+  $ref: "./paths/economy.yaml#/paths/~1user~1bulk~1gift~1purchases"
 '/users/{userId}/subscription/eligible':
   $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1subscription~1eligible"
 '/users/{userId}/credits/eligible':

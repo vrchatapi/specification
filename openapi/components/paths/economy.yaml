@@ -96,6 +96,22 @@ paths:
       tags:
         - economy
       description: Get the most recent user subscription.
+  /user/bulk/gift/purchases:
+    parameters:
+      - $ref: ../parameters.yaml#/mostRecentFlag
+    get:
+      summary: Get Bulk Gift Purchases
+      operationId: getBulkGiftPurchases
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/BulkPurchasesListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Get bulk gift purchases made by the user.
   '/users/{userId}/subscription/eligible':
     parameters:
       - $ref: ../parameters.yaml#/userId

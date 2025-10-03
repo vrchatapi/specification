@@ -674,3 +674,9 @@ subscriptionId:
   required: true
   schema:
     type: string
+mostRecentFlag:
+  name: mostRecent
+  in: query
+  required: false
+  schema:
+    type: boolean
