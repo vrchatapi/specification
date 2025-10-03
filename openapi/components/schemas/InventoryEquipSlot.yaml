@@ -1,0 +1,8 @@
+title: InventoryEquipSlot
+type: string
+enum:
+  - ""
+  - drone
+  - portal
+default: ""
+example: drone

@@ -8,6 +8,8 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/offset
+      - $ref: ../parameters.yaml#/inventoryHolderId
+      - $ref: ../parameters.yaml#/inventoryEquipSlot
       - $ref: ../parameters.yaml#/inventorySortOrder
       - $ref: ../parameters.yaml#/inventoryItemTags
       - $ref: ../parameters.yaml#/inventoryItemTypes
@@ -25,6 +27,8 @@ paths:
           $ref: ../responses/inventory/InventoryResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/NoPermission.yaml
       tags:
         - inventory
       description: Returns an Inventory object.
@@ -62,6 +66,19 @@ paths:
             schema:
               $ref: ../requests/UpdateInventoryItemRequest.yaml
       description: Returns the modified InventoryItem object as held by the currently logged in user.
+    delete:
+      summary: Delete Own Inventory Item
+      operationId: deleteOwnInventoryItem
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/inventory/DeleteInventoryItemResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - inventory
+      description: Deletes an InventoryItem from the inventory of the currently logged in user.
   '/users/{userId}/inventory/{inventoryItemId}':
     parameters:
       - $ref: ../parameters.yaml#/userId

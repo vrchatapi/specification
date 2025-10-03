@@ -7,5 +7,7 @@ enum:
   - trashable
   - cloneable
   - ugc
+  - equippable
+  - unique
 default: instantiatable
 example: consumable
