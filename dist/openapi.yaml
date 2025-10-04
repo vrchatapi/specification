@@ -7763,6 +7763,7 @@ components:
         - group-roles-assign
         - group-roles-manage
         - group-calendar-manage
+        - group-instance-calendar-link
       x-enum-varnames:
         - group_all
         - group_announcement_manage
@@ -7789,6 +7790,7 @@ components:
         - group_roles_assign
         - group_roles_manage
         - group_calendar_manage
+        - group_instance_calendar_link
     GroupMyMember:
       title: GroupMyMember
       type: object
