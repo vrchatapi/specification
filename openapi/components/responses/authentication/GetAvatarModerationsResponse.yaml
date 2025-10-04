@@ -1,4 +1,4 @@
-description: Returns list of avatar moderations created by the current user
+description: Returns list of globally blocked avatars with timestamps
 content:
   application/json:
     schema:
