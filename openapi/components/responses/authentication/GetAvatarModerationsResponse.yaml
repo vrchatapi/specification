@@ -1,0 +1,7 @@
+description: Returns list of avatar moderations created by the current user
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        $ref: ../../schemas/AvatarModeration.yaml

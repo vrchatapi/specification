@@ -1,0 +1,5 @@
+title: AvatarModerationType
+type: string
+enum:
+  - block
+example: block
