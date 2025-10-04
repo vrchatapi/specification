@@ -36,10 +36,12 @@
   $ref: "./paths/authentication.yaml#/paths/~1auth~1confirmEmail"
 "/auth/verifyLoginPlace":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1verifyLoginPlace"
+"/auth/user/avatarmoderations":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1avatarmoderations"
 
 # avatars
 
-'/users/{userId}/avatar':
+"/users/{userId}/avatar":
   $ref: "./paths/avatars.yaml#/paths/~1users~1{userId}~1avatar"
 "/avatars":
   $ref: "./paths/avatars.yaml#/paths/~1avatars"
@@ -64,66 +66,66 @@
 
 # calendar
 
-'/calendar':
+"/calendar":
   $ref: "./paths/calendar.yaml#/paths/~1calendar"
-'/calendar/featured':
+"/calendar/featured":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1featured"
-'/calendar/following':
+"/calendar/following":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1following"
-'/calendar/search':
+"/calendar/search":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1search"
-'/calendar/{groupId}':
+"/calendar/{groupId}":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}"
-'/calendar/{groupId}/event':
+"/calendar/{groupId}/event":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1event"
-'/calendar/{groupId}/{calendarId}':
+"/calendar/{groupId}/{calendarId}":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}"
-'/calendar/{groupId}/{calendarId}.ics':
+"/calendar/{groupId}/{calendarId}.ics":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}.ics"
-'/calendar/{groupId}/{calendarId}/event':
+"/calendar/{groupId}/{calendarId}/event":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}~1event"
-'/calendar/{groupId}/{calendarId}/follow':
+"/calendar/{groupId}/{calendarId}/follow":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}~1follow"
 
 # economy
 
-'/Steam/transactions':
+"/Steam/transactions":
   $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions"
-'/Steam/transactions/{transactionId}':
+"/Steam/transactions/{transactionId}":
   $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions~1{transactionId}"
-'/Admin/transactions':
+"/Admin/transactions":
   $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions"
-'/Admin/transactions/{transactionId}':
+"/Admin/transactions/{transactionId}":
   $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions~1{transactionId}"
-'/auth/user/subscription':
+"/auth/user/subscription":
   $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
-'/users/{userId}/subscription/eligible':
+"/users/{userId}/subscription/eligible":
   $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1subscription~1eligible"
-'/subscriptions':
+"/subscriptions":
   $ref: "./paths/economy.yaml#/paths/~1subscriptions"
-'/licenseGroups/{licenseGroupId}':
+"/licenseGroups/{licenseGroupId}":
   $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
-'/listing/{productId}':
+"/listing/{productId}":
   $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}"
-'/user/{userId}/listings':
+"/user/{userId}/listings":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1listings"
-'/tokenBundles':
+"/tokenBundles":
   $ref: "./paths/economy.yaml#/paths/~1tokenBundles"
-'/tilia/status':
+"/tilia/status":
   $ref: "./paths/economy.yaml#/paths/~1tilia~1status"
-'/user/{userId}/tilia/tos':
+"/user/{userId}/tilia/tos":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1tilia~1tos"
-'/user/{userId}/balance':
+"/user/{userId}/balance":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance"
-'/user/{userId}/balance/earnings':
+"/user/{userId}/balance/earnings":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
-'/user/{userId}/economy/account':
+"/user/{userId}/economy/account":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
-'/economy/licenses/active':
+"/economy/licenses/active":
   $ref: "./paths/economy.yaml#/paths/~1economy~1licenses~1active"
-'/economy/store':
+"/economy/store":
   $ref: "./paths/economy.yaml#/paths/~1economy~1store"
-'/economy/store/shelves':
+"/economy/store/shelves":
   $ref: "./paths/economy.yaml#/paths/~1economy~1store~1shelves"
 
 # favorites
@@ -217,9 +219,9 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1leave"
 "/groups/{groupId}/members":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members"
-'/groups/{groupId}/members/{userId}':
+"/groups/{groupId}/members/{userId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}"
-'/groups/{groupId}/members/{userId}/roles/{groupRoleId}':
+"/groups/{groupId}/members/{userId}/roles/{groupRoleId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}~1roles~1{groupRoleId}"
 "/groups/{groupId}/permissions":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1permissions"

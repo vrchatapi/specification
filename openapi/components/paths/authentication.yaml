@@ -167,6 +167,20 @@ paths:
         - authentication
       security:
         - authCookie: []
+  /auth/user/avatarmoderations:
+    get:
+      summary: Get Global Avatar Moderations
+      operationId: getGlobalAvatarModerations
+      description: Returns list of globally blocked avatars.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/authentication/GetAvatarModerationsResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
   /auth/twofactorauth/otp/verify:
     post:
       summary: Verify 2FA code with Recovery code
