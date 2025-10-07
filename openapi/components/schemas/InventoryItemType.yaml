@@ -5,5 +5,7 @@ enum:
   - prop
   - emoji
   - sticker
+  - droneskin
+  - portalskin
 default: bundle
 example: prop

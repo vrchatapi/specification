@@ -1,0 +1,6 @@
+description: Returns a UserSubscription object.
+content:
+  application/json:
+    schema:
+      type: object
+      nullable: true

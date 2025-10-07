@@ -1,0 +1,9 @@
+title: InventoryUserAttributes
+type: object
+properties:
+  primaryColor:
+    type: string
+  secondaryColor:
+    type: string
+  trailColor:
+    type: string

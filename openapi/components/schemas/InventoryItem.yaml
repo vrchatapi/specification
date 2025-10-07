@@ -9,8 +9,16 @@ properties:
     format: date-time
     type: string
     example: '2025-06-13T05:00:45.455Z'
+  defaultAttributes:
+    $ref: ./InventoryDefaultAttributes.yaml
   description:
     type: string
+  equipSlot:
+    $ref: ./InventoryEquipSlot.yaml
+  equipSlots:
+    type: array
+    items:
+      $ref: ./InventoryEquipSlot.yaml
   expiryDate:
     format: date-time
     type: string
@@ -56,9 +64,14 @@ properties:
     format: date-time
     type: string
     example: '2025-06-25T00:34:15.965Z'
+  userAttributes:
+    $ref: ./InventoryUserAttributes.yaml
+  validateUserAttributes:
+    type: boolean
 required:
   - collections
   - created_at
+  - defaultAttributes
   - description
   - expiryDate
   - flags
@@ -76,3 +89,5 @@ required:
   - template_created_at
   - template_updated_at
   - updated_at
+  - userAttributes
+  - validateUserAttributes

@@ -1,0 +1,7 @@
+description: Returns a list of ??? objects.
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        type: object
