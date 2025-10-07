@@ -471,6 +471,20 @@ paths:
       tags:
         - authentication
       description: Verifies a login attempt for a user
+  /auth/user/avatarmoderations:
+    get:
+      summary: Get Global Avatar Moderations
+      operationId: getGlobalAvatarModerations
+      description: Returns list of globally blocked avatars.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/GetAvatarModerationsResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
   /users/{userId}/avatar:
     get:
       summary: Get Own Avatar
@@ -5195,6 +5209,27 @@ components:
         - captchaCode
         - subscribe
         - acceptedTOSVersion
+    AvatarModerationType:
+      title: AvatarModerationType
+      type: string
+      enum:
+        - block
+      example: block
+    AvatarModeration:
+      title: AvatarModeration
+      type: object
+      properties:
+        avatarModerationType:
+          $ref: '#/components/schemas/AvatarModerationType'
+        created:
+          type: string
+          format: date-time
+        targetAvatarId:
+          $ref: '#/components/schemas/AvatarID'
+      required:
+        - avatarModerationType
+        - created
+        - targetAvatarId
     ReleaseStatus:
       type: string
       default: public
@@ -12312,6 +12347,14 @@ components:
       description: OK
     VerifyLoginPlaceResponse:
       description: OK
+    GetAvatarModerationsResponse:
+      description: Returns list of globally blocked avatars with timestamps
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AvatarModeration'
     AvatarResponse:
       description: Returns a single Avatar object.
       content:
