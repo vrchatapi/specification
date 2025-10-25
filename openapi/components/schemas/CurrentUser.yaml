@@ -65,6 +65,10 @@ properties:
     type: string
   developerType:
     $ref: ./DeveloperType.yaml
+  discordDetails:
+    $ref: ./DiscordDetails.yaml
+  discordId:
+    $ref: ./DiscordID.yaml
   displayName:
     type: string
   emailVerified:
