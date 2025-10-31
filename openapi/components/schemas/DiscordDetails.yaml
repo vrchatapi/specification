@@ -1,0 +1,11 @@
+title: DiscordDetails
+type: object
+description: ''
+properties:
+  global_name:
+    type: string
+  id:
+    $ref: './DiscordID.yaml'
+required:
+  - global_name
+  - id
