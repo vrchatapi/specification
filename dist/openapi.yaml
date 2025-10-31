@@ -4694,6 +4694,23 @@ components:
         - moderator
       title: DeveloperType
       type: string
+    DiscordID:
+      example: '1280064052206370848'
+      title: DiscordID
+      description: https://discord.com/developers/docs/reference#snowflakes
+      type: string
+    DiscordDetails:
+      title: DiscordDetails
+      type: object
+      description: ''
+      properties:
+        global_name:
+          type: string
+        id:
+          $ref: '#/components/schemas/DiscordID'
+      required:
+        - global_name
+        - id
     WorldID:
       example: wrld_4432ea9b-729c-46e3-8eaf-846aa0a37fdd
       title: WorldID
@@ -4872,6 +4889,10 @@ components:
           type: string
         developerType:
           $ref: '#/components/schemas/DeveloperType'
+        discordDetails:
+          $ref: '#/components/schemas/DiscordDetails'
+        discordId:
+          $ref: '#/components/schemas/DiscordID'
         displayName:
           type: string
         emailVerified:
