@@ -90,5 +90,9 @@ required:
   - id
   - title
   - accessType
+  - startsAt
+  - endsAt
+  - description
+  - category
 title: CalendarEvent
 type: object
