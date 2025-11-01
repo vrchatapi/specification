@@ -3511,12 +3511,12 @@ paths:
         - authCookie: []
       parameters:
         - schema:
-            type: string
+            $ref: '#/components/schemas/PlayerModerationType'
           in: query
           name: type
-          description: Must be one of PlayerModerationType, except unblock. Unblocking simply removes a block.
+          description: Must be one of PlayerModerationType.
         - schema:
-            type: string
+            $ref: ../schemas/UserID.yaml
           in: query
           name: targetUserId
           description: Must be valid UserID.
@@ -9778,22 +9778,25 @@ components:
         - secureName
       title: InstanceShortNameResponse
       type: object
-    PlayerModerationID:
-      example: pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244
-      title: PlayerModerationID
-      type: string
     PlayerModerationType:
       type: string
       default: unmute
       enum:
-        - mute
-        - unmute
         - block
-        - unblock
+        - mute
+        - muteChat
+        - unmute
+        - unmuteChat
+        - hideAvatar
+        - showAvatar
         - interactOn
         - interactOff
       example: unmute
       title: PlayerModerationType
+    PlayerModerationID:
+      example: pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244
+      title: PlayerModerationID
+      type: string
     PlayerModeration:
       properties:
         created:
