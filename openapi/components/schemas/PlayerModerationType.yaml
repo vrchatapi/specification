@@ -1,10 +1,13 @@
 type: string
 default: unmute
 enum:
-  - mute
-  - unmute
   - block
-  - unblock
+  - mute
+  - muteChat
+  - unmute
+  - unmuteChat
+  - hideAvatar
+  - showAvatar
   - interactOn
   - interactOff
 example: unmute

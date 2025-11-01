@@ -50,18 +50,18 @@ paths:
         - authCookie: []
       parameters:
         - schema:
-            type: string
+            $ref: ../schemas/PlayerModerationType.yaml
           in: query
           name: type
-          description: 'Must be one of PlayerModerationType, except unblock. Unblocking simply removes a block.'
+          description: Must be one of PlayerModerationType.
         - schema:
-            type: string
+            $ref: ../schemas/UserID.yaml
           in: query
           name: sourceUserId
           description: Must be valid UserID. Trying to view someone else's moderations results with "Can't view someone else's player moderations" error.
           x-internal: true
         - schema:
-            type: string
+            $ref: ../schemas/UserID.yaml
           in: query
           name: targetUserId
           description: Must be valid UserID.
