@@ -351,6 +351,25 @@ paths:
           $ref: ../responses/users/UserMustBeOwnError.yaml
       security:
         - authCookie: []
+  "/users/{userId}/instances/groups/{groupId}":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      summary: Get User Group Instances for a specific Group
+      description: Returns a list of a group's instances for a user
+      operationId: getUserGroupInstancesForGroup
+      tags:
+        - users
+      responses:
+        '200':
+          $ref: ../responses/users/UserGroupInstanceListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+        '403':
+          $ref: ../responses/users/UserMustBeOwnError.yaml
+      security:
+        - authCookie: []
   '/users/{userId}/{worldId}/persist/exists':
     parameters:
       - $ref: ../parameters.yaml#/userId

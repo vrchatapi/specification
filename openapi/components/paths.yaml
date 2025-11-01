@@ -367,6 +367,8 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1badges~1{badgeId}"
 "/users/{userId}/instances/groups":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups"
+"/users/{userId}/instances/groups/{groupId}":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups~1{groupId}"
 "/users/{userId}/{worldId}/persist/exists":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1{worldId}~1persist~1exists"
 "/users/{userId}/{worldId}/persist":
