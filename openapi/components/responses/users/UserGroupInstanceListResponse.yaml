@@ -2,6 +2,7 @@ description: Returns a list of Instance objects with a fetched at time.
 content:
   application/json:
     schema:
+      title: UserGroupInstanceListResponse
       type: object
       properties:
         fetchedAt:
