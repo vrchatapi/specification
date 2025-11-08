@@ -6,6 +6,3 @@ properties:
     type: string
   id:
     $ref: './DiscordID.yaml'
-required:
-  - global_name
-  - id
