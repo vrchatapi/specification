@@ -2,12 +2,14 @@ title: EconomyAccount
 type: object
 properties:
   accountActivatedOn:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true
   accountId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   blocked:
     type: boolean
   canSpend:

@@ -2,11 +2,13 @@ title: GroupMember
 type: object
 properties:
   acceptedByDisplayName:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   acceptedById:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   id:
     $ref: ./GroupMemberID.yaml
   groupId:
@@ -30,9 +32,10 @@ properties:
     items:
       $ref: ./GroupRoleID.yaml
   joinedAt:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true
   membershipStatus:
     $ref: ./GroupMemberStatus.yaml
   visibility:
@@ -45,21 +48,25 @@ properties:
     type: boolean
   createdAt:
     description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true
   bannedAt:
     description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true
   managerNotes:
     description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   lastPostReadAt:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true
   hasJoinedFromPurchase:
     type: boolean

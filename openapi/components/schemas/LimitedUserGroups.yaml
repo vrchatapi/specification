@@ -12,23 +12,28 @@ properties:
   description:
     type: string
   iconId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   iconUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   bannerId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   bannerUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   privacy:
     type: string
   lastPostCreatedAt:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true
   ownerId:
     $ref: ./UserID.yaml
   memberCount:
@@ -42,6 +47,7 @@ properties:
   mutualGroup:
     type: boolean
   lastPostReadAt:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true

@@ -20,28 +20,32 @@ properties:
     default: false
   roleIdsToView:
     description: ' '
-    type: array
+    type:
+      - array
+      - null
     items:
       $ref: ./GroupRoleID.yaml
-    nullable: true
   roleIdsToSubmit:
     description: ' '
-    type: array
+    type:
+      - array
+      - null
     items:
       $ref: ./GroupRoleID.yaml
-    nullable: true
   roleIdsToAutoApprove:
     description: ' '
-    type: array
+    type:
+      - array
+      - null
     items:
       $ref: ./GroupRoleID.yaml
-    nullable: true
   roleIdsToManage:
     description: ' '
-    type: array
+    type:
+      - array
+      - null
     items:
       $ref: ./GroupRoleID.yaml
-    nullable: true
   createdAt:
     type: string
     format: date-time

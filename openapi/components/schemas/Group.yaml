@@ -24,18 +24,21 @@ properties:
   description:
     type: string
   iconUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   bannerUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   privacy:
     $ref: ./GroupPrivacy.yaml
   ownerId:
     $ref: ./UserID.yaml
   rules:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   links:
     type: array
     items:
@@ -45,11 +48,13 @@ properties:
     items:
       type: string
   iconId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   bannerId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   memberCount:
     type: integer
   memberCountSyncedAt:
@@ -78,9 +83,10 @@ properties:
     type: string
     format: date-time
   lastPostCreatedAt:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true
   onlineMemberCount:
     type: integer
   membershipStatus:
@@ -90,7 +96,8 @@ properties:
     nullable: true
   roles:
     description: "Only returned if ?includeRoles=true is specified."
-    type: array
-    nullable: true
+    type:
+      - array
+      - null
     items:
       $ref: ./GroupRole.yaml

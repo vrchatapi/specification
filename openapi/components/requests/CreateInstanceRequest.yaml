@@ -38,11 +38,13 @@ properties:
     type: boolean
     default: false
   instancePersistenceEnabled:
-    type: boolean
-    nullable: true
+    type:
+      - boolean
+      - null
   displayName:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   contentSettings:
     $ref: ../schemas/InstanceContentSettings.yaml
 required:

@@ -2,8 +2,9 @@ description: ''
 properties:
   created_at:
     format: date-time
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   platform:
     $ref: ./Platform.yaml
   unityVersion:

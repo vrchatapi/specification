@@ -9,8 +9,9 @@ properties:
     example: '2025-06-10T20:37:31.837Z'
   dropExpiryDate:
     format: date-time
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   endDropDate:
     format: date-time
     type: string

@@ -10,19 +10,22 @@ properties:
   displayName:
     type: string
   duration:
-    type: integer
-    nullable: true
+    type:
+      - integer
+      - null
   durationType:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   groupIcon:
     $ref: ./FileID.yaml
     nullable: true
   groupId:
     $ref: ./GroupID.yaml
   groupName:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   hasAvatar:
     type: boolean
   hasUdon:
@@ -37,8 +40,9 @@ properties:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   listingType:
     $ref: ./ProductListingType.yaml
   listingVariants:

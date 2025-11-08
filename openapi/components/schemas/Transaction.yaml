@@ -26,8 +26,9 @@ properties:
   agreement:
     $ref: ./TransactionAgreement.yaml
   error:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   isGift:
     type: boolean
     default: false

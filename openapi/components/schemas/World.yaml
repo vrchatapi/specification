@@ -72,8 +72,9 @@ properties:
     minimum: 0
     type: integer
   previewYoutubeId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   privateOccupants:
     default: 0
     example: 1

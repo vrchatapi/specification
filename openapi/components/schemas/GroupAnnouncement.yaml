@@ -11,22 +11,27 @@ properties:
     $ref: ./UserID.yaml
     nullable: true
   title:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   text:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   imageId:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   createdAt:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true
   updatedAt:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true

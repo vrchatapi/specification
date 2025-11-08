@@ -16,12 +16,14 @@ properties:
   joinState:
     $ref: ../schemas/GroupJoinState.yaml
   iconId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     default: null
   bannerId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     default: null
   privacy:
     $ref: ../schemas/GroupPrivacy.yaml

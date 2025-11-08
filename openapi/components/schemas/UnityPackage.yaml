@@ -3,8 +3,9 @@ properties:
   id:
     $ref: ./UnityPackageID.yaml
   assetUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     example: https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
   assetUrlObject:
     type: object
@@ -42,11 +43,13 @@ properties:
     type: string
   worldSignature:
     example: 'AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ=='
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   impostorUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   scanStatus:
     type: string
   variant:

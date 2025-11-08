@@ -13,9 +13,10 @@ properties:
     type: string
   expiryDate:
     format: date-time
-    type: string
+    type:
+      - string
+      - null
     example: '2025-06-13T05:00:45.455Z'
-    nullable: true
   flags:
     type: array
     items:

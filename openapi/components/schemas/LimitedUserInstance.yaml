@@ -22,8 +22,9 @@ properties:
     items:
       $ref: ./Tag.yaml
   date_joined:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     format: date-time
   developerType:
     $ref: ./DeveloperType.yaml
@@ -40,12 +41,14 @@ properties:
   last_platform:
     $ref: ./Platform.yaml
   last_activity:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     format: date-time
   last_mobile:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     format: date-time
   platform:
     type: string

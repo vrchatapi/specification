@@ -11,12 +11,14 @@ properties:
     type: integer
   accountDeletionDate:
     format: date
-    nullable: true
-    type: string
+    type:
+      - string
+      - null
   accountDeletionLog:
     description: ' '
-    nullable: true
-    type: array
+    type:
+      - array
+      - null
     items:
       $ref: ./AccountDeletionLog.yaml
   activeFriends:
@@ -93,11 +95,13 @@ properties:
   hideContentFilterSettings:
     type: boolean
   userLanguage:
-    nullable: true
-    type: string
+    type:
+      - string
+      - null
   userLanguageCode:
-    nullable: true
-    type: string
+    type:
+      - string
+      - null
   hasEmail:
     type: boolean
   hasLoggedInFromClient:
@@ -124,8 +128,9 @@ properties:
     type: string
   last_mobile:
     format: date-time
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   last_platform:
     $ref: ./Platform.yaml
   obfuscatedEmail:
@@ -165,8 +170,9 @@ properties:
         isMobile:
           type: boolean
         platform:
-          type: string
-          nullable: true
+          type:
+            - string
+            - null
         recorded:
           type: string
           format: date-time
@@ -181,8 +187,9 @@ properties:
     items:
       type: string
   queuedInstance:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   receiveMobileInvitations:
     type: boolean
   state:
@@ -209,8 +216,9 @@ properties:
     type: boolean
   twoFactorAuthEnabledDate:
     format: date-time
-    nullable: true
-    type: string
+    type:
+      - string
+      - null
   unsubscribe:
     type: boolean
   updated_at:

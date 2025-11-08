@@ -18,25 +18,29 @@ properties:
     default: false
   roleIdsToView:
     description: ' '
-    type: array
+    type:
+      - array
+      - null
     items:
       $ref: ../schemas/GroupRoleID.yaml
-    nullable: true
   roleIdsToSubmit:
     description: ' '
-    type: array
+    type:
+      - array
+      - null
     items:
       $ref: ../schemas/GroupRoleID.yaml
-    nullable: true
   roleIdsToAutoApprove:
     description: ' '
-    type: array
+    type:
+      - array
+      - null
     items:
       $ref: ../schemas/GroupRoleID.yaml
-    nullable: true
   roleIdsToManage:
     description: ' '
-    type: array
+    type:
+      - array
+      - null
     items:
       $ref: ../schemas/GroupRoleID.yaml
-    nullable: true

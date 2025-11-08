@@ -2,10 +2,11 @@ title: Badge
 type: object
 properties:
   assignedAt:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
     description: only present in CurrentUser badges
-    nullable: true
   badgeDescription:
     type: string
   badgeId:
@@ -16,16 +17,18 @@ properties:
   badgeName:
     type: string
   hidden:
-    type: boolean
+    type:
+      - boolean
+      - null
     description: only present in CurrentUser badges
-    nullable: true
   showcased:
     type: boolean
   updatedAt:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
     description: only present in CurrentUser badges
-    nullable: true
 required:
   - badgeDescription
   - badgeId

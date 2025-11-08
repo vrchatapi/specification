@@ -2,8 +2,9 @@ title: CurrentUserPresence
 type: object
 properties:
   avatarThumbnail:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   currentAvatarTags:
     type: string
   displayName:
@@ -11,42 +12,51 @@ properties:
   debugflag:
     type: string
   groups:
-    type: array
-    nullable: true
+    type:
+      - array
+      - null
     items:
       $ref: ./GroupID.yaml
   id:
     $ref: ./UserID.yaml
   instance:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   instanceType:
-    type: string
+    type:
+      - string
+      - null
     description: either an InstanceType or an empty string
-    nullable: true
   isRejoining:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   platform:
-    type: string
+    type:
+      - string
+      - null
     description: either a Platform or an empty string
-    nullable: true
   profilePicOverride:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   status:
-    type: string
+    type:
+      - string
+      - null
     description: either a UserStatus or empty string
-    nullable: true
   travelingToInstance:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   travelingToWorld:
     $ref: ./LocationID.yaml
     nullable: true
   userIcon:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   world:
     $ref: ./WorldID.yaml
     nullable: true

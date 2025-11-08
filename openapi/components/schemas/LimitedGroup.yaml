@@ -12,22 +12,27 @@ properties:
   description:
     type: string
   iconUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   bannerUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   ownerId:
     $ref: ./UserID.yaml
   rules:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   iconId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   bannerId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   memberCount:
     type: integer
   tags:

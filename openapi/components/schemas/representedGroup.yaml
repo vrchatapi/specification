@@ -10,17 +10,21 @@ properties:
   description:
     type: string
   iconId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   iconUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   bannerId:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   bannerUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   privacy:
     $ref: ./GroupPrivacy.yaml
   ownerId:

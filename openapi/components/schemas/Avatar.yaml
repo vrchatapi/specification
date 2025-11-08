@@ -33,8 +33,9 @@ properties:
     minLength: 1
     type: string
   listingDate:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   lock:
     type: boolean
   lowestPrice:
@@ -85,11 +86,13 @@ properties:
     type: object
     properties:
       primary:
-        type: string
-        nullable: true
+        type:
+          - string
+          - null
       secondary:
-        type: string
-        nullable: true
+        type:
+          - string
+          - null
       supplementary:
         type: array
         items:

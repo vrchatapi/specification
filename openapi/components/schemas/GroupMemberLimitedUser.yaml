@@ -7,15 +7,17 @@ properties:
   displayName:
     type: string
   thumbnailUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   iconUrl:
     type: string
   profilePicOverride:
     type: string
   currentAvatarThumbnailImageUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   currentAvatarTags:
     type: array
     items:

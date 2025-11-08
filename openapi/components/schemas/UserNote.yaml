@@ -22,8 +22,9 @@ properties:
       "id":
         $ref: ./UserNoteID.yaml
       "profilePicOverride":
-        type: string
-        nullable: true
+        type:
+          - string
+          - null
       "userIcon":
         type: string
   targetUserId:

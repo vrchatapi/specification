@@ -10,8 +10,9 @@ properties:
     example: true
     type: boolean
   ageGate:
-    nullable: true
-    type: boolean
+    type:
+      - boolean
+      - null
   canRequestInvite:
     default: true
     example: true
@@ -28,8 +29,9 @@ properties:
   contentSettings:
     $ref: ./InstanceContentSettings.yaml
   displayName:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   full:
     default: false
     type: boolean
@@ -40,8 +42,9 @@ properties:
   instanceId:
     $ref: ./InstanceID.yaml
   instancePersistenceEnabled:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   location:
     $ref: ./LocationID.yaml
   n_users:
@@ -62,8 +65,9 @@ properties:
   platforms:
     $ref: ./InstancePlatforms.yaml
   playerPersistenceEnabled:
-    type: boolean
-    nullable: true
+    type:
+      - boolean
+      - null
   region:
     $ref: ./InstanceRegion.yaml
   secureName:
@@ -71,10 +75,11 @@ properties:
     minLength: 1
     example: 7eavhhng
   shortName:
-    type: string
+    type:
+      - string
+      - null
     minLength: 1
     example: 02u7yz8j
-    nullable: true
   tags:
     description: 'The tags array on Instances usually contain the language tags of the people in the instance. '
     type: array
@@ -127,11 +132,13 @@ properties:
     type: string
   closedAt:
     format: date-time
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   hardClose:
-    type: boolean
-    nullable: true
+    type:
+      - boolean
+      - null
 required:
   - active
   - canRequestInvite

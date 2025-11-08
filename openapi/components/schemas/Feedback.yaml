@@ -9,8 +9,9 @@ properties:
     $ref: ./UserID.yaml
     nullable: true
   contentAuthorName:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   contentId:
     type: string
   contentName:
@@ -18,11 +19,13 @@ properties:
   contentType:
     type: string
   contentVersion:
-    type: integer
-    nullable: true
+    type:
+      - integer
+      - null
   description:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   id:
     $ref: ./FeedbackID.yaml
   reason:

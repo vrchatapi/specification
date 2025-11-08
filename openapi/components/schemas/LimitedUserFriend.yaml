@@ -32,16 +32,19 @@ properties:
   location:
     type: string
   last_login:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     format: date-time
   last_activity:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     format: date-time
   last_mobile:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
     format: date-time
   platform:
     type: string

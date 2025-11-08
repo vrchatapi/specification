@@ -7,9 +7,10 @@ properties:
     example: "Deletion requested"
     description: Typically "Deletion requested" or "Deletion canceled". Other messages like "Deletion completed" may exist, but are these are not possible to see as a regular user.
   deletionScheduled:
-    type: string
+    type:
+      - string
+      - null
     format: date-time
-    nullable: true
     description: When the deletion is scheduled to happen, standard is 14 days after the request.
   dateTime:
     type: string

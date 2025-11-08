@@ -55,8 +55,9 @@ properties:
     type: string
     description: Either a date-time or empty string.
   last_mobile:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   last_platform:
     $ref: ./Platform.yaml
   location:

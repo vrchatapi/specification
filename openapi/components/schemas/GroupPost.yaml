@@ -22,8 +22,9 @@ properties:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
-    type: string
-    nullable: true
+    type:
+      - string
+      - null
   createdAt:
     type: string
     format: date-time
