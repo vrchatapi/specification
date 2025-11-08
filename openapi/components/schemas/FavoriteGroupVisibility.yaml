@@ -3,6 +3,7 @@ enum:
   - private
   - friends
   - public
-example: private
+examples:
+  - private
 title: FavoriteGroupVisibility
 type: string

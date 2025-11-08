@@ -1,3 +1,4 @@
-example: gmem_95cdb3b4-4643-4eb6-bdab-46a4e1e5ce37
+examples:
+  - gmem_95cdb3b4-4643-4eb6-bdab-46a4e1e5ce37
 title: GroupMemberID
 type: string

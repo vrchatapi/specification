@@ -1,6 +1,7 @@
 type: string
 title: GroupAccessType
-example: members
+examples:
+  - members
 enum:
   - public
   - plus

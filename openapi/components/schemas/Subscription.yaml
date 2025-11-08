@@ -1,12 +1,12 @@
 description: ''
 type: object
-example:
-  id: vrchatplus-yearly
-  steamItemId: '5000'
-  amount: 9999
-  description: VRChat Plus (Yearly)
-  period: year
-  tier: 5
+examples:
+  - id: vrchatplus-yearly
+    steamItemId: '5000'
+    amount: 9999
+    description: VRChat Plus (Yearly)
+    period: year
+    tier: 5
 title: Subscription
 properties:
   id:

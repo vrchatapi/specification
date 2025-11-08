@@ -1,3 +1,4 @@
-example: gpos_71a7ff59-112c-4e78-a990-c7cc650776e5
+examples:
+  - gpos_71a7ff59-112c-4e78-a990-c7cc650776e5
 title: GroupAnnouncementID
 type: string

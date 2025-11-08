@@ -4,4 +4,5 @@ default: descending
 enum:
   - ascending
   - descending
-example: descending
+examples:
+  - descending

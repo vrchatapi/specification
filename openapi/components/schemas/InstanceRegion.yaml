@@ -1,7 +1,8 @@
 type: string
 title: InstanceRegion
 default: us
-example: us
+examples:
+  - us
 enum:
   - us
   - use

@@ -1,3 +1,4 @@
-example: prod_bfbc2315-247a-44d7-bfea-5237f8d56cb4
+examples:
+  - prod_bfbc2315-247a-44d7-bfea-5237f8d56cb4
 title: ProductID
 type: string

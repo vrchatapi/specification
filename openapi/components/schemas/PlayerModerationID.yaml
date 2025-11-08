@@ -1,3 +1,4 @@
-example: pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244
+examples:
+  - pmod_25551a8d-6f5d-430a-88d3-9c0ce08b5244
 title: PlayerModerationID
 type: string

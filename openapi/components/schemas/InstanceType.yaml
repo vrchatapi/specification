@@ -1,6 +1,7 @@
 type: string
 title: InstanceType
-example: hidden
+examples:
+  - hidden
 enum:
   - public
   - hidden

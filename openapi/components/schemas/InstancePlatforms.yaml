@@ -18,4 +18,5 @@ properties:
   standalonewindows:
     type: integer
     minimum: 0
-    example: 5
+    examples:
+      - 5

@@ -1,3 +1,4 @@
-example: ABC123
+examples:
+  - ABC123
 title: GroupShortCode
 type: string

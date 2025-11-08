@@ -1,3 +1,4 @@
-example: invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
+examples:
+  - invm_24a1c14d-5e24-48e5-90e3-c3f712420ffa
 title: InviteMessageID
 type: string

@@ -6,4 +6,5 @@ enum:
   - emoji
   - sticker
 default: bundle
-example: prop
+examples:
+  - prop

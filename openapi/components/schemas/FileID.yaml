@@ -1,3 +1,4 @@
-example: file_ce35d830-e20a-4df0-a6d4-5aaef4508044
+examples:
+  - file_ce35d830-e20a-4df0-a6d4-5aaef4508044
 title: FileID
 type: string

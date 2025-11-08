@@ -10,5 +10,6 @@ enum:
   - showAvatar
   - interactOn
   - interactOff
-example: unmute
+examples:
+  - unmute
 title: PlayerModerationType

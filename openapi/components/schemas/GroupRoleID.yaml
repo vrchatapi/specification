@@ -1,3 +1,4 @@
-example: grol_459d3911-f672-44bc-b84d-e54ffe7960fe
+examples:
+  - grol_459d3911-f672-44bc-b84d-e54ffe7960fe
 title: GroupRoleID
 type: string

@@ -1,10 +1,10 @@
 description: ''
 type: object
-example:
-  state: ''
-  country: SE
-  currency: EUR
-  status: Trusted
+examples:
+  - state: ''
+    country: SE
+    currency: EUR
+    status: Trusted
 title: TransactionSteamWalletInfo
 properties:
   state:

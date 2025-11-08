@@ -1,3 +1,4 @@
-example: ess_964dd7aa-f881-4ba1-adf7-261e906b9189
+examples:
+  - ess_964dd7aa-f881-4ba1-adf7-261e906b9189
 title: StoreShelfID
 type: string

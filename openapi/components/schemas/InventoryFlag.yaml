@@ -8,4 +8,5 @@ enum:
   - cloneable
   - ugc
 default: instantiatable
-example: consumable
+examples:
+  - consumable

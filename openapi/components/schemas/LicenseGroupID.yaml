@@ -1,3 +1,4 @@
-example: lgrp_608513da-b213-4e15-80af-bd88c27f0979
+examples:
+  - lgrp_608513da-b213-4e15-80af-bd88c27f0979
 title: LicenseGroupID
 type: string

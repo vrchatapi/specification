@@ -16,4 +16,5 @@ enum:
   - application/octet-stream
 title: MIMEType
 default: image/jpeg
-example: image/jpeg
+examples:
+  - image/jpeg

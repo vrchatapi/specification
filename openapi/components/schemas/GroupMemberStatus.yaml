@@ -7,4 +7,5 @@ enum:
   - banned
   - userblocked
 default: inactive
-example: member
+examples:
+  - member

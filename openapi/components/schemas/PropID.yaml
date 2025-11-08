@@ -1,3 +1,4 @@
-example: prop_829ba6f6-b837-49d9-b9a9-056b82103b58
+examples:
+  - prop_829ba6f6-b837-49d9-b9a9-056b82103b58
 title: PropID
 type: string

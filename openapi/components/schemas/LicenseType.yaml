@@ -6,4 +6,5 @@ enum:
   - licenseGroup
   - permission
   - product
-example: permission
+examples:
+  - permission

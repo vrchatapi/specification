@@ -3,4 +3,5 @@ type: string
 enum:
   - joinedAt:asc
   - joinedAt:desc
-example: joinedAt:asc
+examples:
+  - joinedAt:asc

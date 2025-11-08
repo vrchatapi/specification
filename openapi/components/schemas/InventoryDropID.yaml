@@ -1,3 +1,4 @@
-example: invd_ee3a8f7f-1454-4748-a935-99bf9865f33d
+examples:
+  - invd_ee3a8f7f-1454-4748-a935-99bf9865f33d
 title: InventoryDropID
 type: string

@@ -1,3 +1,4 @@
-example: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
+examples:
+  - avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
 title: AvatarID
 type: string

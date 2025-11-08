@@ -1,3 +1,4 @@
-example: ggal_a03a4b55-4ca6-4490-9519-40ba6351a233
+examples:
+  - ggal_a03a4b55-4ca6-4490-9519-40ba6351a233
 title: GroupGalleryID
 type: string

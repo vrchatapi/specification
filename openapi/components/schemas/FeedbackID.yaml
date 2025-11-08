@@ -1,3 +1,4 @@
-example: feedback_8cffb23a-f961-444e-b496-0196d1c90adb
+examples:
+  - feedback_8cffb23a-f961-444e-b496-0196d1c90adb
 title: FeedbackID
 type: string

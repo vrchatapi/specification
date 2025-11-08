@@ -1,7 +1,8 @@
 type: string
 title: Region
 default: us
-example: eu
+examples:
+  - eu
 enum:
   - us
   - use

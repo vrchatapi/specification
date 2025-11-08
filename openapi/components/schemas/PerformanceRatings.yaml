@@ -1,6 +1,7 @@
 type: string
 title: PerformanceRatings
-example: Excellent
+examples:
+  - Excellent
 enum:
   - None
   - Excellent

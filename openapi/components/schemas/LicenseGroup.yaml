@@ -1,30 +1,30 @@
 description: ''
 type: object
-example:
-  id: lgrp_608513da-b213-4e15-80af-bd88c27f0979
-  name: vrcplus
-  description: VRC+ benefits
-  licenses:
-    - forId: prms_1d9549db-d30a-48f3-a6b8-6741ce5a4283
-      forType: permission
-      forName: permission-user-icons
-      forAction: have
-    - forId: prms_76f33deb-dd5d-46b7-b79d-e1f8f0a9a1e0
-      forType: permission
-      forName: permission-supporter-tags
-      forAction: have
-    - forId: prms_0d9549db-d30a-48f3-a6b8-6741ce5a4283
-      forType: permission
-      forName: permission-invite-photos
-      forAction: have
-    - forId: prms_dc02c512-4c03-479c-8c6a-d9329c023baf
-      forType: permission
-      forName: permission-user-gallery
-      forAction: have
-    - forId: prms_153ac0b7-c2dd-43f9-96e3-c61fd2e85509
-      forType: permission
-      forName: permission-profile-pic-override
-      forAction: have
+examples:
+  - id: lgrp_608513da-b213-4e15-80af-bd88c27f0979
+    name: vrcplus
+    description: VRC+ benefits
+    licenses:
+      - forId: prms_1d9549db-d30a-48f3-a6b8-6741ce5a4283
+        forType: permission
+        forName: permission-user-icons
+        forAction: have
+      - forId: prms_76f33deb-dd5d-46b7-b79d-e1f8f0a9a1e0
+        forType: permission
+        forName: permission-supporter-tags
+        forAction: have
+      - forId: prms_0d9549db-d30a-48f3-a6b8-6741ce5a4283
+        forType: permission
+        forName: permission-invite-photos
+        forAction: have
+      - forId: prms_dc02c512-4c03-479c-8c6a-d9329c023baf
+        forType: permission
+        forName: permission-user-gallery
+        forAction: have
+      - forId: prms_153ac0b7-c2dd-43f9-96e3-c61fd2e85509
+        forType: permission
+        forName: permission-profile-pic-override
+        forAction: have
 title: LicenseGroup
 properties:
   id:

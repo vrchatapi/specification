@@ -1,4 +1,5 @@
-example: visible
+examples:
+  - visible
 title: GroupUserVisibility
 type: string
 enum:

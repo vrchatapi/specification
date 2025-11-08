@@ -1,5 +1,6 @@
 type: string
-example: accept
+examples:
+  - accept
 enum:
   - accept
   - reject

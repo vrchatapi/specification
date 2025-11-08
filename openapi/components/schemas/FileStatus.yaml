@@ -4,6 +4,7 @@ enum:
   - complete
   - none
   - queued
-example: complete
+examples:
+  - complete
 title: FileStatus
 default: waiting

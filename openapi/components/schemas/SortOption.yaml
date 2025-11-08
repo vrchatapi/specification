@@ -20,4 +20,5 @@ enum:
   - relevance
   - magic
   - name
-example: popularity
+examples:
+  - popularity
