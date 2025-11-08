@@ -165,7 +165,8 @@ paths:
         - schema:
             type: integer
             minimum: 0
-            example: 1
+            examples:
+              - 1
           in: query
           name: partNumber
           required: false
@@ -298,11 +299,13 @@ paths:
                   description: Required for emojianimated. Animation frames per second (1-64)
                 animationStyle:
                   type: string
-                  example: bats
+                  examples:
+                    - bats
                   description: Animation style for sticker, required for emoji.
                 maskTag:
                   type: string
-                  example: square
+                  examples:
+                    - square
                   description: Mask of the sticker, optional for emoji.
               required:
                 - file

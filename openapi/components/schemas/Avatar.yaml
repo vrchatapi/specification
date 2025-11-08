@@ -125,7 +125,8 @@ properties:
     type: string
   version:
     default: 0
-    example: 68
+    examples:
+      - 68
     minimum: 0
     type: integer
 required:

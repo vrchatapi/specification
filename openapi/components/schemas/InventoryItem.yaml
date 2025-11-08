@@ -8,7 +8,8 @@ properties:
   created_at:
     format: date-time
     type: string
-    example: '2025-06-13T05:00:45.455Z'
+    examples:
+      - '2025-06-13T05:00:45.455Z'
   description:
     type: string
   expiryDate:
@@ -16,7 +17,8 @@ properties:
     type:
       - string
       - null
-    example: '2025-06-13T05:00:45.455Z'
+    examples:
+      - '2025-06-13T05:00:45.455Z'
   flags:
     type: array
     items:
@@ -48,15 +50,18 @@ properties:
   template_created_at:
     format: date-time
     type: string
-    example: '2025-06-09T16:31:40.785Z'
+    examples:
+      - '2025-06-09T16:31:40.785Z'
   template_updated_at:
     format: date-time
     type: string
-    example: '2025-06-25T00:34:14.578Z'
+    examples:
+      - '2025-06-25T00:34:14.578Z'
   updated_at:
     format: date-time
     type: string
-    example: '2025-06-25T00:34:15.965Z'
+    examples:
+      - '2025-06-25T00:34:15.965Z'
 required:
   - collections
   - created_at

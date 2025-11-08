@@ -18,7 +18,8 @@ properties:
   isRepresenting:
     type: boolean
     default: false
-    example: true
+    examples:
+      - true
     description: Whether the user is representing the group. This makes the group show up above the name tag in-game.
   user:
     $ref: ./GroupMemberLimitedUser.yaml
@@ -40,7 +41,8 @@ properties:
     $ref: ./GroupMemberStatus.yaml
   visibility:
     type: string
-    example: visible
+    examples:
+      - visible
   isSubscribedToAnnouncements:
     type: boolean
     default: false

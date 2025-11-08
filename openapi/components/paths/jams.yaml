@@ -25,7 +25,8 @@ paths:
       parameters:
         - schema:
             type: string
-            example: avatar
+            examples:
+              - avatar
           in: query
           name: type
           description: 'Only show jams of this type (`avatar` or `world`).'

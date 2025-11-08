@@ -2,10 +2,12 @@ description: ""
 properties:
   accessType:
     type: string
-    example: group
+    examples:
+      - group
   category:
     type: string
-    example: performance
+    examples:
+      - performance
   closeInstanceAfterEndMinutes:
     type: integer
   createdAt:
@@ -72,7 +74,8 @@ properties:
     minLength: 1
   type:
     type: string
-    example: event
+    examples:
+      - event
   updatedAt:
     type: string
     format: date-time

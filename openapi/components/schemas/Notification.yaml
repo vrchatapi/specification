@@ -6,14 +6,16 @@ properties:
   details:
     default: '{}'
     description: '**NOTICE:** This is not a JSON object when received from the REST API, but it is when received from the Websocket API. When received from the REST API, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
-    example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
+    examples:
+      - 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
     type: string
   id:
     minLength: 1
     type: string
   message:
     description: ''
-    example: This is a generated invite to VRChat Hub
+    examples:
+      - This is a generated invite to VRChat Hub
     type: string
   seen:
     default: false

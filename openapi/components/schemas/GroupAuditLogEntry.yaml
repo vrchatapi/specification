@@ -17,20 +17,22 @@ properties:
     type: string
   eventType:
     type: string
-    example: group.role.update
+    examples:
+      - group.role.update
     default: group.update
     description: The type of event that occurred. This is a string that is prefixed with the type of object that the event occurred on. For example, a group role update event would be prefixed with `group.role`.
   description:
     type: string
     description: A human-readable description of the event.
-    example: "Group role updated"
+    examples:
+      - "Group role updated"
   data:
     type: object
     description: The data associated with the event. The format of this data is dependent on the event type.
-    example:
-      description:
-        old: "My exciting new group.  It's pretty nifty!"
-        new: "My exciting new group. It's pretty nifty!"
-      joinState:
-        old: "closed"
-        new: "request"
+    examples:
+      - description:
+          old: "My exciting new group.  It's pretty nifty!"
+          new: "My exciting new group. It's pretty nifty!"
+        joinState:
+          old: "closed"
+          new: "request"

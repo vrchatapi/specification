@@ -16,7 +16,8 @@ properties:
   template:
     type: string
   version:
-    example: 2021.3.4
+    examples:
+      - 2021.3.4
     minLength: 1
     type: string
   article:

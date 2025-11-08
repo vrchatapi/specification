@@ -13,7 +13,8 @@ properties:
     type: string
     minLength: 1
   capacity:
-    example: 8
+    examples:
+      - 8
     maximum: 40
     minimum: 0
     type: integer
@@ -43,7 +44,8 @@ properties:
     type: string
     minLength: 1
     default: 5.3.4p1
-    example: 2022.3.6f1
+    examples:
+      - 2022.3.6f1
 required:
   - assetUrl
   - imageUrl

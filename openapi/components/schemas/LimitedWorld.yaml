@@ -6,10 +6,12 @@ properties:
     minLength: 1
     type: string
   capacity:
-    example: 8
+    examples:
+      - 8
     type: integer
   recommendedCapacity:
-    example: 16
+    examples:
+      - 16
     type: integer
   created_at:
     format: date-time
@@ -18,17 +20,20 @@ properties:
     $ref: ./InstanceContentSettings.yaml
   favorites:
     default: 0
-    example: 12024
+    examples:
+      - 12024
     minimum: 0
     type: integer
   visits:
     default: 0
-    example: 9988675
+    examples:
+      - 9988675
     minimum: 0
     type: integer
   heat:
     default: 0
-    example: 5
+    examples:
+      - 5
     minimum: 0
     type: integer
   id:
@@ -37,7 +42,8 @@ properties:
     minLength: 1
     type: string
   labsPublicationDate:
-    example: none
+    examples:
+      - none
     minLength: 1
     type: string
   name:
@@ -45,7 +51,8 @@ properties:
     type: string
   occupants:
     default: 0
-    example: 47
+    examples:
+      - 47
     minimum: 0
     type: integer
   organization:
@@ -54,7 +61,8 @@ properties:
     type: string
   popularity:
     default: 0
-    example: 8
+    examples:
+      - 8
     minimum: 0
     type: integer
   previewYoutubeId:
@@ -62,7 +70,8 @@ properties:
       - string
       - null
   publicationDate:
-    example: none
+    examples:
+      - none
     minLength: 1
     type: string
   releaseStatus:

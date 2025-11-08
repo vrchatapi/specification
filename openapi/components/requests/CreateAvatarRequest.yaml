@@ -46,7 +46,8 @@ properties:
     type: string
     minLength: 1
     default: 5.3.4p1
-    example: 2022.3.6f1
+    examples:
+      - 2022.3.6f1
 required:
   - name
   - imageUrl

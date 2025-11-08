@@ -10,7 +10,8 @@ properties:
   memberCount:
     type: integer
     minimum: 0
-    example: 6
+    examples:
+      - 6
 required:
   - instanceId
   - location

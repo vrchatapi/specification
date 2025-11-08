@@ -9,7 +9,8 @@ properties:
   ownerDisplayName:
     type: string
   name:
-    example: permission-invite-photos
+    examples:
+      - permission-invite-photos
     minLength: 1
     type: string
   ownerId:

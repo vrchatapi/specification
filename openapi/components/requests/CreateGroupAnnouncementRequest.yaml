@@ -5,19 +5,22 @@ properties:
     type: string
     description: Announcement title
     minLength: 1
-    example: "Event is starting soon!"
+    examples:
+      - "Event is starting soon!"
   text:
     type: string
     description: Announcement text
     minLength: 1
-    example: "Come join us for the event!"
+    examples:
+      - "Come join us for the event!"
   imageId:
     $ref: ../schemas/FileID.yaml
   sendNotification:
     type: boolean
     description: Send notification to group members.
     default: false
-    example: false
+    examples:
+      - false
 required:
   - title
   - favoriteId

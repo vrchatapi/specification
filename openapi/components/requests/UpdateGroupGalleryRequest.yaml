@@ -4,17 +4,20 @@ properties:
   name:
     type: string
     description: Name of the gallery.
-    example: Example Gallery
+    examples:
+      - Example Gallery
     minLength: 1
   description:
     type: string
     description: Description of the gallery.
-    example: Example Description
+    examples:
+      - Example Description
     minLength: 0
   membersOnly:
     type: boolean
     description: Whether the gallery is members only.
-    example: false
+    examples:
+      - false
     default: false
   roleIdsToView:
     description: ' '

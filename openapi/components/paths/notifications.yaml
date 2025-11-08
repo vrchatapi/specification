@@ -21,7 +21,8 @@ paths:
       parameters:
         - schema:
             type: string
-            example: all
+            examples:
+              - all
           in: query
           name: type
           description: 'Only send notifications of this type (can use `all` for all). This parameter no longer does anything, and is deprecated.'
@@ -39,7 +40,8 @@ paths:
           description: Whether to return hidden or non-hidden notifications. True only allowed on type `friendRequest`.
         - schema:
             type: string
-            example: five_minutes_ago
+            examples:
+              - five_minutes_ago
           in: query
           name: after
           description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.

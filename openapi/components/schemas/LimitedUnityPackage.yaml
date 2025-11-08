@@ -8,7 +8,8 @@ properties:
   platform:
     $ref: ./Platform.yaml
   unityVersion:
-    example: 2022.3.6f1
+    examples:
+      - 2022.3.6f1
     minLength: 1
     type: string
 required:

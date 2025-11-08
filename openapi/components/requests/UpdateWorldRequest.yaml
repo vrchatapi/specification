@@ -13,7 +13,8 @@ properties:
     type: string
     minLength: 1
   capacity:
-    example: 8
+    examples:
+      - 8
     maximum: 40
     minimum: 0
     type: integer

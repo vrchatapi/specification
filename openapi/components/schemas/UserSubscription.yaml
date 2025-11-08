@@ -4,29 +4,35 @@ properties:
   id:
     type: string
     minLength: 1
-    example: "vrchatplus-yearly"
+    examples:
+      - "vrchatplus-yearly"
   transactionId:
     $ref: ./TransactionID.yaml
   store:
     type: string
     minLength: 1
     description: Which "Store" it came from. Right now only Stores are "Steam" and "Admin".
-    example: "Steam"
+    examples:
+      - "Steam"
   steamItemId:
     type: string
     minLength: 1
-    example: "5000"
+    examples:
+      - "5000"
   amount:
     type: number
-    example: 9999
+    examples:
+      - 9999
   description:
     type: string
-    example: "VRChat Plus (Yearly)"
+    examples:
+      - "VRChat Plus (Yearly)"
   period:
     $ref: ./SubscriptionPeriod.yaml
   tier:
     type: integer
-    example: 5
+    examples:
+      - 5
   active:
     type: boolean
     default: true

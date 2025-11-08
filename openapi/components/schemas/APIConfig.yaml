@@ -16,19 +16,23 @@ properties:
       Default:
         type: string
         format: uri
-        example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        examples:
+          - "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
       Pico:
         type: string
         format: uri
-        example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        examples:
+          - "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
       Quest:
         type: string
         format: uri
-        example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        examples:
+          - "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
       XRElite:
         type: string
         format: uri
-        example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        examples:
+          - "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
   address:
     description: VRChat's office address
     minLength: 1
@@ -173,7 +177,8 @@ properties:
     description: Current version number of the Privacy Agreement
     type: integer
   currentTOSVersion:
-    example: 7
+    examples:
+      - 7
     description: Current version number of the Terms of Service
     minimum: 0
     type: integer

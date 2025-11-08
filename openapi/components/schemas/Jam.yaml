@@ -6,7 +6,8 @@ properties:
   id:
     type: string
     minLength: 1
-    example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+    examples:
+      - jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
   isVisible:
     type: boolean
   moreInfo:
@@ -42,7 +43,8 @@ properties:
           - string
           - null
         format: date-time
-        example: null
+        examples:
+          - null
   submissionContentGateDate:
     type:
       - string

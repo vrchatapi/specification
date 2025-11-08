@@ -26,7 +26,8 @@ properties:
     type: string
   membershipStatus:
     type: string
-    example: member
+    examples:
+      - member
   isSubscribedToAnnouncements:
     type: boolean
     default: true
@@ -34,7 +35,8 @@ properties:
     type: boolean
   visibility:
     type: string
-    example: visible
+    examples:
+      - visible
   isRepresenting:
     type: boolean
     default: false

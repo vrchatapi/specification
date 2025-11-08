@@ -13,15 +13,18 @@ properties:
     type: string
     minLength: 2
     default: US
-    example: SE
+    examples:
+      - SE
   currency:
     type: string
     minLength: 3
-    example: EUR
+    examples:
+      - EUR
     default: USD
   status:
     type: string
-    example: Trusted
+    examples:
+      - Trusted
     minLength: 1
 required:
   - state

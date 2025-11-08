@@ -26,7 +26,8 @@ properties:
     type: string
   type:
     type: string
-    example: avatar
+    examples:
+      - avatar
     description: Type is not present if it is a world.
 required:
   - name

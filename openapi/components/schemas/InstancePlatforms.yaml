@@ -8,11 +8,13 @@ properties:
   android:
     type: integer
     minimum: 0
-    example: 1
+    examples:
+      - 1
   ios:
     type: integer
     minimum: 0
-    example: 1
+    examples:
+      - 1
   standalonewindows:
     type: integer
     minimum: 0

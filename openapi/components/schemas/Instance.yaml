@@ -7,7 +7,8 @@ type: object
 properties:
   active:
     default: true
-    example: true
+    examples:
+      - true
     type: boolean
   ageGate:
     type:
@@ -15,11 +16,13 @@ properties:
       - null
   canRequestInvite:
     default: true
-    example: true
+    examples:
+      - true
     type: boolean
   capacity:
     type: integer
-    example: 8
+    examples:
+      - 8
     minimum: 0
   clientNumber:
     type: string
@@ -50,11 +53,13 @@ properties:
   n_users:
     type: integer
     minimum: 0
-    example: 6
+    examples:
+      - 6
   name:
     type: string
     minLength: 1
-    example: '12345'
+    examples:
+      - "12345"
   ownerId:
     $ref: ./InstanceOwnerId.yaml
   permanent:
@@ -73,17 +78,19 @@ properties:
   secureName:
     type: string
     minLength: 1
-    example: 7eavhhng
+    examples:
+      - 7eavhhng
   shortName:
     type:
       - string
       - null
     minLength: 1
-    example: 02u7yz8j
+    examples:
+      - 02u7yz8j
   tags:
-    description: 'The tags array on Instances usually contain the language tags of the people in the instance. '
+    description: "The tags array on Instances usually contain the language tags of the people in the instance. "
     type: array
-    example:
+    examples:
       - show_social_rank
       - language_eng
       - language_jpn
@@ -104,11 +111,13 @@ properties:
   queueSize:
     type: integer
     minimum: 0
-    example: 6
+    examples:
+      - 6
   recommendedCapacity:
     type: integer
     minimum: 0
-    example: 6
+    examples:
+      - 6
   roleRestricted:
     type: boolean
   strict:
@@ -116,11 +125,12 @@ properties:
   userCount:
     type: integer
     minimum: 0
-    example: 6
+    examples:
+      - 6
   world:
     $ref: ./World.yaml
   users:
-    description: 'The users field is present on instances created by the requesting user.'
+    description: "The users field is present on instances created by the requesting user."
     type: array
     items:
       $ref: ./LimitedUserInstance.yaml

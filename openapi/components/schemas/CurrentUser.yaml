@@ -3,11 +3,13 @@ type: object
 properties:
   acceptedTOSVersion:
     minimum: 0
-    example: 7
+    examples:
+      - 7
     type: integer
   acceptedPrivacyVersion:
     minimum: 0
-    example: 0
+    examples:
+      - 0
     type: integer
   accountDeletionDate:
     format: date

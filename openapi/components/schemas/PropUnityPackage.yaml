@@ -4,18 +4,21 @@ description: ''
 properties:
   assetUrl:
     type: string
-    example: https://api.vrchat.cloud/api/1/file/file_c991c050-8b43-4046-8182-24d068524ac5/24/file
+    examples:
+      - https://api.vrchat.cloud/api/1/file/file_c991c050-8b43-4046-8182-24d068524ac5/24/file
   assetVersion:
     minimum: 0
     type: integer
-    example: 4
+    examples:
+      - 4
   propSignature:
     type: string
   platform:
     $ref: ./Platform.yaml
   unityVersion:
     default: 2022.3.22f1
-    example: 2022.3.22f1
+    examples:
+      - 2022.3.22f1
     minLength: 1
     type: string
   variant:

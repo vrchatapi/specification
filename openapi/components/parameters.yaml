@@ -90,7 +90,8 @@ actorIds:
   required: false
   schema:
     type: string
-    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+    examples:
+      - usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
   description: The comma-separated actor ids to search for.
 eventTypes:
   name: eventTypes
@@ -98,7 +99,8 @@ eventTypes:
   required: false
   schema:
     type: string
-    example: group.member.remove,group.instance.kick
+    examples:
+      - group.member.remove,group.instance.kick
   description: The comma-separated event types to search for.
 targetIds:
   name: targetIds
@@ -106,7 +108,8 @@ targetIds:
   required: false
   schema:
     type: string
-    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+    examples:
+      - usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
   description: The comma-separated target ids to search for.
 releaseStatus:
   name: releaseStatus
@@ -128,7 +131,8 @@ fileId:
   required: true
   schema:
     type: string
-    example: file_00000000-0000-0000-0000-000000000000
+    examples:
+      - file_00000000-0000-0000-0000-000000000000
   description: Must be a valid file ID.
 groupId:
   name: groupId
@@ -136,7 +140,8 @@ groupId:
   required: true
   schema:
     type: string
-    example: grp_00000000-0000-0000-0000-000000000000
+    examples:
+      - grp_00000000-0000-0000-0000-000000000000
   description: Must be a valid group ID.
 calendarId:
   name: calendarId
@@ -144,7 +149,8 @@ calendarId:
   required: true
   schema:
     type: string
-    example: cal_00000000-0000-0000-0000-000000000000
+    examples:
+      - cal_00000000-0000-0000-0000-000000000000
   description: Must be a valid calendar ID.
 groupIdFilter:
   name: groupId
@@ -152,7 +158,8 @@ groupIdFilter:
   required: false
   schema:
     type: string
-    example: grp_00000000-0000-0000-0000-000000000000
+    examples:
+      - grp_00000000-0000-0000-0000-000000000000
   description: Must be a valid group ID.
 groupRoleId:
   name: groupRoleId
@@ -160,7 +167,8 @@ groupRoleId:
   required: true
   schema:
     type: string
-    example: grol_00000000-0000-0000-0000-000000000000
+    examples:
+      - grol_00000000-0000-0000-0000-000000000000
   description: Must be a valid group role ID.
 groupGalleryId:
   name: groupGalleryId
@@ -168,7 +176,8 @@ groupGalleryId:
   required: true
   schema:
     type: string
-    example: ggal_00000000-0000-0000-0000-000000000000
+    examples:
+      - ggal_00000000-0000-0000-0000-000000000000
   description: Must be a valid group gallery ID.
 groupGalleryImageId:
   name: groupGalleryImageId
@@ -176,7 +185,8 @@ groupGalleryImageId:
   required: true
   schema:
     type: string
-    example: ggim_00000000-0000-0000-0000-000000000000
+    examples:
+      - ggim_00000000-0000-0000-0000-000000000000
   description: Must be a valid group gallery image ID.
 versionId:
   name: versionId
@@ -185,7 +195,8 @@ versionId:
   schema:
     type: integer
     minimum: 1
-    example: 1
+    examples:
+      - 1
   description: Version ID of the asset.
 fileType:
   name: fileType
@@ -197,7 +208,8 @@ fileType:
       - file
       - signature
       - delta
-    example: file
+    examples:
+      - file
   description: Type of file.
 userId:
   name: userId
@@ -469,7 +481,8 @@ jamId:
   required: true
   schema:
     type: string
-    example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+    examples:
+      - jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
   description: Must be a valid query ID.
 printId:
   name: printId
@@ -477,7 +490,8 @@ printId:
   required: true
   schema:
     type: string
-    example: 'prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa'
+    examples:
+      - 'prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa'
   description: Print ID.
 confirmEmailUserId:
   name: id
@@ -485,7 +499,8 @@ confirmEmailUserId:
   required: true
   schema:
     type: string
-    example: 'usr_00000000-0000-0000-0000-000000000000'
+    examples:
+      - 'usr_00000000-0000-0000-0000-000000000000'
   description: 'Target user for which to verify email.'
 confirmEmailToken:
   name: verify_email
@@ -493,7 +508,8 @@ confirmEmailToken:
   required: true
   schema:
     type: string
-    example: 'eml_00000000-0000-0000-0000-000000000000'
+    examples:
+      - 'eml_00000000-0000-0000-0000-000000000000'
   description: 'Token to verify email.'
 verifyLoginPlaceToken:
   name: token
@@ -508,7 +524,8 @@ propId:
   required: true
   schema:
     type: string
-    example: 'prop_829ba6f6-b837-49d9-b9a9-056b82103b58'
+    examples:
+      - 'prop_829ba6f6-b837-49d9-b9a9-056b82103b58'
   description: Prop ID.
 adminAssetBundleId:
   name: adminAssetBundleId
@@ -516,7 +533,8 @@ adminAssetBundleId:
   required: true
   schema:
     type: string
-    example: 'aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d'
+    examples:
+      - 'aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d'
   description: Must be a valid admin asset bundle ID.
 inventoryItemId:
   name: inventoryItemId
@@ -524,7 +542,8 @@ inventoryItemId:
   required: true
   schema:
     type: string
-    example: inv_00000000-0000-0000-0000-000000000000
+    examples:
+      - inv_00000000-0000-0000-0000-000000000000
   description: Must be a valid inventory item ID.
 inventoryTemplateId:
   name: inventoryTemplateId
@@ -532,7 +551,8 @@ inventoryTemplateId:
   required: true
   schema:
     type: string
-    example: invt_00000000-0000-0000-0000-000000000000
+    examples:
+      - invt_00000000-0000-0000-0000-000000000000
   description: Must be a valid inventory template ID.
 inventorySortOrder:
   name: order
@@ -618,7 +638,8 @@ calendarSearchTerm:
   required: true
   schema:
     type: string
-    example: game night
+    examples:
+      - game night
   description: Search term for calendar events.
 steamId:
   name: steamId
@@ -626,7 +647,8 @@ steamId:
   required: false
   schema:
     type: string
-    example: game night
+    examples:
+      - game night
   description: The Steam ID of the user.
 hydrateListings:
   name: hydrateListings

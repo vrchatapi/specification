@@ -5,7 +5,8 @@ properties:
   id:
     type: string
     minLength: 1
-    example: launch-beta
+    examples:
+      - launch-beta
   isEnabled:
     type: boolean
     default: true

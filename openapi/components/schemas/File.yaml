@@ -2,12 +2,15 @@ description: ''
 properties:
   animationStyle:
     type: string
-    example: bats
+    examples:
+      - bats
   maskTag:
     type: string
-    example: square
+    examples:
+      - square
   extension:
-    example: .unitypackage
+    examples:
+      - .unitypackage
     minLength: 1
     type: string
   id:
@@ -16,7 +19,8 @@ properties:
     $ref: ./MIMEType.yaml
   name:
     description: ''
-    example: Example File
+    examples:
+      - Example File
     minLength: 0
     type: string
   ownerId:
