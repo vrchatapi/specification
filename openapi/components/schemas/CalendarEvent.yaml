@@ -1,4 +1,4 @@
-description: ""
+description: ''
 properties:
   accessType:
     type: string

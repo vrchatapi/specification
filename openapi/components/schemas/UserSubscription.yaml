@@ -1,5 +1,5 @@
 type: object
-description: ""
+description: ''
 properties:
   id:
     type: string

@@ -16,7 +16,7 @@ properties:
     minLength: 1
     type: string
   message:
-    description: ""
+    description: ''
     examples:
       - This is a generated invite to VRChat Hub
     type: string
