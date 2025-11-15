@@ -1,0 +1,5 @@
+description: Returns a single OkStatus2 object
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/OkStatus2.yaml
