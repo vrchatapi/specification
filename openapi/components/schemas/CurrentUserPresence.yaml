@@ -5,7 +5,9 @@ properties:
     type: string
     nullable: true
   currentAvatarTags:
-    type: string
+    type: array
+    items:
+      type: string
   displayName:
     type: string
   debugflag:
