@@ -998,9 +998,39 @@ paths:
         - economy
       description: Get a single Steam transactions by ID. This returns the exact same information as `getSteamTransactions`, so no point in using this endpoint.
       deprecated: true
+  /Admin/transactions:
+    get:
+      summary: Get Admin Transactions
+      operationId: getAdminTransactions
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Get all own Admin transactions.
+      x-internal: true
   /Admin/transactions/{transactionId}:
     parameters:
       - $ref: '#/components/parameters/transactionId'
+    get:
+      summary: Get Admin Transactions
+      operationId: getAdminTransaction
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Get a single Admin transactions by ID. This returns the exact same information as `getAdminTransactions`, so no point in using this endpoint.
+      deprecated: true
+      x-internal: true
   /auth/user/subscription:
     get:
       summary: Get Current Subscriptions
@@ -3516,7 +3546,13 @@ paths:
           name: type
           description: Must be one of PlayerModerationType.
         - schema:
-            $ref: ../schemas/UserID.yaml
+            $ref: '#/components/schemas/UserID'
+          in: query
+          name: sourceUserId
+          description: Must be valid UserID. Trying to view someone else's moderations results with "Can't view someone else's player moderations" error.
+          x-internal: true
+        - schema:
+            $ref: '#/components/schemas/UserID'
           in: query
           name: targetUserId
           description: Must be valid UserID.
@@ -3798,6 +3834,44 @@ paths:
         - $ref: '#/components/parameters/number'
         - $ref: '#/components/parameters/offset'
       description: Search and list any users by text query
+  /users/active:
+    get:
+      summary: Search Active Users
+      tags:
+        - users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LimitedUserFriend'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/InvalidAdminCredentialsError'
+      operationId: searchActiveUsers
+      security:
+        - authCookie: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: search
+          required: true
+          description: Username to search for
+        - schema:
+            type: string
+          in: query
+          name: developerType
+          description: Active user by developer type, none for normal users and internal for moderators
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/number'
+      x-internal: true
+      deprecated: true
+      description: '**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users by text query.'
   /users/{username}/name:
     parameters:
       - schema:
@@ -4524,6 +4598,59 @@ paths:
         - miscellaneous
       description: Returns a list of all permissions currently granted by the user. Permissions are assigned e.g. by subscribing to VRC+.
     parameters: []
+  /permissions:
+    get:
+      summary: Get Permissions
+      tags:
+        - miscellaneous
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/InvalidAdminCredentialsError'
+      operationId: getPermissions
+      security:
+        - authCookie: []
+      x-internal: true
+      description: '**REQUIRES ADMIN CREDENTIALS**. Returns a list of all existing permissions, just like `/users` with empty search would.'
+    post:
+      summary: Create Permission
+      operationId: createPermission
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/InvalidAdminCredentialsError'
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ownerId:
+                  $ref: '#/components/schemas/UserID'
+              required:
+                - name
+      description: '**REQUIRES ADMIN CREDENTIALS**. Creates and returns a new Permission. The permission will by default be owned by the sender of the request unless otherwise specified.'
+      tags:
+        - miscellaneous
+      parameters:
+        - $ref: '#/components/parameters/number'
+        - $ref: '#/components/parameters/offset'
+        - schema:
+            type: string
+          in: query
+          name: ownerId
+          description: Owner of the Permission, MUST be valid UserID.
   /permissions/{permissionId}:
     parameters:
       - $ref: '#/components/parameters/permissionId'
@@ -4540,6 +4667,49 @@ paths:
       security:
         - authCookie: []
       description: Returns a single permission. This endpoint is pretty useless, as it returns the exact same information as `/auth/permissions`.
+    put:
+      summary: Update Permission
+      operationId: updatePermission
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/InvalidAdminCredentialsError'
+      x-internal: true
+      description: '**REQUIRES ADMIN CREDENTIALS**. Updates the info on a permission.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                ownerId:
+                  $ref: '#/components/schemas/UserID'
+        description: ''
+      tags:
+        - miscellaneous
+    delete:
+      summary: Delete Permission
+      operationId: deletePermission
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PermissionResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/InvalidAdminCredentialsError'
+      description: '**REQUIRES ADMIN CREDENTIALS**. Deletes a permission.'
+      x-internal: true
+      tags:
+        - miscellaneous
 components:
   schemas:
     UserExists:
@@ -5564,6 +5734,10 @@ components:
           type: integer
           minimum: 0
           default: 1
+        featured:
+          type: boolean
+          x-internal: true
+          description: Enabling featured tag requires Admin Credentials.
         unityPackageUrl:
           type: string
         unityVersion:
@@ -5618,6 +5792,10 @@ components:
           type: integer
           minimum: 0
           default: 1
+        featured:
+          type: boolean
+          x-internal: true
+          description: Enabling featured tag requires Admin Credentials.
         unityPackageUrl:
           type: string
         unityVersion:
