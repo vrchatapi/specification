@@ -4918,7 +4918,9 @@ components:
           type: string
           nullable: true
         currentAvatarTags:
-          type: string
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
         displayName:
           type: string
         debugflag:
