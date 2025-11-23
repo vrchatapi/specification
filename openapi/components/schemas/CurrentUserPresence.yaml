@@ -7,7 +7,7 @@ properties:
   currentAvatarTags:
     type: array
     items:
-      type: string
+      $ref: ./Tag.yaml
   displayName:
     type: string
   debugflag:
