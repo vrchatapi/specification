@@ -4226,7 +4226,9 @@ paths:
         - $ref: '#/components/parameters/maxUnityVersion'
         - $ref: '#/components/parameters/minUnityVersion'
         - $ref: '#/components/parameters/platform'
+        - $ref: '#/components/parameters/noplatform'
         - $ref: '#/components/parameters/fuzzy'
+        - $ref: '#/components/parameters/avatarSpecific'
       description: Search and list any worlds by query filters.
     post:
       summary: Create World
@@ -4273,6 +4275,7 @@ paths:
         - $ref: '#/components/parameters/maxUnityVersion'
         - $ref: '#/components/parameters/minUnityVersion'
         - $ref: '#/components/parameters/platform'
+        - $ref: '#/components/parameters/noplatform'
       description: Search and list currently Active worlds by query filters.
   /worlds/favorites:
     get:
@@ -14912,12 +14915,26 @@ components:
       schema:
         type: string
       description: Must be a valid badge ID.
+    noplatform:
+      name: noplatform
+      in: query
+      required: false
+      schema:
+        type: string
+      description: The platform the asset does not support.
     fuzzy:
       name: fuzzy
       in: query
       required: false
       schema:
         type: boolean
+    avatarSpecific:
+      name: avatarSpecific
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: Only search for avatar worlds.
     require:
       name: require
       in: query
