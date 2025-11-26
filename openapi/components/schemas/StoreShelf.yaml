@@ -19,7 +19,7 @@ properties:
     type: string
   updatedAt:
     type: string
-    format: data-time
+    format: date-time
 required:
   - id
   - listingIds

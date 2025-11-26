@@ -11,7 +11,9 @@ properties:
     example: true
   ageGate:
     type: boolean
+  calendarEntryId:
     nullable: true
+    type: string
   canRequestInvite:
     type: boolean
     default: true
@@ -29,6 +31,8 @@ properties:
     type: string
     nullable: true
     format: date-time
+  creatorId:
+    $ref: ./UserID.yaml
   contentSettings:
     $ref: ./InstanceContentSettings.yaml
   displayName:
@@ -133,9 +137,6 @@ properties:
   worldId:
     $ref: ./WorldID.yaml
 required:
-  - active
-  - canRequestInvite
-  - capacity
   - clientNumber
   - full
   - id

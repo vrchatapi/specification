@@ -19,6 +19,8 @@ properties:
     format: date-time
   description:
     type: string
+  durationInMs:
+    type: integer
   endsAt:
     type: string
     format: date-time
@@ -92,6 +94,7 @@ required:
   - accessType
   - category
   - description
+  - durationInMs
   - endsAt
   - id
   - startsAt
