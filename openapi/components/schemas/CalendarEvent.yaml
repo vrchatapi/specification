@@ -91,6 +91,7 @@ properties:
   usesInstanceOverflow:
     type: boolean
 required:
+  - durationInMs
   - accessType
   - category
   - description
