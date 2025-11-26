@@ -562,6 +562,20 @@ inventoryTemplateId:
     type: string
     example: invt_00000000-0000-0000-0000-000000000000
   description: Must be a valid inventory template ID.
+inventoryHolderId:
+  name: holderId
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/UserID.yaml
+  description: The UserID of the owner of the inventory; defaults to the currently authenticated user.
+inventoryEquipSlot:
+  name: equipSlot
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/InventoryEquipSlot.yaml
+  description: Filter for inventory retrieval.
 inventorySortOrder:
   name: order
   in: query
@@ -682,3 +696,15 @@ storeView:
   required: false
   schema:
     $ref: ./schemas/StoreView.yaml
+subscriptionId:
+  name: subscriptionId
+  in: query
+  required: true
+  schema:
+    type: string
+mostRecentFlag:
+  name: mostRecent
+  in: query
+  required: false
+  schema:
+    type: boolean

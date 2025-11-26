@@ -99,8 +99,14 @@
   $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions~1{transactionId}"
 "/auth/user/subscription":
   $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
-"/users/{userId}/subscription/eligible":
+'/user/subscription/recent':
+  $ref: "./paths/economy.yaml#/paths/~1user~1subscription~1recent"
+'/user/bulk/gift/purchases':
+  $ref: "./paths/economy.yaml#/paths/~1user~1bulk~1gift~1purchases"
+'/users/{userId}/subscription/eligible':
   $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1subscription~1eligible"
+'/users/{userId}/credits/eligible':
+  $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1credits~1eligible"
 "/subscriptions":
   $ref: "./paths/economy.yaml#/paths/~1subscriptions"
 "/licenseGroups/{licenseGroupId}":
