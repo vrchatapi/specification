@@ -15,9 +15,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-v20-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v16
+            ${{ runner.os }}-node-v20
       - name: Install Dependencies
         run: npm install
       - name: Run Spectral linting
@@ -36,9 +36,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-v16-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-v20-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v16
+            ${{ runner.os }}-node-v20
 
       - name: Bundle OpenAPI Specification 📦
         run: npm run bundle
