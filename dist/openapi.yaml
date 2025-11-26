@@ -4268,6 +4268,25 @@ paths:
           $ref: '#/components/responses/UserMustBeOwnError'
       security:
         - authCookie: []
+  /users/{userId}/instances/groups/{groupId}:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/groupId'
+    get:
+      summary: Get User Group Instances for a specific Group
+      description: Returns a list of a group's instances for a user
+      operationId: getUserGroupInstancesForGroup
+      tags:
+        - users
+      responses:
+        '200':
+          $ref: '#/components/responses/UserGroupInstanceListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/UserMustBeOwnError'
+      security:
+        - authCookie: []
   /users/{userId}/{worldId}/persist/exists:
     parameters:
       - $ref: '#/components/parameters/userId'
