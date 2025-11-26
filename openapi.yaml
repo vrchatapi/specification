@@ -201,7 +201,7 @@ paths:
           2) If logged in, this function will also return the CurrentUser object containing detailed information about the currently logged in user.
 
         The auth string after `Authorization: Basic {string}` is a base64-encoded string of the username and password, both individually url-encoded, and then joined with a colon.
-          
+
         > base64(urlencode(username):urlencode(password))
 
         **WARNING: Session Limit:** Each authentication with login credentials counts as a separate session, out of which you have a limited amount. Make sure to save and reuse the `auth` cookie if you are often restarting the program. The provided API libraries automatically save cookies during runtime, but does not persist during restart. While it can be fine to use username/password during development, expect in production to very fast run into the rate-limit and be temporarily blocked from making new sessions until older ones expire. The exact number of simultaneous sessions is unknown/undisclosed.
@@ -2080,7 +2080,7 @@ paths:
       summary: Get Group Announcement
       description: |-
         Returns the announcement for a Group.
-        If no announcement has been made, then it returns **empty object**. 
+        If no announcement has been made, then it returns **empty object**.
         If an announcement exists, then it will always return all fields except `imageId` and `imageUrl` which may be null.
       operationId: getGroupAnnouncements
       tags:
