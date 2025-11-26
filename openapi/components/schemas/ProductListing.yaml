@@ -80,6 +80,16 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  soldByVrc:
+    type: boolean
+  subtitle:
+    type: string
+  vrcPlusDiscountPrice:
+    type: integer
+  whenToExpire:
+    type: string
+    format: date-time
+    nullable: true
 required:
   - active
   - buyerRefundable

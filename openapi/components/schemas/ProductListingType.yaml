@@ -2,4 +2,6 @@ title: ProductListingType
 type: string
 enum:
   - subscription
+  - permanent
+  - duration
 default: subscription

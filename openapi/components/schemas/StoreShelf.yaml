@@ -20,6 +20,10 @@ properties:
   updatedAt:
     type: string
     format: date-time
+  highlightListing:
+    $ref: ./ProductListing.yaml
+  highlightListingId:
+    $ref: ./ProductID.yaml
 required:
   - id
   - listingIds
