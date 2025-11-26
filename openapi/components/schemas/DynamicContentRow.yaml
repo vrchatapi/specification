@@ -9,7 +9,7 @@ properties:
     type: string
   platform:
     minLength: 1
-    type: string
+    $ref: ./Platform.yaml
     description: 'Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.'
   sortHeading:
     minLength: 1
@@ -23,7 +23,7 @@ properties:
   tag:
     description: Tag to filter content for this row.
     minLength: 1
-    type: string
+    $ref: ./Tag.yaml
   type:
     type: string
     example: avatar

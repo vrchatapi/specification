@@ -5,8 +5,12 @@ properties:
     type: string
     nullable: true
   currentAvatarTags:
-    type: string
+    type: array
+    items:
+      $ref: ./Tag.yaml
   displayName:
+    type: string
+  debugflag:
     type: string
   groups:
     type: array
@@ -26,7 +30,7 @@ properties:
     type: string
     nullable: true
   platform:
-    type: string
+    $ref: ./Platform.yaml
     description: either a Platform or an empty string
     nullable: true
   profilePicOverride:
@@ -40,7 +44,7 @@ properties:
     type: string
     nullable: true
   travelingToWorld:
-    $ref: ./WorldID.yaml
+    $ref: ./LocationID.yaml
     nullable: true
   userIcon:
     type: string

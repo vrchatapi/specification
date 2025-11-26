@@ -25,6 +25,8 @@ properties:
     minLength: 1
     deprecated: true
     description: Always returns "unknown".
+  contentSettings:
+    $ref: ./InstanceContentSettings.yaml
   displayName:
     type: string
     nullable: true
@@ -36,14 +38,12 @@ properties:
   id:
     $ref: ./InstanceID.yaml
   instanceId:
-    type: string
-    minLength: 1
-    example: 12345~hidden(usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469)~region(eu)~nonce(27e8414a-59a0-4f3d-af1f-f27557eb49a2)
+    $ref: ./InstanceID.yaml
   instancePersistenceEnabled:
     type: string
     nullable: true
   location:
-    $ref: ./InstanceID.yaml
+    $ref: ./LocationID.yaml
   n_users:
     type: integer
     minimum: 0
@@ -118,7 +118,7 @@ properties:
     description: 'The users field is present on instances created by the requesting user.'
     type: array
     items:
-      $ref: ./LimitedUser.yaml
+      $ref: ./LimitedUserInstance.yaml
   groupAccessType:
     $ref: ./GroupAccessType.yaml
   hasCapacityForYou:
@@ -137,18 +137,15 @@ required:
   - canRequestInvite
   - capacity
   - clientNumber
-  - displayName
   - full
   - id
   - instanceId
-  - instancePersistenceEnabled
   - location
   - n_users
   - name
   - permanent
   - photonRegion
   - platforms
-  - playerPersistenceEnabled
   - region
   - secureName
   - tags

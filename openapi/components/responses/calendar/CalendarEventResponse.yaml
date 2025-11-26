@@ -1,0 +1,5 @@
+description: Returns a single CalendarEvent object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/CalendarEvent.yaml

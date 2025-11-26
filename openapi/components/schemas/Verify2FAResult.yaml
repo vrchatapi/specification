@@ -3,5 +3,8 @@ type: object
 properties:
   verified:
     type: boolean
+  enabled:
+    type: boolean
+    default: true
 required:
   - verified

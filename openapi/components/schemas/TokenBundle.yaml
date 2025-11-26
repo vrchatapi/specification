@@ -3,9 +3,13 @@ type: object
 properties:
   id:
     type: string
+  appleProductId:
+    type: string
   steamItemId:
     type: string
   oculusSku:
+    type: string
+  googleProductId:
     type: string
   amount:
     type: integer
@@ -20,6 +24,7 @@ properties:
     description: direct url to image
 required:
   - id
+  - appleProductId
   - steamItemId
   - oculusSku
   - amount

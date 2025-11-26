@@ -9,11 +9,9 @@ paths:
       summary: Search All Users
       tags:
         - users
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users/get
       responses:
         '200':
-          $ref: ../responses/users/LimitedUserListResponse.yaml
+          $ref: ../responses/users/LimitedUserSearchListResponse.yaml
         '400':
           $ref: ../responses/users/UsersInvalidSearchError.yaml
         '401':
@@ -48,8 +46,6 @@ paths:
       summary: Get User by Username
       tags:
         - users
-      x-codeSamples:
-        $ref: '../codeSamples/users.yaml#/~1users~1{username}~1name/get'
       responses:
         '200':
           $ref: ../responses/users/UserResponse.yaml
@@ -71,8 +67,6 @@ paths:
       summary: Get User by ID
       tags:
         - users
-      x-codeSamples:
-        $ref: '../codeSamples/users.yaml#/~1users~1{userId}/get'
       responses:
         '200':
           $ref: ../responses/users/UserResponse.yaml
@@ -85,11 +79,11 @@ paths:
     put:
       summary: Update User Info
       operationId: updateUser
-      x-codeSamples:
-        $ref: '../codeSamples/users.yaml#/~1users~1{userId}/put'
       responses:
         '200':
           $ref: ../responses/users/CurrentUserResponse.yaml
+        '400':
+          $ref: ../responses/users/CurrentPasswordRequiredError.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
       description: Update a users information such as the email and birthday.
@@ -123,8 +117,6 @@ paths:
       summary: Search Active Users
       tags:
         - users
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users~1active/get
       responses:
         '200':
           description: OK
@@ -133,7 +125,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../schemas/LimitedUser.yaml
+                  $ref: ../schemas/LimitedUserFriend.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
         '403':
@@ -202,8 +194,6 @@ paths:
       - $ref: ../parameters.yaml#/offset
     get:
       summary: Get User Feedback
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1feedback/get
       tags:
         - users
       deprecated: true
@@ -219,8 +209,6 @@ paths:
   '/userNotes':
     get:
       summary: Get User Notes
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1userNotes/get
       tags:
         - users
       security:
@@ -239,8 +227,6 @@ paths:
       summary: Update User Note
       tags:
         - users
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1userNotes/post
       responses:
         '200':
           $ref: ../responses/users/UserNoteResponse.yaml
@@ -261,8 +247,6 @@ paths:
       - $ref: ../parameters.yaml#/userNoteId
     get:
       summary: Get User Note
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1userNotes~1{userNoteId}/get
       tags:
         - users
       security:
@@ -279,8 +263,6 @@ paths:
       - $ref: ../parameters.yaml#/userId
     post:
       summary: Add User Tags
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1addTags/post
       description: Adds tags to the user's profile
       operationId: addTags
       tags:
@@ -305,8 +287,6 @@ paths:
       - $ref: ../parameters.yaml#/userId
     post:
       summary: Remove User Tags
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1removeTags/post
       description: Removes tags from the user's profile
       operationId: removeTags
       tags:
@@ -332,8 +312,6 @@ paths:
       - $ref: ../parameters.yaml#/badgeId
     put:
       summary: Update User Badge
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1badges~1{badgeId}/put
       description: Updates a user's badge
       operationId: updateBadge
       tags:
@@ -360,8 +338,6 @@ paths:
       - $ref: ../parameters.yaml#/userId
     get:
       summary: Get User Group Instances
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1instances~1groups/get
       description: Returns a list of group instances for a user
       operationId: getUserGroupInstances
       tags:
@@ -381,8 +357,6 @@ paths:
       - $ref: ../parameters.yaml#/worldId
     get:
       summary: Check User Persistence Exists
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1{worldId}~1persist~1exists/get
       description: Checks whether the user has persistence data for a given world
       operationId: checkUserPersistenceExists
       tags:
@@ -403,8 +377,6 @@ paths:
       - $ref: ../parameters.yaml#/worldId
     delete:
       summary: Delete User Persistence
-      x-codeSamples:
-        $ref: ../codeSamples/users.yaml#/~1users~1{userId}~1{worldId}~1persist/delete
       description: Deletes the user's persistence data for a given world
       operationId: deleteUserPersistence
       tags:

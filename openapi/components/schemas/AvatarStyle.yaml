@@ -1,0 +1,11 @@
+title: AvatarStyle
+type: object
+description: ''
+properties:
+  id:
+    $ref: ./AvatarStyleID.yaml
+  styleName:
+    type: string
+required:
+  - id
+  - styleName

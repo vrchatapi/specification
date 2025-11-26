@@ -28,6 +28,8 @@ properties:
   isSubscribedToAnnouncements:
     type: boolean
     default: true
+  isSubscribedToEventAnnouncements:
+    type: boolean
   visibility:
     type: string
     example: visible

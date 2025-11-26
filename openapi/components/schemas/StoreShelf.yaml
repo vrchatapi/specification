@@ -1,0 +1,29 @@
+title: StoreShelf
+type: object
+properties:
+  id:
+    $ref: ./StoreShelfID.yaml
+  listingIds:
+    type: array
+    items:
+      $ref: ./ProductID.yaml
+  listings:
+    type: array
+    items:
+      $ref: ./ProductListing.yaml
+  shelfDescription:
+    type: string
+  shelfLayout:
+    type: string
+  shelfTitle:
+    type: string
+  updatedAt:
+    type: string
+    format: data-time
+required:
+  - id
+  - listingIds
+  - shelfDescription
+  - shelfLayout
+  - shelfTitle
+  - updatedAt

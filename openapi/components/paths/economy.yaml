@@ -10,8 +10,6 @@ paths:
       operationId: getSteamTransactions
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1Steam~1transactions/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionListResponse.yaml
@@ -28,8 +26,6 @@ paths:
       operationId: getSteamTransaction
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1Steam~1transactions~1{transactionId}/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionResponse.yaml
@@ -45,8 +41,6 @@ paths:
       operationId: getAdminTransactions
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1Admin~1transactions/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionListResponse.yaml
@@ -64,8 +58,6 @@ paths:
       operationId: getAdminTransaction
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1Admin~1transactions~1{transactionId}/get"
       responses:
         '200':
           $ref: ../responses/economy/TransactionResponse.yaml
@@ -82,8 +74,6 @@ paths:
       operationId: getCurrentSubscriptions
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1auth~1user~1subscription/get"
       responses:
         '200':
           $ref: ../responses/economy/UserSubscriptionListResponse.yaml
@@ -92,14 +82,29 @@ paths:
       tags:
         - economy
       description: Get a list of all current user subscriptions.
+  '/users/{userId}/subscription/eligible':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/steamId
+    get:
+      summary: Get User Subscription Eligiblity
+      operationId: getUserSubscriptionEligible
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/UserSubscriptionEligibleResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Get the user's eligibility status for subscriptions.
   /subscriptions:
     get:
       summary: List Subscriptions
       operationId: getSubscriptions
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1subscriptions/get"
       responses:
         '200':
           $ref: ../responses/economy/SubscriptionListResponse.yaml
@@ -116,8 +121,6 @@ paths:
       operationId: getLicenseGroup
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1licenseGroups~1{licenseGroupId}/get"
       responses:
         '200':
           $ref: ../responses/economy/LicenseGroupResponse.yaml
@@ -135,8 +138,6 @@ paths:
       operationId: getProductListing
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1listing~1{productId}/get"
       responses:
         '200':
           $ref: ../responses/economy/ProductListingResponse.yaml
@@ -158,8 +159,6 @@ paths:
       operationId: getProductListings
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1user~1{userId}~1listings/get"
       responses:
         '200':
           $ref: ../responses/economy/ProductListingListResponse.yaml
@@ -174,8 +173,6 @@ paths:
       operationId: getTokenBundles
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1tokenBundles/get"
       responses:
         '200':
           $ref: ../responses/economy/TokenBundleListResponse.yaml
@@ -190,8 +187,6 @@ paths:
       operationId: getTiliaStatus
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1tilia~1status/get"
       responses:
         '200':
           $ref: ../responses/economy/TiliaStatusResponse.yaml
@@ -208,8 +203,6 @@ paths:
       operationId: getTiliaTos
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1user~1{userId}~1tilia~1tos/get"
       responses:
         '200':
           $ref: ../responses/economy/TiliaTOSResponse.yaml
@@ -226,8 +219,6 @@ paths:
       operationId: getBalance
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/economy.yaml#/~1user~1{userId}~1balance/get"
       responses:
         '200':
           $ref: ../responses/economy/BalanceResponse.yaml
@@ -236,6 +227,88 @@ paths:
       tags:
         - economy
       description: 'Gets the balance of a user'
+  '/user/{userId}/balance/earnings':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      summary: Get Balance Earnings
+      operationId: getBalanceEarnings
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/BalanceResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets the balance of a user from earnings'
+  '/user/{userId}/economy/account':
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      summary: Get Economy Account
+      operationId: getEconomyAccount
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/EconomyAccountResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets the economy account of a user'
+  '/economy/licenses/active':
+    get:
+      summary: Get Active Licenses
+      operationId: getActiveLicenses
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/LicenseListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: 'Gets active licenses'
+  '/economy/store':
+    parameters:
+      - $ref: ../parameters.yaml#/storeId
+      - $ref: ../parameters.yaml#/hydrateListings
+      - $ref: ../parameters.yaml#/hydrateProducts
+    get:
+      summary: Get Store
+      operationId: getStore
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/StoreResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Gets a store
+  '/economy/store/shelves':
+    parameters:
+      - $ref: ../parameters.yaml#/storeId
+      - $ref: ../parameters.yaml#/hydrateListings
+      - $ref: ../parameters.yaml#/storeView
+    get:
+      summary: Get Store Shelves
+      operationId: getStoreShelves
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/economy/StoreShelfListResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - economy
+      description: Gets the shelves for a store
 tags:
   $ref: ../tags.yaml
 components:

@@ -1,12 +1,14 @@
 description: ''
 properties:
+  acknowledgements:
+    type: string
   assetUrl:
-    description: 'Not present from general serach `/avatars`, only on specific requests `/avatars/{avatarId}`.'
+    description: 'Not present from general search `/avatars`, only on specific requests `/avatars/{avatarId}`.'
     minLength: 1
     type: string
   assetUrlObject:
     description: |-
-      Not present from general serach `/avatars`, only on specific requests `/avatars/{avatarId}`.
+      Not present from general search `/avatars`, only on specific requests `/avatars/{avatarId}`.
       **Deprecation:** `Object` has unknown usage/fields, and is always empty. Use normal `Url` field instead.
     type: object
   authorId:
@@ -23,16 +25,62 @@ properties:
   featured:
     default: false
     type: boolean
+  highestPrice:
+    type: integer
   id:
     $ref: ./AvatarID.yaml
   imageUrl:
     minLength: 1
     type: string
+  listingDate:
+    type: string
+    nullable: true
+  lock:
+    type: boolean
+  lowestPrice:
+    type: integer
   name:
     minLength: 1
     type: string
+  performance:
+    type: object
+    properties:
+      android:
+        type: string
+      android-sort:
+        type: integer
+      ios:
+        type: string
+      ios-sort:
+        type: integer
+      standalonewindows:
+        type: string
+      standalonewindows-sort:
+        type: integer
+  productId:
+    type: string
+  publishedListings:
+    type: array
+    items:
+      type: object
+      properties:
+        description:
+          type: string
+        displayName:
+          type: string
+        imageId:
+          type: string
+        listingId:
+          type: string
+        listingType:
+          type: string
+        priceTokens:
+          type: integer
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
+  searchable:
+    type: boolean
+    default: false
   styles:
     type: object
     properties:
@@ -85,7 +133,9 @@ required:
   - featured
   - id
   - imageUrl
+  - listingDate
   - name
+  - performance
   - releaseStatus
   - styles
   - tags

@@ -4,6 +4,9 @@
 - name: avatars
   description:
     $ref: ./paths/avatars.yaml#/info/description
+- name: calendar
+  description:
+    $ref: ./paths/calendar.yaml#/info/description
 - name: economy
   description:
     $ref: ./paths/economy.yaml#/info/description
@@ -19,6 +22,9 @@
 - name: groups
   description:
     $ref: ./paths/groups.yaml#/info/description
+- name: inventory
+  description:
+    $ref: ./paths/inventory.yaml#/info/description
 - name: invite
   description:
     $ref: ./paths/invite.yaml#/info/description
@@ -31,21 +37,21 @@
 - name: notifications
   description:
     $ref: ./paths/notifications.yaml#/info/description
-- name: permissions
-  description:
-    $ref: ./paths/permissions.yaml#/info/description
 - name: playermoderation
   description:
     $ref: ./paths/playermoderation.yaml#/info/description
 - name: prints
   description:
     $ref: ./paths/prints.yaml#/info/description
-- name: system
+- name: props
   description:
-    $ref: ./paths/system.yaml#/info/description
+    $ref: ./paths/props.yaml#/info/description
 - name: users
   description:
     $ref: ./paths/users.yaml#/info/description
 - name: worlds
   description:
     $ref: ./paths/worlds.yaml#/info/description
+- name: miscellaneous
+  description:
+    $ref: ./paths/miscellaneous.yaml#/info/description

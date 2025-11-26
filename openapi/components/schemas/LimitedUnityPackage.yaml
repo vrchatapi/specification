@@ -1,5 +1,9 @@
 description: ''
 properties:
+  created_at:
+    format: date-time
+    type: string
+    nullable: true
   platform:
     $ref: ./Platform.yaml
   unityVersion:
@@ -7,6 +11,7 @@ properties:
     minLength: 1
     type: string
 required:
+  - created_at
   - platform
   - unityVersion
 title: LimitedUnityPackage

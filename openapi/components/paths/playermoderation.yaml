@@ -40,8 +40,6 @@ paths:
       summary: Search Player Moderations
       tags:
         - playermoderation
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/get"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationListResponse.yaml
@@ -52,18 +50,18 @@ paths:
         - authCookie: []
       parameters:
         - schema:
-            type: string
+            $ref: ../schemas/PlayerModerationType.yaml
           in: query
           name: type
-          description: 'Must be one of PlayerModerationType, except unblock. Unblocking simply removes a block.'
+          description: Must be one of PlayerModerationType.
         - schema:
-            type: string
+            $ref: ../schemas/UserID.yaml
           in: query
           name: sourceUserId
           description: Must be valid UserID. Trying to view someone else's moderations results with "Can't view someone else's player moderations" error.
           x-internal: true
         - schema:
-            type: string
+            $ref: ../schemas/UserID.yaml
           in: query
           name: targetUserId
           description: Must be valid UserID.
@@ -76,8 +74,6 @@ paths:
       operationId: moderateUser
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/post"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
@@ -101,8 +97,6 @@ paths:
       operationId: clearAllPlayerModerations
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1playermoderations/delete"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationClearAllSuccess.yaml
@@ -124,8 +118,6 @@ paths:
             schema:
               $ref: ../requests/ModerateUserRequest.yaml
       description: 'Removes a player moderation previously added through `moderateUser`. E.g if you previously have shown their avatar, but now want to reset it to default.'
-      x-codeSamples:
-        $ref: "../codeSamples/playermoderation.yaml#/~1auth~1user~1unplayermoderate/put"
       responses:
         '200':
           $ref: ../responses/playermoderation/PlayerModerationUnmoderatedSuccess.yaml

@@ -1,0 +1,13 @@
+title: InventoryNotificationDetails
+type: object
+properties:
+  body:
+    type: string
+  imageUrl:
+    type: string
+  title:
+    type: string
+required:
+  - body
+  - imageUrl
+  - title

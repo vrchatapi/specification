@@ -1,0 +1,10 @@
+title: OkStatus
+type: object
+description: A status response consisting of solely a string description of whether the result of an operation was ok.
+properties:
+  ok:
+    type: string
+    default: "maybe?"
+    description: The actual status itself
+required:
+  - ok

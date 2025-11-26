@@ -9,8 +9,6 @@ paths:
       summary: Verify Auth Token
       tags:
         - authentication
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth/get"
       responses:
         '200':
           $ref: ../responses/authentication/VerifyAuthTokenResponse.yaml
@@ -25,8 +23,6 @@ paths:
     put:
       summary: Logout
       operationId: logout
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1logout/put"
       responses:
         '200':
           $ref: ../responses/authentication/LogoutSuccess.yaml
@@ -42,8 +38,6 @@ paths:
       summary: Login and/or Get Current User Info
       tags:
         - authentication
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1user/get"
       responses:
         '200':
           $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
@@ -71,8 +65,6 @@ paths:
       summary: Check User Exists
       tags:
         - authentication
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1exists/get"
       responses:
         '200':
           $ref: ../responses/authentication/UserExistsResponse.yaml
@@ -92,8 +84,6 @@ paths:
     post:
       summary: Verify 2FA code
       operationId: verify2FA
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1totp~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAResponse.yaml
@@ -112,12 +102,89 @@ paths:
       security:
         - authCookie: []
       parameters: []
+  /auth/twofactorauth/totp/pending:
+    post:
+      summary: Enable time-based 2FA codes
+      operationId: enable2FA
+      responses:
+        '200':
+          $ref: ../responses/authentication/Pending2FAResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: Begins the sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
+    delete:
+      summary: Cancel pending enabling of time-based 2FA codes
+      operationId: cancelPending2FA
+      responses:
+        '200':
+          $ref: ../responses/authentication/Disable2FAResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: Cancels the sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
+  /auth/twofactorauth/totp/pending/verify:
+    post:
+      summary: Verify Pending 2FA code
+      operationId: verifyPending2FA
+      responses:
+        '200':
+          $ref: ../responses/authentication/Verify2FAResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/TwoFactorAuthCode.yaml
+            examples: {}
+      description: Finishes sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      parameters: []
+  /auth/user/twofactorauth/otp:
+    get:
+      summary: Get 2FA Recovery codes
+      operationId: getRecoveryCodes
+      responses:
+        '200':
+          $ref: ../responses/authentication/Get2FARecoveryCodesResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      description: Gets the OTP (One Time Password) recovery codes for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+  /auth/user/avatarmoderations:
+    get:
+      summary: Get Global Avatar Moderations
+      operationId: getGlobalAvatarModerations
+      description: Returns list of globally blocked avatars.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/authentication/GetAvatarModerationsResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
   /auth/twofactorauth/otp/verify:
     post:
       summary: Verify 2FA code with Recovery code
       operationId: verifyRecoveryCode
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1otp~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAResponse.yaml
@@ -139,8 +206,6 @@ paths:
     post:
       summary: Verify 2FA email code
       operationId: verify2FAEmailCode
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1auth~1twofactorauth~1emailotp~1verify/post"
       responses:
         '200':
           $ref: ../responses/authentication/Verify2FAEmailCodeResponse.yaml
@@ -159,14 +224,26 @@ paths:
       security:
         - authCookie: [ ]
       parameters: [ ]
+  '/auth/twofactorauth':
+    delete:
+      summary: Disable 2FA
+      operationId: disable2FA
+      responses:
+        '200':
+          $ref: ../responses/authentication/Disable2FAResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - authentication
+      description: Disables 2FA for the currently logged in account
+      security:
+        - authCookie: []
   '/users/{userId}/delete':
     parameters:
       - $ref: ../parameters.yaml#/userId
     put:
       summary: Delete User
       operationId: deleteUser
-      x-codeSamples:
-        $ref: "../codeSamples/authentication.yaml#/~1user~1{userId}~1delete/put"
       responses:
         '200':
           $ref: ../responses/authentication/DeleteUserResponse.yaml
@@ -182,6 +259,72 @@ paths:
         **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
       security:
         - authCookie: []
+  /auth/register:
+    post:
+      summary: Register User Account
+      description: |-
+        ~~Register a new user account.~~
+        
+        **DEPRECATED:** Automated creation of accounts has no legitimate public third-party use case, and would be in violation of ToS §13.2:
+        *By using the Platform, you agree not to: i. [...] use the Platform in a manner inconsistent with individual human usage*
+        This endpoint is documented in the interest of completeness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/RegisterUserAccountRequest.yaml
+      responses:
+        '200':
+          $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: registerUserAccount
+      parameters: []
+      tags:
+        - authentication
+      deprecated: true
+  /auth/user/resendEmail:
+    post:
+      summary: Resend Email Confirmation
+      description: Requests a resend of pending email address confirmation email
+      responses:
+        '200':
+          $ref: ../responses/authentication/ResendVerificationEmailSuccess.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      operationId: resendEmailConfirmation
+      parameters: []
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+  '/auth/confirmEmail':
+    get:
+      summary: Confirm Email
+      operationId: confirmEmail
+      parameters:
+        - $ref: ../parameters.yaml#/confirmEmailUserId
+        - $ref: ../parameters.yaml#/confirmEmailToken
+      responses:
+        '302':
+          $ref: ../responses/authentication/ConfirmEmailResponse.yaml
+      tags:
+        - authentication
+      description: Confirms the email address for a user
+  '/auth/verifyLoginPlace':
+    get:
+      summary: Verify Login Place
+      operationId: verifyLoginPlace
+      parameters:
+        - $ref: ../parameters.yaml#/userIdQuery
+        - $ref: ../parameters.yaml#/verifyLoginPlaceToken
+      responses:
+        '302':
+          $ref: ../responses/authentication/VerifyLoginPlaceResponse.yaml
+      tags:
+        - authentication
+      description: Verifies a login attempt for a user
 tags:
   $ref: ../tags.yaml
 components:

@@ -1,0 +1,12 @@
+title: ShareInventoryItemDirectRequest
+type: object
+properties:
+  itemId:
+    $ref: ../schemas/InventoryItemID.yaml
+  users:
+    type: array
+    items:
+      $ref: ../schemas/UserID.yaml
+required:
+  - itemId
+  - users

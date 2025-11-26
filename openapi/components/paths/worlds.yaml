@@ -9,8 +9,6 @@ paths:
       summary: Search All Worlds
       tags:
         - worlds
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds/get"
       responses:
         '200':
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
@@ -41,13 +39,13 @@ paths:
         - $ref: ../parameters.yaml#/maxUnityVersion
         - $ref: ../parameters.yaml#/minUnityVersion
         - $ref: ../parameters.yaml#/platform
+        - $ref: ../parameters.yaml#/noplatform
         - $ref: ../parameters.yaml#/fuzzy
+        - $ref: ../parameters.yaml#/avatarSpecific
       description: Search and list any worlds by query filters.
     post:
       summary: Create World
       operationId: createWorld
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds/post"
       responses:
         '200':
           $ref: ../responses/worlds/WorldResponse.yaml
@@ -69,8 +67,6 @@ paths:
       summary: List Active Worlds
       tags:
         - worlds
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds~1active/get"
       responses:
         '200':
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
@@ -92,14 +88,13 @@ paths:
         - $ref: ../parameters.yaml#/maxUnityVersion
         - $ref: ../parameters.yaml#/minUnityVersion
         - $ref: ../parameters.yaml#/platform
+        - $ref: ../parameters.yaml#/noplatform
       description: Search and list currently Active worlds by query filters.
   /worlds/recent:
     get:
       summary: List Recent Worlds
       tags:
         - worlds
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds~1recend/get"
       responses:
         '200':
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
@@ -130,8 +125,6 @@ paths:
       summary: List Favorited Worlds
       tags:
         - worlds
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds~1favorites/get"
       responses:
         '200':
           $ref: ../responses/worlds/FavoritedWorldListResponse.yaml
@@ -165,8 +158,6 @@ paths:
       tags:
         - worlds
       operationId: getWorld
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}/get"
       responses:
         '200':
           $ref: ../responses/worlds/WorldResponse.yaml
@@ -180,8 +171,6 @@ paths:
       operationId: updateWorld
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}/put"
       responses:
         '200':
           $ref: ../responses/worlds/WorldResponse.yaml
@@ -202,8 +191,6 @@ paths:
       operationId: deleteWorld
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}/delete"
       responses:
         '200':
           description: OK
@@ -226,8 +213,6 @@ paths:
       security:
         - authCookie: []
       description: Returns a worlds instance.
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1worlds~1{worldId}~1{instanceId}/get"
       responses:
         '200':
           $ref: ../responses/instances/InstanceResponse.yaml
@@ -245,8 +230,6 @@ paths:
         - authCookie: []
       deprecated: true
       description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1metadata/get"
       responses:
         '200':
           $ref: ../responses/worlds/WorldMetadataResponse.yaml
@@ -263,8 +246,6 @@ paths:
       security:
         - authCookie: []
       description: Returns a worlds publish status.
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1publish/get"
       responses:
         '200':
           $ref: ../responses/worlds/WorldPublishStatusResponse.yaml
@@ -277,8 +258,6 @@ paths:
       operationId: publishWorld
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1publish/put"
       responses:
         '200':
           description: TODO
@@ -294,8 +273,6 @@ paths:
       operationId: unpublishWorld
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/worlds.yaml#/~1world~1{worldId}~1publish/delete"
       responses:
         '200':
           description: OK

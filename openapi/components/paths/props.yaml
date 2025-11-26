@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: props
+  version: '1.0'
+  description: 'Props are interactable items users can spawn into instances.'
+paths:
+  '/props/{propId}':
+    parameters:
+      - $ref: ../parameters.yaml#/propId
+    get:
+      summary: Get Prop
+      operationId: getProp
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/props/PropResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - props
+      description: Returns a Prop object.
+tags:
+  $ref: ../tags.yaml
+components:
+  securitySchemes:
+    $ref: ../securitySchemes.yaml

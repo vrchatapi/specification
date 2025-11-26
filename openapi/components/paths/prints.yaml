@@ -12,8 +12,6 @@ paths:
       operationId: getUserPrints
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/prints.yaml#/~1prints~1user~1{userId}/get"
       responses:
         '200':
           $ref: ../responses/prints/PrintListResponse.yaml
@@ -32,8 +30,6 @@ paths:
       operationId: getPrint
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/prints.yaml#/~1prints~1{printId}/get"
       responses:
         '200':
           $ref: ../responses/prints/PrintResponse.yaml
@@ -47,8 +43,6 @@ paths:
       operationId: deletePrint
       security:
         - authCookie: []
-      x-codeSamples:
-        $ref: "../codeSamples/prints.yaml#/~1prints~1{printId}/delete"
       responses:
         '200':
           description: Empty response if successful
@@ -57,6 +51,74 @@ paths:
       tags:
         - prints
       description: Returns a print.
+    post:
+      summary: Edit Print
+      operationId: editPrint
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                note:
+                  type: string
+                  description: The caption for the image.
+              required:
+                - image
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/prints/PrintResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - prints
+      description: Edits a print.
+  /prints:
+    post:
+      summary: Upload Print
+      operationId: uploadPrint
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                timestamp:
+                  type: string
+                  format: date-time
+                  description: The time the image was captured.
+                note:
+                  type: string
+                  description: The caption for the image.
+                worldId:
+                  type: string
+                  description: The id of the world in which the image was captured.
+                worldName:
+                  type: string
+                  description: The name of the world in which the image was captured.
+              required:
+                - image
+                - timestamp
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/prints/PrintResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+      tags:
+        - prints
+      description: Uploads and creates a print.
 tags:
   $ref: ../tags.yaml
 components:

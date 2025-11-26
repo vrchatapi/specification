@@ -1,0 +1,25 @@
+title: EconomyAccount
+type: object
+properties:
+  accountActivatedOn:
+    type: string
+    format: date-time
+    nullable: true
+  accountId:
+    type: string
+    nullable: true
+  blocked:
+    type: boolean
+  canSpend:
+    type: boolean
+  source:
+    type: string
+  userId:
+    $ref: ./UserID.yaml
+required:
+  - accountActivatedOn
+  - accountId
+  - blocked
+  - canSpend
+  - source
+  - userId

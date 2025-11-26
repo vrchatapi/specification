@@ -6,8 +6,12 @@ properties:
   created_at:
     type: string
     format: date-time
+  encryptionKey:
+    type: string
   fileSize:
     type: integer
+  performanceRating:
+    type: string
   success:
     type: boolean
   uncompressedSize:

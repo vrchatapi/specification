@@ -1,0 +1,30 @@
+title: GroupRoleTemplateValues
+type: object
+properties:
+  basePermissions:
+    type: array
+    items:
+      $ref: ./GroupPermissions.yaml
+  description:
+    type: string
+  name:
+    type: string
+  roles:
+    type: object
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      basePermissions:
+        type: array
+        items:
+          $ref: ./GroupPermissions.yaml
+      isAddedOnJoin:
+        type: boolean
+        default: false
+required:
+  - basePermissions
+  - description
+  - name
+  - roles

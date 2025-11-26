@@ -7,8 +7,6 @@ paths:
   /files:
     get:
       summary: List Files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1files/get"
       responses:
         '200':
           $ref: ../responses/files/FileListResponse.yaml
@@ -38,8 +36,6 @@ paths:
       summary: Create File
       tags:
         - files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file/post"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -60,8 +56,6 @@ paths:
       operationId: getFile
       tags:
         - files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}/get"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -73,8 +67,6 @@ paths:
     delete:
       summary: Delete File
       operationId: deleteFile
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}/delete"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -88,8 +80,6 @@ paths:
     post:
       summary: Create File Version
       operationId: createFileVersion
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}/post"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -111,8 +101,6 @@ paths:
       summary: Download File Version
       tags:
         - files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}/get"
       responses:
         '200':
           $ref: ../responses/files/RawFileResponse.yaml
@@ -130,8 +118,6 @@ paths:
     delete:
       summary: Delete File Version
       operationId: deleteFileVersion
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}/delete"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -153,8 +139,6 @@ paths:
       summary: Check FileData Upload Status
       tags:
         - files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}~1{fileType}~1status/get"
       responses:
         '200':
           $ref: ../responses/files/FileVersionUploadStatusResponse.yaml
@@ -171,8 +155,6 @@ paths:
       summary: Start FileData Upload
       tags:
         - files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}~1{fileType}~1start/put"
       responses:
         '200':
           $ref: ../responses/files/FileUploadURLResponse.yaml
@@ -204,8 +186,6 @@ paths:
       summary: Finish FileData Upload
       tags:
         - files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1file~1{fileId}~1{versionId}~1{fileType}~1finish/put"
       responses:
         '200':
           $ref: ../responses/files/FileResponse.yaml
@@ -239,8 +219,6 @@ paths:
       summary: Get File Version Analysis
       tags:
         - files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1analysis~1{fileId}~1{versionId}/get"
       responses:
         '200':
           $ref: ../responses/files/FileAnalysisResponse.yaml
@@ -260,8 +238,6 @@ paths:
       summary: Get File Version Analysis Security
       tags:
         - files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1analysis~1{fileId}~1{versionId}~1security/get"
       responses:
         '200':
           $ref: ../responses/files/FileAnalysisResponse.yaml
@@ -281,8 +257,6 @@ paths:
       summary: Get File Version Analysis Standard
       tags:
         - files
-      x-codeSamples:
-        $ref: "../codeSamples/files.yaml#/~1analysis~1{fileId}~1{versionId}~1standard/get"
       responses:
         '200':
           $ref: ../responses/files/FileAnalysisResponse.yaml
@@ -294,6 +268,110 @@ paths:
       security:
         - authCookie: []
       description: Get the standard performance analysis for the uploaded assets of an avatar
+  '/file/image':
+    post:
+      summary: Upload gallery image, icon, emoji or sticker
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: ../responses/files/FileResponse.yaml
+      operationId: uploadImage
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+                tag:
+                  type: string
+                  description: Needs to be either icon, gallery, sticker, emoji, or emojianimated
+                frames:
+                  type: integer
+                  description: Required for emojianimated. Total number of frames to be animated (2-64)
+                framesOverTime:
+                  type: integer
+                  description: Required for emojianimated. Animation frames per second (1-64)
+                animationStyle:
+                  type: string
+                  example: bats
+                  description: Animation style for sticker, required for emoji.
+                maskTag:
+                  type: string
+                  example: square
+                  description: Mask of the sticker, optional for emoji.
+              required:
+                - file
+                - tag
+      security:
+        - authCookie: []
+      description: Upload an image, which can be an icon, gallery image, sticker or emoji
+  '/icon':
+    post:
+      summary: Upload icon
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: ../responses/files/FileResponse.yaml
+      operationId: uploadIcon
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+              required:
+                - file
+      security:
+        - authCookie: [ ]
+      description: Upload an icon
+  '/gallery':
+    post:
+      summary: Upload gallery image
+      tags:
+        - files
+      responses:
+        '200':
+          $ref: ../responses/files/FileResponse.yaml
+      operationId: uploadGalleryImage
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The binary blob of the png file.
+              required:
+                - file
+      security:
+        - authCookie: [ ]
+      description: Upload a gallery image
+  /adminassetbundles/{adminAssetBundleId}:
+    get:
+      summary: Get AdminAssetBundle
+      responses:
+        '200':
+          $ref: ../responses/files/AdminAssetBundleResponse.yaml
+      operationId: getAdminAssetBundle
+      security:
+        - authCookie: []
+      description: Returns an AdminAssetBundle
+      parameters:
+        - $ref: ../parameters.yaml#/adminAssetBundleId
+      tags:
+        - files
 tags:
   $ref: ../tags.yaml
 components:

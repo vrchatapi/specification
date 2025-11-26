@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 25
       - uses: actions/checkout@v4
       - name: Cache node_modules
         uses: actions/cache@v4
@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 25
       - uses: actions/checkout@v4
       - name: Cache node_modules
         uses: actions/cache@v4

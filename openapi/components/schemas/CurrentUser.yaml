@@ -30,6 +30,9 @@ properties:
     $ref: ./AgeVerified.yaml
   allowAvatarCopying:
     type: boolean
+  authToken:
+    description: The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)
+    type: string
   badges:
     description: ' '
     type: array
@@ -42,10 +45,13 @@ properties:
     type: array  
     items:
       type: string
+  contentFilters:
+    description: These tags begin with `content_` and control content gating
+    type: array
+    items:
+      $ref: ./Tag.yaml
   currentAvatar:
     $ref: ./AvatarID.yaml
-  currentAvatarAssetUrl:
-    type: string
   currentAvatarImageUrl:
     $ref: ./CurrentAvatarImageUrl.yaml
   currentAvatarThumbnailImageUrl:
@@ -59,11 +65,16 @@ properties:
     type: string
   developerType:
     $ref: ./DeveloperType.yaml
+  discordDetails:
+    $ref: ./DiscordDetails.yaml
+  discordId:
+    $ref: ./DiscordID.yaml
   displayName:
     type: string
   emailVerified:
     type: boolean
   fallbackAvatar:
+    deprecated: true
     $ref: ./AvatarID.yaml
   friendGroupNames:
     type: array
@@ -154,7 +165,7 @@ properties:
         isMobile:
           type: boolean
         platform:
-          type: string
+          $ref: ./Platform.yaml
           nullable: true
         recorded:
           type: string
@@ -165,6 +176,10 @@ properties:
     type: string
   pronouns:
     type: string
+  pronounsHistory:
+    type: array
+    items:
+      type: string
   queuedInstance:
     type: string
     nullable: true
@@ -217,6 +232,7 @@ required:
   - profilePicOverride
   - profilePicOverrideThumbnail
   - pronouns
+  - pronounsHistory
   - statusDescription
   - pastDisplayNames
   - hasEmail
@@ -234,7 +250,6 @@ required:
   - currentAvatarThumbnailImageUrl
   - currentAvatarTags
   - currentAvatar
-  - currentAvatarAssetUrl
   - acceptedTOSVersion
   - steamId
   - steamDetails

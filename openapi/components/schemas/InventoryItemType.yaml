@@ -1,0 +1,9 @@
+title: InventoryItemType
+type: string
+enum:
+  - bundle
+  - prop
+  - emoji
+  - sticker
+default: bundle
+example: prop

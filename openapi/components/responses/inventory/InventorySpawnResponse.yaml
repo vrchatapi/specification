@@ -1,0 +1,5 @@
+description: Returns an InventorySpawn object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/InventorySpawn.yaml

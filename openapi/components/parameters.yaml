@@ -16,6 +16,15 @@ offset:
     type: integer
     minimum: 0
   description: A zero-based offset from the default object sorting from where search results start.
+utcOffset:
+  name: utcOffset
+  in: query
+  required: false
+  schema:
+    type: integer
+    minimum: -12
+    maximum: 12
+  description: The offset from UTC in hours of the client or authenticated user.
 sort:
   name: sort
   in: query
@@ -51,6 +60,14 @@ order:
   schema:
     $ref: ./schemas/OrderOption.yaml
   description: Result ordering
+monthDate:
+  name: date
+  in: query
+  required: false
+  schema:
+    type: string
+    format: date-time
+  description: The month to search in.
 startDate:
   name: startDate
   in: query
@@ -121,6 +138,14 @@ groupId:
     type: string
     example: grp_00000000-0000-0000-0000-000000000000
   description: Must be a valid group ID.
+calendarId:
+  name: calendarId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: cal_00000000-0000-0000-0000-000000000000
+  description: Must be a valid calendar ID.
 groupIdFilter:
   name: groupId
   in: query
@@ -249,35 +274,49 @@ platform:
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Platform.yaml
   description: The platform the asset supports.
+noplatform:
+  name: noplatform
+  in: query
+  required: false
+  schema:
+    type: string
+  description: The platform the asset does not support.
+avatarSpecific:
+  name: avatarSpecific
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Only search for avatar worlds.
 tag:
   name: tag
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to include (comma-separated). Any of the tags needs to be present.
 include:
   name: include
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to include (comma-separated). Any of the tags needs to be present.
 require:
   name: require
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to include (comma-separated). All of the tags needs to be present.
 notag:
   name: notag
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to exclude (comma-separated).
 search:
   name: search
@@ -403,14 +442,14 @@ contentId:
   required: false
   schema:
     type: boolean
-  description: Filter for users' previously submitted feedback, e.g., a groupId, useeId, avatarId, etc.
+  description: Filter for users' previously submitted feedback, e.g., a groupId, userId, avatarId, etc.
 active:
   name: active
   in: query
   required: false
   schema:
     type: boolean
-  description: Filter for users' listings.
+  description: Filter for users' listings and inventory bundles.
 variant:
   name: variant
   in: query
@@ -454,3 +493,178 @@ printId:
     type: string
     example: 'prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa'
   description: Print ID.
+confirmEmailUserId:
+  name: id
+  in: query
+  required: true
+  schema:
+    type: string
+    example: 'usr_00000000-0000-0000-0000-000000000000'
+  description: 'Target user for which to verify email.'
+confirmEmailToken:
+  name: verify_email
+  in: query
+  required: true
+  schema:
+    type: string
+    example: 'eml_00000000-0000-0000-0000-000000000000'
+  description: 'Token to verify email.'
+verifyLoginPlaceToken:
+  name: token
+  in: query
+  required: true
+  schema:
+    type: string
+  description: 'Token to verify login attempt.'
+propId:
+  name: propId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: 'prop_829ba6f6-b837-49d9-b9a9-056b82103b58'
+  description: Prop ID.
+adminAssetBundleId:
+  name: adminAssetBundleId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: 'aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d'
+  description: Must be a valid admin asset bundle ID.
+inventoryItemId:
+  name: inventoryItemId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: inv_00000000-0000-0000-0000-000000000000
+  description: Must be a valid inventory item ID.
+inventoryTemplateId:
+  name: inventoryTemplateId
+  in: path
+  required: true
+  schema:
+    type: string
+    example: invt_00000000-0000-0000-0000-000000000000
+  description: Must be a valid inventory template ID.
+inventorySortOrder:
+  name: order
+  in: query
+  required: false
+  schema:
+    type: string
+    enum:
+      - newest
+      - newest_created
+      - oldest
+      - oldest_created
+  description: Sort order for inventory retrieval.
+inventoryItemTypes:
+  name: types
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/InventoryItemType.yaml
+  description: Filter for inventory retrieval.
+inventoryItemTags:
+  name: tags
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/Tag.yaml
+  description: Filter tags for inventory retrieval (comma-separated).
+inventoryItemFlags:
+  name: flags
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/InventoryFlag.yaml
+  description: Filter flags for inventory retrieval (comma-separated).
+inventoryItemNotTypes:
+  name: notTypes
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/InventoryItemType.yaml
+  description: Filter out types for inventory retrieval (comma-separated).
+inventoryItemNotFlags:
+  name: notFlags
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/InventoryFlag.yaml
+  description: Filter out flags for inventory retrieval (comma-separated).
+inventoryItemArchived:
+  name: archived
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Filter archived status for inventory retrieval.
+inventorySpawnItemId:
+  name: id
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/InventoryItemID.yaml
+  description: Id for inventory item spawning.
+inventoryPedestalItemId:
+  name: itemId
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/InventoryItemID.yaml
+  description: Id for inventory item sharing.
+inventoryPedestalDuration:
+  name: duration
+  in: query
+  required: true
+  schema:
+    type: integer
+    minimum: 30
+    maximum: 86400
+    default: 90
+  description: The duration before the sharing pedestal despawns.
+calendarSearchTerm:
+  name: searchTerm
+  in: query
+  required: true
+  schema:
+    type: string
+    example: game night
+  description: Search term for calendar events.
+steamId:
+  name: steamId
+  in: query
+  required: false
+  schema:
+    type: string
+    example: game night
+  description: The Steam ID of the user.
+hydrateListings:
+  name: hydrateListings
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Listings fields will be populated.
+hydrateProducts:
+  name: hydrateProducts
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Products fields will be populated.
+storeId:
+  name: storeId
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/StoreID.yaml
+storeView:
+  name: fetch
+  in: query
+  required: false
+  schema:
+    $ref: ./schemas/StoreView.yaml

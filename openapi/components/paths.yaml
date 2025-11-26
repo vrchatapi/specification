@@ -8,8 +8,16 @@
   $ref: "./paths/authentication.yaml#/paths/~1auth~1exists"
 "/auth/user":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1user"
+"/auth/twofactorauth":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth"
 "/auth/twofactorauth/totp/verify":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify"
+"/auth/twofactorauth/totp/pending":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1pending"
+"/auth/twofactorauth/totp/pending/verify":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1pending~1verify"
+"/auth/user/twofactorauth/otp":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1twofactorauth~1otp"
 "/auth/twofactorauth/otp/verify":
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1otp~1verify"
 "/auth/twofactorauth/emailotp/verify":
@@ -20,13 +28,25 @@
   $ref: "./paths/authentication.yaml#/paths/~1logout"
 "/users/{userId}/delete":
   $ref: "./paths/authentication.yaml#/paths/~1users~1{userId}~1delete"
+"/auth/register":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1register"
+"/auth/user/resendEmail":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1resendEmail"
+"/auth/confirmEmail":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1confirmEmail"
+"/auth/verifyLoginPlace":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1verifyLoginPlace"
+"/auth/user/avatarmoderations":
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1avatarmoderations"
 
 # avatars
 
-'/users/{userId}/avatar':
+"/users/{userId}/avatar":
   $ref: "./paths/avatars.yaml#/paths/~1users~1{userId}~1avatar"
 "/avatars":
   $ref: "./paths/avatars.yaml#/paths/~1avatars"
+"/avatarStyles":
+  $ref: "./paths/avatars.yaml#/paths/~1avatarStyles"
 "/avatars/{avatarId}":
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}"
 "/avatars/{avatarId}/select":
@@ -44,34 +64,69 @@
 "/avatars/{avatarId}/impostor":
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1impostor"
 
+# calendar
+
+"/calendar":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar"
+"/calendar/featured":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1featured"
+"/calendar/following":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1following"
+"/calendar/search":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1search"
+"/calendar/{groupId}":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}"
+"/calendar/{groupId}/event":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1event"
+"/calendar/{groupId}/{calendarId}":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}"
+"/calendar/{groupId}/{calendarId}.ics":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}.ics"
+"/calendar/{groupId}/{calendarId}/event":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}~1event"
+"/calendar/{groupId}/{calendarId}/follow":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}~1follow"
+
 # economy
 
-'/Steam/transactions':
+"/Steam/transactions":
   $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions"
-'/Steam/transactions/{transactionId}':
+"/Steam/transactions/{transactionId}":
   $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions~1{transactionId}"
-'/Admin/transactions':
+"/Admin/transactions":
   $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions"
-'/Admin/transactions/{transactionId}':
+"/Admin/transactions/{transactionId}":
   $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions~1{transactionId}"
-'/auth/user/subscription':
+"/auth/user/subscription":
   $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
-'/subscriptions':
+"/users/{userId}/subscription/eligible":
+  $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1subscription~1eligible"
+"/subscriptions":
   $ref: "./paths/economy.yaml#/paths/~1subscriptions"
-'/licenseGroups/{licenseGroupId}':
+"/licenseGroups/{licenseGroupId}":
   $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
-'/listing/{productId}':
+"/listing/{productId}":
   $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}"
-'/user/{userId}/listings':
+"/user/{userId}/listings":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1listings"
-'/tokenBundles':
+"/tokenBundles":
   $ref: "./paths/economy.yaml#/paths/~1tokenBundles"
-'/tilia/status':
+"/tilia/status":
   $ref: "./paths/economy.yaml#/paths/~1tilia~1status"
-'/user/{userId}/tilia/tos':
+"/user/{userId}/tilia/tos":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1tilia~1tos"
-'/user/{userId}/balance':
+"/user/{userId}/balance":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance"
+"/user/{userId}/balance/earnings":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
+"/user/{userId}/economy/account":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
+"/economy/licenses/active":
+  $ref: "./paths/economy.yaml#/paths/~1economy~1licenses~1active"
+"/economy/store":
+  $ref: "./paths/economy.yaml#/paths/~1economy~1store"
+"/economy/store/shelves":
+  $ref: "./paths/economy.yaml#/paths/~1economy~1store~1shelves"
 
 # favorites
 
@@ -108,6 +163,14 @@
   $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1security"
 "/analysis/{fileId}/{versionId}/standard":
   $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1standard"
+"/file/image":
+  $ref: "./paths/files.yaml#/paths/~1file~1image"
+"/icon":
+  $ref: "./paths/files.yaml#/paths/~1icon"
+"/gallery":
+  $ref: "./paths/files.yaml#/paths/~1gallery"
+"/adminassetbundles/{adminAssetBundleId}":
+  $ref: "./paths/files.yaml#/paths/~1adminassetbundles~1{adminAssetBundleId}"
 
 # friends
 
@@ -124,6 +187,8 @@
 
 "/groups":
   $ref: "./paths/groups.yaml#/paths/~1groups"
+"/groups/roleTemplates":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1roleTemplates"
 "/groups/{groupId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
 "/groups/{groupId}/announcement":
@@ -154,9 +219,9 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1leave"
 "/groups/{groupId}/members":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members"
-'/groups/{groupId}/members/{userId}':
+"/groups/{groupId}/members/{userId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}"
-'/groups/{groupId}/members/{userId}/roles/{groupRoleId}':
+"/groups/{groupId}/members/{userId}/roles/{groupRoleId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}~1roles~1{groupRoleId}"
 "/groups/{groupId}/permissions":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1permissions"
@@ -164,6 +229,8 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1posts"
 "/groups/{groupId}/posts/{notificationId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1posts~1{notificationId}"
+"/groups/{groupId}/representation":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1representation"
 "/groups/{groupId}/requests":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1requests"
 "/groups/{groupId}/requests/{userId}":
@@ -173,16 +240,40 @@
 "/groups/{groupId}/roles/{groupRoleId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
 
+# inventory
+
+"/inventory":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory"
+"/inventory/{inventoryItemId}":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}"
+"/inventory/drops":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1drops"
+"/inventory/template/{inventoryTemplateId}":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1template~1{inventoryTemplateId}"
+"/inventory/spawn":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1spawn"
+"/inventory/cloning/pedestal":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1pedestal"
+"/inventory/cloning/direct":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1direct"
+
+
 # invite
 
 "/invite/{userId}":
   $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}"
+"/invite/{userId}/photo":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}~1photo"
 "/invite/myself/to/{worldId}:{instanceId}":
   $ref: "./paths/invite.yaml#/paths/~1invite~1myself~1to~1{worldId}:{instanceId}"
 "/requestInvite/{userId}":
   $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}"
+"/requestInvite/{userId}/photo":
+  $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}~1photo"
 "/invite/{notificationId}/response":
   $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response"
+"/invite/{notificationId}/response/photo":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response~1photo"
 "/message/{userId}/{messageType}":
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
 "/message/{userId}/{messageType}/{slot}":
@@ -192,6 +283,8 @@
 
 "/instances":
   $ref: "./paths/instances.yaml#/paths/~1instances"
+"/instances/recent":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1recent"
 "/instances/{worldId}:{instanceId}":
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}"
 "/instances/{worldId}:{instanceId}/shortName":
@@ -214,15 +307,6 @@
 "/auth/user/notifications/clear":
   $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1clear"
 
-# permissions
-
-"/auth/permissions":
-  $ref: "./paths/permissions.yaml#/paths/~1auth~1permissions"
-"/permissions":
-  $ref: "./paths/permissions.yaml#/paths/~1permissions"
-"/permissions/{permissionId}":
-  $ref: "./paths/permissions.yaml#/paths/~1permissions~1{permissionId}"
-
 # playermoderation
 
 "/auth/user/playermoderations":
@@ -236,23 +320,13 @@
   $ref: "./paths/prints.yaml#/paths/~1prints~1user~1{userId}"
 "/prints/{printId}":
   $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
+"/prints":
+  $ref: "./paths/prints.yaml#/paths/~1prints"
 
-# system
+# props
 
-"/config":
-  $ref: "./paths/system.yaml#/paths/~1config"
-"/infoPush":
-  $ref: "./paths/system.yaml#/paths/~1infoPush"
-"/css/app.css":
-  $ref: "./paths/system.yaml#/paths/~1css~1app.css"
-"/js/app.js":
-  $ref: "./paths/system.yaml#/paths/~1js~1app.js"
-"/health":
-  $ref: "./paths/system.yaml#/paths/~1health"
-"/visits":
-  $ref: "./paths/system.yaml#/paths/~1visits"
-"/time":
-  $ref: "./paths/system.yaml#/paths/~1time"
+"/props/{propId}":
+  $ref: "./paths/props.yaml#/paths/~1props~1{propId}"
 
 # jams
 
@@ -317,3 +391,25 @@
 "/worlds/{worldId}/{instanceId}":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}"
 
+# miscellaneous
+
+"/config":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1config"
+"/infoPush":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1infoPush"
+"/css/app.css":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1css~1app.css"
+"/js/app.js":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1js~1app.js"
+"/health":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1health"
+"/visits":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1visits"
+"/time":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1time"
+"/auth/permissions":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1auth~1permissions"
+"/permissions":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1permissions"
+"/permissions/{permissionId}":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1permissions~1{permissionId}"

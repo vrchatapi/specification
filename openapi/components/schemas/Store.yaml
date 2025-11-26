@@ -1,0 +1,56 @@
+title: Store
+type: object
+properties:
+  description:
+    type: string
+  displayName:
+    type: string
+  id:
+    $ref: ./StoreID.yaml
+  sellerDisplayName:
+    type: string
+  sellerId:
+    $ref: ./UserID.yaml
+  storeId:
+    $ref: ./StoreID.yaml
+  storeType:
+    $ref: ./StoreType.yaml
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  listingIds:
+    description: Only for store type world and group
+    type: array
+    items:
+      $ref: ./ProductID.yaml
+  listings:
+    description: Only for store type world and group
+    type: array
+    items:
+      $ref: ./ProductListing.yaml
+  worldId:
+    description: Only for store type world
+    $ref: ./WorldID.yaml
+  groupId:
+    description: Only for store type group
+    $ref: ./GroupID.yaml
+  shelfIds:
+    description: Only for store type house
+    type: array
+    items:
+      $ref: ./StoreShelfID.yaml
+  shelves:
+    description: Only for store type house
+    type: array
+    items:
+      $ref: ./StoreShelf.yaml
+required:
+  - description
+  - displayName
+  - id
+  - sellerDisplayName
+  - sellerId
+  - storeId
+  - storeType
+  - tags

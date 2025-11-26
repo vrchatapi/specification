@@ -1,0 +1,7 @@
+title: Disable2FAResult
+type: object
+properties:
+  removed:
+    type: boolean
+required:
+  - removed

@@ -1,0 +1,22 @@
+title: InventoryMetadata
+type: object
+properties:
+  inventoryItemsToInstantiate:
+    description: 'Only in bundles'
+    type: array
+    items:
+      $ref: ./InventoryTemplateID.yaml
+  animated:
+    type: boolean
+  animationStyle:
+    type: string
+  assetBundleId:
+    type: string
+  fileId:
+    type: string
+  imageUrl:
+    type: string
+  maskTag:
+    type: string
+  propId:
+    $ref: ./PropID.yaml

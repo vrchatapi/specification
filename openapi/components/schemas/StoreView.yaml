@@ -1,0 +1,9 @@
+title: StoreView
+type: string
+default: public
+enum:
+  - all
+  - publicPreview
+  - public
+  - preview
+  - draft
