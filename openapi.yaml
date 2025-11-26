@@ -4946,7 +4946,7 @@ components:
           type: string
           nullable: true
         platform:
-          type: string
+          $ref: '#/components/schemas/Platform'
           description: either a Platform or an empty string
           nullable: true
         profilePicOverride:
@@ -5161,7 +5161,7 @@ components:
               isMobile:
                 type: boolean
               platform:
-                type: string
+                $ref: '#/components/schemas/Platform'
                 nullable: true
               recorded:
                 type: string
@@ -9741,7 +9741,7 @@ components:
           nullable: true
           format: date-time
         platform:
-          type: string
+          $ref: '#/components/schemas/Platform'
         profilePicOverride:
           type: string
         profilePicOverrideThumbnail:
@@ -11273,7 +11273,7 @@ components:
           type: string
         platform:
           minLength: 1
-          type: string
+          $ref: '#/components/schemas/Platform'
           description: Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.
         sortHeading:
           minLength: 1
@@ -11287,7 +11287,7 @@ components:
         tag:
           description: Tag to filter content for this row.
           minLength: 1
-          type: string
+          $ref: '#/components/schemas/Tag'
         type:
           type: string
           example: avatar
@@ -12366,7 +12366,7 @@ components:
       properties:
         platform:
           description: 'TODO: Does this still exist?'
-          type: string
+          $ref: '#/components/schemas/Platform'
         requestMessage:
           description: Used when using InviteMessage Slot.
           type: string
@@ -14416,14 +14416,14 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        $ref: '#/components/schemas/Tag'
       description: Tags to include (comma-separated). Any of the tags needs to be present.
     notag:
       name: notag
       in: query
       required: false
       schema:
-        type: string
+        $ref: '#/components/schemas/Tag'
       description: Tags to exclude (comma-separated).
     releaseStatus:
       name: releaseStatus
@@ -14451,7 +14451,7 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        $ref: '#/components/schemas/Platform'
       description: The platform the asset supports.
     avatarId:
       name: avatarId
@@ -14940,14 +14940,14 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        $ref: '#/components/schemas/Tag'
       description: Tags to include (comma-separated). All of the tags needs to be present.
     include:
       name: include
       in: query
       required: false
       schema:
-        type: string
+        $ref: '#/components/schemas/Tag'
       description: Tags to include (comma-separated). Any of the tags needs to be present.
     variant:
       name: variant
