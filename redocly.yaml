@@ -5,8 +5,7 @@ extends:
 apis:
   main:
     root: openapi/openapi.yaml
+    output: dist/openapi.yaml
 
-plugins:
-  - './.github/redocly-plugins/remove-internal.js'
 decorators:
-  remove-internal/remove-internal: error
+  remove-x-internal: on

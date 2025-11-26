@@ -1,17 +1,35 @@
 {
-  "name": "vrchat-openapi-test",
-  "version": "1.0.0",
-  "description": "VRChat API OpenAPI Specification",
-  "main": "index.js",
-  "private": true,
-  "scripts": {
-    "lint": "node ./node_modules/\\@stoplight/spectral-cli/dist/ lint openapi/openapi.yaml -F warn",
-    "bundle": "node ./node_modules/\\@redocly/cli/bin/cli.js bundle openapi/openapi.yaml -o dist/openapi.yaml"
-  },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "@redocly/cli": "^2.11.0",
-    "@stoplight/spectral-cli": "^6.6.0"
-  }
+	"name": "vrchat-openapi",
+	"version": "1.0.0",
+	"private": true,
+	"description": "VRChat API OpenAPI Specification",
+	"author": "",
+	"license": "MIT",
+	"main": "index.js",
+	"scripts": {
+		"lint-spectral": "spectral lint openapi/openapi.yaml",
+		"lint-spectral-ci": "pnpm -s run lint-spectral -f github-actions",
+		"lint-eslint": "eslint .",
+		"lint-eslint-ci": "pnpm -s run lint-eslint -f @jamesacarr/eslint-formatter-github-actions",
+		"lint": "pnpm --no-bail --stream --reporter-hide-prefix --color run '/^lint-(?!ci$)(?!.*-ci$).*/'",
+		"lint-ci": "pnpm --no-bail --stream --reporter-hide-prefix run '/^lint-.*-ci$/'",
+		"bundle": "redocly bundle"
+	},
+	"dependencies": {
+		"@apidevtools/json-schema-ref-parser": "^15.1.2",
+		"@redocly/cli": "^2.12.0",
+		"@stoplight/spectral-cli": "^6.15.0",
+		"@stoplight/spectral-formats": "^1.8.2",
+		"@stoplight/spectral-functions": "^1.10.1",
+		"@stoplight/spectral-rulesets": "^1.22.0",
+		"change-case": "^5.4.4",
+		"pluralize": "^8.0.0"
+	},
+	"devDependencies": {
+		"@ariesclark/eslint-config": "^3.1.1",
+		"@eslint-react/eslint-plugin": "^2.3.9",
+		"@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
+		"@types/pluralize": "^0.0.33",
+		"eslint": "^9.39.1"
+	}
 }

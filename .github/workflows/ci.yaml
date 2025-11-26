@@ -1,53 +1,64 @@
-on: [push, pull_request]
-
 name: OpenAPI Specification CI
+
+on:
+  - push
+  - pull_request
+  - workflow_dispatch
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-    name: Lint OpenAPI specification
+    name: Lint
     steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
       - uses: actions/setup-node@v4
         with:
           node-version: 25
-      - uses: actions/checkout@v4
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-v20-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-v20
-      - name: Install Dependencies
-        run: npm install
-      - name: Run Spectral linting
-        run: npm run lint
+          cache: pnpm
+
+      - run: pnpm install
+
+      - run: pnpm run lint-ci
 
   bundle:
     needs: lint
     runs-on: ubuntu-latest
-    name: Bundle and Filter OpenAPI specification
+    name: Bundle
     steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
       - uses: actions/setup-node@v4
         with:
           node-version: 25
-      - uses: actions/checkout@v4
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-v20-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-v20
+          cache: pnpm
 
-      - name: Bundle OpenAPI Specification 📦
-        run: npm run bundle
+      - name: Install dependencies
+        run: pnpm install
 
-      - name: Upload Bundled Specification as Artifact 📤
-        uses: actions/upload-artifact@v4
+      - run: |
+          pnpm bundle --ext yaml
+          pnpm bundle --ext json
+
+      - uses: actions/upload-artifact@v4
         with:
-          name: openapi-bundled
-          path: dist
+          name: openapi.yaml
+          path: dist/openapi.yaml
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openapi.json
+          path: dist/openapi.json
 
   pages:
     # Only if main branch
@@ -60,8 +71,8 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: openapi-bundled
-          path: dist
+          name: openapi.yaml
+          path: dist/openapi.yaml
 
       - name: Disable Jekyll for Github Pages
         run: sudo touch dist/.nojekyll; sudo touch dist/index.html
