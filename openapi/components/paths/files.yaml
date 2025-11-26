@@ -288,7 +288,7 @@ paths:
                   format: binary
                   description: The binary blob of the png file.
                 tag:
-                  $ref: ../parameters.yaml#/tag
+                  type: string
                   description: Needs to be either icon, gallery, sticker, emoji, or emojianimated
                 frames:
                   type: integer
