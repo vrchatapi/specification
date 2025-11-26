@@ -6,16 +6,16 @@ properties:
     type: string
     example: https://assets.vrchat.com/adminfiles/adfl_fba880f3-7d8c-4429-87e6-0e2d50000076ie_chad_rat_standalonewindows
   assetVersion:
-    minimum: 0
     type: integer
     example: 4
+    minimum: 0
   platform:
     $ref: ./Platform.yaml
   unityVersion:
+    type: string
     default: 2022.3.22f1-DWR
     example: 2022.3.22f1-DWR
     minLength: 1
-    type: string
   variant:
     type: string
 required:

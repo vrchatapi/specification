@@ -1,9 +1,9 @@
-type: string
 title: LicenseType
-default: permission
+type: string
 enum:
   - avatar
   - licenseGroup
   - permission
   - product
+default: permission
 example: permission

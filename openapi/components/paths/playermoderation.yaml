@@ -1,7 +1,6 @@
 openapi: 3.0.3
 info:
   title: playermoderation
-  version: "1.0"
   description: |-
     There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players.
     PlayerModerations are user-generated actions towards others, such as muting them, blocking, or toggling interaction.
@@ -34,67 +33,15 @@ info:
     As of October 2022, `showAvatar` and `hideAvatar` has been moved to local storage.
     Sending these types to the API will result in a 200 OK response, but the API will **not** store them.
     More information is avaiable on VRChat's official [documentation on Local Storage](https://docs.vrchat.com/docs/local-vrchat-storage).
+  version: "1.0"
 paths:
   /auth/user/playermoderations:
-    get:
-      summary: Search Player Moderations
-      tags:
-        - playermoderation
-      responses:
-        "200":
-          $ref: ../responses/playermoderation/PlayerModerationListResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getPlayerModerations
-      security:
-        - authCookie: []
-      parameters:
-        - schema:
-            $ref: ../schemas/PlayerModerationType.yaml
-          in: query
-          name: type
-          description: Must be one of PlayerModerationType.
-        - schema:
-            $ref: ../schemas/UserID.yaml
-          in: query
-          name: sourceUserId
-          description: Must be valid UserID. Trying to view someone else's moderations results with "Can't view someone else's player moderations" error.
-          x-internal: true
-        - schema:
-            $ref: ../schemas/UserID.yaml
-          in: query
-          name: targetUserId
-          description: Must be valid UserID.
-      description: |-
-        Returns a list of all player moderations made by **you**.
-
-        This endpoint does not have pagination, and will return *all* results. Use query parameters to limit your query if needed.
-    post:
-      summary: Moderate User
-      operationId: moderateUser
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/ModerateUserRequest.yaml
-        description: ""
-      description: |-
-        Moderate a user, e.g. unmute them or show their avatar.
-
-        Please see the [Player Moderation docs](https://vrchatapi.github.io/docs/api/#tag--playermoderation) on what playerModerations are, and how they differ from staff moderations.
-      tags:
-        - playermoderation
     delete:
-      summary: Clear All Player Moderations
       operationId: clearAllPlayerModerations
+      summary: Clear All Player Moderations
+      description: ⚠️ **This will delete every single player moderation you've ever made.**
+      tags:
+        - playermoderation
       security:
         - authCookie: []
       responses:
@@ -102,31 +49,84 @@ paths:
           $ref: ../responses/playermoderation/PlayerModerationClearAllSuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      description: ⚠️ **This will delete every single player moderation you've ever made.**
+    get:
+      operationId: getPlayerModerations
+      summary: Search Player Moderations
+      description: |-
+        Returns a list of all player moderations made by **you**.
+
+        This endpoint does not have pagination, and will return *all* results. Use query parameters to limit your query if needed.
       tags:
         - playermoderation
-  /auth/user/unplayermoderate:
-    put:
-      summary: Unmoderate User
-      operationId: unmoderateUser
+      parameters:
+        - name: type
+          description: Must be one of PlayerModerationType.
+          in: query
+          schema:
+            $ref: ../schemas/PlayerModerationType.yaml
+        - name: sourceUserId
+          description: Must be valid UserID. Trying to view someone else's moderations results with "Can't view someone else's player moderations" error.
+          in: query
+          schema:
+            $ref: ../schemas/UserID.yaml
+          x-internal: true
+        - name: targetUserId
+          description: Must be valid UserID.
+          in: query
+          schema:
+            $ref: ../schemas/UserID.yaml
       security:
         - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/playermoderation/PlayerModerationListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    post:
+      operationId: moderateUser
+      summary: Moderate User
+      description: |-
+        Moderate a user, e.g. unmute them or show their avatar.
+
+        Please see the [Player Moderation docs](https://vrchatapi.github.io/docs/api/#tag--playermoderation) on what playerModerations are, and how they differ from staff moderations.
+      tags:
+        - playermoderation
+      requestBody:
+        description: ""
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ModerateUserRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /auth/user/unplayermoderate:
+    put:
+      operationId: unmoderateUser
+      summary: Unmoderate User
+      description: "Removes a player moderation previously added through `moderateUser`. E.g if you previously have shown their avatar, but now want to reset it to default."
+      tags:
+        - playermoderation
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: ../requests/ModerateUserRequest.yaml
-      description: "Removes a player moderation previously added through `moderateUser`. E.g if you previously have shown their avatar, but now want to reset it to default."
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/playermoderation/PlayerModerationUnmoderatedSuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      tags:
-        - playermoderation
-tags:
-  $ref: ../tags.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+tags:
+  $ref: ../tags.yaml

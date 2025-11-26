@@ -1,50 +1,50 @@
 title: GroupMember
 type: object
 properties:
-  id:
-    $ref: ./GroupGalleryID.yaml
-  name:
+  createdAt:
     type: string
-    description: Name of the gallery.
-    example: Example Gallery
-    minLength: 1
+    format: date-time
   description:
     type: string
     description: Description of the gallery.
     example: Example Description
     minLength: 0
+  id:
+    $ref: ./GroupGalleryID.yaml
   membersOnly:
     type: boolean
     description: Whether the gallery is members only.
-    example: false
     default: false
-  roleIdsToView:
-    description: " "
-    type: array
-    items:
-      $ref: ./GroupRoleID.yaml
-    nullable: true
-  roleIdsToSubmit:
-    description: " "
-    type: array
-    items:
-      $ref: ./GroupRoleID.yaml
-    nullable: true
-  roleIdsToAutoApprove:
-    description: " "
-    type: array
-    items:
-      $ref: ./GroupRoleID.yaml
-    nullable: true
-  roleIdsToManage:
-    description: " "
-    type: array
-    items:
-      $ref: ./GroupRoleID.yaml
-    nullable: true
-  createdAt:
+    example: false
+  name:
     type: string
-    format: date-time
+    description: Name of the gallery.
+    example: Example Gallery
+    minLength: 1
+  roleIdsToAutoApprove:
+    type: array
+    description: " "
+    nullable: true
+    items:
+      $ref: ./GroupRoleID.yaml
+  roleIdsToManage:
+    type: array
+    description: " "
+    nullable: true
+    items:
+      $ref: ./GroupRoleID.yaml
+  roleIdsToSubmit:
+    type: array
+    description: " "
+    nullable: true
+    items:
+      $ref: ./GroupRoleID.yaml
+  roleIdsToView:
+    type: array
+    description: " "
+    nullable: true
+    items:
+      $ref: ./GroupRoleID.yaml
   updatedAt:
     type: string
     format: date-time

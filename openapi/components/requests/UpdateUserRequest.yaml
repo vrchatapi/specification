@@ -1,24 +1,8 @@
 title: UpdateUserRequest
 type: object
 properties:
-  email:
-    type: string
-  unsubscribe:
-    type: boolean
-  birthday:
-    type: string
-    format: date
   acceptedTOSVersion:
     type: integer
-  tags:
-    description: " "
-    type: array
-    items:
-      $ref: ../schemas/Tag.yaml
-  status:
-    $ref: ../schemas/UserStatus.yaml
-  statusDescription:
-    type: string
   bio:
     type: string
     minLength: 0
@@ -26,30 +10,46 @@ properties:
     type: array
     items:
       type: string
+  birthday:
+    type: string
+    format: date
+  contentFilters:
+    type: array
+    description: These tags begin with `content_` and control content gating
+    items:
+      $ref: ../schemas/Tag.yaml
+  currentPassword:
+    type: string
+  displayName:
+    type: string
+    description: MUST specify currentPassword as well to change display name
+  email:
+    type: string
+  isBoopingEnabled:
+    type: boolean
+  password:
+    type: string
+    description: MUST specify currentPassword as well to change password
   pronouns:
     type: string
-    minLength: 0
     maxLength: 32
-  isBoopingEnabled:
+    minLength: 0
+  revertDisplayName:
+    type: boolean
+    description: MUST specify currentPassword as well to revert display name
+  status:
+    $ref: ../schemas/UserStatus.yaml
+  statusDescription:
+    type: string
+  tags:
+    type: array
+    description: " "
+    items:
+      $ref: ../schemas/Tag.yaml
+  unsubscribe:
     type: boolean
   userIcon:
     type: string
     description: MUST be a valid VRChat /file/ url.
     example: "https://api.vrchat.cloud/api/1/file/file_76dc2964-0ce8-41df-b2e7-8edf994fee31/1"
     minLength: 0
-  contentFilters:
-    description: These tags begin with `content_` and control content gating
-    type: array
-    items:
-      $ref: ../schemas/Tag.yaml
-  displayName:
-    description: MUST specify currentPassword as well to change display name
-    type: string
-  revertDisplayName:
-    description: MUST specify currentPassword as well to revert display name
-    type: boolean
-  password:
-    description: MUST specify currentPassword as well to change password
-    type: string
-  currentPassword:
-    type: string

@@ -1,18 +1,18 @@
+title: LimitedUnityPackage
+type: object
 description: ""
 properties:
   created_at:
-    format: date-time
     type: string
     nullable: true
+    format: date-time
   platform:
     $ref: ./Platform.yaml
   unityVersion:
+    type: string
     example: 2022.3.6f1
     minLength: 1
-    type: string
 required:
   - created_at
   - platform
   - unityVersion
-title: LimitedUnityPackage
-type: object

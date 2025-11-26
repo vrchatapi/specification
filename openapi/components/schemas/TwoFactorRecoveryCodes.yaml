@@ -1,19 +1,19 @@
 title: TwoFactorRecoveryCodes
 type: object
 properties:
-  requiresTwoFactorAuth:
-    type: array
-    items:
-      type: string
   otp:
     type: array
     items:
       type: object
-      required:
-        - code
-        - used
       properties:
         code:
           type: string
         used:
           type: boolean
+      required:
+        - code
+        - used
+  requiresTwoFactorAuth:
+    type: array
+    items:
+      type: string

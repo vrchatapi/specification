@@ -1,20 +1,22 @@
+title: LimitedUserFriend
+type: object
 description: User object received when querying your friends list
 properties:
   bio:
     type: string
   bioLinks:
-    description: " "
     type: array
+    description: " "
     items:
       type: string
   currentAvatarImageUrl:
     $ref: ./CurrentAvatarImageUrl.yaml
-  currentAvatarThumbnailImageUrl:
-    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   currentAvatarTags:
     type: array
     items:
       $ref: ./Tag.yaml
+  currentAvatarThumbnailImageUrl:
+    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   developerType:
     $ref: ./DeveloperType.yaml
   displayName:
@@ -23,19 +25,15 @@ properties:
     type: string
   id:
     $ref: ./UserID.yaml
-  isFriend:
-    type: boolean
   imageUrl:
     type: string
-  last_platform:
-    $ref: ./Platform.yaml
-  location:
-    type: string
-  last_login:
+  isFriend:
+    type: boolean
+  last_activity:
     type: string
     nullable: true
     format: date-time
-  last_activity:
+  last_login:
     type: string
     nullable: true
     format: date-time
@@ -43,6 +41,10 @@ properties:
     type: string
     nullable: true
     format: date-time
+  last_platform:
+    $ref: ./Platform.yaml
+  location:
+    type: string
   platform:
     type: string
   profilePicOverride:
@@ -54,10 +56,10 @@ properties:
   statusDescription:
     type: string
   tags:
+    type: array
     description: <- Always empty.
     items:
       $ref: ./Tag.yaml
-    type: array
   userIcon:
     type: string
 required:
@@ -65,16 +67,14 @@ required:
   - displayName
   - friendKey
   - id
-  - isFriend
   - imageUrl
+  - isFriend
+  - last_activity
+  - last_login
+  - last_mobile
   - last_platform
   - location
-  - last_login
-  - last_activity
-  - last_mobile
   - platform
   - status
   - statusDescription
   - tags
-title: LimitedUserFriend
-type: object

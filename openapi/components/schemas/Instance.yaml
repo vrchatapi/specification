@@ -1,40 +1,55 @@
+title: Instance
+type: object
 description: |-
   * `hidden` field is only present if InstanceType is `hidden` aka "Friends+", and is instance creator.
   * `friends` field is only present if InstanceType is `friends` aka "Friends", and is instance creator.
   * `private` field is only present if InstanceType is `private` aka "Invite" or "Invite+", and is instance creator.
-title: Instance
-type: object
 properties:
   active:
+    type: boolean
     default: true
     example: true
-    type: boolean
   ageGate:
-    nullable: true
     type: boolean
+    nullable: true
   canRequestInvite:
+    type: boolean
     default: true
     example: true
-    type: boolean
   capacity:
     type: integer
     example: 8
     minimum: 0
   clientNumber:
-    type: string
-    minLength: 1
     deprecated: true
+    type: string
     description: Always returns "unknown".
+    minLength: 1
+  closedAt:
+    type: string
+    nullable: true
+    format: date-time
   contentSettings:
     $ref: ./InstanceContentSettings.yaml
   displayName:
     type: string
     nullable: true
+  friends:
+    $ref: ./UserID.yaml
   full:
-    default: false
     type: boolean
+    default: false
   gameServerVersion:
     type: integer
+  groupAccessType:
+    $ref: ./GroupAccessType.yaml
+  hardClose:
+    type: boolean
+    nullable: true
+  hasCapacityForYou:
+    type: boolean
+  hidden:
+    $ref: ./UserID.yaml
   id:
     $ref: ./InstanceID.yaml
   instanceId:
@@ -46,17 +61,19 @@ properties:
     $ref: ./LocationID.yaml
   n_users:
     type: integer
-    minimum: 0
     example: 6
+    minimum: 0
   name:
     type: string
-    minLength: 1
     example: "12345"
+    minLength: 1
+  nonce:
+    type: string
   ownerId:
     $ref: ./InstanceOwnerId.yaml
   permanent:
-    default: false
     type: boolean
+    default: false
   photonRegion:
     $ref: ./Region.yaml
   platforms:
@@ -64,74 +81,57 @@ properties:
   playerPersistenceEnabled:
     type: boolean
     nullable: true
-  region:
-    $ref: ./InstanceRegion.yaml
-  secureName:
-    type: string
-    minLength: 1
-    example: 7eavhhng
-  shortName:
-    type: string
-    minLength: 1
-    example: 02u7yz8j
-    nullable: true
-  tags:
-    description: "The tags array on Instances usually contain the language tags of the people in the instance. "
-    type: array
-    example:
-      - show_social_rank
-      - language_eng
-      - language_jpn
-    items:
-      $ref: ./Tag.yaml
-  type:
-    $ref: ./InstanceType.yaml
-  worldId:
-    $ref: ./WorldID.yaml
-  hidden:
-    $ref: ./UserID.yaml
-  friends:
-    $ref: ./UserID.yaml
   private:
     $ref: ./UserID.yaml
   queueEnabled:
     type: boolean
   queueSize:
     type: integer
-    minimum: 0
     example: 6
+    minimum: 0
   recommendedCapacity:
     type: integer
-    minimum: 0
     example: 6
+    minimum: 0
+  region:
+    $ref: ./InstanceRegion.yaml
   roleRestricted:
     type: boolean
+  secureName:
+    type: string
+    example: 7eavhhng
+    minLength: 1
+  shortName:
+    type: string
+    nullable: true
+    example: 02u7yz8j
+    minLength: 1
   strict:
     type: boolean
+  tags:
+    type: array
+    description: "The tags array on Instances usually contain the language tags of the people in the instance. "
+    example:
+      - language_eng
+      - language_jpn
+      - show_social_rank
+    items:
+      $ref: ./Tag.yaml
+  type:
+    $ref: ./InstanceType.yaml
   userCount:
     type: integer
-    minimum: 0
     example: 6
-  world:
-    $ref: ./World.yaml
+    minimum: 0
   users:
-    description: The users field is present on instances created by the requesting user.
     type: array
+    description: The users field is present on instances created by the requesting user.
     items:
       $ref: ./LimitedUserInstance.yaml
-  groupAccessType:
-    $ref: ./GroupAccessType.yaml
-  hasCapacityForYou:
-    type: boolean
-  nonce:
-    type: string
-  closedAt:
-    format: date-time
-    type: string
-    nullable: true
-  hardClose:
-    type: boolean
-    nullable: true
+  world:
+    $ref: ./World.yaml
+  worldId:
+    $ref: ./WorldID.yaml
 required:
   - active
   - canRequestInvite
@@ -146,14 +146,14 @@ required:
   - permanent
   - photonRegion
   - platforms
-  - region
-  - secureName
-  - tags
-  - type
-  - worldId
   - queueEnabled
   - queueSize
   - recommendedCapacity
+  - region
+  - secureName
   - strict
+  - tags
+  - type
   - userCount
   - world
+  - worldId

@@ -1,34 +1,37 @@
 title: CreateCalendarEventRequest
 type: object
 properties:
-  title:
+  accessType:
     type: string
-    description: Event title
-    minLength: 1
-    example: Performance Event!
-  startsAt:
+    enum:
+      - group
+      - public
+  category:
     type: string
-    format: date-time
-    description: Time the event starts at
+    example: performance
+  closeInstanceAfterEndMinutes:
+    type: integer
+    example: 5
   description:
     type: string
     minLength: 1
   endsAt:
     type: string
-    format: date-time
     description: Time the event ends at
-  category:
-    type: string
-    example: performance
-  tags:
-    type: array
-    items:
-      type: string
-  isDraft:
+    format: date-time
+  featured:
     type: boolean
+  guestEarlyJoinMinutes:
+    type: integer
+    example: 5
+  hostEarlyJoinMinutes:
+    type: integer
+    example: 60
   imageId:
     $ref: ../schemas/FileID.yaml
-  roleIds:
+  isDraft:
+    type: boolean
+  languages:
     type: array
     items:
       type: string
@@ -38,7 +41,7 @@ properties:
     type: array
     items:
       type: string
-  languages:
+  roleIds:
     type: array
     items:
       type: string
@@ -46,30 +49,27 @@ properties:
     type: boolean
     description: Send notification to group members.
     example: false
-  featured:
-    type: boolean
-  hostEarlyJoinMinutes:
-    type: integer
-    example: 60
-  guestEarlyJoinMinutes:
-    type: integer
-    example: 5
-  closeInstanceAfterEndMinutes:
-    type: integer
-    example: 5
+  startsAt:
+    type: string
+    description: Time the event starts at
+    format: date-time
+  tags:
+    type: array
+    items:
+      type: string
+  title:
+    type: string
+    description: Event title
+    example: Performance Event!
+    minLength: 1
   usesInstanceOverflow:
     type: boolean
     example: true
-  accessType:
-    type: string
-    enum:
-      - public
-      - group
 required:
-  - title
   - accessType
-  - startsAt
-  - endsAt
-  - description
   - category
+  - description
+  - endsAt
   - sendCreationNotification
+  - startsAt
+  - title

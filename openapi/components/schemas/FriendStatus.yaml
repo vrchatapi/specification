@@ -1,16 +1,16 @@
-properties:
-  incomingRequest:
-    default: false
-    type: boolean
-  isFriend:
-    default: false
-    type: boolean
-  outgoingRequest:
-    default: false
-    type: boolean
-required:
-  - isFriend
-  - outgoingRequest
-  - incomingRequest
 title: FriendStatus
 type: object
+properties:
+  incomingRequest:
+    type: boolean
+    default: false
+  isFriend:
+    type: boolean
+    default: false
+  outgoingRequest:
+    type: boolean
+    default: false
+required:
+  - incomingRequest
+  - isFriend
+  - outgoingRequest

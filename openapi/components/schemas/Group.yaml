@@ -1,65 +1,89 @@
 title: Group
 type: object
 properties:
-  ageVerificationSlotsAvailable:
-    type: boolean
   ageVerificationBetaCode:
     type: string
     example: abc1234
   ageVerificationBetaSlots:
     type: number
     example: 500
+  ageVerificationSlotsAvailable:
+    type: boolean
   badges:
     type: array
     items:
       type: string
-  id:
-    $ref: ./GroupID.yaml
-  name:
-    type: string
-  shortCode:
-    $ref: ./GroupShortCode.yaml
-  discriminator:
-    $ref: ./GroupDiscriminator.yaml
-  description:
-    type: string
-  iconUrl:
+  bannerId:
     type: string
     nullable: true
   bannerUrl:
     type: string
     nullable: true
-  privacy:
-    $ref: ./GroupPrivacy.yaml
-  ownerId:
-    $ref: ./UserID.yaml
-  rules:
+  createdAt:
     type: string
-    nullable: true
-  links:
+    format: date-time
+  description:
+    type: string
+  discriminator:
+    $ref: ./GroupDiscriminator.yaml
+  galleries:
     type: array
     items:
-      type: string
-  languages:
-    type: array
-    items:
-      type: string
+      $ref: ./GroupGallery.yaml
   iconId:
     type: string
     nullable: true
-  bannerId:
+  iconUrl:
     type: string
     nullable: true
-  memberCount:
-    type: integer
-  memberCountSyncedAt:
-    type: string
-    format: date-time
+  id:
+    $ref: ./GroupID.yaml
   isVerified:
     type: boolean
     default: false
   joinState:
     $ref: ./GroupJoinState.yaml
+  languages:
+    type: array
+    items:
+      type: string
+  lastPostCreatedAt:
+    type: string
+    nullable: true
+    format: date-time
+  links:
+    type: array
+    items:
+      type: string
+  memberCount:
+    type: integer
+  memberCountSyncedAt:
+    type: string
+    format: date-time
+  membershipStatus:
+    $ref: ./GroupMemberStatus.yaml
+  myMember:
+    $ref: ./GroupMyMember.yaml
+    nullable: true
+  name:
+    type: string
+  onlineMemberCount:
+    type: integer
+  ownerId:
+    $ref: ./UserID.yaml
+  privacy:
+    $ref: ./GroupPrivacy.yaml
+  roles:
+    type: array
+    description: Only returned if ?includeRoles=true is specified.
+    nullable: true
+    items:
+      $ref: ./GroupRole.yaml
+  rules:
+    type: string
+    nullable: true
+  shortCode:
+    $ref: ./GroupShortCode.yaml
   tags:
     type: array
     items:
@@ -67,30 +91,6 @@ properties:
   transferTargetId:
     $ref: ./UserID.yaml
     nullable: true
-  galleries:
-    type: array
-    items:
-      $ref: ./GroupGallery.yaml
-  createdAt:
-    type: string
-    format: date-time
   updatedAt:
     type: string
     format: date-time
-  lastPostCreatedAt:
-    type: string
-    format: date-time
-    nullable: true
-  onlineMemberCount:
-    type: integer
-  membershipStatus:
-    $ref: ./GroupMemberStatus.yaml
-  myMember:
-    $ref: ./GroupMyMember.yaml
-    nullable: true
-  roles:
-    description: Only returned if ?includeRoles=true is specified.
-    type: array
-    nullable: true
-    items:
-      $ref: ./GroupRole.yaml

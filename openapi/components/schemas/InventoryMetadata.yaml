@@ -1,11 +1,6 @@
 title: InventoryMetadata
 type: object
 properties:
-  inventoryItemsToInstantiate:
-    description: Only in bundles
-    type: array
-    items:
-      $ref: ./InventoryTemplateID.yaml
   animated:
     type: boolean
   animationStyle:
@@ -16,6 +11,11 @@ properties:
     type: string
   imageUrl:
     type: string
+  inventoryItemsToInstantiate:
+    type: array
+    description: Only in bundles
+    items:
+      $ref: ./InventoryTemplateID.yaml
   maskTag:
     type: string
   propId:

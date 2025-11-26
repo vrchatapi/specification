@@ -1,15 +1,15 @@
 title: APIHealth
 type: object
 properties:
+  buildVersionTag:
+    type: string
+    minLength: 1
   ok:
     type: boolean
   serverName:
     type: string
     minLength: 1
-  buildVersionTag:
-    type: string
-    minLength: 1
 required:
+  - buildVersionTag
   - ok
   - serverName
-  - buildVersionTag

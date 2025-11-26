@@ -11,6 +11,8 @@ properties:
   targetUser:
     type: object
     properties:
+      id:
+        $ref: ./UserNoteID.yaml
       currentAvatarTags:
         type: array
         items:
@@ -19,8 +21,6 @@ properties:
         $ref: ./CurrentAvatarThumbnailImageUrl.yaml
       displayName:
         type: string
-      id:
-        $ref: ./UserNoteID.yaml
       profilePicOverride:
         type: string
         nullable: true

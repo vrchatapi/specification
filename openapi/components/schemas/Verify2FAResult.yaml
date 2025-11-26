@@ -1,10 +1,10 @@
 title: Verify2FAResult
 type: object
 properties:
-  verified:
-    type: boolean
   enabled:
     type: boolean
     default: true
+  verified:
+    type: boolean
 required:
   - verified

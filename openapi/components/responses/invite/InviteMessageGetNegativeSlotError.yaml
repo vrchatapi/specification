@@ -1,8 +1,8 @@
 description: Error response when trying to get an Invite Message with a negative slot number.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       200 Negative Slot Number Error:
         value: {}
+    schema:
+      $ref: ../../schemas/Error.yaml

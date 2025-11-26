@@ -1,32 +1,32 @@
 title: GroupPost
 type: object
 properties:
-  id:
-    $ref: ./NotificationID.yaml
-  groupId:
-    $ref: ./GroupID.yaml
   authorId:
     $ref: ./UserID.yaml
+  createdAt:
+    type: string
+    format: date-time
   editorId:
     $ref: ./UserID.yaml
     nullable: true
-  visibility:
-    $ref: ./GroupPostVisibility.yaml
-  roleId:
-    $ref: ./GroupRoleIDList.yaml
-  title:
-    type: string
-  text:
-    type: string
+  groupId:
+    $ref: ./GroupID.yaml
+  id:
+    $ref: ./NotificationID.yaml
   imageId:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
     type: string
     nullable: true
-  createdAt:
+  roleId:
+    $ref: ./GroupRoleIDList.yaml
+  text:
     type: string
-    format: date-time
+  title:
+    type: string
   updatedAt:
     type: string
     format: date-time
+  visibility:
+    $ref: ./GroupPostVisibility.yaml

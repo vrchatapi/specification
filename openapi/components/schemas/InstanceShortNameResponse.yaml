@@ -1,14 +1,14 @@
+title: InstanceShortNameResponse
+type: object
 properties:
   secureName:
     type: string
-    minLength: 1
     example: 7eavhhng
+    minLength: 1
   shortName:
     type: string
-    minLength: 1
-    example: 02u7yz8j
     nullable: true
+    example: 02u7yz8j
+    minLength: 1
 required:
   - secureName
-title: InstanceShortNameResponse
-type: object

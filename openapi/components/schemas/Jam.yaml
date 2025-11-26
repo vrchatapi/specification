@@ -1,12 +1,14 @@
+title: Jam
+type: object
 description: ""
 properties:
   description:
-    minLength: 1
     type: string
+    minLength: 1
   id:
     type: string
-    minLength: 1
     example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+    minLength: 1
   isVisible:
     type: boolean
   moreInfo:
@@ -14,35 +16,35 @@ properties:
     minLength: 1
   state:
     type: string
-    minLength: 1
     description: |-
       One of:
       - submissions_open
       - closed
+    minLength: 1
   stateChangeDates:
     type: object
     properties:
       closed:
         type: string
-        format: date-time
         nullable: true
+        format: date-time
       submissionsClosed:
         type: string
-        format: date-time
         nullable: true
+        format: date-time
       submissionsOpened:
         type: string
-        format: date-time
         nullable: true
+        format: date-time
       winnersSelected:
         type: string
-        format: date-time
         nullable: true
         example: null
+        format: date-time
   submissionContentGateDate:
     type: string
-    format: date-time
     nullable: true
+    format: date-time
   submissionContentGated:
     type: boolean
   title:
@@ -63,5 +65,3 @@ required:
   - title
   - type
   - updated_at
-title: Jam
-type: object

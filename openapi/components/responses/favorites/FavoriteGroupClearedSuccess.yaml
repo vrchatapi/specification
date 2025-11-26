@@ -1,11 +1,11 @@
 description: Success response after clearing a favorite group.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Success.yaml
     examples:
       200 Favorite Group Cleared:
         value:
           success:
             message: favorite deleted!
             status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

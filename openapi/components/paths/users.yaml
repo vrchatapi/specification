@@ -1,14 +1,84 @@
 openapi: 3.0.3
 info:
   title: users
-  version: "1.0"
   description: Users Docs Here
+  version: "1.0"
 paths:
-  /users:
+  /userNotes:
     get:
-      summary: Search All Users
+      operationId: getUserNotes
+      summary: Get User Notes
+      description: Get recently updated user notes
       tags:
         - users
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/UserNoteListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    post:
+      operationId: updateUserNote
+      summary: Update User Note
+      description: Updates the currently authenticated user's note on a user
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateUserNoteRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/UserNoteResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/userNotes/{userNoteId}":
+    parameters:
+      - $ref: ../parameters.yaml#/userNoteId
+    get:
+      operationId: getUserNote
+      summary: Get User Note
+      description: Get a particular user note
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/UserNoteResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /users:
+    get:
+      operationId: searchUsers
+      summary: Search All Users
+      description: Search and list any users by text query
+      tags:
+        - users
+      parameters:
+        - name: search
+          description: Searches by `displayName`. Will return empty array if search query is empty or missing.
+          in: query
+          schema:
+            type: string
+            minLength: 0
+        - name: developerType
+          description: "Active user by developer type, none for normal users and internal for moderators"
+          in: query
+          schema:
+            type: string
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/users/LimitedUserSearchListResponse.yaml
@@ -16,107 +86,31 @@ paths:
           $ref: ../responses/users/UsersInvalidSearchError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: searchUsers
-      security:
-        - authCookie: []
-      parameters:
-        - schema:
-            type: string
-            minLength: 0
-          in: query
-          name: search
-          description: Searches by `displayName`. Will return empty array if search query is empty or missing.
-        - schema:
-            type: string
-          in: query
-          name: developerType
-          description: "Active user by developer type, none for normal users and internal for moderators"
-        - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/offset
-      description: Search and list any users by text query
-  "/users/{username}/name":
-    parameters:
-      - schema:
-          type: string
-        name: username
-        in: path
-        required: true
-        description: Username of the user
-    get:
-      summary: Get User by Username
-      tags:
-        - users
-      responses:
-        "200":
-          $ref: ../responses/users/UserResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getUserByName
-      security:
-        - authCookie: []
-      description: |-
-        ~~Get public user information about a specific user using their name.~~
-
-        **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
-        This endpoint now require Admin Credentials.
-      deprecated: true
-  "/users/{userId}":
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-    get:
-      summary: Get User by ID
-      tags:
-        - users
-      responses:
-        "200":
-          $ref: ../responses/users/UserResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getUser
-      security:
-        - authCookie: []
-      description: Get public user information about a specific user using their ID.
-    put:
-      summary: Update User Info
-      operationId: updateUser
-      responses:
-        "200":
-          $ref: ../responses/users/CurrentUserResponse.yaml
-        "400":
-          $ref: ../responses/users/CurrentPasswordRequiredError.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      description: Update a users information such as the email and birthday.
-      security:
-        - authCookie: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/UpdateUserRequest.yaml
-      tags:
-        - users
-  "/users/{userId}/groups":
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-    get:
-      summary: Get User Groups
-      tags:
-        - users
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/users/LimitedUserGroupListResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getUserGroups
-      description: Get user's public groups
   /users/active:
     get:
+      operationId: searchActiveUsers
+      x-internal: true
+      deprecated: true
       summary: Search Active Users
+      description: "**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users by text query."
       tags:
         - users
+      parameters:
+        - name: search
+          description: Username to search for
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: developerType
+          description: "Active user by developer type, none for normal users and internal for moderators"
+          in: query
+          schema:
+            type: string
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/number
+      security:
+        - authCookie: []
       responses:
         "200":
           description: OK
@@ -130,141 +124,49 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
-      operationId: searchActiveUsers
-      security:
-        - authCookie: []
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: search
-          required: true
-          description: Username to search for
-        - schema:
-            type: string
-          in: query
-          name: developerType
-          description: "Active user by developer type, none for normal users and internal for moderators"
-        - $ref: ../parameters.yaml#/offset
-        - $ref: ../parameters.yaml#/number
-      x-internal: true
-      deprecated: true
-      description: "**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users by text query."
-  "/users/{userId}/groups/requested":
+  "/users/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
-      summary: Get User Group Requests
-      description: Returns a list of Groups the user has requested to be invited into.
-      operationId: getUserGroupRequests
-      tags:
-        - users
-      responses:
-        "200":
-          $ref: ../responses/groups/GroupListResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      security:
-        - authCookie: []
-  "/users/{userId}/groups/represented":
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-    get:
-      summary: Get user's current represented group
-      description: Returns the current group that the user is currently representing
-      operationId: getUserRepresentedGroup
-      tags:
-        - users
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/representedGroup.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      security:
-        - authCookie: []
-  "/users/{userId}/feedback":
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-      - $ref: ../parameters.yaml#/contentId
-      - $ref: ../parameters.yaml#/number
-      - $ref: ../parameters.yaml#/offset
-    get:
-      summary: Get User Feedback
-      tags:
-        - users
-      deprecated: true
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/users/FeedbackListResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getUserFeedback
-      description: Get user's submitted feedback
-  /userNotes:
-    get:
-      summary: Get User Notes
+      operationId: getUser
+      summary: Get User by ID
+      description: Get public user information about a specific user using their ID.
       tags:
         - users
       security:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/users/UserNoteListResponse.yaml
+          $ref: ../responses/users/UserResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getUserNotes
-      parameters:
-        - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/offset
-      description: Get recently updated user notes
-    post:
-      summary: Update User Note
+    put:
+      operationId: updateUser
+      summary: Update User Info
+      description: Update a users information such as the email and birthday.
       tags:
         - users
-      responses:
-        "200":
-          $ref: ../responses/users/UserNoteResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: updateUserNote
-      security:
-        - authCookie: []
-      description: Updates the currently authenticated user's note on a user
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: ../requests/UpdateUserNoteRequest.yaml
-  "/userNotes/{userNoteId}":
-    parameters:
-      - $ref: ../parameters.yaml#/userNoteId
-    get:
-      summary: Get User Note
-      tags:
-        - users
+              $ref: ../requests/UpdateUserRequest.yaml
       security:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/users/UserNoteResponse.yaml
+          $ref: ../responses/users/CurrentUserResponse.yaml
+        "400":
+          $ref: ../responses/users/CurrentPasswordRequiredError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getUserNote
-      description: Get a particular user note
   "/users/{userId}/addTags":
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:
+      operationId: addTags
       summary: Add User Tags
       description: Adds tags to the user's profile
-      operationId: addTags
       tags:
         - users
       requestBody:
@@ -273,6 +175,8 @@ paths:
           application/json:
             schema:
               $ref: ../requests/ChangeUserTagsRequest.yaml
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/users/CurrentUserResponse.yaml
@@ -280,40 +184,14 @@ paths:
           $ref: ../responses/users/UserTagInvalidError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      security:
-        - authCookie: []
-  "/users/{userId}/removeTags":
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-    post:
-      summary: Remove User Tags
-      description: Removes tags from the user's profile
-      operationId: removeTags
-      tags:
-        - users
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/ChangeUserTagsRequest.yaml
-      responses:
-        "200":
-          $ref: ../responses/users/CurrentUserResponse.yaml
-        "400":
-          $ref: ../responses/users/UserTagInvalidError.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      security:
-        - authCookie: []
   "/users/{userId}/badges/{badgeId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/badgeId
     put:
+      operationId: updateBadge
       summary: Update User Badge
       description: Updates a user's badge
-      operationId: updateBadge
       tags:
         - users
       requestBody:
@@ -322,6 +200,8 @@ paths:
           application/json:
             schema:
               $ref: ../requests/UpdateUserBadgeRequest.yaml
+      security:
+        - authCookie: []
       responses:
         "200":
           description: The user's badge is updated.
@@ -331,17 +211,89 @@ paths:
           $ref: ../responses/users/UserMustBeOwnError.yaml
         "404":
           description: The user does not have the badge.
+  "/users/{userId}/feedback":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/contentId
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+    get:
+      operationId: getUserFeedback
+      deprecated: true
+      summary: Get User Feedback
+      description: Get user's submitted feedback
+      tags:
+        - users
       security:
         - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/FeedbackListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/groups":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserGroups
+      summary: Get User Groups
+      description: Get user's public groups
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/LimitedUserGroupListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/groups/represented":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserRepresentedGroup
+      summary: Get user's current represented group
+      description: Returns the current group that the user is currently representing
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/representedGroup.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/groups/requested":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserGroupRequests
+      summary: Get User Group Requests
+      description: Returns a list of Groups the user has requested to be invited into.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/GroupListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/instances/groups":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
+      operationId: getUserGroupInstances
       summary: Get User Group Instances
       description: Returns a list of group instances for a user
-      operationId: getUserGroupInstances
       tags:
         - users
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/users/UserGroupInstanceListResponse.yaml
@@ -349,18 +301,18 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/users/UserMustBeOwnError.yaml
-      security:
-        - authCookie: []
   "/users/{userId}/instances/groups/{groupId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/groupId
     get:
+      operationId: getUserGroupInstancesForGroup
       summary: Get User Group Instances for a specific Group
       description: Returns a list of a group's instances for a user
-      operationId: getUserGroupInstancesForGroup
       tags:
         - users
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/users/UserGroupInstanceListResponse.yaml
@@ -368,39 +320,43 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/users/UserMustBeOwnError.yaml
-      security:
-        - authCookie: []
-  "/users/{userId}/{worldId}/persist/exists":
+  "/users/{userId}/removeTags":
     parameters:
       - $ref: ../parameters.yaml#/userId
-      - $ref: ../parameters.yaml#/worldId
-    get:
-      summary: Check User Persistence Exists
-      description: Checks whether the user has persistence data for a given world
-      operationId: checkUserPersistenceExists
+    post:
+      operationId: removeTags
+      summary: Remove User Tags
+      description: Removes tags from the user's profile
       tags:
         - users
-        - worlds
-      responses:
-        "200":
-          description: The user has persistence data for the given world.
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-        "404":
-          description: The user does not have persistence data for the given world.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ChangeUserTagsRequest.yaml
       security:
         - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/CurrentUserResponse.yaml
+        "400":
+          $ref: ../responses/users/UserTagInvalidError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/{worldId}/persist":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/worldId
     delete:
+      operationId: deleteUserPersistence
       summary: Delete User Persistence
       description: Deletes the user's persistence data for a given world
-      operationId: deleteUserPersistence
       tags:
         - users
         - worlds
+      security:
+        - authCookie: []
       responses:
         "200":
           description: The user's persistence data for the given world is deleted.
@@ -408,10 +364,54 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           description: The user does not have persistence data for the given world.
+  "/users/{userId}/{worldId}/persist/exists":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/worldId
+    get:
+      operationId: checkUserPersistenceExists
+      summary: Check User Persistence Exists
+      description: Checks whether the user has persistence data for a given world
+      tags:
+        - users
+        - worlds
       security:
         - authCookie: []
-tags:
-  $ref: ../tags.yaml
+      responses:
+        "200":
+          description: The user has persistence data for the given world.
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          description: The user does not have persistence data for the given world.
+  "/users/{username}/name":
+    parameters:
+      - name: username
+        description: Username of the user
+        required: true
+        in: path
+        schema:
+          type: string
+    get:
+      operationId: getUserByName
+      deprecated: true
+      summary: Get User by Username
+      description: |-
+        ~~Get public user information about a specific user using their name.~~
+
+        **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
+        This endpoint now require Admin Credentials.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/UserResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+tags:
+  $ref: ../tags.yaml

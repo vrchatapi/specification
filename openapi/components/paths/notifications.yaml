@@ -1,58 +1,75 @@
 openapi: 3.0.3
 info:
   title: notifications
-  version: "1.0"
   description: Notifiations Docs
+  version: "1.0"
 paths:
   /auth/user/notifications:
     get:
+      operationId: getNotifications
       summary: List Notifications
+      description: Retrieve all of the current user's notifications.
       tags:
         - notifications
+      parameters:
+        - name: type
+          deprecated: true
+          description: "Only send notifications of this type (can use `all` for all). This parameter no longer does anything, and is deprecated."
+          in: query
+          schema:
+            type: string
+            example: all
+        - name: sent
+          deprecated: true
+          description: Return notifications sent by the user. Must be false or omitted.
+          in: query
+          schema:
+            type: boolean
+        - name: hidden
+          description: Whether to return hidden or non-hidden notifications. True only allowed on type `friendRequest`.
+          in: query
+          schema:
+            type: boolean
+        - name: after
+          description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.
+          in: query
+          schema:
+            type: string
+            example: five_minutes_ago
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/notifications/NotificationListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getNotifications
+  /auth/user/notifications/clear:
+    put:
+      operationId: clearNotifications
+      summary: Clear All Notifications
+      description: Clear **all** notifications.
+      tags:
+        - notifications
       security:
         - authCookie: []
-      description: Retrieve all of the current user's notifications.
-      parameters:
-        - schema:
-            type: string
-            example: all
-          in: query
-          name: type
-          description: "Only send notifications of this type (can use `all` for all). This parameter no longer does anything, and is deprecated."
-          deprecated: true
-        - schema:
-            type: boolean
-          in: query
-          name: sent
-          description: Return notifications sent by the user. Must be false or omitted.
-          deprecated: true
-        - schema:
-            type: boolean
-          in: query
-          name: hidden
-          description: Whether to return hidden or non-hidden notifications. True only allowed on type `friendRequest`.
-        - schema:
-            type: string
-            example: five_minutes_ago
-          in: query
-          name: after
-          description: Only return notifications sent after this Date. Ignored if type is `friendRequest`.
-        - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/offset
+      responses:
+        "200":
+          $ref: ../responses/notifications/ClearNotificationsSuccess.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/auth/user/notifications/{notificationId}":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
     get:
-      summary: Show notification
       operationId: getNotification
+      summary: Show notification
+      description: Get a notification by notification `not_` ID.
       tags:
         - notifications
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/notifications/NotificationResponse.yaml
@@ -60,47 +77,17 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/notifications/NotificationNotFoundError.yaml
-      security:
-        - authCookie: []
-      description: Get a notification by notification `not_` ID.
-  "/auth/user/notifications/{notificationId}/see":
-    parameters:
-      - $ref: ../parameters.yaml#/notificationId
-    put:
-      summary: Mark Notification As Read
-      operationId: markNotificationAsRead
-      responses:
-        "200":
-          $ref: ../responses/notifications/NotificationResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      security:
-        - authCookie: []
-      description: Mark a notification as seen.
-      tags:
-        - notifications
-  "/auth/user/notifications/{notificationId}/hide":
-    parameters:
-      - $ref: ../parameters.yaml#/notificationId
-    put:
-      summary: Delete Notification
-      operationId: deleteNotification
-      responses:
-        "200":
-          $ref: ../responses/notifications/NotificationResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      security:
-        - authCookie: []
-      description: Delete a notification.
-      tags:
-        - notifications
   "/auth/user/notifications/{notificationId}/accept":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
     put:
-      summary: Accept Friend Request
       operationId: acceptFriendRequest
+      summary: Accept Friend Request
+      description: Accept a friend request by notification `frq_` ID. Friend requests can be found using the NotificationsAPI `getNotifications` by filtering of type `friendRequest`.
+      tags:
+        - notifications
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/friends/FriendSuccess.yaml
@@ -108,27 +95,40 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/friends/AcceptFriendRequestError.yaml
-      security:
-        - authCookie: []
-      description: Accept a friend request by notification `frq_` ID. Friend requests can be found using the NotificationsAPI `getNotifications` by filtering of type `friendRequest`.
+  "/auth/user/notifications/{notificationId}/hide":
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
+    put:
+      operationId: deleteNotification
+      summary: Delete Notification
+      description: Delete a notification.
       tags:
         - notifications
-  /auth/user/notifications/clear:
-    put:
-      summary: Clear All Notifications
-      operationId: clearNotifications
+      security:
+        - authCookie: []
       responses:
         "200":
-          $ref: ../responses/notifications/ClearNotificationsSuccess.yaml
+          $ref: ../responses/notifications/NotificationResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      security:
-        - authCookie: []
-      description: Clear **all** notifications.
+  "/auth/user/notifications/{notificationId}/see":
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
+    put:
+      operationId: markNotificationAsRead
+      summary: Mark Notification As Read
+      description: Mark a notification as seen.
       tags:
         - notifications
-tags:
-  $ref: ../tags.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+tags:
+  $ref: ../tags.yaml

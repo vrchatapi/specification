@@ -1,45 +1,45 @@
 description: Returns a single File object.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/File.yaml
     examples:
       Example Avatar File:
         value:
           id: file_00000000-0000-0000-0000-000000000000
           name: Avatar - Test Avatar - Unity package - 2017․4․28f1_3_standalonewindows_Release
-          ownerId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-          mimeType: application/gzip
           extension: .unitypackage
+          mimeType: application/gzip
+          ownerId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
           tags: []
           versions:
-            - version: 0
+            - created_at: "2019-08-15T11:04:37.910Z"
               status: complete
-              created_at: "2019-08-15T11:04:37.910Z"
-            - version: 1
-              status: complete
-              created_at: "2019-08-15T11:04:49.702Z"
-              file:
-                fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage
-                url: "https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage"
-                md5: xxxxxxxxxxxxxxxxxxx==
-                sizeInBytes: 303055180
-                status: complete
-                category: multipart
-                uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+              version: 0
+            - created_at: "2019-08-15T11:04:49.702Z"
               delta:
+                category: queued
                 fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta
-                url: "https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta"
                 md5: ""
                 sizeInBytes: 0
                 status: none
-                category: queued
                 uploadId: ""
+                url: "https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta"
+              file:
+                category: multipart
+                fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage
+                md5: xxxxxxxxxxxxxxxxxxx==
+                sizeInBytes: 303055180
+                status: complete
+                uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                url: "https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage"
               signature:
+                category: simple
                 fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature
-                url: "https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature"
                 md5: xxxxxxxxxxxxxxxx==
                 sizeInBytes: 532748
                 status: complete
-                category: simple
                 uploadId: ""
+                url: "https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature"
+              status: complete
+              version: 1
+    schema:
+      $ref: ../../schemas/File.yaml

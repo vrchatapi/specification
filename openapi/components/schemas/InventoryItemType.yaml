@@ -2,10 +2,10 @@ title: InventoryItemType
 type: string
 enum:
   - bundle
-  - prop
-  - emoji
-  - sticker
   - droneskin
+  - emoji
   - portalskin
+  - prop
+  - sticker
 default: bundle
 example: prop

@@ -1,15 +1,15 @@
 title: CreateGroupRequest
 type: object
 properties:
-  id:
-    type: string
-  name:
-    type: string
   description:
+    type: string
+  id:
     type: string
   isSelfAssignable:
     type: boolean
     default: false
+  name:
+    type: string
   permissions:
     type: array
     items:

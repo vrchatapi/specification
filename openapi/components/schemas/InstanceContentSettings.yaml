@@ -1,22 +1,22 @@
-description: Types of dynamic user content permitted in an instance
 title: InstanceContentSettings
 type: object
+description: Types of dynamic user content permitted in an instance
 properties:
   drones:
-    default: true
     type: boolean
+    default: true
   emoji:
-    default: true
     type: boolean
+    default: true
   pedestals:
-    default: true
     type: boolean
+    default: true
   prints:
-    default: true
     type: boolean
-  stickers:
     default: true
-    type: boolean
   props:
-    default: true
     type: boolean
+    default: true
+  stickers:
+    type: boolean
+    default: true

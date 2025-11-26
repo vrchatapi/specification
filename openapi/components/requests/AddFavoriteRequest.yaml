@@ -1,8 +1,6 @@
 title: AddFavoriteRequest
 type: object
 properties:
-  type:
-    $ref: ../schemas/FavoriteType.yaml
   favoriteId:
     type: string
     description: "Must be either AvatarID, WorldID or UserID."
@@ -11,7 +9,9 @@ properties:
     description: Tags indicate which group this favorite belongs to. Adding multiple groups makes it show up in all. Removing it from one in that case removes it from all.
     items:
       $ref: ../schemas/Tag.yaml
+  type:
+    $ref: ../schemas/FavoriteType.yaml
 required:
-  - type
   - favoriteId
   - tags
+  - type

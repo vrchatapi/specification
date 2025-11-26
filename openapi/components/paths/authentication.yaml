@@ -1,301 +1,61 @@
 openapi: 3.0.3
 info:
   title: authentication
-  version: "1.0"
   description: Authentication Docs Here
+  version: "1.0"
 paths:
   /auth:
     get:
+      operationId: verifyAuthToken
       summary: Verify Auth Token
+      description: Verify whether the currently provided Auth Token is valid.
       tags:
         - authentication
+      parameters: []
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/authentication/VerifyAuthTokenResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: verifyAuthToken
-      parameters: []
-      description: Verify whether the currently provided Auth Token is valid.
-      security:
-        - authCookie: []
-  /logout:
-    put:
-      summary: Logout
-      operationId: logout
-      responses:
-        "200":
-          $ref: ../responses/authentication/LogoutSuccess.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      description: Invalidates the login session.
-      security:
-        - authCookie: []
-      tags:
-        - authentication
-  /auth/user:
+  /auth/confirmEmail:
     get:
-      summary: Login and/or Get Current User Info
+      operationId: confirmEmail
+      summary: Confirm Email
+      description: Confirms the email address for a user
       tags:
         - authentication
+      parameters:
+        - $ref: ../parameters.yaml#/confirmEmailUserId
+        - $ref: ../parameters.yaml#/confirmEmailToken
       responses:
-        "200":
-          $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getCurrentUser
-      description: |-
-        This endpoint does the following two operations:
-          1) Checks if you are already logged in by looking for a valid `auth` cookie. If you are have a valid auth cookie then no additional auth-related actions are taken. If you are **not** logged in then it will log you in with the `Authorization` header and set the `auth` cookie. The `auth` cookie will only be sent once.
-          2) If logged in, this function will also return the CurrentUser object containing detailed information about the currently logged in user.
-
-        The auth string after `Authorization: Basic {string}` is a base64-encoded string of the username and password, both individually url-encoded, and then joined with a colon.
-
-        > base64(urlencode(username):urlencode(password))
-
-        **WARNING: Session Limit:** Each authentication with login credentials counts as a separate session, out of which you have a limited amount. Make sure to save and reuse the `auth` cookie if you are often restarting the program. The provided API libraries automatically save cookies during runtime, but does not persist during restart. While it can be fine to use username/password during development, expect in production to very fast run into the rate-limit and be temporarily blocked from making new sessions until older ones expire. The exact number of simultaneous sessions is unknown/undisclosed.
-      parameters: []
-      security:
-        - authHeader: []
-        - authHeader: []
-          twoFactorAuthCookie: []
-        - authCookie: []
+        "302":
+          $ref: ../responses/authentication/ConfirmEmailResponse.yaml
   /auth/exists:
     get:
+      operationId: checkUserExists
       summary: Check User Exists
+      description: |-
+        Checks if a user by a given `username`, `displayName` or `email` exist. This is used during registration to check if a username has already been taken, during change of displayName to check if a displayName is available, and during change of email to check if the email is already used. In the later two cases the `excludeUserId` is used to exclude oneself, otherwise the result would always be true.
+
+        It is **REQUIRED** to include **AT LEAST** `username`, `displayName` **or** `email` query parameter. Although they can be combined - in addition with `excludeUserId` (generally to exclude yourself) - to further fine-tune the search.
       tags:
         - authentication
-      responses:
-        "200":
-          $ref: ../responses/authentication/UserExistsResponse.yaml
-        "400":
-          $ref: ../responses/authentication/MissingParameterError.yaml
-      operationId: checkUserExists
       parameters:
         - $ref: ../parameters.yaml#/email
         - $ref: ../parameters.yaml#/displayName
         - $ref: ../parameters.yaml#/usernameQuery
         - $ref: ../parameters.yaml#/excludeUserId
-      description: |-
-        Checks if a user by a given `username`, `displayName` or `email` exist. This is used during registration to check if a username has already been taken, during change of displayName to check if a displayName is available, and during change of email to check if the email is already used. In the later two cases the `excludeUserId` is used to exclude oneself, otherwise the result would always be true.
-
-        It is **REQUIRED** to include **AT LEAST** `username`, `displayName` **or** `email` query parameter. Although they can be combined - in addition with `excludeUserId` (generally to exclude yourself) - to further fine-tune the search.
-  /auth/twofactorauth/totp/verify:
-    post:
-      summary: Verify 2FA code
-      operationId: verify2FA
       responses:
         "200":
-          $ref: ../responses/authentication/Verify2FAResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/TwoFactorAuthCode.yaml
-            examples: {}
-      description: Finishes the login sequence with a normal 2FA-generated code for accounts with 2FA-protection enabled.
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-      parameters: []
-  /auth/twofactorauth/totp/pending:
-    post:
-      summary: Enable time-based 2FA codes
-      operationId: enable2FA
-      responses:
-        "200":
-          $ref: ../responses/authentication/Pending2FAResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      description: Begins the sequence for enabling time-based 2FA.
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-      parameters: []
-    delete:
-      summary: Cancel pending enabling of time-based 2FA codes
-      operationId: cancelPending2FA
-      responses:
-        "200":
-          $ref: ../responses/authentication/Disable2FAResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      description: Cancels the sequence for enabling time-based 2FA.
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-      parameters: []
-  /auth/twofactorauth/totp/pending/verify:
-    post:
-      summary: Verify Pending 2FA code
-      operationId: verifyPending2FA
-      responses:
-        "200":
-          $ref: ../responses/authentication/Verify2FAResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/TwoFactorAuthCode.yaml
-            examples: {}
-      description: Finishes sequence for enabling time-based 2FA.
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-      parameters: []
-  /auth/user/twofactorauth/otp:
-    get:
-      summary: Get 2FA Recovery codes
-      operationId: getRecoveryCodes
-      responses:
-        "200":
-          $ref: ../responses/authentication/Get2FARecoveryCodesResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      description: Gets the OTP (One Time Password) recovery codes for accounts with 2FA-protection enabled.
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-  /auth/user/avatarmoderations:
-    get:
-      summary: Get Global Avatar Moderations
-      operationId: getGlobalAvatarModerations
-      description: Returns list of globally moderated avatars.
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/authentication/GetAvatarModerationsResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-    post:
-      summary: Create Global Avatar Moderation
-      operationId: createGlobalAvatarModeration
-      description: Globally moderates an avatar.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/CreateAvatarModerationRequest.yaml
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/authentication/CreateAvatarModerationResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-    delete:
-      summary: Delete Global Avatar Moderation
-      operationId: deleteGlobalAvatarModeration
-      description: Globally unmoderates an avatar.
-      parameters:
-        - $ref: ../parameters.yaml#/targetAvatarId
-        - $ref: ../parameters.yaml#/avatarModerationType
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/authentication/DeleteAvatarModerationResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-  /auth/twofactorauth/otp/verify:
-    post:
-      summary: Verify 2FA code with Recovery code
-      operationId: verifyRecoveryCode
-      responses:
-        "200":
-          $ref: ../responses/authentication/Verify2FAResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/TwoFactorAuthCode.yaml
-            examples: {}
-      description: Finishes the login sequence with an OTP (One Time Password) recovery code for accounts with 2FA-protection enabled.
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-  /auth/twofactorauth/emailotp/verify:
-    post:
-      summary: Verify 2FA email code
-      operationId: verify2FAEmailCode
-      responses:
-        "200":
-          $ref: ../responses/authentication/Verify2FAEmailCodeResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/TwoFactorEmailCode.yaml
-            examples: { }
-      description: Finishes the login sequence with an 2FA email code.
-      tags:
-        - authentication
-      security:
-        - authCookie: []
-      parameters: []
-  /auth/twofactorauth:
-    delete:
-      summary: Disable 2FA
-      operationId: disable2FA
-      responses:
-        "200":
-          $ref: ../responses/authentication/Disable2FAResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      tags:
-        - authentication
-      description: Disables 2FA for the currently logged in account
-      security:
-        - authCookie: []
-  "/users/{userId}/delete":
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-    put:
-      summary: Delete User
-      operationId: deleteUser
-      responses:
-        "200":
-          $ref: ../responses/authentication/DeleteUserResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      tags:
-        - authentication
-      description: |-
-        Deletes the account with given ID. Normal users only have permission to delete their own account. Account deletion is 14 days from this request, and will be cancelled if you do an authenticated request with the account afterwards.
-
-        **VRC+ NOTE:** Despite the 14-days cooldown, any VRC+ subscription will be cancelled **immediately**.
-
-        **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
-      security:
-        - authCookie: []
+          $ref: ../responses/authentication/UserExistsResponse.yaml
+        "400":
+          $ref: ../responses/authentication/MissingParameterError.yaml
   /auth/register:
     post:
+      operationId: registerUserAccount
+      deprecated: true
       summary: Register User Account
       description: |-
         ~~Register a new user account.~~
@@ -303,6 +63,9 @@ paths:
         **DEPRECATED:** Automated creation of accounts has no legitimate public third-party use case, and would be in violation of ToS §13.2:
         *By using the Platform, you agree not to: i. [...] use the Platform in a manner inconsistent with individual human usage*
         This endpoint is documented in the interest of completeness
+      tags:
+        - authentication
+      parameters: []
       requestBody:
         required: true
         content:
@@ -314,54 +77,291 @@ paths:
           $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: registerUserAccount
-      parameters: []
+  /auth/twofactorauth:
+    delete:
+      operationId: disable2FA
+      summary: Disable 2FA
+      description: Disables 2FA for the currently logged in account
       tags:
         - authentication
-      deprecated: true
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/Disable2FAResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /auth/twofactorauth/emailotp/verify:
+    post:
+      operationId: verify2FAEmailCode
+      summary: Verify 2FA email code
+      description: Finishes the login sequence with an 2FA email code.
+      tags:
+        - authentication
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples: { }
+            schema:
+              $ref: ../requests/TwoFactorEmailCode.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/Verify2FAEmailCodeResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /auth/twofactorauth/otp/verify:
+    post:
+      operationId: verifyRecoveryCode
+      summary: Verify 2FA code with Recovery code
+      description: Finishes the login sequence with an OTP (One Time Password) recovery code for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples: {}
+            schema:
+              $ref: ../requests/TwoFactorAuthCode.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/Verify2FAResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /auth/twofactorauth/totp/pending:
+    delete:
+      operationId: cancelPending2FA
+      summary: Cancel pending enabling of time-based 2FA codes
+      description: Cancels the sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      parameters: []
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/Disable2FAResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    post:
+      operationId: enable2FA
+      summary: Enable time-based 2FA codes
+      description: Begins the sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      parameters: []
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/Pending2FAResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /auth/twofactorauth/totp/pending/verify:
+    post:
+      operationId: verifyPending2FA
+      summary: Verify Pending 2FA code
+      description: Finishes sequence for enabling time-based 2FA.
+      tags:
+        - authentication
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples: {}
+            schema:
+              $ref: ../requests/TwoFactorAuthCode.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/Verify2FAResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /auth/twofactorauth/totp/verify:
+    post:
+      operationId: verify2FA
+      summary: Verify 2FA code
+      description: Finishes the login sequence with a normal 2FA-generated code for accounts with 2FA-protection enabled.
+      tags:
+        - authentication
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples: {}
+            schema:
+              $ref: ../requests/TwoFactorAuthCode.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/Verify2FAResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /auth/user:
+    get:
+      operationId: getCurrentUser
+      summary: Login and/or Get Current User Info
+      description: |-
+        This endpoint does the following two operations:
+          1) Checks if you are already logged in by looking for a valid `auth` cookie. If you are have a valid auth cookie then no additional auth-related actions are taken. If you are **not** logged in then it will log you in with the `Authorization` header and set the `auth` cookie. The `auth` cookie will only be sent once.
+          2) If logged in, this function will also return the CurrentUser object containing detailed information about the currently logged in user.
+
+        The auth string after `Authorization: Basic {string}` is a base64-encoded string of the username and password, both individually url-encoded, and then joined with a colon.
+
+        > base64(urlencode(username):urlencode(password))
+
+        **WARNING: Session Limit:** Each authentication with login credentials counts as a separate session, out of which you have a limited amount. Make sure to save and reuse the `auth` cookie if you are often restarting the program. The provided API libraries automatically save cookies during runtime, but does not persist during restart. While it can be fine to use username/password during development, expect in production to very fast run into the rate-limit and be temporarily blocked from making new sessions until older ones expire. The exact number of simultaneous sessions is unknown/undisclosed.
+      tags:
+        - authentication
+      parameters: []
+      security:
+        - authHeader: []
+        - authHeader: []
+          twoFactorAuthCookie: []
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /auth/user/avatarmoderations:
+    delete:
+      operationId: deleteGlobalAvatarModeration
+      summary: Delete Global Avatar Moderation
+      description: Globally unmoderates an avatar.
+      tags:
+        - authentication
+      parameters:
+        - $ref: ../parameters.yaml#/targetAvatarId
+        - $ref: ../parameters.yaml#/avatarModerationType
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/DeleteAvatarModerationResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    get:
+      operationId: getGlobalAvatarModerations
+      summary: Get Global Avatar Moderations
+      description: Returns list of globally moderated avatars.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/GetAvatarModerationsResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    post:
+      operationId: createGlobalAvatarModeration
+      summary: Create Global Avatar Moderation
+      description: Globally moderates an avatar.
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateAvatarModerationRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/CreateAvatarModerationResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /auth/user/resendEmail:
     post:
+      operationId: resendEmailConfirmation
       summary: Resend Email Confirmation
       description: Requests a resend of pending email address confirmation email
+      tags:
+        - authentication
+      parameters: []
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/authentication/ResendVerificationEmailSuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: resendEmailConfirmation
-      parameters: []
+  /auth/user/twofactorauth/otp:
+    get:
+      operationId: getRecoveryCodes
+      summary: Get 2FA Recovery codes
+      description: Gets the OTP (One Time Password) recovery codes for accounts with 2FA-protection enabled.
       tags:
         - authentication
       security:
         - authCookie: []
-  /auth/confirmEmail:
-    get:
-      summary: Confirm Email
-      operationId: confirmEmail
-      parameters:
-        - $ref: ../parameters.yaml#/confirmEmailUserId
-        - $ref: ../parameters.yaml#/confirmEmailToken
       responses:
-        "302":
-          $ref: ../responses/authentication/ConfirmEmailResponse.yaml
-      tags:
-        - authentication
-      description: Confirms the email address for a user
+        "200":
+          $ref: ../responses/authentication/Get2FARecoveryCodesResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /auth/verifyLoginPlace:
     get:
-      summary: Verify Login Place
       operationId: verifyLoginPlace
+      summary: Verify Login Place
+      description: Verifies a login attempt for a user
+      tags:
+        - authentication
       parameters:
         - $ref: ../parameters.yaml#/userIdQuery
         - $ref: ../parameters.yaml#/verifyLoginPlaceToken
       responses:
         "302":
           $ref: ../responses/authentication/VerifyLoginPlaceResponse.yaml
+  /logout:
+    put:
+      operationId: logout
+      summary: Logout
+      description: Invalidates the login session.
       tags:
         - authentication
-      description: Verifies a login attempt for a user
-tags:
-  $ref: ../tags.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/LogoutSuccess.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/delete":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    put:
+      operationId: deleteUser
+      summary: Delete User
+      description: |-
+        Deletes the account with given ID. Normal users only have permission to delete their own account. Account deletion is 14 days from this request, and will be cancelled if you do an authenticated request with the account afterwards.
+
+        **VRC+ NOTE:** Despite the 14-days cooldown, any VRC+ subscription will be cancelled **immediately**.
+
+        **METHOD NOTE:** Despite this being a Delete action, the method type required is PUT.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/DeleteUserResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+tags:
+  $ref: ../tags.yaml

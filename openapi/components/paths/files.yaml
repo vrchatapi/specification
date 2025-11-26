@@ -1,45 +1,87 @@
 openapi: 3.0.3
 info:
   title: files
-  version: "1.0"
   description: Files Docs Here
+  version: "1.0"
 paths:
-  /files:
+  /adminassetbundles/{adminAssetBundleId}:
     get:
-      summary: List Files
-      responses:
-        "200":
-          $ref: ../responses/files/FileListResponse.yaml
-      operationId: getFiles
+      operationId: getAdminAssetBundle
+      summary: Get AdminAssetBundle
+      description: Returns an AdminAssetBundle
+      tags:
+        - files
+      parameters:
+        - $ref: ../parameters.yaml#/adminAssetBundleId
       security:
         - authCookie: []
-      description: Returns a list of files
-      parameters:
-        - schema:
-            type: string
-            minLength: 1
-          in: query
-          name: tag
-          description: 'Tag, for example "icon" or "gallery", not included by default.'
-        - schema:
-            type: string
-          in: query
-          name: userId
-          deprecated: true
-          description: "UserID, will always generate a 500 permission error."
-        - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/offset
-      tags:
-        - files
-  /file:
-    post:
-      summary: Create File
-      tags:
-        - files
       responses:
         "200":
-          $ref: ../responses/files/FileResponse.yaml
+          $ref: ../responses/files/AdminAssetBundleResponse.yaml
+  "/analysis/{fileId}/{versionId}":
+    parameters:
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+    get:
+      operationId: getFileAnalysis
+      summary: Get File Version Analysis
+      description: Get the performance analysis for the uploaded assets of an avatar
+      tags:
+        - files
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/FileAnalysisResponse.yaml
+        "202":
+          $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
+        "404":
+          $ref: ../responses/files/FileNotFoundError.yaml
+  "/analysis/{fileId}/{versionId}/security":
+    parameters:
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+    get:
+      operationId: getFileAnalysisSecurity
+      summary: Get File Version Analysis Security
+      description: Get the security performance analysis for the uploaded assets of an avatar
+      tags:
+        - files
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/FileAnalysisResponse.yaml
+        "202":
+          $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
+        "404":
+          $ref: ../responses/files/FileNotFoundError.yaml
+  "/analysis/{fileId}/{versionId}/standard":
+    parameters:
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+    get:
+      operationId: getFileAnalysisStandard
+      summary: Get File Version Analysis Standard
+      description: Get the standard performance analysis for the uploaded assets of an avatar
+      tags:
+        - files
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/FileAnalysisResponse.yaml
+        "202":
+          $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
+        "404":
+          $ref: ../responses/files/FileNotFoundError.yaml
+  /file:
+    post:
       operationId: createFile
+      summary: Create File
+      description: Creates a new File object
+      tags:
+        - files
       requestBody:
         content:
           application/json:
@@ -47,44 +89,70 @@ paths:
               $ref: ../requests/CreateFileRequest.yaml
       security:
         - authCookie: []
-      description: Creates a new File object
+      responses:
+        "200":
+          $ref: ../responses/files/FileResponse.yaml
+  /file/image:
+    post:
+      operationId: uploadImage
+      summary: Upload gallery image, icon, emoji or sticker
+      description: Upload an image, which can be an icon, gallery image, sticker or emoji
+      tags:
+        - files
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                animationStyle:
+                  type: string
+                  description: Animation style for sticker, required for emoji.
+                  example: bats
+                file:
+                  type: string
+                  description: The binary blob of the png file.
+                  format: binary
+                frames:
+                  type: integer
+                  description: Required for emojianimated. Total number of frames to be animated (2-64)
+                framesOverTime:
+                  type: integer
+                  description: Required for emojianimated. Animation frames per second (1-64)
+                maskTag:
+                  type: string
+                  description: Mask of the sticker, optional for emoji.
+                  example: square
+                tag:
+                  type: string
+                  description: Needs to be either icon, gallery, sticker, emoji, or emojianimated
+              required:
+                - file
+                - tag
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/FileResponse.yaml
   "/file/{fileId}":
     parameters:
       - $ref: ../parameters.yaml#/fileId
     get:
-      summary: Show File
       operationId: getFile
+      summary: Show File
+      description: 'Shows general information about the "File" object. Each File can have several "Version"''s, and each Version can have multiple real files or "Data" blobs.'
       tags:
         - files
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/files/FileResponse.yaml
         "404":
           $ref: ../responses/files/FileNotFoundError.yaml
-      security:
-        - authCookie: []
-      description: 'Shows general information about the "File" object. Each File can have several "Version"''s, and each Version can have multiple real files or "Data" blobs.'
-    delete:
-      summary: Delete File
-      operationId: deleteFile
-      responses:
-        "200":
-          $ref: ../responses/files/FileResponse.yaml
-        "404":
-          $ref: ../responses/files/FileDeletedError.yaml
-      tags:
-        - files
-      security:
-        - authCookie: []
-      description: Deletes a File object.
     post:
-      summary: Create File Version
       operationId: createFileVersion
-      responses:
-        "200":
-          $ref: ../responses/files/FileResponse.yaml
-      security:
-        - authCookie: []
+      summary: Create File Version
       description: "Creates a new FileVersion. Once a Version has been created, proceed to the `/file/{fileId}/{versionId}/file/start` endpoint to start a file upload."
       tags:
         - files
@@ -93,31 +161,54 @@ paths:
           application/json:
             schema:
               $ref: ../requests/CreateFileVersionRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/FileResponse.yaml
+    delete:
+      operationId: deleteFile
+      summary: Delete File
+      description: Deletes a File object.
+      tags:
+        - files
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/FileResponse.yaml
+        "404":
+          $ref: ../responses/files/FileDeletedError.yaml
   "/file/{fileId}/{versionId}":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
     get:
-      summary: Download File Version
-      tags:
-        - files
-      responses:
-        "200":
-          $ref: ../responses/files/RawFileResponse.yaml
-        "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
       operationId: downloadFileVersion
-      security:
-        - authCookie: []
+      summary: Download File Version
       description: |-
         Downloads the file with the provided version number.
 
         **Version Note:** Version 0 is always when the file was created. The real data is usually always located in version 1 and up.
 
         **Extension Note:** Files are not guaranteed to have a file extensions. UnityPackage files tends to have it, images through this endpoint do not. You are responsible for appending file extension from the `extension` field when neccesary.
+      tags:
+        - files
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/RawFileResponse.yaml
+        "404":
+          $ref: ../responses/files/FileNotFoundError.yaml
     delete:
-      summary: Delete File Version
       operationId: deleteFileVersion
+      summary: Delete File Version
+      description: Delete a specific version of a file. You can only delete the latest version.
+      tags:
+        - files
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/files/FileResponse.yaml
@@ -125,224 +216,121 @@ paths:
           $ref: ../responses/files/FileVersionDeleteInitialError.yaml
         "500":
           $ref: ../responses/files/FileVersionDeleteMiddleError.yaml
-      security:
-        - authCookie: []
-      description: Delete a specific version of a file. You can only delete the latest version.
-      tags:
-        - files
-  "/file/{fileId}/{versionId}/{fileType}/status":
-    parameters:
-      - $ref: ../parameters.yaml#/fileId
-      - $ref: ../parameters.yaml#/versionId
-      - $ref: ../parameters.yaml#/fileType
-    get:
-      summary: Check FileData Upload Status
-      tags:
-        - files
-      responses:
-        "200":
-          $ref: ../responses/files/FileVersionUploadStatusResponse.yaml
-      operationId: getFileDataUploadStatus
-      security:
-        - authCookie: []
-      description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
-  "/file/{fileId}/{versionId}/{fileType}/start":
-    parameters:
-      - $ref: ../parameters.yaml#/fileId
-      - $ref: ../parameters.yaml#/versionId
-      - $ref: ../parameters.yaml#/fileType
-    put:
-      summary: Start FileData Upload
-      tags:
-        - files
-      responses:
-        "200":
-          $ref: ../responses/files/FileUploadURLResponse.yaml
-        "400":
-          $ref: ../responses/files/FileUploadAlreadyFinishedError.yaml
-      operationId: startFileDataUpload
-      parameters:
-        - schema:
-            type: integer
-            minimum: 0
-            example: 1
-          in: query
-          name: partNumber
-          required: false
-          description: The part number to start uploading. If not provided, the first part will be started.
-          deprecated: true
-      security:
-        - authCookie: []
-      description: |-
-        Starts an upload of a specific FilePart. This endpoint will return an AWS URL which you can PUT data to. You need to call this and receive a new AWS API URL for each `partNumber`. Please see AWS's REST documentation on "PUT Object to S3" on how to upload. Once all parts has been uploaded, proceed to `/finish` endpoint.
-
-        **Note:** `nextPartNumber` seems like it is always ignored. Despite it returning 0, first partNumber is always 1.
   "/file/{fileId}/{versionId}/{fileType}/finish":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
       - $ref: ../parameters.yaml#/fileType
     put:
+      operationId: finishFileDataUpload
       summary: Finish FileData Upload
+      description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
       tags:
         - files
-      responses:
-        "200":
-          $ref: ../responses/files/FileResponse.yaml
-      operationId: finishFileDataUpload
       requestBody:
+        description: |-
+          Please see documentation on ETag's:
+          [https://teppen.io/2018/06/23/aws_s3_etags/](https://teppen.io/2018/06/23/aws_s3_etags/)
+
+          ETag's should NOT be present when uploading a `signature`.
         content:
           application/json:
-            schema:
-              $ref: ../requests/FinishFileDataUploadRequest.yaml
             examples:
               Example Request:
                 value:
                   etags:
                     - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                     - yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
-                  nextPartNumber: "0"
                   maxParts: "0"
-        description: |-
-          Please see documentation on ETag's:
-          [https://teppen.io/2018/06/23/aws_s3_etags/](https://teppen.io/2018/06/23/aws_s3_etags/)
+                  nextPartNumber: "0"
+            schema:
+              $ref: ../requests/FinishFileDataUploadRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/FileResponse.yaml
+  "/file/{fileId}/{versionId}/{fileType}/start":
+    parameters:
+      - $ref: ../parameters.yaml#/fileId
+      - $ref: ../parameters.yaml#/versionId
+      - $ref: ../parameters.yaml#/fileType
+    put:
+      operationId: startFileDataUpload
+      summary: Start FileData Upload
+      description: |-
+        Starts an upload of a specific FilePart. This endpoint will return an AWS URL which you can PUT data to. You need to call this and receive a new AWS API URL for each `partNumber`. Please see AWS's REST documentation on "PUT Object to S3" on how to upload. Once all parts has been uploaded, proceed to `/finish` endpoint.
 
-          ETag's should NOT be present when uploading a `signature`.
+        **Note:** `nextPartNumber` seems like it is always ignored. Despite it returning 0, first partNumber is always 1.
+      tags:
+        - files
+      parameters:
+        - name: partNumber
+          deprecated: true
+          description: The part number to start uploading. If not provided, the first part will be started.
+          required: false
+          in: query
+          schema:
+            type: integer
+            example: 1
+            minimum: 0
       security:
         - authCookie: []
-      description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
-  "/analysis/{fileId}/{versionId}":
+      responses:
+        "200":
+          $ref: ../responses/files/FileUploadURLResponse.yaml
+        "400":
+          $ref: ../responses/files/FileUploadAlreadyFinishedError.yaml
+  "/file/{fileId}/{versionId}/{fileType}/status":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
+      - $ref: ../parameters.yaml#/fileType
     get:
-      summary: Get File Version Analysis
+      operationId: getFileDataUploadStatus
+      summary: Check FileData Upload Status
+      description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
       tags:
         - files
-      responses:
-        "200":
-          $ref: ../responses/files/FileAnalysisResponse.yaml
-        "202":
-          $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
-        "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
-      operationId: getFileAnalysis
       security:
         - authCookie: []
-      description: Get the performance analysis for the uploaded assets of an avatar
-  "/analysis/{fileId}/{versionId}/security":
-    parameters:
-      - $ref: ../parameters.yaml#/fileId
-      - $ref: ../parameters.yaml#/versionId
+      responses:
+        "200":
+          $ref: ../responses/files/FileVersionUploadStatusResponse.yaml
+  /files:
     get:
-      summary: Get File Version Analysis Security
+      operationId: getFiles
+      summary: List Files
+      description: Returns a list of files
       tags:
         - files
-      responses:
-        "200":
-          $ref: ../responses/files/FileAnalysisResponse.yaml
-        "202":
-          $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
-        "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
-      operationId: getFileAnalysisSecurity
+      parameters:
+        - name: tag
+          description: 'Tag, for example "icon" or "gallery", not included by default.'
+          in: query
+          schema:
+            type: string
+            minLength: 1
+        - name: userId
+          deprecated: true
+          description: "UserID, will always generate a 500 permission error."
+          in: query
+          schema:
+            type: string
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
       security:
         - authCookie: []
-      description: Get the security performance analysis for the uploaded assets of an avatar
-  "/analysis/{fileId}/{versionId}/standard":
-    parameters:
-      - $ref: ../parameters.yaml#/fileId
-      - $ref: ../parameters.yaml#/versionId
-    get:
-      summary: Get File Version Analysis Standard
-      tags:
-        - files
       responses:
         "200":
-          $ref: ../responses/files/FileAnalysisResponse.yaml
-        "202":
-          $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
-        "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
-      operationId: getFileAnalysisStandard
-      security:
-        - authCookie: []
-      description: Get the standard performance analysis for the uploaded assets of an avatar
-  /file/image:
-    post:
-      summary: Upload gallery image, icon, emoji or sticker
-      tags:
-        - files
-      responses:
-        "200":
-          $ref: ../responses/files/FileResponse.yaml
-      operationId: uploadImage
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                file:
-                  type: string
-                  format: binary
-                  description: The binary blob of the png file.
-                tag:
-                  type: string
-                  description: Needs to be either icon, gallery, sticker, emoji, or emojianimated
-                frames:
-                  type: integer
-                  description: Required for emojianimated. Total number of frames to be animated (2-64)
-                framesOverTime:
-                  type: integer
-                  description: Required for emojianimated. Animation frames per second (1-64)
-                animationStyle:
-                  type: string
-                  example: bats
-                  description: Animation style for sticker, required for emoji.
-                maskTag:
-                  type: string
-                  example: square
-                  description: Mask of the sticker, optional for emoji.
-              required:
-                - file
-                - tag
-      security:
-        - authCookie: []
-      description: Upload an image, which can be an icon, gallery image, sticker or emoji
-  /icon:
-    post:
-      summary: Upload icon
-      tags:
-        - files
-      responses:
-        "200":
-          $ref: ../responses/files/FileResponse.yaml
-      operationId: uploadIcon
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                file:
-                  type: string
-                  format: binary
-                  description: The binary blob of the png file.
-              required:
-                - file
-      security:
-        - authCookie: []
-      description: Upload an icon
+          $ref: ../responses/files/FileListResponse.yaml
   /gallery:
     post:
+      operationId: uploadGalleryImage
       summary: Upload gallery image
+      description: Upload a gallery image
       tags:
         - files
-      responses:
-        "200":
-          $ref: ../responses/files/FileResponse.yaml
-      operationId: uploadGalleryImage
       requestBody:
         content:
           multipart/form-data:
@@ -351,29 +339,41 @@ paths:
               properties:
                 file:
                   type: string
-                  format: binary
                   description: The binary blob of the png file.
+                  format: binary
               required:
                 - file
       security:
         - authCookie: []
-      description: Upload a gallery image
-  /adminassetbundles/{adminAssetBundleId}:
-    get:
-      summary: Get AdminAssetBundle
       responses:
         "200":
-          $ref: ../responses/files/AdminAssetBundleResponse.yaml
-      operationId: getAdminAssetBundle
-      security:
-        - authCookie: []
-      description: Returns an AdminAssetBundle
-      parameters:
-        - $ref: ../parameters.yaml#/adminAssetBundleId
+          $ref: ../responses/files/FileResponse.yaml
+  /icon:
+    post:
+      operationId: uploadIcon
+      summary: Upload icon
+      description: Upload an icon
       tags:
         - files
-tags:
-  $ref: ../tags.yaml
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  description: The binary blob of the png file.
+                  format: binary
+              required:
+                - file
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/FileResponse.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+tags:
+  $ref: ../tags.yaml

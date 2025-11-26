@@ -5,14 +5,14 @@ properties:
     $ref: ./InstanceID.yaml
   location:
     $ref: ./LocationID.yaml
-  world:
-    $ref: ./World.yaml
   memberCount:
     type: integer
-    minimum: 0
     example: 6
+    minimum: 0
+  world:
+    $ref: ./World.yaml
 required:
   - instanceId
   - location
-  - world
   - memberCount
+  - world

@@ -2,32 +2,32 @@ title: DynamicContentRow
 type: object
 properties:
   index:
-    minimum: 0
     type: integer
+    minimum: 0
   name:
-    minLength: 1
     type: string
-  platform:
     minLength: 1
+  platform:
     $ref: ./Platform.yaml
     description: 'Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.'
+    minLength: 1
   sortHeading:
-    minLength: 1
     type: string
+    minLength: 1
   sortOrder:
-    minLength: 1
     type: string
+    minLength: 1
   sortOwnership:
-    minLength: 1
     type: string
+    minLength: 1
   tag:
+    $ref: ./Tag.yaml
     description: Tag to filter content for this row.
     minLength: 1
-    $ref: ./Tag.yaml
   type:
     type: string
-    example: avatar
     description: Type is not present if it is a world.
+    example: avatar
 required:
   - name
   - platform

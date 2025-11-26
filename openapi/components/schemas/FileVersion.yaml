@@ -1,12 +1,14 @@
+title: FileVersion
+type: object
 description: ""
 properties:
   created_at:
-    format: date-time
     type: string
+    format: date-time
   deleted:
-    default: true
-    description: Usually only present if `true`
     type: boolean
+    description: Usually only present if `true`
+    default: true
   delta:
     $ref: ./FileData.yaml
   file:
@@ -16,13 +18,11 @@ properties:
   status:
     $ref: ./FileStatus.yaml
   version:
-    default: 0
-    description: "Incremental version counter, can only be increased."
-    minimum: 0
     type: integer
+    description: "Incremental version counter, can only be increased."
+    default: 0
+    minimum: 0
 required:
-  - version
-  - status
   - created_at
-title: FileVersion
-type: object
+  - status
+  - version

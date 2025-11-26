@@ -1,45 +1,45 @@
+title: File
+type: object
 description: ""
 properties:
   animationStyle:
     type: string
     example: bats
+  extension:
+    type: string
+    example: .unitypackage
+    minLength: 1
+  id:
+    $ref: ./FileID.yaml
   maskTag:
     type: string
     example: square
-  extension:
-    example: .unitypackage
-    minLength: 1
-    type: string
-  id:
-    $ref: ./FileID.yaml
   mimeType:
     $ref: ./MIMEType.yaml
   name:
+    type: string
     description: ""
     example: Example File
     minLength: 0
-    type: string
   ownerId:
     $ref: ./UserID.yaml
   tags:
+    type: array
     description: " "
     items:
       $ref: ./Tag.yaml
-    type: array
   versions:
+    type: array
     description: " "
     items:
       $ref: ./FileVersion.yaml
     minItems: 1
-    type: array
     uniqueItems: true
 required:
+  - extension
   - id
+  - mimeType
   - name
   - ownerId
-  - mimeType
-  - extension
   - tags
   - versions
-title: File
-type: object

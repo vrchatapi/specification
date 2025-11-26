@@ -1,19 +1,19 @@
 title: InstancePlatforms
 type: object
 additionalProperties: false
-required:
-  - android
-  - standalonewindows
 properties:
   android:
     type: integer
-    minimum: 0
     example: 1
+    minimum: 0
   ios:
     type: integer
-    minimum: 0
     example: 1
+    minimum: 0
   standalonewindows:
     type: integer
-    minimum: 0
     example: 5
+    minimum: 0
+required:
+  - android
+  - standalonewindows

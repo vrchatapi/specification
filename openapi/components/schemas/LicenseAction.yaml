@@ -1,7 +1,7 @@
-type: string
 title: LicenseAction
-default: have
+type: string
 enum:
-  - wear
   - have
+  - wear
+default: have
 example: have

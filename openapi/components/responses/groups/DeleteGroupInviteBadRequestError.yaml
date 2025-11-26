@@ -1,11 +1,11 @@
 description: Bad request error response when deleting a group invite
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       User Not Invited:
         value:
           error:
             message: You can't uninvite a user who wasn't invited․
             status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

@@ -1,62 +1,62 @@
 title: GroupMyMember
 type: object
 properties:
-  id:
-    $ref: ./GroupMemberID.yaml
-  groupId:
-    $ref: ./GroupID.yaml
-  userId:
-    $ref: ./UserID.yaml
-  roleIds:
-    type: array
-    items:
-      $ref: ./GroupRoleID.yaml
   acceptedByDisplayName:
     type: string
     nullable: true
   acceptedById:
     type: string
     nullable: true
-  createdAt:
-    type: string
-    format: date-time
-  managerNotes:
-    type: string
-  membershipStatus:
-    type: string
-    example: member
-  isSubscribedToAnnouncements:
-    type: boolean
-    default: true
-  isSubscribedToEventAnnouncements:
-    type: boolean
-  visibility:
-    type: string
-    example: visible
-  isRepresenting:
-    type: boolean
-    default: false
-  joinedAt:
-    type: string
-    format: date-time
   bannedAt:
     type: string
     nullable: true
+  createdAt:
+    type: string
+    format: date-time
+  groupId:
+    $ref: ./GroupID.yaml
   has2FA:
     type: boolean
     default: false
   hasJoinedFromPurchase:
     type: boolean
     default: false
-  lastPostReadAt:
+  id:
+    $ref: ./GroupMemberID.yaml
+  isRepresenting:
+    type: boolean
+    default: false
+  isSubscribedToAnnouncements:
+    type: boolean
+    default: true
+  isSubscribedToEventAnnouncements:
+    type: boolean
+  joinedAt:
     type: string
     format: date-time
+  lastPostReadAt:
+    type: string
     nullable: true
+    format: date-time
   mRoleIds:
     type: array
     items:
       type: string
+  managerNotes:
+    type: string
+  membershipStatus:
+    type: string
+    example: member
   permissions:
     type: array
     items:
       $ref: ./GroupPermissions.yaml
+  roleIds:
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
+  userId:
+    $ref: ./UserID.yaml
+  visibility:
+    type: string
+    example: visible

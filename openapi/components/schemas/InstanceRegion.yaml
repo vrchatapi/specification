@@ -1,11 +1,11 @@
-type: string
 title: InstanceRegion
-default: us
-example: us
+type: string
+description: Instance region
 enum:
-  - us
-  - use
   - eu
   - jp
   - unknown
-description: Instance region
+  - us
+  - use
+default: us
+example: us

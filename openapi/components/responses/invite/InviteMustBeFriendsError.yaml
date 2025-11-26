@@ -1,11 +1,11 @@
 description: Error response when trying to invite someome whom you are not friends with.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       Must Be Friends Error:
         value:
           error:
             message: "\"You need to be friends with that user first.\""
             status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

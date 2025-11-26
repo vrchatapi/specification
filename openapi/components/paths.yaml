@@ -1,71 +1,95 @@
----
-
-# The order on the website is determined by the order of the endpoints in this document.
-
-# authentication
-
+/Admin/transactions:
+  $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions"
+"/Admin/transactions/{transactionId}":
+  $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions~1{transactionId}"
+/Steam/transactions:
+  $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions"
+"/Steam/transactions/{transactionId}":
+  $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions~1{transactionId}"
+"/adminassetbundles/{adminAssetBundleId}":
+  $ref: "./paths/files.yaml#/paths/~1adminassetbundles~1{adminAssetBundleId}"
+"/analysis/{fileId}/{versionId}":
+  $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}"
+"/analysis/{fileId}/{versionId}/security":
+  $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1security"
+"/analysis/{fileId}/{versionId}/standard":
+  $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1standard"
+/auth:
+  $ref: "./paths/authentication.yaml#/paths/~1auth"
+/auth/confirmEmail:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1confirmEmail"
 /auth/exists:
   $ref: "./paths/authentication.yaml#/paths/~1auth~1exists"
-/auth/user:
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1user"
+/auth/permissions:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1auth~1permissions"
+/auth/register:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1register"
 /auth/twofactorauth:
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth"
-/auth/twofactorauth/totp/verify:
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify"
+/auth/twofactorauth/emailotp/verify:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1emailotp~1verify"
+/auth/twofactorauth/otp/verify:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1otp~1verify"
 /auth/twofactorauth/totp/pending:
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1pending"
 /auth/twofactorauth/totp/pending/verify:
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1pending~1verify"
-/auth/user/twofactorauth/otp:
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1twofactorauth~1otp"
-/auth/twofactorauth/otp/verify:
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1otp~1verify"
-/auth/twofactorauth/emailotp/verify:
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1emailotp~1verify"
-/auth:
-  $ref: "./paths/authentication.yaml#/paths/~1auth"
-/logout:
-  $ref: "./paths/authentication.yaml#/paths/~1logout"
-"/users/{userId}/delete":
-  $ref: "./paths/authentication.yaml#/paths/~1users~1{userId}~1delete"
-/auth/register:
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1register"
-/auth/user/resendEmail:
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1resendEmail"
-/auth/confirmEmail:
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1confirmEmail"
-/auth/verifyLoginPlace:
-  $ref: "./paths/authentication.yaml#/paths/~1auth~1verifyLoginPlace"
+/auth/twofactorauth/totp/verify:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify"
+/auth/user:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user"
 /auth/user/avatarmoderations:
   $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1avatarmoderations"
-
-# avatars
-
-"/users/{userId}/avatar":
-  $ref: "./paths/avatars.yaml#/paths/~1users~1{userId}~1avatar"
-/avatars:
-  $ref: "./paths/avatars.yaml#/paths/~1avatars"
+/auth/user/favoritelimits:
+  $ref: "./paths/favorites.yaml#/paths/~1auth~1user~1favoritelimits"
+/auth/user/friends:
+  $ref: "./paths/friends.yaml#/paths/~1auth~1user~1friends"
+"/auth/user/friends/{userId}":
+  $ref: "./paths/friends.yaml#/paths/~1auth~1user~1friends~1{userId}"
+/auth/user/notifications:
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications"
+/auth/user/notifications/clear:
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1clear"
+"/auth/user/notifications/{notificationId}":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}"
+"/auth/user/notifications/{notificationId}/accept":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1accept"
+"/auth/user/notifications/{notificationId}/hide":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1hide"
+"/auth/user/notifications/{notificationId}/see":
+  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1see"
+/auth/user/playermoderations:
+  $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations"
+/auth/user/resendEmail:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1resendEmail"
+/auth/user/subscription:
+  $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
+/auth/user/twofactorauth/otp:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1twofactorauth~1otp"
+/auth/user/unplayermoderate:
+  $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1unplayermoderate"
+/auth/verifyLoginPlace:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1verifyLoginPlace"
 /avatarStyles:
   $ref: "./paths/avatars.yaml#/paths/~1avatarStyles"
+/avatars:
+  $ref: "./paths/avatars.yaml#/paths/~1avatars"
+/avatars/favorites:
+  $ref: "./paths/avatars.yaml#/paths/~1avatars~1favorites"
+/avatars/impostor/queue/stats:
+  $ref: "./paths/avatars.yaml#/paths/~1avatars~1impostor~1queue~1stats"
+/avatars/licensed:
+  $ref: "./paths/avatars.yaml#/paths/~1avatars~1licensed"
 "/avatars/{avatarId}":
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}"
+"/avatars/{avatarId}/impostor":
+  $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1impostor"
+"/avatars/{avatarId}/impostor/enqueue":
+  $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1impostor~1enqueue"
 "/avatars/{avatarId}/select":
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1select"
 "/avatars/{avatarId}/selectFallback":
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1selectFallback"
-/avatars/favorites:
-  $ref: "./paths/avatars.yaml#/paths/~1avatars~1favorites"
-/avatars/licensed:
-  $ref: "./paths/avatars.yaml#/paths/~1avatars~1licensed"
-"/avatars/{avatarId}/impostor/enqueue":
-  $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1impostor~1enqueue"
-/avatars/impostor/queue/stats:
-  $ref: "./paths/avatars.yaml#/paths/~1avatars~1impostor~1queue~1stats"
-"/avatars/{avatarId}/impostor":
-  $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1impostor"
-
-# calendar
-
 /calendar:
   $ref: "./paths/calendar.yaml#/paths/~1calendar"
 /calendar/featured:
@@ -86,73 +110,28 @@
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}~1event"
 "/calendar/{groupId}/{calendarId}/follow":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}~1follow"
-
-# economy
-
-/Steam/transactions:
-  $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions"
-"/Steam/transactions/{transactionId}":
-  $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions~1{transactionId}"
-/Admin/transactions:
-  $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions"
-"/Admin/transactions/{transactionId}":
-  $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions~1{transactionId}"
-/auth/user/subscription:
-  $ref: "./paths/economy.yaml#/paths/~1auth~1user~1subscription"
-/user/subscription/recent:
-  $ref: "./paths/economy.yaml#/paths/~1user~1subscription~1recent"
-/user/bulk/gift/purchases:
-  $ref: "./paths/economy.yaml#/paths/~1user~1bulk~1gift~1purchases"
-"/users/{userId}/subscription/eligible":
-  $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1subscription~1eligible"
-"/users/{userId}/credits/eligible":
-  $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1credits~1eligible"
-/subscriptions:
-  $ref: "./paths/economy.yaml#/paths/~1subscriptions"
-"/licenseGroups/{licenseGroupId}":
-  $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
-"/listing/{productId}":
-  $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}"
-"/user/{userId}/listings":
-  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1listings"
-/tokenBundles:
-  $ref: "./paths/economy.yaml#/paths/~1tokenBundles"
-/tilia/status:
-  $ref: "./paths/economy.yaml#/paths/~1tilia~1status"
-"/user/{userId}/tilia/tos":
-  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1tilia~1tos"
-"/user/{userId}/balance":
-  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance"
-"/user/{userId}/balance/earnings":
-  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
-"/user/{userId}/economy/account":
-  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
+/config:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1config"
+/css/app.css:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1css~1app.css"
 /economy/licenses/active:
   $ref: "./paths/economy.yaml#/paths/~1economy~1licenses~1active"
 /economy/store:
   $ref: "./paths/economy.yaml#/paths/~1economy~1store"
 /economy/store/shelves:
   $ref: "./paths/economy.yaml#/paths/~1economy~1store~1shelves"
-
-# favorites
-
+"/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}":
+  $ref: "./paths/favorites.yaml#/paths/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}"
+/favorite/groups:
+  $ref: "./paths/favorites.yaml#/paths/~1favorite~1groups"
 /favorites:
   $ref: "./paths/favorites.yaml#/paths/~1favorites"
 "/favorites/{favoriteId}":
   $ref: "./paths/favorites.yaml#/paths/~1favorites~1{favoriteId}"
-/favorite/groups:
-  $ref: "./paths/favorites.yaml#/paths/~1favorite~1groups"
-"/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}":
-  $ref: "./paths/favorites.yaml#/paths/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}"
-/auth/user/favoritelimits:
-  $ref: "./paths/favorites.yaml#/paths/~1auth~1user~1favoritelimits"
-
-# files
-
-/files:
-  $ref: "./paths/files.yaml#/paths/~1files"
 /file:
   $ref: "./paths/files.yaml#/paths/~1file"
+/file/image:
+  $ref: "./paths/files.yaml#/paths/~1file~1image"
 "/file/{fileId}":
   $ref: "./paths/files.yaml#/paths/~1file~1{fileId}"
 "/file/{fileId}/{versionId}":
@@ -163,34 +142,10 @@
   $ref: "./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1start"
 "/file/{fileId}/{versionId}/{fileType}/status":
   $ref: "./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1status"
-"/analysis/{fileId}/{versionId}":
-  $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}"
-"/analysis/{fileId}/{versionId}/security":
-  $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1security"
-"/analysis/{fileId}/{versionId}/standard":
-  $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1standard"
-/file/image:
-  $ref: "./paths/files.yaml#/paths/~1file~1image"
-/icon:
-  $ref: "./paths/files.yaml#/paths/~1icon"
+/files:
+  $ref: "./paths/files.yaml#/paths/~1files"
 /gallery:
   $ref: "./paths/files.yaml#/paths/~1gallery"
-"/adminassetbundles/{adminAssetBundleId}":
-  $ref: "./paths/files.yaml#/paths/~1adminassetbundles~1{adminAssetBundleId}"
-
-# friends
-
-/auth/user/friends:
-  $ref: "./paths/friends.yaml#/paths/~1auth~1user~1friends"
-"/user/{userId}/friendRequest":
-  $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendRequest"
-"/user/{userId}/friendStatus":
-  $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendStatus"
-"/auth/user/friends/{userId}":
-  $ref: "./paths/friends.yaml#/paths/~1auth~1user~1friends~1{userId}"
-
-# groups
-
 /groups:
   $ref: "./paths/groups.yaml#/paths/~1groups"
 /groups/roleTemplates:
@@ -245,142 +200,150 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles"
 "/groups/{groupId}/roles/{groupRoleId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
-
-# inventory
-
-/inventory:
-  $ref: "./paths/inventory.yaml#/paths/~1inventory"
-"/inventory/{inventoryItemId}":
-  $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}"
-/inventory/drops:
-  $ref: "./paths/inventory.yaml#/paths/~1inventory~1drops"
-"/inventory/template/{inventoryTemplateId}":
-  $ref: "./paths/inventory.yaml#/paths/~1inventory~1template~1{inventoryTemplateId}"
-/inventory/spawn:
-  $ref: "./paths/inventory.yaml#/paths/~1inventory~1spawn"
-/inventory/cloning/pedestal:
-  $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1pedestal"
-/inventory/cloning/direct:
-  $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1direct"
-
-# invite
-
-"/invite/{userId}":
-  $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}"
-"/invite/{userId}/photo":
-  $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}~1photo"
-"/invite/myself/to/{worldId}:{instanceId}":
-  $ref: "./paths/invite.yaml#/paths/~1invite~1myself~1to~1{worldId}:{instanceId}"
-"/requestInvite/{userId}":
-  $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}"
-"/requestInvite/{userId}/photo":
-  $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}~1photo"
-"/invite/{notificationId}/response":
-  $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response"
-"/invite/{notificationId}/response/photo":
-  $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response~1photo"
-"/message/{userId}/{messageType}":
-  $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
-"/message/{userId}/{messageType}/{slot}":
-  $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{slot}"
-
-# instances
-
+/health:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1health"
+/icon:
+  $ref: "./paths/files.yaml#/paths/~1icon"
+/infoPush:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1infoPush"
 /instances:
   $ref: "./paths/instances.yaml#/paths/~1instances"
 /instances/recent:
   $ref: "./paths/instances.yaml#/paths/~1instances~1recent"
+"/instances/s/{shortName}":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1s~1{shortName}"
 "/instances/{worldId}:{instanceId}":
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}"
 "/instances/{worldId}:{instanceId}/shortName":
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1shortName"
-"/instances/s/{shortName}":
-  $ref: "./paths/instances.yaml#/paths/~1instances~1s~1{shortName}"
-
-# notifications
-
-/auth/user/notifications:
-  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications"
-"/auth/user/notifications/{notificationId}":
-  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}"
-"/auth/user/notifications/{notificationId}/accept":
-  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1accept"
-"/auth/user/notifications/{notificationId}/see":
-  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1see"
-"/auth/user/notifications/{notificationId}/hide":
-  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1{notificationId}~1hide"
-/auth/user/notifications/clear:
-  $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications~1clear"
-
-# playermoderation
-
-/auth/user/playermoderations:
-  $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1playermoderations"
-/auth/user/unplayermoderate:
-  $ref: "./paths/playermoderation.yaml#/paths/~1auth~1user~1unplayermoderate"
-
-# prints
-
-"/prints/user/{userId}":
-  $ref: "./paths/prints.yaml#/paths/~1prints~1user~1{userId}"
-"/prints/{printId}":
-  $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
-/prints:
-  $ref: "./paths/prints.yaml#/paths/~1prints"
-
-# props
-
-"/props/{propId}":
-  $ref: "./paths/props.yaml#/paths/~1props~1{propId}"
-
-# jams
-
+/inventory:
+  $ref: "./paths/inventory.yaml#/paths/~1inventory"
+/inventory/cloning/direct:
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1direct"
+/inventory/cloning/pedestal:
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1pedestal"
+/inventory/drops:
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1drops"
+/inventory/spawn:
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1spawn"
+"/inventory/template/{inventoryTemplateId}":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1template~1{inventoryTemplateId}"
+"/inventory/{inventoryItemId}":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}"
+"/invite/myself/to/{worldId}:{instanceId}":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1myself~1to~1{worldId}:{instanceId}"
+"/invite/{notificationId}/response":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response"
+"/invite/{notificationId}/response/photo":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{notificationId}~1response~1photo"
+"/invite/{userId}":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}"
+"/invite/{userId}/photo":
+  $ref: "./paths/invite.yaml#/paths/~1invite~1{userId}~1photo"
 /jams:
   $ref: "./paths/jams.yaml#/paths/~1jams"
 "/jams/{jamId}":
   $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}"
 "/jams/{jamId}/submissions":
   $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}~1submissions"
-
-# users
-
-/users:
-  $ref: "./paths/users.yaml#/paths/~1users"
-/users/active:
-  $ref: "./paths/users.yaml#/paths/~1users~1active"
-"/users/{username}/name":
-  $ref: "./paths/users.yaml#/paths/~1users~1{username}~1name"
-"/users/{userId}":
-  $ref: "./paths/users.yaml#/paths/~1users~1{userId}"
-"/users/{userId}/groups":
-  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups"
-"/users/{userId}/groups/requested":
-  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1requested"
-"/users/{userId}/groups/represented":
-  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1represented"
-"/users/{userId}/feedback":
-  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1feedback"
+/js/app.js:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1js~1app.js"
+"/licenseGroups/{licenseGroupId}":
+  $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
+"/listing/{productId}":
+  $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}"
+/logout:
+  $ref: "./paths/authentication.yaml#/paths/~1logout"
+"/message/{userId}/{messageType}":
+  $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
+"/message/{userId}/{messageType}/{slot}":
+  $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{slot}"
+/permissions:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1permissions"
+"/permissions/{permissionId}":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1permissions~1{permissionId}"
+/prints:
+  $ref: "./paths/prints.yaml#/paths/~1prints"
+"/prints/user/{userId}":
+  $ref: "./paths/prints.yaml#/paths/~1prints~1user~1{userId}"
+"/prints/{printId}":
+  $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
+"/props/{propId}":
+  $ref: "./paths/props.yaml#/paths/~1props~1{propId}"
+"/requestInvite/{userId}":
+  $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}"
+"/requestInvite/{userId}/photo":
+  $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}~1photo"
+/subscriptions:
+  $ref: "./paths/economy.yaml#/paths/~1subscriptions"
+/tilia/status:
+  $ref: "./paths/economy.yaml#/paths/~1tilia~1status"
+/time:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1time"
+/tokenBundles:
+  $ref: "./paths/economy.yaml#/paths/~1tokenBundles"
+/user/bulk/gift/purchases:
+  $ref: "./paths/economy.yaml#/paths/~1user~1bulk~1gift~1purchases"
+/user/subscription/recent:
+  $ref: "./paths/economy.yaml#/paths/~1user~1subscription~1recent"
+"/user/{userId}/balance":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance"
+"/user/{userId}/balance/earnings":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
+"/user/{userId}/economy/account":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
+"/user/{userId}/friendRequest":
+  $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendRequest"
+"/user/{userId}/friendStatus":
+  $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendStatus"
+"/user/{userId}/listings":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1listings"
+"/user/{userId}/tilia/tos":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1tilia~1tos"
 /userNotes:
   $ref: "./paths/users.yaml#/paths/~1userNotes"
 "/userNotes/{userNoteId}":
   $ref: "./paths/users.yaml#/paths/~1userNotes~1{userNoteId}"
+/users:
+  $ref: "./paths/users.yaml#/paths/~1users"
+/users/active:
+  $ref: "./paths/users.yaml#/paths/~1users~1active"
+"/users/{userId}":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}"
 "/users/{userId}/addTags":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1addTags"
-"/users/{userId}/removeTags":
-  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1removeTags"
+"/users/{userId}/avatar":
+  $ref: "./paths/avatars.yaml#/paths/~1users~1{userId}~1avatar"
 "/users/{userId}/badges/{badgeId}":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1badges~1{badgeId}"
+"/users/{userId}/credits/eligible":
+  $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1credits~1eligible"
+"/users/{userId}/delete":
+  $ref: "./paths/authentication.yaml#/paths/~1users~1{userId}~1delete"
+"/users/{userId}/feedback":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1feedback"
+"/users/{userId}/groups":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups"
+"/users/{userId}/groups/represented":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1represented"
+"/users/{userId}/groups/requested":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1requested"
 "/users/{userId}/instances/groups":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups"
 "/users/{userId}/instances/groups/{groupId}":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups~1{groupId}"
-"/users/{userId}/{worldId}/persist/exists":
-  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1{worldId}~1persist~1exists"
+"/users/{userId}/removeTags":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1removeTags"
+"/users/{userId}/subscription/eligible":
+  $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1subscription~1eligible"
 "/users/{userId}/{worldId}/persist":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1{worldId}~1persist"
-
-# worlds
-
+"/users/{userId}/{worldId}/persist/exists":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1{worldId}~1persist~1exists"
+"/users/{username}/name":
+  $ref: "./paths/users.yaml#/paths/~1users~1{username}~1name"
+/visits:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1visits"
 /worlds:
   $ref: "./paths/worlds.yaml#/paths/~1worlds"
 /worlds/active:
@@ -397,26 +360,3 @@
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1publish"
 "/worlds/{worldId}/{instanceId}":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}"
-
-# miscellaneous
-
-/config:
-  $ref: "./paths/miscellaneous.yaml#/paths/~1config"
-/infoPush:
-  $ref: "./paths/miscellaneous.yaml#/paths/~1infoPush"
-/css/app.css:
-  $ref: "./paths/miscellaneous.yaml#/paths/~1css~1app.css"
-/js/app.js:
-  $ref: "./paths/miscellaneous.yaml#/paths/~1js~1app.js"
-/health:
-  $ref: "./paths/miscellaneous.yaml#/paths/~1health"
-/visits:
-  $ref: "./paths/miscellaneous.yaml#/paths/~1visits"
-/time:
-  $ref: "./paths/miscellaneous.yaml#/paths/~1time"
-/auth/permissions:
-  $ref: "./paths/miscellaneous.yaml#/paths/~1auth~1permissions"
-/permissions:
-  $ref: "./paths/miscellaneous.yaml#/paths/~1permissions"
-"/permissions/{permissionId}":
-  $ref: "./paths/miscellaneous.yaml#/paths/~1permissions~1{permissionId}"

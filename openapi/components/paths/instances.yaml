@@ -1,24 +1,24 @@
 openapi: 3.0.3
 info:
   title: instances
-  version: "1.0"
   description: Instances Docs Here
+  version: "1.0"
 paths:
   /instances:
     post:
+      operationId: createInstance
       summary: Create Instance
+      description: Create an instance
       tags:
         - instances
-      operationId: createInstance
-      security:
-        - authCookie: []
-      description: Create an instance
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: ../requests/CreateInstanceRequest.yaml
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/instances/InstanceResponse.yaml
@@ -26,68 +26,91 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
   /instances/recent:
     get:
+      operationId: getRecentLocations
       summary: List Recent Locations
+      description: |-
+        Returns a list of recently visited locations.
       tags:
         - instances
       parameters:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
-      operationId: getRecentLocations
       security:
         - authCookie: []
-      description: |-
-        Returns a list of recently visited locations.
       responses:
         "200":
           $ref: ../responses/instances/LocationIDListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/instances/s/{shortName}":
+    parameters:
+      - name: shortName
+        description: Must be a valid instance short name.
+        required: true
+        in: path
+        schema:
+          type: string
+    get:
+      operationId: getInstanceByShortName
+      summary: Get Instance By Short Name
+      description: "Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances."
+      tags:
+        - instances
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/instances/InstanceNotFoundError.yaml
   "/instances/{worldId}:{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId
       - $ref: ../parameters.yaml#/instanceId
     get:
-      summary: Get Instance
-      tags:
-        - instances
       operationId: getInstance
-      security:
-        - authCookie: []
+      summary: Get Instance
       description: |-
         Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances.
 
         If an invalid instanceId is provided, this endpoint will simply return "null"!
+      tags:
+        - instances
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/instances/InstanceResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
     delete:
-      summary: Close Instance
-      tags:
-        - instances
       operationId: closeInstance
-      security:
-        - authCookie: []
-      parameters:
-        - in: query
-          name: hardClose
-          schema:
-            type: boolean
-          required: false
-          description: Whether to hard close the instance. Defaults to false.
-        - in: query
-          name: closedAt
-          schema:
-            type: string
-            format: date-time
-          description: |-
-            The time after which users won't be allowed to join the instances.
-            If omitted, the instance will be closed immediately.
+      summary: Close Instance
       description: |-
         Close an instance or update the closedAt time when it will be closed.
 
         You can only close an instance if the ownerId is yourself or if the instance owner is a group and you have the `group-instance-manage` permission.
+      tags:
+        - instances
+      parameters:
+        - name: hardClose
+          description: Whether to hard close the instance. Defaults to false.
+          required: false
+          in: query
+          schema:
+            type: boolean
+        - name: closedAt
+          description: |-
+            The time after which users won't be allowed to join the instances.
+            If omitted, the instance will be closed immediately.
+          in: query
+          schema:
+            type: string
+            format: date-time
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/instances/InstanceResponse.yaml
@@ -102,43 +125,20 @@ paths:
       - $ref: ../parameters.yaml#/worldId
       - $ref: ../parameters.yaml#/instanceId
     get:
+      operationId: getShortName
       summary: Get Instance Short Name
+      description: Returns an instance short name.
       tags:
         - instances
-      operationId: getShortName
       security:
         - authCookie: []
-      description: Returns an instance short name.
       responses:
         "200":
           $ref: ../responses/instances/InstanceShortNameResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  "/instances/s/{shortName}":
-    parameters:
-      - schema:
-          type: string
-        name: shortName
-        in: path
-        required: true
-        description: Must be a valid instance short name.
-    get:
-      summary: Get Instance By Short Name
-      tags:
-        - instances
-      operationId: getInstanceByShortName
-      security:
-        - authCookie: []
-      description: "Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances."
-      responses:
-        "200":
-          $ref: ../responses/instances/InstanceResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-        "404":
-          $ref: ../responses/instances/InstanceNotFoundError.yaml
-tags:
-  $ref: ../tags.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+tags:
+  $ref: ../tags.yaml

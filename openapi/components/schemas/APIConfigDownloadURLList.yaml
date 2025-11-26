@@ -1,32 +1,32 @@
-additionalProperties: false
-description: Download links for various development assets.
 title: APIConfigDownloadURLList
 type: object
+description: Download links for various development assets.
+additionalProperties: false
+properties:
+  bootstrap:
+    type: string
+    description: Download link for ???
+    minLength: 1
+  sdk2:
+    deprecated: true
+    type: string
+    description: Download link for legacy SDK2
+    minLength: 1
+  sdk3-avatars:
+    type: string
+    description: Download link for SDK3 for Avatars
+    minLength: 1
+  sdk3-worlds:
+    type: string
+    description: Download link for SDK3 for Worlds
+    minLength: 1
+  vcc:
+    type: string
+    description: Download link for the Creator Companion
+    minLength: 1
 required:
+  - bootstrap
   - sdk2
   - sdk3-avatars
   - sdk3-worlds
   - vcc
-  - bootstrap
-properties:
-  sdk2:
-    deprecated: true
-    description: Download link for legacy SDK2
-    minLength: 1
-    type: string
-  sdk3-avatars:
-    description: Download link for SDK3 for Avatars
-    minLength: 1
-    type: string
-  sdk3-worlds:
-    description: Download link for SDK3 for Worlds
-    minLength: 1
-    type: string
-  vcc:
-    description: Download link for the Creator Companion
-    minLength: 1
-    type: string
-  bootstrap:
-    description: Download link for ???
-    minLength: 1
-    type: string

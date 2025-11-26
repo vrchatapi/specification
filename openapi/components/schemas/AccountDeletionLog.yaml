@@ -1,17 +1,17 @@
 title: AccountDeletionLog
 type: object
 properties:
-  message:
-    type: string
-    default: Deletion requested
-    example: Deletion requested
-    description: Typically "Deletion requested" or "Deletion canceled". Other messages like "Deletion completed" may exist, but are these are not possible to see as a regular user.
-  deletionScheduled:
-    type: string
-    format: date-time
-    nullable: true
-    description: When the deletion is scheduled to happen, standard is 14 days after the request.
   dateTime:
     type: string
-    format: date-time
     description: Date and time of the deletion request.
+    format: date-time
+  deletionScheduled:
+    type: string
+    description: When the deletion is scheduled to happen, standard is 14 days after the request.
+    nullable: true
+    format: date-time
+  message:
+    type: string
+    description: Typically "Deletion requested" or "Deletion canceled". Other messages like "Deletion completed" may exist, but are these are not possible to see as a regular user.
+    default: Deletion requested
+    example: Deletion requested

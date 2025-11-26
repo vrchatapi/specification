@@ -1,11 +1,11 @@
 description: Error response when trying to see recently visited worlds of another user without sufficient admin permissions.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       403 Only See Own Recents:
         value:
           error:
             message: \"You can only see your own recent worlds!\"
             status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

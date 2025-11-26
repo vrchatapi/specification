@@ -1,33 +1,33 @@
 title: TokenBundle
 type: object
 properties:
-  id:
-    type: string
-  appleProductId:
-    type: string
-  steamItemId:
-    type: string
-  oculusSku:
-    type: string
-  googleProductId:
-    type: string
   amount:
     type: integer
     description: price of the bundle
+  appleProductId:
+    type: string
   description:
+    type: string
+  googleProductId:
+    type: string
+  id:
+    type: string
+  imageUrl:
+    type: string
+    description: direct url to image
+  oculusSku:
+    type: string
+  steamItemId:
     type: string
   tokens:
     type: integer
     description: number of tokens received
-  imageUrl:
-    type: string
-    description: direct url to image
 required:
-  - id
-  - appleProductId
-  - steamItemId
-  - oculusSku
   - amount
+  - appleProductId
   - description
-  - tokens
+  - id
   - imageUrl
+  - oculusSku
+  - steamItemId
+  - tokens

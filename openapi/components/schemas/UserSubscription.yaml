@@ -1,72 +1,72 @@
+title: UserSubscription
 type: object
 description: ""
 properties:
-  id:
-    type: string
-    minLength: 1
-    example: vrchatplus-yearly
-  transactionId:
-    $ref: ./TransactionID.yaml
-  store:
-    type: string
-    minLength: 1
-    description: Which "Store" it came from. Right now only Stores are "Steam" and "Admin".
-    example: Steam
-  steamItemId:
-    type: string
-    minLength: 1
-    example: "5000"
-  amount:
-    type: number
-    example: 9999
-  description:
-    type: string
-    example: VRChat Plus (Yearly)
-  period:
-    $ref: ./SubscriptionPeriod.yaml
-  tier:
-    type: integer
-    example: 5
   active:
     type: boolean
     default: true
-  status:
-    $ref: ./TransactionStatus.yaml
-  starts:
-    type: string
-  expires:
-    type: string
-    format: date-time
+  amount:
+    type: number
+    example: 9999
   created_at:
     type: string
     format: date-time
-  updated_at:
+  description:
+    type: string
+    example: VRChat Plus (Yearly)
+  expires:
     type: string
     format: date-time
+  id:
+    type: string
+    example: vrchatplus-yearly
+    minLength: 1
+  isBulkGift:
+    type: boolean
+    default: false
+  isGift:
+    type: boolean
+    default: false
   licenseGroups:
     type: array
     items:
       $ref: ./LicenseGroupID.yaml
-  isGift:
-    type: boolean
-    default: false
-  isBulkGift:
-    type: boolean
-    default: false
+  period:
+    $ref: ./SubscriptionPeriod.yaml
+  starts:
+    type: string
+  status:
+    $ref: ./TransactionStatus.yaml
+  steamItemId:
+    type: string
+    example: "5000"
+    minLength: 1
+  store:
+    type: string
+    description: Which "Store" it came from. Right now only Stores are "Steam" and "Admin".
+    example: Steam
+    minLength: 1
+  tier:
+    type: integer
+    example: 5
+  transactionId:
+    $ref: ./TransactionID.yaml
+  updated_at:
+    type: string
+    format: date-time
 required:
-  - id
-  - transactionId
-  - store
-  - amount
-  - description
-  - period
-  - tier
   - active
-  - status
-  - expires
+  - amount
   - created_at
-  - updated_at
-  - licenseGroups
-  - isGift
+  - description
+  - expires
+  - id
   - isBulkGift
-title: UserSubscription
+  - isGift
+  - licenseGroups
+  - period
+  - status
+  - store
+  - tier
+  - transactionId
+  - updated_at

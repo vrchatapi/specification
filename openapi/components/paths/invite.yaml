@@ -1,27 +1,153 @@
 openapi: 3.0.3
 info:
   title: invite
-  version: "1.0"
   description: Invite Docs Here
+  version: "1.0"
 paths:
+  "/invite/myself/to/{worldId}:{instanceId}":
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
+    post:
+      operationId: inviteMyselfTo
+      summary: Invite Myself To Instance
+      description: Sends self an invite to an instance
+      tags:
+        - invite
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/SendNotificationResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/instances/InstanceNotFoundError.yaml
+  "/invite/{notificationId}/response":
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
+    post:
+      operationId: respondInvite
+      summary: Respond Invite
+      description: |-
+        Respond to an invite or invite request without accepting it. `:notificationId` is the ID of the requesting notification.
+
+        In case the notification being replied to is an invite, the `responseSlot` refers to a response message from the the `message` collection.
+        In case the notification is an invite request, it will refer to one from the `requestResponse` collection instead.
+      tags:
+        - invite
+      requestBody:
+        description: Slot number of the Response Message to use when responding to a user.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/InviteResponse.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        "400":
+          $ref: ../responses/invite/InviteResponse400Error.yaml
+  "/invite/{notificationId}/response/photo":
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
+    post:
+      operationId: respondInviteWithPhoto
+      summary: Respond Invite with photo
+      description: |-
+        Respond with photo to an invite or invite request without accepting it. `:notificationId` is the ID of the requesting notification.
+
+        In case the notification being replied to is an invite, the `responseSlot` refers to a response message from the the `message` collection.
+        In case the notification is an invite request, it will refer to one from the `requestResponse` collection instead.'
+      tags:
+        - invite
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: ../requests/InviteResponse.yaml
+                image:
+                  type: string
+                  description: The binary blob of the png file.
+                  format: binary
+              required:
+                - data
+                - image
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/NotificationResponse.yaml
+        "400":
+          $ref: ../responses/invite/InviteResponse400Error.yaml
+  "/invite/{userId}":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      operationId: inviteUser
+      summary: Invite User
+      description: Sends an invite to a user. Returns the Notification of type `invite` that was sent.
+      tags:
+        - invite
+      requestBody:
+        description: Slot number of the Invite Message to use when inviting a user.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/InviteRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/SendNotificationResponse.yaml
+        "403":
+          $ref: ../responses/invite/InviteMustBeFriendsError.yaml
+  "/invite/{userId}/photo":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      operationId: inviteUserWithPhoto
+      summary: Invite User with photo
+      description: Sends an photo invite to a user. Returns the Notification of type `invite` that was sent.
+      tags:
+        - invite
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: ../requests/InviteRequest.yaml
+                image:
+                  type: string
+                  description: The binary blob of the png file.
+                  format: binary
+              required:
+                - data
+                - image
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/SendNotificationResponse.yaml
+        "403":
+          $ref: ../responses/invite/InviteMustBeFriendsError.yaml
   "/message/{userId}/{messageType}":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/messageType
     get:
-      summary: List Invite Messages
-      tags:
-        - invite
-      responses:
-        "200":
-          $ref: ../responses/invite/InviteMessageListResponse.yaml
-        "400":
-          $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
-        "401":
-          $ref: ../responses/NotAuthorizedActionError.yaml
       operationId: getInviteMessages
-      security:
-        - authCookie: []
+      summary: List Invite Messages
       description: |-
         Returns a list of all the users Invite Messages. Admin Credentials are required to view messages of other users!
 
@@ -31,27 +157,25 @@ paths:
         * `response` = Message when replying to a message
         * `request` = Message when requesting an invite
         * `requestResponse` = Message when replying to a request for invite
+      tags:
+        - invite
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/invite/InviteMessageListResponse.yaml
+        "400":
+          $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
+        "401":
+          $ref: ../responses/NotAuthorizedActionError.yaml
   "/message/{userId}/{messageType}/{slot}":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/messageType
       - $ref: ../parameters.yaml#/slot
     get:
-      summary: Get Invite Message
-      tags:
-        - invite
-      responses:
-        "200":
-          $ref: ../responses/invite/InviteMessageResponse.yaml
-        "400":
-          $ref: ../responses/invite/InviteMessageGetNegativeSlotError.yaml
-        "401":
-          $ref: ../responses/NotAuthorizedActionError.yaml
-        "404":
-          $ref: ../responses/invite/InviteMessageGetTooHighSlotError.yaml
       operationId: getInviteMessage
-      security:
-        - authCookie: []
+      summary: Get Invite Message
       description: |-
         Returns a single Invite Message. This returns the exact same information but less than `getInviteMessages`. Admin Credentials are required to view messages of other users!
 
@@ -61,11 +185,22 @@ paths:
         * `response` = Message when replying to a message
         * `request` = Message when requesting an invite
         * `requestResponse` = Message when replying to a request for invite
-    put:
-      summary: Update Invite Message
-      operationId: updateInviteMessage
+      tags:
+        - invite
       security:
         - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/invite/InviteMessageResponse.yaml
+        "400":
+          $ref: ../responses/invite/InviteMessageGetNegativeSlotError.yaml
+        "401":
+          $ref: ../responses/NotAuthorizedActionError.yaml
+        "404":
+          $ref: ../responses/invite/InviteMessageGetTooHighSlotError.yaml
+    put:
+      operationId: updateInviteMessage
+      summary: Update Invite Message
       description: |-
         Updates a single Invite Message and then returns a list of all of them. Admin Credentials are required to update messages of other users!
 
@@ -78,26 +213,14 @@ paths:
         * `response` = Message when replying to a message
         * `request` = Message when requesting an invite
         * `requestResponse` = Message when replying to a request for invite
-      responses:
-        "200":
-          $ref: ../responses/invite/InviteMessageListResponse.yaml
-        "400":
-          $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
-        "401":
-          $ref: ../responses/NotAuthorizedActionError.yaml
-        "429":
-          $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
+      tags:
+        - invite
       requestBody:
+        description: Message of what to set the invite message to.
         content:
           application/json:
             schema:
               $ref: ../requests/UpdateInviteMessageRequest.yaml
-        description: Message of what to set the invite message to.
-      tags:
-        - invite
-    delete:
-      summary: Reset Invite Message
-      operationId: resetInviteMessage
       security:
         - authCookie: []
       responses:
@@ -107,12 +230,11 @@ paths:
           $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
         "401":
           $ref: ../responses/NotAuthorizedActionError.yaml
-        "404":
-          $ref: ../responses/invite/InviteMessageNoEntryForSlotError.yaml
         "429":
           $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
-      tags:
-        - invite
+    delete:
+      operationId: resetInviteMessage
+      summary: Reset Invite Message
       description: |-
         Resets a single Invite Message back to its original message, and then returns a list of all of them. Admin Credentials are required to update messages of other users!
 
@@ -129,160 +251,38 @@ paths:
         * `requestResponse` = Message when replying to a request for invite
 
         The DELETE endpoint does not have/require any request body.
-  "/invite/{userId}":
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-    post:
-      summary: Invite User
       tags:
         - invite
-      responses:
-        "200":
-          $ref: ../responses/notifications/SendNotificationResponse.yaml
-        "403":
-          $ref: ../responses/invite/InviteMustBeFriendsError.yaml
-      operationId: inviteUser
       security:
         - authCookie: []
-      description: Sends an invite to a user. Returns the Notification of type `invite` that was sent.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/InviteRequest.yaml
-        description: Slot number of the Invite Message to use when inviting a user.
-  "/invite/{userId}/photo":
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-    post:
-      summary: Invite User with photo
-      tags:
-        - invite
       responses:
         "200":
-          $ref: ../responses/notifications/SendNotificationResponse.yaml
-        "403":
-          $ref: ../responses/invite/InviteMustBeFriendsError.yaml
-      operationId: inviteUserWithPhoto
-      security:
-        - authCookie: []
-      description: Sends an photo invite to a user. Returns the Notification of type `invite` that was sent.
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                image:
-                  type: string
-                  format: binary
-                  description: The binary blob of the png file.
-                data:
-                  $ref: ../requests/InviteRequest.yaml
-              required:
-                - image
-                - data
-  "/invite/myself/to/{worldId}:{instanceId}":
-    parameters:
-      - $ref: ../parameters.yaml#/worldId
-      - $ref: ../parameters.yaml#/instanceId
-    post:
-      summary: Invite Myself To Instance
-      tags:
-        - invite
-      operationId: inviteMyselfTo
-      security:
-        - authCookie: []
-      description: Sends self an invite to an instance
-      responses:
-        "200":
-          $ref: ../responses/notifications/SendNotificationResponse.yaml
+          $ref: ../responses/invite/InviteMessageListResponse.yaml
+        "400":
+          $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
         "401":
-          $ref: ../responses/MissingCredentialsError.yaml
+          $ref: ../responses/NotAuthorizedActionError.yaml
         "404":
-          $ref: ../responses/instances/InstanceNotFoundError.yaml
-  "/invite/{notificationId}/response":
-    parameters:
-      - $ref: ../parameters.yaml#/notificationId
-    post:
-      summary: Respond Invite
-      tags:
-        - invite
-      responses:
-        "200":
-          $ref: ../responses/notifications/NotificationResponse.yaml
-        "400":
-          $ref: ../responses/invite/InviteResponse400Error.yaml
-      operationId: respondInvite
-      security:
-        - authCookie: []
-      description: |-
-        Respond to an invite or invite request without accepting it. `:notificationId` is the ID of the requesting notification.
-
-        In case the notification being replied to is an invite, the `responseSlot` refers to a response message from the the `message` collection.
-        In case the notification is an invite request, it will refer to one from the `requestResponse` collection instead.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/InviteResponse.yaml
-        description: Slot number of the Response Message to use when responding to a user.
-  "/invite/{notificationId}/response/photo":
-    parameters:
-      - $ref: ../parameters.yaml#/notificationId
-    post:
-      summary: Respond Invite with photo
-      tags:
-        - invite
-      responses:
-        "200":
-          $ref: ../responses/notifications/NotificationResponse.yaml
-        "400":
-          $ref: ../responses/invite/InviteResponse400Error.yaml
-      operationId: respondInviteWithPhoto
-      security:
-        - authCookie: []
-      description: |-
-        Respond with photo to an invite or invite request without accepting it. `:notificationId` is the ID of the requesting notification.
-
-        In case the notification being replied to is an invite, the `responseSlot` refers to a response message from the the `message` collection.
-        In case the notification is an invite request, it will refer to one from the `requestResponse` collection instead.'
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                image:
-                  type: string
-                  format: binary
-                  description: The binary blob of the png file.
-                data:
-                  $ref: ../requests/InviteResponse.yaml
-              required:
-                - image
-                - data
+          $ref: ../responses/invite/InviteMessageNoEntryForSlotError.yaml
+        "429":
+          $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
   "/requestInvite/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:
-      summary: Request Invite
       operationId: requestInvite
-      security:
-        - authCookie: []
+      summary: Request Invite
       description: Requests an invite from a user. Returns the Notification of type `requestInvite` that was sent.
+      tags:
+        - invite
       requestBody:
+        description: Slot number of the Request Message to use when request an invite.
         content:
           application/json:
             schema:
               $ref: ../requests/RequestInviteRequest.yaml
-        description: Slot number of the Request Message to use when request an invite.
-      tags:
-        - invite
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/notifications/NotificationResponse.yaml
@@ -292,35 +292,35 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:
-      summary: Request Invite with photo
       operationId: requestInviteWithPhoto
-      security:
-        - authCookie: []
+      summary: Request Invite with photo
       description: Requests with photo an invite from a user. Returns the Notification of type `requestInvite` that was sent.
+      tags:
+        - invite
       requestBody:
         content:
           multipart/form-data:
             schema:
               type: object
               properties:
-                image:
-                  type: string
-                  format: binary
-                  description: The binary blob of the png file.
                 data:
                   $ref: ../requests/RequestInviteRequest.yaml
+                image:
+                  type: string
+                  description: The binary blob of the png file.
+                  format: binary
               required:
-                - image
                 - data
-      tags:
-        - invite
+                - image
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/notifications/NotificationResponse.yaml
         "403":
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
-tags:
-  $ref: ../tags.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+tags:
+  $ref: ../tags.yaml

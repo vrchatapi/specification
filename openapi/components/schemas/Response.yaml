@@ -1,11 +1,11 @@
-properties:
-  message:
-    minLength: 1
-    type: string
-  status_code:
-    minimum: 100
-    type: integer
-required:
-  - status_code
 title: Response
 type: object
+properties:
+  message:
+    type: string
+    minLength: 1
+  status_code:
+    type: integer
+    minimum: 100
+required:
+  - status_code

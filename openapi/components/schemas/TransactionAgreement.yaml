@@ -1,70 +1,70 @@
-description: "Represents a single Transaction, which is likely between VRChat and Steam."
+title: TransactionAgreement
 type: object
+description: "Represents a single Transaction, which is likely between VRChat and Steam."
 properties:
+  agreement:
+    type: string
   agreementId:
     type: string
     minLength: 1
-  itemId:
-    type: integer
-  agreement:
-    type: string
-  status:
-    type: string
-    minLength: 1
-    description: "This is NOT TransactionStatus, but whatever Steam return."
-  period:
-    type: string
-    minLength: 1
-  frequency:
-    type: integer
   billingType:
     type: string
     minLength: 1
-  startDate:
+  currency:
     type: string
     minLength: 1
   endDate:
     type: string
     minLength: 1
-  recurringAmt:
+  failedAttempts:
+    type: integer
+  frequency:
+    type: integer
+  itemId:
+    type: integer
+  lastAmount:
     type: number
-  currency:
-    type: string
-    minLength: 1
-  timeCreated:
+  lastAmountVat:
+    type: number
+  lastPayment:
     type: string
     minLength: 1
   nextPayment:
     type: string
     minLength: 1
-  lastPayment:
-    type: string
-    minLength: 1
-  lastAmount:
-    type: number
-  lastAmountVat:
-    type: number
   outstanding:
     type: integer
-  failedAttempts:
-    type: integer
+  period:
+    type: string
+    minLength: 1
+  recurringAmt:
+    type: number
+  startDate:
+    type: string
+    minLength: 1
+  status:
+    type: string
+    description: "This is NOT TransactionStatus, but whatever Steam return."
+    minLength: 1
+  timeCreated:
+    type: string
+    minLength: 1
 required:
-  - agreementId
-  - itemId
   - agreement
-  - status
-  - period
-  - frequency
+  - agreementId
   - billingType
-  - startDate
-  - endDate
-  - recurringAmt
   - currency
-  - timeCreated
-  - nextPayment
-  - lastPayment
+  - endDate
+  - failedAttempts
+  - frequency
+  - itemId
   - lastAmount
   - lastAmountVat
+  - lastPayment
+  - nextPayment
   - outstanding
-  - failedAttempts
-title: TransactionAgreement
+  - period
+  - recurringAmt
+  - startDate
+  - status
+  - timeCreated

@@ -1,27 +1,27 @@
-description: ""
+title: TransactionSteamInfo
 type: object
+description: ""
 properties:
-  walletInfo:
-    $ref: ./TransactionSteamWalletInfo.yaml
-  steamId:
-    type: string
-    minLength: 1
-    description: Steam User ID
   orderId:
     type: string
-    minLength: 1
     description: Steam Order ID
+    minLength: 1
+  steamId:
+    type: string
+    description: Steam User ID
+    minLength: 1
   steamUrl:
     type: string
     description: Empty
   transId:
     type: string
-    minLength: 1
     description: "Steam Transaction ID, NOT the same as VRChat TransactionID"
+    minLength: 1
+  walletInfo:
+    $ref: ./TransactionSteamWalletInfo.yaml
 required:
-  - walletInfo
-  - steamId
   - orderId
+  - steamId
   - steamUrl
   - transId
-title: TransactionSteamInfo
+  - walletInfo

@@ -1,6 +1,6 @@
+title: GroupPrivacy
 type: string
 enum:
   - default
   - private
-title: GroupPrivacy
 default: default

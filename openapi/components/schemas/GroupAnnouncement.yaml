@@ -1,20 +1,18 @@
 title: GroupAnnouncement
 type: object
 properties:
-  id:
-    $ref: ./GroupAnnouncementID.yaml
-    nullable: true
-  groupId:
-    $ref: ./GroupID.yaml
-    nullable: true
   authorId:
     $ref: ./UserID.yaml
     nullable: true
-  title:
+  createdAt:
     type: string
     nullable: true
-  text:
-    type: string
+    format: date-time
+  groupId:
+    $ref: ./GroupID.yaml
+    nullable: true
+  id:
+    $ref: ./GroupAnnouncementID.yaml
     nullable: true
   imageId:
     $ref: ./FileID.yaml
@@ -22,11 +20,13 @@ properties:
   imageUrl:
     type: string
     nullable: true
-  createdAt:
+  text:
     type: string
-    format: date-time
+    nullable: true
+  title:
+    type: string
     nullable: true
   updatedAt:
     type: string
-    format: date-time
     nullable: true
+    format: date-time

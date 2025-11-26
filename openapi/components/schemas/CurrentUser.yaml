@@ -1,27 +1,27 @@
 title: CurrentUser
 type: object
 properties:
-  acceptedTOSVersion:
-    minimum: 0
-    example: 7
-    type: integer
   acceptedPrivacyVersion:
-    minimum: 0
-    example: 0
     type: integer
+    example: 0
+    minimum: 0
+  acceptedTOSVersion:
+    type: integer
+    example: 7
+    minimum: 0
   accountDeletionDate:
-    format: date
-    nullable: true
     type: string
+    nullable: true
+    format: date
   accountDeletionLog:
+    type: array
     description: " "
     nullable: true
-    type: array
     items:
       $ref: ./AccountDeletionLog.yaml
   activeFriends:
-    description: " "
     type: array
+    description: " "
     items:
       $ref: ./UserID.yaml
   ageVerificationStatus:
@@ -31,38 +31,38 @@ properties:
   allowAvatarCopying:
     type: boolean
   authToken:
-    description: The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)
     type: string
+    description: The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)
   badges:
-    description: " "
     type: array
+    description: " "
     items:
       $ref: ./Badge.yaml
   bio:
     type: string
   bioLinks:
-    description: " "
     type: array
+    description: " "
     items:
       type: string
   contentFilters:
-    description: These tags begin with `content_` and control content gating
     type: array
+    description: These tags begin with `content_` and control content gating
     items:
       $ref: ./Tag.yaml
   currentAvatar:
     $ref: ./AvatarID.yaml
   currentAvatarImageUrl:
     $ref: ./CurrentAvatarImageUrl.yaml
-  currentAvatarThumbnailImageUrl:
-    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   currentAvatarTags:
     type: array
     items:
       $ref: ./Tag.yaml
+  currentAvatarThumbnailImageUrl:
+    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   date_joined:
-    format: date
     type: string
+    format: date
   developerType:
     $ref: ./DeveloperType.yaml
   discordDetails:
@@ -77,32 +77,30 @@ properties:
     deprecated: true
     $ref: ./AvatarID.yaml
   friendGroupNames:
-    type: array
     deprecated: true
+    type: array
     description: Always empty array.
     items:
       type: string
   friendKey:
     type: string
   friends:
+    type: array
     items:
       $ref: ./UserID.yaml
-    type: array
+  googleDetails:
+    type: object
+  googleId:
+    type: string
   hasBirthday:
     type: boolean
-  hideContentFilterSettings:
-    type: boolean
-  userLanguage:
-    nullable: true
-    type: string
-  userLanguageCode:
-    nullable: true
-    type: string
   hasEmail:
     type: boolean
   hasLoggedInFromClient:
     type: boolean
   hasPendingEmail:
+    type: boolean
+  hideContentFilterSettings:
     type: boolean
   homeLocation:
     $ref: ./WorldID.yaml
@@ -111,21 +109,21 @@ properties:
   isAdult:
     type: boolean
   isBoopingEnabled:
+    type: boolean
     default: true
-    type: boolean
   isFriend:
-    default: false
     type: boolean
+    default: false
   last_activity:
-    format: date-time
     type: string
+    format: date-time
   last_login:
-    format: date-time
     type: string
-  last_mobile:
     format: date-time
+  last_mobile:
     type: string
     nullable: true
+    format: date-time
   last_platform:
     $ref: ./Platform.yaml
   obfuscatedEmail:
@@ -134,29 +132,21 @@ properties:
     type: string
   oculusId:
     type: string
-  googleId:
-    type: string
-  googleDetails:
-    type: object
-  picoId:
-    type: string
-  viveId:
-    type: string
   offlineFriends:
+    type: array
     items:
       $ref: ./UserID.yaml
-    type: array
   onlineFriends:
+    type: array
     items:
       $ref: ./UserID.yaml
-    type: array
   pastDisplayNames:
+    type: array
     description: " "
     items:
       $ref: ./PastDisplayName.yaml
-    type: array
-  presence:
-    $ref: ./CurrentUserPresence.yaml
+  picoId:
+    type: string
   platform_history:
     type: array
     items:
@@ -170,6 +160,8 @@ properties:
         recorded:
           type: string
           format: date-time
+  presence:
+    $ref: ./CurrentUserPresence.yaml
   profilePicOverride:
     type: string
   profilePicOverrideThumbnail:
@@ -194,80 +186,88 @@ properties:
   statusFirstTime:
     type: boolean
   statusHistory:
+    type: array
     items:
       type: string
-    type: array
   steamDetails:
     type: object
   steamId:
     type: string
   tags:
+    type: array
     items:
       $ref: ./Tag.yaml
-    type: array
   twoFactorAuthEnabled:
     type: boolean
   twoFactorAuthEnabledDate:
-    format: date-time
-    nullable: true
     type: string
+    nullable: true
+    format: date-time
   unsubscribe:
     type: boolean
   updated_at:
-    format: date-time
     type: string
+    format: date-time
   userIcon:
     type: string
-  username:
+  userLanguage:
     type: string
+    nullable: true
+  userLanguageCode:
+    type: string
+    nullable: true
+  username:
     deprecated: true
+    type: string
     description: -|
       **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
+  viveId:
+    type: string
 required:
-  - id
-  - displayName
-  - userIcon
+  - acceptedTOSVersion
+  - ageVerificationStatus
+  - ageVerified
+  - allowAvatarCopying
   - bio
   - bioLinks
+  - currentAvatar
+  - currentAvatarImageUrl
+  - currentAvatarTags
+  - currentAvatarThumbnailImageUrl
+  - date_joined
+  - developerType
+  - displayName
+  - emailVerified
+  - friendGroupNames
+  - friendKey
+  - friends
+  - hasBirthday
+  - hasEmail
+  - hasLoggedInFromClient
+  - hasPendingEmail
+  - homeLocation
+  - id
+  - isAdult
+  - isFriend
+  - last_login
+  - last_mobile
+  - last_platform
+  - obfuscatedEmail
+  - obfuscatedPendingEmail
+  - oculusId
+  - pastDisplayNames
   - profilePicOverride
   - profilePicOverrideThumbnail
   - pronouns
   - pronounsHistory
-  - statusDescription
-  - pastDisplayNames
-  - hasEmail
-  - hasPendingEmail
-  - obfuscatedEmail
-  - obfuscatedPendingEmail
-  - emailVerified
-  - hasBirthday
-  - unsubscribe
-  - statusHistory
-  - statusFirstTime
-  - friends
-  - friendGroupNames
-  - currentAvatarImageUrl
-  - currentAvatarThumbnailImageUrl
-  - currentAvatarTags
-  - currentAvatar
-  - acceptedTOSVersion
-  - steamId
-  - steamDetails
-  - oculusId
-  - hasLoggedInFromClient
-  - homeLocation
-  - twoFactorAuthEnabled
   - state
-  - tags
-  - developerType
-  - last_login
-  - last_mobile
-  - last_platform
-  - allowAvatarCopying
   - status
-  - date_joined
-  - isFriend
-  - friendKey
-  - isAdult
-  - ageVerificationStatus
-  - ageVerified
+  - statusDescription
+  - statusFirstTime
+  - statusHistory
+  - steamDetails
+  - steamId
+  - tags
+  - twoFactorAuthEnabled
+  - unsubscribe
+  - userIcon

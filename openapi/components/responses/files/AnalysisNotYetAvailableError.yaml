@@ -1,11 +1,11 @@
 description: Error response when requesting file Analysis that is not yet available.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       Analysis Not Yet Available Error:
         value:
           error:
             message: Analysis not yet available
             status_code: 202
+    schema:
+      $ref: ../../schemas/Error.yaml

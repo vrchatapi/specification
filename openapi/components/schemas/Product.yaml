@@ -41,8 +41,8 @@ properties:
       $ref: ./Tag.yaml
   updated:
     type: string
-    format: date-time
     nullable: true
+    format: date-time
   useForSubscriberList:
     type: boolean
     default: false

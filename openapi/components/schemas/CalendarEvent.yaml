@@ -1,3 +1,5 @@
+title: CalendarEvent
+type: object
 description: ""
 properties:
   accessType:
@@ -13,8 +15,8 @@ properties:
     format: date-time
   deletedAt:
     type: string
-    format: date-time
     nullable: true
+    format: date-time
   description:
     type: string
   endsAt:
@@ -39,31 +41,31 @@ properties:
   isDraft:
     type: boolean
   languages:
-    description: " "
     type: array
+    description: " "
     items:
       type: string
   ownerId:
     $ref: ./GroupID.yaml
   platforms:
-    description: " "
     type: array
+    description: " "
     items:
       type: string
   roleIds:
-    description: " "
     type: array
+    description: " "
+    nullable: true
     items:
       $ref: ./GroupRoleID.yaml
-    nullable: true
   startsAt:
     type: string
     format: date-time
   tags:
+    type: array
     description: " "
     items:
       $ref: ./Tag.yaml
-    type: array
   title:
     type: string
     minLength: 1
@@ -73,8 +75,6 @@ properties:
   updatedAt:
     type: string
     format: date-time
-  usesInstanceOverflow:
-    type: boolean
   userInterest:
     type: object
     properties:
@@ -86,13 +86,13 @@ properties:
       updatedAt:
         type: string
         format: date-time
+  usesInstanceOverflow:
+    type: boolean
 required:
-  - id
-  - title
   - accessType
-  - startsAt
-  - endsAt
-  - description
   - category
-title: CalendarEvent
-type: object
+  - description
+  - endsAt
+  - id
+  - startsAt
+  - title

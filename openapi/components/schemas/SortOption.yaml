@@ -1,23 +1,23 @@
 title: SortOption
 type: string
-default: popularity
 enum:
-  - popularity
-  - heat
-  - trust
-  - shuffle
-  - random
-  - favorites
-  - reportScore
-  - reportCount
-  - publicationDate
-  - labsPublicationDate
-  - created
   - _created_at
-  - updated
   - _updated_at
-  - order
-  - relevance
+  - created
+  - favorites
+  - heat
+  - labsPublicationDate
   - magic
   - name
+  - order
+  - popularity
+  - publicationDate
+  - random
+  - relevance
+  - reportCount
+  - reportScore
+  - shuffle
+  - trust
+  - updated
+default: popularity
 example: popularity

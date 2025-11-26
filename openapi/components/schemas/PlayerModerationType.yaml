@@ -1,14 +1,14 @@
+title: PlayerModerationType
 type: string
-default: unmute
 enum:
   - block
+  - hideAvatar
+  - interactOff
+  - interactOn
   - mute
   - muteChat
+  - showAvatar
   - unmute
   - unmuteChat
-  - hideAvatar
-  - showAvatar
-  - interactOn
-  - interactOff
+default: unmute
 example: unmute
-title: PlayerModerationType

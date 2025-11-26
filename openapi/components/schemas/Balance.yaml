@@ -1,10 +1,10 @@
-description: ""
-type: object
 title: Balance
+type: object
+description: ""
 properties:
   balance:
-    default: 0
     type: integer
+    default: 0
   noTransactions:
     type: boolean
   tiliaResponse:

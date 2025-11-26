@@ -1,42 +1,81 @@
 openapi: 3.0.3
 info:
   title: avatars
-  version: "1.0"
   description: Avatars Docs Here
+  version: "1.0"
 paths:
-  "/users/{userId}/avatar":
+  /avatarStyles:
     get:
-      summary: Get Own Avatar
+      operationId: getAvatarStyles
+      summary: Get Avatar Styles
+      description: List avatar styles.
       tags:
         - avatars
       responses:
         "200":
-          $ref: ../responses/avatars/AvatarResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-        "403":
-          $ref: ../responses/avatars/AvatarSeeOtherUserCurrentAvatarError.yaml
-      operationId: getOwnAvatar
-      security:
-        - authCookie: []
-      description: Get the current avatar for the user. This will return an error for any other user than the one logged in.
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-  /avatars/favorites:
+          $ref: ../responses/avatars/AvatarStyleListResponse.yaml
+  /avatars:
     get:
-      summary: List Favorited Avatars
+      operationId: searchAvatars
+      summary: Search Avatars
+      description: Search and list avatars by query filters. You can only search your own or featured avatars. It is not possible as a normal user to search other peoples avatars.
       tags:
         - avatars
+      parameters:
+        - $ref: ../parameters.yaml#/featured
+        - $ref: ../parameters.yaml#/sort
+        - name: user
+          description: Set to `me` for searching own avatars.
+          required: false
+          in: query
+          schema:
+            type: string
+            enum:
+              - me
+        - $ref: ../parameters.yaml#/userIdQuery
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/order
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/tag
+        - $ref: ../parameters.yaml#/notag
+        - $ref: ../parameters.yaml#/releaseStatus
+        - $ref: ../parameters.yaml#/maxUnityVersion
+        - $ref: ../parameters.yaml#/minUnityVersion
+        - $ref: ../parameters.yaml#/platform
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/avatars/AvatarListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        "403":
-          $ref: ../responses/avatars/AvatarSeeOtherUserFavoritesError.yaml
-      operationId: getFavoritedAvatars
+    post:
+      operationId: createAvatar
+      summary: Create Avatar
+      description: Create an avatar. It's possible to optionally specify a ID if you want a custom one. Attempting to create an Avatar with an already claimed ID will result in a DB error.
+      tags:
+        - avatars
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateAvatarRequest.yaml
       security:
         - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/avatars/AvatarResponse.yaml
+        "400":
+          $ref: ../responses/avatars/UnableToCreateAvatarNowError.yaml
+        "401":
+          $ref: ../responses/FeaturedSetNotAdminError.yaml
+  /avatars/favorites:
+    get:
+      operationId: getFavoritedAvatars
+      summary: List Favorited Avatars
+      description: Search and list favorited avatars by query filters.
+      tags:
+        - avatars
       parameters:
         - $ref: ../parameters.yaml#/featured
         - $ref: ../parameters.yaml#/sort
@@ -51,96 +90,57 @@ paths:
         - $ref: ../parameters.yaml#/minUnityVersion
         - $ref: ../parameters.yaml#/platform
         - $ref: ../parameters.yaml#/userIdAdmin
-      description: Search and list favorited avatars by query filters.
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/avatars/AvatarListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/avatars/AvatarSeeOtherUserFavoritesError.yaml
+  /avatars/impostor/queue/stats:
+    get:
+      operationId: getImpostorQueueStats
+      summary: Get Impostor Queue Stats
+      description: Gets service stats for queued impostor.
+      tags:
+        - avatars
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/avatars/AvatarImpostorQueueStatsResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /avatars/licensed:
     get:
-      summary: List Licensed Avatars
-      tags:
-        - avatars
-      responses:
-        "200":
-          $ref: ../responses/avatars/AvatarListResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
       operationId: getLicensedAvatars
-      security:
-        - authCookie: []
+      summary: List Licensed Avatars
+      description: List licensed avatars.
+      tags:
+        - avatars
       parameters:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
-      description: List licensed avatars.
-  /avatars:
-    get:
-      summary: Search Avatars
-      tags:
-        - avatars
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/avatars/AvatarListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: searchAvatars
-      security:
-        - authCookie: []
-      parameters:
-        - $ref: ../parameters.yaml#/featured
-        - $ref: ../parameters.yaml#/sort
-        - schema:
-            type: string
-            enum:
-              - me
-          in: query
-          required: false
-          name: user
-          description: Set to `me` for searching own avatars.
-        - $ref: ../parameters.yaml#/userIdQuery
-        - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/order
-        - $ref: ../parameters.yaml#/offset
-        - $ref: ../parameters.yaml#/tag
-        - $ref: ../parameters.yaml#/notag
-        - $ref: ../parameters.yaml#/releaseStatus
-        - $ref: ../parameters.yaml#/maxUnityVersion
-        - $ref: ../parameters.yaml#/minUnityVersion
-        - $ref: ../parameters.yaml#/platform
-      description: Search and list avatars by query filters. You can only search your own or featured avatars. It is not possible as a normal user to search other peoples avatars.
-    post:
-      summary: Create Avatar
-      operationId: createAvatar
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/avatars/AvatarResponse.yaml
-        "400":
-          $ref: ../responses/avatars/UnableToCreateAvatarNowError.yaml
-        "401":
-          $ref: ../responses/FeaturedSetNotAdminError.yaml
-      tags:
-        - avatars
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/CreateAvatarRequest.yaml
-      description: Create an avatar. It's possible to optionally specify a ID if you want a custom one. Attempting to create an Avatar with an already claimed ID will result in a DB error.
-  /avatarStyles:
-    get:
-      summary: Get Avatar Styles
-      tags:
-        - avatars
-      responses:
-        "200":
-          $ref: ../responses/avatars/AvatarStyleListResponse.yaml
-      operationId: getAvatarStyles
-      description: List avatar styles.
   "/avatars/{avatarId}":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
     get:
+      operationId: getAvatar
       summary: Get Avatar
+      description: Get information about a specific Avatar.
       tags:
         - avatars
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/avatars/AvatarResponse.yaml
@@ -148,22 +148,9 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
-      operationId: getAvatar
-      security:
-        - authCookie: []
-      description: Get information about a specific Avatar.
     put:
-      summary: Update Avatar
       operationId: updateAvatar
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/avatars/AvatarResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-        "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+      summary: Update Avatar
       description: Update information about a specific avatar.
       tags:
         - avatars
@@ -172,9 +159,6 @@ paths:
           application/json:
             schema:
               $ref: ../requests/UpdateAvatarRequest.yaml
-    delete:
-      summary: Delete Avatar
-      operationId: deleteAvatar
       security:
         - authCookie: []
       responses:
@@ -184,16 +168,68 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
+    delete:
+      operationId: deleteAvatar
+      summary: Delete Avatar
+      description: 'Delete an avatar. Notice an avatar is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The AvatarID is permanently reserved.'
       tags:
         - avatars
-      description: 'Delete an avatar. Notice an avatar is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The AvatarID is permanently reserved.'
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/avatars/AvatarResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+  "/avatars/{avatarId}/impostor":
+    parameters:
+      - $ref: ../parameters.yaml#/avatarId
+    delete:
+      operationId: deleteImpostor
+      summary: Delete generated Impostor
+      description: Delete generated Impostor for that avatar.
+      tags:
+        - avatars
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          description: The Impostors generated for that avatar are deleted.
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+  "/avatars/{avatarId}/impostor/enqueue":
+    parameters:
+      - $ref: ../parameters.yaml#/avatarId
+    post:
+      operationId: enqueueImpostor
+      summary: Enqueue Impostor generation
+      description: Enqueue Impostor generation for that avatar.
+      tags:
+        - avatars
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/avatars/AvatarImpostorEnqueueResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/avatars/AvatarNotFoundError.yaml
   "/avatars/{avatarId}/select":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
     put:
+      operationId: selectAvatar
       summary: Select Avatar
+      description: Switches into that avatar.
       tags:
         - avatars
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/users/CurrentUserResponse.yaml
@@ -201,18 +237,18 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
-      operationId: selectAvatar
-      security:
-        - authCookie: []
-      description: Switches into that avatar.
   "/avatars/{avatarId}/selectFallback":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
     put:
-      summary: Select Fallback Avatar
+      operationId: selectFallbackAvatar
       deprecated: true
+      summary: Select Fallback Avatar
+      description: Switches into that avatar as your fallback avatar.
       tags:
         - avatars
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/users/CurrentUserResponse.yaml
@@ -222,62 +258,26 @@ paths:
           $ref: ../responses/avatars/AvatarNotTaggedAsFallbackError.yaml
         "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
-      operationId: selectFallbackAvatar
-      security:
-        - authCookie: []
-      description: Switches into that avatar as your fallback avatar.
-  "/avatars/{avatarId}/impostor/enqueue":
+  "/users/{userId}/avatar":
     parameters:
-      - $ref: ../parameters.yaml#/avatarId
-    post:
-      summary: Enqueue Impostor generation
-      tags:
-        - avatars
-      responses:
-        "200":
-          $ref: ../responses/avatars/AvatarImpostorEnqueueResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-        "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
-      operationId: enqueueImpostor
-      security:
-        - authCookie: []
-      description: Enqueue Impostor generation for that avatar.
-  /avatars/impostor/queue/stats:
+      - $ref: ../parameters.yaml#/userId
     get:
-      summary: Get Impostor Queue Stats
+      operationId: getOwnAvatar
+      summary: Get Own Avatar
+      description: Get the current avatar for the user. This will return an error for any other user than the one logged in.
       tags:
         - avatars
-      responses:
-        "200":
-          $ref: ../responses/avatars/AvatarImpostorQueueStatsResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getImpostorQueueStats
       security:
         - authCookie: []
-      description: Gets service stats for queued impostor.
-  "/avatars/{avatarId}/impostor":
-    parameters:
-      - $ref: ../parameters.yaml#/avatarId
-    delete:
-      summary: Delete generated Impostor
-      tags:
-        - avatars
       responses:
         "200":
-          description: The Impostors generated for that avatar are deleted.
+          $ref: ../responses/avatars/AvatarResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
-      operationId: deleteImpostor
-      security:
-        - authCookie: []
-      description: Delete generated Impostor for that avatar.
-tags:
-  $ref: ../tags.yaml
+        "403":
+          $ref: ../responses/avatars/AvatarSeeOtherUserCurrentAvatarError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+tags:
+  $ref: ../tags.yaml

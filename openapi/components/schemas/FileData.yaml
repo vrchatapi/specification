@@ -1,6 +1,6 @@
-description: ""
 title: FileData
 type: object
+description: ""
 properties:
   category:
     type: string
@@ -8,26 +8,26 @@ properties:
       - multipart
       - queued
       - simple
-    minLength: 1
     default: queued
-  fileName:
     minLength: 1
+  fileName:
     type: string
+    minLength: 1
   md5:
-    minLength: 0
     type: string
+    minLength: 0
   sizeInBytes:
-    minimum: 0
     type: integer
+    minimum: 0
   status:
     $ref: ./FileStatus.yaml
   uploadId:
+    type: string
     default: ""
     minLength: 0
-    type: string
   url:
-    minLength: 1
     type: string
+    minLength: 1
 required:
   - category
   - fileName

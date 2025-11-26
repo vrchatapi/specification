@@ -1,14 +1,16 @@
-description: ""
-type: object
 title: InfoPushData
+type: object
+description: ""
 properties:
+  article:
+    $ref: ./InfoPushDataArticle.yaml
   contentList:
     $ref: ./DynamicContentRow.yaml
   description:
     type: string
   imageUrl:
-    minLength: 1
     type: string
+    minLength: 1
   name:
     type: string
   onPressed:
@@ -16,8 +18,6 @@ properties:
   template:
     type: string
   version:
+    type: string
     example: 2021.3.4
     minLength: 1
-    type: string
-  article:
-    $ref: ./InfoPushDataArticle.yaml

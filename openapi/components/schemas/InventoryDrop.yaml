@@ -4,17 +4,17 @@ properties:
   authorId:
     $ref: ./UserID.yaml
   created_at:
-    format: date-time
     type: string
     example: "2025-06-10T20:37:31.837Z"
-  dropExpiryDate:
     format: date-time
+  dropExpiryDate:
     type: string
     nullable: true
-  endDropDate:
     format: date-time
+  endDropDate:
     type: string
     example: "2184-07-24T00:00:00.000Z"
+    format: date-time
   id:
     $ref: ./InventoryDropID.yaml
   name:
@@ -22,9 +22,9 @@ properties:
   notificationDetails:
     $ref: ./InventoryNotificationDetails.yaml
   startDropDate:
-    format: date-time
     type: string
     example: "2025-06-09T10:00:00.000Z"
+    format: date-time
   status:
     type: string
     example: active
@@ -40,9 +40,9 @@ properties:
     items:
       $ref: ./InventoryTemplateID.yaml
   updated_at:
-    format: date-time
     type: string
     example: "2025-06-10T20:37:31.837Z"
+    format: date-time
 required:
   - authorId
   - created_at

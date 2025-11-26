@@ -1,6 +1,6 @@
-description: ""
-type: object
 title: TiliaTOS
+type: object
+description: ""
 properties:
   signed_tos:
     type: boolean

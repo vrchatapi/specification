@@ -1,11 +1,11 @@
 description: Successful response after deleting a calendar event.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Success.yaml
     examples:
       Deleted Calendar Entry:
         value:
           success:
             message: Calendar Entry deleted!
             status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

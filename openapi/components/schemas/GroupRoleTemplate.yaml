@@ -1,8 +1,8 @@
+title: GroupRoleTemplate
 type: string
 enum:
   - default
   - managedFree
   - managedInvite
   - managedRequest
-title: GroupRoleTemplate
 default: default

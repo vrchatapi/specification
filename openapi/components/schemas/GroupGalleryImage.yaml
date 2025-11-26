@@ -1,29 +1,29 @@
 title: GroupGalleryImage
 type: object
 properties:
-  id:
-    $ref: ./GroupGalleryImageID.yaml
-  groupId:
-    $ref: ./GroupID.yaml
-  galleryId:
-    $ref: ./GroupGalleryID.yaml
-  fileId:
-    $ref: ./FileID.yaml
-  imageUrl:
-    type: string
-    example: "https://api.vrchat.cloud/api/1/file/file_ce35d830-e20a-4df0-a6d4-5aaef4508044/1/file"
-    format: uri
-  createdAt:
-    type: string
-    format: date-time
-  submittedByUserId:
-    $ref: ./UserID.yaml
   approved:
     type: boolean
     default: false
     example: true
-  approvedByUserId:
-    $ref: ./UserID.yaml
   approvedAt:
     type: string
     format: date-time
+  approvedByUserId:
+    $ref: ./UserID.yaml
+  createdAt:
+    type: string
+    format: date-time
+  fileId:
+    $ref: ./FileID.yaml
+  galleryId:
+    $ref: ./GroupGalleryID.yaml
+  groupId:
+    $ref: ./GroupID.yaml
+  id:
+    $ref: ./GroupGalleryImageID.yaml
+  imageUrl:
+    type: string
+    example: "https://api.vrchat.cloud/api/1/file/file_ce35d830-e20a-4df0-a6d4-5aaef4508044/1/file"
+    format: uri
+  submittedByUserId:
+    $ref: ./UserID.yaml

@@ -1,19 +1,19 @@
 title: License
 type: object
 properties:
+  forAction:
+    $ref: ./LicenseAction.yaml
   forId:
     type: string
     description: "Either a AvatarID, LicenseGroupID, PermissionID or ProductID. This depends on the `forType` field."
     minLength: 1
-  forType:
-    $ref: ./LicenseType.yaml
   forName:
     type: string
     minLength: 1
-  forAction:
-    $ref: ./LicenseAction.yaml
+  forType:
+    $ref: ./LicenseType.yaml
 required:
-  - forId
-  - forType
-  - forName
   - forAction
+  - forId
+  - forName
+  - forType

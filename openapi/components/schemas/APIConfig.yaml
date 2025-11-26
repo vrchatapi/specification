@@ -3,36 +3,36 @@ type: object
 description: ""
 properties:
   VoiceEnableDegradation:
+    type: boolean
+    description: "Unknown, probably voice optimization testing"
     default: false
-    description: "Unknown, probably voice optimization testing"
-    type: boolean
   VoiceEnableReceiverLimiting:
-    default: true
-    description: "Unknown, probably voice optimization testing"
     type: boolean
+    description: "Unknown, probably voice optimization testing"
+    default: true
   accessLogsUrls:
     type: object
     properties:
       Default:
         type: string
-        format: uri
         example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        format: uri
       Pico:
         type: string
-        format: uri
         example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        format: uri
       Quest:
         type: string
-        format: uri
         example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        format: uri
       XRElite:
         type: string
-        format: uri
         example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        format: uri
   address:
+    type: string
     description: VRChat's office address
     minLength: 1
-    type: string
   ageVerificationInviteVisible:
     type: boolean
   ageVerificationP:
@@ -45,27 +45,27 @@ properties:
   analysisRetryInterval:
     type: integer
     description: Interval between retries for avatar analysis requests
+  analyticsSegment_NewUI_PctOfUsers:
+    type: integer
+    description: Unknown
+  analyticsSegment_NewUI_Salt:
+    type: string
+    description: Unknown
   announcements:
     type: array
     description: Public Announcements
-    uniqueItems: true
-    minItems: 0
     items:
       $ref: ./APIConfigAnnouncement.yaml
-  analyticsSegment_NewUI_PctOfUsers:
-    description: Unknown
-    type: integer
-  analyticsSegment_NewUI_Salt:
-    description: Unknown
-    type: string
+    minItems: 0
+    uniqueItems: true
   availableLanguageCodes:
-    description: List of supported Languages
     type: array
+    description: List of supported Languages
     items:
       type: string
   availableLanguages:
-    description: List of supported Languages
     type: array
+    description: List of supported Languages
     items:
       type: string
   avatarPerfLimiter:
@@ -91,92 +91,92 @@ properties:
       - XRElite
       - iOSMobile
   chatboxLogBufferSeconds:
-    default: 40
-    description: Unknown
     type: integer
+    description: Unknown
+    default: 40
   clientApiKey:
+    type: string
     description: apiKey to be used for all other requests
     minLength: 1
-    type: string
   clientBPSCeiling:
+    type: integer
+    description: Unknown
     default: 18432
-    description: Unknown
-    type: integer
   clientDisconnectTimeout:
+    type: integer
+    description: Unknown
     default: 30000
-    description: Unknown
-    type: integer
   clientNetDispatchThread:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   clientNetDispatchThreadMobile:
+    type: boolean
+    description: Unknown
     default: true
-    description: Unknown
-    type: boolean
   clientNetInThread:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   clientNetInThread2:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   clientNetInThreadMobile:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   clientNetInThreadMobile2:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   clientNetOutThread:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   clientNetOutThread2:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   clientNetOutThreadMobile:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   clientNetOutThreadMobile2:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   clientQR:
+    type: integer
+    description: Unknown
     default: 1
-    description: Unknown
-    type: integer
   clientReservedPlayerBPS:
+    type: integer
+    description: Unknown
     default: 7168
-    description: Unknown
-    type: integer
   clientSentCountAllowance:
-    default: 15
-    description: Unknown
     type: integer
+    description: Unknown
+    default: 15
   constants:
     $ref: ./APIConfigConstants.yaml
   contactEmail:
+    type: string
     description: VRChat's contact email
     minLength: 1
-    type: string
   copyrightEmail:
+    type: string
     description: VRChat's copyright-issues-related email
     minLength: 1
-    type: string
   currentPrivacyVersion:
-    default: 1
+    type: integer
     description: Current version number of the Privacy Agreement
-    type: integer
+    default: 1
   currentTOSVersion:
-    example: 7
-    description: Current version number of the Terms of Service
-    minimum: 0
     type: integer
+    description: Current version number of the Terms of Service
+    example: 7
+    minimum: 0
   defaultAvatar:
     $ref: ./AvatarID.yaml
   defaultStickerSet:
@@ -188,123 +188,123 @@ properties:
       type: string
   devSdkUrl:
     deprecated: true
+    type: string
     description: "Link to download the development SDK, use downloadUrls instead"
     minLength: 1
-    type: string
   devSdkVersion:
     deprecated: true
+    type: string
     description: Version of the development SDK
     minLength: 1
-    type: string
   dis-countdown:
+    type: string
     description: 'Unknown, "dis" maybe for disconnect?'
     format: date-time
-    type: string
   disableAVProInProton:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   disableAvatarCopying:
-    default: false
+    type: boolean
     description: Toggles if copying avatars should be disabled
-    type: boolean
+    default: false
   disableAvatarGating:
-    default: false
+    type: boolean
     description: Toggles if avatar gating should be disabled. Avatar gating restricts uploading of avatars to people with the `system_avatar_access` Tag or `admin_avatar_access` Tag
-    type: boolean
-  disableCommunityLabs:
     default: false
-    description: Toggles if the Community Labs should be disabled
-    type: boolean
-  disableCommunityLabsPromotion:
-    default: false
-    description: Toggles if promotion out of Community Labs should be disabled
-    type: boolean
-  disableEmail:
-    default: false
-    description: Unknown
-    type: boolean
   disableCaptcha:
-    default: true
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: true
+  disableCommunityLabs:
+    type: boolean
+    description: Toggles if the Community Labs should be disabled
+    default: false
+  disableCommunityLabsPromotion:
+    type: boolean
+    description: Toggles if promotion out of Community Labs should be disabled
+    default: false
+  disableEmail:
+    type: boolean
+    description: Unknown
+    default: false
   disableEventStream:
-    default: false
+    type: boolean
     description: Toggles if Analytics should be disabled.
-    type: boolean
+    default: false
   disableFeedbackGating:
-    default: false
+    type: boolean
     description: Toggles if feedback gating should be disabled. Feedback gating restricts submission of feedback (reporting a World or User) to people with the `system_feedback_access` Tag.
-    type: boolean
+    default: false
   disableFrontendBuilds:
-    default: false
+    type: boolean
     description: "Unknown, probably toggles compilation of frontend web builds? So internal flag?"
-    type: boolean
+    default: false
   disableGiftDrops:
-    default: false
+    type: boolean
     description: Toggles if gift drops should be disabled
-    type: boolean
+    default: false
   disableHello:
-    default: false
+    type: boolean
     description: Unknown
-    type: boolean
+    default: false
   disableOculusSubs:
-    default: false
+    type: boolean
     description: Toggles if signing up for Subscriptions in Oculus is disabled or not.
-    type: boolean
+    default: false
   disableRegistration:
-    default: false
+    type: boolean
     description: Toggles if new user account registration should be disabled.
-    type: boolean
+    default: false
   disableSteamNetworking:
-    default: true
+    type: boolean
     description: Toggles if Steam Networking should be disabled. VRChat these days uses Photon Unity Networking (PUN) instead.
-    type: boolean
+    default: true
   disableTwoFactorAuth:
-    default: false
     deprecated: true
+    type: boolean
     description: Toggles if 2FA should be disabled.
-    type: boolean
+    default: false
   disableUdon:
-    default: false
+    type: boolean
     description: Toggles if Udon should be universally disabled in-game.
-    type: boolean
-  disableUpgradeAccount:
     default: false
-    description: Toggles if account upgrading "linking with Steam/Oculus" should be disabled.
+  disableUpgradeAccount:
     type: boolean
+    description: Toggles if account upgrading "linking with Steam/Oculus" should be disabled.
+    default: false
   downloadLinkWindows:
+    type: string
     description: Download link for game on the Oculus Rift website.
     minLength: 1
-    type: string
   downloadUrls:
     $ref: ./APIConfigDownloadURLList.yaml
   dynamicWorldRows:
-    description: "Array of DynamicWorldRow objects, used by the game to display the list of world rows"
-    minItems: 1
     type: array
-    uniqueItems: true
+    description: "Array of DynamicWorldRow objects, used by the game to display the list of world rows"
     items:
       $ref: ./DynamicContentRow.yaml
+    minItems: 1
+    uniqueItems: true
   economyPauseEnd:
-    description: Unknown
     type: string
+    description: Unknown
   economyPauseStart:
-    description: Unknown
     type: string
-  economyState:
-    default: 1
     description: Unknown
+  economyState:
     type: integer
+    description: Unknown
+    default: 1
   events:
     $ref: ./APIConfigEvents.yaml
   forceUseLatestWorld:
-    default: true
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: true
   giftDisplayType:
-    description: Display type of gifts
     type: string
+    description: Display type of gifts
   googleApiClientId:
     type: string
     description: Unknown
@@ -312,21 +312,21 @@ properties:
   homeWorldId:
     $ref: ./WorldID.yaml
   homepageRedirectTarget:
-    default: "https://hello.vrchat.com"
-    description: Redirect target if you try to open the base API domain in your browser
-    minLength: 1
     type: string
+    description: Redirect target if you try to open the base API domain in your browser
+    default: "https://hello.vrchat.com"
+    minLength: 1
   hubWorldId:
     $ref: ./WorldID.yaml
   imageHostUrlList:
-    description: A list of explicitly allowed origins that worlds can request images from via the Udon's [VRCImageDownloader#DownloadImage](https://creators.vrchat.com/worlds/udon/image-loading/#downloadimage).
     type: array
+    description: A list of explicitly allowed origins that worlds can request images from via the Udon's [VRCImageDownloader#DownloadImage](https://creators.vrchat.com/worlds/udon/image-loading/#downloadimage).
     items:
       type: string
   jobsEmail:
+    type: string
     description: VRChat's job application email
     minLength: 1
-    type: string
   minSupportedClientBuildNumber:
     type: object
     description: Minimum supported client build number for various platforms
@@ -370,13 +370,13 @@ properties:
     description: Minimum Unity version required for uploading assets
     default: 2019.0.0f1
   moderationEmail:
+    type: string
     description: VRChat's moderation related email
     minLength: 1
-    type: string
   notAllowedToSelectAvatarInPrivateWorldMessage:
+    type: string
     description: Used in-game to notify a user they aren't allowed to select avatars in private worlds
     minLength: 1
-    type: string
   offlineAnalysis:
     type: object
     description: Whether to allow offline analysis
@@ -399,6 +399,17 @@ properties:
     description: Unknown
     items:
       type: string
+  player-url-resolver-sha1:
+    type: string
+    description: Currently used youtube-dl.exe hash in SHA1-delimited format
+    minLength: 1
+  player-url-resolver-version:
+    type: string
+    description: Currently used youtube-dl.exe version
+    minLength: 1
+  publicKey:
+    type: string
+    description: Public key, hex encoded
   reportCategories:
     type: object
     description: Categories available for reporting objectionable content
@@ -419,9 +430,9 @@ properties:
         $ref: ./ReportCategory.yaml
       image:
         $ref: ./ReportCategory.yaml
-      text:
-        $ref: ./ReportCategory.yaml
       sticker:
+        $ref: ./ReportCategory.yaml
+      text:
         $ref: ./ReportCategory.yaml
       warnings:
         $ref: ./ReportCategory.yaml
@@ -599,85 +610,69 @@ properties:
   requireAgeVerificationBetaTag:
     type: boolean
   sdkDeveloperFaqUrl:
+    type: string
     description: Link to the developer FAQ
     minLength: 1
-    type: string
   sdkDiscordUrl:
+    type: string
     description: Link to the official VRChat Discord
     minLength: 1
-    type: string
   sdkNotAllowedToPublishMessage:
+    type: string
     description: Used in the SDK to notify a user they aren't allowed to upload avatars/worlds yet
     minLength: 1
-    type: string
   sdkUnityVersion:
+    type: string
     description: Unity version supported by the SDK
     minLength: 1
-    type: string
   stringHostUrlList:
-    description: A list of explicitly allowed origins that worlds can request strings from via the Udon's [VRCStringDownloader.LoadUrl](https://creators.vrchat.com/worlds/udon/string-loading/#ivrcstringdownload).
     type: array
+    description: A list of explicitly allowed origins that worlds can request strings from via the Udon's [VRCStringDownloader.LoadUrl](https://creators.vrchat.com/worlds/udon/string-loading/#ivrcstringdownload).
     items:
       type: string
   supportEmail:
+    type: string
     description: VRChat's support email
     minLength: 1
-    type: string
   supportFormUrl:
-    description: VRChat's support form
     type: string
+    description: VRChat's support form
+  timeOutWorldId:
+    $ref: ./WorldID.yaml
   timekeeping:
     type: boolean
     description: Unknown
     default: true
-  timeOutWorldId:
-    $ref: ./WorldID.yaml
   tutorialWorldId:
     $ref: ./WorldID.yaml
   updateRateMsMaximum:
-    description: Unknown
     type: integer
+    description: Unknown
   updateRateMsMinimum:
-    description: Unknown
     type: integer
+    description: Unknown
   updateRateMsNormal:
-    description: Unknown
     type: integer
+    description: Unknown
   updateRateMsUdonManual:
-    description: Unknown
     type: integer
+    description: Unknown
   uploadAnalysisPercent:
-    description: Unknown
     type: integer
+    description: Unknown
   urlList:
-    description: List of allowed URLs that bypass the "Allow untrusted URL's" setting in-game
     type: array
+    description: List of allowed URLs that bypass the "Allow untrusted URL's" setting in-game
     items:
       type: string
   useReliableUdpForVoice:
-    default: false
-    description: Unknown
     type: boolean
+    description: Unknown
+    default: false
   viveWindowsUrl:
+    type: string
     description: Download link for game on the Steam website.
     minLength: 1
-    type: string
-  whiteListedAssetUrls:
-    description: List of allowed URLs that are allowed to host avatar assets
-    type: array
-    items:
-      type: string
-  player-url-resolver-version:
-    description: Currently used youtube-dl.exe version
-    minLength: 1
-    type: string
-  player-url-resolver-sha1:
-    description: Currently used youtube-dl.exe hash in SHA1-delimited format
-    minLength: 1
-    type: string
-  publicKey:
-    type: string
-    description: Public key, hex encoded
   websocketMaxFriendsRefreshDelay:
     type: integer
     description: Unknown
@@ -690,6 +685,11 @@ properties:
     type: integer
     description: Unknown
     default: 2
+  whiteListedAssetUrls:
+    type: array
+    description: List of allowed URLs that are allowed to host avatar assets
+    items:
+      type: string
 required:
   - VoiceEnableDegradation
   - VoiceEnableReceiverLimiting
@@ -700,21 +700,21 @@ required:
   - ageVerificationStatusVisible
   - analysisMaxRetries
   - analysisRetryInterval
-  - announcements
   - analyticsSegment_NewUI_PctOfUsers
   - analyticsSegment_NewUI_Salt
+  - announcements
   - availableLanguageCodes
   - availableLanguages
   - avatarPerfLimiter
   - chatboxLogBufferSeconds
   - clientApiKey
   - clientBPSCeiling
-  - clientNetDispatchThreadMobile
   - clientDisconnectTimeout
+  - clientNetDispatchThreadMobile
   - clientReservedPlayerBPS
   - clientSentCountAllowance
-  - contactEmail
   - constants
+  - contactEmail
   - copyrightEmail
   - currentTOSVersion
   - defaultAvatar
@@ -757,6 +757,9 @@ required:
   - offlineAnalysis
   - photonNameserverOverrides
   - photonPublicKeys
+  - player-url-resolver-sha1
+  - player-url-resolver-version
+  - publicKey
   - reportCategories
   - reportFormUrl
   - reportOptions
@@ -769,8 +772,8 @@ required:
   - stringHostUrlList
   - supportEmail
   - supportFormUrl
-  - timekeeping
   - timeOutWorldId
+  - timekeeping
   - tutorialWorldId
   - updateRateMsMaximum
   - updateRateMsMinimum
@@ -780,10 +783,7 @@ required:
   - urlList
   - useReliableUdpForVoice
   - viveWindowsUrl
-  - whiteListedAssetUrls
-  - player-url-resolver-version
-  - player-url-resolver-sha1
-  - publicKey
   - websocketMaxFriendsRefreshDelay
   - websocketQuickReconnectTime
   - websocketReconnectMaxDelay
+  - whiteListedAssetUrls

@@ -1,35 +1,144 @@
 openapi: 3.0.3
 info:
   title: favorites
-  version: "1.0"
   description: Favorites Docs Here
+  version: "1.0"
 paths:
-  /favorites:
+  /auth/user/favoritelimits:
+    parameters: []
     get:
-      summary: List Favorites
+      operationId: getFavoriteLimits
+      summary: Get Favorite Limits
+      description: Return information about a specific Favorite.
       tags:
         - favorites
+      parameters: []
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/favorites/FavoriteLimitsResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}":
+    parameters:
+      - $ref: ../parameters.yaml#/favoriteGroupType
+      - $ref: ../parameters.yaml#/favoriteGroupName
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getFavoriteGroup
+      summary: Show Favorite Group
+      description: Fetch information about a specific favorite group.
+      tags:
+        - favorites
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/favorites/FavoriteGroupResponse.yaml
+    put:
+      operationId: updateFavoriteGroup
+      summary: Update Favorite Group
+      description: Update information about a specific favorite group.
+      tags:
+        - favorites
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateFavoriteGroupRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          description: OK
+    delete:
+      operationId: clearFavoriteGroup
+      summary: Clear Favorite Group
+      description: Clear ALL contents of a specific favorite group.
+      tags:
+        - favorites
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/favorites/FavoriteGroupClearedSuccess.yaml
+  /favorite/groups:
+    get:
+      operationId: getFavoriteGroups
+      summary: List Favorite Groups
+      description: Return a list of favorite groups owned by a user. Returns the same information as `getFavoriteGroups`.
+      tags:
+        - favorites
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/userIdAdmin
+        - name: ownerId
+          description: The owner of whoms favorite groups to return. Must be a UserID.
+          in: query
+          schema:
+            type: string
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/favorites/FavoriteGroupListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /favorites:
+    get:
+      operationId: getFavorites
+      summary: List Favorites
+      description: Returns a list of favorites.
+      tags:
+        - favorites
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+        - name: type
+          description: "The type of favorites to return, FavoriteType."
+          in: query
+          schema:
+            type: string
+        - $ref: ../parameters.yaml#/tag
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/favorites/FavoriteListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getFavorites
-      security:
-        - authCookie: []
-      description: Returns a list of favorites.
-      parameters:
-        - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/offset
-        - schema:
-            type: string
-          in: query
-          name: type
-          description: "The type of favorites to return, FavoriteType."
-        - $ref: ../parameters.yaml#/tag
     post:
-      summary: Add Favorite
       operationId: addFavorite
+      summary: Add Favorite
+      description: |-
+        Add a new favorite.
+
+        Friend groups are named `group_0` through `group_3`. Avatar and World groups are named `avatars1` to `avatars4` and `worlds1` to `worlds4`.
+
+        You cannot add people whom you are not friends with to your friends list. Destroying a friendship removes the person as favorite on both sides.
+      tags:
+        - favorites
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            examples:
+              Example Favorite Avatar:
+                value:
+                  type: avatar
+                  favoriteId: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
+                  tags:
+                    - avatars1
+              Example Favorite Friend:
+                value:
+                  type: friend
+                  favoriteId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+                  tags:
+                    - group_0
+            schema:
+              $ref: ../requests/AddFavoriteRequest.yaml
       security:
         - authCookie: []
       responses:
@@ -39,39 +148,15 @@ paths:
           $ref: ../responses/favorites/FavoriteAddAlreadyFavoritedError.yaml
         "403":
           $ref: ../responses/favorites/FavoriteAddNotFriendsError.yaml
-      description: |-
-        Add a new favorite.
-
-        Friend groups are named `group_0` through `group_3`. Avatar and World groups are named `avatars1` to `avatars4` and `worlds1` to `worlds4`.
-
-        You cannot add people whom you are not friends with to your friends list. Destroying a friendship removes the person as favorite on both sides.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/AddFavoriteRequest.yaml
-            examples:
-              Example Favorite Friend:
-                value:
-                  type: friend
-                  favoriteId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
-                  tags:
-                    - group_0
-              Example Favorite Avatar:
-                value:
-                  type: avatar
-                  favoriteId: avtr_912d66a4-4714-43b8-8407-7de2cafbf55b
-                  tags:
-                    - avatars1
-        description: ""
-      tags:
-        - favorites
   "/favorites/{favoriteId}":
     parameters:
       - $ref: ../parameters.yaml#/favoriteId
     delete:
-      summary: Remove Favorite
       operationId: removeFavorite
+      summary: Remove Favorite
+      description: Remove a favorite from your favorites list.
+      tags:
+        - favorites
       security:
         - authCookie: []
       responses:
@@ -81,93 +166,8 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/favorites/FavoriteNotFoundError.yaml
-      description: Remove a favorite from your favorites list.
-      tags:
-        - favorites
-  /favorite/groups:
-    get:
-      summary: List Favorite Groups
-      tags:
-        - favorites
-      responses:
-        "200":
-          $ref: ../responses/favorites/FavoriteGroupListResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getFavoriteGroups
-      security:
-        - authCookie: []
-      parameters:
-        - $ref: ../parameters.yaml#/number
-        - $ref: ../parameters.yaml#/offset
-        - $ref: ../parameters.yaml#/userIdAdmin
-        - schema:
-            type: string
-          in: query
-          name: ownerId
-          description: The owner of whoms favorite groups to return. Must be a UserID.
-      description: Return a list of favorite groups owned by a user. Returns the same information as `getFavoriteGroups`.
-  "/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}":
-    parameters:
-      - $ref: ../parameters.yaml#/favoriteGroupType
-      - $ref: ../parameters.yaml#/favoriteGroupName
-      - $ref: ../parameters.yaml#/userId
-    get:
-      summary: Show Favorite Group
-      tags:
-        - favorites
-      responses:
-        "200":
-          $ref: ../responses/favorites/FavoriteGroupResponse.yaml
-      operationId: getFavoriteGroup
-      security:
-        - authCookie: []
-      description: Fetch information about a specific favorite group.
-    put:
-      summary: Update Favorite Group
-      operationId: updateFavoriteGroup
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          description: OK
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/UpdateFavoriteGroupRequest.yaml
-      tags:
-        - favorites
-      description: Update information about a specific favorite group.
-    delete:
-      summary: Clear Favorite Group
-      operationId: clearFavoriteGroup
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/favorites/FavoriteGroupClearedSuccess.yaml
-      tags:
-        - favorites
-      description: Clear ALL contents of a specific favorite group.
-  /auth/user/favoritelimits:
-    parameters: []
-    get:
-      summary: Get Favorite Limits
-      tags:
-        - favorites
-      responses:
-        "200":
-          $ref: ../responses/favorites/FavoriteLimitsResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-      operationId: getFavoriteLimits
-      security:
-        - authCookie: []
-      description: Return information about a specific Favorite.
-      parameters: []
-tags:
-  $ref: ../tags.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
+tags:
+  $ref: ../tags.yaml

@@ -2,37 +2,37 @@ title: FileVersionUploadStatus
 type: object
 description: ""
 properties:
-  uploadId:
-    type: string
-    minLength: 1
-    example: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
-  fileName:
-    type: string
-    minLength: 1
-    example: Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage
-  nextPartNumber:
-    type: integer
-    minimum: 0
-    example: 0
-  maxParts:
-    type: integer
-    minimum: 1
-    example: 1000
-  parts:
-    type: array
-    minItems: 0
-    items:
-      type: object
   etags:
     type: array
     description: Unknown
-    minItems: 0
     items:
       type: object
+    minItems: 0
+  fileName:
+    type: string
+    example: Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage
+    minLength: 1
+  maxParts:
+    type: integer
+    example: 1000
+    minimum: 1
+  nextPartNumber:
+    type: integer
+    example: 0
+    minimum: 0
+  parts:
+    type: array
+    items:
+      type: object
+    minItems: 0
+  uploadId:
+    type: string
+    example: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+    minLength: 1
 required:
-  - uploadId
-  - fileName
-  - nextPartNumber
-  - maxParts
-  - parts
   - etags
+  - fileName
+  - maxParts
+  - nextPartNumber
+  - parts
+  - uploadId

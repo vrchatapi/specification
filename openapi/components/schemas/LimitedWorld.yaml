@@ -1,113 +1,113 @@
+title: LimitedWorld
+type: object
 description: ""
 properties:
   authorId:
     $ref: ./UserID.yaml
   authorName:
+    type: string
     minLength: 1
-    type: string
   capacity:
+    type: integer
     example: 8
-    type: integer
-  recommendedCapacity:
-    example: 16
-    type: integer
   created_at:
-    format: date-time
     type: string
+    format: date-time
   defaultContentSettings:
     $ref: ./InstanceContentSettings.yaml
   favorites:
+    type: integer
     default: 0
     example: 12024
     minimum: 0
-    type: integer
-  visits:
-    default: 0
-    example: 9988675
-    minimum: 0
-    type: integer
   heat:
+    type: integer
     default: 0
     example: 5
     minimum: 0
-    type: integer
   id:
     $ref: ./WorldID.yaml
   imageUrl:
-    minLength: 1
     type: string
+    minLength: 1
   labsPublicationDate:
+    type: string
     example: none
     minLength: 1
-    type: string
   name:
-    minLength: 1
     type: string
+    minLength: 1
   occupants:
+    type: integer
     default: 0
     example: 47
     minimum: 0
-    type: integer
   organization:
+    type: string
     default: vrchat
     minLength: 1
-    type: string
   popularity:
+    type: integer
     default: 0
     example: 8
     minimum: 0
-    type: integer
   previewYoutubeId:
     type: string
     nullable: true
   publicationDate:
+    type: string
     example: none
     minLength: 1
-    type: string
+  recommendedCapacity:
+    type: integer
+    example: 16
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   storeId:
     $ref: ./StoreID.yaml
   tags:
+    type: array
     description: " "
     items:
       $ref: ./Tag.yaml
-    type: array
   thumbnailImageUrl:
+    type: string
     minLength: 1
-    type: string
-  unityPackages:
-    description: " "
-    items:
-      $ref: ./LimitedUnityPackage.yaml
-    minItems: 1
-    type: array
-  updated_at:
-    format: date-time
-    type: string
   udonProducts:
     type: array
     items:
       $ref: ./UdonProductId.yaml
+  unityPackages:
+    type: array
+    description: " "
+    items:
+      $ref: ./LimitedUnityPackage.yaml
+    minItems: 1
+  updated_at:
+    type: string
+    format: date-time
+  visits:
+    type: integer
+    default: 0
+    example: 9988675
+    minimum: 0
 required:
-  - id
-  - name
   - authorId
   - authorName
   - capacity
-  - imageUrl
-  - thumbnailImageUrl
-  - releaseStatus
-  - organization
-  - tags
-  - favorites
   - created_at
-  - updated_at
-  - publicationDate
-  - labsPublicationDate
-  - unityPackages
-  - popularity
+  - favorites
   - heat
+  - id
+  - imageUrl
+  - labsPublicationDate
+  - name
   - occupants
-title: LimitedWorld
-type: object
+  - organization
+  - popularity
+  - publicationDate
+  - releaseStatus
+  - tags
+  - thumbnailImageUrl
+  - unityPackages
+  - updated_at

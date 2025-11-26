@@ -3,32 +3,32 @@ type: object
 description: Status information for a service request
 properties:
   created_at:
+    type: string
     format: date-time
-    type: string
   id:
-    description: "The id of this service, NOT the id of the thing this service was requested for."
     type: string
+    description: "The id of this service, NOT the id of the thing this service was requested for."
   progress:
     type: array
     items:
       type: object
   requesterUserId:
-    description: The id of the user who requested this service.
     $ref: ./UserID.yaml
+    description: The id of the user who requested this service.
   state:
     type: string
   subjectId:
+    type: string
     description: The id of the thing this service was requested for.
-    type: string
   subjectType:
+    type: string
     description: The kind of the thing this service was requested for.
-    type: string
   type:
+    type: string
     description: The kind of service that was requested.
-    type: string
   updated_at:
-    format: date-time
     type: string
+    format: date-time
 required:
   - created_at
   - id

@@ -1,6 +1,6 @@
-example: accept
 title: GroupJoinRequestAction
 type: string
 enum:
   - accept
   - reject
+example: accept

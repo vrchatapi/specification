@@ -1,11 +1,11 @@
 description: Successful response after clearing all notifications.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Success.yaml
     examples:
       Unfriend Success:
         value:
           success:
             message: Ok
             status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

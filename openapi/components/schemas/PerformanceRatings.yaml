@@ -1,11 +1,11 @@
-type: string
 title: PerformanceRatings
-example: Excellent
+type: string
+description: Avatar Performance ratings.
 enum:
-  - None
   - Excellent
   - Good
   - Medium
+  - None
   - Poor
   - VeryPoor
-description: Avatar Performance ratings.
+example: Excellent

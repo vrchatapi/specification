@@ -1,8 +1,6 @@
 description: Bad request error response when creating a group invite.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       Group Member Already Exists:
         value:
@@ -14,3 +12,5 @@ content:
           error:
             message: User <displayName> is already invited.
             status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

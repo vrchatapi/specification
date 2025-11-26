@@ -1,13 +1,13 @@
 title: LimitedGroupMember
 type: object
 properties:
-  id:
-    $ref: ./GroupMemberID.yaml
   groupId:
     $ref: ./GroupID.yaml
-  userId:
-    $ref: ./UserID.yaml
+  id:
+    $ref: ./GroupMemberID.yaml
   isRepresenting:
     type: boolean
     description: Whether the user is representing the group in the world.
     example: false
+  userId:
+    $ref: ./UserID.yaml

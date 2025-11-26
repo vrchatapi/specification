@@ -1,5 +1,36 @@
 title: APIConfigEvents
 type: object
+properties:
+  distanceClose:
+    type: integer
+    description: Unknown
+  distanceFactor:
+    type: integer
+    description: Unknown
+  distanceFar:
+    type: integer
+    description: Unknown
+  groupDistance:
+    type: integer
+    description: Unknown
+  maximumBunchSize:
+    type: integer
+    description: Unknown
+  notVisibleFactor:
+    type: integer
+    description: Unknown
+  playerOrderBucketSize:
+    type: integer
+    description: Unknown
+  playerOrderFactor:
+    type: integer
+    description: Unknown
+  slowUpdateFactorThreshold:
+    type: integer
+    description: Unknown
+  viewSegmentLength:
+    type: integer
+    description: Unknown
 required:
   - distanceClose
   - distanceFactor
@@ -11,34 +42,3 @@ required:
   - playerOrderFactor
   - slowUpdateFactorThreshold
   - viewSegmentLength
-properties:
-  distanceClose:
-    description: Unknown
-    type: integer
-  distanceFactor:
-    description: Unknown
-    type: integer
-  distanceFar:
-    description: Unknown
-    type: integer
-  groupDistance:
-    description: Unknown
-    type: integer
-  maximumBunchSize:
-    description: Unknown
-    type: integer
-  notVisibleFactor:
-    description: Unknown
-    type: integer
-  playerOrderBucketSize:
-    description: Unknown
-    type: integer
-  playerOrderFactor:
-    description: Unknown
-    type: integer
-  slowUpdateFactorThreshold:
-    description: Unknown
-    type: integer
-  viewSegmentLength:
-    description: Unknown
-    type: integer

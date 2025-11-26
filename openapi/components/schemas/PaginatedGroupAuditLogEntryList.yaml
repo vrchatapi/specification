@@ -1,14 +1,14 @@
 title: PaginatedGroupAuditLogEntryList
 type: object
 properties:
+  hasNext:
+    type: boolean
+    description: Whether there are more results after this page.
   results:
-    description: " "
     type: array
+    description: " "
     items:
       $ref: ./GroupAuditLogEntry.yaml
   totalCount:
     type: integer
     description: The total number of results that the query would return if there were no pagination.
-  hasNext:
-    type: boolean
-    description: Whether there are more results after this page.

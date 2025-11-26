@@ -13,10 +13,10 @@ properties:
     type: string
     minLength: 1
   capacity:
+    type: integer
     example: 8
     maximum: 40
     minimum: 0
-    type: integer
   description:
     type: string
   id:
@@ -32,8 +32,8 @@ properties:
   releaseStatus:
     $ref: ../schemas/ReleaseStatus.yaml
   tags:
-    description: " "
     type: array
+    description: " "
     items:
       $ref: ../schemas/Tag.yaml
   unityPackageUrl:
@@ -41,9 +41,9 @@ properties:
     minLength: 1
   unityVersion:
     type: string
-    minLength: 1
     default: 5.3.4p1
     example: 2022.3.6f1
+    minLength: 1
 required:
   - assetUrl
   - imageUrl

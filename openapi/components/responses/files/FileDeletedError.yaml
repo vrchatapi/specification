@@ -1,11 +1,11 @@
 description: Error response when trying to delete a non-existent file.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       File Deleted Error:
         value:
           error:
             message: File 'file_ce35d830-e20a-4df0-a6d4-5aaef4508044' not found
             status_code: 404
+    schema:
+      $ref: ../../schemas/Error.yaml

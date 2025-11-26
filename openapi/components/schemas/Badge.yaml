@@ -3,9 +3,9 @@ type: object
 properties:
   assignedAt:
     type: string
-    format: date-time
     description: only present in CurrentUser badges
     nullable: true
+    format: date-time
   badgeDescription:
     type: string
   badgeId:
@@ -23,9 +23,9 @@ properties:
     type: boolean
   updatedAt:
     type: string
-    format: date-time
     description: only present in CurrentUser badges
     nullable: true
+    format: date-time
 required:
   - badgeDescription
   - badgeId

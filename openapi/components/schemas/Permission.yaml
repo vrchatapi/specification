@@ -1,27 +1,27 @@
+title: Permission
+type: object
 description: ""
 properties:
-  displayName:
-    type: string
+  data:
+    type: object
   description:
+    type: string
+  displayName:
     type: string
   id:
     $ref: ./PermissionID.yaml
-  ownerDisplayName:
-    type: string
   name:
+    type: string
     example: permission-invite-photos
     minLength: 1
+  ownerDisplayName:
     type: string
   ownerId:
     $ref: ./UserID.yaml
   type:
     type: string
-  data:
-    type: object
 required:
   - id
-  - ownerId
-  - ownerDisplayName
   - name
-title: Permission
-type: object
+  - ownerDisplayName
+  - ownerId

@@ -2,8 +2,8 @@ title: ChangeUserTagsRequest
 type: object
 properties:
   tags:
-    description: The tags being added or removed.
     type: array
+    description: The tags being added or removed.
     items:
       $ref: ../schemas/Tag.yaml
 required:

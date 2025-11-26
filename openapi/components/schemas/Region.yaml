@@ -1,13 +1,13 @@
-type: string
 title: Region
-default: us
-example: eu
+type: string
+description: API/Photon region.
 enum:
+  - eu
+  - jp
+  - unknown
   - us
   - use
   - usw
   - usx
-  - eu
-  - jp
-  - unknown
-description: API/Photon region.
+default: us
+example: eu

@@ -1,138 +1,137 @@
-description: ""
 title: World
 type: object
+description: ""
 properties:
   authorId:
     $ref: ./UserID.yaml
   authorName:
+    type: string
     minLength: 1
-    type: string
   capacity:
+    type: integer
     example: 8
-    type: integer
-  recommendedCapacity:
-    example: 4
-    type: integer
   created_at:
-    format: date-time
     type: string
+    format: date-time
   defaultContentSettings:
     $ref: ./InstanceContentSettings.yaml
   description:
-    minLength: 0
     type: string
+    minLength: 0
   favorites:
+    type: integer
     default: 0
     example: 12024
     minimum: 0
-    type: integer
   featured:
-    default: false
     type: boolean
+    default: false
   heat:
+    type: integer
     default: 0
     example: 5
     minimum: 0
-    type: integer
   id:
     $ref: ./WorldID.yaml
   imageUrl:
-    minLength: 1
     type: string
+    minLength: 1
   instances:
     type: array
     description: Will always be an empty list when unauthenticated.
     items:
-      maxItems: 2
-      minItems: 2
       type: array
       items: {}
+      maxItems: 2
+      minItems: 2
   labsPublicationDate:
+    type: string
     example: none
     minLength: 1
-    type: string
   name:
-    minLength: 1
     type: string
+    minLength: 1
   namespace:
     type: string
   occupants:
+    type: integer
+    description: Will always be `0` when unauthenticated.
     default: 0
     example: 47
     minimum: 0
-    type: integer
-    description: Will always be `0` when unauthenticated.
   organization:
+    type: string
     default: vrchat
     minLength: 1
-    type: string
   popularity:
+    type: integer
     default: 0
     example: 8
     minimum: 0
-    type: integer
   previewYoutubeId:
     type: string
     nullable: true
   privateOccupants:
+    type: integer
+    description: Will always be `0` when unauthenticated.
     default: 0
     example: 1
     minimum: 0
+  publicOccupants:
     type: integer
     description: Will always be `0` when unauthenticated.
-  publicOccupants:
     default: 0
     example: 46
     minimum: 0
-    type: integer
-    description: Will always be `0` when unauthenticated.
   publicationDate:
+    type: string
     example: none
     minLength: 1
-    type: string
+  recommendedCapacity:
+    type: integer
+    example: 4
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   storeId:
     $ref: ./StoreID.yaml
   tags:
-    description: " "
     type: array
+    description: " "
     items:
       $ref: ./Tag.yaml
   thumbnailImageUrl:
-    minLength: 1
     type: string
+    minLength: 1
+  udonProducts:
+    type: array
+    items:
+      $ref: ./UdonProductId.yaml
   unityPackages:
     type: array
     description: Empty if unauthenticated.
     items:
       $ref: ./UnityPackage.yaml
   updated_at:
-    format: date-time
     type: string
+    format: date-time
   urlList:
     type: array
     items:
       type: string
   version:
+    type: integer
     default: 0
     example: 68
     minimum: 0
-    type: integer
   visits:
+    type: integer
     default: 0
     example: 9988675
     minimum: 0
-    type: integer
-  udonProducts:
-    type: array
-    items:
-      $ref: ./UdonProductId.yaml
 required:
   - authorId
   - authorName
   - capacity
-  - recommendedCapacity
   - created_at
   - description
   - featured
@@ -144,6 +143,7 @@ required:
   - organization
   - popularity
   - publicationDate
+  - recommendedCapacity
   - releaseStatus
   - tags
   - thumbnailImageUrl

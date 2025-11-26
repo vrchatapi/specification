@@ -1,49 +1,49 @@
-description: ""
-type: object
 title: InfoPush
+type: object
+description: ""
 properties:
-  id:
-    type: string
-    minLength: 1
-    example: launch-beta
-  isEnabled:
-    type: boolean
-    default: true
-  releaseStatus:
-    $ref: ./ReleaseStatus.yaml
-  priority:
-    type: integer
-  tags:
-    description: " "
-    type: array
-    items:
-      $ref: ./Tag.yaml
-  data:
-    $ref: ./InfoPushData.yaml
-  hash:
-    type: string
-    minLength: 1
-    description: "Unknown usage, MD5"
   createdAt:
     type: string
     format: date-time
-  updatedAt:
-    type: string
-    format: date-time
-  startDate:
-    type: string
-    format: date-time
-    description: ""
+  data:
+    $ref: ./InfoPushData.yaml
   endDate:
     type: string
     format: date-time
+  hash:
+    type: string
+    description: "Unknown usage, MD5"
+    minLength: 1
+  id:
+    type: string
+    example: launch-beta
+    minLength: 1
+  isEnabled:
+    type: boolean
+    default: true
+  priority:
+    type: integer
+  releaseStatus:
+    $ref: ./ReleaseStatus.yaml
+  startDate:
+    type: string
+    description: ""
+    format: date-time
+  tags:
+    type: array
+    description: " "
+    items:
+      $ref: ./Tag.yaml
+  updatedAt:
+    type: string
+    format: date-time
 required:
-  - id
-  - isEnabled
-  - releaseStatus
-  - priority
-  - tags
+  - createdAt
   - data
   - hash
-  - createdAt
+  - id
+  - isEnabled
+  - priority
+  - releaseStatus
+  - tags
   - updatedAt

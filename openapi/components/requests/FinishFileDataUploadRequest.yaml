@@ -5,26 +5,26 @@ properties:
   etags:
     type: array
     description: Array of ETags uploaded.
-    minItems: 1
-    uniqueItems: true
     items:
       type: string
-  nextPartNumber:
-    type: string
-    minLength: 1
-    default: "0"
-    example: "0"
-    deprecated: true
-    description: "Always a zero in string form, despite how many parts uploaded."
-    maxLength: 1
+    minItems: 1
+    uniqueItems: true
   maxParts:
-    type: string
-    minLength: 1
-    description: "Always a zero in string form, despite how many parts uploaded."
     deprecated: true
+    type: string
+    description: "Always a zero in string form, despite how many parts uploaded."
     default: "0"
     example: "0"
     maxLength: 1
+    minLength: 1
+  nextPartNumber:
+    deprecated: true
+    type: string
+    description: "Always a zero in string form, despite how many parts uploaded."
+    default: "0"
+    example: "0"
+    maxLength: 1
+    minLength: 1
 required:
-  - nextPartNumber
   - maxParts
+  - nextPartNumber

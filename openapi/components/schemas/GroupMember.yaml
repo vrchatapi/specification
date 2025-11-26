@@ -7,59 +7,59 @@ properties:
   acceptedById:
     type: string
     nullable: true
-  id:
-    $ref: ./GroupMemberID.yaml
+  bannedAt:
+    type: string
+    description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
+    nullable: true
+    format: date-time
+  createdAt:
+    type: string
+    description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
+    nullable: true
+    format: date-time
   groupId:
     $ref: ./GroupID.yaml
-  userId:
-    $ref: ./UserID.yaml
+  hasJoinedFromPurchase:
+    type: boolean
+  id:
+    $ref: ./GroupMemberID.yaml
   isRepresenting:
     type: boolean
+    description: Whether the user is representing the group. This makes the group show up above the name tag in-game.
     default: false
     example: true
-    description: Whether the user is representing the group. This makes the group show up above the name tag in-game.
-  user:
-    $ref: ./GroupMemberLimitedUser.yaml
-    nullable: true
-  roleIds:
-    type: array
-    items:
-      $ref: ./GroupRoleID.yaml
-  mRoleIds:
-    type: array
-    items:
-      $ref: ./GroupRoleID.yaml
-  joinedAt:
-    type: string
-    format: date-time
-    nullable: true
-  membershipStatus:
-    $ref: ./GroupMemberStatus.yaml
-  visibility:
-    type: string
-    example: visible
   isSubscribedToAnnouncements:
     type: boolean
     default: false
   isSubscribedToEventAnnouncements:
     type: boolean
-  createdAt:
-    description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
+  joinedAt:
     type: string
+    nullable: true
     format: date-time
-    nullable: true
-  bannedAt:
-    description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
-    type: string
-    format: date-time
-    nullable: true
-  managerNotes:
-    description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
-    type: string
-    nullable: true
   lastPostReadAt:
     type: string
-    format: date-time
     nullable: true
-  hasJoinedFromPurchase:
-    type: boolean
+    format: date-time
+  mRoleIds:
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
+  managerNotes:
+    type: string
+    description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
+    nullable: true
+  membershipStatus:
+    $ref: ./GroupMemberStatus.yaml
+  roleIds:
+    type: array
+    items:
+      $ref: ./GroupRoleID.yaml
+  user:
+    $ref: ./GroupMemberLimitedUser.yaml
+    nullable: true
+  userId:
+    $ref: ./UserID.yaml
+  visibility:
+    type: string
+    example: visible

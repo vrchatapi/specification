@@ -1,11 +1,11 @@
 description: Error response when trying to start an upload against a FileVersion that is already marked as  `complete`.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       Tried To Upload Against Already Finished Version:
         value:
           error:
             message: Cannot upload against a complete version entry․ Create a new version of this file before uploading․
             status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

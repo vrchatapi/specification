@@ -1,47 +1,47 @@
 title: LimitedUserGroups
 type: object
 properties:
-  id:
-    $ref: ./GroupMemberID.yaml
-  name:
-    type: string
-  shortCode:
-    $ref: ./GroupShortCode.yaml
-  discriminator:
-    $ref: ./GroupDiscriminator.yaml
-  description:
-    type: string
-  iconId:
-    type: string
-    nullable: true
-  iconUrl:
-    type: string
-    nullable: true
   bannerId:
     type: string
     nullable: true
   bannerUrl:
     type: string
     nullable: true
-  privacy:
+  description:
     type: string
-  lastPostCreatedAt:
-    type: string
-    format: date-time
-    nullable: true
-  ownerId:
-    $ref: ./UserID.yaml
-  memberCount:
-    type: integer
+  discriminator:
+    $ref: ./GroupDiscriminator.yaml
   groupId:
     $ref: ./GroupID.yaml
-  memberVisibility:
+  iconId:
     type: string
+    nullable: true
+  iconUrl:
+    type: string
+    nullable: true
+  id:
+    $ref: ./GroupMemberID.yaml
   isRepresenting:
     type: boolean
-  mutualGroup:
-    type: boolean
+  lastPostCreatedAt:
+    type: string
+    nullable: true
+    format: date-time
   lastPostReadAt:
     type: string
-    format: date-time
     nullable: true
+    format: date-time
+  memberCount:
+    type: integer
+  memberVisibility:
+    type: string
+  mutualGroup:
+    type: boolean
+  name:
+    type: string
+  ownerId:
+    $ref: ./UserID.yaml
+  privacy:
+    type: string
+  shortCode:
+    $ref: ./GroupShortCode.yaml

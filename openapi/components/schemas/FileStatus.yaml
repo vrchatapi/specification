@@ -1,9 +1,9 @@
+title: FileStatus
 type: string
 enum:
-  - waiting
   - complete
   - none
   - queued
-example: complete
-title: FileStatus
+  - waiting
 default: waiting
+example: complete

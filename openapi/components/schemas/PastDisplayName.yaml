@@ -1,12 +1,12 @@
+title: PastDisplayName
+type: object
 properties:
   displayName:
+    type: string
     minLength: 1
-    type: string
   updated_at:
-    format: date-time
     type: string
+    format: date-time
 required:
   - displayName
   - updated_at
-title: PastDisplayName
-type: object

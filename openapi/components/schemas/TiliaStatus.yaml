@@ -1,15 +1,15 @@
-description: ""
-type: object
 title: TiliaStatus
+type: object
+description: ""
 properties:
   economyOnline:
     type: boolean
   economyState:
     type: integer
-  plannedOfflineWindowStart:
+  plannedOfflineWindowEnd:
     type: string
     format: date-time
-  plannedOfflineWindowEnd:
+  plannedOfflineWindowStart:
     type: string
     format: date-time
 required:

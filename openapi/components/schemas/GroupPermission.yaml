@@ -2,25 +2,25 @@ title: GroupPermission
 type: object
 description: A permission that can be granted to a role in a group.
 properties:
-  name:
-    type: string
-    example: group-data-manage
-    description: The name of the permission.
-  displayName:
-    type: string
-    example: Manage Group Data
-    description: The display name of the permission.
-  help:
-    type: string
-    example: Allows role to edit group details (name, description, joinState, initialRoles, etc).
-    description: Human-readable description of the permission.
-  isManagementPermission:
-    type: boolean
-    default: false
-    example: true
-    description: Whether this permission is a "management" permission.
   allowedToAdd:
     type: boolean
+    description: Whether the user is allowed to add this permission to a role.
     default: false
     example: true
-    description: Whether the user is allowed to add this permission to a role.
+  displayName:
+    type: string
+    description: The display name of the permission.
+    example: Manage Group Data
+  help:
+    type: string
+    description: Human-readable description of the permission.
+    example: Allows role to edit group details (name, description, joinState, initialRoles, etc).
+  isManagementPermission:
+    type: boolean
+    description: Whether this permission is a "management" permission.
+    default: false
+    example: true
+  name:
+    type: string
+    description: The name of the permission.
+    example: group-data-manage

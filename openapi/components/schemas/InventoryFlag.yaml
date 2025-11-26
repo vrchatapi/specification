@@ -1,13 +1,13 @@
 title: InventoryFlag
 type: string
 enum:
-  - instantiatable
   - archivable
-  - consumable
-  - trashable
   - cloneable
-  - ugc
+  - consumable
   - equippable
+  - instantiatable
+  - trashable
+  - ugc
   - unique
 default: instantiatable
 example: consumable

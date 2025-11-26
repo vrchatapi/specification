@@ -5,10 +5,10 @@ description: |
 
   User who have verified and are 18+ can switch to `plus18` status.
 enum:
+  - 18+
   - hidden
   - verified
-  - 18+
 x-enum-varnames:
   - hidden
-  - verified
   - plus18
+  - verified

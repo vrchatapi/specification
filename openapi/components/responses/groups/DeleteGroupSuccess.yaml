@@ -1,11 +1,11 @@
 description: Successful response after deleting a Group.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Success.yaml
     examples:
       Deleted Group:
         value:
           success:
             message: Group deleted!
             status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

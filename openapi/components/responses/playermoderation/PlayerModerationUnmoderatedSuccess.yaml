@@ -1,16 +1,16 @@
 description: Success response after unmoderating a player moderation.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Success.yaml
     examples:
-      200 Specific User Unmoderated:
-        value:
-          success:
-            message: User usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469 unmoderated
-            status_code: 200
       200 All Of PlayerModerationType Unmoderated:
         value:
           success:
             message: PlayerModerations of type undefined removed
             status_code: 200
+      200 Specific User Unmoderated:
+        value:
+          success:
+            message: User usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469 unmoderated
+            status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

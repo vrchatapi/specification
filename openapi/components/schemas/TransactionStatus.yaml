@@ -1,8 +1,8 @@
-type: string
 title: TransactionStatus
+type: string
 enum:
   - active
-  - failed
-  - expired
   - chargeback
+  - expired
+  - failed
 default: active

@@ -1,10 +1,10 @@
+title: UserStatus
 type: string
 description: 'Defines the User''s current status, for example "ask me", "join me" or "offline. This status is a combined indicator of their online activity and privacy preference.'
 enum:
   - active
-  - join me
   - ask me
   - busy
+  - join me
   - offline
-title: UserStatus
 default: offline

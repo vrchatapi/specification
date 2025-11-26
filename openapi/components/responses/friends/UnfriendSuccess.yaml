@@ -1,11 +1,11 @@
 description: Successful response after unfriending a user.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Success.yaml
     examples:
       Unfriend Success:
         value:
           success:
             message: Friendship destroyed
             status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

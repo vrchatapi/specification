@@ -1,9 +1,9 @@
+title: InviteMessageType
 type: string
-default: message
 description: ""
 enum:
   - message
-  - response
   - request
   - requestResponse
-title: InviteMessageType
+  - response
+default: message

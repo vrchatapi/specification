@@ -1,11 +1,11 @@
 description: Error response when trying get group instances of another user.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       User Id must be your own:
         value:
           error:
             message: User ID must be your own․
             status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

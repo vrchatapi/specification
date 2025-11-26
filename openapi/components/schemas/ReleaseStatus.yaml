@@ -1,9 +1,9 @@
-type: string
-default: public
-enum:
-  - public
-  - private
-  - hidden
-  - all
 title: ReleaseStatus
+type: string
+enum:
+  - all
+  - hidden
+  - private
+  - public
+default: public
 example: public

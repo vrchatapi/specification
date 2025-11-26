@@ -1,7 +1,7 @@
+title: UnityPackage
+type: object
 description: ""
 properties:
-  id:
-    $ref: ./UnityPackageID.yaml
   assetUrl:
     type: string
     nullable: true
@@ -10,13 +10,18 @@ properties:
     type: object
     example: {}
   assetVersion:
-    minimum: 0
     type: integer
     example: 4
+    minimum: 0
   created_at:
-    format: date-time
     type: string
     example: "2020-09-10T06:13:27.777Z"
+    format: date-time
+  id:
+    $ref: ./UnityPackageID.yaml
+  impostorUrl:
+    type: string
+    nullable: true
   impostorizerVersion:
     type: string
     example: 0.17.0
@@ -30,31 +35,26 @@ properties:
   pluginUrlObject:
     type: object
     example: {}
+  scanStatus:
+    type: string
   unitySortNumber:
-    minimum: 0
     type: integer
-    format: int64
     example: 20180414000
+    format: int64
+    minimum: 0
   unityVersion:
+    type: string
     default: 5.3.4p1
     example: 2022.3.6f1
     minLength: 1
-    type: string
-  worldSignature:
-    example: AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ==
-    type: string
-    nullable: true
-  impostorUrl:
-    type: string
-    nullable: true
-  scanStatus:
-    type: string
   variant:
     type: string
+  worldSignature:
+    type: string
+    nullable: true
+    example: AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ==
 required:
-  - id
-  - unityVersion
   - assetVersion
+  - id
   - platform
-title: UnityPackage
-type: object
+  - unityVersion

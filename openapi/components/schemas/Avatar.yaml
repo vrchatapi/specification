@@ -1,37 +1,39 @@
+title: Avatar
+type: object
 description: ""
 properties:
   acknowledgements:
     type: string
   assetUrl:
+    type: string
     description: "Not present from general search `/avatars`, only on specific requests `/avatars/{avatarId}`."
     minLength: 1
-    type: string
   assetUrlObject:
+    type: object
     description: |-
       Not present from general search `/avatars`, only on specific requests `/avatars/{avatarId}`.
       **Deprecation:** `Object` has unknown usage/fields, and is always empty. Use normal `Url` field instead.
-    type: object
   authorId:
     $ref: ./UserID.yaml
   authorName:
+    type: string
     minLength: 1
-    type: string
   created_at:
+    type: string
     format: date-time
-    type: string
   description:
-    minLength: 0
     type: string
+    minLength: 0
   featured:
-    default: false
     type: boolean
+    default: false
   highestPrice:
     type: integer
   id:
     $ref: ./AvatarID.yaml
   imageUrl:
-    minLength: 1
     type: string
+    minLength: 1
   listingDate:
     type: string
     nullable: true
@@ -40,8 +42,8 @@ properties:
   lowestPrice:
     type: integer
   name:
-    minLength: 1
     type: string
+    minLength: 1
   performance:
     type: object
     properties:
@@ -95,36 +97,36 @@ properties:
         items:
           type: string
   tags:
+    type: array
     description: " "
     items:
       $ref: ./Tag.yaml
-    type: array
   thumbnailImageUrl:
-    minLength: 1
     type: string
+    minLength: 1
   unityPackageUrl:
     type: string
   unityPackageUrlObject:
     deprecated: true
+    type: object
     description: "**Deprecation:** `Object` has unknown usage/fields, and is always empty. Use normal `Url` field instead."
     properties:
       unityPackageUrl:
         type: string
-    type: object
   unityPackages:
+    type: array
     items:
       $ref: ./UnityPackage.yaml
     minItems: 1
-    type: array
     uniqueItems: true
   updated_at:
-    format: date-time
     type: string
+    format: date-time
   version:
+    type: integer
     default: 0
     example: 68
     minimum: 0
-    type: integer
 required:
   - authorId
   - authorName
@@ -140,10 +142,8 @@ required:
   - styles
   - tags
   - thumbnailImageUrl
-  - unityPackages
   - unityPackageUrl
   - unityPackageUrlObject
+  - unityPackages
   - updated_at
   - version
-title: Avatar
-type: object

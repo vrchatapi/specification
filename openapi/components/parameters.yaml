@@ -1,585 +1,372 @@
-number:
-  name: n
-  in: query
-  required: false
-  schema:
-    type: integer
-    maximum: 100
-    minimum: 1
-    default: 60
-  description: The number of objects to return.
-offset:
-  name: offset
-  in: query
-  required: false
-  schema:
-    type: integer
-    minimum: 0
-  description: A zero-based offset from the default object sorting from where search results start.
-utcOffset:
-  name: utcOffset
-  in: query
-  required: false
-  schema:
-    type: integer
-    minimum: -12
-    maximum: 12
-  description: The offset from UTC in hours of the client or authenticated user.
-sort:
-  name: sort
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/SortOption.yaml
-  description: The sort order of the results.
-hydrate:
-  name: hydrate
-  in: query
-  required: false
-  schema:
-    type: boolean
-  description: Populates some fields and changes types of others for certain objects.
-groupMemberSort:
-  name: sort
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/GroupSearchSort.yaml
-  description: The sort order of Group Member results
-groupMemberRoleFilter:
-  name: roleId
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/GroupRoleID.yaml
-  description: Only returns members with a specific groupRoleId
-order:
-  name: order
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/OrderOption.yaml
-  description: Result ordering
-monthDate:
-  name: date
-  in: query
-  required: false
-  schema:
-    type: string
-    format: date-time
-  description: The month to search in.
-startDate:
-  name: startDate
-  in: query
-  required: false
-  schema:
-    type: string
-    format: date-time
-  description: The start date of the search range.
-endDate:
-  name: endDate
-  in: query
-  required: false
-  schema:
-    type: string
-    format: date-time
-  description: The end date of the search range.
-actorIds:
-  name: actorIds
-  in: query
-  required: false
-  schema:
-    type: string
-    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
-  description: The comma-separated actor ids to search for.
-eventTypes:
-  name: eventTypes
-  in: query
-  required: false
-  schema:
-    type: string
-    example: group.member.remove,group.instance.kick
-  description: The comma-separated event types to search for.
-targetIds:
-  name: targetIds
-  in: query
-  required: false
-  schema:
-    type: string
-    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
-  description: The comma-separated target ids to search for.
-releaseStatus:
-  name: releaseStatus
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/ReleaseStatus.yaml
-  description: Filter by ReleaseStatus.
-offline:
-  name: offline
-  in: query
-  required: false
-  schema:
-    type: boolean
-  description: "Returns *only* offline users if true, returns only online and active users if false"
-fileId:
-  name: fileId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: file_00000000-0000-0000-0000-000000000000
-  description: Must be a valid file ID.
-groupId:
-  name: groupId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: grp_00000000-0000-0000-0000-000000000000
-  description: Must be a valid group ID.
-calendarId:
-  name: calendarId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: cal_00000000-0000-0000-0000-000000000000
-  description: Must be a valid calendar ID.
-groupIdFilter:
-  name: groupId
-  in: query
-  required: false
-  schema:
-    type: string
-    example: grp_00000000-0000-0000-0000-000000000000
-  description: Must be a valid group ID.
-groupRoleId:
-  name: groupRoleId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: grol_00000000-0000-0000-0000-000000000000
-  description: Must be a valid group role ID.
-groupGalleryId:
-  name: groupGalleryId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: ggal_00000000-0000-0000-0000-000000000000
-  description: Must be a valid group gallery ID.
-groupGalleryImageId:
-  name: groupGalleryImageId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: ggim_00000000-0000-0000-0000-000000000000
-  description: Must be a valid group gallery image ID.
-versionId:
-  name: versionId
-  in: path
-  required: true
-  schema:
-    type: integer
-    minimum: 1
-    example: 1
-  description: Version ID of the asset.
-fileType:
-  name: fileType
-  in: path
-  required: true
-  schema:
-    type: string
-    enum:
-      - file
-      - signature
-      - delta
-    example: file
-  description: Type of file.
-userId:
-  name: userId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid user ID.
-userIdQuery:
-  name: userId
-  in: query
-  required: false
-  schema:
-    type: string
-  description: Filter by UserID.
-userNoteId:
-  name: userNoteId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid user note ID.
-badgeId:
-  name: badgeId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid badge ID.
-usernameQuery:
-  name: username
-  in: query
-  required: false
-  schema:
-    type: string
-  description: Filter by Username.
-excludeUserId:
-  name: excludeUserId
-  in: query
-  required: false
-  schema:
-    type: string
-  description: Exclude by UserID.
-displayName:
-  name: displayName
-  in: query
-  required: false
-  schema:
-    type: string
-  description: Filter by displayName.
-email:
-  name: email
-  in: query
-  required: false
-  schema:
-    type: string
-  description: Filter by email.
-maxUnityVersion:
-  name: maxUnityVersion
-  in: query
-  required: false
-  schema:
-    type: string
-  description: The maximum Unity version supported by the asset.
-minUnityVersion:
-  name: minUnityVersion
-  in: query
-  required: false
-  schema:
-    type: string
-  description: The minimum Unity version supported by the asset.
-platform:
-  name: platform
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/Platform.yaml
-  description: The platform the asset supports.
-noplatform:
-  name: noplatform
-  in: query
-  required: false
-  schema:
-    type: string
-  description: The platform the asset does not support.
-avatarSpecific:
-  name: avatarSpecific
-  in: query
-  required: false
-  schema:
-    type: boolean
-  description: Only search for avatar worlds.
-tag:
-  name: tag
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/Tag.yaml
-  description: Tags to include (comma-separated). Any of the tags needs to be present.
-include:
-  name: include
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/Tag.yaml
-  description: Tags to include (comma-separated). Any of the tags needs to be present.
-require:
-  name: require
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/Tag.yaml
-  description: Tags to include (comma-separated). All of the tags needs to be present.
-notag:
-  name: notag
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/Tag.yaml
-  description: Tags to exclude (comma-separated).
-search:
-  name: search
-  in: query
-  required: false
-  schema:
-    type: string
-  description: Filters by world name.
-featured:
-  name: featured
-  in: query
-  required: false
-  schema:
-    type: boolean
-  description: Filters on featured results.
-userIdAdmin:
-  name: userId
-  in: query
-  required: false
-  schema:
-    type: string
-  description: "Target user to see information on, admin-only."
-worldId:
-  name: worldId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid world ID.
-instanceId:
-  name: instanceId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid instance ID.
-favoriteId:
-  name: favoriteId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid favorite ID.
-favoriteGroupType:
-  name: favoriteGroupType
-  in: path
-  required: true
-  schema:
-    type: string
-    enum:
-      - world
-      - friend
-      - avatar
-  description: "The type of group to fetch, must be a valid FavoriteType."
-favoriteGroupName:
-  name: favoriteGroupName
-  in: path
-  required: true
-  schema:
-    type: string
-  description: "The name of the group to fetch, must be a name of a FavoriteGroup."
-avatarId:
-  name: avatarId
-  in: path
-  required: true
-  schema:
-    $ref: ./schemas/AvatarID.yaml
-  description: Must be a valid avatar ID.
-targetAvatarId:
-  name: targetAvatarId
-  in: query
-  required: true
-  schema:
-    $ref: ./schemas/AvatarID.yaml
-  description: Must be a valid avatar ID.
-avatarModerationType:
-  name: avatarModerationType
-  in: query
-  required: true
-  schema:
-    $ref: ./schemas/AvatarModerationType.yaml
-  description: The avatar moderation type associated with the avatar.
-messageType:
-  name: messageType
-  in: path
-  required: true
-  schema:
-    $ref: ./schemas/InviteMessageType.yaml
-  description: "The type of message to fetch, must be a valid InviteMessageType."
-slot:
-  name: slot
-  in: path
-  required: true
-  schema:
-    type: integer
-    minimum: 0
-    maximum: 11
-  description: The message slot to fetch of a given message type.
-notificationId:
-  name: notificationId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid notification ID.
-permissionId:
-  name: permissionId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid permission ID.
-transactionId:
-  name: transactionId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid transaction ID.
-licenseGroupId:
-  name: licenseGroupId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid license group ID.
-productId:
-  name: productId
-  in: path
-  required: true
-  schema:
-    type: string
-  description: Must be a valid product ID.
-contentId:
-  name: contentId
-  in: query
-  required: false
-  schema:
-    type: boolean
-  description: Filter for users' previously submitted feedback, e.g., a groupId, userId, avatarId, etc.
 active:
   name: active
-  in: query
-  required: false
-  schema:
-    type: boolean
   description: Filter for users' listings and inventory bundles.
-variant:
-  name: variant
-  in: query
   required: false
-  schema:
-    type: string
-    enum:
-      - public
-      - internal
-    default: public
-  allowEmptyValue: true
-  description: "Specifies which `variant` of the site. Public is the end-user site, while `internal` is the staff-only site with special pages for moderation and management."
-branch:
-  name: branch
   in: query
-  required: false
-  schema:
-    type: string
-    default: main
-  allowEmptyValue: true
-  description: Specifies which git branch the site should load frontend source code from.
-fuzzy:
-  name: fuzzy
-  in: query
-  required: false
   schema:
     type: boolean
-jamId:
-  name: jamId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
-  description: Must be a valid query ID.
-printId:
-  name: printId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa
-  description: Print ID.
-confirmEmailUserId:
-  name: id
+actorIds:
+  name: actorIds
+  description: The comma-separated actor ids to search for.
+  required: false
   in: query
-  required: true
   schema:
     type: string
-    example: usr_00000000-0000-0000-0000-000000000000
-  description: Target user for which to verify email.
-confirmEmailToken:
-  name: verify_email
-  in: query
-  required: true
-  schema:
-    type: string
-    example: eml_00000000-0000-0000-0000-000000000000
-  description: Token to verify email.
-verifyLoginPlaceToken:
-  name: token
-  in: query
-  required: true
-  schema:
-    type: string
-  description: Token to verify login attempt.
-propId:
-  name: propId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: prop_829ba6f6-b837-49d9-b9a9-056b82103b58
-  description: Prop ID.
+    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
 adminAssetBundleId:
   name: adminAssetBundleId
-  in: path
+  description: Must be a valid admin asset bundle ID.
   required: true
+  in: path
   schema:
     type: string
     example: aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d
-  description: Must be a valid admin asset bundle ID.
+avatarId:
+  name: avatarId
+  description: Must be a valid avatar ID.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/AvatarID.yaml
+avatarModerationType:
+  name: avatarModerationType
+  description: The avatar moderation type associated with the avatar.
+  required: true
+  in: query
+  schema:
+    $ref: ./schemas/AvatarModerationType.yaml
+avatarSpecific:
+  name: avatarSpecific
+  description: Only search for avatar worlds.
+  required: false
+  in: query
+  schema:
+    type: boolean
+badgeId:
+  name: badgeId
+  description: Must be a valid badge ID.
+  required: true
+  in: path
+  schema:
+    type: string
+branch:
+  name: branch
+  description: Specifies which git branch the site should load frontend source code from.
+  required: false
+  allowEmptyValue: true
+  in: query
+  schema:
+    type: string
+    default: main
+calendarId:
+  name: calendarId
+  description: Must be a valid calendar ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: cal_00000000-0000-0000-0000-000000000000
+calendarSearchTerm:
+  name: searchTerm
+  description: Search term for calendar events.
+  required: true
+  in: query
+  schema:
+    type: string
+    example: game night
+confirmEmailToken:
+  name: verify_email
+  description: Token to verify email.
+  required: true
+  in: query
+  schema:
+    type: string
+    example: eml_00000000-0000-0000-0000-000000000000
+confirmEmailUserId:
+  name: id
+  description: Target user for which to verify email.
+  required: true
+  in: query
+  schema:
+    type: string
+    example: usr_00000000-0000-0000-0000-000000000000
+contentId:
+  name: contentId
+  description: Filter for users' previously submitted feedback, e.g., a groupId, userId, avatarId, etc.
+  required: false
+  in: query
+  schema:
+    type: boolean
+displayName:
+  name: displayName
+  description: Filter by displayName.
+  required: false
+  in: query
+  schema:
+    type: string
+email:
+  name: email
+  description: Filter by email.
+  required: false
+  in: query
+  schema:
+    type: string
+endDate:
+  name: endDate
+  description: The end date of the search range.
+  required: false
+  in: query
+  schema:
+    type: string
+    format: date-time
+eventTypes:
+  name: eventTypes
+  description: The comma-separated event types to search for.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: group.member.remove,group.instance.kick
+excludeUserId:
+  name: excludeUserId
+  description: Exclude by UserID.
+  required: false
+  in: query
+  schema:
+    type: string
+favoriteGroupName:
+  name: favoriteGroupName
+  description: "The name of the group to fetch, must be a name of a FavoriteGroup."
+  required: true
+  in: path
+  schema:
+    type: string
+favoriteGroupType:
+  name: favoriteGroupType
+  description: "The type of group to fetch, must be a valid FavoriteType."
+  required: true
+  in: path
+  schema:
+    type: string
+    enum:
+      - avatar
+      - friend
+      - world
+favoriteId:
+  name: favoriteId
+  description: Must be a valid favorite ID.
+  required: true
+  in: path
+  schema:
+    type: string
+featured:
+  name: featured
+  description: Filters on featured results.
+  required: false
+  in: query
+  schema:
+    type: boolean
+fileId:
+  name: fileId
+  description: Must be a valid file ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: file_00000000-0000-0000-0000-000000000000
+fileType:
+  name: fileType
+  description: Type of file.
+  required: true
+  in: path
+  schema:
+    type: string
+    enum:
+      - delta
+      - file
+      - signature
+    example: file
+fuzzy:
+  name: fuzzy
+  required: false
+  in: query
+  schema:
+    type: boolean
+groupGalleryId:
+  name: groupGalleryId
+  description: Must be a valid group gallery ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: ggal_00000000-0000-0000-0000-000000000000
+groupGalleryImageId:
+  name: groupGalleryImageId
+  description: Must be a valid group gallery image ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: ggim_00000000-0000-0000-0000-000000000000
+groupId:
+  name: groupId
+  description: Must be a valid group ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: grp_00000000-0000-0000-0000-000000000000
+groupIdFilter:
+  name: groupId
+  description: Must be a valid group ID.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: grp_00000000-0000-0000-0000-000000000000
+groupMemberRoleFilter:
+  name: roleId
+  description: Only returns members with a specific groupRoleId
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/GroupRoleID.yaml
+groupMemberSort:
+  name: sort
+  description: The sort order of Group Member results
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/GroupSearchSort.yaml
+groupRoleId:
+  name: groupRoleId
+  description: Must be a valid group role ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: grol_00000000-0000-0000-0000-000000000000
+hydrate:
+  name: hydrate
+  description: Populates some fields and changes types of others for certain objects.
+  required: false
+  in: query
+  schema:
+    type: boolean
+hydrateListings:
+  name: hydrateListings
+  description: Listings fields will be populated.
+  required: false
+  in: query
+  schema:
+    type: boolean
+hydrateProducts:
+  name: hydrateProducts
+  description: Products fields will be populated.
+  required: false
+  in: query
+  schema:
+    type: boolean
+include:
+  name: include
+  description: Tags to include (comma-separated). Any of the tags needs to be present.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/Tag.yaml
+instanceId:
+  name: instanceId
+  description: Must be a valid instance ID.
+  required: true
+  in: path
+  schema:
+    type: string
+inventoryEquipSlot:
+  name: equipSlot
+  description: Filter for inventory retrieval.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/InventoryEquipSlot.yaml
+inventoryHolderId:
+  name: holderId
+  description: The UserID of the owner of the inventory; defaults to the currently authenticated user.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
+inventoryItemArchived:
+  name: archived
+  description: Filter archived status for inventory retrieval.
+  required: false
+  in: query
+  schema:
+    type: boolean
+inventoryItemFlags:
+  name: flags
+  description: Filter flags for inventory retrieval (comma-separated).
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/InventoryFlag.yaml
 inventoryItemId:
   name: inventoryItemId
-  in: path
+  description: Must be a valid inventory item ID.
   required: true
+  in: path
   schema:
     type: string
     example: inv_00000000-0000-0000-0000-000000000000
-  description: Must be a valid inventory item ID.
-inventoryTemplateId:
-  name: inventoryTemplateId
-  in: path
-  required: true
-  schema:
-    type: string
-    example: invt_00000000-0000-0000-0000-000000000000
-  description: Must be a valid inventory template ID.
-inventoryHolderId:
-  name: holderId
-  in: query
+inventoryItemNotFlags:
+  name: notFlags
+  description: Filter out flags for inventory retrieval (comma-separated).
   required: false
-  schema:
-    $ref: ./schemas/UserID.yaml
-  description: The UserID of the owner of the inventory; defaults to the currently authenticated user.
-inventoryEquipSlot:
-  name: equipSlot
   in: query
-  required: false
   schema:
-    $ref: ./schemas/InventoryEquipSlot.yaml
+    $ref: ./schemas/InventoryFlag.yaml
+inventoryItemNotTypes:
+  name: notTypes
+  description: Filter out types for inventory retrieval (comma-separated).
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/InventoryItemType.yaml
+inventoryItemTags:
+  name: tags
+  description: Filter tags for inventory retrieval (comma-separated).
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/Tag.yaml
+inventoryItemTypes:
+  name: types
   description: Filter for inventory retrieval.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/InventoryItemType.yaml
+inventoryPedestalDuration:
+  name: duration
+  description: The duration before the sharing pedestal despawns.
+  required: true
+  in: query
+  schema:
+    type: integer
+    default: 90
+    maximum: 86400
+    minimum: 30
+inventoryPedestalItemId:
+  name: itemId
+  description: Id for inventory item sharing.
+  required: true
+  in: query
+  schema:
+    $ref: ./schemas/InventoryItemID.yaml
 inventorySortOrder:
   name: order
-  in: query
+  description: Sort order for inventory retrieval.
   required: false
+  in: query
   schema:
     type: string
     enum:
@@ -587,124 +374,337 @@ inventorySortOrder:
       - newest_created
       - oldest
       - oldest_created
-  description: Sort order for inventory retrieval.
-inventoryItemTypes:
-  name: types
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/InventoryItemType.yaml
-  description: Filter for inventory retrieval.
-inventoryItemTags:
-  name: tags
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/Tag.yaml
-  description: Filter tags for inventory retrieval (comma-separated).
-inventoryItemFlags:
-  name: flags
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/InventoryFlag.yaml
-  description: Filter flags for inventory retrieval (comma-separated).
-inventoryItemNotTypes:
-  name: notTypes
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/InventoryItemType.yaml
-  description: Filter out types for inventory retrieval (comma-separated).
-inventoryItemNotFlags:
-  name: notFlags
-  in: query
-  required: false
-  schema:
-    $ref: ./schemas/InventoryFlag.yaml
-  description: Filter out flags for inventory retrieval (comma-separated).
-inventoryItemArchived:
-  name: archived
-  in: query
-  required: false
-  schema:
-    type: boolean
-  description: Filter archived status for inventory retrieval.
 inventorySpawnItemId:
   name: id
-  in: query
-  required: true
-  schema:
-    $ref: ./schemas/InventoryItemID.yaml
   description: Id for inventory item spawning.
-inventoryPedestalItemId:
-  name: itemId
-  in: query
   required: true
+  in: query
   schema:
     $ref: ./schemas/InventoryItemID.yaml
-  description: Id for inventory item sharing.
-inventoryPedestalDuration:
-  name: duration
-  in: query
+inventoryTemplateId:
+  name: inventoryTemplateId
+  description: Must be a valid inventory template ID.
   required: true
+  in: path
+  schema:
+    type: string
+    example: invt_00000000-0000-0000-0000-000000000000
+jamId:
+  name: jamId
+  description: Must be a valid query ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+licenseGroupId:
+  name: licenseGroupId
+  description: Must be a valid license group ID.
+  required: true
+  in: path
+  schema:
+    type: string
+maxUnityVersion:
+  name: maxUnityVersion
+  description: The maximum Unity version supported by the asset.
+  required: false
+  in: query
+  schema:
+    type: string
+messageType:
+  name: messageType
+  description: "The type of message to fetch, must be a valid InviteMessageType."
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/InviteMessageType.yaml
+minUnityVersion:
+  name: minUnityVersion
+  description: The minimum Unity version supported by the asset.
+  required: false
+  in: query
+  schema:
+    type: string
+monthDate:
+  name: date
+  description: The month to search in.
+  required: false
+  in: query
+  schema:
+    type: string
+    format: date-time
+mostRecentFlag:
+  name: mostRecent
+  required: false
+  in: query
+  schema:
+    type: boolean
+noplatform:
+  name: noplatform
+  description: The platform the asset does not support.
+  required: false
+  in: query
+  schema:
+    type: string
+notag:
+  name: notag
+  description: Tags to exclude (comma-separated).
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/Tag.yaml
+notificationId:
+  name: notificationId
+  description: Must be a valid notification ID.
+  required: true
+  in: path
+  schema:
+    type: string
+number:
+  name: n
+  description: The number of objects to return.
+  required: false
+  in: query
   schema:
     type: integer
-    minimum: 30
-    maximum: 86400
-    default: 90
-  description: The duration before the sharing pedestal despawns.
-calendarSearchTerm:
-  name: searchTerm
+    default: 60
+    maximum: 100
+    minimum: 1
+offline:
+  name: offline
+  description: "Returns *only* offline users if true, returns only online and active users if false"
+  required: false
   in: query
+  schema:
+    type: boolean
+offset:
+  name: offset
+  description: A zero-based offset from the default object sorting from where search results start.
+  required: false
+  in: query
+  schema:
+    type: integer
+    minimum: 0
+order:
+  name: order
+  description: Result ordering
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/OrderOption.yaml
+permissionId:
+  name: permissionId
+  description: Must be a valid permission ID.
   required: true
+  in: path
   schema:
     type: string
-    example: game night
-  description: Search term for calendar events.
+platform:
+  name: platform
+  description: The platform the asset supports.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/Platform.yaml
+printId:
+  name: printId
+  description: Print ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa
+productId:
+  name: productId
+  description: Must be a valid product ID.
+  required: true
+  in: path
+  schema:
+    type: string
+propId:
+  name: propId
+  description: Prop ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: prop_829ba6f6-b837-49d9-b9a9-056b82103b58
+releaseStatus:
+  name: releaseStatus
+  description: Filter by ReleaseStatus.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/ReleaseStatus.yaml
+require:
+  name: require
+  description: Tags to include (comma-separated). All of the tags needs to be present.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/Tag.yaml
+search:
+  name: search
+  description: Filters by world name.
+  required: false
+  in: query
+  schema:
+    type: string
+slot:
+  name: slot
+  description: The message slot to fetch of a given message type.
+  required: true
+  in: path
+  schema:
+    type: integer
+    maximum: 11
+    minimum: 0
+sort:
+  name: sort
+  description: The sort order of the results.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/SortOption.yaml
+startDate:
+  name: startDate
+  description: The start date of the search range.
+  required: false
+  in: query
+  schema:
+    type: string
+    format: date-time
 steamId:
   name: steamId
-  in: query
+  description: The Steam ID of the user.
   required: false
+  in: query
   schema:
     type: string
     example: game night
-  description: The Steam ID of the user.
-hydrateListings:
-  name: hydrateListings
-  in: query
-  required: false
-  schema:
-    type: boolean
-  description: Listings fields will be populated.
-hydrateProducts:
-  name: hydrateProducts
-  in: query
-  required: false
-  schema:
-    type: boolean
-  description: Products fields will be populated.
 storeId:
   name: storeId
-  in: query
   required: true
+  in: query
   schema:
     $ref: ./schemas/StoreID.yaml
 storeView:
   name: fetch
-  in: query
   required: false
+  in: query
   schema:
     $ref: ./schemas/StoreView.yaml
 subscriptionId:
   name: subscriptionId
-  in: query
   required: true
+  in: query
   schema:
     type: string
-mostRecentFlag:
-  name: mostRecent
-  in: query
+tag:
+  name: tag
+  description: Tags to include (comma-separated). Any of the tags needs to be present.
   required: false
+  in: query
   schema:
-    type: boolean
+    $ref: ./schemas/Tag.yaml
+targetAvatarId:
+  name: targetAvatarId
+  description: Must be a valid avatar ID.
+  required: true
+  in: query
+  schema:
+    $ref: ./schemas/AvatarID.yaml
+targetIds:
+  name: targetIds
+  description: The comma-separated target ids to search for.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+transactionId:
+  name: transactionId
+  description: Must be a valid transaction ID.
+  required: true
+  in: path
+  schema:
+    type: string
+userId:
+  name: userId
+  description: Must be a valid user ID.
+  required: true
+  in: path
+  schema:
+    type: string
+userIdAdmin:
+  name: userId
+  description: "Target user to see information on, admin-only."
+  required: false
+  in: query
+  schema:
+    type: string
+userIdQuery:
+  name: userId
+  description: Filter by UserID.
+  required: false
+  in: query
+  schema:
+    type: string
+userNoteId:
+  name: userNoteId
+  description: Must be a valid user note ID.
+  required: true
+  in: path
+  schema:
+    type: string
+usernameQuery:
+  name: username
+  description: Filter by Username.
+  required: false
+  in: query
+  schema:
+    type: string
+utcOffset:
+  name: utcOffset
+  description: The offset from UTC in hours of the client or authenticated user.
+  required: false
+  in: query
+  schema:
+    type: integer
+    maximum: 12
+    minimum: -12
+variant:
+  name: variant
+  description: "Specifies which `variant` of the site. Public is the end-user site, while `internal` is the staff-only site with special pages for moderation and management."
+  required: false
+  allowEmptyValue: true
+  in: query
+  schema:
+    type: string
+    enum:
+      - internal
+      - public
+    default: public
+verifyLoginPlaceToken:
+  name: token
+  description: Token to verify login attempt.
+  required: true
+  in: query
+  schema:
+    type: string
+versionId:
+  name: versionId
+  description: Version ID of the asset.
+  required: true
+  in: path
+  schema:
+    type: integer
+    example: 1
+    minimum: 1
+worldId:
+  name: worldId
+  description: Must be a valid world ID.
+  required: true
+  in: path
+  schema:
+    type: string

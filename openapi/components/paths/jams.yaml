@@ -1,20 +1,13 @@
 openapi: 3.0.3
 info:
   title: jams
-  version: "1.0"
   description: Jams Docs Here
+  version: "1.0"
 paths:
   /jams:
     get:
-      summary: Show jams list
-      tags:
-        - jams
-      responses:
-        "200":
-          $ref: ../responses/jams/JamListResponse.yaml
-      security:
-        - authCookie: []
       operationId: getJams
+      summary: Show jams list
       description: |-
         Lists World Jams or Avatar Jams, both currently running and ones that have ended.
 
@@ -22,42 +15,49 @@ paths:
 
         `type` is used to select only world or avatar jams, and can only take `world` or `avatar`.
         ``
+      tags:
+        - jams
       parameters:
-        - schema:
+        - name: type
+          description: Only show jams of this type (`avatar` or `world`).
+          in: query
+          schema:
             type: string
             example: avatar
-          in: query
-          name: type
-          description: Only show jams of this type (`avatar` or `world`).
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/jams/JamListResponse.yaml
   /jams/{jamId}:
     parameters:
       - $ref: ../parameters.yaml#/jamId
     get:
+      operationId: getJam
       summary: Show jam information
+      description: Returns a jam.
       tags:
         - jams
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/jams/JamResponse.yaml
         "404":
           $ref: ../responses/jams/JamNotFoundError.yaml
-      security:
-        - authCookie: []
-      operationId: getJam
-      description: Returns a jam.
   /jams/{jamId}/submissions:
     parameters:
       - $ref: ../parameters.yaml#/jamId
     get:
+      operationId: getJamSubmissions
       summary: Show jam submissions
+      description: Returns all submissions of a jam.
       tags:
         - jams
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/jams/SubmissionListResponse.yaml
         "404":
           $ref: ../responses/jams/JamNotFoundError.yaml
-      security:
-        - authCookie: []
-      operationId: getJamSubmissions
-      description: Returns all submissions of a jam.

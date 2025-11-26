@@ -1,11 +1,11 @@
 description: Error response due to missing authorization to perform that action.
 content:
   application/json:
-    schema:
-      $ref: ../schemas/Error.yaml
     examples:
       Not Authorized Example:
         value:
           error:
             message: You are not authorized to perform that action.
             status_code: 401
+    schema:
+      $ref: ../schemas/Error.yaml

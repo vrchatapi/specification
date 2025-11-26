@@ -5,8 +5,8 @@ properties:
     $ref: ./AvatarModerationType.yaml
   created:
     type: integer
-    format: int64
     description: Timestamp in milliseconds since Unix epoch
+    format: int64
   targetAvatarId:
     $ref: ./AvatarID.yaml
 required:

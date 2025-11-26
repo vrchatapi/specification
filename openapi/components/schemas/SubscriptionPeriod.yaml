@@ -1,9 +1,9 @@
-type: string
 title: SubscriptionPeriod
-default: month
+type: string
 enum:
-  - hour
   - day
-  - week
+  - hour
   - month
+  - week
   - year
+default: month

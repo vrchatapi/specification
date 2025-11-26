@@ -8,9 +8,9 @@ properties:
     items:
       type: string
   created_at:
-    format: date-time
     type: string
     example: "2025-06-12T20:21:15.056Z"
+    format: date-time
   description:
     type: string
   flags:
@@ -39,9 +39,9 @@ properties:
     items:
       $ref: ./Tag.yaml
   updated_at:
-    format: date-time
     type: string
     example: "2025-06-10T20:37:31.837Z"
+    format: date-time
 required:
   - authorId
   - collections

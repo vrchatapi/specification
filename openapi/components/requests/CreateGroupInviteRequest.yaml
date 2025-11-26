@@ -1,10 +1,10 @@
 title: CreateGroupInviteRequest
 type: object
 properties:
-  userId:
-    $ref: ../schemas/UserID.yaml
   confirmOverrideBlock:
     type: boolean
     default: true
+  userId:
+    $ref: ../schemas/UserID.yaml
 required:
   - userId

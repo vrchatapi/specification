@@ -1,46 +1,46 @@
-description: ""
-type: object
-example:
-  id: vrchatplus-yearly
-  steamItemId: "5000"
-  amount: 9999
-  description: VRChat Plus (Yearly)
-  period: year
-  tier: 5
 title: Subscription
+type: object
+description: ""
 properties:
-  id:
+  amount:
+    type: number
+  appleProductId:
     type: string
     minLength: 1
-  steamItemId:
+  description:
+    type: string
+  googlePlanId:
+    type: string
+  googleProductId:
+    type: string
+    minLength: 1
+  id:
     type: string
     minLength: 1
   oculusSku:
     type: string
     minLength: 1
-  googleProductId:
-    type: string
-    minLength: 1
-  googlePlanId:
-    type: string
+  period:
+    $ref: ./SubscriptionPeriod.yaml
   picoSku:
     type: string
     minLength: 1
-  appleProductId:
+  steamItemId:
     type: string
     minLength: 1
-  amount:
-    type: number
-  description:
-    type: string
-  period:
-    $ref: ./SubscriptionPeriod.yaml
   tier:
     type: integer
 required:
-  - id
-  - steamItemId
   - amount
   - description
+  - id
   - period
+  - steamItemId
   - tier
+example:
+  id: vrchatplus-yearly
+  description: VRChat Plus (Yearly)
+  amount: 9999
+  period: year
+  steamItemId: "5000"
+  tier: 5

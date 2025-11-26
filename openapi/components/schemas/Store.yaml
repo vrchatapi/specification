@@ -5,12 +5,35 @@ properties:
     type: string
   displayName:
     type: string
+  groupId:
+    $ref: ./GroupID.yaml
+    description: Only for store type group
   id:
     $ref: ./StoreID.yaml
+  listingIds:
+    type: array
+    description: Only for store type world and group
+    items:
+      $ref: ./ProductID.yaml
+  listings:
+    type: array
+    description: Only for store type world and group
+    items:
+      $ref: ./ProductListing.yaml
   sellerDisplayName:
     type: string
   sellerId:
     $ref: ./UserID.yaml
+  shelfIds:
+    type: array
+    description: Only for store type house
+    items:
+      $ref: ./StoreShelfID.yaml
+  shelves:
+    type: array
+    description: Only for store type house
+    items:
+      $ref: ./StoreShelf.yaml
   storeId:
     $ref: ./StoreID.yaml
   storeType:
@@ -19,32 +42,9 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
-  listingIds:
-    description: Only for store type world and group
-    type: array
-    items:
-      $ref: ./ProductID.yaml
-  listings:
-    description: Only for store type world and group
-    type: array
-    items:
-      $ref: ./ProductListing.yaml
   worldId:
-    description: Only for store type world
     $ref: ./WorldID.yaml
-  groupId:
-    description: Only for store type group
-    $ref: ./GroupID.yaml
-  shelfIds:
-    description: Only for store type house
-    type: array
-    items:
-      $ref: ./StoreShelfID.yaml
-  shelves:
-    description: Only for store type house
-    type: array
-    items:
-      $ref: ./StoreShelf.yaml
+    description: Only for store type world
 required:
   - description
   - displayName

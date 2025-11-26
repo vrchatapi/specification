@@ -1,11 +1,11 @@
 description: Error response when trying to delete any version of a file that is not the last one.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       409/500 Delete Non-Last File Version:
         value:
           error:
             message: 409 Cannot delete against anything but the latest version of this file˸ 1‚ 11
             status_code: 500
+    schema:
+      $ref: ../../schemas/Error.yaml

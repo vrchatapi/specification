@@ -1,16 +1,16 @@
 description: Returns a users Friend Status.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/FriendStatus.yaml
     examples:
-      Not Friends:
-        value:
-          isFriend: true
-          outgoingRequest: false
-          incomingRequest: false
       Is Friend:
         value:
+          incomingRequest: false
           isFriend: true
           outgoingRequest: false
+      Not Friends:
+        value:
           incomingRequest: false
+          isFriend: true
+          outgoingRequest: false
+    schema:
+      $ref: ../../schemas/FriendStatus.yaml

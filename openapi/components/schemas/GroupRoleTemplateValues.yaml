@@ -12,9 +12,9 @@ properties:
   roles:
     type: object
     properties:
-      description:
-        type: string
       name:
+        type: string
+      description:
         type: string
       basePermissions:
         type: array

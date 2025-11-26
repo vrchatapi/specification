@@ -1,11 +1,11 @@
 description: Successful response after deleting/clearing the group announcement.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Success.yaml
     examples:
       Deleted Group Announcement:
         value:
           success:
             message: Group announcement was cleared!
             status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

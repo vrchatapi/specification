@@ -1,16 +1,6 @@
 title: CreateGroupAnnouncementRequest
 type: object
 properties:
-  title:
-    type: string
-    description: Announcement title
-    minLength: 1
-    example: Event is starting soon!
-  text:
-    type: string
-    description: Announcement text
-    minLength: 1
-    example: Come join us for the event!
   imageId:
     $ref: ../schemas/FileID.yaml
   sendNotification:
@@ -18,6 +8,16 @@ properties:
     description: Send notification to group members.
     default: false
     example: false
+  text:
+    type: string
+    description: Announcement text
+    example: Come join us for the event!
+    minLength: 1
+  title:
+    type: string
+    description: Announcement title
+    example: Event is starting soon!
+    minLength: 1
 required:
-  - title
   - favoriteId
+  - title

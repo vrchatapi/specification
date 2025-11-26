@@ -5,12 +5,12 @@ properties:
   description:
     type: string
     description: The description of the report category
-  title:
-    type: string
-    description: The title of the report category
   text:
     type: string
     description: The label of the report category
+  title:
+    type: string
+    description: The title of the report category
   tooltip:
     type: string
     description: The tooltip that describes the category

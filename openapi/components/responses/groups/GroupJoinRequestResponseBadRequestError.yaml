@@ -1,11 +1,11 @@
 description: Bad request error response when responding to a group join request
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
       User Join Request Not Exist:
         value:
           error:
             message: You can't accept a join request for a user who hasn't requested to join․
             status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

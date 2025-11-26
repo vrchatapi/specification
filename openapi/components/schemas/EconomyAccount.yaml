@@ -3,8 +3,8 @@ type: object
 properties:
   accountActivatedOn:
     type: string
-    format: date-time
     nullable: true
+    format: date-time
   accountId:
     type: string
     nullable: true

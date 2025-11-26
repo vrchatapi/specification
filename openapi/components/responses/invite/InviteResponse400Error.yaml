@@ -1,14 +1,7 @@
 description: Error response when trying to respond to an invite and something went wrong.
 content:
   application/json:
-    schema:
-      $ref: ../../schemas/Error.yaml
     examples:
-      Response Slot Out Of Bounds Error:
-        value:
-          error:
-            message: "\"Response slot is out of bounds.\""
-            status_code: 400
       Already Responded Error:
         value:
           error:
@@ -19,3 +12,10 @@ content:
           error:
             message: "\"You cannot respond to your own invites.\""
             status_code: 400
+      Response Slot Out Of Bounds Error:
+        value:
+          error:
+            message: "\"Response slot is out of bounds.\""
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

@@ -1,33 +1,33 @@
 title: CreateGroupRequest
 type: object
 properties:
-  name:
-    type: string
-    minLength: 3
-    maxLength: 64
-  shortCode:
-    type: string
-    minLength: 3
-    maxLength: 6
-  description:
-    type: string
-    maxLength: 250
-    minLength: 0
-  joinState:
-    $ref: ../schemas/GroupJoinState.yaml
-  iconId:
-    type: string
-    nullable: true
-    default: null
   bannerId:
     type: string
     nullable: true
     default: null
+  description:
+    type: string
+    maxLength: 250
+    minLength: 0
+  iconId:
+    type: string
+    nullable: true
+    default: null
+  joinState:
+    $ref: ../schemas/GroupJoinState.yaml
+  name:
+    type: string
+    maxLength: 64
+    minLength: 3
   privacy:
     $ref: ../schemas/GroupPrivacy.yaml
   roleTemplate:
     $ref: ../schemas/GroupRoleTemplate.yaml
+  shortCode:
+    type: string
+    maxLength: 6
+    minLength: 3
 required:
   - name
-  - shortCode
   - roleTemplate
+  - shortCode
