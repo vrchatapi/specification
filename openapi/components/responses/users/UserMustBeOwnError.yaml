@@ -7,5 +7,5 @@ content:
       User Id must be your own:
         value:
           error:
-            message: "User ID must be your own․"
+            message: User ID must be your own․
             status_code: 403

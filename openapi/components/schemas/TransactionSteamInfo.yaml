@@ -1,4 +1,4 @@
-description: ''
+description: ""
 type: object
 properties:
   walletInfo:
@@ -17,7 +17,7 @@ properties:
   transId:
     type: string
     minLength: 1
-    description: 'Steam Transaction ID, NOT the same as VRChat TransactionID'
+    description: "Steam Transaction ID, NOT the same as VRChat TransactionID"
 required:
   - walletInfo
   - steamId

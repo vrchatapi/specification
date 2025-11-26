@@ -30,7 +30,7 @@ properties:
   releaseStatus:
     $ref: ../schemas/ReleaseStatus.yaml
   tags:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ../schemas/Tag.yaml

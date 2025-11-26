@@ -4,7 +4,7 @@ description: A status response consisting of solely a string description of whet
 properties:
   ok:
     type: string
-    default: "maybe?"
+    default: maybe?
     description: The actual status itself
 required:
   - ok

@@ -15,13 +15,13 @@ content:
           versions:
             - version: 0
               status: complete
-              created_at: '2019-08-15T11:04:37.910Z'
+              created_at: "2019-08-15T11:04:37.910Z"
             - version: 1
               status: complete
-              created_at: '2019-08-15T11:04:49.702Z'
+              created_at: "2019-08-15T11:04:49.702Z"
               file:
                 fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage
-                url: 'https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage'
+                url: "https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage"
                 md5: xxxxxxxxxxxxxxxxxxx==
                 sizeInBytes: 303055180
                 status: complete
@@ -29,17 +29,17 @@ content:
                 uploadId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
               delta:
                 fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta
-                url: 'https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta'
-                md5: ''
+                url: "https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.delta"
+                md5: ""
                 sizeInBytes: 0
                 status: none
                 category: queued
-                uploadId: ''
+                uploadId: ""
               signature:
                 fileName: Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature
-                url: 'https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature'
+                url: "https://s3.us-east-1.amazonaws.com/files.vrchat.cloud/Avatar-Test-Avatar-Unity.file_00000000-0000-0000-0000-000000000000.1.unitypackage.signature"
                 md5: xxxxxxxxxxxxxxxx==
                 sizeInBytes: 532748
                 status: complete
                 category: simple
-                uploadId: ''
+                uploadId: ""

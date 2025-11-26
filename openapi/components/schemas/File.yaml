@@ -1,4 +1,4 @@
-description: ''
+description: ""
 properties:
   animationStyle:
     type: string
@@ -15,19 +15,19 @@ properties:
   mimeType:
     $ref: ./MIMEType.yaml
   name:
-    description: ''
+    description: ""
     example: Example File
     minLength: 0
     type: string
   ownerId:
     $ref: ./UserID.yaml
   tags:
-    description: ' '
+    description: " "
     items:
       $ref: ./Tag.yaml
     type: array
   versions:
-    description: ' '
+    description: " "
     items:
       $ref: ./FileVersion.yaml
     minItems: 1

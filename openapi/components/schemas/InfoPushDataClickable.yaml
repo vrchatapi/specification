@@ -11,7 +11,7 @@ properties:
       - OpenSafetyMenu
       - CannedWorldSearch
   parameters:
-    description: 'In case of OpenURL, this would contain the link.'
+    description: "In case of OpenURL, this would contain the link."
     type: array
     items:
       type: string

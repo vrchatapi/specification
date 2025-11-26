@@ -1,4 +1,4 @@
-description: ''
+description: ""
 title: FileData
 type: object
 properties:
@@ -22,7 +22,7 @@ properties:
   status:
     $ref: ./FileStatus.yaml
   uploadId:
-    default: ''
+    default: ""
     minLength: 0
     type: string
   url:

@@ -11,20 +11,20 @@ properties:
   targetUser:
     type: object
     properties:
-      "currentAvatarTags":
+      currentAvatarTags:
         type: array
         items:
           $ref: ./Tag.yaml
-      "currentAvatarThumbnailImageUrl":
+      currentAvatarThumbnailImageUrl:
         $ref: ./CurrentAvatarThumbnailImageUrl.yaml
-      "displayName":
+      displayName:
         type: string
-      "id":
+      id:
         $ref: ./UserNoteID.yaml
-      "profilePicOverride":
+      profilePicOverride:
         type: string
         nullable: true
-      "userIcon":
+      userIcon:
         type: string
   targetUserId:
     $ref: ./UserID.yaml

@@ -17,5 +17,5 @@ content:
       404 Avatar Not Found:
         value:
           error:
-            message: "Avatar Not Found"
+            message: Avatar Not Found
             status_code: 404

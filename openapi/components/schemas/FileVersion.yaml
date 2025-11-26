@@ -1,4 +1,4 @@
-description: ''
+description: ""
 properties:
   created_at:
     format: date-time
@@ -17,7 +17,7 @@ properties:
     $ref: ./FileStatus.yaml
   version:
     default: 0
-    description: 'Incremental version counter, can only be increased.'
+    description: "Incremental version counter, can only be increased."
     minimum: 0
     type: integer
 required:

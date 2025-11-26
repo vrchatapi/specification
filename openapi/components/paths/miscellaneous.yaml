@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: miscellaneous
-  version: '1.0'
+  version: "1.0"
   description: Miscellaneous endpoints that do not fit into any other category.
 paths:
   /infoPush:
@@ -10,7 +10,7 @@ paths:
       tags:
         - miscellaneous
       responses:
-        '200':
+        "200":
           $ref: ../responses/system/InfoPushListResponse.yaml
       operationId: getInfoPush
       description: |-
@@ -24,7 +24,7 @@ paths:
         - $ref: ../parameters.yaml#/include
       x-badges:
         - color: gold
-          label: 'Status: Early Access (Still Under Development)'
+          label: "Status: Early Access (Still Under Development)"
   /health:
     get:
       summary: Check API Health
@@ -37,7 +37,7 @@ paths:
         **DEPRECATED:** VRChat has suddenly restricted this endpoint for unknown reasons, and now always return 401 Unauthorized.
       security: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/system/APIHealthResponse.yaml
       deprecated: true
   /config:
@@ -46,7 +46,7 @@ paths:
       tags:
         - miscellaneous
       responses:
-        '200':
+        "200":
           $ref: ../responses/system/APIConfigResponse.yaml
       operationId: getConfig
       description: |-
@@ -60,7 +60,7 @@ paths:
       tags:
         - miscellaneous
       responses:
-        '200':
+        "200":
           $ref: ../responses/system/CurrentOnlineUsersResponse.yaml
       operationId: getCurrentOnlineUsers
       security: []
@@ -74,7 +74,7 @@ paths:
       tags:
         - miscellaneous
       responses:
-        '200':
+        "200":
           $ref: ../responses/system/SystemTimeResponse.yaml
       operationId: getSystemTime
       description: |-
@@ -88,13 +88,13 @@ paths:
       tags:
         - miscellaneous
       responses:
-        '200':
-          description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
+        "200":
+          description: "**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively."
           content:
             application/javascript:
               schema:
                 type: string
-        '400':
+        "400":
           $ref: ../responses/system/DownloadSourceCodeAccessError.yaml
       operationId: getJavaScript
       description: Fetches the JavaScript code to the frontend React website.
@@ -107,13 +107,13 @@ paths:
       tags:
         - miscellaneous
       responses:
-        '200':
-          description: '**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively.'
+        "200":
+          description: "**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively."
           content:
             text/css:
               schema:
                 type: string
-        '400':
+        "400":
           $ref: ../responses/system/DownloadSourceCodeAccessError.yaml
       operationId: getCSS
       description: Fetches the CSS code to the frontend React website.
@@ -127,9 +127,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/permissions/PermissionListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - miscellaneous
@@ -141,28 +141,28 @@ paths:
       tags:
         - miscellaneous
       responses:
-        '200':
+        "200":
           $ref: ../responses/permissions/PermissionListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
       operationId: getPermissions
       security:
         - authCookie: []
       x-internal: true
-      description: '**REQUIRES ADMIN CREDENTIALS**. Returns a list of all existing permissions, just like `/users` with empty search would.'
+      description: "**REQUIRES ADMIN CREDENTIALS**. Returns a list of all existing permissions, just like `/users` with empty search would."
     post:
       summary: Create Permission
       operationId: createPermission
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/permissions/PermissionResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
       x-internal: true
       requestBody:
@@ -177,7 +177,7 @@ paths:
                   $ref: ../schemas/UserID.yaml
               required:
                 - name
-      description: '**REQUIRES ADMIN CREDENTIALS**. Creates and returns a new Permission. The permission will by default be owned by the sender of the request unless otherwise specified.'
+      description: "**REQUIRES ADMIN CREDENTIALS**. Creates and returns a new Permission. The permission will by default be owned by the sender of the request unless otherwise specified."
       tags:
         - miscellaneous
       parameters:
@@ -187,8 +187,8 @@ paths:
             type: string
           in: query
           name: ownerId
-          description: 'Owner of the Permission, MUST be valid UserID.'
-  '/permissions/{permissionId}':
+          description: "Owner of the Permission, MUST be valid UserID."
+  "/permissions/{permissionId}":
     parameters:
       - $ref: ../parameters.yaml#/permissionId
     get:
@@ -196,28 +196,28 @@ paths:
       tags:
         - miscellaneous
       responses:
-        '200':
+        "200":
           $ref: ../responses/permissions/PermissionResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getPermission
       security:
         - authCookie: []
-      description: 'Returns a single permission. This endpoint is pretty useless, as it returns the exact same information as `/auth/permissions`.'
+      description: "Returns a single permission. This endpoint is pretty useless, as it returns the exact same information as `/auth/permissions`."
     put:
       summary: Update Permission
       operationId: updatePermission
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/permissions/PermissionResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
       x-internal: true
-      description: '**REQUIRES ADMIN CREDENTIALS**. Updates the info on a permission.'
+      description: "**REQUIRES ADMIN CREDENTIALS**. Updates the info on a permission."
       requestBody:
         content:
           application/json:
@@ -228,7 +228,7 @@ paths:
                   type: string
                 ownerId:
                   $ref: ../schemas/UserID.yaml
-        description: ''
+        description: ""
       tags:
         - miscellaneous
     delete:
@@ -237,13 +237,13 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/permissions/PermissionResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
-      description: '**REQUIRES ADMIN CREDENTIALS**. Deletes a permission.'
+      description: "**REQUIRES ADMIN CREDENTIALS**. Deletes a permission."
       x-internal: true
       tags:
         - miscellaneous

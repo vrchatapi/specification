@@ -14,13 +14,13 @@ properties:
     nullable: true
     type: string
   accountDeletionLog:
-    description: ' '
+    description: " "
     nullable: true
     type: array
     items:
       $ref: ./AccountDeletionLog.yaml
   activeFriends:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./UserID.yaml
@@ -34,15 +34,15 @@ properties:
     description: The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)
     type: string
   badges:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./Badge.yaml
   bio:
     type: string
   bioLinks:
-    description: ' '
-    type: array  
+    description: " "
+    type: array
     items:
       type: string
   contentFilters:
@@ -151,7 +151,7 @@ properties:
       $ref: ./UserID.yaml
     type: array
   pastDisplayNames:
-    description: ' '
+    description: " "
     items:
       $ref: ./PastDisplayName.yaml
     type: array

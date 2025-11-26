@@ -51,7 +51,7 @@ properties:
   name:
     type: string
     minLength: 1
-    example: '12345'
+    example: "12345"
   ownerId:
     $ref: ./InstanceOwnerId.yaml
   permanent:
@@ -76,7 +76,7 @@ properties:
     example: 02u7yz8j
     nullable: true
   tags:
-    description: 'The tags array on Instances usually contain the language tags of the people in the instance. '
+    description: "The tags array on Instances usually contain the language tags of the people in the instance. "
     type: array
     example:
       - show_social_rank
@@ -115,7 +115,7 @@ properties:
   world:
     $ref: ./World.yaml
   users:
-    description: 'The users field is present on instances created by the requesting user.'
+    description: The users field is present on instances created by the requesting user.
     type: array
     items:
       $ref: ./LimitedUserInstance.yaml

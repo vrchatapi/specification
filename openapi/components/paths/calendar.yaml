@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: calendar
-  version: '1.0'
+  version: "1.0"
   description: Calendar docs here
 paths:
   /calendar:
@@ -10,9 +10,9 @@ paths:
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/CalendarEventListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getCalendarEvents
       security:
@@ -28,9 +28,9 @@ paths:
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/CalendarEventListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getFeaturedCalendarEvents
       security:
@@ -46,9 +46,9 @@ paths:
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/CalendarEventListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getFollowedCalendarEvents
       security:
@@ -64,9 +64,9 @@ paths:
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/CalendarEventListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: searchCalendarEvents
       security:
@@ -77,15 +77,15 @@ paths:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
       description: Get a list of calendar events by search terms
-  '/calendar/{groupId}/event':
+  "/calendar/{groupId}/event":
     post:
       summary: Create a calendar event
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/CalendarEventResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: createGroupCalendarEvent
       requestBody:
@@ -99,15 +99,15 @@ paths:
       description: Creates an event for a group on the calendar
     parameters:
       - $ref: ../parameters.yaml#/groupId
-  '/calendar/{groupId}/{calendarId}/follow':
+  "/calendar/{groupId}/{calendarId}/follow":
     post:
       summary: Follow a calendar event
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/CalendarEventResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: followGroupCalendarEvent
       requestBody:
@@ -122,15 +122,15 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/groupId
       - $ref: ../parameters.yaml#/calendarId
-  '/calendar/{groupId}/{calendarId}/event':
+  "/calendar/{groupId}/{calendarId}/event":
     put:
       summary: Update a calendar event
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/CalendarEventResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: updateGroupCalendarEvent
       requestBody:
@@ -145,15 +145,15 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/groupId
       - $ref: ../parameters.yaml#/calendarId
-  '/calendar/{groupId}':
+  "/calendar/{groupId}":
     get:
       summary: List a group's calendar events
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/CalendarEventListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getGroupCalendarEvents
       security:
@@ -164,7 +164,7 @@ paths:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
       description: Get a list of a group's calendar events
-  '/calendar/{groupId}/{calendarId}.ics':
+  "/calendar/{groupId}/{calendarId}.ics":
     get:
       summary: Download calendar event as ICS
       tags:
@@ -175,21 +175,21 @@ paths:
         - $ref: ../parameters.yaml#/calendarId
       operationId: getGroupCalendarEventICS
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/ICSResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/calendar/ICSNotFoundError.yaml
-  '/calendar/{groupId}/{calendarId}':
+  "/calendar/{groupId}/{calendarId}":
     get:
       summary: Get a calendar event
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/CalendarEventResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getGroupCalendarEvent
       security:
@@ -203,9 +203,9 @@ paths:
       tags:
         - calendar
       responses:
-        '200':
+        "200":
           $ref: ../responses/calendar/DeleteCalendarEventSuccess.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: deleteGroupCalendarEvent
       security:

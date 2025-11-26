@@ -1,4 +1,4 @@
-description: 'Current FileVersion upload status. Contains the uploadId needed for uploading, as well as the already uploaded parts.'
+description: "Current FileVersion upload status. Contains the uploadId needed for uploading, as well as the already uploaded parts."
 content:
   application/json:
     schema:

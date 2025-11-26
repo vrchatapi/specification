@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: economy
-  version: '1.0'
+  version: "1.0"
   description: Economy Docs Here
 paths:
   /Steam/transactions:
@@ -11,14 +11,14 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/TransactionListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
       description: Get all own Steam transactions.
-  '/Steam/transactions/{transactionId}':
+  "/Steam/transactions/{transactionId}":
     parameters:
       - $ref: ../parameters.yaml#/transactionId
     get:
@@ -27,13 +27,13 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/TransactionResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Get a single Steam transactions by ID. This returns the exact same information as `getSteamTransactions`, so no point in using this endpoint.'
+      description: "Get a single Steam transactions by ID. This returns the exact same information as `getSteamTransactions`, so no point in using this endpoint."
       deprecated: true
   /Admin/transactions:
     get:
@@ -42,15 +42,15 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/TransactionListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
       description: Get all own Admin transactions.
       x-internal: true
-  '/Admin/transactions/{transactionId}':
+  "/Admin/transactions/{transactionId}":
     parameters:
       - $ref: ../parameters.yaml#/transactionId
     get:
@@ -59,13 +59,13 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/TransactionResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Get a single Admin transactions by ID. This returns the exact same information as `getAdminTransactions`, so no point in using this endpoint.'
+      description: "Get a single Admin transactions by ID. This returns the exact same information as `getAdminTransactions`, so no point in using this endpoint."
       deprecated: true
       x-internal: true
   /auth/user/subscription:
@@ -75,9 +75,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/UserSubscriptionListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
@@ -89,9 +89,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/UserSubscriptionResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
@@ -105,14 +105,14 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/BulkPurchasesListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
       description: Get bulk gift purchases made by the user.
-  '/users/{userId}/subscription/eligible':
+  "/users/{userId}/subscription/eligible":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/steamId
@@ -122,14 +122,14 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/UserSubscriptionEligibleResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
       description: Get the user's eligibility status for subscriptions.
-  '/users/{userId}/credits/eligible':
+  "/users/{userId}/credits/eligible":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/subscriptionId
@@ -139,9 +139,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/UserCreditsEligibleResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
@@ -153,14 +153,14 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/SubscriptionListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
       description: 'List all existing Subscriptions. For example, "vrchatplus-monthly" and "vrchatplus-yearly".'
-  '/licenseGroups/{licenseGroupId}':
+  "/licenseGroups/{licenseGroupId}":
     parameters:
       - $ref: ../parameters.yaml#/licenseGroupId
     get:
@@ -169,14 +169,14 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/LicenseGroupResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
       description: Get a single License Group by given ID.
-  '/listing/{productId}':
+  "/listing/{productId}":
     parameters:
       - $ref: ../parameters.yaml#/productId
       - $ref: ../parameters.yaml#/hydrate
@@ -186,14 +186,14 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/ProductListingResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets a product listing'
-  '/user/{userId}/listings':
+      description: Gets a product listing
+  "/user/{userId}/listings":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/number
@@ -207,42 +207,42 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/ProductListingListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
       description: Gets the product listings of a given user
-  '/tokenBundles':
+  /tokenBundles:
     get:
       summary: List Token Bundles
       operationId: getTokenBundles
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/TokenBundleListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets the list of token bundles'
-  '/tilia/status':
+      description: Gets the list of token bundles
+  /tilia/status:
     get:
       summary: Get Tilia Status
       operationId: getTiliaStatus
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/TiliaStatusResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets the status of Tilia integration'
-  '/user/{userId}/tilia/tos':
+      description: Gets the status of Tilia integration
+  "/user/{userId}/tilia/tos":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
@@ -251,22 +251,22 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/TiliaTOSResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets the status of the agreement of a user to the Tilia TOS'
+      description: Gets the status of the agreement of a user to the Tilia TOS
     put:
       summary: Update Tilia TOS Agreement Status
       operationId: updateTiliaTos
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/UpdateTiliaTOSResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
@@ -275,8 +275,8 @@ paths:
           application/json:
             schema:
               $ref: ../requests/UpdateTiliaTOSRequest.yaml
-      description: 'Updates the status of the agreement of a user to the Tilia TOS'
-  '/user/{userId}/balance':
+      description: Updates the status of the agreement of a user to the Tilia TOS
+  "/user/{userId}/balance":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
@@ -285,14 +285,14 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/BalanceResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets the balance of a user'
-  '/user/{userId}/balance/earnings':
+      description: Gets the balance of a user
+  "/user/{userId}/balance/earnings":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
@@ -301,14 +301,14 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/BalanceResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets the balance of a user from earnings'
-  '/user/{userId}/economy/account':
+      description: Gets the balance of a user from earnings
+  "/user/{userId}/economy/account":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
@@ -317,28 +317,28 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/EconomyAccountResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets the economy account of a user'
-  '/economy/licenses/active':
+      description: Gets the economy account of a user
+  /economy/licenses/active:
     get:
       summary: Get Active Licenses
       operationId: getActiveLicenses
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/LicenseListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
-      description: 'Gets active licenses'
-  '/economy/store':
+      description: Gets active licenses
+  /economy/store:
     parameters:
       - $ref: ../parameters.yaml#/storeId
       - $ref: ../parameters.yaml#/hydrateListings
@@ -349,14 +349,14 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/StoreResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy
       description: Gets a store
-  '/economy/store/shelves':
+  /economy/store/shelves:
     parameters:
       - $ref: ../parameters.yaml#/storeId
       - $ref: ../parameters.yaml#/hydrateListings
@@ -367,9 +367,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/economy/StoreShelfListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - economy

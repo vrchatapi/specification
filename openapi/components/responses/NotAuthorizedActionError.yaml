@@ -7,5 +7,5 @@ content:
       Not Authorized Example:
         value:
           error:
-            message: 'You are not authorized to perform that action.'
+            message: You are not authorized to perform that action.
             status_code: 401

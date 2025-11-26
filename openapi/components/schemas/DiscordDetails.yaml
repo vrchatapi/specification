@@ -1,8 +1,8 @@
 title: DiscordDetails
 type: object
-description: ''
+description: ""
 properties:
   global_name:
     type: string
   id:
-    $ref: './DiscordID.yaml'
+    $ref: ./DiscordID.yaml

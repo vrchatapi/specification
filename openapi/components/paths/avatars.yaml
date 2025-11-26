@@ -1,20 +1,20 @@
 openapi: 3.0.3
 info:
   title: avatars
-  version: '1.0'
+  version: "1.0"
   description: Avatars Docs Here
 paths:
-  '/users/{userId}/avatar':
+  "/users/{userId}/avatar":
     get:
       summary: Get Own Avatar
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/avatars/AvatarSeeOtherUserCurrentAvatarError.yaml
       operationId: getOwnAvatar
       security:
@@ -28,11 +28,11 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/avatars/AvatarSeeOtherUserFavoritesError.yaml
       operationId: getFavoritedAvatars
       security:
@@ -58,9 +58,9 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getLicensedAvatars
       security:
@@ -75,9 +75,9 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: searchAvatars
       security:
@@ -110,11 +110,11 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/avatars/UnableToCreateAvatarNowError.yaml
-        '401':
+        "401":
           $ref: ../responses/FeaturedSetNotAdminError.yaml
       tags:
         - avatars
@@ -130,11 +130,11 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarStyleListResponse.yaml
       operationId: getAvatarStyles
       description: List avatar styles.
-  '/avatars/{avatarId}':
+  "/avatars/{avatarId}":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
     get:
@@ -142,11 +142,11 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: getAvatar
       security:
@@ -158,11 +158,11 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       description: Update information about a specific avatar.
       tags:
@@ -178,16 +178,16 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       tags:
         - avatars
       description: 'Delete an avatar. Notice an avatar is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The AvatarID is permanently reserved.'
-  '/avatars/{avatarId}/select':
+  "/avatars/{avatarId}/select":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
     put:
@@ -195,17 +195,17 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/CurrentUserResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: selectAvatar
       security:
         - authCookie: []
       description: Switches into that avatar.
-  '/avatars/{avatarId}/selectFallback':
+  "/avatars/{avatarId}/selectFallback":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
     put:
@@ -214,19 +214,19 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/CurrentUserResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/avatars/AvatarNotTaggedAsFallbackError.yaml
-        '404':
+        "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: selectFallbackAvatar
       security:
         - authCookie: []
       description: Switches into that avatar as your fallback avatar.
-  '/avatars/{avatarId}/impostor/enqueue':
+  "/avatars/{avatarId}/impostor/enqueue":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
     post:
@@ -234,11 +234,11 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarImpostorEnqueueResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: enqueueImpostor
       security:
@@ -250,15 +250,15 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           $ref: ../responses/avatars/AvatarImpostorQueueStatsResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getImpostorQueueStats
       security:
         - authCookie: []
       description: Gets service stats for queued impostor.
-  '/avatars/{avatarId}/impostor':
+  "/avatars/{avatarId}/impostor":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
     delete:
@@ -266,11 +266,11 @@ paths:
       tags:
         - avatars
       responses:
-        '200':
+        "200":
           description: The Impostors generated for that avatar are deleted.
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/avatars/AvatarNotFoundError.yaml
       operationId: deleteImpostor
       security:

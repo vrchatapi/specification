@@ -1,10 +1,10 @@
-description: 'User object received when searching'
+description: User object received when searching
 properties:
   bio:
     type: string
   bioLinks:
-    description: ' '
-    type: array  
+    description: " "
+    type: array
     items:
       type: string
   currentAvatarImageUrl:

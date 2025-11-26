@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: worlds
-  version: '1.0'
+  version: "1.0"
   description: Worlds Docs Here
 paths:
   /worlds:
@@ -10,9 +10,9 @@ paths:
       tags:
         - worlds
       responses:
-        '200':
+        "200":
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: searchWorlds
       security:
@@ -47,19 +47,19 @@ paths:
       summary: Create World
       operationId: createWorld
       responses:
-        '200':
+        "200":
           $ref: ../responses/worlds/WorldResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/worlds/WorldCreateNotAllowedYetError.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       requestBody:
         content:
           application/json:
             schema:
               $ref: ../requests/CreateWorldRequest.yaml
-        description: ''
-      description: 'Create a new world. This endpoint requires `assetUrl` to be a valid File object with `.vrcw` file extension, and `imageUrl` to be a valid File object with an image file extension.'
+        description: ""
+      description: "Create a new world. This endpoint requires `assetUrl` to be a valid File object with `.vrcw` file extension, and `imageUrl` to be a valid File object with an image file extension."
       tags:
         - worlds
   /worlds/active:
@@ -68,9 +68,9 @@ paths:
       tags:
         - worlds
       responses:
-        '200':
+        "200":
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getActiveWorlds
       security:
@@ -96,11 +96,11 @@ paths:
       tags:
         - worlds
       responses:
-        '200':
+        "200":
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/worlds/WorldSeeOtherUserRecentsError.yaml
       operationId: getRecentWorlds
       security:
@@ -126,11 +126,11 @@ paths:
       tags:
         - worlds
       responses:
-        '200':
+        "200":
           $ref: ../responses/worlds/FavoritedWorldListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/worlds/WorldSeeOtherUserFavoritesError.yaml
       operationId: getFavoritedWorlds
       security:
@@ -150,7 +150,7 @@ paths:
         - $ref: ../parameters.yaml#/platform
         - $ref: ../parameters.yaml#/userIdAdmin
       description: Search and list favorited worlds by query filters.
-  '/worlds/{worldId}':
+  "/worlds/{worldId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId
     get:
@@ -159,9 +159,9 @@ paths:
         - worlds
       operationId: getWorld
       responses:
-        '200':
+        "200":
           $ref: ../responses/worlds/WorldResponse.yaml
-        '404':
+        "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
       description: |-
         Get information about a specific World.
@@ -172,11 +172,11 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/worlds/WorldResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
       requestBody:
         content:
@@ -192,16 +192,16 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           description: OK
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
       description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
       tags:
         - worlds
-  '/worlds/{worldId}/{instanceId}':
+  "/worlds/{worldId}/{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId
       - $ref: ../parameters.yaml#/instanceId
@@ -214,11 +214,11 @@ paths:
         - authCookie: []
       description: Returns a worlds instance.
       responses:
-        '200':
+        "200":
           $ref: ../responses/instances/InstanceResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  '/worlds/{worldId}/metadata':
+  "/worlds/{worldId}/metadata":
     parameters:
       - $ref: ../parameters.yaml#/worldId
     get:
@@ -231,11 +231,11 @@ paths:
       deprecated: true
       description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
       responses:
-        '200':
+        "200":
           $ref: ../responses/worlds/WorldMetadataResponse.yaml
-        '404':
+        "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
-  '/worlds/{worldId}/publish':
+  "/worlds/{worldId}/publish":
     parameters:
       - $ref: ../parameters.yaml#/worldId
     get:
@@ -247,11 +247,11 @@ paths:
         - authCookie: []
       description: Returns a worlds publish status.
       responses:
-        '200':
+        "200":
           $ref: ../responses/worlds/WorldPublishStatusResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
     put:
       summary: Publish World
@@ -259,11 +259,11 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           description: TODO
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
       description: Publish a world. You can only publish one world per week.
       tags:
@@ -274,11 +274,11 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           description: OK
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
       description: Unpublish a world.
       tags:

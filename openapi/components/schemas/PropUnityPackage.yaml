@@ -1,6 +1,6 @@
 title: PropUnityPackage
 type: object
-description: ''
+description: ""
 properties:
   assetUrl:
     type: string

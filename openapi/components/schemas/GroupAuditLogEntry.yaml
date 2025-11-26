@@ -23,7 +23,7 @@ properties:
   description:
     type: string
     description: A human-readable description of the event.
-    example: "Group role updated"
+    example: Group role updated
   data:
     type: object
     description: The data associated with the event. The format of this data is dependent on the event type.
@@ -32,5 +32,5 @@ properties:
         old: "My exciting new group.  It's pretty nifty!"
         new: "My exciting new group. It's pretty nifty!"
       joinState:
-        old: "closed"
-        new: "request"
+        old: closed
+        new: request

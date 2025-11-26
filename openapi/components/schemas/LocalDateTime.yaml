@@ -1,4 +1,4 @@
 title: LocalDateTime
 type: string
-description: 'A date and time of the pattern `M/d/yyyy h:mm:ss tt` (see C Sharp `System.DateTime`)'
-example: '12/12/2021 1:23:43 AM'
+description: "A date and time of the pattern `M/d/yyyy h:mm:ss tt` (see C Sharp `System.DateTime`)"
+example: "12/12/2021 1:23:43 AM"

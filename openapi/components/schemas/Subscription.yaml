@@ -1,8 +1,8 @@
-description: ''
+description: ""
 type: object
 example:
   id: vrchatplus-yearly
-  steamItemId: '5000'
+  steamItemId: "5000"
   amount: 9999
   description: VRChat Plus (Yearly)
   period: year

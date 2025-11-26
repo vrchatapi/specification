@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   title: props
-  version: '1.0'
-  description: 'Props are interactable items users can spawn into instances.'
+  version: "1.0"
+  description: Props are interactable items users can spawn into instances.
 paths:
-  '/props/{propId}':
+  "/props/{propId}":
     parameters:
       - $ref: ../parameters.yaml#/propId
     get:
@@ -13,9 +13,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/props/PropResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - props

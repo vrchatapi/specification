@@ -6,7 +6,7 @@ properties:
   created_at:
     format: date-time
     type: string
-    example: '2025-06-10T20:37:31.837Z'
+    example: "2025-06-10T20:37:31.837Z"
   dropExpiryDate:
     format: date-time
     type: string
@@ -14,7 +14,7 @@ properties:
   endDropDate:
     format: date-time
     type: string
-    example: '2184-07-24T00:00:00.000Z'
+    example: "2184-07-24T00:00:00.000Z"
   id:
     $ref: ./InventoryDropID.yaml
   name:
@@ -24,17 +24,17 @@ properties:
   startDropDate:
     format: date-time
     type: string
-    example: '2025-06-09T10:00:00.000Z'
+    example: "2025-06-09T10:00:00.000Z"
   status:
     type: string
-    example: 'active'
+    example: active
   tags:
     type: array
     items:
       $ref: ./Tag.yaml
   targetGroup:
     type: string
-    example: 'everyone'
+    example: everyone
   templateIds:
     type: array
     items:
@@ -42,7 +42,7 @@ properties:
   updated_at:
     format: date-time
     type: string
-    example: '2025-06-10T20:37:31.837Z'
+    example: "2025-06-10T20:37:31.837Z"
 required:
   - authorId
   - created_at

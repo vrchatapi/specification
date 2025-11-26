@@ -1,14 +1,14 @@
 title: APIConfig
 type: object
-description: ''
+description: ""
 properties:
   VoiceEnableDegradation:
     default: false
-    description: 'Unknown, probably voice optimization testing'
+    description: "Unknown, probably voice optimization testing"
     type: boolean
   VoiceEnableReceiverLimiting:
     default: true
-    description: 'Unknown, probably voice optimization testing'
+    description: "Unknown, probably voice optimization testing"
     type: boolean
   accessLogsUrls:
     type: object
@@ -41,10 +41,10 @@ properties:
     type: boolean
   analysisMaxRetries:
     type: integer
-    description: 'Max retries for avatar analysis requests'
+    description: Max retries for avatar analysis requests
   analysisRetryInterval:
     type: integer
-    description: 'Interval between retries for avatar analysis requests'
+    description: Interval between retries for avatar analysis requests
   announcements:
     type: array
     description: Public Announcements
@@ -72,17 +72,17 @@ properties:
     type: object
     properties:
       AndroidMobile:
-        $ref: './PerformanceLimiterInfo.yaml'
+        $ref: ./PerformanceLimiterInfo.yaml
       PC:
-        $ref: './PerformanceLimiterInfo.yaml'
+        $ref: ./PerformanceLimiterInfo.yaml
       Pico:
-        $ref: './PerformanceLimiterInfo.yaml'
+        $ref: ./PerformanceLimiterInfo.yaml
       Quest:
-        $ref: './PerformanceLimiterInfo.yaml'
+        $ref: ./PerformanceLimiterInfo.yaml
       XRElite:
-        $ref: './PerformanceLimiterInfo.yaml'
+        $ref: ./PerformanceLimiterInfo.yaml
       iOSMobile:
-        $ref: './PerformanceLimiterInfo.yaml'
+        $ref: ./PerformanceLimiterInfo.yaml
     required:
       - AndroidMobile
       - PC
@@ -182,13 +182,13 @@ properties:
   defaultStickerSet:
     type: string
   devLanguageCodes:
-   type: array
-   description: Unknown
-   items:
-     type: string
+    type: array
+    description: Unknown
+    items:
+      type: string
   devSdkUrl:
     deprecated: true
-    description: 'Link to download the development SDK, use downloadUrls instead'
+    description: "Link to download the development SDK, use downloadUrls instead"
     minLength: 1
     type: string
   devSdkVersion:
@@ -238,11 +238,11 @@ properties:
     type: boolean
   disableFrontendBuilds:
     default: false
-    description: 'Unknown, probably toggles compilation of frontend web builds? So internal flag?'
+    description: "Unknown, probably toggles compilation of frontend web builds? So internal flag?"
     type: boolean
   disableGiftDrops:
     default: false
-    description: 'Toggles if gift drops should be disabled'
+    description: Toggles if gift drops should be disabled
     type: boolean
   disableHello:
     default: false
@@ -280,7 +280,7 @@ properties:
   downloadUrls:
     $ref: ./APIConfigDownloadURLList.yaml
   dynamicWorldRows:
-    description: 'Array of DynamicWorldRow objects, used by the game to display the list of world rows'
+    description: "Array of DynamicWorldRow objects, used by the game to display the list of world rows"
     minItems: 1
     type: array
     uniqueItems: true
@@ -303,16 +303,16 @@ properties:
     description: Unknown
     type: boolean
   giftDisplayType:
-    description: "Display type of gifts"
+    description: Display type of gifts
     type: string
   googleApiClientId:
     type: string
     description: Unknown
-    default: "827942544393-r2ouvckvouldn9dg9uruseje575e878f.apps.googleusercontent.com"
+    default: 827942544393-r2ouvckvouldn9dg9uruseje575e878f.apps.googleusercontent.com
   homeWorldId:
     $ref: ./WorldID.yaml
   homepageRedirectTarget:
-    default: 'https://hello.vrchat.com'
+    default: "https://hello.vrchat.com"
     description: Redirect target if you try to open the base API domain in your browser
     minLength: 1
     type: string
@@ -332,27 +332,27 @@ properties:
     description: Minimum supported client build number for various platforms
     properties:
       AppStore:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       Default:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       Firebase:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       FirebaseiOS:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       GooglePlay:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       PC:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       PicoStore:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       QuestAppLab:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       QuestStore:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       TestFlight:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
       XRElite:
-        $ref: './PlatformBuildInfo.yaml'
+        $ref: ./PlatformBuildInfo.yaml
     required:
       - AppStore
       - Default
@@ -368,7 +368,7 @@ properties:
   minimumUnityVersionForUploads:
     type: string
     description: Minimum Unity version required for uploading assets
-    default: "2019.0.0f1"
+    default: 2019.0.0f1
   moderationEmail:
     description: VRChat's moderation related email
     minLength: 1
@@ -404,31 +404,31 @@ properties:
     description: Categories available for reporting objectionable content
     properties:
       avatar:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       avatarpage:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       behavior:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       chat:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       emoji:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       environment:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       groupstore:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       image:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       text:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       sticker:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       warnings:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       worldimage:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
       worldstore:
-        $ref: './ReportCategory.yaml'
+        $ref: ./ReportCategory.yaml
     required:
       - avatar
       - behavior
@@ -533,49 +533,49 @@ properties:
     description: Reasons available for reporting users
     properties:
       billing:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       botting:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       cancellation:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       copyright:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       fraud:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       gore:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       hacking:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       harassing:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       hateful:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       impersonation:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       inappropriate:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       leaking:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       malicious:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       missing:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       nudity:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       renewal:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       security:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       service:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       sexual:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       technical:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       threatening:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
       visuals:
-        $ref: './ReportReason.yaml'
+        $ref: ./ReportReason.yaml
     required:
       - billing
       - botting

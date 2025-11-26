@@ -2,7 +2,7 @@ title: InventoryMetadata
 type: object
 properties:
   inventoryItemsToInstantiate:
-    description: 'Only in bundles'
+    description: Only in bundles
     type: array
     items:
       $ref: ./InventoryTemplateID.yaml

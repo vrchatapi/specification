@@ -1,4 +1,4 @@
-description: ''
+description: ""
 properties:
   accessType:
     type: string
@@ -39,19 +39,19 @@ properties:
   isDraft:
     type: boolean
   languages:
-    description: ' '
+    description: " "
     type: array
     items:
       type: string
   ownerId:
     $ref: ./GroupID.yaml
   platforms:
-    description: ' '
+    description: " "
     type: array
     items:
       type: string
   roleIds:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./GroupRoleID.yaml
@@ -60,7 +60,7 @@ properties:
     type: string
     format: date-time
   tags:
-    description: ' '
+    description: " "
     items:
       $ref: ./Tag.yaml
     type: array

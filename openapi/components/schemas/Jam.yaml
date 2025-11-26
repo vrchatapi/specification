@@ -1,4 +1,4 @@
-description: ''
+description: ""
 properties:
   description:
     minLength: 1

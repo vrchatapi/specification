@@ -5,21 +5,21 @@ properties:
     type: string
     description: Event title
     minLength: 1
-    example: "Performance Event!"
+    example: Performance Event!
   startsAt:
     type: string
     format: date-time
-    description: "Time the vent starts at"
+    description: Time the vent starts at
   description:
     type: string
     minLength: 1
   endsAt:
     type: string
     format: date-time
-    description: "Time the vent starts at"
+    description: Time the vent starts at
   category:
     type: string
-    example: "performance"
+    example: performance
   tags:
     type: array
     items:

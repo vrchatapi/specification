@@ -1,4 +1,4 @@
-description: ''
+description: ""
 type: object
 title: InfoPush
 properties:
@@ -14,7 +14,7 @@ properties:
   priority:
     type: integer
   tags:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./Tag.yaml
@@ -23,7 +23,7 @@ properties:
   hash:
     type: string
     minLength: 1
-    description: 'Unknown usage, MD5'
+    description: "Unknown usage, MD5"
   createdAt:
     type: string
     format: date-time
@@ -33,7 +33,7 @@ properties:
   startDate:
     type: string
     format: date-time
-    description: ''
+    description: ""
   endDate:
     type: string
     format: date-time

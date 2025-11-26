@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: jams
-  version: '1.0'
+  version: "1.0"
   description: Jams Docs Here
 paths:
   /jams:
@@ -10,16 +10,16 @@ paths:
       tags:
         - jams
       responses:
-        '200':
+        "200":
           $ref: ../responses/jams/JamListResponse.yaml
       security:
         - authCookie: []
       operationId: getJams
       description: |-
         Lists World Jams or Avatar Jams, both currently running and ones that have ended.
-        
+
         `isActive` is used to select only active or already ended jams.
-        
+
         `type` is used to select only world or avatar jams, and can only take `world` or `avatar`.
         ``
       parameters:
@@ -28,7 +28,7 @@ paths:
             example: avatar
           in: query
           name: type
-          description: 'Only show jams of this type (`avatar` or `world`).'
+          description: Only show jams of this type (`avatar` or `world`).
   /jams/{jamId}:
     parameters:
       - $ref: ../parameters.yaml#/jamId
@@ -37,9 +37,9 @@ paths:
       tags:
         - jams
       responses:
-        '200':
+        "200":
           $ref: ../responses/jams/JamResponse.yaml
-        '404':
+        "404":
           $ref: ../responses/jams/JamNotFoundError.yaml
       security:
         - authCookie: []
@@ -53,9 +53,9 @@ paths:
       tags:
         - jams
       responses:
-        '200':
+        "200":
           $ref: ../responses/jams/SubmissionListResponse.yaml
-        '404':
+        "404":
           $ref: ../responses/jams/JamNotFoundError.yaml
       security:
         - authCookie: []

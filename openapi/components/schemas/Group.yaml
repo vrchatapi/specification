@@ -89,7 +89,7 @@ properties:
     $ref: ./GroupMyMember.yaml
     nullable: true
   roles:
-    description: "Only returned if ?includeRoles=true is specified."
+    description: Only returned if ?includeRoles=true is specified.
     type: array
     nullable: true
     items:

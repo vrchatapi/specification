@@ -2,4 +2,4 @@ description: Returns a list of CalendarEvent objects.
 content:
   application/json:
     schema:
-      $ref: '../../schemas/PaginatedCalendarEventList.yaml'
+      $ref: ../../schemas/PaginatedCalendarEventList.yaml

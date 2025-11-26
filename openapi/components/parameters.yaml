@@ -1,5 +1,5 @@
 number:
-  name: 'n'
+  name: n
   in: query
   required: false
   schema:
@@ -121,7 +121,7 @@ offline:
   required: false
   schema:
     type: boolean
-  description: 'Returns *only* offline users if true, returns only online and active users if false'
+  description: "Returns *only* offline users if true, returns only online and active users if false"
 fileId:
   name: fileId
   in: path
@@ -338,7 +338,7 @@ userIdAdmin:
   required: false
   schema:
     type: string
-  description: 'Target user to see information on, admin-only.'
+  description: "Target user to see information on, admin-only."
 worldId:
   name: worldId
   in: path
@@ -370,14 +370,14 @@ favoriteGroupType:
       - world
       - friend
       - avatar
-  description: 'The type of group to fetch, must be a valid FavoriteType.'
+  description: "The type of group to fetch, must be a valid FavoriteType."
 favoriteGroupName:
   name: favoriteGroupName
   in: path
   required: true
   schema:
     type: string
-  description: 'The name of the group to fetch, must be a name of a FavoriteGroup.'
+  description: "The name of the group to fetch, must be a name of a FavoriteGroup."
 avatarId:
   name: avatarId
   in: path
@@ -405,7 +405,7 @@ messageType:
   required: true
   schema:
     $ref: ./schemas/InviteMessageType.yaml
-  description: 'The type of message to fetch, must be a valid InviteMessageType.'
+  description: "The type of message to fetch, must be a valid InviteMessageType."
 slot:
   name: slot
   in: path
@@ -414,7 +414,7 @@ slot:
     type: integer
     minimum: 0
     maximum: 11
-  description: 'The message slot to fetch of a given message type.'
+  description: The message slot to fetch of a given message type.
 notificationId:
   name: notificationId
   in: path
@@ -475,7 +475,7 @@ variant:
       - internal
     default: public
   allowEmptyValue: true
-  description: 'Specifies which `variant` of the site. Public is the end-user site, while `internal` is the staff-only site with special pages for moderation and management.'
+  description: "Specifies which `variant` of the site. Public is the end-user site, while `internal` is the staff-only site with special pages for moderation and management."
 branch:
   name: branch
   in: query
@@ -505,7 +505,7 @@ printId:
   required: true
   schema:
     type: string
-    example: 'prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa'
+    example: prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa
   description: Print ID.
 confirmEmailUserId:
   name: id
@@ -513,30 +513,30 @@ confirmEmailUserId:
   required: true
   schema:
     type: string
-    example: 'usr_00000000-0000-0000-0000-000000000000'
-  description: 'Target user for which to verify email.'
+    example: usr_00000000-0000-0000-0000-000000000000
+  description: Target user for which to verify email.
 confirmEmailToken:
   name: verify_email
   in: query
   required: true
   schema:
     type: string
-    example: 'eml_00000000-0000-0000-0000-000000000000'
-  description: 'Token to verify email.'
+    example: eml_00000000-0000-0000-0000-000000000000
+  description: Token to verify email.
 verifyLoginPlaceToken:
   name: token
   in: query
   required: true
   schema:
     type: string
-  description: 'Token to verify login attempt.'
+  description: Token to verify login attempt.
 propId:
   name: propId
   in: path
   required: true
   schema:
     type: string
-    example: 'prop_829ba6f6-b837-49d9-b9a9-056b82103b58'
+    example: prop_829ba6f6-b837-49d9-b9a9-056b82103b58
   description: Prop ID.
 adminAssetBundleId:
   name: adminAssetBundleId
@@ -544,7 +544,7 @@ adminAssetBundleId:
   required: true
   schema:
     type: string
-    example: 'aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d'
+    example: aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d
   description: Must be a valid admin asset bundle ID.
 inventoryItemId:
   name: inventoryItemId

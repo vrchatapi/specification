@@ -1,4 +1,4 @@
-description: ''
+description: ""
 title: World
 type: object
 properties:
@@ -95,7 +95,7 @@ properties:
   storeId:
     $ref: ./StoreID.yaml
   tags:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./Tag.yaml

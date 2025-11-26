@@ -1,4 +1,4 @@
-description: ''
+description: ""
 properties:
   canBeUpdated:
     default: true
@@ -12,7 +12,7 @@ properties:
     $ref: ./InviteMessageType.yaml
   remainingCooldownMinutes:
     default: 0
-    description: 'Changes to 60 when updated, although probably server-side configurable.'
+    description: "Changes to 60 when updated, although probably server-side configurable."
     minimum: 0
     type: integer
   slot:

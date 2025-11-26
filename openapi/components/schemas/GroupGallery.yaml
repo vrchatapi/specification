@@ -19,25 +19,25 @@ properties:
     example: false
     default: false
   roleIdsToView:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./GroupRoleID.yaml
     nullable: true
   roleIdsToSubmit:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./GroupRoleID.yaml
     nullable: true
   roleIdsToAutoApprove:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./GroupRoleID.yaml
     nullable: true
   roleIdsToManage:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./GroupRoleID.yaml

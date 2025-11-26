@@ -1,6 +1,6 @@
 type: string
 default: message
-description: ''
+description: ""
 enum:
   - message
   - response

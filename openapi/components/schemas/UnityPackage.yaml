@@ -1,4 +1,4 @@
-description: ''
+description: ""
 properties:
   id:
     $ref: ./UnityPackageID.yaml
@@ -16,7 +16,7 @@ properties:
   created_at:
     format: date-time
     type: string
-    example: '2020-09-10T06:13:27.777Z'
+    example: "2020-09-10T06:13:27.777Z"
   impostorizerVersion:
     type: string
     example: 0.17.0
@@ -26,7 +26,7 @@ properties:
     $ref: ./Platform.yaml
   pluginUrl:
     type: string
-    example: ''
+    example: ""
   pluginUrlObject:
     type: object
     example: {}
@@ -41,7 +41,7 @@ properties:
     minLength: 1
     type: string
   worldSignature:
-    example: 'AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ=='
+    example: AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ==
     type: string
     nullable: true
   impostorUrl:

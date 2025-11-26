@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: users
-  version: '1.0'
+  version: "1.0"
   description: Users Docs Here
 paths:
   /users:
@@ -10,11 +10,11 @@ paths:
       tags:
         - users
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/LimitedUserSearchListResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/users/UsersInvalidSearchError.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: searchUsers
       security:
@@ -30,11 +30,11 @@ paths:
             type: string
           in: query
           name: developerType
-          description: 'Active user by developer type, none for normal users and internal for moderators'
+          description: "Active user by developer type, none for normal users and internal for moderators"
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
       description: Search and list any users by text query
-  '/users/{username}/name':
+  "/users/{username}/name":
     parameters:
       - schema:
           type: string
@@ -47,9 +47,9 @@ paths:
       tags:
         - users
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/UserResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserByName
       security:
@@ -60,7 +60,7 @@ paths:
         **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
         This endpoint now require Admin Credentials.
       deprecated: true
-  '/users/{userId}':
+  "/users/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
@@ -68,9 +68,9 @@ paths:
       tags:
         - users
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/UserResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUser
       security:
@@ -80,11 +80,11 @@ paths:
       summary: Update User Info
       operationId: updateUser
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/CurrentUserResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/users/CurrentPasswordRequiredError.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       description: Update a users information such as the email and birthday.
       security:
@@ -96,7 +96,7 @@ paths:
               $ref: ../requests/UpdateUserRequest.yaml
       tags:
         - users
-  '/users/{userId}/groups':
+  "/users/{userId}/groups":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
@@ -106,9 +106,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/LimitedUserGroupListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserGroups
       description: Get user's public groups
@@ -118,7 +118,7 @@ paths:
       tags:
         - users
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -126,9 +126,9 @@ paths:
                 type: array
                 items:
                   $ref: ../schemas/LimitedUserFriend.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
       operationId: searchActiveUsers
       security:
@@ -144,13 +144,13 @@ paths:
             type: string
           in: query
           name: developerType
-          description: 'Active user by developer type, none for normal users and internal for moderators'
+          description: "Active user by developer type, none for normal users and internal for moderators"
         - $ref: ../parameters.yaml#/offset
         - $ref: ../parameters.yaml#/number
       x-internal: true
       deprecated: true
-      description: '**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users by text query.'
-  '/users/{userId}/groups/requested':
+      description: "**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users by text query."
+  "/users/{userId}/groups/requested":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
@@ -160,9 +160,9 @@ paths:
       tags:
         - users
       responses:
-        '200':
+        "200":
           $ref: ../responses/groups/GroupListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       security:
         - authCookie: []
@@ -186,7 +186,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
       security:
         - authCookie: []
-  '/users/{userId}/feedback':
+  "/users/{userId}/feedback":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/contentId
@@ -200,13 +200,13 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/FeedbackListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserFeedback
       description: Get user's submitted feedback
-  '/userNotes':
+  /userNotes:
     get:
       summary: Get User Notes
       tags:
@@ -214,9 +214,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/UserNoteListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserNotes
       parameters:
@@ -228,9 +228,9 @@ paths:
       tags:
         - users
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/UserNoteResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: updateUserNote
       security:
@@ -242,7 +242,7 @@ paths:
           application/json:
             schema:
               $ref: ../requests/UpdateUserNoteRequest.yaml
-  '/userNotes/{userNoteId}':
+  "/userNotes/{userNoteId}":
     parameters:
       - $ref: ../parameters.yaml#/userNoteId
     get:
@@ -252,13 +252,13 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/UserNoteResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getUserNote
       description: Get a particular user note
-  '/users/{userId}/addTags':
+  "/users/{userId}/addTags":
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:
@@ -274,15 +274,15 @@ paths:
             schema:
               $ref: ../requests/ChangeUserTagsRequest.yaml
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/CurrentUserResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/users/UserTagInvalidError.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       security:
         - authCookie: []
-  '/users/{userId}/removeTags':
+  "/users/{userId}/removeTags":
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:
@@ -298,15 +298,15 @@ paths:
             schema:
               $ref: ../requests/ChangeUserTagsRequest.yaml
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/CurrentUserResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/users/UserTagInvalidError.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       security:
         - authCookie: []
-  '/users/{userId}/badges/{badgeId}':
+  "/users/{userId}/badges/{badgeId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/badgeId
@@ -323,13 +323,13 @@ paths:
             schema:
               $ref: ../requests/UpdateUserBadgeRequest.yaml
       responses:
-        '200':
+        "200":
           description: The user's badge is updated.
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/users/UserMustBeOwnError.yaml
-        '404':
+        "404":
           description: The user does not have the badge.
       security:
         - authCookie: []
@@ -343,11 +343,11 @@ paths:
       tags:
         - users
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/UserGroupInstanceListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/users/UserMustBeOwnError.yaml
       security:
         - authCookie: []
@@ -362,15 +362,15 @@ paths:
       tags:
         - users
       responses:
-        '200':
+        "200":
           $ref: ../responses/users/UserGroupInstanceListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/users/UserMustBeOwnError.yaml
       security:
         - authCookie: []
-  '/users/{userId}/{worldId}/persist/exists':
+  "/users/{userId}/{worldId}/persist/exists":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/worldId
@@ -382,15 +382,15 @@ paths:
         - users
         - worlds
       responses:
-        '200':
+        "200":
           description: The user has persistence data for the given world.
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           description: The user does not have persistence data for the given world.
       security:
         - authCookie: []
-  '/users/{userId}/{worldId}/persist':
+  "/users/{userId}/{worldId}/persist":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/worldId
@@ -402,11 +402,11 @@ paths:
         - users
         - worlds
       responses:
-        '200':
+        "200":
           description: The user's persistence data for the given world is deleted.
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           description: The user does not have persistence data for the given world.
       security:
         - authCookie: []

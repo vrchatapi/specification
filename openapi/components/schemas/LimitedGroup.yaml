@@ -31,7 +31,7 @@ properties:
   memberCount:
     type: integer
   tags:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./Tag.yaml
@@ -43,7 +43,7 @@ properties:
   isSearchable:
     type: boolean
   galleries:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./GroupGallery.yaml

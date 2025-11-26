@@ -1,4 +1,4 @@
-description: 'When profilePicOverride is not empty, use it instead.'
-example: 'https://api.vrchat.cloud/api/1/image/file_aae83ed9-d42d-4d72-9f4b-9f1e41ed17e1/1/256'
+description: "When profilePicOverride is not empty, use it instead."
+example: "https://api.vrchat.cloud/api/1/image/file_aae83ed9-d42d-4d72-9f4b-9f1e41ed17e1/1/256"
 title: CurrentAvatarThumbnailImageUrl
 type: string

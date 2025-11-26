@@ -1,4 +1,4 @@
-description: ''
+description: ""
 properties:
   contentId:
     minLength: 1

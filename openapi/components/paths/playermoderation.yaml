@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: playermoderation
-  version: '1.0'
+  version: "1.0"
   description: |-
     There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players.
     PlayerModerations are user-generated actions towards others, such as muting them, blocking, or toggling interaction.
@@ -18,7 +18,7 @@ info:
     - *Default setting*
 
     **Example:**
-    
+
     Force On (`interactOn`) and Force Off (`interactOff`) always or never allow that person to interact with you.
     These are stored as PlayerModerations. When you select a player and select "Force On", it creates a playerModeration of type `interactOn`.
 
@@ -41,9 +41,9 @@ paths:
       tags:
         - playermoderation
       responses:
-        '200':
+        "200":
           $ref: ../responses/playermoderation/PlayerModerationListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       operationId: getPlayerModerations
       security:
@@ -75,9 +75,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       requestBody:
         required: true
@@ -85,7 +85,7 @@ paths:
           application/json:
             schema:
               $ref: ../requests/ModerateUserRequest.yaml
-        description: ''
+        description: ""
       description: |-
         Moderate a user, e.g. unmute them or show their avatar.
 
@@ -98,9 +98,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/playermoderation/PlayerModerationClearAllSuccess.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       description: ⚠️ **This will delete every single player moderation you've ever made.**
       tags:
@@ -117,11 +117,11 @@ paths:
           application/json:
             schema:
               $ref: ../requests/ModerateUserRequest.yaml
-      description: 'Removes a player moderation previously added through `moderateUser`. E.g if you previously have shown their avatar, but now want to reset it to default.'
+      description: "Removes a player moderation previously added through `moderateUser`. E.g if you previously have shown their avatar, but now want to reset it to default."
       responses:
-        '200':
+        "200":
           $ref: ../responses/playermoderation/PlayerModerationUnmoderatedSuccess.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - playermoderation

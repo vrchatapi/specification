@@ -7,5 +7,5 @@ content:
       404 World Not Found:
         value:
           error:
-            message: "Notification not found"
+            message: Notification not found
             status_code: 404

@@ -2,7 +2,7 @@ title: PaginatedGroupAuditLogEntryList
 type: object
 properties:
   results:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./GroupAuditLogEntry.yaml

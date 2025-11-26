@@ -3,7 +3,7 @@ type: object
 properties:
   forId:
     type: string
-    description: 'Either a AvatarID, LicenseGroupID, PermissionID or ProductID. This depends on the `forType` field.'
+    description: "Either a AvatarID, LicenseGroupID, PermissionID or ProductID. This depends on the `forType` field."
     minLength: 1
   forType:
     $ref: ./LicenseType.yaml

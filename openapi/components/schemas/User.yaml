@@ -9,7 +9,7 @@ properties:
     type: boolean
     default: true
   badges:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./Badge.yaml
@@ -36,7 +36,7 @@ properties:
     $ref: ./DeveloperType.yaml
   displayName:
     type: string
-    description: 'A users visual display name. This is what shows up in-game, and can different from their `username`. Changing display name is restricted to a cooldown period.'
+    description: "A users visual display name. This is what shows up in-game, and can different from their `username`. Changing display name is restricted to a cooldown period."
   friendKey:
     type: string
   friendRequestStatus:
@@ -47,7 +47,7 @@ properties:
     $ref: ./InstanceID.yaml
   isFriend:
     type: boolean
-    description: 'Either their `friendKey`, or empty string if you are not friends. Unknown usage.'
+    description: "Either their `friendKey`, or empty string if you are not friends. Unknown usage."
   last_activity:
     type: string
     description: Either a date-time or empty string.
@@ -78,7 +78,7 @@ properties:
   statusDescription:
     type: string
   tags:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ./Tag.yaml

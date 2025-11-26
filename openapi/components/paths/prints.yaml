@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
   title: prints
-  version: '1.0'
-  description: 'Prints are a way to print photos directly from the VRChat camera.'
+  version: "1.0"
+  description: Prints are a way to print photos directly from the VRChat camera.
 paths:
   /prints/user/{userId}:
     parameters:
@@ -13,11 +13,11 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/prints/PrintListResponse.yaml
-        '403':
+        "403":
           $ref: ../responses/prints/UnableToRequestOtherUsersPrintsError.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - prints
@@ -31,9 +31,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/prints/PrintResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - prints
@@ -44,9 +44,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           description: Empty response if successful
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - prints
@@ -72,9 +72,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/prints/PrintResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - prints
@@ -112,9 +112,9 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/prints/PrintResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
       tags:
         - prints

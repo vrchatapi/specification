@@ -1,14 +1,14 @@
 openapi: 3.0.3
 info:
   title: files
-  version: '1.0'
+  version: "1.0"
   description: Files Docs Here
 paths:
   /files:
     get:
       summary: List Files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileListResponse.yaml
       operationId: getFiles
       security:
@@ -26,7 +26,7 @@ paths:
           in: query
           name: userId
           deprecated: true
-          description: 'UserID, will always generate a 500 permission error.'
+          description: "UserID, will always generate a 500 permission error."
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
       tags:
@@ -37,7 +37,7 @@ paths:
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileResponse.yaml
       operationId: createFile
       requestBody:
@@ -48,7 +48,7 @@ paths:
       security:
         - authCookie: []
       description: Creates a new File object
-  '/file/{fileId}':
+  "/file/{fileId}":
     parameters:
       - $ref: ../parameters.yaml#/fileId
     get:
@@ -57,9 +57,9 @@ paths:
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileResponse.yaml
-        '404':
+        "404":
           $ref: ../responses/files/FileNotFoundError.yaml
       security:
         - authCookie: []
@@ -68,9 +68,9 @@ paths:
       summary: Delete File
       operationId: deleteFile
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileResponse.yaml
-        '404':
+        "404":
           $ref: ../responses/files/FileDeletedError.yaml
       tags:
         - files
@@ -81,11 +81,11 @@ paths:
       summary: Create File Version
       operationId: createFileVersion
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileResponse.yaml
       security:
         - authCookie: []
-      description: 'Creates a new FileVersion. Once a Version has been created, proceed to the `/file/{fileId}/{versionId}/file/start` endpoint to start a file upload.'
+      description: "Creates a new FileVersion. Once a Version has been created, proceed to the `/file/{fileId}/{versionId}/file/start` endpoint to start a file upload."
       tags:
         - files
       requestBody:
@@ -93,7 +93,7 @@ paths:
           application/json:
             schema:
               $ref: ../requests/CreateFileVersionRequest.yaml
-  '/file/{fileId}/{versionId}':
+  "/file/{fileId}/{versionId}":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
@@ -102,9 +102,9 @@ paths:
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/RawFileResponse.yaml
-        '404':
+        "404":
           $ref: ../responses/files/FileNotFoundError.yaml
       operationId: downloadFileVersion
       security:
@@ -119,18 +119,18 @@ paths:
       summary: Delete File Version
       operationId: deleteFileVersion
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/files/FileVersionDeleteInitialError.yaml
-        '500':
+        "500":
           $ref: ../responses/files/FileVersionDeleteMiddleError.yaml
       security:
         - authCookie: []
       description: Delete a specific version of a file. You can only delete the latest version.
       tags:
         - files
-  '/file/{fileId}/{versionId}/{fileType}/status':
+  "/file/{fileId}/{versionId}/{fileType}/status":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
@@ -140,13 +140,13 @@ paths:
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileVersionUploadStatusResponse.yaml
       operationId: getFileDataUploadStatus
       security:
         - authCookie: []
       description: Retrieves the upload status for file upload. Can currently only be accessed when `status` is `waiting`. Trying to access it on a file version already uploaded currently times out.
-  '/file/{fileId}/{versionId}/{fileType}/start':
+  "/file/{fileId}/{versionId}/{fileType}/start":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
@@ -156,9 +156,9 @@ paths:
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileUploadURLResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/files/FileUploadAlreadyFinishedError.yaml
       operationId: startFileDataUpload
       parameters:
@@ -177,7 +177,7 @@ paths:
         Starts an upload of a specific FilePart. This endpoint will return an AWS URL which you can PUT data to. You need to call this and receive a new AWS API URL for each `partNumber`. Please see AWS's REST documentation on "PUT Object to S3" on how to upload. Once all parts has been uploaded, proceed to `/finish` endpoint.
 
         **Note:** `nextPartNumber` seems like it is always ignored. Despite it returning 0, first partNumber is always 1.
-  '/file/{fileId}/{versionId}/{fileType}/finish':
+  "/file/{fileId}/{versionId}/{fileType}/finish":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
@@ -187,7 +187,7 @@ paths:
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileResponse.yaml
       operationId: finishFileDataUpload
       requestBody:
@@ -201,8 +201,8 @@ paths:
                   etags:
                     - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                     - yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
-                  nextPartNumber: '0'
-                  maxParts: '0'
+                  nextPartNumber: "0"
+                  maxParts: "0"
         description: |-
           Please see documentation on ETag's:
           [https://teppen.io/2018/06/23/aws_s3_etags/](https://teppen.io/2018/06/23/aws_s3_etags/)
@@ -211,7 +211,7 @@ paths:
       security:
         - authCookie: []
       description: Finish an upload of a FileData. This will mark it as "complete". After uploading the `file` for Avatars and Worlds you then have to upload a `signature` file.
-  '/analysis/{fileId}/{versionId}':
+  "/analysis/{fileId}/{versionId}":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
@@ -220,17 +220,17 @@ paths:
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileAnalysisResponse.yaml
-        '202':
+        "202":
           $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
-        '404':
+        "404":
           $ref: ../responses/files/FileNotFoundError.yaml
       operationId: getFileAnalysis
       security:
         - authCookie: []
       description: Get the performance analysis for the uploaded assets of an avatar
-  '/analysis/{fileId}/{versionId}/security':
+  "/analysis/{fileId}/{versionId}/security":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
@@ -239,17 +239,17 @@ paths:
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileAnalysisResponse.yaml
-        '202':
+        "202":
           $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
-        '404':
+        "404":
           $ref: ../responses/files/FileNotFoundError.yaml
       operationId: getFileAnalysisSecurity
       security:
         - authCookie: []
       description: Get the security performance analysis for the uploaded assets of an avatar
-  '/analysis/{fileId}/{versionId}/standard':
+  "/analysis/{fileId}/{versionId}/standard":
     parameters:
       - $ref: ../parameters.yaml#/fileId
       - $ref: ../parameters.yaml#/versionId
@@ -258,23 +258,23 @@ paths:
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileAnalysisResponse.yaml
-        '202':
+        "202":
           $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
-        '404':
+        "404":
           $ref: ../responses/files/FileNotFoundError.yaml
       operationId: getFileAnalysisStandard
       security:
         - authCookie: []
       description: Get the standard performance analysis for the uploaded assets of an avatar
-  '/file/image':
+  /file/image:
     post:
       summary: Upload gallery image, icon, emoji or sticker
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileResponse.yaml
       operationId: uploadImage
       requestBody:
@@ -310,13 +310,13 @@ paths:
       security:
         - authCookie: []
       description: Upload an image, which can be an icon, gallery image, sticker or emoji
-  '/icon':
+  /icon:
     post:
       summary: Upload icon
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileResponse.yaml
       operationId: uploadIcon
       requestBody:
@@ -332,15 +332,15 @@ paths:
               required:
                 - file
       security:
-        - authCookie: [ ]
+        - authCookie: []
       description: Upload an icon
-  '/gallery':
+  /gallery:
     post:
       summary: Upload gallery image
       tags:
         - files
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/FileResponse.yaml
       operationId: uploadGalleryImage
       requestBody:
@@ -356,13 +356,13 @@ paths:
               required:
                 - file
       security:
-        - authCookie: [ ]
+        - authCookie: []
       description: Upload a gallery image
   /adminassetbundles/{adminAssetBundleId}:
     get:
       summary: Get AdminAssetBundle
       responses:
-        '200':
+        "200":
           $ref: ../responses/files/AdminAssetBundleResponse.yaml
       operationId: getAdminAssetBundle
       security:

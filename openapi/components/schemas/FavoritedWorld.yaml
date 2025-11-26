@@ -1,4 +1,4 @@
-description: ''
+description: ""
 properties:
   authorId:
     $ref: ./UserID.yaml
@@ -78,7 +78,7 @@ properties:
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   tags:
-    description: ' '
+    description: " "
     items:
       $ref: ./Tag.yaml
     type: array
@@ -86,7 +86,7 @@ properties:
     minLength: 1
     type: string
   unityPackages:
-    description: ' '
+    description: " "
     items:
       $ref: ./UnityPackage.yaml
     minItems: 1

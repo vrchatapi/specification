@@ -7,5 +7,5 @@ content:
       400 Already Favorited That Friend:
         value:
           error:
-            message: "You already have that friend favorited"
+            message: You already have that friend favorited
             status_code: 400

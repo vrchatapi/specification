@@ -5,12 +5,12 @@ properties:
     type: string
     description: Post title
     minLength: 1
-    example: "Event is starting soon!"
+    example: Event is starting soon!
   text:
     type: string
     description: Post text
     minLength: 1
-    example: "Come join us for the event!"
+    example: Come join us for the event!
   imageId:
     $ref: ../schemas/FileID.yaml
   sendNotification:

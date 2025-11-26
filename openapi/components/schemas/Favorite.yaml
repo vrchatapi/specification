@@ -1,12 +1,12 @@
-description: ''
+description: ""
 properties:
   favoriteId:
-    description: 'MUST be either AvatarID, UserID or WorldID.'
+    description: "MUST be either AvatarID, UserID or WorldID."
     type: string
   id:
     $ref: ./FavoriteID.yaml
   tags:
-    description: ' '
+    description: " "
     items:
       $ref: ./Tag.yaml
     type: array

@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   title: instances
-  version: '1.0'
+  version: "1.0"
   description: Instances Docs Here
 paths:
-  '/instances':
+  /instances:
     post:
       summary: Create Instance
       tags:
@@ -20,11 +20,11 @@ paths:
             schema:
               $ref: ../requests/CreateInstanceRequest.yaml
       responses:
-        '200':
+        "200":
           $ref: ../responses/instances/InstanceResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  '/instances/recent':
+  /instances/recent:
     get:
       summary: List Recent Locations
       tags:
@@ -38,11 +38,11 @@ paths:
       description: |-
         Returns a list of recently visited locations.
       responses:
-        '200':
+        "200":
           $ref: ../responses/instances/LocationIDListResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  '/instances/{worldId}:{instanceId}':
+  "/instances/{worldId}:{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId
       - $ref: ../parameters.yaml#/instanceId
@@ -58,9 +58,9 @@ paths:
 
         If an invalid instanceId is provided, this endpoint will simply return "null"!
       responses:
-        '200':
+        "200":
           $ref: ../responses/instances/InstanceResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
     delete:
       summary: Close Instance
@@ -89,15 +89,15 @@ paths:
 
         You can only close an instance if the ownerId is yourself or if the instance owner is a group and you have the `group-instance-manage` permission.
       responses:
-        '200':
+        "200":
           $ref: ../responses/instances/InstanceResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '403':
+        "403":
           $ref: ../responses/instances/InstanceCloseForbiddenError.yaml
-        '404':
+        "404":
           $ref: ../responses/instances/InstanceNotFoundError.yaml
-  '/instances/{worldId}:{instanceId}/shortName':
+  "/instances/{worldId}:{instanceId}/shortName":
     parameters:
       - $ref: ../parameters.yaml#/worldId
       - $ref: ../parameters.yaml#/instanceId
@@ -110,11 +110,11 @@ paths:
         - authCookie: []
       description: Returns an instance short name.
       responses:
-        '200':
+        "200":
           $ref: ../responses/instances/InstanceShortNameResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  '/instances/s/{shortName}':
+  "/instances/s/{shortName}":
     parameters:
       - schema:
           type: string
@@ -129,13 +129,13 @@ paths:
       operationId: getInstanceByShortName
       security:
         - authCookie: []
-      description: 'Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances.'
+      description: "Returns an instance. Please read [Instances Tutorial](https://vrchatapi.github.io/tutorials/instances/) for more information on Instances."
       responses:
-        '200':
+        "200":
           $ref: ../responses/instances/InstanceResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/instances/InstanceNotFoundError.yaml
 tags:
   $ref: ../tags.yaml

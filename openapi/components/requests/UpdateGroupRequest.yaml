@@ -38,7 +38,7 @@ properties:
   rules:
     type: string
   tags:
-    description: ' '
+    description: " "
     type: array
     items:
       $ref: ../schemas/Tag.yaml

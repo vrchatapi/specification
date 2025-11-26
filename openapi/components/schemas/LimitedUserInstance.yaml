@@ -1,4 +1,4 @@
-description: 'User object received when querying your own instance'
+description: User object received when querying your own instance
 properties:
   ageVerificationStatus:
     $ref: ./AgeVerificationStatus.yaml
@@ -9,8 +9,8 @@ properties:
   bio:
     type: string
   bioLinks:
-    description: ' '
-    type: array  
+    description: " "
+    type: array
     items:
       type: string
   currentAvatarImageUrl:

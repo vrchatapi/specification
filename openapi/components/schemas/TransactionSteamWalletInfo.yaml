@@ -1,7 +1,7 @@
-description: ''
+description: ""
 type: object
 example:
-  state: ''
+  state: ""
   country: SE
   currency: EUR
   status: Trusted

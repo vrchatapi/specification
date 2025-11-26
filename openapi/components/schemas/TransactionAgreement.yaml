@@ -1,4 +1,4 @@
-description: 'Represents a single Transaction, which is likely between VRChat and Steam.'
+description: "Represents a single Transaction, which is likely between VRChat and Steam."
 type: object
 properties:
   agreementId:
@@ -11,7 +11,7 @@ properties:
   status:
     type: string
     minLength: 1
-    description: 'This is NOT TransactionStatus, but whatever Steam return.'
+    description: "This is NOT TransactionStatus, but whatever Steam return."
   period:
     type: string
     minLength: 1

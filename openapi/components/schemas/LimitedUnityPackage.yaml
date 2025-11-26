@@ -1,4 +1,4 @@
-description: ''
+description: ""
 properties:
   created_at:
     format: date-time

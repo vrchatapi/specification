@@ -17,4 +17,3 @@ properties:
           type: string
         used:
           type: boolean
-       

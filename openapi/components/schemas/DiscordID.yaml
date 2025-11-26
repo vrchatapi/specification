@@ -1,4 +1,4 @@
-example: '1280064052206370848'
+example: "1280064052206370848"
 title: DiscordID
 description: https://discord.com/developers/docs/reference#snowflakes
 type: string

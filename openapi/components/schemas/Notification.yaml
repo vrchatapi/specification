@@ -1,26 +1,26 @@
-description: ''
+description: ""
 properties:
   created_at:
     format: date-time
     type: string
   details:
-    default: '{}'
-    description: '**NOTICE:** This is not a JSON object when received from the REST API, but it is when received from the Websocket API. When received from the REST API, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType.'
-    example: 'OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick'
+    default: "{}"
+    description: "**NOTICE:** This is not a JSON object when received from the REST API, but it is when received from the Websocket API. When received from the REST API, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType."
+    example: "OneOf: {}, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick"
     type: string
   id:
     minLength: 1
     type: string
   message:
-    description: ''
+    description: ""
     example: This is a generated invite to VRChat Hub
     type: string
   seen:
     default: false
-    description: 'Not included in notification objects received from the Websocket API'
+    description: Not included in notification objects received from the Websocket API
     type: boolean
   receiverUserId:
-    description: 'Not included in notification objects received from the REST API'
+    description: Not included in notification objects received from the REST API
     $ref: ./UserID.yaml
   senderUserId:
     $ref: ./UserID.yaml

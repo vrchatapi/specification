@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   title: invite
-  version: '1.0'
+  version: "1.0"
   description: Invite Docs Here
 paths:
-  '/message/{userId}/{messageType}':
+  "/message/{userId}/{messageType}":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/messageType
@@ -13,11 +13,11 @@ paths:
       tags:
         - invite
       responses:
-        '200':
+        "200":
           $ref: ../responses/invite/InviteMessageListResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
-        '401':
+        "401":
           $ref: ../responses/NotAuthorizedActionError.yaml
       operationId: getInviteMessages
       security:
@@ -31,7 +31,7 @@ paths:
         * `response` = Message when replying to a message
         * `request` = Message when requesting an invite
         * `requestResponse` = Message when replying to a request for invite
-  '/message/{userId}/{messageType}/{slot}':
+  "/message/{userId}/{messageType}/{slot}":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/messageType
@@ -41,13 +41,13 @@ paths:
       tags:
         - invite
       responses:
-        '200':
+        "200":
           $ref: ../responses/invite/InviteMessageResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/invite/InviteMessageGetNegativeSlotError.yaml
-        '401':
+        "401":
           $ref: ../responses/NotAuthorizedActionError.yaml
-        '404':
+        "404":
           $ref: ../responses/invite/InviteMessageGetTooHighSlotError.yaml
       operationId: getInviteMessage
       security:
@@ -79,13 +79,13 @@ paths:
         * `request` = Message when requesting an invite
         * `requestResponse` = Message when replying to a request for invite
       responses:
-        '200':
+        "200":
           $ref: ../responses/invite/InviteMessageListResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
-        '401':
+        "401":
           $ref: ../responses/NotAuthorizedActionError.yaml
-        '429':
+        "429":
           $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
       requestBody:
         content:
@@ -101,15 +101,15 @@ paths:
       security:
         - authCookie: []
       responses:
-        '200':
+        "200":
           $ref: ../responses/invite/InviteMessageListResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
-        '401':
+        "401":
           $ref: ../responses/NotAuthorizedActionError.yaml
-        '404':
+        "404":
           $ref: ../responses/invite/InviteMessageNoEntryForSlotError.yaml
-        '429':
+        "429":
           $ref: ../responses/invite/InviteMessageUpdateRateLimitError.yaml
       tags:
         - invite
@@ -129,7 +129,7 @@ paths:
         * `requestResponse` = Message when replying to a request for invite
 
         The DELETE endpoint does not have/require any request body.
-  '/invite/{userId}':
+  "/invite/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:
@@ -137,9 +137,9 @@ paths:
       tags:
         - invite
       responses:
-        '200':
+        "200":
           $ref: ../responses/notifications/SendNotificationResponse.yaml
-        '403':
+        "403":
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
       operationId: inviteUser
       security:
@@ -152,7 +152,7 @@ paths:
             schema:
               $ref: ../requests/InviteRequest.yaml
         description: Slot number of the Invite Message to use when inviting a user.
-  '/invite/{userId}/photo':
+  "/invite/{userId}/photo":
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:
@@ -160,9 +160,9 @@ paths:
       tags:
         - invite
       responses:
-        '200':
+        "200":
           $ref: ../responses/notifications/SendNotificationResponse.yaml
-        '403':
+        "403":
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
       operationId: inviteUserWithPhoto
       security:
@@ -184,7 +184,7 @@ paths:
               required:
                 - image
                 - data
-  '/invite/myself/to/{worldId}:{instanceId}':
+  "/invite/myself/to/{worldId}:{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId
       - $ref: ../parameters.yaml#/instanceId
@@ -197,13 +197,13 @@ paths:
         - authCookie: []
       description: Sends self an invite to an instance
       responses:
-        '200':
+        "200":
           $ref: ../responses/notifications/SendNotificationResponse.yaml
-        '401':
+        "401":
           $ref: ../responses/MissingCredentialsError.yaml
-        '404':
+        "404":
           $ref: ../responses/instances/InstanceNotFoundError.yaml
-  '/invite/{notificationId}/response':
+  "/invite/{notificationId}/response":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
     post:
@@ -211,9 +211,9 @@ paths:
       tags:
         - invite
       responses:
-        '200':
+        "200":
           $ref: ../responses/notifications/NotificationResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/invite/InviteResponse400Error.yaml
       operationId: respondInvite
       security:
@@ -230,7 +230,7 @@ paths:
             schema:
               $ref: ../requests/InviteResponse.yaml
         description: Slot number of the Response Message to use when responding to a user.
-  '/invite/{notificationId}/response/photo':
+  "/invite/{notificationId}/response/photo":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
     post:
@@ -238,9 +238,9 @@ paths:
       tags:
         - invite
       responses:
-        '200':
+        "200":
           $ref: ../responses/notifications/NotificationResponse.yaml
-        '400':
+        "400":
           $ref: ../responses/invite/InviteResponse400Error.yaml
       operationId: respondInviteWithPhoto
       security:
@@ -266,7 +266,7 @@ paths:
               required:
                 - image
                 - data
-  '/requestInvite/{userId}':
+  "/requestInvite/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:
@@ -284,11 +284,11 @@ paths:
       tags:
         - invite
       responses:
-        '200':
+        "200":
           $ref: ../responses/notifications/NotificationResponse.yaml
-        '403':
+        "403":
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
-  '/requestInvite/{userId}/photo':
+  "/requestInvite/{userId}/photo":
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:
@@ -315,9 +315,9 @@ paths:
       tags:
         - invite
       responses:
-        '200':
+        "200":
           $ref: ../responses/notifications/NotificationResponse.yaml
-        '403':
+        "403":
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
 tags:
   $ref: ../tags.yaml

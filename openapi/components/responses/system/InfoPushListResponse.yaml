@@ -22,8 +22,8 @@ content:
                 parameters:
                   - https://docs.vrchat.com/v2021.4.1/docs/latest-release
             hash: 69abf85064503e870124acde330bb0ae
-            createdAt: '2021-09-13T20:50:40+00:00'
-            updatedAt: '2021-11-08T22:45:25+00:00'
+            createdAt: "2021-09-13T20:50:40+00:00"
+            updatedAt: "2021-11-08T22:45:25+00:00"
       World Hot Row:
         value:
           - id: world-hot
@@ -41,8 +41,8 @@ content:
                 sortOrder: descending
                 platform: ThisPlatformSupported
             hash: f0e97e72c437aa437e92c1184630bec6
-            createdAt: '2020-06-05T08:23:31+00:00'
-            updatedAt: '2020-08-16T07:04:07+00:00'
+            createdAt: "2020-06-05T08:23:31+00:00"
+            updatedAt: "2020-08-16T07:04:07+00:00"
       Game Version:
         value:
           - id: build-config
@@ -55,5 +55,5 @@ content:
             data:
               version: 2021.3.4
             hash: a76e7da333c6a5a8f7ec2adee064cac9
-            createdAt: '2021-08-21T04:27:05+00:00'
-            updatedAt: '2021-09-18T04:37:29+00:00'
+            createdAt: "2021-08-21T04:27:05+00:00"
+            updatedAt: "2021-09-18T04:37:29+00:00"

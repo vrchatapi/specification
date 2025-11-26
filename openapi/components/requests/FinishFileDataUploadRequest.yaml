@@ -1,6 +1,6 @@
 title: FinishFileDataUploadRequest
 type: object
-description: ''
+description: ""
 properties:
   etags:
     type: array
@@ -12,18 +12,18 @@ properties:
   nextPartNumber:
     type: string
     minLength: 1
-    default: '0'
-    example: '0'
+    default: "0"
+    example: "0"
     deprecated: true
-    description: 'Always a zero in string form, despite how many parts uploaded.'
+    description: "Always a zero in string form, despite how many parts uploaded."
     maxLength: 1
   maxParts:
     type: string
     minLength: 1
-    description: 'Always a zero in string form, despite how many parts uploaded.'
+    description: "Always a zero in string form, despite how many parts uploaded."
     deprecated: true
-    default: '0'
-    example: '0'
+    default: "0"
+    example: "0"
     maxLength: 1
 required:
   - nextPartNumber

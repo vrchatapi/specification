@@ -1,6 +1,6 @@
 properties:
   platform:
-    description: 'TODO: Does this still exist?'
+    description: "TODO: Does this still exist?"
     $ref: ./Platform.yaml
   requestMessage:
     description: Used when using InviteMessage Slot.
