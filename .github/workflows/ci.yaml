@@ -72,7 +72,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: openapi.yaml
-          path: dist/openapi.yaml
+          path: dist
 
       - name: Disable Jekyll for Github Pages
         run: sudo touch dist/.nojekyll; sudo touch dist/index.html
