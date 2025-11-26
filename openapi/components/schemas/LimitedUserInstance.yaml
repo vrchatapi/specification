@@ -48,7 +48,7 @@ properties:
     nullable: true
     format: date-time
   platform:
-    type: string
+    $ref: ./Platform.yaml
   profilePicOverride:
     type: string
   profilePicOverrideThumbnail:

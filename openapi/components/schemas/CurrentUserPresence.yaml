@@ -30,7 +30,7 @@ properties:
     type: string
     nullable: true
   platform:
-    type: string
+    $ref: ./Platform.yaml
     description: either a Platform or an empty string
     nullable: true
   profilePicOverride:
