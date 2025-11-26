@@ -77,9 +77,6 @@ jobs:
       - name: Disable Jekyll for Github Pages
         run: sudo touch dist/.nojekyll; sudo touch dist/index.html
 
-      - name: Prevent Cloudflare Pages (used for dev preview) from breaking
-        run: mkdir dist/dist; cp dist/openapi.yaml dist/dist/openapi.yaml; cp .github/files/empty.json dist/package.json
-
       - name: Deploy Bundle to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
