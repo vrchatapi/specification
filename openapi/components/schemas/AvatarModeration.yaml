@@ -1,0 +1,14 @@
+title: AvatarModeration
+type: object
+properties:
+  avatarModerationType:
+    $ref: ./AvatarModerationType.yaml
+  created:
+    type: string
+    format: date-time
+  targetAvatarId:
+    $ref: ./AvatarID.yaml
+required:
+  - avatarModerationType
+  - created
+  - targetAvatarId

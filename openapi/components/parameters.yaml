@@ -274,35 +274,49 @@ platform:
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Platform.yaml
   description: The platform the asset supports.
+noplatform:
+  name: noplatform
+  in: query
+  required: false
+  schema:
+    type: string
+  description: The platform the asset does not support.
+avatarSpecific:
+  name: avatarSpecific
+  in: query
+  required: false
+  schema:
+    type: boolean
+  description: Only search for avatar worlds.
 tag:
   name: tag
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to include (comma-separated). Any of the tags needs to be present.
 include:
   name: include
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to include (comma-separated). Any of the tags needs to be present.
 require:
   name: require
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to include (comma-separated). All of the tags needs to be present.
 notag:
   name: notag
   in: query
   required: false
   schema:
-    type: string
+    $ref: ./schemas/Tag.yaml
   description: Tags to exclude (comma-separated).
 search:
   name: search
@@ -369,8 +383,22 @@ avatarId:
   in: path
   required: true
   schema:
-    type: string
+    $ref: ./schemas/AvatarID.yaml
   description: Must be a valid avatar ID.
+targetAvatarId:
+  name: targetAvatarId
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/AvatarID.yaml
+  description: Must be a valid avatar ID.
+avatarModerationType:
+  name: avatarModerationType
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/AvatarModerationType.yaml
+  description: The avatar moderation type associated with the avatar.
 messageType:
   name: messageType
   in: path

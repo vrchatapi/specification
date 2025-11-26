@@ -65,6 +65,10 @@ properties:
     type: string
   developerType:
     $ref: ./DeveloperType.yaml
+  discordDetails:
+    $ref: ./DiscordDetails.yaml
+  discordId:
+    $ref: ./DiscordID.yaml
   displayName:
     type: string
   emailVerified:
@@ -161,7 +165,7 @@ properties:
         isMobile:
           type: boolean
         platform:
-          type: string
+          $ref: ./Platform.yaml
           nullable: true
         recorded:
           type: string
