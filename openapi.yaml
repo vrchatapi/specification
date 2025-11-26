@@ -1080,6 +1080,36 @@ paths:
       tags:
         - economy
       description: Get a list of all current user subscriptions.
+  /user/subscription/recent:
+    get:
+      summary: Get Recent Subscription
+      operationId: getRecentSubscription
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/UserSubscriptionResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Get the most recent user subscription.
+  /user/bulk/gift/purchases:
+    parameters:
+      - $ref: '#/components/parameters/mostRecentFlag'
+    get:
+      summary: Get Bulk Gift Purchases
+      operationId: getBulkGiftPurchases
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/BulkPurchasesListResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Get bulk gift purchases made by the user.
   /users/{userId}/subscription/eligible:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -1097,6 +1127,23 @@ paths:
       tags:
         - economy
       description: Get the user's eligibility status for subscriptions.
+  /users/{userId}/credits/eligible:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/subscriptionId'
+    get:
+      summary: Get User Credits Eligiblity
+      operationId: getUserCreditsEligible
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/UserCreditsEligibleResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      description: Get the user's eligibility status for subscriptions based on available credits.
   /subscriptions:
     get:
       summary: List Subscriptions
@@ -1209,6 +1256,24 @@ paths:
       tags:
         - economy
       description: Gets the status of the agreement of a user to the Tilia TOS
+    put:
+      summary: Update Tilia TOS Agreement Status
+      operationId: updateTiliaTos
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateTiliaTOSResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - economy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTiliaTOSRequest'
+      description: Updates the status of the agreement of a user to the Tilia TOS
   /user/{userId}/balance:
     parameters:
       - $ref: '#/components/parameters/userId'
@@ -2849,6 +2914,8 @@ paths:
     parameters:
       - $ref: '#/components/parameters/number'
       - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/inventoryHolderId'
+      - $ref: '#/components/parameters/inventoryEquipSlot'
       - $ref: '#/components/parameters/inventorySortOrder'
       - $ref: '#/components/parameters/inventoryItemTags'
       - $ref: '#/components/parameters/inventoryItemTypes'
@@ -2866,6 +2933,8 @@ paths:
           $ref: '#/components/responses/InventoryResponse'
         '401':
           $ref: '#/components/responses/MissingCredentialsError'
+        '403':
+          $ref: '#/components/responses/NoPermission'
       tags:
         - inventory
       description: Returns an Inventory object.
@@ -2903,6 +2972,19 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateInventoryItemRequest'
       description: Returns the modified InventoryItem object as held by the currently logged in user.
+    delete:
+      summary: Delete Own Inventory Item
+      operationId: deleteOwnInventoryItem
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteInventoryItemResponse'
+        '401':
+          $ref: '#/components/responses/MissingCredentialsError'
+      tags:
+        - inventory
+      description: Deletes an InventoryItem from the inventory of the currently logged in user.
   /inventory/drops:
     parameters:
       - $ref: '#/components/parameters/active'
@@ -6548,6 +6630,16 @@ components:
         - purchaseEligible
         - subscriptionEligible
         - subscriptionOnAltAccount
+    UserCreditsEligible:
+      title: UserCreditsEligible
+      type: object
+      properties:
+        eligible:
+          type: boolean
+        reason:
+          type: string
+      required:
+        - eligible
     LicenseType:
       type: string
       title: LicenseType
@@ -6902,6 +6994,14 @@ components:
           type: boolean
       required:
         - signed_tos
+    UpdateTiliaTOSRequest:
+      title: UpdateTiliaTOSRequest
+      type: object
+      properties:
+        accepted:
+          type: boolean
+      required:
+        - accepted
     Balance:
       description: ''
       type: object
@@ -9177,6 +9277,15 @@ components:
             $ref: '#/components/schemas/GroupPermissions'
         order:
           type: integer
+    InventoryEquipSlot:
+      title: InventoryEquipSlot
+      type: string
+      enum:
+        - ''
+        - drone
+        - portal
+      default: ''
+      example: drone
     InventoryItemType:
       title: InventoryItemType
       type: string
@@ -9185,6 +9294,8 @@ components:
         - prop
         - emoji
         - sticker
+        - droneskin
+        - portalskin
       default: bundle
       example: prop
     InventoryFlag:
@@ -9197,8 +9308,23 @@ components:
         - trashable
         - cloneable
         - ugc
+        - equippable
+        - unique
       default: instantiatable
       example: consumable
+    InventoryDefaultAttributes:
+      title: InventoryDefaultAttributes
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          defaultValue:
+            type: string
+          validator:
+            type: object
+            properties:
+              type:
+                type: string
     InventoryItemID:
       example: inv_10bce5b0-2d2b-44e0-900d-db6534615162
       title: InventoryItemID
@@ -9234,6 +9360,16 @@ components:
           type: string
         propId:
           $ref: '#/components/schemas/PropID'
+    InventoryUserAttributes:
+      title: InventoryUserAttributes
+      type: object
+      properties:
+        primaryColor:
+          type: string
+        secondaryColor:
+          type: string
+        trailColor:
+          type: string
     InventoryItem:
       title: InventoryItem
       type: object
@@ -9246,8 +9382,16 @@ components:
           format: date-time
           type: string
           example: '2025-06-13T05:00:45.455Z'
+        defaultAttributes:
+          $ref: '#/components/schemas/InventoryDefaultAttributes'
         description:
           type: string
+        equipSlot:
+          $ref: '#/components/schemas/InventoryEquipSlot'
+        equipSlots:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryEquipSlot'
         expiryDate:
           format: date-time
           type: string
@@ -9293,9 +9437,14 @@ components:
           format: date-time
           type: string
           example: '2025-06-25T00:34:15.965Z'
+        userAttributes:
+          $ref: '#/components/schemas/InventoryUserAttributes'
+        validateUserAttributes:
+          type: boolean
       required:
         - collections
         - created_at
+        - defaultAttributes
         - description
         - expiryDate
         - flags
@@ -9313,6 +9462,8 @@ components:
         - template_created_at
         - template_updated_at
         - updated_at
+        - userAttributes
+        - validateUserAttributes
     Inventory:
       title: Inventory
       type: object
@@ -9332,6 +9483,18 @@ components:
       properties:
         isArchived:
           type: boolean
+        isSeen:
+          type: boolean
+        userAttributes:
+          $ref: '#/components/schemas/InventoryUserAttributes'
+    SuccessFlag:
+      title: SuccessFlag
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+        - success
     InventoryDropID:
       example: invd_ee3a8f7f-1454-4748-a935-99bf9865f33d
       title: InventoryDropID
@@ -12829,12 +12992,32 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/UserSubscription'
+    UserSubscriptionResponse:
+      description: Returns a UserSubscription object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserSubscription'
+    BulkPurchasesListResponse:
+      description: Returns a list of ??? objects.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
     UserSubscriptionEligibleResponse:
       description: Returns a single UserSubscriptionEligible object.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/UserSubscriptionEligible'
+    UserCreditsEligibleResponse:
+      description: Returns a single UserCreditsEligible object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserCreditsEligible'
     SubscriptionListResponse:
       description: Returns a list of Subscription objects.
       content:
@@ -12883,6 +13066,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/TiliaTOS'
+    UpdateTiliaTOSResponse:
+      description: Returns a UserSubscription object.
+      content:
+        application/json:
+          schema:
+            type: object
+            nullable: true
     BalanceResponse:
       description: Returns a single Balance object.
       content:
@@ -13652,6 +13842,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InventoryItem'
+    DeleteInventoryItemResponse:
+      description: Returns an SuccessFlag object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessFlag'
     InventoryDropListResponse:
       description: Returns a list of InventoryDrop objects.
       content:
@@ -14620,6 +14816,12 @@ components:
       schema:
         type: string
       description: Must be a valid transaction ID.
+    mostRecentFlag:
+      name: mostRecent
+      in: query
+      required: false
+      schema:
+        type: boolean
     steamId:
       name: steamId
       in: query
@@ -14628,6 +14830,12 @@ components:
         type: string
         example: game night
       description: The Steam ID of the user.
+    subscriptionId:
+      name: subscriptionId
+      in: query
+      required: true
+      schema:
+        type: string
     licenseGroupId:
       name: licenseGroupId
       in: path
@@ -14844,6 +15052,20 @@ components:
       schema:
         type: string
       description: Must be a valid notification ID.
+    inventoryHolderId:
+      name: holderId
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/UserID'
+      description: The UserID of the owner of the inventory; defaults to the currently authenticated user.
+    inventoryEquipSlot:
+      name: equipSlot
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/InventoryEquipSlot'
+      description: Filter for inventory retrieval.
     inventorySortOrder:
       name: order
       in: query
