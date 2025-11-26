@@ -383,8 +383,22 @@ avatarId:
   in: path
   required: true
   schema:
-    type: string
+    $ref: ./schemas/AvatarID.yaml
   description: Must be a valid avatar ID.
+targetAvatarId:
+  name: targetAvatarId
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/AvatarID.yaml
+  description: Must be a valid avatar ID.
+avatarModerationType:
+  name: avatarModerationType
+  in: query
+  required: true
+  schema:
+    $ref: ./schemas/AvatarModerationType.yaml
+  description: The avatar moderation type associated with the avatar.
 messageType:
   name: messageType
   in: path

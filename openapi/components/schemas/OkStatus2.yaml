@@ -1,0 +1,9 @@
+title: OkStatus2
+type: object
+description: Another status response consisting of solely a string description of whether the result of an operation was ok.
+properties:
+  OK:
+    type: string
+    description: The actual status itself
+required:
+  - OK

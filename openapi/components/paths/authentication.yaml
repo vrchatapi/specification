@@ -171,7 +171,7 @@ paths:
     get:
       summary: Get Global Avatar Moderations
       operationId: getGlobalAvatarModerations
-      description: Returns list of globally blocked avatars.
+      description: Returns list of globally moderated avatars.
       tags:
         - authentication
       security:
@@ -179,6 +179,41 @@ paths:
       responses:
         '200':
           $ref: ../responses/authentication/GetAvatarModerationsResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+    post:
+      summary: Create Global Avatar Moderation
+      operationId: createGlobalAvatarModeration
+      description: Globally moderates an avatar.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateAvatarModerationRequest.yaml
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/authentication/CreateAvatarModerationResponse.yaml
+        '401':
+          $ref: ../responses/MissingCredentialsError.yaml
+    delete:
+      summary: Delete Global Avatar Moderation
+      operationId: deleteGlobalAvatarModeration
+      description: Globally unmoderates an avatar.
+      parameters:
+        - $ref: ../parameters.yaml#/targetAvatarId
+        - $ref: ../parameters.yaml#/avatarModerationType
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        '200':
+          $ref: ../responses/authentication/DeleteAvatarModerationResponse.yaml
         '401':
           $ref: ../responses/MissingCredentialsError.yaml
   /auth/twofactorauth/otp/verify:
