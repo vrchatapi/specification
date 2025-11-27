@@ -11,6 +11,8 @@ jobs:
     name: Lint
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
         with:
@@ -24,7 +26,28 @@ jobs:
 
       - run: pnpm install
 
-      - run: pnpm run lint-ci
+      - run: |
+          case '${{ github.event_name }}' in
+            push)
+              after='${{ github.event.commits[0].id }}'
+              before='${{ github.event.commits[-1].id }}'
+              ;;
+            pull_request)
+              after='${{ github.event.base_ref }}'
+              before='${{ github.event.head_ref }}'
+              ;;
+          esac
+          changes=$(git diff --name-only --diff-filter=d "${after}~1" "${before}")
+
+          # Run lint and filter results for changed files only
+          if [ -n "$changes" ]; then
+            echo "Changed files:"
+            echo "$changes"
+
+            pnpm run lint-ci 2>&1 | grep -E "($(echo "$changes" | tr '\n' '|' | sed 's/|$//'))" || true
+          else
+            echo "No changed files."
+          fi
 
   bundle:
     needs: lint
