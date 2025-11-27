@@ -27,19 +27,12 @@ jobs:
       - run: pnpm install
 
       - run: |
-          case '${{ github.event_name }}' in
-            push)
-              after='${{ github.event.commits[0].id }}'
-              before='${{ github.event.commits[-1].id }}'
-              ;;
-            pull_request)
-              after='${{ github.event.base_ref }}'
-              before='${{ github.event.head_ref }}'
-              ;;
-          esac
-          changes=$(git diff --name-only --diff-filter=d "${after}~1" "${before}")
+          if [ "${{ github.event_name }}" = "push" ]; then
+            changes=$(git diff --name-only --diff-filter=d "${{ github.event.commits[0].id }}~1" "${{ github.event.commits[0].id }}")
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            changes=$(git diff --name-only --diff-filter=d "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}")
+          fi
 
-          # Run lint and filter results for changed files only
           if [ -n "$changes" ]; then
             echo "Changed files:"
             echo "$changes"
