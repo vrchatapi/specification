@@ -1,4 +1,3 @@
-title: AddFavoriteRequest
 type: object
 properties:
   favoriteId:
