@@ -1458,9 +1458,9 @@ paths:
         '200':
           description: OK
     delete:
-      description: Clear ALL contents of a specific favorite group.
-      summary: Clear Favorite Group
       operationId: clearFavoriteGroup
+      summary: Clear Favorite Group
+      description: Clear ALL contents of a specific favorite group.
       tags:
         - favorites
       security:
@@ -8489,6 +8489,7 @@ components:
         - tags
         - type
     AddFavoriteRequest:
+      title: AddFavoriteRequest
       type: object
       properties:
         favoriteId:
