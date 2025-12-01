@@ -40,7 +40,7 @@ paths:
           $ref: ../responses/friends/NotFriendsError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  "/user/{userId}/boop":
+  "/users/{userId}/boop":
     parameters:
       - $ref: ../parameters.yaml#/userId
     post:

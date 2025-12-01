@@ -36,10 +36,10 @@ properties:
     type: boolean
   purchaseContext:
     type: object
-      properties:
-        locationType:
-          type: string
-          example: undefined
+    properties:
+      locationType:
+        type: string
+        example: undefined
   purchaseCurrentStatus:
     type: string
   purchaseDate:
