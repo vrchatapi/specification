@@ -1,0 +1,11 @@
+description: Successful response after booping a user.
+content:
+  application/json:
+    examples:
+      Boop Success:
+        value:
+          success:
+            message: User booped!
+            status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

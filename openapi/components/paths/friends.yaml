@@ -40,6 +40,32 @@ paths:
           $ref: ../responses/friends/NotFriendsError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/boop":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      operationId: boop
+      summary: Send Boop
+      description: Send a boop to another user.
+      tags:
+        - friends
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/BoopRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/friends/BoopSuccess.yaml
+        "400":
+          $ref: ../responses/friends/NotFriendsError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/friends/UserDoesntExistError.yaml
   "/user/{userId}/friendRequest":
     parameters:
       - $ref: ../parameters.yaml#/userId

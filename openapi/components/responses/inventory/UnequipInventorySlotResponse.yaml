@@ -1,0 +1,6 @@
+description: Returns a string.
+content:
+  application/json:
+    schema:
+      type: string
+      example: OK

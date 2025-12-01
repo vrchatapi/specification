@@ -1,0 +1,10 @@
+title: BoopRequest
+type: object
+description: See NotificationDetailBoop; either inventoryItemId by itself, or emojiId with optional emojiVersion
+properties:
+  emojiId:
+    $ref: ../schemas/FileID.yaml
+  emojiVersion:
+    type: integer
+  inventoryItemId:
+    $ref: ../schemas/InventoryItemID.yaml

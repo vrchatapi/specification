@@ -4,5 +4,6 @@ enum:
   - ""
   - drone
   - portal
+  - warp
 default: ""
 example: drone

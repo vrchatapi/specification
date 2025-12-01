@@ -7,5 +7,6 @@ enum:
   - portalskin
   - prop
   - sticker
+  - warpeffect
 default: bundle
 example: prop

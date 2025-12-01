@@ -1,0 +1,17 @@
+title: PurchaseProductListingRequest
+type: object
+properties:
+  listingId:
+    $ref: ../schemas/ProductID.yaml
+  totalPrice:
+    type: integer
+    minimum: 0
+  quantity:
+    type: integer
+    default: 1
+    minimum: 1
+    maximum: 99
+required:
+  - listingId
+  - totalPrice
+  - quantity
