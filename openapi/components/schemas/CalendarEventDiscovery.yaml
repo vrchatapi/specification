@@ -28,9 +28,9 @@ properties:
             description: milliseconds since Unix epoch
           paramHash:
             type: string
-            format: byte
+            format: string
             description: Base64-encoded 256-bit hash of the original query parameters
-    format: byte
+    format: string
   results:
     type: array
     items:

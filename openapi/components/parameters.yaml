@@ -104,7 +104,7 @@ calendarDiscoveryNextCursor:
   in: query
   schema:
     type: string
-    format: byte
+    format: string
 calendarDiscoveryNonFeatured:
   name: nonFeaturedResults
   description: Filter for calendar event discovery.
