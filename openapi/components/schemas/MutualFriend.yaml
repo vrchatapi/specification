@@ -26,10 +26,8 @@ properties:
     type: string
 required:
   - currentAvatarImageUrl
-  - currentAvatarTags
   - displayName
   - id
   - imageUrl
-  - profilePicOverride
   - status
   - statusDescription
