@@ -65,29 +65,6 @@ buyerId:
   in: query
   schema:
     $ref: ./schemas/UserID.yaml
-calendarId:
-  name: calendarId
-  description: Must be a valid calendar ID.
-  required: true
-  in: path
-  schema:
-    type: string
-    example: cal_00000000-0000-0000-0000-000000000000
-calendarSearchTerm:
-  name: searchTerm
-  description: Search term for calendar events.
-  required: true
-  in: query
-  schema:
-    type: string
-    example: game night
-calendarDiscoveryScope:
-  name: scope
-  description: Scope for calendar event discovery.
-  required: false
-  in: query
-  schema:
-    $ref: ./schemas/CalendarEventDiscoveryScope.yaml
 calendarDiscoveryCategories:
   name: categories
   description: Filter for calendar event discovery.
@@ -97,31 +74,8 @@ calendarDiscoveryCategories:
     type: string
     description: Comma-separated list of calendar event categories
     example: "avatars,exploration,gaming,roleplaying,music,performance"
-calendarDiscoveryTags:
-  name: tags
-  description: Filter for calendar event discovery.
-  required: false
-  in: query
-  schema:
-    type: string
-    description: Comma-separated list of calendar event tags
-    example: vrc_event_group_fair
 calendarDiscoveryFeatured:
   name: featuredResults
-  description: Filter for calendar event discovery.
-  required: false
-  in: query
-  schema:
-    $ref: ./schemas/CalendarEventDiscoveryInclusion.yaml
-calendarDiscoveryNonFeatured:
-  name: nonFeaturedResults
-  description: Filter for calendar event discovery.
-  required: false
-  in: query
-  schema:
-    $ref: ./schemas/CalendarEventDiscoveryInclusion.yaml
-calendarDiscoveryPersonalized:
-  name: personalizedResults
   description: Filter for calendar event discovery.
   required: false
   in: query
@@ -143,14 +97,6 @@ calendarDiscoveryMinimumRemainingMinutes:
   schema:
     type: integer
     example: 10
-calendarDiscoveryUpcomingOffsetMinutes:
-  name: upcomingOffsetMinutes
-  description: Filter for calendar event discovery.
-  required: false
-  in: query
-  schema:
-    type: integer
-    example: 10080
 calendarDiscoveryNextCursor:
   name: nextCursor
   description: Cursor returned from previous calendar discovery queries (see nextCursor property of the schema CalendarEventDiscovery).
@@ -159,6 +105,60 @@ calendarDiscoveryNextCursor:
   schema:
     type: string
     format: byte
+calendarDiscoveryNonFeatured:
+  name: nonFeaturedResults
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/CalendarEventDiscoveryInclusion.yaml
+calendarDiscoveryPersonalized:
+  name: personalizedResults
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/CalendarEventDiscoveryInclusion.yaml
+calendarDiscoveryScope:
+  name: scope
+  description: Scope for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/CalendarEventDiscoveryScope.yaml
+calendarDiscoveryTags:
+  name: tags
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    type: string
+    description: Comma-separated list of calendar event tags
+    example: vrc_event_group_fair
+calendarDiscoveryUpcomingOffsetMinutes:
+  name: upcomingOffsetMinutes
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    type: integer
+    example: 10080
+calendarId:
+  name: calendarId
+  description: Must be a valid calendar ID.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: cal_00000000-0000-0000-0000-000000000000
+calendarSearchTerm:
+  name: searchTerm
+  description: Search term for calendar events.
+  required: true
+  in: query
+  schema:
+    type: string
+    example: game night
 confirmEmailToken:
   name: verify_email
   description: Token to verify email.

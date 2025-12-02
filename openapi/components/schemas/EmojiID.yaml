@@ -2,133 +2,133 @@ title: EmojiID
 type: string
 description: Either a FileID or a string constant for default emojis
 examples:
-  "Angry":
+  Angry:
     value: default_angry
-  "Arrow Point":
+  Arrow Point:
     value: default_arrowpoint
-  "Bats":
+  Bats:
     value: default_bats
-  "Beachball":
+  Beachball:
     value: default_beachball
-  "Beer":
+  Beer:
     value: default_beer
-  "Blushing":
+  Blushing:
     value: default_blushing
-  "Boo":
+  Boo:
     value: default_boo
-  "Broken Heart":
+  Broken Heart:
     value: default_broken_heart
-  "Candy":
+  Candy:
     value: default_candy
-  "Candy Cane":
+  Candy Cane:
     value: default_candy_cane
-  "Candy Corn":
+  Candy Corn:
     value: default_candy_corn
-  "CantSee":
+  CantSee:
     value: default_cantsee
-  "Champagne":
+  Champagne:
     value: default_champagne
-  "Cloud":
+  Cloud:
     value: default_cloud
-  "Coal":
+  Coal:
     value: default_coal
-  "Confetti":
+  Confetti:
     value: default_confetti
-  "Crying":
+  Crying:
     value: default_crying
-  "Drink":
+  Drink:
     value: default_drink
-  "Exclamation":
+  Exclamation:
     value: default_exclamation
-  "Fire":
+  Fire:
     value: default_fire
-  "Frown":
+  Frown:
     value: default_frown
-  "Gift":
+  Gift:
     value: default_gift
-  "Gifts":
+  Gifts:
     value: default_gifts
-  "Gingerbread":
+  Gingerbread:
     value: default_gingerbread
-  "Go":
+  Go:
     value: default_go
-  "Hand Wave":
+  Hand Wave:
     value: default_hand_wave
-  "Hang Ten":
+  Hang Ten:
     value: default_hang_ten
-  "Heart":
+  Heart:
     value: default_heart
-  "Hourglass":
+  Hourglass:
     value: default_hourglass
-  "Ice Cream":
+  Ice Cream:
     value: default_ice_cream
-  "In Love":
+  In Love:
     value: default_in_love
-  "Jack O Lantern":
+  Jack O Lantern:
     value: default_jack_o_lantern
-  "Keyboard":
+  Keyboard:
     value: default_keyboard
-  "Kiss":
+  Kiss:
     value: default_kiss
-  "Laugh":
+  Laugh:
     value: default_laugh
-  "Life Ring":
+  Life Ring:
     value: default_life_ring
-  "Mistletoe":
+  Mistletoe:
     value: default_mistletoe
-  "Money":
+  Money:
     value: default_money
-  "Music Note":
+  Music Note:
     value: default_music_note
-  "Neon Shades":
+  Neon Shades:
     value: default_neon_shades
-  "NoHeadphones":
+  NoHeadphones:
     value: default_noheadphones
-  "NoMic":
+  NoMic:
     value: default_nomic
-  "Pineapple":
+  Pineapple:
     value: default_pineapple
-  "Pizza":
+  Pizza:
     value: default_pizza
-  "Portal":
+  Portal:
     value: default_portal
-  "Question":
+  Question:
     value: default_question
-  "Shush":
+  Shush:
     value: default_shush
-  "Skull":
+  Skull:
     value: default_skull
-  "Smile":
+  Smile:
     value: default_smile
-  "Snow Fall":
+  Snow Fall:
     value: default_snow_fall
-  "Snowball":
+  Snowball:
     value: default_snowball
-  "Splash":
+  Splash:
     value: default_splash
-  "Spooky Ghost":
+  Spooky Ghost:
     value: default_spooky_ghost
-  "Stoic":
+  Stoic:
     value: default_stoic
-  "Stop":
+  Stop:
     value: default_stop
-  "Sun Lotion":
+  Sun Lotion:
     value: default_sun_lotion
-  "Sunglasses":
+  Sunglasses:
     value: default_sunglasses
-  "Thinking":
+  Thinking:
     value: default_thinking
-  "Thumbs Down":
+  Thumbs Down:
     value: default_thumbs_down
-  "Thumbs Up":
+  Thumbs Up:
     value: default_thumbs_up
-  "Tomato":
+  Tomato:
     value: default_tomato
-  "Tongue Out":
+  Tongue Out:
     value: default_tongue_out
-  "Web":
+  Web:
     value: default_web
-  "Wow":
+  Wow:
     value: default_wow
-  "Zzz":
+  Zzz:
     value: default_zzz

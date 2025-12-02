@@ -3,7 +3,6 @@ type: object
 properties:
   nextCursor:
     type: string
-    format: byte
     description: |-
       Base64-encoded JSON:
         type: object
@@ -31,10 +30,11 @@ properties:
             type: string
             format: byte
             description: Base64-encoded 256-bit hash of the original query parameters
+    format: byte
   results:
     type: array
     items:
-    $ref: ./CalendarEvent.yaml
+      $ref: ./CalendarEvent.yaml
 required:
   - nextCursor
   - results

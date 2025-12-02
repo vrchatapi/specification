@@ -23,7 +23,7 @@ properties:
   status:
     $ref: ./UserStatus.yaml
   statusDescription:
-    type: 
+    type: string
 required:
   - currentAvatarImageUrl
   - currentAvatarTags

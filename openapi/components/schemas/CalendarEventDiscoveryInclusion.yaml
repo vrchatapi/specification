@@ -1,8 +1,8 @@
 title: CalendarEventDiscoveryInclusion
 type: string
 enum:
-  - include
   - exclude
+  - include
   - skip
 default: include
 example: include
