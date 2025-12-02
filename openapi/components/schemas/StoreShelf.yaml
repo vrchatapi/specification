@@ -1,6 +1,10 @@
 title: StoreShelf
 type: object
 properties:
+  highlightListing:
+    $ref: ./ProductListing.yaml
+  highlightListingId:
+    $ref: ./ProductID.yaml
   id:
     $ref: ./StoreShelfID.yaml
   listingIds:
@@ -20,10 +24,6 @@ properties:
   updatedAt:
     type: string
     format: date-time
-  highlightListing:
-    $ref: ./ProductListing.yaml
-  highlightListingId:
-    $ref: ./ProductID.yaml
 required:
   - id
   - listingIds

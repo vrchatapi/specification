@@ -11,9 +11,10 @@ properties:
     example: true
   ageGate:
     type: boolean
-  calendarEntryId:
     nullable: true
+  calendarEntryId:
     type: string
+    nullable: true
   canRequestInvite:
     type: boolean
     default: true
@@ -31,10 +32,10 @@ properties:
     type: string
     nullable: true
     format: date-time
-  creatorId:
-    $ref: ./UserID.yaml
   contentSettings:
     $ref: ./InstanceContentSettings.yaml
+  creatorId:
+    $ref: ./UserID.yaml
   displayName:
     type: string
     nullable: true

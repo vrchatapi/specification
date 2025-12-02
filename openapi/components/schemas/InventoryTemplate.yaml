@@ -8,9 +8,9 @@ properties:
     items:
       type: string
   created_at:
+    type: string
     example: "2025-06-12T20:21:15.056Z"
     format: date-time
-    type: string
   defaultAttributes:
     type: object
   description:

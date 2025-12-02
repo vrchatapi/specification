@@ -70,26 +70,26 @@ properties:
     type: string
   sellerId:
     type: string
+  soldByVrc:
+    type: boolean
   stackable:
     type: boolean
   storeIds:
     type: array
     items:
       type: string
+  subtitle:
+    type: string
   tags:
     type: array
     items:
       $ref: ./Tag.yaml
-  soldByVrc:
-    type: boolean
-  subtitle:
-    type: string
   vrcPlusDiscountPrice:
     type: integer
   whenToExpire:
     type: string
-    format: date-time
     nullable: true
+    format: date-time
 required:
   - active
   - buyerRefundable
