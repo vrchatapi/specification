@@ -10239,6 +10239,7 @@ components:
         - unknown
         - us
         - use
+        - usw
       default: us
       example: us
     InstanceType:
