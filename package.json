@@ -15,27 +15,27 @@
 		"lint-ci": "pnpm --no-bail --stream --reporter-hide-prefix run '/^lint-.*-ci$/'",
 		"bundle": "redocly bundle"
 	},
-	"dependencies": {
+	"devDependencies": {
 		"@actions/core": "^1.11.1",
 		"@apidevtools/json-schema-ref-parser": "^15.1.2",
-		"@redocly/cli": "^2.12.0",
-		"@stoplight/spectral-cli": "^6.15.0",
-		"@stoplight/spectral-formats": "^1.8.2",
-		"@stoplight/spectral-formatters": "^1.5.0",
-		"@stoplight/spectral-functions": "^1.10.1",
-		"@stoplight/spectral-rulesets": "^1.22.0",
-		"change-case": "^5.4.4",
-		"pluralize": "^8.0.0"
-	},
-	"devDependencies": {
 		"@ariesclark/eslint-config": "^3.1.1",
 		"@eslint-react/eslint-plugin": "^2.3.9",
 		"@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
+		"@redocly/cli": "^2.12.0",
+		"@stoplight/spectral-cli": "^6.15.0",
+		"@stoplight/spectral-core": "^1.20.0",
+		"@stoplight/spectral-formats": "^1.8.2",
+		"@stoplight/spectral-formatters": "^1.5.0",
+		"@stoplight/spectral-functions": "^1.10.1",
+		"@stoplight/spectral-parsers": "^1.0.5",
+		"@stoplight/spectral-rulesets": "^1.22.0",
 		"@types/bun": "^1.3.3",
 		"@types/node": "^24.10.1",
 		"@types/pluralize": "^0.0.33",
+		"change-case": "^5.4.4",
 		"cspell": "^9.3.2",
 		"cspell-lib": "^9.3.2",
-		"eslint": "^9.39.1"
+		"eslint": "^9.39.1",
+		"pluralize": "^8.0.0"
 	}
 }
