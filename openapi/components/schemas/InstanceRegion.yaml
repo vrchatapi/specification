@@ -7,6 +7,5 @@ enum:
   - unknown
   - us
   - use
-  - usw
 default: us
 example: us
