@@ -12,6 +12,7 @@ const prefixesByType = {
 };
 
 export const operationId = rule({
+	severity: "hint",
 	given: "#OperationObject",
 	then: [
 		{

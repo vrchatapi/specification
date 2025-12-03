@@ -36,5 +36,14 @@ export const defaultRuleset = ruleset({
 				.map(([key, { recommended, ...value }]) => [key, value])
 		),
 		...rules
-	}
+	},
+	overrides: [
+		{
+			files: ["openapi.yaml"],
+			rules: {
+				"oas3-schema": "off",
+				"oas3-unused-component": "off"
+			}
+		}
+	]
 });

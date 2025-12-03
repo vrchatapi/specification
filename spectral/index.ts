@@ -14,7 +14,7 @@ import { cwd, env, exit } from "node:process";
 import { parseArgs } from "node:util";
 
 import { error, notice, summary, warning } from "@actions/core";
-import { Document, Spectral } from "@stoplight/spectral-core";
+import { Document, Ruleset, Spectral } from "@stoplight/spectral-core";
 import Parsers from "@stoplight/spectral-parsers";
 
 import { defaultRuleset } from "./ruleset";
@@ -39,7 +39,7 @@ const { values: { only = [], except = [], ci, fail }, positionals } = parseArgs(
 		},
 		fail: {
 			type: "string",
-			default: "2",
+			default: "0",
 			short: "f",
 		}
 	}
@@ -66,7 +66,7 @@ interface ExecuteOptions {
 
 async function execute(filename: string, { only, except, failSeverity, ci }: ExecuteOptions) {
 	const spectral = new Spectral();
-	spectral.setRuleset(defaultRuleset);
+	spectral.setRuleset(new Ruleset(defaultRuleset, { source: filename }));
 
 	if (except.length > 0)
 		for (const rule of except)
@@ -100,7 +100,6 @@ async function execute(filename: string, { only, except, failSeverity, ci }: Exe
 	summary.addRaw(`${diagnostics.length} issue(s).`, true);
 	summary.addBreak();
 
-	// group by file.
 	const diagnosticsBySource = diagnostics.reduce((acc, diag) => {
 		const file = diag.source || "<unknown>";
 		if (!acc[file]) acc[file] = [];
