@@ -33,7 +33,8 @@ jobs:
 
       - name: pnpm run lint-ci
         run: |
-          output=$(pnpm run lint-ci 2>&1) || exit_code=$?
+          output=$(pnpm run lint-ci 2>&1)
+          exit_code=$?
 
           if [ "${{ github.event_name }}" = "push" ]; then
             changes=$(git diff --name-only --diff-filter=d "${{ github.event.commits[0].id }}~1" "${{ github.event.commits[0].id }}")
@@ -163,6 +164,8 @@ jobs:
           - vrchatapi-rust
           - vrchatapi-dart
     steps:
+      - uses: actions/checkout@v4
+
       - run: |
           jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
           | gh api repos/{owner}/$repository/dispatches -X POST -i --input -
