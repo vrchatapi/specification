@@ -7,8 +7,8 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
     name: Lint
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,7 +23,10 @@ jobs:
 
       - run: pnpm install
 
-      - run: |
+      - name: pnpm run lint-ci
+        run: |
+          output=$(pnpm run lint-ci 2>&1) || exit_code=$?
+
           if [ "${{ github.event_name }}" = "push" ]; then
             changes=$(git diff --name-only --diff-filter=d "${{ github.event.commits[0].id }}~1" "${{ github.event.commits[0].id }}")
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
@@ -31,30 +34,25 @@ jobs:
           fi
 
           if [ -n "$changes" ]; then
-            echo "Changed files:"
-            echo "$changes"
-
-            # Run lint and capture output
-            lint_output=$(pnpm run lint-ci 2>&1 || true)
-
-            # Filter for changed files and check if any issues found
-            filtered_output=$(echo "$lint_output" | grep -E "($(echo "$changes" | tr '\n' '|' | sed 's/|$//'))" || true)
+            filtered_output=$(echo "$output" | grep -E "($(echo "$changes" | tr '\n' '|' | sed 's/|$//'))" || true)
 
             if [ -n "$filtered_output" ]; then
-              echo "Lint issues found in changed files:"
               echo "$filtered_output"
-              exit 1
-            else
-              echo "No lint issues in changed files"
+              echo "$output"
+              
+              exit ${exit_code:-1}
             fi
-          else
-            echo "No changed files."
           fi
 
+          echo "$output"
+
   bundle:
-    needs: lint
-    runs-on: ubuntu-latest
     name: Bundle
+    runs-on: ubuntu-latest
+    needs: lint
+    strategy:
+      matrix:
+        format: [yaml, json]
     steps:
       - uses: actions/checkout@v4
 
@@ -68,78 +66,129 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: |
-          pnpm bundle --ext yaml
-          pnpm bundle --ext json
+      - run: pnpm bundle --ext ${{ matrix.format }}
 
       - uses: actions/upload-artifact@v4
         with:
-          name: openapi.yaml
-          path: dist/openapi.yaml
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: openapi.json
-          path: dist/openapi.json
-
-  pages:
-    # Only if main branch
-    if: github.ref == 'refs/heads/main'
-    needs: bundle
+          name: openapi.${{ matrix.format }}
+          path: dist/openapi.${{ matrix.format }}
+    
+  release:
     runs-on: ubuntu-latest
-    name: Upload OpenAPI specification to GitHub Pages
+    needs: bundle
+    outputs:
+      release: ${{ steps.script.outputs.release }}
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
-          name: openapi.yaml
           path: dist
+          merge-multiple: true
 
-      - name: Disable Jekyll for Github Pages
-        run: sudo touch dist/.nojekyll; sudo touch dist/index.html
-
-      - name: Deploy Bundle to Github Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: dist
-
-  version_check:
-    # Only if tag "release/*" is pushed
-    if: ${{ startsWith(github.ref, 'refs/tags/release/') }}
-    needs: bundle
-    name: Check if OpenAPI specification version is matching tag
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Check if OpenAPI specification version is matching tag
-        # Tag will be e.g., "release/1.0.0", check if this matches the version in openapi/openapi.yaml
+      - id: script
         run: |
-          if [[ $(cat openapi/openapi.yaml | grep -oP '(?<=version: ).*') != $(echo $GITHUB_REF | grep -oP '(?<=release/).*') ]]; then
-            echo "OpenAPI specification version does not match tag!"
-            exit 1
-          fi
+          version=$(jq -r '.info.version' dist/openapi.json)
+          commits_since_release=$(git log --oneline "v$version"..HEAD | wc -l)
 
-  # https://blog.marcnuri.com/triggering-github-actions-across-different-repositories
-  # Make sure this is same as in sdk_generate.yaml
-  sdk_generate:
+          version=$(semver $version -i)-nightly.$commits_since_release
+
+          gh release create v$version dist/* \
+            --generate-notes \
+            --prerelease
+
+          release=$(gh release view v$version --json id,tagName,url,isPrerelease,assets | jq -c '{
+            id,
+            url,
+            version: .tagName,
+            prerelease: .isPrerelease,
+            artifacts: (
+              .assets
+              | map({ (.name): .url })
+              | add
+            )
+          }')
+
+          echo "release=$release" >> $GITHUB_OUTPUT
+
+  release_dispatch:
     runs-on: ubuntu-latest
-    needs: version_check
-    name: Trigger Remote SDK builds
+    needs: release
     strategy:
       matrix:
-        project:
-          - javascript
-          - csharp
-          - python
-          - java
-          - rust
-          - dart
+        repositories:
+          - vrchatapi-javascript
+          - vrchatapi-csharp
+          - vrchatapi-python
+          - vrchatapi-java
+          - vrchatapi-rust
+          - vrchatapi-dart
     steps:
-      - name: Triggering build SDK - ${{ matrix.node }}
-        run: |
-          curl -X POST https://api.github.com/repos/vrchatapi/vrchatapi-${{ matrix.project }}/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u ${{ secrets.ACCESS_TOKEN }} \
-          --data '{"event_type": "spec_release"}'
+      - run: |
+          jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
+          | gh api repos/{owner}/vrchatapi-javascript/dispatches -X POST -i --input -
+        env:
+          release: ${{ needs.release.outputs.release }}
+
+#  pages:
+#    name: Upload OpenAPI specification to GitHub Pages
+#    runs-on: ubuntu-latest
+#    needs: bundle
+#    # Only if main branch
+#    if: github.ref == 'refs/heads/main'
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: openapi.yaml
+#          path: dist
+#
+#      - name: Disable Jekyll for Github Pages
+#        run: sudo touch dist/.nojekyll; sudo touch dist/index.html
+#
+#      - name: Deploy Bundle to Github Pages 🚀
+#        uses: JamesIves/github-pages-deploy-action@v4
+#        with:
+#          branch: gh-pages
+#          folder: dist
+#
+#  version_check:
+#    name: Check if OpenAPI specification version is matching tag
+#    runs-on: ubuntu-latest
+#    needs: bundle
+#    # Only if tag "release/*" is pushed
+#    if: ${{ startsWith(github.ref, 'refs/tags/release/') }}
+#    steps:
+#      - uses: actions/checkout@v4
+#      - name: Check if OpenAPI specification version is matching tag
+#        # Tag will be e.g., "release/1.0.0", check if this matches the version in openapi/openapi.yaml
+#        run: |
+#          if [[ $(cat openapi/openapi.yaml | grep -oP '(?<=version: ).*') != $(echo $GITHUB_REF | grep -oP '(?<=release/).*') ]]; then
+#            echo "OpenAPI specification version does not match tag!"
+#            exit 1
+#          fi
+#
+#  # https://blog.marcnuri.com/triggering-github-actions-across-different-repositories
+#  # Make sure this is same as in sdk_generate.yaml
+#  sdk_generate:
+#    runs-on: ubuntu-latest
+#    needs: version_check
+#    name: Trigger Remote SDK builds
+#    strategy:
+#      matrix:
+#        project:
+#          - javascript
+#          - csharp
+#          - python
+#          - java
+#          - rust
+#          - dart
+#    steps:
+#      - name: Triggering build SDK - ${{ matrix.node }}
+#        run: |
+#          curl -X POST https://api.github.com/repos/vrchatapi/vrchatapi-${{ matrix.project }}/dispatches \
+#          -H 'Accept: application/vnd.github.everest-preview+json' \
+#          -u ${{ secrets.ACCESS_TOKEN }} \
+#          --data '{"event_type": "spec_release"}'
+#

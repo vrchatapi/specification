@@ -86,12 +86,13 @@ async function execute(filename: string, { only, except, failSeverity, ci }: Exe
 	const document = new Document(await readFile(filename, "utf8"), Parsers.Yaml, filename);
 	const diagnostics = await spectral.run(document);
 
+	const failed = diagnostics.filter(({ severity }) => severity <= failSeverity).length > 0;
+
 	if (!ci) {
 		const { stylish } = await import("@stoplight/spectral-formatters");
 
 		console.log(stylish(diagnostics, { failSeverity }));
-		if (diagnostics.some(({ severity }) => severity <= failSeverity))
-			exit(1);
+		if (failed) exit(1);
 
 		return;
 	}
@@ -136,5 +137,8 @@ async function execute(filename: string, { only, except, failSeverity, ci }: Exe
 		});
 	});
 
-	summary.write();
+	if (env.GITHUB_STEP_SUMMARY)
+		await summary.write();
+
+	if (failed) exit(1);
 }

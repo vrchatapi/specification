@@ -12,7 +12,7 @@
 		"lint-eslint": "eslint .",
 		"lint-eslint-ci": "pnpm -s run lint-eslint -f @jamesacarr/eslint-formatter-github-actions",
 		"lint": "pnpm --no-bail --stream --reporter-hide-prefix --color run '/^lint-(?!ci$)(?!.*-ci$).*/'",
-		"lint-ci": "pnpm --no-bail --stream --reporter-hide-prefix run '/^lint-.*-ci$/'",
+		"lint-ci": "pnpm --stream --reporter-hide-prefix run '/^lint-.*-ci$/'",
 		"bundle": "redocly bundle"
 	},
 	"devDependencies": {
