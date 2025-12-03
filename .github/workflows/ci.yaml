@@ -147,6 +147,8 @@ jobs:
           }')
 
           echo "release=$release" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}
 
   release_dispatch:
     runs-on: ubuntu-latest
@@ -165,6 +167,7 @@ jobs:
           jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
           | gh api repos/{owner}/$repository/dispatches -X POST -i --input -
         env:
+          GH_TOKEN: ${{ github.token }}
           repository: ${{ matrix.repository }}
           release: ${{ needs.release.outputs.release }}
 
