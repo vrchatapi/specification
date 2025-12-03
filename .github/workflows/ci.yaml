@@ -39,7 +39,7 @@ jobs:
             if [ -n "$filtered_output" ]; then
               echo "$filtered_output"
               echo "$output"
-              
+
               exit ${exit_code:-1}
             fi
           fi
@@ -72,7 +72,7 @@ jobs:
         with:
           name: openapi.${{ matrix.format }}
           path: dist/openapi.${{ matrix.format }}
-    
+
   release:
     runs-on: ubuntu-latest
     needs: bundle
@@ -116,7 +116,7 @@ jobs:
     needs: release
     strategy:
       matrix:
-        repositories:
+        repository:
           - vrchatapi-javascript
           - vrchatapi-csharp
           - vrchatapi-python
@@ -126,8 +126,9 @@ jobs:
     steps:
       - run: |
           jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
-          | gh api repos/{owner}/vrchatapi-javascript/dispatches -X POST -i --input -
+          | gh api repos/{owner}/$repository/dispatches -X POST -i --input -
         env:
+          repository: ${{ matrix.repository }}
           release: ${{ needs.release.outputs.release }}
 
 #  pages:
