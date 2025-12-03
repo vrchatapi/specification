@@ -55,7 +55,7 @@ properties:
   instanceId:
     $ref: ./InstanceID.yaml
   instancePersistenceEnabled:
-    type: boolean
+    type: string
     nullable: true
   location:
     $ref: ./LocationID.yaml

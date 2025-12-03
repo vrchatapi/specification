@@ -186,6 +186,21 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/inventory/{inventoryItemId}/equip":
+    delete:
+      operationId: unequipOwnInventorySlot
+      summary: Unequip Own Inventory Slot
+      description: Unequips the InventoryItem in the given slot of the inventory of the currently logged in user.
+      tags:
+        - inventory
+      parameters:
+        - $ref: ../parameters.yaml#/inventoryItemSlotAsId
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/inventory/UnequipInventorySlotResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
     put:
       operationId: equipOwnInventoryItem
       summary: Equip Own Inventory Item
@@ -206,21 +221,6 @@ paths:
           $ref: ../responses/inventory/InventoryItemResponse.yaml
         "400":
           $ref: ../responses/inventory/InventoryItemNotEquippable.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-    delete:
-      operationId: unequipOwnInventorySlot
-      summary: Unequip Own Inventory Slot
-      description: Unequips the InventoryItem in the given slot of the inventory of the currently logged in user.
-      tags:
-        - inventory
-      parameters:
-        - $ref: ../parameters.yaml#/inventoryItemSlotAsId
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/inventory/UnequipInventorySlotResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/inventory/{inventoryItemId}":
