@@ -1,7 +1,7 @@
 title: EmojiID
 type: string
 description: Either a FileID or a string constant for default emojis
-example:
+example: >
   Angry:
     value: default_angry
   Arrow Point:
