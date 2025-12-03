@@ -19,10 +19,7 @@ jobs:
           version: 10
           run_install: false
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 25
-          cache: pnpm
+      - uses: oven-sh/setup-bun@v2
 
       - run: pnpm install
 
@@ -37,7 +34,19 @@ jobs:
             echo "Changed files:"
             echo "$changes"
 
-            pnpm run lint-ci 2>&1 | grep -E "($(echo "$changes" | tr '\n' '|' | sed 's/|$//'))" || true
+            # Run lint and capture output
+            lint_output=$(pnpm run lint-ci 2>&1 || true)
+
+            # Filter for changed files and check if any issues found
+            filtered_output=$(echo "$lint_output" | grep -E "($(echo "$changes" | tr '\n' '|' | sed 's/|$//'))" || true)
+
+            if [ -n "$filtered_output" ]; then
+              echo "Lint issues found in changed files:"
+              echo "$filtered_output"
+              exit 1
+            else
+              echo "No lint issues in changed files"
+            fi
           else
             echo "No changed files."
           fi
@@ -54,10 +63,7 @@ jobs:
           version: 10
           run_install: false
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 25
-          cache: pnpm
+      - uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
         run: pnpm install

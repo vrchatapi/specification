@@ -1,5 +1,3 @@
-// @ts-check
-
 import { createRulesetFunction } from "@stoplight/spectral-core";
 import { camelCase, pascalCase } from "change-case";
 
@@ -8,7 +6,7 @@ const types = {
 	pascalCase
 };
 
-export const casing = createRulesetFunction({
+export const casing = createRulesetFunction<string, { type: keyof typeof types }>({
 	input: {
 		type: "string",
 	},
@@ -21,11 +19,10 @@ export const casing = createRulesetFunction({
 		},
 	}
 }, (value, { type }) => {
-	// @ts-expect-error
 	const suggestedName = types[type](value);
 	if (value === suggestedName) return [];
 
 	return [{
-		message: `Consider renaming to "${suggestedName}".`,
+		message: `Consider renaming to ${suggestedName}.`,
 	}];
 });
