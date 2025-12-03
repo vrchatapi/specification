@@ -1,9 +1,9 @@
 title: BoopRequest
 type: object
-description: See NotificationDetailBoop; either inventoryItemId (accessed through .id) by itself, or emojiId (accessed through .metadata.fileId) with optional emojiVersion
+description: See NotificationDetailBoop; either inventoryItemId (accessed through .id) by itself, or emojiId (accessed through .metadata.fileId or built-in emoji name) with optional emojiVersion
 properties:
   emojiId:
-    $ref: ../schemas/FileID.yaml
+    $ref: ../schemas/EmojiID.yaml
   emojiVersion:
     type: integer
   inventoryItemId:
