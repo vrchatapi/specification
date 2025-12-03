@@ -7,8 +7,8 @@
 	"license": "MIT",
 	"main": "index.js",
 	"scripts": {
-		"lint-spectral": "spectral lint openapi/openapi.yaml",
-		"lint-spectral-ci": "pnpm -s run lint-spectral -f github-actions",
+		"lint-spectral": "bun spectral openapi/openapi.yaml",
+		"lint-spectral-ci": "bun spectral -i openapi/openapi.yaml",
 		"lint-eslint": "eslint .",
 		"lint-eslint-ci": "pnpm -s run lint-eslint -f @jamesacarr/eslint-formatter-github-actions",
 		"lint": "pnpm --no-bail --stream --reporter-hide-prefix --color run '/^lint-(?!ci$)(?!.*-ci$).*/'",
@@ -16,10 +16,12 @@
 		"bundle": "redocly bundle"
 	},
 	"dependencies": {
+		"@actions/core": "^1.11.1",
 		"@apidevtools/json-schema-ref-parser": "^15.1.2",
 		"@redocly/cli": "^2.12.0",
 		"@stoplight/spectral-cli": "^6.15.0",
 		"@stoplight/spectral-formats": "^1.8.2",
+		"@stoplight/spectral-formatters": "^1.5.0",
 		"@stoplight/spectral-functions": "^1.10.1",
 		"@stoplight/spectral-rulesets": "^1.22.0",
 		"change-case": "^5.4.4",
@@ -29,7 +31,11 @@
 		"@ariesclark/eslint-config": "^3.1.1",
 		"@eslint-react/eslint-plugin": "^2.3.9",
 		"@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
+		"@types/bun": "^1.3.3",
+		"@types/node": "^24.10.1",
 		"@types/pluralize": "^0.0.33",
+		"cspell": "^9.3.2",
+		"cspell-lib": "^9.3.2",
 		"eslint": "^9.39.1"
 	}
 }
