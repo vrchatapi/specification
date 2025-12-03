@@ -1,5 +1,7 @@
 title: GroupLimitedMember
 type: object
+nullable: true
+description: May be null when attempting to retrieve group membership for a user who is not part of the group
 properties:
   bannedAt:
     type: string
