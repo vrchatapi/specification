@@ -89,7 +89,7 @@ jobs:
       - id: script
         run: |
           version=$(jq -r '.info.version' dist/openapi.json)
-          commits_since_release=$(git log --oneline "v$version"..HEAD | wc -l)
+          commits_since_release=$(git log --oneline "release/$version"..HEAD | wc -l)
 
           version=$(semver $version -i)-nightly.$commits_since_release
 
