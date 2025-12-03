@@ -416,8 +416,8 @@ inventoryItemNotTypes:
   in: query
   schema:
     $ref: ./schemas/InventoryItemType.yaml
-inventoryItemSlot:
-  name: inventoryItemSlot
+inventoryItemSlotAsId:
+  name: inventoryItemId
   description: Selector for inventory slot management.
   required: true
   in: path

@@ -186,14 +186,14 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/inventory/{inventoryItemId}/equip":
-    parameters:
-      - $ref: ../parameters.yaml#/inventoryItemId
     put:
       operationId: equipOwnInventoryItem
       summary: Equip Own Inventory Item
       description: Returns the modified InventoryItem object as held by the currently logged in user.
       tags:
         - inventory
+      parameters:
+        - $ref: ../parameters.yaml#/inventoryItemId
       requestBody:
         content:
           application/json:
@@ -208,15 +208,14 @@ paths:
           $ref: ../responses/inventory/InventoryItemNotEquippable.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  "/inventory/{inventoryItemSlot}/equip":
-    parameters:
-      - $ref: ../parameters.yaml#/inventoryItemSlot
     delete:
       operationId: unequipOwnInventorySlot
       summary: Unequip Own Inventory Slot
       description: Unequips the InventoryItem in the given slot of the inventory of the currently logged in user.
       tags:
         - inventory
+      parameters:
+        - $ref: ../parameters.yaml#/inventoryItemSlotAsId
       security:
         - authCookie: []
       responses:

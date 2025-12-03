@@ -240,8 +240,6 @@
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}~1consume"
 "/inventory/{inventoryItemId}/equip":
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}~1equip"
-"/inventory/{inventoryItemSlot}/equip":
-  $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemSlot}~1equip"
 "/invite/myself/to/{worldId}:{instanceId}":
   $ref: "./paths/invite.yaml#/paths/~1invite~1myself~1to~1{worldId}:{instanceId}"
 "/invite/{notificationId}/response":
