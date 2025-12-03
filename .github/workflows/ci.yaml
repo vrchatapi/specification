@@ -91,7 +91,7 @@ jobs:
           version=$(jq -r '.info.version' dist/openapi.json)
           commits_since_release=$(git log --oneline "release/$version"..HEAD | wc -l)
 
-          version=$(semver $version -i)-nightly.$commits_since_release
+          version=$(pnpm semver $version -i)-nightly.$commits_since_release
 
           gh release create v$version dist/* \
             --generate-notes \
