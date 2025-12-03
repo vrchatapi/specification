@@ -8489,7 +8489,6 @@ components:
         - tags
         - type
     AddFavoriteRequest:
-      title: AddFavoriteRequest
       type: object
       properties:
         favoriteId:
@@ -10239,7 +10238,6 @@ components:
         - unknown
         - us
         - use
-        - usw
       default: us
       example: us
     InstanceType:
