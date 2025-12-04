@@ -3,6 +3,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  GH_TOKEN: ${{ github.token }}
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -39,16 +42,15 @@ jobs:
           changes=$(git diff --name-only --diff-filter=d "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}")
           echo "changes=$changes" >> $GITHUB_ENV
 
-      - 
-        # Files were changed, lint & filter results to only changed files.
+      - name: lint changed files
         if: env.changes != ''
         run: |
           pattern=$(echo "$changes" | tr '\n' '|' | sed 's/|$//')
 
           pnpm run lint-ci 2>&1 | grep -E "$pattern" || true
           exit ${PIPESTATUS[0]:-1}
-      - 
-        # Files were not changed, lint but don't fail.
+
+      - name: lint files
         if: env.changes == ''
         continue-on-error: true
         run: pnpm run lint-ci
@@ -78,8 +80,7 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
 
-      - name: Install dependencies
-        run: pnpm install
+      - run: pnpm install
 
       - run: pnpm bundle --ext ${{ matrix.format }}
 
@@ -94,6 +95,7 @@ jobs:
     if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[dry]')
     outputs:
       release: ${{ steps.data.outputs.release }}
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -115,8 +117,7 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
 
-      - name: Install dependencies
-        run: pnpm install
+      - run: pnpm install
 
       - uses: actions/download-artifact@v5
         with:
@@ -134,19 +135,14 @@ jobs:
             || echo ""
           )
           echo "version_sha=$version_sha" >> $GITHUB_ENV
+          echo "prerelease=$(test -z "$version_sha" && echo false || echo true)" >> $GITHUB_ENV
 
-          echo "prerelease=$(test -z "$version_sha" && echo false || echo true)" >> $GITHUB_OUTPUT
-
-      - id: create_release
-        if: steps.metadata.outputs.prerelease == 'false'
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: create release
+        if: env.prerelease == 'false'
         run: gh release create v$version dist/* --generate-notes
 
-      - id: create_prerelease
-        if: steps.metadata.outputs.prerelease == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: create release (nightly)
+        if: env.prerelease == 'true'
         run: |
           version=$(pnpm semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
           echo "version=$version" >> $GITHUB_ENV
@@ -159,8 +155,6 @@ jobs:
             --prerelease
 
       - id: data
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           release=$(gh release view v$version --json id,tagName,url,isPrerelease,assets | jq --arg version "$version" -c '{
             id,
@@ -195,6 +189,5 @@ jobs:
           jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
           | gh api repos/{owner}/$repository/dispatches -X POST -i --input -
         env:
-          GH_TOKEN: ${{ secrets.RELEASE_DISPATCH_TOKEN }}
           repository: ${{ matrix.repository }}
           release: ${{ needs.release.outputs.release }}
