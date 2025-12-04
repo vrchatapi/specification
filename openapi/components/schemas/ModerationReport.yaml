@@ -1,0 +1,43 @@
+title: PlayerModeration
+type: object
+properties:
+  category:
+    type: string
+    description: "Possibly valid values are likely the keys of the object `$.reportCategories` from `GET /config`."
+    example: behavior
+  contentId:
+    type: string
+    example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+  contentName:
+    type: string
+  contentThumbnailImageUrl:
+    type: string
+    nullable: true
+  description:
+    type: string
+    description: The subjective reason for the report
+    example: iz bulli
+  evidenceRequired:
+    type: boolean
+  id:
+    $ref: ./ModerationReportID.yaml
+  reason:
+    type: string
+    description: "Possibly valid values are likely the keys of the object `$.reportReasons` from `GET /config`."
+  supportRequired:
+    type: boolean
+  type:
+    type: string
+    description: "Possibly valid values are likely the keys of the object `$.reportOptions` from `GET /config`."
+    example: user
+required:
+  - category
+  - contentId
+  - contentName
+  - contentThumbnailImageUrl
+  - description
+  - evidenceRequired
+  - id
+  - reason
+  - supportRequired
+  - type

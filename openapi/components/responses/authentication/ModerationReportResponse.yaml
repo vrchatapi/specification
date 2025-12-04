@@ -1,0 +1,5 @@
+description: Returns a list of ModerationReport objects, wrapped in new pagination format.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/ModerationReport.yaml

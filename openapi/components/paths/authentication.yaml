@@ -105,7 +105,7 @@ paths:
           application/json:
             examples: { }
             schema:
-              $ref: ../requests/TwoFactorEmailCode.yaml
+              $ref: ../requests/TwoFactorCode.yaml
       security:
         - authCookie: []
       responses:
@@ -126,7 +126,7 @@ paths:
           application/json:
             examples: {}
             schema:
-              $ref: ../requests/TwoFactorAuthCode.yaml
+              $ref: ../requests/TwoFactorCode.yaml
       security:
         - authCookie: []
       responses:
@@ -177,7 +177,7 @@ paths:
           application/json:
             examples: {}
             schema:
-              $ref: ../requests/TwoFactorAuthCode.yaml
+              $ref: ../requests/TwoFactorCode.yaml
       security:
         - authCookie: []
       responses:
@@ -199,7 +199,7 @@ paths:
           application/json:
             examples: {}
             schema:
-              $ref: ../requests/TwoFactorAuthCode.yaml
+              $ref: ../requests/TwoFactorCode.yaml
       security:
         - authCookie: []
       responses:
@@ -339,6 +339,66 @@ paths:
           $ref: ../responses/authentication/LogoutSuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /moderationReports:
+    get:
+      operationId: getModerationReports
+      summary: Get Moderation Reports
+      description: Get submitted moderation reports
+      tags:
+        - authentication
+      parameters:
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/moderationReportingUserId
+        - $ref: ../parameters.yaml#/moderationReportStatus
+        - $ref: ../parameters.yaml#/moderationReportType
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/ModerationReportListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/InvalidAdminCredentialsError.yaml
+    post:
+      operationId: submitModerationReport
+      summary: Submit Moderation Report
+      description: Submit a moderation report
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples: {}
+            schema:
+              $ref: ../requests/SubmitModerationReportRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/ModerationReportResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/moderationReports/{moderationReportId}":
+    delete:
+      operationId: deleteModerationReport
+      summary: Delete Moderation Report
+      description: Delete a moderation report
+      tags:
+        - authentication
+      parameters:
+        - $ref: ../parameters.yaml#/moderationReportId
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../schemas/SuccessFlag.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/InvalidAdminCredentialsError.yaml
   "/users/{userId}/delete":
     parameters:
       - $ref: ../parameters.yaml#/userId

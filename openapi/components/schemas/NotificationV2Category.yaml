@@ -1,0 +1,7 @@
+title: NotificationV2Category
+type: string
+examples:
+  Group:
+    value: "social.group"
+  Event:
+    value: event

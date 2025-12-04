@@ -2,13 +2,9 @@ title: CreateCalendarEventRequest
 type: object
 properties:
   accessType:
-    type: string
-    enum:
-      - group
-      - public
+    $ref: ../schemas/CalendarEventAccess.yaml
   category:
-    type: string
-    example: performance
+    $ref: ../schemas/CalendarEventCategory.yaml
   closeInstanceAfterEndMinutes:
     type: integer
     example: 5
@@ -34,17 +30,19 @@ properties:
   languages:
     type: array
     items:
-      type: string
+      $ref: ../schemas/LanguageCode.yaml
+    minItems: 0
+    maxItems: 3
   parentId:
-    type: string
+    $ref: ../schemas/CalendarID.yaml
   platforms:
     type: array
     items:
-      type: string
+      $ref: ../schemas/CalendarEventPlatform.yaml
   roleIds:
     type: array
     items:
-      type: string
+      $ref: ../schemas/GroupRoleID.yaml
   sendCreationNotification:
     type: boolean
     description: Send notification to group members.
@@ -57,11 +55,16 @@ properties:
     type: array
     items:
       type: string
+      minLength: 1
+      maxLength: 100
+    minItems: 0
+    maxItems: 5
   title:
     type: string
     description: Event title
     example: Performance Event!
     minLength: 1
+    maxLength: 64
   usesInstanceOverflow:
     type: boolean
     example: true

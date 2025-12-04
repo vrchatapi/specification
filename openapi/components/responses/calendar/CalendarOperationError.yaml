@@ -1,0 +1,21 @@
+description: Error response due to an invalid or illegal calendar request.
+content:
+  application/json:
+    examples:
+      Event Limit Example:
+        value:
+          error:
+            message: '"You're not allowed to make more than 100 events in a single month"'
+            status_code: 403
+      Insufficient Permission Example:
+        value:
+          error:
+            message: '"Can't create calendar entries for that owner ID"'
+            status_code: 403
+      Retroactive Event Example:
+        value:
+          error:
+            message: '"Calendar Entry must start in the future"'
+            status_code: 400
+    schema:
+      $ref: ../schemas/Error.yaml

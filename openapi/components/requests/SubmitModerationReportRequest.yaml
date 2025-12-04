@@ -1,0 +1,32 @@
+title: SubmitModerationReportRequest
+type: object
+properties:
+  category:
+    type: string
+    description: "Possibly valid values are likely the keys of the object `$.reportCategories` from `GET /config`."
+    example: behavior
+  contentId:
+    type: string
+    example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+  details:
+    type: object
+    properties:
+      instanceType:
+        type: string
+      instanceAgeGated:
+        type: boolean
+      userInSameInstance:
+        type: boolean
+  reason:
+    type: string
+    description: The subjective reason for the report
+    example: iz bulli
+  type:
+    type: string
+    description: "Possibly valid values are likely the keys of the object `$.reportOptions` from `GET /config`."
+    example: user
+required:
+  - category
+  - contentId
+  - reason
+  - type

@@ -72,6 +72,20 @@ paths:
           $ref: ../responses/inventory/InventorySpawnResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /inventory/collections:
+    get:
+      operationId: getInventoryCollections
+      summary: List Inventory Collections
+      description: Returns a list of collection names.
+      tags:
+        - inventory
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/inventory/InventoryCollectionsResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /inventory/drops:
     parameters:
       - $ref: ../parameters.yaml#/active
@@ -167,7 +181,7 @@ paths:
           $ref: ../responses/inventory/DeleteInventoryItemResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  "/users/{userId}/inventory/{inventoryItemId}":
+  "/user/{userId}/inventory/{inventoryItemId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/inventoryItemId

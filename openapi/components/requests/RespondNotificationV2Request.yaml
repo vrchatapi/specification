@@ -1,0 +1,10 @@
+title: RespondNotificationV2Request
+type: object
+properties:
+  responseData:
+    type: string
+    default: ""
+  responseType:
+    $ref: ../schemas/NotificationV2ResponseType.yaml
+required:
+  - responseType

@@ -1,0 +1,13 @@
+title: NotificationV2DataGroupAnnouncement
+type: object
+properties:
+  announcementTitle:
+    type: string
+  groupId:
+    $ref: ./GroupID.yaml
+  groupName:
+    type: string
+required:
+  - announcementTitle
+  - groupId
+  - groupName

@@ -3,11 +3,9 @@ type: object
 description: ""
 properties:
   accessType:
-    type: string
-    example: group
+    $ref: ./CalendarEventAccess.yaml
   category:
-    type: string
-    example: performance
+    $ref: ./CalendarEventCategory.yaml
   closeInstanceAfterEndMinutes:
     type: integer
   createdAt:
@@ -42,19 +40,18 @@ properties:
     type: boolean
   languages:
     type: array
-    description: " "
+    description: Languages that might be spoken at this event
     items:
-      type: string
+      $ref: ./LanguageCode.yaml
   ownerId:
     $ref: ./GroupID.yaml
   platforms:
     type: array
-    description: " "
     items:
-      type: string
+      $ref: ./CalendarEventPlatform.yaml
   roleIds:
     type: array
-    description: " "
+    description: Group roles that may join this event
     nullable: true
     items:
       $ref: ./GroupRoleID.yaml
@@ -63,7 +60,7 @@ properties:
     format: date-time
   tags:
     type: array
-    description: " "
+    description: Custom tags for this event
     items:
       $ref: ./Tag.yaml
   title:

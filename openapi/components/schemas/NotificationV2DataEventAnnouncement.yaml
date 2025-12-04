@@ -1,0 +1,13 @@
+title: NotificationV2DataEventAnnouncement
+type: object
+properties:
+  ownerId:
+    $ref: ./GroupID.yaml
+  ownerName:
+    type: string
+  title:
+    type: string
+required:
+  - ownerId
+  - ownerName
+  - title

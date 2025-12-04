@@ -127,6 +127,134 @@ paths:
           $ref: ../responses/notifications/NotificationResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /notifications:
+    get:
+      operationId: getNotificationV2s
+      summary: List NotificationV2s
+      description: Retrieve all of the current user's notifications.
+      tags:
+        - notifications
+      parameters:
+        - $ref: ../parameters.yaml#/limit
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/NotificationV2ListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    delete:
+      operationId: deleteAllNotificationV2s
+      summary: Delete All NotificationV2s
+      description: Delete all of the current user's notifications.
+      tags:
+        - notifications
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../schemas/Success.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/notifications/{notificationId}":
+    get:
+      operationId: getNotificationV2
+      summary: Get NotificationV2
+      description: Get a specific notification
+      tags:
+        - notifications
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/NotificationV2Response.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/InvalidAdminCredentialsError.yaml
+        "404":
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
+    delete:
+      operationId: deleteNotificationV2
+      summary: Delete NotificationV2
+      description: Delete a specific notification
+      tags:
+        - notifications
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../schemas/Success.yaml
+        "400":
+          $ref: ../responses/notifications/NotificationOperationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
+  "/notifications/{notificationId}/reply":
+    post:
+      operationId: replyNotificationV2
+      summary: Reply NotificationV2
+      description: Reply to a specific notification
+      tags:
+        - notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ReplyNotificationV2Request.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/NotificationV2Response.yaml
+        "400":
+          $ref: ../responses/notifications/NotificationOperationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
+  "/notifications/{notificationId}/respond":
+    post:
+      operationId: respondNotificationV2
+      summary: Respond NotificationV2
+      description: Respond to a specific notification
+      tags:
+        - notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/RespondNotificationV2Request.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/NotificationV2Response.yaml
+        "400":
+          $ref: ../responses/notifications/NotificationOperationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
+  "/notifications/{notificationId}/see":
+    post:
+      operationId: acknowledgeNotificationV2
+      summary: Acknowledge NotificationV2
+      description: Acknowledge a specific notification
+      tags:
+        - notifications
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/NotificationV2Response.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml

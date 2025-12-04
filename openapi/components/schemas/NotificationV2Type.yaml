@@ -1,0 +1,24 @@
+title: NotificationV2Type
+type: string
+enum:
+  - avatarreview.success
+  - avatarreview.failure
+  - badge.earned
+  - boop
+  - economy.alert
+  - economy.received.gift
+  - event.announcement
+  - group.announcement
+  - group.informative
+  - group.invite
+  - group.joinRequest
+  - group.post
+  - invite.instance.contentGated
+  - moderation.contentrestriction
+  - moderation.notice
+  - moderation.warning.group
+  - moderation.report.closed
+  - promo.redeem
+  - text.adventure
+  - vrcplus.gift
+default: group.announcement

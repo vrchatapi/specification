@@ -1,0 +1,19 @@
+title: CalendarEventCategory
+type: string
+description: The activity intended to take place at an event
+enum:
+  - music
+  - gaming
+  - hangout
+  - exploration
+  - avatars
+  - film_media
+  - dance
+  - roleplaying
+  - performance
+  - wellness
+  - arts
+  - education
+  - other
+default: other
+example: performance
