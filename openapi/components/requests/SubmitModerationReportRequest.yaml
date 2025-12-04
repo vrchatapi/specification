@@ -11,10 +11,10 @@ properties:
   details:
     type: object
     properties:
-      instanceType:
-        type: string
       instanceAgeGated:
         type: boolean
+      instanceType:
+        type: string
       userInSameInstance:
         type: boolean
   reason:
@@ -23,7 +23,7 @@ properties:
     example: iz bulli
   type:
     type: string
-    description: "Possibly valid values are likely the keys of the object `$.reportOptions` from `GET /config`."
+    description: Possibly valid values are likely the keys of the object `$.reportOptions` from `GET /config`.
     example: user
 required:
   - category
