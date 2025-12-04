@@ -1,9 +1,9 @@
 name: OpenAPI Specification CI
 
 on:
-  - push
-  - pull_request
-  - workflow_dispatch
+  push:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   lint:
@@ -125,12 +125,31 @@ jobs:
           path: dist
           merge-multiple: true
 
-      - id: script
+      - id: metadata
         run: |
           version=$(jq -r '.info.version' dist/openapi.json)
-          commits_since_release=$(git log --oneline "release/$version"..HEAD | wc -l)
+          echo "version=$version" >> $GITHUB_ENV
 
-          version=$(pnpm semver $version -i)-nightly.$commits_since_release
+          version_sha=$(
+            git rev-list -n 1 "v$version" 2>/dev/null \
+            || git rev-list -n 1 "release/$version" 2>/dev/null \
+            || echo ""
+          )
+          echo "version_sha=$version_sha" >> $GITHUB_ENV
+
+          echo "prerelease=$(test -z "$version_sha" && echo false || echo true)" >> $GITHUB_OUTPUT
+
+      - id: create_release
+        if: !steps.metadata.outputs.prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create v$version dist/* --generate-notes
+
+      - id: create_prerelease
+        if: steps.metadata.outputs.prerelease
+        run: |
+          version=$(semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
+          echo "version=$version" >> $GITHUB_ENV
 
           jq --arg version "$version" '.info.version = $version' dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
           yq --arg version "$version" '.info.version = $version' dist/openapi.yaml > dist/.openapi.yaml && mv dist/.openapi.yaml dist/openapi.yaml
@@ -139,6 +158,10 @@ jobs:
             --generate-notes \
             --prerelease
 
+      - id: script
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           release=$(gh release view v$version --json id,tagName,url,isPrerelease,assets | jq --arg version "$version" -c '{
             id,
             url,
@@ -152,8 +175,6 @@ jobs:
           }')
 
           echo "release=$release" >> $GITHUB_OUTPUT
-        env:
-          GH_TOKEN: ${{ github.token }}
 
   release_dispatch:
     runs-on: ubuntu-latest
