@@ -272,11 +272,11 @@
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
 "/message/{userId}/{messageType}/{slot}":
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{slot}"
-"/moderationReports":
+/moderationReports:
   $ref: "./paths/authentication.yaml#/paths/~1moderationReports"
 "/moderationReports/{moderationReportId}":
   $ref: "./paths/authentication.yaml#/paths/~1moderationReports~1{moderationReportId}"
-"/notifications":
+/notifications:
   $ref: "./paths/notifications.yaml#/paths/~1notifications"
 "/notifications/{notificationId}":
   $ref: "./paths/notifications.yaml#/paths/~1notifications~1{notificationId}"

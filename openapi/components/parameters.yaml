@@ -525,13 +525,6 @@ minUnityVersion:
   in: query
   schema:
     type: string
-moderationReportingUserId:
-  name: reportingUserId
-  description: Filter for moderation reports.
-  required: false
-  in: query
-  schema:
-    $ref: ./schemas/UserID.yaml
 moderationReportStatus:
   name: status
   description: Filter for moderation reports.
@@ -547,6 +540,13 @@ moderationReportType:
   in: query
   schema:
     type: string
+moderationReportingUserId:
+  name: reportingUserId
+  description: Filter for moderation reports.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 monthDate:
   name: date
   description: The month to search in.

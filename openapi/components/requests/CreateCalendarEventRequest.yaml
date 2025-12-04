@@ -31,8 +31,8 @@ properties:
     type: array
     items:
       $ref: ../schemas/LanguageCode.yaml
-    minItems: 0
     maxItems: 3
+    minItems: 0
   parentId:
     $ref: ../schemas/CalendarID.yaml
   platforms:
@@ -55,16 +55,16 @@ properties:
     type: array
     items:
       type: string
-      minLength: 1
       maxLength: 100
-    minItems: 0
+      minLength: 1
     maxItems: 5
+    minItems: 0
   title:
     type: string
     description: Event title
     example: Performance Event!
-    minLength: 1
     maxLength: 64
+    minLength: 1
   usesInstanceOverflow:
     type: boolean
     example: true

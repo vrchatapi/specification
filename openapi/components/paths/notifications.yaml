@@ -128,6 +128,19 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /notifications:
+    delete:
+      operationId: deleteAllNotificationV2s
+      summary: Delete All NotificationV2s
+      description: Delete all of the current user's notifications.
+      tags:
+        - notifications
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../schemas/Success.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
     get:
       operationId: getNotificationV2s
       summary: List NotificationV2s
@@ -143,37 +156,7 @@ paths:
           $ref: ../responses/notifications/NotificationV2ListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-    delete:
-      operationId: deleteAllNotificationV2s
-      summary: Delete All NotificationV2s
-      description: Delete all of the current user's notifications.
-      tags:
-        - notifications
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../schemas/Success.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
   "/notifications/{notificationId}":
-    get:
-      operationId: getNotificationV2
-      summary: Get NotificationV2
-      description: Get a specific notification
-      tags:
-        - notifications
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/notifications/NotificationV2Response.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-        "403":
-          $ref: ../responses/InvalidAdminCredentialsError.yaml
-        "404":
-          $ref: ../responses/notifications/NotificationNotFoundError.yaml
     delete:
       operationId: deleteNotificationV2
       summary: Delete NotificationV2
@@ -189,6 +172,23 @@ paths:
           $ref: ../responses/notifications/NotificationOperationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
+    get:
+      operationId: getNotificationV2
+      summary: Get NotificationV2
+      description: Get a specific notification
+      tags:
+        - notifications
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/notifications/NotificationV2Response.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/InvalidAdminCredentialsError.yaml
         "404":
           $ref: ../responses/notifications/NotificationNotFoundError.yaml
   "/notifications/{notificationId}/reply":

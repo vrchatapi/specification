@@ -3,7 +3,7 @@ type: object
 properties:
   category:
     type: string
-    description: "Possibly valid values are likely the keys of the object `$.reportCategories` from `GET /config`."
+    description: Possibly valid values are likely the keys of the object `$.reportCategories` from `GET /config`.
     example: behavior
   contentId:
     type: string
