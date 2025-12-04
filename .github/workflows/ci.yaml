@@ -35,18 +35,25 @@ jobs:
       - if: github.event_name == 'push'
         run: |
           changes=$(git diff --name-only --diff-filter=d "${{ github.event.commits[0].id }}~1" "${{ github.event.commits[0].id }}")
-          echo "changes=$changes" >> $GITHUB_ENV
+          {
+            echo 'changes<<eof_${{ github.run_id }}'
+            echo "$changes"
+            echo 'eof_${{ github.run_id }}'
+          } >> $GITHUB_ENV
 
       - if: github.event_name == 'pull_request'
         run: |
           changes=$(git diff --name-only --diff-filter=d "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}")
-          echo "changes=$changes" >> $GITHUB_ENV
+          {
+            echo 'changes<<eof_${{ github.run_id }}'
+            echo "$changes"
+            echo 'eof_${{ github.run_id }}'
+          } >> $GITHUB_ENV
 
       - name: lint changed files
         if: env.changes != ''
         run: |
-          pattern=$(echo "$changes" | tr '\n' '|' | sed 's/|$//')
-
+          pattern=$(echo "${{ env.changes }}" | tr '\n' '|' | sed 's/|$//')
           pnpm run lint-ci 2>&1 | grep -E "$pattern" || true
           exit ${PIPESTATUS[0]:-1}
 
@@ -139,27 +146,27 @@ jobs:
 
       - name: create release
         if: env.prerelease == 'false'
-        run: gh release create v$version dist/* --generate-notes
+        run: gh release create v${{ env.version }} dist/* --generate-notes
 
       - name: create release (nightly)
         if: env.prerelease == 'true'
         run: |
-          version=$(pnpm semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
+          version=$(pnpm semver ${{ env.version }} -i)-nightly.$(git rev-list --count "${{ env.version_sha }}"..HEAD)
           echo "version=$version" >> $GITHUB_ENV
 
-          jq --arg version "$version" '.info.version = $version' dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
-          yq eval ".info.version = \"$version\"" -i dist/openapi.yaml
+          jq '.info.version = ${{ env.version }}' dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
+          yq eval ".info.version = \"${{ env.version }}\"" -i dist/openapi.yaml
 
-          gh release create v$version dist/* \
+          gh release create v${{ env.version }} dist/* \
             --generate-notes \
             --prerelease
 
       - id: data
         run: |
-          release=$(gh release view v$version --json id,tagName,url,isPrerelease,assets | jq --arg version "$version" -c '{
+          release=$(gh release view v${{ env.version }} --json id,tagName,url,isPrerelease,assets | jq -c '{
             id,
             url,
-            version: $version,
+            version: \"${{ env.version }}\"
             prerelease: .isPrerelease,
             artifacts: (
               .assets
