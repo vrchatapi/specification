@@ -191,3 +191,4 @@ jobs:
         env:
           repository: ${{ matrix.repository }}
           release: ${{ needs.release.outputs.release }}
+          GH_TOKEN: ${{ secrets.RELEASE_DISPATCH_TOKEN }}
