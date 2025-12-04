@@ -150,7 +150,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          version=$(semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
+          version=$(pnpm semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
           echo "version=$version" >> $GITHUB_ENV
 
           jq --arg version "$version" '.info.version = $version' dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
