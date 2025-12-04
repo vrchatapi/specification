@@ -1,4 +1,4 @@
-title: TwoFactorCode
+title: TwoFactorEmailCode
 type: object
 properties:
   code:

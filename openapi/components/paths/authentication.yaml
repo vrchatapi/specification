@@ -105,7 +105,7 @@ paths:
           application/json:
             examples: { }
             schema:
-              $ref: ../requests/TwoFactorCode.yaml
+              $ref: ../requests/TwoFactorEmailCode.yaml
       security:
         - authCookie: []
       responses:
@@ -126,7 +126,7 @@ paths:
           application/json:
             examples: {}
             schema:
-              $ref: ../requests/TwoFactorCode.yaml
+              $ref: ../requests/TwoFactorAuthCode.yaml
       security:
         - authCookie: []
       responses:
@@ -177,7 +177,7 @@ paths:
           application/json:
             examples: {}
             schema:
-              $ref: ../requests/TwoFactorCode.yaml
+              $ref: ../requests/TwoFactorAuthCode.yaml
       security:
         - authCookie: []
       responses:
@@ -199,7 +199,7 @@ paths:
           application/json:
             examples: {}
             schema:
-              $ref: ../requests/TwoFactorCode.yaml
+              $ref: ../requests/TwoFactorAuthCode.yaml
       security:
         - authCookie: []
       responses:
