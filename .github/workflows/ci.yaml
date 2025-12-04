@@ -95,7 +95,7 @@ jobs:
     needs: bundle
     if: github.ref == 'refs/heads/main'
     outputs:
-      release: ${{ steps.script.outputs.release }}
+      release: ${{ steps.data.outputs.release }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -140,13 +140,15 @@ jobs:
           echo "prerelease=$(test -z "$version_sha" && echo false || echo true)" >> $GITHUB_OUTPUT
 
       - id: create_release
-        if: !steps.metadata.outputs.prerelease
+        if: steps.metadata.outputs.prerelease == 'false'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create v$version dist/* --generate-notes
 
       - id: create_prerelease
-        if: steps.metadata.outputs.prerelease
+        if: steps.metadata.outputs.prerelease == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           version=$(semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
           echo "version=$version" >> $GITHUB_ENV
@@ -158,7 +160,7 @@ jobs:
             --generate-notes \
             --prerelease
 
-      - id: script
+      - id: data
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
