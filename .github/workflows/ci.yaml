@@ -132,14 +132,17 @@ jobs:
 
           version=$(pnpm semver $version -i)-nightly.$commits_since_release
 
+          jq --arg version "$version" '.info.version = $version' dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
+          yq --arg version "$version" '.info.version = $version' dist/openapi.yaml > dist/.openapi.yaml && mv dist/.openapi.yaml dist/openapi.yaml
+
           gh release create v$version dist/* \
             --generate-notes \
             --prerelease
 
-          release=$(gh release view v$version --json id,tagName,url,isPrerelease,assets | jq -c '{
+          release=$(gh release view v$version --json id,tagName,url,isPrerelease,assets | jq --arg version "$version" -c '{
             id,
             url,
-            version: .tagName,
+            version: $version,
             prerelease: .isPrerelease,
             artifacts: (
               .assets
