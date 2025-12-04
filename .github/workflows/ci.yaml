@@ -170,7 +170,7 @@ jobs:
           jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
           | gh api repos/{owner}/$repository/dispatches -X POST -i --input -
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           repository: ${{ matrix.repository }}
           release: ${{ needs.release.outputs.release }}
 
