@@ -154,8 +154,8 @@ jobs:
           echo "version=$version" >> $GITHUB_ENV
 
           jq --arg version "$version" '.info.version = $version' dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
-          yq --arg version "$version" '.info.version = $version' dist/openapi.yaml > dist/.openapi.yaml && mv dist/.openapi.yaml dist/openapi.yaml
-
+          yq eval ".info.version = \"$version\"" -i dist/openapi.yaml
+          
           gh release create v$version dist/* \
             --generate-notes \
             --prerelease
