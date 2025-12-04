@@ -1,0 +1,11 @@
+description: Error response when trying to consume an InventoryItem lacking the consumable flag.
+content:
+  application/json:
+    examples:
+      InventoryItem not consumable:
+        value:
+          error:
+            message: InventoryItem not consumable
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

@@ -1,0 +1,14 @@
+title: Mutuals
+type: object
+properties:
+  friends:
+    type: integer
+    default: 0
+    minimum: 0
+  groups:
+    type: integer
+    default: 0
+    minimum: 0
+required:
+  - friends
+  - groups

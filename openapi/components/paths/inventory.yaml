@@ -181,6 +181,62 @@ paths:
           $ref: ../responses/inventory/DeleteInventoryItemResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/inventory/{inventoryItemId}/consume":
+    parameters:
+      - $ref: ../parameters.yaml#/inventoryItemId
+    put:
+      operationId: consumeOwnInventoryItem
+      summary: Consume Own Inventory Item
+      description: Returns the modified InventoryItem object as held by the currently logged in user.
+      tags:
+        - inventory
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/inventory/ConsumeInventoryItemResponse.yaml
+        "400":
+          $ref: ../responses/inventory/InventoryItemNotConsumable.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/inventory/{inventoryItemId}/equip":
+    delete:
+      operationId: unequipOwnInventorySlot
+      summary: Unequip Own Inventory Slot
+      description: Unequips the InventoryItem in the given slot of the inventory of the currently logged in user.
+      tags:
+        - inventory
+      parameters:
+        - $ref: ../parameters.yaml#/inventoryItemSlotAsId
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/inventory/UnequipInventorySlotResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    put:
+      operationId: equipOwnInventoryItem
+      summary: Equip Own Inventory Item
+      description: Returns the modified InventoryItem object as held by the currently logged in user.
+      tags:
+        - inventory
+      parameters:
+        - $ref: ../parameters.yaml#/inventoryItemId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/EquipInventoryItemRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/inventory/InventoryItemResponse.yaml
+        "400":
+          $ref: ../responses/inventory/InventoryItemNotEquippable.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/inventory/{inventoryItemId}":
     parameters:
       - $ref: ../parameters.yaml#/userId

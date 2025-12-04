@@ -1,6 +1,6 @@
 title: CalendarEvent
 type: object
-description: ""
+description: "An event scheduled on a group's calendar"
 properties:
   accessType:
     $ref: ./CalendarEventAccess.yaml
