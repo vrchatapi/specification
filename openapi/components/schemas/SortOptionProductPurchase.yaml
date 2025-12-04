@@ -1,0 +1,6 @@
+title: SortOptionProductPurchase
+type: string
+enum:
+  - purchaseDate
+default: purchaseDate
+example: purchaseDate

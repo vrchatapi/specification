@@ -1,0 +1,11 @@
+description: Error response when trying to equip an InventoryItem lacking the equippable flag.
+content:
+  application/json:
+    examples:
+      InventoryItem not equippable:
+        value:
+          error:
+            message: InventoryItem not equippable
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

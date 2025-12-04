@@ -1,0 +1,123 @@
+title: ProductPurchase
+type: object
+properties:
+  buyerDisplayName:
+    type: string
+  buyerId:
+    $ref: ./UserID.yaml
+  firstParty:
+    type: boolean
+  isBuyer:
+    type: boolean
+  isGift:
+    type: boolean
+  isReceiver:
+    type: boolean
+  isSeller:
+    type: boolean
+  listingCurrentlyAvailable:
+    type: boolean
+  listingDisplayName:
+    type: string
+  listingId:
+    $ref: ./ProductID.yaml
+  listingImageId:
+    $ref: ./FileID.yaml
+    nullable: true
+  listingSubtitle:
+    type: string
+  listingType:
+    $ref: ./ProductListingType.yaml
+  products:
+    type: array
+    items:
+      type: object
+  purchaseActive:
+    type: boolean
+  purchaseContext:
+    type: object
+    properties:
+      locationType:
+        type: string
+        example: undefined
+  purchaseCurrentStatus:
+    type: string
+  purchaseDate:
+    type: string
+    format: date-time
+  purchaseDuration:
+    type: integer
+  purchaseDurationType:
+    type: string
+  purchaseEndDate:
+    type: string
+    format: date-time
+  purchaseId:
+    $ref: ./ProductPurchaseID.yaml
+  purchaseLatest:
+    type: boolean
+  purchasePrice:
+    type: integer
+  purchaseQuantity:
+    type: integer
+  purchaseStartDate:
+    type: string
+    format: date-time
+  purchaseToken:
+    type: object
+    nullable: true
+  purchaseType:
+    type: string
+  purchaseUnitPrice:
+    type: integer
+  receiverDisplayName:
+    type: string
+  receiverId:
+    $ref: ./UserID.yaml
+  recurrable:
+    type: boolean
+  refundable:
+    type: boolean
+  sellerDisplayName:
+    type: string
+  sellerId:
+    $ref: ./UserID.yaml
+  stackable:
+    type: boolean
+  willRecur:
+    type: boolean
+required:
+  - buyerDisplayName
+  - buyerId
+  - isBuyer
+  - isGift
+  - isReceiver
+  - isSeller
+  - listingCurrentlyAvailable
+  - listingDisplayName
+  - listingId
+  - listingImageId
+  - listingSubtitle
+  - listingType
+  - products
+  - purchaseActive
+  - purchaseContext
+  - purchaseCurrentStatus
+  - purchaseDate
+  - purchaseEndDate
+  - purchaseId
+  - purchaseLatest
+  - purchasePrice
+  - purchaseQuantity
+  - purchaseStartDate
+  - purchaseToken
+  - purchaseType
+  - purchaseUnitPrice
+  - receiverDisplayName
+  - receiverId
+  - recurrable
+  - refundable
+  - sellerDisplayName
+  - sellerId
+  - stackable
+  - willRecur

@@ -58,6 +58,91 @@ branch:
   schema:
     type: string
     default: main
+buyerId:
+  name: buyerId
+  description: Must be a valid user ID.
+  required: true
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
+calendarDiscoveryCategories:
+  name: categories
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    type: string
+    description: Comma-separated list of calendar event categories
+    example: "avatars,exploration,gaming,roleplaying,music,performance"
+calendarDiscoveryFeatured:
+  name: featuredResults
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/CalendarEventDiscoveryInclusion.yaml
+calendarDiscoveryMinimumInterestCount:
+  name: minimumInterestCount
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    type: integer
+    example: 5
+calendarDiscoveryMinimumRemainingMinutes:
+  name: minimumRemainingMinutes
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    type: integer
+    example: 10
+calendarDiscoveryNextCursor:
+  name: nextCursor
+  description: Cursor returned from previous calendar discovery queries (see nextCursor property of the schema CalendarEventDiscovery).
+  required: false
+  in: query
+  schema:
+    type: string
+    format: string
+calendarDiscoveryNonFeatured:
+  name: nonFeaturedResults
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/CalendarEventDiscoveryInclusion.yaml
+calendarDiscoveryPersonalized:
+  name: personalizedResults
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/CalendarEventDiscoveryInclusion.yaml
+calendarDiscoveryScope:
+  name: scope
+  description: Scope for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/CalendarEventDiscoveryScope.yaml
+calendarDiscoveryTags:
+  name: tags
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    type: string
+    description: Comma-separated list of calendar event tags
+    example: vrc_event_group_fair
+calendarDiscoveryUpcomingOffsetMinutes:
+  name: upcomingOffsetMinutes
+  description: Filter for calendar event discovery.
+  required: false
+  in: query
+  schema:
+    type: integer
+    example: 10080
 calendarId:
   name: calendarId
   description: Must be a valid calendar ID.
@@ -331,6 +416,13 @@ inventoryItemNotTypes:
   in: query
   schema:
     $ref: ./schemas/InventoryItemType.yaml
+inventoryItemSlotAsId:
+  name: inventoryItemId
+  description: Selector for inventory slot management.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/InventoryEquipSlot.yaml
 inventoryItemTags:
   name: tags
   description: Filter tags for inventory retrieval (comma-separated).
@@ -522,6 +614,13 @@ order:
   in: query
   schema:
     $ref: ./schemas/OrderOption.yaml
+orderShort:
+  name: order
+  description: Result ordering
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/OrderOptionShort.yaml
 permissionId:
   name: permissionId
   description: Must be a valid permission ID.
@@ -596,6 +695,13 @@ sort:
   in: query
   schema:
     $ref: ./schemas/SortOption.yaml
+sortProductPurchase:
+  name: sort
+  description: The sort order of the results.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/SortOptionProductPurchase.yaml
 startDate:
   name: startDate
   description: The start date of the search range.
