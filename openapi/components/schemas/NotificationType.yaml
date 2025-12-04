@@ -1,6 +1,7 @@
 title: NotificationType
 type: string
 enum:
+  - boop
   - friendRequest
   - invite
   - inviteResponse

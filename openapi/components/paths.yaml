@@ -92,6 +92,8 @@
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1selectFallback"
 /calendar:
   $ref: "./paths/calendar.yaml#/paths/~1calendar"
+/calendar/discover:
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1discover"
 /calendar/featured:
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1featured"
 /calendar/following:
@@ -116,6 +118,10 @@
   $ref: "./paths/miscellaneous.yaml#/paths/~1css~1app.css"
 /economy/licenses/active:
   $ref: "./paths/economy.yaml#/paths/~1economy~1licenses~1active"
+/economy/purchase/listing:
+  $ref: "./paths/economy.yaml#/paths/~1economy~1purchase~1listing"
+/economy/purchases:
+  $ref: "./paths/economy.yaml#/paths/~1economy~1purchases"
 /economy/store:
   $ref: "./paths/economy.yaml#/paths/~1economy~1store"
 /economy/store/shelves:
@@ -230,6 +236,10 @@
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1template~1{inventoryTemplateId}"
 "/inventory/{inventoryItemId}":
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}"
+"/inventory/{inventoryItemId}/consume":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}~1consume"
+"/inventory/{inventoryItemId}/equip":
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1{inventoryItemId}~1equip"
 "/invite/myself/to/{worldId}:{instanceId}":
   $ref: "./paths/invite.yaml#/paths/~1invite~1myself~1to~1{worldId}:{instanceId}"
 "/invite/{notificationId}/response":
@@ -268,6 +278,8 @@
   $ref: "./paths/prints.yaml#/paths/~1prints~1user~1{userId}"
 "/prints/{printId}":
   $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
+"/products/{productId}":
+  $ref: "./paths/economy.yaml#/paths/~1products~1{productId}"
 "/props/{propId}":
   $ref: "./paths/props.yaml#/paths/~1props~1{propId}"
 "/requestInvite/{userId}":
@@ -316,6 +328,8 @@
   $ref: "./paths/avatars.yaml#/paths/~1users~1{userId}~1avatar"
 "/users/{userId}/badges/{badgeId}":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1badges~1{badgeId}"
+"/users/{userId}/boop":
+  $ref: "./paths/friends.yaml#/paths/~1users~1{userId}~1boop"
 "/users/{userId}/credits/eligible":
   $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1credits~1eligible"
 "/users/{userId}/delete":
@@ -332,6 +346,12 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups"
 "/users/{userId}/instances/groups/{groupId}":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups~1{groupId}"
+"/users/{userId}/mutuals":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1mutuals"
+"/users/{userId}/mutuals/friends":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1mutuals~1friends"
+"/users/{userId}/mutuals/groups":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1mutuals~1groups"
 "/users/{userId}/removeTags":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1removeTags"
 "/users/{userId}/subscription/eligible":

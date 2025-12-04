@@ -1,0 +1,8 @@
+title: CalendarEventDiscoveryInclusion
+type: string
+enum:
+  - exclude
+  - include
+  - skip
+default: include
+example: include

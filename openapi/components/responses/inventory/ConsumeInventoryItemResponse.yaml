@@ -1,0 +1,5 @@
+description: Returns an InventoryConsumptionResults object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/InventoryConsumptionResults.yaml

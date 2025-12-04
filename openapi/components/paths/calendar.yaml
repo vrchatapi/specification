@@ -22,6 +22,36 @@ paths:
           $ref: ../responses/calendar/CalendarEventListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /calendar/discover:
+    get:
+      operationId: discoverCalendarEvents
+      summary: Discover calendar events
+      description: |-
+        Get a list of calendar events
+        Initially, call without a `nextCursor` parameter
+        For every successive call, use the `nextCursor` property returned in the previous call & the `number` of entries desired for this call
+        The `nextCursor` internally keeps track of the `offset` of the results, the initial request parameters, and accounts for discrepancies that might arise from time elapsed between calls
+      tags:
+        - calendar
+      parameters:
+        - $ref: ../parameters.yaml#/calendarDiscoveryScope
+        - $ref: ../parameters.yaml#/calendarDiscoveryCategories
+        - $ref: ../parameters.yaml#/calendarDiscoveryTags
+        - $ref: ../parameters.yaml#/calendarDiscoveryFeatured
+        - $ref: ../parameters.yaml#/calendarDiscoveryNonFeatured
+        - $ref: ../parameters.yaml#/calendarDiscoveryPersonalized
+        - $ref: ../parameters.yaml#/calendarDiscoveryMinimumInterestCount
+        - $ref: ../parameters.yaml#/calendarDiscoveryMinimumRemainingMinutes
+        - $ref: ../parameters.yaml#/calendarDiscoveryUpcomingOffsetMinutes
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/calendarDiscoveryNextCursor
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/calendar/CalendarEventDiscoveryResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /calendar/featured:
     get:
       operationId: getFeaturedCalendarEvents

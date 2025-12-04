@@ -1,0 +1,5 @@
+description: Returns a CalendarEventDiscovery objects.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/CalendarEventDiscovery.yaml

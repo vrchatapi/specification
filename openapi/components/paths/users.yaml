@@ -320,6 +320,58 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/users/UserMustBeOwnError.yaml
+  "/users/{userId}/mutuals":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getMutuals
+      summary: Get User Mutuals
+      description: Gets the counts of mutuals between the logged in user and the specified user
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/MutualsResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/mutuals/friends":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+    get:
+      operationId: getMutualFriends
+      summary: Get User Mutual Friends
+      description: Gets a list of mutual friends between the logged in user and the specified user
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/MutualFriendListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/mutuals/groups":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+    get:
+      operationId: getMutualGroups
+      summary: Get User Mutual Groups
+      description: Gets a list of mutual groups between the logged in user and the specified user
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/LimitedUserGroupListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/removeTags":
     parameters:
       - $ref: ../parameters.yaml#/userId

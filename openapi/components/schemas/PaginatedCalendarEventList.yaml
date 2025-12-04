@@ -1,5 +1,6 @@
 title: PaginatedCalendarEventList
 type: object
+description: An offset-based list of CalendarEvents
 properties:
   hasNext:
     type: boolean
