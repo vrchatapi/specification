@@ -93,6 +93,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     needs: bundle
+    if: github.ref == 'refs/heads/main'
     outputs:
       release: ${{ steps.script.outputs.release }}
     steps:
@@ -170,7 +171,7 @@ jobs:
           jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
           | gh api repos/{owner}/$repository/dispatches -X POST -i --input -
         env:
-          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.RELEASE_DISPATCH_TOKEN }}
           repository: ${{ matrix.repository }}
           release: ${{ needs.release.outputs.release }}
 
