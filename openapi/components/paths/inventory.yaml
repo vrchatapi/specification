@@ -181,7 +181,7 @@ paths:
           $ref: ../responses/inventory/DeleteInventoryItemResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  "/users/{userId}/inventory/{inventoryItemId}":
+  "/user/{userId}/inventory/{inventoryItemId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/inventoryItemId
