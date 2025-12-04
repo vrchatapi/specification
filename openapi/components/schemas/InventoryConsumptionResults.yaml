@@ -1,0 +1,17 @@
+title: InventoryConsumptionResults
+type: object
+properties:
+  errors:
+    type: array
+    items:
+      type: object
+  inventoryItems:
+    type: array
+    items:
+      $ref: ./InventoryItem.yaml
+  inventoryItemsCreated:
+    type: integer
+required:
+  - errors
+  - inventoryItems
+  - inventoryItemsCreated

@@ -96,6 +96,46 @@ paths:
           $ref: ../responses/economy/LicenseListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /economy/purchase/listing:
+    post:
+      operationId: purchaseProductListing
+      summary: Purchase Product Listing
+      description: Purchases a product listing
+      tags:
+        - economy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/PurchaseProductListingRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductPurchaseResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /economy/purchases:
+    parameters:
+      - $ref: ../parameters.yaml#/buyerId
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+      - $ref: ../parameters.yaml#/mostRecentFlag
+      - $ref: ../parameters.yaml#/sortProductPurchase
+      - $ref: ../parameters.yaml#/orderShort
+    get:
+      operationId: getProductPurchases
+      summary: Get Product Purchases
+      description: Gets product purchases
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductPurchaseListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /economy/store:
     parameters:
       - $ref: ../parameters.yaml#/storeId
@@ -155,6 +195,23 @@ paths:
     get:
       operationId: getProductListing
       summary: Get Product Listing
+      description: Gets a product listing
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductListingResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/products/{productId}":
+    parameters:
+      - $ref: ../parameters.yaml#/productId
+    get:
+      operationId: getProductListingAlternate
+      deprecated: true
+      summary: Get Product Listing (alternate)
       description: Gets a product listing
       tags:
         - economy

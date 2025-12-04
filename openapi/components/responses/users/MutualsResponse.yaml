@@ -1,0 +1,5 @@
+description: Returns a single Mutuals object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Mutuals.yaml
