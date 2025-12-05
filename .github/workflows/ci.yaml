@@ -154,8 +154,8 @@ jobs:
           version=$(pnpm semver ${{ env.version }} -i)-nightly.$(git rev-list --count "${{ env.version_sha }}"..HEAD)
           echo "version=$version" >> $GITHUB_ENV
 
-          jq ".info.version = \"${{ env.version }}\"" dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
-          yq eval ".info.version = \"${{ env.version }}\"" -i dist/openapi.yaml
+          jq --arg v "$version" '.info.version = $v' dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
+          yq eval ".info.version = \"$version\"" -i dist/openapi.yaml
 
           gh release create v${{ env.version }} dist/* \
             --generate-notes \
