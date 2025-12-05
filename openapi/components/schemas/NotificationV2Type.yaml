@@ -1,8 +1,8 @@
 title: NotificationV2Type
 type: string
 enum:
-  - avatarreview.success
   - avatarreview.failure
+  - avatarreview.success
   - badge.earned
   - boop
   - economy.alert
@@ -16,8 +16,8 @@ enum:
   - invite.instance.contentGated
   - moderation.contentrestriction
   - moderation.notice
-  - moderation.warning.group
   - moderation.report.closed
+  - moderation.warning.group
   - promo.redeem
   - text.adventure
   - vrcplus.gift
