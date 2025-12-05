@@ -526,12 +526,19 @@ minUnityVersion:
   schema:
     type: string
 moderationReportId:
-  name: status
+  name: moderationReportId
   description: The moderation report id.
   required: true
   in: path
   schema:
     $ref: ./schemas/ModerationReportID.yaml
+moderationReportStatus:
+  name: status
+  description: "Filter for moderation reports. One of: `closed`..."
+  required: false
+  in: query
+  schema:
+    type: string
 moderationReportType:
   name: type
   description: "Filter for moderation reports. One of: `avatar`, `group`, `user`, `world`..."
