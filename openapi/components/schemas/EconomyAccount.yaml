@@ -1,5 +1,6 @@
 title: EconomyAccount
 type: object
+nullable: true
 properties:
   accountActivatedOn:
     type: string

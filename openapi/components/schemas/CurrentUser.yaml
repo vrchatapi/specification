@@ -221,6 +221,8 @@ properties:
     type: string
     description: -|
       **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
+  usesGeneratedPassword:
+    type: boolean
   viveId:
     type: string
 required:
@@ -271,3 +273,4 @@ required:
   - twoFactorAuthEnabled
   - unsubscribe
   - userIcon
+  - usesGeneratedPassword

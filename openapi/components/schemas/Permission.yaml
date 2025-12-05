@@ -4,6 +4,9 @@ description: ""
 properties:
   data:
     type: object
+    properties:
+      max:
+        type: integer
   description:
     type: string
   displayName:

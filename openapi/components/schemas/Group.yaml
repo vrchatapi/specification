@@ -9,6 +9,8 @@ properties:
     example: 500
   ageVerificationSlotsAvailable:
     type: boolean
+  allowGroupJoinPrompt:
+    type: boolean
   badges:
     type: array
     items:

@@ -11,8 +11,12 @@ properties:
     type: string
     example: "2025-06-12T20:21:15.056Z"
     format: date-time
+  defaultAttributes:
+    type: object
   description:
     type: string
+  equipSlots:
+    type: array
   flags:
     type: array
     items:
@@ -42,11 +46,15 @@ properties:
     type: string
     example: "2025-06-10T20:37:31.837Z"
     format: date-time
+  validateUserAttributes:
+    type: boolean
 required:
   - authorId
   - collections
   - created_at
+  - defaultAttributes
   - description
+  - equipSlots
   - flags
   - id
   - imageUrl
@@ -56,3 +64,4 @@ required:
   - status
   - tags
   - updated_at
+  - validateUserAttributes

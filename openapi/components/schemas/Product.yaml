@@ -47,8 +47,6 @@ properties:
     type: boolean
     default: false
 required:
-  - archived
-  - created
   - description
   - displayName
   - id
@@ -58,4 +56,3 @@ required:
   - sellerDisplayName
   - sellerId
   - tags
-  - updated
