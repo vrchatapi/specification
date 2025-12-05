@@ -1,9 +1,9 @@
-title: PlayerModeration
+title: ModerationReport
 type: object
 properties:
   category:
     type: string
-    description: "Possibly valid values are likely the keys of the object `$.reportCategories` from `GET /config`."
+    description: Valid values are the keys of the object `$.reportOptions[type]` from `GET /config`. Descriptions of these are found at `$.reportCategories[type]`.
     example: behavior
   contentId:
     type: string
@@ -23,12 +23,12 @@ properties:
     $ref: ./ModerationReportID.yaml
   reason:
     type: string
-    description: "Possibly valid values are likely the keys of the object `$.reportReasons` from `GET /config`."
+    description: Valid values are the strings in the array `$.reportOptions[type][category]` from `GET /config`. Descriptions of these are found at `$.reportReasons[type]`.
   supportRequired:
     type: boolean
   type:
     type: string
-    description: "Possibly valid values are likely the keys of the object `$.reportOptions` from `GET /config`."
+    description: Valid values are the keys of the object `$.reportOptions` from `GET /config`.
     example: user
 required:
   - category

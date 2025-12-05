@@ -1,0 +1,9 @@
+title: ContentFilter
+type: string
+description: Flags for content filtering
+enum:
+  - content_adult
+  - content_gore
+  - content_horror
+  - content_sex
+  - content_violence

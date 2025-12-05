@@ -17,7 +17,7 @@ properties:
     type: array
     description: These tags begin with `content_` and control content gating
     items:
-      $ref: ../schemas/Tag.yaml
+      $ref: ../schemas/ContentFilter.yaml
   currentPassword:
     type: string
   displayName:
@@ -25,6 +25,9 @@ properties:
     description: MUST specify currentPassword as well to change display name
   email:
     type: string
+  hasSharedConnectionsOptOut:
+    type: boolean
+    description: Opt out of the Mutuals feature
   isBoopingEnabled:
     type: boolean
   password:

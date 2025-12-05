@@ -1,4 +1,4 @@
-description: Returns a list of ModerationReport objects, wrapped in new pagination format.
+description: Returns a single ModerationReport object.
 content:
   application/json:
     schema:
