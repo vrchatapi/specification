@@ -157,6 +157,8 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/notifications/{notificationId}":
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
     delete:
       operationId: deleteNotificationV2
       summary: Delete NotificationV2
@@ -192,6 +194,8 @@ paths:
         "404":
           $ref: ../responses/notifications/NotificationNotFoundError.yaml
   "/notifications/{notificationId}/reply":
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
     post:
       operationId: replyNotificationV2
       summary: Reply NotificationV2
@@ -216,6 +220,8 @@ paths:
         "404":
           $ref: ../responses/notifications/NotificationNotFoundError.yaml
   "/notifications/{notificationId}/respond":
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
     post:
       operationId: respondNotificationV2
       summary: Respond NotificationV2
@@ -240,6 +246,8 @@ paths:
         "404":
           $ref: ../responses/notifications/NotificationNotFoundError.yaml
   "/notifications/{notificationId}/see":
+    parameters:
+      - $ref: ../parameters.yaml#/notificationId
     post:
       operationId: acknowledgeNotificationV2
       summary: Acknowledge NotificationV2

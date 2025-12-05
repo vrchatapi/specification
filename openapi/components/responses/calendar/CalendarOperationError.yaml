@@ -18,4 +18,4 @@ content:
             message: Calendar Entry must start in the future
             status_code: 400
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Error.yaml
