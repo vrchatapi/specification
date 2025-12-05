@@ -157,7 +157,7 @@ jobs:
           jq --arg v "$version" '.info.version = $v' dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
           yq eval ".info.version = \"$version\"" -i dist/openapi.yaml
 
-          gh release create v${{ env.version }} dist/* \
+          gh release create v$version dist/* \
             --generate-notes \
             --prerelease
 
