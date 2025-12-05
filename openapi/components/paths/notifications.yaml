@@ -159,23 +159,6 @@ paths:
   "/notifications/{notificationId}":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
-    delete:
-      operationId: deleteNotificationV2
-      summary: Delete NotificationV2
-      description: Delete a specific notification
-      tags:
-        - notifications
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../schemas/Success.yaml
-        "400":
-          $ref: ../responses/notifications/NotificationOperationError.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-        "404":
-          $ref: ../responses/notifications/NotificationNotFoundError.yaml
     get:
       operationId: getNotificationV2
       summary: Get NotificationV2
@@ -191,6 +174,23 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
+        "404":
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
+    delete:
+      operationId: deleteNotificationV2
+      summary: Delete NotificationV2
+      description: Delete a specific notification
+      tags:
+        - notifications
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../schemas/Success.yaml
+        "400":
+          $ref: ../responses/notifications/NotificationOperationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/notifications/NotificationNotFoundError.yaml
   "/notifications/{notificationId}/reply":
