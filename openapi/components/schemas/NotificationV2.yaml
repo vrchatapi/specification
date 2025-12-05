@@ -50,7 +50,7 @@ properties:
   relatedNotificationsId:
     type: string
     nullable: true
-    example: "cal_00000000-0000-0000-0000-000000000000"
+    example: cal_00000000-0000-0000-0000-000000000000
   requireSeen:
     type: boolean
   responses:

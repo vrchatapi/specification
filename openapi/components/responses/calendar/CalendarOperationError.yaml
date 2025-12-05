@@ -10,12 +10,12 @@ content:
       Insufficient Permission Example:
         value:
           error:
-            message: '"Can't create calendar entries for that owner ID"'
+            message: "Can't create calendar entries for that owner ID"
             status_code: 403
       Retroactive Event Example:
         value:
           error:
-            message: '"Calendar Entry must start in the future"'
+            message: Calendar Entry must start in the future
             status_code: 400
     schema:
       $ref: ../schemas/Error.yaml
