@@ -1,0 +1,9 @@
+title: NotificationV2ResponseIcon
+type: string
+examples:
+  Bell:
+    value: bell
+  Bell Slash:
+    value: bell-slash
+  Check:
+    value: check

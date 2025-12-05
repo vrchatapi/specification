@@ -1,0 +1,9 @@
+title: NotificationV2ResponseType
+type: string
+examples:
+  Boop:
+    value: boop
+  Delete:
+    value: delete
+  Unsubscribe:
+    value: unsubscribe

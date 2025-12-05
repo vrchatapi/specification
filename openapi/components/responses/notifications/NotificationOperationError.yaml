@@ -1,0 +1,11 @@
+description: Error response when trying to perform an invalid operations on a notification.
+content:
+  application/json:
+    examples:
+      400 No Reply:
+        value:
+          error:
+            message: This notification cannot be replied toǃ
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

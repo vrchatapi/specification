@@ -496,6 +496,14 @@ licenseGroupId:
   in: path
   schema:
     type: string
+limit:
+  name: limit
+  description: The maximum number of entries to get.
+  required: false
+  in: query
+  schema:
+    type: integer
+    example: 100
 maxUnityVersion:
   name: maxUnityVersion
   description: The maximum Unity version supported by the asset.
@@ -517,6 +525,34 @@ minUnityVersion:
   in: query
   schema:
     type: string
+moderationReportId:
+  name: moderationReportId
+  description: The moderation report id.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/ModerationReportID.yaml
+moderationReportStatus:
+  name: status
+  description: "Filter for moderation reports. One of: `closed`..."
+  required: false
+  in: query
+  schema:
+    type: string
+moderationReportType:
+  name: type
+  description: "Filter for moderation reports. One of: `avatar`, `group`, `user`, `world`..."
+  required: false
+  in: query
+  schema:
+    type: string
+moderationReportingUserId:
+  name: reportingUserId
+  description: Filter for moderation reports.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 monthDate:
   name: date
   description: The month to search in.

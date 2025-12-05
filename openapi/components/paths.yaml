@@ -104,6 +104,8 @@
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}"
 "/calendar/{groupId}/event":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1event"
+"/calendar/{groupId}/next":
+  $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1next"
 "/calendar/{groupId}/{calendarId}":
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}"
 "/calendar/{groupId}/{calendarId}.ics":
@@ -228,6 +230,8 @@
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1direct"
 /inventory/cloning/pedestal:
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1cloning~1pedestal"
+/inventory/collections:
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1collections"
 /inventory/drops:
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1drops"
 /inventory/spawn:
@@ -268,6 +272,20 @@
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
 "/message/{userId}/{messageType}/{slot}":
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}~1{slot}"
+/moderationReports:
+  $ref: "./paths/authentication.yaml#/paths/~1moderationReports"
+"/moderationReports/{moderationReportId}":
+  $ref: "./paths/authentication.yaml#/paths/~1moderationReports~1{moderationReportId}"
+/notifications:
+  $ref: "./paths/notifications.yaml#/paths/~1notifications"
+"/notifications/{notificationId}":
+  $ref: "./paths/notifications.yaml#/paths/~1notifications~1{notificationId}"
+"/notifications/{notificationId}/reply":
+  $ref: "./paths/notifications.yaml#/paths/~1notifications~1{notificationId}~1reply"
+"/notifications/{notificationId}/respond":
+  $ref: "./paths/notifications.yaml#/paths/~1notifications~1{notificationId}~1respond"
+"/notifications/{notificationId}/see":
+  $ref: "./paths/notifications.yaml#/paths/~1notifications~1{notificationId}~1see"
 /permissions:
   $ref: "./paths/miscellaneous.yaml#/paths/~1permissions"
 "/permissions/{permissionId}":
@@ -308,6 +326,8 @@
   $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendRequest"
 "/user/{userId}/friendStatus":
   $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendStatus"
+"/user/{userId}/inventory/{inventoryItemId}":
+  $ref: "./paths/inventory.yaml#/paths/~1user~1{userId}~1inventory~1{inventoryItemId}"
 "/user/{userId}/listings":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1listings"
 "/user/{userId}/tilia/tos":

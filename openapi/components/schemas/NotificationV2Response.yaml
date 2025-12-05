@@ -1,0 +1,20 @@
+title: NotificationV2Response
+type: object
+properties:
+  data:
+    type: string
+  icon:
+    $ref: ./NotificationV2ResponseIcon.yaml
+  text:
+    type: string
+  textKey:
+    type: string
+    nullable: true
+  type:
+    $ref: ./NotificationV2ResponseType.yaml
+required:
+  - data
+  - icon
+  - text
+  - textKey
+  - type

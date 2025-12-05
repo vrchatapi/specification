@@ -1,4 +1,4 @@
-description: Error response when trying to download ICS calendar of a non-existent calendar entry.
+description: Error response when trying to download ICS calendar of a non-existent calendar entry, get such a calendar entry, or get the next event for a group that lacks any future scheduled events.
 content:
   application/json:
     examples:
