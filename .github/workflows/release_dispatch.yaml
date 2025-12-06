@@ -31,7 +31,7 @@ jobs:
           release=$(gh release view v${{ inputs.version }} --json id,tagName,url,isPrerelease,assets | jq -c '{
             id,
             url,
-            version: \"${{ inputs.version }}\",
+            version: "${{ inputs.version }}",
             prerelease: .isPrerelease,
             artifacts: (
               .assets
