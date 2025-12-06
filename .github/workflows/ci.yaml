@@ -162,7 +162,7 @@ jobs:
           fi
 
           echo "version=$version" >> $GITHUB_ENV
-          echo "::set-output name=version::$version"
+          echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: create release
         if: env.prerelease == 'false'
@@ -181,5 +181,6 @@ jobs:
   release_dispatch:
     uses: ./.github/workflows/release_dispatch.yaml
     needs: release
+    secrets: inherit
     with:
       version: ${{ needs.release.outputs.version }}
