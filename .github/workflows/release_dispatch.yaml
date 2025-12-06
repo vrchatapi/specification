@@ -1,0 +1,46 @@
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: The version to dispatch the release for.
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      version:
+        description: The version to dispatch the release for.
+        required: true
+        type: string
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repository:
+          - vrchatapi-javascript
+          - vrchatapi-csharp
+          - vrchatapi-python
+          - vrchatapi-java
+          - vrchatapi-rust
+          - vrchatapi-dart
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          release=$(gh release view v${{ inputs.version }} --json id,tagName,url,isPrerelease,assets | jq -c '{
+            id,
+            url,
+            version: \"${{ inputs.version }}\"
+            prerelease: .isPrerelease,
+            artifacts: (
+              .assets
+              | map({ (.name): .url })
+              | add
+            )
+          }')
+
+          jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
+          | gh api repos/{owner}/${{ matrix.repository }}/dispatches -X POST -i --input -
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_DISPATCH_TOKEN }}
