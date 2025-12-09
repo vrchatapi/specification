@@ -91,7 +91,6 @@ required:
   - accessType
   - category
   - description
-  - durationInMs
   - endsAt
   - id
   - startsAt

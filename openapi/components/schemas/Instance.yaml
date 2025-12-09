@@ -46,6 +46,7 @@ properties:
     default: false
   gameServerVersion:
     type: integer
+    nullable: true
   groupAccessType:
     $ref: ./GroupAccessType.yaml
   hardClose:
