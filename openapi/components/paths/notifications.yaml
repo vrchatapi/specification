@@ -161,8 +161,9 @@ paths:
       - $ref: ../parameters.yaml#/notificationId
     get:
       operationId: getNotificationV2
+      deprecated: true
       summary: Get NotificationV2
-      description: Get a specific notification
+      description: Get a specific notification. Appears to require admin credentials by default. Expect a 403 Forbidden error response for normal users.
       tags:
         - notifications
       security:
