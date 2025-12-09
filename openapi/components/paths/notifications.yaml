@@ -138,7 +138,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../schemas/Success.yaml
+          $ref: ../responses/notifications/ClearNotificationsV2Success.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
     get:
@@ -186,7 +186,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../schemas/Success.yaml
+          $ref: ../responses/notifications/ClearNotificationV2Success.yaml
         "400":
           $ref: ../responses/notifications/NotificationOperationError.yaml
         "401":

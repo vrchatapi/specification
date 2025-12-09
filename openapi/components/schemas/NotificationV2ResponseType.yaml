@@ -1,6 +1,6 @@
 title: NotificationV2ResponseType
 type: string
-examples:
+example: >
   Boop:
     value: boop
   Delete:

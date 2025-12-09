@@ -394,7 +394,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../schemas/SuccessFlag.yaml
+          $ref: ../responses/authentication/DeleteModerationReportResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":

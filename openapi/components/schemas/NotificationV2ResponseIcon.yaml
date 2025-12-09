@@ -1,6 +1,6 @@
 title: NotificationV2ResponseIcon
 type: string
-examples:
+example: >
   Bell:
     value: bell
   Bell Slash:

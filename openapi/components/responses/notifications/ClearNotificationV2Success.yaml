@@ -1,0 +1,11 @@
+description: Successful response after clearing a notification.
+content:
+  application/json:
+    examples:
+      Unfriend Success:
+        value:
+          success:
+            message: Notification cleared.
+            status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

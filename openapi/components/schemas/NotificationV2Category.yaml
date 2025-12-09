@@ -1,6 +1,6 @@
 title: NotificationV2Category
 type: string
-examples:
+example: >
   Event:
     value: event
   Group:
