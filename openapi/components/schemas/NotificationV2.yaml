@@ -10,13 +10,24 @@ properties:
     type: string
     format: date-time
   data:
-    type: object
-    example:
-      OneOf:
-        - {}
-        - NotificationV2DataBoop
-        - NotificationV2DataEventAnnouncement
-        - NotificationV2DataGroupAnnouncement
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - $ref: ./NotificationV2DataBoop.yaml
+          - $ref: ./NotificationV2DataEventAnnouncement.yaml
+          - $ref: ./NotificationV2DataGroupAnnouncement.yaml
+          - type: object
+            properties: { }
+            additionalProperties: false
+      else:
+        type: object
+        example:
+          OneOf:
+            - {}
+            - NotificationV2DataBoop
+            - NotificationV2DataEventAnnouncement
+            - NotificationV2DataGroupAnnouncement
   expiresAt:
     type: string
     format: date-time
