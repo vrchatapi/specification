@@ -1,0 +1,30 @@
+title: UpdatePropRequest
+type: object
+properties:
+  assetUrl:
+    type: string
+  assetVersion:
+    type: integer
+  description:
+    type: string
+  imageUrl:
+    type: string
+  name:
+    type: string
+  platform:
+    $ref: ../schemas/Platform.yaml
+  propSignature:
+    type: string
+  spawnType:
+    type: integer
+    example: 0
+  tags:
+    type: array
+    items:
+      $ref: ../schemas/Tag.yaml
+  unityVersion:
+    type: string
+  worldPlacementMask:
+    type: integer
+    example: 1
+

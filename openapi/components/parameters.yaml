@@ -21,6 +21,13 @@ adminAssetBundleId:
   schema:
     type: string
     example: aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d
+assetReviewId:
+  name: assetReviewId
+  description: Must be an valid asset review ID.
+  required: true
+  in: path
+  schema:
+    type: string
 avatarId:
   name: avatarId
   description: Must be a valid avatar ID.
@@ -28,6 +35,13 @@ avatarId:
   in: path
   schema:
     $ref: ./schemas/AvatarID.yaml
+authorId:
+  name: authorId
+  description: Must be a valid user ID.
+  required: true
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 avatarModerationType:
   name: avatarModerationType
   description: The avatar moderation type associated with the avatar.

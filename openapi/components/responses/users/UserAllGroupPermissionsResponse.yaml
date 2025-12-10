@@ -1,0 +1,5 @@
+description: The group permissions the user has for every joined group.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/UserAllGroupPermissions.yaml

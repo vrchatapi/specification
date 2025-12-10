@@ -18,6 +18,59 @@ paths:
       responses:
         "200":
           $ref: ../responses/files/AdminAssetBundleResponse.yaml
+  /agreement:
+    get:
+      operationId: getContentAgreementStatus
+      summary: Get Content Agreement Status
+      description: Returns the agreement status of the currently authenticated user for the given agreementCode, contentId, and version.
+      tags:
+        - files
+      parameters:
+        - name: agreementCode
+          description: The type of agreement (currently content.copyright.owned)
+          required: true
+          in: query
+          schema:
+            $ref: ../schemas/AgreementCode.yaml
+        - name: contentId
+          description: The id of the content being uploaded, such as a WorldID, AvatarID, or PropID
+          required: true
+          in: query
+          schema:
+            type: string
+            example: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
+        - name: version
+          description: The version of the agreement (currently 1)
+          required: true
+          in: query
+          schema:
+            type: integer
+            example: 1
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/AgreementStatusResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    post:
+      operationId: submitContentAgreement
+      summary: Submit Content Agreement
+      description: Returns the agreement of the currently authenticated user for the given agreementCode, contentId, and version.
+      tags:
+        - files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/AgreementRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/AgreementResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/analysis/{fileId}/{versionId}":
     parameters:
       - $ref: ../parameters.yaml#/fileId
@@ -75,6 +128,25 @@ paths:
           $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
         "404":
           $ref: ../responses/files/FileNotFoundError.yaml
+  "/assetReview/{assetReviewId}/notes":
+    put:
+      operationId: submitAssetReviewNotes
+      summary: Submit Asset Review Notes
+      description: Submit notes regarding an asset review.
+      tags:
+        - files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/SubmitAssetReviewNotesRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          description: The asset review notes are submitted.
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /file:
     post:
       operationId: createFile
@@ -324,6 +396,25 @@ paths:
       responses:
         "200":
           $ref: ../responses/files/FileListResponse.yaml
+  /files/order:
+    put:
+      operationId: setGalleryFileOrder
+      summary: Set Gallery File Order
+      description: Set the order of the files in a gallery
+      tags:
+        - files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/GalleryFileOrderRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/GalleryFileOrderResponse.yaml
+        "404":
+          $ref: ../responses/files/FileNotFoundError.yaml
   /gallery:
     post:
       operationId: uploadGalleryImage

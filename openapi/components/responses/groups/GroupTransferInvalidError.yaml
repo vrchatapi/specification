@@ -1,0 +1,11 @@
+description: Error response when trying to transfer a group to an ineligible target user.
+content:
+  application/json:
+    examples:
+      403 Ineligible Target:
+        value:
+          error:
+            message: Cannot transfer this group.
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

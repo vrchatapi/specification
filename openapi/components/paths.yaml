@@ -8,12 +8,16 @@
   $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions~1{transactionId}"
 "/adminassetbundles/{adminAssetBundleId}":
   $ref: "./paths/files.yaml#/paths/~1adminassetbundles~1{adminAssetBundleId}"
+/agreement:
+  $ref: "./paths/files.yaml#/paths/~1agreement"
 "/analysis/{fileId}/{versionId}":
   $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}"
 "/analysis/{fileId}/{versionId}/security":
   $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1security"
 "/analysis/{fileId}/{versionId}/standard":
   $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1standard"
+"/assetReview/{assetReviewId}/notes":
+  $ref: "./paths/files.yaml#/paths/~1assetReview~1{assetReviewId}~1notes"
 /auth:
   $ref: "./paths/authentication.yaml#/paths/~1auth"
 /auth/confirmEmail:
@@ -152,6 +156,8 @@
   $ref: "./paths/files.yaml#/paths/~1file~1{fileId}~1{versionId}~1{fileType}~1status"
 /files:
   $ref: "./paths/files.yaml#/paths/~1files"
+/files/order:
+  $ref: "./paths/files.yaml#/paths/~1files~1order"
 /gallery:
   $ref: "./paths/files.yaml#/paths/~1gallery"
 /groups:
@@ -162,12 +168,16 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
 "/groups/{groupId}/announcement":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1announcement"
+"/groups/{groupId}/auditLogTypes":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1auditLogTypes"
 "/groups/{groupId}/auditLogs":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1auditLogs"
 "/groups/{groupId}/bans":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1bans"
 "/groups/{groupId}/bans/{userId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1bans~1{userId}"
+"/groups/{groupId}/block":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1block"
 "/groups/{groupId}/galleries":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1galleries"
 "/groups/{groupId}/galleries/{groupGalleryId}":
@@ -188,6 +198,8 @@
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1leave"
 "/groups/{groupId}/members":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members"
+"/groups/{groupId}/members/search":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1search"
 "/groups/{groupId}/members/{userId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1members~1{userId}"
 "/groups/{groupId}/members/{userId}/roles/{groupRoleId}":
@@ -207,6 +219,8 @@
 "/groups/{groupId}/roles":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles"
 "/groups/{groupId}/roles/{groupRoleId}":
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
+"/groups/{groupId}/transfer":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
 /health:
   $ref: "./paths/miscellaneous.yaml#/paths/~1health"
@@ -298,8 +312,12 @@
   $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
 "/products/{productId}":
   $ref: "./paths/economy.yaml#/paths/~1products~1{productId}"
+/props:
+  $ref: "./paths/props.yaml#/paths/~1props"
 "/props/{propId}":
   $ref: "./paths/props.yaml#/paths/~1props~1{propId}"
+"/props/{propId}/publish":
+  $ref: "./paths/props.yaml#/paths/~1props~1{propId}/publish"
 "/requestInvite/{userId}":
   $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}"
 "/requestInvite/{userId}/photo":
@@ -358,10 +376,16 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1feedback"
 "/users/{userId}/groups":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups"
+"/users/{userId}/groups/invited":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1invited"
+"/users/{userId}/groups/permissions":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1permissions"
 "/users/{userId}/groups/represented":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1represented"
 "/users/{userId}/groups/requested":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1requested"
+"/users/{userId}/groups/userblocked":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1groups~1userblocked"
 "/users/{userId}/instances/groups":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1instances~1groups"
 "/users/{userId}/instances/groups/{groupId}":
@@ -372,6 +396,8 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1mutuals~1friends"
 "/users/{userId}/mutuals/groups":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1mutuals~1groups"
+"/users/{userId}/persist":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1persist"
 "/users/{userId}/removeTags":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1removeTags"
 "/users/{userId}/subscription/eligible":

@@ -1,0 +1,16 @@
+description: Successful response after initiating or completing a group transfer.
+content:
+  application/json:
+    examples:
+      Complete Transfer:
+        value:
+          success:
+            message: Group transfer completed.
+            status_code: 200
+      Initiate Transfer:
+        value:
+          success:
+            message: Group transfer initiated.
+            status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

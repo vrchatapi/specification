@@ -247,6 +247,42 @@ paths:
           $ref: ../responses/users/LimitedUserGroupListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/groups/invited":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserGroupInvites
+      summary: Get User Group Invited
+      description: Returns a list of Groups the user has been invited to.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/GroupListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/groups/permissions":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserAllGroupPermissions
+      summary: Get user's permissions for all joined groups.
+      description: Returns a mapping of GroupIDs to arrays of GroupPermissions.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/UserAllGroupPermissionsResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/groups/represented":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -274,6 +310,22 @@ paths:
       operationId: getUserGroupRequests
       summary: Get User Group Requests
       description: Returns a list of Groups the user has requested to be invited into.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/GroupListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/groups/userblocked":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserGroupBlocks
+      summary: Get User Group Blocks
+      description: Returns a list of Groups the user has blocked.
       tags:
         - users
       security:
@@ -370,6 +422,23 @@ paths:
       responses:
         "200":
           $ref: ../responses/users/LimitedUserGroupListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/persist":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    delete:
+      operationId: deleteAllUserPersistenceData
+      summary: Delete All User Persistence Data
+      description: Deletes all of the user's persistence data for every world.
+      tags:
+        - users
+        - worlds
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          description: The user's persistence data for all worlds is deleted.
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/removeTags":
