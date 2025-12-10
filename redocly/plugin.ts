@@ -3,7 +3,7 @@ import type { Plugin } from "@redocly/openapi-core";
 export default function myLocalPlugin(): Plugin {
 	return {
 		id: "vrchat",
-		decorators: {
+		preprocessors: {
 			oas3: {
 				"x-if": ({ defines = [] }: { defines?: Array<string> }) => {
 					return {

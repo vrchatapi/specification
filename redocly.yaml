@@ -5,7 +5,7 @@ extends:
 plugins:
   - ./redocly/plugin.ts
 
-decorators:
+preprocessors:
   vrchat/x-if: on
 
 apis:
@@ -20,6 +20,7 @@ apis:
     output: dist/openapi.json
     decorators:
       remove-x-internal: on
+    preprocessors:
       vrchat/x-if:
         defines:
           - jsonschema
@@ -27,7 +28,7 @@ apis:
   legacy-internal:
     root: openapi/openapi.yaml
     output: dist/openapi-internal+legacy.json
-    decorators:
+    preprocessors:
       vrchat/x-if:
         defines:
           - internal
@@ -35,7 +36,7 @@ apis:
   modern-internal:
     root: openapi/openapi.yaml
     output: dist/openapi-internal.json
-    decorators:
+    preprocessors:
       vrchat/x-if:
         defines:
           - jsonschema
@@ -52,6 +53,7 @@ apis:
     output: dist/openapi.yaml
     decorators:
       remove-x-internal: on
+    preprocessors:
       vrchat/x-if:
         defines:
           - jsonschema
@@ -59,7 +61,7 @@ apis:
   legacy-internal-yaml:
     root: openapi/openapi.yaml
     output: dist/openapi-internal+legacy.yaml
-    decorators:
+    preprocessors:
       vrchat/x-if:
         defines:
           - internal
@@ -67,7 +69,7 @@ apis:
   modern-internal-yaml:
     root: openapi/openapi.yaml
     output: dist/openapi-internal.yaml
-    decorators:
+    preprocessors:
       vrchat/x-if:
         defines:
           - jsonschema
