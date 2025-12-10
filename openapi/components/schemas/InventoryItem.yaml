@@ -46,6 +46,8 @@ properties:
     $ref: ./InventoryMetadata.yaml
   name:
     type: string
+  quantifiable:
+    type: boolean
   tags:
     type: array
     items:
@@ -73,7 +75,6 @@ required:
   - created_at
   - defaultAttributes
   - description
-  - expiryDate
   - flags
   - holderId
   - id
@@ -84,6 +85,7 @@ required:
   - itemTypeLabel
   - metadata
   - name
+  - quantifiable
   - tags
   - templateId
   - template_created_at

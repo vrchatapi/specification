@@ -17,6 +17,8 @@ properties:
     format: date-time
   id:
     $ref: ./InventoryDropID.yaml
+  isDisabled:
+    type: boolean
   name:
     type: string
   notificationDetails:
@@ -49,6 +51,7 @@ required:
   - dropExpiryDate
   - endDropDate
   - id
+  - isDisabled
   - name
   - notificationDetails
   - startDropDate
