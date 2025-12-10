@@ -2,4 +2,4 @@ title: TransferGroupRequest
 type: object
 properties:
   transferTargetId:
-    $ref: ./UserID.yaml
+    $ref: ../schemas/UserID.yaml

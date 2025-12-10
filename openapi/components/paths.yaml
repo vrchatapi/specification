@@ -221,7 +221,7 @@
 "/groups/{groupId}/roles/{groupRoleId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
 "/groups/{groupId}/transfer":
-  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1roles~1{groupRoleId}"
+  $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}~1transfer"
 /health:
   $ref: "./paths/miscellaneous.yaml#/paths/~1health"
 /icon:
