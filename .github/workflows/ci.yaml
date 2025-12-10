@@ -99,26 +99,22 @@ jobs:
 
       - run: bun --bun run bundle
 
-      - run: |
-          pnpm add @actions/artifact
+      - run: pnpm add @actions/artifact
 
-          bun -e "
-            import { readdir } from \"node:fs/promises\";
-            import { resolve } from \"node:path\";
+      - uses: actions/github-script@v8
+        with:
+          script: |
+            import { readdir } from "node:fs/promises";
+            import { resolve } from "node:path";
 
-            import { DefaultArtifactClient } from \"@actions/artifact\";
+            import { DefaultArtifactClient } from "@actions/artifact";
 
             const artifact = new DefaultArtifactClient();
-            const files = await readdir(\"./dist\");
+            const files = await readdir("./dist");
 
             const artifacts = await Promise.all(files.map(async (file) =>
-              artifact.uploadArtifact(file, [resolve(`./dist/${file}`)], \"./dist\")
+              artifact.uploadArtifact(file, [resolve(`./dist/${file}`)], "./dist")
             ));
-          "
-
-      - uses: actions/upload-artifact@v4
-        with:
-          path: dist
 
   release:
     runs-on: ubuntu-latest
