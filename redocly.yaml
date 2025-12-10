@@ -17,7 +17,7 @@ apis:
 
   modern:
     root: openapi/openapi.yaml
-    output: dist/openapi.yaml
+    output: dist/openapi.json
     decorators:
       remove-x-internal: on
       vrchat/x-if:

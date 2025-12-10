@@ -105,16 +105,17 @@ jobs:
         with:
           script: |
             const { readdir } = require("node:fs/promises");
-            const { resolve } = require("node:path");
+            const { resolve, dirname } = require("node:path");
 
             const { DefaultArtifactClient } = require("@actions/artifact");
 
             const artifact = new DefaultArtifactClient();
             const files = await readdir("./dist");
 
-            const artifacts = await Promise.all(files.map(async (file) =>
-              artifact.uploadArtifact(file, [resolve(`./dist/${file}`)], "./dist")
-            ));
+            const artifacts = await Promise.all(files.map(async (file) => {
+              const pathname = resolve(`./dist/${file}`);
+              return artifact.uploadArtifact(file, [pathname], dirname(pathname));
+            }));
 
   release:
     runs-on: ubuntu-latest
