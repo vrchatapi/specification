@@ -77,6 +77,7 @@ paths:
             type: string
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/isInternalVariant
       security:
         - authCookie: []
       responses:

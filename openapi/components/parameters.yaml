@@ -495,6 +495,14 @@ inventoryTemplateId:
   schema:
     type: string
     example: invt_00000000-0000-0000-0000-000000000000
+isInternalVariant:
+  name: isInternalVariant
+  description: Not quite sure what this actually does (exists on the website but doesn't seem to be used)
+  required: false
+  in: query
+  schema:
+    type: boolean
+    example: false
 jamId:
   name: jamId
   description: Must be a valid query ID.

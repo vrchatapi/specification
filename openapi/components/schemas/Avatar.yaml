@@ -47,6 +47,9 @@ properties:
   name:
     type: string
     minLength: 1
+  pendingUpload:
+    type: boolean
+    default: false
   performance:
     type: object
     properties:

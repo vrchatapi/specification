@@ -1,33 +1,44 @@
 title: APIConfig
 type: object
-description: ""
+description: Global configuration for various features.
 properties:
+  CampaignStatus:
+    type: string
+    description: The current platform-wide event taking place
+  DisableBackgroundPreloads:
+    type: boolean
+    description: Toggles if certain assets are preloaded in the background
+    default: true
+  LocationGiftingNonSubPrioEnabled:
+    type: boolean
+    description: Toggles whether users without a current VRC+ subscription are priority recipients for gift drops
+    default: true
   VoiceEnableDegradation:
     type: boolean
-    description: "Unknown, probably voice optimization testing"
+    description: Unknown, probably voice optimization testing
     default: false
   VoiceEnableReceiverLimiting:
     type: boolean
-    description: "Unknown, probably voice optimization testing"
+    description: Unknown, probably voice optimization testing
     default: true
   accessLogsUrls:
     type: object
     properties:
       Default:
         type: string
-        example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
         format: uri
       Pico:
         type: string
-        example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
         format: uri
       Quest:
         type: string
-        example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
         format: uri
       XRElite:
         type: string
-        example: "https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR"
+        example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
         format: uri
   address:
     type: string
@@ -58,6 +69,8 @@ properties:
       $ref: ./APIConfigAnnouncement.yaml
     minItems: 0
     uniqueItems: true
+  audioConfig:
+    $ref: ./APIConfigAudioConfig.yaml
   availableLanguageCodes:
     type: array
     description: List of supported Languages
@@ -168,6 +181,10 @@ properties:
     type: string
     description: VRChat's copyright-issues-related email
     minLength: 1
+  copyrightFormUrl:
+    type: string
+    description: VRChat's DMCA claim webform url
+    minLength: 1
   currentPrivacyVersion:
     type: integer
     description: Current version number of the Privacy Agreement
@@ -189,7 +206,7 @@ properties:
   devSdkUrl:
     deprecated: true
     type: string
-    description: "Link to download the development SDK, use downloadUrls instead"
+    description: Link to download the development SDK, use downloadUrls instead
     minLength: 1
   devSdkVersion:
     deprecated: true
@@ -238,7 +255,7 @@ properties:
     default: false
   disableFrontendBuilds:
     type: boolean
-    description: "Unknown, probably toggles compilation of frontend web builds? So internal flag?"
+    description: Unknown, probably toggles compilation of frontend web builds? So internal flag?
     default: false
   disableGiftDrops:
     type: boolean
@@ -281,16 +298,30 @@ properties:
     $ref: ./APIConfigDownloadURLList.yaml
   dynamicWorldRows:
     type: array
-    description: "Array of DynamicWorldRow objects, used by the game to display the list of world rows"
+    description: Array of DynamicWorldRow objects, used by the game to display the list of world rows
     items:
       $ref: ./DynamicContentRow.yaml
     minItems: 1
     uniqueItems: true
+  economyLedgerBackfill:
+    type: boolean
+    description: Unknown
+  economyLedgerMigrationStop:
+    type: string
+    description: Unknown
+  economyLedgerMode:
+    type: string
+    description: Unknown
   economyPauseEnd:
     type: string
     description: Unknown
+    format: date-time
   economyPauseStart:
     type: string
+    description: Unknown
+    format: date-time
+  economyPurchaseRepairEnabled:
+    type: boolean
     description: Unknown
   economyState:
     type: integer
@@ -314,7 +345,7 @@ properties:
   homepageRedirectTarget:
     type: string
     description: Redirect target if you try to open the base API domain in your browser
-    default: "https://hello.vrchat.com"
+    default: https://hello.vrchat.com
     minLength: 1
   hubWorldId:
     $ref: ./WorldID.yaml
@@ -323,10 +354,34 @@ properties:
     description: A list of explicitly allowed origins that worlds can request images from via the Udon's [VRCImageDownloader#DownloadImage](https://creators.vrchat.com/worlds/udon/image-loading/#downloadimage).
     items:
       type: string
+  iosAppVersion:
+    type: array
+    description: Current app version for iOS
+    items:
+      type: string
+  iosVersion:
+    type: object
+    description: Current version for iOS
+    properties:
+      major:
+        type: integer
+      minor:
+        type: integer
+    required:
+      - major
+      - minor
   jobsEmail:
     type: string
     description: VRChat's job application email
     minLength: 1
+  maxUserEmoji:
+    type: integer
+    description: The maximum number of custom emoji each user may have at a given time.
+    default: 18
+  maxUserStickers:
+    type: integer
+    description: The maximum number of custom stickers each user may have at a given time.
+    default: 18
   minSupportedClientBuildNumber:
     type: object
     description: Minimum supported client build number for various platforms
@@ -413,200 +468,32 @@ properties:
   reportCategories:
     type: object
     description: Categories available for reporting objectionable content
-    properties:
-      avatar:
-        $ref: ./ReportCategory.yaml
-      avatarpage:
-        $ref: ./ReportCategory.yaml
-      behavior:
-        $ref: ./ReportCategory.yaml
-      chat:
-        $ref: ./ReportCategory.yaml
-      emoji:
-        $ref: ./ReportCategory.yaml
-      environment:
-        $ref: ./ReportCategory.yaml
-      groupstore:
-        $ref: ./ReportCategory.yaml
-      image:
-        $ref: ./ReportCategory.yaml
-      sticker:
-        $ref: ./ReportCategory.yaml
-      text:
-        $ref: ./ReportCategory.yaml
-      warnings:
-        $ref: ./ReportCategory.yaml
-      worldimage:
-        $ref: ./ReportCategory.yaml
-      worldstore:
-        $ref: ./ReportCategory.yaml
-    required:
-      - avatar
-      - behavior
-      - chat
-      - environment
-      - groupstore
-      - image
-      - text
-      - warnings
-      - worldimage
-      - worldstore
+    additionalProperties:
+      $ref: ./ReportCategory.yaml
   reportFormUrl:
     type: string
     description: URL to the report form
     default: "https://help.vrchat.com/hc/en-us/requests/new?ticket_form_id=1500000182242&tf_360056455174=user_report&tf_360057451993={userId}&tf_1500001445142={reportedId}&tf_subject={reason} {category} By {contentType} {reportedName}&tf_description={description}"
   reportOptions:
     type: object
-    description: Options for reporting content
-    properties:
-      avatar:
-        type: object
-        properties:
-          avatar:
-            type: array
-            items:
-              type: string
-          avatarpage:
-            type: array
-            items:
-              type: string
-          warnings:
-            type: array
-            items:
-              type: string
-      group:
-        type: object
-        properties:
-          groupstore:
-            type: array
-            items:
-              type: string
-          image:
-            type: array
-            items:
-              type: string
-          text:
-            type: array
-            items:
-              type: string
-      user:
-        type: object
-        properties:
-          behavior:
-            type: array
-            items:
-              type: string
-          chat:
-            type: array
-            items:
-              type: string
-          emoji:
-            type: array
-            items:
-              type: string
-          image:
-            type: array
-            items:
-              type: string
-          sticker:
-            type: array
-            items:
-              type: string
-          text:
-            type: array
-            items:
-              type: string
-      world:
-        type: object
-        properties:
-          environment:
-            type: array
-            items:
-              type: string
-          text:
-            type: array
-            items:
-              type: string
-          warnings:
-            type: array
-            items:
-              type: string
-          worldimage:
-            type: array
-            items:
-              type: string
-          worldstore:
-            type: array
-            items:
-              type: string
+    description: |-
+      Options for reporting content.
+      Select a key+value from this mapping as the `type` of the report.
+      Select one key+value from the object at reportOptions[type] as the `category` of the report.
+      reportCategories[category] contains user-facing text to display for all possible categories.
+      Select one value from the array at reportOptions[type][category] as the `reason` of the report.
+      reportReasons[reason] contains user-facing text to display for all possible categories.
+    additionalProperties:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
   reportReasons:
     type: object
-    description: Reasons available for reporting users
-    properties:
-      billing:
-        $ref: ./ReportReason.yaml
-      botting:
-        $ref: ./ReportReason.yaml
-      cancellation:
-        $ref: ./ReportReason.yaml
-      copyright:
-        $ref: ./ReportReason.yaml
-      fraud:
-        $ref: ./ReportReason.yaml
-      gore:
-        $ref: ./ReportReason.yaml
-      hacking:
-        $ref: ./ReportReason.yaml
-      harassing:
-        $ref: ./ReportReason.yaml
-      hateful:
-        $ref: ./ReportReason.yaml
-      impersonation:
-        $ref: ./ReportReason.yaml
-      inappropriate:
-        $ref: ./ReportReason.yaml
-      leaking:
-        $ref: ./ReportReason.yaml
-      malicious:
-        $ref: ./ReportReason.yaml
-      missing:
-        $ref: ./ReportReason.yaml
-      nudity:
-        $ref: ./ReportReason.yaml
-      renewal:
-        $ref: ./ReportReason.yaml
-      security:
-        $ref: ./ReportReason.yaml
-      service:
-        $ref: ./ReportReason.yaml
-      sexual:
-        $ref: ./ReportReason.yaml
-      technical:
-        $ref: ./ReportReason.yaml
-      threatening:
-        $ref: ./ReportReason.yaml
-      visuals:
-        $ref: ./ReportReason.yaml
-    required:
-      - billing
-      - botting
-      - cancellation
-      - gore
-      - hacking
-      - harassing
-      - hateful
-      - impersonation
-      - inappropriate
-      - leaking
-      - malicious
-      - missing
-      - nudity
-      - renewal
-      - security
-      - service
-      - sexual
-      - threatening
-      - visuals
+    description: Reasons available for submitting a report
+    additionalProperties:
+      $ref: ./ReportReason.yaml
   requireAgeVerificationBetaTag:
     type: boolean
   sdkDeveloperFaqUrl:
@@ -691,6 +578,9 @@ properties:
     items:
       type: string
 required:
+  - CampaignStatus
+  - DisableBackgroundPreloads
+  - LocationGiftingNonSubPrioEnabled
   - VoiceEnableDegradation
   - VoiceEnableReceiverLimiting
   - accessLogsUrls
@@ -716,6 +606,8 @@ required:
   - constants
   - contactEmail
   - copyrightEmail
+  - copyrightFormUrl
+  - currentPrivacyVersion
   - currentTOSVersion
   - defaultAvatar
   - defaultStickerSet
@@ -741,6 +633,13 @@ required:
   - downloadLinkWindows
   - downloadUrls
   - dynamicWorldRows
+  - economyLedgerBackfill
+  - economyLedgerMigrationStop
+  - economyLedgerMode
+  - economyPauseEnd
+  - economyPauseStart
+  - economyPurchaseRepairEnabled
+  - economyState
   - events
   - forceUseLatestWorld
   - giftDisplayType
@@ -749,7 +648,11 @@ required:
   - homepageRedirectTarget
   - hubWorldId
   - imageHostUrlList
+  - iosAppVersion
+  - iosVersion
   - jobsEmail
+  - maxUserEmoji
+  - maxUserStickers
   - minSupportedClientBuildNumber
   - minimumUnityVersionForUploads
   - moderationEmail
