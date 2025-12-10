@@ -1061,8 +1061,8 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/groupId
     get:
-      operationId: getGroupTransferable
-      summary: Get Group Transferable
+      operationId: getGroupTransferability
+      summary: Get Group Transferability
       description: Returns the transferability of the group to a given user.
       tags:
         - groups
@@ -1130,3 +1130,4 @@ components:
     $ref: ../securitySchemes.yaml
 tags:
   $ref: ../tags.yaml
+
