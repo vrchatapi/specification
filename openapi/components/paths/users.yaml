@@ -251,7 +251,7 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
-      operationId: getUserGroupInvites
+      operationId: getInvitedGroups
       summary: Get User Group Invited
       description: Returns a list of Groups the user has been invited to.
       tags:
@@ -319,7 +319,7 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
-      operationId: getUserGroupBlocks
+      operationId: getBlockedGroups
       summary: Get User Group Blocks
       description: Returns a list of Groups the user has blocked.
       tags:
