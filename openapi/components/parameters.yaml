@@ -28,13 +28,6 @@ assetReviewId:
   in: path
   schema:
     type: string
-avatarId:
-  name: avatarId
-  description: Must be a valid avatar ID.
-  required: true
-  in: path
-  schema:
-    $ref: ./schemas/AvatarID.yaml
 authorId:
   name: authorId
   description: Must be a valid user ID.
@@ -42,6 +35,13 @@ authorId:
   in: query
   schema:
     $ref: ./schemas/UserID.yaml
+avatarId:
+  name: avatarId
+  description: Must be a valid avatar ID.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/AvatarID.yaml
 avatarModerationType:
   name: avatarModerationType
   description: The avatar moderation type associated with the avatar.

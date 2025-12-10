@@ -317,7 +317,7 @@
 "/props/{propId}":
   $ref: "./paths/props.yaml#/paths/~1props~1{propId}"
 "/props/{propId}/publish":
-  $ref: "./paths/props.yaml#/paths/~1props~1{propId}/publish"
+  $ref: "./paths/props.yaml#/paths/~1props~1{propId}~1publish"
 "/requestInvite/{userId}":
   $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}"
 "/requestInvite/{userId}/photo":

@@ -507,6 +507,29 @@ paths:
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
+    put:
+      operationId: declineGroupInvite
+      summary: Decline Invite from Group
+      description: Declines an invite to the user from a group.
+      tags:
+        - groups
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/DeclineGroupInviteRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/DeclineGroupInviteSuccess.yaml
+        "400":
+          $ref: ../responses/groups/DeclineGroupInviteBadRequestError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/groups/GroupNotFoundError.yaml
     post:
       operationId: createGroupInvite
       summary: Invite User to Group
@@ -530,29 +553,6 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/groups/GroupInviteForbiddenError.yaml
-        "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
-    put:
-      operationId: declineGroupInvite
-      summary: Decline Invite from Group
-      description: Declines an invite to the user from a group.
-      tags:
-        - groups
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/DeclineGroupInviteRequest.yaml
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/groups/DeclineGroupInviteSuccess.yaml
-        "400":
-          $ref: ../responses/groups/DeclineGroupInviteBadRequestError.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/invites/{userId}":

@@ -8,4 +8,4 @@ content:
             message: That prop does not exist.
             status_code: 404
     schema:
-      $ref: ../schemas/Error.yaml
+      $ref: ../../schemas/Error.yaml

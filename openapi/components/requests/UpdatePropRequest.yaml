@@ -27,4 +27,3 @@ properties:
   worldPlacementMask:
     type: integer
     example: 1
-

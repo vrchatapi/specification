@@ -276,11 +276,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/UserAllGroupPermissionsResponse.yaml
+          $ref: ../responses/users/UserAllGroupPermissionsResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/groups/represented":
