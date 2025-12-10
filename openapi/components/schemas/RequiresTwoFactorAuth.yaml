@@ -5,3 +5,5 @@ properties:
     type: array
     items:
       $ref: ./TwoFactorAuthType.yaml
+required:
+  - requiresTwoFactorAuth
