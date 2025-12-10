@@ -1,0 +1,4 @@
+title: LanguageCode
+type: string
+description: "Represents a spoken language, signed language, or the absence of linguistic content. Valid language codes and display names are the keys and values respectively in the `$.constants.LANGUAGE.SPOKEN_LANGUAGE_OPTIONS` object from `GET /config`."
+example: eng

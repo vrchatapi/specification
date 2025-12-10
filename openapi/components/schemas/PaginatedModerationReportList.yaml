@@ -1,0 +1,14 @@
+title: PaginatedModerationReportList
+type: object
+properties:
+  hasNext:
+    type: boolean
+    description: Whether there are more results after this page.
+  results:
+    type: array
+    description: The list of moderation reports.
+    items:
+      $ref: ./ModerationReport.yaml
+  totalCount:
+    type: integer
+    description: The total number of results that the query would return if there were no pagination.
