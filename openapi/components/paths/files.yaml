@@ -129,6 +129,8 @@ paths:
         "404":
           $ref: ../responses/files/FileNotFoundError.yaml
   "/assetReview/{assetReviewId}/notes":
+    parameters:
+      - $ref: ../parameters.yaml#/assetReviewId
     put:
       operationId: submitAssetReviewNotes
       summary: Submit Asset Review Notes
