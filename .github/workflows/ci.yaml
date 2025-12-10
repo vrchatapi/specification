@@ -78,9 +78,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     if: ${{ !failure() && !cancelled() }}
-    strategy:
-      matrix:
-        format: [yaml, json]
     steps:
       - uses: actions/checkout@v4
 
@@ -102,12 +99,11 @@ jobs:
 
       - run: pnpm install
 
-      - run: pnpm bundle --ext ${{ matrix.format }}
+      - run: pnpm bundle
 
       - uses: actions/upload-artifact@v4
         with:
-          name: openapi.${{ matrix.format }}
-          path: dist/openapi.${{ matrix.format }}
+          path: dist
 
   release:
     runs-on: ubuntu-latest

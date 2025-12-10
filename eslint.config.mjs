@@ -15,6 +15,14 @@ export default configure({
 		"yaml/sort-keys": [
 			"error",
 			{
+				pathPattern: ".*x-if.*",
+				order: [
+					"when",
+					"then",
+					"else"
+				]
+			},
+			{
 				pathPattern: ".*",
 				hasProperties: [
 					"openapi"

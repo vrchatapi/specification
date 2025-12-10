@@ -1,0 +1,6 @@
+title: TwoFactorAuthType
+type: string
+enum:
+  - emailOtp
+  - otp
+  - totp

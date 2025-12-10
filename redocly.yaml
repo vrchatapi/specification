@@ -2,10 +2,73 @@
 extends:
   - recommended
 
-apis:
-  main:
-    root: openapi/openapi.yaml
-    output: dist/openapi.yaml
+plugins:
+  - ./redocly/plugin.ts
 
 decorators:
-  remove-x-internal: on
+  vrchat/x-if: on
+
+apis:
+  legacy:
+    root: openapi/openapi.yaml
+    output: dist/openapi-legacy.json
+    decorators:
+      remove-x-internal: on
+
+  modern:
+    root: openapi/openapi.yaml
+    output: dist/openapi.yaml
+    decorators:
+      remove-x-internal: on
+      vrchat/x-if:
+        defines:
+          - jsonschema
+
+  legacy-internal:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal+legacy.json
+    decorators:
+      vrchat/x-if:
+        defines:
+          - internal
+
+  modern-internal:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal.json
+    decorators:
+      vrchat/x-if:
+        defines:
+          - jsonschema
+          - internal
+
+  legacy-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi-legacy.yaml
+    decorators:
+      remove-x-internal: on
+
+  modern-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi.yaml
+    decorators:
+      remove-x-internal: on
+      vrchat/x-if:
+        defines:
+          - jsonschema
+
+  legacy-internal-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal+legacy.yaml
+    decorators:
+      vrchat/x-if:
+        defines:
+          - internal
+
+  modern-internal-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal.yaml
+    decorators:
+      vrchat/x-if:
+        defines:
+          - jsonschema
+          - internal

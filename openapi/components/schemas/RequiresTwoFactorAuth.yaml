@@ -1,0 +1,7 @@
+title: RequiresTwoFactorAuth
+type: object
+properties:
+  requiresTwoFactorAuth:
+    type: array
+    items:
+      $ref: ./TwoFactorAuthType.yaml

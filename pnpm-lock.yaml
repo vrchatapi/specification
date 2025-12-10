@@ -16,7 +16,7 @@ importers:
         version: 15.1.2(@types/json-schema@7.0.15)
       '@ariesclark/eslint-config':
         specifier: ^3.1.1
-        version: 3.1.1(@eslint-react/eslint-plugin@2.3.9(eslint@9.39.1)(typescript@5.9.3))(@typescript-eslint/utils@8.48.0(eslint@9.39.1)(typescript@5.9.3))(@vue/compiler-sfc@3.5.25)(eslint-plugin-react-refresh@0.4.24(eslint@9.39.1))(eslint@9.39.1)(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        version: 3.1.1(@eslint-react/eslint-plugin@2.3.9(eslint@9.39.1)(typescript@5.9.3))(@typescript-eslint/utils@8.48.0(eslint@9.39.1)(typescript@5.9.3))(@vue/compiler-sfc@3.5.25)(eslint-plugin-react-refresh@0.4.24(eslint@9.39.1))(eslint@9.39.1)(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)
       '@eslint-react/eslint-plugin':
         specifier: ^2.3.9
         version: 2.3.9(eslint@9.39.1)(typescript@5.9.3)
@@ -26,6 +26,9 @@ importers:
       '@redocly/cli':
         specifier: ^2.12.0
         version: 2.12.0(@opentelemetry/api@1.9.0)(ajv@8.17.1)(core-js@3.47.0)
+      '@redocly/openapi-core':
+        specifier: ^2.12.5
+        version: 2.12.5(ajv@8.17.1)
       '@stoplight/spectral-cli':
         specifier: ^6.15.0
         version: 6.15.0
@@ -1076,12 +1079,19 @@ packages:
   '@redocly/config@0.40.0':
     resolution: {integrity: sha512-MZQZs7QEGnue3rVN9Q9QvDbcGjesxbpKXUvDeckS69R1xjtgsnT9B39VA25zmwSJtgUeA9ST+sMf9GxIqixNbw==}
 
+  '@redocly/config@0.41.0':
+    resolution: {integrity: sha512-8yJ2e+ex8KVF25zijdpDbAEjyubk7NLfHsLI8h0MUnLEo2iEg6rTCDT9Qw71XDqd5UlXvfJb0Z0h6dd+Y6pWLw==}
+
   '@redocly/openapi-core@1.34.5':
     resolution: {integrity: sha512-0EbE8LRbkogtcCXU7liAyC00n9uNG9hJ+eMyHFdUsy9lB/WGqnEBgwjA9q2cyzAVcdTkQqTBBU1XePNnN3OijA==}
     engines: {node: '>=18.17.0', npm: '>=9.5.0'}
 
   '@redocly/openapi-core@2.12.0':
     resolution: {integrity: sha512-RsVwmRD0KhyJbR8acIeU98ce6N+/YCuLJf6IGN+2SOsbwnDhnI5MG0TFV9D7URK/ukEewaNA701dVYsoP1VtRQ==}
+    engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
+
+  '@redocly/openapi-core@2.12.5':
+    resolution: {integrity: sha512-PlzsfOgPUWg4OmyznsIWQ6EnfZK6KSOn2MG4sZS3DY9cHgno5YywNy8zFQWHADXLqR7hTw2M7VvbiMKVJxzyiA==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
 
   '@redocly/respect-core@2.12.0':
@@ -1582,6 +1592,14 @@ packages:
 
   ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    peerDependencies:
+      ajv: ^8.0.0
+    peerDependenciesMeta:
+      ajv:
+        optional: true
+
+  ajv-formats@3.0.1:
+    resolution: {integrity: sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==}
     peerDependencies:
       ajv: ^8.0.0
     peerDependenciesMeta:
@@ -4072,8 +4090,8 @@ packages:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
     engines: {node: '>= 6'}
 
-  yaml@2.8.1:
-    resolution: {integrity: sha512-lcYcMxX2PO9XMGvAJkJ3OsNMw+/7FKes7/hgerGUYWIoWu5j/+YQqcZr5JnPZWzOsEBgMbSbiSTn/dv/69Mkpw==}
+  yaml@2.8.2:
+    resolution: {integrity: sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A==}
     engines: {node: '>= 14.6'}
     hasBin: true
 
@@ -4183,14 +4201,14 @@ snapshots:
       '@types/json-schema': 7.0.15
       js-yaml: 4.1.1
 
-  '@ariesclark/eslint-config@3.1.1(@eslint-react/eslint-plugin@2.3.9(eslint@9.39.1)(typescript@5.9.3))(@typescript-eslint/utils@8.48.0(eslint@9.39.1)(typescript@5.9.3))(@vue/compiler-sfc@3.5.25)(eslint-plugin-react-refresh@0.4.24(eslint@9.39.1))(eslint@9.39.1)(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)':
+  '@ariesclark/eslint-config@3.1.1(@eslint-react/eslint-plugin@2.3.9(eslint@9.39.1)(typescript@5.9.3))(@typescript-eslint/utils@8.48.0(eslint@9.39.1)(typescript@5.9.3))(@vue/compiler-sfc@3.5.25)(eslint-plugin-react-refresh@0.4.24(eslint@9.39.1))(eslint@9.39.1)(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)':
     dependencies:
       '@antfu/eslint-config': 3.16.0(@eslint-react/eslint-plugin@2.3.9(eslint@9.39.1)(typescript@5.9.3))(@typescript-eslint/utils@8.48.0(eslint@9.39.1)(typescript@5.9.3))(@vue/compiler-sfc@3.5.25)(eslint-plugin-react-refresh@0.4.24(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
       eslint: 9.39.1
       eslint-flat-config-utils: 0.4.0
       esno: 4.8.0
       local-pkg: 0.5.1
-      tsup: 8.5.1(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+      tsup: 8.5.1(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)
     transitivePeerDependencies:
       - '@eslint-react/eslint-plugin'
       - '@eslint/json'
@@ -5058,6 +5076,10 @@ snapshots:
     dependencies:
       json-schema-to-ts: 2.7.2
 
+  '@redocly/config@0.41.0':
+    dependencies:
+      json-schema-to-ts: 2.7.2
+
   '@redocly/openapi-core@1.34.5':
     dependencies:
       '@redocly/ajv': 8.17.1
@@ -5077,6 +5099,20 @@ snapshots:
       '@redocly/ajv': 8.17.1
       '@redocly/config': 0.40.0
       ajv-formats: 2.1.1(ajv@8.17.1)
+      colorette: 1.4.0
+      js-levenshtein: 1.1.6
+      js-yaml: 4.1.1
+      picomatch: 4.0.3
+      pluralize: 8.0.0
+      yaml-ast-parser: 0.0.43
+    transitivePeerDependencies:
+      - ajv
+
+  '@redocly/openapi-core@2.12.5(ajv@8.17.1)':
+    dependencies:
+      '@redocly/ajv': 8.17.1
+      '@redocly/config': 0.41.0
+      ajv-formats: 3.0.1(ajv@8.17.1)
       colorette: 1.4.0
       js-levenshtein: 1.1.6
       js-yaml: 4.1.1
@@ -5718,6 +5754,10 @@ snapshots:
     optionalDependencies:
       ajv: 8.17.1
 
+  ajv-formats@3.0.1(ajv@8.17.1):
+    optionalDependencies:
+      ajv: 8.17.1
+
   ajv@6.12.6:
     dependencies:
       fast-deep-equal: 3.1.3
@@ -5987,7 +6027,7 @@ snapshots:
       '@cspell/cspell-types': 9.3.2
       comment-json: 4.4.1
       smol-toml: 1.5.2
-      yaml: 2.8.1
+      yaml: 2.8.2
 
   cspell-dictionary@9.3.2:
     dependencies:
@@ -7888,13 +7928,13 @@ snapshots:
 
   possible-typed-array-names@1.1.0: {}
 
-  postcss-load-config@6.0.1(postcss@8.5.6)(tsx@4.20.6)(yaml@2.8.1):
+  postcss-load-config@6.0.1(postcss@8.5.6)(tsx@4.20.6)(yaml@2.8.2):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
       postcss: 8.5.6
       tsx: 4.20.6
-      yaml: 2.8.1
+      yaml: 2.8.2
 
   postcss-selector-parser@6.1.2:
     dependencies:
@@ -8467,7 +8507,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.5.1(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1):
+  tsup@8.5.1(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.27.0)
       cac: 6.7.14
@@ -8478,7 +8518,7 @@ snapshots:
       fix-dts-default-cjs-exports: 1.0.1
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1(postcss@8.5.6)(tsx@4.20.6)(yaml@2.8.1)
+      postcss-load-config: 6.0.1(postcss@8.5.6)(tsx@4.20.6)(yaml@2.8.2)
       resolve-from: 5.0.0
       rollup: 4.53.3
       source-map: 0.7.6
@@ -8747,11 +8787,11 @@ snapshots:
   yaml-eslint-parser@1.3.1:
     dependencies:
       eslint-visitor-keys: 3.4.3
-      yaml: 2.8.1
+      yaml: 2.8.2
 
   yaml@1.10.2: {}
 
-  yaml@2.8.1: {}
+  yaml@2.8.2: {}
 
   yargs-parser@20.2.9: {}
 

@@ -2,7 +2,14 @@ description: OK
 content:
   application/json:
     schema:
-      $ref: ../../schemas/CurrentUser.yaml
+      x-if:
+        when: jsonschema
+        then:
+          oneOf:
+            - $ref: ../../schemas/CurrentUser.yaml
+            - $ref: ../../schemas/RequiresTwoFactorAuth.yaml
+        else:
+          $ref: ../../schemas/CurrentUser.yaml
 headers:
   Set-Cookie:
     description: Successful authentication returns an `auth` cookie.
