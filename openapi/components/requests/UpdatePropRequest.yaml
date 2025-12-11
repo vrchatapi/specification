@@ -16,7 +16,7 @@ properties:
   propSignature:
     type: string
   spawnType:
-    $ref: ./PropSpawnType.yaml
+    $ref: ../schemas/PropSpawnType.yaml
   tags:
     type: array
     items:
@@ -24,4 +24,4 @@ properties:
   unityVersion:
     type: string
   worldPlacementMask:
-    $ref: ./PropPlacementMask.yaml
+    $ref: ../schemas/PropPlacementMask.yaml
