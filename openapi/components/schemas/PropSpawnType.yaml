@@ -1,0 +1,9 @@
+title: PropSpawnType
+type: integer
+description: |-
+  How a prop is summoned and interacted with.
+  0: the prop fixed to some surface in the world
+  1: the prop is a pickup and may be held by users
+  2: ???
+default: 1
+minimum: 0

@@ -1,0 +1,49 @@
+title: APIConfigAudioConfig
+type: object
+description: Global configuration for Steam Audio
+properties:
+  eq:
+    type: number
+    description: Unknown
+  nearFieldILDNudge:
+    type: number
+    description: Unknown
+  nearFieldILDNudgeDistance:
+    type: number
+    description: Unknown
+  nearFieldILDNudgeEarRadius:
+    type: number
+    description: Unknown
+  perEarDirectionalityEarRadius:
+    type: number
+    description: Unknown
+  perEarDirectionalityFadeDistance:
+    type: number
+    description: Unknown
+  perEarDirectionalityMaxScale:
+    type: number
+    description: Unknown
+  perEarDirectionalityPCFactor:
+    type: number
+    description: Unknown
+  trackingScaleMax:
+    type: number
+    description: Unknown
+  trackingScaleMin:
+    type: number
+    description: Unknown
+  trackingScaleMultiplier:
+    type: number
+    description: Unknown
+required:
+  - eq
+  - nearFieldILDNudge
+  - nearFieldILDNudgeDistance
+  - nearFieldILDNudgeEarRadius
+  - perEarDirectionalityEarRadius
+  - perEarDirectionalityFadeDistance
+  - perEarDirectionalityMaxScale
+  - perEarDirectionalityPCFactor
+  - trackingScaleMax
+  - trackingScaleMin
+  - trackingScaleMultiplier

@@ -1,0 +1,5 @@
+title: TransferGroupRequest
+type: object
+properties:
+  transferTargetId:
+    $ref: ../schemas/UserID.yaml

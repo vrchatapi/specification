@@ -1,0 +1,41 @@
+title: CreatePropRequest
+type: object
+properties:
+  assetUrl:
+    type: string
+  assetVersion:
+    type: integer
+  description:
+    type: string
+  id:
+    $ref: ../schemas/PropID.yaml
+  imageUrl:
+    type: string
+  name:
+    type: string
+  platform:
+    $ref: ../schemas/Platform.yaml
+  propSignature:
+    type: string
+  spawnType:
+    $ref: ../schemas/PropSpawnType.yaml
+  tags:
+    type: array
+    items:
+      $ref: ../schemas/Tag.yaml
+  unityVersion:
+    type: string
+  worldPlacementMask:
+    $ref: ../schemas/PropPlacementMask.yaml
+required:
+  - assetUrl
+  - assetVersion
+  - description
+  - id
+  - imageUrl
+  - name
+  - platform
+  - spawnType
+  - tags
+  - unityVersion
+  - worldPlacementMask

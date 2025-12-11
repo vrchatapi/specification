@@ -1,0 +1,5 @@
+title: JoinGroupRequest
+type: object
+properties:
+  inviteId:
+    type: string

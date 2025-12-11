@@ -1,0 +1,11 @@
+description: Successful response after cancelling a group transfer.
+content:
+  application/json:
+    examples:
+      Initiate Transfer:
+        value:
+          success:
+            message: Group transfer cancelled.
+            status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

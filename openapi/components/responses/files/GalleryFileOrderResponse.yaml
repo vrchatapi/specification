@@ -1,0 +1,5 @@
+description: Returns a list of File IDs.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/GroupGalleryFileOrder.yaml

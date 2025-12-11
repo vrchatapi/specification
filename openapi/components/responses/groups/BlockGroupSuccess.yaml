@@ -1,0 +1,11 @@
+description: Successful response after blocking a Group.
+content:
+  application/json:
+    examples:
+      Blocked Group:
+        value:
+          success:
+            message: You've blocked the group.
+            status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

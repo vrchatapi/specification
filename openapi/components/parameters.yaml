@@ -21,6 +21,20 @@ adminAssetBundleId:
   schema:
     type: string
     example: aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d
+assetReviewId:
+  name: assetReviewId
+  description: Must be an valid asset review ID.
+  required: true
+  in: path
+  schema:
+    type: string
+authorId:
+  name: authorId
+  description: Must be a valid user ID.
+  required: true
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 avatarId:
   name: avatarId
   description: Must be a valid avatar ID.
@@ -481,6 +495,14 @@ inventoryTemplateId:
   schema:
     type: string
     example: invt_00000000-0000-0000-0000-000000000000
+isInternalVariant:
+  name: isInternalVariant
+  description: Not quite sure what this actually does (exists on the website but doesn't seem to be used)
+  required: false
+  in: query
+  schema:
+    type: boolean
+    example: false
 jamId:
   name: jamId
   description: Must be a valid query ID.

@@ -26,8 +26,7 @@ properties:
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   spawnType:
-    type: integer
-    default: 0
+    $ref: ./PropSpawnType.yaml
   tags:
     type: array
     items:
@@ -44,8 +43,7 @@ properties:
     minItems: 1
     uniqueItems: true
   worldPlacementMask:
-    type: integer
-    default: 1
+    $ref: ./PropPlacementMask.yaml
 required:
   - _created_at
   - _updated_at

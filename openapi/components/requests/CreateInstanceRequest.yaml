@@ -31,6 +31,9 @@ properties:
     default: false
   ownerId:
     $ref: ../schemas/InstanceOwnerId.yaml
+  playerPersistenceEnabled:
+    type: boolean
+    nullable: true
   queueEnabled:
     type: boolean
     default: false

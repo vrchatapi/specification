@@ -1,0 +1,9 @@
+title: GroupGalleryFileOrder
+type: object
+properties:
+  ids:
+    type: array
+    items:
+      $ref: ./FileID.yaml
+required:
+  - ids

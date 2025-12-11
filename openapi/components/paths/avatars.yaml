@@ -42,6 +42,7 @@ paths:
         - $ref: ../parameters.yaml#/maxUnityVersion
         - $ref: ../parameters.yaml#/minUnityVersion
         - $ref: ../parameters.yaml#/platform
+        - $ref: ../parameters.yaml#/isInternalVariant
       security:
         - authCookie: []
       responses:

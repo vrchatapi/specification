@@ -4,6 +4,9 @@ description: ""
 properties:
   acknowledgements:
     type: string
+  activeAssetReviewId:
+    type: string
+    description: Only present for the avatar author on avatars under active review.
   assetUrl:
     type: string
     description: "Not present from general search `/avatars`, only on specific requests `/avatars/{avatarId}`."
@@ -44,6 +47,9 @@ properties:
   name:
     type: string
     minLength: 1
+  pendingUpload:
+    type: boolean
+    default: false
   performance:
     type: object
     properties:

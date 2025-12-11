@@ -4,6 +4,47 @@ info:
   description: Props are interactable items users can spawn into instances.
   version: "1.0"
 paths:
+  /props:
+    get:
+      operationId: listProps
+      summary: List Props
+      description: Returns a list Prop objects.
+      tags:
+        - props
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/authorId
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/props/PropListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
+    post:
+      operationId: createProp
+      summary: Create Prop
+      description: Create a Prop and return the new Prop object.
+      tags:
+        - props
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreatePropRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/props/PropResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
   "/props/{propId}":
     parameters:
       - $ref: ../parameters.yaml#/propId
@@ -20,6 +61,102 @@ paths:
           $ref: ../responses/props/PropResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/props/NoSuchPropError.yaml
+    put:
+      operationId: updateProp
+      summary: Update Prop
+      description: Updates a Prop and returns the updated Prop object. When updating the asset bundle, all of `name`, `assetUrl`, `platform`, `unityVersion`, `assetVersion`, `spawnType`, and `worldPlacementMask` must be present, as well as `propSignature` if this value is not blank.
+      tags:
+        - props
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdatePropRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/props/PropResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
+        "404":
+          $ref: ../responses/props/NoSuchPropError.yaml
+    delete:
+      operationId: deleteProp
+      summary: Delete Prop
+      description: Delete a Prop.
+      tags:
+        - props
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          description: The Prop is successfully deleted.
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
+        "404":
+          $ref: ../responses/props/NoSuchPropError.yaml
+  "/props/{propId}/publish":
+    parameters:
+      - $ref: ../parameters.yaml#/propId
+    get:
+      operationId: getPropPublishStatus
+      summary: Get Prop Publish Status
+      description: Returns a PropPublishStatus object.
+      tags:
+        - props
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/props/PropPublishStatusResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
+        "404":
+          $ref: ../responses/props/NoSuchPropError.yaml
+    put:
+      operationId: publishProp
+      summary: Publish Prop
+      description: Publish a Prop and return the updated PropPublishStatus object.
+      tags:
+        - props
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/props/PropPublishStatusResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
+        "404":
+          $ref: ../responses/props/NoSuchPropError.yaml
+    delete:
+      operationId: unpublishProp
+      summary: Unpublish Prop
+      description: Unpublish a Prop and return the updated PropPublishStatus object.
+      tags:
+        - props
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/props/PropPublishStatusResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
+        "404":
+          $ref: ../responses/props/NoSuchPropError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml

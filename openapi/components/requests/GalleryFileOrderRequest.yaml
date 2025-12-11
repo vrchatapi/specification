@@ -1,0 +1,12 @@
+title: GalleryFileOrderRequest
+type: object
+properties:
+  galleryId:
+    $ref: ../schemas/GroupGalleryID.yaml
+  ids:
+    type: array
+    items:
+      $ref: ../schemas/FileID.yaml
+required:
+  - galleryId
+  - ids

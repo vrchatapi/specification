@@ -1,0 +1,11 @@
+description: Error response when trying to block a group you already have blocked.
+content:
+  application/json:
+    examples:
+      403 Already BLocked:
+        value:
+          error:
+            message: You must leave a group before blocking it․
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

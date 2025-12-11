@@ -1,0 +1,10 @@
+title: PropPlacementMask
+type: integer
+description: |-
+  Bitmask for restrictions on what world surfaces a prop may be summoned.
+  0: no restrictions
+  1: floors
+  2: walls
+  4: ceilings
+default: 1
+minimum: 0

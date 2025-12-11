@@ -1,0 +1,31 @@
+title: Agreement
+type: object
+properties:
+  agreementCode:
+    $ref: ./AgreementCode.yaml
+  agreementFulltext:
+    type: string
+    description: The full text of the agreement.
+    example: By clicking OK, I certify that I have the necessary rights to upload this content and that it will not infringe on any third-party legal or intellectual property rights.
+  contentId:
+    type: string
+    description: The id of the content being uploaded, such as a WorldID, AvatarID, or PropID.
+    example: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
+  id:
+    type: string
+    description: The id of the agreement.
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  version:
+    type: integer
+    description: The version of the agreement.
+    example: 1
+required:
+  - agreementCode
+  - agreementFulltext
+  - contentId
+  - id
+  - tags
+  - version

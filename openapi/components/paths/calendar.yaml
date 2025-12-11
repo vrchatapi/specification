@@ -100,6 +100,7 @@ paths:
         - $ref: ../parameters.yaml#/utcOffset
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/isInternalVariant
       security:
         - authCookie: []
       responses:
