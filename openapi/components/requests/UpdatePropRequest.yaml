@@ -16,8 +16,7 @@ properties:
   propSignature:
     type: string
   spawnType:
-    type: integer
-    example: 0
+    $ref: ./PropSpawnType.yaml
   tags:
     type: array
     items:
@@ -25,5 +24,4 @@ properties:
   unityVersion:
     type: string
   worldPlacementMask:
-    type: integer
-    example: 1
+    $ref: ./PropPlacementMask.yaml
