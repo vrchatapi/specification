@@ -1,0 +1,13 @@
+title: NotificationV2DataBadgeEarned
+type: object
+properties:
+  badgeDescription:
+    type: string
+  badgeId:
+    $ref: ./BadgeID.yaml
+  badgeName:
+    type: string
+required:
+  - badgeDescription
+  - badgeId
+  - badgeName

@@ -14,11 +14,19 @@ properties:
     example:
       OneOf:
         - {}
+        - NotificationV2DataBadgeEarned
         - NotificationV2DataBoop
         - NotificationV2DataEventAnnouncement
         - NotificationV2DataGroupAnnouncement
         - NotificationV2DataGroupInformative
         - NotificationV2DataGroupTransfer
+  details:
+    type: object
+    description: Only boops appear to have this property
+    example:
+      OneOf:
+        - {}
+        - NotificationV2DetailsBoop
   expiresAt:
     type: string
     format: date-time
