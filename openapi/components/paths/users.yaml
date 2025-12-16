@@ -273,6 +273,13 @@ paths:
       description: Returns a mapping of GroupIDs to arrays of GroupPermissions.
       tags:
         - users
+      parameters:
+        - name: groupIds
+          description: Comma-separated list of GroupIDs to retrieve permissions for.
+          in: query
+          required: false
+          schema:
+            type: string
       security:
         - authCookie: []
       responses:
