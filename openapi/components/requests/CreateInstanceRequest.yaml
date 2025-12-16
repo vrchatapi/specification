@@ -4,6 +4,8 @@ properties:
   ageGate:
     type: boolean
     default: false
+  calendarEntryId:
+    type: string
   canRequestInvite:
     type: boolean
     description: Only applies to invite type instances to make them invite+
