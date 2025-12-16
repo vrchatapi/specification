@@ -275,11 +275,12 @@ paths:
         - users
       parameters:
         - name: groupIds
-          description: Comma-separated list of GroupIDs to retrieve permissions for.
-          in: query
+          description: Comma-separated (no spaces!) list of GroupIDs to retrieve permissions for.
           required: false
+          in: query
           schema:
             type: string
+            example: grp_00000000-0000-0000-0000-000000000000,grp_11111111-1111-1111-1111-111111111111
       security:
         - authCookie: []
       responses:
