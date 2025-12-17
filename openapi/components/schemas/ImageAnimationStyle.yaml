@@ -1,0 +1,32 @@
+title: ImageAnimationStyle
+type: string
+description: Animation style for images.
+enum:
+  - aura
+  - bats
+  - bees
+  - bounce
+  - cloud
+  - confetti
+  - crying
+  - dislike
+  - fire
+  - idea
+  - lasers
+  - like
+  - magnet
+  - mistletoe
+  - money
+  - noise
+  - orbit
+  - pizza
+  - rain
+  - rotate
+  - shake
+  - snow
+  - snowball
+  - spin
+  - splash
+  - stop
+  - zzz
+example: bats

@@ -1,0 +1,12 @@
+title: ImageMask
+type: string
+description: Mask shape for images.
+enum:
+  - circle
+  - flower
+  - heart
+  - pow
+  - square
+  - star
+default: square
+example: circle

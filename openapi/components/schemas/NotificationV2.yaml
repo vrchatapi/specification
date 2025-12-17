@@ -24,7 +24,7 @@ properties:
       else:
         - $ref: ./NotificationV2DataGeneric.yaml
   details:
-    - $ref: ./NotificationV2DetailsBoop.yaml
+    $ref: ./NotificationV2DetailsBoop.yaml
   expiresAt:
     type: string
     format: date-time
