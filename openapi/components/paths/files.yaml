@@ -181,7 +181,7 @@ paths:
               properties:
                 animationStyle:
                   type: string
-                  description: Animation style for sticker, required for emoji.
+                  description: Animation style for sticker, required for emoji. Must be one of aura, bats, bees, bounce, cloud, confetti, crying, dislike, fire, idea, lasers, like, magnet, mistletoe, money, noise, orbit, pizza, rain, rotate, shake, snow, snowball, spin, splazh, stop, zzz.
                   example: bats
                 file:
                   type: string
@@ -193,13 +193,16 @@ paths:
                 framesOverTime:
                   type: integer
                   description: Required for emojianimated. Animation frames per second (1-64)
+                loopStyle:
+                  type: string
+                  description: Optional for emojianimated. Must be either linear or pingpong. Defaults to linear.
                 maskTag:
                   type: string
-                  description: Mask of the sticker, optional for emoji.
+                  description: Mask of the sticker, optional for emoji. Must be one of square, circle, flower, heart, star, pow.
                   example: square
                 tag:
                   type: string
-                  description: Needs to be either icon, gallery, sticker, emoji, or emojianimated
+                  description: Must be one of product, gallery, icon, emoji, emojianimated, sticker, avatargallery, listinggallery, avatarimage, bundle, admin.
               required:
                 - file
                 - tag

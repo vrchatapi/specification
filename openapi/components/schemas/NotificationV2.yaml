@@ -10,23 +10,21 @@ properties:
     type: string
     format: date-time
   data:
-    type: object
-    example:
-      OneOf:
-        - {}
-        - NotificationV2DataBadgeEarned
-        - NotificationV2DataBoop
-        - NotificationV2DataEventAnnouncement
-        - NotificationV2DataGroupAnnouncement
-        - NotificationV2DataGroupInformative
-        - NotificationV2DataGroupTransfer
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - $ref: ./NotificationV2DataEmpty.yaml
+          - $ref: ./NotificationV2DataBadgeEarned.yaml
+          - $ref: ./NotificationV2DataBoop.yaml
+          - $ref: ./NotificationV2DataEventAnnouncement.yaml
+          - $ref: ./NotificationV2DataGroupAnnouncement.yaml
+          - $ref: ./NotificationV2DataGroupInformative.yaml
+          - $ref: ./NotificationV2DataGroupTransfer.yaml
+      else:
+        - $ref: ./NotificationV2DataGeneric.yaml
   details:
-    type: object
-    description: Only boops appear to have this property
-    example:
-      OneOf:
-        - {}
-        - NotificationV2DetailsBoop
+    - $ref: ./NotificationV2DetailsBoop.yaml
   expiresAt:
     type: string
     format: date-time
