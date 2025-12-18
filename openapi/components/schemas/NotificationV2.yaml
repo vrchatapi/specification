@@ -22,7 +22,7 @@ properties:
           - $ref: ./NotificationV2DataGroupInformative.yaml
           - $ref: ./NotificationV2DataGroupTransfer.yaml
       else:
-        - $ref: ./NotificationV2DataGeneric.yaml
+        $ref: ./NotificationV2DataGeneric.yaml
   details:
     $ref: ./NotificationV2DetailsBoop.yaml
   expiresAt:
