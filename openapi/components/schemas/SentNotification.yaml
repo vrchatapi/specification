@@ -6,16 +6,30 @@ properties:
     type: string
     format: date-time
   details:
-    type: object
-    example:
-      OneOf:
-        - {}
-        - NotificationDetailBoop
-        - NotificationDetailInvite
-        - NotificationDetailInviteResponse
-        - NotificationDetailRequestInvite
-        - NotificationDetailRequestInviteResponse
-        - NotificationDetailVoteToKick
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - $ref: ../schemas/NotificationDetailBoop.yaml
+          - $ref: ../schemas/NotificationDetailInvite.yaml
+          - $ref: ../schemas/NotificationDetailInviteResponse.yaml
+          - $ref: ../schemas/NotificationDetailRequestInvite.yaml
+          - $ref: ../schemas/NotificationDetailRequestInviteResponse.yaml
+          - $ref: ../schemas/NotificationDetailVoteToKick.yaml
+          - type: object
+            properties: { }
+            additionalProperties: false
+      else:
+        type: object
+        example:
+          OneOf:
+            - {}
+            - NotificationDetailBoop
+            - NotificationDetailInvite
+            - NotificationDetailInviteResponse
+            - NotificationDetailRequestInvite
+            - NotificationDetailRequestInviteResponse
+            - NotificationDetailVoteToKick
   id:
     type: string
     minLength: 1
