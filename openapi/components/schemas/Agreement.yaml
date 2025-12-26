@@ -11,6 +11,10 @@ properties:
     type: string
     description: The id of the content being uploaded, such as a WorldID, AvatarID, or PropID.
     example: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
+  created:
+    description: When the agreement was created
+    format: datetime
+    type: string
   id:
     type: string
     description: The id of the agreement.
@@ -18,14 +22,17 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  userId:
+    $ref: ./UserID.yaml
   version:
     type: integer
     description: The version of the agreement.
     example: 1
 required:
   - agreementCode
-  - agreementFulltext
   - contentId
+  - created
   - id
   - tags
+  - userId
   - version

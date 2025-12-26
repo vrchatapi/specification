@@ -733,7 +733,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          description: OK
+          $ref: ../responses/groups/DeleteGroupMemberSuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
