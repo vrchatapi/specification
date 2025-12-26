@@ -675,7 +675,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/groups/GroupMemberListResponse.yaml
+          $ref: ../responses/groups/GroupMemberSearchResponse.yaml
         "400":
           $ref: ../responses/users/UsersInvalidSearchError.yaml
         "401":
