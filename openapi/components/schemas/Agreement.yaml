@@ -12,9 +12,9 @@ properties:
     description: The id of the content being uploaded, such as a WorldID, AvatarID, or PropID.
     example: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
   created:
+    type: string
     description: When the agreement was created
     format: datetime
-    type: string
   id:
     type: string
     description: The id of the agreement.
