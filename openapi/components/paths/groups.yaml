@@ -20,7 +20,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/files/GroupGalleryFileOrderResponse.yaml
+          $ref: ../responses/groups/GroupGalleryFileOrderResponse.yaml
         "404":
           $ref: ../responses/files/FileNotFoundError.yaml
   /groups:
