@@ -1,0 +1,7 @@
+title: UpdateAssetReviewNotesRequest
+type: object
+properties:
+  reviewNotes:
+    type: string
+required:
+  - reviewNotes

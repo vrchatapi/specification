@@ -1,4 +1,4 @@
-title: GalleryFileOrderRequest
+title: GroupGalleryFileOrderRequest
 type: object
 properties:
   galleryId:

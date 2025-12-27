@@ -17,7 +17,7 @@
 "/analysis/{fileId}/{versionId}/standard":
   $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}~1standard"
 "/assetReview/{assetReviewId}/notes":
-  $ref: "./paths/files.yaml#/paths/~1assetReview~1{assetReviewId}~1notes"
+  $ref: "./paths/economy.yaml#/paths/~1assetReview~1{assetReviewId}~1notes"
 /auth:
   $ref: "./paths/authentication.yaml#/paths/~1auth"
 /auth/confirmEmail:
@@ -157,7 +157,7 @@
 /files:
   $ref: "./paths/files.yaml#/paths/~1files"
 /files/order:
-  $ref: "./paths/files.yaml#/paths/~1files~1order"
+  $ref: "./paths/groups.yaml#/paths/~1files~1order"
 /gallery:
   $ref: "./paths/files.yaml#/paths/~1gallery"
 /groups:

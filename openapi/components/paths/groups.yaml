@@ -4,6 +4,25 @@ info:
   description: Group Docs Here
   version: "1.0"
 paths:
+  /files/order:
+    put:
+      operationId: setGroupGalleryFileOrder
+      summary: Set Group Gallery File Order
+      description: Set the order of the files in a group gallery
+      tags:
+        - files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/GroupGalleryFileOrderRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/GroupGalleryFileOrderResponse.yaml
+        "404":
+          $ref: ../responses/files/FileNotFoundError.yaml
   /groups:
     get:
       operationId: searchGroups
