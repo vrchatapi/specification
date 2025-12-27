@@ -1,0 +1,29 @@
+title: GroupTransferable
+type: object
+properties:
+  requirements:
+    type: object
+    properties:
+      groupNotMonetized:
+        type: boolean
+        default: false
+      hasVRCPlus:
+        type: boolean
+        default: false
+      hasVerifiedEmail:
+        type: boolean
+        default: false
+      targetCanOwnMoreGroups:
+        type: boolean
+        default: false
+      targetIsGroupMember:
+        type: boolean
+        default: false
+    required:
+      - groupNotMonetized
+      - hasVRCPlus
+      - hasVerifiedEmail
+      - targetCanOwnMoreGroups
+      - targetIsGroupMember
+required:
+  - requirements

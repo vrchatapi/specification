@@ -28,6 +28,9 @@ properties:
   slowUpdateFactorThreshold:
     type: integer
     description: Unknown
+  useDirectPlayerSerialization:
+    type: boolean
+    description: Unknown
   viewSegmentLength:
     type: integer
     description: Unknown
@@ -41,4 +44,5 @@ required:
   - playerOrderBucketSize
   - playerOrderFactor
   - slowUpdateFactorThreshold
+  - useDirectPlayerSerialization
   - viewSegmentLength

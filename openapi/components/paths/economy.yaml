@@ -68,6 +68,27 @@ paths:
           $ref: ../responses/economy/TransactionResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/assetReview/{assetReviewId}/notes":
+    parameters:
+      - $ref: ../parameters.yaml#/assetReviewId
+    put:
+      operationId: updateAssetReviewNotes
+      summary: Update Asset Review Notes
+      description: Update notes regarding an asset review.
+      tags:
+        - files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateAssetReviewNotesRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          description: The asset review notes are submitted.
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /auth/user/subscription:
     get:
       operationId: getCurrentSubscriptions

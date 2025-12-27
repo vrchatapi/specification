@@ -1,0 +1,11 @@
+description: Error response when trying to cancel a transfer for a group without a pending transfer.
+content:
+  application/json:
+    examples:
+      400 No Pending Transfer:
+        value:
+          error:
+            message: No group transfer to cancel.
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

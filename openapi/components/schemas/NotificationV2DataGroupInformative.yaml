@@ -1,0 +1,12 @@
+title: NotificationV2DataGroupInformative
+type: object
+properties:
+  groupId:
+    $ref: ./GroupID.yaml
+  groupName:
+    type: string
+  transferTargetDisplayName:
+    type: string
+required:
+  - groupId
+  - groupName

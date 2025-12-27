@@ -1,0 +1,17 @@
+title: ImagePurpose
+type: string
+description: Indication of the purpose for uploading images.
+enum:
+  - admin
+  - avatargallery
+  - avatarimage
+  - bundle
+  - emoji
+  - emojianimated
+  - gallery
+  - icon
+  - listinggallery
+  - product
+  - sticker
+default: gallery
+example: emojianimated

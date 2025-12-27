@@ -1,0 +1,15 @@
+title: NotificationV2DetailsBoop
+type: object
+description: Either inventoryItemId by itself, or emojiId with optional emojiVersion
+properties:
+  emojiId:
+    $ref: ../schemas/EmojiID.yaml
+  emojiVersion:
+    type: integer
+    nullable: true
+  inventoryItemId:
+    $ref: ../schemas/InventoryItemID.yaml
+required:
+  - emojiId
+  - emojiVersion
+  - inventoryItemId

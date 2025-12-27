@@ -1,0 +1,5 @@
+description: Returns a single Agreement object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Agreement.yaml

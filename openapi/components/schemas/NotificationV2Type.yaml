@@ -9,10 +9,13 @@ enum:
   - economy.received.gift
   - event.announcement
   - group.announcement
+  - group.event.created
+  - group.event.starting
   - group.informative
   - group.invite
   - group.joinRequest
   - group.post
+  - group.transfer
   - invite.instance.contentGated
   - moderation.contentrestriction
   - moderation.notice

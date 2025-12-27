@@ -1,0 +1,11 @@
+description: Error response when trying to perform operations on a non-existing prop.
+content:
+  application/json:
+    examples:
+      404 Prop Not Found:
+        value:
+          error:
+            message: That prop does not exist.
+            status_code: 404
+    schema:
+      $ref: ../../schemas/Error.yaml

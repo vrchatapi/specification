@@ -1,0 +1,10 @@
+title: NotificationV2DataGroupTransfer
+type: object
+properties:
+  groupName:
+    type: string
+  ownerUserDisplayName:
+    type: string
+required:
+  - groupName
+  - ownerUserDisplayName

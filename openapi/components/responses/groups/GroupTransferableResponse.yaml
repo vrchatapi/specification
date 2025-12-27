@@ -1,0 +1,5 @@
+description: Returns a single GroupTransferable object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/GroupTransferable.yaml

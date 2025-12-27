@@ -1,0 +1,4 @@
+title: NotificationV2DataGeneric
+type: object
+additionalProperties:
+  type: string

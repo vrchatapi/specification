@@ -3,19 +3,32 @@ type: object
 description: ""
 properties:
   animationStyle:
-    type: string
-    example: bats
+    $ref: ./ImageAnimationStyle.yaml
   extension:
     type: string
     example: .unitypackage
     minLength: 1
+  frames:
+    type: integer
+    description: The number of frames for animated spritesheet images.
+    maximum: 64
+    minimum: 2
+  framesOverTime:
+    type: integer
+    description: The frames per second for animated spritesheet images.
+    maximum: 64
+    minimum: 1
   id:
     $ref: ./FileID.yaml
+  loopStyle:
+    $ref: ./ImageLoopStyle.yaml
   maskTag:
-    type: string
-    example: square
+    $ref: ./ImageMask.yaml
   mimeType:
     $ref: ./MIMEType.yaml
+  modifiedThumbnailFileName:
+    type: string
+    example: thumbnails/file_00000000-0000-0000-0000-000000000000.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.1.modified-thumbnail-256.png
   name:
     type: string
     description: ""

@@ -1,8 +1,12 @@
 title: NotificationV2ResponseType
 type: string
 example: >
+  Accept:
+    value: accept
   Boop:
     value: boop
+  Decline:
+    value: decline
   Delete:
     value: delete
   Unsubscribe:
