@@ -64,13 +64,13 @@ properties:
     nullable: true
     items:
       $ref: ./GroupRoleID.yaml
-  startsAt:
-    type: string
-    format: date-time
   seriesId:
     type: string
     description: So far unused, always "null"
     nullable: true
+  startsAt:
+    type: string
+    format: date-time
   tags:
     type: array
     description: Custom tags for this event
