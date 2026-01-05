@@ -79,11 +79,11 @@ paths:
         `require` is used to limit what Information Pushes should be included in the response. This is usually used in combination with `include`, and is an "all of" search.
       tags:
         - miscellaneous
-      security:
-        - authCookie: []
       parameters:
         - $ref: ../parameters.yaml#/require
         - $ref: ../parameters.yaml#/include
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/system/InfoPushListResponse.yaml
