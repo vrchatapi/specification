@@ -82,6 +82,8 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/require
         - $ref: ../parameters.yaml#/include
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/system/InfoPushListResponse.yaml
