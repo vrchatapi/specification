@@ -4,6 +4,7 @@ enum:
   - application/gzip
   - application/octet-stream
   - application/x-avatar
+  - application/x-prop
   - application/x-rsync-delta
   - application/x-rsync-signature
   - application/x-world
