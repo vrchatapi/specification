@@ -5,27 +5,27 @@ nullable: true
 properties:
   acceptedByDisplayName:
     type: string
-    description: Only missing when explitly fetching own user.
+    description: Only missing when explicitly fetching own user.
     nullable: true
   acceptedById:
     type: string
-    description: Only missing when explitly fetching own user.
+    description: Only missing when explicitly fetching own user.
     nullable: true
   bannedAt:
     type: string
-    description: Only missing when explitly fetching own user.
+    description: Only missing when explicitly fetching own user.
     nullable: true
     format: date-time
   createdAt:
     type: string
-    description: Only missing when explitly fetching own user.
+    description: Only missing when explicitly fetching own user.
     nullable: true
     format: date-time
   groupId:
     $ref: ./GroupID.yaml
   hasJoinedFromPurchase:
     type: boolean
-    description: Only missing when explitly fetching own user.
+    description: Missing when explicitly fetching own user, or when group isn't linked to a purchase.
   id:
     $ref: ./GroupMemberID.yaml
   isRepresenting:
@@ -38,7 +38,7 @@ properties:
     default: false
   isSubscribedToEventAnnouncements:
     type: boolean
-    description: Only missing when explitly fetching own user.
+    description: Only missing when explicitly fetching own user.
   joinedAt:
     type: string
     nullable: true
@@ -53,7 +53,7 @@ properties:
       $ref: ./GroupRoleID.yaml
   managerNotes:
     type: string
-    description: Only missing when explitly fetching own user.
+    description: Only missing when explicitly fetching own user.
     nullable: true
   membershipStatus:
     $ref: ./GroupMemberStatus.yaml
