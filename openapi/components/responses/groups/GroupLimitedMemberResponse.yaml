@@ -1,5 +1,0 @@
-description: Returns a list of GroupMember objects.
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/GroupLimitedMember.yaml

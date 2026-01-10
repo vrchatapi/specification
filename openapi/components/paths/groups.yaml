@@ -708,14 +708,14 @@ paths:
     get:
       operationId: getGroupMember
       summary: Get Group Member
-      description: Returns a LimitedGroup Member.
+      description: Returns a GroupMember.
       tags:
         - groups
       security:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/groups/GroupLimitedMemberResponse.yaml
+          $ref: ../responses/groups/GroupMemberResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
@@ -737,7 +737,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/groups/GroupLimitedMemberResponse.yaml
+          $ref: ../responses/groups/GroupMemberResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":

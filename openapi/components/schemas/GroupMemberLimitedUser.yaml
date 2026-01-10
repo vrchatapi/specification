@@ -1,6 +1,7 @@
 title: GroupMemberLimitedUser
 type: object
 description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
+nullable: true
 properties:
   currentAvatarTags:
     type: array
