@@ -99,7 +99,7 @@ jobs:
 
       - run: bun --bun run bundle
 
-      - run: pnpm add @actions/artifact
+      - run: pnpm add @actions/artifact@5.0.2
 
       - uses: actions/github-script@v8
         with:
@@ -107,9 +107,9 @@ jobs:
             const { readdir } = require("node:fs/promises");
             const { resolve, dirname } = require("node:path");
 
-            const { createArtifactClient } = require("@actions/artifact");
-            const artifact = createArtifactClient();
+            const { DefaultArtifactClient } = require("@actions/artifact");
 
+            const artifact = new DefaultArtifactClient();
             const files = await readdir("./dist");
 
             const artifacts = await Promise.all(files.map(async (file) => {
