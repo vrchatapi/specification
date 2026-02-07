@@ -9,6 +9,6 @@ enum:
   - hidden
   - verified
 x-enum-varnames:
-  - hidden
   - plus18
+  - hidden
   - verified
