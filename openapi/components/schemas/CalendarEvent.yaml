@@ -19,6 +19,7 @@ properties:
     type: string
   durationInMs:
     type: integer
+    format: int64
   endsAt:
     type: string
     format: date-time
