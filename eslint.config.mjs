@@ -115,7 +115,7 @@ export default configure({
 		"yaml/sort-sequence-values": [
 			"error",
 			{
-				pathPattern: ".*",
+				pathPattern: "^(?!.*x-enum-varnames).*",
 				order: [
 					{
 						order: {
