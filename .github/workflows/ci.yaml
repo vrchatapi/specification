@@ -107,9 +107,7 @@ jobs:
             const { readdir } = require("node:fs/promises");
             const { resolve, dirname } = require("node:path");
 
-            const { DefaultArtifactClient } = require("@actions/artifact");
-
-            const artifact = new DefaultArtifactClient();
+            const artifact = require("@actions/artifact").create();
             const files = await readdir("./dist");
 
             const artifacts = await Promise.all(files.map(async (file) => {
