@@ -74,6 +74,27 @@ jobs:
         continue-on-error: true
         run: pnpm run lint-ci
 
+      # Will fail if no paths are defined
+      - name: assert no unused paths
+        if: env.changes != ''
+        run: |
+          status=0
+          mapfile -t expected <<< "$(yq -re '.paths | keys' openapi/components/paths/*.yaml | yq -r 'sort_by(.) | .[]')"
+          mapfile -t actual <<< "$(yq -re 'sort_by(keys) | keys[]' openapi/components/paths.yaml)"
+
+          for ((i = 0, j = 0; i < "${#expected[@]}"; i++)); do
+              if [[ "${expected[$i]}" == "${actual[$j]}" ]]; then
+                  j=$((j + 1))
+              else
+                  status=2
+                  echo "Missing path: ${expected[$i]}" >&2;
+              fi
+          done;
+
+          if [[ "$status" -ne 0 ]]; then
+              exit "$status"
+          fi
+
   bundle:
     runs-on: ubuntu-latest
     steps:
