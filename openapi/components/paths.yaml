@@ -8,8 +8,6 @@
   $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions~1{transactionId}"
 "/adminassetbundles/{adminAssetBundleId}":
   $ref: "./paths/files.yaml#/paths/~1adminassetbundles~1{adminAssetBundleId}"
-/agreement:
-  $ref: "./paths/files.yaml#/paths/~1agreement"
 "/analysis/{fileId}/{versionId}":
   $ref: "./paths/files.yaml#/paths/~1analysis~1{fileId}~1{versionId}"
 "/analysis/{fileId}/{versionId}/security":
