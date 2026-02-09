@@ -14,20 +14,17 @@ properties:
       when: jsonschema
       then:
         oneOf:
+          - $ref: ./NotificationV2DataEmpty.yaml
+          - $ref: ./NotificationV2DataBadgeEarned.yaml
           - $ref: ./NotificationV2DataBoop.yaml
           - $ref: ./NotificationV2DataEventAnnouncement.yaml
           - $ref: ./NotificationV2DataGroupAnnouncement.yaml
-          - type: object
-            properties: { }
-            additionalProperties: false
+          - $ref: ./NotificationV2DataGroupInformative.yaml
+          - $ref: ./NotificationV2DataGroupTransfer.yaml
       else:
-        type: object
-        example:
-          OneOf:
-            - {}
-            - NotificationV2DataBoop
-            - NotificationV2DataEventAnnouncement
-            - NotificationV2DataGroupAnnouncement
+        $ref: ./NotificationV2DataGeneric.yaml
+  details:
+    $ref: ./NotificationV2DetailsBoop.yaml
   expiresAt:
     type: string
     format: date-time

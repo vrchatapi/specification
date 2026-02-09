@@ -1,10 +1,7 @@
 title: NotificationV2DataBoop
 type: object
-description: Either inventoryItemId by itself, or emojiId with optional emojiVersion
 properties:
-  emojiId:
-    $ref: ../schemas/EmojiID.yaml
-  emojiVersion:
-    type: integer
-  inventoryItemId:
-    $ref: ../schemas/InventoryItemID.yaml
+  boopingUserDisplayName:
+    type: string
+required:
+  - boopingUserDisplayName

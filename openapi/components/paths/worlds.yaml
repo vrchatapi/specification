@@ -161,6 +161,7 @@ paths:
         Works unauthenticated but when so will always return `0` for certain fields.
       tags:
         - worlds
+      security: []
       responses:
         "200":
           $ref: ../responses/worlds/WorldResponse.yaml
@@ -211,8 +212,7 @@ paths:
       description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
       tags:
         - worlds
-      security:
-        - authCookie: []
+      security: []
       responses:
         "200":
           $ref: ../responses/worlds/WorldMetadataResponse.yaml

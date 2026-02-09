@@ -1,0 +1,6 @@
+title: DeclineGroupInviteRequest
+type: object
+properties:
+  block:
+    type: boolean
+    default: false

@@ -18,6 +18,59 @@ paths:
       responses:
         "200":
           $ref: ../responses/files/AdminAssetBundleResponse.yaml
+  /agreement:
+    get:
+      operationId: getContentAgreementStatus
+      summary: Get Content Agreement Status
+      description: Returns the agreement status of the currently authenticated user for the given agreementCode, contentId, and version.
+      tags:
+        - files
+      parameters:
+        - name: agreementCode
+          description: The type of agreement (currently content.copyright.owned)
+          required: true
+          in: query
+          schema:
+            $ref: ../schemas/AgreementCode.yaml
+        - name: contentId
+          description: The id of the content being uploaded, such as a WorldID, AvatarID, or PropID
+          required: true
+          in: query
+          schema:
+            type: string
+            example: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
+        - name: version
+          description: The version of the agreement (currently 1)
+          required: true
+          in: query
+          schema:
+            type: integer
+            example: 1
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/AgreementStatusResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    post:
+      operationId: submitContentAgreement
+      summary: Submit Content Agreement
+      description: Returns the agreement of the currently authenticated user for the given agreementCode, contentId, and version.
+      tags:
+        - files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/AgreementRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/files/AgreementResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/analysis/{fileId}/{versionId}":
     parameters:
       - $ref: ../parameters.yaml#/fileId
@@ -106,26 +159,27 @@ paths:
               type: object
               properties:
                 animationStyle:
-                  type: string
-                  description: Animation style for sticker, required for emoji.
-                  example: bats
+                  $ref: ../schemas/ImageAnimationStyle.yaml
                 file:
                   type: string
                   description: The binary blob of the png file.
                   format: binary
                 frames:
                   type: integer
-                  description: Required for emojianimated. Total number of frames to be animated (2-64)
+                  description: Required for animated images. Total number of frames of the spritesheet to be animated.
+                  maximum: 64
+                  minimum: 2
                 framesOverTime:
                   type: integer
-                  description: Required for emojianimated. Animation frames per second (1-64)
+                  description: Required for animated images. Animation frames per second.
+                  maximum: 64
+                  minimum: 1
+                loopStyle:
+                  $ref: ../schemas/ImageLoopStyle.yaml
                 maskTag:
-                  type: string
-                  description: Mask of the sticker, optional for emoji.
-                  example: square
+                  $ref: ../schemas/ImageMask.yaml
                 tag:
-                  type: string
-                  description: Needs to be either icon, gallery, sticker, emoji, or emojianimated
+                  $ref: ../schemas/ImagePurpose.yaml
               required:
                 - file
                 - tag

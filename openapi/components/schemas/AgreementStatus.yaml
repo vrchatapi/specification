@@ -1,0 +1,25 @@
+title: AgreementStatus
+type: object
+properties:
+  agreed:
+    type: boolean
+    description: Whether the user has agreed for this content.
+    example: false
+  agreementCode:
+    $ref: ./AgreementCode.yaml
+  contentId:
+    type: string
+    description: The id of the content being uploaded, such as a WorldID, AvatarID, or PropID.
+    example: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
+  userId:
+    $ref: ./UserID.yaml
+  version:
+    type: integer
+    description: The version of the agreement.
+    example: 1
+required:
+  - agreed
+  - agreementCode
+  - contentId
+  - userId
+  - version

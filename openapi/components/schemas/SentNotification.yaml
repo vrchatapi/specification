@@ -10,26 +10,15 @@ properties:
       when: jsonschema
       then:
         oneOf:
-          - $ref: ../schemas/NotificationDetailBoop.yaml
-          - $ref: ../schemas/NotificationDetailInvite.yaml
-          - $ref: ../schemas/NotificationDetailInviteResponse.yaml
-          - $ref: ../schemas/NotificationDetailRequestInvite.yaml
-          - $ref: ../schemas/NotificationDetailRequestInviteResponse.yaml
-          - $ref: ../schemas/NotificationDetailVoteToKick.yaml
-          - type: object
-            properties: { }
-            additionalProperties: false
+          - $ref: ./NotificationDetailEmpty.yaml
+          - $ref: ./NotificationDetailBoop.yaml
+          - $ref: ./NotificationDetailInvite.yaml
+          - $ref: ./NotificationDetailInviteResponse.yaml
+          - $ref: ./NotificationDetailRequestInvite.yaml
+          - $ref: ./NotificationDetailRequestInviteResponse.yaml
+          - $ref: ./NotificationDetailVoteToKick.yaml
       else:
-        type: object
-        example:
-          OneOf:
-            - {}
-            - NotificationDetailBoop
-            - NotificationDetailInvite
-            - NotificationDetailInviteResponse
-            - NotificationDetailRequestInvite
-            - NotificationDetailRequestInviteResponse
-            - NotificationDetailVoteToKick
+        $ref: ./NotificationDetailGeneric.yaml
   id:
     type: string
     minLength: 1

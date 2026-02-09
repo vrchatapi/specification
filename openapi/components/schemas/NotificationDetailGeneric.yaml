@@ -1,0 +1,4 @@
+title: NotificationDetailGeneric
+type: object
+additionalProperties:
+  type: string

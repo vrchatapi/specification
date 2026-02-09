@@ -1,0 +1,11 @@
+description: Bad request error response when declining a group invite.
+content:
+  application/json:
+    examples:
+      User Not Invited:
+        value:
+          error:
+            message: You can't decline an invite that wasn't sent to you․
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

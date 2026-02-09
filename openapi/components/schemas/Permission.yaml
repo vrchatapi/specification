@@ -4,9 +4,31 @@ description: ""
 properties:
   data:
     type: object
+    description: Specific values afforded the user by this permission
     properties:
+      badges:
+        type: array
+        description: Badges afforded the user by this permission
+        items:
+          $ref: ./BadgeID.yaml
       max:
         type: integer
+        description: Maximum value afforded the user by this permission
+      maxFavoriteGroups:
+        type: object
+        description: Maximum favorite groups afforded the user by this permission
+        additionalProperties:
+          type: integer
+      maxFavoritesPerGroup:
+        type: object
+        description: Maximum favorites per group afforded the user by this permission
+        additionalProperties:
+          type: integer
+      tags:
+        type: array
+        description: Tags afforded the user by this permission
+        items:
+          $ref: ./Tag.yaml
   description:
     type: string
   displayName:

@@ -1,0 +1,13 @@
+description: Returns a list of GroupMember objects from a search.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: ../../schemas/GroupMember.yaml
+        total:
+          type: integer
+          description: Number of members returned

@@ -19,6 +19,7 @@ properties:
     type: string
   durationInMs:
     type: integer
+    format: int64
   endsAt:
     type: string
     format: date-time
@@ -45,18 +46,29 @@ properties:
     description: Languages that might be spoken at this event
     items:
       $ref: ./LanguageCode.yaml
+  occurrenceKind:
+    type: string
+    description: So far if it exists, always the string "single"
   ownerId:
     $ref: ./GroupID.yaml
   platforms:
     type: array
     items:
       $ref: ./CalendarEventPlatform.yaml
+  recurrence:
+    type: string
+    description: So far unused, always "null"
+    nullable: true
   roleIds:
     type: array
     description: Group roles that may join this event
     nullable: true
     items:
       $ref: ./GroupRoleID.yaml
+  seriesId:
+    type: string
+    description: So far unused, always "null"
+    nullable: true
   startsAt:
     type: string
     format: date-time

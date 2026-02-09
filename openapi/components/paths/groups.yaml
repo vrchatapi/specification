@@ -4,6 +4,25 @@ info:
   description: Group Docs Here
   version: "1.0"
 paths:
+  /files/order:
+    put:
+      operationId: setGroupGalleryFileOrder
+      summary: Set Group Gallery File Order
+      description: Set the order of the files in a group gallery
+      tags:
+        - files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/GroupGalleryFileOrderRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/GroupGalleryFileOrderResponse.yaml
+        "404":
+          $ref: ../responses/files/FileNotFoundError.yaml
   /groups:
     get:
       operationId: searchGroups
@@ -109,6 +128,12 @@ paths:
       description: Deletes a Group.
       tags:
         - groups
+      parameters:
+        - name: hardDelete
+          required: false
+          in: query
+          schema:
+            type: boolean
       security:
         - authCookie: []
       responses:
@@ -171,6 +196,24 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/DeleteGroupAnnouncementSuccess.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+  "/groups/{groupId}/auditLogTypes":
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      operationId: getGroupAuditLogEntryTypes
+      summary: Get Group Audit Log Entry Types
+      description: Returns a list of audit log entry types for which the group has entries.
+      tags:
+        - groups
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/GroupAuditLogEntryTypeListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
@@ -264,6 +307,28 @@ paths:
           $ref: ../responses/groups/GroupMemberResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+  "/groups/{groupId}/block":
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    post:
+      operationId: blockGroup
+      summary: Block Group
+      description: Blocks a Group for the current user. To unblock a group, call kickGroupMember (DELETE /groups/{groupId}/members/{userId}).
+      tags:
+        - groups
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/BlockGroupSuccess.yaml
+        "400":
+          $ref: ../responses/groups/BanGroupMemberBadRequestError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupAlreadyBlockedError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/galleries":
@@ -461,6 +526,29 @@ paths:
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
+    put:
+      operationId: declineGroupInvite
+      summary: Decline Invite from Group
+      description: Declines an invite to the user from a group.
+      tags:
+        - groups
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/DeclineGroupInviteRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/DeclineGroupInviteSuccess.yaml
+        "400":
+          $ref: ../responses/groups/DeclineGroupInviteBadRequestError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/groups/GroupNotFoundError.yaml
     post:
       operationId: createGroupInvite
       summary: Invite User to Group
@@ -514,6 +602,19 @@ paths:
       description: Join a Group by ID and returns the member object.
       tags:
         - groups
+      parameters:
+        - name: confirmOverrideBlock
+          description: Manually override the failure that would occur if the user has blocked the group.
+          required: false
+          in: query
+          schema:
+            type: boolean
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/JoinGroupRequest.yaml
       security:
         - authCookie: []
       responses:
@@ -570,6 +671,36 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
+  "/groups/{groupId}/members/search":
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      operationId: searchGroupMembers
+      summary: Search Group Members
+      description: Search for members in the group by displayName.
+      tags:
+        - groups
+      parameters:
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+        - name: query
+          description: Filter for member displayName.
+          required: true
+          in: query
+          schema:
+            type: string
+            minLength: 3
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/GroupMemberSearchResponse.yaml
+        "400":
+          $ref: ../responses/users/UsersInvalidSearchError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/members/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -577,14 +708,14 @@ paths:
     get:
       operationId: getGroupMember
       summary: Get Group Member
-      description: Returns a LimitedGroup Member.
+      description: Returns a GroupMember.
       tags:
         - groups
       security:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/groups/GroupLimitedMemberResponse.yaml
+          $ref: ../responses/groups/GroupMemberResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
@@ -606,7 +737,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/groups/GroupLimitedMemberResponse.yaml
+          $ref: ../responses/groups/GroupMemberResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
@@ -614,14 +745,14 @@ paths:
     delete:
       operationId: kickGroupMember
       summary: Kick Group Member
-      description: Kicks a Group Member from the Group. The current user must have the "Remove Group Members" permission.
+      description: Kicks a Group Member from the Group. The current user must have the "Remove Group Members" permission. Also used for unblocking groups.
       tags:
         - groups
       security:
         - authCookie: []
       responses:
         "200":
-          description: OK
+          $ref: ../responses/groups/DeleteGroupMemberSuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
@@ -945,6 +1076,73 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/groups/GroupNotMemberError.yaml
+  "/groups/{groupId}/transfer":
+    parameters:
+      - $ref: ../parameters.yaml#/groupId
+    get:
+      operationId: getGroupTransferability
+      summary: Get Group Transferability
+      description: Returns the transferability of the group to a given user.
+      tags:
+        - groups
+      parameters:
+        - name: transferTargetId
+          description: The UserID of the prospective transferee.
+          required: false
+          in: query
+          schema:
+            $ref: ../schemas/UserID.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/GroupTransferableResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
+        "404":
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+    post:
+      operationId: initiateOrAcceptGroupTransfer
+      summary: Initiate or Accept Group Transfer
+      description: To initiate, must be logged in as the current owner and specify the transferTargetId in the body. To accept, must be logged in as the user targetted by a pending transfer, no body is required.
+      tags:
+        - groups
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/TransferGroupRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/GroupTransferSuccess.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupTransferInvalidError.yaml
+        "404":
+          $ref: ../responses/groups/GroupNotFoundError.yaml
+    delete:
+      operationId: cancelGroupTransfer
+      summary: Cancel Group Transfer
+      description: Cancel a Group Transfer.
+      tags:
+        - groups
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/GroupTransferCanceledSuccess.yaml
+        "400":
+          $ref: ../responses/groups/NoGroupTransferError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/groups/GroupNotFoundError.yaml
 components:
   responses: {}
   securitySchemes:
