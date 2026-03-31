@@ -249,7 +249,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../requests/inventory/RewardRedemptionRequest.yaml
+              $ref: ../requests/RewardRedemptionRequest.yaml
       security:
         - authCookie: []
       responses:

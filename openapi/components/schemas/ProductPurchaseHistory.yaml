@@ -1,4 +1,4 @@
-title: PurchaseHistory
+title: ProductPurchaseHistory
 type: object
 properties:
   endDate:
@@ -10,7 +10,7 @@ properties:
   transactions:
     type: array
     items:
-      $ref: ./Purchase.yaml
+      $ref: ./ProductPurchaseRecord.yaml
 required:
   - endDate
   - startDate
