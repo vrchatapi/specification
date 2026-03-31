@@ -714,7 +714,7 @@ propId:
   schema:
     $ref: ./schemas/PropID.yaml
 publishedPlatform:
-  name: platform
+  name: publishedPlatform
   description: A platform the world supports.
   required: true
   in: path
