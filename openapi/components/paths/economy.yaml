@@ -117,6 +117,20 @@ paths:
           $ref: ../responses/economy/LicenseListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /economy/metrics/earnings:
+    get:
+      operationId: getEarningsMetrics
+      summary: Get Earnings Metrics
+      description: Gets earnings totals and breakdown metrics for the currently authenticated user.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/EarningsMetricsResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /economy/purchase/listing:
     post:
       operationId: purchaseProductListing
@@ -155,6 +169,52 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/ProductPurchaseListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/economy/purchases/{productPurchaseId}":
+    parameters:
+      - $ref: ../parameters.yaml#/productPurchaseId
+    get:
+      operationId: getProductPurchase
+      summary: Get Product Purchase
+      description: Gets a single product purchase
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductPurchaseResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/economy/purchases/{productPurchaseId}/stacks":
+    parameters:
+      - $ref: ../parameters.yaml#/productPurchaseId
+    get:
+      operationId: getProductPurchaseStacks
+      summary: Get Product Purchase Stacks
+      description: Gets stacks for a product purchase
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductPurchaseStacksResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /economy/seller/eligibility:
+    get:
+      operationId: getSellerEligibility
+      summary: Get Seller Eligibility
+      description: Get the eligibility of the currently authenticated user to become a seller
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/SellerEligibilityResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /economy/store:
@@ -361,6 +421,28 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/EconomyAccountResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/economy/transactions":
+    parameters:
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/dateMin
+      - $ref: ../parameters.yaml#/dateMax
+      - $ref: ../parameters.yaml#/fromUserId
+      - $ref: ../parameters.yaml#/toUserId
+      - $ref: ../parameters.yaml#/sortProductPurchase
+      - $ref: ../parameters.yaml#/orderShort
+    get:
+      operationId: getProductPurchases
+      summary: Get Product Purchases
+      description: Gets product purchases
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductPurchaseHistoryResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/listings":

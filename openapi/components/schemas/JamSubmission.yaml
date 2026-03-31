@@ -1,4 +1,4 @@
-title: Submission
+title: JamSubmission
 type: object
 description: ""
 properties:
@@ -12,13 +12,9 @@ properties:
   description:
     type: string
   id:
-    type: string
-    example: jsub_f01f44fa-89fa-443c-ab4c-7fed9245970f
-    minLength: 1
+    $ref: ../schemas/JamSubmissionID.yaml
   jamId:
-    type: string
-    example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
-    minLength: 1
+    $ref: ../schemas/JamID.yaml
   ratingScore:
     type: integer
     minimum: 0

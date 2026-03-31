@@ -1,0 +1,5 @@
+title: TutorialKey
+type: string
+description: "The ID of a tutorial, in the format `{platform}:{tutorial}:{version}`. `undefined:undefined:v1` is used as a null-ish or sentinel value."
+default: undefined:undefined:v1
+example: standalonewindows:steam:v1

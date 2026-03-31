@@ -1,0 +1,7 @@
+description: Returns a list of stacks for a product purchase.
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        type: object

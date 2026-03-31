@@ -1,0 +1,10 @@
+title: ChangeWorldTagsRequest
+type: object
+properties:
+  tags:
+    type: array
+    description: The tags being added or removed.
+    items:
+      $ref: ../schemas/Tag.yaml
+required:
+  - tags

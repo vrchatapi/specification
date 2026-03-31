@@ -1,0 +1,18 @@
+title: TutorialStatus
+type: object
+properties:
+  completed:
+    type: boolean
+  completedAnyTutorial:
+    type: boolean
+  completedTutorials:
+    type: array
+    items:
+      $ref: ./TutorialKey.yaml
+  tutorialKey:
+    $ref: ./TutorialKey.yaml
+required:
+  - completed
+  - completedAnyTutorial
+  - completedTutorials
+  - tutorialKey

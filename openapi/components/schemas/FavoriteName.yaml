@@ -1,0 +1,8 @@
+title: FavoriteName
+type: string
+default: group_0
+example: >
+  avatar: [ avatars1, avatars2, avatars3, avatars4, avatars5, avatars6 ]
+  friend: [ group_0, group_1, group_2 ]
+  vrcPlusWorld: [ vrcPlusWorlds1, vrcPlusWorlds2, vrcPlusWorlds3, vrcPlusWorlds4 ]
+  world: [ worlds1, worlds2, worlds3, worlds4 ]

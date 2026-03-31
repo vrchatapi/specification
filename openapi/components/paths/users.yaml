@@ -305,7 +305,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/representedGroup.yaml
+                $ref: ../schemas/RepresentedGroup.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/groups/requested":
@@ -468,6 +468,22 @@ paths:
           $ref: ../responses/users/CurrentUserResponse.yaml
         "400":
           $ref: ../responses/users/UserTagInvalidError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/users/{userId}/tutorial":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserTutorialStatus
+      summary: Get User Tutorial Status
+      description: Gets the status of completed or outstanding tutorials for the specified user.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/TutorialStatusResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/{worldId}/persist":
