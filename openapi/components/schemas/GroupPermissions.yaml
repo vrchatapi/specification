@@ -10,6 +10,7 @@ enum:
   - group-default-role-manage
   - group-galleries-manage
   - group-instance-age-gated-create
+  - group-instance-announcement-create
   - group-instance-calendar-link
   - group-instance-join
   - group-instance-manage
@@ -37,6 +38,7 @@ x-enum-varnames:
   - group_default_role_manage
   - group_galleries_manage
   - group_instance_age_gated_create
+  - group_instance_announcement_create
   - group_instance_calendar_link
   - group_instance_join
   - group_instance_manage
