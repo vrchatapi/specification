@@ -434,9 +434,9 @@ paths:
       - $ref: ../parameters.yaml#/sortProductPurchase
       - $ref: ../parameters.yaml#/orderShort
     get:
-      operationId: getProductPurchases
-      summary: Get Product Purchases
-      description: Gets product purchases
+      operationId: getProductPurchaseHistory
+      summary: Get Product Purchase History
+      description: Gets a history of product purchases
       tags:
         - economy
       security:
