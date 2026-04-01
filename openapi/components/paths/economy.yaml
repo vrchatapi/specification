@@ -425,6 +425,7 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/economy/transactions":
     parameters:
+      - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/dateMin
       - $ref: ../parameters.yaml#/dateMax

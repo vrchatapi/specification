@@ -700,7 +700,7 @@ productId:
   schema:
     $ref: ./schemas/ProductID.yaml
 productPurchaseId:
-  name: purchaseId
+  name: productPurchaseId
   description: Must be a valid purchase ID.
   required: true
   in: path
