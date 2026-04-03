@@ -58,8 +58,15 @@ properties:
   products:
     type: array
     items:
-      type: object
       description: Either a ProductID or a Product, depending on hydration
+      x-if:
+        when: jsonschema
+        then:
+          oneOf:
+            - $ref: ./Product.yaml
+            - $ref: ./ProductID.yaml
+        else:
+          type: object
   quantifiable:
     type: boolean
   recurrable:

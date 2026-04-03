@@ -3,7 +3,14 @@ type: object
 description: ""
 properties:
   agreement:
-    $ref: ./TransactionAgreement.yaml
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - $ref: ./TransactionAgreement.yaml
+          - type: string
+      else:
+        $ref: ./TransactionAgreement.yaml
   created_at:
     type: string
     format: date-time
