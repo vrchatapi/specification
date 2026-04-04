@@ -1,0 +1,19 @@
+title: EconomyPayoutEligibility
+type: object
+properties:
+  issue:
+    type: string
+  okBalance:
+    type: boolean
+  okFrequency:
+    type: boolean
+  okNotOngoing:
+    type: boolean
+  okStanding:
+    type: boolean
+required:
+  - issue
+  - okBalance
+  - okFrequency
+  - okNotOngoing
+  - okStanding

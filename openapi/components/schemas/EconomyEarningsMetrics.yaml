@@ -1,0 +1,16 @@
+title: EconomyEarningsMetrics
+type: object
+properties:
+  breakdown:
+    type: array
+    description: Earnings breakdown grouped by the requested duration.
+    items:
+      $ref: ./EconomyEarningsMetricsBucket.yaml
+  sellerId:
+    $ref: ./UserID.yaml
+  totals:
+    $ref: ./EconomyEarningsMetricsTotals.yaml
+required:
+  - breakdown
+  - sellerId
+  - totals

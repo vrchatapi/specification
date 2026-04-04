@@ -1,0 +1,24 @@
+title: EconomyEarningsMetricsTotals
+type: object
+properties:
+  otpEarnings:
+    type: integer
+    description: Total earnings from one-time purchases.
+  otpPurchaseCount:
+    type: integer
+    description: Total one-time purchase count.
+  subscriberEarnings:
+    type: integer
+    description: Total earnings from subscriptions.
+  subscriberMonths:
+    type: integer
+    description: Total subscriber months counted.
+  totalEarnings:
+    type: integer
+    description: Total earnings across the selected range.
+required:
+  - otpEarnings
+  - otpPurchaseCount
+  - subscriberEarnings
+  - subscriberMonths
+  - totalEarnings

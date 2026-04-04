@@ -3,8 +3,13 @@ type: object
 properties:
   active:
     type: boolean
+  archived:
+    type: boolean
   buyerRefundable:
     type: boolean
+  created:
+    type: string
+    format: date-time
   description:
     type: string
   displayName:
@@ -60,6 +65,10 @@ properties:
     items:
       type: object
       description: Either a ProductID or a Product, depending on hydration
+  purchaseCount:
+    type: integer
+  purchaseCountQuantity:
+    type: integer
   quantifiable:
     type: boolean
   recurrable:
@@ -84,6 +93,9 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  updated:
+    type: string
+    format: date-time
   vrcPlusDiscountPrice:
     type: integer
   whenToExpire:

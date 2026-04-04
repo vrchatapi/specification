@@ -1,0 +1,20 @@
+title: UserEconomyTransactions
+type: object
+properties:
+  endDate:
+    type: string
+    description: Upper bound applied to the returned transaction window.
+    format: date-time
+  startDate:
+    type: string
+    description: Lower bound applied to the returned transaction window.
+    format: date-time
+  transactions:
+    type: array
+    description: Transaction lines in reverse chronological order.
+    items:
+      $ref: ./UserEconomyTransaction.yaml
+required:
+  - endDate
+  - startDate
+  - transactions

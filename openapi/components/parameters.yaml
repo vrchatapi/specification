@@ -307,6 +307,14 @@ fuzzy:
   in: query
   schema:
     type: boolean
+groupByDuration:
+  name: groupByDuration
+  description: Time bucket size for economy metrics. Observed values include `days` and `years`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: days
 groupGalleryId:
   name: groupGalleryId
   description: Must be a valid group gallery ID.
@@ -541,6 +549,22 @@ limit:
   schema:
     type: integer
     example: 100
+listingTypeFilter:
+  name: listingType
+  description: Filter user listings by category. Observed values include `otp` and `subscription`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: otp
+managementPov:
+  name: managementPov
+  description: Return stores from the seller management point of view.
+  required: false
+  in: query
+  schema:
+    type: boolean
+    example: true
 maxUnityVersion:
   name: maxUnityVersion
   description: The maximum Unity version supported by the asset.
@@ -562,6 +586,22 @@ metadata:
   in: query
   schema:
     type: string
+metricDateEnd:
+  name: metricDateEnd
+  description: Upper bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: 2026-04-04T21:59:59.999Z
+metricDateStart:
+  name: metricDateStart
+  description: Lower bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: 2026-03-28T23:00:00.000Z
 minUnityVersion:
   name: minUnityVersion
   description: The minimum Unity version supported by the asset.
@@ -741,6 +781,20 @@ search:
   in: query
   schema:
     type: string
+sellerId:
+  name: sellerId
+  description: Seller to retrieve economy metrics for.
+  required: true
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
+sellerIdQuery:
+  name: sellerId
+  description: Filter results by seller.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 slot:
   name: slot
   description: The message slot to fetch of a given message type.

@@ -1,0 +1,5 @@
+description: Returns an EconomyPayoutStatus object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/EconomyPayoutStatus.yaml

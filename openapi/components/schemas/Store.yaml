@@ -1,6 +1,9 @@
 title: Store
 type: object
 properties:
+  created:
+    type: string
+    format: date-time
   description:
     type: string
   displayName:
@@ -34,14 +37,21 @@ properties:
     description: Only for store type house
     items:
       $ref: ./StoreShelf.yaml
+  storeContext:
+    $ref: ./StoreContext.yaml
   storeId:
     $ref: ./StoreID.yaml
+  storeStatus:
+    type: string
   storeType:
     $ref: ./StoreType.yaml
   tags:
     type: array
     items:
       $ref: ./Tag.yaml
+  updated:
+    type: string
+    format: date-time
   worldId:
     $ref: ./WorldID.yaml
     description: Only for store type world
