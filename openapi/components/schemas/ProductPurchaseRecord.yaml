@@ -1,0 +1,49 @@
+title: ProductPurchaseRecord
+type: object
+properties:
+  amount:
+    type: integer
+    example: 399
+  balance:
+    type: integer
+    example: 399
+  date:
+    type: string
+    format: date-time
+  fromUserDisplayName:
+    type: string
+    example: VRChat
+  listingDisplayName:
+    type: string
+    example: Lucky Red Envelope
+  listingType:
+    $ref: ./ProductListingType.yaml
+  platform:
+    type: string
+    description: Where (first- or third-party) the purchase was made
+    example: VRChat
+  purchaseId:
+    $ref: ./ProductPurchaseID.yaml
+  reason:
+    type: integer
+    example: 3002
+  reasonLabel:
+    type: string
+    example: Promo Credit
+  transactionId:
+    type: integer
+  transactionLineId:
+    type: integer
+required:
+  - amount
+  - balance
+  - date
+  - fromUserDisplayName
+  - listingDisplayName
+  - listingType
+  - platform
+  - purchaseId
+  - reason
+  - reasonLabel
+  - transactionId
+  - transactionLineId

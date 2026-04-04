@@ -1,0 +1,12 @@
+title: RewardRedemptionResult
+type: object
+properties:
+  redeemedRewards:
+    type: array
+    items:
+      $ref: ./RewardRedemption.yaml
+  redemptionCode:
+    type: string
+required:
+  - redeemedRewards
+  - redemptionCode

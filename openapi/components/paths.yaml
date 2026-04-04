@@ -124,10 +124,18 @@
   $ref: "./paths/miscellaneous.yaml#/paths/~1css~1app.css"
 /economy/licenses/active:
   $ref: "./paths/economy.yaml#/paths/~1economy~1licenses~1active"
+/economy/metrics/earnings:
+  $ref: "./paths/economy.yaml#/paths/~1economy~1metrics~1earnings"
 /economy/purchase/listing:
   $ref: "./paths/economy.yaml#/paths/~1economy~1purchase~1listing"
 /economy/purchases:
   $ref: "./paths/economy.yaml#/paths/~1economy~1purchases"
+"/economy/purchases/{productPurchaseId}":
+  $ref: "./paths/economy.yaml#/paths/~1economy~1purchases~1{productPurchaseId}"
+"/economy/purchases/{productPurchaseId}/stacks":
+  $ref: "./paths/economy.yaml#/paths/~1economy~1purchases~1{productPurchaseId}~1stacks"
+/economy/seller/eligibility:
+  $ref: "./paths/economy.yaml#/paths/~1economy~1seller~1eligibility"
 /economy/store:
   $ref: "./paths/economy.yaml#/paths/~1economy~1store"
 /economy/store/shelves:
@@ -274,6 +282,8 @@
   $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}"
 "/jams/{jamId}/submissions":
   $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}~1submissions"
+"/jams/{jamId}/submissions/{jamSubmissionId}":
+  $ref: "./paths/jams.yaml#/paths/~1jams~1{jamId}~1submissions~1{jamSubmissionId}"
 /js/app.js:
   $ref: "./paths/miscellaneous.yaml#/paths/~1js~1app.js"
 "/licenseGroups/{licenseGroupId}":
@@ -322,6 +332,8 @@
   $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}"
 "/requestInvite/{userId}/photo":
   $ref: "./paths/invite.yaml#/paths/~1requestInvite~1{userId}~1photo"
+/reward/redeem:
+  $ref: "./paths/inventory.yaml#/paths/~1reward~1redeem"
 /subscriptions:
   $ref: "./paths/economy.yaml#/paths/~1subscriptions"
 /tilia/status:
@@ -340,6 +352,8 @@
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
 "/user/{userId}/economy/account":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
+"/user/{userId}/economy/transactions":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1transactions"
 "/user/{userId}/friendRequest":
   $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendRequest"
 "/user/{userId}/friendStatus":
@@ -402,6 +416,8 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1removeTags"
 "/users/{userId}/subscription/eligible":
   $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1subscription~1eligible"
+"/users/{userId}/tutorial":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1tutorial"
 "/users/{userId}/{worldId}/persist":
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1{worldId}~1persist"
 "/users/{userId}/{worldId}/persist/exists":
@@ -420,9 +436,15 @@
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1recent"
 "/worlds/{worldId}":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}"
+"/worlds/{worldId}/addTags":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1addTags"
 "/worlds/{worldId}/metadata":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1metadata"
+"/worlds/{worldId}/platform/{publishedPlatform}":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1platform~1{publishedPlatform}"
 "/worlds/{worldId}/publish":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1publish"
+"/worlds/{worldId}/removeTags":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1removeTags"
 "/worlds/{worldId}/{instanceId}":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}"

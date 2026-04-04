@@ -1,0 +1,7 @@
+title: SellerEligibility
+type: object
+properties:
+  eligible:
+    type: boolean
+required:
+  - eligible

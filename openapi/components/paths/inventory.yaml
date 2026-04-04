@@ -237,6 +237,26 @@ paths:
           $ref: ../responses/inventory/InventoryItemNotEquippable.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /reward/redeem:
+    post:
+      operationId: redeemReward
+      summary: Redeem Reward
+      description: Redeem a reward for the currently logged in user.
+      tags:
+        - inventory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/RewardRedemptionRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/inventory/RewardRedemptionResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/inventory/{inventoryItemId}":
     parameters:
       - $ref: ../parameters.yaml#/userId

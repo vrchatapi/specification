@@ -1,0 +1,7 @@
+description: Returns a single RewardRedemptionResult object.
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        $ref: ../../schemas/RewardRedemptionResult.yaml

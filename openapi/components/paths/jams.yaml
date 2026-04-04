@@ -29,7 +29,7 @@ paths:
       responses:
         "200":
           $ref: ../responses/jams/JamListResponse.yaml
-  /jams/{jamId}:
+  "/jams/{jamId}":
     parameters:
       - $ref: ../parameters.yaml#/jamId
     get:
@@ -45,19 +45,63 @@ paths:
           $ref: ../responses/jams/JamResponse.yaml
         "404":
           $ref: ../responses/jams/JamNotFoundError.yaml
-  /jams/{jamId}/submissions:
+  "/jams/{jamId}/submissions":
     parameters:
       - $ref: ../parameters.yaml#/jamId
     get:
       operationId: getJamSubmissions
       summary: Show jam submissions
-      description: Returns all submissions of a jam.
+      description: Returns all submissions of a jam. Can filter by contentId (for world or avatar jams) or submitterId (for a participant).
+      tags:
+        - jams
+      parameters:
+        - $ref: ../parameters.yaml#/contentId
+        - $ref: ../parameters.yaml#/submitterId
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/jams/JamSubmissionListResponse.yaml
+        "404":
+          $ref: ../responses/jams/JamNotFoundError.yaml
+    post:
+      operationId: submitJamContent
+      summary: Submit Jam Content
+      description: Submits content to a jam. The content must have been uploaded by the submitter, and both the content upload and jam submission must be made within the jam's designated times.
+      tags:
+        - jams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateJamSubmissionRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/jams/JamSubmissionResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/jams/JamNotFoundError.yaml
+  "/jams/{jamId}/submissions/{jamSubmissionId}":
+    parameters:
+      - $ref: ../parameters.yaml#/jamId
+      - $ref: ../parameters.yaml#/jamSubmissionId
+    delete:
+      operationId: deleteJamSubmission
+      summary: Delete Jam Submission
+      description: Withdraws a content submission from a jam.
       tags:
         - jams
       security:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/jams/SubmissionListResponse.yaml
+          $ref: ../responses/jams/DeleteJamSubmissionResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
         "404":
           $ref: ../responses/jams/JamNotFoundError.yaml
