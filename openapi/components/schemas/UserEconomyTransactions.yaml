@@ -3,12 +3,12 @@ type: object
 properties:
   endDate:
     type: string
-    format: date-time
     description: Upper bound applied to the returned transaction window.
+    format: date-time
   startDate:
     type: string
-    format: date-time
     description: Lower bound applied to the returned transaction window.
+    format: date-time
   transactions:
     type: array
     description: Transaction lines in reverse chronological order.

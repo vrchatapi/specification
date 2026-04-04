@@ -11,8 +11,8 @@ properties:
     example: 0
   date:
     type: string
-    format: date-time
     description: Timestamp of the transaction line.
+    format: date-time
   earningsBalance:
     type: integer
     description: Resulting earnings balance after this transaction line.
@@ -56,14 +56,14 @@ properties:
     example: 0
   transactionId:
     type: integer
-    format: int64
     description: Parent transaction identifier.
     example: 1728687
+    format: int64
   transactionLineId:
     type: integer
-    format: int64
     description: Transaction line identifier.
     example: 5302728
+    format: int64
 required:
   - amount
   - balance
