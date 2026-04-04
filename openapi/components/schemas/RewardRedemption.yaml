@@ -1,4 +1,4 @@
-title: RewardRedemptionResult
+title: RewardRedemption
 type: object
 properties:
   data:
