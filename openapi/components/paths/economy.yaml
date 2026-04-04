@@ -177,25 +177,6 @@ paths:
           $ref: ../responses/economy/ProductPurchaseListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  /economy/stores:
-    parameters:
-      - $ref: ../parameters.yaml#/sellerIdQuery
-      - $ref: ../parameters.yaml#/managementPov
-      - $ref: ../parameters.yaml#/number
-      - $ref: ../parameters.yaml#/offset
-    get:
-      operationId: listStores
-      summary: List Stores
-      description: Lists stores, optionally filtered to a seller and adjusted for management views.
-      tags:
-        - economy
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/economy/StoreListResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
   "/economy/purchases/{productPurchaseId}":
     parameters:
       - $ref: ../parameters.yaml#/productPurchaseId
@@ -276,6 +257,25 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/StoreShelfListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /economy/stores:
+    parameters:
+      - $ref: ../parameters.yaml#/sellerIdQuery
+      - $ref: ../parameters.yaml#/managementPov
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+    get:
+      operationId: listStores
+      summary: List Stores
+      description: Lists stores, optionally filtered to a seller and adjusted for management views.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/StoreListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/licenseGroups/{licenseGroupId}":
@@ -663,6 +663,22 @@ paths:
           $ref: ../responses/economy/ProductListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/tilia/kyc":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserTiliaKyc
+      summary: Get User Tilia KYC
+      description: Gets KYC status details for a user's Tilia account.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/TiliaKycResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/tilia/tos":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -695,22 +711,6 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/UpdateTiliaTOSResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-  "/user/{userId}/tilia/kyc":
-    parameters:
-      - $ref: ../parameters.yaml#/userId
-    get:
-      operationId: getUserTiliaKyc
-      summary: Get User Tilia KYC
-      description: Gets KYC status details for a user's Tilia account.
-      tags:
-        - economy
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/economy/TiliaKycResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/credits/eligible":

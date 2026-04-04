@@ -27,8 +27,6 @@ properties:
     type: string
   sellerId:
     $ref: ./UserID.yaml
-  storeContext:
-    $ref: ./StoreContext.yaml
   shelfIds:
     type: array
     description: Only for store type house
@@ -39,6 +37,8 @@ properties:
     description: Only for store type house
     items:
       $ref: ./StoreShelf.yaml
+  storeContext:
+    $ref: ./StoreContext.yaml
   storeId:
     $ref: ./StoreID.yaml
   storeStatus:

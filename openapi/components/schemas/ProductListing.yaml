@@ -54,10 +54,6 @@ properties:
     type: boolean
   priceTokens:
     type: integer
-  purchaseCount:
-    type: integer
-  purchaseCountQuantity:
-    type: integer
   productIds:
     type: array
     items:
@@ -69,6 +65,10 @@ properties:
     items:
       type: object
       description: Either a ProductID or a Product, depending on hydration
+  purchaseCount:
+    type: integer
+  purchaseCountQuantity:
+    type: integer
   quantifiable:
     type: boolean
   recurrable:

@@ -134,14 +134,14 @@
   $ref: "./paths/economy.yaml#/paths/~1economy~1purchases~1{productPurchaseId}"
 "/economy/purchases/{productPurchaseId}/stacks":
   $ref: "./paths/economy.yaml#/paths/~1economy~1purchases~1{productPurchaseId}~1stacks"
-/economy/stores:
-  $ref: "./paths/economy.yaml#/paths/~1economy~1stores"
 /economy/seller/eligibility:
   $ref: "./paths/economy.yaml#/paths/~1economy~1seller~1eligibility"
 /economy/store:
   $ref: "./paths/economy.yaml#/paths/~1economy~1store"
 /economy/store/shelves:
   $ref: "./paths/economy.yaml#/paths/~1economy~1store~1shelves"
+/economy/stores:
+  $ref: "./paths/economy.yaml#/paths/~1economy~1stores"
 "/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}":
   $ref: "./paths/favorites.yaml#/paths/~1favorite~1group~1{favoriteGroupType}~1{favoriteGroupName}~1{userId}"
 /favorite/groups:

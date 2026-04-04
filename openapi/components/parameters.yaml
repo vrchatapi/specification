@@ -307,6 +307,14 @@ fuzzy:
   in: query
   schema:
     type: boolean
+groupByDuration:
+  name: groupByDuration
+  description: Time bucket size for economy metrics. Observed values include `days` and `years`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: days
 groupGalleryId:
   name: groupGalleryId
   description: Must be a valid group gallery ID.
@@ -356,14 +364,6 @@ groupRoleId:
   in: path
   schema:
     $ref: ./schemas/GroupRoleID.yaml
-groupByDuration:
-  name: groupByDuration
-  description: Time bucket size for economy metrics. Observed values include `days` and `years`.
-  required: false
-  in: query
-  schema:
-    type: string
-    example: days
 hydrate:
   name: hydrate
   description: Populates some fields and changes types of others for certain objects.
@@ -385,22 +385,6 @@ hydrateProducts:
   in: query
   schema:
     type: boolean
-listingTypeFilter:
-  name: listingType
-  description: Filter user listings by category. Observed values include `otp` and `subscription`.
-  required: false
-  in: query
-  schema:
-    type: string
-    example: otp
-managementPov:
-  name: managementPov
-  description: Return stores from the seller management point of view.
-  required: false
-  in: query
-  schema:
-    type: boolean
-    example: true
 include:
   name: include
   description: Tags to include (comma-separated). Any of the tags needs to be present.
@@ -565,9 +549,39 @@ limit:
   schema:
     type: integer
     example: 100
+listingTypeFilter:
+  name: listingType
+  description: Filter user listings by category. Observed values include `otp` and `subscription`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: otp
+managementPov:
+  name: managementPov
+  description: Return stores from the seller management point of view.
+  required: false
+  in: query
+  schema:
+    type: boolean
+    example: true
 maxUnityVersion:
   name: maxUnityVersion
   description: The maximum Unity version supported by the asset.
+  required: false
+  in: query
+  schema:
+    type: string
+messageType:
+  name: messageType
+  description: "The type of message to fetch, must be a valid InviteMessageType."
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/InviteMessageType.yaml
+metadata:
+  name: metadata
+  description: Which metadata fields to include (comma-separated).
   required: false
   in: query
   schema:
@@ -588,20 +602,6 @@ metricDateStart:
   schema:
     type: string
     example: 2026-03-28T23:00:00.000Z
-messageType:
-  name: messageType
-  description: "The type of message to fetch, must be a valid InviteMessageType."
-  required: true
-  in: path
-  schema:
-    $ref: ./schemas/InviteMessageType.yaml
-metadata:
-  name: metadata
-  description: Which metadata fields to include (comma-separated).
-  required: false
-  in: query
-  schema:
-    type: string
 minUnityVersion:
   name: minUnityVersion
   description: The minimum Unity version supported by the asset.
@@ -781,17 +781,17 @@ search:
   in: query
   schema:
     type: string
-sellerIdQuery:
-  name: sellerId
-  description: Filter results by seller.
-  required: false
-  in: query
-  schema:
-    $ref: ./schemas/UserID.yaml
 sellerId:
   name: sellerId
   description: Seller to retrieve economy metrics for.
   required: true
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
+sellerIdQuery:
+  name: sellerId
+  description: Filter results by seller.
+  required: false
   in: query
   schema:
     $ref: ./schemas/UserID.yaml
