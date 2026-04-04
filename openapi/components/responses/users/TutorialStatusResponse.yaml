@@ -1,0 +1,5 @@
+description: Returns a single TutorialStatus object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/TutorialStatus.yaml

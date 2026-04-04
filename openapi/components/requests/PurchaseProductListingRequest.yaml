@@ -1,13 +1,31 @@
 title: PurchaseProductListingRequest
 type: object
 properties:
+  contextData:
+    title: PurchaseContextData
+    type: object
+    properties:
+      locationType:
+        $ref: ../schemas/ProductPurchaseLocationType.yaml
+      storeId:
+        $ref: ../schemas/StoreID.yaml
+      worldId:
+        $ref: ../schemas/WorldID.yaml
+    required:
+      - locationType
   listingId:
     $ref: ../schemas/ProductID.yaml
+  listingVariantId:
+    $ref: ../schemas/ProductListingVariantID.yaml
   quantity:
     type: integer
     default: 1
     maximum: 99
     minimum: 1
+  receiverId:
+    $ref: ../schemas/UserID.yaml
+  stackable:
+    type: boolean
   totalPrice:
     type: integer
     minimum: 0

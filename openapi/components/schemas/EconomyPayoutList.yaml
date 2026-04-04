@@ -1,9 +1,0 @@
-title: EconomyPayoutList
-type: object
-properties:
-  payouts:
-    type: array
-    items:
-      $ref: ./EconomyPayout.yaml
-required:
-  - payouts

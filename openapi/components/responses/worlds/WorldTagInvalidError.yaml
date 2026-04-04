@@ -1,0 +1,5 @@
+description: Error response when a world owner attempts to add an invalid, restricted, or duplicate tag to a world's profile, attempts to add tags above the limit for its profile, or attempts to remove invalid, restricted, or absent tag from its profile.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yaml

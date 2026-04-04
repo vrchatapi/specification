@@ -1,0 +1,17 @@
+title: ProductPurchaseHistory
+type: object
+properties:
+  endDate:
+    type: string
+    format: date-time
+  startDate:
+    type: string
+    format: date-time
+  transactions:
+    type: array
+    items:
+      $ref: ./ProductPurchaseRecord.yaml
+required:
+  - endDate
+  - startDate
+  - transactions

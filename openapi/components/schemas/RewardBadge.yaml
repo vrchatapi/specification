@@ -1,0 +1,41 @@
+title: RewardBadge
+type: object
+properties:
+  createdAt:
+    type: string
+    format: date-time
+  createdBy:
+    $ref: ./UserID.yaml
+  description:
+    type: string
+  fileName:
+    type: string
+  hidden:
+    type: boolean
+  id:
+    $ref: ./BadgeID.yaml
+  imageUrl:
+    type: string
+  isLocalizationEnabled:
+    type: boolean
+  machineName:
+    type: string
+  name:
+    type: string
+  type:
+    type: string
+  updatedAt:
+    type: string
+    format: date-time
+required:
+  - createdAt
+  - createdBy
+  - description
+  - fileName
+  - hidden
+  - id
+  - imageUrl
+  - isLocalizationEnabled
+  - name
+  - type
+  - updatedAt

@@ -62,7 +62,7 @@ badgeId:
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/BadgeID.yaml
 branch:
   name: branch
   description: Specifies which git branch the site should load frontend source code from.
@@ -75,7 +75,7 @@ branch:
 buyerId:
   name: buyerId
   description: Must be a valid user ID.
-  required: false
+  required: true
   in: query
   schema:
     $ref: ./schemas/UserID.yaml
@@ -163,8 +163,7 @@ calendarId:
   required: true
   in: path
   schema:
-    type: string
-    example: cal_00000000-0000-0000-0000-000000000000
+    $ref: ./schemas/CalendarID.yaml
 calendarSearchTerm:
   name: searchTerm
   description: Search term for calendar events.
@@ -187,31 +186,30 @@ confirmEmailUserId:
   required: true
   in: query
   schema:
-    type: string
-    example: usr_00000000-0000-0000-0000-000000000000
+    $ref: ./schemas/UserID.yaml
 contentId:
   name: contentId
-  description: Filter for users' previously submitted feedback, e.g., a groupId, userId, avatarId, etc.
+  description: Filter for particular content submitted, e.g., a groupId, userId, avatarId, etc.
   required: false
   in: query
   schema:
-    type: boolean
+    type: string
 dateMax:
   name: dateMax
-  description: Upper bound for the transaction search range. The website sends a JavaScript Date string, for example `Sat Apr 04 2026 13:52:46 GMT+0200 (Central European Summer Time)`.
+  description: The end date of the search range.
   required: false
   in: query
   schema:
     type: string
-    example: Sat Apr 04 2026 13:52:46 GMT+0200 (Central European Summer Time)
+    format: date-time
 dateMin:
   name: dateMin
-  description: Lower bound for the transaction search range. The website sends a JavaScript Date string, for example `Thu Jan 01 2026 13:52:46 GMT+0100 (Central European Standard Time)`.
+  description: The start date of the search range.
   required: false
   in: query
   schema:
     type: string
-    example: Thu Jan 01 2026 13:52:46 GMT+0100 (Central European Standard Time)
+    format: date-time
 displayName:
   name: displayName
   description: Filter by displayName.
@@ -248,32 +246,28 @@ excludeUserId:
   required: false
   in: query
   schema:
-    type: string
+    $ref: ./schemas/UserID.yaml
 favoriteGroupName:
   name: favoriteGroupName
   description: "The name of the group to fetch, must be a name of a FavoriteGroup."
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/FavoriteName.yaml
 favoriteGroupType:
   name: favoriteGroupType
   description: "The type of group to fetch, must be a valid FavoriteType."
   required: true
   in: path
   schema:
-    type: string
-    enum:
-      - avatar
-      - friend
-      - world
+    $ref: ./schemas/FavoriteType.yaml
 favoriteId:
   name: favoriteId
   description: Must be a valid favorite ID.
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/FavoriteID.yaml
 featured:
   name: featured
   description: Filters on featured results.
@@ -287,8 +281,7 @@ fileId:
   required: true
   in: path
   schema:
-    type: string
-    example: file_00000000-0000-0000-0000-000000000000
+    $ref: ./schemas/FileID.yaml
 fileType:
   name: fileType
   description: Type of file.
@@ -301,6 +294,13 @@ fileType:
       - file
       - signature
     example: file
+fromUserId:
+  name: fromUserId
+  description: Must be a valid user ID.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 fuzzy:
   name: fuzzy
   required: false
@@ -313,32 +313,28 @@ groupGalleryId:
   required: true
   in: path
   schema:
-    type: string
-    example: ggal_00000000-0000-0000-0000-000000000000
+    $ref: ./schemas/GroupGalleryID.yaml
 groupGalleryImageId:
   name: groupGalleryImageId
   description: Must be a valid group gallery image ID.
   required: true
   in: path
   schema:
-    type: string
-    example: ggim_00000000-0000-0000-0000-000000000000
+    $ref: ./schemas/GroupGalleryImageID.yaml
 groupId:
   name: groupId
   description: Must be a valid group ID.
   required: true
   in: path
   schema:
-    type: string
-    example: grp_00000000-0000-0000-0000-000000000000
+    $ref: ./schemas/GroupID.yaml
 groupIdFilter:
   name: groupId
   description: Must be a valid group ID.
   required: false
   in: query
   schema:
-    type: string
-    example: grp_00000000-0000-0000-0000-000000000000
+    $ref: ./schemas/GroupID.yaml
 groupMemberRoleFilter:
   name: roleId
   description: Only returns members with a specific groupRoleId
@@ -359,16 +355,7 @@ groupRoleId:
   required: true
   in: path
   schema:
-    type: string
-    example: grol_00000000-0000-0000-0000-000000000000
-groupByDuration:
-  name: groupByDuration
-  description: Time bucket size for economy metrics. Observed values include `days` and `years`.
-  required: false
-  in: query
-  schema:
-    type: string
-    example: days
+    $ref: ./schemas/GroupRoleID.yaml
 hydrate:
   name: hydrate
   description: Populates some fields and changes types of others for certain objects.
@@ -390,22 +377,6 @@ hydrateProducts:
   in: query
   schema:
     type: boolean
-listingTypeFilter:
-  name: listingType
-  description: Filter user listings by category. Observed values include `otp` and `subscription`.
-  required: false
-  in: query
-  schema:
-    type: string
-    example: otp
-managementPov:
-  name: managementPov
-  description: Return stores from the seller management point of view.
-  required: false
-  in: query
-  schema:
-    type: boolean
-    example: true
 include:
   name: include
   description: Tags to include (comma-separated). Any of the tags needs to be present.
@@ -419,7 +390,7 @@ instanceId:
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/InstanceID.yaml
 inventoryEquipSlot:
   name: equipSlot
   description: Filter for inventory retrieval.
@@ -454,8 +425,7 @@ inventoryItemId:
   required: true
   in: path
   schema:
-    type: string
-    example: inv_00000000-0000-0000-0000-000000000000
+    $ref: ./schemas/InventoryItemID.yaml
 inventoryItemNotFlags:
   name: notFlags
   description: Filter out flags for inventory retrieval (comma-separated).
@@ -533,8 +503,7 @@ inventoryTemplateId:
   required: true
   in: path
   schema:
-    type: string
-    example: invt_00000000-0000-0000-0000-000000000000
+    $ref: ./schemas/InventoryTemplateID.yaml
 isInternalVariant:
   name: isInternalVariant
   description: Not quite sure what this actually does (exists on the website but doesn't seem to be used)
@@ -545,19 +514,25 @@ isInternalVariant:
     example: false
 jamId:
   name: jamId
-  description: Must be a valid query ID.
+  description: Must be a valid jam ID.
   required: true
   in: path
   schema:
-    type: string
-    example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
+    $ref: ./schemas/JamID.yaml
+jamSubmissionId:
+  name: jamSubmissionId
+  description: Must be a valid jam submission ID.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/JamSubmissionID.yaml
 licenseGroupId:
   name: licenseGroupId
   description: Must be a valid license group ID.
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/LicenseGroupID.yaml
 limit:
   name: limit
   description: The maximum number of entries to get.
@@ -573,22 +548,6 @@ maxUnityVersion:
   in: query
   schema:
     type: string
-metricDateEnd:
-  name: metricDateEnd
-  description: Upper bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps.
-  required: false
-  in: query
-  schema:
-    type: string
-    example: 2026-04-04T21:59:59.999Z
-metricDateStart:
-  name: metricDateStart
-  description: Lower bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps.
-  required: false
-  in: query
-  schema:
-    type: string
-    example: 2026-03-28T23:00:00.000Z
 messageType:
   name: messageType
   description: "The type of message to fetch, must be a valid InviteMessageType."
@@ -596,6 +555,13 @@ messageType:
   in: path
   schema:
     $ref: ./schemas/InviteMessageType.yaml
+metadata:
+  name: metadata
+  description: Which metadata fields to include (comma-separated).
+  required: false
+  in: query
+  schema:
+    type: string
 minUnityVersion:
   name: minUnityVersion
   description: The minimum Unity version supported by the asset.
@@ -665,7 +631,7 @@ notificationId:
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/NotificationID.yaml
 number:
   name: n
   description: The number of objects to return.
@@ -711,7 +677,7 @@ permissionId:
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/PermissionID.yaml
 platform:
   name: platform
   description: The platform the asset supports.
@@ -725,23 +691,35 @@ printId:
   required: true
   in: path
   schema:
-    type: string
-    example: prnt_0a0aa0a0-85ea-42eb-b2f7-4840d7f341fa
+    $ref: ./schemas/PrintID.yaml
 productId:
   name: productId
   description: Must be a valid product ID.
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/ProductID.yaml
+productPurchaseId:
+  name: productPurchaseId
+  description: Must be a valid purchase ID.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/ProductPurchaseID.yaml
 propId:
   name: propId
   description: Prop ID.
   required: true
   in: path
   schema:
-    type: string
-    example: prop_829ba6f6-b837-49d9-b9a9-056b82103b58
+    $ref: ./schemas/PropID.yaml
+publishedPlatform:
+  name: publishedPlatform
+  description: A platform the world supports.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/Platform.yaml
 releaseStatus:
   name: releaseStatus
   description: Filter by ReleaseStatus.
@@ -763,20 +741,6 @@ search:
   in: query
   schema:
     type: string
-sellerIdQuery:
-  name: sellerId
-  description: Filter results by seller.
-  required: false
-  in: query
-  schema:
-    $ref: ./schemas/UserID.yaml
-sellerId:
-  name: sellerId
-  description: Seller to retrieve economy metrics for.
-  required: true
-  in: query
-  schema:
-    $ref: ./schemas/UserID.yaml
 slot:
   name: slot
   description: The message slot to fetch of a given message type.
@@ -828,6 +792,13 @@ storeView:
   in: query
   schema:
     $ref: ./schemas/StoreView.yaml
+submitterId:
+  name: submitterId
+  description: Must be a valid user ID.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 subscriptionId:
   name: subscriptionId
   required: true
@@ -856,6 +827,13 @@ targetIds:
   schema:
     type: string
     example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+toUserId:
+  name: toUserId
+  description: Must be a valid user ID.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 transactionId:
   name: transactionId
   description: Must be a valid transaction ID.
@@ -869,28 +847,28 @@ userId:
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/UserID.yaml
 userIdAdmin:
   name: userId
   description: "Target user to see information on, admin-only."
   required: false
   in: query
   schema:
-    type: string
+    $ref: ./schemas/UserID.yaml
 userIdQuery:
   name: userId
   description: Filter by UserID.
   required: false
   in: query
   schema:
-    type: string
+    $ref: ./schemas/UserID.yaml
 userNoteId:
   name: userNoteId
   description: Must be a valid user note ID.
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/UserNoteID.yaml
 usernameQuery:
   name: username
   description: Filter by Username.
@@ -941,4 +919,4 @@ worldId:
   required: true
   in: path
   schema:
-    type: string
+    $ref: ./schemas/WorldID.yaml

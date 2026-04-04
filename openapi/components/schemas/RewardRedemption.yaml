@@ -1,0 +1,16 @@
+title: RewardRedemption
+type: object
+properties:
+  data:
+    type: object
+    properties:
+      badge:
+        $ref: ./RewardBadge.yaml
+      item:
+        $ref: ./InventoryTemplate.yaml
+  type:
+    type: string
+    description: One of `badge`, `item`, ...
+required:
+  - data
+  - type

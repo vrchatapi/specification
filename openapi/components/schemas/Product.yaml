@@ -25,21 +25,12 @@ properties:
   imageId:
     $ref: ./FileID.yaml
     nullable: true
-  imageUrl:
-    type: string
-    nullable: true
   parentListings:
     type: array
     items:
       $ref: ./ProductID.yaml
   productType:
     $ref: ./ProductType.yaml
-  productTypeLabel:
-    type: string
-  purchaseCount:
-    type: integer
-  purchaseCountQuantity:
-    type: integer
   sellerDisplayName:
     type: string
   sellerId:
@@ -60,10 +51,8 @@ required:
   - displayName
   - id
   - imageId
-  - imageUrl
   - parentListings
   - productType
-  - productTypeLabel
   - sellerDisplayName
   - sellerId
   - tags

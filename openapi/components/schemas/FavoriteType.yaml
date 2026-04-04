@@ -3,5 +3,6 @@ type: string
 enum:
   - avatar
   - friend
+  - vrcPlusWorld
   - world
 default: friend

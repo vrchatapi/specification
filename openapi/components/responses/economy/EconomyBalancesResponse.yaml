@@ -1,5 +1,0 @@
-description: Returns an EconomyBalances object.
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/EconomyBalances.yaml

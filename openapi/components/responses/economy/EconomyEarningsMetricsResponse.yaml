@@ -1,5 +1,0 @@
-description: Returns an EconomyEarningsMetrics object.
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/EconomyEarningsMetrics.yaml

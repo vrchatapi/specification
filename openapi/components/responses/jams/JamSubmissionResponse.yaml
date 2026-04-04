@@ -1,0 +1,5 @@
+description: Returns a single JamSubmission object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/JamSubmission.yaml

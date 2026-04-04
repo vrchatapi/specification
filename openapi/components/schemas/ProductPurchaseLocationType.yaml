@@ -1,0 +1,15 @@
+title: ProductPurchaseLocationType
+type: string
+enum:
+  - client_avatar_marketplace
+  - client_creator_store
+  - client_group_store
+  - client_world_component
+  - client_world_store
+  - undefined
+  - web_any
+  - web_avatar_marketplace
+  - web_creator_store
+  - web_group_store
+  - web_world_store
+default: web_group_store

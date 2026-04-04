@@ -1,0 +1,5 @@
+description: Returns an Success object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Success.yaml

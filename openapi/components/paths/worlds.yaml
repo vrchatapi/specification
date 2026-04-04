@@ -202,6 +202,30 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
+  "/worlds/{worldId}/addTags":
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+    post:
+      operationId: addWorldTags
+      summary: Add World Tags
+      description: Adds tags to the world's profile
+      tags:
+        - worlds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ChangeWorldTagsRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/worlds/WorldResponse.yaml
+        "400":
+          $ref: ../responses/worlds/WorldTagInvalidError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/worlds/{worldId}/metadata":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -216,6 +240,25 @@ paths:
       responses:
         "200":
           $ref: ../responses/worlds/WorldMetadataResponse.yaml
+        "404":
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
+  "/worlds/{worldId}/platform/{publishedPlatform}":
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/publishedPlatform
+    delete:
+      operationId: deleteWorldPlatform
+      summary: Delete World Platform
+      description: Deletes a world platform.
+      tags:
+        - worlds
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          description: OK
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
   "/worlds/{worldId}/publish":
@@ -266,6 +309,30 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
+  "/worlds/{worldId}/removeTags":
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+    post:
+      operationId: removeWorldTags
+      summary: Remove World Tags
+      description: Removes tags from the world's profile
+      tags:
+        - worlds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ChangeWorldTagsRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/worlds/WorldResponse.yaml
+        "400":
+          $ref: ../responses/worlds/WorldTagInvalidError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/worlds/{worldId}/{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId

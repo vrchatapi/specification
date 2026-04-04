@@ -1,5 +1,0 @@
-description: Returns an EconomyPayoutList object.
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/EconomyPayoutList.yaml

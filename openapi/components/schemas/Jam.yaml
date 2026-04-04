@@ -6,9 +6,7 @@ properties:
     type: string
     minLength: 1
   id:
-    type: string
-    example: jam_0b7e3f6d-4647-4648-b2a1-1431e76906d9
-    minLength: 1
+    $ref: ./JamID.yaml
   isVisible:
     type: boolean
   moreInfo:

@@ -1,7 +1,7 @@
-title: UpdateListingRequest
+title: SellerEligibility
 type: object
 properties:
-  active:
+  eligible:
     type: boolean
 required:
-  - active
+  - eligible

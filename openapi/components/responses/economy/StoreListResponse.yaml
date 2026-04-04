@@ -1,7 +1,0 @@
-description: Returns a list of Store objects.
-content:
-  application/json:
-    schema:
-      type: array
-      items:
-        $ref: ../../schemas/Store.yaml
