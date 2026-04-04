@@ -1,0 +1,5 @@
+description: Returns a TiliaKyc object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/TiliaKyc.yaml

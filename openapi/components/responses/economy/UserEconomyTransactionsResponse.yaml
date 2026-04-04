@@ -1,0 +1,5 @@
+description: Returns a UserEconomyTransactions object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/UserEconomyTransactions.yaml

@@ -356,6 +356,14 @@ groupRoleId:
   in: path
   schema:
     $ref: ./schemas/GroupRoleID.yaml
+groupByDuration:
+  name: groupByDuration
+  description: Time bucket size for economy metrics. Observed values include `days` and `years`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: days
 hydrate:
   name: hydrate
   description: Populates some fields and changes types of others for certain objects.
@@ -377,6 +385,22 @@ hydrateProducts:
   in: query
   schema:
     type: boolean
+listingTypeFilter:
+  name: listingType
+  description: Filter user listings by category. Observed values include `otp` and `subscription`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: otp
+managementPov:
+  name: managementPov
+  description: Return stores from the seller management point of view.
+  required: false
+  in: query
+  schema:
+    type: boolean
+    example: true
 include:
   name: include
   description: Tags to include (comma-separated). Any of the tags needs to be present.
@@ -548,6 +572,22 @@ maxUnityVersion:
   in: query
   schema:
     type: string
+metricDateEnd:
+  name: metricDateEnd
+  description: Upper bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: 2026-04-04T21:59:59.999Z
+metricDateStart:
+  name: metricDateStart
+  description: Lower bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: 2026-03-28T23:00:00.000Z
 messageType:
   name: messageType
   description: "The type of message to fetch, must be a valid InviteMessageType."
@@ -741,6 +781,20 @@ search:
   in: query
   schema:
     type: string
+sellerIdQuery:
+  name: sellerId
+  description: Filter results by seller.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
+sellerId:
+  name: sellerId
+  description: Seller to retrieve economy metrics for.
+  required: true
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 slot:
   name: slot
   description: The message slot to fetch of a given message type.

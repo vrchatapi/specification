@@ -1,0 +1,5 @@
+description: Returns an SuccessFlag object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/SuccessFlag.yaml

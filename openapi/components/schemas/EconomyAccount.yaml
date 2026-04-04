@@ -6,21 +6,48 @@ properties:
     type: string
     nullable: true
     format: date-time
-  accountId:
+  accountSellerRegisteredOn:
     type: string
+    nullable: true
+    format: date-time
+  accountSellerStatus:
+    type: string
+    nullable: true
+  accountId:
+    type: integer
     nullable: true
   blocked:
     type: boolean
+  canEarn:
+    type: boolean
+  canPayout:
+    type: boolean
   canSpend:
     type: boolean
+  skrillEmail:
+    type: string
+    nullable: true
   source:
     type: string
+  tiliaId:
+    type: string
+    nullable: true
+  tiliaType:
+    type: string
+    nullable: true
   userId:
     $ref: ./UserID.yaml
 required:
   - accountActivatedOn
+  - accountSellerRegisteredOn
+  - accountSellerStatus
   - accountId
   - blocked
+  - canEarn
+  - canPayout
   - canSpend
+  - skrillEmail
   - source
+  - tiliaId
+  - tiliaType
   - userId

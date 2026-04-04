@@ -15,8 +15,12 @@ properties:
     type: boolean
   isSeller:
     type: boolean
+  ledgerTransactionId:
+    type: integer
   listingCurrentlyAvailable:
     type: boolean
+  listingDescription:
+    type: string
   listingDisplayName:
     type: string
   listingId:
@@ -31,7 +35,7 @@ properties:
   products:
     type: array
     items:
-      type: object
+      $ref: ./ProductPurchaseProduct.yaml
   purchaseActive:
     type: boolean
   purchaseContext:
@@ -40,6 +44,10 @@ properties:
       locationType:
         type: string
         example: undefined
+      worldId:
+        $ref: ./WorldID.yaml
+      worldName:
+        type: string
   purchaseCurrentStatus:
     type: string
   purchaseDate:
@@ -51,7 +59,10 @@ properties:
     type: string
   purchaseEndDate:
     type: string
+    nullable: true
     format: date-time
+  purchaseFee:
+    type: integer
   purchaseId:
     $ref: ./ProductPurchaseID.yaml
   purchaseLatest:
@@ -62,6 +73,7 @@ properties:
     type: integer
   purchaseStartDate:
     type: string
+    nullable: true
     format: date-time
   purchaseToken:
     type: object
@@ -69,6 +81,8 @@ properties:
   purchaseType:
     type: string
   purchaseUnitPrice:
+    type: integer
+  purchaseValue:
     type: integer
   receiverDisplayName:
     type: string
@@ -93,26 +107,24 @@ required:
   - isGift
   - isReceiver
   - isSeller
-  - listingCurrentlyAvailable
+  - ledgerTransactionId
   - listingDisplayName
   - listingId
   - listingImageId
-  - listingSubtitle
   - listingType
   - products
   - purchaseActive
   - purchaseContext
   - purchaseCurrentStatus
   - purchaseDate
-  - purchaseEndDate
+  - purchaseFee
   - purchaseId
   - purchaseLatest
   - purchasePrice
   - purchaseQuantity
-  - purchaseStartDate
-  - purchaseToken
   - purchaseType
   - purchaseUnitPrice
+  - purchaseValue
   - receiverDisplayName
   - receiverId
   - recurrable

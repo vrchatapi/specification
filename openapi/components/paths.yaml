@@ -134,6 +134,8 @@
   $ref: "./paths/economy.yaml#/paths/~1economy~1purchases~1{productPurchaseId}"
 "/economy/purchases/{productPurchaseId}/stacks":
   $ref: "./paths/economy.yaml#/paths/~1economy~1purchases~1{productPurchaseId}~1stacks"
+/economy/stores:
+  $ref: "./paths/economy.yaml#/paths/~1economy~1stores"
 /economy/seller/eligibility:
   $ref: "./paths/economy.yaml#/paths/~1economy~1seller~1eligibility"
 /economy/store:
@@ -288,6 +290,8 @@
   $ref: "./paths/miscellaneous.yaml#/paths/~1js~1app.js"
 "/licenseGroups/{licenseGroupId}":
   $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
+/listing:
+  $ref: "./paths/economy.yaml#/paths/~1listing"
 "/listing/{productId}":
   $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}"
 /logout:
@@ -320,6 +324,8 @@
   $ref: "./paths/prints.yaml#/paths/~1prints~1user~1{userId}"
 "/prints/{printId}":
   $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
+/products:
+  $ref: "./paths/economy.yaml#/paths/~1products"
 "/products/{productId}":
   $ref: "./paths/economy.yaml#/paths/~1products~1{productId}"
 /props:
@@ -352,6 +358,12 @@
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
 "/user/{userId}/economy/account":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
+"/user/{userId}/economy/balances":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1balances"
+"/user/{userId}/economy/payouts/list":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1payouts~1list"
+"/user/{userId}/economy/payouts/status":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1payouts~1status"
 "/user/{userId}/economy/transactions":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1transactions"
 "/user/{userId}/friendRequest":
@@ -362,6 +374,10 @@
   $ref: "./paths/inventory.yaml#/paths/~1user~1{userId}~1inventory~1{inventoryItemId}"
 "/user/{userId}/listings":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1listings"
+"/user/{userId}/products":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1products"
+"/user/{userId}/tilia/kyc":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1tilia~1kyc"
 "/user/{userId}/tilia/tos":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1tilia~1tos"
 /userNotes:

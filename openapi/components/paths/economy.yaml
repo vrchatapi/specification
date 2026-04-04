@@ -118,17 +118,22 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /economy/metrics/earnings:
+    parameters:
+      - $ref: ../parameters.yaml#/metricDateStart
+      - $ref: ../parameters.yaml#/metricDateEnd
+      - $ref: ../parameters.yaml#/sellerId
+      - $ref: ../parameters.yaml#/groupByDuration
     get:
-      operationId: getEarningsMetrics
-      summary: Get Earnings Metrics
-      description: Gets earnings totals and breakdown metrics for the currently authenticated user.
+      operationId: getEconomyEarningsMetrics
+      summary: Get Economy Earnings Metrics
+      description: Gets seller earnings metrics grouped by a requested duration.
       tags:
         - economy
       security:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/economy/EarningsMetricsResponse.yaml
+          $ref: ../responses/economy/EconomyEarningsMetricsResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /economy/purchase/listing:
@@ -153,6 +158,7 @@ paths:
   /economy/purchases:
     parameters:
       - $ref: ../parameters.yaml#/buyerId
+      - $ref: ../parameters.yaml#/sellerIdQuery
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/offset
       - $ref: ../parameters.yaml#/mostRecentFlag
@@ -169,6 +175,25 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/ProductPurchaseListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /economy/stores:
+    parameters:
+      - $ref: ../parameters.yaml#/sellerIdQuery
+      - $ref: ../parameters.yaml#/managementPov
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+    get:
+      operationId: listStores
+      summary: List Stores
+      description: Lists stores, optionally filtered to a seller and adjusted for management views.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/StoreListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/economy/purchases/{productPurchaseId}":
@@ -269,6 +294,26 @@ paths:
           $ref: ../responses/economy/LicenseGroupResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /listing:
+    post:
+      operationId: createProductListingDirect
+      summary: Create Product Listing
+      description: Creates a listing and returns the new ProductListing object. The request body is based on observed fields and may be incomplete.
+      tags:
+        - economy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateListingRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductListingResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/listing/{productId}":
     parameters:
       - $ref: ../parameters.yaml#/productId
@@ -286,6 +331,58 @@ paths:
           $ref: ../responses/economy/ProductListingResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+    put:
+      operationId: updateProductListingDirect
+      summary: Update Product Listing
+      description: Updates the active state of a listing. Setting `active` to `true` publishes the listing, while `false` unpublishes it.
+      tags:
+        - economy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateListingRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductListingResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    delete:
+      operationId: deleteProductListingDirect
+      summary: Delete Product Listing
+      description: Deletes a listing.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/DeleteProductListingResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /products:
+    post:
+      operationId: createProduct
+      summary: Create Product
+      description: Creates a product and returns the new Product object.
+      tags:
+        - economy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateProductRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/products/{productId}":
     parameters:
       - $ref: ../parameters.yaml#/productId
@@ -301,6 +398,38 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/ProductListingResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    put:
+      operationId: updateProduct
+      summary: Update Product
+      description: Updates a product and returns the updated Product object.
+      tags:
+        - economy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateProductRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    delete:
+      operationId: deleteProduct
+      summary: Delete Product
+      description: Deletes a product.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/DeleteProductResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /subscriptions:
@@ -423,6 +552,54 @@ paths:
           $ref: ../responses/economy/EconomyAccountResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/economy/balances":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getEconomyBalances
+      summary: Get Economy Balances
+      description: Gets the combined balances for a user.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/EconomyBalancesResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/economy/payouts/list":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getEconomyPayouts
+      summary: Get Economy Payouts
+      description: Gets the payout history for a user.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/EconomyPayoutListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/economy/payouts/status":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getEconomyPayoutStatus
+      summary: Get Economy Payout Status
+      description: Gets the current payout status and eligibility information for a user.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/EconomyPayoutStatusResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/economy/transactions":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -452,6 +629,7 @@ paths:
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/offset
       - $ref: ../parameters.yaml#/hydrate
+      - $ref: ../parameters.yaml#/listingTypeFilter
       - $ref: ../parameters.yaml#/groupIdFilter
       - $ref: ../parameters.yaml#/active
     get:
@@ -465,6 +643,24 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/ProductListingListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/products":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/number
+      - $ref: ../parameters.yaml#/offset
+    get:
+      operationId: listUserProducts
+      summary: List User Products
+      description: Gets the products of a given user.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/tilia/tos":
@@ -499,6 +695,22 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/UpdateTiliaTOSResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/tilia/kyc":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserTiliaKyc
+      summary: Get User Tilia KYC
+      description: Gets KYC status details for a user's Tilia account.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/TiliaKycResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/credits/eligible":

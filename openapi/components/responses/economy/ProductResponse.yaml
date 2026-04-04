@@ -1,0 +1,5 @@
+description: Returns a single Product object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Product.yaml

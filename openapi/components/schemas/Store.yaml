@@ -1,6 +1,9 @@
 title: Store
 type: object
 properties:
+  created:
+    type: string
+    format: date-time
   description:
     type: string
   displayName:
@@ -24,6 +27,8 @@ properties:
     type: string
   sellerId:
     $ref: ./UserID.yaml
+  storeContext:
+    $ref: ./StoreContext.yaml
   shelfIds:
     type: array
     description: Only for store type house
@@ -36,21 +41,30 @@ properties:
       $ref: ./StoreShelf.yaml
   storeId:
     $ref: ./StoreID.yaml
+  storeStatus:
+    type: string
   storeType:
     $ref: ./StoreType.yaml
   tags:
     type: array
     items:
       $ref: ./Tag.yaml
+  updated:
+    type: string
+    format: date-time
   worldId:
     $ref: ./WorldID.yaml
     description: Only for store type world
 required:
+  - created
   - description
   - displayName
   - id
   - sellerDisplayName
   - sellerId
+  - storeContext
   - storeId
+  - storeStatus
   - storeType
   - tags
+  - updated
