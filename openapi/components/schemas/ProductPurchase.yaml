@@ -107,24 +107,26 @@ required:
   - isGift
   - isReceiver
   - isSeller
-  - ledgerTransactionId
+  - listingCurrentlyAvailable
   - listingDisplayName
   - listingId
   - listingImageId
+  - listingSubtitle
   - listingType
   - products
   - purchaseActive
   - purchaseContext
   - purchaseCurrentStatus
   - purchaseDate
-  - purchaseFee
+  - purchaseEndDate
   - purchaseId
   - purchaseLatest
   - purchasePrice
   - purchaseQuantity
+  - purchaseStartDate
+  - purchaseToken
   - purchaseType
   - purchaseUnitPrice
-  - purchaseValue
   - receiverDisplayName
   - receiverId
   - recurrable

@@ -56,15 +56,11 @@ properties:
     $ref: ./WorldID.yaml
     description: Only for store type world
 required:
-  - created
   - description
   - displayName
   - id
   - sellerDisplayName
   - sellerId
-  - storeContext
   - storeId
-  - storeStatus
   - storeType
   - tags
-  - updated

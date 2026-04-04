@@ -14,7 +14,7 @@ properties:
     type: string
     nullable: true
   accountId:
-    type: integer
+    type: string
     nullable: true
   blocked:
     type: boolean
@@ -39,15 +39,8 @@ properties:
     $ref: ./UserID.yaml
 required:
   - accountActivatedOn
-  - accountSellerRegisteredOn
-  - accountSellerStatus
   - accountId
   - blocked
-  - canEarn
-  - canPayout
   - canSpend
-  - skrillEmail
   - source
-  - tiliaId
-  - tiliaType
   - userId

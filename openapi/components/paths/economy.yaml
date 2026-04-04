@@ -124,16 +124,16 @@ paths:
       - $ref: ../parameters.yaml#/sellerId
       - $ref: ../parameters.yaml#/groupByDuration
     get:
-      operationId: getEconomyEarningsMetrics
-      summary: Get Economy Earnings Metrics
-      description: Gets seller earnings metrics grouped by a requested duration.
+      operationId: getEarningsMetrics
+      summary: Get Earnings Metrics
+      description: Gets earnings totals and breakdown metrics for the currently authenticated user.
       tags:
         - economy
       security:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/economy/EconomyEarningsMetricsResponse.yaml
+          $ref: ../responses/economy/EarningsMetricsResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /economy/purchase/listing:

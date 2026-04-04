@@ -104,9 +104,7 @@ properties:
     format: date-time
 required:
   - active
-  - archived
   - buyerRefundable
-  - created
   - description
   - displayName
   - hasAvatar
@@ -114,8 +112,6 @@ required:
   - id
   - listingType
   - priceTokens
-  - purchaseCount
-  - purchaseCountQuantity
   - productIds
   - productType
   - products
@@ -125,4 +121,3 @@ required:
   - sellerId
   - stackable
   - storeIds
-  - updated
