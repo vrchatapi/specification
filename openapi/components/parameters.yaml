@@ -75,7 +75,7 @@ branch:
 buyerId:
   name: buyerId
   description: Must be a valid user ID.
-  required: true
+  required: false
   in: query
   schema:
     $ref: ./schemas/UserID.yaml
@@ -196,6 +196,22 @@ contentId:
   in: query
   schema:
     type: boolean
+dateMax:
+  name: dateMax
+  description: Upper bound for the transaction search range. The website sends a JavaScript Date string, for example `Sat Apr 04 2026 13:52:46 GMT+0200 (Central European Summer Time)`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: Sat Apr 04 2026 13:52:46 GMT+0200 (Central European Summer Time)
+dateMin:
+  name: dateMin
+  description: Lower bound for the transaction search range. The website sends a JavaScript Date string, for example `Thu Jan 01 2026 13:52:46 GMT+0100 (Central European Standard Time)`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: Thu Jan 01 2026 13:52:46 GMT+0100 (Central European Standard Time)
 displayName:
   name: displayName
   description: Filter by displayName.
@@ -345,6 +361,14 @@ groupRoleId:
   schema:
     type: string
     example: grol_00000000-0000-0000-0000-000000000000
+groupByDuration:
+  name: groupByDuration
+  description: Time bucket size for economy metrics. Observed values include `days` and `years`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: days
 hydrate:
   name: hydrate
   description: Populates some fields and changes types of others for certain objects.
@@ -366,6 +390,22 @@ hydrateProducts:
   in: query
   schema:
     type: boolean
+listingTypeFilter:
+  name: listingType
+  description: Filter user listings by category. Observed values include `otp` and `subscription`.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: otp
+managementPov:
+  name: managementPov
+  description: Return stores from the seller management point of view.
+  required: false
+  in: query
+  schema:
+    type: boolean
+    example: true
 include:
   name: include
   description: Tags to include (comma-separated). Any of the tags needs to be present.
@@ -533,6 +573,22 @@ maxUnityVersion:
   in: query
   schema:
     type: string
+metricDateEnd:
+  name: metricDateEnd
+  description: Upper bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: 2026-04-04T21:59:59.999Z
+metricDateStart:
+  name: metricDateStart
+  description: Lower bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps.
+  required: false
+  in: query
+  schema:
+    type: string
+    example: 2026-03-28T23:00:00.000Z
 messageType:
   name: messageType
   description: "The type of message to fetch, must be a valid InviteMessageType."
@@ -707,6 +763,20 @@ search:
   in: query
   schema:
     type: string
+sellerIdQuery:
+  name: sellerId
+  description: Filter results by seller.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
+sellerId:
+  name: sellerId
+  description: Seller to retrieve economy metrics for.
+  required: true
+  in: query
+  schema:
+    $ref: ./schemas/UserID.yaml
 slot:
   name: slot
   description: The message slot to fetch of a given message type.

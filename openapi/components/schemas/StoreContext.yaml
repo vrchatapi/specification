@@ -1,0 +1,14 @@
+title: StoreContext
+type: object
+properties:
+  id:
+    type: string
+  imageUrl:
+    type: string
+    nullable: true
+  name:
+    type: string
+required:
+  - id
+  - imageUrl
+  - name

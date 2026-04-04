@@ -124,10 +124,14 @@
   $ref: "./paths/miscellaneous.yaml#/paths/~1css~1app.css"
 /economy/licenses/active:
   $ref: "./paths/economy.yaml#/paths/~1economy~1licenses~1active"
+"/economy/metrics/earnings":
+  $ref: "./paths/economy.yaml#/paths/~1economy~1metrics~1earnings"
 /economy/purchase/listing:
   $ref: "./paths/economy.yaml#/paths/~1economy~1purchase~1listing"
 /economy/purchases:
   $ref: "./paths/economy.yaml#/paths/~1economy~1purchases"
+/economy/stores:
+  $ref: "./paths/economy.yaml#/paths/~1economy~1stores"
 /economy/store:
   $ref: "./paths/economy.yaml#/paths/~1economy~1store"
 /economy/store/shelves:
@@ -278,6 +282,8 @@
   $ref: "./paths/miscellaneous.yaml#/paths/~1js~1app.js"
 "/licenseGroups/{licenseGroupId}":
   $ref: "./paths/economy.yaml#/paths/~1licenseGroups~1{licenseGroupId}"
+/listing:
+  $ref: "./paths/economy.yaml#/paths/~1listing"
 "/listing/{productId}":
   $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}"
 /logout:
@@ -312,6 +318,8 @@
   $ref: "./paths/prints.yaml#/paths/~1prints~1{printId}"
 "/products/{productId}":
   $ref: "./paths/economy.yaml#/paths/~1products~1{productId}"
+/products:
+  $ref: "./paths/economy.yaml#/paths/~1products"
 /props:
   $ref: "./paths/props.yaml#/paths/~1props"
 "/props/{propId}":
@@ -340,6 +348,16 @@
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
 "/user/{userId}/economy/account":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
+"/user/{userId}/economy/balances":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1balances"
+"/user/{userId}/economy/payouts/list":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1payouts~1list"
+"/user/{userId}/economy/payouts/status":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1payouts~1status"
+"/user/{userId}/economy/transactions":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1transactions"
+"/user/{userId}/products":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1products"
 "/user/{userId}/friendRequest":
   $ref: "./paths/friends.yaml#/paths/~1user~1{userId}~1friendRequest"
 "/user/{userId}/friendStatus":
@@ -350,6 +368,8 @@
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1listings"
 "/user/{userId}/tilia/tos":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1tilia~1tos"
+"/user/{userId}/tilia/kyc":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1tilia~1kyc"
 /userNotes:
   $ref: "./paths/users.yaml#/paths/~1userNotes"
 "/userNotes/{userNoteId}":

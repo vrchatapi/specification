@@ -1,0 +1,15 @@
+title: UpdateProductRequest
+type: object
+properties:
+  description:
+    type: string
+  displayName:
+    type: string
+  imageId:
+    $ref: ../schemas/FileID.yaml
+  tags:
+    type: array
+    items:
+      $ref: ../schemas/Tag.yaml
+  useForSubscriberList:
+    type: boolean

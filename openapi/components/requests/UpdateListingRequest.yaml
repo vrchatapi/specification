@@ -1,0 +1,7 @@
+title: UpdateListingRequest
+type: object
+properties:
+  active:
+    type: boolean
+required:
+  - active

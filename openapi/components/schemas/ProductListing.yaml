@@ -3,8 +3,13 @@ type: object
 properties:
   active:
     type: boolean
+  archived:
+    type: boolean
   buyerRefundable:
     type: boolean
+  created:
+    type: string
+    format: date-time
   description:
     type: string
   displayName:
@@ -49,6 +54,10 @@ properties:
     type: boolean
   priceTokens:
     type: integer
+  purchaseCount:
+    type: integer
+  purchaseCountQuantity:
+    type: integer
   productIds:
     type: array
     items:
@@ -84,6 +93,9 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  updated:
+    type: string
+    format: date-time
   vrcPlusDiscountPrice:
     type: integer
   whenToExpire:
@@ -92,7 +104,9 @@ properties:
     format: date-time
 required:
   - active
+  - archived
   - buyerRefundable
+  - created
   - description
   - displayName
   - hasAvatar
@@ -100,6 +114,8 @@ required:
   - id
   - listingType
   - priceTokens
+  - purchaseCount
+  - purchaseCountQuantity
   - productIds
   - productType
   - products
@@ -109,3 +125,4 @@ required:
   - sellerId
   - stackable
   - storeIds
+  - updated

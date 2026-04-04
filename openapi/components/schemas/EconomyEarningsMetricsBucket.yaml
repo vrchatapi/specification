@@ -1,0 +1,29 @@
+title: EconomyEarningsMetricsBucket
+type: object
+properties:
+  _id:
+    type: string
+    description: Identifier for the grouping bucket.
+    example: 2026-04-04
+  otpEarnings:
+    type: integer
+    description: Earnings from one-time purchases in this bucket.
+  otpPurchaseCount:
+    type: integer
+    description: One-time purchase count in this bucket.
+  subscriberEarnings:
+    type: integer
+    description: Earnings from subscriptions in this bucket.
+  subscriberMonths:
+    type: integer
+    description: Number of subscriber months counted in this bucket.
+  totalEarnings:
+    type: integer
+    description: Total earnings in this bucket.
+required:
+  - _id
+  - otpEarnings
+  - otpPurchaseCount
+  - subscriberEarnings
+  - subscriberMonths
+  - totalEarnings
