@@ -18,6 +18,7 @@ jobs:
     strategy:
       matrix:
         repository:
+          - vrchat.community
           - vrchatapi-javascript
           - vrchatapi-csharp
           - vrchatapi-python
