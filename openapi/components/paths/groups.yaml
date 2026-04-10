@@ -78,7 +78,7 @@ paths:
         - groups
       responses:
         "302":
-          description: 
+          description: Redirect to the /home/group/{groupId} URL of the group.
           headers:
             Location:
               description: The /home/group/{groupId} URL of the group.
