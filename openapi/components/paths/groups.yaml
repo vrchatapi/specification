@@ -64,6 +64,8 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/groups/redirect/{groupShortCodeAndDiscriminator}":
+    parameters:
+      - $ref: ../parameters.yaml#/groupShortCodeAndDiscriminator
     get:
       operationId: resolveGroupShortCodeAndDiscriminator
       summary: Resolve Group Short Code and Discriminator
