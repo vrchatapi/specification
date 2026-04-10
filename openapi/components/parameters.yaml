@@ -315,6 +315,13 @@ groupByDuration:
   schema:
     type: string
     example: days
+groupShortCodeAndDiscriminator:
+  name: groupShortCodeAndDiscriminator
+  description: Must be a valid group short code and discriminator.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/GroupShortCodeAndDiscriminator.yaml
 groupGalleryId:
   name: groupGalleryId
   description: Must be a valid group gallery ID.
