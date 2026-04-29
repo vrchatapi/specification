@@ -3,13 +3,13 @@ type: object
 description: Details about how a recurring event will be scheduled. If the event is to be scheduled indefinitely, this will lack an "end" property.
 nullable: true
 properties:
-  end:
-    $ref: ./CalendarEventRecurrenceEnd.yaml
   daysOfWeek:
     type: array
     description: Which days of the week the event will be scheduled, only valid/present for "weekly" recurring events
     items:
       $ref: ./CalendarDayOfWeek.yaml
+  end:
+    $ref: ./CalendarEventRecurrenceEnd.yaml
   frequency:
     $ref: ./CalendarEventFrequency.yaml
   interval:
