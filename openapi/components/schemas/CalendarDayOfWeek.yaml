@@ -1,0 +1,13 @@
+title: CalendarDayOfWeek
+type: string
+description: The day of the week, used for recurring events.
+enum:
+  - FR
+  - MO
+  - SA
+  - SU
+  - TH
+  - TU
+  - WE
+default: SU
+example: FR

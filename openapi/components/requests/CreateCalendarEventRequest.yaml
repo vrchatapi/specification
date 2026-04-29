@@ -33,12 +33,16 @@ properties:
       $ref: ../schemas/LanguageCode.yaml
     maxItems: 3
     minItems: 0
+  occurrenceKind:
+    $ref: ../schemas/CalendarEventOccurrenceKind.yaml
   parentId:
     $ref: ../schemas/CalendarID.yaml
   platforms:
     type: array
     items:
       $ref: ../schemas/CalendarEventPlatform.yaml
+  recurrence:
+    $ref: ../schemas/CalendarEventRecurrence.yaml
   roleIds:
     type: array
     items:

@@ -1,0 +1,16 @@
+title: CalendarEventRecurrenceEnd
+type: object
+description: Details about how a recurring event stops being scheduled
+properties:
+  count:
+    type: integer
+    description: Required for "afterOccurrences" - The number of times the event will be scheduled before it stops being scheduled
+    minimum: 1
+  date:
+    type: string
+    description: Required for "afterDate" - The date and time after which the event will stop being scheduled, **without timezone or offset**
+    example: 2026-12-31T23:59:00
+  type:
+    $ref: ./CalendarEventRecurrenceEndType.yaml
+required:
+  - type
