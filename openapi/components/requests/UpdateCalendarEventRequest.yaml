@@ -36,6 +36,8 @@ properties:
     type: array
     items:
       type: string
+  recurrence:
+    $ref: ../schemas/CalendarEventRecurrence.yaml
   roleIds:
     type: array
     items:

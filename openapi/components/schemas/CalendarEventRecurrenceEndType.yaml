@@ -1,0 +1,8 @@
+title: CalendarEventRecurrenceEndTyoe
+type: string
+description: How a recurring event stops being scheduled
+enum:
+  - afterDate
+  - afterOccurrences
+default: afterDate
+example: afterOccurrences
