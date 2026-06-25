@@ -94,11 +94,15 @@ properties:
     type: string
   hasBirthday:
     type: boolean
+  hasDiscordFriendsOptOut:
+    type: boolean
   hasEmail:
     type: boolean
   hasLoggedInFromClient:
     type: boolean
   hasPendingEmail:
+    type: boolean
+  hasSharedConnectionsOptOut:
     type: boolean
   hideContentFilterSettings:
     type: boolean

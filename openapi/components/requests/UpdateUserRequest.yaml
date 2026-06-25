@@ -25,6 +25,9 @@ properties:
     description: MUST specify currentPassword as well to change display name
   email:
     type: string
+  hasDiscordFriendsOptOut:
+    type: boolean
+    description: Opt out of the Discord Friend Connections feature
   hasSharedConnectionsOptOut:
     type: boolean
     description: Opt out of the Mutuals feature
