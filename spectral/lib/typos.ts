@@ -11,7 +11,26 @@ const words = [
 	"favorited",
 	"vrchatplus",
 	"unban",
-	"unmute"
+	"unmute",
+	"spritesheet",
+	"despawns",
+	"urlencode",
+	"unmoderates",
+	"standalonewindows",
+	"unknownplatform",
+	"booping",
+	"unequip",
+	"playermoderation",
+	"unmoderate",
+	"interactable",
+	"bitmask",
+	"unbans",
+	"unequips",
+	"equippable",
+	"unmoderated",
+	"unmoderating",
+	"webform",
+	"recents"
 ];
 
 const suggestWords = [

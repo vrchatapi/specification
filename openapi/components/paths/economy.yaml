@@ -719,7 +719,7 @@ paths:
       - $ref: ../parameters.yaml#/subscriptionId
     get:
       operationId: getUserCreditsEligible
-      summary: Get User Credits Eligiblity
+      summary: Get User Credits Eligibility
       description: Get the user's eligibility status for subscriptions based on available credits.
       tags:
         - economy
@@ -736,7 +736,7 @@ paths:
       - $ref: ../parameters.yaml#/steamId
     get:
       operationId: getUserSubscriptionEligible
-      summary: Get User Subscription Eligiblity
+      summary: Get User Subscription Eligibility
       description: Get the user's eligibility status for subscriptions.
       tags:
         - economy

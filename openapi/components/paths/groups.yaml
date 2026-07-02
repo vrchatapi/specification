@@ -1106,7 +1106,7 @@ paths:
     post:
       operationId: initiateOrAcceptGroupTransfer
       summary: Initiate or Accept Group Transfer
-      description: To initiate, must be logged in as the current owner and specify the transferTargetId in the body. To accept, must be logged in as the user targetted by a pending transfer, no body is required.
+      description: To initiate, must be logged in as the current owner and specify the transferTargetId in the body. To accept, must be logged in as the user targeted by a pending transfer, no body is required.
       tags:
         - groups
       requestBody:

@@ -1,4 +1,4 @@
-description: Error response due to non existant instance
+description: Error response due to non existent instance
 content:
   application/json:
     examples:

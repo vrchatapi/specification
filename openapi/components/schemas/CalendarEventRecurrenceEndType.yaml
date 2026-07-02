@@ -1,4 +1,4 @@
-title: CalendarEventRecurrenceEndTyoe
+title: CalendarEventRecurrenceEndType
 type: string
 description: How a recurring event stops being scheduled
 enum:
