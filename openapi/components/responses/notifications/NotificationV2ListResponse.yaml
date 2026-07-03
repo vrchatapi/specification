@@ -1,4 +1,4 @@
-description: Returns a list of NotifcationV2 objects.
+description: Returns a list of NotificationV2 objects.
 content:
   application/json:
     schema:

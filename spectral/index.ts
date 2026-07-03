@@ -16,6 +16,7 @@ import { parseArgs } from "node:util";
 import { error, notice, summary, warning } from "@actions/core";
 import { Document, Ruleset, Spectral } from "@stoplight/spectral-core";
 import Parsers from "@stoplight/spectral-parsers";
+import Bun from "bun";
 
 import { defaultRuleset } from "./ruleset";
 

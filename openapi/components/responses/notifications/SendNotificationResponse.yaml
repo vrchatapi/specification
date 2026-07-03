@@ -1,4 +1,4 @@
-description: Returns a single SentNotifcation object.
+description: Returns a single SentNotification object.
 content:
   application/json:
     examples:

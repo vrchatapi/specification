@@ -75,7 +75,7 @@ paths:
         - $ref: ../parameters.yaml#/offset
         - $ref: ../parameters.yaml#/userIdAdmin
         - name: ownerId
-          description: The owner of whoms favorite groups to return. Must be a UserID.
+          description: The owner whose favorite groups to return. Must be a UserID.
           in: query
           schema:
             type: string

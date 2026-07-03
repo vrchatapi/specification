@@ -1,4 +1,4 @@
-description: Error response when trying create a world without having the neccesary Trust rank yet.
+description: Error response when trying create a world without having the necessary Trust rank yet.
 content:
   application/json:
     examples:

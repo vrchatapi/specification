@@ -22,7 +22,7 @@ properties:
     minLength: 8
   subscribe:
     type: boolean
-    description: Whether to recieve promotional emails
+    description: Whether to receive promotional emails
   username:
     type: string
     description: Display Name / Username (Username is a sanitized version)

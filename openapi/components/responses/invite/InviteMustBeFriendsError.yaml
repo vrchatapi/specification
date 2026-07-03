@@ -1,4 +1,4 @@
-description: Error response when trying to invite someome whom you are not friends with.
+description: Error response when trying to invite someone whom you are not friends with.
 content:
   application/json:
     examples:

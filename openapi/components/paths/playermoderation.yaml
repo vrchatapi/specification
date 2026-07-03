@@ -10,7 +10,7 @@ info:
 
     ## Implementation details
 
-    There are three different user-targetted permission options:
+    There are three different user-targeted permission options:
 
     - Mode 1: interactOn/unmute/unblock
     - Mode 2: interactOff/mute/block
@@ -32,7 +32,7 @@ info:
 
     As of October 2022, `showAvatar` and `hideAvatar` has been moved to local storage.
     Sending these types to the API will result in a 200 OK response, but the API will **not** store them.
-    More information is avaiable on VRChat's official [documentation on Local Storage](https://docs.vrchat.com/docs/local-vrchat-storage).
+    More information is available on VRChat's official [documentation on Local Storage](https://docs.vrchat.com/docs/local-vrchat-storage).
   version: "1.0"
 paths:
   /auth/user/playermoderations:
