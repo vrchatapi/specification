@@ -39,9 +39,9 @@ properties:
     $ref: ./Platform.yaml
   nameplateEffect:
     type: string
-  profilePicOverride:
-    type: string
   profileEffect:
+    type: string
+  profilePicOverride:
     type: string
   pronouns:
     type: string

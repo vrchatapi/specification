@@ -53,11 +53,11 @@ properties:
     $ref: ./UserID.yaml
   instanceId:
     $ref: ./InstanceID.yaml
+  isEconomyCreator:
+    type: boolean
   isFriend:
     type: boolean
     description: "Either their `friendKey`, or empty string if you are not friends. Unknown usage."
-  isEconomyCreator:
-    type: boolean
   last_activity:
     type: string
     description: Either a date-time or empty string.
@@ -77,11 +77,11 @@ properties:
     type: string
   platform:
     type: string
+  profileEffect:
+    type: string
   profilePicOverride:
     type: string
   profilePicOverrideThumbnail:
-    type: string
-  profileEffect:
     type: string
   pronouns:
     type: string

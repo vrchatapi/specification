@@ -44,9 +44,9 @@ properties:
   pronouns:
     type: string
   representedGroup:
+    nullable: true
     allOf:
       - $ref: ./ProfileRepresentedGroup.yaml
-    nullable: true
   themeId:
     type: string
   trustTags:
