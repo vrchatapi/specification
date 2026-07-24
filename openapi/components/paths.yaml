@@ -318,6 +318,10 @@
   $ref: "./paths/miscellaneous.yaml#/paths/~1permissions"
 "/permissions/{permissionId}":
   $ref: "./paths/miscellaneous.yaml#/paths/~1permissions~1{permissionId}"
+"/profile/{userId}":
+  $ref: "./paths/users.yaml#/paths/~1profile~1{userId}"
+"/profile/{userId}/private":
+  $ref: "./paths/users.yaml#/paths/~1profile~1{userId}~1private"
 /prints:
   $ref: "./paths/prints.yaml#/paths/~1prints"
 "/prints/user/{userId}":

@@ -1,0 +1,5 @@
+description: Returns profile data visible to the authenticated user.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/PrivateProfile.yaml

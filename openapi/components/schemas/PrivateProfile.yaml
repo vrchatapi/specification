@@ -1,0 +1,22 @@
+title: PrivateProfile
+type: object
+properties:
+  activity:
+    $ref: ./PrivateProfileActivity.yaml
+  id:
+    $ref: ./UserID.yaml
+  isFriend:
+    type: boolean
+  note:
+    type: string
+  status:
+    $ref: ./UserStatus.yaml
+  statusDescription:
+    type: string
+required:
+  - activity
+  - id
+  - isFriend
+  - note
+  - status
+  - statusDescription

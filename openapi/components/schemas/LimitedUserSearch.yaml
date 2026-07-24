@@ -2,6 +2,12 @@ title: LimitedUserSearch
 type: object
 description: User object received when searching
 properties:
+  bannerColor:
+    type: string
+  bannerType:
+    type: string
+  bannerUrl:
+    type: string
   bio:
     type: string
   bioLinks:
@@ -21,13 +27,21 @@ properties:
     $ref: ./DeveloperType.yaml
   displayName:
     type: string
+  iconFrame:
+    type: string
+  iconUrl:
+    type: string
   id:
     $ref: ./UserID.yaml
   isFriend:
     type: boolean
   last_platform:
     $ref: ./Platform.yaml
+  nameplateEffect:
+    type: string
   profilePicOverride:
+    type: string
+  profileEffect:
     type: string
   pronouns:
     type: string

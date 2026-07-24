@@ -13,6 +13,10 @@ properties:
     description: " "
     items:
       $ref: ./Badge.yaml
+  bannerType:
+    type: string
+  bannerUrl:
+    type: string
   bio:
     type: string
     maxLength: 512
@@ -41,6 +45,10 @@ properties:
     type: string
   friendRequestStatus:
     type: string
+  iconFrame:
+    type: string
+  iconUrl:
+    type: string
   id:
     $ref: ./UserID.yaml
   instanceId:
@@ -48,6 +56,8 @@ properties:
   isFriend:
     type: boolean
     description: "Either their `friendKey`, or empty string if you are not friends. Unknown usage."
+  isEconomyCreator:
+    type: boolean
   last_activity:
     type: string
     description: Either a date-time or empty string.
@@ -61,6 +71,8 @@ properties:
     $ref: ./Platform.yaml
   location:
     $ref: ./LocationID.yaml
+  nameplateEffect:
+    type: string
   note:
     type: string
   platform:
@@ -68,6 +80,8 @@ properties:
   profilePicOverride:
     type: string
   profilePicOverrideThumbnail:
+    type: string
+  profileEffect:
     type: string
   pronouns:
     type: string

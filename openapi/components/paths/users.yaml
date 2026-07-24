@@ -4,6 +4,34 @@ info:
   description: Users Docs Here
   version: "1.0"
 paths:
+  "/profile/{userId}":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getPublicProfile
+      summary: Get Public Profile
+      description: Get a user's public profile information.
+      tags:
+        - users
+      responses:
+        "200":
+          $ref: ../responses/users/PublicProfileResponse.yaml
+  "/profile/{userId}/private":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getPrivateProfile
+      summary: Get Private Profile
+      description: Get profile information visible to the currently authenticated user.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/PrivateProfileResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /userNotes:
     get:
       operationId: getUserNotes
