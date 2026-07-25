@@ -13,9 +13,13 @@ paths:
       description: Get a user's public profile information.
       tags:
         - users
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/users/PublicProfileResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/profile/{userId}/private":
     parameters:
       - $ref: ../parameters.yaml#/userId
