@@ -1,0 +1,36 @@
+title: PrivateProfileActivity
+type: object
+properties:
+  instanceId:
+    $ref: ./InstanceID.yaml
+  last_activity:
+    type: string
+    description: Either a date-time or an empty string.
+  last_login:
+    type: string
+    description: Either a date-time or an empty string.
+  location:
+    $ref: ./LocationID.yaml
+  platform:
+    $ref: ./Platform.yaml
+  state:
+    $ref: ./UserState.yaml
+  travelingToInstance:
+    type: string
+  travelingToLocation:
+    type: string
+  travelingToWorld:
+    type: string
+  worldId:
+    $ref: ./WorldID.yaml
+required:
+  - instanceId
+  - last_activity
+  - last_login
+  - location
+  - platform
+  - state
+  - travelingToInstance
+  - travelingToLocation
+  - travelingToWorld
+  - worldId

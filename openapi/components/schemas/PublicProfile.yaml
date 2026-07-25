@@ -1,0 +1,77 @@
+title: PublicProfile
+type: object
+properties:
+  ageVerificationStatus:
+    $ref: ./AgeVerificationStatus.yaml
+  ageVerified:
+    $ref: ./AgeVerified.yaml
+  backgroundType:
+    type: string
+  badges:
+    type: array
+    items:
+      $ref: ./Badge.yaml
+  bannerColor:
+    type: string
+  bannerType:
+    type: string
+  bio:
+    type: string
+  bioLinks:
+    type: array
+    items:
+      type: string
+  displayName:
+    type: string
+  hasVrcPlus:
+    type: boolean
+  iconFrame:
+    type: string
+  iconUrl:
+    type: string
+  id:
+    $ref: ./UserID.yaml
+  isEconomyCreator:
+    type: boolean
+  languages:
+    type: array
+    items:
+      type: string
+  nameplateEffect:
+    type: string
+  profileEffect:
+    type: string
+  pronouns:
+    type: string
+  representedGroup:
+    nullable: true
+    allOf:
+      - $ref: ./ProfileRepresentedGroup.yaml
+  themeId:
+    type: string
+  trustTags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+required:
+  - ageVerificationStatus
+  - ageVerified
+  - backgroundType
+  - badges
+  - bannerColor
+  - bannerType
+  - bio
+  - bioLinks
+  - displayName
+  - hasVrcPlus
+  - iconFrame
+  - iconUrl
+  - id
+  - isEconomyCreator
+  - languages
+  - nameplateEffect
+  - profileEffect
+  - pronouns
+  - representedGroup
+  - themeId
+  - trustTags

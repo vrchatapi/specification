@@ -1,0 +1,5 @@
+description: Returns a user's public profile.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/PublicProfile.yaml

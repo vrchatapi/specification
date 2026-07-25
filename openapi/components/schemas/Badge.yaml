@@ -19,6 +19,8 @@ properties:
     type: boolean
     description: only present in CurrentUser badges
     nullable: true
+  isQuantifiable:
+    type: boolean
   showcased:
     type: boolean
   updatedAt:

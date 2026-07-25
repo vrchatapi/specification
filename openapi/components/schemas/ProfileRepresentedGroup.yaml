@@ -1,0 +1,18 @@
+title: ProfileRepresentedGroup
+type: object
+properties:
+  bannerUrl:
+    type: string
+    nullable: true
+  iconUrl:
+    type: string
+    nullable: true
+  id:
+    $ref: ./GroupID.yaml
+  name:
+    type: string
+required:
+  - bannerUrl
+  - iconUrl
+  - id
+  - name
