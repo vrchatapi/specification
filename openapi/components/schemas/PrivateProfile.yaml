@@ -13,10 +13,3 @@ properties:
     $ref: ./UserStatus.yaml
   statusDescription:
     type: string
-required:
-  - activity
-  - id
-  - isFriend
-  - note
-  - status
-  - statusDescription

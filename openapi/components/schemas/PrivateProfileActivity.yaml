@@ -23,14 +23,3 @@ properties:
     type: string
   worldId:
     $ref: ./WorldID.yaml
-required:
-  - instanceId
-  - last_activity
-  - last_login
-  - location
-  - platform
-  - state
-  - travelingToInstance
-  - travelingToLocation
-  - travelingToWorld
-  - worldId

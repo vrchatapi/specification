@@ -11,8 +11,3 @@ properties:
     $ref: ./GroupID.yaml
   name:
     type: string
-required:
-  - bannerUrl
-  - iconUrl
-  - id
-  - name
