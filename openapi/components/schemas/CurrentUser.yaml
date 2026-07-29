@@ -30,6 +30,10 @@ properties:
     $ref: ./AgeVerified.yaml
   allowAvatarCopying:
     type: boolean
+  appleDetails:
+    type: object
+  appleId:
+    type: string
   authToken:
     type: string
     description: The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)
@@ -201,6 +205,10 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  twitchDetails:
+    type: object
+  twitchId:
+    type: string
   twoFactorAuthEnabled:
     type: boolean
   twoFactorAuthEnabledDate:
