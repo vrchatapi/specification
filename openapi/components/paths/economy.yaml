@@ -26,7 +26,9 @@ paths:
       operationId: getAdminTransaction
       deprecated: true
       summary: Get Admin Transactions
-      description: "Get a single Admin transactions by ID. This returns the exact same information as `getAdminTransactions`, so no point in using this endpoint."
+      description: "Get a single Admin transactions by ID. This returns the exact same
+        information as `getAdminTransactions`, so no point in using this
+        endpoint."
       tags:
         - economy
       security:
@@ -56,9 +58,10 @@ paths:
       - $ref: ../parameters.yaml#/transactionId
     get:
       operationId: getSteamTransaction
-      deprecated: true
       summary: Get Steam Transaction
-      description: "Get a single Steam transactions by ID. This returns the exact same information as `getSteamTransactions`, so no point in using this endpoint."
+      description: "Get a single Steam transactions by ID. This returns the exact same
+        information as `getSteamTransactions`, so no point in using this
+        endpoint."
       tags:
         - economy
       security:
@@ -121,12 +124,13 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/metricDateStart
       - $ref: ../parameters.yaml#/metricDateEnd
-      - $ref: ../parameters.yaml#/sellerId
+      - $ref: ../parameters.yaml#/sellerIdQuery
       - $ref: ../parameters.yaml#/groupByDuration
     get:
       operationId: getEarningsMetrics
       summary: Get Earnings Metrics
-      description: Gets earnings totals and breakdown metrics for the currently authenticated user.
+      description: Gets earnings totals and breakdown metrics for the currently
+        authenticated user.
       tags:
         - economy
       security:
@@ -212,10 +216,15 @@ paths:
   /economy/seller/eligibility:
     get:
       operationId: getSellerEligibility
+      deprecated: true
       summary: Get Seller Eligibility
-      description: Get the eligibility of the currently authenticated user to become a seller
+      description: |-
+        ~~Get the eligibility of the currently authenticated user to become a seller~~
+
+        **DEPRECATED:** the route no longer exists.
       tags:
         - economy
+        - deprecated
       security:
         - authCookie: []
       responses:
@@ -223,6 +232,8 @@ paths:
           $ref: ../responses/economy/SellerEligibilityResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/RouteNotImplementedError.yaml
   /economy/store:
     parameters:
       - $ref: ../parameters.yaml#/storeId
@@ -261,14 +272,15 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
   /economy/stores:
     parameters:
-      - $ref: ../parameters.yaml#/sellerIdQuery
+      - $ref: ../parameters.yaml#/sellerId
       - $ref: ../parameters.yaml#/managementPov
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/offset
     get:
       operationId: listStores
       summary: List Stores
-      description: Lists stores, optionally filtered to a seller and adjusted for management views.
+      description: Lists stores, optionally filtered to a seller and adjusted for
+        management views.
       tags:
         - economy
       security:
@@ -278,6 +290,8 @@ paths:
           $ref: ../responses/economy/StoreListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/economy/StoresUnavailableError.yaml
   "/licenseGroups/{licenseGroupId}":
     parameters:
       - $ref: ../parameters.yaml#/licenseGroupId
@@ -298,7 +312,8 @@ paths:
     post:
       operationId: createProductListingDirect
       summary: Create Product Listing
-      description: Creates a listing and returns the new ProductListing object. The request body is based on observed fields and may be incomplete.
+      description: Creates a listing and returns the new ProductListing object. The
+        request body is based on observed fields and may be incomplete.
       tags:
         - economy
       requestBody:
@@ -334,7 +349,8 @@ paths:
     put:
       operationId: updateProductListingDirect
       summary: Update Product Listing
-      description: Updates the active state of a listing. Setting `active` to `true` publishes the listing, while `false` unpublishes it.
+      description: Updates the active state of a listing. Setting `active` to `true`
+        publishes the listing, while `false` unpublishes it.
       tags:
         - economy
       requestBody:
@@ -436,9 +452,23 @@ paths:
     get:
       operationId: getSubscriptions
       summary: List Subscriptions
-      description: 'List all existing Subscriptions. For example, "vrchatplus-monthly" and "vrchatplus-yearly".'
+      description: 'List all existing Subscriptions. For example, "vrchatplus-monthly"
+        and "vrchatplus-yearly".'
       tags:
         - economy
+      parameters:
+        - name: gifts
+          description: Return the giftable subscriptions instead of the standard ones.
+          required: false
+          in: query
+          schema:
+            type: boolean
+        - name: recurring
+          description: Return the recurring subscriptions instead of the standard ones.
+          required: false
+          in: query
+          schema:
+            type: boolean
       security:
         - authCookie: []
       responses:
@@ -449,10 +479,15 @@ paths:
   /tilia/status:
     get:
       operationId: getTiliaStatus
+      deprecated: true
       summary: Get Tilia Status
-      description: Gets the status of Tilia integration
+      description: |-
+        ~~Gets the status of Tilia integration~~
+
+        **DEPRECATED:** the route no longer exists.
       tags:
         - economy
+        - deprecated
       security:
         - authCookie: []
       responses:
@@ -460,6 +495,8 @@ paths:
           $ref: ../responses/economy/TiliaStatusResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/RouteNotImplementedError.yaml
   /tokenBundles:
     get:
       operationId: getTokenBundles
@@ -510,7 +547,7 @@ paths:
     get:
       operationId: getBalance
       summary: Get Balance
-      description: Gets the balance of a user
+      description: Gets the balance of a user.
       tags:
         - economy
       security:
@@ -525,10 +562,15 @@ paths:
       - $ref: ../parameters.yaml#/userId
     get:
       operationId: getBalanceEarnings
+      deprecated: true
       summary: Get Balance Earnings
-      description: Gets the balance of a user from earnings
+      description: |-
+        ~~Gets the balance of a user from earnings~~
+
+        **DEPRECATED:** the route no longer exists.
       tags:
         - economy
+        - deprecated
       security:
         - authCookie: []
       responses:
@@ -536,6 +578,8 @@ paths:
           $ref: ../responses/economy/BalanceResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/RouteNotImplementedError.yaml
   "/user/{userId}/economy/account":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -598,6 +642,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/EconomyPayoutStatusResponse.yaml
+        "400":
+          $ref: ../responses/economy/AccountStateError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/economy/transactions":
@@ -645,6 +691,8 @@ paths:
           $ref: ../responses/economy/ProductListingListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/economy/ProductListingsForbiddenError.yaml
   "/user/{userId}/products":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -677,6 +725,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/TiliaKycResponse.yaml
+        "400":
+          $ref: ../responses/economy/AccountStateError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/tilia/tos":
@@ -684,10 +734,15 @@ paths:
       - $ref: ../parameters.yaml#/userId
     get:
       operationId: getTiliaTos
+      deprecated: true
       summary: Get Tilia TOS Agreement Status
-      description: Gets the status of the agreement of a user to the Tilia TOS
+      description: |-
+        ~~Gets the status of the agreement of a user to the Tilia TOS~~
+
+        **DEPRECATED:** the route no longer exists.
       tags:
         - economy
+        - deprecated
       security:
         - authCookie: []
       responses:
@@ -695,12 +750,19 @@ paths:
           $ref: ../responses/economy/TiliaTOSResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/RouteNotImplementedError.yaml
     put:
       operationId: updateTiliaTos
+      deprecated: true
       summary: Update Tilia TOS Agreement Status
-      description: Updates the status of the agreement of a user to the Tilia TOS
+      description: |-
+        ~~Updates the status of the agreement of a user to the Tilia TOS~~
+
+        **DEPRECATED:** the route no longer exists.
       tags:
         - economy
+        - deprecated
       requestBody:
         content:
           application/json:
@@ -713,16 +775,23 @@ paths:
           $ref: ../responses/economy/UpdateTiliaTOSResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/RouteNotImplementedError.yaml
   "/users/{userId}/credits/eligible":
     parameters:
       - $ref: ../parameters.yaml#/userId
       - $ref: ../parameters.yaml#/subscriptionId
     get:
       operationId: getUserCreditsEligible
+      deprecated: true
       summary: Get User Credits Eligibility
-      description: Get the user's eligibility status for subscriptions based on available credits.
+      description: |-
+        ~~Get the user's eligibility status for subscriptions based on available credits.~~
+
+        **DEPRECATED:** the route no longer exists.
       tags:
         - economy
+        - deprecated
       security:
         - authCookie: []
       responses:
@@ -730,6 +799,8 @@ paths:
           $ref: ../responses/economy/UserCreditsEligibleResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/RouteNotImplementedError.yaml
   "/users/{userId}/subscription/eligible":
     parameters:
       - $ref: ../parameters.yaml#/userId

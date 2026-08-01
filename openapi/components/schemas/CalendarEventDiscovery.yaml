@@ -36,5 +36,4 @@ properties:
     items:
       $ref: ./CalendarEvent.yaml
 required:
-  - nextCursor
   - results

@@ -18,7 +18,9 @@ paths:
     get:
       operationId: searchAvatars
       summary: Search Avatars
-      description: Search and list avatars by query filters. You can only search your own or featured avatars. It is not possible as a normal user to search other peoples avatars.
+      description: Search and list avatars by query filters. You can only search your
+        own or featured avatars. It is not possible as a normal user to search
+        other peoples avatars.
       tags:
         - avatars
       parameters:
@@ -53,7 +55,9 @@ paths:
     post:
       operationId: createAvatar
       summary: Create Avatar
-      description: Create an avatar. It's possible to optionally specify a ID if you want a custom one. Attempting to create an Avatar with an already claimed ID will result in a DB error.
+      description: Create an avatar. It's possible to optionally specify a ID if you
+        want a custom one. Attempting to create an Avatar with an already
+        claimed ID will result in a DB error.
       tags:
         - avatars
       requestBody:
@@ -165,6 +169,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/avatars/AvatarResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
@@ -172,7 +178,9 @@ paths:
     delete:
       operationId: deleteAvatar
       summary: Delete Avatar
-      description: 'Delete an avatar. Notice an avatar is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The AvatarID is permanently reserved.'
+      description: 'Delete an avatar. Notice an avatar is never fully "deleted", only
+        its ReleaseStatus is set to "hidden" and the linked Files are deleted.
+        The AvatarID is permanently reserved.'
       tags:
         - avatars
       security:
@@ -243,7 +251,6 @@ paths:
       - $ref: ../parameters.yaml#/avatarId
     put:
       operationId: selectFallbackAvatar
-      deprecated: true
       summary: Select Fallback Avatar
       description: Switches into that avatar as your fallback avatar.
       tags:
@@ -265,7 +272,8 @@ paths:
     get:
       operationId: getOwnAvatar
       summary: Get Own Avatar
-      description: Get the current avatar for the user. This will return an error for any other user than the one logged in.
+      description: Get the current avatar for the user. This will return an error for
+        any other user than the one logged in.
       tags:
         - avatars
       security:

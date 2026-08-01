@@ -296,6 +296,10 @@
   $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}"
 /logout:
   $ref: "./paths/authentication.yaml#/paths/~1logout"
+/oauth/redirectCode:
+  $ref: "./paths/authentication.yaml#/paths/~1oauth~1redirectCode"
+"/sso/{provider}":
+  $ref: "./paths/authentication.yaml#/paths/~1sso~1{provider}"
 "/message/{userId}/{messageType}":
   $ref: "./paths/invite.yaml#/paths/~1message~1{userId}~1{messageType}"
 "/message/{userId}/{messageType}/{slot}":
@@ -464,7 +468,7 @@
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1platform~1{publishedPlatform}"
 "/worlds/{worldId}/publish":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1publish"
-"/worlds/{worldId}/removeTags":
-  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1removeTags"
+"/worlds/{worldId}/deleteTags":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1deleteTags"
 "/worlds/{worldId}/{instanceId}":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}"

@@ -4,6 +4,21 @@ description: User object received when querying mutual friends
 properties:
   avatarThumbnail:
     $ref: ./CurrentAvatarThumbnailImageUrl.yaml
+  bannerColor:
+    type: string
+    description: Hex colour without a leading `#`.
+    example: 3cc92c
+  bannerType:
+    type: string
+    example: color
+  iconFrame:
+    type: string
+  iconUrl:
+    type: string
+  nameplateEffect:
+    type: string
+  profileEffect:
+    type: string
   currentAvatarImageUrl:
     $ref: ./CurrentAvatarImageUrl.yaml
   currentAvatarTags:

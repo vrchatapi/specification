@@ -118,6 +118,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
@@ -162,6 +164,8 @@ paths:
           $ref: ../responses/groups/GroupAnnouncementResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
     post:
@@ -181,6 +185,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupAnnouncementResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
@@ -198,6 +204,8 @@ paths:
           $ref: ../responses/groups/DeleteGroupAnnouncementSuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/auditLogTypes":
@@ -216,6 +224,8 @@ paths:
           $ref: ../responses/groups/GroupAuditLogEntryTypeListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/auditLogs":
@@ -242,6 +252,8 @@ paths:
           $ref: ../responses/groups/GroupAuditLogListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/bans":
@@ -288,6 +300,8 @@ paths:
           $ref: ../responses/groups/BanGroupMemberBadRequestError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/bans/{userId}":
@@ -307,6 +321,8 @@ paths:
           $ref: ../responses/groups/GroupMemberResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/block":
@@ -353,6 +369,8 @@ paths:
           $ref: ../responses/groups/GroupGalleryResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/galleries/{groupGalleryId}":
@@ -401,6 +419,8 @@ paths:
           $ref: ../responses/groups/GroupGalleryResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
     delete:
@@ -416,6 +436,8 @@ paths:
           $ref: ../responses/groups/DeleteGroupGallerySuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/galleries/{groupGalleryId}/images":
@@ -441,6 +463,8 @@ paths:
           $ref: ../responses/groups/GroupGalleryImageResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}":
@@ -501,6 +525,8 @@ paths:
           $ref: ../responses/groups/GroupInstanceListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/invites":
@@ -740,6 +766,8 @@ paths:
           $ref: ../responses/groups/GroupMemberResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
     delete:
@@ -777,6 +805,8 @@ paths:
           $ref: ../responses/groups/GroupRoleIDListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
     delete:
@@ -792,6 +822,8 @@ paths:
           $ref: ../responses/groups/GroupRoleIDListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/permissions":
@@ -812,6 +844,8 @@ paths:
           $ref: ../responses/users/UsersInvalidSearchError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/posts":
@@ -880,6 +914,8 @@ paths:
           $ref: ../responses/groups/GroupPostResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupPostResponseSuccess.yaml
     delete:
@@ -895,6 +931,8 @@ paths:
           $ref: ../responses/groups/GroupPostResponseSuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupPostResponseSuccess.yaml
   "/groups/{groupId}/representation":
@@ -998,6 +1036,8 @@ paths:
           description: OK
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/roles":
@@ -1016,6 +1056,8 @@ paths:
           $ref: ../responses/groups/GroupRoleListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
     post:
@@ -1037,6 +1079,8 @@ paths:
           $ref: ../responses/groups/GroupRoleResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
   "/groups/{groupId}/roles/{groupRoleId}":
@@ -1074,6 +1118,8 @@ paths:
           $ref: ../responses/groups/GroupRoleListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotMemberError.yaml
   "/groups/{groupId}/transfer":
@@ -1141,6 +1187,8 @@ paths:
           $ref: ../responses/groups/NoGroupTransferError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/groups/GroupNotFoundError.yaml
 components:

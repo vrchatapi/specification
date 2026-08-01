@@ -69,6 +69,8 @@ properties:
     nullable: true
   name:
     type: string
+  nameplateId: {}
+  nameplateUrl: {}
   onlineMemberCount:
     type: integer
   ownerId:

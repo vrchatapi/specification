@@ -1,0 +1,15 @@
+title: LocalizedString
+type: object
+description: A string the client resolves through its localization table, falling back to `fallback` when the key is unknown.
+properties:
+  fallback:
+    type: string
+    description: The text to show when `key` cannot be resolved.
+    example: carnival
+  key:
+    type: string
+    description: The localization key.
+    example: SuggestedSearch/Carnival/Name/carnival
+required:
+  - fallback
+  - key

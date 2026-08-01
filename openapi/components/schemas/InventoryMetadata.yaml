@@ -20,3 +20,6 @@ properties:
     type: string
   propId:
     $ref: ./PropID.yaml
+
+  propKind:
+    type: integer

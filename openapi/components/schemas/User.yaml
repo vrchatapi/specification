@@ -1,6 +1,17 @@
 title: User
 type: object
 properties:
+  acceptedPrivacyVersion:
+    type: integer
+  acceptedTOSVersion:
+    type: integer
+  accountDeletionDate:
+    type: string
+    nullable: true
+  accountDeletionLog:
+    type: array
+    nullable: true
+    items: {}
   ageVerificationStatus:
     $ref: ./AgeVerificationStatus.yaml
   ageVerified:
@@ -8,11 +19,16 @@ properties:
   allowAvatarCopying:
     type: boolean
     default: true
+  appleDetails:
+    type: object
+    additionalProperties: true
   badges:
     type: array
     description: " "
     items:
       $ref: ./Badge.yaml
+  bannerColor:
+    type: string
   bannerType:
     type: string
   bannerUrl:
@@ -44,7 +60,7 @@ properties:
   friendKey:
     type: string
   friendRequestStatus:
-    type: string
+    $ref: ./FriendRequestStatus.yaml
   iconFrame:
     type: string
   iconUrl:

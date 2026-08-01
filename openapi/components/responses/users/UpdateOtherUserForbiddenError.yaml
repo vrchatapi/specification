@@ -1,0 +1,11 @@
+description: Error response when updating a user other than the authenticated one.
+content:
+  application/json:
+    examples:
+      Not Yourself:
+        value:
+          error:
+            message: '"You can only edit yourself, not other users."'
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

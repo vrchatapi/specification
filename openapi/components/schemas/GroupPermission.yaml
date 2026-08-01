@@ -7,6 +7,11 @@ properties:
     description: Whether the user is allowed to add this permission to a role.
     default: false
     example: true
+  dependsOn:
+    type: array
+    description: Other permission names this one is listed against.
+    items:
+      $ref: ./GroupPermissions.yaml
   displayName:
     type: string
     description: The display name of the permission.

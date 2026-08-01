@@ -19,5 +19,5 @@ properties:
     example: Event is starting soon!
     minLength: 1
 required:
-  - favoriteId
+  - text
   - title

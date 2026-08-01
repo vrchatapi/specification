@@ -66,7 +66,10 @@ paths:
     put:
       operationId: updateProp
       summary: Update Prop
-      description: Updates a Prop and returns the updated Prop object. When updating the asset bundle, all of `name`, `assetUrl`, `platform`, `unityVersion`, `assetVersion`, `spawnType`, and `worldPlacementMask` must be present, as well as `propSignature` if this value is not blank.
+      description: Updates a Prop and returns the updated Prop object. When updating
+        the asset bundle, all of `name`, `assetUrl`, `platform`, `unityVersion`,
+        `assetVersion`, `spawnType`, and `worldPlacementMask` must be present,
+        as well as `propSignature` if this value is not blank.
       tags:
         - props
       requestBody:
@@ -80,6 +83,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/props/PropResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
@@ -108,10 +113,15 @@ paths:
       - $ref: ../parameters.yaml#/propId
     get:
       operationId: getPropPublishStatus
+      deprecated: true
       summary: Get Prop Publish Status
-      description: Returns a PropPublishStatus object.
+      description: |-
+        ~~Returns a PropPublishStatus object.~~
+
+        **DEPRECATED:** the route no longer exists, though `/props/{propId}` does.
       tags:
         - props
+        - deprecated
       security:
         - authCookie: []
       responses:
@@ -122,13 +132,18 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/props/NoSuchPropError.yaml
+          $ref: ../responses/RouteNotImplementedError.yaml
     put:
       operationId: publishProp
+      deprecated: true
       summary: Publish Prop
-      description: Publish a Prop and return the updated PropPublishStatus object.
+      description: |-
+        ~~Publish a Prop and return the updated PropPublishStatus object.~~
+
+        **DEPRECATED:** the route no longer exists, though `/props/{propId}` does.
       tags:
         - props
+        - deprecated
       security:
         - authCookie: []
       responses:
@@ -139,13 +154,18 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/props/NoSuchPropError.yaml
+          $ref: ../responses/RouteNotImplementedError.yaml
     delete:
       operationId: unpublishProp
+      deprecated: true
       summary: Unpublish Prop
-      description: Unpublish a Prop and return the updated PropPublishStatus object.
+      description: |-
+        ~~Unpublish a Prop and return the updated PropPublishStatus object.~~
+
+        **DEPRECATED:** the route no longer exists, though `/props/{propId}` does.
       tags:
         - props
+        - deprecated
       security:
         - authCookie: []
       responses:
@@ -156,7 +176,7 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/props/NoSuchPropError.yaml
+          $ref: ../responses/RouteNotImplementedError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml

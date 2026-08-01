@@ -1,2 +1,6 @@
 title: NotificationDetailEmpty
 type: object
+description: >-
+  The absence of details, serialized as `{}`. Constrained so it cannot also
+  match a populated branch of the `details` union.
+additionalProperties: false

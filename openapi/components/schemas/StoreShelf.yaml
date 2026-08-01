@@ -15,10 +15,16 @@ properties:
     type: array
     items:
       $ref: ./ProductListing.yaml
+  shelfBackgroundImageId:
+    $ref: ./FileID.yaml
   shelfDescription:
     type: string
+  shelfIconImageId:
+    $ref: ./FileID.yaml
   shelfLayout:
     type: string
+  shelfTabBackgroundImageId:
+    $ref: ./FileID.yaml
   shelfTitle:
     type: string
   updatedAt:
