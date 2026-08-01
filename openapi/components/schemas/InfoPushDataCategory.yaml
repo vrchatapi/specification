@@ -1,0 +1,22 @@
+title: InfoPushDataCategory
+type: object
+properties:
+  ids:
+    type: array
+    items:
+      type: string
+  ipsQuery:
+    $ref: ./InfoPushIpsQuery.yaml
+  maxCells:
+    type: integer
+  name:
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - type: string
+          - $ref: ./LocalizedString.yaml
+      else:
+        type: string
+  type:
+    type: string

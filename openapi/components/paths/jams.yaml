@@ -80,6 +80,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/jams/JamSubmissionResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":

@@ -73,6 +73,7 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/favoriteGroupTypeQuery
         - $ref: ../parameters.yaml#/userIdAdmin
         - name: ownerId
           description: The owner whose favorite groups to return. Must be a UserID.
@@ -162,6 +163,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/favorites/FavoriteRemovedSuccess.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":

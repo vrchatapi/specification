@@ -18,7 +18,6 @@ properties:
     $ref: ../schemas/InstanceContentSettings.yaml
   displayName:
     type: string
-    nullable: true
   groupAccessType:
     $ref: ../schemas/GroupAccessType.yaml
   hardClose:

@@ -1,0 +1,7 @@
+title: InfoPushExperiment
+type: object
+properties:
+  key:
+    type: string
+  variant:
+    type: string

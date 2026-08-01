@@ -5,10 +5,13 @@ properties:
     $ref: ./PrivateProfileActivity.yaml
   id:
     $ref: ./UserID.yaml
+  friendRequestStatus:
+    $ref: ./FriendRequestStatus.yaml
   isFriend:
     type: boolean
   note:
     type: string
+    nullable: true
   status:
     $ref: ./UserStatus.yaml
   statusDescription:

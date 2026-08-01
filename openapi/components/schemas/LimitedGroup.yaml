@@ -35,6 +35,8 @@ properties:
     $ref: ./GroupMemberStatus.yaml
   name:
     type: string
+  nameplateId: {}
+  nameplateUrl: {}
   ownerId:
     $ref: ./UserID.yaml
   rules:

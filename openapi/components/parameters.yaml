@@ -254,6 +254,20 @@ favoriteGroupName:
   in: path
   schema:
     $ref: ./schemas/FavoriteName.yaml
+ssoProvider:
+  name: provider
+  description: The third-party service to mint a token for.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/SsoProvider.yaml
+favoriteGroupTypeQuery:
+  name: type
+  description: Filter the returned groups to a single favourite type.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/FavoriteType.yaml
 favoriteGroupType:
   name: favoriteGroupType
   description: "The type of group to fetch, must be a valid FavoriteType."
@@ -783,7 +797,7 @@ search:
     type: string
 sellerId:
   name: sellerId
-  description: Seller to retrieve economy metrics for.
+  description: Seller to scope the results to.
   required: true
   in: query
   schema:

@@ -18,6 +18,8 @@ properties:
   ratingScore:
     type: integer
     minimum: 0
+  ratingsScore:
+    type: integer
   submitterId:
     $ref: ../schemas/UserID.yaml
 required:

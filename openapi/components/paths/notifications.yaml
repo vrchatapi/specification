@@ -108,7 +108,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/notifications/NotificationResponse.yaml
+          $ref: ../responses/notifications/HideNotificationSuccess.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/auth/user/notifications/{notificationId}/see":

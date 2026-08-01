@@ -1,0 +1,19 @@
+title: GroupRoleTemplateRole
+type: object
+description: A role a group role template creates alongside the everyone role.
+properties:
+  description:
+    type: string
+  isAddedOnJoin:
+    type: boolean
+    default: false
+  name:
+    type: string
+  permissions:
+    type: array
+    items:
+      $ref: ./GroupPermissions.yaml
+required:
+  - description
+  - name
+  - permissions

@@ -1,0 +1,19 @@
+title: APIConfigProfileDefaults
+type: object
+description: Default profile theme colours, each a hex RGB triplet without a leading `#`.
+properties:
+  backgroundGradientBottom:
+    type: string
+    example: 9933FF
+  backgroundGradientTop:
+    type: string
+    example: 00C48A
+  themeButtonColor:
+    type: string
+    example: "009599"
+  themeIconColor:
+    type: string
+    example: 6BE4FA
+  themeSubtextColor:
+    type: string
+    example: A9A9A9

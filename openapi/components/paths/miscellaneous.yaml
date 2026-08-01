@@ -67,6 +67,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/system/APIHealthResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /infoPush:
     get:
       operationId: getInfoPush
@@ -87,6 +89,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/system/InfoPushListResponse.yaml
+        "400":
+          $ref: ../responses/system/InfoPushBadRequestError.yaml
       x-badges:
         - color: gold
           label: "Status: Early Access (Still Under Development)"

@@ -22,6 +22,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/instances/InstanceResponse.yaml
+        "400":
+          $ref: ../responses/instances/InstanceBadRequestError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /instances/recent:
@@ -78,7 +80,10 @@ paths:
         If an invalid instanceId is provided, this endpoint will simply return "null"!
       tags:
         - instances
+      # Answers an anonymous caller, so the session is optional rather than
+      # required.
       security:
+        - {}
         - authCookie: []
       responses:
         "200":
@@ -130,7 +135,10 @@ paths:
       description: Returns an instance short name.
       tags:
         - instances
+      # Answers an anonymous caller, so the session is optional rather than
+      # required.
       security:
+        - {}
         - authCookie: []
       responses:
         "200":

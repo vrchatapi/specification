@@ -46,7 +46,9 @@ paths:
     post:
       operationId: createWorld
       summary: Create World
-      description: "Create a new world. This endpoint requires `assetUrl` to be a valid File object with `.vrcw` file extension, and `imageUrl` to be a valid File object with an image file extension."
+      description: "Create a new world. This endpoint requires `assetUrl` to be a
+        valid File object with `.vrcw` file extension, and `imageUrl` to be a
+        valid File object with an image file extension."
       tags:
         - worlds
       requestBody:
@@ -183,6 +185,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/worlds/WorldResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
@@ -190,7 +194,9 @@ paths:
     delete:
       operationId: deleteWorld
       summary: Delete World
-      description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
+      description: 'Delete a world. Notice a world is never fully "deleted", only its
+        ReleaseStatus is set to "hidden" and the linked Files are deleted. The
+        WorldID is permanently reserved.'
       tags:
         - worlds
       security:
@@ -231,9 +237,10 @@ paths:
       - $ref: ../parameters.yaml#/worldId
     get:
       operationId: getWorldMetadata
-      deprecated: true
       summary: Get World Metadata
-      description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
+      description: Return a worlds custom metadata. This is currently believed to be
+        unused. Metadata can be set with `updateWorld` and can be any arbitrary
+        object.
       tags:
         - worlds
       security: []
@@ -309,13 +316,16 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
-  "/worlds/{worldId}/removeTags":
+  "/worlds/{worldId}/deleteTags":
     parameters:
       - $ref: ../parameters.yaml#/worldId
     post:
       operationId: removeWorldTags
       summary: Remove World Tags
-      description: Removes tags from the world's profile
+      description: |-
+        Removes tags from the world's profile.
+
+        The path is `deleteTags`, not `removeTags` as the user equivalent uses.
       tags:
         - worlds
       requestBody:
@@ -333,6 +343,8 @@ paths:
           $ref: ../responses/worlds/WorldTagInvalidError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/InvalidAdminCredentialsError.yaml
   "/worlds/{worldId}/{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId

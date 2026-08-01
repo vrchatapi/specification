@@ -15,6 +15,9 @@ properties:
     format: date-time
   defaultContentSettings:
     $ref: ./InstanceContentSettings.yaml
+  disabledPropAbilities:
+    type: array
+    items: {}
   favorites:
     type: integer
     default: 0
