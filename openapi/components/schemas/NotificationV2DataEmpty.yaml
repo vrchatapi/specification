@@ -1,7 +1,4 @@
 title: NotificationV2DataEmpty
 type: object
 description: The payload for a notification type that carries no data.
-# Without this the branch matches any object, so every populated `data` also
-# satisfies it and the union stops discriminating: a `badge.earned` payload
-# matched both this and `NotificationV2DataBadgeEarned`.
 additionalProperties: false
