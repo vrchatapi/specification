@@ -15,9 +15,6 @@ properties:
     $ref: ../schemas/JamSubmissionID.yaml
   jamId:
     $ref: ../schemas/JamID.yaml
-  ratingScore:
-    type: integer
-    minimum: 0
   ratingsScore:
     type: integer
   submitterId:
