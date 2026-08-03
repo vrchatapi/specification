@@ -45,8 +45,6 @@ paths:
         - $ref: ../parameters.yaml#/calendarDiscoveryUpcomingOffsetMinutes
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/calendarDiscoveryNextCursor
-      # Answers an anonymous caller with real results, so the session is
-      # optional rather than required.
       security:
         - {}
         - authCookie: []
@@ -66,8 +64,6 @@ paths:
         - $ref: ../parameters.yaml#/monthDate
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
-      # Answers an anonymous caller, so the session is optional rather than
-      # required.
       security:
         - {}
         - authCookie: []

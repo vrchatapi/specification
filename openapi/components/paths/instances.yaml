@@ -80,8 +80,6 @@ paths:
         If an invalid instanceId is provided, this endpoint will simply return "null"!
       tags:
         - instances
-      # Answers an anonymous caller, so the session is optional rather than
-      # required.
       security:
         - {}
         - authCookie: []
@@ -135,8 +133,6 @@ paths:
       description: Returns an instance short name.
       tags:
         - instances
-      # Answers an anonymous caller, so the session is optional rather than
-      # required.
       security:
         - {}
         - authCookie: []
