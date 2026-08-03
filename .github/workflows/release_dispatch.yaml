@@ -41,6 +41,8 @@ jobs:
             )
           }')
 
+          echo ${release}
+
           jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
           | gh api repos/{owner}/${{ matrix.repository }}/dispatches -X POST -i --input -
         env:
