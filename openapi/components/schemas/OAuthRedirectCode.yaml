@@ -4,7 +4,7 @@ description: A short-lived code used to hand the current session to an OAuth red
 properties:
   code:
     type: string
-    minLength: 1
     example: redirect_00000000-0000-0000-0000-000000000000
+    minLength: 1
 required:
   - code

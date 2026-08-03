@@ -39,10 +39,6 @@ properties:
     example: 4
   releaseStatus:
     $ref: ../schemas/ReleaseStatus.yaml
-  urlList:
-    type: array
-    items:
-      type: string
   tags:
     type: array
     description: " "
@@ -56,3 +52,7 @@ properties:
     default: 5.3.4p1
     example: 2022.3.6f1
     minLength: 1
+  urlList:
+    type: array
+    items:
+      type: string

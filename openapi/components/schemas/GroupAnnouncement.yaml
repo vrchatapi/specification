@@ -7,13 +7,13 @@ properties:
   authorId:
     $ref: ./UserID.yaml
     nullable: true
-  editorId:
-    $ref: ./UserID.yaml
-    nullable: true
   createdAt:
     type: string
     nullable: true
     format: date-time
+  editorId:
+    $ref: ./UserID.yaml
+    nullable: true
   groupId:
     $ref: ./GroupID.yaml
     nullable: true

@@ -11,14 +11,6 @@ properties:
   bannerType:
     type: string
     example: color
-  iconFrame:
-    type: string
-  iconUrl:
-    type: string
-  nameplateEffect:
-    type: string
-  profileEffect:
-    type: string
   currentAvatarImageUrl:
     $ref: ./CurrentAvatarImageUrl.yaml
   currentAvatarTags:
@@ -29,9 +21,17 @@ properties:
     $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   displayName:
     type: string
+  iconFrame:
+    type: string
+  iconUrl:
+    type: string
   id:
     $ref: ./UserID.yaml
   imageUrl:
+    type: string
+  nameplateEffect:
+    type: string
+  profileEffect:
     type: string
   profilePicOverride:
     type: string

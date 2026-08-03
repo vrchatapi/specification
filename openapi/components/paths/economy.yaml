@@ -223,8 +223,8 @@ paths:
 
         **DEPRECATED:** the route no longer exists.
       tags:
-        - economy
         - deprecated
+        - economy
       security:
         - authCookie: []
       responses:
@@ -486,8 +486,8 @@ paths:
 
         **DEPRECATED:** the route no longer exists.
       tags:
-        - economy
         - deprecated
+        - economy
       security:
         - authCookie: []
       responses:
@@ -569,8 +569,8 @@ paths:
 
         **DEPRECATED:** the route no longer exists.
       tags:
-        - economy
         - deprecated
+        - economy
       security:
         - authCookie: []
       responses:
@@ -741,8 +741,8 @@ paths:
 
         **DEPRECATED:** the route no longer exists.
       tags:
-        - economy
         - deprecated
+        - economy
       security:
         - authCookie: []
       responses:
@@ -761,8 +761,8 @@ paths:
 
         **DEPRECATED:** the route no longer exists.
       tags:
-        - economy
         - deprecated
+        - economy
       requestBody:
         content:
           application/json:
@@ -790,8 +790,8 @@ paths:
 
         **DEPRECATED:** the route no longer exists.
       tags:
-        - economy
         - deprecated
+        - economy
       security:
         - authCookie: []
       responses:
