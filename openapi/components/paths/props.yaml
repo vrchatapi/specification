@@ -120,8 +120,8 @@ paths:
 
         **DEPRECATED:** the route no longer exists, though `/props/{propId}` does.
       tags:
-        - props
         - deprecated
+        - props
       security:
         - authCookie: []
       responses:
@@ -142,8 +142,8 @@ paths:
 
         **DEPRECATED:** the route no longer exists, though `/props/{propId}` does.
       tags:
-        - props
         - deprecated
+        - props
       security:
         - authCookie: []
       responses:
@@ -164,8 +164,8 @@ paths:
 
         **DEPRECATED:** the route no longer exists, though `/props/{propId}` does.
       tags:
-        - props
         - deprecated
+        - props
       security:
         - authCookie: []
       responses:

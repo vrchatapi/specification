@@ -232,6 +232,35 @@ paths:
           $ref: ../responses/worlds/WorldTagInvalidError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/worlds/{worldId}/deleteTags":
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+    post:
+      operationId: removeWorldTags
+      summary: Remove World Tags
+      description: |-
+        Removes tags from the world's profile.
+
+        The path is `deleteTags`, not `removeTags` as the user equivalent uses.
+      tags:
+        - worlds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ChangeWorldTagsRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/worlds/WorldResponse.yaml
+        "400":
+          $ref: ../responses/worlds/WorldTagInvalidError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/InvalidAdminCredentialsError.yaml
   "/worlds/{worldId}/metadata":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -316,35 +345,6 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/worlds/WorldNotFoundError.yaml
-  "/worlds/{worldId}/deleteTags":
-    parameters:
-      - $ref: ../parameters.yaml#/worldId
-    post:
-      operationId: removeWorldTags
-      summary: Remove World Tags
-      description: |-
-        Removes tags from the world's profile.
-
-        The path is `deleteTags`, not `removeTags` as the user equivalent uses.
-      tags:
-        - worlds
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/ChangeWorldTagsRequest.yaml
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/worlds/WorldResponse.yaml
-        "400":
-          $ref: ../responses/worlds/WorldTagInvalidError.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-        "403":
-          $ref: ../responses/InvalidAdminCredentialsError.yaml
   "/worlds/{worldId}/{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId

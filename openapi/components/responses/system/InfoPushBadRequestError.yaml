@@ -5,7 +5,7 @@ content:
       Require Not An Array:
         value:
           error:
-            message: "Parameter `require` must be an array."
+            message: Parameter `require` must be an array.
             status_code: 400
     schema:
       $ref: ../../schemas/Error.yaml

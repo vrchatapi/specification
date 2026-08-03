@@ -1,11 +1,9 @@
 title: APIConfig
 type: object
-description: >-
+description: |-
   Global configuration for various features.
 
-
-  The response carries decoy properties: plausible-looking names VRChat rerolls
-  at random as deliberate obfuscation.
+  The response carries decoy properties: plausible-looking names VRChat rerolls at random as deliberate obfuscation.
 additionalProperties: true
 properties:
   CampaignStatus:

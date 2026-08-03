@@ -130,8 +130,8 @@ paths:
       description: "**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users
         by text query."
       tags:
-        - users
         - deprecated
+        - users
       parameters:
         - name: search
           description: Username to search for

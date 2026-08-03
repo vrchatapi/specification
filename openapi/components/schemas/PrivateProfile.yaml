@@ -3,10 +3,10 @@ type: object
 properties:
   activity:
     $ref: ./PrivateProfileActivity.yaml
-  id:
-    $ref: ./UserID.yaml
   friendRequestStatus:
     $ref: ./FriendRequestStatus.yaml
+  id:
+    $ref: ./UserID.yaml
   isFriend:
     type: boolean
   note:

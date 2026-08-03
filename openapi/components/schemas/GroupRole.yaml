@@ -13,10 +13,10 @@ properties:
     $ref: ./GroupID.yaml
   id:
     $ref: ./GroupRoleID.yaml
-  isManagementRole:
+  isAddedOnJoin:
     type: boolean
     default: false
-  isAddedOnJoin:
+  isManagementRole:
     type: boolean
     default: false
   isSelfAssignable:
