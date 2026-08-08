@@ -10,7 +10,7 @@ properties:
       when: jsonschema
       then:
         oneOf:
-          - $ref: ./NotificationDetailEmpty.yaml
+          - $ref: ./NotificationEmpty.yaml
           - $ref: ./NotificationDetailBoop.yaml
           - $ref: ./NotificationDetailInvite.yaml
           - $ref: ./NotificationDetailInviteResponse.yaml

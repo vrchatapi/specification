@@ -1,4 +1,0 @@
-title: NotificationV2DataEmpty
-type: object
-description: The payload for a notification type that carries no data.
-additionalProperties: false
