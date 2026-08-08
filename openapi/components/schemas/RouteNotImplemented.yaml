@@ -1,16 +1,18 @@
 title: RouteNotImplemented
 type: object
 description: >-
-  The body VRChat returns for a route it does not serve. Note the shape differs
-  from every other error in this description: `error` is a string here, not an
+  The body VRChat returns for a route it does not serve. The shape differs from
+  every other error in this description: `error` is a string here, not an
   `Error` object with `message` and `status_code` inside it.
 properties:
   error:
     type: string
-    example: The endpoint you're looking for is not implemented by our system.
+    enum:
+      - The endpoint you're looking for is not implemented by our system.
   status_code:
     type: integer
-    example: 404
+    enum:
+      - 404
 required:
   - error
   - status_code
