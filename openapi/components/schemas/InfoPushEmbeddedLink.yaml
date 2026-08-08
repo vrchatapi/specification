@@ -1,13 +1,13 @@
 title: InfoPushEmbeddedLink
 type: object
 properties:
-  parameters:
-    type: array
-    items:
-      type: string
   command:
     type: string
   id:
     type: string
   name:
     type: string
+  parameters:
+    type: array
+    items:
+      type: string
