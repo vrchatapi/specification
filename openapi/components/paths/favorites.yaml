@@ -76,7 +76,7 @@ paths:
         - $ref: ../parameters.yaml#/favoriteGroupTypeQuery
         - $ref: ../parameters.yaml#/userIdAdmin
         - name: ownerId
-          description: The owner whose favorite groups to return. Must be a UserID.
+          description: The user whose favorite groups to return. Must be a user ID.
           in: query
           schema:
             type: string
@@ -168,7 +168,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/favorites/FavoriteNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml

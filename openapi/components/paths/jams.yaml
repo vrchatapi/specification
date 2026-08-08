@@ -44,7 +44,7 @@ paths:
         "200":
           $ref: ../responses/jams/JamResponse.yaml
         "404":
-          $ref: ../responses/jams/JamNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/jams/{jamId}/submissions":
     parameters:
       - $ref: ../parameters.yaml#/jamId
@@ -63,7 +63,7 @@ paths:
         "200":
           $ref: ../responses/jams/JamSubmissionListResponse.yaml
         "404":
-          $ref: ../responses/jams/JamNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     post:
       operationId: submitJamContent
       summary: Submit Jam Content
@@ -85,7 +85,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/jams/JamNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/jams/{jamId}/submissions/{jamSubmissionId}":
     parameters:
       - $ref: ../parameters.yaml#/jamId
@@ -106,4 +106,4 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/jams/JamNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml

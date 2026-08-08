@@ -23,7 +23,7 @@ paths:
         "200":
           $ref: ../responses/instances/InstanceResponse.yaml
         "400":
-          $ref: ../responses/instances/InstanceBadRequestError.yaml
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /instances/recent:
@@ -66,7 +66,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/instances/InstanceNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/instances/{worldId}:{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -122,7 +122,7 @@ paths:
         "403":
           $ref: ../responses/instances/InstanceCloseForbiddenError.yaml
         "404":
-          $ref: ../responses/instances/InstanceNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/instances/{worldId}:{instanceId}/shortName":
     parameters:
       - $ref: ../parameters.yaml#/worldId

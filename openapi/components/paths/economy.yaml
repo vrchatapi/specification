@@ -218,10 +218,7 @@ paths:
       operationId: getSellerEligibility
       deprecated: true
       summary: Get Seller Eligibility
-      description: |-
-        ~~Get the eligibility of the currently authenticated user to become a seller~~
-
-        **DEPRECATED:** the route no longer exists.
+      description: Return the current user's eligibility to become a seller.
       tags:
         - deprecated
         - economy
@@ -279,8 +276,7 @@ paths:
     get:
       operationId: listStores
       summary: List Stores
-      description: Lists stores, optionally filtered to a seller and adjusted for
-        management views.
+      description: List a seller's stores, adjusted for management views.
       tags:
         - economy
       security:
@@ -288,6 +284,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/StoreListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
@@ -458,13 +456,13 @@ paths:
         - economy
       parameters:
         - name: gifts
-          description: Return the giftable subscriptions instead of the standard ones.
+          description: Return giftable subscriptions instead of standard ones.
           required: false
           in: query
           schema:
             type: boolean
         - name: recurring
-          description: Return the recurring subscriptions instead of the standard ones.
+          description: Return recurring subscriptions instead of standard ones.
           required: false
           in: query
           schema:
@@ -481,10 +479,7 @@ paths:
       operationId: getTiliaStatus
       deprecated: true
       summary: Get Tilia Status
-      description: |-
-        ~~Gets the status of Tilia integration~~
-
-        **DEPRECATED:** the route no longer exists.
+      description: Return the Tilia integration status.
       tags:
         - deprecated
         - economy
@@ -547,7 +542,7 @@ paths:
     get:
       operationId: getBalance
       summary: Get Balance
-      description: Gets the balance of a user.
+      description: Return the balance of a user.
       tags:
         - economy
       security:
@@ -564,10 +559,7 @@ paths:
       operationId: getBalanceEarnings
       deprecated: true
       summary: Get Balance Earnings
-      description: |-
-        ~~Gets the balance of a user from earnings~~
-
-        **DEPRECATED:** the route no longer exists.
+      description: Return the user's balance from earnings.
       tags:
         - deprecated
         - economy
@@ -736,10 +728,7 @@ paths:
       operationId: getTiliaTos
       deprecated: true
       summary: Get Tilia TOS Agreement Status
-      description: |-
-        ~~Gets the status of the agreement of a user to the Tilia TOS~~
-
-        **DEPRECATED:** the route no longer exists.
+      description: Return the user's Tilia TOS agreement status.
       tags:
         - deprecated
         - economy
@@ -756,10 +745,7 @@ paths:
       operationId: updateTiliaTos
       deprecated: true
       summary: Update Tilia TOS Agreement Status
-      description: |-
-        ~~Updates the status of the agreement of a user to the Tilia TOS~~
-
-        **DEPRECATED:** the route no longer exists.
+      description: Update the user's Tilia TOS agreement status.
       tags:
         - deprecated
         - economy
@@ -785,10 +771,7 @@ paths:
       operationId: getUserCreditsEligible
       deprecated: true
       summary: Get User Credits Eligibility
-      description: |-
-        ~~Get the user's eligibility status for subscriptions based on available credits.~~
-
-        **DEPRECATED:** the route no longer exists.
+      description: Return the user's subscription credit eligibility.
       tags:
         - deprecated
         - economy

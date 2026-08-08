@@ -57,6 +57,6 @@
     $ref: ./paths/worlds.yaml#/info/description
 - name: deprecated
   description: >-
-    Routes VRChat no longer serves: every observed call answers the generic
-    "not implemented" 404. They stay described, and the conformance suite keeps
-    calling them, so a route that comes back shows up.
+    Routes VRChat no longer serves: every call answers the generic "not
+    implemented" 404. They stay described, and the conformance suite keeps
+    calling them, so a route that comes back online shows up.

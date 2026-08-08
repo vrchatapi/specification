@@ -58,11 +58,11 @@ paths:
       deprecated: true
       summary: Register User Account
       description: |-
-        ~~Register a new user account.~~
+        Register a new user account.
 
-        **DEPRECATED:** Automated creation of accounts has no legitimate public third-party use case, and would be in violation of ToS §13.2:
+        Automated creation of accounts has no legitimate public third-party use case, and would violate ToS §13.2:
         *By using the Platform, you agree not to: i. [...] use the Platform in a manner inconsistent with individual human usage*
-        This endpoint is documented in the interest of completeness
+        This endpoint is documented in the interest of completeness.
       tags:
         - authentication
       parameters: []
@@ -403,7 +403,7 @@ paths:
     get:
       operationId: getOAuthRedirectCode
       summary: Get OAuth Redirect Code
-      description: Mints a short-lived code that hands the current session to an OAuth redirect.
+      description: Generate a short-lived OAuth redirect code for the current session.
       tags:
         - authentication
       security:
@@ -419,7 +419,7 @@ paths:
     get:
       operationId: getSsoToken
       summary: Get SSO Token
-      description: Returns a token for the given third-party service.
+      description: Generate a token for the specified third-party service.
       tags:
         - authentication
       security:
