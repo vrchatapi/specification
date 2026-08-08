@@ -1,4 +1,4 @@
-description: Error response when requesting the listings of another user.
+description: Error response when requesting another user's product listings.
 content:
   application/json:
     examples:

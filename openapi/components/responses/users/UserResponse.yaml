@@ -1,9 +1,9 @@
 description: |-
-  Returns a single User object.
+  Return a single User object.
 
   Requesting your own ID returns your full `CurrentUser` record instead, carrying
   the private fields (`emailVerified`, `steamDetails`, `twoFactorAuthEnabled`, …)
-  that are never present for another user.
+  that never appear in responses for another user.
 content:
   application/json:
     schema:

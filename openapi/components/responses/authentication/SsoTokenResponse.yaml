@@ -1,4 +1,4 @@
-description: Returns a token for the service.
+description: Return a token for the service.
 content:
   application/json:
     schema:

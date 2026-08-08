@@ -1,4 +1,4 @@
-description: Error response when the seller has no store available to the caller.
+description: Error response when the seller's stores are unavailable to the caller.
 content:
   application/json:
     examples:
