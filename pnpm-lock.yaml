@@ -18,8 +18,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       '@redocly/cli':
-        specifier: link:../redocly-cli/packages/cli
-        version: link:../redocly-cli/packages/cli
+        specifier: ^2.46.0
+        version: 2.46.0
       '@redocly/openapi-core':
         specifier: ^2.41.2
         version: 2.41.2
@@ -880,6 +880,11 @@ packages:
 
   '@redocly/ajv@8.18.3':
     resolution: {integrity: sha512-l42u0of3hY98sN2A+M4qTX1O/KrpgGH32Hu9kP2GtHyD5Dfqq86PKFLe5dwaD8DEnNmlOlll2BAmeEtf0DaySg==}
+
+  '@redocly/cli@2.46.0':
+    resolution: {integrity: sha512-Hx4dIYwFhMkE6fZXDl0TwuVsvE8INX7dzEOgAcEhl0mhTkHC95o/rhUTlVLbNRg4mWHQ27jbdgKXPZBJJANWYA==}
+    engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
+    hasBin: true
 
   '@redocly/config@0.52.0':
     resolution: {integrity: sha512-e/++L27tRgo35GVCy4ivy+uqHi/ksg4KnhlYzj5FTJ9OokuyX18B0mJm0SUXLBih9VIQMgSk6tXsyYmhg5OsIQ==}
@@ -3953,6 +3958,8 @@ snapshots:
       fast-uri: 3.1.0
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
+
+  '@redocly/cli@2.46.0': {}
 
   '@redocly/config@0.52.0':
     dependencies:

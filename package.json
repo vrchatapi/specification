@@ -20,7 +20,7 @@
 		"@actions/core": "^1.11.1",
 		"@ariesclark/eslint-config": "^3.1.1",
 		"@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
-		"@redocly/cli": "link:../redocly-cli/packages/cli",
+		"@redocly/cli": "^2.46.0",
 		"@redocly/openapi-core": "^2.41.2",
 		"@stoplight/spectral-core": "^1.20.0",
 		"@stoplight/spectral-formats": "^1.8.2",
