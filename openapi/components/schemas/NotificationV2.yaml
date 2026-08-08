@@ -14,7 +14,7 @@ properties:
       when: jsonschema
       then:
         oneOf:
-          - $ref: ./NotificationV2DataEmpty.yaml
+          - $ref: ./NotificationEmpty.yaml
           - $ref: ./NotificationV2DataBadgeEarned.yaml
           - $ref: ./NotificationV2DataBoop.yaml
           - $ref: ./NotificationV2DataEventAnnouncement.yaml
