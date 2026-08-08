@@ -3061,6 +3061,20 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: list-stores-no-seller
+    summary: listStores without a seller to scope to
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: stores
+        operationId: $sourceDescriptions.default.listStores
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: list-stores-query-parameters
     summary: listStores with every fillable query parameter
     parameters:
