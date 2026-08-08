@@ -1,4 +1,4 @@
-description: Error response when the requested SSO provider is not supported.
+description: Error response when the requested SSO provider is unsupported.
 content:
   application/json:
     examples:

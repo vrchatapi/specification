@@ -1,7 +1,7 @@
 description: >-
-  The request body failed validation. VRChat validates the payload before it
-  looks the resource up, so this is returned even when the id in the path does
-  not exist. The message names the offending field.
+  The request failed validation. VRChat validates the request before it looks
+  up the resource, so this response is returned even when the ID in the path does
+  not exist. The message names the offending field or parameter.
 content:
   application/json:
     examples:
@@ -9,6 +9,16 @@ content:
         value:
           error:
             message: "imageUrl must be a URL˸ 'string'‚ assetUrl must be a URL˸ 'string'"
+            status_code: 400
+      Missing Seller:
+        value:
+          error:
+            message: You must specify a sellerId
+            status_code: 400
+      Require Not An Array:
+        value:
+          error:
+            message: Parameter `require` must be an array․
             status_code: 400
     schema:
       $ref: ../schemas/Error.yaml

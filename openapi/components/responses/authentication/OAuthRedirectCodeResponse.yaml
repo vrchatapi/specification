@@ -1,4 +1,4 @@
-description: Returns a short-lived redirect code for the current session.
+description: Return a short-lived redirect code for the current session.
 content:
   application/json:
     schema:

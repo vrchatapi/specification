@@ -1,4 +1,4 @@
-description: The route is not served by VRChat. A live route answers 200 or 401.
+description: VRChat does not serve this route. A live route answers 200 or 401.
 content:
   application/json:
     examples:

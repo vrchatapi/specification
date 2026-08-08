@@ -1,4 +1,4 @@
-description: Error response when updating a user other than the authenticated one.
+description: Error response when updating a user other than yourself.
 content:
   application/json:
     examples:

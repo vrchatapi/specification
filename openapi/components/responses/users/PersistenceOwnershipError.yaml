@@ -1,5 +1,5 @@
 description: >-
-  Error response when asking about another user's persistence data. The body
+  Error response when querying another user's persistence data. The body
   carries only a message string, without the nested `error` object every other
   response in this description uses.
 content:

@@ -1,6 +1,6 @@
 description: >-
   Error response when the account is not in a state that supports the request,
-  such as one that has never been onboarded for payouts.
+  such as an account never onboarded for payouts.
 content:
   application/json:
     examples:

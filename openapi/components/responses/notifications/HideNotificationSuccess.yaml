@@ -1,4 +1,4 @@
-description: Successful response after hiding a notification.
+description: Response from successfully hiding a notification.
 content:
   application/json:
     examples:
