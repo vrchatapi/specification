@@ -48,6 +48,32 @@ workflow to `test/arazzo.yaml`; never close the gap by guessing.
 `required` omits is either required, or missing the workflow that shows it
 absent. A property in `required` that some response omits is neither.
 
+## Check with curl, document from a workflow
+
+One `curl` answers what a route does now, without running the suite. The session
+cache holds the cookie:
+
+```sh
+curl -s -A "specification-test/1 (https://vrchat.community)" \
+	-b "auth=$(cat test/.out/session)" \
+	https://api.vrchat.cloud/api/1/economy/stores
+```
+
+Use it to check a single route, to confirm what a capture only implies, or to
+separate an API behaviour from a tooling artifact: when curl and the suite
+disagree on the same URL, the client differs, not VRChat.
+
+A curl records one moment. Never write a description from one alone. Add the
+workflow to `test/arazzo.yaml`, then document what it captures.
+
+## A "not implemented" 404 means no route matched
+
+VRChat answers `{"error":"The endpoint you're looking for is not implemented by
+our system."}` when no route matches. A removed endpoint and a malformed path
+both produce it: `/api/1//css/app.css` and a percent-encoded dot return it
+byte-for-byte. This body never establishes that a route is gone. Request the
+exact path directly before marking anything deprecated.
+
 ## One operation per workflow
 
 A failing step ends its workflow, so every operation after it goes unexercised
