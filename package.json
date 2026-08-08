@@ -36,6 +36,7 @@
 		"httpexec": "^0.0.2",
 		"pluralize": "^8.0.0",
 		"semver": "^7.7.3",
-		"totp-generator": "^2.0.1"
+		"totp-generator": "^2.0.1",
+		"typescript": "^6.0.3"
 	}
 }
