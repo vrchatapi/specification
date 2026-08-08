@@ -62,7 +62,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/props/NoSuchPropError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     put:
       operationId: updateProp
       summary: Update Prop
@@ -90,7 +90,7 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/props/NoSuchPropError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: deleteProp
       summary: Delete Prop
@@ -107,7 +107,7 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/props/NoSuchPropError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/props/{propId}/publish":
     parameters:
       - $ref: ../parameters.yaml#/propId
@@ -115,10 +115,7 @@ paths:
       operationId: getPropPublishStatus
       deprecated: true
       summary: Get Prop Publish Status
-      description: |-
-        ~~Returns a PropPublishStatus object.~~
-
-        **DEPRECATED:** the route no longer exists, though `/props/{propId}` does.
+      description: Return the PropPublishStatus object. `/props/{propId}` is still served.
       tags:
         - deprecated
         - props
@@ -137,10 +134,7 @@ paths:
       operationId: publishProp
       deprecated: true
       summary: Publish Prop
-      description: |-
-        ~~Publish a Prop and return the updated PropPublishStatus object.~~
-
-        **DEPRECATED:** the route no longer exists, though `/props/{propId}` does.
+      description: Publish a prop and return the updated PropPublishStatus object. `/props/{propId}` is still served.
       tags:
         - deprecated
         - props
@@ -159,10 +153,7 @@ paths:
       operationId: unpublishProp
       deprecated: true
       summary: Unpublish Prop
-      description: |-
-        ~~Unpublish a Prop and return the updated PropPublishStatus object.~~
-
-        **DEPRECATED:** the route no longer exists, though `/props/{propId}` does.
+      description: Unpublish a prop and return the updated PropPublishStatus object. `/props/{propId}` is still served.
       tags:
         - deprecated
         - props

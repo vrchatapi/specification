@@ -152,7 +152,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     put:
       operationId: updateAvatar
       summary: Update Avatar
@@ -174,7 +174,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: deleteAvatar
       summary: Delete Avatar
@@ -191,7 +191,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/avatars/{avatarId}/impostor":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
@@ -209,7 +209,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/avatars/{avatarId}/impostor/enqueue":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
@@ -227,7 +227,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/avatars/{avatarId}/select":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
@@ -245,7 +245,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/avatars/{avatarId}/selectFallback":
     parameters:
       - $ref: ../parameters.yaml#/avatarId
@@ -265,7 +265,7 @@ paths:
         "403":
           $ref: ../responses/avatars/AvatarNotTaggedAsFallbackError.yaml
         "404":
-          $ref: ../responses/avatars/AvatarNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/users/{userId}/avatar":
     parameters:
       - $ref: ../parameters.yaml#/userId

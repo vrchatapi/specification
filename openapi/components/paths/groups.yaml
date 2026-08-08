@@ -22,7 +22,7 @@ paths:
         "200":
           $ref: ../responses/groups/GroupGalleryFileOrderResponse.yaml
         "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   /groups:
     get:
       operationId: searchGroups
@@ -101,7 +101,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     put:
       operationId: updateGroup
       summary: Update Group
@@ -123,7 +123,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: deleteGroup
       summary: Delete Group
@@ -144,7 +144,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/announcement":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -167,7 +167,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     post:
       operationId: createGroupAnnouncement
       summary: Create Group Announcement
@@ -190,7 +190,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: deleteGroupAnnouncement
       summary: Delete Group Announcement
@@ -207,7 +207,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/auditLogTypes":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -227,7 +227,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/auditLogs":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -255,7 +255,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/bans":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -278,7 +278,7 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     post:
       operationId: banGroupMember
       summary: Ban Group Member
@@ -303,7 +303,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/bans/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -324,7 +324,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/block":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -346,7 +346,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupAlreadyBlockedError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/galleries":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -372,7 +372,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/galleries/{groupGalleryId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -400,7 +400,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     put:
       operationId: updateGroupGallery
       summary: Update Group Gallery
@@ -422,7 +422,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: deleteGroupGallery
       summary: Delete Group Gallery
@@ -439,7 +439,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/galleries/{groupGalleryId}/images":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -466,7 +466,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -489,7 +489,7 @@ paths:
     #     '401':
     #       $ref: ../responses/MissingCredentialsError.yaml
     #     '404':
-    #       $ref: ../responses/groups/GroupNotFoundError.yaml
+    #       $ref: ../responses/ResourceNotFoundError.yaml
     #   security:
     #     - authCookie: []
     delete:
@@ -508,7 +508,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupGalleryImageDeleteForbiddenError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/instances":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -528,7 +528,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/invites":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -551,7 +551,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     put:
       operationId: declineGroupInvite
       summary: Decline Invite from Group
@@ -574,7 +574,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     post:
       operationId: createGroupInvite
       summary: Invite User to Group
@@ -599,7 +599,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupInviteForbiddenError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/invites/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -651,7 +651,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/leave":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -669,7 +669,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/members":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -696,7 +696,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/members/search":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -726,7 +726,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/members/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -747,7 +747,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     put:
       operationId: updateGroupMember
       summary: Update Group Member
@@ -769,7 +769,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: kickGroupMember
       summary: Kick Group Member
@@ -786,7 +786,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/members/{userId}/roles/{groupRoleId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -808,7 +808,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: removeGroupMemberRole
       summary: Remove Role from GroupMember
@@ -825,7 +825,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/permissions":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -847,7 +847,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/posts":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -995,7 +995,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: cancelGroupRequest
       summary: Cancel Group Join Request
@@ -1012,7 +1012,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/requests/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -1039,7 +1039,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/roles":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -1059,7 +1059,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     post:
       operationId: createGroupRole
       summary: Create GroupRole
@@ -1082,7 +1082,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/roles/{groupRoleId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId
@@ -1148,7 +1148,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     post:
       operationId: initiateOrAcceptGroupTransfer
       summary: Initiate or Accept Group Transfer
@@ -1171,7 +1171,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupTransferInvalidError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: cancelGroupTransfer
       summary: Cancel Group Transfer
@@ -1190,7 +1190,7 @@ paths:
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
-          $ref: ../responses/groups/GroupNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
 components:
   responses: {}
   securitySchemes:

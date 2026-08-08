@@ -168,7 +168,7 @@ paths:
         "200":
           $ref: ../responses/worlds/WorldResponse.yaml
         "404":
-          $ref: ../responses/worlds/WorldNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     put:
       operationId: updateWorld
       summary: Update World
@@ -190,7 +190,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/worlds/WorldNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: deleteWorld
       summary: Delete World
@@ -207,7 +207,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/worlds/WorldNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/worlds/{worldId}/addTags":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -239,7 +239,7 @@ paths:
       operationId: removeWorldTags
       summary: Remove World Tags
       description: |-
-        Removes tags from the world's profile.
+        Remove tags from the world's profile.
 
         The path is `deleteTags`, not `removeTags` as the user equivalent uses.
       tags:
@@ -277,7 +277,7 @@ paths:
         "200":
           $ref: ../responses/worlds/WorldMetadataResponse.yaml
         "404":
-          $ref: ../responses/worlds/WorldNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/worlds/{worldId}/platform/{publishedPlatform}":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -296,7 +296,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/worlds/WorldNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/worlds/{worldId}/publish":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -314,7 +314,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/worlds/WorldNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     put:
       operationId: publishWorld
       summary: Publish World
@@ -329,7 +329,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/worlds/WorldNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: unpublishWorld
       summary: Unpublish World
@@ -344,7 +344,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/worlds/WorldNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/worlds/{worldId}/{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId

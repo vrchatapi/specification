@@ -263,7 +263,7 @@ favoriteGroupType:
     $ref: ./schemas/FavoriteType.yaml
 favoriteGroupTypeQuery:
   name: type
-  description: Filter the returned groups to a single favourite type.
+  description: Filter to a single favorite group type.
   required: false
   in: query
   schema:
