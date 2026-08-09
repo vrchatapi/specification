@@ -96,6 +96,8 @@ runs:
             return { running, done: seen.size > 0 && running.size === 0 };
           }
 
+          const sha = context.payload.pull_request.head.sha;
+
           function recall(body) {
             const start = body?.indexOf(opening) ?? -1;
             if (start === -1) return {};
@@ -104,14 +106,15 @@ runs:
             if (end === -1) return {};
 
             try {
-              return JSON.parse(body.slice(start + opening.length, end));
+              const recorded = JSON.parse(body.slice(start + opening.length, end));
+              return recorded.sha === sha ? recorded.installs ?? {} : {};
             } catch {
               return {};
             }
           }
 
           function render(running, installs) {
-            const lines = [marker, `${opening}${JSON.stringify(installs)}${closing}`];
+            const lines = [marker, `${opening}${JSON.stringify({ sha, installs })}${closing}`];
 
             if (bundles.length > 0) {
               const byStem = {};
@@ -146,7 +149,6 @@ runs:
               lines.push(`* [**${name}**](https://github.com/${repository})${suffix}`);
             }
 
-            const sha = context.payload.pull_request.head.sha;
             const commit = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${sha}`;
 
             lines.push('', `<sub>built from [\`${sha.slice(0, 7)}\`](${commit})</sub>`);
