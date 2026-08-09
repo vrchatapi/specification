@@ -1,0 +1,27 @@
+name: Fetch a specification bundle
+description: >-
+  Leaves the requested bundle in the working directory, taken from this run's
+  artifacts when running inside the specification repository and from the latest
+  release otherwise.
+
+inputs:
+  bundle:
+    description: >-
+      Bundle to fetch.
+    required: false
+    default: openapi.json
+
+runs:
+  using: composite
+  steps:
+    - if: github.repository == 'vrchatapi/specification'
+      uses: actions/download-artifact@v8
+      with:
+        name: ${{ inputs.bundle }}
+        path: .
+
+    - if: github.repository != 'vrchatapi/specification'
+      run: >-
+        curl -Lfo "${{ inputs.bundle }}"
+        "https://github.com/vrchatapi/specification/releases/latest/download/${{ inputs.bundle }}"
+      shell: bash
