@@ -2,8 +2,9 @@ name: Report the SDKs a run builds
 description: >-
   Keeps one pull request comment up to date with the bundles a run produced and
   what each SDK job is doing. Without `installs` it polls the run and reports
-  progress; with `installs` it writes the commands the SDKs reported for
-  themselves and returns.
+  progress; with `installs` it records how to install what an SDK built and
+  returns. Commands already in the comment are kept, so each SDK can report as
+  soon as it finishes.
 
 inputs:
   token:
@@ -51,10 +52,12 @@ runs:
         github-token: ${{ inputs.token }}
         script: |
           const marker = '<!-- sdk-preview -->';
+          const opening = '<!-- installs ';
+          const closing = ' -->';
 
           const sdks = JSON.parse(process.env.SDKS);
           const bundles = JSON.parse(process.env.BUNDLES);
-          const installs = process.env.INSTALLS ? JSON.parse(process.env.INSTALLS) : null;
+          const reported = process.env.INSTALLS ? JSON.parse(process.env.INSTALLS) : null;
 
           const interval = Number(process.env.INTERVAL) * 1000;
           const deadline = Date.now() + Number(process.env.TIMEOUT) * 1000;
@@ -62,17 +65,17 @@ runs:
           const pull = context.payload.pull_request?.number;
           if (!pull) return;
 
-          const headings = {
-            queued: 'Queued',
-            generate: 'Generating',
-            build: 'Building',
-            test: 'Testing',
-            install: 'Installing',
-            analyze: 'Analysing',
-            pana: 'Analysing',
-            format: 'Checking formatting',
-            built: 'Built',
-            failed: 'Failed',
+          const stages = {
+            queued: 'queued',
+            generate: 'generating',
+            build: 'building',
+            test: 'testing',
+            install: 'installing',
+            analyze: 'analysing',
+            pana: 'analysing',
+            format: 'checking formatting',
+            built: 'built',
+            failed: 'failed',
           };
 
           async function jobsBySdk() {
@@ -107,50 +110,66 @@ runs:
             return { stage: 'built', done: true };
           }
 
-          function render(bySdk) {
-            const lines = [marker];
+          function recall(body) {
+            const start = body?.indexOf(opening) ?? -1;
+            if (start === -1) return {};
+
+            const end = body.indexOf(closing, start);
+            if (end === -1) return {};
+
+            try {
+              return JSON.parse(body.slice(start + opening.length, end));
+            } catch {
+              return {};
+            }
+          }
+
+          function render(bySdk, installs) {
+            const lines = [marker, `${opening}${JSON.stringify(installs)}${closing}`];
 
             if (bundles.length > 0) {
+              const byStem = {};
+
+              for (const { name, url } of bundles) {
+                const cut = name.lastIndexOf('.');
+                const stem = cut === -1 ? name : name.slice(0, cut);
+                const format = cut === -1 ? name : name.slice(cut + 1);
+
+                (byStem[stem] ??= []).push({ format, url });
+              }
+
               lines.push('### Bundles', '');
-              lines.push(...bundles.map(({ name, url }) => `* [${name}](${url})`));
-              lines.push('');
-            }
 
-            lines.push('### SDKs', '');
+              for (const stem of Object.keys(byStem).sort((a, b) => b.localeCompare(a))) {
+                const formats = byStem[stem]
+                  .sort((a, b) => a.format.localeCompare(b.format))
+                  .map(({ format, url }) => `[${format}](${url})`);
 
-            const grouped = {};
-
-            for (const [key, { name, repository }] of Object.entries(sdks)) {
-              const { stage } = state(bySdk[key]);
-              const heading = headings[stage] ?? stage;
-
-              (grouped[heading] ??= []).push({ key, name, repository });
-            }
-
-            for (const [heading, members] of Object.entries(grouped)) {
-              lines.push(`#### ${heading}`, '');
-
-              for (const { key, name, repository } of members) {
-                lines.push(`* [**${name}**](https://github.com/${repository})`);
-
-                const how = installs?.[key];
-                if (how) {
-                  lines.push(how.startsWith('[') ? `  → ${how}` : `  → \`${how}\``);
-                }
+                lines.push(`* ${stem} (${formats.join(', ')})`);
               }
 
               lines.push('');
             }
 
+            lines.push('### SDKs', '');
+
+            for (const [key, { name, repository }] of Object.entries(sdks)) {
+              const { stage } = state(bySdk[key]);
+              const how = installs[key];
+              const suffix = how ? `  ${how.startsWith('[') ? how : `\`${how}\``}` : '';
+
+              lines.push(`* [**${name}**](https://github.com/${repository}) → ${stages[stage] ?? stage}${suffix}`);
+            }
+
             const sha = context.payload.pull_request.head.sha;
             const commit = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${sha}`;
 
-            lines.push(`<sub>built from [\`${sha.slice(0, 7)}\`](${commit})</sub>`);
+            lines.push('', `<sub>built from [\`${sha.slice(0, 7)}\`](${commit})</sub>`);
 
-            return lines.join('\n').trimEnd();
+            return lines.join('\n');
           }
 
-          async function upsert(body) {
+          async function upsert(bySdk) {
             const comments = await github.paginate(github.rest.issues.listComments, {
               ...context.repo,
               issue_number: pull,
@@ -158,6 +177,8 @@ runs:
             });
 
             const existing = comments.find((comment) => comment.body.includes(marker));
+            const installs = { ...recall(existing?.body), ...reported };
+            const body = render(bySdk, installs);
 
             if (!existing) {
               await github.rest.issues.createComment({
@@ -177,8 +198,8 @@ runs:
             }
           }
 
-          if (installs) {
-            await upsert(render(await jobsBySdk()));
+          if (reported) {
+            await upsert(await jobsBySdk());
             return;
           }
 
@@ -186,8 +207,8 @@ runs:
             const bySdk = await jobsBySdk();
             const states = Object.keys(sdks).map((key) => state(bySdk[key]));
 
+            await upsert(bySdk);
             if (states.every(({ done }) => done)) return;
 
-            await upsert(render(bySdk));
             await new Promise((resolve) => setTimeout(resolve, interval));
           }

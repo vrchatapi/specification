@@ -147,6 +147,7 @@ jobs:
 
   report:
     if: github.event_name == 'pull_request'
+    needs: bundle
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -156,6 +157,7 @@ jobs:
 
       - uses: ./.github/actions/report
         with:
+          bundles: ${{ needs.bundle.outputs.artifacts }}
           sdks: |
             {
               "javascript": { "name": "JavaScript", "repository": "vrchatapi/vrchatapi-javascript" },
@@ -166,15 +168,155 @@ jobs:
               "dart": { "name": "Dart", "repository": "vrchatapi/vrchatapi-dart" }
             }
 
-  report_install:
+  report_javascript:
     if: always() && github.event_name == 'pull_request'
     needs:
       - bundle
       - build_javascript
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/report
+        with:
+          bundles: ${{ needs.bundle.outputs.artifacts }}
+          sdks: |
+            {
+              "javascript": { "name": "JavaScript", "repository": "vrchatapi/vrchatapi-javascript" },
+              "rust": { "name": "Rust", "repository": "vrchatapi/vrchatapi-rust" },
+              "java": { "name": "Java", "repository": "vrchatapi/vrchatapi-java" },
+              "python": { "name": "Python", "repository": "vrchatapi/vrchatapi-python" },
+              "csharp": { "name": "C#", "repository": "vrchatapi/vrchatapi-csharp" },
+              "dart": { "name": "Dart", "repository": "vrchatapi/vrchatapi-dart" }
+            }
+          installs: |
+            {
+              "javascript": ${{ toJSON(needs.build_javascript.outputs.install) }}
+            }
+
+  report_rust:
+    if: always() && github.event_name == 'pull_request'
+    needs:
+      - bundle
       - build_rust
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/report
+        with:
+          bundles: ${{ needs.bundle.outputs.artifacts }}
+          sdks: |
+            {
+              "javascript": { "name": "JavaScript", "repository": "vrchatapi/vrchatapi-javascript" },
+              "rust": { "name": "Rust", "repository": "vrchatapi/vrchatapi-rust" },
+              "java": { "name": "Java", "repository": "vrchatapi/vrchatapi-java" },
+              "python": { "name": "Python", "repository": "vrchatapi/vrchatapi-python" },
+              "csharp": { "name": "C#", "repository": "vrchatapi/vrchatapi-csharp" },
+              "dart": { "name": "Dart", "repository": "vrchatapi/vrchatapi-dart" }
+            }
+          installs: |
+            {
+              "rust": ${{ toJSON(needs.build_rust.outputs.install) }}
+            }
+
+  report_java:
+    if: always() && github.event_name == 'pull_request'
+    needs:
+      - bundle
       - build_java
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/report
+        with:
+          bundles: ${{ needs.bundle.outputs.artifacts }}
+          sdks: |
+            {
+              "javascript": { "name": "JavaScript", "repository": "vrchatapi/vrchatapi-javascript" },
+              "rust": { "name": "Rust", "repository": "vrchatapi/vrchatapi-rust" },
+              "java": { "name": "Java", "repository": "vrchatapi/vrchatapi-java" },
+              "python": { "name": "Python", "repository": "vrchatapi/vrchatapi-python" },
+              "csharp": { "name": "C#", "repository": "vrchatapi/vrchatapi-csharp" },
+              "dart": { "name": "Dart", "repository": "vrchatapi/vrchatapi-dart" }
+            }
+          installs: |
+            {
+              "java": ${{ toJSON(needs.build_java.outputs.install) }}
+            }
+
+  report_python:
+    if: always() && github.event_name == 'pull_request'
+    needs:
+      - bundle
       - build_python
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/report
+        with:
+          bundles: ${{ needs.bundle.outputs.artifacts }}
+          sdks: |
+            {
+              "javascript": { "name": "JavaScript", "repository": "vrchatapi/vrchatapi-javascript" },
+              "rust": { "name": "Rust", "repository": "vrchatapi/vrchatapi-rust" },
+              "java": { "name": "Java", "repository": "vrchatapi/vrchatapi-java" },
+              "python": { "name": "Python", "repository": "vrchatapi/vrchatapi-python" },
+              "csharp": { "name": "C#", "repository": "vrchatapi/vrchatapi-csharp" },
+              "dart": { "name": "Dart", "repository": "vrchatapi/vrchatapi-dart" }
+            }
+          installs: |
+            {
+              "python": ${{ toJSON(needs.build_python.outputs.install) }}
+            }
+
+  report_csharp:
+    if: always() && github.event_name == 'pull_request'
+    needs:
+      - bundle
       - build_csharp
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/report
+        with:
+          bundles: ${{ needs.bundle.outputs.artifacts }}
+          sdks: |
+            {
+              "javascript": { "name": "JavaScript", "repository": "vrchatapi/vrchatapi-javascript" },
+              "rust": { "name": "Rust", "repository": "vrchatapi/vrchatapi-rust" },
+              "java": { "name": "Java", "repository": "vrchatapi/vrchatapi-java" },
+              "python": { "name": "Python", "repository": "vrchatapi/vrchatapi-python" },
+              "csharp": { "name": "C#", "repository": "vrchatapi/vrchatapi-csharp" },
+              "dart": { "name": "Dart", "repository": "vrchatapi/vrchatapi-dart" }
+            }
+          installs: |
+            {
+              "csharp": ${{ toJSON(needs.build_csharp.outputs.install) }}
+            }
+
+  report_dart:
+    if: always() && github.event_name == 'pull_request'
+    needs:
+      - bundle
       - build_dart
     runs-on: ubuntu-latest
     permissions:
@@ -197,11 +339,6 @@ jobs:
             }
           installs: |
             {
-              "javascript": ${{ toJSON(needs.build_javascript.outputs.install) }},
-              "rust": ${{ toJSON(needs.build_rust.outputs.install) }},
-              "java": ${{ toJSON(needs.build_java.outputs.install) }},
-              "python": ${{ toJSON(needs.build_python.outputs.install) }},
-              "csharp": ${{ toJSON(needs.build_csharp.outputs.install) }},
               "dart": ${{ toJSON(needs.build_dart.outputs.install) }}
             }
 
