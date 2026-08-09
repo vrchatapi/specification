@@ -1,9 +1,8 @@
 name: Report the SDKs a run builds
 description: >-
-  Keeps one pull request comment up to date with what each SDK job is doing and,
-  once a job finishes, how to install what it produced. Polls until every
-  `build_<language>` job in the run has finished, so the comment is live rather
-  than written once at the end.
+  Keeps one pull request comment up to date with what each SDK job is doing.
+  Without `installs` it polls the run and reports progress; with `installs` it
+  writes the commands the SDKs reported for themselves and returns.
 
 inputs:
   token:
@@ -11,57 +10,40 @@ inputs:
       Token used to read the run's jobs and write the comment.
     required: false
     default: ${{ github.token }}
+  installs:
+    description: >-
+      JSON object mapping an SDK to how it says to install what it built.
+    required: false
+    default: ""
   interval:
     description: >-
       Seconds between refreshes.
     required: false
-    default: '15'
+    default: "15"
   timeout:
     description: >-
       Seconds to keep refreshing before giving up.
     required: false
-    default: '2700'
+    default: "2700"
 
 runs:
   using: composite
   steps:
     - uses: actions/github-script@v9
+      env:
+        INSTALLS: ${{ inputs.installs }}
+        INTERVAL: ${{ inputs.interval }}
+        TIMEOUT: ${{ inputs.timeout }}
       with:
         github-token: ${{ inputs.token }}
         script: |
           const marker = '<!-- sdk-preview -->';
-          const interval = Number(${{ inputs.interval }}) * 1000;
-          const deadline = Date.now() + Number(${{ inputs.timeout }}) * 1000;
-
-          const labels = {
-            javascript: 'JavaScript',
-            rust: 'Rust',
-            java: 'Java',
-            python: 'Python',
-            csharp: 'C#',
-            dart: 'Dart',
-          };
-
-          const stages = {
-            generate: 'generating',
-            build: 'building',
-            test: 'testing',
-            install: 'installing',
-            analyze: 'analysing',
-            pana: 'analysing',
-            format: 'checking formatting',
-          };
-
-          const artifacts = {
-            javascript: 'generated-javascript',
-            rust: 'generated-rust',
-            java: 'generated-java',
-            python: 'dist-python',
-            csharp: 'generated-csharp',
-            dart: 'generated-dart',
-          };
+          const installs = process.env.INSTALLS ? JSON.parse(process.env.INSTALLS) : null;
+          const interval = Number(process.env.INTERVAL) * 1000;
+          const deadline = Date.now() + Number(process.env.TIMEOUT) * 1000;
 
           const pull = context.payload.pull_request?.number;
+          if (!pull) return;
 
           async function jobsBySdk() {
             const jobs = await github.paginate(
@@ -82,60 +64,20 @@ runs:
             return bySdk;
           }
 
-          async function downloads() {
-            const uploaded = await github.paginate(
-              github.rest.actions.listWorkflowRunArtifacts,
-              { ...context.repo, run_id: context.runId, per_page: 100 },
-            );
-
-            return Object.fromEntries(uploaded.map(({ name, id }) => [
-              name,
-              `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}/artifacts/${id}`,
-            ]));
-          }
-
           function state(jobs) {
             if (!jobs?.length) return { status: 'queued', done: false };
 
             const failed = jobs.find(({ conclusion }) =>
               conclusion === 'failure' || conclusion === 'cancelled');
-            if (failed) return { status: `failed while ${stages[failed.step] ?? failed.step}`, done: true };
+            if (failed) return { status: `failed to ${failed.step}`, done: true };
 
             const running = jobs.find(({ status }) => status !== 'completed');
-            if (running) return { status: stages[running.step] ?? running.step, done: false };
+            if (running) return { status: running.step, done: false };
 
             return { status: 'built', done: true };
           }
 
-          function install(sdk, urls) {
-            if (sdk === 'javascript' && pull) {
-              return `\`pnpm add https://pkg.pr.new/vrchat@${pull}\``;
-            }
-
-            const url = urls[artifacts[sdk]];
-            return url ? `[download](${url})` : '';
-          }
-
-          async function report() {
-            const bySdk = await jobsBySdk();
-            const urls = await downloads();
-
-            const rows = Object.entries(labels).map(([sdk, label]) => {
-              const { status, done } = state(bySdk[sdk]);
-              const how = status === 'built' ? install(sdk, urls) : '';
-
-              return `| ${label} | ${status} | ${how} |`;
-            });
-
-            const body = [
-              marker,
-              '### SDKs built from this specification',
-              '',
-              '| SDK | Status | Install |',
-              '| --- | ------ | ------- |',
-              ...rows,
-            ].join('\n');
-
+          async function upsert(body) {
             const comments = await github.paginate(github.rest.issues.listComments, {
               ...context.repo,
               issue_number: pull,
@@ -144,29 +86,53 @@ runs:
 
             const existing = comments.find((comment) => comment.body.includes(marker));
 
-            if (existing) {
-              if (existing.body !== body) {
-                await github.rest.issues.updateComment({
-                  ...context.repo,
-                  comment_id: existing.id,
-                  body,
-                });
-              }
-            } else {
+            if (!existing) {
               await github.rest.issues.createComment({
                 ...context.repo,
                 issue_number: pull,
                 body,
               });
+              return;
             }
 
-            const sdks = Object.keys(labels).map((sdk) => state(bySdk[sdk]));
-            return sdks.length > 0 && sdks.every(({ done }) => done);
+            if (existing.body !== body) {
+              await github.rest.issues.updateComment({
+                ...context.repo,
+                comment_id: existing.id,
+                body,
+              });
+            }
           }
 
-          if (!pull) return;
+          function render(bySdk) {
+            const rows = Object.keys(bySdk).sort().map((sdk) => {
+              const { status } = state(bySdk[sdk]);
+              const how = status === 'built' ? (installs?.[sdk] ?? '') : '';
+
+              return `| ${sdk} | ${status} | ${how} |`;
+            });
+
+            return [
+              marker,
+              '### SDKs built from this specification',
+              '',
+              '| SDK | Status | Install |',
+              '| --- | ------ | ------- |',
+              ...rows,
+            ].join('\n');
+          }
+
+          if (installs) {
+            await upsert(render(await jobsBySdk()));
+            return;
+          }
 
           while (Date.now() < deadline) {
-            if (await report()) return;
+            const bySdk = await jobsBySdk();
+            await upsert(render(bySdk));
+
+            const sdks = Object.values(bySdk).map(state);
+            if (sdks.length > 0 && sdks.every(({ done }) => done)) return;
+
             await new Promise((resolve) => setTimeout(resolve, interval));
           }

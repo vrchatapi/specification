@@ -137,7 +137,6 @@ jobs:
 
   report:
     if: github.event_name == 'pull_request'
-    needs: bundle
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -146,6 +145,34 @@ jobs:
       - uses: actions/checkout@v7
 
       - uses: ./.github/actions/report
+
+  report_install:
+    if: always() && github.event_name == 'pull_request'
+    needs:
+      - build_javascript
+      - build_rust
+      - build_java
+      - build_python
+      - build_csharp
+      - build_dart
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/report
+        with:
+          installs: |
+            {
+              "javascript": ${{ toJSON(needs.build_javascript.outputs.install) }},
+              "rust": ${{ toJSON(needs.build_rust.outputs.install) }},
+              "java": ${{ toJSON(needs.build_java.outputs.install) }},
+              "python": ${{ toJSON(needs.build_python.outputs.install) }},
+              "csharp": ${{ toJSON(needs.build_csharp.outputs.install) }},
+              "dart": ${{ toJSON(needs.build_dart.outputs.install) }}
+            }
 
   release:
     runs-on: ubuntu-latest
