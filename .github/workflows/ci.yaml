@@ -136,73 +136,16 @@ jobs:
       ref: ci/modernise-actions
 
   report:
-    if: always() && github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request'
+    needs: bundle
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       pull-requests: write
-    needs:
-      - build_javascript
-      - build_rust
-      - build_java
-      - build_python
-      - build_csharp
-      - build_dart
     steps:
-      - uses: actions/github-script@v9
-        with:
-          script: |
-            const marker = '<!-- sdk-preview -->';
+      - uses: actions/checkout@v7
 
-            const sdks = [
-              { name: 'JavaScript', install: `${{ needs.build_javascript.outputs.install }}`, artifact: '' },
-              { name: 'Rust', install: '', artifact: `${{ needs.build_rust.outputs.artifact }}` },
-              { name: 'Java', install: '', artifact: `${{ needs.build_java.outputs.artifact }}` },
-              { name: 'Python', install: '', artifact: `${{ needs.build_python.outputs.artifact }}` },
-              { name: 'C#', install: '', artifact: `${{ needs.build_csharp.outputs.artifact }}` },
-              { name: 'Dart', install: '', artifact: `${{ needs.build_dart.outputs.artifact }}` },
-            ];
-
-            const rows = sdks.map(({ name, install, artifact }) => {
-              const how = install
-                ? `\`${install}\``
-                : artifact
-                  ? `[download](${artifact})`
-                  : 'unavailable';
-
-              return `| ${name} | ${how} |`;
-            });
-
-            const body = [
-              marker,
-              `### SDKs built from this specification`,
-              ``,
-              `| SDK | Install |`,
-              `| --- | ------- |`,
-              ...rows,
-              ``,
-              `<sub>${context.payload.pull_request.head.sha.slice(0, 7)}</sub>`,
-            ].join('\n');
-
-            const { data: comments } = await github.rest.issues.listComments({
-              ...context.repo,
-              issue_number: context.issue.number,
-            });
-
-            const existing = comments.find(({ body }) => body.includes(marker));
-
-            if (existing) {
-              await github.rest.issues.updateComment({
-                ...context.repo,
-                comment_id: existing.id,
-                body,
-              });
-            } else {
-              await github.rest.issues.createComment({
-                ...context.repo,
-                issue_number: context.issue.number,
-                body,
-              });
-            }
+      - uses: ./.github/actions/report
 
   release:
     runs-on: ubuntu-latest
