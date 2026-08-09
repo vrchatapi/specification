@@ -184,10 +184,10 @@ runs:
 
           while (Date.now() < deadline) {
             const bySdk = await jobsBySdk();
-            await upsert(render(bySdk));
-
             const states = Object.keys(sdks).map((key) => state(bySdk[key]));
+
             if (states.every(({ done }) => done)) return;
 
+            await upsert(render(bySdk));
             await new Promise((resolve) => setTimeout(resolve, interval));
           }
