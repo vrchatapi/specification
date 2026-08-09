@@ -147,7 +147,6 @@ jobs:
 
   report:
     if: github.event_name == 'pull_request'
-    needs: bundle
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -157,7 +156,6 @@ jobs:
 
       - uses: ./.github/actions/report
         with:
-          bundles: ${{ needs.bundle.outputs.artifacts }}
           sdks: |
             {
               "javascript": { "name": "JavaScript", "repository": "vrchatapi/vrchatapi-javascript" },

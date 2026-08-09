@@ -30,7 +30,7 @@ inputs:
     description: >-
       Seconds between refreshes.
     required: false
-    default: "15"
+    default: "5"
   timeout:
     description: >-
       Seconds to keep refreshing before giving up.
@@ -141,6 +141,11 @@ runs:
 
               lines.push('');
             }
+
+            const sha = context.payload.pull_request.head.sha;
+            const commit = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${sha}`;
+
+            lines.push(`<sub>built from [\`${sha.slice(0, 7)}\`](${commit})</sub>`);
 
             return lines.join('\n').trimEnd();
           }
