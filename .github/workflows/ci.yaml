@@ -106,37 +106,37 @@ jobs:
   # matrix leg.
   build_javascript:
     needs: bundle
-    uses: vrchatapi/vrchatapi-javascript/.github/workflows/build.yaml@ci/modernise-actions
+    uses: vrchatapi/vrchatapi-javascript/.github/workflows/ci.yaml@ci/modernise-actions
     with:
       ref: ci/modernise-actions
 
   build_rust:
     needs: bundle
-    uses: vrchatapi/vrchatapi-rust/.github/workflows/build.yaml@ci/modernise-actions
+    uses: vrchatapi/vrchatapi-rust/.github/workflows/ci.yaml@ci/modernise-actions
     with:
       ref: ci/modernise-actions
 
   build_java:
     needs: bundle
-    uses: vrchatapi/vrchatapi-java/.github/workflows/build.yaml@ci/modernise-actions
+    uses: vrchatapi/vrchatapi-java/.github/workflows/ci.yaml@ci/modernise-actions
     with:
       ref: ci/modernise-actions
 
   build_python:
     needs: bundle
-    uses: vrchatapi/vrchatapi-python/.github/workflows/build.yaml@ci/modernise-actions
+    uses: vrchatapi/vrchatapi-python/.github/workflows/ci.yaml@ci/modernise-actions
     with:
       ref: ci/modernise-actions
 
   build_csharp:
     needs: bundle
-    uses: vrchatapi/vrchatapi-csharp/.github/workflows/build.yaml@ci/modernise-actions
+    uses: vrchatapi/vrchatapi-csharp/.github/workflows/ci.yaml@ci/modernise-actions
     with:
       ref: ci/modernise-actions
 
   build_dart:
     needs: bundle
-    uses: vrchatapi/vrchatapi-dart/.github/workflows/build.yaml@ci/modernise-actions
+    uses: vrchatapi/vrchatapi-dart/.github/workflows/ci.yaml@ci/modernise-actions
     with:
       ref: ci/modernise-actions
 
