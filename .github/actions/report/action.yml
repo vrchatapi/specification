@@ -1,8 +1,9 @@
 name: Report the SDKs a run builds
 description: >-
-  Keeps one pull request comment up to date with what each SDK job is doing.
-  Without `installs` it polls the run and reports progress; with `installs` it
-  writes the commands the SDKs reported for themselves and returns.
+  Keeps one pull request comment up to date with the bundles a run produced and
+  what each SDK job is doing. Without `installs` it polls the run and reports
+  progress; with `installs` it writes the commands the SDKs reported for
+  themselves and returns.
 
 inputs:
   token:
@@ -10,6 +11,16 @@ inputs:
       Token used to read the run's jobs and write the comment.
     required: false
     default: ${{ github.token }}
+  sdks:
+    description: >-
+      JSON object naming each SDK a `build_<key>` job builds, and the repository
+      it comes from.
+    required: true
+  bundles:
+    description: >-
+      JSON array of the bundles this run produced, as `name` and `url`.
+    required: false
+    default: "[]"
   installs:
     description: >-
       JSON object mapping an SDK to how it says to install what it built.
@@ -31,6 +42,8 @@ runs:
   steps:
     - uses: actions/github-script@v9
       env:
+        SDKS: ${{ inputs.sdks }}
+        BUNDLES: ${{ inputs.bundles }}
         INSTALLS: ${{ inputs.installs }}
         INTERVAL: ${{ inputs.interval }}
         TIMEOUT: ${{ inputs.timeout }}
@@ -38,12 +51,29 @@ runs:
         github-token: ${{ inputs.token }}
         script: |
           const marker = '<!-- sdk-preview -->';
+
+          const sdks = JSON.parse(process.env.SDKS);
+          const bundles = JSON.parse(process.env.BUNDLES);
           const installs = process.env.INSTALLS ? JSON.parse(process.env.INSTALLS) : null;
+
           const interval = Number(process.env.INTERVAL) * 1000;
           const deadline = Date.now() + Number(process.env.TIMEOUT) * 1000;
 
           const pull = context.payload.pull_request?.number;
           if (!pull) return;
+
+          const headings = {
+            queued: 'Queued',
+            generate: 'Generating',
+            build: 'Building',
+            test: 'Testing',
+            install: 'Installing',
+            analyze: 'Analysing',
+            pana: 'Analysing',
+            format: 'Checking formatting',
+            built: 'Built',
+            failed: 'Failed',
+          };
 
           async function jobsBySdk() {
             const jobs = await github.paginate(
@@ -65,16 +95,54 @@ runs:
           }
 
           function state(jobs) {
-            if (!jobs?.length) return { status: 'queued', done: false };
+            if (!jobs?.length) return { stage: 'queued', done: false };
 
-            const failed = jobs.find(({ conclusion }) =>
+            const failed = jobs.some(({ conclusion }) =>
               conclusion === 'failure' || conclusion === 'cancelled');
-            if (failed) return { status: `failed to ${failed.step}`, done: true };
+            if (failed) return { stage: 'failed', done: true };
 
             const running = jobs.find(({ status }) => status !== 'completed');
-            if (running) return { status: running.step, done: false };
+            if (running) return { stage: running.step, done: false };
 
-            return { status: 'built', done: true };
+            return { stage: 'built', done: true };
+          }
+
+          function render(bySdk) {
+            const lines = [marker];
+
+            if (bundles.length > 0) {
+              lines.push('### Bundles', '');
+              lines.push(...bundles.map(({ name, url }) => `* [${name}](${url})`));
+              lines.push('');
+            }
+
+            lines.push('### SDKs', '');
+
+            const grouped = {};
+
+            for (const [key, { name, repository }] of Object.entries(sdks)) {
+              const { stage } = state(bySdk[key]);
+              const heading = headings[stage] ?? stage;
+
+              (grouped[heading] ??= []).push({ key, name, repository });
+            }
+
+            for (const [heading, members] of Object.entries(grouped)) {
+              lines.push(`#### ${heading}`, '');
+
+              for (const { key, name, repository } of members) {
+                lines.push(`* [**${name}**](https://github.com/${repository})`);
+
+                const how = installs?.[key];
+                if (how) {
+                  lines.push(how.startsWith('[') ? `  → ${how}` : `  → \`${how}\``);
+                }
+              }
+
+              lines.push('');
+            }
+
+            return lines.join('\n').trimEnd();
           }
 
           async function upsert(body) {
@@ -104,24 +172,6 @@ runs:
             }
           }
 
-          function render(bySdk) {
-            const rows = Object.keys(bySdk).sort().map((sdk) => {
-              const { status } = state(bySdk[sdk]);
-              const how = status === 'built' ? (installs?.[sdk] ?? '') : '';
-
-              return `| ${sdk} | ${status} | ${how} |`;
-            });
-
-            return [
-              marker,
-              '### SDKs built from this specification',
-              '',
-              '| SDK | Status | Install |',
-              '| --- | ------ | ------- |',
-              ...rows,
-            ].join('\n');
-          }
-
           if (installs) {
             await upsert(render(await jobsBySdk()));
             return;
@@ -131,8 +181,8 @@ runs:
             const bySdk = await jobsBySdk();
             await upsert(render(bySdk));
 
-            const sdks = Object.values(bySdk).map(state);
-            if (sdks.length > 0 && sdks.every(({ done }) => done)) return;
+            const states = Object.keys(sdks).map((key) => state(bySdk[key]));
+            if (states.every(({ done }) => done)) return;
 
             await new Promise((resolve) => setTimeout(resolve, interval));
           }
