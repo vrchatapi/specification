@@ -4,6 +4,7 @@
 	"version": "1.0.0",
 	"private": true,
 	"packageManager": "pnpm@11.20.0",
+	"engines": { "node": ">=22" },
 	"description": "VRChat API OpenAPI Specification",
 	"author": "",
 	"license": "MIT",
