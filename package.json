@@ -4,11 +4,13 @@
 	"version": "1.0.0",
 	"private": true,
 	"packageManager": "pnpm@11.20.0",
-	"engines": { "node": ">=22" },
 	"description": "VRChat API OpenAPI Specification",
 	"author": "",
 	"license": "MIT",
 	"main": "index.js",
+	"engines": {
+		"node": ">=22"
+	},
 	"scripts": {
 		"lint-spectral": "bun spectral openapi/openapi.yaml",
 		"lint-spectral-ci": "bun spectral -i openapi/openapi.yaml",
