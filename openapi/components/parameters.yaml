@@ -364,6 +364,13 @@ groupRoleId:
   in: path
   schema:
     $ref: ./schemas/GroupRoleID.yaml
+groupShortCodeAndDiscriminator:
+  name: groupShortCodeAndDiscriminator
+  description: Must be a valid group short code and discriminator.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/GroupShortCodeAndDiscriminator.yaml
 hydrate:
   name: hydrate
   description: Populates some fields and changes types of others for certain objects.

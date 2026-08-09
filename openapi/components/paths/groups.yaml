@@ -63,6 +63,32 @@ paths:
           $ref: ../responses/groups/GroupResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/groups/redirect/{groupShortCodeAndDiscriminator}":
+    parameters:
+      - $ref: ../parameters.yaml#/groupShortCodeAndDiscriminator
+    get:
+      operationId: resolveGroupShortCodeAndDiscriminator
+      summary: Resolve Group Short Code and Discriminator
+      description: |-
+        Resolves a group short code and discriminator to a group ID.
+
+        **Only works with the api.vrchat.cloud domain.**
+
+        Other domains respond with a redirect to this endpoint on the api.vrchat.cloud domain.
+        (e.g., to https://api.vrchat.cloud/api/1/groups/redirect/VRCHAT.0000)
+      tags:
+        - groups
+      responses:
+        "302":
+          description: Redirect to the /home/group/{groupId} URL of the group.
+          headers:
+            Location:
+              description: The /home/group/{groupId} URL of the group.
+              schema:
+                type: string
+                example: /home/group/grp_7ccb6ca3-cd36-4dab-9ab1-7bcf08d794e4
+        "404":
+          $ref: ../responses/groups/GroupNotFoundError.yaml
   /groups/roleTemplates:
     get:
       operationId: getGroupRoleTemplates

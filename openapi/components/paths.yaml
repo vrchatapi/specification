@@ -172,6 +172,8 @@
   $ref: "./paths/files.yaml#/paths/~1gallery"
 /groups:
   $ref: "./paths/groups.yaml#/paths/~1groups"
+/groups/redirect/{groupShortCodeAndDiscriminator}:
+  $ref: "./paths/groups.yaml#/paths/~1groups~1redirect~1{groupShortCodeAndDiscriminator}"
 /groups/roleTemplates:
   $ref: "./paths/groups.yaml#/paths/~1groups~1roleTemplates"
 "/groups/{groupId}":
