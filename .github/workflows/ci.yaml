@@ -51,7 +51,6 @@ jobs:
         continue-on-error: true
         run: pnpm run lint-ci
 
-      # Will fail if no paths are defined
       - name: assert no unused paths
         if: env.changes != ''
         run: |
@@ -84,7 +83,7 @@ jobs:
 
       - run: bun --bun run bundle
 
-      - uses: actions/github-script@v8
+      - uses: actions/github-script@v9
         with:
           script: |
             const { readdir } = require("node:fs/promises");
@@ -100,10 +99,6 @@ jobs:
               return artifact.uploadArtifact(file, [pathname], dirname(pathname));
             }));
 
-  # Each SDK builds against this run's bundle, so a spec change that breaks a
-  # generated client fails here rather than after release.
-  # `uses` takes no expressions, so each SDK needs its own job rather than a
-  # matrix leg.
   build_javascript:
     needs: bundle
     uses: vrchatapi/vrchatapi-javascript/.github/workflows/ci.yaml@ci/modernise-actions
@@ -159,7 +154,7 @@ jobs:
           runtime: bun@latest
           cache: true
 
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v8
         with:
           path: dist
           merge-multiple: true
