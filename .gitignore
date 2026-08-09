@@ -2,3 +2,12 @@
 dist
 .idea
 .claude
+test/.out
+.env
+.env.*
+!.env.example
+
+# Captures of authenticated traffic contain the session cookie in plaintext:
+# Respect masks inputs marked `format: password`, but not values captured from a
+# response into a step output.
+*.har
