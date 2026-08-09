@@ -1,0 +1,28 @@
+name: Install the OpenAPI generator
+description: >-
+  Puts `openapi-generator` on the path at the version openapitools.json pins.
+  The generator is a Java program and the runner image already ships a JDK, so
+  nothing here needs Node.
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v6
+      with:
+        path: ~/.cache/openapi-generator
+        key: openapi-generator-${{ hashFiles('openapitools.json') }}
+
+    - run: |
+        set -euo pipefail
+
+        version=$(jq -re '."generator-cli".version' openapitools.json)
+        jar="$HOME/.cache/openapi-generator/openapi-generator-cli-$version.jar"
+
+        [ -f "$jar" ] || curl -fsSL --create-dirs -o "$jar" \
+          "https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$version/openapi-generator-cli-$version.jar"
+
+        mkdir -p "$HOME/.local/bin"
+        printf '#!/usr/bin/env bash\nexec java -jar %s "$@"\n' "$jar" > "$HOME/.local/bin/openapi-generator"
+        chmod +x "$HOME/.local/bin/openapi-generator"
+        printf '%s\n' "$HOME/.local/bin" >> "$GITHUB_PATH"
+      shell: bash

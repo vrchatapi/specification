@@ -3,10 +3,14 @@
 	"type": "module",
 	"version": "1.0.0",
 	"private": true,
+	"packageManager": "pnpm@11.20.0",
 	"description": "VRChat API OpenAPI Specification",
 	"author": "",
 	"license": "MIT",
 	"main": "index.js",
+	"engines": {
+		"node": ">=22"
+	},
 	"scripts": {
 		"lint-spectral": "bun spectral openapi/openapi.yaml",
 		"lint-spectral-ci": "bun spectral -i openapi/openapi.yaml",
@@ -17,6 +21,7 @@
 		"bundle": "redocly bundle"
 	},
 	"devDependencies": {
+		"@actions/artifact": "5.0.2",
 		"@actions/core": "^1.11.1",
 		"@apidevtools/json-schema-ref-parser": "^15.1.2",
 		"@ariesclark/eslint-config": "^3.1.1",
