@@ -19,10 +19,6 @@ properties:
     minimum: 0
   description:
     type: string
-  disabledPropAbilities:
-    type: array
-    items:
-      type: string
   imageUrl:
     type: string
     minLength: 1
@@ -31,12 +27,6 @@ properties:
     minLength: 1
   platform:
     $ref: ../schemas/Platform.yaml
-  previewYoutubeId:
-    type: string
-    nullable: true
-  recommendedCapacity:
-    type: integer
-    example: 4
   releaseStatus:
     $ref: ../schemas/ReleaseStatus.yaml
   tags:
@@ -52,7 +42,3 @@ properties:
     default: 5.3.4p1
     example: 2022.3.6f1
     minLength: 1
-  urlList:
-    type: array
-    items:
-      type: string

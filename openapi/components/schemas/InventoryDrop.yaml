@@ -11,8 +11,6 @@ properties:
     type: string
     nullable: true
     format: date-time
-  dropStatus:
-    type: string
   endDropDate:
     type: string
     example: "2184-07-24T00:00:00.000Z"
@@ -29,6 +27,9 @@ properties:
     type: string
     example: "2025-06-09T10:00:00.000Z"
     format: date-time
+  status:
+    type: string
+    example: active
   tags:
     type: array
     items:
@@ -54,6 +55,7 @@ required:
   - name
   - notificationDetails
   - startDropDate
+  - status
   - tags
   - targetGroup
   - templateIds

@@ -22,8 +22,6 @@ paths:
       responses:
         "200":
           $ref: ../responses/instances/InstanceResponse.yaml
-        "400":
-          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /instances/recent:
@@ -66,7 +64,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/instances/InstanceNotFoundError.yaml
   "/instances/{worldId}:{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -81,7 +79,6 @@ paths:
       tags:
         - instances
       security:
-        - {}
         - authCookie: []
       responses:
         "200":
@@ -122,7 +119,7 @@ paths:
         "403":
           $ref: ../responses/instances/InstanceCloseForbiddenError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/instances/InstanceNotFoundError.yaml
   "/instances/{worldId}:{instanceId}/shortName":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -134,7 +131,6 @@ paths:
       tags:
         - instances
       security:
-        - {}
         - authCookie: []
       responses:
         "200":

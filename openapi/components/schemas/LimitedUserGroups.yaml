@@ -39,8 +39,6 @@ properties:
     type: boolean
   name:
     type: string
-  nameplateId: {}
-  nameplateUrl: {}
   ownerId:
     $ref: ./UserID.yaml
   privacy:

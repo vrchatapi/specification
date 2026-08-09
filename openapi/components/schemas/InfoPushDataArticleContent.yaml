@@ -1,16 +1,9 @@
 title: InfoPushDataArticleContent
 type: object
 properties:
-  id:
-    type: string
   imageUrl:
     type: string
   onPressed:
     $ref: ./InfoPushDataClickable.yaml
   text:
-    type: string
-
-  title:
-    type: string
-  videoUrl:
     type: string

@@ -14,7 +14,7 @@ properties:
       when: jsonschema
       then:
         oneOf:
-          - $ref: ./NotificationEmpty.yaml
+          - $ref: ./NotificationV2DataEmpty.yaml
           - $ref: ./NotificationV2DataBadgeEarned.yaml
           - $ref: ./NotificationV2DataBoop.yaml
           - $ref: ./NotificationV2DataEventAnnouncement.yaml
@@ -25,7 +25,6 @@ properties:
         $ref: ./NotificationV2DataGeneric.yaml
   details:
     $ref: ./NotificationV2DetailsBoop.yaml
-  displayData: {}
   expiresAt:
     type: string
     format: date-time
@@ -43,12 +42,9 @@ properties:
     type: boolean
   link:
     type: string
-    nullable: true
-    example: "event:grp_00000000-0000-0000-0000-000000000000,cal_00000000-0000-0000\
-      -0000-000000000000"
+    example: "event:grp_00000000-0000-0000-0000-000000000000,cal_00000000-0000-0000-0000-000000000000"
   linkText:
     type: string
-    nullable: true
   linkTextKey:
     type: string
     nullable: true
@@ -73,7 +69,6 @@ properties:
     type: boolean
   senderUserId:
     $ref: ./UserID.yaml
-    nullable: true
   senderUsername:
     type: string
     nullable: true

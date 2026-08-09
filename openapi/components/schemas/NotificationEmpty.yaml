@@ -1,6 +1,0 @@
-title: NotificationEmpty
-type: object
-description: >-
-  A notification that carries no payload, serialized as `{}`. Constrained so it
-  cannot also match a populated branch of the union it appears in.
-additionalProperties: false

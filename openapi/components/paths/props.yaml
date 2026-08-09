@@ -62,14 +62,11 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/props/NoSuchPropError.yaml
     put:
       operationId: updateProp
       summary: Update Prop
-      description: Updates a Prop and returns the updated Prop object. When updating
-        the asset bundle, all of `name`, `assetUrl`, `platform`, `unityVersion`,
-        `assetVersion`, `spawnType`, and `worldPlacementMask` must be present,
-        as well as `propSignature` if this value is not blank.
+      description: Updates a Prop and returns the updated Prop object. When updating the asset bundle, all of `name`, `assetUrl`, `platform`, `unityVersion`, `assetVersion`, `spawnType`, and `worldPlacementMask` must be present, as well as `propSignature` if this value is not blank.
       tags:
         - props
       requestBody:
@@ -83,14 +80,12 @@ paths:
       responses:
         "200":
           $ref: ../responses/props/PropResponse.yaml
-        "400":
-          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/props/NoSuchPropError.yaml
     delete:
       operationId: deleteProp
       summary: Delete Prop
@@ -107,17 +102,15 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/props/NoSuchPropError.yaml
   "/props/{propId}/publish":
     parameters:
       - $ref: ../parameters.yaml#/propId
     get:
       operationId: getPropPublishStatus
-      deprecated: true
       summary: Get Prop Publish Status
-      description: Return the PropPublishStatus object. `/props/{propId}` is still served.
+      description: Returns a PropPublishStatus object.
       tags:
-        - deprecated
         - props
       security:
         - authCookie: []
@@ -129,14 +122,12 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/RouteNotImplementedError.yaml
+          $ref: ../responses/props/NoSuchPropError.yaml
     put:
       operationId: publishProp
-      deprecated: true
       summary: Publish Prop
-      description: Publish a prop and return the updated PropPublishStatus object. `/props/{propId}` is still served.
+      description: Publish a Prop and return the updated PropPublishStatus object.
       tags:
-        - deprecated
         - props
       security:
         - authCookie: []
@@ -148,14 +139,12 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/RouteNotImplementedError.yaml
+          $ref: ../responses/props/NoSuchPropError.yaml
     delete:
       operationId: unpublishProp
-      deprecated: true
       summary: Unpublish Prop
-      description: Unpublish a prop and return the updated PropPublishStatus object. `/props/{propId}` is still served.
+      description: Unpublish a Prop and return the updated PropPublishStatus object.
       tags:
-        - deprecated
         - props
       security:
         - authCookie: []
@@ -167,7 +156,7 @@ paths:
         "403":
           $ref: ../responses/NoPermission.yaml
         "404":
-          $ref: ../responses/RouteNotImplementedError.yaml
+          $ref: ../responses/props/NoSuchPropError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml

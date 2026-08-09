@@ -1,17 +1,5 @@
-description: |-
-  Return a single User object.
-
-  Requesting your own ID returns your full `CurrentUser` record instead, carrying
-  the private fields (`emailVerified`, `steamDetails`, `twoFactorAuthEnabled`, …)
-  that never appear in responses for another user.
+description: Returns a single User object.
 content:
   application/json:
     schema:
-      x-if:
-        when: jsonschema
-        then:
-          oneOf:
-            - $ref: ../../schemas/User.yaml
-            - $ref: ../../schemas/CurrentUser.yaml
-        else:
-          $ref: ../../schemas/User.yaml
+      $ref: ../../schemas/User.yaml

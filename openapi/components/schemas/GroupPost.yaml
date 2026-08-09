@@ -19,7 +19,7 @@ properties:
   imageUrl:
     type: string
     nullable: true
-  roleIds:
+  roleId:
     $ref: ./GroupRoleIDList.yaml
   text:
     type: string

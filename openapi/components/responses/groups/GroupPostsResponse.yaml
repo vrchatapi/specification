@@ -8,5 +8,3 @@ content:
           type: array
           items:
             $ref: ../../schemas/GroupPost.yaml
-        total:
-          type: integer

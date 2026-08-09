@@ -2,10 +2,6 @@ title: LimitedUserFriend
 type: object
 description: User object received when querying your friends list
 properties:
-  bannerColor:
-    type: string
-  bannerType:
-    type: string
   bio:
     type: string
   bioLinks:
@@ -23,15 +19,9 @@ properties:
     $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   developerType:
     $ref: ./DeveloperType.yaml
-  discordId:
-    $ref: ./DiscordID.yaml
   displayName:
     type: string
   friendKey:
-    type: string
-  iconFrame:
-    type: string
-  iconUrl:
     type: string
   id:
     $ref: ./UserID.yaml
@@ -55,11 +45,7 @@ properties:
     $ref: ./Platform.yaml
   location:
     type: string
-  nameplateEffect:
-    type: string
   platform:
-    type: string
-  profileEffect:
     type: string
   profilePicOverride:
     type: string

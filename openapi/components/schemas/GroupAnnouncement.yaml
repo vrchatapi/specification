@@ -1,8 +1,5 @@
 title: GroupAnnouncement
 type: object
-description: >-
-  An announcement is stored as a group post, so `POST /groups/{groupId}/announcement`
-  answers with the post fields below as well as the announcement ones.
 properties:
   authorId:
     $ref: ./UserID.yaml
@@ -11,9 +8,6 @@ properties:
     type: string
     nullable: true
     format: date-time
-  editorId:
-    $ref: ./UserID.yaml
-    nullable: true
   groupId:
     $ref: ./GroupID.yaml
     nullable: true
@@ -26,8 +20,6 @@ properties:
   imageUrl:
     type: string
     nullable: true
-  roleIds:
-    $ref: ./GroupRoleIDList.yaml
   text:
     type: string
     nullable: true
@@ -38,5 +30,3 @@ properties:
     type: string
     nullable: true
     format: date-time
-  visibility:
-    type: string

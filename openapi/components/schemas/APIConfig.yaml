@@ -1,10 +1,6 @@
 title: APIConfig
 type: object
-description: |-
-  Global client configuration.
-
-  The response carries decoy properties: plausible-looking names VRChat rerolls at random as deliberate obfuscation.
-additionalProperties: true
+description: Global configuration for various features.
 properties:
   CampaignStatus:
     type: string
@@ -123,8 +119,6 @@ properties:
     type: integer
     description: Unknown
     default: 30000
-  clientMaxDatagrams:
-    type: integer
   clientNetDispatchThread:
     type: boolean
     description: Unknown
@@ -177,8 +171,6 @@ properties:
     type: integer
     description: Unknown
     default: 15
-  clientUseAck2:
-    type: boolean
   constants:
     $ref: ./APIConfigConstants.yaml
   contactEmail:
@@ -335,12 +327,6 @@ properties:
     type: integer
     description: Unknown
     default: 1
-  enableVRCPlusWorldLists:
-    type: boolean
-  eventShelfCampaigns:
-    type: array
-    items:
-      $ref: ./APIConfigEventShelfCampaign.yaml
   events:
     $ref: ./APIConfigEvents.yaml
   forceUseLatestWorld:
@@ -350,16 +336,10 @@ properties:
   giftDisplayType:
     type: string
     description: Display type of gifts
-  globalCacheVersion:
-    type: integer
-  globalCacheVersionDefault:
-    type: integer
   googleApiClientId:
     type: string
     description: Unknown
     default: 827942544393-r2ouvckvouldn9dg9uruseje575e878f.apps.googleusercontent.com
-  googleApiUnityClientId:
-    type: string
   homeWorldId:
     $ref: ./WorldID.yaml
   homepageRedirectTarget:
@@ -394,20 +374,6 @@ properties:
     type: string
     description: VRChat's job application email
     minLength: 1
-  loadingScreenWeights:
-    type: object
-    description: Relative weight of each info-push category on the loading screen, per audience.
-    additionalProperties:
-      $ref: ./APIConfigLoadingScreenWeights.yaml
-  lowMemoryGoHomeTimeout:
-    type: object
-    description: Low-memory timeout, keyed by platform.
-    additionalProperties:
-      type: object
-      properties:
-        timeout:
-          type: integer
-          example: -1
   maxUserEmoji:
     type: integer
     description: The maximum number of custom emoji each user may have at a given time.
@@ -416,9 +382,6 @@ properties:
     type: integer
     description: The maximum number of custom stickers each user may have at a given time.
     default: 18
-  maximumUnityVersionForUploads:
-    type: string
-    example: 2023.0.0f0
   minSupportedClientBuildNumber:
     type: object
     description: Minimum supported client build number for various platforms
@@ -453,6 +416,7 @@ properties:
       - GooglePlay
       - PC
       - PicoStore
+      - QuestAppLab
       - QuestStore
       - TestFlight
       - XRElite
@@ -494,32 +458,13 @@ properties:
     type: string
     description: Currently used youtube-dl.exe hash in SHA1-delimited format
     minLength: 1
-  player-url-resolver-sha1-gfn-override:
-    type: string
-    description: Overrides `player-url-resolver-sha1` on GeForce Now.
   player-url-resolver-version:
     type: string
     description: Currently used youtube-dl.exe version
     minLength: 1
-  player-url-resolver-version-gfn-override:
-    type: string
-    description: Overrides `player-url-resolver-version` on GeForce Now.
-    example: 2026-07-04-GFN
-  profileDefaults:
-    $ref: ./APIConfigProfileDefaults.yaml
-  propComponentList:
-    type: array
-    description: SDK3 component type names.
-    items:
-      type: string
   publicKey:
     type: string
     description: Public key, hex encoded
-  questMinimumLowMemoryThreshold:
-    type: object
-    description: Low-memory threshold, keyed by platform.
-    additionalProperties:
-      type: integer
   reportCategories:
     type: object
     description: Categories available for reporting objectionable content
@@ -615,10 +560,6 @@ properties:
     type: string
     description: Download link for game on the Steam website.
     minLength: 1
-  voiceMaxPlaybackSourcesMobile:
-    type: integer
-  voiceMaxPlaybackSourcesPC:
-    type: integer
   websocketMaxFriendsRefreshDelay:
     type: integer
     description: Unknown
@@ -693,6 +634,7 @@ required:
   - downloadUrls
   - dynamicWorldRows
   - economyLedgerBackfill
+  - economyLedgerMigrationStop
   - economyLedgerMode
   - economyPauseEnd
   - economyPauseStart

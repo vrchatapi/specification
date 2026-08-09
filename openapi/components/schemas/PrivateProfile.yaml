@@ -3,15 +3,12 @@ type: object
 properties:
   activity:
     $ref: ./PrivateProfileActivity.yaml
-  friendRequestStatus:
-    $ref: ./FriendRequestStatus.yaml
   id:
     $ref: ./UserID.yaml
   isFriend:
     type: boolean
   note:
     type: string
-    nullable: true
   status:
     $ref: ./UserStatus.yaml
   statusDescription:

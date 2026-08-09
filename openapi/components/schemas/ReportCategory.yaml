@@ -5,10 +5,6 @@ properties:
   description:
     type: string
     description: The description of the report category
-  ipsArticle:
-    type: string
-  order:
-    type: integer
   text:
     type: string
     description: The label of the report category

@@ -46,7 +46,6 @@ paths:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/calendarDiscoveryNextCursor
       security:
-        - {}
         - authCookie: []
       responses:
         "200":
@@ -65,7 +64,6 @@ paths:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
       security:
-        - {}
         - authCookie: []
       responses:
         "200":
@@ -159,8 +157,7 @@ paths:
     get:
       operationId: getGroupNextCalendarEvent
       summary: Get next calendar event
-      description: Return the closest future calendar event scheduled for a group.
-        A group with no future scheduled events answers 404.
+      description: Get the closest future calendar event scheduled for a group
       tags:
         - calendar
       parameters:
@@ -173,7 +170,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/calendar/CalendarEventNotFoundError.yaml
   "/calendar/{groupId}/{calendarId}":
     delete:
       operationId: deleteGroupCalendarEvent
@@ -192,7 +189,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/calendar/CalendarEventNotFoundError.yaml
     get:
       operationId: getGroupCalendarEvent
       summary: Get a calendar event
@@ -225,7 +222,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/calendar/CalendarEventNotFoundError.yaml
   "/calendar/{groupId}/{calendarId}/event":
     parameters:
       - $ref: ../parameters.yaml#/groupId

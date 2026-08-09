@@ -1,7 +1,0 @@
-title: InfoPushIpsQuery
-type: object
-properties:
-  include:
-    type: string
-  require:
-    type: string

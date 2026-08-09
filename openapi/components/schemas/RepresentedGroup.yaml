@@ -27,8 +27,6 @@ properties:
     $ref: ./GroupUserVisibility.yaml
   name:
     type: string
-  nameplateId: {}
-  nameplateUrl: {}
   ownerId:
     $ref: ./UserID.yaml
   privacy:

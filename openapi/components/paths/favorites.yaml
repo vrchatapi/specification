@@ -73,10 +73,9 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
-        - $ref: ../parameters.yaml#/favoriteGroupTypeQuery
         - $ref: ../parameters.yaml#/userIdAdmin
         - name: ownerId
-          description: The user whose favorite groups to return. Must be a user ID.
+          description: The owner whose favorite groups to return. Must be a UserID.
           in: query
           schema:
             type: string
@@ -163,12 +162,10 @@ paths:
       responses:
         "200":
           $ref: ../responses/favorites/FavoriteRemovedSuccess.yaml
-        "400":
-          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/favorites/FavoriteNotFoundError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml

@@ -4,18 +4,12 @@ properties:
   createdAt:
     type: string
     format: date-time
-  defaultRole:
-    type: boolean
-    default: false
   description:
     type: string
   groupId:
     $ref: ./GroupID.yaml
   id:
     $ref: ./GroupRoleID.yaml
-  isAddedOnJoin:
-    type: boolean
-    default: false
   isManagementRole:
     type: boolean
     default: false

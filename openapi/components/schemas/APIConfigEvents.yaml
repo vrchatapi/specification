@@ -31,8 +31,6 @@ properties:
   useDirectPlayerSerialization:
     type: boolean
     description: Unknown
-  useSparseRotationForPlayerSerialization:
-    type: boolean
   viewSegmentLength:
     type: integer
     description: Unknown

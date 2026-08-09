@@ -48,9 +48,6 @@ properties:
       $ref: ./LanguageCode.yaml
   occurrenceKind:
     $ref: ./CalendarEventOccurrenceKind.yaml
-  occurrenceModified:
-    type: boolean
-    nullable: true
   ownerId:
     $ref: ./GroupID.yaml
   platforms:

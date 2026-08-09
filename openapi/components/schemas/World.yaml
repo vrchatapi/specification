@@ -18,9 +18,6 @@ properties:
   description:
     type: string
     minLength: 0
-  disabledPropAbilities:
-    type: array
-    items: {}
   favorites:
     type: integer
     default: 0
@@ -44,13 +41,9 @@ properties:
     description: Will always be an empty list when unauthenticated.
     items:
       type: array
-      description: |-
-        A fixed triple of instance id, occupant count, and the share of
-        occupants per language code. OpenAPI 3.0 cannot type the positions
-        individually, so the members are only bounded by length.
       items: {}
-      maxItems: 3
-      minItems: 3
+      maxItems: 2
+      minItems: 2
   labsPublicationDate:
     type: string
     example: none
@@ -99,9 +92,6 @@ properties:
     example: 4
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
-  slimInstances:
-    type: array
-    items: {}
   storeId:
     $ref: ./StoreID.yaml
   tags:

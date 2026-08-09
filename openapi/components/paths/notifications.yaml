@@ -76,7 +76,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
   "/auth/user/notifications/{notificationId}/accept":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
@@ -108,7 +108,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/notifications/HideNotificationSuccess.yaml
+          $ref: ../responses/notifications/NotificationResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/auth/user/notifications/{notificationId}/see":
@@ -176,7 +176,7 @@ paths:
         "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
     delete:
       operationId: deleteNotificationV2
       summary: Delete NotificationV2
@@ -193,7 +193,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
   "/notifications/{notificationId}/reply":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
@@ -219,7 +219,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
   "/notifications/{notificationId}/respond":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
@@ -245,7 +245,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
   "/notifications/{notificationId}/see":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
@@ -263,7 +263,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/notifications/NotificationNotFoundError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml

@@ -1,9 +1,0 @@
-title: SsoToken
-type: object
-description: A token for a third-party service.
-properties:
-  token:
-    type: string
-    minLength: 1
-required:
-  - token

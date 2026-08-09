@@ -2,7 +2,6 @@ title: InfoPush
 type: object
 description: ""
 properties:
-  clientMinVersion: {}
   createdAt:
     type: string
     format: date-time
@@ -10,10 +9,7 @@ properties:
     $ref: ./InfoPushData.yaml
   endDate:
     type: string
-    nullable: true
     format: date-time
-  experiment:
-    $ref: ./InfoPushExperiment.yaml
   hash:
     type: string
     description: "Unknown usage, MD5"
@@ -27,20 +23,11 @@ properties:
     default: true
   priority:
     type: integer
-  regions:
-    type: array
-    items:
-      type: string
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
-  requireClientTags:
-    type: array
-    items:
-      type: string
   startDate:
     type: string
     description: ""
-    nullable: true
     format: date-time
   tags:
     type: array

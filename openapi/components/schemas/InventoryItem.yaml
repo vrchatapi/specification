@@ -1,9 +1,6 @@
 title: InventoryItem
 type: object
 properties:
-  acquisition:
-    type: string
-  attribution: {}
   collections:
     type: array
     items:
@@ -45,9 +42,6 @@ properties:
     $ref: ./InventoryItemType.yaml
   itemTypeLabel:
     type: string
-  last_equipped:
-    type: object
-    additionalProperties: true
   metadata:
     $ref: ./InventoryMetadata.yaml
   name:

@@ -1,4 +1,0 @@
-title: FriendRequestStatus
-type: string
-description: State of a friend request between the caller and this user. VRChat sends the string `"null"`, not JSON `null`.
-example: "null"

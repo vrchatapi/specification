@@ -7,16 +7,8 @@ properties:
   appleProductId:
     type: string
     minLength: 1
-  bulkSize:
-    type: integer
-    description: How many subscriptions a gifted bundle grants.
-    example: 5
   description:
     type: string
-  discountPercentage:
-    type: integer
-    description: Discount applied to a gifted bundle.
-    example: 10
   googlePlanId:
     type: string
   googleProductId:
@@ -30,7 +22,6 @@ properties:
     minLength: 1
   period:
     $ref: ./SubscriptionPeriod.yaml
-  periodAmount: {}
   picoSku:
     type: string
     minLength: 1

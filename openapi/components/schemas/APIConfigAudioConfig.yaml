@@ -14,8 +14,6 @@ properties:
   nearFieldILDNudgeEarRadius:
     type: number
     description: Unknown
-  nearFieldILDNudgeEarTranslate:
-    type: number
   perEarDirectionalityEarRadius:
     type: number
     description: Unknown
@@ -37,8 +35,6 @@ properties:
   trackingScaleMultiplier:
     type: number
     description: Unknown
-  useLegacyILDNudging:
-    type: boolean
 required:
   - eq
   - nearFieldILDNudge

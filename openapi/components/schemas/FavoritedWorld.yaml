@@ -18,9 +18,6 @@ properties:
   description:
     type: string
     minLength: 1
-  disabledPropAbilities:
-    type: array
-    items: {}
   favoriteGroup:
     type: string
     minLength: 1

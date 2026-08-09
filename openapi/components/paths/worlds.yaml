@@ -46,9 +46,7 @@ paths:
     post:
       operationId: createWorld
       summary: Create World
-      description: "Create a new world. This endpoint requires `assetUrl` to be a
-        valid File object with `.vrcw` file extension, and `imageUrl` to be a
-        valid File object with an image file extension."
+      description: "Create a new world. This endpoint requires `assetUrl` to be a valid File object with `.vrcw` file extension, and `imageUrl` to be a valid File object with an image file extension."
       tags:
         - worlds
       requestBody:
@@ -168,7 +166,7 @@ paths:
         "200":
           $ref: ../responses/worlds/WorldResponse.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
     put:
       operationId: updateWorld
       summary: Update World
@@ -185,18 +183,14 @@ paths:
       responses:
         "200":
           $ref: ../responses/worlds/WorldResponse.yaml
-        "400":
-          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
     delete:
       operationId: deleteWorld
       summary: Delete World
-      description: 'Delete a world. Notice a world is never fully "deleted", only its
-        ReleaseStatus is set to "hidden" and the linked Files are deleted. The
-        WorldID is permanently reserved.'
+      description: 'Delete a world. Notice a world is never fully "deleted", only its ReleaseStatus is set to "hidden" and the linked Files are deleted. The WorldID is permanently reserved.'
       tags:
         - worlds
       security:
@@ -207,7 +201,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
   "/worlds/{worldId}/addTags":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -232,44 +226,14 @@ paths:
           $ref: ../responses/worlds/WorldTagInvalidError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
-  "/worlds/{worldId}/deleteTags":
-    parameters:
-      - $ref: ../parameters.yaml#/worldId
-    post:
-      operationId: removeWorldTags
-      summary: Remove World Tags
-      description: |-
-        Remove tags from the world's profile.
-
-        The path is `deleteTags`, not `removeTags` as the user equivalent uses.
-      tags:
-        - worlds
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: ../requests/ChangeWorldTagsRequest.yaml
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/worlds/WorldResponse.yaml
-        "400":
-          $ref: ../responses/worlds/WorldTagInvalidError.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-        "403":
-          $ref: ../responses/InvalidAdminCredentialsError.yaml
   "/worlds/{worldId}/metadata":
     parameters:
       - $ref: ../parameters.yaml#/worldId
     get:
       operationId: getWorldMetadata
+      deprecated: true
       summary: Get World Metadata
-      description: Return a worlds custom metadata. This is currently believed to be
-        unused. Metadata can be set with `updateWorld` and can be any arbitrary
-        object.
+      description: Return a worlds custom metadata. This is currently believed to be unused. Metadata can be set with `updateWorld` and can be any arbitrary object.
       tags:
         - worlds
       security: []
@@ -277,7 +241,7 @@ paths:
         "200":
           $ref: ../responses/worlds/WorldMetadataResponse.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
   "/worlds/{worldId}/platform/{publishedPlatform}":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -296,7 +260,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
   "/worlds/{worldId}/publish":
     parameters:
       - $ref: ../parameters.yaml#/worldId
@@ -314,7 +278,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
     put:
       operationId: publishWorld
       summary: Publish World
@@ -329,7 +293,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
     delete:
       operationId: unpublishWorld
       summary: Unpublish World
@@ -344,7 +308,31 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/worlds/WorldNotFoundError.yaml
+  "/worlds/{worldId}/removeTags":
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+    post:
+      operationId: removeWorldTags
+      summary: Remove World Tags
+      description: Removes tags from the world's profile
+      tags:
+        - worlds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ChangeWorldTagsRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/worlds/WorldResponse.yaml
+        "400":
+          $ref: ../responses/worlds/WorldTagInvalidError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/worlds/{worldId}/{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId

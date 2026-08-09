@@ -1,7 +1,6 @@
 title: InventoryTemplate
 type: object
 properties:
-  attribution: {}
   authorId:
     $ref: ./UserID.yaml
   collections:
@@ -15,8 +14,6 @@ properties:
   defaultAttributes:
     type: object
   description:
-    type: string
-  dropStatus:
     type: string
   equipSlots:
     type: array
@@ -66,6 +63,7 @@ required:
   - itemType
   - itemTypeLabel
   - name
+  - status
   - tags
   - updated_at
   - validateUserAttributes
