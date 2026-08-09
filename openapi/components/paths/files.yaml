@@ -89,7 +89,7 @@ paths:
         "202":
           $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
         "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/analysis/{fileId}/{versionId}/security":
     parameters:
       - $ref: ../parameters.yaml#/fileId
@@ -108,7 +108,7 @@ paths:
         "202":
           $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
         "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/analysis/{fileId}/{versionId}/standard":
     parameters:
       - $ref: ../parameters.yaml#/fileId
@@ -127,7 +127,7 @@ paths:
         "202":
           $ref: ../responses/files/AnalysisNotYetAvailableError.yaml
         "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   /file:
     post:
       operationId: createFile
@@ -203,7 +203,7 @@ paths:
         "200":
           $ref: ../responses/files/FileResponse.yaml
         "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     post:
       operationId: createFileVersion
       summary: Create File Version
@@ -232,7 +232,7 @@ paths:
         "200":
           $ref: ../responses/files/FileResponse.yaml
         "404":
-          $ref: ../responses/files/FileDeletedError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/file/{fileId}/{versionId}":
     parameters:
       - $ref: ../parameters.yaml#/fileId
@@ -254,7 +254,7 @@ paths:
         "200":
           $ref: ../responses/files/RawFileResponse.yaml
         "404":
-          $ref: ../responses/files/FileNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: deleteFileVersion
       summary: Delete File Version

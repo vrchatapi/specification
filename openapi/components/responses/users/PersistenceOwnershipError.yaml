@@ -1,0 +1,12 @@
+description: >-
+  Error response when querying another user's persistence data. The body
+  carries only a message string, without the nested `error` object every other
+  response in this description uses.
+content:
+  application/json:
+    examples:
+      Not Your Persistence:
+        value:
+          error: You're not who I was expecting!
+    schema:
+      $ref: ../../schemas/BareError.yaml

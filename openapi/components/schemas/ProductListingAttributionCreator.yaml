@@ -1,0 +1,8 @@
+title: ProductListingAttributionCreator
+type: object
+description: The creator credited on a listing.
+properties:
+  customName:
+    type: string
+  userId:
+    $ref: ./UserID.yaml

@@ -15,9 +15,8 @@ properties:
     $ref: ../schemas/JamSubmissionID.yaml
   jamId:
     $ref: ../schemas/JamID.yaml
-  ratingScore:
+  ratingsScore:
     type: integer
-    minimum: 0
   submitterId:
     $ref: ../schemas/UserID.yaml
 required:

@@ -9,5 +9,4 @@ properties:
     type: integer
 required:
   - balance
-  - earnings
   - standard

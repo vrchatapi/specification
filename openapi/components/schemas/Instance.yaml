@@ -36,9 +36,15 @@ properties:
     $ref: ./InstanceContentSettings.yaml
   creatorId:
     $ref: ./UserID.yaml
+    nullable: true
+  disabledPropAbilities:
+    type: array
+    items: {}
   displayName:
     type: string
     nullable: true
+  dominantLanguage:
+    type: string
   friends:
     $ref: ./UserID.yaml
   full:
@@ -63,8 +69,14 @@ properties:
   instancePersistenceEnabled:
     type: boolean
     nullable: true
+  languageRatio:
+    type: object
+    additionalProperties: true
   location:
     $ref: ./LocationID.yaml
+  minimumAvatarPerformance:
+    type: string
+    nullable: true
   n_users:
     type: integer
     example: 6

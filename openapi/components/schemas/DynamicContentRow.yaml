@@ -1,16 +1,89 @@
 title: DynamicContentRow
 type: object
 properties:
+  anyStyle:
+    type: array
+    nullable: true
+    items:
+      type: string
+  anyTag:
+    type: array
+    nullable: true
+    items:
+      type: string
+  avatarSpecific:
+    type: boolean
+  bannersTag:
+    type: string
+  categories:
+    type: array
+    items:
+      type: string
+  featuredResults:
+    type: string
   index:
     type: integer
     minimum: 0
-  name:
+  marketplace:
     type: string
+  maxPrice:
+    type: integer
+  minOccupants:
+    type: integer
+  minPrice:
+    type: integer
+  minimumInterestCount:
+    type: integer
+  minimumRemainingMinutes:
+    type: integer
+  mode:
+    type: string
+  n:
+    type: integer
+  name:
     minLength: 1
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - type: string
+          - $ref: ./LocalizedString.yaml
+      else:
+        type: string
+  nonFeaturedResults:
+    type: string
+  notag:
+    type: array
+    nullable: true
+    items:
+      type: string
+  params:
+    type: object
+    additionalProperties: true
+  personalizedResults:
+    type: string
+    example: include
   platform:
     $ref: ./Platform.yaml
     description: 'Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.'
     minLength: 1
+  region:
+    type: string
+    nullable: true
+  scope:
+    type: string
+    example: all
+  shortName:
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - type: string
+          - type: "null"
+          - $ref: ./LocalizedString.yaml
+      else:
+        type: string
+        nullable: true
   sortHeading:
     type: string
     minLength: 1
@@ -20,17 +93,28 @@ properties:
   sortOwnership:
     type: string
     minLength: 1
+  style:
+    type: string
+    nullable: true
   tag:
-    $ref: ./Tag.yaml
-    description: Tag to filter content for this row.
-    minLength: 1
+    type: string
+    description: |-
+      Tag to filter content for this row. Not a `Tag`: that type forbids the
+      empty string, which this field uses for a row that is not tag-filtered.
+    nullable: true
+    example: admin_spotlight_pc
+  tags:
+    type: array
+    nullable: true
+    items:
+      $ref: ./Tag.yaml
   type:
     type: string
     description: Type is not present if it is a world.
     example: avatar
+  upcomingOffsetMinutes:
+    type: integer
+    example: 10080
 required:
   - name
   - platform
-  - sortHeading
-  - sortOrder
-  - sortOwnership

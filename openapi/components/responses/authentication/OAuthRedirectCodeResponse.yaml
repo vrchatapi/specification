@@ -1,0 +1,5 @@
+description: Return a short-lived redirect code for the current session.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/OAuthRedirectCode.yaml

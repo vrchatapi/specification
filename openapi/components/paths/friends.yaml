@@ -59,7 +59,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/friends/UserDoesntExistError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
     delete:
       operationId: deleteFriendRequest
       summary: Delete Friend Request
@@ -116,7 +116,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/friends/UserDoesntExistError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml

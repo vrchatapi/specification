@@ -10,19 +10,9 @@ properties:
   name:
     type: string
   roles:
-    type: object
-    properties:
-      name:
-        type: string
-      description:
-        type: string
-      basePermissions:
-        type: array
-        items:
-          $ref: ./GroupPermissions.yaml
-      isAddedOnJoin:
-        type: boolean
-        default: false
+    type: array
+    items:
+      $ref: ./GroupRoleTemplateRole.yaml
 required:
   - basePermissions
   - description

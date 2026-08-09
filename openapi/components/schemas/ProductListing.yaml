@@ -5,8 +5,15 @@ properties:
     type: boolean
   archived:
     type: boolean
+  attribution:
+    $ref: ./ProductListingAttribution.yaml
   buyerRefundable:
     type: boolean
+  collabUserDisplayName:
+    type: string
+    nullable: true
+  collabUserId:
+    $ref: ./UserID.yaml
   created:
     type: string
     format: date-time
@@ -29,6 +36,10 @@ properties:
     type: string
     nullable: true
   hasAvatar:
+    type: boolean
+  hasCompanion:
+    type: boolean
+  hasInventory:
     type: boolean
   hasUdon:
     type: boolean
@@ -60,11 +71,15 @@ properties:
       $ref: ./ProductID.yaml
   productType:
     $ref: ./ProductType.yaml
-  products:
+  productTypes:
     type: array
     items:
-      type: object
-      description: Either a ProductID or a Product, depending on hydration
+      type: string
+  products:
+    type: array
+    description: Product ids. The products themselves arrive in `hydratedProducts`.
+    items:
+      $ref: ./ProductID.yaml
   purchaseCount:
     type: integer
   purchaseCountQuantity:
@@ -86,7 +101,7 @@ properties:
   storeIds:
     type: array
     items:
-      type: string
+      $ref: ./StoreID.yaml
   subtitle:
     type: string
   tags:
