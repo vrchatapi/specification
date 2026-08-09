@@ -22,7 +22,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
-          $ref: ../responses/instances/InstanceNotFoundError.yaml
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/invite/{notificationId}/response":
     parameters:
       - $ref: ../parameters.yaml#/notificationId
@@ -196,6 +196,8 @@ paths:
           $ref: ../responses/invite/InviteMessageGetNegativeSlotError.yaml
         "401":
           $ref: ../responses/NotAuthorizedActionError.yaml
+        "403":
+          $ref: ../responses/NotAuthorizedActionError.yaml
         "404":
           $ref: ../responses/invite/InviteMessageGetTooHighSlotError.yaml
     put:
@@ -261,6 +263,8 @@ paths:
         "400":
           $ref: ../responses/invite/InviteMessageInvalidSlotNumberError.yaml
         "401":
+          $ref: ../responses/NotAuthorizedActionError.yaml
+        "403":
           $ref: ../responses/NotAuthorizedActionError.yaml
         "404":
           $ref: ../responses/invite/InviteMessageNoEntryForSlotError.yaml

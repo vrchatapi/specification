@@ -2,4 +2,25 @@ title: InfoPushDataArticle
 type: object
 properties:
   content:
-    $ref: ./InfoPushDataArticleContent.yaml
+    type: array
+    items:
+      $ref: ./InfoPushDataArticleContent.yaml
+
+  embeddedLinkData:
+    type: array
+    items:
+      $ref: ./InfoPushEmbeddedLink.yaml
+
+  jumpLinks:
+    type: array
+    items:
+      type: string
+  moreInfoLinks:
+    type: array
+    items:
+      $ref: ./InfoPushEmbeddedLink.yaml
+
+  sectionLinks:
+    type: array
+    items:
+      type: string

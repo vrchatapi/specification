@@ -97,13 +97,15 @@ paths:
         - users
       parameters:
         - name: search
-          description: Searches by `displayName`. Will return empty array if search query is empty or missing.
+          description: Searches by `displayName`. Will return empty array if search query
+            is empty or missing.
           in: query
           schema:
             type: string
             minLength: 0
         - name: developerType
-          description: "Active user by developer type, none for normal users and internal for moderators"
+          description: "Active user by developer type, none for normal users and internal
+            for moderators"
           in: query
           schema:
             type: string
@@ -125,8 +127,10 @@ paths:
       x-internal: true
       deprecated: true
       summary: Search Active Users
-      description: "**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users by text query."
+      description: "**REQUIRES ADMIN CREDENTIALS**. Search and list any Active users
+        by text query."
       tags:
+        - deprecated
         - users
       parameters:
         - name: search
@@ -136,7 +140,8 @@ paths:
           schema:
             type: string
         - name: developerType
-          description: "Active user by developer type, none for normal users and internal for moderators"
+          description: "Active user by developer type, none for normal users and internal
+            for moderators"
           in: query
           schema:
             type: string
@@ -157,6 +162,8 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/users/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -173,6 +180,8 @@ paths:
           $ref: ../responses/users/UserResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
     put:
       operationId: updateUser
       summary: Update User Info
@@ -193,6 +202,8 @@ paths:
           $ref: ../responses/users/CurrentPasswordRequiredError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/users/UpdateOtherUserForbiddenError.yaml
   "/users/{userId}/addTags":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -217,6 +228,8 @@ paths:
           $ref: ../responses/users/UserTagInvalidError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
   "/users/{userId}/badges/{badgeId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -252,7 +265,6 @@ paths:
       - $ref: ../parameters.yaml#/offset
     get:
       operationId: getUserFeedback
-      deprecated: true
       summary: Get User Feedback
       description: Get user's submitted feedback
       tags:
@@ -307,7 +319,8 @@ paths:
         - users
       parameters:
         - name: groupIds
-          description: Comma-separated (no spaces!) list of GroupIDs to retrieve permissions for.
+          description: Comma-separated (no spaces!) list of GroupIDs to retrieve
+            permissions for.
           required: false
           in: query
           schema:
@@ -415,7 +428,8 @@ paths:
     get:
       operationId: getMutuals
       summary: Get User Mutuals
-      description: Gets the counts of mutuals between the logged in user and the specified user
+      description: Gets the counts of mutuals between the logged in user and the
+        specified user
       tags:
         - users
       security:
@@ -433,7 +447,8 @@ paths:
     get:
       operationId: getMutualFriends
       summary: Get User Mutual Friends
-      description: Gets a list of mutual friends between the logged in user and the specified user
+      description: Gets a list of mutual friends between the logged in user and the
+        specified user
       tags:
         - users
       security:
@@ -451,7 +466,8 @@ paths:
     get:
       operationId: getMutualGroups
       summary: Get User Mutual Groups
-      description: Gets a list of mutual groups between the logged in user and the specified user
+      description: Gets a list of mutual groups between the logged in user and the
+        specified user
       tags:
         - users
       security:
@@ -502,13 +518,16 @@ paths:
           $ref: ../responses/users/UserTagInvalidError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/NoPermission.yaml
   "/users/{userId}/tutorial":
     parameters:
       - $ref: ../parameters.yaml#/userId
     get:
       operationId: getUserTutorialStatus
       summary: Get User Tutorial Status
-      description: Gets the status of completed or outstanding tutorials for the specified user.
+      description: Gets the status of completed or outstanding tutorials for the
+        specified user.
       tags:
         - users
       security:
@@ -536,6 +555,8 @@ paths:
           description: The user's persistence data for the given world is deleted.
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/users/PersistenceOwnershipError.yaml
         "404":
           description: The user does not have persistence data for the given world.
   "/users/{userId}/{worldId}/persist/exists":
@@ -556,6 +577,8 @@ paths:
           description: The user has persistence data for the given world.
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/users/PersistenceOwnershipError.yaml
         "404":
           description: The user does not have persistence data for the given world.
   "/users/{username}/name":
@@ -571,10 +594,10 @@ paths:
       deprecated: true
       summary: Get User by Username
       description: |-
-        ~~Get public user information about a specific user using their name.~~
+        Get public user information about a specific user using their name.
 
-        **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
-        This endpoint now require Admin Credentials.
+        VRChat no longer returns the usernames of other users, and this endpoint
+        now requires admin credentials. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429).
       tags:
         - users
       security:
@@ -584,6 +607,8 @@ paths:
           $ref: ../responses/users/UserResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/InvalidAdminCredentialsError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml

@@ -67,6 +67,8 @@ properties:
     type: integer
   physicsRigidbodies:
     type: integer
+  raycastCount:
+    type: integer
   skinnedMeshCount:
     type: integer
   skinnedMeshIndices:

@@ -58,11 +58,11 @@ paths:
       deprecated: true
       summary: Register User Account
       description: |-
-        ~~Register a new user account.~~
+        Register a new user account.
 
-        **DEPRECATED:** Automated creation of accounts has no legitimate public third-party use case, and would be in violation of ToS §13.2:
+        Automated creation of accounts has no legitimate public third-party use case, and would violate ToS §13.2:
         *By using the Platform, you agree not to: i. [...] use the Platform in a manner inconsistent with individual human usage*
-        This endpoint is documented in the interest of completeness
+        This endpoint is documented in the interest of completeness.
       tags:
         - authentication
       parameters: []
@@ -399,6 +399,38 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/InvalidAdminCredentialsError.yaml
+  /oauth/redirectCode:
+    get:
+      operationId: getOAuthRedirectCode
+      summary: Get OAuth Redirect Code
+      description: Generate a short-lived OAuth redirect code for the current session.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/OAuthRedirectCodeResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/sso/{provider}":
+    parameters:
+      - $ref: ../parameters.yaml#/ssoProvider
+    get:
+      operationId: getSsoToken
+      summary: Get SSO Token
+      description: Generate a token for the specified third-party service.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/SsoTokenResponse.yaml
+        "400":
+          $ref: ../responses/authentication/SsoProviderUnsupportedError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/delete":
     parameters:
       - $ref: ../parameters.yaml#/userId

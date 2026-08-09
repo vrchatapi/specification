@@ -1,0 +1,18 @@
+description: >-
+  Error response when the account is not in a state that supports the request,
+  such as an account never onboarded for payouts.
+content:
+  application/json:
+    examples:
+      Account Invalid:
+        value:
+          error:
+            message: Account invalid
+            status_code: 400
+      Invalid Account State:
+        value:
+          error:
+            message: Invalid account state
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml
