@@ -3,6 +3,8 @@ on:
     branches:
       - main
   pull_request:
+  schedule:
+    - cron: "17 7 * * *"
   workflow_dispatch:
 
 env:
@@ -10,6 +12,7 @@ env:
 
 jobs:
   lint:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -72,6 +75,7 @@ jobs:
           fi
 
   bundle:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -128,7 +132,7 @@ jobs:
     needs:
       - lint
       - bundle
-    if: ${{ !failure() && !cancelled() && github.ref == 'refs/heads/main' }}
+    if: ${{ !failure() && !cancelled() && github.event_name != 'schedule' && github.ref == 'refs/heads/main' }}
     outputs:
       version: ${{ steps.metadata.outputs.version }}
 
@@ -188,3 +192,35 @@ jobs:
     secrets: inherit
     with:
       version: ${{ needs.release.outputs.version }}
+
+  conformance:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    # The suite logs into a real account and the login endpoint is rate
+    # limited, so never let two runs overlap.
+    concurrency:
+      group: conformance
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/setup@v2
+        with:
+          runtime: bun@latest
+          cache: true
+
+      # `respect` resolves operations against dist/openapi-test.yaml, and
+      # `drift` compares the captures to it.
+      - run: bun --bun run bundle
+
+      - run: pnpm test
+        env:
+          VRCHAT_EMAIL: ${{ secrets.VRCHAT_EMAIL }}
+          VRCHAT_PASSWORD: ${{ secrets.VRCHAT_PASSWORD }}
+          VRCHAT_TOTP_SECRET: ${{ secrets.VRCHAT_TOTP_SECRET }}
+          VRCHAT_FRIEND_ID: ${{ secrets.VRCHAT_FRIEND_ID }}
+
+      # The captures are never uploaded: they carry the session cookie in
+      # plaintext and this repository's artifacts are world readable.
+      - if: "!cancelled()"
+        run: pnpm test:drift >> "$GITHUB_STEP_SUMMARY"
