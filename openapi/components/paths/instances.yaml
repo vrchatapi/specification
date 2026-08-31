@@ -114,6 +114,24 @@ paths:
           $ref: ../responses/instances/InstanceResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+    put:
+      operationId: updateInstance
+      summary: Update Instance
+      description: Set or remove the calendar event linked to an instance.
+      tags:
+        - instances
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateInstanceRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
     delete:
       operationId: closeInstance
       summary: Close Instance

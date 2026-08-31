@@ -1342,6 +1342,71 @@ workflows:
         outputs:
           calendarId: $response.body#/id
 
+      - stepId: create-instance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: group
+            region: use
+            ownerId: $steps.create-group.outputs.groupId
+            groupAccessType: members
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: link-instance-event
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.updateInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        requestBody:
+          contentType: application/json
+          payload:
+            calendarEntryId: $steps.create-event.outputs.calendarId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/calendarEntryId == $steps.create-event.outputs.calendarId
+
+      - stepId: unlink-instance-event
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.updateInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        requestBody:
+          contentType: application/json
+          payload:
+            calendarEntryId: null
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/calendarEntryId == null
+
       - stepId: calendar-events
         x-security:
           - schemeName: authCookie
@@ -1516,6 +1581,22 @@ workflows:
             value: $steps.create-event.outputs.calendarId
         successCriteria:
           - condition: $statusCode == 404
+
+      - stepId: close-instance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
 
       - stepId: delete-group
         x-security:
