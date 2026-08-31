@@ -16,9 +16,14 @@
 		"lint-spectral-ci": "bun spectral -i openapi/openapi.yaml",
 		"lint-eslint": "eslint .",
 		"lint-eslint-ci": "pnpm -s run lint-eslint -f @jamesacarr/eslint-formatter-github-actions",
+		"lint-arazzo": "redocly lint test/arazzo.yaml",
+		"lint-arazzo-ci": "pnpm -s run lint-arazzo",
 		"lint": "pnpm --no-bail --stream --reporter-hide-prefix --color run '/^lint-(?!ci$)(?!.*-ci$).*/'",
 		"lint-ci": "pnpm --stream --reporter-hide-prefix run '/^lint-.*-ci$/'",
-		"bundle": "redocly bundle"
+		"bundle": "redocly bundle",
+		"test": "sh test/run.sh",
+		"test:coverage": "redocly coverage test/.out/har --api dist/openapi-internal.json",
+		"test:drift": "redocly drift test/.out/har --api dist/openapi-test.yaml"
 	},
 	"devDependencies": {
 		"@actions/artifact": "5.0.2",
@@ -27,8 +32,8 @@
 		"@ariesclark/eslint-config": "^3.1.1",
 		"@eslint-react/eslint-plugin": "^2.3.9",
 		"@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
-		"@redocly/cli": "^2.12.0",
-		"@redocly/openapi-core": "^2.12.5",
+		"@redocly/cli": "^2.46.0",
+		"@redocly/openapi-core": "^2.41.2",
 		"@stoplight/spectral-cli": "^6.15.0",
 		"@stoplight/spectral-core": "^1.20.0",
 		"@stoplight/spectral-formats": "^1.8.2",
@@ -43,7 +48,10 @@
 		"cspell": "^9.3.2",
 		"cspell-lib": "^9.3.2",
 		"eslint": "^9.39.1",
+		"httpexec": "^0.0.2",
 		"pluralize": "^8.0.0",
-		"semver": "^7.7.3"
+		"semver": "^7.7.3",
+		"totp-generator": "^2.0.1",
+		"typescript": "^6.0.3"
 	}
 }

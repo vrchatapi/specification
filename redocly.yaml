@@ -74,3 +74,17 @@ apis:
         defines:
           - jsonschema
           - internal
+
+  # Not published. The bundle the workflows run against, and what `pnpm
+  # test:drift` compares the captures to — it cannot see undocumented response
+  # fields while the schemas stay open.
+  test:
+    root: openapi/openapi.yaml
+    output: dist/openapi-test.yaml
+    preprocessors:
+      vrchat/x-if:
+        defines:
+          - jsonschema
+          - internal
+    decorators:
+      vrchat/close-schemas: on
