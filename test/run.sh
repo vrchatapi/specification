@@ -26,8 +26,10 @@ fi
 
 mkdir -p test/.out/har
 
-# Fixed port, because `sourceDescriptions` takes no expressions.
-httpexec --port 65482 &
+# Fixed port, because `sourceDescriptions` takes no expressions. The hostname
+# has to match it too: httpexec defaults to `localhost`, which resolves to ::1
+# first on the CI runners, leaving nothing on the 127.0.0.1 the description names.
+httpexec --port 65482 --hostname 127.0.0.1 &
 httpexec_pid=$!
 
 # Only EXIT kills the server, so it happens once. INT and TERM exit, which
