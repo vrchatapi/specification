@@ -4,20 +4,105 @@ description: ""
 properties:
   article:
     $ref: ./InfoPushDataArticle.yaml
+  authorName:
+    type: string
+  avatarId:
+    $ref: ./AvatarID.yaml
+  bannerImageUrl:
+    type: string
+  categories:
+    type: array
+    items:
+      $ref: ./InfoPushDataCategory.yaml
+  category:
+    type: string
   contentList:
     $ref: ./DynamicContentRow.yaml
   description:
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - type: string
+          - $ref: ./LocalizedString.yaml
+      else:
+        type: string
+  disclaimerText:
+    type: string
+  domainList:
+    type: array
+    items:
+      type: object
+      properties:
+        domain:
+          type: string
+  featuredAvatarCategoryId:
+    type: string
+  finalName:
+    type: string
+  iconImageUrl:
     type: string
   imageUrl:
     type: string
-    minLength: 1
+    nullable: true
+  ipsQuery:
+    $ref: ./InfoPushIpsQuery.yaml
+  isNew:
+    type: boolean
+  listingIds:
+    type: array
+    items:
+      type: string
   name:
-    type: string
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - type: string
+          - $ref: ./LocalizedString.yaml
+      else:
+        type: string
   onPressed:
     $ref: ./InfoPushDataClickable.yaml
+  overrideName: {}
+  rows:
+    type: integer
+    description: Number of rows to render.
+    nullable: true
+  search:
+    $ref: ./InfoPushDataSearch.yaml
+  shortName:
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - type: string
+          - type: "null"
+          - $ref: ./LocalizedString.yaml
+      else:
+        type: string
+        nullable: true
   template:
     type: string
+  thumbnailImageUrl:
+    type: string
+    nullable: true
+  tooltipDescription:
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - type: string
+          - $ref: ./LocalizedString.yaml
+      else:
+        type: string
   version:
     type: string
     example: 2021.3.4
     minLength: 1
+
+  weight:
+    type: integer
+
+  worldTag:
+    type: string

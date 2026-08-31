@@ -10,9 +10,15 @@ properties:
     type: string
     enum:
       - CannedWorldSearch
+      - OpenAccountUpgrade
+      - OpenAvatarsMenu
+      - OpenHelpArticle
+      - OpenListingDetails
       - OpenSafetyMenu
       - OpenURL
       - OpenVRCPlusMenu
+      - OpenVRChatStore
+      - OpenWorldDetails
     example: OpenURL
     minLength: 1
 required:

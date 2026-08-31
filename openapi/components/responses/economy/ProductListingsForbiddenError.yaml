@@ -1,0 +1,11 @@
+description: Error response when requesting another user's product listings.
+content:
+  application/json:
+    examples:
+      Access Denied:
+        value:
+          error:
+            message: Access Denied
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

@@ -2,6 +2,9 @@ title: Jam
 type: object
 description: ""
 properties:
+  created_at:
+    type: string
+    format: date-time
   description:
     type: string
     minLength: 1
@@ -48,6 +51,8 @@ properties:
   title:
     type: string
     minLength: 1
+  type:
+    type: string
   updated_at:
     type: string
     format: date-time

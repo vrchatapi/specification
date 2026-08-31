@@ -261,6 +261,13 @@ favoriteGroupType:
   in: path
   schema:
     $ref: ./schemas/FavoriteType.yaml
+favoriteGroupTypeQuery:
+  name: type
+  description: Filter to a single favorite group type.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/FavoriteType.yaml
 favoriteId:
   name: favoriteId
   description: Must be a valid favorite ID.
@@ -783,7 +790,7 @@ search:
     type: string
 sellerId:
   name: sellerId
-  description: Seller to retrieve economy metrics for.
+  description: Seller to scope the results to.
   required: true
   in: query
   schema:
@@ -818,6 +825,13 @@ sortProductPurchase:
   in: query
   schema:
     $ref: ./schemas/SortOptionProductPurchase.yaml
+ssoProvider:
+  name: provider
+  description: The third-party service to mint a token for.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/SsoProvider.yaml
 startDate:
   name: startDate
   description: The start date of the search range.

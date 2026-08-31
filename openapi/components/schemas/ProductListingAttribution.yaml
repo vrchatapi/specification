@@ -1,0 +1,8 @@
+title: ProductListingAttribution
+type: object
+description: Attribution shown alongside a listing.
+properties:
+  creator:
+    $ref: ./ProductListingAttributionCreator.yaml
+  publisher:
+    $ref: ./ProductListingAttributionCreator.yaml

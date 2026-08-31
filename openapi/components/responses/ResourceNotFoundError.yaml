@@ -1,0 +1,24 @@
+description: >-
+  The requested resource does not exist. The message varies by resource and by
+  route, and only some name the id. Worlds sometimes answer `model <worldId>
+  not found` instead of `World <worldId> not found`.
+content:
+  application/json:
+    examples:
+      File:
+        value:
+          error:
+            message: File not found
+            status_code: 404
+      Group:
+        value:
+          error:
+            message: Group not foundǃ
+            status_code: 404
+      Notification:
+        value:
+          error:
+            message: Cannot find notification․
+            status_code: 404
+    schema:
+      $ref: ../schemas/Error.yaml

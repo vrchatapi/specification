@@ -1,0 +1,5 @@
+description: Return a token for the service.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/SsoToken.yaml
