@@ -193,13 +193,11 @@ jobs:
     with:
       version: ${{ needs.release.outputs.version }}
 
-  conformance:
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+  test:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    # The suite logs into a real account and the login endpoint is rate
-    # limited, so never let two runs overlap.
     concurrency:
-      group: conformance
+      group: test
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7
@@ -209,8 +207,6 @@ jobs:
           runtime: bun@latest
           cache: true
 
-      # `respect` resolves operations against dist/openapi-test.yaml, and
-      # `drift` compares the captures to it.
       - run: bun --bun run bundle
 
       - run: pnpm test
@@ -220,7 +216,5 @@ jobs:
           VRCHAT_TOTP_SECRET: ${{ secrets.VRCHAT_TOTP_SECRET }}
           VRCHAT_FRIEND_ID: ${{ secrets.VRCHAT_FRIEND_ID }}
 
-      # The captures are never uploaded: they carry the session cookie in
-      # plaintext and this repository's artifacts are world readable.
       - if: "!cancelled()"
         run: pnpm test:drift >> "$GITHUB_STEP_SUMMARY"
