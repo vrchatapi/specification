@@ -120,7 +120,7 @@ paths:
       description: |-
         Set or remove the calendar event linked to a group instance.
 
-        The event must belong to the group that owns the instance.
+        Updating a group instance requires both the `group-instance-manage` and `group-instance-calendar-link` permissions.
 
         The event must begin within the next six hours or have ended within the previous six hours.
       tags:

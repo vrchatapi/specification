@@ -1,8 +1,13 @@
-description: Error response due to not being allowed to update an instance
+description: Error response when the caller lacks permission to manage the instance or its calendar link
 content:
   application/json:
     examples:
-      Not Allowed to Update Instance Example:
+      Missing Calendar Link Permission Example:
+        value:
+          error:
+            message: You're not allowed to create or change an instance linked to an event․
+            status_code: 403
+      Missing Instance Management Permission Example:
         value:
           error:
             message: "You're not allowed to edit this instance․"
