@@ -7655,6 +7655,46 @@ workflows:
         successCriteria:
           - condition: $statusCode == 429
 
+  - workflowId: invite-user-must-be-friends
+    summary: inviteUser refuses a user who is not a friend
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: invite-user
+        operationId: $sourceDescriptions.default.inviteUser
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            instanceId: "0"
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: invite-user-unauthenticated
+    summary: inviteUser refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: invite-user
+        operationId: $sourceDescriptions.default.inviteUser
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            instanceId: "0"
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: reset-invite-message-not-found
     summary: resetInviteMessage refuses a resource that does not exist
     parameters:

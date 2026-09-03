@@ -107,6 +107,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/notifications/SendNotificationResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/invite/InviteMustBeFriendsError.yaml
   "/invite/{userId}/photo":
