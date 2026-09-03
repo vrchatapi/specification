@@ -120,6 +120,8 @@ paths:
       description: |-
         Set or remove the calendar event linked to a group instance.
 
+        The event must belong to the group that owns the instance.
+
         The event must begin within the next six hours or have ended within the previous six hours.
       tags:
         - instances
@@ -141,7 +143,7 @@ paths:
         "403":
           $ref: ../responses/instances/InstanceUpdateForbiddenError.yaml
         "404":
-          $ref: ../responses/ResourceNotFoundError.yaml
+          $ref: ../responses/instances/InstanceUpdateNotFoundError.yaml
     delete:
       operationId: closeInstance
       summary: Close Instance
