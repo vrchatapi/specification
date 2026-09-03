@@ -1,0 +1,16 @@
+description: Error response when an instance's calendar event link cannot be updated
+content:
+  application/json:
+    examples:
+      Event Outside Link Window Example:
+        value:
+          error:
+            message: You can only link instances to events starting within 6 hours‚ or that have ended within the last 6 hours․
+            status_code: 400
+      Non-Group Instance Example:
+        value:
+          error:
+            message: "'calendarEntryId' is only allowed for group instances․"
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml
