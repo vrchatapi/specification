@@ -46,7 +46,7 @@ curl -sf --retry 20 --retry-delay 1 --retry-connrefused -o /dev/null \
 # the skips. Only what you name runs: `pnpm test -w session -w get-current-user`.
 # A partial run writes its capture elsewhere, so it cannot overwrite the one
 # `coverage` and `drift` read as a whole-suite record.
-skips='--skip logout --skip invite-message-lifecycle --skip group-lifecycle --skip group-calendar-lifecycle'
+skips='--skip logout --skip invite-message-lifecycle'
 capture=test/.out/har/arazzo.har
 for argument do
 	case $argument in
@@ -69,9 +69,8 @@ elif [ -n "$skips" ]; then
 	set -- --skip login "$@"
 fi
 
-# `logout` kills the session, `invite-message-lifecycle` locks a slot for half
-# an hour, and the two group lifecycles create a group, which is rate limited
-# for hours. Run those deliberately: `pnpm test -w group-lifecycle`.
+# `logout` kills the session and `invite-message-lifecycle` locks a message slot
+# for half an hour. Run those deliberately: `pnpm test -w session -w logout`.
 redocly respect test/arazzo.yaml \
 	${skips} \
 	--har-output "$capture" \
