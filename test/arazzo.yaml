@@ -6727,6 +6727,28 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/0/id != null
 
+  - workflowId: create-instance-non-private-can-request-invite
+    summary: createInstance refuses canRequestInvite outside a private instance
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: friends
+            region: use
+            ownerId: $workflows.session.outputs.userId
+            canRequestInvite: true
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: instance-lifecycle
     summary: Creates a real private instance, then invites the account to it
     parameters:
@@ -6763,6 +6785,7 @@ workflows:
               stickers: true
         successCriteria:
           - condition: $statusCode == 200
+          - condition: $response.body#/canRequestInvite == true
         onFailure:
           - name: stop
             type: end

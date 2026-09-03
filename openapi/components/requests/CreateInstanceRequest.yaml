@@ -8,7 +8,7 @@ properties:
     type: string
   canRequestInvite:
     type: boolean
-    description: Only applies to invite type instances to make them invite+
+    description: Makes a private instance invite+. A friends instance is rejected.
     default: false
   closedAt:
     type: string
