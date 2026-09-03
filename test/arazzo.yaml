@@ -1576,44 +1576,6 @@ workflows:
         outputs:
           value: $response.body#/stdout
 
-      - stepId: outside-window-starts-at
-        operationId: $sourceDescriptions.local.execute
-        requestBody:
-          contentType: application/json
-          payload:
-            command: sh
-            args:
-              - -c
-              - date -u -d '+43200 seconds' +%Y-%m-%dT%H:%M:%S.%3NZ | tr -d '\n'
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/exitCode == 0
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          value: $response.body#/stdout
-
-      - stepId: outside-window-ends-at
-        operationId: $sourceDescriptions.local.execute
-        requestBody:
-          contentType: application/json
-          payload:
-            command: sh
-            args:
-              - -c
-              - date -u -d '+46800 seconds' +%Y-%m-%dT%H:%M:%S.%3NZ | tr -d '\n'
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/exitCode == 0
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          value: $response.body#/stdout
-
       - stepId: short-code
         operationId: $sourceDescriptions.local.execute
         requestBody:
@@ -1710,30 +1672,6 @@ workflows:
         outputs:
           instanceId: $response.body#/instanceId
 
-      - stepId: reject-malformed-calendar-entry
-        x-security:
-          - schemeName: authCookie
-            values:
-              apiKey: $workflows.session.outputs.sessionToken
-        operationId: $sourceDescriptions.default.updateInstance
-        parameters:
-          - name: worldId
-            in: path
-            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
-          - name: instanceId
-            in: path
-            value: $steps.create-instance.outputs.instanceId
-        requestBody:
-          contentType: application/json
-          payload:
-            calendarEntryId: x
-        successCriteria:
-          - condition: $statusCode == 400
-        onFailure:
-          - name: cleanup-instance
-            type: goto
-            stepId: close-instance
-
       - stepId: link-instance-event
         x-security:
           - schemeName: authCookie
@@ -1784,12 +1722,32 @@ workflows:
             type: goto
             stepId: close-instance
 
-      - stepId: move-event-outside-window
+      - stepId: close-instance
         x-security:
           - schemeName: authCookie
             values:
               apiKey: $workflows.session.outputs.sessionToken
-        operationId: $sourceDescriptions.default.updateGroupCalendarEvent
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: cleanup-event
+            type: goto
+            stepId: delete-event
+
+      - stepId: delete-event
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.deleteGroupCalendarEvent
         parameters:
           - name: groupId
             in: path
@@ -1797,19 +1755,169 @@ workflows:
           - name: calendarId
             in: path
             value: $steps.create-event.outputs.calendarId
-        requestBody:
-          contentType: application/json
-          payload:
-            startsAt: $steps.outside-window-starts-at.outputs.value
-            endsAt: $steps.outside-window-ends-at.outputs.value
         successCriteria:
           - condition: $statusCode == 200
         onFailure:
-          - name: cleanup-instance
+          - name: cleanup-group
             type: goto
-            stepId: close-instance
+            stepId: delete-group
 
-      - stepId: reject-event-outside-window
+      - stepId: delete-group
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.deleteGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.create-group.outputs.groupId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: update-instance-calendar-link-outside-window
+    summary: Reject linking a group instance to an event outside the six-hour window
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: starts-at
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - date -u -d '+43200 seconds' +%Y-%m-%dT%H:%M:%S.%3NZ | tr -d '\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: ends-at
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - date -u -d '+46800 seconds' +%Y-%m-%dT%H:%M:%S.%3NZ | tr -d '\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: short-code
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - openssl rand -hex 2 | tr -d '\r\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: create-group
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createGroup
+        requestBody:
+          contentType: application/json
+          payload:
+            name: Test Instance Calendar Window
+            privacy: private
+            joinState: invite
+            roleTemplate: default
+            shortCode: $steps.short-code.outputs.value
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          groupId: $response.body#/id
+
+      - stepId: create-event
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createGroupCalendarEvent
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.create-group.outputs.groupId
+        requestBody:
+          contentType: application/json
+          payload:
+            accessType: group
+            category: other
+            description: Created by the test suite
+            title: Test Instance Calendar Window
+            sendCreationNotification: false
+            startsAt: $steps.starts-at.outputs.value
+            endsAt: $steps.ends-at.outputs.value
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: cleanup-group
+            type: goto
+            stepId: delete-group
+
+        outputs:
+          calendarId: $response.body#/id
+
+      - stepId: create-instance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: group
+            region: use
+            ownerId: $steps.create-group.outputs.groupId
+            groupAccessType: members
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: cleanup-event
+            type: goto
+            stepId: delete-event
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: update-instance
         x-security:
           - schemeName: authCookie
             values:
@@ -1888,6 +1996,172 @@ workflows:
         onFailure:
           - name: stop
             type: end
+
+  - workflowId: update-instance-malformed-calendar-entry
+    summary: updateInstance rejects a malformed calendar entry ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: instance-id
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - printf '98765~private(%s)~region(use)~nonce(00000000-0000-0000-0000-000000000000)' "$1"
+              - sh
+              - $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: update-instance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.updateInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.instance-id.outputs.value
+        requestBody:
+          contentType: application/json
+          payload:
+            calendarEntryId: x
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: update-instance-missing-calendar-entry
+    summary: updateInstance requires the calendar entry property
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-instance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: update-instance
+        x-operation:
+          method: put
+          url: https://api.vrchat.cloud/api/1/instances/wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b:$steps.create-instance.outputs.instanceId
+        parameters:
+          - name: Cookie
+            in: header
+            value: auth=$workflows.session.outputs.sessionToken
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 500
+        onFailure:
+          - name: cleanup-instance
+            type: goto
+            stepId: close-instance
+
+      - stepId: close-instance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: update-instance-non-group
+    summary: updateInstance rejects a calendar entry on a non-group instance
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: update-instance
+        operationId: $sourceDescriptions.default.updateInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        requestBody:
+          contentType: application/json
+          payload:
+            calendarEntryId: null
+        successCriteria:
+          - condition: $statusCode == 400
+        onFailure:
+          - name: cleanup-instance
+            type: goto
+            stepId: close-instance
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
 
   - workflowId: update-instance-unauthenticated
     summary: updateInstance refuses an anonymous caller
