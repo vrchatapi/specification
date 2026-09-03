@@ -23,6 +23,9 @@ properties:
     type: integer
     example: 8
     minimum: 0
+  categoryId:
+    $ref: ./InstanceCategoryID.yaml
+    nullable: true
   clientNumber:
     deprecated: true
     type: string
@@ -34,8 +37,14 @@ properties:
     format: date-time
   contentSettings:
     $ref: ./InstanceContentSettings.yaml
+  creationLanguages:
+    type: array
+    items: {}
   creatorId:
     $ref: ./UserID.yaml
+    nullable: true
+  description:
+    type: string
     nullable: true
   disabledPropAbilities:
     type: array
@@ -72,6 +81,16 @@ properties:
   languageRatio:
     type: object
     additionalProperties: true
+  languages:
+    type: array
+    description: The keys of languageRatio, ordered by their share of the instance.
+    items:
+      type: string
+      example: en
+  languagesIso639:
+    type: array
+    items:
+      $ref: ./LanguageCode.yaml
   location:
     $ref: ./LocationID.yaml
   minimumAvatarPerformance:
@@ -141,11 +160,20 @@ properties:
     type: integer
     example: 6
     minimum: 0
+  userIcons:
+    type: array
+    items:
+      type: string
+      example: https://api.vrchat.cloud/api/1/image/file_12ca2b06-c08d-4023-b06f-b60691d9946e/1/256
   users:
     type: array
     description: The users field is present on instances created by the requesting user.
     items:
       $ref: ./LimitedUserInstance.yaml
+  vibeIds:
+    type: array
+    items:
+      $ref: ./InstanceVibeID.yaml
   world:
     $ref: ./World.yaml
   worldId:
