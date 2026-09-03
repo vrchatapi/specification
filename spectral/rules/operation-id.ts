@@ -16,16 +16,13 @@ export const operationId = rule({
 	given: "#OperationObject",
 	then: [
 		{
-			functionOptions: {
-				// validateArrayOperations: false
-			},
-			function: ({ operationId = "", responses = {} } = {}, { validateArrayOperations = true }, { path = [] }) => {
+			function: ({ operationId = "", responses = {} } = {}, _options, { path = [] }) => {
 				const [, , method] = path;
 				const type = method === "get" ? "read" : "write";
 
 				const [prefix, ...operationName] = split(operationId);
 
-				if (validateArrayOperations && type === "read") {
+				if (type === "read") {
 					const hasArrayResponse = Object
 						.values(responses)
 						.some((response: any) => {
@@ -33,15 +30,15 @@ export const operationId = rule({
 							return schema?.type === "array";
 						});
 
-					if (hasArrayResponse) {
-						const lastNameSegment = operationName.at(-1) || "";
-						const suggestedName = camelCase(`list${operationName.slice(0, -1).join("")}${plural(lastNameSegment)}`);
+					const lastNameSegment = operationName.at(-1) || "";
 
-						if (!isPlural(lastNameSegment) || prefix !== "list")
-							return [{
-								message: `Operation returns an array, consider renaming to ${suggestedName}.`,
-								path: [...path, "operationId"],
-							}];
+					if (hasArrayResponse && !isPlural(lastNameSegment)) {
+						const suggestedName = camelCase(`${prefix}${operationName.slice(0, -1).join("")}${plural(lastNameSegment)}`);
+
+						return [{
+							message: `Operation returns an array, consider renaming to ${suggestedName}.`,
+							path: [...path, "operationId"],
+						}];
 					}
 				}
 
