@@ -1997,6 +1997,288 @@ workflows:
           - name: stop
             type: end
 
+  - workflowId: update-instance-calendar-link-cross-group
+    summary: Reject linking a group instance to an event owned by another group
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: starts-at
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - date -u -d '+3600 seconds' +%Y-%m-%dT%H:%M:%S.%3NZ | tr -d '\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: ends-at
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - date -u -d '+7200 seconds' +%Y-%m-%dT%H:%M:%S.%3NZ | tr -d '\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: event-group-short-code
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - openssl rand -hex 2 | tr -d '\r\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: instance-group-short-code
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - openssl rand -hex 2 | tr -d '\r\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: create-event-group
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createGroup
+        requestBody:
+          contentType: application/json
+          payload:
+            name: Test Instance Calendar Event Owner
+            privacy: private
+            joinState: invite
+            roleTemplate: default
+            shortCode: $steps.event-group-short-code.outputs.value
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          groupId: $response.body#/id
+
+      - stepId: create-event
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createGroupCalendarEvent
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.create-event-group.outputs.groupId
+        requestBody:
+          contentType: application/json
+          payload:
+            accessType: group
+            category: other
+            description: Created by the test suite
+            title: Test Cross-Group Instance Calendar Link
+            sendCreationNotification: false
+            startsAt: $steps.starts-at.outputs.value
+            endsAt: $steps.ends-at.outputs.value
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: cleanup-event-group
+            type: goto
+            stepId: delete-event-group
+
+        outputs:
+          calendarId: $response.body#/id
+
+      - stepId: create-instance-group
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createGroup
+        requestBody:
+          contentType: application/json
+          payload:
+            name: Test Instance Calendar Instance Owner
+            privacy: private
+            joinState: invite
+            roleTemplate: default
+            shortCode: $steps.instance-group-short-code.outputs.value
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: cleanup-event
+            type: goto
+            stepId: delete-event
+
+        outputs:
+          groupId: $response.body#/id
+
+      - stepId: create-instance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: group
+            region: use
+            ownerId: $steps.create-instance-group.outputs.groupId
+            groupAccessType: members
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: cleanup-instance-group
+            type: goto
+            stepId: delete-instance-group
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: reject-cross-group-link
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.updateInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        requestBody:
+          contentType: application/json
+          payload:
+            calendarEntryId: $steps.create-event.outputs.calendarId
+        successCriteria:
+          - condition: $statusCode == 404
+          - condition: $response.body#/error/message == 'Event not found․'
+          - condition: $response.body#/error/status_code == 404
+        onFailure:
+          - name: cleanup-instance
+            type: goto
+            stepId: close-instance
+
+      - stepId: close-instance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/calendarEntryId == null
+        onFailure:
+          - name: cleanup-instance-group
+            type: goto
+            stepId: delete-instance-group
+
+      - stepId: delete-instance-group
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.deleteGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.create-instance-group.outputs.groupId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: cleanup-event
+            type: goto
+            stepId: delete-event
+
+      - stepId: delete-event
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.deleteGroupCalendarEvent
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.create-event-group.outputs.groupId
+          - name: calendarId
+            in: path
+            value: $steps.create-event.outputs.calendarId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: cleanup-event-group
+            type: goto
+            stepId: delete-event-group
+
+      - stepId: delete-event-group
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.deleteGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.create-event-group.outputs.groupId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
   - workflowId: update-instance-malformed-calendar-entry
     summary: updateInstance rejects a malformed calendar entry ID
     parameters:
