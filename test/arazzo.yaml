@@ -4508,14 +4508,14 @@ workflows:
             shortCode: $steps.short-code.outputs.value
             description: Created by the test suite
             joinState: closed
-            privacy: private
+            privacy: default
             bannerId: null
             iconId: null
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/name == 'Test'
           - condition: $response.body#/description == 'Created by the test suite'
-          - condition: $response.body#/privacy == 'private'
+          - condition: $response.body#/privacy == 'default'
         onFailure:
           - name: stop
             type: end
@@ -4627,6 +4627,23 @@ workflows:
           contentType: application/json
           payload:
             isRepresenting: true
+        successCriteria:
+          - condition: $statusCode == 200
+
+      - stepId: unrepresent-group
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.updateGroupRepresentation
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.create-group.outputs.groupId
+        requestBody:
+          contentType: application/json
+          payload:
+            isRepresenting: false
         successCriteria:
           - condition: $statusCode == 200
 
