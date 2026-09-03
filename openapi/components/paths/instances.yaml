@@ -137,7 +137,7 @@ paths:
         "200":
           $ref: ../responses/instances/InstanceResponse.yaml
         "400":
-          $ref: ../responses/RequestValidationError.yaml
+          $ref: ../responses/instances/InstanceUpdateValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":

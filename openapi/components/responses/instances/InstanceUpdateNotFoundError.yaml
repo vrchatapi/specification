@@ -9,5 +9,10 @@ content:
           error:
             message: Event not found․
             status_code: 404
+      Instance Not Found Example:
+        value:
+          error:
+            message: Instance not found․
+            status_code: 404
     schema:
       $ref: ../../schemas/Error.yaml
