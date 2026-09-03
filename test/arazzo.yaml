@@ -1230,6 +1230,10 @@ workflows:
     summary: Creates a group and a calendar event on it, then removes both
     parameters:
       - reference: $components.parameters.userAgent
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-group
     steps:
       - stepId: short-code
         operationId: $sourceDescriptions.local.execute
@@ -1525,6 +1529,9 @@ workflows:
             value: $steps.create-group.outputs.groupId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: create-group-calendar-event-unauthenticated
     summary: createGroupCalendarEvent refuses an anonymous caller
@@ -4474,6 +4481,10 @@ workflows:
           type: string
     parameters:
       - reference: $components.parameters.userAgent
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-group
     steps:
       - stepId: short-code
         operationId: $sourceDescriptions.local.execute
@@ -4709,6 +4720,9 @@ workflows:
             value: $steps.create-group.outputs.groupId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
       - stepId: verify-group-deleted
         x-security:
@@ -4722,6 +4736,9 @@ workflows:
             value: $steps.create-group.outputs.groupId
         successCriteria:
           - condition: $statusCode == 404
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: create-group-announcement-not-found
     summary: createGroupAnnouncement refuses a resource that does not exist
