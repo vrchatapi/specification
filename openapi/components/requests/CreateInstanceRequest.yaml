@@ -10,12 +10,16 @@ properties:
     type: boolean
     description: Makes a private instance invite+. A friends instance is rejected.
     default: false
+  categoryId:
+    $ref: ../schemas/InstanceCategoryID.yaml
   closedAt:
     type: string
     description: The time after which users won't be allowed to join the instance. This doesn't work for public instances.
     format: date-time
   contentSettings:
     $ref: ../schemas/InstanceContentSettings.yaml
+  description:
+    type: string
   displayName:
     type: string
   groupAccessType:
@@ -47,6 +51,10 @@ properties:
       $ref: ../schemas/GroupRoleID.yaml
   type:
     $ref: ../schemas/InstanceType.yaml
+  vibeIds:
+    type: array
+    items:
+      $ref: ../schemas/InstanceVibeID.yaml
   worldId:
     $ref: ../schemas/WorldID.yaml
 required:

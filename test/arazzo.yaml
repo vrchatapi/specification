@@ -6749,6 +6749,74 @@ workflows:
         successCriteria:
           - condition: $statusCode == 400
 
+  - workflowId: create-instance-categorised
+    summary: Creates an instance carrying a category, a description and a vibe, then closes it
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: instance-categories
+        operationId: $sourceDescriptions.default.getInstanceCategories
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          categoryId: $response.body#/0/id
+
+      - stepId: instance-vibes
+        operationId: $sourceDescriptions.default.getInstanceVibes
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          vibeId: $response.body#/0/id
+
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+            description: test
+            categoryId: $steps.instance-categories.outputs.categoryId
+            vibeIds:
+              - $steps.instance-vibes.outputs.vibeId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/description == 'test'
+          - condition: $response.body#/categoryId == $steps.instance-categories.outputs.categoryId
+          - condition: $response.body#/vibeIds/0 == $steps.instance-vibes.outputs.vibeId
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+
   - workflowId: instance-lifecycle
     summary: Creates a real private instance, then invites the account to it
     parameters:
