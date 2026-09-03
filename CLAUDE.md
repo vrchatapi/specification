@@ -48,6 +48,34 @@ workflow to `test/arazzo.yaml`; never close the gap by guessing.
 `required` omits is either required, or missing the workflow that shows it
 absent. A property in `required` that some response omits is neither.
 
+## Guess what to probe, verify before you write it
+
+Documenting only what the traffic has shown is a rule about what reaches a
+`description`, not about what you are allowed to think. Inference is how you
+find the traffic worth capturing. Guess widely, then let a request settle it.
+
+- An ID prefix names its resource, and a resource with its own prefix usually
+  has a collection of its own. `icat` and `ivib` in a validation message
+  unpacked to `GET /instanceCategories` and `GET /instanceVibes`, two routes no
+  capture had ever touched.
+- Send a deliberately wrong value to make the API name the format it wants.
+  `categoryId: "x"` answered `categoryId must be a 'icat' ID`.
+- Take the spelling from paths the description already carries. VRChat writes
+  top-level collections as camelCase plurals: `/avatarStyles`, `/tokenBundles`,
+  `/moderationReports`.
+- A candidate path an existing route swallows answers with that route's error.
+  `/instances/categories` returns the 400 from `getInstance` parsing
+  `categories` as `worldId:instanceId`, which rules out every nested spelling
+  in one request.
+- Read a field where it is populated, not where it is empty. `languages` and
+  `userIcons` are `[]` on every instance the suite creates and full on a busy
+  public one.
+- Probe candidates in a batch and read the status codes. A 200 establishes a
+  route.
+
+An inference no request settles stays out of the description. Say it to the
+user as an open question instead.
+
 ## Check with curl, document from a workflow
 
 One `curl` answers what a route does now, without running the suite. The session
@@ -127,7 +155,15 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
   innocent ones. Fix the branch that should have matched, never the properties
   the finding names.
 - `respect` rejects `--skip` alongside `--workflow`, and runs only what you name,
-  so an authenticated workflow needs `-w session` too.
+  so an authenticated workflow needs `-w session` too, and `-w login` as well
+  when `test/.out/session` is missing or stale.
+- The suite resolves `operationId` against the bundle, so a new path needs an
+  entry in `openapi/components/paths.yaml` as well as its file under
+  `openapi/components/paths/`. Without it every step naming the operation fails
+  as `Unknown operationId`.
+- `pnpm test` validates against `dist/`, never `openapi/`. Run `pnpm bundle`
+  first: a stale bundle passes checks the current schema fails, and hides the
+  schema drift a fresh one reports.
 - A `-w` run writes `test/.out/partial.har` and leaves the suite capture alone.
   `coverage` and `drift` read the suite capture, so run them after a full run.
 - Some files under `openapi/components/paths/` are CRLF. Read a diff of one with
