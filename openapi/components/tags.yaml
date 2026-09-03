@@ -58,5 +58,5 @@
 - name: deprecated
   description: >-
     Routes VRChat no longer serves: every call answers the generic "not
-    implemented" 404. They stay described, and the conformance suite keeps
+    implemented" 404. They stay described, and the test suite keeps
     calling them, so a route that comes back online shows up.

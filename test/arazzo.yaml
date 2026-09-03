@@ -608,12 +608,12 @@ workflows:
         parameters:
           - name: provider
             in: path
-            value: conformance
+            value: test
         successCriteria:
           - condition: $statusCode == 400
   - workflowId: logout
     summary: >-
-      Invalidates the session, so `pnpm conformance` skips it by name — running
+      Invalidates the session, so `pnpm test` skips it by name — running
       it would break the cached token every later workflow depends on. Drive it
       directly when you want to exercise logout.
     parameters:
@@ -1956,8 +1956,8 @@ workflows:
           payload:
             accessType: group
             category: other
-            description: Created by the conformance suite
-            title: Conformance
+            description: Created by the test suite
+            title: Test
             sendCreationNotification: false
             startsAt: $steps.starts-at.outputs.value
             endsAt: $steps.ends-at.outputs.value
@@ -1985,7 +1985,7 @@ workflows:
             value: $steps.create-event.outputs.calendarId
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/title == 'Conformance'
+          - condition: $response.body#/title == 'Test'
 
       - stepId: update-event
         x-security:
@@ -2003,8 +2003,8 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            title: Conformance renamed
-            description: Updated by the conformance suite
+            title: Test renamed
+            description: Updated by the test suite
         successCriteria:
           - condition: $statusCode == 200
 
@@ -3299,7 +3299,7 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            displayName: conformance-renamed
+            displayName: test-renamed
             visibility: public
             tags: $steps.group-before.outputs.tags
         successCriteria:
@@ -3319,7 +3319,7 @@ workflows:
             value: $workflows.session.outputs.userId
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/displayName == 'conformance-renamed'
+          - condition: $response.body#/displayName == 'test-renamed'
           - condition: $response.body#/visibility == 'public'
 
       - stepId: restore-group-name
@@ -4506,7 +4506,7 @@ workflows:
             name: Test
             roleTemplate: default
             shortCode: $steps.short-code.outputs.value
-            description: Created by the conformance suite
+            description: Created by the test suite
             joinState: closed
             privacy: private
             bannerId: null
@@ -4514,7 +4514,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/name == 'Test'
-          - condition: $response.body#/description == 'Created by the conformance suite'
+          - condition: $response.body#/description == 'Created by the test suite'
           - condition: $response.body#/privacy == 'private'
         onFailure:
           - name: stop
@@ -4724,7 +4724,7 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            title: conformance
+            title: test
         successCriteria:
           - condition: $statusCode == 400
 
@@ -4760,7 +4760,7 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            name: conformance
+            name: test
         successCriteria:
           - condition: $statusCode == 403
 
@@ -5617,8 +5617,8 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            title: Conformance
-            text: Created by the conformance suite
+            title: Test
+            text: Created by the test suite
             sendNotification: false
         successCriteria:
           - condition: $statusCode == 200
@@ -5669,8 +5669,8 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            name: conformance
-            description: Created by the conformance suite
+            name: test
+            description: Created by the test suite
             membersOnly: true
         successCriteria:
           - condition: $statusCode == 200
@@ -5693,7 +5693,7 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            name: conformance-renamed
+            name: test-renamed
             membersOnly: false
         successCriteria:
           - condition: $statusCode == 200
@@ -5756,8 +5756,8 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            name: conformance-member-role
-            description: Created by the conformance suite
+            name: test-member-role
+            description: Created by the test suite
             isSelfAssignable: false
             permissions:
               - group-instance-join
@@ -5846,8 +5846,8 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            title: Conformance
-            text: Created by the conformance suite
+            title: Test
+            text: Created by the test suite
             sendNotification: false
             visibility: group
         successCriteria:
@@ -5871,8 +5871,8 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            title: Conformance renamed
-            text: Updated by the conformance suite
+            title: Test renamed
+            text: Updated by the test suite
             sendNotification: false
             visibility: group
         successCriteria:
@@ -6090,14 +6090,14 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            name: conformance
-            description: Created by the conformance suite
+            name: test
+            description: Created by the test suite
             isSelfAssignable: false
             permissions:
               - group-instance-join
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/name == 'conformance'
+          - condition: $response.body#/name == 'test'
         onFailure:
           - name: stop
             type: end
@@ -6117,8 +6117,8 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            name: conformance-renamed
-            description: Updated by the conformance suite
+            name: test-renamed
+            description: Updated by the test suite
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6169,10 +6169,10 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            description: Renamed by the conformance suite
+            description: Renamed by the test suite
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/description == 'Renamed by the conformance suite'
+          - condition: $response.body#/description == 'Renamed by the test suite'
 
       - stepId: restore
         operationId: $sourceDescriptions.default.updateGroup
@@ -6613,8 +6613,8 @@ workflows:
           contentType: application/json
           payload:
             sendNotification: false
-            text: conformance
-            title: conformance
+            text: test
+            title: test
             visibility: group
         successCriteria:
           - condition: $statusCode == 403
@@ -6837,7 +6837,7 @@ workflows:
             ownerId: $workflows.session.outputs.userId
             canRequestInvite: true
             ageGate: false
-            displayName: conformance
+            displayName: test
             hardClose: false
             inviteOnly: false
             queueEnabled: false
@@ -6917,7 +6917,7 @@ workflows:
         parameters:
           - name: shortName
             in: path
-            value: conformance
+            value: test
         successCriteria:
           - condition: $statusCode == 404
 
@@ -7562,7 +7562,7 @@ workflows:
           - condition: $statusCode == 401
   - workflowId: invite-message-lifecycle
     summary: >-
-      Skipped by name in `pnpm conformance`: resetting or updating a message
+      Skipped by name in `pnpm test`: resetting or updating a message
       slot locks it for roughly half an hour, so these cannot run on every pass.
     parameters:
       - reference: $components.parameters.userAgent
@@ -7885,7 +7885,7 @@ workflows:
           contentType: application/json
           payload:
             contentId: wrld_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
-            description: conformance
+            description: test
         successCriteria:
           - condition: $statusCode == 400
 
@@ -8536,7 +8536,7 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            responseType: conformance
+            responseType: test
         successCriteria:
           - condition: $statusCode == 404
 
@@ -9679,7 +9679,7 @@ workflows:
         parameters:
           - name: username
             in: path
-            value: conformance
+            value: test
         successCriteria:
           - condition: $statusCode == 401
 
@@ -10109,7 +10109,7 @@ workflows:
         parameters:
           - name: search
             in: query
-            value: conformance
+            value: test
         successCriteria:
           - condition: $statusCode == 404
 
@@ -10762,7 +10762,7 @@ workflows:
           contentType: application/json
           payload:
             tags:
-              - author_tag_conformance
+              - author_tag_test
         successCriteria:
           - condition: $statusCode == 403
 

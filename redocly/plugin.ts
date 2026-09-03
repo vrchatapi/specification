@@ -9,7 +9,7 @@ export default function myLocalPlugin(): Plugin {
 				 * Closes every object schema that lists properties, so a response
 				 * carrying a field the description does not mention fails validation.
 				 *
-				 * Only for the conformance bundle. An open schema legally permits any
+				 * Only for the test bundle. An open schema legally permits any
 				 * extra property, which is correct for consumers but makes undocumented
 				 * fields undetectable.
 				 *
@@ -21,7 +21,7 @@ export default function myLocalPlugin(): Plugin {
 				 * valid in this description's OpenAPI 3.0.3 dialect. It works because
 				 * `redocly drift` validates with Ajv; a validator that only knows 3.0
 				 * ignores it and silently reports zero drift. Safe only while the
-				 * `conformance` bundle stays unpublished and drift-only.
+				 * `test` bundle stays unpublished and drift-only.
 				 */
 				"close-schemas": () => ({
 					SchemaProperties: {
