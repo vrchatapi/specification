@@ -26,8 +26,6 @@ jobs:
           - vrchatapi-rust
           - vrchatapi-dart
     steps:
-      - uses: actions/checkout@v4
-
       - run: |
           release=$(gh release view v${{ inputs.version }} --json id,tagName,url,isPrerelease,assets | jq -c '{
             id,
@@ -46,4 +44,5 @@ jobs:
           jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
           | gh api repos/{owner}/${{ matrix.repository }}/dispatches -X POST -i --input -
         env:
+          GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.RELEASE_DISPATCH_TOKEN }}
