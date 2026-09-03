@@ -5,6 +5,11 @@ description: >-
 content:
   application/json:
     examples:
+      Calendar entry:
+        value:
+          error:
+            message: Calendar Entry not foundǃ
+            status_code: 404
       File:
         value:
           error:

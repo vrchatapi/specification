@@ -209,6 +209,8 @@ paths:
           $ref: ../responses/calendar/CalendarEventResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/calendar/{groupId}/{calendarId}.ics":
     get:
       operationId: getGroupCalendarEventICS
