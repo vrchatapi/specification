@@ -1,0 +1,7 @@
+description: Returns a list of InstanceCategory objects.
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        $ref: ../../schemas/InstanceCategory.yaml

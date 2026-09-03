@@ -1,0 +1,23 @@
+title: InstanceCategory
+type: object
+description: A category an instance can be listed under.
+properties:
+  deleted:
+    type: boolean
+  iconUrl:
+    type: string
+    example: vrchat://category_hangout
+  id:
+    $ref: ./InstanceCategoryID.yaml
+  name:
+    type: string
+    example: Hangout
+  order:
+    type: integer
+    example: 0
+required:
+  - deleted
+  - iconUrl
+  - id
+  - name
+  - order

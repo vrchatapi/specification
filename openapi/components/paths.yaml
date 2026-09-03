@@ -238,6 +238,10 @@
   $ref: "./paths/files.yaml#/paths/~1icon"
 /infoPush:
   $ref: "./paths/miscellaneous.yaml#/paths/~1infoPush"
+/instanceCategories:
+  $ref: "./paths/instances.yaml#/paths/~1instanceCategories"
+/instanceVibes:
+  $ref: "./paths/instances.yaml#/paths/~1instanceVibes"
 /instances:
   $ref: "./paths/instances.yaml#/paths/~1instances"
 /instances/recent:

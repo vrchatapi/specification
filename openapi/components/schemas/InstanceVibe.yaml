@@ -1,0 +1,15 @@
+title: InstanceVibe
+type: object
+description: A vibe an instance can be tagged with.
+properties:
+  deleted:
+    type: boolean
+  id:
+    $ref: ./InstanceVibeID.yaml
+  title:
+    type: string
+    example: adventure
+required:
+  - deleted
+  - id
+  - title

@@ -6705,6 +6705,28 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: get-instance-categories
+    summary: Instance categories need no session
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: instance-categories
+        operationId: $sourceDescriptions.default.getInstanceCategories
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/0/id != null
+
+  - workflowId: get-instance-vibes
+    summary: Instance vibes need no session
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: instance-vibes
+        operationId: $sourceDescriptions.default.getInstanceVibes
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/0/id != null
+
   - workflowId: instance-lifecycle
     summary: Creates a real private instance, then invites the account to it
     parameters:

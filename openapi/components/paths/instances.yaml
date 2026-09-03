@@ -4,6 +4,32 @@ info:
   description: Instances Docs Here
   version: "1.0"
 paths:
+  /instanceCategories:
+    get:
+      operationId: getInstanceCategories
+      summary: List Instance Categories
+      description: Returns the categories an instance can be listed under.
+      tags:
+        - instances
+      security:
+        - {}
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceCategoryListResponse.yaml
+  /instanceVibes:
+    get:
+      operationId: getInstanceVibes
+      summary: List Instance Vibes
+      description: Returns the vibes an instance can be tagged with.
+      tags:
+        - instances
+      security:
+        - {}
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceVibeListResponse.yaml
   /instances:
     post:
       operationId: createInstance
