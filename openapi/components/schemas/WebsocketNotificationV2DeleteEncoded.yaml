@@ -1,5 +1,5 @@
 title: WebsocketNotificationV2DeleteEncoded
-type: string
+type: object
 properties:
   content:
     type: string

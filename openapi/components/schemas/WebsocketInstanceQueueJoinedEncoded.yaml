@@ -1,5 +1,5 @@
 title: WebsocketInstanceQueueJoinedEncoded
-type: string
+type: object
 properties:
   content:
     type: string

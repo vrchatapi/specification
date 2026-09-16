@@ -1,5 +1,5 @@
 title: NotificationV2Encoded
-type: string
+type: object
 properties:
   content:
     type: string

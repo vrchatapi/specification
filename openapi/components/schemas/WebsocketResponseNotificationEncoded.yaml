@@ -1,5 +1,5 @@
 title: WebsocketResponseNotificationEncoded
-type: string
+type: object
 properties:
   content:
     type: string

@@ -1,5 +1,5 @@
 title: WebsocketGroupMemberUpdatedEncoded
-type: string
+type: object
 properties:
   content:
     type: string

@@ -1,5 +1,5 @@
 title: WebsocketFriendActiveEncoded
-type: string
+type: object
 properties:
   content:
     type: string
