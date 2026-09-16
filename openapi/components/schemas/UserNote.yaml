@@ -12,7 +12,7 @@ properties:
     type: object
     properties:
       id:
-        $ref: ./UserNoteID.yaml
+        $ref: ./UserID.yaml
       displayName:
         type: string
   targetUserId:
