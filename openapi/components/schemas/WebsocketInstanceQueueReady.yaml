@@ -8,4 +8,4 @@ properties:
     format: date-time
 required:
   - location
-  - position
+  - expiry
