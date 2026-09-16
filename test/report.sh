@@ -92,18 +92,30 @@ jq -r --argjson lines "$lines" --arg format "$format" '
 		| if ($sections | length) == 0 then ["All \($total) workflows passed."] else $sections end;
 
 	# https://docs.github.com/actions/reference/workflow-commands-for-github-actions
+	#
+	# GitHub shows ten annotations of each level per step and drops the rest, but
+	# the runner calls its API for every one it is given. A run whose session
+	# failed fails every workflow it has, so this cap is what keeps the step from
+	# spending minutes on annotations nobody will see. The summary keeps them all.
 	def github:
 		def message: gsub("%"; "%25") | gsub("\r"; "%0D") | gsub("\n"; "%0A");
 		def property: message | gsub(":"; "%3A") | gsub(","; "%2C");
 		def command($level; $severity):
-			[
-				rows($severity)[]
+			rows($severity) as $all
+			| [
+				$all[0:10][]
 				| ($lines[.workflow + "\t" + .step] // 0) as $line
 				| (if $line == 0 then "" else ",line=\($line)" end) as $anchor
 				| ("\(.workflow) / \(.step)" | property) as $title
 				| ("\(summary) — \(.code) \(.method) \(.path)" | message) as $body
 				| "::\($level) file=test/arazzo.yaml\($anchor),title=\($title)::\($body)"
-			];
+			]
+			+ (
+				if ($all | length) > 10
+				then ["::notice::\(($all | length) - 10) further \($severity) checks, listed in the run summary."]
+				else []
+				end
+			);
 		command("error"; "error") + command("warning"; "warn");
 
 	(if $format == "github" then github else markdown end)
