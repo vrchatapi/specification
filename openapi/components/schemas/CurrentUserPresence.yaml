@@ -15,9 +15,7 @@ properties:
   bannerUrl:
     type: string
   currentAvatarTags:
-    type: array
-    items:
-      $ref: ./Tag.yaml
+    type: string
   debugflag:
     type: string
   displayName:
