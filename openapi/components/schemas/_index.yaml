@@ -11,54 +11,34 @@ NotificationDetailRequestInviteResponse:
 NotificationDetailVoteToKick:
   $ref: ./NotificationDetailVoteToKick.yaml
 
-WebsocketMessage:
-  $ref: ./WebsocketMessage.yaml
-WebsocketMessageNormal:
-  $ref: ./WebsocketMessageNormal.yaml
-WebsocketMessageDoubleJson:
-  $ref: ./WebsocketMessageDoubleJson.yaml
+NotificationV2:
+  $ref: ./NotificationV2.yaml
 
+WebsocketClearNotification:
+  $ref: ./WebsocketClearNotification.yaml
 WebsocketSeeNotification:
   $ref: ./WebsocketSeeNotification.yaml
 WebsocketHideNotification:
   $ref: ./WebsocketHideNotification.yaml
-WebsocketClearNotification:
-  $ref: ./WebsocketClearNotification.yaml
 
-WebsocketNotification:
-  $ref: ./WebsocketNotification.yaml
+WebsocketContentRefresh:
+  $ref: ./WebsocketContentRefresh.yaml
 WebsocketResponseNotification:
   $ref: ./WebsocketResponseNotification.yaml
-NotificationV2:
-  $ref: ./NotificationV2.yaml
-WebsocketNotificationV2Update:
-  $ref: ./WebsocketNotificationV2Update.yaml
-WebsocketNotificationV2Delete:
-  $ref: ./WebsocketNotificationV2Delete.yaml
+WebsocketFriendActive:
+  $ref: ./WebsocketFriendActive.yaml
 WebsocketFriendAdd:
   $ref: ./WebsocketFriendAdd.yaml
 WebsocketFriendDelete:
   $ref: ./WebsocketFriendDelete.yaml
-WebsocketFriendOnline:
-  $ref: ./WebsocketFriendOnline.yaml
-WebsocketFriendActive:
-  $ref: ./WebsocketFriendActive.yaml
 WebsocketFriendOffline:
   $ref: ./WebsocketFriendOffline.yaml
+WebsocketFriendOnline:
+  $ref: ./WebsocketFriendOnline.yaml
 WebsocketFriendUpdate:
   $ref: ./WebsocketFriendUpdate.yaml
 WebsocketFriendLocation:
   $ref: ./WebsocketFriendLocation.yaml
-WebsocketUserUpdate:
-  $ref: ./WebsocketUserUpdate.yaml
-WebsocketUserLocation:
-  $ref: ./WebsocketUserLocation.yaml
-WebsocketUserBadgeAssigned:
-  $ref: ./WebsocketUserBadgeAssigned.yaml
-WebsocketUserBadgeUnassigned:
-  $ref: ./WebsocketUserBadgeUnassigned.yaml
-WebsocketContentRefresh:
-  $ref: ./WebsocketContentRefresh.yaml
 WebsocketInstanceQueueJoined:
   $ref: ./WebsocketInstanceQueueJoined.yaml
 WebsocketInstanceQueueReady:
@@ -71,3 +51,23 @@ WebsocketGroupMemberUpdated:
   $ref: ./WebsocketGroupMemberUpdated.yaml
 WebsocketGroupRoleUpdated:
   $ref: ./WebsocketGroupRoleUpdated.yaml
+WebsocketNotification:
+  $ref: ./WebsocketNotification.yaml
+WebsocketNotificationV2Update:
+  $ref: ./WebsocketNotificationV2Update.yaml
+WebsocketNotificationV2Delete:
+  $ref: ./WebsocketNotificationV2Delete.yaml
+WebsocketUserUpdate:
+  $ref: ./WebsocketUserUpdate.yaml
+WebsocketUserLocation:
+  $ref: ./WebsocketUserLocation.yaml
+WebsocketUserBadgeAssigned:
+  $ref: ./WebsocketUserBadgeAssigned.yaml
+WebsocketUserBadgeUnassigned:
+  $ref: ./WebsocketUserBadgeUnassigned.yaml
+WebsocketMessage:
+  $ref: ./WebsocketMessage.yaml
+WebsocketMessageDoubleJson:
+  $ref: ./WebsocketMessageDoubleJson.yaml
+WebsocketMessageNormal:
+  $ref: ./WebsocketMessageNormal.yaml
