@@ -8,21 +8,6 @@ properties:
     type: string
   bannerUrl:
     type: string
-  bio:
-    type: string
-  bioLinks:
-    type: array
-    description: " "
-    items:
-      type: string
-  currentAvatarImageUrl:
-    $ref: ./CurrentAvatarImageUrl.yaml
-  currentAvatarTags:
-    type: array
-    items:
-      $ref: ./Tag.yaml
-  currentAvatarThumbnailImageUrl:
-    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   developerType:
     $ref: ./DeveloperType.yaml
   displayName:
@@ -41,8 +26,6 @@ properties:
     type: string
   profileEffect:
     type: string
-  profilePicOverride:
-    type: string
   pronouns:
     type: string
   status:
@@ -54,12 +37,7 @@ properties:
     description: <- Always empty.
     items:
       $ref: ./Tag.yaml
-  userIcon:
-    type: string
 required:
-  - currentAvatarImageUrl
-  - currentAvatarTags
-  - currentAvatarThumbnailImageUrl
   - developerType
   - displayName
   - id

@@ -6,21 +6,6 @@ properties:
     type: string
   bannerType:
     type: string
-  bio:
-    type: string
-  bioLinks:
-    type: array
-    description: " "
-    items:
-      type: string
-  currentAvatarImageUrl:
-    $ref: ./CurrentAvatarImageUrl.yaml
-  currentAvatarTags:
-    type: array
-    items:
-      $ref: ./Tag.yaml
-  currentAvatarThumbnailImageUrl:
-    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   developerType:
     $ref: ./DeveloperType.yaml
   discordId:
@@ -35,8 +20,6 @@ properties:
     type: string
   id:
     $ref: ./UserID.yaml
-  imageUrl:
-    type: string
   isFriend:
     type: boolean
   last_activity:
@@ -61,10 +44,6 @@ properties:
     type: string
   profileEffect:
     type: string
-  profilePicOverride:
-    type: string
-  profilePicOverrideThumbnail:
-    type: string
   status:
     $ref: ./UserStatus.yaml
   statusDescription:
@@ -74,14 +53,11 @@ properties:
     description: <- Always empty.
     items:
       $ref: ./Tag.yaml
-  userIcon:
-    type: string
 required:
   - developerType
   - displayName
   - friendKey
   - id
-  - imageUrl
   - isFriend
   - last_activity
   - last_login

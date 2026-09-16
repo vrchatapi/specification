@@ -37,22 +37,10 @@ properties:
   authToken:
     type: string
     description: The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)
-  badges:
-    type: array
-    description: " "
-    items:
-      $ref: ./Badge.yaml
   bannerColor:
     type: string
   bannerType:
     type: string
-  bio:
-    type: string
-  bioLinks:
-    type: array
-    description: " "
-    items:
-      type: string
   completedTutorials:
     type: array
     items:
@@ -204,10 +192,6 @@ properties:
     $ref: ./CurrentUserPresence.yaml
   profileEffect:
     type: string
-  profilePicOverride:
-    type: string
-  profilePicOverrideThumbnail:
-    type: string
   pronouns:
     type: string
   pronounsHistory:
@@ -261,8 +245,6 @@ properties:
   updated_at:
     type: string
     format: date-time
-  userIcon:
-    type: string
   userLanguage:
     type: string
     nullable: true
@@ -284,8 +266,6 @@ required:
   - ageVerificationStatus
   - ageVerified
   - allowAvatarCopying
-  - bio
-  - bioLinks
   - currentAvatar
   - currentAvatarImageUrl
   - currentAvatarTags
@@ -312,8 +292,6 @@ required:
   - obfuscatedPendingEmail
   - oculusId
   - pastDisplayNames
-  - profilePicOverride
-  - profilePicOverrideThumbnail
   - pronouns
   - pronounsHistory
   - state
@@ -326,5 +304,4 @@ required:
   - tags
   - twoFactorAuthEnabled
   - unsubscribe
-  - userIcon
   - usesGeneratedPassword

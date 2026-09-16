@@ -9135,7 +9135,6 @@ workflows:
             type: end
 
         outputs:
-          bioLinks: $response.body#/bioLinks
           pronouns: $response.body#/pronouns
           status: $response.body#/status
           statusDescription: $response.body#/statusDescription
@@ -9155,16 +9154,13 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            bio: $steps.marker.outputs.value
             statusDescription: $steps.marker.outputs.value
             pronouns: they/them
             status: active
-            bioLinks: $steps.current-before.outputs.bioLinks
             isBoopingEnabled: $steps.current-before.outputs.isBoopingEnabled
             unsubscribe: $steps.current-before.outputs.unsubscribe
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/bio == $steps.marker.outputs.value
           - condition: $response.body#/statusDescription == $steps.marker.outputs.value
           - condition: $response.body#/pronouns == 'they/them'
           - condition: $response.body#/status == 'active'
@@ -9177,7 +9173,7 @@ workflows:
         operationId: $sourceDescriptions.default.getCurrentUser
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/bio == $steps.marker.outputs.value
+          - condition: $response.body#/statusDescription == $steps.marker.outputs.value
 
       - stepId: verify-get-user
         x-security:
@@ -9191,7 +9187,7 @@ workflows:
             value: $workflows.session.outputs.userId
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/bio == $steps.marker.outputs.value
+          - condition: $response.body#/statusDescription == $steps.marker.outputs.value
 
       - stepId: restore-profile
         x-security:
@@ -9206,13 +9202,12 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
-            bio: ""
             statusDescription: $steps.current-before.outputs.statusDescription
             pronouns: $steps.current-before.outputs.pronouns
             status: $steps.current-before.outputs.status
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/bio == ''
+          - condition: $response.body#/statusDescription == $steps.current-before.outputs.statusDescription
           - condition: $response.body#/pronouns == $steps.current-before.outputs.pronouns
           - condition: $response.body#/status == $steps.current-before.outputs.status
 
@@ -9228,7 +9223,7 @@ workflows:
             value: $workflows.session.outputs.userId
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/bio == ''
+          - condition: $response.body#/statusDescription == $steps.current-before.outputs.statusDescription
 
   - workflowId: get-invited-groups
     summary: Invited groups

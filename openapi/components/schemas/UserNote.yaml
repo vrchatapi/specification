@@ -13,18 +13,7 @@ properties:
     properties:
       id:
         $ref: ./UserNoteID.yaml
-      currentAvatarTags:
-        type: array
-        items:
-          $ref: ./Tag.yaml
-      currentAvatarThumbnailImageUrl:
-        $ref: ./CurrentAvatarThumbnailImageUrl.yaml
       displayName:
-        type: string
-      profilePicOverride:
-        type: string
-        nullable: true
-      userIcon:
         type: string
   targetUserId:
     $ref: ./UserID.yaml

@@ -22,11 +22,6 @@ properties:
   appleDetails:
     type: object
     additionalProperties: true
-  badges:
-    type: array
-    description: " "
-    items:
-      $ref: ./Badge.yaml
   bannerColor:
     type: string
   bannerType:

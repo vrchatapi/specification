@@ -2,8 +2,6 @@ title: MutualFriend
 type: object
 description: User object received when querying mutual friends
 properties:
-  avatarThumbnail:
-    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   bannerColor:
     type: string
     description: Hex colour without a leading `#`.
@@ -11,14 +9,6 @@ properties:
   bannerType:
     type: string
     example: color
-  currentAvatarImageUrl:
-    $ref: ./CurrentAvatarImageUrl.yaml
-  currentAvatarTags:
-    type: array
-    items:
-      $ref: ./Tag.yaml
-  currentAvatarThumbnailImageUrl:
-    $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   displayName:
     type: string
   iconFrame:
@@ -27,22 +17,16 @@ properties:
     type: string
   id:
     $ref: ./UserID.yaml
-  imageUrl:
-    type: string
   nameplateEffect:
     type: string
   profileEffect:
-    type: string
-  profilePicOverride:
     type: string
   status:
     $ref: ./UserStatus.yaml
   statusDescription:
     type: string
 required:
-  - currentAvatarImageUrl
   - displayName
   - id
-  - imageUrl
   - status
   - statusDescription
