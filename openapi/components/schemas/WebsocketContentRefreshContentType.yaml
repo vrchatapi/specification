@@ -1,0 +1,3 @@
+title: WebsocketContentRefreshContentType
+type: string
+#Todo: How to type this, since this is technically a non-exhaustive enum?

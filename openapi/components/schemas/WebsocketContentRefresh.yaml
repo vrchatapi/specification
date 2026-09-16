@@ -1,9 +1,18 @@
 title: WebsocketContentRefresh
 type: object
 properties:
-  action_type:
-#Todo: Add proper enum
-    type: string
-  content_type:
-#Todo: Add proper enum
-    type: string
+  actionType:
+    $ref: ./WebsocketContentRefreshActionType.yaml
+  contentType:
+    $ref: ./WebsocketContentRefreshContentType.yaml
+  fileId:
+    $ref: ./FileID.yaml
+  itemId:
+#TODO: is this correct?
+    $ref: ./InventoryTemplateID.yaml
+  itemType:
+#TODO: is this correct?
+    $ref: ./InventoryItemType.yaml
+required:
+  - action_type
+  - contentType
