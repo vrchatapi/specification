@@ -1,0 +1,9 @@
+title: ProfileGroups
+type: object
+properties:
+  count:
+    type: integer
+  list:
+    type: array
+    items:
+      $ref: ./ProfileGroup.yaml
