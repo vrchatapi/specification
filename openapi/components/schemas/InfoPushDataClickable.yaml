@@ -19,6 +19,8 @@ properties:
       - OpenVRCPlusMenu
       - OpenVRChatStore
       - OpenWorldDetails
+      - OpenWorldsMenu
+      - scrollToShelf
     example: OpenURL
     minLength: 1
 required:
