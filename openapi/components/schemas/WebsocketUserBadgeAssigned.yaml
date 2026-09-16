@@ -1,1 +1,7 @@
+title: WebsocketUserBadgeAssigned
 type: object
+properties:
+  badge:
+    $ref: ./Badge.yaml
+required:
+  - badge

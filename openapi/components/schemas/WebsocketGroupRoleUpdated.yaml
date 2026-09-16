@@ -1,1 +1,7 @@
+title: WebsocketGroupRoleUpdated
 type: object
+properties:
+  role:
+    $ref: ./GroupRole.yaml
+requires:
+  - role
