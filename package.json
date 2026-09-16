@@ -32,7 +32,7 @@
 		"@ariesclark/eslint-config": "^3.1.1",
 		"@eslint-react/eslint-plugin": "^2.3.9",
 		"@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
-		"@redocly/cli": "^2.53.1",
+		"@redocly/cli": "^2.53.2",
 		"@redocly/openapi-core": "^2.53.1",
 		"@stoplight/spectral-cli": "^6.15.0",
 		"@stoplight/spectral-core": "^1.20.0",
