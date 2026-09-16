@@ -7,7 +7,7 @@ properties:
     nullable: true
     format: date-time
   accountId:
-    type: string
+    type: integer
     nullable: true
   accountSellerRegisteredOn:
     type: string
@@ -24,6 +24,8 @@ properties:
     type: boolean
   canSpend:
     type: boolean
+  limits:
+    $ref: ./EconomyAccountLimits.yaml
   skrillEmail:
     type: string
     nullable: true

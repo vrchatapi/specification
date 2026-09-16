@@ -93,6 +93,11 @@ paths:
           in: query
           schema:
             type: boolean
+        - name: purpose
+          required: false
+          in: query
+          schema:
+            type: string
       security:
         - authCookie: []
       responses:
@@ -386,6 +391,12 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
+        - name: v
+          description: Response version. `2` wraps the images in a paginated object.
+          required: false
+          in: query
+          schema:
+            type: integer
         - name: approved
           description: If specified, only returns images that have been approved or not approved.
           required: false

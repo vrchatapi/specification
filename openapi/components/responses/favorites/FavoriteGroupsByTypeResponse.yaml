@@ -1,0 +1,5 @@
+description: Returns a single FavoriteGroupList object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/FavoriteGroupList.yaml

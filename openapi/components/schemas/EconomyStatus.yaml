@@ -1,0 +1,11 @@
+title: EconomyStatus
+type: object
+description: Whether the economy is accepting requests.
+properties:
+  economyOnline:
+    type: boolean
+  economyState:
+    type: integer
+required:
+  - economyOnline
+  - economyState

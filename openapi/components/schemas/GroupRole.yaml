@@ -30,6 +30,8 @@ properties:
     type: array
     items:
       $ref: ./GroupPermissions.yaml
+  productId:
+    $ref: ./ProductID.yaml
   requiresPurchase:
     type: boolean
     default: false

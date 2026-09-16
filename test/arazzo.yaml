@@ -5766,6 +5766,22 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+      - stepId: gallery-images-paginated
+        operationId: $sourceDescriptions.default.getGroupGalleryImages
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.own-groups.outputs.groupId
+          - name: groupGalleryId
+            in: path
+            value: $steps.create-gallery.outputs.galleryId
+          - name: v
+            in: query
+            value: 2
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/totalCount != null
+
       - stepId: delete-gallery
         operationId: $sourceDescriptions.default.deleteGroupGallery
         parameters:
@@ -11449,5 +11465,280 @@ workflows:
           contentType: application/json
           payload:
             bio: ""
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-age-verification-status
+    summary: Age verification status
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: age-verification-status
+        operationId: $sourceDescriptions.default.getAgeVerificationStatus
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/status != null
+
+  - workflowId: get-age-verification-status-unauthenticated
+    summary: getAgeVerificationStatus refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: age-verification-status
+        operationId: $sourceDescriptions.default.getAgeVerificationStatus
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-economy-status
+    summary: Economy status
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: economy-status
+        operationId: $sourceDescriptions.default.getEconomyStatus
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/economyOnline != null
+          - condition: $response.body#/economyState != null
+
+  - workflowId: get-economy-status-unauthenticated
+    summary: getEconomyStatus refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: economy-status
+        operationId: $sourceDescriptions.default.getEconomyStatus
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-economy-balance
+    summary: Economy balance
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: economy-balance
+        operationId: $sourceDescriptions.default.getEconomyBalance
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/balance != null
+
+  - workflowId: get-economy-balance-unauthenticated
+    summary: getEconomyBalance refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: economy-balance
+        operationId: $sourceDescriptions.default.getEconomyBalance
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-economy-account-limits
+    summary: Economy account with its spending limits
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: economy-account
+        operationId: $sourceDescriptions.default.getEconomyAccount
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: getLimits
+            in: query
+            value: true
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-favorite-groups-by-type
+    summary: Favorite groups of one type
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: favorite-groups
+        operationId: $sourceDescriptions.default.getFavoriteGroupsByType
+        parameters:
+          - name: favoriteGroupType
+            in: path
+            value: world
+          - name: ownerId
+            in: query
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/favoriteGroups/0/id != null
+          - condition: $response.body#/maxFavoriteGroups != null
+
+  - workflowId: get-favorite-groups-by-type-unauthenticated
+    summary: getFavoriteGroupsByType refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: favorite-groups
+        operationId: $sourceDescriptions.default.getFavoriteGroupsByType
+        parameters:
+          - name: favoriteGroupType
+            in: path
+            value: world
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-user-cosmetics
+    summary: A user's cosmetics
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: user-cosmetics
+        operationId: $sourceDescriptions.default.getUserCosmetics
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-user-cosmetics-unauthenticated
+    summary: getUserCosmetics refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: user-cosmetics
+        operationId: $sourceDescriptions.default.getUserCosmetics
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-product-listing-products
+    summary: The products a listing sells
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: listing-products
+        operationId: $sourceDescriptions.default.getProductListingProducts
+        parameters:
+          - name: productId
+            in: path
+            value: prod_c9d1cf9b-e3be-4bed-8386-49f0a8d32910
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-product-listing-products-unauthenticated
+    summary: getProductListingProducts refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: listing-products
+        operationId: $sourceDescriptions.default.getProductListingProducts
+        parameters:
+          - name: productId
+            in: path
+            value: prod_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: client-config-update-restore
+    summary: Update a client config setting and put it back
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: config-before
+        operationId: $sourceDescriptions.default.getUserClientConfig
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          accessReduceDecorAnim: $response.body#/accessReduceDecorAnim
+
+      - stepId: config-toggle
+        operationId: $sourceDescriptions.default.updateUserClientConfig
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            accessReduceDecorAnim: true
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/accessReduceDecorAnim == true
+
+      - stepId: config-restore
+        operationId: $sourceDescriptions.default.updateUserClientConfig
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            accessReduceDecorAnim: $steps.config-before.outputs.accessReduceDecorAnim
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: update-user-client-config-unauthenticated
+    summary: updateUserClientConfig refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: client-config
+        operationId: $sourceDescriptions.default.updateUserClientConfig
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            accessReduceDecorAnim: false
         successCriteria:
           - condition: $statusCode == 401

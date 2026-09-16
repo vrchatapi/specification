@@ -1,0 +1,23 @@
+title: FavoriteGroupSummary
+type: object
+description: A favorite group as listed for one favorite type.
+properties:
+  displayName:
+    type: string
+    minLength: 1
+  id:
+    $ref: ./FavoriteGroupID.yaml
+  name:
+    type: string
+    minLength: 1
+  numFavorites:
+    type: integer
+    minimum: 0
+  visibility:
+    $ref: ./FavoriteGroupVisibility.yaml
+required:
+  - displayName
+  - id
+  - name
+  - numFavorites
+  - visibility

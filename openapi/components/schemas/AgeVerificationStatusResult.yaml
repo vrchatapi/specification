@@ -1,0 +1,8 @@
+title: AgeVerificationStatusResult
+type: object
+description: The caller's age verification status.
+properties:
+  status:
+    type: string
+required:
+  - status

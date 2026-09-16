@@ -1,0 +1,24 @@
+title: UserCosmetic
+type: object
+description: A cosmetic a user holds, without the template's presentation fields.
+properties:
+  acquiredOn:
+    type: string
+    format: date-time
+  acquisition:
+    type: string
+  id:
+    $ref: ./InventoryItemID.yaml
+  itemType:
+    $ref: ./InventoryItemType.yaml
+  templateId:
+    $ref: ./InventoryTemplateID.yaml
+  userAttributes:
+    $ref: ./InventoryUserAttributes.yaml
+required:
+  - acquiredOn
+  - acquisition
+  - id
+  - itemType
+  - templateId
+  - userAttributes

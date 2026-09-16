@@ -122,6 +122,20 @@ paths:
         - $ref: ../parameters.yaml#/monthDate
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
+        - $ref: ../parameters.yaml#/limit
+        - name: after
+          description: Only return events starting after this date.
+          required: false
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: sort
+          required: false
+          in: query
+          schema:
+            type: string
+            example: startTime_ascending
       security:
         - authCookie: []
       responses:

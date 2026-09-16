@@ -110,4 +110,6 @@ properties:
     type: string
   worldFavoriteLists:
     type: array
-    items: {}
+    description: The owner's public world favorite groups.
+    items:
+      $ref: ./WorldFavoriteList.yaml

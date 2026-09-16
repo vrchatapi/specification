@@ -1,7 +1,9 @@
-description: Returns a list of GroupGalleryImage objects.
+description: Returns a list of GroupGalleryImage objects, wrapped in a paginated object when `v` is `2`.
 content:
   application/json:
     schema:
-      type: array
-      items:
-        $ref: ../../schemas/GroupGalleryImage.yaml
+      oneOf:
+        - type: array
+          items:
+            $ref: ../../schemas/GroupGalleryImage.yaml
+        - $ref: ../../schemas/GroupGalleryImageList.yaml

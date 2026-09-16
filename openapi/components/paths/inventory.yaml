@@ -35,6 +35,8 @@ paths:
       - $ref: ../parameters.yaml#/inventoryItemNotTypes
       - $ref: ../parameters.yaml#/inventoryItemNotFlags
       - $ref: ../parameters.yaml#/inventoryItemArchived
+      - $ref: ../parameters.yaml#/inventoryItemSeen
+      - $ref: ../parameters.yaml#/inventoryIsNavBar
     get:
       operationId: getInventory
       summary: Get Inventory
@@ -273,6 +275,22 @@ paths:
       responses:
         "200":
           $ref: ../responses/inventory/RewardRedemptionResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/cosmetics":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserCosmetics
+      summary: List User Cosmetics
+      description: List the cosmetics a user holds.
+      tags:
+        - inventory
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/UserCosmeticListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/inventory/{inventoryItemId}":

@@ -1,0 +1,18 @@
+title: FavoriteGroupList
+type: object
+description: A user's favorite groups of one type, with the limits that apply to them.
+properties:
+  favoriteGroups:
+    type: array
+    items:
+      $ref: ./FavoriteGroupSummary.yaml
+  maxFavoriteGroups:
+    type: integer
+    description: Only returned when the owner is the currently authenticated user.
+    minimum: 0
+  maxFavoritesPerGroup:
+    type: integer
+    description: Only returned when the owner is the currently authenticated user.
+    minimum: 0
+required:
+  - favoriteGroups

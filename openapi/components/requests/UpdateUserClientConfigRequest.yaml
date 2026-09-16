@@ -1,0 +1,6 @@
+title: UpdateUserClientConfigRequest
+type: object
+description: Only the settings named are changed.
+properties:
+  accessReduceDecorAnim:
+    type: boolean

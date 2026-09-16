@@ -83,7 +83,7 @@ branch:
 buyerId:
   name: buyerId
   description: Must be a valid user ID.
-  required: true
+  required: false
   in: query
   schema:
     $ref: ./schemas/UserID.yaml
@@ -337,6 +337,13 @@ fuzzy:
   in: query
   schema:
     type: boolean
+getLimits:
+  name: getLimits
+  description: Include the account's spending limits in the response.
+  required: false
+  in: query
+  schema:
+    type: boolean
 groupByDuration:
   name: groupByDuration
   description: Time bucket size for economy metrics. Observed values include `days` and `years`.
@@ -443,6 +450,12 @@ inventoryHolderId:
   in: query
   schema:
     $ref: ./schemas/UserID.yaml
+inventoryIsNavBar:
+  name: isNavBar
+  required: false
+  in: query
+  schema:
+    type: boolean
 inventoryItemArchived:
   name: archived
   description: Filter archived status for inventory retrieval.
@@ -478,6 +491,12 @@ inventoryItemNotTypes:
   in: query
   schema:
     $ref: ./schemas/InventoryItemType.yaml
+inventoryItemSeen:
+  name: seen
+  required: false
+  in: query
+  schema:
+    type: boolean
 inventoryItemSlotAsId:
   name: inventoryItemId
   description: Selector for inventory slot management.

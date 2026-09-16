@@ -88,6 +88,9 @@ properties:
     nullable: true
   shortCode:
     $ref: ./GroupShortCode.yaml
+  storeId:
+    $ref: ./StoreID.yaml
+    nullable: true
   tags:
     type: array
     items:

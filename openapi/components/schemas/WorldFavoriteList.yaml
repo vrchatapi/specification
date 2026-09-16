@@ -1,0 +1,21 @@
+title: WorldFavoriteList
+type: object
+description: A world favorite group summarised for a public profile, with a sample of its worlds' thumbnails.
+properties:
+  count:
+    type: integer
+    minimum: 0
+  id:
+    $ref: ./FavoriteGroupID.yaml
+  name:
+    type: string
+    minLength: 1
+  thumbnails:
+    type: array
+    items:
+      type: string
+required:
+  - count
+  - id
+  - name
+  - thumbnails

@@ -4,6 +4,20 @@ info:
   description: Users Docs Here
   version: "1.0"
 paths:
+  /ageVerification/status:
+    get:
+      operationId: getAgeVerificationStatus
+      summary: Get Age Verification Status
+      description: Get the currently authenticated user's age verification status.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/AgeVerificationStatusResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/profile/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/userId
@@ -297,6 +311,24 @@ paths:
       description: Get the client settings VRChat stores against a user.
       tags:
         - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/UserClientConfigResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    put:
+      operationId: updateUserClientConfig
+      summary: Update User Client Config
+      description: Update the client settings VRChat stores against a user.
+      tags:
+        - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateUserClientConfigRequest.yaml
       security:
         - authCookie: []
       responses:

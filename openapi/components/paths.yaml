@@ -8,6 +8,8 @@
   $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions~1{transactionId}"
 "/adminassetbundles/{adminAssetBundleId}":
   $ref: "./paths/files.yaml#/paths/~1adminassetbundles~1{adminAssetBundleId}"
+/ageVerification/status:
+  $ref: "./paths/users.yaml#/paths/~1ageVerification~1status"
 /agreement:
   $ref: "./paths/files.yaml#/paths/~1agreement"
 "/analysis/{fileId}/{versionId}":
@@ -142,6 +144,8 @@
   $ref: "./paths/economy.yaml#/paths/~1economy~1purchases~1{productPurchaseId}~1stacks"
 /economy/seller/eligibility:
   $ref: "./paths/economy.yaml#/paths/~1economy~1seller~1eligibility"
+/economy/status:
+  $ref: "./paths/economy.yaml#/paths/~1economy~1status"
 /economy/store:
   $ref: "./paths/economy.yaml#/paths/~1economy~1store"
 /economy/store/shelves:
@@ -154,6 +158,8 @@
   $ref: "./paths/favorites.yaml#/paths/~1favorite~1groups"
 /favorites:
   $ref: "./paths/favorites.yaml#/paths/~1favorites"
+"/favorites/groups/{favoriteGroupType}":
+  $ref: "./paths/favorites.yaml#/paths/~1favorites~1groups~1{favoriteGroupType}"
 "/favorites/groups/{favoriteGroupType}/{favoriteGroupName}":
   $ref: "./paths/favorites.yaml#/paths/~1favorites~1groups~1{favoriteGroupType}~1{favoriteGroupName}"
 "/favorites/{favoriteId}":
@@ -308,6 +314,8 @@
   $ref: "./paths/economy.yaml#/paths/~1listing"
 "/listing/{productId}":
   $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}"
+"/listing/{productId}/products":
+  $ref: "./paths/economy.yaml#/paths/~1listing~1{productId}~1products"
 /logout:
   $ref: "./paths/authentication.yaml#/paths/~1logout"
 "/message/{userId}/{messageType}":
@@ -378,8 +386,12 @@
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance"
 "/user/{userId}/balance/earnings":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1balance~1earnings"
+"/user/{userId}/cosmetics":
+  $ref: "./paths/inventory.yaml#/paths/~1user~1{userId}~1cosmetics"
 "/user/{userId}/economy/account":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1account"
+"/user/{userId}/economy/balance":
+  $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1balance"
 "/user/{userId}/economy/balances":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1economy~1balances"
 "/user/{userId}/economy/payouts/list":

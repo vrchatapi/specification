@@ -161,7 +161,14 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
   /economy/purchases:
     parameters:
+      - $ref: ../parameters.yaml#/active
       - $ref: ../parameters.yaml#/buyerId
+      - name: receiverId
+        description: Must be a valid user ID.
+        required: false
+        in: query
+        schema:
+          $ref: ../schemas/UserID.yaml
       - $ref: ../parameters.yaml#/sellerIdQuery
       - $ref: ../parameters.yaml#/number
       - $ref: ../parameters.yaml#/offset
@@ -231,9 +238,28 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/RouteNotImplementedError.yaml
+  /economy/status:
+    get:
+      operationId: getEconomyStatus
+      summary: Get Economy Status
+      description: Get whether the economy is accepting requests.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/EconomyStatusResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /economy/store:
     parameters:
       - $ref: ../parameters.yaml#/storeId
+      - name: hydrateContext
+        required: false
+        in: query
+        schema:
+          type: boolean
       - $ref: ../parameters.yaml#/hydrateListings
       - $ref: ../parameters.yaml#/hydrateProducts
     get:
@@ -375,6 +401,22 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/DeleteProductListingResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/listing/{productId}/products":
+    parameters:
+      - $ref: ../parameters.yaml#/productId
+    get:
+      operationId: getProductListingProducts
+      summary: Get Product Listing Products
+      description: List the products a listing sells.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/ProductListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /products:
@@ -529,6 +571,8 @@ paths:
       description: Get the most recent user subscription.
       tags:
         - economy
+      parameters:
+        - $ref: ../parameters.yaml#/userIdQuery
       security:
         - authCookie: []
       responses:
@@ -581,11 +625,29 @@ paths:
       description: Gets the economy account of a user
       tags:
         - economy
+      parameters:
+        - $ref: ../parameters.yaml#/getLimits
       security:
         - authCookie: []
       responses:
         "200":
           $ref: ../responses/economy/EconomyAccountResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/economy/balance":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getEconomyBalance
+      summary: Get Economy Balance
+      description: Return the balance of a user's economy account.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/BalanceResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/user/{userId}/economy/balances":
