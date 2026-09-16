@@ -8,3 +8,7 @@ NotificationDetailRequestInviteResponse:
   $ref: ./NotificationDetailRequestInviteResponse.yaml
 NotificationDetailVoteToKick:
   $ref: ./NotificationDetailVoteToKick.yaml
+WebsocketMessage:
+  $ref: ./WebsocketMessage.yaml
+WebsocketNotification:
+  $ref: ./WebsocketNotification.yaml

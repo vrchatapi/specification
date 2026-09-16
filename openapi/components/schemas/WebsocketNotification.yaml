@@ -1,0 +1,59 @@
+title: WebsocketNotification
+type: object
+description: ""
+properties:
+  created_at:
+    type: string
+    format: date-time
+  details:
+    x-if:
+      when: jsonschema
+      then:
+        oneOf:
+          - $ref: ./NotificationDetailBoop.yaml
+          - $ref: ./NotificationDetailInvite.yaml
+          - $ref: ./NotificationDetailInviteResponse.yaml
+          - $ref: ./NotificationDetailRequestInvite.yaml
+          - $ref: ./NotificationDetailRequestInviteResponse.yaml
+          - $ref: ./NotificationDetailVoteToKick.yaml
+        discriminator:
+          propertyName: type
+          mapping:
+            boop: ./NotificationDetailBoop.yaml
+            invite: ./NotificationDetailInvite.yaml
+            invite-response: ./NotificationDetailInviteResponse.yaml
+            request-invite: ./NotificationDetailRequestInvite.yaml
+            request-invite-response: ./NotificationDetailRequestInviteResponse.yaml
+            vote-to-kick: ./NotificationDetailVoteToKick.yaml
+      else:
+        type: object
+  id:
+    type: string
+    minLength: 1
+  message:
+    type: string
+    description: ""
+    example: This is a generated invite to VRChat Hub
+  receiverUserId:
+    $ref: ./UserID.yaml
+    description: Not included in notification objects received from the REST API
+  seen:
+    type: boolean
+    description: Not included in notification objects received from the Websocket API
+    default: false
+  senderUserId:
+    $ref: ./UserID.yaml
+  senderUsername:
+    type: string
+    description: The name of the user who sent the notification.
+    nullable: true
+    minLength: 1
+  type:
+    $ref: ./NotificationType.yaml
+required:
+  - created_at
+  - details
+  - id
+  - message
+  - senderUserId
+  - type

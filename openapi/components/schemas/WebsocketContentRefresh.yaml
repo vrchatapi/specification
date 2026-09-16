@@ -1,0 +1,9 @@
+title: WebsocketContentRefresh
+type: object
+properties:
+  content_type:
+#Todo: Add proper enum
+    type: string
+  action_type:
+#Todo: Add proper enum
+    type: string
