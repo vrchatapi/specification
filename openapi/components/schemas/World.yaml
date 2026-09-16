@@ -51,6 +51,8 @@ properties:
       items: {}
       maxItems: 3
       minItems: 3
+  isHypeTrainEligible:
+    type: boolean
   labsPublicationDate:
     type: string
     example: none

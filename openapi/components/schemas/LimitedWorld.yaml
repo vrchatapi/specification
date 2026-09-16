@@ -51,6 +51,8 @@ properties:
     type: string
     default: vrchat
     minLength: 1
+  pendingUpload:
+    type: boolean
   popularity:
     type: integer
     default: 0

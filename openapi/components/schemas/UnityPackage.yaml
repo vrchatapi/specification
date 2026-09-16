@@ -15,6 +15,7 @@ properties:
     minimum: 0
   created_at:
     type: string
+    nullable: true
     example: "2020-09-10T06:13:27.777Z"
     format: date-time
   id:
