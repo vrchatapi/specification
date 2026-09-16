@@ -1,0 +1,14 @@
+title: WebsocketResponseNotification
+type: object
+description: ""
+properties:
+  notification_id:
+    type: string
+  receiver_id:
+    type: string
+  response_id:
+    type: string
+required:
+  - notification_id
+  - receiver_id
+  - response_id
