@@ -49,15 +49,15 @@ jq -r --argjson lines "$lines" --arg format "$format" '
 		| select(.checks | length > 0)
 	] as $steps
 	| ([.files[].executedWorkflows[]] | length) as $total
-	# A schema check reports a multi-line code frame, coloured. Only its first
-	# line names the property, and a table cell holds one line, as does an
-	# annotation title.
+	# A schema check reports a multi-line code frame, coloured, and the frame
+	# quotes the whole response body: one ran to 57MB in CI. Only the first line
+	# names the property, and a table cell holds one line, as does an annotation
+	# title, so cut to a bounded prefix before any regex touches it.
 	| def detail:
 		if .condition then .condition
 		else
 			[
-				(.message // "")
-				| gsub("\\[[0-9;]*m"; "")
+				((.message // "")[0:2000] | gsub("\u001b\\[[0-9;]*m"; ""))
 				| split("\n")[]
 				| select(test("\\S"))
 			][0] // ""

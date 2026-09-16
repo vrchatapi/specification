@@ -217,20 +217,11 @@ jobs:
           VRCHAT_FRIEND_ID: ${{ secrets.VRCHAT_FRIEND_ID }}
 
       - if: "!cancelled()"
-        run: |
-          ls -l test/.out/ || true
-          jq --version || true
-          awk -W version 2>&1 | head -1 || true
-
-          status=0
-          timeout --verbose 60 sh -x test/report.sh --format github > /tmp/inherited.txt 2>&1 || status=$?
-          sed 's/^::/SUPPRESSED::/' /tmp/inherited.txt
-          echo "inherited stdin, exit: $status"
-
-          status=0
-          timeout --verbose 60 sh -x test/report.sh --format github < /dev/null > /tmp/devnull.txt 2>&1 || status=$?
-          sed 's/^::/SUPPRESSED::/' /tmp/devnull.txt
-          echo "stdin from /dev/null, exit: $status"
+        uses: actions/upload-artifact@v4
+        with:
+          name: respect-report
+          path: test/.out/respect.json
+          retention-days: 1
 
       - if: "!cancelled()"
         run: |
