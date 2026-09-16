@@ -22,24 +22,18 @@ properties:
     type: string
     format: date-time
   platformPaymentGuid:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   platformPaymentMethod:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   reversalDate:
-    type: string
-    nullable: true
+    type: ['null', 'string']
     format: date-time
   reversalReason:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   reversalReasonCode:
-    type: integer
-    nullable: true
+    type: ['null', 'integer']
   reversalTransactionId:
-    type: integer
-    nullable: true
+    type: ['null', 'integer']
   transactionId:
     type: integer
 required:

@@ -4,8 +4,7 @@ properties:
   id:
     type: string
   imageUrl:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   name:
     type: string
 required:

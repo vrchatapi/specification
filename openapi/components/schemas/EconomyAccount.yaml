@@ -1,21 +1,16 @@
 title: EconomyAccount
-type: object
-nullable: true
+type: ['null', 'object']
 properties:
   accountActivatedOn:
-    type: string
-    nullable: true
+    type: ['null', 'string']
     format: date-time
   accountId:
-    type: integer
-    nullable: true
+    type: ['null', 'integer']
   accountSellerRegisteredOn:
-    type: string
-    nullable: true
+    type: ['null', 'string']
     format: date-time
   accountSellerStatus:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   blocked:
     type: boolean
   canEarn:
@@ -27,16 +22,13 @@ properties:
   limits:
     $ref: ./EconomyAccountLimits.yaml
   skrillEmail:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   source:
     type: string
   tiliaId:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   tiliaType:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   userId:
     $ref: ./UserID.yaml
 required:
