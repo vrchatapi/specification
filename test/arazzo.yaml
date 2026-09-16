@@ -9456,6 +9456,29 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-public-profile-with-groups-and-worlds
+    summary: Public profile with groups and public worlds
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: public-profile
+        operationId: $sourceDescriptions.default.getPublicProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: withGroupsAndWorlds
+            in: query
+            value: true
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/groups != null
+          - condition: $response.body#/publicWorlds != null
+
   - workflowId: get-public-profile-unauthenticated
     summary: getPublicProfile refuses an anonymous caller
     parameters:
