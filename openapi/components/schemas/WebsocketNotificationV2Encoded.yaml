@@ -1,0 +1,10 @@
+title: NotificationV2Encoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./NotificationV2.yaml
+required:
+  - content

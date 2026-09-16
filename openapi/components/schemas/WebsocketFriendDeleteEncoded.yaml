@@ -1,0 +1,10 @@
+title: WebsocketFriendDeleteEncoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendDelete.yaml
+required:
+  - content

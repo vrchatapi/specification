@@ -1,0 +1,10 @@
+title: WebsocketGroupJoinedEncoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketGroupJoined.yaml
+required:
+  - content

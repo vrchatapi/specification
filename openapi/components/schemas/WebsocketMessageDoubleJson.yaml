@@ -1,93 +1,56 @@
 title: WebsocketMessageDoubleJson
-type: object
-properties:
-  content:
-    type: string
-    description: JSON-encoded object.
-    contentMediaType: application/json
-    x-if:
-      when: jsonschema
-      then:
-        contentSchema:
-          oneOf:
-            - $ref: ./WebsocketNotification.yaml
-            - $ref: ./WebsocketResponseNotification.yaml
-            - $ref: ./NotificationV2.yaml
-            - $ref: ./WebsocketNotificationV2Update.yaml
-            - $ref: ./WebsocketNotificationV2Delete.yaml
-            - $ref: ./WebsocketFriendAdd.yaml
-            - $ref: ./WebsocketFriendDelete.yaml
-            - $ref: ./WebsocketFriendOnline.yaml
-            - $ref: ./WebsocketFriendActive.yaml
-            - $ref: ./WebsocketFriendOffline.yaml
-            - $ref: ./WebsocketFriendUpdate.yaml
-            - $ref: ./WebsocketFriendLocation.yaml
-            - $ref: ./WebsocketUserUpdate.yaml
-            - $ref: ./WebsocketUserLocation.yaml
-            - $ref: ./WebsocketUserBadgeAssigned.yaml
-            - $ref: ./WebsocketUserBadgeUnassigned.yaml
-            - $ref: ./WebsocketContentRefresh.yaml
-            - $ref: ./WebsocketInstanceQueueJoined.yaml
-            - $ref: ./WebsocketInstanceQueueReady.yaml
-            - $ref: ./WebsocketGroupJoined.yaml
-            - $ref: ./WebsocketGroupLeft.yaml
-            - $ref: ./WebsocketGroupMemberUpdated.yaml
-            - $ref: ./WebsocketGroupRoleUpdated.yaml
-          discriminator:
-            propertyName: type
-            mapping:
-              content-refresh: ./WebsocketContentRefresh.yaml
-              friend-active: ./WebsocketFriendActive.yaml
-              friend-add: ./WebsocketFriendAdd.yaml
-              friend-delete: ./WebsocketFriendDelete.yaml
-              friend-location: ./WebsocketFriendLocation.yaml
-              friend-offline: ./WebsocketFriendOffline.yaml
-              friend-online: ./WebsocketFriendOnline.yaml
-              friend-update: ./WebsocketFriendUpdate.yaml
-              group-joined: ./WebsocketGroupJoined.yaml
-              group-left: ./WebsocketGroupLeft.yaml
-              group-member-updated: ./WebsocketGroupMemberUpdated.yaml
-              group-role-updated: ./WebsocketGroupRoleUpdated.yaml
-              instance-queue-joined: ./WebsocketInstanceQueueJoined.yaml
-              instance-queue-ready: ./WebsocketInstanceQueueReady.yaml
-              notification: ./WebsocketNotification.yaml
-              notification-v2: ./NotificationV2.yaml
-              notification-v2-delete: ./WebsocketNotificationV2Delete.yaml
-              notification-v2-update: ./WebsocketNotificationV2Update.yaml
-              response-notification: ./WebsocketResponseNotification.yaml
-              user-badge-assigned: ./WebsocketUserBadgeAssigned.yaml
-              user-badge-unassigned: ./WebsocketUserBadgeUnassigned.yaml
-              user-location: ./WebsocketUserLocation.yaml
-              user-update: ./WebsocketUserUpdate.yaml
-      else:
-        contentSchema:
-          type: object
-  type:
-    type: string
-    enum:
-      - content-refresh
-      - friend-active
-      - friend-add
-      - friend-delete
-      - friend-location
-      - friend-offline
-      - friend-online
-      - friend-update
-      - group-joined
-      - group-left
-      - group-member-updated
-      - group-role-updated
-      - instance-queue-joined
-      - instance-queue-ready
-      - notification
-      - notification-v2
-      - notification-v2-delete
-      - notification-v2-update
-      - response-notification
-      - user-badge-assigned
-      - user-badge-unassigned
-      - user-location
-      - user-update
-required:
-  - content
-  - type
+x-if:
+  when: jsonschema
+  then:
+    oneOf:
+      - $ref: ./WebsocketContentRefreshEncoded.yaml
+      - $ref: ./WebsocketFriendActiveEncoded.yaml
+      - $ref: ./WebsocketFriendAddEncoded.yaml
+      - $ref: ./WebsocketFriendDeleteEncoded.yaml
+      - $ref: ./WebsocketFriendLocationEncoded.yaml
+      - $ref: ./WebsocketFriendOfflineEncoded.yaml
+      - $ref: ./WebsocketFriendOnlineEncoded.yaml
+      - $ref: ./WebsocketFriendUpdateEncoded.yaml
+      - $ref: ./WebsocketGroupJoinedEncoded.yaml
+      - $ref: ./WebsocketGroupLeftEncoded.yaml
+      - $ref: ./WebsocketGroupMemberUpdatedEncoded.yaml
+      - $ref: ./WebsocketGroupRoleUpdatedEncoded.yaml
+      - $ref: ./WebsocketInstanceQueueJoinedEncoded.yaml
+      - $ref: ./WebsocketInstanceQueueReadyEncoded.yaml
+      - $ref: ./WebsocketNotificationEncoded.yaml
+      - $ref: ./WebsocketNotificationV2Encoded.yaml
+      - $ref: ./WebsocketNotificationV2DeleteEncoded.yaml
+      - $ref: ./WebsocketNotificationV2UpdateEncoded.yaml
+      - $ref: ./WebsocketResponseNotificationEncoded.yaml
+      - $ref: ./WebsocketUserBadgeAssignedEncoded.yaml
+      - $ref: ./WebsocketUserBadgeUnassignedEncoded.yaml
+      - $ref: ./WebsocketUserLocationEncoded.yaml
+      - $ref: ./WebsocketUserUpdateEncoded.yaml
+    discriminator:
+      propertyName: type
+      mapping:
+        content-refresh: ./WebsocketContentRefreshEncoded.yaml
+        friend-active: ./WebsocketFriendActiveEncoded.yaml
+        friend-add: ./WebsocketFriendAddEncoded.yaml
+        friend-delete: ./WebsocketFriendDeleteEncoded.yaml
+        friend-location: ./WebsocketFriendLocationEncoded.yaml
+        friend-offline: ./WebsocketFriendOfflineEncoded.yaml
+        friend-online: ./WebsocketFriendOnlineEncoded.yaml
+        friend-update: ./WebsocketFriendUpdateEncoded.yaml
+        group-joined: ./WebsocketGroupJoinedEncoded.yaml
+        group-left: ./WebsocketGroupLeftEncoded.yaml
+        group-member-updated: ./WebsocketGroupMemberUpdatedEncoded.yaml
+        group-role-updated: ./WebsocketGroupRoleUpdatedEncoded.yaml
+        instance-queue-joined: ./WebsocketInstanceQueueJoinedEncoded.yaml
+        instance-queue-ready: ./WebsocketInstanceQueueReadyEncoded.yaml
+        notification: ./WebsocketNotificationEncoded.yaml
+        notification-v2: ./WebsocketNotificationV2Encoded.yaml
+        notification-v2-delete: ./WebsocketNotificationV2DeleteEncoded.yaml
+        notification-v2-update: ./WebsocketNotificationV2UpdateEncoded.yaml
+        response-notification: ./WebsocketResponseNotificationEncoded.yaml
+        user-badge-assigned: ./WebsocketUserBadgeAssignedEncoded.yaml
+        user-badge-unassigned: ./WebsocketUserBadgeUnassignedEncoded.yaml
+        user-location: ./WebsocketUserLocationEncoded.yaml
+        user-update: ./WebsocketUserUpdateEncoded.yaml
+  else:
+    type: object

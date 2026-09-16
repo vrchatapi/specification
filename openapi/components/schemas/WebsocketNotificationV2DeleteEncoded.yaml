@@ -1,0 +1,10 @@
+title: WebsocketNotificationV2DeleteEncoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketNotificationV2Delete.yaml
+required:
+  - content
