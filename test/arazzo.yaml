@@ -8009,16 +8009,6 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
-  - workflowId: get-css
-    summary: Css
-    parameters:
-      - reference: $components.parameters.userAgent
-    steps:
-      - stepId: css
-        operationId: $sourceDescriptions.default.getCSS
-        successCriteria:
-          - condition: $statusCode == 200
-
   - workflowId: get-current-online-users
     summary: Online users
     parameters:
@@ -8105,16 +8095,6 @@ workflows:
           - name: require
             in: query
             value: user-all
-        successCriteria:
-          - condition: $statusCode == 200
-
-  - workflowId: get-java-script
-    summary: Javascript
-    parameters:
-      - reference: $components.parameters.userAgent
-    steps:
-      - stepId: javascript
-        operationId: $sourceDescriptions.default.getJavaScript
         successCriteria:
           - condition: $statusCode == 200
 
