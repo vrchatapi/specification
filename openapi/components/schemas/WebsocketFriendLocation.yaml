@@ -1,1 +1,22 @@
+title: WebsocketFriendLocation
 type: object
+properties:
+  canRequestInvite:
+    type: boolean
+  location:
+    $ref: ./LocationID.yaml
+  user:
+    $ref: ./User.yaml
+  userId:
+    $ref: ./UserID.yaml
+  travelingToLocation:
+    $ref: ./LocationID.yaml
+  worldId:
+    $ref: ./WorldID.yaml
+required:
+  - canRequestInvite
+  - location
+  - user
+  - userId
+  - travelingToLocation
+  - worldId

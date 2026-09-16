@@ -2,13 +2,13 @@ title: WebsocketResponseNotification
 type: object
 description: ""
 properties:
-  notification_id:
+  notificationId:
     type: string
-  receiver_id:
-    type: string
-  response_id:
-    type: string
+  receiverId:
+    $ref: ./UserID.yaml
+  responseId:
+    $ref: ./UserID.yaml
 required:
-  - notification_id
-  - receiver_id
-  - response_id
+  - notificationId
+  - receiverId
+  - responseId

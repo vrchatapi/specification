@@ -1,3 +1,1 @@
-title: WebsocketHideNotification
-type: string
-description: "Notification-Id"
+$ref: ./NotificationID.yaml
