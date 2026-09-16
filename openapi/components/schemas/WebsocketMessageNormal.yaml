@@ -11,7 +11,6 @@ properties:
           - $ref: ./WebsocketClearNotification.yaml
         discriminator:
           propertyName: type
-          propertyBaseName: type
           mapping:
             see-notification: ./WebsocketSeeNotification.yaml
             hide-notification: ./WebsocketHideNotification.yaml
