@@ -1,0 +1,12 @@
+title: PlatformHistoryEntry
+type: object
+description: A platform the user was recorded on, and when.
+properties:
+  isMobile:
+    type: boolean
+  platform:
+    $ref: ./Platform.yaml
+    nullable: true
+  recorded:
+    type: string
+    format: date-time

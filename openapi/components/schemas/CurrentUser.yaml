@@ -31,7 +31,7 @@ properties:
   allowAvatarCopying:
     type: boolean
   appleDetails:
-    type: object
+    $ref: ./ConnectedAccountDetails.yaml
   appleId:
     type: string
   authToken:
@@ -93,7 +93,7 @@ properties:
     items:
       $ref: ./UserID.yaml
   googleDetails:
-    type: object
+    $ref: ./ConnectedAccountDetails.yaml
   googleId:
     type: string
   hasBirthday:
@@ -180,16 +180,7 @@ properties:
   platform_history:
     type: array
     items:
-      type: object
-      properties:
-        isMobile:
-          type: boolean
-        platform:
-          $ref: ./Platform.yaml
-          nullable: true
-        recorded:
-          type: string
-          format: date-time
+      $ref: ./PlatformHistoryEntry.yaml
   presence:
     $ref: ./CurrentUserPresence.yaml
   profileEffect:
@@ -218,7 +209,7 @@ properties:
     items:
       type: string
   steamDetails:
-    type: object
+    $ref: ./ConnectedAccountDetails.yaml
   steamId:
     type: string
   tags:
@@ -233,7 +224,7 @@ properties:
   travelingToWorld:
     type: string
   twitchDetails:
-    type: object
+    $ref: ./ConnectedAccountDetails.yaml
   twitchId:
     type: string
   twoFactorAuthEnabled:

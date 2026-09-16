@@ -1,0 +1,3 @@
+title: ConnectedAccountDetails
+type: object
+description: Details of an account on another service linked to this one.
