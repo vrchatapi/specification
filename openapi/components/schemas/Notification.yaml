@@ -6,9 +6,28 @@ properties:
     format: date-time
   details:
     type: string
-    description: "**NOTICE:** This is not a JSON object when received from the REST API, but it is when received from the Websocket API. When received from the REST API, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType."
-    default: "{}"
-    example: "OneOf: {}, NotificationDetailBoop, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick"
+    description: JSON-encoded NotificationDetail
+    contentMediaType: application/json
+    x-if:
+      when: jsonschema
+      then:
+        contentSchema:
+          oneOf:
+            - $ref: ./NotificationDetailBoop.yaml
+            - $ref: ./NotificationDetailInvite.yaml
+            - $ref: ./NotificationDetailInviteResponse.yaml
+            - $ref: ./NotificationDetailRequestInvite.yaml
+            - $ref: ./NotificationDetailRequestInviteResponse.yaml
+            - $ref: ./NotificationDetailVoteToKick.yaml
+          discriminator:
+            propertyName: type
+            mapping:
+              boop: ./NotificationDetailBoop.yaml
+              invite: ./NotificationDetailInvite.yaml
+              invite-response: ./NotificationDetailInviteResponse.yaml
+              request-invite: ./NotificationDetailRequestInvite.yaml
+              request-invite-response: ./NotificationDetailRequestInviteResponse.yaml
+              vote-to-kick: ./NotificationDetailVoteToKick.yaml
   id:
     type: string
     minLength: 1
