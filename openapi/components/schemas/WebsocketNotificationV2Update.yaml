@@ -4,6 +4,7 @@ properties:
   id:
     $ref: ./NotificationID.yaml
   updates:
+    title: WebsocketNotificationV2Updates
     # Todo: type this better
     type: object
   version:
