@@ -48,9 +48,10 @@ curl -sf --retry 20 --retry-delay 1 --retry-connrefused -o /dev/null \
 # `coverage` and `drift` read as a whole-suite record.
 skips='--skip logout --skip invite-message-lifecycle'
 capture=test/.out/har/arazzo.har
+report=test/.out/respect.json
 for argument do
 	case $argument in
-		-w | --workflow) skips=''; capture=test/.out/partial.har ;;
+		-w | --workflow) skips=''; capture=test/.out/partial.har; report=test/.out/partial.json ;;
 	esac
 done
 
@@ -74,6 +75,7 @@ fi
 redocly respect test/arazzo.yaml \
 	${skips} \
 	--har-output "$capture" \
+	--json-output "$report" \
 	--input friendId="$VRCHAT_FRIEND_ID" \
 	--input username="${VRCHAT_USERNAME:-$VRCHAT_EMAIL}" \
 	--input email="$VRCHAT_EMAIL" \
