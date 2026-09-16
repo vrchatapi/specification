@@ -8,6 +8,12 @@ properties:
     nullable: true
   banner:
     type: string
+  bannerColor:
+    type: string
+  bannerType:
+    type: string
+  bannerUrl:
+    type: string
   currentAvatarTags:
     type: array
     items:
@@ -22,6 +28,8 @@ properties:
     items:
       $ref: ./GroupID.yaml
   iconFrame:
+    type: string
+  iconUrl:
     type: string
   id:
     $ref: ./UserID.yaml

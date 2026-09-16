@@ -41,6 +41,8 @@ properties:
     type: string
   bannerType:
     type: string
+  bannerUrl:
+    type: string
   completedTutorials:
     type: array
     items:

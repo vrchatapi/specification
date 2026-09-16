@@ -9,6 +9,8 @@ properties:
   bannerType:
     type: string
     example: color
+  bannerUrl:
+    type: string
   displayName:
     type: string
   iconFrame:
