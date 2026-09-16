@@ -1,6 +1,6 @@
 title: APIConfigProfileDefaults
 type: object
-description: Default profile theme colours, each a hex RGB triplet without a leading `#`.
+description: Default profile theme colors.
 properties:
   backgroundGradientBottom:
     $ref: ./Color.yaml

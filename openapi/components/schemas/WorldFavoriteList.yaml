@@ -1,6 +1,6 @@
 title: WorldFavoriteList
 type: object
-description: A world favorite group summarised for a public profile, with a sample of its worlds' thumbnails.
+description: A world favorite group as a public profile lists it, with a sample of its worlds' thumbnails.
 properties:
   count:
     type: integer
