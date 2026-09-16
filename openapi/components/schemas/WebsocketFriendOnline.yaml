@@ -1,1 +1,17 @@
+title: WebsocketFriendOnline
 type: object
+properties:
+  canRequestInvite:
+    type: boolean
+  userId:
+    $ref: ./UserID.yaml
+  location:
+    $ref: ./LocationID.yaml
+  platform:
+    $ref: ./Platform.yaml
+
+required:
+  - canRequestInvite
+  - location
+  - userId
+  - platform

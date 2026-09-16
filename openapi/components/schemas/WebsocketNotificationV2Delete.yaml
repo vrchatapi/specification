@@ -2,7 +2,7 @@ title: WebsocketNotificationV2Delete
 type: object
 properties:
   id:
-    type: string
+    $ref: ./NotificationID.yaml
   version:
     type: integer
 required:
