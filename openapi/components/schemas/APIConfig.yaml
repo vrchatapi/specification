@@ -692,7 +692,6 @@ required:
   - downloadLinkWindows
   - downloadUrls
   - dynamicWorldRows
-  - economyLedgerBackfill
   - economyLedgerMode
   - economyPauseEnd
   - economyPauseStart
