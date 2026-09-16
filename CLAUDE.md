@@ -126,11 +126,15 @@ characters in validation messages — `˸` (U+02F8) for a colon, `‚` (U+201A) 
 comma, `․` (U+2024) for a full stop — and a retyped example normalises them,
 which is how you can tell nobody captured it.
 
-## Deprecation
+## Deprecation and deletion
 
-Mark `deprecated: true` only where every observed call answers the generic
-"not implemented" 404. Keep the original tag and add `deprecated`, so the suite
-keeps calling the route and a revival shows up.
+Mark `x-deleted: true` only where every observed call answers the generic
+"not implemented" 404. Keep the operation and its tag: the published bundles
+drop it, the `test` bundle keeps it, so the suite goes on calling the route and
+a revival shows up as a failing `not-found` workflow.
+
+Mark `deprecated: true` where the route still answers but VRChat has replaced
+it or the client no longer uses it. Keep the original tag and add `deprecated`.
 
 ## Comments
 

@@ -113,11 +113,10 @@ paths:
       - $ref: ../parameters.yaml#/propId
     get:
       operationId: getPropPublishStatus
-      deprecated: true
+      x-deleted: 2026-08-08
       summary: Get Prop Publish Status
       description: Return the PropPublishStatus object. `/props/{propId}` is still served.
       tags:
-        - deprecated
         - props
       security:
         - authCookie: []
@@ -132,11 +131,10 @@ paths:
           $ref: ../responses/RouteNotImplementedError.yaml
     put:
       operationId: publishProp
-      deprecated: true
+      x-deleted: 2026-08-08
       summary: Publish Prop
       description: Publish a prop and return the updated PropPublishStatus object. `/props/{propId}` is still served.
       tags:
-        - deprecated
         - props
       security:
         - authCookie: []
@@ -151,11 +149,10 @@ paths:
           $ref: ../responses/RouteNotImplementedError.yaml
     delete:
       operationId: unpublishProp
-      deprecated: true
+      x-deleted: 2026-08-08
       summary: Unpublish Prop
       description: Unpublish a prop and return the updated PropPublishStatus object. `/props/{propId}` is still served.
       tags:
-        - deprecated
         - props
       security:
         - authCookie: []

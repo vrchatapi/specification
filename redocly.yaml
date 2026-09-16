@@ -14,12 +14,14 @@ apis:
     output: dist/openapi-legacy.json
     decorators:
       remove-x-internal: on
+      vrchat/remove-x-deleted: on
 
   modern:
     root: openapi/openapi.yaml
     output: dist/openapi.json
     decorators:
       remove-x-internal: on
+      vrchat/remove-x-deleted: on
     preprocessors:
       vrchat/x-if:
         defines:
@@ -32,6 +34,8 @@ apis:
       vrchat/x-if:
         defines:
           - internal
+    decorators:
+      vrchat/remove-x-deleted: on
 
   modern-internal:
     root: openapi/openapi.yaml
@@ -41,18 +45,22 @@ apis:
         defines:
           - jsonschema
           - internal
+    decorators:
+      vrchat/remove-x-deleted: on
 
   legacy-yaml:
     root: openapi/openapi.yaml
     output: dist/openapi-legacy.yaml
     decorators:
       remove-x-internal: on
+      vrchat/remove-x-deleted: on
 
   modern-yaml:
     root: openapi/openapi.yaml
     output: dist/openapi.yaml
     decorators:
       remove-x-internal: on
+      vrchat/remove-x-deleted: on
     preprocessors:
       vrchat/x-if:
         defines:
@@ -65,6 +73,8 @@ apis:
       vrchat/x-if:
         defines:
           - internal
+    decorators:
+      vrchat/remove-x-deleted: on
 
   modern-internal-yaml:
     root: openapi/openapi.yaml
@@ -74,6 +84,8 @@ apis:
         defines:
           - jsonschema
           - internal
+    decorators:
+      vrchat/remove-x-deleted: on
 
   # Not published. The bundle the workflows run against, and what `pnpm
   # test:drift` compares the captures to — it cannot see undocumented response

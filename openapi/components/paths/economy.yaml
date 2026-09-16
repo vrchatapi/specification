@@ -223,11 +223,10 @@ paths:
   /economy/seller/eligibility:
     get:
       operationId: getSellerEligibility
-      deprecated: true
+      x-deleted: 2026-08-08
       summary: Get Seller Eligibility
       description: Return the current user's eligibility to become a seller.
       tags:
-        - deprecated
         - economy
       security:
         - authCookie: []
@@ -519,11 +518,10 @@ paths:
   /tilia/status:
     get:
       operationId: getTiliaStatus
-      deprecated: true
+      x-deleted: 2026-07-31
       summary: Get Tilia Status
       description: Return the Tilia integration status.
       tags:
-        - deprecated
         - economy
       security:
         - authCookie: []
@@ -601,11 +599,10 @@ paths:
       - $ref: ../parameters.yaml#/userId
     get:
       operationId: getBalanceEarnings
-      deprecated: true
+      x-deleted: 2026-07-31
       summary: Get Balance Earnings
       description: Return the user's balance from earnings.
       tags:
-        - deprecated
         - economy
       security:
         - authCookie: []
@@ -788,11 +785,10 @@ paths:
       - $ref: ../parameters.yaml#/userId
     get:
       operationId: getTiliaTos
-      deprecated: true
+      x-deleted: 2026-07-31
       summary: Get Tilia TOS Agreement Status
       description: Return the user's Tilia TOS agreement status.
       tags:
-        - deprecated
         - economy
       security:
         - authCookie: []
@@ -805,11 +801,10 @@ paths:
           $ref: ../responses/RouteNotImplementedError.yaml
     put:
       operationId: updateTiliaTos
-      deprecated: true
+      x-deleted: 2026-08-08
       summary: Update Tilia TOS Agreement Status
       description: Update the user's Tilia TOS agreement status.
       tags:
-        - deprecated
         - economy
       requestBody:
         content:
@@ -831,11 +826,10 @@ paths:
       - $ref: ../parameters.yaml#/subscriptionId
     get:
       operationId: getUserCreditsEligible
-      deprecated: true
+      x-deleted: 2026-08-08
       summary: Get User Credits Eligibility
       description: Return the user's subscription credit eligibility.
       tags:
-        - deprecated
         - economy
       security:
         - authCookie: []
