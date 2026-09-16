@@ -152,6 +152,17 @@ or deleting one breaks all of that, so open a matching PR on
 `vrchatapi/vrchat.community` adding a redirect from the old id before the rename
 lands, and fix the links in any release notes that named it.
 
+## One object, one file
+
+Every object schema lives in its own file under `openapi/components/schemas` and
+is reached by `$ref`. An object written inline inside another schema has no name,
+so each generated client invents its own, and a second schema that needs the same
+shape has to restate it.
+
+`vrc-title` is what catches this: a schema in its own file takes its title from
+that file, so anything the rule reports as untitled is an object still nested
+somewhere. Pull it out rather than adding a `title` in place.
+
 ## Comments
 
 Never add a YAML comment. A fact about the API belongs in a `description`.
