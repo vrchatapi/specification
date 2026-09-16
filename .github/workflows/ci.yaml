@@ -224,10 +224,12 @@ jobs:
           retention-days: 1
 
       - if: "!cancelled()"
-        run: timeout --verbose 120 sh test/report.sh --format github
+        timeout-minutes: 2
+        run: sh test/report.sh --format github
 
       - if: "!cancelled()"
-        run: timeout --verbose 120 sh test/report.sh >> "$GITHUB_STEP_SUMMARY"
+        timeout-minutes: 2
+        run: sh test/report.sh >> "$GITHUB_STEP_SUMMARY"
 
       - if: "!cancelled()"
         run: |

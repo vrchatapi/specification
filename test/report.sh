@@ -49,19 +49,49 @@ jq -r --argjson lines "$lines" --arg format "$format" '
 		| select(.checks | length > 0)
 	] as $steps
 	| ([.files[].executedWorkflows[]] | length) as $total
-	# A schema check reports a code frame quoting the whole response body, and
-	# colours every line of it: one came to 14MB, holding an escape sequence for
-	# each. Stripping those from the whole string rebuilds it once per escape and
-	# takes minutes. Only the first line names the property, and a table cell
-	# holds one line, as does an annotation title, so cut before the regex.
+	# A schema check reports what failed, sometimes the values it would have
+	# accepted, then a code frame quoting the whole response body. The prose is
+	# what is worth reading, so take lines until the frame starts.
+	#
+	# The frame colours every line: one message came to 14MB, holding an escape
+	# sequence for each, and stripping those from the whole string rebuilds it
+	# once per escape and takes minutes. Cut to a prefix before the regex.
 	| def detail:
+		# Ajv shouts the keyword it failed on.
+		def tidy:
+			sub("^REQUIRED must have required property "; "missing required property ")
+			| sub("^UNEVALUATEDPROPERTIES must NOT have unevaluated properties: "; "undocumented property ")
+			| sub("^ENUM must be equal to one of the allowed values"; "not one of the allowed values")
+			| sub("^TYPE "; "")
+			| sub("\\.$"; "");
 		if .condition then .condition
 		else
 			[
-				((.message // "")[0:2000] | gsub("\u001b\\[[0-9;]*m"; ""))
+				(.message // "")
 				| split("\n")[]
+				# Every line of a code frame carries a gutter, and a frame can run
+				# to megabytes. Finding the prose by substring rather than by regex
+				# is what keeps that affordable: the same lines, ninety times faster.
+				| select(index("|") | not)
+				| gsub("\u001b\\[[0-9;]*m"; "")
 				| select(test("\\S"))
-			][0] // ""
+			]
+			# One message can carry several failures, each opening with the keyword
+			# Ajv failed on. Anything else continues the failure above it, whether
+			# that is the values it would have taken or a sentence on the cause.
+			# Ajv repeats a failure once per element it rejected, and the same
+			# wording twice says nothing the first did not.
+			| map(sub("^ +"; "") | sub(" +$"; ""))
+			| reduce .[] as $line (
+				[];
+				if (length > 0) and (($line | test("^[A-Z][A-Z]")) | not)
+				then .[0:-1] + [.[-1] + " " + $line]
+				else . + [$line]
+				end
+			)
+			| map(tidy)
+			| reduce .[] as $item ([]; if index([$item]) then . else . + [$item] end)
+			| join("; ")
 		end;
 	def rows($severity):
 		[
@@ -71,22 +101,44 @@ jq -r --argjson lines "$lines" --arg format "$format" '
 			| select(.severity == $severity)
 			| $step + {check: .name, detail: detail}
 		];
+	# The annotation already points at the step, so its name would only repeat
+	# the line it sits on. The check name is worth printing when it carries no
+	# detail of its own.
 	def summary:
-		"\(.check)\(if .detail == "" then "" else ": " + .detail end)";
+		if .detail == "" then .check else .detail end;
 
+	# Failures run long enough that no table column can hold them. A workflow can
+	# fail several steps, and a step several checks, so each nests under the one
+	# it belongs to rather than repeating it.
 	def markdown:
-		def cell: gsub("\\|"; "\\\\|");
-		def table($severity):
+		def unique_in_order: reduce .[] as $item ([]; if index([$item]) then . else . + [$item] end);
+		def entries($severity):
 			[
-				rows($severity)[]
-				| "| `\(.workflow)` | `\(.step)` | `\(.code) \(.method) \(.path)` | \(summary | cell) |"
-			];
+				rows($severity)
+				| group_by(.workflow)[]
+				| ["- **\(.[0].workflow)**"]
+				+ [
+					group_by(.step)[]
+					| ["  - `\(.[0].step)`"]
+					+ [
+						group_by([.code, .method, .path])[]
+						| ["    - `\(.[0].code) \(.[0].method) \(.[0].path)`"]
+						+ ([.[] | summary | split("; ")[]] | unique_in_order | map("      - \(.)"))
+					]
+				]
+			]
+			| flatten;
+		def plural($n; $noun): "\($n) \($noun)\(if $n == 1 then "" else "s" end)";
 		def section($title; $severity):
-			table($severity) as $table
-			| if ($table | length) == 0 then empty
+			entries($severity) as $entries
+			| rows($severity) as $rows
+			| if ($entries | length) == 0 then empty
 			else
-				["### \($title) (\($table | length))", "", "| Workflow | Step | Response | Check |", "| --- | --- | --- | --- |"]
-				+ $table
+				[
+					"### \($title) (\(plural($rows | map(.workflow) | unique | length; "workflow")), \(plural($rows | length; "check")))",
+					""
+				]
+				+ $entries
 				+ [""]
 			end;
 		([section("Failures"; "error"), section("Warnings"; "warn")] | flatten) as $sections
@@ -98,18 +150,19 @@ jq -r --argjson lines "$lines" --arg format "$format" '
 	# the runner calls its API for every one it is given. A run whose session
 	# failed fails every workflow it has, so this cap is what keeps the step from
 	# spending minutes on annotations nobody will see. The summary keeps them all.
+	#
+	# GitHub heads each annotation with the step that emitted it, so a title only
+	# repeats that. The workflow, the check and the request go in the body.
 	def github:
 		def message: gsub("%"; "%25") | gsub("\r"; "%0D") | gsub("\n"; "%0A");
-		def property: message | gsub(":"; "%3A") | gsub(","; "%2C");
 		def command($level; $severity):
 			rows($severity) as $all
 			| [
 				$all[0:10][]
 				| ($lines[.workflow + "\t" + .step] // 0) as $line
 				| (if $line == 0 then "" else ",line=\($line)" end) as $anchor
-				| ("\(.workflow) / \(.step)" | property) as $title
-				| ("\(summary) — \(.code) \(.method) \(.path)" | message) as $body
-				| "::\($level) file=test/arazzo.yaml\($anchor),title=\($title)::\($body)"
+				| ("\(.workflow): \(summary) — \(.code) \(.method) \(.path)" | message) as $body
+				| "::\($level) file=test/arazzo.yaml\($anchor)::\($body)"
 			]
 			+ (
 				if ($all | length) > 10
