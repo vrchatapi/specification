@@ -8,8 +8,7 @@ properties:
   text:
     type: string
   textKey:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   type:
     $ref: ./NotificationV2ResponseType.yaml
 required:

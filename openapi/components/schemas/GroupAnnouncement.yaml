@@ -8,8 +8,7 @@ properties:
     $ref: ./UserID.yaml
     nullable: true
   createdAt:
-    type: string
-    nullable: true
+    type: ['null', 'string']
     format: date-time
   editorId:
     $ref: ./UserID.yaml
@@ -24,19 +23,15 @@ properties:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   roleIds:
     $ref: ./GroupRoleIDList.yaml
   text:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   title:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   updatedAt:
-    type: string
-    nullable: true
+    type: ['null', 'string']
     format: date-time
   visibility:
     type: string

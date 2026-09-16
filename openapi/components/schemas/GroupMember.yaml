@@ -1,25 +1,20 @@
 title: GroupMember
-type: object
+type: ['null', 'object']
 description: May be null when attempting to retrieve group membership for a user who is not part of the group
-nullable: true
 properties:
   acceptedByDisplayName:
-    type: string
+    type: ['null', 'string']
     description: Only missing when explicitly fetching own user.
-    nullable: true
   acceptedById:
-    type: string
+    type: ['null', 'string']
     description: Only missing when explicitly fetching own user.
-    nullable: true
   bannedAt:
-    type: string
+    type: ['null', 'string']
     description: Only missing when explicitly fetching own user.
-    nullable: true
     format: date-time
   createdAt:
-    type: string
+    type: ['null', 'string']
     description: Only missing when explicitly fetching own user.
-    nullable: true
     format: date-time
   groupId:
     $ref: ./GroupID.yaml
@@ -40,21 +35,18 @@ properties:
     type: boolean
     description: Only missing when explicitly fetching own user.
   joinedAt:
-    type: string
-    nullable: true
+    type: ['null', 'string']
     format: date-time
   lastPostReadAt:
-    type: string
-    nullable: true
+    type: ['null', 'string']
     format: date-time
   mRoleIds:
     type: array
     items:
       $ref: ./GroupRoleID.yaml
   managerNotes:
-    type: string
+    type: ['null', 'string']
     description: Only missing when explicitly fetching own user.
-    nullable: true
   membershipStatus:
     $ref: ./GroupMemberStatus.yaml
   roleIds:

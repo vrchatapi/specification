@@ -32,8 +32,7 @@ properties:
   platform:
     $ref: ../schemas/Platform.yaml
   previewYoutubeId:
-    type: string
-    nullable: true
+    type: ['null', 'string']
   recommendedCapacity:
     type: integer
     example: 4

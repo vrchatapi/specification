@@ -46,9 +46,8 @@ properties:
   senderUserId:
     $ref: ./UserID.yaml
   senderUsername:
-    type: string
+    type: ['null', 'string']
     description: The name of the user who sent the notification.
-    nullable: true
     minLength: 1
   type:
     $ref: ./NotificationType.yaml
