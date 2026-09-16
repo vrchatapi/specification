@@ -2,6 +2,8 @@ title: ProductListingAttribution
 type: object
 description: Attribution shown alongside a listing.
 properties:
+  collaborationId:
+    type: string
   creator:
     $ref: ./ProductListingAttributionCreator.yaml
   publisher:
