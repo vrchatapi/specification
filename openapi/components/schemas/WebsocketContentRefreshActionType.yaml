@@ -1,8 +1,8 @@
 title: WebsocketContentRefreshActionType
 type: string
 enum:
-  - created
-  - deleted
   - add
+  - created
   - delete
+  - deleted
 example: created

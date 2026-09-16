@@ -8,10 +8,10 @@ properties:
   fileId:
     $ref: ./FileID.yaml
   itemId:
-#TODO: is this correct?
+    # TODO: is this correct?
     $ref: ./InventoryTemplateID.yaml
   itemType:
-#TODO: is this correct?
+    # TODO: is this correct?
     $ref: ./InventoryItemType.yaml
 required:
   - actionType

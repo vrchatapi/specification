@@ -3,12 +3,12 @@ type: object
 properties:
   id:
     $ref: ./NotificationID.yaml
+  updates:
+    # Todo: type this better
+    type: object
   version:
     type: integer
-  updates:
-    #Todo: type this better
-    type: object
 required:
   - id
-  - version
   - updates
+  - version

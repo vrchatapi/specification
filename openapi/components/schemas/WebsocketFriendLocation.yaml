@@ -5,18 +5,18 @@ properties:
     type: boolean
   location:
     $ref: ./LocationID.yaml
+  travelingToLocation:
+    $ref: ./LocationID.yaml
   user:
     $ref: ./User.yaml
   userId:
     $ref: ./UserID.yaml
-  travelingToLocation:
-    $ref: ./LocationID.yaml
   worldId:
     $ref: ./WorldID.yaml
 required:
   - canRequestInvite
   - location
+  - travelingToLocation
   - user
   - userId
-  - travelingToLocation
   - worldId

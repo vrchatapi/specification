@@ -1,11 +1,11 @@
 title: WebsocketInstanceQueueReady
 type: object
 properties:
-  location:
-    $ref: ./LocationID.yaml
   expiry:
     type: string
     format: date-time
+  location:
+    $ref: ./LocationID.yaml
 required:
-  - location
   - expiry
+  - location

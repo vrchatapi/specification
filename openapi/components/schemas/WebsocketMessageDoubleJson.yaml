@@ -1,32 +1,6 @@
 title: WebsocketMessageDoubleJson
 type: object
 properties:
-  type:
-    type: string
-    enum:
-      - notification
-      - response-notification
-      - notification-v2
-      - notification-v2-update
-      - notification-v2-delete
-      - friend-add
-      - friend-delete
-      - friend-online
-      - friend-active
-      - friend-offline
-      - friend-update
-      - friend-location
-      - user-update
-      - user-location
-      - user-badge-assigned
-      - user-badge-unassigned
-      - content-refresh
-      - instance-queue-joined
-      - instance-queue-ready
-      - group-joined
-      - group-left
-      - group-member-updated
-      - group-role-updated
   content:
     type: string
     description: JSON-encoded object.
@@ -62,28 +36,55 @@ properties:
           discriminator:
             propertyName: type
             mapping:
-              notification: ./WebsocketNotification.yaml
-              response-notification: ./WebsocketResponseNotification.yaml
-              notification-v2: ./NotificationV2.yaml
-              notification-v2-update: ./WebsocketNotificationV2Update.yaml
-              notification-v2-delete: ./WebsocketNotificationV2Delete.yaml
+              content-refresh: ./WebsocketContentRefresh.yaml
+              friend-active: ./WebsocketFriendActive.yaml
               friend-add: ./WebsocketFriendAdd.yaml
               friend-delete: ./WebsocketFriendDelete.yaml
-              friend-online: ./WebsocketFriendOnline.yaml
-              friend-active: ./WebsocketFriendActive.yaml
-              friend-offline: ./WebsocketFriendOffline.yaml
-              friend-update: ./WebsocketFriendUpdate.yaml
               friend-location: ./WebsocketFriendLocation.yaml
-              user-update: ./WebsocketUserUpdate.yaml
-              user-location: ./WebsocketUserLocation.yaml
-              user-badge-assigned: ./WebsocketUserBadgeAssigned.yaml
-              user-badge-unassigned: ./WebsocketUserBadgeUnassigned.yaml
-              content-refresh: ./WebsocketContentRefresh.yaml
-              instance-queue-joined: ./WebsocketInstanceQueueJoined.yaml
-              instance-queue-ready: ./WebsocketInstanceQueueReady.yaml
+              friend-offline: ./WebsocketFriendOffline.yaml
+              friend-online: ./WebsocketFriendOnline.yaml
+              friend-update: ./WebsocketFriendUpdate.yaml
               group-joined: ./WebsocketGroupJoined.yaml
               group-left: ./WebsocketGroupLeft.yaml
               group-member-updated: ./WebsocketGroupMemberUpdated.yaml
               group-role-updated: ./WebsocketGroupRoleUpdated.yaml
+              notification: ./WebsocketNotification.yaml
+              notification-v2: ./NotificationV2.yaml
+              notification-v2-update: ./WebsocketNotificationV2Update.yaml
+              notification-v2-delete: ./WebsocketNotificationV2Delete.yaml
+              instance-queue-joined: ./WebsocketInstanceQueueJoined.yaml
+              instance-queue-ready: ./WebsocketInstanceQueueReady.yaml
+              user-update: ./WebsocketUserUpdate.yaml
+              user-location: ./WebsocketUserLocation.yaml
+              user-badge-assigned: ./WebsocketUserBadgeAssigned.yaml
+              user-badge-unassigned: ./WebsocketUserBadgeUnassigned.yaml
+              response-notification: ./WebsocketResponseNotification.yaml
+  type:
+    type: string
+    enum:
+      - content-refresh
+      - friend-active
+      - friend-add
+      - friend-delete
+      - friend-location
+      - friend-offline
+      - friend-online
+      - friend-update
+      - group-joined
+      - group-left
+      - group-member-updated
+      - group-role-updated
+      - notification
+      - notification-v2
+      - notification-v2-update
+      - notification-v2-delete
+      - instance-queue-joined
+      - instance-queue-ready
+      - user-update
+      - user-location
+      - user-badge-assigned
+      - user-badge-unassigned
+      - response-notification
 required:
+  - content
   - type

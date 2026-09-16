@@ -1,10 +1,10 @@
 title: WebsocketFriendOffline
 type: object
 properties:
-  userId:
-    $ref: ./UserID.yaml
   platform:
     $ref: ./Platform.yaml
+  userId:
+    $ref: ./UserID.yaml
 required:
-  - userId
   - platform
+  - userId

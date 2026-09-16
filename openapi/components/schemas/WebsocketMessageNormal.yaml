@@ -1,12 +1,6 @@
 title: WebsocketMessageNormal
 type: object
 properties:
-  type:
-    type: string
-    enum:
-      - see-notification
-      - hide-notification
-      - clear-notification
   content:
     x-if:
       when: jsonschema
@@ -21,6 +15,12 @@ properties:
             see-notification: ./WebsocketSeeNotification.yaml
             hide-notification: ./WebsocketHideNotification.yaml
             clear-notification: ./WebsocketClearNotification.yaml
+  type:
+    type: string
+    enum:
+      - clear-notification
+      - hide-notification
+      - see-notification
 required:
-  - type
   - content
+  - type
