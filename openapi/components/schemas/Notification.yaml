@@ -21,6 +21,7 @@ properties:
             - $ref: ./NotificationDetailVoteToKick.yaml
           discriminator:
             propertyName: type
+            propertyBaseName: type
             mapping:
               boop: ./NotificationDetailBoop.yaml
               invite: ./NotificationDetailInvite.yaml
