@@ -38,9 +38,6 @@ properties:
           oneOf:
             - $ref: ./WebsocketNotification.yaml
             - $ref: ./WebsocketResponseNotification.yaml
-            - $ref: ./WebsocketSeeNotification.yaml
-            - $ref: ./WebsocketHideNotification.yaml
-            - $ref: ./WebsocketClearNotification.yaml
             - $ref: ./NotificationV2.yaml
             - $ref: ./WebsocketNotificationV2Update.yaml
             - $ref: ./WebsocketNotificationV2Delete.yaml
@@ -67,9 +64,6 @@ properties:
             mapping:
               notification: ./WebsocketNotification.yaml
               response-notification: ./WebsocketResponseNotification.yaml
-              see-notification: ./WebsocketSeeNotification.yaml
-              hide-notification: ./WebsocketHideNotification.yaml
-              clear-notification: ./WebsocketNotification.yaml
               notification-v2: ./NotificationV2.yaml
               notification-v2-update: ./WebsocketNotificationV2Update.yaml
               notification-v2-delete: ./WebsocketNotificationV2Delete.yaml
