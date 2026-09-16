@@ -8,7 +8,7 @@ paths:
     parameters:
       - $ref: ../parameters.yaml#/cosmeticItemType
     get:
-      operationId: getCosmeticIndex
+      operationId: getCosmetics
       summary: List Cosmetics
       description: List every cosmetic of a kind that VRChat has published, whether or not the caller owns it.
       tags:

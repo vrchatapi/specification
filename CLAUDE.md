@@ -145,6 +145,13 @@ it stopped answering.
 Mark `deprecated: true` where the route still answers but VRChat has replaced
 it or the client no longer uses it. Keep the original tag and add `deprecated`.
 
+An operation id is a public URL. `vrchat.community/reference/<kebab-case-id>`
+is what the changelogs, the release notes and every link anyone has saved point
+at, and generated clients take their method names from the same string. Renaming
+or deleting one breaks all of that, so open a matching PR on
+`vrchatapi/vrchat.community` adding a redirect from the old id before the rename
+lands, and fix the links in any release notes that named it.
+
 ## Comments
 
 Never add a YAML comment. A fact about the API belongs in a `description`.

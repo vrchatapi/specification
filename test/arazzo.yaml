@@ -10993,7 +10993,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
-  - workflowId: get-cosmetic-index-portalskin
+  - workflowId: get-cosmetics-portalskin
     summary: Cosmetics of type portalskin
     parameters:
       - reference: $components.parameters.userAgent
@@ -11003,7 +11003,7 @@ workflows:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: cosmetic-index
-        operationId: $sourceDescriptions.default.getCosmeticIndex
+        operationId: $sourceDescriptions.default.getCosmetics
         parameters:
           - name: itemType
             in: path
@@ -11011,7 +11011,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
-  - workflowId: get-cosmetic-index-droneskin
+  - workflowId: get-cosmetics-droneskin
     summary: Cosmetics of type droneskin
     parameters:
       - reference: $components.parameters.userAgent
@@ -11021,7 +11021,7 @@ workflows:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: cosmetic-index
-        operationId: $sourceDescriptions.default.getCosmeticIndex
+        operationId: $sourceDescriptions.default.getCosmetics
         parameters:
           - name: itemType
             in: path
@@ -11029,7 +11029,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
-  - workflowId: get-cosmetic-index-warpeffect
+  - workflowId: get-cosmetics-warpeffect
     summary: Cosmetics of type warpeffect
     parameters:
       - reference: $components.parameters.userAgent
@@ -11039,7 +11039,7 @@ workflows:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: cosmetic-index
-        operationId: $sourceDescriptions.default.getCosmeticIndex
+        operationId: $sourceDescriptions.default.getCosmetics
         parameters:
           - name: itemType
             in: path
@@ -11047,7 +11047,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
-  - workflowId: get-cosmetic-index-nameplateeffect
+  - workflowId: get-cosmetics-nameplateeffect
     summary: Cosmetics of type nameplateEffect
     parameters:
       - reference: $components.parameters.userAgent
@@ -11057,7 +11057,7 @@ workflows:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: cosmetic-index
-        operationId: $sourceDescriptions.default.getCosmeticIndex
+        operationId: $sourceDescriptions.default.getCosmetics
         parameters:
           - name: itemType
             in: path
@@ -11065,7 +11065,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
-  - workflowId: get-cosmetic-index-profileeffect
+  - workflowId: get-cosmetics-profileeffect
     summary: Cosmetics of type profileEffect
     parameters:
       - reference: $components.parameters.userAgent
@@ -11075,7 +11075,7 @@ workflows:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: cosmetic-index
-        operationId: $sourceDescriptions.default.getCosmeticIndex
+        operationId: $sourceDescriptions.default.getCosmetics
         parameters:
           - name: itemType
             in: path
@@ -11083,7 +11083,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
-  - workflowId: get-cosmetic-index-profilebackground
+  - workflowId: get-cosmetics-profilebackground
     summary: Cosmetics of type profileBackground
     parameters:
       - reference: $components.parameters.userAgent
@@ -11093,7 +11093,7 @@ workflows:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: cosmetic-index
-        operationId: $sourceDescriptions.default.getCosmeticIndex
+        operationId: $sourceDescriptions.default.getCosmetics
         parameters:
           - name: itemType
             in: path
@@ -11101,7 +11101,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
-  - workflowId: get-cosmetic-index-iconframe
+  - workflowId: get-cosmetics-iconframe
     summary: Cosmetics of type iconFrame
     parameters:
       - reference: $components.parameters.userAgent
@@ -11111,7 +11111,7 @@ workflows:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: cosmetic-index
-        operationId: $sourceDescriptions.default.getCosmeticIndex
+        operationId: $sourceDescriptions.default.getCosmetics
         parameters:
           - name: itemType
             in: path
@@ -11119,8 +11119,8 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
-  - workflowId: get-cosmetic-index-invalid-type
-    summary: getCosmeticIndex names the types it accepts
+  - workflowId: get-cosmetics-invalid-type
+    summary: getCosmetics names the types it accepts
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -11129,7 +11129,7 @@ workflows:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: cosmetic-index
-        operationId: $sourceDescriptions.default.getCosmeticIndex
+        operationId: $sourceDescriptions.default.getCosmetics
         parameters:
           - name: itemType
             in: path
@@ -11137,13 +11137,13 @@ workflows:
         successCriteria:
           - condition: $statusCode == 400
 
-  - workflowId: get-cosmetic-index-unauthenticated
-    summary: getCosmeticIndex refuses an anonymous caller
+  - workflowId: get-cosmetics-unauthenticated
+    summary: getCosmetics refuses an anonymous caller
     parameters:
       - reference: $components.parameters.userAgent
     steps:
       - stepId: cosmetic-index
-        operationId: $sourceDescriptions.default.getCosmeticIndex
+        operationId: $sourceDescriptions.default.getCosmetics
         parameters:
           - name: itemType
             in: path
