@@ -217,12 +217,6 @@ jobs:
           VRCHAT_FRIEND_ID: ${{ secrets.VRCHAT_FRIEND_ID }}
 
       - if: "!cancelled()"
-        run: sh test/report.sh --format github
-
-      - if: "!cancelled()"
-        run: sh test/report.sh >> "$GITHUB_STEP_SUMMARY"
-
-      - if: "!cancelled()"
         run: |
           status=0
           printf '### Drift\n\n```\n' >> "$GITHUB_STEP_SUMMARY"
