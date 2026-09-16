@@ -1,6 +1,5 @@
 title: WebsocketResponseNotification
 type: object
-description: ""
 properties:
   notificationId:
     type: string
