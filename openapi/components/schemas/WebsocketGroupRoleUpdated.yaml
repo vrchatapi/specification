@@ -3,5 +3,5 @@ type: object
 properties:
   role:
     $ref: ./GroupRole.yaml
-requires:
+required:
   - role

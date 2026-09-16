@@ -3,5 +3,5 @@ type: object
 properties:
   member:
     $ref: ./GroupMemberLimitedUser.yaml
-requires:
+required:
   - member
