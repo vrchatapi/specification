@@ -54,3 +54,8 @@ x-if:
         user-update: ./WebsocketUserUpdateEncoded.yaml
   else:
     type: object
+    properties:
+      type:
+        type: string
+      content:
+        type: string
