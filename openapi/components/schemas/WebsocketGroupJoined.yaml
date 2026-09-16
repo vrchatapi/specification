@@ -3,5 +3,5 @@ type: object
 properties:
   groupId:
     $ref: ./GroupID.yaml
-requires:
+required:
   - groupId
