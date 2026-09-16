@@ -20,7 +20,7 @@ properties:
           mapping:
             see-notification: ./WebsocketSeeNotification.yaml
             hide-notification: ./WebsocketHideNotification.yaml
-            clear-notification: ./WebsocketNotification.yaml
+            clear-notification: ./WebsocketClearNotification.yaml
 required:
   - type
   - content
