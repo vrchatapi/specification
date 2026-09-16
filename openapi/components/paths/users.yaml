@@ -13,6 +13,12 @@ paths:
       description: Get a user's public profile information.
       tags:
         - users
+      parameters:
+        - name: withGroupsAndWorlds
+          description: Include `groups`, `publicWorlds` and `totalPublicWorldsCount` in the response.
+          in: query
+          schema:
+            type: boolean
       security:
         - authCookie: []
       responses:

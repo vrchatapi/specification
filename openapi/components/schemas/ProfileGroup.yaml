@@ -1,0 +1,9 @@
+title: ProfileGroup
+type: object
+properties:
+  iconUrl:
+    type: string
+  id:
+    $ref: ./GroupID.yaml
+  name:
+    type: string
