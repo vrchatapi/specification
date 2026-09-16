@@ -57,8 +57,8 @@ properties:
               response-notification: ./WebsocketResponseNotification.yaml
               user-badge-assigned: ./WebsocketUserBadgeAssigned.yaml
               user-badge-unassigned: ./WebsocketUserBadgeUnassigned.yaml
-              user-update: ./WebsocketUserUpdate.yaml
               user-location: ./WebsocketUserLocation.yaml
+              user-update: ./WebsocketUserUpdate.yaml
   type:
     type: string
     enum:
@@ -83,8 +83,8 @@ properties:
       - response-notification
       - user-badge-assigned
       - user-badge-unassigned
-      - user-update
       - user-location
+      - user-update
 required:
   - content
   - type
