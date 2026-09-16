@@ -40,6 +40,8 @@ properties:
     type: string
   finalName:
     type: string
+  hoverToJoin:
+    type: boolean
   iconImageUrl:
     type: string
   imageUrl:

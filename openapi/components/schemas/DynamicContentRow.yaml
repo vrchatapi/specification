@@ -21,6 +21,9 @@ properties:
       type: string
   featuredResults:
     type: string
+  groupPool:
+    type: string
+    example: mine
   index:
     type: integer
     minimum: 0
@@ -115,6 +118,9 @@ properties:
   upcomingOffsetMinutes:
     type: integer
     example: 10080
+  worldPool:
+    type: string
+    example: trending
 required:
   - name
   - platform
