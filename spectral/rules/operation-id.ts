@@ -64,7 +64,8 @@ export const operationId = rule({
 			field: "operationId",
 			function: casing,
 			functionOptions: {
-				type: "camelCase"
+				type: "camelCase",
+				acronyms: ["2FA", "CSS", "ICS"]
 			}
 		}
 	]
