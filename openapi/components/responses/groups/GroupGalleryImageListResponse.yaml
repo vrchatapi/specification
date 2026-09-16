@@ -2,6 +2,7 @@ description: Returns a list of GroupGalleryImage objects, wrapped in a paginated
 content:
   application/json:
     schema:
+      title: GroupGalleryImageListResponse
       oneOf:
         - type: array
           items:
