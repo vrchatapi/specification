@@ -48,17 +48,17 @@ properties:
               group-left: ./WebsocketGroupLeft.yaml
               group-member-updated: ./WebsocketGroupMemberUpdated.yaml
               group-role-updated: ./WebsocketGroupRoleUpdated.yaml
-              notification: ./WebsocketNotification.yaml
-              notification-v2: ./NotificationV2.yaml
-              notification-v2-update: ./WebsocketNotificationV2Update.yaml
-              notification-v2-delete: ./WebsocketNotificationV2Delete.yaml
               instance-queue-joined: ./WebsocketInstanceQueueJoined.yaml
               instance-queue-ready: ./WebsocketInstanceQueueReady.yaml
-              user-update: ./WebsocketUserUpdate.yaml
-              user-location: ./WebsocketUserLocation.yaml
+              notification: ./WebsocketNotification.yaml
+              notification-v2: ./NotificationV2.yaml
+              notification-v2-delete: ./WebsocketNotificationV2Delete.yaml
+              notification-v2-update: ./WebsocketNotificationV2Update.yaml
+              response-notification: ./WebsocketResponseNotification.yaml
               user-badge-assigned: ./WebsocketUserBadgeAssigned.yaml
               user-badge-unassigned: ./WebsocketUserBadgeUnassigned.yaml
-              response-notification: ./WebsocketResponseNotification.yaml
+              user-update: ./WebsocketUserUpdate.yaml
+              user-location: ./WebsocketUserLocation.yaml
   type:
     type: string
     enum:
@@ -74,17 +74,17 @@ properties:
       - group-left
       - group-member-updated
       - group-role-updated
-      - notification
-      - notification-v2
-      - notification-v2-update
-      - notification-v2-delete
       - instance-queue-joined
       - instance-queue-ready
-      - user-update
-      - user-location
+      - notification
+      - notification-v2
+      - notification-v2-delete
+      - notification-v2-update
+      - response-notification
       - user-badge-assigned
       - user-badge-unassigned
-      - response-notification
+      - user-update
+      - user-location
 required:
   - content
   - type
