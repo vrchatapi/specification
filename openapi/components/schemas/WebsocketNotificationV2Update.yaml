@@ -1,1 +1,14 @@
+title: WebsocketNotificationV2Update
 type: object
+properties:
+  id:
+    type: string
+  version:
+    type: integer
+  updates:
+    #Todo: type this better
+    type: object
+required:
+  - id
+  - version
+  - updates
