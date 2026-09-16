@@ -27,11 +27,11 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       '@redocly/cli':
-        specifier: ^2.46.0
-        version: 2.49.0
+        specifier: ^2.53.1
+        version: 2.53.1
       '@redocly/openapi-core':
-        specifier: ^2.41.2
-        version: 2.49.0
+        specifier: ^2.53.1
+        version: 2.53.1
       '@stoplight/spectral-cli':
         specifier: ^6.15.0
         version: 6.15.0
@@ -267,8 +267,8 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  '@babel/runtime@7.28.4':
-    resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
+  '@babel/runtime@7.29.7':
+    resolution: {integrity: sha512-Nq8OhGWiZIZGV6hLHoyAKLLcJihP/xFeBMGJoUrxTX2psI8dCifzLhZISFb+VWS3wFMRDmCGw5R+dOySCqPLhw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/types@7.28.5':
@@ -1113,16 +1113,16 @@ packages:
   '@redocly/ajv@8.18.3':
     resolution: {integrity: sha512-l42u0of3hY98sN2A+M4qTX1O/KrpgGH32Hu9kP2GtHyD5Dfqq86PKFLe5dwaD8DEnNmlOlll2BAmeEtf0DaySg==}
 
-  '@redocly/cli@2.49.0':
-    resolution: {integrity: sha512-87UuARXYrPIiHhd/UriamL4BApuPgB0E91coBtoPG6PK4giTwiuo3dI4RoyMGhsC7TwgAnL8PJuhCwGymgwbVA==}
+  '@redocly/cli@2.53.1':
+    resolution: {integrity: sha512-NzfSDjHZMMY5qvoXWT5Xz3qIdEEzlxjukU1hytgxY0UMTVroCLm8xprzVjDcMW/2L/P6zgP3vzIZBqS0tG69eA==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
     hasBin: true
 
-  '@redocly/config@0.53.1':
-    resolution: {integrity: sha512-aOldTWynKS3ZM6u8WkL72d94QBobITv9X6UECiZykgVjdLiAqV737bPVLGKJYPWf0Ryf3zSHgUYALjCj66BkdA==}
+  '@redocly/config@0.56.0':
+    resolution: {integrity: sha512-sGEC13BWOSKgFEHSPmFmTHpRt+zfNOc4+5+COe3Z4TD37glshCzM8qaeX7fIddGf6akRSs1tz3j+2FZVEQtCWw==}
 
-  '@redocly/openapi-core@2.49.0':
-    resolution: {integrity: sha512-EoawTPEubDThlHGwJCwHDZgCuEYGWt4iFMDorSWWnSB8ZK1/8PAowohB1U6qumgcuTu0Md0BYSgueL1TNgF7qw==}
+  '@redocly/openapi-core@2.53.1':
+    resolution: {integrity: sha512-N4Mpjq+ybWxnZ3CawlncxFhunIv2v4bF4H7/ObeVWgj+aGLBMCgEb10w4uzyuJyOmsp6Bwd2kguIJYz50DdLjQ==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
 
   '@rollup/plugin-commonjs@22.0.2':
@@ -2462,6 +2462,9 @@ packages:
   fast-uri@3.1.0:
     resolution: {integrity: sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==}
 
+  fast-uri@3.1.8:
+    resolution: {integrity: sha512-GZMtZUTNRpOVIECoXwLNZS5xUGE+mVNbTB8h/7Rwh2TFWcBQiPzTgyZi05BF9UMZKkLJv8XBRJTlU7zg8+ZfMg==}
+
   fast-xml-builder@1.3.0:
     resolution: {integrity: sha512-F74cZEdCvuw9P41GAC3rod4X04jjWGM1JPEv/GWSqFTWLsdyMSBMBMlm9Hk3GLBgLBbdBNY8yee0pQh2RBVESQ==}
 
@@ -2876,8 +2879,8 @@ packages:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
     hasBin: true
 
-  js-yaml@5.4.1:
-    resolution: {integrity: sha512-28R/k+NAjeuf7+CKlTxWZVExJGwVVLwY06DgEnOMz2gEpfNkDcD7QvyiVPT0xy0XXhU8vHsd4Ot42OOPdJG7dQ==}
+  js-yaml@5.4.2:
+    resolution: {integrity: sha512-m+aqu+LwO1O6sIopafj8HUVl5aawITwZQe/yHpMCKjaWBaA/d07B/QdMb3529REftiU+RMMHL3Vlsw3hON7vWg==}
     hasBin: true
 
   jsdoc-type-pratt-parser@4.1.0:
@@ -4343,7 +4346,7 @@ snapshots:
     dependencies:
       '@babel/types': 7.28.5
 
-  '@babel/runtime@7.28.4': {}
+  '@babel/runtime@7.29.7': {}
 
   '@babel/types@7.28.5':
     dependencies:
@@ -5101,26 +5104,26 @@ snapshots:
   '@redocly/ajv@8.18.3':
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.0
+      fast-uri: 3.1.8
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  '@redocly/cli@2.49.0': {}
+  '@redocly/cli@2.53.1': {}
 
-  '@redocly/config@0.53.1':
+  '@redocly/config@0.56.0':
     dependencies:
       json-schema-to-ts: 2.7.2
 
-  '@redocly/openapi-core@2.49.0':
+  '@redocly/openapi-core@2.53.1':
     dependencies:
       '@redocly/ajv': 8.18.3
-      '@redocly/config': 0.53.1
+      '@redocly/config': 0.56.0
       ajv: '@redocly/ajv@8.18.3'
       ajv-formats: 3.0.1(@redocly/ajv@8.18.3)
       colorette: 1.4.0
       graphql: 16.14.2
       js-levenshtein: 1.1.6
-      js-yaml: 5.4.1
+      js-yaml: 5.4.2
       picomatch: 4.0.7
       pluralize: 8.0.0
       yaml-ast-parser: 0.0.43
@@ -6825,6 +6828,8 @@ snapshots:
 
   fast-uri@3.1.0: {}
 
+  fast-uri@3.1.8: {}
+
   fast-xml-builder@1.3.0:
     dependencies:
       path-expression-matcher: 1.6.2
@@ -7246,7 +7251,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  js-yaml@5.4.1:
+  js-yaml@5.4.2:
     dependencies:
       argparse: 2.0.1
 
@@ -7266,7 +7271,7 @@ snapshots:
 
   json-schema-to-ts@2.7.2:
     dependencies:
-      '@babel/runtime': 7.28.4
+      '@babel/runtime': 7.29.7
       '@types/json-schema': 7.0.15
       ts-algebra: 1.2.2
 
