@@ -131,8 +131,6 @@ required:
   - productType
   - products
   - recurrable
-  - refundable
   - sellerDisplayName
   - sellerId
   - stackable
-  - storeIds
