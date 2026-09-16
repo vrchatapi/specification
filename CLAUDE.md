@@ -166,8 +166,18 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
   schema drift a fresh one reports.
 - A `-w` run writes `test/.out/partial.har` and leaves the suite capture alone.
   `coverage` and `drift` read the suite capture, so run them after a full run.
-- Some files under `openapi/components/paths/` are CRLF. Read a diff of one with
-  `git diff --ignore-all-space` before believing its size.
+- A response file may already serve another operation. Check with `grep -rn`
+  before rewriting one: overwriting `FavoriteGroupListResponse.yaml` for a new
+  route silently broke the three workflows `getFavoriteGroups` runs through it.
+- One `schema check` message carries every failure the step found, separated by
+  code frames. Reading only the first hides the rest, so three undocumented
+  properties get found one suite run apart instead of together.
+- Ajv reports `unevaluatedProperties` at the outermost object that fails and does
+  not descend, so fixing a property on a shelf can reveal others nested under it.
+  `drift` and the suite's schema check disagree on which they name.
+- `jq`'s `gsub` over a multi-megabyte string takes minutes. A coloured code frame
+  in a check message reached 14MB. Filter lines by substring before any regex
+  touches them.
 
 ## Commands
 
@@ -179,6 +189,19 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
 | `pnpm test -w session -w <workflowId>` | one workflow, plus the session it reads |
 | `pnpm test:coverage` | what the traffic never reached |
 | `pnpm test:drift` | where traffic and description disagree |
+| `sh test/report.sh` | the last run's failures as Markdown |
+| `sh test/report.sh --format github` | the same, as CI annotations |
 
 `pnpm test` reuses the cached session in `test/.out/`; delete
 `test/.out/session` to force a fresh login.
+
+`oasdiff` (`~/go/bin/oasdiff`) diffs a release bundle against `dist/`. Read
+`docs/writing-changelogs.md` before writing release notes.
+
+## A second account settles what one cannot
+
+`presence` has a legacy shape and a current one, and which you get depends on the
+account. `themes`, `worldFavoriteLists` and the frontend branches are empty on the
+test account and populated elsewhere. When a field resists the suite, ask a user
+for their `/auth/user` body and validate it against `dist/openapi-test.yaml`.
+`docs/next.md` carries the snippet that collects one.
