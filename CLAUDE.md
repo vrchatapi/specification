@@ -128,10 +128,19 @@ which is how you can tell nobody captured it.
 
 ## Deprecation and deletion
 
-Mark `x-deleted: true` only where every observed call answers the generic
+Mark `x-deleted: <date>` only where every observed call answers the generic
 "not implemented" 404. Keep the operation and its tag: the published bundles
 drop it, the `test` bundle keeps it, so the suite goes on calling the route and
 a revival shows up as a failing `not-found` workflow.
+
+The date is the day the route started answering that 404, which the suite now
+records the morning it happens. For a route that died before the suite existed,
+`vrchatapi/specification-test` commits one response file per operation daily
+back to 2023, so `git log -S '\`404 Not Found\`'` over the file dates it. Where
+neither covers the route, fall back to the day it was marked and say no more
+than that. Never date one from `vrchatapi/monitor`: a path outlives its endpoint
+in the client bundle, and `/economy/seller/eligibility` sat there months after
+it stopped answering.
 
 Mark `deprecated: true` where the route still answers but VRChat has replaced
 it or the client no longer uses it. Keep the original tag and add `deprecated`.
