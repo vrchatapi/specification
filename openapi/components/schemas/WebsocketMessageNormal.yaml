@@ -16,6 +16,8 @@ properties:
             see-notification: ./WebsocketSeeNotification.yaml
             hide-notification: ./WebsocketHideNotification.yaml
             clear-notification: ./WebsocketClearNotification.yaml
+      else:
+        type: object
   type:
     type: string
     enum:

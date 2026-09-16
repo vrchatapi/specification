@@ -60,6 +60,9 @@ properties:
               user-badge-unassigned: ./WebsocketUserBadgeUnassigned.yaml
               user-location: ./WebsocketUserLocation.yaml
               user-update: ./WebsocketUserUpdate.yaml
+      else:
+        contentSchema:
+          type: object
   type:
     type: string
     enum:
