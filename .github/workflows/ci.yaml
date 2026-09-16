@@ -132,7 +132,7 @@ jobs:
     needs:
       - lint
       - bundle
-    if: ${{ !failure() && !cancelled() && github.event_name != 'schedule' && github.ref == 'refs/heads/main' }}
+    if: ${{ !failure() && !cancelled() && github.event_name != 'schedule' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[no release]') }}
     outputs:
       version: ${{ steps.metadata.outputs.version }}
 
