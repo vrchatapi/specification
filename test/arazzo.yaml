@@ -5451,6 +5451,28 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: get-group-members-populated
+    summary: Members of a group that has them
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-members
+        operationId: $sourceDescriptions.default.getGroupMembers
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_52c61c62-9aff-44ed-a8ae-2595dd4745ca
+          - name: n
+            in: query
+            value: 50
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/0/user/id != null
+
   - workflowId: get-group-members-unauthenticated
     summary: getGroupMembers refuses an anonymous caller
     parameters:

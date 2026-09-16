@@ -3,21 +3,21 @@ type: object
 description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
 nullable: true
 properties:
-  currentAvatarTags:
-    type: array
-    items:
-      $ref: ./Tag.yaml
-  currentAvatarThumbnailImageUrl:
+  bannerColor:
     type: string
-    nullable: true
+  bannerType:
+    type: string
+  bannerUrl:
+    type: string
   displayName:
+    type: string
+  iconFrame:
     type: string
   iconUrl:
     type: string
   id:
     $ref: ./UserID.yaml
-  profilePicOverride:
+  nameplateEffect:
     type: string
-  thumbnailUrl:
+  profileEffect:
     type: string
-    nullable: true
