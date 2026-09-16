@@ -224,6 +224,12 @@ jobs:
           retention-days: 1
 
       - if: "!cancelled()"
+        run: timeout --verbose 120 sh test/report.sh --format github
+
+      - if: "!cancelled()"
+        run: timeout --verbose 120 sh test/report.sh >> "$GITHUB_STEP_SUMMARY"
+
+      - if: "!cancelled()"
         run: |
           status=0
           printf '### Drift\n\n```\n' >> "$GITHUB_STEP_SUMMARY"
