@@ -3,17 +3,12 @@ type: object
 description: Default profile theme colours, each a hex RGB triplet without a leading `#`.
 properties:
   backgroundGradientBottom:
-    type: string
-    example: 9933FF
+    $ref: ./Color.yaml
   backgroundGradientTop:
-    type: string
-    example: 00C48A
+    $ref: ./Color.yaml
   themeButtonColor:
-    type: string
-    example: "009599"
+    $ref: ./Color.yaml
   themeIconColor:
-    type: string
-    example: 6BE4FA
+    $ref: ./Color.yaml
   themeSubtextColor:
-    type: string
-    example: A9A9A9
+    $ref: ./Color.yaml

@@ -3,9 +3,7 @@ type: object
 description: User object received when querying mutual friends
 properties:
   bannerColor:
-    type: string
-    description: Hex colour without a leading `#`.
-    example: 3cc92c
+    $ref: ./Color.yaml
   bannerType:
     type: string
     example: color

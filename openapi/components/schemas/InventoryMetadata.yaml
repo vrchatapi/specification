@@ -14,11 +14,9 @@ properties:
   fileId:
     type: string
   gradientEnd:
-    type: string
-    description: Hex colour without a leading `#`.
+    $ref: ./Color.yaml
   gradientStart:
-    type: string
-    description: Hex colour without a leading `#`.
+    $ref: ./Color.yaml
   imageUrl:
     type: string
   inventoryItemsToInstantiate:

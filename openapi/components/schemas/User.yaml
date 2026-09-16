@@ -23,7 +23,7 @@ properties:
     type: object
     additionalProperties: true
   bannerColor:
-    type: string
+    $ref: ./Color.yaml
   bannerType:
     type: string
   bannerUrl:

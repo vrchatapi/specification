@@ -6,11 +6,9 @@ properties:
   ageVerified:
     $ref: ./AgeVerified.yaml
   backgroundGradientBottom:
-    type: string
-    description: Hex colour without a leading `#`.
+    $ref: ./Color.yaml
   backgroundGradientTop:
-    type: string
-    description: Hex colour without a leading `#`.
+    $ref: ./Color.yaml
   backgroundTemplateId:
     type: string
   backgroundTextureId:
@@ -22,7 +20,7 @@ properties:
     items:
       $ref: ./Badge.yaml
   bannerColor:
-    type: string
+    $ref: ./Color.yaml
   bannerCustomUrl:
     type: string
   bannerType:
@@ -87,16 +85,13 @@ properties:
   statusDescription:
     type: string
   themeButtonColor:
-    type: string
-    description: Hex colour without a leading `#`.
+    $ref: ./Color.yaml
   themeIconColor:
-    type: string
-    description: Hex colour without a leading `#`.
+    $ref: ./Color.yaml
   themeId:
     type: string
   themeSubtextColor:
-    type: string
-    description: Hex colour without a leading `#`.
+    $ref: ./Color.yaml
   themes:
     type: array
     items: {}

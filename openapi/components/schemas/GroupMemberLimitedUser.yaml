@@ -4,7 +4,7 @@ description: "Only visible via the /groups/:groupId/members endpoint, **not** wh
 nullable: true
 properties:
   bannerColor:
-    type: string
+    $ref: ./Color.yaml
   bannerType:
     type: string
   bannerUrl:

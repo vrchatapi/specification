@@ -38,7 +38,7 @@ properties:
     type: string
     description: The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)
   bannerColor:
-    type: string
+    $ref: ./Color.yaml
   bannerType:
     type: string
   bannerUrl:

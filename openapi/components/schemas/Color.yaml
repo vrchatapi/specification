@@ -1,0 +1,4 @@
+title: Color
+type: string
+description: "Six hexadecimal digits, without a leading `#`. May be empty."
+example: 3cc92c
