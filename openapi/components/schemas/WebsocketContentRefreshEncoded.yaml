@@ -1,0 +1,10 @@
+title: WebsocketContentRefreshEncoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketContentRefresh.yaml
+required:
+  - content

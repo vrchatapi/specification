@@ -1,0 +1,10 @@
+title: WebsocketUserBadgeAssignedEncoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketUserBadgeAssigned.yaml
+required:
+  - content

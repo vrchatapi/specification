@@ -1,0 +1,10 @@
+title: WebsocketFriendOnlineEncoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendOnline.yaml
+required:
+  - content

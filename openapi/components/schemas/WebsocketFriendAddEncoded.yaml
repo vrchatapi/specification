@@ -1,0 +1,10 @@
+title: WebsocketFriendAddEncoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendAdd.yaml
+required:
+  - content

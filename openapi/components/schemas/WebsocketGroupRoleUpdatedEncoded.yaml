@@ -1,0 +1,10 @@
+title: WebsocketGroupRoleUpdatedEncoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketGroupRoleUpdated.yaml
+required:
+  - content

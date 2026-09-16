@@ -1,0 +1,10 @@
+title: WebsocketResponseNotificationEncoded
+type: string
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketResponseNotification.yaml
+required:
+  - content
