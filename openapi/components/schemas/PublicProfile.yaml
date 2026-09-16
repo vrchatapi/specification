@@ -5,6 +5,8 @@ properties:
     $ref: ./AgeVerificationStatus.yaml
   ageVerified:
     $ref: ./AgeVerified.yaml
+  backgroundTextureId:
+    type: string
   backgroundType:
     type: string
   badges:
@@ -49,12 +51,22 @@ properties:
     type: string
   publicWorlds:
     type: array
-    items: {}
+    items:
+      $ref: ./LimitedWorld.yaml
   representedGroup:
     $ref: ./ProfileRepresentedGroup.yaml
     nullable: true
+  themeButtonColor:
+    type: string
+    description: Hex colour without a leading `#`.
+  themeIconColor:
+    type: string
+    description: Hex colour without a leading `#`.
   themeId:
     type: string
+  themeSubtextColor:
+    type: string
+    description: Hex colour without a leading `#`.
   totalPublicWorldsCount:
     type: integer
   trustTags:

@@ -15,7 +15,7 @@ paths:
         - users
       parameters:
         - name: withGroupsAndWorlds
-          description: Include `groups`, `publicWorlds` and `totalPublicWorldsCount` in the response.
+          description: Include `groups`, `publicWorlds`, `totalPublicWorldsCount` and `worldFavoriteLists` in the response.
           in: query
           schema:
             type: boolean

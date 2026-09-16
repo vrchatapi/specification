@@ -9495,6 +9495,33 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/groups != null
           - condition: $response.body#/publicWorlds != null
+          - condition: $response.body#/worldFavoriteLists != null
+
+  - workflowId: get-public-profile-populated
+    summary: Public profile carrying badges, a banner, a custom theme and public worlds
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: public-profile
+        operationId: $sourceDescriptions.default.getPublicProfile
+        parameters:
+          - name: userId
+            in: path
+            value: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+          - name: withGroupsAndWorlds
+            in: query
+            value: true
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/badges/0/badgeId != null
+          - condition: $response.body#/bannerUrl != null
+          - condition: $response.body#/backgroundTextureId != null
+          - condition: $response.body#/themeButtonColor != null
+          - condition: $response.body#/publicWorlds/0/id != null
 
   - workflowId: get-public-profile-unauthenticated
     summary: getPublicProfile refuses an anonymous caller

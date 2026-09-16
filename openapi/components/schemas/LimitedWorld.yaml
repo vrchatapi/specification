@@ -33,6 +33,8 @@ properties:
   imageUrl:
     type: string
     minLength: 1
+  isHypeTrainEligible:
+    type: boolean
   labsPublicationDate:
     type: string
     example: none
