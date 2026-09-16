@@ -149,6 +149,29 @@ paths:
           $ref: ../responses/favorites/FavoriteAddAlreadyFavoritedError.yaml
         "403":
           $ref: ../responses/favorites/FavoriteAddNotFriendsError.yaml
+  "/favorites/groups/{favoriteGroupType}/{favoriteGroupName}":
+    parameters:
+      - $ref: ../parameters.yaml#/favoriteGroupType
+      - $ref: ../parameters.yaml#/favoriteGroupName
+    get:
+      operationId: getFavoriteGroupContents
+      summary: List Favorite Group Contents
+      description: List the favorites in a group, each alongside the object it points at.
+      tags:
+        - favorites
+      parameters:
+        - name: ownerId
+          description: The user whose favorite group to return. Must be a user ID.
+          in: query
+          schema:
+            type: string
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/favorites/FavoriteGroupContentsResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/favorites/{favoriteId}":
     parameters:
       - $ref: ../parameters.yaml#/favoriteId

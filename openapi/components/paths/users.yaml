@@ -14,6 +14,11 @@ paths:
       tags:
         - users
       parameters:
+        - name: asSelf
+          description: Include the properties VRChat shows a user on their own profile. Ignored for any other user.
+          in: query
+          schema:
+            type: boolean
         - name: withGroupsAndWorlds
           description: Include `groups`, `publicWorlds`, `totalPublicWorldsCount` and `worldFavoriteLists` in the response.
           in: query
@@ -24,6 +29,26 @@ paths:
       responses:
         "200":
           $ref: ../responses/users/PublicProfileResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    put:
+      operationId: updateProfile
+      summary: Update Profile
+      description: Update a user's profile. `pronouns`, `status` and `statusDescription` are written through `updateUser` instead.
+      tags:
+        - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateProfileRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/PublicProfileResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/profile/{userId}/private":
@@ -263,6 +288,22 @@ paths:
           $ref: ../responses/users/UserMustBeOwnError.yaml
         "404":
           description: The user does not have the badge.
+  "/users/{userId}/clientConfig":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    get:
+      operationId: getUserClientConfig
+      summary: Get User Client Config
+      description: Get the client settings VRChat stores against a user.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/UserClientConfigResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/users/{userId}/feedback":
     parameters:
       - $ref: ../parameters.yaml#/userId

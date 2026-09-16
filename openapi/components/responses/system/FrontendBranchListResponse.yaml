@@ -1,0 +1,6 @@
+description: Returns the frontend branches available to the caller.
+content:
+  application/json:
+    schema:
+      type: array
+      items: {}

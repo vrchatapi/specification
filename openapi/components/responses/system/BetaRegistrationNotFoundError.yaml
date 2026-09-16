@@ -1,0 +1,12 @@
+description: The caller has no registration for this beta program.
+content:
+  application/json:
+    schema:
+      title: BetaRegistrationNotFoundError
+      type: object
+      properties:
+        error:
+          type: string
+          example: No registration found
+      required:
+        - error

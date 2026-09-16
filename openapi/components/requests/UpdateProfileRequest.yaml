@@ -1,0 +1,41 @@
+title: UpdateProfileRequest
+type: object
+properties:
+  backgroundTextureId:
+    type: string
+  backgroundType:
+    type: string
+    enum:
+      - default
+      - gradient
+      - inventory
+      - texture
+  bannerColor:
+    type: string
+    description: Hex colour without a leading `#`.
+  bannerType:
+    type: string
+    enum:
+      - avatarBanner
+      - color
+      - customImage
+  bio:
+    type: string
+  bioLinks:
+    type: array
+    items:
+      type: string
+  iconFrame:
+    $ref: ../schemas/InventoryTemplateID.yaml
+  languages:
+    type: array
+    items:
+      type: string
+  nameplateEffect:
+    $ref: ../schemas/InventoryTemplateID.yaml
+  profileEffect:
+    $ref: ../schemas/InventoryTemplateID.yaml
+  themeId:
+    type: string
+  userIcon:
+    type: string

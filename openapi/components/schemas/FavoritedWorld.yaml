@@ -17,7 +17,7 @@ properties:
     $ref: ./InstanceContentSettings.yaml
   description:
     type: string
-    minLength: 1
+    minLength: 0
   disabledPropAbilities:
     type: array
     items: {}
@@ -44,13 +44,15 @@ properties:
   imageUrl:
     type: string
     minLength: 1
+  isHypeTrainEligible:
+    type: boolean
   labsPublicationDate:
     type: string
     example: none
     minLength: 1
   name:
     type: string
-    minLength: 1
+    minLength: 0
   occupants:
     type: integer
     default: 0
@@ -77,6 +79,8 @@ properties:
     example: 16
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
+  storeId:
+    $ref: ./StoreID.yaml
   tags:
     type: array
     description: " "
@@ -113,11 +117,8 @@ properties:
 required:
   - authorName
   - capacity
-  - favoriteGroup
-  - favoriteId
   - id
   - imageUrl
   - name
-  - occupants
   - releaseStatus
   - thumbnailImageUrl

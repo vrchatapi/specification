@@ -63,6 +63,14 @@ badgeId:
   in: path
   schema:
     $ref: ./schemas/BadgeID.yaml
+betaName:
+  name: betaName
+  description: The name of a beta program.
+  required: true
+  in: path
+  schema:
+    type: string
+    example: ios-closed-beta
 branch:
   name: branch
   description: Specifies which git branch the site should load frontend source code from.
@@ -194,6 +202,21 @@ contentId:
   in: query
   schema:
     type: string
+cosmeticItemType:
+  name: itemType
+  description: The kind of cosmetic to list.
+  required: true
+  in: path
+  schema:
+    type: string
+    enum:
+      - droneskin
+      - iconFrame
+      - nameplateEffect
+      - portalskin
+      - profileBackground
+      - profileEffect
+      - warpeffect
 dateMax:
   name: dateMax
   description: The end date of the search range.

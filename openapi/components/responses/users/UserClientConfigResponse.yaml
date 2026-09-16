@@ -1,0 +1,5 @@
+description: Returns a UserClientConfig object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/UserClientConfig.yaml

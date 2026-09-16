@@ -1,0 +1,13 @@
+title: BetaUserField
+type: object
+properties:
+  allowedValues:
+    type: array
+    items:
+      type: string
+  excludeFromAnalytics:
+    type: boolean
+  required:
+    type: boolean
+required:
+  - required

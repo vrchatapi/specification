@@ -1,0 +1,12 @@
+title: FavoriteGroupContents
+type: object
+properties:
+  favorites:
+    type: array
+    items:
+      $ref: ./FavoriteGroupContentsEntry.yaml
+  totalCount:
+    type: integer
+required:
+  - favorites
+  - totalCount

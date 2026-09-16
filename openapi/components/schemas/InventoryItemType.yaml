@@ -4,7 +4,10 @@ enum:
   - bundle
   - droneskin
   - emoji
+  - iconFrame
+  - nameplateEffect
   - portalskin
+  - profileEffect
   - prop
   - sticker
   - warpeffect

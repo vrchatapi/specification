@@ -4,6 +4,24 @@ info:
   description: "The inventory manages collectable items, such as drop bundles and their contents."
   version: "1.0"
 paths:
+  "/cosmetics/index/{itemType}":
+    parameters:
+      - $ref: ../parameters.yaml#/cosmeticItemType
+    get:
+      operationId: getCosmeticIndex
+      summary: List Cosmetics
+      description: List every cosmetic of a kind that VRChat has published, whether or not the caller owns it.
+      tags:
+        - inventory
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/inventory/InventoryTemplateListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /inventory:
     parameters:
       - $ref: ../parameters.yaml#/number

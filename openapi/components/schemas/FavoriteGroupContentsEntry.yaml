@@ -1,0 +1,25 @@
+title: FavoriteGroupContentsEntry
+type: object
+description: A favorite alongside the object it points at. The object appears under a property named for the favorite's type.
+properties:
+  avatar:
+    $ref: ./Avatar.yaml
+  favoriteId:
+    type: string
+  id:
+    type: string
+  tags:
+    type: array
+    items:
+      type: string
+  type:
+    $ref: ./FavoriteType.yaml
+  world:
+    oneOf:
+      - $ref: ./FavoritedWorld.yaml
+      - $ref: ./UnavailableWorld.yaml
+required:
+  - favoriteId
+  - id
+  - tags
+  - type

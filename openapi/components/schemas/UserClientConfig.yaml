@@ -1,0 +1,10 @@
+title: UserClientConfig
+type: object
+properties:
+  accessReduceDecorAnim:
+    type: boolean
+  configString:
+    type: string
+required:
+  - accessReduceDecorAnim
+  - configString

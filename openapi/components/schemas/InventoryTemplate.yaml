@@ -30,6 +30,8 @@ properties:
     $ref: ./InventoryTemplateID.yaml
   imageUrl:
     type: string
+  initialToggleState:
+    type: boolean
   itemType:
     $ref: ./InventoryItemType.yaml
   itemTypeLabel:
@@ -40,6 +42,12 @@ properties:
     type: string
   notificationDetails:
     $ref: ./InventoryNotificationDetails.yaml
+  productId:
+    $ref: ./ProductID.yaml
+  publishedListings:
+    type: array
+    items:
+      $ref: ./ProductID.yaml
   status:
     type: string
     example: live

@@ -1,0 +1,5 @@
+description: Returns the favorites in a group, each alongside the object it points at.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/FavoriteGroupContents.yaml

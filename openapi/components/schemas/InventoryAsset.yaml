@@ -1,0 +1,20 @@
+title: InventoryAsset
+type: object
+properties:
+  fileId:
+    type: string
+  frameCount:
+    type: integer
+  framesPerSecond:
+    type: number
+  loopCount:
+    type: integer
+  totalDurationMs:
+    type: integer
+  type:
+    type: string
+  url:
+    type: string
+required:
+  - type
+  - url

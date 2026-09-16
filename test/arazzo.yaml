@@ -10996,3 +10996,458 @@ workflows:
             value: wrld_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: get-cosmetic-index-portalskin
+    summary: Cosmetics of type portalskin
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: cosmetic-index
+        operationId: $sourceDescriptions.default.getCosmeticIndex
+        parameters:
+          - name: itemType
+            in: path
+            value: portalskin
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-cosmetic-index-droneskin
+    summary: Cosmetics of type droneskin
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: cosmetic-index
+        operationId: $sourceDescriptions.default.getCosmeticIndex
+        parameters:
+          - name: itemType
+            in: path
+            value: droneskin
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-cosmetic-index-warpeffect
+    summary: Cosmetics of type warpeffect
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: cosmetic-index
+        operationId: $sourceDescriptions.default.getCosmeticIndex
+        parameters:
+          - name: itemType
+            in: path
+            value: warpeffect
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-cosmetic-index-nameplateeffect
+    summary: Cosmetics of type nameplateEffect
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: cosmetic-index
+        operationId: $sourceDescriptions.default.getCosmeticIndex
+        parameters:
+          - name: itemType
+            in: path
+            value: nameplateEffect
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-cosmetic-index-profileeffect
+    summary: Cosmetics of type profileEffect
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: cosmetic-index
+        operationId: $sourceDescriptions.default.getCosmeticIndex
+        parameters:
+          - name: itemType
+            in: path
+            value: profileEffect
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-cosmetic-index-profilebackground
+    summary: Cosmetics of type profileBackground
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: cosmetic-index
+        operationId: $sourceDescriptions.default.getCosmeticIndex
+        parameters:
+          - name: itemType
+            in: path
+            value: profileBackground
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-cosmetic-index-iconframe
+    summary: Cosmetics of type iconFrame
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: cosmetic-index
+        operationId: $sourceDescriptions.default.getCosmeticIndex
+        parameters:
+          - name: itemType
+            in: path
+            value: iconFrame
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-cosmetic-index-invalid-type
+    summary: getCosmeticIndex names the types it accepts
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: cosmetic-index
+        operationId: $sourceDescriptions.default.getCosmeticIndex
+        parameters:
+          - name: itemType
+            in: path
+            value: sticker
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: get-cosmetic-index-unauthenticated
+    summary: getCosmeticIndex refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: cosmetic-index
+        operationId: $sourceDescriptions.default.getCosmeticIndex
+        parameters:
+          - name: itemType
+            in: path
+            value: iconFrame
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-favorite-group-contents
+    summary: Favorite group contents
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: favorite-group-contents
+        operationId: $sourceDescriptions.default.getFavoriteGroupContents
+        parameters:
+          - name: favoriteGroupType
+            in: path
+            value: world
+          - name: favoriteGroupName
+            in: path
+            value: world1
+          - name: ownerId
+            in: query
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/favorites/0/world/id != null
+
+  - workflowId: get-favorite-group-contents-unauthenticated
+    summary: getFavoriteGroupContents refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: favorite-group-contents
+        operationId: $sourceDescriptions.default.getFavoriteGroupContents
+        parameters:
+          - name: favoriteGroupType
+            in: path
+            value: world
+          - name: favoriteGroupName
+            in: path
+            value: world1
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-beta
+    summary: Beta program
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: beta
+        operationId: $sourceDescriptions.default.getBeta
+        parameters:
+          - name: betaName
+            in: path
+            value: ios-closed-beta
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/betaName == 'ios-closed-beta'
+
+  - workflowId: get-beta-not-found
+    summary: getBeta refuses a resource that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: beta
+        operationId: $sourceDescriptions.default.getBeta
+        parameters:
+          - name: betaName
+            in: path
+            value: 3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: get-beta-registration-not-found
+    summary: getBetaRegistration refuses a beta the caller has not registered for
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: beta-registration
+        operationId: $sourceDescriptions.default.getBetaRegistration
+        parameters:
+          - name: betaName
+            in: path
+            value: ios-closed-beta
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: get-beta-registration-unauthenticated
+    summary: getBetaRegistration refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: beta-registration
+        operationId: $sourceDescriptions.default.getBetaRegistration
+        parameters:
+          - name: betaName
+            in: path
+            value: ios-closed-beta
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-frontend-branches
+    summary: Frontend branches
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: frontend-branches
+        operationId: $sourceDescriptions.default.getFrontendBranches
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-frontend-branches-unauthenticated
+    summary: getFrontendBranches refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: frontend-branches
+        operationId: $sourceDescriptions.default.getFrontendBranches
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-user-client-config
+    summary: User client config
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: client-config
+        operationId: $sourceDescriptions.default.getUserClientConfig
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-user-client-config-unauthenticated
+    summary: getUserClientConfig refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: client-config
+        operationId: $sourceDescriptions.default.getUserClientConfig
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-public-profile-as-self
+    summary: Public profile as its own owner
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: public-profile
+        operationId: $sourceDescriptions.default.getPublicProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: asSelf
+            in: query
+            value: true
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/currentAvatar != null
+          - condition: $response.body#/iconType != null
+          - condition: $response.body#/status != null
+
+  - workflowId: profile-bio-update-restore
+    summary: Update the bio through the profile, confirm it applied, restore it
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: marker
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - openssl rand -hex 6 | tr -d '\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: profile-before
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.getPublicProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          bio: $response.body#/bio
+          bioLinks: $response.body#/bioLinks
+
+      - stepId: update-profile
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            bio: $steps.marker.outputs.value
+            bioLinks: $steps.profile-before.outputs.bioLinks
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/bio == $steps.marker.outputs.value
+
+      - stepId: verify-profile
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.getPublicProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/bio == $steps.marker.outputs.value
+
+      - stepId: restore-profile
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            bio: $steps.profile-before.outputs.bio
+            bioLinks: $steps.profile-before.outputs.bioLinks
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/bio == $steps.profile-before.outputs.bio
+
+  - workflowId: update-profile-unauthenticated
+    summary: updateProfile refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-profile
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            bio: ""
+        successCriteria:
+          - condition: $statusCode == 401

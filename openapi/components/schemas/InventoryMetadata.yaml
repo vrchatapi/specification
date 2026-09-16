@@ -7,8 +7,18 @@ properties:
     type: string
   assetBundleId:
     type: string
+  assets:
+    type: array
+    items:
+      $ref: ./InventoryAsset.yaml
   fileId:
     type: string
+  gradientEnd:
+    type: string
+    description: Hex colour without a leading `#`.
+  gradientStart:
+    type: string
+    description: Hex colour without a leading `#`.
   imageUrl:
     type: string
   inventoryItemsToInstantiate:
@@ -22,3 +32,5 @@ properties:
     $ref: ./PropID.yaml
   propKind:
     type: integer
+  viewfinderBundleId:
+    type: string

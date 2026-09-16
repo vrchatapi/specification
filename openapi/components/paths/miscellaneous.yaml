@@ -19,6 +19,37 @@ paths:
           $ref: ../responses/permissions/PermissionListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/beta/{betaName}":
+    parameters:
+      - $ref: ../parameters.yaml#/betaName
+    get:
+      operationId: getBeta
+      summary: Get Beta Program
+      description: Get a beta program and the fields a registration must supply.
+      tags:
+        - miscellaneous
+      security: []
+      responses:
+        "200":
+          $ref: ../responses/system/BetaResponse.yaml
+        "404":
+          $ref: ../responses/system/BetaNotFoundError.yaml
+  "/beta/{betaName}/register":
+    parameters:
+      - $ref: ../parameters.yaml#/betaName
+    get:
+      operationId: getBetaRegistration
+      summary: Get Beta Registration
+      description: Get the currently authenticated user's registration for a beta program.
+      tags:
+        - miscellaneous
+      security:
+        - authCookie: []
+      responses:
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/system/BetaRegistrationNotFoundError.yaml
   /config:
     get:
       operationId: getConfig
@@ -52,6 +83,20 @@ paths:
                 type: string
         "400":
           $ref: ../responses/system/DownloadSourceCodeAccessError.yaml
+  /frontend/branches:
+    get:
+      operationId: getFrontendBranches
+      summary: List Frontend Branches
+      description: List the frontend branches the currently authenticated user may switch to.
+      tags:
+        - miscellaneous
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/system/FrontendBranchListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /health:
     get:
       operationId: getHealth

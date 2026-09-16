@@ -1,0 +1,9 @@
+description: No beta program goes by that name.
+content:
+  application/json:
+    example:
+      error:
+        message: Beta not found
+        status_code: 404
+    schema:
+      $ref: ../../schemas/Error.yaml

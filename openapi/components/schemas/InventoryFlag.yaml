@@ -5,9 +5,12 @@ enum:
   - cloneable
   - consumable
   - equippable
+  - global
+  - global_visible
   - instantiatable
   - trashable
   - ugc
   - unique
+  - vrc_plus_exclusive
 default: instantiatable
 example: consumable

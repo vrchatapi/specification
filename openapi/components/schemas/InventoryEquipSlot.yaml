@@ -3,7 +3,10 @@ type: string
 enum:
   - ""
   - drone
+  - iconFrame
+  - nameplateEffect
   - portal
+  - profileEffect
   - warp
 default: ""
 example: drone

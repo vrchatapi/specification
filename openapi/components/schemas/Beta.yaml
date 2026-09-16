@@ -1,0 +1,39 @@
+title: Beta
+type: object
+properties:
+  active:
+    type: boolean
+  betaAppId:
+    type: string
+  betaGroupId:
+    type: string
+  betaName:
+    type: string
+  created_at:
+    type: string
+    format: date-time
+  id:
+    type: string
+    example: beta_872e10d7-699d-42cb-9e70-2373a9a044e1
+  lastSynchronizedAt:
+    type: string
+    format: date-time
+  type:
+    type: string
+  updated_at:
+    type: string
+    format: date-time
+  userFields:
+    title: BetaUserFields
+    type: object
+    description: The fields a registration must supply, keyed by field name.
+    additionalProperties:
+      $ref: ./BetaUserField.yaml
+required:
+  - active
+  - betaName
+  - created_at
+  - id
+  - type
+  - updated_at
+  - userFields

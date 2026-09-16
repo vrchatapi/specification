@@ -94,6 +94,10 @@
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1select"
 "/avatars/{avatarId}/selectFallback":
   $ref: "./paths/avatars.yaml#/paths/~1avatars~1{avatarId}~1selectFallback"
+"/beta/{betaName}":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1beta~1{betaName}"
+"/beta/{betaName}/register":
+  $ref: "./paths/miscellaneous.yaml#/paths/~1beta~1{betaName}~1register"
 /calendar:
   $ref: "./paths/calendar.yaml#/paths/~1calendar"
 /calendar/discover:
@@ -120,6 +124,8 @@
   $ref: "./paths/calendar.yaml#/paths/~1calendar~1{groupId}~1{calendarId}~1follow"
 /config:
   $ref: "./paths/miscellaneous.yaml#/paths/~1config"
+"/cosmetics/index/{itemType}":
+  $ref: "./paths/inventory.yaml#/paths/~1cosmetics~1index~1{itemType}"
 /css/app.css:
   $ref: "./paths/miscellaneous.yaml#/paths/~1css~1app.css"
 /economy/licenses/active:
@@ -148,6 +154,8 @@
   $ref: "./paths/favorites.yaml#/paths/~1favorite~1groups"
 /favorites:
   $ref: "./paths/favorites.yaml#/paths/~1favorites"
+"/favorites/groups/{favoriteGroupType}/{favoriteGroupName}":
+  $ref: "./paths/favorites.yaml#/paths/~1favorites~1groups~1{favoriteGroupType}~1{favoriteGroupName}"
 "/favorites/{favoriteId}":
   $ref: "./paths/favorites.yaml#/paths/~1favorites~1{favoriteId}"
 /file:
@@ -168,6 +176,8 @@
   $ref: "./paths/files.yaml#/paths/~1files"
 /files/order:
   $ref: "./paths/groups.yaml#/paths/~1files~1order"
+/frontend/branches:
+  $ref: "./paths/miscellaneous.yaml#/paths/~1frontend~1branches"
 /gallery:
   $ref: "./paths/files.yaml#/paths/~1gallery"
 /groups:
@@ -410,6 +420,8 @@
   $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1badges~1{badgeId}"
 "/users/{userId}/boop":
   $ref: "./paths/friends.yaml#/paths/~1users~1{userId}~1boop"
+"/users/{userId}/clientConfig":
+  $ref: "./paths/users.yaml#/paths/~1users~1{userId}~1clientConfig"
 "/users/{userId}/credits/eligible":
   $ref: "./paths/economy.yaml#/paths/~1users~1{userId}~1credits~1eligible"
 "/users/{userId}/delete":

@@ -1,0 +1,32 @@
+title: UnavailableWorld
+type: object
+description: "Stands in for a world the API will not describe. `name` and `authorName` are `???`, `imageUrl` is empty, and the counts are `0`."
+properties:
+  authorName:
+    type: string
+    example: ???
+  capacity:
+    type: integer
+  id:
+    $ref: ./WorldID.yaml
+  imageUrl:
+    type: string
+  isSecure:
+    type: boolean
+  name:
+    type: string
+    example: ???
+  occupants:
+    type: integer
+  thumbnailImageUrl:
+    type: string
+    example: https://assets.vrchat.com/default/unavailable-world.png
+required:
+  - authorName
+  - capacity
+  - id
+  - imageUrl
+  - isSecure
+  - name
+  - occupants
+  - thumbnailImageUrl
