@@ -16,33 +16,23 @@ NotificationV2:
 
 WebsocketClearNotification:
   $ref: ./WebsocketClearNotification.yaml
-WebsocketSeeNotification:
-  $ref: ./WebsocketSeeNotification.yaml
-WebsocketHideNotification:
-  $ref: ./WebsocketHideNotification.yaml
 
 WebsocketContentRefresh:
   $ref: ./WebsocketContentRefresh.yaml
-WebsocketResponseNotification:
-  $ref: ./WebsocketResponseNotification.yaml
 WebsocketFriendActive:
   $ref: ./WebsocketFriendActive.yaml
 WebsocketFriendAdd:
   $ref: ./WebsocketFriendAdd.yaml
 WebsocketFriendDelete:
   $ref: ./WebsocketFriendDelete.yaml
+WebsocketFriendLocation:
+  $ref: ./WebsocketFriendLocation.yaml
 WebsocketFriendOffline:
   $ref: ./WebsocketFriendOffline.yaml
 WebsocketFriendOnline:
   $ref: ./WebsocketFriendOnline.yaml
 WebsocketFriendUpdate:
   $ref: ./WebsocketFriendUpdate.yaml
-WebsocketFriendLocation:
-  $ref: ./WebsocketFriendLocation.yaml
-WebsocketInstanceQueueJoined:
-  $ref: ./WebsocketInstanceQueueJoined.yaml
-WebsocketInstanceQueueReady:
-  $ref: ./WebsocketInstanceQueueReady.yaml
 WebsocketGroupJoined:
   $ref: ./WebsocketGroupJoined.yaml
 WebsocketGroupLeft:
@@ -51,23 +41,33 @@ WebsocketGroupMemberUpdated:
   $ref: ./WebsocketGroupMemberUpdated.yaml
 WebsocketGroupRoleUpdated:
   $ref: ./WebsocketGroupRoleUpdated.yaml
-WebsocketNotification:
-  $ref: ./WebsocketNotification.yaml
-WebsocketNotificationV2Update:
-  $ref: ./WebsocketNotificationV2Update.yaml
-WebsocketNotificationV2Delete:
-  $ref: ./WebsocketNotificationV2Delete.yaml
-WebsocketUserUpdate:
-  $ref: ./WebsocketUserUpdate.yaml
-WebsocketUserLocation:
-  $ref: ./WebsocketUserLocation.yaml
-WebsocketUserBadgeAssigned:
-  $ref: ./WebsocketUserBadgeAssigned.yaml
-WebsocketUserBadgeUnassigned:
-  $ref: ./WebsocketUserBadgeUnassigned.yaml
+WebsocketHideNotification:
+  $ref: ./WebsocketHideNotification.yaml
+WebsocketInstanceQueueJoined:
+  $ref: ./WebsocketInstanceQueueJoined.yaml
+WebsocketInstanceQueueReady:
+  $ref: ./WebsocketInstanceQueueReady.yaml
 WebsocketMessage:
   $ref: ./WebsocketMessage.yaml
 WebsocketMessageDoubleJson:
   $ref: ./WebsocketMessageDoubleJson.yaml
 WebsocketMessageNormal:
   $ref: ./WebsocketMessageNormal.yaml
+WebsocketNotification:
+  $ref: ./WebsocketNotification.yaml
+WebsocketNotificationV2Update:
+  $ref: ./WebsocketNotificationV2Update.yaml
+WebsocketNotificationV2Delete:
+  $ref: ./WebsocketNotificationV2Delete.yaml
+WebsocketResponseNotification:
+  $ref: ./WebsocketResponseNotification.yaml
+WebsocketSeeNotification:
+  $ref: ./WebsocketSeeNotification.yaml
+WebsocketUserBadgeAssigned:
+  $ref: ./WebsocketUserBadgeAssigned.yaml
+WebsocketUserBadgeUnassigned:
+  $ref: ./WebsocketUserBadgeUnassigned.yaml
+WebsocketUserLocation:
+  $ref: ./WebsocketUserLocation.yaml
+WebsocketUserUpdate:
+  $ref: ./WebsocketUserUpdate.yaml
