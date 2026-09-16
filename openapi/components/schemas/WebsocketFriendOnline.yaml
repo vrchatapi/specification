@@ -3,15 +3,14 @@ type: object
 properties:
   canRequestInvite:
     type: boolean
-  userId:
-    $ref: ./UserID.yaml
   location:
     $ref: ./LocationID.yaml
   platform:
     $ref: ./Platform.yaml
-
+  userId:
+    $ref: ./UserID.yaml
 required:
   - canRequestInvite
   - location
-  - userId
   - platform
+  - userId

@@ -5,15 +5,15 @@ properties:
     $ref: ./InstanceID.yaml
   location:
     $ref: ./LocationID.yaml
+  travelingToLocation:
+    $ref: ./LocationID.yaml
   user:
     $ref: ./User.yaml
   userId:
     $ref: ./UserID.yaml
-  travelingToLocation:
-    $ref: ./LocationID.yaml
 required:
   - instance
   - location
+  - travelingToLocation
   - user
   - userId
-  - travelingToLocation

@@ -1,10 +1,10 @@
 title: WebsocketFriendUpdate
 type: object
 properties:
-  userId:
-    $ref: ./UserID.yaml
   user:
     $ref: ./User.yaml
+  userId:
+    $ref: ./UserID.yaml
 required:
-  - userId
   - user
+  - userId
