@@ -55,10 +55,10 @@ WebsocketMessageNormal:
   $ref: ./WebsocketMessageNormal.yaml
 WebsocketNotification:
   $ref: ./WebsocketNotification.yaml
-WebsocketNotificationV2Update:
-  $ref: ./WebsocketNotificationV2Update.yaml
 WebsocketNotificationV2Delete:
   $ref: ./WebsocketNotificationV2Delete.yaml
+WebsocketNotificationV2Update:
+  $ref: ./WebsocketNotificationV2Update.yaml
 WebsocketResponseNotification:
   $ref: ./WebsocketResponseNotification.yaml
 WebsocketSeeNotification:
