@@ -35,7 +35,6 @@ properties:
             - $ref: ./WebsocketGroupRoleUpdated.yaml
           discriminator:
             propertyName: type
-            propertyBaseName: type
             mapping:
               content-refresh: ./WebsocketContentRefresh.yaml
               friend-active: ./WebsocketFriendActive.yaml
