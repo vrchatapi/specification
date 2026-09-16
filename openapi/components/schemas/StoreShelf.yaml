@@ -17,12 +17,20 @@ properties:
       $ref: ./ProductListing.yaml
   shelfBackgroundImageId:
     $ref: ./FileID.yaml
+  shelfClientBannerImageId:
+    $ref: ./FileID.yaml
   shelfDescription:
     type: string
   shelfIconImageId:
     $ref: ./FileID.yaml
   shelfLayout:
     type: string
+  shelfMobileHeroBannerImageId:
+    $ref: ./FileID.yaml
+  shelfMobileLogoImageId:
+    $ref: ./FileID.yaml
+  shelfMobileSecondaryBannerImageId:
+    $ref: ./FileID.yaml
   shelfTabBackgroundImageId:
     $ref: ./FileID.yaml
   shelfTitle:
