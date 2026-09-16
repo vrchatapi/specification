@@ -14,5 +14,8 @@ properties:
 #TODO: is this correct?
     $ref: ./InventoryItemType.yaml
 required:
-  - action_type
+  - actionType
   - contentType
+  - fileId
+  - itemId
+  - itemType
