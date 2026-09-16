@@ -49,10 +49,11 @@ jq -r --argjson lines "$lines" --arg format "$format" '
 		| select(.checks | length > 0)
 	] as $steps
 	| ([.files[].executedWorkflows[]] | length) as $total
-	# A schema check reports a multi-line code frame, coloured, and the frame
-	# quotes the whole response body: one ran to 57MB in CI. Only the first line
-	# names the property, and a table cell holds one line, as does an annotation
-	# title, so cut to a bounded prefix before any regex touches it.
+	# A schema check reports a code frame quoting the whole response body, and
+	# colours every line of it: one came to 14MB, holding an escape sequence for
+	# each. Stripping those from the whole string rebuilds it once per escape and
+	# takes minutes. Only the first line names the property, and a table cell
+	# holds one line, as does an annotation title, so cut before the regex.
 	| def detail:
 		if .condition then .condition
 		else
