@@ -31,7 +31,7 @@ assetReviewId:
 authorId:
   name: authorId
   description: Must be a valid user ID.
-  required: true
+  required: false
   in: query
   schema:
     $ref: ./schemas/UserID.yaml
