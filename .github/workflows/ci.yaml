@@ -218,6 +218,22 @@ jobs:
 
       - if: "!cancelled()"
         run: |
+          ls -l test/.out/ || true
+          jq --version || true
+          awk -W version 2>&1 | head -1 || true
+
+          status=0
+          timeout --verbose 60 sh -x test/report.sh --format github > /tmp/inherited.txt 2>&1 || status=$?
+          sed 's/^::/SUPPRESSED::/' /tmp/inherited.txt
+          echo "inherited stdin, exit: $status"
+
+          status=0
+          timeout --verbose 60 sh -x test/report.sh --format github < /dev/null > /tmp/devnull.txt 2>&1 || status=$?
+          sed 's/^::/SUPPRESSED::/' /tmp/devnull.txt
+          echo "stdin from /dev/null, exit: $status"
+
+      - if: "!cancelled()"
+        run: |
           status=0
           printf '### Drift\n\n```\n' >> "$GITHUB_STEP_SUMMARY"
           pnpm test:drift >> "$GITHUB_STEP_SUMMARY" || status=$?
