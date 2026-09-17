@@ -45,7 +45,7 @@ properties:
   iconImageUrl:
     type: string
   imageUrl:
-    type: ['null', 'string']
+    type: ["null", string]
   ipsQuery:
     $ref: ./InfoPushIpsQuery.yaml
   isNew:
@@ -67,7 +67,7 @@ properties:
     $ref: ./InfoPushDataClickable.yaml
   overrideName: {}
   rows:
-    type: ['null', 'integer']
+    type: [integer, "null"]
     description: Number of rows to render.
   search:
     $ref: ./InfoPushDataSearch.yaml
@@ -80,11 +80,11 @@ properties:
           - type: "null"
           - $ref: ./LocalizedString.yaml
       else:
-        type: ['null', 'string']
+        type: ["null", string]
   template:
     type: string
   thumbnailImageUrl:
-    type: ['null', 'string']
+    type: ["null", string]
   tooltipDescription:
     x-if:
       when: jsonschema

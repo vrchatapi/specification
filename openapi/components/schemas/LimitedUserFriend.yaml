@@ -25,13 +25,13 @@ properties:
   isFriend:
     type: boolean
   last_activity:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   last_login:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   last_mobile:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   last_platform:
     $ref: ./Platform.yaml

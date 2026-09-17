@@ -1,5 +1,5 @@
 title: CalendarEventRecurrence
-type: ['null', 'object']
+type: ["null", object]
 description: Details about how a recurring event will be scheduled. If the event is to be scheduled indefinitely, this will lack an "end" property.
 properties:
   daysOfWeek:

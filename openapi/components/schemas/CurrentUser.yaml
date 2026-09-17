@@ -10,10 +10,10 @@ properties:
     example: 7
     minimum: 0
   accountDeletionDate:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date
   accountDeletionLog:
-    type: ['null', 'array']
+    type: [array, "null"]
     description: " "
     items:
       $ref: ./AccountDeletionLog.yaml
@@ -139,7 +139,7 @@ properties:
     type: string
     format: date-time
   last_mobile:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   last_platform:
     $ref: ./Platform.yaml
@@ -198,7 +198,7 @@ properties:
     items:
       type: string
   queuedInstance:
-    type: ['null', 'string']
+    type: ["null", string]
   receiveMobileInvitations:
     type: boolean
   state:
@@ -235,7 +235,7 @@ properties:
   twoFactorAuthEnabled:
     type: boolean
   twoFactorAuthEnabledDate:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   unsubscribe:
     type: boolean
@@ -243,9 +243,9 @@ properties:
     type: string
     format: date-time
   userLanguage:
-    type: ['null', 'string']
+    type: ["null", string]
   userLanguageCode:
-    type: ['null', 'string']
+    type: ["null", string]
   username:
     type: string
     description: Your own unique name, used during login. Distinct from

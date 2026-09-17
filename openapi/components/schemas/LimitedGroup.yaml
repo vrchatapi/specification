@@ -2,9 +2,9 @@ title: LimitedGroup
 type: object
 properties:
   bannerId:
-    type: ['null', 'string']
+    type: ["null", string]
   bannerUrl:
-    type: ['null', 'string']
+    type: ["null", string]
   createdAt:
     type: string
     format: date-time
@@ -18,9 +18,9 @@ properties:
     items:
       $ref: ./GroupGallery.yaml
   iconId:
-    type: ['null', 'string']
+    type: ["null", string]
   iconUrl:
-    type: ['null', 'string']
+    type: ["null", string]
   id:
     $ref: ./GroupID.yaml
   isSearchable:
@@ -36,7 +36,7 @@ properties:
   ownerId:
     $ref: ./UserID.yaml
   rules:
-    type: ['null', 'string']
+    type: ["null", string]
   shortCode:
     $ref: ./GroupShortCode.yaml
   tags:

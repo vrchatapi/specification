@@ -16,9 +16,9 @@ properties:
     items:
       type: string
   bannerId:
-    type: ['null', 'string']
+    type: ["null", string]
   bannerUrl:
-    type: ['null', 'string']
+    type: ["null", string]
   createdAt:
     type: string
     format: date-time
@@ -31,9 +31,9 @@ properties:
     items:
       $ref: ./GroupGallery.yaml
   iconId:
-    type: ['null', 'string']
+    type: ["null", string]
   iconUrl:
-    type: ['null', 'string']
+    type: ["null", string]
   id:
     $ref: ./GroupID.yaml
   isVerified:
@@ -46,7 +46,7 @@ properties:
     items:
       type: string
   lastPostCreatedAt:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   links:
     type: array
@@ -73,12 +73,12 @@ properties:
   privacy:
     $ref: ./GroupPrivacy.yaml
   roles:
-    type: ['null', 'array']
+    type: [array, "null"]
     description: Only returned if ?includeRoles=true is specified.
     items:
       $ref: ./GroupRole.yaml
   rules:
-    type: ['null', 'string']
+    type: ["null", string]
   shortCode:
     $ref: ./GroupShortCode.yaml
   storeId:

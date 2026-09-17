@@ -2,4 +2,4 @@ description: Returns a UserSubscription object.
 content:
   application/json:
     schema:
-      type: ['null', 'object']
+      type: ["null", object]

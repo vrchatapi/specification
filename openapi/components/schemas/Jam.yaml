@@ -26,20 +26,20 @@ properties:
     type: object
     properties:
       closed:
-        type: ['null', 'string']
+        type: ["null", string]
         format: date-time
       submissionsClosed:
-        type: ['null', 'string']
+        type: ["null", string]
         format: date-time
       submissionsOpened:
-        type: ['null', 'string']
+        type: ["null", string]
         format: date-time
       winnersSelected:
-        type: ['null', 'string']
+        type: ["null", string]
         example: null
         format: date-time
   submissionContentGateDate:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   submissionContentGated:
     type: boolean

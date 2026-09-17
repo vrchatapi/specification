@@ -29,14 +29,14 @@ properties:
     description: Currently unused, but will eventually be a flag to set if the closing of the instance should kick people.
     default: false
   instancePersistenceEnabled:
-    type: ['null', 'boolean']
+    type: [boolean, "null"]
   inviteOnly:
     type: boolean
     default: false
   ownerId:
     $ref: ../schemas/InstanceOwnerId.yaml
   playerPersistenceEnabled:
-    type: ['null', 'boolean']
+    type: [boolean, "null"]
   queueEnabled:
     type: boolean
     default: false

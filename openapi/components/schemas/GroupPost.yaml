@@ -17,7 +17,7 @@ properties:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
-    type: ['null', 'string']
+    type: ["null", string]
   roleIds:
     $ref: ./GroupRoleIDList.yaml
   text:

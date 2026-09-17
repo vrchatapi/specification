@@ -68,7 +68,7 @@ properties:
     example: 8
     minimum: 0
   previewYoutubeId:
-    type: ['null', 'string']
+    type: ["null", string]
   publicationDate:
     type: string
     example: none
