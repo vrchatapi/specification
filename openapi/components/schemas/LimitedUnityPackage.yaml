@@ -3,7 +3,7 @@ type: object
 description: ""
 properties:
   created_at:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   platform:
     $ref: ./Platform.yaml

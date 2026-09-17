@@ -26,7 +26,7 @@ properties:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
-    type: ['null', 'string']
+    type: ["null", string]
   parentListings:
     type: array
     items:
@@ -48,7 +48,7 @@ properties:
     items:
       $ref: ./Tag.yaml
   updated:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   useForSubscriberList:
     type: boolean

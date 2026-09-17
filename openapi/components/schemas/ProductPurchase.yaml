@@ -58,7 +58,7 @@ properties:
   purchaseDurationType:
     type: string
   purchaseEndDate:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   purchaseFee:
     type: integer
@@ -71,10 +71,10 @@ properties:
   purchaseQuantity:
     type: integer
   purchaseStartDate:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   purchaseToken:
-    type: ['null', 'object']
+    type: ["null", object]
   purchaseType:
     type: string
   purchaseUnitPrice:

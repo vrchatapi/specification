@@ -12,7 +12,7 @@ properties:
     type: string
     format: date-time
   deletedAt:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   description:
     type: string
@@ -34,7 +34,7 @@ properties:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
-    type: string
+    type: ["null", string]
   interestedUserCount:
     type: integer
   isDraft:
@@ -57,7 +57,7 @@ properties:
   recurrence:
     $ref: ./CalendarEventRecurrence.yaml
   roleIds:
-    type: ['null', 'array']
+    type: [array, "null"]
     description: Group roles that may join this event
     items:
       $ref: ./GroupRoleID.yaml

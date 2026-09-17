@@ -2,11 +2,11 @@ title: GroupMyMember
 type: object
 properties:
   acceptedByDisplayName:
-    type: ['null', 'string']
+    type: ["null", string]
   acceptedById:
-    type: ['null', 'string']
+    type: ["null", string]
   bannedAt:
-    type: ['null', 'string']
+    type: ["null", string]
   createdAt:
     type: string
     format: date-time
@@ -32,7 +32,7 @@ properties:
     type: string
     format: date-time
   lastPostReadAt:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   mRoleIds:
     type: array

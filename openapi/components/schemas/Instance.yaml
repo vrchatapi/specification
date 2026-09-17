@@ -10,9 +10,9 @@ properties:
     default: true
     example: true
   ageGate:
-    type: ['null', 'boolean']
+    type: [boolean, "null"]
   calendarEntryId:
-    type: ['null', 'string']
+    type: ["null", string]
   canRequestInvite:
     type: boolean
     default: true
@@ -30,7 +30,7 @@ properties:
     description: Always returns "unknown".
     minLength: 1
   closedAt:
-    type: ['null', 'string']
+    type: ["null", string]
     format: date-time
   contentSettings:
     $ref: ./InstanceContentSettings.yaml
@@ -41,12 +41,12 @@ properties:
     $ref: ./UserID.yaml
     nullable: true
   description:
-    type: ['null', 'string']
+    type: ["null", string]
   disabledPropAbilities:
     type: array
     items: {}
   displayName:
-    type: ['null', 'string']
+    type: ["null", string]
   dominantLanguage:
     type: string
   friends:
@@ -55,11 +55,11 @@ properties:
     type: boolean
     default: false
   gameServerVersion:
-    type: ['null', 'integer']
+    type: [integer, "null"]
   groupAccessType:
     $ref: ./GroupAccessType.yaml
   hardClose:
-    type: ['null', 'boolean']
+    type: [boolean, "null"]
   hasCapacityForYou:
     type: boolean
   hidden:
@@ -69,7 +69,7 @@ properties:
   instanceId:
     $ref: ./InstanceID.yaml
   instancePersistenceEnabled:
-    type: ['null', 'boolean']
+    type: [boolean, "null"]
   languageRatio:
     type: object
     additionalProperties: true
@@ -86,7 +86,7 @@ properties:
   location:
     $ref: ./LocationID.yaml
   minimumAvatarPerformance:
-    type: ['null', 'string']
+    type: ["null", string]
   n_users:
     type: integer
     example: 6
@@ -107,7 +107,7 @@ properties:
   platforms:
     $ref: ./InstancePlatforms.yaml
   playerPersistenceEnabled:
-    type: ['null', 'boolean']
+    type: [boolean, "null"]
   private:
     $ref: ./UserID.yaml
   queueEnabled:
@@ -129,7 +129,7 @@ properties:
     example: 7eavhhng
     minLength: 1
   shortName:
-    type: ['null', 'string']
+    type: ["null", string]
     example: 02u7yz8j
     minLength: 1
   strict:

@@ -1,4 +1,4 @@
 title: InstanceOwnerId
-type: ['null', 'string']
+type: ["null", string]
 description: A groupId if the instance type is "group", null if instance type is public, or a userId otherwise
 example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
