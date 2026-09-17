@@ -1,0 +1,7 @@
+title: WebsocketNotificationDetailBoop
+type: object
+properties:
+  details:
+    $ref: ./NotificationDetailBoop.yaml
+required:
+  - details

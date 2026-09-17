@@ -1,5 +1,24 @@
 title: WebsocketNotification
 type: object
+x-if:
+  when: jsonschema
+  then:
+    oneOf:
+      - $ref: ./WebsocketNotificationDetailBoop.yaml
+      - $ref: ./WebsocketNotificationDetailInvite.yaml
+      - $ref: ./WebsocketNotificationDetailInviteResponse.yaml
+      - $ref: ./WebsocketNotificationDetailRequestInvite.yaml
+      - $ref: ./WebsocketNotificationDetailRequestInviteResponse.yaml
+      - $ref: ./WebsocketNotificationDetailVoteToKick.yaml
+    discriminator:
+      propertyName: type
+      mapping:
+        boop: ./NotificationDetailBoop.yaml
+        invite: ./NotificationDetailInvite.yaml
+        invite-response: ./NotificationDetailInviteResponse.yaml
+        request-invite: ./NotificationDetailRequestInvite.yaml
+        request-invite-response: ./NotificationDetailRequestInviteResponse.yaml
+        vote-to-kick: ./NotificationDetailVoteToKick.yaml
 properties:
   created_at:
     type: string
@@ -7,25 +26,7 @@ properties:
   details:
     x-if:
       when: jsonschema
-      then:
-        oneOf:
-          - $ref: ./NotificationDetailBoop.yaml
-          - $ref: ./NotificationDetailInvite.yaml
-          - $ref: ./NotificationDetailInviteResponse.yaml
-          - $ref: ./NotificationDetailRequestInvite.yaml
-          - $ref: ./NotificationDetailRequestInviteResponse.yaml
-          - $ref: ./NotificationDetailVoteToKick.yaml
-        discriminator:
-          propertyName: type
-          mapping:
-            boop: ./NotificationDetailBoop.yaml
-            invite: ./NotificationDetailInvite.yaml
-            invite-response: ./NotificationDetailInviteResponse.yaml
-            request-invite: ./NotificationDetailRequestInvite.yaml
-            request-invite-response: ./NotificationDetailRequestInviteResponse.yaml
-            vote-to-kick: ./NotificationDetailVoteToKick.yaml
       else:
-        title: NotificationDetails
         type: object
   id:
     type: string

@@ -82,6 +82,18 @@ WebsocketMessageNormal:
   $ref: ./WebsocketMessageNormal.yaml
 WebsocketNotification:
   $ref: ./WebsocketNotification.yaml
+WebsocketNotificationDetailBoop:
+  $ref: ./WebsocketNotificationDetailBoop.yaml
+WebsocketNotificationDetailInvite:
+  $ref: ./WebsocketNotificationDetailInvite.yaml
+WebsocketNotificationDetailInviteResponse:
+  $ref: ./WebsocketNotificationDetailInviteResponse.yaml
+WebsocketNotificationDetailRequestInvite:
+  $ref: ./WebsocketNotificationDetailRequestInvite.yaml
+WebsocketNotificationDetailRequestInviteResponse:
+  $ref: ./WebsocketNotificationDetailRequestInviteResponse.yaml
+WebsocketNotificationDetailVoteToKick:
+  $ref: ./WebsocketNotificationDetailVoteToKick.yaml
 WebsocketNotificationEncoded:
   $ref: ./WebsocketNotificationEncoded.yaml
 WebsocketNotificationV2Delete:
