@@ -9,8 +9,7 @@ properties:
   data:
     $ref: ./InfoPushData.yaml
   endDate:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   experiment:
     $ref: ./InfoPushExperiment.yaml
@@ -38,9 +37,8 @@ properties:
     items:
       type: string
   startDate:
-    type: string
+    type: ["null", string]
     description: ""
-    nullable: true
     format: date-time
   tags:
     type: array

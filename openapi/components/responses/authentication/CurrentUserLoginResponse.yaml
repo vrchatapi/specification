@@ -5,6 +5,7 @@ content:
       x-if:
         when: jsonschema
         then:
+          title: LoginOr2fa
           oneOf:
             - $ref: ../../schemas/CurrentUser.yaml
             - $ref: ../../schemas/RequiresTwoFactorAuth.yaml

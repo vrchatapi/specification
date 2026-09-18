@@ -1,0 +1,13 @@
+title: WebsocketResponseNotification
+type: object
+properties:
+  notificationId:
+    type: string
+  receiverId:
+    $ref: ./UserID.yaml
+  responseId:
+    $ref: ./UserID.yaml
+required:
+  - notificationId
+  - receiverId
+  - responseId

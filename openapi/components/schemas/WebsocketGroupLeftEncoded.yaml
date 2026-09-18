@@ -1,0 +1,10 @@
+title: WebsocketGroupLeftEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketGroupLeft.yaml
+required:
+  - content

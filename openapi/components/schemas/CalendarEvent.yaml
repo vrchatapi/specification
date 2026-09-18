@@ -12,8 +12,7 @@ properties:
     type: string
     format: date-time
   deletedAt:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   description:
     type: string
@@ -35,8 +34,7 @@ properties:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   interestedUserCount:
     type: integer
   isDraft:
@@ -49,8 +47,7 @@ properties:
   occurrenceKind:
     $ref: ./CalendarEventOccurrenceKind.yaml
   occurrenceModified:
-    type: boolean
-    nullable: true
+    type: [boolean, "null"]
   ownerId:
     $ref: ./GroupID.yaml
   platforms:
@@ -60,15 +57,13 @@ properties:
   recurrence:
     $ref: ./CalendarEventRecurrence.yaml
   roleIds:
-    type: array
+    type: [array, "null"]
     description: Group roles that may join this event
-    nullable: true
     items:
       $ref: ./GroupRoleID.yaml
   seriesId:
-    type: string
+    type: ["null", string]
     description: So far unused, always "null"
-    nullable: true
   startsAt:
     type: string
     format: date-time

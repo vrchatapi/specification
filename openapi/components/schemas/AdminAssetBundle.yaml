@@ -29,8 +29,7 @@ properties:
   thumbnailImageUrl:
     type: string
   unityPackageUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   unityPackages:
     type: array
     items:

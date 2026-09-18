@@ -1,0 +1,9 @@
+title: WebsocketMessage
+x-if:
+  when: jsonschema
+  then:
+    oneOf:
+      - $ref: ./WebsocketMessageNormal.yaml
+      - $ref: ./WebsocketMessageDoubleJson.yaml
+  else:
+    type: object

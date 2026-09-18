@@ -9,8 +9,7 @@ properties:
     $ref: ./FileID.yaml
     nullable: true
   licenseId:
-    type: string
-    nullable: true
+    type: ["null", string]
   productType:
     $ref: ./ProductType.yaml
 required:

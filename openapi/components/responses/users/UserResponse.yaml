@@ -10,6 +10,7 @@ content:
       x-if:
         when: jsonschema
         then:
+          title: UserResponse
           oneOf:
             - $ref: ../../schemas/User.yaml
             - $ref: ../../schemas/CurrentUser.yaml

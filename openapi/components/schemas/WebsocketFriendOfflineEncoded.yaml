@@ -1,0 +1,10 @@
+title: WebsocketFriendOfflineEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendOffline.yaml
+required:
+  - content

@@ -1,0 +1,10 @@
+title: WebsocketFriendActiveEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendActive.yaml
+required:
+  - content

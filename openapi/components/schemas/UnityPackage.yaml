@@ -3,8 +3,7 @@ type: object
 description: ""
 properties:
   assetUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
     example: https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
   assetUrlObject:
     type: object
@@ -14,15 +13,13 @@ properties:
     example: 4
     minimum: 0
   created_at:
-    type: string
-    nullable: true
+    type: ["null", string]
     example: "2020-09-10T06:13:27.777Z"
     format: date-time
   id:
     $ref: ./UnityPackageID.yaml
   impostorUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   impostorizerVersion:
     type: string
     example: 0.17.0
@@ -51,8 +48,7 @@ properties:
   variant:
     type: string
   worldSignature:
-    type: string
-    nullable: true
+    type: ["null", string]
     example: AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ==
 required:
   - assetVersion

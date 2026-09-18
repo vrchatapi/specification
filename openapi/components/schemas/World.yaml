@@ -78,8 +78,7 @@ properties:
     example: 8
     minimum: 0
   previewYoutubeId:
-    type: string
-    nullable: true
+    type: ["null", string]
   privateOccupants:
     type: integer
     description: Will always be `0` when unauthenticated.

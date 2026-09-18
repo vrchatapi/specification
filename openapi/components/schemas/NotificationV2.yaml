@@ -30,38 +30,31 @@ properties:
     type: string
     format: date-time
   expiryAfterSeen:
-    type: integer
-    nullable: true
+    type: [integer, "null"]
   id:
     type: string
   ignoreDND:
     type: boolean
   imageUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   isSystem:
     type: boolean
   link:
-    type: string
-    nullable: true
+    type: ["null", string]
     example: "event:grp_00000000-0000-0000-0000-000000000000,cal_00000000-0000-0000\
       -0000-000000000000"
   linkText:
-    type: string
-    nullable: true
+    type: ["null", string]
   linkTextKey:
-    type: string
-    nullable: true
+    type: ["null", string]
   message:
     type: string
   messageKey:
-    type: string
-    nullable: true
+    type: ["null", string]
   receiverUserId:
     $ref: ./UserID.yaml
   relatedNotificationsId:
-    type: string
-    nullable: true
+    type: ["null", string]
     example: cal_00000000-0000-0000-0000-000000000000
   requireSeen:
     type: boolean
@@ -75,13 +68,11 @@ properties:
     $ref: ./UserID.yaml
     nullable: true
   senderUsername:
-    type: string
-    nullable: true
+    type: ["null", string]
   title:
     type: string
   titleKey:
-    type: string
-    nullable: true
+    type: ["null", string]
   type:
     $ref: ./NotificationV2Type.yaml
   updatedAt:

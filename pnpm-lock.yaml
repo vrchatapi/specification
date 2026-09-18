@@ -27,8 +27,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       '@redocly/cli':
-        specifier: ^2.53.1
-        version: 2.53.1
+        specifier: ^2.53.2
+        version: 2.53.2
       '@redocly/openapi-core':
         specifier: ^2.53.1
         version: 2.53.1
@@ -1113,8 +1113,8 @@ packages:
   '@redocly/ajv@8.18.3':
     resolution: {integrity: sha512-l42u0of3hY98sN2A+M4qTX1O/KrpgGH32Hu9kP2GtHyD5Dfqq86PKFLe5dwaD8DEnNmlOlll2BAmeEtf0DaySg==}
 
-  '@redocly/cli@2.53.1':
-    resolution: {integrity: sha512-NzfSDjHZMMY5qvoXWT5Xz3qIdEEzlxjukU1hytgxY0UMTVroCLm8xprzVjDcMW/2L/P6zgP3vzIZBqS0tG69eA==}
+  '@redocly/cli@2.53.2':
+    resolution: {integrity: sha512-ay2jLuWvKssw1Au1A0fyDR//plK83GxV80TfA08iB9W/5AVosgB+WFv0JzglU4PiXf1fQjtsoXhZwZLx28VGrw==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
     hasBin: true
 
@@ -5108,7 +5108,7 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  '@redocly/cli@2.53.1': {}
+  '@redocly/cli@2.53.2': {}
 
   '@redocly/config@0.56.0':
     dependencies:

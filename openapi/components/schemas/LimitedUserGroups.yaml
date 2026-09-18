@@ -2,11 +2,9 @@ title: LimitedUserGroups
 type: object
 properties:
   bannerId:
-    type: string
-    nullable: true
+    type: ["null", string]
   bannerUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   description:
     type: string
   discriminator:
@@ -14,22 +12,18 @@ properties:
   groupId:
     $ref: ./GroupID.yaml
   iconId:
-    type: string
-    nullable: true
+    type: ["null", string]
   iconUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   id:
     $ref: ./GroupMemberID.yaml
   isRepresenting:
     type: boolean
   lastPostCreatedAt:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   lastPostReadAt:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   memberCount:
     type: integer

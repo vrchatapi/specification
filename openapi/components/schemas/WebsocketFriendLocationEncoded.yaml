@@ -1,0 +1,10 @@
+title: WebsocketFriendLocationEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendLocation.yaml
+required:
+  - content

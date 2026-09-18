@@ -1,3 +1,5 @@
+NotificationDetailBoop:
+  $ref: ./NotificationDetailBoop.yaml
 NotificationDetailInvite:
   $ref: ./NotificationDetailInvite.yaml
 NotificationDetailInviteResponse:
@@ -8,3 +10,109 @@ NotificationDetailRequestInviteResponse:
   $ref: ./NotificationDetailRequestInviteResponse.yaml
 NotificationDetailVoteToKick:
   $ref: ./NotificationDetailVoteToKick.yaml
+
+NotificationV2:
+  $ref: ./NotificationV2.yaml
+
+WebsocketClearNotification:
+  $ref: ./WebsocketClearNotification.yaml
+WebsocketContentRefresh:
+  $ref: ./WebsocketContentRefresh.yaml
+WebsocketContentRefreshEncoded:
+  $ref: ./WebsocketContentRefreshEncoded.yaml
+WebsocketFriendActive:
+  $ref: ./WebsocketFriendActive.yaml
+WebsocketFriendActiveEncoded:
+  $ref: ./WebsocketFriendActiveEncoded.yaml
+WebsocketFriendAdd:
+  $ref: ./WebsocketFriendAdd.yaml
+WebsocketFriendAddEncoded:
+  $ref: ./WebsocketFriendAddEncoded.yaml
+WebsocketFriendDelete:
+  $ref: ./WebsocketFriendDelete.yaml
+WebsocketFriendDeleteEncoded:
+  $ref: ./WebsocketFriendDeleteEncoded.yaml
+WebsocketFriendLocation:
+  $ref: ./WebsocketFriendLocation.yaml
+WebsocketFriendLocationEncoded:
+  $ref: ./WebsocketFriendLocationEncoded.yaml
+WebsocketFriendOffline:
+  $ref: ./WebsocketFriendOffline.yaml
+WebsocketFriendOfflineEncoded:
+  $ref: ./WebsocketFriendOfflineEncoded.yaml
+WebsocketFriendOnline:
+  $ref: ./WebsocketFriendOnline.yaml
+WebsocketFriendOnlineEncoded:
+  $ref: ./WebsocketFriendOnlineEncoded.yaml
+WebsocketFriendUpdate:
+  $ref: ./WebsocketFriendUpdate.yaml
+WebsocketFriendUpdateEncoded:
+  $ref: ./WebsocketFriendUpdateEncoded.yaml
+WebsocketGroupJoined:
+  $ref: ./WebsocketGroupJoined.yaml
+WebsocketGroupJoinedEncoded:
+  $ref: ./WebsocketGroupJoinedEncoded.yaml
+WebsocketGroupLeft:
+  $ref: ./WebsocketGroupLeft.yaml
+WebsocketGroupLeftEncoded:
+  $ref: ./WebsocketGroupLeftEncoded.yaml
+WebsocketGroupMemberUpdated:
+  $ref: ./WebsocketGroupMemberUpdated.yaml
+WebsocketGroupMemberUpdatedEncoded:
+  $ref: ./WebsocketGroupMemberUpdatedEncoded.yaml
+WebsocketGroupRoleUpdated:
+  $ref: ./WebsocketGroupRoleUpdated.yaml
+WebsocketGroupRoleUpdatedEncoded:
+  $ref: ./WebsocketGroupRoleUpdatedEncoded.yaml
+WebsocketHideNotification:
+  $ref: ./WebsocketHideNotification.yaml
+WebsocketInstanceQueueJoined:
+  $ref: ./WebsocketInstanceQueueJoined.yaml
+WebsocketInstanceQueueJoinedEncoded:
+  $ref: ./WebsocketInstanceQueueJoinedEncoded.yaml
+WebsocketInstanceQueueReady:
+  $ref: ./WebsocketInstanceQueueReady.yaml
+WebsocketInstanceQueueReadyEncoded:
+  $ref: ./WebsocketInstanceQueueReadyEncoded.yaml
+WebsocketMessage:
+  $ref: ./WebsocketMessage.yaml
+WebsocketMessageDoubleJson:
+  $ref: ./WebsocketMessageDoubleJson.yaml
+WebsocketMessageNormal:
+  $ref: ./WebsocketMessageNormal.yaml
+WebsocketNotification:
+  $ref: ./WebsocketNotification.yaml
+WebsocketNotificationEncoded:
+  $ref: ./WebsocketNotificationEncoded.yaml
+WebsocketNotificationV2Delete:
+  $ref: ./WebsocketNotificationV2Delete.yaml
+WebsocketNotificationV2DeleteEncoded:
+  $ref: ./WebsocketNotificationV2DeleteEncoded.yaml
+WebsocketNotificationV2Encoded:
+  $ref: ./WebsocketNotificationV2Encoded.yaml
+WebsocketNotificationV2Update:
+  $ref: ./WebsocketNotificationV2Update.yaml
+WebsocketNotificationV2UpdateEncoded:
+  $ref: ./WebsocketNotificationV2UpdateEncoded.yaml
+WebsocketResponseNotification:
+  $ref: ./WebsocketResponseNotification.yaml
+WebsocketResponseNotificationEncoded:
+  $ref: ./WebsocketResponseNotificationEncoded.yaml
+WebsocketSeeNotification:
+  $ref: ./WebsocketSeeNotification.yaml
+WebsocketUserBadgeAssigned:
+  $ref: ./WebsocketUserBadgeAssigned.yaml
+WebsocketUserBadgeAssignedEncoded:
+  $ref: ./WebsocketUserBadgeAssignedEncoded.yaml
+WebsocketUserBadgeUnassigned:
+  $ref: ./WebsocketUserBadgeUnassigned.yaml
+WebsocketUserBadgeUnassignedEncoded:
+  $ref: ./WebsocketUserBadgeUnassignedEncoded.yaml
+WebsocketUserLocation:
+  $ref: ./WebsocketUserLocation.yaml
+WebsocketUserLocationEncoded:
+  $ref: ./WebsocketUserLocationEncoded.yaml
+WebsocketUserUpdate:
+  $ref: ./WebsocketUserUpdate.yaml
+WebsocketUserUpdateEncoded:
+  $ref: ./WebsocketUserUpdateEncoded.yaml

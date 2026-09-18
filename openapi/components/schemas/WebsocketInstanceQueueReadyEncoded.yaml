@@ -1,0 +1,10 @@
+title: WebsocketInstanceQueueReadyEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketInstanceQueueReady.yaml
+required:
+  - content
