@@ -31,6 +31,10 @@ properties:
     type: string
     maxLength: 64
     minLength: 3
+  nameplateId:
+    type: string
+    nullable: true
+    default: null
   rules:
     type: string
   shortCode:
