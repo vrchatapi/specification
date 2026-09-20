@@ -4005,6 +4005,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: cleanup-unfriend
     steps:
       - stepId: status-before
         operationId: $sourceDescriptions.default.getFriendStatus
@@ -4016,6 +4020,9 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/isFriend == false
           - condition: $response.body#/outgoingRequest == false
+        onFailure:
+          - name: stop
+            type: end
 
       - stepId: send-request
         operationId: $sourceDescriptions.default.friend
@@ -4054,6 +4061,34 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/outgoingRequest == false
+        onSuccess:
+          - name: done
+            type: end
+
+      - stepId: cleanup-unfriend
+        operationId: $sourceDescriptions.default.unfriend
+        parameters:
+          - name: userId
+            in: path
+            value: $inputs.friendId
+        successCriteria:
+          - condition: $statusCode == 200 || $statusCode == 400
+        onFailure:
+          - name: withdraw
+            type: goto
+            stepId: cleanup-withdraw
+
+      - stepId: cleanup-withdraw
+        operationId: $sourceDescriptions.default.deleteFriendRequest
+        parameters:
+          - name: userId
+            in: path
+            value: $inputs.friendId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: get-friend-status
     summary: Friend status
