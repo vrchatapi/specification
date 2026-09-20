@@ -34,10 +34,14 @@ lines=$(awk '
 ')
 
 jq -r --argjson lines "$lines" --arg format "$format" '
+	# A `goto` failure action runs its target as a nested workflow, which respect
+	# records among the steps it jumped from rather than beside them. Only the
+	# leaves carry checks, so a cleanup that fails would go unreported.
+	def leaves: .executedSteps[] | if .type == "workflow" then leaves else . end;
 	[
 		.files[].executedWorkflows[]
 		| .workflowId as $workflow
-		| .executedSteps[]
+		| leaves
 		| {
 			workflow: $workflow,
 			step: .stepId,
