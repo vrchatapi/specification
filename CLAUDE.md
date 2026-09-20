@@ -159,9 +159,11 @@ is reached by `$ref`. An object written inline inside another schema has no name
 so each generated client invents its own, and a second schema that needs the same
 shape has to restate it.
 
-`vrc-title` is what catches this: a schema in its own file takes its title from
-that file, so anything the rule reports as untitled is an object still nested
-somewhere. Pull it out rather than adding a `title` in place.
+`vrc-nested-object` is what catches this. A schema in its own file carries a
+title taken from that file, so an object without one is still nested somewhere;
+the rule reports each one once, against the file it is written in. Pull the
+object out rather than adding a `title` in place, which would silence the rule
+without moving anything.
 
 ## Comments
 

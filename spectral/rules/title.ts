@@ -1,10 +1,7 @@
 import { rule } from "../identity";
 
 export const title = rule({
-	given: [
-		"#AnyObjectSchema",
-		"$.components.schemas[*]",
-	],
+	given: "$.components.schemas[*]",
 	then: {
 		field: "title",
 		function: (value) => {
