@@ -8,6 +8,8 @@ properties:
     type: string
   bannerUrl:
     type: string
+  currentAvatarImageUrl:
+    $ref: ./CurrentAvatarImageUrl.yaml
   developerType:
     $ref: ./DeveloperType.yaml
   discordId:
