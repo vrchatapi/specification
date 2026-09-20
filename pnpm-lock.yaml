@@ -27,11 +27,11 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       '@redocly/cli':
-        specifier: ^2.53.1
-        version: 2.53.1
+        specifier: ^2.53.3
+        version: 2.53.3
       '@redocly/openapi-core':
-        specifier: ^2.53.1
-        version: 2.53.1
+        specifier: ^2.53.3
+        version: 2.53.3
       '@stoplight/spectral-cli':
         specifier: ^6.15.0
         version: 6.15.0
@@ -1113,16 +1113,16 @@ packages:
   '@redocly/ajv@8.18.3':
     resolution: {integrity: sha512-l42u0of3hY98sN2A+M4qTX1O/KrpgGH32Hu9kP2GtHyD5Dfqq86PKFLe5dwaD8DEnNmlOlll2BAmeEtf0DaySg==}
 
-  '@redocly/cli@2.53.1':
-    resolution: {integrity: sha512-NzfSDjHZMMY5qvoXWT5Xz3qIdEEzlxjukU1hytgxY0UMTVroCLm8xprzVjDcMW/2L/P6zgP3vzIZBqS0tG69eA==}
+  '@redocly/cli@2.53.3':
+    resolution: {integrity: sha512-hzNAWzHCOZ05vwRx0ehTxNeJaxxizjGV505eKtfs9MR/8ieD/8lYhAK4GF5FaqRRwOEpLO0PvzQwBSKYXmxhRA==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
     hasBin: true
 
   '@redocly/config@0.56.0':
     resolution: {integrity: sha512-sGEC13BWOSKgFEHSPmFmTHpRt+zfNOc4+5+COe3Z4TD37glshCzM8qaeX7fIddGf6akRSs1tz3j+2FZVEQtCWw==}
 
-  '@redocly/openapi-core@2.53.1':
-    resolution: {integrity: sha512-N4Mpjq+ybWxnZ3CawlncxFhunIv2v4bF4H7/ObeVWgj+aGLBMCgEb10w4uzyuJyOmsp6Bwd2kguIJYz50DdLjQ==}
+  '@redocly/openapi-core@2.53.3':
+    resolution: {integrity: sha512-dBh/k3+ahGFnNjlNkER8MZN9j1Lq186z4SG38DSHfX/j+xRMrZexJmb+A4xmGDdXUzFYZXSN6gU1FWUlRMNAYA==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
 
   '@rollup/plugin-commonjs@22.0.2':
@@ -5108,13 +5108,13 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  '@redocly/cli@2.53.1': {}
+  '@redocly/cli@2.53.3': {}
 
   '@redocly/config@0.56.0':
     dependencies:
       json-schema-to-ts: 2.7.2
 
-  '@redocly/openapi-core@2.53.1':
+  '@redocly/openapi-core@2.53.3':
     dependencies:
       '@redocly/ajv': 8.18.3
       '@redocly/config': 0.56.0
