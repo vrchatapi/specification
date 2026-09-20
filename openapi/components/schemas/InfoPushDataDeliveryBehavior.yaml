@@ -1,0 +1,9 @@
+title: InfoPushDataDeliveryBehavior
+type: object
+properties:
+  bypass24HourWindow:
+    type: boolean
+  maxRedeliveryAttempts:
+    type: integer
+  redeliverIfNoEngagement:
+    type: boolean

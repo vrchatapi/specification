@@ -10,6 +10,8 @@ properties:
     $ref: ./AvatarID.yaml
   bannerImageUrl:
     type: string
+  body:
+    type: string
   categories:
     type: array
     items:
@@ -18,6 +20,10 @@ properties:
     type: string
   contentList:
     $ref: ./DynamicContentRow.yaml
+  cta:
+    $ref: ./InfoPushDataCallToAction.yaml
+  deliveryBehavior:
+    $ref: ./InfoPushDataDeliveryBehavior.yaml
   description:
     x-if:
       when: jsonschema
@@ -44,6 +50,8 @@ properties:
     type: boolean
   iconImageUrl:
     type: string
+  imageFileId:
+    $ref: ./FileID.yaml
   imageUrl:
     type: string
     nullable: true
@@ -55,6 +63,9 @@ properties:
     type: array
     items:
       type: string
+  mediaType:
+    type: string
+    example: video
   name:
     x-if:
       when: jsonschema
@@ -84,11 +95,14 @@ properties:
       else:
         type: string
         nullable: true
+  showInWorldIds: {}
   template:
     type: string
   thumbnailImageUrl:
     type: string
     nullable: true
+  title:
+    type: string
   tooltipDescription:
     x-if:
       when: jsonschema
@@ -102,9 +116,11 @@ properties:
     type: string
     example: 2021.3.4
     minLength: 1
-
+  videoFileId:
+    $ref: ./FileID.yaml
+  videoUrl:
+    type: string
   weight:
     type: integer
-
   worldTag:
     type: string
