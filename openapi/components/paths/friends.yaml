@@ -60,6 +60,8 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
+        "429":
+          $ref: ../responses/friends/FriendRateLimitError.yaml
     delete:
       operationId: deleteFriendRequest
       summary: Delete Friend Request

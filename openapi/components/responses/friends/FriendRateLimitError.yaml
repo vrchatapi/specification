@@ -1,0 +1,11 @@
+description: Error response when sending friend requests faster than the account is allowed to.
+content:
+  application/json:
+    examples:
+      Too Many Friend Requests:
+        value:
+          error:
+            message: You are making too many friend requests
+            status_code: 429
+    schema:
+      $ref: ../../schemas/Error.yaml
