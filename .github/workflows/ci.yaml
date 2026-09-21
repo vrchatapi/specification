@@ -194,7 +194,7 @@ jobs:
       version: ${{ needs.release.outputs.version }}
 
   test:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && !contains(github.event.head_commit.message, '[no test]')
     runs-on: ubuntu-latest
     concurrency:
       group: test
