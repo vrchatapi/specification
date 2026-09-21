@@ -1,4 +1,5 @@
 import { configure } from "@ariesclark/eslint-config";
+import cspell from "@cspell/eslint-plugin";
 
 export default configure({
 	type: "app",
@@ -130,5 +131,25 @@ export default configure({
 	files: ["openapi/openapi.yaml"],
 	rules: {
 		"yaml/sort-keys": "off"
+	}
+}, {
+	files: ["openapi/**/*.yaml"],
+	plugins: { "@cspell": cspell },
+	rules: {
+		"@cspell/spellchecker": [
+			"warn",
+			{
+				configFile: new URL("./cspell.config.yaml", import.meta.url).toString(),
+				// `checkScope` matches a node type and the key it was reached by, so
+				// there is no way to check only the prose fields. Keys and sequence
+				// entries are off because a path segment and an enum value are the
+				// API's vocabulary rather than English; values carry the descriptions.
+				checkScope: [
+					["YAMLPair[key] YAMLScalar", false],
+					["YAMLPair[value] YAMLScalar", true],
+					["YAMLSequence[entries] YAMLScalar", false]
+				]
+			}
+		]
 	}
 });

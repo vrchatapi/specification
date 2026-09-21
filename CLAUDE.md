@@ -159,7 +159,7 @@ is reached by `$ref`. An object written inline inside another schema has no name
 so each generated client invents its own, and a second schema that needs the same
 shape has to restate it.
 
-`vrc-nested-object` is what catches this. A schema in its own file carries a
+`vrchat/no-nested-object` is what catches this. A schema in its own file carries a
 title taken from that file, so an object without one is still nested somewhere;
 the rule reports each one once, against the file it is written in. Pull the
 object out rather than adding a `title` in place, which would silence the rule
@@ -220,7 +220,7 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
 | | |
 | --- | --- |
 | `pnpm bundle` | build `dist/` |
-| `pnpm lint` | spectral, eslint, arazzo |
+| `pnpm lint` | redocly, eslint, arazzo |
 | `pnpm test` | drive the suite against the live API |
 | `pnpm test -w session -w <workflowId>` | one workflow, plus the session it reads |
 | `pnpm test:coverage` | what the traffic never reached |

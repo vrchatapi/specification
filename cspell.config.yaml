@@ -1,0 +1,101 @@
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: "0.2"
+
+language: en
+languageId: markdown
+enabledLanguageIds:
+  - markdown
+
+# What VRChat calls things: tags, enum values, path segments and the words the
+# descriptions use for them.
+words:
+  - adminassetbundles
+  - arrowpoint
+  - avatarmoderations
+  - beachball
+  - bitmask
+  - booped
+  - booping
+  - cantsee
+  - cooldown
+  - despawns
+  - drakeshoot
+  - emailotp
+  - emojianimated
+  - equippable
+  - favoritelimits
+  - favorited
+  - giftable
+  - homeworld
+  - interactable
+  - moderations
+  - noheadphones
+  - nomic
+  - noplatform
+  - notag
+  - playermoderation
+  - playermoderations
+  - recents
+  - spritesheet
+  - standalonewindows
+  - Tilia
+  - totp
+  - Tupper
+  - twofactorauth
+  - unban
+  - unbans
+  - unequip
+  - unequips
+  - uninvite
+  - unknownplatform
+  - unmoderate
+  - unmoderated
+  - unmoderates
+  - unmoderating
+  - unmute
+  - unplayermoderate
+  - urlencode
+  - userblocked
+  - VRC
+  - VRChat
+  - vrchatplus
+  - vrcplus
+  - webform
+
+# Values copied out of captured responses. Not vocabulary — they are there so a
+# real example does not have to be retyped to satisfy the spell checker.
+ignoreWords:
+  - 8JoV9XEdpo
+  - Arctor
+  - authco
+  - bulli
+  - eavhhng
+  - heldogs
+  - Kpjafh
+  - ouvckvouldn
+  - redi
+  - Tanabata
+  - uruseje
+
+suggestWords:
+  - "favourited: favorited"
+
+patterns:
+  - name: ids
+    pattern: /\w{1,4}_[\w-]{36}/g
+  - name: extensions
+    pattern: /\.\w+/g
+  # VRChat substitutes lookalike characters into validation messages, and the
+  # examples copy them verbatim. Each one joins itself to the word beside it,
+  # so `found․` reaches the checker as a single unknown word.
+  - name: lookalikes
+    pattern: /[ǃ˸‚․]/g
+
+ignoreRegExpList:
+  - ids
+  - extensions
+  - lookalikes
+
+ignoreRandomStrings: true
+numSuggestions: 3
+validateDirectives: false
