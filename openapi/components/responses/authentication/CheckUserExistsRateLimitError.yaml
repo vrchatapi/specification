@@ -1,0 +1,1 @@
+description: Error response when checking for users faster than the caller is allowed to. Carries no body.

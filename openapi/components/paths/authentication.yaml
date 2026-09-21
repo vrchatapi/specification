@@ -52,6 +52,8 @@ paths:
           $ref: ../responses/authentication/UserExistsResponse.yaml
         "400":
           $ref: ../responses/authentication/MissingParameterError.yaml
+        "429":
+          $ref: ../responses/authentication/CheckUserExistsRateLimitError.yaml
   /auth/register:
     post:
       operationId: registerUserAccount
