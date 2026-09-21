@@ -36,7 +36,6 @@ properties:
     nullable: true
   imageUrl:
     type: string
-    nullable: true
   interestedUserCount:
     type: integer
   isDraft:
@@ -50,7 +49,6 @@ properties:
     $ref: ./CalendarEventOccurrenceKind.yaml
   occurrenceModified:
     type: boolean
-    nullable: true
   ownerId:
     $ref: ./GroupID.yaml
   platforms:
@@ -66,8 +64,7 @@ properties:
     items:
       $ref: ./GroupRoleID.yaml
   seriesId:
-    type: string
-    description: So far unused, always "null"
+    $ref: ./CalendarID.yaml
     nullable: true
   startsAt:
     type: string
@@ -87,16 +84,7 @@ properties:
     type: string
     format: date-time
   userInterest:
-    type: object
-    properties:
-      createdAt:
-        type: string
-        format: date-time
-      isFollowing:
-        type: boolean
-      updatedAt:
-        type: string
-        format: date-time
+    $ref: ./CalendarEventUserInterest.yaml
   usesInstanceOverflow:
     type: boolean
 required:

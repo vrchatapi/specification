@@ -1,0 +1,12 @@
+title: CalendarEventUserInterest
+type: object
+description: The currently logged in user's interest in an event.
+properties:
+  createdAt:
+    type: string
+    format: date-time
+  isFollowing:
+    type: boolean
+  updatedAt:
+    type: string
+    format: date-time
