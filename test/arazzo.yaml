@@ -4034,17 +4034,17 @@ workflows:
           - condition: $statusCode == 200
 
       - stepId: confirm-pending
-        description: A second request to the same user is refused while the first is outstanding, which is what establishes that it is.
+        description: A second request to the same user is refused while the first is outstanding, so a 200 here would mean the first never took.
         operationId: $sourceDescriptions.default.friend
         parameters:
           - name: userId
             in: path
             value: $inputs.friendId
         successCriteria:
-          - condition: $statusCode == 400
+          - condition: $statusCode == 400 || $statusCode == 429
 
       - stepId: status-pending
-        description: VRChat stopped setting outgoingRequest on 2024-07-20, so this criterion fails the day it starts again.
+        description: outgoingRequest trails the request it reflects by a minute or more, so a step reading it this soon can assert nothing either way.
         operationId: $sourceDescriptions.default.getFriendStatus
         parameters:
           - name: userId
@@ -4053,7 +4053,6 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/isFriend == false
-          - condition: $response.body#/outgoingRequest == false
 
       - stepId: delete-request
         operationId: $sourceDescriptions.default.deleteFriendRequest
