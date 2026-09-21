@@ -5,5 +5,3 @@ properties:
     type: integer
     maximum: 11
     minimum: 0
-required:
-  - instanceId
