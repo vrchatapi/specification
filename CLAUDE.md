@@ -182,7 +182,10 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
   finding.
 - `drift`'s `security-baseline` flags every unauthenticated workflow for the
   missing cookie it exists to assert. Every finding it produces is a 401 and
-  none is actionable.
+  none is actionable, so `test:drift` names the rules it wants instead of taking
+  the default set. It passes `--server` for the same reason: the local
+  `httpexec` the suite drives shares the capture, and `undocumented-endpoint`
+  reports all twelve of its exchanges against a description that never had them.
 - A `oneOf` that matches no branch reports every property in the body as
   unevaluated, so one missing property produces hundreds of findings naming
   innocent ones. Fix the branch that should have matched, never the properties
