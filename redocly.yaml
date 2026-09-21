@@ -5,8 +5,15 @@ extends:
 plugins:
   - ./redocly/plugin.ts
 
-preprocessors:
+oas3_0Preprocessors:
   vrchat/x-if: on
+
+oas3_0Rules:
+  parameter-description: warn
+  vrchat/no-empty-description: warn
+  vrchat/no-nested-object: warn
+  vrchat/operation-id-convention: warn
+  vrchat/schema-title: warn
 
 apis:
   legacy:
