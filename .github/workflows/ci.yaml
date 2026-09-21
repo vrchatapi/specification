@@ -103,21 +103,29 @@ jobs:
               return artifact.uploadArtifact(file, [pathname], dirname(pathname));
             }));
 
-  build:
+  build_javascript:
     needs: bundle
-    strategy:
-      fail-fast: false
-      matrix:
-        language:
-          - javascript
-          - rust
-          - java
-          - python
-          - csharp
-          - dart
-    uses: ./.github/workflows/build_client.yaml
-    with:
-      language: ${{ matrix.language }}
+    uses: vrchatapi/vrchatapi-javascript/.github/workflows/ci.yaml@main
+
+  build_rust:
+    needs: bundle
+    uses: vrchatapi/vrchatapi-rust/.github/workflows/ci.yaml@main
+
+  build_java:
+    needs: bundle
+    uses: vrchatapi/vrchatapi-java/.github/workflows/ci.yaml@main
+
+  build_python:
+    needs: bundle
+    uses: vrchatapi/vrchatapi-python/.github/workflows/ci.yaml@main
+
+  build_csharp:
+    needs: bundle
+    uses: vrchatapi/vrchatapi-csharp/.github/workflows/ci.yaml@main
+
+  build_dart:
+    needs: bundle
+    uses: vrchatapi/vrchatapi-dart/.github/workflows/ci.yaml@main
 
   release:
     runs-on: ubuntu-latest
