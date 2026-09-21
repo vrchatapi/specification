@@ -74,6 +74,7 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/variant
         - $ref: ../parameters.yaml#/branch
+      security: []
       responses:
         "200":
           description: "**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively."
@@ -149,6 +150,7 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/variant
         - $ref: ../parameters.yaml#/branch
+      security: []
       responses:
         "200":
           description: "**Note:** VRChat uses 302 Redirect to Cloudfront. The implementing library **must** support and follow redirects natively."

@@ -29,6 +29,7 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/confirmEmailUserId
         - $ref: ../parameters.yaml#/confirmEmailToken
+      security: []
       responses:
         "302":
           $ref: ../responses/authentication/ConfirmEmailResponse.yaml
@@ -47,6 +48,9 @@ paths:
         - $ref: ../parameters.yaml#/displayName
         - $ref: ../parameters.yaml#/usernameQuery
         - $ref: ../parameters.yaml#/excludeUserId
+      security:
+        - {}
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/authentication/UserExistsResponse.yaml
@@ -74,6 +78,7 @@ paths:
           application/json:
             schema:
               $ref: ../requests/RegisterUserAccountRequest.yaml
+      security: []
       responses:
         "200":
           $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
@@ -324,6 +329,7 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/userIdQuery
         - $ref: ../parameters.yaml#/verifyLoginPlaceToken
+      security: []
       responses:
         "302":
           $ref: ../responses/authentication/VerifyLoginPlaceResponse.yaml

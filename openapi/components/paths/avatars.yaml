@@ -11,6 +11,9 @@ paths:
       description: List avatar styles.
       tags:
         - avatars
+      security:
+        - {}
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/avatars/AvatarStyleListResponse.yaml

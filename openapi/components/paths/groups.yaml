@@ -39,6 +39,8 @@ paths:
             type: string
         - $ref: ../parameters.yaml#/offset
         - $ref: ../parameters.yaml#/number
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/groups/LimitedGroupListResponse.yaml

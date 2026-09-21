@@ -235,6 +235,8 @@ paths:
       parameters:
         - $ref: ../parameters.yaml#/groupId
         - $ref: ../parameters.yaml#/calendarId
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/calendar/ICSResponse.yaml

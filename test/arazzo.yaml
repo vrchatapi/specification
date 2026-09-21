@@ -328,6 +328,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200 || $statusCode == 429
 
+  - workflowId: check-user-exists-anonymous
+    summary: checkUserExists answers an anonymous caller
+    inputs:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: by-username-anonymous
+        operationId: $sourceDescriptions.default.checkUserExists
+        parameters:
+          - name: username
+            in: query
+            value: $inputs.username
+        successCriteria:
+          - condition: $statusCode == 200 || $statusCode == 429
+
   - workflowId: check-user-exists-no-parameters
     summary: Exists no parameters
     parameters:
@@ -859,6 +880,16 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: avatar-styles
+        operationId: $sourceDescriptions.default.getAvatarStyles
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-avatar-styles-anonymous
+    summary: getAvatarStyles answers an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
     steps:
       - stepId: avatar-styles
         operationId: $sourceDescriptions.default.getAvatarStyles

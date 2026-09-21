@@ -57,6 +57,8 @@ paths:
           application/json:
             schema:
               $ref: ../requests/CreateWorldRequest.yaml
+      security:
+        - authCookie: []
       responses:
         "200":
           $ref: ../responses/worlds/WorldResponse.yaml
