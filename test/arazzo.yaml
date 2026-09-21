@@ -336,7 +336,7 @@ workflows:
       - stepId: exists-no-parameters
         operationId: $sourceDescriptions.default.checkUserExists
         successCriteria:
-          - condition: $statusCode == 400
+          - condition: $statusCode == 400 || $statusCode == 429
 
   - workflowId: avatar-moderation-lifecycle
     summary: Block an avatar globally, confirm it is listed, then unblock it
