@@ -3991,7 +3991,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
   - workflowId: friend-request-lifecycle
-    summary: Send a friend request, confirm it is outgoing, withdraw it
+    summary: Send a friend request, read the status it leaves, withdraw it
     inputs:
       type: object
       required:
@@ -4033,7 +4033,18 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
-      - stepId: verify-outgoing
+      - stepId: confirm-pending
+        description: A second request to the same user is refused while the first is outstanding, which is what establishes that it is.
+        operationId: $sourceDescriptions.default.friend
+        parameters:
+          - name: userId
+            in: path
+            value: $inputs.friendId
+        successCriteria:
+          - condition: $statusCode == 400
+
+      - stepId: status-pending
+        description: VRChat stopped setting outgoingRequest on 2024-07-20, so this criterion fails the day it starts again.
         operationId: $sourceDescriptions.default.getFriendStatus
         parameters:
           - name: userId
@@ -4041,7 +4052,8 @@ workflows:
             value: $inputs.friendId
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/outgoingRequest == true
+          - condition: $response.body#/isFriend == false
+          - condition: $response.body#/outgoingRequest == false
 
       - stepId: delete-request
         operationId: $sourceDescriptions.default.deleteFriendRequest
