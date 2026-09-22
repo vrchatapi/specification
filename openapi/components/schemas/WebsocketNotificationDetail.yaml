@@ -1,0 +1,21 @@
+title: WebsocketNotificationDetail
+type: object
+x-if:
+  when: jsonschema
+  then:
+    oneOf:
+      - $ref: ./WebsocketNotificationDetailBoop.yaml
+      - $ref: ./WebsocketNotificationDetailInvite.yaml
+      - $ref: ./WebsocketNotificationDetailInviteResponse.yaml
+      - $ref: ./WebsocketNotificationDetailRequestInvite.yaml
+      - $ref: ./WebsocketNotificationDetailRequestInviteResponse.yaml
+      - $ref: ./WebsocketNotificationDetailVoteToKick.yaml
+    discriminator:
+      propertyName: type
+      mapping:
+        boop: ./NotificationDetailBoop.yaml
+        invite: ./NotificationDetailInvite.yaml
+        invite-response: ./NotificationDetailInviteResponse.yaml
+        request-invite: ./NotificationDetailRequestInvite.yaml
+        request-invite-response: ./NotificationDetailRequestInviteResponse.yaml
+        vote-to-kick: ./NotificationDetailVoteToKick.yaml
