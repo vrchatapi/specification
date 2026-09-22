@@ -31,7 +31,8 @@ properties:
   id:
     $ref: ./CalendarID.yaml
   imageId:
-    type: [./FileID.yaml, "null"]
+    $ref: ./FileID.yaml
+    nullable: true
   imageUrl:
     type: ["null", string]
   interestedUserCount:
@@ -61,7 +62,8 @@ properties:
     items:
       $ref: ./GroupRoleID.yaml
   seriesId:
-    type: [./CalendarID.yaml, "null"]
+    $ref: ./CalendarID.yaml
+    nullable: true
   startsAt:
     type: string
     format: date-time

@@ -5,7 +5,8 @@ properties:
     type: string
     format: date-time
   listingVariantId:
-    type: [./ProductListingVariantID.yaml, "null"]
+    $ref: ./ProductListingVariantID.yaml
+    nullable: true
   nonRefundable:
     type: boolean
   quantity:

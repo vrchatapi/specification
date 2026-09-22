@@ -22,7 +22,8 @@ properties:
     example: 8
     minimum: 0
   categoryId:
-    type: [./InstanceCategoryID.yaml, "null"]
+    $ref: ./InstanceCategoryID.yaml
+    nullable: true
   clientNumber:
     deprecated: true
     type: string
@@ -37,7 +38,8 @@ properties:
     type: array
     items: {}
   creatorId:
-    type: [./UserID.yaml, "null"]
+    $ref: ./UserID.yaml
+    nullable: true
   description:
     type: ["null", string]
   disabledPropAbilities:

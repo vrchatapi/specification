@@ -26,7 +26,8 @@ properties:
   listingId:
     $ref: ./ProductID.yaml
   listingImageId:
-    type: [./FileID.yaml, "null"]
+    $ref: ./FileID.yaml
+    nullable: true
   listingSubtitle:
     type: string
   listingType:

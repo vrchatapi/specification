@@ -64,7 +64,8 @@ properties:
   seen:
     type: boolean
   senderUserId:
-    type: [./UserID.yaml, "null"]
+    $ref: ./UserID.yaml
+    nullable: true
   senderUsername:
     type: ["null", string]
   title:
