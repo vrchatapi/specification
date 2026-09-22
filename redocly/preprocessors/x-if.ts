@@ -27,7 +27,7 @@ export const xIf: Oas3Preprocessor = ({ defines = [] }: Options) => ({
 			if (typeof when !== "string" || !when)
 				return report({ message: "Cannot be empty.", location: location.child("when") });
 
-			if (typeof then !== "object" || !then)
+			if (then !== undefined && (typeof then !== "object" || !then))
 				return report({ message: "Must be an object.", location: location.child("then") });
 
 			if (fallback !== undefined && (typeof fallback !== "object" || !fallback))
