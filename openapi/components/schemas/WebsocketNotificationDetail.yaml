@@ -3,6 +3,15 @@ type: object
 x-if:
   when: jsonschema
   then:
+    discriminator:
+      propertyName: type
+      mapping:
+        boop: ./WebsocketNotificationDetailBoop.yaml
+        invite: ./WebsocketNotificationDetailInvite.yaml
+        invite-response: ./WebsocketNotificationDetailInviteResponse.yaml
+        request-invite: ./WebsocketNotificationDetailRequestInvite.yaml
+        request-invite-response: ./WebsocketNotificationDetailRequestInviteResponse.yaml
+        vote-to-kick: ./WebsocketNotificationDetailVoteToKick.yaml
     oneOf:
       - $ref: ./WebsocketNotificationDetailBoop.yaml
       - $ref: ./WebsocketNotificationDetailInvite.yaml
@@ -10,12 +19,3 @@ x-if:
       - $ref: ./WebsocketNotificationDetailRequestInvite.yaml
       - $ref: ./WebsocketNotificationDetailRequestInviteResponse.yaml
       - $ref: ./WebsocketNotificationDetailVoteToKick.yaml
-    discriminator:
-      propertyName: type
-      mapping:
-        boop: ./NotificationDetailBoop.yaml
-        invite: ./NotificationDetailInvite.yaml
-        invite-response: ./NotificationDetailInviteResponse.yaml
-        request-invite: ./NotificationDetailRequestInvite.yaml
-        request-invite-response: ./NotificationDetailRequestInviteResponse.yaml
-        vote-to-kick: ./NotificationDetailVoteToKick.yaml

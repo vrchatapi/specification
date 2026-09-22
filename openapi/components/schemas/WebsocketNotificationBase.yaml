@@ -5,10 +5,7 @@ properties:
     type: string
     format: date-time
   details:
-    x-if:
-      when: jsonschema
-      else:
-        type: object
+    type: object
   id:
     type: string
     minLength: 1
