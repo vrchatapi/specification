@@ -6,8 +6,7 @@ properties:
   id:
     $ref: ./ProductID.yaml
   imageId:
-    $ref: ./FileID.yaml
-    nullable: true
+    type: [./FileID.yaml, "null"]
   licenseId:
     type: ["null", string]
   productType:

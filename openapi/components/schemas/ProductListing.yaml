@@ -25,8 +25,7 @@ properties:
   durationType:
     type: ["null", string]
   groupIcon:
-    $ref: ./FileID.yaml
-    nullable: true
+    type: [./FileID.yaml, "null"]
   groupId:
     $ref: ./GroupID.yaml
   groupName:
@@ -46,8 +45,7 @@ properties:
   id:
     $ref: ./ProductID.yaml
   imageId:
-    $ref: ./FileID.yaml
-    nullable: true
+    type: [./FileID.yaml, "null"]
   imageUrl:
     type: ["null", string]
   listingType:

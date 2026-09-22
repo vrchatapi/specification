@@ -5,8 +5,7 @@ properties:
   isMobile:
     type: boolean
   platform:
-    $ref: ./Platform.yaml
-    nullable: true
+    type: [./Platform.yaml, "null"]
   recorded:
     type: string
     format: date-time

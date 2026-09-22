@@ -39,9 +39,8 @@ properties:
   nameplateEffect:
     type: string
   platform:
-    $ref: ./Platform.yaml
+    type: [./Platform.yaml, "null"]
     description: either a Platform or an empty string
-    nullable: true
   profileEffect:
     type: string
   profilePicOverride:
@@ -52,10 +51,8 @@ properties:
   travelingToInstance:
     type: ["null", string]
   travelingToWorld:
-    $ref: ./LocationID.yaml
-    nullable: true
+    type: [./LocationID.yaml, "null"]
   userIcon:
     type: ["null", string]
   world:
-    $ref: ./WorldID.yaml
-    nullable: true
+    type: [./WorldID.yaml, "null"]

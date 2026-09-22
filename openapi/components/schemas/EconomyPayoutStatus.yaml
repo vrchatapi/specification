@@ -4,8 +4,7 @@ properties:
   accountId:
     type: integer
   activePayout:
-    $ref: ./EconomyPayout.yaml
-    nullable: true
+    type: [./EconomyPayout.yaml, "null"]
   activePayoutCancellable:
     type: boolean
   activePayoutTiliaAmount:

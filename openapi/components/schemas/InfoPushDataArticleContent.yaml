@@ -9,7 +9,6 @@ properties:
     $ref: ./InfoPushDataClickable.yaml
   text:
     type: string
-
   title:
     type: string
   videoUrl:
