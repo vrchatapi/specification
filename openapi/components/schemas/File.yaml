@@ -36,12 +36,10 @@ properties:
     $ref: ./UserID.yaml
   tags:
     type: array
-    description: " "
     items:
       $ref: ./Tag.yaml
   versions:
     type: array
-    description: " "
     items:
       $ref: ./FileVersion.yaml
     minItems: 1

@@ -16,7 +16,6 @@ properties:
     $ref: ./UserID.yaml
   tags:
     type: array
-    description: " "
     items:
       $ref: ./Tag.yaml
   type:

@@ -14,12 +14,10 @@ properties:
     format: date
   accountDeletionLog:
     type: [array, "null"]
-    description: " "
     items:
       $ref: ./AccountDeletionLog.yaml
   activeFriends:
     type: array
-    description: " "
     items:
       $ref: ./UserID.yaml
   ageVerificationStatus:
@@ -165,7 +163,6 @@ properties:
       $ref: ./UserID.yaml
   pastDisplayNames:
     type: array
-    description: " "
     items:
       $ref: ./PastDisplayName.yaml
   personalizationOptOut:

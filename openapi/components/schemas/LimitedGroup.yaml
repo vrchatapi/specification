@@ -14,7 +14,6 @@ properties:
     $ref: ./GroupDiscriminator.yaml
   galleries:
     type: array
-    description: " "
     items:
       $ref: ./GroupGallery.yaml
   iconId:
@@ -41,6 +40,5 @@ properties:
     $ref: ./GroupShortCode.yaml
   tags:
     type: array
-    description: " "
     items:
       $ref: ./Tag.yaml

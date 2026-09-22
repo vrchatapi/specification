@@ -106,7 +106,6 @@ properties:
     $ref: ./StoreID.yaml
   tags:
     type: array
-    description: " "
     items:
       $ref: ./Tag.yaml
   thumbnailImageUrl:

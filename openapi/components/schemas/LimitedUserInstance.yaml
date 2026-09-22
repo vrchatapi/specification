@@ -12,7 +12,6 @@ properties:
     type: string
   bioLinks:
     type: array
-    description: " "
     items:
       type: string
   currentAvatarImageUrl:

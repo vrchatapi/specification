@@ -42,7 +42,6 @@ properties:
     type: string
   tags:
     type: array
-    description: " "
     items:
       $ref: ../schemas/Tag.yaml
   unsubscribe:

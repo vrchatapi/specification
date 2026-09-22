@@ -41,6 +41,5 @@ properties:
     minLength: 3
   tags:
     type: array
-    description: " "
     items:
       $ref: ../schemas/Tag.yaml

@@ -23,22 +23,18 @@ properties:
     minLength: 1
   roleIdsToAutoApprove:
     type: [array, "null"]
-    description: " "
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToManage:
     type: [array, "null"]
-    description: " "
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToSubmit:
     type: [array, "null"]
-    description: " "
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToView:
     type: [array, "null"]
-    description: " "
     items:
       $ref: ./GroupRoleID.yaml
   updatedAt:

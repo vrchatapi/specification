@@ -40,7 +40,6 @@ properties:
     format: date-time
   tags:
     type: array
-    description: " "
     items:
       $ref: ./Tag.yaml
   updatedAt:
