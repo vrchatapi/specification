@@ -6332,6 +6332,7 @@ workflows:
         requestBody:
           contentType: application/json
           payload:
+            description: ""
         successCriteria:
           - condition: $statusCode == 200
 

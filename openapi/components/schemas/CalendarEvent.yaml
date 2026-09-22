@@ -34,7 +34,7 @@ properties:
     $ref: ./FileID.yaml
     nullable: true
   imageUrl:
-    type: ["null", string]
+    type: string
   interestedUserCount:
     type: integer
   isDraft:
