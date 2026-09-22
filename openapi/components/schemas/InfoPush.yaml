@@ -1,6 +1,5 @@
 title: InfoPush
 type: object
-description: ""
 properties:
   clientMinVersion: {}
   createdAt:
@@ -38,7 +37,6 @@ properties:
       type: string
   startDate:
     type: ["null", string]
-    description: ""
     format: date-time
   tags:
     type: array

@@ -1,6 +1,5 @@
 title: Jam
 type: object
-description: ""
 properties:
   created_at:
     type: string

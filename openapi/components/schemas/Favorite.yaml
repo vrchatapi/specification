@@ -1,6 +1,5 @@
 title: Favorite
 type: object
-description: ""
 properties:
   favoriteId:
     type: string

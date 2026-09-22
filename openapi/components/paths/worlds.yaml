@@ -52,7 +52,6 @@ paths:
       tags:
         - worlds
       requestBody:
-        description: ""
         content:
           application/json:
             schema:

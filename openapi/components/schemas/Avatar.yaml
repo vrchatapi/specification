@@ -1,6 +1,5 @@
 title: Avatar
 type: object
-description: ""
 properties:
   acknowledgements:
     type: string

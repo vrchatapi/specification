@@ -1,6 +1,5 @@
 title: NotificationV2
 type: object
-description: ""
 properties:
   canDelete:
     type: boolean

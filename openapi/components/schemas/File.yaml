@@ -1,6 +1,5 @@
 title: File
 type: object
-description: ""
 properties:
   animationStyle:
     $ref: ./ImageAnimationStyle.yaml
@@ -31,7 +30,6 @@ properties:
     example: thumbnails/file_00000000-0000-0000-0000-000000000000.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.1.modified-thumbnail-256.png
   name:
     type: string
-    description: ""
     example: Example File
     minLength: 0
   ownerId:

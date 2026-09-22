@@ -1,6 +1,5 @@
 title: FavoriteGroup
 type: object
-description: ""
 properties:
   displayName:
     type: string

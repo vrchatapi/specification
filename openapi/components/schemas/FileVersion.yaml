@@ -1,6 +1,5 @@
 title: FileVersion
 type: object
-description: ""
 properties:
   created_at:
     type: string

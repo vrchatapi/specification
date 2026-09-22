@@ -1,6 +1,5 @@
 title: World
 type: object
-description: ""
 properties:
   authorId:
     $ref: ./UserID.yaml

@@ -1,6 +1,5 @@
 title: Transaction
 type: object
-description: ""
 properties:
   agreement:
     x-if:

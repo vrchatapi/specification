@@ -1,6 +1,5 @@
 title: DiscordDetails
 type: object
-description: ""
 properties:
   global_name:
     type: string

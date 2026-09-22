@@ -1,6 +1,5 @@
 title: SentNotification
 type: object
-description: ""
 properties:
   created_at:
     type: string
@@ -24,7 +23,6 @@ properties:
     minLength: 1
   message:
     type: string
-    description: ""
     example: This is a generated invite to VRChat Hub
   receiverUserId:
     $ref: ./UserID.yaml

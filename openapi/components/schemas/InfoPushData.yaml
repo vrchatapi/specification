@@ -1,6 +1,5 @@
 title: InfoPushData
 type: object
-description: ""
 properties:
   article:
     $ref: ./InfoPushDataArticle.yaml

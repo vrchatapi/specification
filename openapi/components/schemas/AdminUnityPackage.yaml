@@ -1,6 +1,5 @@
 title: AdminUnityPackage
 type: object
-description: ""
 properties:
   assetUrl:
     type: string

@@ -1,6 +1,5 @@
 title: LimitedUnityPackage
 type: object
-description: ""
 properties:
   created_at:
     type: ["null", string]

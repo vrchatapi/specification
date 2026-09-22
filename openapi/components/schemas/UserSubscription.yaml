@@ -1,6 +1,5 @@
 title: UserSubscription
 type: object
-description: ""
 properties:
   active:
     type: boolean

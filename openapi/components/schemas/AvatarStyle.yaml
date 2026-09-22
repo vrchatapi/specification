@@ -1,6 +1,5 @@
 title: AvatarStyle
 type: object
-description: ""
 properties:
   id:
     $ref: ./AvatarStyleID.yaml

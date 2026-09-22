@@ -1,6 +1,5 @@
 title: UnityPackage
 type: object
-description: ""
 properties:
   assetUrl:
     type: ["null", string]

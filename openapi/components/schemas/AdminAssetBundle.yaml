@@ -1,6 +1,5 @@
 title: AdminAssetBundle
 type: object
-description: ""
 properties:
   _created_at:
     type: string
