@@ -3,4 +3,5 @@ type: string
 enum:
   - emailOtp
   - otp
+  - passkey
   - totp
