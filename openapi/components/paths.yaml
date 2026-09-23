@@ -52,6 +52,8 @@
   $ref: "./paths/friends.yaml#/paths/~1auth~1user~1friends"
 "/auth/user/friends/{userId}":
   $ref: "./paths/friends.yaml#/paths/~1auth~1user~1friends~1{userId}"
+/auth/user/interestsAndPreferences:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1interestsAndPreferences"
 /auth/user/notifications:
   $ref: "./paths/notifications.yaml#/paths/~1auth~1user~1notifications"
 /auth/user/notifications/clear:

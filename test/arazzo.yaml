@@ -507,6 +507,30 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: get-interests-and-preferences
+    summary: Interests and preferences
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: interests-and-preferences
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-interests-and-preferences-unauthenticated
+    summary: getInterestsAndPreferences refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-interests-and-preferences
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-moderation-reports
     summary: Moderation reports
     parameters:
@@ -632,6 +656,153 @@ workflows:
             value: test
         successCriteria:
           - condition: $statusCode == 400
+  - workflowId: interests-and-preferences-lifecycle
+    summary: Turns every interest on, one off, then the rest off, reading each state back
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: turn-all-on
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload:
+            Anime: true
+            Art: true
+            Avatars: true
+            BigGroup: true
+            Explore: true
+            Fantasy: true
+            Fashion: true
+            FindAvatars: true
+            Furries: true
+            Horror: true
+            LanguageLearning: true
+            MeetPeople: true
+            Music: true
+            Mystery: true
+            SciFi: true
+            SmallGroup: true
+            Surprise: true
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-all-on
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/Anime == true
+          - condition: $response.body#/Art == true
+          - condition: $response.body#/Avatars == true
+          - condition: $response.body#/BigGroup == true
+          - condition: $response.body#/Explore == true
+          - condition: $response.body#/Fantasy == true
+          - condition: $response.body#/Fashion == true
+          - condition: $response.body#/FindAvatars == true
+          - condition: $response.body#/Furries == true
+          - condition: $response.body#/Horror == true
+          - condition: $response.body#/LanguageLearning == true
+          - condition: $response.body#/MeetPeople == true
+          - condition: $response.body#/Music == true
+          - condition: $response.body#/Mystery == true
+          - condition: $response.body#/SciFi == true
+          - condition: $response.body#/SmallGroup == true
+          - condition: $response.body#/Surprise == true
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: turn-one-off
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload:
+            Art: false
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-one-off
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+          - context: $response.body
+            condition: $[?(!@.Art)]
+            type: jsonpath
+          - condition: $response.body#/Music == true
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: send-unknown
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload:
+            Music: loud
+            Unknown: true
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-unknown-ignored
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/Music == true
+          - context: $response.body
+            condition: $[?(!@.Unknown)]
+            type: jsonpath
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: turn-all-off
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload:
+            Anime: false
+            Art: false
+            Avatars: false
+            BigGroup: false
+            Explore: false
+            Fantasy: false
+            Fashion: false
+            FindAvatars: false
+            Furries: false
+            Horror: false
+            LanguageLearning: false
+            MeetPeople: false
+            Music: false
+            Mystery: false
+            SciFi: false
+            SmallGroup: false
+            Surprise: false
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-all-off
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+          - context: $response.body
+            condition: $[?(!@.Music)]
+            type: jsonpath
+
   - workflowId: logout
     summary: >-
       Invalidates the session, so `pnpm test` skips it by name — running
@@ -681,6 +852,33 @@ workflows:
     steps:
       - stepId: submit-moderation-report
         operationId: $sourceDescriptions.default.submitModerationReport
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: update-interests-and-preferences-invalid-body
+    summary: updateInterestsAndPreferences refuses a body that is not an object
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-interests-and-preferences
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload: not an object
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: update-interests-and-preferences-unauthenticated
+    summary: updateInterestsAndPreferences refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-interests-and-preferences
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
         successCriteria:
           - condition: $statusCode == 401
 
@@ -10248,6 +10446,243 @@ workflows:
     steps:
       - stepId: get-user-tutorial-status
         operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-user-tutorial-status-platforms
+    summary: getUserTutorialStatus keys a tutorial by the platform and store headers
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: read-android
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: android
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/tutorialKey == 'android:suite:v1'
+
+      - stepId: read-ios
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: ios
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/tutorialKey == 'ios:suite:v1'
+
+      - stepId: read-standalonewindows
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: standalonewindows
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/tutorialKey == 'standalonewindows:suite:v1'
+
+      - stepId: read-spectest
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/tutorialKey == 'null:suite:v1'
+
+  - workflowId: user-tutorial-lifecycle
+    summary: Completes a tutorial, clears every platform tutorial, then restores the account's own
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: complete
+        operationId: $sourceDescriptions.default.completeUserTutorial
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $workflows.session.outputs.userId
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-completed
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/completed == true
+          - condition: $response.body#/tutorialKey == 'null:suite:v1'
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: clear
+        operationId: $sourceDescriptions.default.clearUserTutorials
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: restore
+        operationId: $sourceDescriptions.default.completeUserTutorial
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: standalonewindows
+          - name: X-Store
+            in: header
+            value: steam
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-restored
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/completed == false
+
+  - workflowId: complete-user-tutorial-forbidden
+    summary: completeUserTutorial refuses another user's tutorials
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: complete-user-tutorial
+        operationId: $sourceDescriptions.default.completeUserTutorial
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: complete-user-tutorial-unauthenticated
+    summary: completeUserTutorial refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: complete-user-tutorial
+        operationId: $sourceDescriptions.default.completeUserTutorial
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: clear-user-tutorials-forbidden
+    summary: clearUserTutorials refuses another user's tutorials
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: clear-user-tutorials
+        operationId: $sourceDescriptions.default.clearUserTutorials
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: clear-user-tutorials-unauthenticated
+    summary: clearUserTutorials refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: clear-user-tutorials
+        operationId: $sourceDescriptions.default.clearUserTutorials
         parameters:
           - name: userId
             in: path

@@ -1029,3 +1029,19 @@ worldId:
   in: path
   schema:
     $ref: ./schemas/WorldID.yaml
+xPlatform:
+  name: X-Platform
+  description: The platform the tutorial belongs to. `standalonewindows`, `android` and `ios` are kept; any other value is recorded as `null`.
+  required: false
+  in: header
+  schema:
+    type: string
+    example: standalonewindows
+xStore:
+  name: X-Store
+  description: The store the tutorial belongs to, recorded as sent.
+  required: false
+  in: header
+  schema:
+    type: string
+    example: steam

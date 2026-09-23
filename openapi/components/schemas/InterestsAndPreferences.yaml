@@ -1,0 +1,38 @@
+title: InterestsAndPreferences
+type: object
+description: Interests and preferences the current user has turned on. A key is present only while its value is `true`.
+properties:
+  Anime:
+    type: boolean
+  Art:
+    type: boolean
+  Avatars:
+    type: boolean
+  BigGroup:
+    type: boolean
+  Explore:
+    type: boolean
+  Fantasy:
+    type: boolean
+  Fashion:
+    type: boolean
+  FindAvatars:
+    type: boolean
+  Furries:
+    type: boolean
+  Horror:
+    type: boolean
+  LanguageLearning:
+    type: boolean
+  MeetPeople:
+    type: boolean
+  Music:
+    type: boolean
+  Mystery:
+    type: boolean
+  SciFi:
+    type: boolean
+  SmallGroup:
+    type: boolean
+  Surprise:
+    type: boolean

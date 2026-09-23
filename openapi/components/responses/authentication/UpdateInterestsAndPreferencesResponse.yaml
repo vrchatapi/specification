@@ -1,0 +1,11 @@
+description: OK
+content:
+  application/json:
+    examples:
+      Update Interests And Preferences Success:
+        value:
+          success:
+            message: Interests and preferences updated!
+            status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

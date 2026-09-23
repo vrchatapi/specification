@@ -1,0 +1,11 @@
+description: A user can complete only their own tutorials.
+content:
+  application/json:
+    examples:
+      Other User:
+        value:
+          error:
+            message: '"You do not have permission to complete tutorials for others."'
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml
