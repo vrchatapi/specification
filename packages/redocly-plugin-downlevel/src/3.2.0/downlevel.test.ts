@@ -7,7 +7,7 @@ const from32 = layer("3.2.0", "3.1.2");
 const ok = { 200: { description: "ok" } };
 
 describe("document", () => {
-	test("drops the fields 3.1 does not have", async () => {
+	test("writes the fields 3.1 lacks as registry extensions, and drops the rest", async () => {
 		const { document, problems } = await from32({
 			$self: "https://example.com/openapi.yaml",
 			servers: [{ url: "https://example.com", name: "production" }],
@@ -28,12 +28,14 @@ describe("document", () => {
 		});
 		expect(document).toStrictEqual({
 			openapi: "3.1.2",
+			"x-oai-$self": "https://example.com/openapi.yaml",
 			info: { title: "fixture", version: "1" },
-			servers: [{ url: "https://example.com" }],
-			tags: [{ name: "a" }, { name: "b" }],
-			paths: { "/a": { get: { responses: { 200: { description: "ok" } } } } },
+			servers: [{ url: "https://example.com", "x-oai-name": "production" }],
+			tags: [{ name: "a", "x-displayName": "A" }, { name: "b" }],
+			"x-tagGroups": [{ name: "A", tags: ["a", "b"] }],
+			paths: { "/a": { get: { responses: { 200: { description: "ok", "x-oai-summary": "OK", "x-summary": "OK" } } } } },
 			components: {
-				securitySchemes: { key: { type: "apiKey", in: "header", name: "key" } },
+				securitySchemes: { key: { type: "apiKey", in: "header", name: "key", "x-oai-deprecated": true } },
 				schemas: {
 					Pet: { type: "object", discriminator: { propertyName: "kind" }, required: ["kind"], properties: { kind: { type: "string" } } },
 					Cat: { type: "object" }
@@ -61,8 +63,77 @@ describe("document", () => {
 	});
 });
 
+describe("tags", () => {
+	test("writes the guide's 3.2 tags as the extensions 3.1 renderers read", async () => {
+		const { document, problems } = await from32({
+			tags: [
+				{ name: "products", summary: "Products", description: "All product operations", kind: "nav" },
+				{ name: "books", summary: "Books & Literature", parent: "products", kind: "nav" },
+				{ name: "cds", summary: "Music CDs", parent: "products", kind: "nav" },
+				{ name: "giftcards", summary: "Gift Cards", parent: "products", kind: "nav" },
+				{ name: "digital-delivery", summary: "Digital Delivery", kind: "badge" }
+			],
+			paths: { "/giftcards": { get: { tags: ["giftcards", "digital-delivery"], responses: ok } } }
+		});
+		expect(document.tags).toStrictEqual([
+			{ name: "products", "x-displayName": "Products", description: "All product operations" },
+			{ name: "books", "x-displayName": "Books & Literature" },
+			{ name: "cds", "x-displayName": "Music CDs" },
+			{ name: "giftcards", "x-displayName": "Gift Cards" },
+			{ name: "digital-delivery", "x-displayName": "Digital Delivery" }
+		]);
+		expect(document["x-tagGroups"]).toStrictEqual([{ name: "Products", tags: ["products", "books", "cds", "giftcards"] }]);
+		expect(document.paths).toStrictEqual({
+			"/giftcards": { get: { tags: ["giftcards", "digital-delivery"], "x-badges": [{ name: "Digital Delivery" }], responses: ok } }
+		});
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("groups every tag under its top-level tag, so none drops out of the navigation", async () => {
+		const { document } = await from32({
+			tags: [{ name: "a" }, { name: "b", parent: "a" }, { name: "c", parent: "b" }, { name: "d", parent: "a" }, { name: "e" }]
+		});
+		expect(document["x-tagGroups"]).toStrictEqual([
+			{ name: "a", tags: ["a", "b", "c", "d"] },
+			{ name: "e", tags: ["e"] }
+		]);
+	});
+
+	test("keeps the extensions the description already has", async () => {
+		const groups = [{ name: "Mine", tags: ["b"] }];
+		const { document } = await from32({
+			tags: [{ name: "a", summary: "A", "x-displayName": "Kept" }, { name: "b", parent: "a" }, { name: "new", summary: "New", kind: "badge" }],
+			"x-tagGroups": groups,
+			paths: { "/a": { get: { tags: ["b", "new"], "x-badges": [{ name: "New" }, { name: "Beta" }], responses: ok } } }
+		});
+		expect(document.tags).toStrictEqual([{ name: "a", "x-displayName": "Kept" }, { name: "b" }, { name: "new", "x-displayName": "New" }]);
+		expect(document["x-tagGroups"]).toStrictEqual(groups);
+		expect(document.paths).toStrictEqual({ "/a": { get: { tags: ["b", "new"], "x-badges": [{ name: "New" }, { name: "Beta" }], responses: ok } } });
+	});
+
+	test("adds no tag groups where no tag has a parent", async () => {
+		const { document } = await from32({ tags: [{ name: "a", summary: "A" }] });
+		expect(document).not.toHaveProperty("x-tagGroups");
+	});
+});
+
+describe("responses", () => {
+	test("writes a response summary as every extension that carries it", async () => {
+		const { document } = await from32({
+			paths: {
+				"/a": {
+					get: { responses: { 200: { summary: "OK", description: "Found." }, 404: { summary: "Missing", description: "Gone.", "x-oai-summary": "Kept" } } }
+				}
+			}
+		});
+		expect(document.paths).toStrictEqual({
+			"/a": { get: { responses: { 200: { "x-oai-summary": "OK", "x-summary": "OK", description: "Found." }, 404: { description: "Gone.", "x-oai-summary": "Kept", "x-summary": "Missing" } } } }
+		});
+	});
+});
+
 describe("examples", () => {
-	test("turns dataValue and serializedValue into value", async () => {
+	test("turns dataValue and serializedValue into value, keeping the serialized form in its registry extension", async () => {
 		const { document } = await from32({
 			components: {
 				examples: {
@@ -75,8 +146,8 @@ describe("examples", () => {
 		expect(document.components).toStrictEqual({
 			examples: {
 				Data: { value: { a: 1 } },
-				Serialized: { value: "a=1" },
-				Both: { value: { a: 1 } }
+				Serialized: { value: "a=1", "x-oai-serializedValue": "a=1" },
+				Both: { value: { a: 1 }, "x-oai-serializedValue": "a=1" }
 			}
 		});
 	});
@@ -119,34 +190,117 @@ describe("reports", () => {
 		const { problems } = await from32({
 			paths: {
 				"/a": {
-					query: { responses: ok },
 					parameters: [
 						{ name: "q", in: "querystring", content: { "application/x-www-form-urlencoded": { schema: { type: "object" } } } },
 						{ name: "c", in: "cookie", style: "cookie", schema: { type: "string" } }
 					]
 				}
-			},
-			components: {
-				securitySchemes: {
-					device: { type: "oauth2", flows: { deviceAuthorization: { deviceAuthorizationUrl: "https://example.com/device", tokenUrl: "https://example.com/token", scopes: {} } } }
-				}
 			}
 		});
 		expect(problems).toStrictEqual([
-			{ severity: "error", pointer: "#/paths/~1a/query", message: "OpenAPI 3.1.2 has no `query`." },
 			{ severity: "error", pointer: "#/paths/~1a/parameters/0/in", message: "OpenAPI 3.1.2 has no `in: querystring`." },
-			{ severity: "error", pointer: "#/paths/~1a/parameters/1/style", message: "OpenAPI 3.1.2 has no `style: cookie`." },
-			{ severity: "error", pointer: "#/components/securitySchemes/device/flows/deviceAuthorization", message: "OpenAPI 3.1.2 has no `deviceAuthorization`." }
+			{ severity: "error", pointer: "#/paths/~1a/parameters/1/style", message: "OpenAPI 3.1.2 has no `style: cookie`." }
 		]);
 	});
 
-	test("reports sequential media types", async () => {
-		const { problems } = await from32({
-			paths: { "/a": { get: { responses: { 200: { description: "ok", content: { "application/jsonl": { itemSchema: { type: "object" } } } } } } } }
+	test("writes item schemas and encodings as their registry extensions", async () => {
+		const { document, problems } = await from32({
+			paths: {
+				"/a": {
+					get: { responses: { 200: { description: "ok", content: { "application/jsonl": { itemSchema: { type: "object" } } } } } },
+					post: {
+						requestBody: {
+							content: {
+								"multipart/mixed": {
+									itemSchema: { type: "string" },
+									prefixEncoding: [{ contentType: "application/json" }],
+									itemEncoding: { contentType: "image/png" }
+								},
+								"multipart/form-data": {
+									schema: { type: "object", properties: { part: { type: "string" } } },
+									encoding: { part: { contentType: "multipart/mixed", encoding: { inner: { contentType: "text/plain" } }, itemEncoding: { contentType: "text/plain" } } }
+								}
+							}
+						},
+						responses: ok
+					}
+				}
+			}
 		});
-		expect(problems).toStrictEqual([
-			{ severity: "error", pointer: "#/paths/~1a/get/responses/200/content/application~1jsonl/itemSchema", message: "OpenAPI 3.1.2 has no `itemSchema`." }
-		]);
+		expect(document.paths).toStrictEqual({
+			"/a": {
+				get: { responses: { 200: { description: "ok", content: { "application/jsonl": { "x-oai-itemSchema": { type: "object" } } } } } },
+				post: {
+					requestBody: {
+						content: {
+							"multipart/mixed": {
+								"x-oai-itemSchema": { type: "string" },
+								"x-oai-prefixEncoding": [{ contentType: "application/json" }],
+								"x-oai-itemEncoding": { contentType: "image/png" }
+							},
+							"multipart/form-data": {
+								schema: { type: "object", properties: { part: { type: "string" } } },
+								encoding: {
+									part: { contentType: "multipart/mixed", "x-oai-encoding": { inner: { contentType: "text/plain" } }, "x-oai-itemEncoding": { contentType: "text/plain" } }
+								}
+							}
+						}
+					},
+					responses: ok
+				}
+			}
+		});
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("writes QUERY and other methods as x-oai-additionalOperations", async () => {
+		const { document, problems } = await from32({
+			paths: {
+				"/a": {
+					get: { responses: ok },
+					query: { operationId: "search", responses: ok },
+					additionalOperations: { COPY: { operationId: "copy", responses: ok } }
+				}
+			}
+		});
+		expect(document.paths).toStrictEqual({
+			"/a": {
+				get: { responses: ok },
+				"x-oai-additionalOperations": { QUERY: { operationId: "search", responses: ok }, COPY: { operationId: "copy", responses: ok } }
+			}
+		});
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("keeps an operation x-oai-additionalOperations already holds", async () => {
+		const { document } = await from32({
+			paths: { "/a": { query: { operationId: "new", responses: ok }, "x-oai-additionalOperations": { QUERY: { operationId: "kept", responses: ok } } } }
+		});
+		expect(document.paths).toStrictEqual({ "/a": { "x-oai-additionalOperations": { QUERY: { operationId: "kept", responses: ok } } } });
+	});
+
+	test("writes the device authorization flow as its registry extensions", async () => {
+		const { document, problems } = await from32({
+			components: {
+				securitySchemes: {
+					device: {
+						type: "oauth2",
+						flows: { deviceAuthorization: { deviceAuthorizationUrl: "https://example.com/device", tokenUrl: "https://example.com/token", scopes: {} } }
+					}
+				}
+			}
+		});
+		expect(document.components).toStrictEqual({
+			securitySchemes: {
+				device: {
+					type: "oauth2",
+					flows: {
+						"x-oai-deviceAuthorization": { "x-oai-deviceAuthorizationUrl": "https://example.com/device", tokenUrl: "https://example.com/token", scopes: {} }
+					}
+				}
+			}
+		});
+		expect(problems).toStrictEqual([]);
 	});
 });
 

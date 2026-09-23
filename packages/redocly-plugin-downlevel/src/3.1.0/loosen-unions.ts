@@ -5,6 +5,7 @@ import { resolveSchema } from "../pointer.ts";
 
 const unions = ["oneOf", "anyOf"] as const;
 const merged = new Set(["type", "properties", "required", "items", "enum", "discriminator"]);
+const enumeration = new Set(["const", "title", "description", "deprecated"]);
 
 /**
  * https://www.ietf.org/archive/id/draft-bhutton-json-schema-validation-01.txt
@@ -37,8 +38,16 @@ const rules: Record<string, Array<string>> = {
  * reference is made nullable with `nullable: true` beside the `$ref`, the form
  * openapi-generator reads, as `lowerNullMembers` explains.
  *
+ * Members that each allow only listed values, by `enum` or `const`, become one
+ * `enum`, the way openapi-generator's `SIMPLIFY_ONEOF_ANYOF_ENUM` rule reads such
+ * a union: a single value's `title` and `description` go to
+ * `x-enum-descriptions`, and its `deprecated` to `x-enum-deprecated`, so a
+ * generator reading the lowered union builds what it builds from the union.
+ *
  * Runs only with `loosenUnions`; otherwise `lowerNullMembers` deals with the
  * `null` members and the unions stay.
+ *
+ * https://github.com/OpenAPITools/openapi-generator/blob/v7.24.0/modules/openapi-generator/src/main/java/org/openapitools/codegen/OpenAPINormalizer.java#L1644
  *
  * A size or value rule written beside the union stays only where the loosened
  * schema has a type it constrains. Left on a schema of no type, generators read
@@ -58,6 +67,41 @@ export const loosenUnions: Transform = ({ loosenUnions: enabled }) => {
 
 	const typesOf = (schema: Node): Array<string> | undefined =>
 		schema.type === undefined ? undefined : [schema.type].flat() as Array<string>;
+
+	const valuesOf = (schema: Node): Array<unknown> | undefined =>
+		Array.isArray(schema.enum) ? schema.enum : "const" in schema ? [schema.const] : undefined;
+
+	const enumerate = (schemas: Array<Node>, typeSets: Array<Array<string> | undefined>, nullable: boolean): Node | undefined => {
+		const lists = schemas.map(valuesOf);
+		if (lists.includes(undefined)) return;
+
+		const declared = typeSets.filter((types) => types !== undefined);
+		if (declared.some((types) => types.length !== 1 || types[0] !== declared[0][0])) return;
+		const type = declared[0]?.[0];
+		if (nullable && !type) return;
+
+		const entries: Array<{ value: unknown; description: string; deprecated: boolean }> = [];
+		schemas.forEach((schema, index) => {
+			const values = lists[index]!;
+			const description = values.length === 1 ? [schema.title, schema.description].filter((part) => typeof part === "string" && part !== "").join(" - ") : "";
+			for (const value of values) {
+				const entry = { value, description, deprecated: schema.deprecated === true };
+				const existing = entries.findIndex((other) => isDeepStrictEqual(other.value, value));
+				if (existing === -1) entries.push(entry);
+				else entries[existing] = entry;
+			}
+		});
+
+		const result: Node = {};
+		if (type) result.type = nullable ? [type, "null"] : type;
+		for (const [key, value] of Object.entries(schemas[0]))
+			if (!merged.has(key) && !enumeration.has(key) && schemas.every((schema) => key in schema && isDeepStrictEqual(schema[key], value)))
+				result[key] = structuredClone(value);
+		result.enum = entries.map((entry) => structuredClone(entry.value));
+		if (entries.some((entry) => entry.description !== "")) result["x-enum-descriptions"] = entries.map((entry) => entry.description);
+		if (entries.some((entry) => entry.deprecated)) result["x-enum-deprecated"] = entries.map((entry) => entry.deprecated);
+		return result;
+	};
 
 	const loosen = (members: Array<Node>): Node => {
 		let nullable = false;
@@ -84,6 +128,10 @@ export const loosenUnions: Transform = ({ loosenUnions: enabled }) => {
 
 		const schemas = concrete.map(resolve);
 		const typeSets = schemas.map((schema) => typesOf(schema)?.filter((type) => type !== "null"));
+
+		const enumerated = enumerate(schemas, typeSets, nullable);
+		if (enumerated) return enumerated;
+
 		const [type] = typeSets[0] ?? [];
 		if (!type || typeSets.some((types) => types?.length !== 1 || types[0] !== type)) return {};
 

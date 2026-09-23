@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.1
 info:
   title: miscellaneous
   description: Miscellaneous endpoints that do not fit into any other category.
@@ -137,9 +137,6 @@ paths:
           $ref: ../responses/system/InfoPushListResponse.yaml
         "400":
           $ref: ../responses/RequestValidationError.yaml
-      x-badges:
-        - color: gold
-          label: "Status: Early Access (Still Under Development)"
   /js/app.js:
     get:
       operationId: getJavaScript

@@ -1,62 +1,102 @@
 - name: authentication
   description:
     $ref: ./paths/authentication.yaml#/info/description
+  kind: nav
+  summary: Authentication
 - name: avatars
   description:
     $ref: ./paths/avatars.yaml#/info/description
+  kind: nav
+  summary: Avatars
 - name: calendar
   description:
     $ref: ./paths/calendar.yaml#/info/description
+  kind: nav
+  summary: Calendar
 - name: economy
   description:
     $ref: ./paths/economy.yaml#/info/description
+  kind: nav
+  summary: Economy
 - name: favorites
   description:
     $ref: ./paths/favorites.yaml#/info/description
+  kind: nav
+  summary: Favorites
 - name: files
   description:
     $ref: ./paths/files.yaml#/info/description
+  kind: nav
+  summary: Files
 - name: friends
   description:
     $ref: ./paths/friends.yaml#/info/description
+  kind: nav
+  summary: Friends
 - name: groups
   description:
     $ref: ./paths/groups.yaml#/info/description
+  kind: nav
+  summary: Groups
 - name: inventory
   description:
     $ref: ./paths/inventory.yaml#/info/description
+  kind: nav
+  summary: Inventory
 - name: invite
   description:
     $ref: ./paths/invite.yaml#/info/description
+  kind: nav
+  summary: Invite
 - name: instances
   description:
     $ref: ./paths/instances.yaml#/info/description
+  kind: nav
+  summary: Instances
 - name: jams
   description:
     $ref: ./paths/jams.yaml#/info/description
+  kind: nav
+  summary: Jams
 - name: miscellaneous
   description:
     $ref: ./paths/miscellaneous.yaml#/info/description
+  kind: nav
+  summary: Miscellaneous
 - name: notifications
   description:
     $ref: ./paths/notifications.yaml#/info/description
+  kind: nav
+  summary: Notifications
 - name: playermoderation
   description:
     $ref: ./paths/playermoderation.yaml#/info/description
+  kind: nav
+  summary: Player Moderation
 - name: prints
   description:
     $ref: ./paths/prints.yaml#/info/description
+  kind: nav
+  summary: Prints
 - name: props
   description:
     $ref: ./paths/props.yaml#/info/description
+  kind: nav
+  summary: Props
 - name: users
   description:
     $ref: ./paths/users.yaml#/info/description
+  kind: nav
+  summary: Users
 - name: worlds
   description:
     $ref: ./paths/worlds.yaml#/info/description
+  kind: nav
+  summary: Worlds
 - name: deprecated
   description: >-
     Routes VRChat no longer serves: every call answers the generic "not
     implemented" 404. They stay described, and the test suite keeps
     calling them, so a route that comes back online shows up.
+  kind: badge
+  summary: Deprecated

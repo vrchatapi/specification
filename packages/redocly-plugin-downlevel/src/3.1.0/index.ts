@@ -1,6 +1,7 @@
 import { Oas3_1Types } from "@redocly/openapi-core";
 
 import { dropFields } from "../builders/drop-fields.ts";
+import { extendFields } from "../builders/extend-fields.ts";
 import { inlineComponents } from "../builders/inline-components.ts";
 import { reportFields } from "../builders/report-fields.ts";
 import type { Layer } from "../layer.ts";
@@ -35,18 +36,8 @@ export const layer: Layer = {
 		reportFields({
 			Schema: {
 				prefixItems: true,
-				contains: true,
-				minContains: true,
-				maxContains: true,
-				if: true,
-				then: true,
-				else: true,
 				dependentRequired: true,
-				dependentSchemas: true,
 				dependencies: true,
-				patternProperties: true,
-				propertyNames: true,
-				unevaluatedProperties: true,
 				unevaluatedItems: true,
 				$dynamicRef: true,
 				$recursiveRef: true,
@@ -74,11 +65,29 @@ export const layer: Layer = {
 		lowerSchemaRules,
 		lowerMultipart,
 		inlineComponents("pathItems"),
+		extendFields({
+			Root: { webhooks: ["x-webhooks"] },
+			License: { identifier: ["x-oai-license-identifier"] },
+			Schema: Object.fromEntries(
+				[
+					"$anchor",
+					"contains",
+					"minContains",
+					"maxContains",
+					"if",
+					"then",
+					"else",
+					"dependentSchemas",
+					"patternProperties",
+					"propertyNames",
+					"unevaluatedProperties"
+				].map((keyword) => [keyword, [`x-jsonschema-${keyword}`]])
+			)
+		}),
 		dropFields({
-			Root: ["webhooks", "jsonSchemaDialect"],
+			Root: ["jsonSchemaDialect"],
 			Info: ["summary"],
-			License: ["identifier"],
-			Schema: ["$schema", "$vocabulary", "$id", "id", "$anchor", "$dynamicAnchor", "$recursiveAnchor", "$comment"]
+			Schema: ["$schema", "$vocabulary", "$id", "id", "$dynamicAnchor", "$recursiveAnchor", "$comment"]
 		}),
 		dropEmptyPathItems,
 		requireFields
