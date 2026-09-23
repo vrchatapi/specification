@@ -1,59 +1,6 @@
 title: Notification
-type: object
-properties:
-  created_at:
-    type: string
-    format: date-time
-  details:
-    type: string
-    description: JSON-encoded NotificationDetail
-    contentMediaType: application/json
-    contentSchema:
-      discriminator:
-        mapping:
-          boop: ./NotificationDetailBoop.yaml
-          friendRequest: ./NotificationDetailFriendRequest.yaml
-          invite: ./NotificationDetailInvite.yaml
-          inviteResponse: ./NotificationDetailInviteResponse.yaml
-          message: ./NotificationDetailMessage.yaml
-          requestInvite: ./NotificationDetailRequestInvite.yaml
-          requestInviteResponse: ./NotificationDetailRequestInviteResponse.yaml
-          votetokick: ./NotificationDetailVoteToKick.yaml
-        propertyName: type
-      oneOf:
-        - $ref: ./NotificationDetailBoop.yaml
-        - $ref: ./NotificationDetailFriendRequest.yaml
-        - $ref: ./NotificationDetailInvite.yaml
-        - $ref: ./NotificationDetailInviteResponse.yaml
-        - $ref: ./NotificationDetailMessage.yaml
-        - $ref: ./NotificationDetailRequestInvite.yaml
-        - $ref: ./NotificationDetailRequestInviteResponse.yaml
-        - $ref: ./NotificationDetailVoteToKick.yaml
-  id:
-    type: string
-    minLength: 1
-  message:
-    type: string
-    example: This is a generated invite to VRChat Hub
-  receiverUserId:
-    $ref: ./UserID.yaml
-    description: Not included in notification objects received from the REST API
-  seen:
-    type: boolean
-    description: Not included in notification objects received from the Websocket API
-    default: false
-  senderUserId:
-    $ref: ./UserID.yaml
-  senderUsername:
-    type: ["null", string]
-    description: The name of the user who sent the notification.
-    minLength: 1
-  type:
-    $ref: ./NotificationType.yaml
-required:
-  - created_at
-  - details
-  - id
-  - message
-  - senderUserId
-  - type
+allOf:
+  - title: base
+    $ref: ./NotificationBase.yaml
+  - title: detail
+    $ref: ./NotificationDetailEncoded.yaml

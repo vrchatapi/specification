@@ -1,15 +1,35 @@
 NotificationDetailBoop:
   $ref: ./NotificationDetailBoop.yaml
+NotificationDetailEncoded:
+  $ref: ./NotificationDetailEncoded.yaml
+NotificationDetailFriendRequest:
+  $ref: ./NotificationDetailFriendRequest.yaml
+NotificationDetailFriendRequestEncoded:
+  $ref: ./NotificationDetailFriendRequestEncoded.yaml
 NotificationDetailInvite:
   $ref: ./NotificationDetailInvite.yaml
+NotificationDetailInviteEncoded:
+  $ref: ./NotificationDetailInviteEncoded.yaml
 NotificationDetailInviteResponse:
   $ref: ./NotificationDetailInviteResponse.yaml
+NotificationDetailInviteResponseEncoded:
+  $ref: ./NotificationDetailInviteResponseEncoded.yaml
+NotificationDetailMessage:
+  $ref: ./NotificationDetailMessage.yaml
+NotificationDetailMessageEncoded:
+  $ref: ./NotificationDetailMessageEncoded.yaml
 NotificationDetailRequestInvite:
   $ref: ./NotificationDetailRequestInvite.yaml
+NotificationDetailRequestInviteEncoded:
+  $ref: ./NotificationDetailRequestInviteEncoded.yaml
 NotificationDetailRequestInviteResponse:
   $ref: ./NotificationDetailRequestInviteResponse.yaml
+NotificationDetailRequestInviteResponseEncoded:
+  $ref: ./NotificationDetailRequestInviteResponseEncoded.yaml
 NotificationDetailVoteToKick:
   $ref: ./NotificationDetailVoteToKick.yaml
+NotificationDetailVoteToKickEncoded:
+  $ref: ./NotificationDetailVoteToKickEncoded.yaml
 
 NotificationV2:
   $ref: ./NotificationV2.yaml
