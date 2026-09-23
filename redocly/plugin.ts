@@ -1,7 +1,6 @@
 import type { Plugin } from "@redocly/openapi-core";
 
 import { decorators } from "./decorators/index.ts";
-import { preprocessors } from "./preprocessors/index.ts";
 import { rules } from "./rules/index.ts";
 
 /**
@@ -13,7 +12,6 @@ export default function plugin(): Plugin {
 	return {
 		id: "vrchat",
 		rules: { oas3: rules },
-		decorators: { oas3: decorators },
-		preprocessors: { oas3: preprocessors }
+		decorators: { oas3: decorators }
 	};
 }

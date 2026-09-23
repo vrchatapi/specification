@@ -1,6 +1,5 @@
 title: FinishFileDataUploadRequest
 type: object
-description: ""
 properties:
   etags:
     type: array

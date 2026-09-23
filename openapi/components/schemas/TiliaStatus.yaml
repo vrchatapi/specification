@@ -1,6 +1,5 @@
 title: TiliaStatus
 type: object
-description: ""
 properties:
   economyOnline:
     type: boolean

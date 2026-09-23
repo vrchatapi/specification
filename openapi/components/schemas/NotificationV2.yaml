@@ -1,6 +1,5 @@
 title: NotificationV2
 type: object
-description: ""
 properties:
   canDelete:
     type: boolean
@@ -10,19 +9,14 @@ properties:
     type: string
     format: date-time
   data:
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - $ref: ./NotificationEmpty.yaml
-          - $ref: ./NotificationV2DataBadgeEarned.yaml
-          - $ref: ./NotificationV2DataBoop.yaml
-          - $ref: ./NotificationV2DataEventAnnouncement.yaml
-          - $ref: ./NotificationV2DataGroupAnnouncement.yaml
-          - $ref: ./NotificationV2DataGroupInformative.yaml
-          - $ref: ./NotificationV2DataGroupTransfer.yaml
-      else:
-        $ref: ./NotificationV2DataGeneric.yaml
+    oneOf:
+      - $ref: ./NotificationEmpty.yaml
+      - $ref: ./NotificationV2DataBadgeEarned.yaml
+      - $ref: ./NotificationV2DataBoop.yaml
+      - $ref: ./NotificationV2DataEventAnnouncement.yaml
+      - $ref: ./NotificationV2DataGroupAnnouncement.yaml
+      - $ref: ./NotificationV2DataGroupInformative.yaml
+      - $ref: ./NotificationV2DataGroupTransfer.yaml
   details:
     $ref: ./NotificationV2DetailsBoop.yaml
   displayData: {}
@@ -30,38 +24,31 @@ properties:
     type: string
     format: date-time
   expiryAfterSeen:
-    type: integer
-    nullable: true
+    type: [integer, "null"]
   id:
     type: string
   ignoreDND:
     type: boolean
   imageUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   isSystem:
     type: boolean
   link:
-    type: string
-    nullable: true
+    type: ["null", string]
     example: "event:grp_00000000-0000-0000-0000-000000000000,cal_00000000-0000-0000\
       -0000-000000000000"
   linkText:
-    type: string
-    nullable: true
+    type: ["null", string]
   linkTextKey:
-    type: string
-    nullable: true
+    type: ["null", string]
   message:
     type: string
   messageKey:
-    type: string
-    nullable: true
+    type: ["null", string]
   receiverUserId:
     $ref: ./UserID.yaml
   relatedNotificationsId:
-    type: string
-    nullable: true
+    type: ["null", string]
     example: cal_00000000-0000-0000-0000-000000000000
   requireSeen:
     type: boolean
@@ -72,16 +59,15 @@ properties:
   seen:
     type: boolean
   senderUserId:
-    $ref: ./UserID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
   senderUsername:
-    type: string
-    nullable: true
+    type: ["null", string]
   title:
     type: string
   titleKey:
-    type: string
-    nullable: true
+    type: ["null", string]
   type:
     $ref: ./NotificationV2Type.yaml
   updatedAt:

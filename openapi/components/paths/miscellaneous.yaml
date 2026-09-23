@@ -237,7 +237,6 @@ paths:
       tags:
         - miscellaneous
       requestBody:
-        description: ""
         content:
           application/json:
             schema:

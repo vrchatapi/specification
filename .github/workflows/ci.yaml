@@ -54,6 +54,9 @@ jobs:
         continue-on-error: true
         run: pnpm run lint-ci
 
+      - name: test and build redocly-plugin-downlevel
+        run: pnpm run test:downlevel
+
       - name: assert no unused paths
         if: env.changes != ''
         run: |
@@ -86,6 +89,9 @@ jobs:
           cache: true
 
       - run: bun --bun run bundle
+
+      - name: lint the downleveled bundles as the version they declare
+        run: bun --bun run test:versions
 
       - uses: actions/github-script@v9
         with:

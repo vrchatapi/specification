@@ -1,6 +1,5 @@
 title: Favorite
 type: object
-description: ""
 properties:
   favoriteId:
     type: string
@@ -9,7 +8,6 @@ properties:
     $ref: ./FavoriteID.yaml
   tags:
     type: array
-    description: " "
     items:
       $ref: ./Tag.yaml
   type:

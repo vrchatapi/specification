@@ -1,6 +1,5 @@
 title: Balance
 type: object
-description: ""
 properties:
   balance:
     type: integer

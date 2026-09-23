@@ -1,0 +1,11 @@
+The files in this directory are copied, unmodified, from the examples of "OpenAPI Documentation" by the OpenAPI Initiative:
+
+  https://learn.openapis.org/examples/
+  https://github.com/OAI/learn.openapis.org
+
+Licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0); see LICENSE in this directory, or https://creativecommons.org/licenses/by/4.0/.
+
+  3.1/  examples/v3.1  at bbb743ed3b7c5ed76b6e6ba9b302af38f3956c44
+  3.2/  examples/v3.2  at bbb743ed3b7c5ed76b6e6ba9b302af38f3956c44
+
+scripts/vendor-fixtures.sh reproduces them.

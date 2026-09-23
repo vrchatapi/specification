@@ -1,10 +1,8 @@
 title: FileUploadURL
 type: object
-description: ""
 properties:
   url:
     type: string
-    description: ""
     minLength: 1
 required:
   - url

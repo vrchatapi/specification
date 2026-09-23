@@ -1,6 +1,5 @@
 title: InviteMessage
 type: object
-description: ""
 properties:
   canBeUpdated:
     type: boolean

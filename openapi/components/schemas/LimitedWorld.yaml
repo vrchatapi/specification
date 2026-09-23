@@ -1,6 +1,5 @@
 title: LimitedWorld
 type: object
-description: ""
 properties:
   authorId:
     $ref: ./UserID.yaml
@@ -59,8 +58,7 @@ properties:
     example: 8
     minimum: 0
   previewYoutubeId:
-    type: string
-    nullable: true
+    type: ["null", string]
   publicationDate:
     type: string
     example: none
@@ -74,7 +72,6 @@ properties:
     $ref: ./StoreID.yaml
   tags:
     type: array
-    description: " "
     items:
       $ref: ./Tag.yaml
   thumbnailImageUrl:
@@ -86,7 +83,6 @@ properties:
       $ref: ./UdonProductId.yaml
   unityPackages:
     type: array
-    description: " "
     items:
       $ref: ./LimitedUnityPackage.yaml
     minItems: 1

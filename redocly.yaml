@@ -4,9 +4,7 @@ extends:
 
 plugins:
   - ./redocly/plugin.ts
-
-oas3_0Preprocessors:
-  vrchat/x-if: on
+  - ./packages/redocly-plugin-downlevel/src/index.ts
 
 oas3_0Rules:
   parameter-description: warn
@@ -15,51 +13,32 @@ oas3_0Rules:
   vrchat/operation-id-convention: warn
   vrchat/schema-title: warn
 
-apis:
-  legacy:
-    root: openapi/openapi.yaml
-    output: dist/openapi-legacy.json
-    decorators:
-      remove-x-internal: on
-      vrchat/remove-x-deleted: on
+oas3_1Rules:
+  parameter-description: warn
+  vrchat/no-empty-description: warn
+  vrchat/no-nested-object: warn
+  vrchat/operation-id-convention: warn
+  vrchat/schema-title: warn
 
+oas3_2Rules:
+  parameter-description: warn
+  vrchat/no-empty-description: warn
+  vrchat/no-nested-object: warn
+  vrchat/operation-id-convention: warn
+  vrchat/schema-title: warn
+
+apis:
   modern:
     root: openapi/openapi.yaml
     output: dist/openapi.json
     decorators:
       remove-x-internal: on
       vrchat/remove-x-deleted: on
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
-
-  legacy-internal:
-    root: openapi/openapi.yaml
-    output: dist/openapi-internal+legacy.json
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - internal
-    decorators:
-      vrchat/remove-x-deleted: on
 
   modern-internal:
     root: openapi/openapi.yaml
     output: dist/openapi-internal.json
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
-          - internal
     decorators:
-      vrchat/remove-x-deleted: on
-
-  legacy-yaml:
-    root: openapi/openapi.yaml
-    output: dist/openapi-legacy.yaml
-    decorators:
-      remove-x-internal: on
       vrchat/remove-x-deleted: on
 
   modern-yaml:
@@ -68,31 +47,118 @@ apis:
     decorators:
       remove-x-internal: on
       vrchat/remove-x-deleted: on
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
-
-  legacy-internal-yaml:
-    root: openapi/openapi.yaml
-    output: dist/openapi-internal+legacy.yaml
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - internal
-    decorators:
-      vrchat/remove-x-deleted: on
 
   modern-internal-yaml:
     root: openapi/openapi.yaml
     output: dist/openapi-internal.yaml
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
-          - internal
     decorators:
       vrchat/remove-x-deleted: on
+
+  3.2:
+    root: openapi/openapi.yaml
+    output: dist/openapi-3.2.json
+    decorators:
+      remove-x-internal: on
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.2"
+
+  3.2-internal:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal+3.2.json
+    decorators:
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.2"
+
+  3.2-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi-3.2.yaml
+    decorators:
+      remove-x-internal: on
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.2"
+
+  3.2-internal-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal+3.2.yaml
+    decorators:
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.2"
+
+  3.1:
+    root: openapi/openapi.yaml
+    output: dist/openapi-3.1.json
+    decorators:
+      remove-x-internal: on
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.1"
+
+  3.1-internal:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal+3.1.json
+    decorators:
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.1"
+
+  3.1-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi-3.1.yaml
+    decorators:
+      remove-x-internal: on
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.1"
+
+  3.1-internal-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal+3.1.yaml
+    decorators:
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.1"
+
+  3.0:
+    root: openapi/openapi.yaml
+    output: dist/openapi-3.0.json
+    decorators:
+      remove-x-internal: on
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.0"
+        loosenUnions: true
+
+  3.0-internal:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal+3.0.json
+    decorators:
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.0"
+        loosenUnions: true
+
+  3.0-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi-3.0.yaml
+    decorators:
+      remove-x-internal: on
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.0"
+        loosenUnions: true
+
+  3.0-internal-yaml:
+    root: openapi/openapi.yaml
+    output: dist/openapi-internal+3.0.yaml
+    decorators:
+      vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: "3.0"
+        loosenUnions: true
 
   # Not published. The bundle the workflows run against, and what `pnpm
   # test:drift` compares the captures to — it cannot see undocumented response
@@ -100,10 +166,5 @@ apis:
   test:
     root: openapi/openapi.yaml
     output: dist/openapi-test.yaml
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
-          - internal
     decorators:
       vrchat/close-schemas: on

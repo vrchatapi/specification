@@ -1,6 +1,5 @@
 title: Permission
 type: object
-description: ""
 properties:
   data:
     type: object

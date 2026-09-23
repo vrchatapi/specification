@@ -1,6 +1,5 @@
 title: Avatar
 type: object
-description: ""
 properties:
   acknowledgements:
     type: string
@@ -40,8 +39,7 @@ properties:
     type: string
     minLength: 1
   listingDate:
-    type: string
-    nullable: true
+    type: ["null", string]
   lock:
     type: boolean
   lowestPrice:
@@ -95,18 +93,15 @@ properties:
     type: object
     properties:
       primary:
-        type: string
-        nullable: true
+        type: ["null", string]
       secondary:
-        type: string
-        nullable: true
+        type: ["null", string]
       supplementary:
         type: array
         items:
           type: string
   tags:
     type: array
-    description: " "
     items:
       $ref: ./Tag.yaml
   thumbnailImageUrl:

@@ -7,7 +7,6 @@ properties:
     description: Whether there are more results after this page.
   results:
     type: array
-    description: " "
     items:
       $ref: ./CalendarEvent.yaml
   totalCount:

@@ -10,18 +10,14 @@ properties:
     example: 7
     minimum: 0
   accountDeletionDate:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date
   accountDeletionLog:
-    type: array
-    description: " "
-    nullable: true
+    type: [array, "null"]
     items:
       $ref: ./AccountDeletionLog.yaml
   activeFriends:
     type: array
-    description: " "
     items:
       $ref: ./UserID.yaml
   ageVerificationStatus:
@@ -141,8 +137,7 @@ properties:
     type: string
     format: date-time
   last_mobile:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   last_platform:
     $ref: ./Platform.yaml
@@ -168,7 +163,6 @@ properties:
       $ref: ./UserID.yaml
   pastDisplayNames:
     type: array
-    description: " "
     items:
       $ref: ./PastDisplayName.yaml
   personalizationOptOut:
@@ -192,8 +186,7 @@ properties:
     items:
       type: string
   queuedInstance:
-    type: string
-    nullable: true
+    type: ["null", string]
   receiveMobileInvitations:
     type: boolean
   state:
@@ -230,8 +223,7 @@ properties:
   twoFactorAuthEnabled:
     type: boolean
   twoFactorAuthEnabledDate:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   unsubscribe:
     type: boolean
@@ -239,11 +231,9 @@ properties:
     type: string
     format: date-time
   userLanguage:
-    type: string
-    nullable: true
+    type: ["null", string]
   userLanguageCode:
-    type: string
-    nullable: true
+    type: ["null", string]
   username:
     type: string
     description: Your own unique name, used during login. Distinct from

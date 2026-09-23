@@ -10,8 +10,7 @@ properties:
   buyerRefundable:
     type: boolean
   collabUserDisplayName:
-    type: string
-    nullable: true
+    type: ["null", string]
   collabUserId:
     $ref: ./UserID.yaml
   created:
@@ -22,19 +21,17 @@ properties:
   displayName:
     type: string
   duration:
-    type: integer
-    nullable: true
+    type: [integer, "null"]
   durationType:
-    type: string
-    nullable: true
+    type: ["null", string]
   groupIcon:
-    $ref: ./FileID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
   groupId:
     $ref: ./GroupID.yaml
   groupName:
-    type: string
-    nullable: true
+    type: ["null", string]
   hasAvatar:
     type: boolean
   hasCompanion:
@@ -50,11 +47,11 @@ properties:
   id:
     $ref: ./ProductID.yaml
   imageId:
-    $ref: ./FileID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
   imageUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   listingType:
     $ref: ./ProductListingType.yaml
   listingVariants:
@@ -114,8 +111,7 @@ properties:
   vrcPlusDiscountPrice:
     type: integer
   whenToExpire:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
 required:
   - active

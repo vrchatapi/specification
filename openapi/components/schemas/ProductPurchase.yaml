@@ -26,8 +26,9 @@ properties:
   listingId:
     $ref: ./ProductID.yaml
   listingImageId:
-    $ref: ./FileID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
   listingSubtitle:
     type: string
   listingType:
@@ -58,8 +59,7 @@ properties:
   purchaseDurationType:
     type: string
   purchaseEndDate:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   purchaseFee:
     type: integer
@@ -72,12 +72,10 @@ properties:
   purchaseQuantity:
     type: integer
   purchaseStartDate:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   purchaseToken:
-    type: object
-    nullable: true
+    type: ["null", object]
   purchaseType:
     type: string
   purchaseUnitPrice:

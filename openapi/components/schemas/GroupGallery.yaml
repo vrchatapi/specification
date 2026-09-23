@@ -22,27 +22,19 @@ properties:
     example: Example Gallery
     minLength: 1
   roleIdsToAutoApprove:
-    type: array
-    description: " "
-    nullable: true
+    type: [array, "null"]
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToManage:
-    type: array
-    description: " "
-    nullable: true
+    type: [array, "null"]
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToSubmit:
-    type: array
-    description: " "
-    nullable: true
+    type: [array, "null"]
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToView:
-    type: array
-    description: " "
-    nullable: true
+    type: [array, "null"]
     items:
       $ref: ./GroupRoleID.yaml
   updatedAt:

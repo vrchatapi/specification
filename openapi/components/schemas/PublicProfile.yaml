@@ -78,8 +78,9 @@ properties:
     items:
       $ref: ./LimitedWorld.yaml
   representedGroup:
-    $ref: ./ProfileRepresentedGroup.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./ProfileRepresentedGroup.yaml
+      - type: "null"
   status:
     $ref: ./UserStatus.yaml
   statusDescription:

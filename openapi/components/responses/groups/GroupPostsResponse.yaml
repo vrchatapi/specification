@@ -2,6 +2,7 @@ description: Returns a GroupPost Array.
 content:
   application/json:
     schema:
+      title: GroupPostsResponse
       type: object
       properties:
         posts:

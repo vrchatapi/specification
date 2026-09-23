@@ -5,6 +5,7 @@ export default configure({
 	type: "app",
 	react: false,
 	yaml: true,
+	ignores: ["packages/*/fixtures/**", "packages/*/dist/**"],
 	rules: {
 		"unicorn/prevent-abbreviations": "off",
 	}
@@ -15,14 +16,6 @@ export default configure({
 	rules: {
 		"yaml/sort-keys": [
 			"error",
-			{
-				pathPattern: ".*x-if.*",
-				order: [
-					"when",
-					"then",
-					"else"
-				]
-			},
 			{
 				pathPattern: ".*",
 				hasProperties: [
