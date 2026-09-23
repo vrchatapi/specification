@@ -1,4 +1,9 @@
 title: WebsocketMessageDoubleJson
+properties:
+  type:
+    type: string
+required:
+  - type
 discriminator:
   mapping:
     content-refresh: ./WebsocketContentRefreshEncoded.yaml

@@ -1,4 +1,9 @@
 title: WebsocketMessageNormal
+properties:
+  type:
+    type: string
+required:
+  - type
 discriminator:
   mapping:
     clear-notification: ./WebsocketClearNotification.yaml

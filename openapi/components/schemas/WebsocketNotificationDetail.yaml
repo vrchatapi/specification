@@ -1,5 +1,10 @@
 title: WebsocketNotificationDetail
 type: object
+properties:
+  type:
+    type: string
+required:
+  - type
 discriminator:
   mapping:
     boop: ./WebsocketNotificationDetailBoop.yaml
