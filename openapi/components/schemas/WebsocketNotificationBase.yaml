@@ -4,8 +4,6 @@ properties:
   created_at:
     type: string
     format: date-time
-  details:
-    type: object
   id:
     type: string
     minLength: 1
@@ -29,7 +27,6 @@ properties:
     $ref: ./NotificationType.yaml
 required:
   - created_at
-  - details
   - id
   - message
   - senderUserId
