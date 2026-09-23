@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketUserBadgeAssigned
+    x-vrchat-double-encoding-type: WebsocketUserBadgeAssigned
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketUserBadgeAssigned.yaml

@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketFriendLocation
+    x-vrchat-double-encoding-type: WebsocketFriendLocation
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketFriendLocation.yaml

@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketNotificationV2Delete
+    x-vrchat-double-encoding-type: WebsocketNotificationV2Delete
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketNotificationV2Delete.yaml

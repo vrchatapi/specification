@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketFriendUpdate
+    x-vrchat-double-encoding-type: WebsocketFriendUpdate
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketFriendUpdate.yaml

@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketInstanceQueueJoined
+    x-vrchat-double-encoding-type: WebsocketInstanceQueueJoined
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketInstanceQueueJoined.yaml

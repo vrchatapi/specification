@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketGroupMemberUpdated
+    x-vrchat-double-encoding-type: WebsocketGroupMemberUpdated
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketGroupMemberUpdated.yaml

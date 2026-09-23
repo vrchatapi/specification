@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: NotificationV2
+    x-vrchat-double-encoding-type: NotificationV2
     contentMediaType: application/json
     contentSchema:
       $ref: ./NotificationV2.yaml

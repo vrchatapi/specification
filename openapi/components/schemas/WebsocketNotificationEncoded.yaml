@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketNotification
+    x-vrchat-double-encoding-type: WebsocketNotification
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketNotification.yaml

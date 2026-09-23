@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketGroupLeft
+    x-vrchat-double-encoding-type: WebsocketGroupLeft
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketGroupLeft.yaml

@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketFriendDelete
+    x-vrchat-double-encoding-type: WebsocketFriendDelete
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketFriendDelete.yaml

@@ -4,7 +4,7 @@ type: object
 properties:
   content:
     type: string
-    x-double-encoding-type: WebsocketContentRefresh
+    x-vrchat-double-encoding-type: WebsocketContentRefresh
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketContentRefresh.yaml
