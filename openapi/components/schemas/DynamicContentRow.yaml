@@ -59,7 +59,7 @@ properties:
     type: string
     example: include
   platform:
-    $ref: ./Platform.yaml
+    type: string
     description: 'Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.'
     minLength: 1
   region:
