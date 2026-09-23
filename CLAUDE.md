@@ -176,11 +176,11 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
   decorator changes `drift` only, and does not reach the schema check.
 - `respect` masks secrets in the capture and sends the real value. `********` in
   a HAR is evidence about nothing.
-- The legacy bundles pass through `downlevel/openapi` from
-  `packages/redocly-plugin-downlevel`, which lowers them to OpenAPI 3.0.3 and
-  loosens every `oneOf` and `anyOf` into one schema.
-  `dist/openapi-test.yaml` and the modern bundles carry the source as written.
-  Check which one you are validating against before believing a finding.
+- `openapi.json` and `openapi-internal.json` carry the source's OpenAPI version.
+  The `-3.x` bundles pass through `downlevel/openapi` from
+  `packages/redocly-plugin-downlevel`, which rewrites them as that version.
+  `dist/openapi-test.yaml` carries the source as written. Check which one you
+  are validating against before believing a finding.
 - `drift`'s `security-baseline` flags every unauthenticated workflow for the
   missing cookie it exists to assert. Every finding it produces is a 401 and
   none is actionable, so `test:drift` names the rules it wants instead of taking
@@ -227,7 +227,7 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
 | `pnpm test:coverage` | what the traffic never reached |
 | `pnpm test:drift` | where traffic and description disagree |
 | `pnpm test:downlevel` | test and build `packages/redocly-plugin-downlevel` |
-| `pnpm test:legacy` | lint the downleveled bundles as the version they declare |
+| `pnpm test:versions` | lint the downleveled bundles as the version they declare |
 | `sh test/report.sh` | the last run's failures as Markdown |
 | `sh test/report.sh --format github` | the same, as CI annotations |
 
