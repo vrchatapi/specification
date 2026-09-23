@@ -602,11 +602,12 @@ paths:
   "/users/{userId}/tutorial":
     parameters:
       - $ref: ../parameters.yaml#/userId
+      - $ref: ../parameters.yaml#/xPlatform
+      - $ref: ../parameters.yaml#/xStore
     get:
       operationId: getUserTutorialStatus
       summary: Get User Tutorial Status
-      description: Gets the status of completed or outstanding tutorials for the
-        specified user.
+      description: Gets the status of completed or outstanding tutorials for the specified user. `tutorialKey` and `completed` describe the tutorial named by `X-Platform` and `X-Store`.
       tags:
         - users
       security:
@@ -616,6 +617,36 @@ paths:
           $ref: ../responses/users/TutorialStatusResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+    post:
+      operationId: completeUserTutorial
+      summary: Complete User Tutorial
+      description: Marks the tutorial named by `X-Platform` and `X-Store` completed, and returns the current user.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/CurrentUserResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/users/CompleteTutorialForbiddenError.yaml
+    delete:
+      operationId: clearUserTutorials
+      summary: Clear User Tutorials
+      description: Clears every tutorial the user completed on a platform, whatever `X-Platform` and `X-Store` name, and returns the current user. Tutorials of other kinds, such as `platform-agnostic:custom:onboarding-tutorial-world:v1`, stay completed.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/CurrentUserResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/users/ClearTutorialsForbiddenError.yaml
   "/users/{userId}/{worldId}/persist":
     parameters:
       - $ref: ../parameters.yaml#/userId

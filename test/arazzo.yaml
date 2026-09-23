@@ -10453,6 +10453,243 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: get-user-tutorial-status-platforms
+    summary: getUserTutorialStatus keys a tutorial by the platform and store headers
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: read-android
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: android
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/tutorialKey == 'android:suite:v1'
+
+      - stepId: read-ios
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: ios
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/tutorialKey == 'ios:suite:v1'
+
+      - stepId: read-standalonewindows
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: standalonewindows
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/tutorialKey == 'standalonewindows:suite:v1'
+
+      - stepId: read-spectest
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/tutorialKey == 'null:suite:v1'
+
+  - workflowId: user-tutorial-lifecycle
+    summary: Completes a tutorial, clears every platform tutorial, then restores the account's own
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: complete
+        operationId: $sourceDescriptions.default.completeUserTutorial
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $workflows.session.outputs.userId
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-completed
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/completed == true
+          - condition: $response.body#/tutorialKey == 'null:suite:v1'
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: clear
+        operationId: $sourceDescriptions.default.clearUserTutorials
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: restore
+        operationId: $sourceDescriptions.default.completeUserTutorial
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: standalonewindows
+          - name: X-Store
+            in: header
+            value: steam
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-restored
+        operationId: $sourceDescriptions.default.getUserTutorialStatus
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: X-Platform
+            in: header
+            value: spectest
+          - name: X-Store
+            in: header
+            value: suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/completed == false
+
+  - workflowId: complete-user-tutorial-forbidden
+    summary: completeUserTutorial refuses another user's tutorials
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: complete-user-tutorial
+        operationId: $sourceDescriptions.default.completeUserTutorial
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: complete-user-tutorial-unauthenticated
+    summary: completeUserTutorial refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: complete-user-tutorial
+        operationId: $sourceDescriptions.default.completeUserTutorial
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: clear-user-tutorials-forbidden
+    summary: clearUserTutorials refuses another user's tutorials
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: clear-user-tutorials
+        operationId: $sourceDescriptions.default.clearUserTutorials
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: clear-user-tutorials-unauthenticated
+    summary: clearUserTutorials refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: clear-user-tutorials
+        operationId: $sourceDescriptions.default.clearUserTutorials
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: remove-tags-unauthenticated
     summary: removeTags refuses an anonymous caller
     parameters:
