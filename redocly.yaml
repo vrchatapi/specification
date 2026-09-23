@@ -20,6 +20,13 @@ oas3_1Rules:
   vrchat/operation-id-convention: warn
   vrchat/schema-title: warn
 
+oas3_2Rules:
+  parameter-description: warn
+  vrchat/no-empty-description: warn
+  vrchat/no-nested-object: warn
+  vrchat/operation-id-convention: warn
+  vrchat/schema-title: warn
+
 apis:
   legacy:
     root: openapi/openapi.yaml
