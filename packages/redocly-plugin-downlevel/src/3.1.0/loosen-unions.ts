@@ -139,13 +139,9 @@ export const loosenUnions: Transform = ({ loosenUnions: enabled }) => {
 				const result = loosen(node[keyword] as Array<Node>);
 
 				const types = typesOf(resolve(result)) ?? [];
+				const applies = (key: string) => !(key in rules) || rules[key].some((type) => types.includes(type));
 				const own = Object.fromEntries(
-					Object.entries(node).filter(
-						([key]) =>
-							!unions.includes(key as never) &&
-							key !== "discriminator" &&
-							(!(key in rules) || rules[key].some((type) => types.includes(type)))
-					)
+					Object.entries(node).filter(([key]) => !unions.includes(key as never) && key !== "discriminator" && applies(key))
 				);
 				for (const key of Object.keys(node)) delete node[key];
 				Object.assign(node, result, own);
