@@ -7,6 +7,26 @@ const unions = ["oneOf", "anyOf"] as const;
 const merged = new Set(["type", "properties", "required", "items", "enum", "discriminator"]);
 
 /**
+ * https://www.ietf.org/archive/id/draft-bhutton-json-schema-validation-01.txt
+ * sections 6.2 to 6.5
+ */
+const rules: Record<string, Array<string>> = {
+	multipleOf: ["number", "integer"],
+	maximum: ["number", "integer"],
+	exclusiveMaximum: ["number", "integer"],
+	minimum: ["number", "integer"],
+	exclusiveMinimum: ["number", "integer"],
+	maxLength: ["string"],
+	minLength: ["string"],
+	pattern: ["string"],
+	maxItems: ["array"],
+	minItems: ["array"],
+	uniqueItems: ["array"],
+	maxProperties: ["object"],
+	minProperties: ["object"]
+};
+
+/**
  * Replaces every `oneOf` and `anyOf` with one schema that accepts everything any
  * member accepts, for readers that take no unions.
  *
@@ -19,6 +39,10 @@ const merged = new Set(["type", "properties", "required", "items", "enum", "disc
  *
  * Runs only with `loosenUnions`; otherwise `lowerNullMembers` deals with the
  * `null` members and the unions stay.
+ *
+ * A size or value rule written beside the union stays only where the loosened
+ * schema has a type it constrains. Left on a schema of no type, generators read
+ * it as a rule for a type the schema never declared.
  */
 export const loosenUnions: Transform = ({ loosenUnions: enabled }) => {
 	if (!enabled) return {};
@@ -114,8 +138,14 @@ export const loosenUnions: Transform = ({ loosenUnions: enabled }) => {
 
 				const result = loosen(node[keyword] as Array<Node>);
 
+				const types = typesOf(resolve(result)) ?? [];
 				const own = Object.fromEntries(
-					Object.entries(node).filter(([key]) => !unions.includes(key as never) && key !== "discriminator")
+					Object.entries(node).filter(
+						([key]) =>
+							!unions.includes(key as never) &&
+							key !== "discriminator" &&
+							(!(key in rules) || rules[key].some((type) => types.includes(type)))
+					)
 				);
 				for (const key of Object.keys(node)) delete node[key];
 				Object.assign(node, result, own);

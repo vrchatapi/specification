@@ -65,7 +65,7 @@ describe("type", () => {
 			C: { type: ["string", "integer"], oneOf: [{ minLength: 1 }, { minimum: 1 }] }
 		});
 		expect(schemas).toStrictEqual({
-			A: { minLength: 1, description: "a" },
+			A: { description: "a" },
 			B: {},
 			C: { allOf: [{}] }
 		});
@@ -141,6 +141,22 @@ describe("unions", () => {
 			Union: { description: "Either.", oneOf: [{ type: "string" }, reference("User")] }
 		});
 		expect(schemas.Union).toStrictEqual({ description: "Either." });
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("drops a rule beside the union that the loosened type takes no part in", async () => {
+		const { schemas, problems } = await loosening.schemas({
+			User: user,
+			State: state,
+			Mixed: { minLength: 1, maxItems: 2, required: ["id"], description: "m", oneOf: [{ type: "string" }, reference("User")] },
+			Strings: { minLength: 1, minimum: 0, oneOf: [{ type: "string" }, { type: "string", format: "uri" }] },
+			Numbers: { minimum: 0, multipleOf: 2, pattern: "^a", anyOf: [{ type: "integer" }, { type: "null" }] },
+			Reference: { maxLength: 3, minProperties: 1, anyOf: [reference("State"), { type: "null" }] }
+		});
+		expect(schemas.Mixed).toStrictEqual({ required: ["id"], description: "m" });
+		expect(schemas.Strings).toStrictEqual({ type: "string", minLength: 1 });
+		expect(schemas.Numbers).toStrictEqual({ type: "integer", nullable: true, minimum: 0, multipleOf: 2 });
+		expect(schemas.Reference).toStrictEqual({ ...reference("State"), nullable: true, maxLength: 3 });
 		expect(problems).toStrictEqual([]);
 	});
 
