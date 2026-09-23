@@ -102,8 +102,6 @@ WebsocketMessageNormal:
   $ref: ./WebsocketMessageNormal.yaml
 WebsocketNotification:
   $ref: ./WebsocketNotification.yaml
-WebsocketNotificationBase:
-  $ref: ./WebsocketNotificationBase.yaml
 WebsocketNotificationDetail:
   $ref: ./WebsocketNotificationDetail.yaml
 WebsocketNotificationDetailBoop:

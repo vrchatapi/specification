@@ -1,6 +1,6 @@
 title: WebsocketNotification
 allOf:
   - title: base
-    $ref: ./WebsocketNotificationBase.yaml
+    $ref: ./NotificationBase.yaml
   - title: detail
     $ref: ./WebsocketNotificationDetail.yaml
