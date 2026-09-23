@@ -59,8 +59,9 @@ properties:
   seen:
     type: boolean
   senderUserId:
-    $ref: ./UserID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
   senderUsername:
     type: ["null", string]
   title:

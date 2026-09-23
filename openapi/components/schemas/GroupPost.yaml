@@ -7,15 +7,17 @@ properties:
     type: string
     format: date-time
   editorId:
-    $ref: ./UserID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
   groupId:
     $ref: ./GroupID.yaml
   id:
     $ref: ./NotificationID.yaml
   imageId:
-    $ref: ./FileID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
   imageUrl:
     type: ["null", string]
   roleIds:

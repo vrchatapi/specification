@@ -60,8 +60,9 @@ properties:
   membershipStatus:
     $ref: ./GroupMemberStatus.yaml
   myMember:
-    $ref: ./GroupMyMember.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./GroupMyMember.yaml
+      - type: "null"
   name:
     type: string
   nameplateId: {}
@@ -82,15 +83,17 @@ properties:
   shortCode:
     $ref: ./GroupShortCode.yaml
   storeId:
-    $ref: ./StoreID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./StoreID.yaml
+      - type: "null"
   tags:
     type: array
     items:
       $ref: ./Tag.yaml
   transferTargetId:
-    $ref: ./UserID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
   updatedAt:
     type: string
     format: date-time

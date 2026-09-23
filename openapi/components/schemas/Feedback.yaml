@@ -6,8 +6,9 @@ properties:
   commenterName:
     type: string
   contentAuthorId:
-    $ref: ./UserID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
   contentAuthorName:
     type: ["null", string]
   contentId:
