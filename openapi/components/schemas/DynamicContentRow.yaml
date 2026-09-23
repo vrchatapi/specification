@@ -42,9 +42,9 @@ properties:
   n:
     type: integer
   name:
-    minLength: 1
     oneOf:
       - type: string
+        minLength: 1
       - $ref: ./LocalizedString.yaml
   nonFeaturedResults:
     type: string
