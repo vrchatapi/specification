@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { layer } from "../fixture.ts";
+import { layer, reference } from "../fixture.ts";
 
 const from311 = layer("3.1.1", "3.1.0");
 
@@ -30,6 +30,38 @@ describe("3.1.1", () => {
 						"application/x-www-form-urlencoded": {
 							schema: { type: "object", properties: { filter: { type: "object" }, name: { type: "string" }, set: { type: "object" } } },
 							encoding: { set: { contentType: "text/plain" }, filter: { contentType: "application/json" } }
+						}
+					}
+				},
+				responses: { 200: { description: "ok" } }
+			}
+		});
+	});
+
+	test("reads a form body and its properties through references", async () => {
+		const { document } = await from311({
+			paths: {
+				"/a": {
+					post: {
+						requestBody: { content: { "application/x-www-form-urlencoded": { schema: reference("Form") } } },
+						responses: { 200: { description: "ok" } }
+					}
+				}
+			},
+			components: {
+				schemas: {
+					Form: { type: "object", properties: { filter: { type: "object" }, range: reference("Range"), name: { type: "string" } } },
+					Range: { type: "object", properties: { from: { type: "integer" } } }
+				}
+			}
+		});
+		expect(document.paths?.["/a"]).toStrictEqual({
+			post: {
+				requestBody: {
+					content: {
+						"application/x-www-form-urlencoded": {
+							schema: reference("Form"),
+							encoding: { filter: { contentType: "application/json" }, range: { contentType: "application/json" } }
 						}
 					}
 				},

@@ -1,4 +1,5 @@
 import type { Node, Transform } from "../layer.ts";
+import { resolveSchema } from "../pointer.ts";
 
 /**
  * 3.0.4 and 3.1.1 say an object property of an
@@ -8,18 +9,28 @@ import type { Node, Transform } from "../layer.ts";
  *
  * https://spec.openapis.org/oas/v3.0.4#encoding-application-x-www-form-urlencoded
  */
-export const pinFormEncoding: Transform = () => ({
-	MediaType: {
-		leave: (node, { key }) => {
-			if (key !== "application/x-www-form-urlencoded") return;
+export const pinFormEncoding: Transform = () => {
+	let root: Node;
+	const resolve = (schema: Node): Node => resolveSchema(root, schema);
 
-			const properties = (node.schema as Node | undefined)?.properties as Record<string, Node> | undefined;
-			for (const [name, property] of Object.entries(properties ?? {})) {
-				if (property.type !== "object") continue;
+	return {
+		Root: {
+			enter: (document) => {
+				root = document;
+			}
+		},
+		MediaType: {
+			leave: (node, { key }) => {
+				if (key !== "application/x-www-form-urlencoded" || !node.schema) return;
 
-				const encoding = (node.encoding ??= {}) as Record<string, Node>;
-				encoding[name] ??= { contentType: "application/json" };
+				const properties = resolve(node.schema as Node).properties as Record<string, Node> | undefined;
+				for (const [name, property] of Object.entries(properties ?? {})) {
+					if (resolve(property).type !== "object") continue;
+
+					const encoding = (node.encoding ??= {}) as Record<string, Node>;
+					encoding[name] ??= { contentType: "application/json" };
+				}
 			}
 		}
-	}
-});
+	};
+};
