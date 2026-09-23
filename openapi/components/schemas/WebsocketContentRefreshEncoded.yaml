@@ -1,8 +1,10 @@
 title: WebsocketContentRefreshEncoded
+x-vrcapispecification-has-double-json-encoding: true
 type: object
 properties:
   content:
     type: string
+    x-vrcapispecification-inner-json: WebsocketContentRefresh
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketContentRefresh.yaml

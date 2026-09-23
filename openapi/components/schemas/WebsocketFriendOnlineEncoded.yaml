@@ -1,8 +1,10 @@
 title: WebsocketFriendOnlineEncoded
+x-vrcapispecification-has-double-json-encoding: true
 type: object
 properties:
   content:
     type: string
+    x-vrcapispecification-inner-json: WebsocketFriendOnline
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketFriendOnline.yaml

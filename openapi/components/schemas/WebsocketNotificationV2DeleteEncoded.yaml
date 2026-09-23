@@ -1,8 +1,10 @@
 title: WebsocketNotificationV2DeleteEncoded
+x-vrcapispecification-has-double-json-encoding: true
 type: object
 properties:
   content:
     type: string
+    x-vrcapispecification-inner-json: WebsocketNotificationV2Delete
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketNotificationV2Delete.yaml

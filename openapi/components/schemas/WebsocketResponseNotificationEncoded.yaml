@@ -1,8 +1,10 @@
 title: WebsocketResponseNotificationEncoded
+x-vrcapispecification-has-double-json-encoding: true
 type: object
 properties:
   content:
     type: string
+    x-vrcapispecification-inner-json: WebsocketResponseNotification
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketResponseNotification.yaml

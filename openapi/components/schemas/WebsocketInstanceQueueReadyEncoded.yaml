@@ -1,8 +1,10 @@
 title: WebsocketInstanceQueueReadyEncoded
+x-vrcapispecification-has-double-json-encoding: true
 type: object
 properties:
   content:
     type: string
+    x-vrcapispecification-inner-json: WebsocketInstanceQueueReady
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketInstanceQueueReady.yaml

@@ -1,8 +1,10 @@
 title: WebsocketUserLocationEncoded
+x-vrcapispecification-has-double-json-encoding: true
 type: object
 properties:
   content:
     type: string
+    x-vrcapispecification-inner-json: WebsocketUserLocation
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketUserLocation.yaml
