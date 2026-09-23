@@ -1,0 +1,11 @@
+The files in this directory are copied, unmodified, from the OpenAPI Specification repository:
+
+  https://github.com/OAI/OpenAPI-Specification
+
+The OpenAPI Specification is a community-driven open specification within the OpenAPI Initiative, a Linux Foundation Collaborative Project. Licensed under the Apache License, Version 2.0; see LICENSE in this directory.
+
+  3.0/  _archive_/schemas/v3.0/pass  at 4c4ae377d28cc9f0eb3ed598fcf3c89512ff8fa3 (main)
+  3.1/  tests/schema/pass            at 6c6c327036987ad18352478b5eba54be10e4865f (v3.1-dev)
+  3.2/  tests/schema/pass            at bb95c80a93c42749ed79b11a4bb4a5f4cf8eafc0 (v3.2-dev)
+
+scripts/vendor-fixtures.sh reproduces them.

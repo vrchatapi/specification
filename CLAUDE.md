@@ -225,6 +225,7 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
 | `pnpm test -w session -w <workflowId>` | one workflow, plus the session it reads |
 | `pnpm test:coverage` | what the traffic never reached |
 | `pnpm test:drift` | where traffic and description disagree |
+| `pnpm test:downlevel` | test and build `packages/redocly-plugin-downlevel` |
 | `sh test/report.sh` | the last run's failures as Markdown |
 | `sh test/report.sh --format github` | the same, as CI annotations |
 

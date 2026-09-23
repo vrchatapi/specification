@@ -23,7 +23,8 @@
 		"bundle": "redocly bundle",
 		"test": "sh test/run.sh",
 		"test:coverage": "redocly coverage test/.out/har --api dist/openapi-internal.json",
-		"test:drift": "redocly drift test/.out/har --api dist/openapi-test.yaml --server https://api.vrchat.cloud/api/1 --rules schema-consistency,undocumented-endpoint"
+		"test:drift": "redocly drift test/.out/har --api dist/openapi-test.yaml --server https://api.vrchat.cloud/api/1 --rules schema-consistency,undocumented-endpoint",
+		"test:downlevel": "pnpm --filter redocly-plugin-downlevel run test && pnpm --filter redocly-plugin-downlevel run build"
 	},
 	"devDependencies": {
 		"@actions/artifact": "5.0.2",
