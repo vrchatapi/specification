@@ -5,38 +5,38 @@ description: >-
   answers with the post fields below as well as the announcement ones.
 properties:
   authorId:
-    $ref: ./UserID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
   createdAt:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   editorId:
-    $ref: ./UserID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
   groupId:
-    $ref: ./GroupID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./GroupID.yaml
+      - type: "null"
   id:
-    $ref: ./GroupAnnouncementID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./GroupAnnouncementID.yaml
+      - type: "null"
   imageId:
-    $ref: ./FileID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
   imageUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   roleIds:
     $ref: ./GroupRoleIDList.yaml
   text:
-    type: string
-    nullable: true
+    type: ["null", string]
   title:
-    type: string
-    nullable: true
+    type: ["null", string]
   updatedAt:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   visibility:
     type: string

@@ -1,6 +1,5 @@
 title: TransactionSteamInfo
 type: object
-description: ""
 properties:
   orderId:
     type: string

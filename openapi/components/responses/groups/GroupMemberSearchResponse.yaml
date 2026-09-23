@@ -2,6 +2,7 @@ description: Returns a list of GroupMember objects from a search.
 content:
   application/json:
     schema:
+      title: GroupMemberSearchResponse
       type: object
       properties:
         results:

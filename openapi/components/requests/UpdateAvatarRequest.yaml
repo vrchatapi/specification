@@ -22,7 +22,6 @@ properties:
     $ref: ../schemas/ReleaseStatus.yaml
   tags:
     type: array
-    description: " "
     items:
       $ref: ../schemas/Tag.yaml
   unityPackageUrl:

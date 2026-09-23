@@ -1,6 +1,5 @@
 title: TransactionSteamWalletInfo
 type: object
-description: ""
 properties:
   country:
     type: string

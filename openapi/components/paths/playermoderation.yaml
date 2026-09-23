@@ -92,7 +92,6 @@ paths:
       tags:
         - playermoderation
       requestBody:
-        description: ""
         required: true
         content:
           application/json:

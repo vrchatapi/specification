@@ -122,7 +122,6 @@ paths:
       tags:
         - favorites
       requestBody:
-        description: ""
         content:
           application/json:
             examples:

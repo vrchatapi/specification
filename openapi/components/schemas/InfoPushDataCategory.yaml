@@ -10,13 +10,8 @@ properties:
   maxCells:
     type: integer
   name:
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - type: string
-          - $ref: ./LocalizedString.yaml
-      else:
-        type: string
+    oneOf:
+      - type: string
+      - $ref: ./LocalizedString.yaml
   type:
     type: string

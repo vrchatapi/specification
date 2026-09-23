@@ -90,6 +90,9 @@ jobs:
 
       - run: bun --bun run bundle
 
+      - name: lint the downleveled bundles as the version they declare
+        run: bun --bun run test:versions
+
       - uses: actions/github-script@v9
         with:
           script: |

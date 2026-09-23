@@ -1,6 +1,5 @@
 title: JamSubmission
 type: object
-description: ""
 properties:
   contentId:
     type: string

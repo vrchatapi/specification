@@ -1,6 +1,5 @@
 title: World
 type: object
-description: ""
 properties:
   authorId:
     $ref: ./UserID.yaml
@@ -78,8 +77,7 @@ properties:
     example: 8
     minimum: 0
   previewYoutubeId:
-    type: string
-    nullable: true
+    type: ["null", string]
   privateOccupants:
     type: integer
     description: Will always be `0` when unauthenticated.
@@ -108,7 +106,6 @@ properties:
     $ref: ./StoreID.yaml
   tags:
     type: array
-    description: " "
     items:
       $ref: ./Tag.yaml
   thumbnailImageUrl:

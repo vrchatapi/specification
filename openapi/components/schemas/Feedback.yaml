@@ -6,11 +6,11 @@ properties:
   commenterName:
     type: string
   contentAuthorId:
-    $ref: ./UserID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
   contentAuthorName:
-    type: string
-    nullable: true
+    type: ["null", string]
   contentId:
     type: string
   contentName:
@@ -18,11 +18,9 @@ properties:
   contentType:
     type: string
   contentVersion:
-    type: integer
-    nullable: true
+    type: [integer, "null"]
   description:
-    type: string
-    nullable: true
+    type: ["null", string]
   id:
     $ref: ./FeedbackID.yaml
   reason:

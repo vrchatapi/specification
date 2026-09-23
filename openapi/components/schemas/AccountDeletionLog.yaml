@@ -6,9 +6,8 @@ properties:
     description: Date and time of the deletion request.
     format: date-time
   deletionScheduled:
-    type: string
+    type: ["null", string]
     description: When the deletion is scheduled to happen, standard is 14 days after the request.
-    nullable: true
     format: date-time
   message:
     type: string

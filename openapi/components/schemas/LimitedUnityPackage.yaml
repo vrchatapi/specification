@@ -1,10 +1,8 @@
 title: LimitedUnityPackage
 type: object
-description: ""
 properties:
   created_at:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   platform:
     $ref: ./Platform.yaml

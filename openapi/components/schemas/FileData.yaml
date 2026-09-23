@@ -1,6 +1,5 @@
 title: FileData
 type: object
-description: ""
 properties:
   category:
     type: string

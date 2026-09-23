@@ -1,6 +1,5 @@
 title: Subscription
 type: object
-description: ""
 properties:
   amount:
     type: number

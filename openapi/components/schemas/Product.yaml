@@ -23,11 +23,11 @@ properties:
   id:
     $ref: ./ProductID.yaml
   imageId:
-    $ref: ./FileID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
   imageUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   parentListings:
     type: array
     items:
@@ -49,8 +49,7 @@ properties:
     items:
       $ref: ./Tag.yaml
   updated:
-    type: string
-    nullable: true
+    type: ["null", string]
     format: date-time
   useForSubscriberList:
     type: boolean

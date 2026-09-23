@@ -1,6 +1,5 @@
 title: Prop
 type: object
-description: ""
 properties:
   _created_at:
     type: string
@@ -34,8 +33,7 @@ properties:
   thumbnailImageUrl:
     type: string
   unityPackageUrl:
-    type: string
-    nullable: true
+    type: ["null", string]
   unityPackages:
     type: array
     items:

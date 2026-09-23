@@ -6,11 +6,11 @@ properties:
   id:
     $ref: ./ProductID.yaml
   imageId:
-    $ref: ./FileID.yaml
-    nullable: true
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
   licenseId:
-    type: string
-    nullable: true
+    type: ["null", string]
   productType:
     $ref: ./ProductType.yaml
 required:

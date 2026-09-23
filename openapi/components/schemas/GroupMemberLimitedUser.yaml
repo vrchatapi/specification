@@ -1,7 +1,6 @@
 title: GroupMemberLimitedUser
-type: object
+type: ["null", object]
 description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
-nullable: true
 properties:
   bannerColor:
     $ref: ./Color.yaml
