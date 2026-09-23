@@ -185,8 +185,12 @@ jobs:
       - name: create release (nightly)
         if: env.prerelease == 'true'
         run: |
-          jq --arg v "${{ env.version }}" '.info.version = $v' dist/openapi.json > dist/.openapi.json && mv dist/.openapi.json dist/openapi.json
-          yq eval ".info.version = \"${{ env.version }}\"" -i dist/openapi.yaml
+          for file in dist/*.json; do
+            jq --arg v "${{ env.version }}" '.info.version = $v' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+          done
+          for file in dist/*.yaml; do
+            yq eval ".info.version = \"${{ env.version }}\"" -i "$file"
+          done
 
           gh release create v${{ env.version }} dist/* \
             --generate-notes \
