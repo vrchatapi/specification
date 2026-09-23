@@ -43,9 +43,9 @@ The decorator runs once bundling has finished, so every `$ref` it meets is inter
 
 Each layer does one of three things with a construct the release below it lacks:
 
-- **rewrite** it into the form the lower release uses, when that form means the same: `type: [string, "null"]` becomes `type: string` with `nullable: true`.
+- **rewrite** it into the form the lower release uses, when that form means the same: `type: [string, "null"]` becomes `type: string` with `nullable: true`. Where the lower release has no field for it, the form is the extension its readers take the same thing from: the [OAI extension registry](https://spec.openapis.org/registry/extension/index.html)'s `x-oai-*` and `x-jsonschema-*` entries, and extensions the wider ecosystem reads, such as `x-displayName`. Every extension a reader uses is written, and one the description already carries is kept.
 - **drop** it, when it is an annotation or hint whose absence changes nothing a reader validates: `info.summary`, `servers[].name`, a discriminator's `defaultMapping`.
-- **report** it, when the lower release cannot say it and any rewrite would change what the description accepts or means: `prefixItems`, `in: querystring`, a `oneOf` that must admit `null`. A report is an error, so the bundle is not written.
+- **report** it, when the lower release cannot say it, no extension carries it, and any rewrite would change what the description accepts or means: `prefixItems`, `in: querystring`, a `oneOf` that must admit `null`. A report is an error, so the bundle is not written. A construct written as an extension keeps its meaning for readers of that extension; a validator that knows none of them accepts more than the source does.
 
 A layer runs all its checks first, so every problem in a release is reported at once, then its rewrites.
 
@@ -53,8 +53,16 @@ A layer runs all its checks first, so every problem in a release is reported at 
 
 | construct | done |
 | --- | --- |
-| `$self`, `servers[].name`, Tag `summary`/`parent`/`kind`, Response `summary`, Security Scheme `deprecated`/`oauth2MetadataUrl`, Discriminator `defaultMapping`, Media Type `description` | dropped |
-| Example `dataValue` / `serializedValue` | written as `value` |
+| Tag `summary` | written as the tag's `x-displayName` |
+| Tag `parent` | written as `x-tagGroups`: one group per top-level tag, holding it and every tag beneath it, since a renderer leaves out any tag no group names |
+| Tag `kind: badge` | written as an `x-badges` entry on each operation carrying the tag, which stays out of `x-tagGroups` |
+| Response `summary` | written as `x-oai-summary` and `x-summary` |
+| `$self`, `servers[].name`, Security Scheme `deprecated` | written as `x-oai-$self`, `x-oai-name`, `x-oai-deprecated` |
+| any other Tag `kind`, Security Scheme `oauth2MetadataUrl`, Discriminator `defaultMapping`, Media Type `description` | dropped |
+| Example `dataValue` / `serializedValue` | written as `value`; `serializedValue` also as `x-oai-serializedValue` |
+| Path Item `query`, `additionalOperations` | written as `x-oai-additionalOperations`, `query` under `QUERY` |
+| Media Type `itemSchema`, `prefixEncoding`, `itemEncoding`; Encoding `encoding`, `itemEncoding` | written as their `x-oai-*` extensions |
+| OAuth `deviceAuthorization` and its `deviceAuthorizationUrl` | written as `x-oai-deviceAuthorization` and `x-oai-deviceAuthorizationUrl` |
 | XML `nodeType` | written as `attribute` / `wrapped`; `text`, `cdata`, and `none` on a scalar are reported |
 | `components.mediaTypes` and Media Type `$ref`s | inlined |
 | a Security Requirement naming its scheme by URI | the component name, when the URI points into this document's components; otherwise reported |
@@ -63,7 +71,7 @@ A layer runs all its checks first, so every problem in a release is reported at 
 | `example` / `examples` beside a Parameter's or Header's `content` | moved into its Media Type Object |
 | `allowReserved: false` beyond `in: query` | dropped |
 | a Response without `description` | `description: ""` |
-| Path Item `query`, `additionalOperations`; `in: querystring`; `style: cookie`; `allowReserved: true` beyond `in: query`; `itemSchema`, `prefixEncoding`, `itemEncoding`, nested `encoding`; `deviceAuthorization`; `encoding` outside a request body; `schema` on a sequential media type; an array `schema` for `multipart/form-data`; a non-ASCII XML `namespace` | reported |
+| `in: querystring`; `style: cookie`; `allowReserved: true` beyond `in: query`; Encoding `prefixEncoding`; `encoding` outside a request body; `schema` on a sequential media type; an array `schema` for `multipart/form-data`; a non-ASCII XML `namespace` | reported |
 
 ### 3.1 → 3.0
 
@@ -73,18 +81,21 @@ A layer runs all its checks first, so every problem in a release is reported at 
 | `type` naming several types | `anyOf` with one member per type |
 | a `null` member of `oneOf` / `anyOf` | `nullable` on one other member, so `null` still matches exactly one; a reference gets `nullable: true` beside its `$ref` (see [Nullable references](#nullable-references)); reported for a `oneOf` where another member already takes `null` |
 | numeric `exclusiveMinimum` / `exclusiveMaximum` | the limit in `minimum` / `maximum`, the flag `true`; the tighter bound where both are given |
-| schema `examples` | `example: examples[0]` |
+| schema `examples` | `example: examples[0]`, and the list as `x-jsonschema-examples` |
 | `const` | `enum: [value]` |
-| `contentEncoding: base64`, `contentMediaType: application/octet-stream` | `format: byte`, `format: binary`; other encodings reported |
+| `contentEncoding`, `contentMediaType`, `contentSchema` | written as their `x-jsonschema-*` extensions; `base64` and `application/octet-stream` also as `format: byte` and `format: binary` |
 | boolean schemas | `{}` and `{not: {}}` |
 | keywords beside a schema `$ref` that constrain it | the reference moved into `allOf` |
 | `type: array` without `items`, empty `required`, empty `enum` | `items: {}`, removed, `not: {}` |
 | an untyped multipart part | `type: string`, `format: binary` |
 | `components.pathItems` | inlined |
-| `webhooks`, `jsonSchemaDialect`, `info.summary`, `license.identifier`, `$schema`, `$id`, `$anchor`, `$comment` and the other identifiers, a `nullable` 3.1 ignores | dropped |
+| `license.identifier`, Schema `$anchor` | written as `x-oai-license-identifier`, `x-jsonschema-$anchor` |
+| `contains`, `minContains`, `maxContains`, `if`/`then`/`else`, `dependentSchemas`, `patternProperties`, `propertyNames`, `unevaluatedProperties` | written as their `x-jsonschema-*` extensions, once the schemas inside them are lowered |
+| `webhooks` | written as `x-webhooks` |
+| `jsonSchemaDialect`, `info.summary`, `$schema`, `$id`, `$comment` and the other identifiers, a `nullable` 3.1 ignores | dropped |
 | an empty path item whose template has no path parameter | dropped |
 | no `paths` | `paths: {}` |
-| `prefixItems`, `contains`, `if`/`then`/`else`, `dependentSchemas`, `patternProperties`, `propertyNames`, `unevaluated*`, `$dynamicRef`, `$defs` and the other keywords 3.0 lacks; `mutualTLS`; an operation without `responses`; a `default` that does not match `type`; `readOnly` with `writeOnly`; a `$ref` fragment that is not a JSON Pointer; roles for a scheme other than OAuth 2 or OpenID Connect; a `requestBody` on GET, HEAD or DELETE; a link into `webhooks`; a relative metadata URL; `style` / `explode` / `allowReserved` in multipart | reported |
+| `prefixItems`, `unevaluatedItems`, `dependentRequired`, `$dynamicRef`, `$defs` and the other keywords 3.0 has no extension for; `mutualTLS`; an operation without `responses`; a `default` that does not match `type`; `readOnly` with `writeOnly`; a `$ref` fragment that is not a JSON Pointer; roles for a scheme other than OAuth 2 or OpenID Connect; a `requestBody` on GET, HEAD or DELETE; a link into `webhooks`; a relative metadata URL; `style` / `explode` / `allowReserved` in multipart | reported |
 
 ### Patch releases
 

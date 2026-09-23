@@ -21,7 +21,7 @@ describe("planning", () => {
 		expect(document).toStrictEqual({
 			openapi: "3.0.0",
 			info: { title: "fixture", version: "1" },
-			servers: [{ url: "https://example.com" }],
+			servers: [{ url: "https://example.com", "x-oai-name": "production" }],
 			paths: {},
 			components: { schemas: { A: { type: "string", nullable: true } } }
 		});

@@ -301,16 +301,16 @@ describe("schema keywords", () => {
 		expect(problems).toStrictEqual([]);
 	});
 
-	test("keeps the first of a schema's examples", async () => {
+	test("keeps the first of a schema's examples, and all of them in their registry extension", async () => {
 		const { schemas, problems } = await from31.schemas({
 			A: { type: "string", examples: ["a", "b"] },
 			B: { type: "string", example: "kept", examples: ["c"] },
 			C: { type: "string", examples: [] }
 		});
 		expect(schemas).toStrictEqual({
-			A: { type: "string", example: "a" },
-			B: { type: "string", example: "kept" },
-			C: { type: "string" }
+			A: { type: "string", example: "a", "x-jsonschema-examples": ["a", "b"] },
+			B: { type: "string", example: "kept", "x-jsonschema-examples": ["c"] },
+			C: { type: "string", "x-jsonschema-examples": [] }
 		});
 		expect(problems).toStrictEqual([]);
 	});
@@ -334,7 +334,7 @@ describe("schema keywords", () => {
 		]);
 	});
 
-	test("turns content keywords into the formats 3.0 uses", async () => {
+	test("turns content keywords into the formats 3.0 uses, keeping them in their registry extensions", async () => {
 		const { schemas } = await from31.schemas({
 			A: { type: "string", contentEncoding: "base64" },
 			B: { type: "string", contentMediaType: "application/octet-stream" },
@@ -342,18 +342,23 @@ describe("schema keywords", () => {
 			E: { type: "string", format: "uri", contentEncoding: "base64" }
 		});
 		expect(schemas).toStrictEqual({
-			A: { type: "string", format: "byte" },
-			B: { type: "string", format: "binary" },
-			C: { type: "string", format: "byte" },
-			E: { type: "string", format: "uri" }
+			A: { type: "string", format: "byte", "x-jsonschema-contentEncoding": "base64" },
+			B: { type: "string", format: "binary", "x-jsonschema-contentMediaType": "application/octet-stream" },
+			C: {
+				type: "string",
+				format: "byte",
+				"x-jsonschema-contentMediaType": "image/png",
+				"x-jsonschema-contentEncoding": "base64",
+				"x-jsonschema-contentSchema": { type: "object" }
+			},
+			E: { type: "string", format: "uri", "x-jsonschema-contentEncoding": "base64" }
 		});
 	});
 
-	test("reports an encoding 3.0 has no format for", async () => {
-		const { problems } = await from31.schemas({ A: { type: "string", contentEncoding: "base64url" } });
-		expect(problems).toStrictEqual([
-			{ severity: "error", pointer: "#/components/schemas/A/contentEncoding", message: "OpenAPI 3.0.4 has no `contentEncoding: base64url`." }
-		]);
+	test("keeps an encoding 3.0 has no format for in its registry extension", async () => {
+		const { schemas, problems } = await from31.schemas({ A: { type: "string", contentEncoding: "base64url" } });
+		expect(schemas).toStrictEqual({ A: { type: "string", "x-jsonschema-contentEncoding": "base64url" } });
+		expect(problems).toStrictEqual([]);
 	});
 
 	test("turns boolean schemas into the objects 3.0 requires", async () => {
@@ -409,7 +414,7 @@ describe("schema keywords", () => {
 		]);
 	});
 
-	test("drops schema identifiers and comments", async () => {
+	test("drops schema identifiers and comments, keeping $anchor as its registry extension", async () => {
 		const { schemas } = await from31.schemas({
 			A: {
 				$schema: "https://json-schema.org/draft/2020-12/schema",
@@ -423,20 +428,43 @@ describe("schema keywords", () => {
 				type: "string"
 			}
 		});
-		expect(schemas).toStrictEqual({ A: { type: "string" } });
+		expect(schemas).toStrictEqual({ A: { type: "string", "x-jsonschema-$anchor": "a" } });
+	});
+
+	test("writes the keywords the registry covers as x-jsonschema extensions, lowering the schemas inside them", async () => {
+		const { schemas, problems } = await from31.schemas({
+			A: {
+				type: "object",
+				patternProperties: { "^x": { type: ["string", "null"] } },
+				propertyNames: { maxLength: 3 },
+				unevaluatedProperties: false,
+				dependentSchemas: { a: { required: ["b"] } }
+			},
+			B: { type: "array", contains: { const: 1 }, minContains: 1, maxContains: 2 },
+			C: { if: { type: "string" }, then: { minLength: 1 }, else: true }
+		});
+		expect(schemas).toStrictEqual({
+			A: {
+				type: "object",
+				"x-jsonschema-patternProperties": { "^x": { type: "string", nullable: true } },
+				"x-jsonschema-propertyNames": { maxLength: 3 },
+				"x-jsonschema-unevaluatedProperties": false,
+				"x-jsonschema-dependentSchemas": { a: { required: ["b"] } }
+			},
+			B: { type: "array", items: {}, "x-jsonschema-contains": { enum: [1] }, "x-jsonschema-minContains": 1, "x-jsonschema-maxContains": 2 },
+			C: { "x-jsonschema-if": { type: "string" }, "x-jsonschema-then": { minLength: 1 }, "x-jsonschema-else": {} }
+		});
+		expect(problems).toStrictEqual([]);
 	});
 
 	test("reports keywords 3.0 does not have", async () => {
 		const { problems } = await from31.schemas({
 			A: { type: "array", prefixItems: [{ type: "string" }] },
-			B: { type: "object", patternProperties: { "^x": { type: "string" } }, unevaluatedProperties: false },
 			C: { type: "object", definitions: { d: { type: "string" } }, dependencies: { a: ["b"] } },
 			D: { $recursiveRef: "#" }
 		});
 		expect(problems).toStrictEqual([
 			{ severity: "error", pointer: "#/components/schemas/A/prefixItems", message: "OpenAPI 3.0.4 has no `prefixItems`." },
-			{ severity: "error", pointer: "#/components/schemas/B/patternProperties", message: "OpenAPI 3.0.4 has no `patternProperties`." },
-			{ severity: "error", pointer: "#/components/schemas/B/unevaluatedProperties", message: "OpenAPI 3.0.4 has no `unevaluatedProperties`." },
 			{ severity: "error", pointer: "#/components/schemas/C/definitions", message: "OpenAPI 3.0.4 has no `definitions`." },
 			{ severity: "error", pointer: "#/components/schemas/C/dependencies", message: "OpenAPI 3.0.4 has no `dependencies`." },
 			{ severity: "error", pointer: "#/components/schemas/D/$recursiveRef", message: "OpenAPI 3.0.4 has no `$recursiveRef`." }
@@ -462,7 +490,7 @@ describe("schema keywords", () => {
 });
 
 describe("document", () => {
-	test("drops the fields 3.0 does not have", async () => {
+	test("writes the fields 3.0 lacks as registry extensions, and drops the rest", async () => {
 		const { document, problems } = await from31({
 			jsonSchemaDialect: "https://spec.openapis.org/oas/3.1/dialect/base",
 			info: { title: "fixture", version: "1", summary: "s", license: { name: "MIT", identifier: "MIT" } },
@@ -470,7 +498,8 @@ describe("document", () => {
 		});
 		expect(document).toStrictEqual({
 			openapi: "3.0.4",
-			info: { title: "fixture", version: "1", license: { name: "MIT" } },
+			info: { title: "fixture", version: "1", license: { name: "MIT", "x-oai-license-identifier": "MIT" } },
+			"x-webhooks": { ping: { post: { responses: { 200: { description: "ok" } } } } },
 			paths: {},
 			components: {}
 		});
