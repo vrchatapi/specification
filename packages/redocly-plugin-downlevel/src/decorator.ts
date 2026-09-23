@@ -38,7 +38,9 @@ function locate(root: unknown, origins: WeakMap<object, Location>, { pointer }: 
 	return depth < parts.length ? found?.child(parts.slice(depth)) : found;
 }
 
-const reaches = (version: string, target: string) => version === target || version.startsWith(`${target}.`);
+function reaches(version: string, target: string) {
+	return version === target || (target.split(".").length === 2 && version.startsWith(`${target}.`));
+}
 
 function plan(from: string, target: string): Array<Layer> | undefined {
 	const chain: Array<Layer> = [];
@@ -74,7 +76,8 @@ export const openapi: Oas3Decorator = ({ version: target, loosenUnions = false }
 		},
 		Root: {
 			leave: (root, { report, location, config }) => {
-				if (!target) return report({ message: "Set `version` to the OpenAPI version to write, such as `3.0`.", location });
+				if (typeof target === "number") return report({ message: "Quote `version`: YAML reads an unquoted 3.0 as the number 3.", location });
+				if (!target) return report({ message: "Set `version` to the OpenAPI version to write, such as `\"3.0\"`.", location });
 
 				const from = String(root.openapi);
 				const chain = plan(from, target);

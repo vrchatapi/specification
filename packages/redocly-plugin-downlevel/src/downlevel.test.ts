@@ -53,12 +53,22 @@ describe("planning", () => {
 		const above = await downlevel({ openapi: "3.0.3" }, { version: "3.1" });
 		const unknown = await downlevel({ openapi: "3.1.0" }, { version: "2.0" });
 		const unreleased = await downlevel({ openapi: "3.1.9" }, { version: "3.0" });
+		const major = await downlevel({ openapi: "3.1.0" }, { version: "3" });
 		const missing = await downlevel({ openapi: "3.1.0" }, {});
-		expect([above, unknown, unreleased, missing].map(({ problems }) => problems)).toStrictEqual([
+		expect([above, unknown, unreleased, major, missing].map(({ problems }) => problems)).toStrictEqual([
 			[{ severity: "error", pointer: "#/openapi", message: "Cannot downlevel OpenAPI 3.0.3 to 3.1." }],
 			[{ severity: "error", pointer: "#/openapi", message: "Cannot downlevel OpenAPI 3.1.0 to 2.0." }],
 			[{ severity: "error", pointer: "#/openapi", message: "Cannot downlevel OpenAPI 3.1.9 to 3.0." }],
-			[{ severity: "error", pointer: "#/", message: "Set `version` to the OpenAPI version to write, such as `3.0`." }]
+			[{ severity: "error", pointer: "#/openapi", message: "Cannot downlevel OpenAPI 3.1.0 to 3." }],
+			[{ severity: "error", pointer: "#/", message: "Set `version` to the OpenAPI version to write, such as `\"3.0\"`." }]
+		]);
+	});
+
+	test("reports a version YAML read as a number", async () => {
+		const { document, problems } = await downlevel({ openapi: "3.1.0" }, { version: 3 as unknown as string });
+		expect(document.openapi).toBe("3.1.0");
+		expect(problems).toStrictEqual([
+			{ severity: "error", pointer: "#/", message: "Quote `version`: YAML reads an unquoted 3.0 as the number 3." }
 		]);
 	});
 });

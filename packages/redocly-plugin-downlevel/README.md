@@ -34,7 +34,7 @@ redocly bundle legacy
 
 | option | | |
 | --- | --- | --- |
-| `version` | required | The release to write, such as `3.0.3`, or a minor version such as `3.0`, which means its latest release. |
+| `version` | required | The release to write, such as `"3.0.3"`, or a minor version such as `"3.0"`, which means its latest release. Quote it: YAML reads an unquoted `3.0` as the number 3. |
 | `loosenUnions` | default `false` | Replace every `oneOf` and `anyOf` with one schema that accepts everything its members accept. For readers that cannot take unions at all; see [Loosening unions](#loosening-unions). |
 
 The decorator runs once bundling has finished, so every `$ref` it meets is internal to the bundle. Put it on the APIs that need the older version and leave the others on the source.
