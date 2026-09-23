@@ -43,14 +43,9 @@ properties:
     type: integer
   name:
     minLength: 1
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - type: string
-          - $ref: ./LocalizedString.yaml
-      else:
-        type: string
+    oneOf:
+      - type: string
+      - $ref: ./LocalizedString.yaml
   nonFeaturedResults:
     type: string
   notag:
@@ -73,15 +68,10 @@ properties:
     type: string
     example: all
   shortName:
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - type: string
-          - type: "null"
-          - $ref: ./LocalizedString.yaml
-      else:
-        type: ["null", string]
+    oneOf:
+      - type: string
+      - type: "null"
+      - $ref: ./LocalizedString.yaml
   sortHeading:
     type: string
     minLength: 1

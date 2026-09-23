@@ -24,6 +24,7 @@
 		"test": "sh test/run.sh",
 		"test:coverage": "redocly coverage test/.out/har --api dist/openapi-internal.json",
 		"test:drift": "redocly drift test/.out/har --api dist/openapi-test.yaml --server https://api.vrchat.cloud/api/1 --rules schema-consistency,undocumented-endpoint",
+		"test:legacy": "redocly lint dist/openapi-legacy.json dist/openapi-internal+legacy.json --extends minimal",
 		"test:downlevel": "pnpm --filter redocly-plugin-downlevel run test && pnpm --filter redocly-plugin-downlevel run build"
 	},
 	"devDependencies": {

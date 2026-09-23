@@ -5,19 +5,14 @@ properties:
     type: string
     format: date-time
   details:
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - $ref: ./NotificationEmpty.yaml
-          - $ref: ./NotificationDetailBoop.yaml
-          - $ref: ./NotificationDetailInvite.yaml
-          - $ref: ./NotificationDetailInviteResponse.yaml
-          - $ref: ./NotificationDetailRequestInvite.yaml
-          - $ref: ./NotificationDetailRequestInviteResponse.yaml
-          - $ref: ./NotificationDetailVoteToKick.yaml
-      else:
-        $ref: ./NotificationDetailGeneric.yaml
+    oneOf:
+      - $ref: ./NotificationEmpty.yaml
+      - $ref: ./NotificationDetailBoop.yaml
+      - $ref: ./NotificationDetailInvite.yaml
+      - $ref: ./NotificationDetailInviteResponse.yaml
+      - $ref: ./NotificationDetailRequestInvite.yaml
+      - $ref: ./NotificationDetailRequestInviteResponse.yaml
+      - $ref: ./NotificationDetailVoteToKick.yaml
   id:
     type: string
     minLength: 1

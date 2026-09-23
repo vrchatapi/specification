@@ -2,15 +2,10 @@ description: OK
 content:
   application/json:
     schema:
-      x-if:
-        when: jsonschema
-        then:
-          title: LoginOr2fa
-          oneOf:
-            - $ref: ../../schemas/CurrentUser.yaml
-            - $ref: ../../schemas/RequiresTwoFactorAuth.yaml
-        else:
-          $ref: ../../schemas/CurrentUser.yaml
+      title: LoginOr2fa
+      oneOf:
+        - $ref: ../../schemas/CurrentUser.yaml
+        - $ref: ../../schemas/RequiresTwoFactorAuth.yaml
 headers:
   Set-Cookie:
     description: Successful authentication returns an `auth` cookie.

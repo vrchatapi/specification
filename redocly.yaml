@@ -4,12 +4,7 @@ extends:
 
 plugins:
   - ./redocly/plugin.ts
-
-oas3_0Preprocessors:
-  vrchat/x-if: on
-
-oas3_1Preprocessors:
-  vrchat/x-if: on
+  - ./packages/redocly-plugin-downlevel/src/index.ts
 
 oas3_0Rules:
   parameter-description: warn
@@ -32,6 +27,9 @@ apis:
     decorators:
       remove-x-internal: on
       vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: 3.0.3
+        loosenUnions: true
 
   modern:
     root: openapi/openapi.yaml
@@ -39,29 +37,19 @@ apis:
     decorators:
       remove-x-internal: on
       vrchat/remove-x-deleted: on
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
 
   legacy-internal:
     root: openapi/openapi.yaml
     output: dist/openapi-internal+legacy.json
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - internal
     decorators:
       vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: 3.0.3
+        loosenUnions: true
 
   modern-internal:
     root: openapi/openapi.yaml
     output: dist/openapi-internal.json
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
-          - internal
     decorators:
       vrchat/remove-x-deleted: on
 
@@ -71,6 +59,9 @@ apis:
     decorators:
       remove-x-internal: on
       vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: 3.0.3
+        loosenUnions: true
 
   modern-yaml:
     root: openapi/openapi.yaml
@@ -78,29 +69,19 @@ apis:
     decorators:
       remove-x-internal: on
       vrchat/remove-x-deleted: on
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
 
   legacy-internal-yaml:
     root: openapi/openapi.yaml
     output: dist/openapi-internal+legacy.yaml
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - internal
     decorators:
       vrchat/remove-x-deleted: on
+      downlevel/openapi:
+        version: 3.0.3
+        loosenUnions: true
 
   modern-internal-yaml:
     root: openapi/openapi.yaml
     output: dist/openapi-internal.yaml
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
-          - internal
     decorators:
       vrchat/remove-x-deleted: on
 
@@ -110,10 +91,5 @@ apis:
   test:
     root: openapi/openapi.yaml
     output: dist/openapi-test.yaml
-    preprocessors:
-      vrchat/x-if:
-        defines:
-          - jsonschema
-          - internal
     decorators:
       vrchat/close-schemas: on

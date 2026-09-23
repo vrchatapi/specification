@@ -7,12 +7,7 @@ description: |-
 content:
   application/json:
     schema:
-      x-if:
-        when: jsonschema
-        then:
-          title: UserResponse
-          oneOf:
-            - $ref: ../../schemas/User.yaml
-            - $ref: ../../schemas/CurrentUser.yaml
-        else:
-          $ref: ../../schemas/User.yaml
+      title: UserResponse
+      oneOf:
+        - $ref: ../../schemas/User.yaml
+        - $ref: ../../schemas/CurrentUser.yaml

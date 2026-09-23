@@ -2,14 +2,9 @@ title: Transaction
 type: object
 properties:
   agreement:
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - type: string
-          - $ref: ./TransactionAgreement.yaml
-      else:
-        $ref: ./TransactionAgreement.yaml
+    oneOf:
+      - type: string
+      - $ref: ./TransactionAgreement.yaml
   created_at:
     type: string
     format: date-time

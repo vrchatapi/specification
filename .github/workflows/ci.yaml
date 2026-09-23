@@ -90,6 +90,9 @@ jobs:
 
       - run: bun --bun run bundle
 
+      - name: lint the legacy bundles as OpenAPI 3.0
+        run: bun --bun run test:legacy
+
       - uses: actions/github-script@v9
         with:
           script: |

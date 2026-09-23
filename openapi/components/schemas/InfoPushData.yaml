@@ -24,14 +24,9 @@ properties:
   deliveryBehavior:
     $ref: ./InfoPushDataDeliveryBehavior.yaml
   description:
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - type: string
-          - $ref: ./LocalizedString.yaml
-      else:
-        type: string
+    oneOf:
+      - type: string
+      - $ref: ./LocalizedString.yaml
   disclaimerText:
     type: string
   domainList:
@@ -65,14 +60,9 @@ properties:
     type: string
     example: video
   name:
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - type: string
-          - $ref: ./LocalizedString.yaml
-      else:
-        type: string
+    oneOf:
+      - type: string
+      - $ref: ./LocalizedString.yaml
   onPressed:
     $ref: ./InfoPushDataClickable.yaml
   overrideName: {}
@@ -82,15 +72,10 @@ properties:
   search:
     $ref: ./InfoPushDataSearch.yaml
   shortName:
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - type: string
-          - type: "null"
-          - $ref: ./LocalizedString.yaml
-      else:
-        type: ["null", string]
+    oneOf:
+      - type: string
+      - type: "null"
+      - $ref: ./LocalizedString.yaml
   showInWorldIds: {}
   template:
     type: string
@@ -99,14 +84,9 @@ properties:
   title:
     type: string
   tooltipDescription:
-    x-if:
-      when: jsonschema
-      then:
-        oneOf:
-          - type: string
-          - $ref: ./LocalizedString.yaml
-      else:
-        type: string
+    oneOf:
+      - type: string
+      - $ref: ./LocalizedString.yaml
   version:
     type: string
     example: 2021.3.4
