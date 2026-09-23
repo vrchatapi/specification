@@ -2,7 +2,7 @@ description: OK
 content:
   application/json:
     schema:
-      title: LoginOr2fa
+      title: CurrentUserLoginResponse
       oneOf:
         - $ref: ../../schemas/CurrentUser.yaml
         - $ref: ../../schemas/RequiresTwoFactorAuth.yaml
