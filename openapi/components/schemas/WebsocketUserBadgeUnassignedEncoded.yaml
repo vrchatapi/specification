@@ -1,10 +1,10 @@
 title: WebsocketUserBadgeUnassignedEncoded
-x-vrcapispecification-has-double-json-encoding: true
+x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrcapispecification-inner-json: WebsocketUserBadgeUnassigned
+    x-double-encoding-type: WebsocketUserBadgeUnassigned
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketUserBadgeUnassigned.yaml

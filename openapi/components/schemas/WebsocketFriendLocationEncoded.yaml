@@ -1,10 +1,10 @@
 title: WebsocketFriendLocationEncoded
-x-vrcapispecification-has-double-json-encoding: true
+x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrcapispecification-inner-json: WebsocketFriendLocation
+    x-double-encoding-type: WebsocketFriendLocation
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketFriendLocation.yaml

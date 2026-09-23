@@ -1,10 +1,10 @@
 title: WebsocketFriendActiveEncoded
-x-vrcapispecification-has-double-json-encoding: true
+x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrcapispecification-inner-json: WebsocketFriendActive
+    x-double-encoding-type: WebsocketFriendActive
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketFriendActive.yaml

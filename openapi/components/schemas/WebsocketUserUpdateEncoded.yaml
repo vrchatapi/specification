@@ -1,10 +1,10 @@
 title: WebsocketUserUpdateEncoded
-x-vrcapispecification-has-double-json-encoding: true
+x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrcapispecification-inner-json: WebsocketUserUpdate
+    x-double-encoding-type: WebsocketUserUpdate
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketUserUpdate.yaml

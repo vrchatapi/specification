@@ -1,10 +1,10 @@
 title: NotificationV2Encoded
-x-vrcapispecification-has-double-json-encoding: true
+x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrcapispecification-inner-json: NotificationV2
+    x-double-encoding-type: NotificationV2
     contentMediaType: application/json
     contentSchema:
       $ref: ./NotificationV2.yaml

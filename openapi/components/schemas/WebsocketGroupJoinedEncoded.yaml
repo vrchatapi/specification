@@ -1,10 +1,10 @@
 title: WebsocketGroupJoinedEncoded
-x-vrcapispecification-has-double-json-encoding: true
+x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrcapispecification-inner-json: WebsocketGroupJoined
+    x-double-encoding-type: WebsocketGroupJoined
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketGroupJoined.yaml

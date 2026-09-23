@@ -1,10 +1,10 @@
 title: WebsocketFriendDeleteEncoded
-x-vrcapispecification-has-double-json-encoding: true
+x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrcapispecification-inner-json: WebsocketFriendDelete
+    x-double-encoding-type: WebsocketFriendDelete
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketFriendDelete.yaml
