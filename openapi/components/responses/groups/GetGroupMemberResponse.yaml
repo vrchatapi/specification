@@ -1,0 +1,7 @@
+description: Returns a single GroupMember object, or `null` when the user is not a member of the group.
+content:
+  application/json:
+    schema:
+      anyOf:
+        - $ref: ../../schemas/GroupMember.yaml
+        - type: "null"

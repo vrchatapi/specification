@@ -1,5 +1,5 @@
 title: GroupMember
-type: ["null", object]
+type: object
 description: May be null when attempting to retrieve group membership for a user who is not part of the group
 properties:
   acceptedByDisplayName:
@@ -54,7 +54,9 @@ properties:
     items:
       $ref: ./GroupRoleID.yaml
   user:
-    $ref: ./GroupMemberLimitedUser.yaml
+    anyOf:
+      - $ref: ./GroupMemberLimitedUser.yaml
+      - type: "null"
   userId:
     $ref: ./UserID.yaml
   visibility:

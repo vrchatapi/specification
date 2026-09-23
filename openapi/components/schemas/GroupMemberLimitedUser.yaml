@@ -1,5 +1,5 @@
 title: GroupMemberLimitedUser
-type: ["null", object]
+type: object
 description: "Only visible via the /groups/:groupId/members endpoint, **not** when fetching a specific user."
 properties:
   bannerColor:

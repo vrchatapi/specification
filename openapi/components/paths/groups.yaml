@@ -754,7 +754,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/groups/GroupMemberResponse.yaml
+          $ref: ../responses/groups/GetGroupMemberResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":

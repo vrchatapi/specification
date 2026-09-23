@@ -2,4 +2,6 @@ description: Returns a single EconomyAccount object.
 content:
   application/json:
     schema:
-      $ref: ../../schemas/EconomyAccount.yaml
+      anyOf:
+        - $ref: ../../schemas/EconomyAccount.yaml
+        - type: "null"

@@ -5709,6 +5709,43 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: get-group-member-not-member
+    summary: getGroupMember answers null for a user outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: own-groups
+        operationId: $sourceDescriptions.default.getUserGroups
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/0/groupId != null
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          groupId: $response.body#/0/groupId
+
+      - stepId: get-group-member
+        operationId: $sourceDescriptions.default.getGroupMember
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.own-groups.outputs.groupId
+          - name: userId
+            in: path
+            value: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+        successCriteria:
+          - condition: $statusCode == 200
+
   - workflowId: get-group-member-unauthenticated
     summary: getGroupMember refuses an anonymous caller
     parameters:
