@@ -1,12 +1,12 @@
 title: WebsocketContentRefreshEncoded
-x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrchat-double-encoding-type: WebsocketContentRefresh
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketContentRefresh.yaml
+    x-vrchat-double-encoding-type: WebsocketContentRefresh
 required:
   - content
+x-vrchat-double-encoding: true

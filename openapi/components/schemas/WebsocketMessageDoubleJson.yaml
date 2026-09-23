@@ -1,30 +1,5 @@
 title: WebsocketMessageDoubleJson
-oneOf:
-  - $ref: ./WebsocketContentRefreshEncoded.yaml
-  - $ref: ./WebsocketFriendActiveEncoded.yaml
-  - $ref: ./WebsocketFriendAddEncoded.yaml
-  - $ref: ./WebsocketFriendDeleteEncoded.yaml
-  - $ref: ./WebsocketFriendLocationEncoded.yaml
-  - $ref: ./WebsocketFriendOfflineEncoded.yaml
-  - $ref: ./WebsocketFriendOnlineEncoded.yaml
-  - $ref: ./WebsocketFriendUpdateEncoded.yaml
-  - $ref: ./WebsocketGroupJoinedEncoded.yaml
-  - $ref: ./WebsocketGroupLeftEncoded.yaml
-  - $ref: ./WebsocketGroupMemberUpdatedEncoded.yaml
-  - $ref: ./WebsocketGroupRoleUpdatedEncoded.yaml
-  - $ref: ./WebsocketInstanceQueueJoinedEncoded.yaml
-  - $ref: ./WebsocketInstanceQueueReadyEncoded.yaml
-  - $ref: ./WebsocketNotificationEncoded.yaml
-  - $ref: ./WebsocketNotificationV2Encoded.yaml
-  - $ref: ./WebsocketNotificationV2DeleteEncoded.yaml
-  - $ref: ./WebsocketNotificationV2UpdateEncoded.yaml
-  - $ref: ./WebsocketResponseNotificationEncoded.yaml
-  - $ref: ./WebsocketUserBadgeAssignedEncoded.yaml
-  - $ref: ./WebsocketUserBadgeUnassignedEncoded.yaml
-  - $ref: ./WebsocketUserLocationEncoded.yaml
-  - $ref: ./WebsocketUserUpdateEncoded.yaml
 discriminator:
-  propertyName: type
   mapping:
     content-refresh: ./WebsocketContentRefreshEncoded.yaml
     friend-active: ./WebsocketFriendActiveEncoded.yaml
@@ -49,3 +24,28 @@ discriminator:
     user-badge-unassigned: ./WebsocketUserBadgeUnassignedEncoded.yaml
     user-location: ./WebsocketUserLocationEncoded.yaml
     user-update: ./WebsocketUserUpdateEncoded.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./WebsocketContentRefreshEncoded.yaml
+  - $ref: ./WebsocketFriendActiveEncoded.yaml
+  - $ref: ./WebsocketFriendAddEncoded.yaml
+  - $ref: ./WebsocketFriendDeleteEncoded.yaml
+  - $ref: ./WebsocketFriendLocationEncoded.yaml
+  - $ref: ./WebsocketFriendOfflineEncoded.yaml
+  - $ref: ./WebsocketFriendOnlineEncoded.yaml
+  - $ref: ./WebsocketFriendUpdateEncoded.yaml
+  - $ref: ./WebsocketGroupJoinedEncoded.yaml
+  - $ref: ./WebsocketGroupLeftEncoded.yaml
+  - $ref: ./WebsocketGroupMemberUpdatedEncoded.yaml
+  - $ref: ./WebsocketGroupRoleUpdatedEncoded.yaml
+  - $ref: ./WebsocketInstanceQueueJoinedEncoded.yaml
+  - $ref: ./WebsocketInstanceQueueReadyEncoded.yaml
+  - $ref: ./WebsocketNotificationEncoded.yaml
+  - $ref: ./WebsocketNotificationV2Encoded.yaml
+  - $ref: ./WebsocketNotificationV2DeleteEncoded.yaml
+  - $ref: ./WebsocketNotificationV2UpdateEncoded.yaml
+  - $ref: ./WebsocketResponseNotificationEncoded.yaml
+  - $ref: ./WebsocketUserBadgeAssignedEncoded.yaml
+  - $ref: ./WebsocketUserBadgeUnassignedEncoded.yaml
+  - $ref: ./WebsocketUserLocationEncoded.yaml
+  - $ref: ./WebsocketUserUpdateEncoded.yaml

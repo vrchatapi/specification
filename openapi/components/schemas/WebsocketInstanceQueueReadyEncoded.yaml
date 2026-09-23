@@ -1,12 +1,12 @@
 title: WebsocketInstanceQueueReadyEncoded
-x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrchat-double-encoding-type: WebsocketInstanceQueueReady
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketInstanceQueueReady.yaml
+    x-vrchat-double-encoding-type: WebsocketInstanceQueueReady
 required:
   - content
+x-vrchat-double-encoding: true

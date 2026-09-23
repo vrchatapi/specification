@@ -1,12 +1,12 @@
 title: WebsocketGroupMemberUpdatedEncoded
-x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrchat-double-encoding-type: WebsocketGroupMemberUpdated
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketGroupMemberUpdated.yaml
+    x-vrchat-double-encoding-type: WebsocketGroupMemberUpdated
 required:
   - content
+x-vrchat-double-encoding: true

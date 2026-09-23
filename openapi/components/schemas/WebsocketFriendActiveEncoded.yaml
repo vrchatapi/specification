@@ -1,12 +1,12 @@
 title: WebsocketFriendActiveEncoded
-x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrchat-double-encoding-type: WebsocketFriendActive
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketFriendActive.yaml
+    x-vrchat-double-encoding-type: WebsocketFriendActive
 required:
   - content
+x-vrchat-double-encoding: true

@@ -1,12 +1,12 @@
 title: NotificationV2Encoded
-x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrchat-double-encoding-type: NotificationV2
     contentMediaType: application/json
     contentSchema:
       $ref: ./NotificationV2.yaml
+    x-vrchat-double-encoding-type: NotificationV2
 required:
   - content
+x-vrchat-double-encoding: true

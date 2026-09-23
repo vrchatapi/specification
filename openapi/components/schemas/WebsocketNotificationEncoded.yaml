@@ -1,12 +1,12 @@
 title: WebsocketNotificationEncoded
-x-vrchat-double-encoding: true
 type: object
 properties:
   content:
     type: string
-    x-vrchat-double-encoding-type: WebsocketNotification
     contentMediaType: application/json
     contentSchema:
       $ref: ./WebsocketNotification.yaml
+    x-vrchat-double-encoding-type: WebsocketNotification
 required:
   - content
+x-vrchat-double-encoding: true

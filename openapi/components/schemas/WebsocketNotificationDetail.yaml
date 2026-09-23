@@ -1,7 +1,6 @@
 title: WebsocketNotificationDetail
 type: object
 discriminator:
-  propertyName: type
   mapping:
     boop: ./WebsocketNotificationDetailBoop.yaml
     invite: ./WebsocketNotificationDetailInvite.yaml
@@ -9,6 +8,7 @@ discriminator:
     request-invite: ./WebsocketNotificationDetailRequestInvite.yaml
     request-invite-response: ./WebsocketNotificationDetailRequestInviteResponse.yaml
     vote-to-kick: ./WebsocketNotificationDetailVoteToKick.yaml
+  propertyName: type
 oneOf:
   - $ref: ./WebsocketNotificationDetailBoop.yaml
   - $ref: ./WebsocketNotificationDetailInvite.yaml
