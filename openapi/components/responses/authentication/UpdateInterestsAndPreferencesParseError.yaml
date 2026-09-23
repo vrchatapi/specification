@@ -1,0 +1,11 @@
+description: The body is not a JSON object.
+content:
+  application/json:
+    examples:
+      JSON Failed To Parse:
+        value:
+          error:
+            message: JSON failed to parse.
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

@@ -507,6 +507,30 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: get-interests-and-preferences
+    summary: Interests and preferences
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: interests-and-preferences
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-interests-and-preferences-unauthenticated
+    summary: getInterestsAndPreferences refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-interests-and-preferences
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-moderation-reports
     summary: Moderation reports
     parameters:
@@ -632,6 +656,153 @@ workflows:
             value: test
         successCriteria:
           - condition: $statusCode == 400
+  - workflowId: interests-and-preferences-lifecycle
+    summary: Turns every interest on, one off, then the rest off, reading each state back
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: turn-all-on
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload:
+            Anime: true
+            Art: true
+            Avatars: true
+            BigGroup: true
+            Explore: true
+            Fantasy: true
+            Fashion: true
+            FindAvatars: true
+            Furries: true
+            Horror: true
+            LanguageLearning: true
+            MeetPeople: true
+            Music: true
+            Mystery: true
+            SciFi: true
+            SmallGroup: true
+            Surprise: true
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-all-on
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/Anime == true
+          - condition: $response.body#/Art == true
+          - condition: $response.body#/Avatars == true
+          - condition: $response.body#/BigGroup == true
+          - condition: $response.body#/Explore == true
+          - condition: $response.body#/Fantasy == true
+          - condition: $response.body#/Fashion == true
+          - condition: $response.body#/FindAvatars == true
+          - condition: $response.body#/Furries == true
+          - condition: $response.body#/Horror == true
+          - condition: $response.body#/LanguageLearning == true
+          - condition: $response.body#/MeetPeople == true
+          - condition: $response.body#/Music == true
+          - condition: $response.body#/Mystery == true
+          - condition: $response.body#/SciFi == true
+          - condition: $response.body#/SmallGroup == true
+          - condition: $response.body#/Surprise == true
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: turn-one-off
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload:
+            Art: false
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-one-off
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+          - context: $response.body
+            condition: $[?(!@.Art)]
+            type: jsonpath
+          - condition: $response.body#/Music == true
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: send-unknown
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload:
+            Music: loud
+            Unknown: true
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-unknown-ignored
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/Music == true
+          - context: $response.body
+            condition: $[?(!@.Unknown)]
+            type: jsonpath
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: turn-all-off
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload:
+            Anime: false
+            Art: false
+            Avatars: false
+            BigGroup: false
+            Explore: false
+            Fantasy: false
+            Fashion: false
+            FindAvatars: false
+            Furries: false
+            Horror: false
+            LanguageLearning: false
+            MeetPeople: false
+            Music: false
+            Mystery: false
+            SciFi: false
+            SmallGroup: false
+            Surprise: false
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: read-all-off
+        operationId: $sourceDescriptions.default.getInterestsAndPreferences
+        successCriteria:
+          - condition: $statusCode == 200
+          - context: $response.body
+            condition: $[?(!@.Music)]
+            type: jsonpath
+
   - workflowId: logout
     summary: >-
       Invalidates the session, so `pnpm test` skips it by name — running
@@ -681,6 +852,33 @@ workflows:
     steps:
       - stepId: submit-moderation-report
         operationId: $sourceDescriptions.default.submitModerationReport
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: update-interests-and-preferences-invalid-body
+    summary: updateInterestsAndPreferences refuses a body that is not an object
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-interests-and-preferences
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
+        requestBody:
+          contentType: application/json
+          payload: not an object
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: update-interests-and-preferences-unauthenticated
+    summary: updateInterestsAndPreferences refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-interests-and-preferences
+        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
         successCriteria:
           - condition: $statusCode == 401
 

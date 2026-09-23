@@ -290,6 +290,41 @@ paths:
           $ref: ../responses/authentication/CreateAvatarModerationResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /auth/user/interestsAndPreferences:
+    get:
+      operationId: getInterestsAndPreferences
+      summary: Get Interests and Preferences
+      description: Returns the interests and preferences the current user has turned on.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/GetInterestsAndPreferencesResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+    put:
+      operationId: updateInterestsAndPreferences
+      summary: Update Interests and Preferences
+      description: Turns interests and preferences on with `true` and off with `false`. A key the body leaves out keeps its value, and an unknown key or a value that is not a boolean is ignored.
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/InterestsAndPreferences.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/UpdateInterestsAndPreferencesResponse.yaml
+        "400":
+          $ref: ../responses/authentication/UpdateInterestsAndPreferencesParseError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /auth/user/resendEmail:
     post:
       operationId: resendEmailConfirmation

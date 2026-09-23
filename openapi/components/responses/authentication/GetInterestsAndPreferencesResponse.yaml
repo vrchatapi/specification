@@ -1,0 +1,27 @@
+description: OK
+content:
+  application/json:
+    examples:
+      All Off:
+        value: {}
+      All On:
+        value:
+          Anime: true
+          Art: true
+          Avatars: true
+          BigGroup: true
+          Explore: true
+          Fantasy: true
+          Fashion: true
+          FindAvatars: true
+          Furries: true
+          Horror: true
+          LanguageLearning: true
+          MeetPeople: true
+          Music: true
+          Mystery: true
+          SciFi: true
+          SmallGroup: true
+          Surprise: true
+    schema:
+      $ref: ../../schemas/InterestsAndPreferences.yaml
