@@ -1,16 +1,11 @@
 title: WebsocketMessageNormal
-x-if:
-  when: jsonschema
-  then:
-    oneOf:
-      - $ref: ./WebsocketSeeNotification.yaml
-      - $ref: ./WebsocketHideNotification.yaml
-      - $ref: ./WebsocketClearNotification.yaml
-    discriminator:
-      propertyName: type
-      mapping:
-        see-notification: ./WebsocketSeeNotification.yaml
-        hide-notification: ./WebsocketHideNotification.yaml
-        clear-notification: ./WebsocketClearNotification.yaml
-  else:
-    type: object
+oneOf:
+  - $ref: ./WebsocketSeeNotification.yaml
+  - $ref: ./WebsocketHideNotification.yaml
+  - $ref: ./WebsocketClearNotification.yaml
+discriminator:
+  propertyName: type
+  mapping:
+    see-notification: ./WebsocketSeeNotification.yaml
+    hide-notification: ./WebsocketHideNotification.yaml
+    clear-notification: ./WebsocketClearNotification.yaml
