@@ -115,8 +115,9 @@ Some patch releases changed how a value is serialized on the wire, correcting wh
 With `loosenUnions`, each `oneOf` and `anyOf` becomes one schema that accepts everything any member accepts:
 
 1. A `null` member makes the result nullable. One member left is the result; a reference stays a reference.
-2. Members of one type merge. An object carries every member's properties and requires only what every member requires; an array loosens its `items`; a keyword survives when every member gives it the same value, and `enum` becomes the union of the members' values.
-3. Members of different types leave `{}`.
+2. Members that each allow only listed values, by `enum` or `const`, become one `enum`, as openapi-generator's `SIMPLIFY_ONEOF_ANYOF_ENUM` rule reads them: a single value's `title` and `description` go to `x-enum-descriptions` and its `deprecated` to `x-enum-deprecated`.
+3. Other members of one type merge. An object carries every member's properties and requires only what every member requires; an array loosens its `items`; a keyword survives when every member gives it the same value, and `enum` becomes the union of the members' values.
+4. Members of different types leave `{}`.
 
 The union's own `title` and `description` carry over, so a code generator names the merged object after the union.
 

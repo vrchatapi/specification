@@ -120,6 +120,35 @@ describe("unions", () => {
 		expect(schemas.Union).toStrictEqual({ type: "object", properties: { kind: { type: "string", enum: ["a", "b"] } } });
 	});
 
+	test("loosens a union of single values into an enum, keeping each value's title, description and deprecation", async () => {
+		const { schemas, problems } = await loosening.schemas({
+			Status: {
+				oneOf: [
+					{ type: "string", const: "a", title: "A", description: "first" },
+					{ type: "string", const: "b", title: "B", deprecated: true },
+					{ type: "string", const: "c" }
+				]
+			},
+			Mixed: { anyOf: [{ type: "string", enum: ["a", "b"] }, { const: "c", description: "see" }] },
+			Plain: { oneOf: [{ type: "integer", const: 1 }, { type: "integer", const: 2 }] },
+			Nullable: { oneOf: [{ type: "string", const: "a", title: "A" }, { type: "string", const: "b" }, { type: "null" }] }
+		});
+		expect(schemas).toStrictEqual({
+			Status: { type: "string", enum: ["a", "b", "c"], "x-enum-descriptions": ["A - first", "B", ""], "x-enum-deprecated": [false, true, false] },
+			Mixed: { type: "string", enum: ["a", "b", "c"], "x-enum-descriptions": ["", "", "see"] },
+			Plain: { type: "integer", enum: [1, 2] },
+			Nullable: { type: "string", nullable: true, enum: ["a", "b"], "x-enum-descriptions": ["A", ""] }
+		});
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("leaves enum extensions a union already carries", async () => {
+		const { schemas } = await loosening.schemas({
+			Status: { "x-enum-descriptions": ["kept"], oneOf: [{ type: "string", const: "a", title: "A" }, { type: "string", const: "b" }] }
+		});
+		expect(schemas.Status).toStrictEqual({ type: "string", enum: ["a", "b"], "x-enum-descriptions": ["kept"] });
+	});
+
 	test("drops an enum some members lack", async () => {
 		const { schemas } = await loosening.schemas({
 			Union: { oneOf: [{ type: "string", enum: ["a"] }, { type: "string", format: "uri" }] }
