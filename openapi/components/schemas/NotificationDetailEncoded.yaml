@@ -1,4 +1,9 @@
 title: NotificationDetail
+required:
+  - type
+properties:
+  type:
+    $ref: ./NotificationType.yaml
 discriminator:
   mapping:
     boop: ./NotificationDetailBoopEncoded.yaml

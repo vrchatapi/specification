@@ -27,7 +27,6 @@ properties:
     $ref: ./NotificationType.yaml
 required:
   - created_at
-  - details
   - id
   - message
   - senderUserId
