@@ -179,14 +179,13 @@ describe("unions", () => {
 		expect(problems).toStrictEqual([]);
 	});
 
-	test("reports a nullable reference", async () => {
-		const { problems } = await loosening.schemas({
+	test("writes a nullable reference the way openapi-generator reads one", async () => {
+		const { schemas, problems } = await loosening.schemas({
 			State: state,
-			Union: { anyOf: [reference("State"), { type: "null" }] }
+			Union: { description: "u", anyOf: [reference("State"), { type: "null" }] }
 		});
-		expect(problems).toStrictEqual([
-			{ severity: "error", pointer: "#/components/schemas/Union", message: "OpenAPI 3.0.4 cannot make a reference nullable." }
-		]);
+		expect(schemas.Union).toStrictEqual({ description: "u", ...reference("State"), nullable: true });
+		expect(problems).toStrictEqual([]);
 	});
 
 	test("leaves allOf alone", async () => {
@@ -238,16 +237,26 @@ describe("null members", () => {
 		expect(problems).toStrictEqual([]);
 	});
 
-	test("reports what nullable cannot reach", async () => {
-		const { problems } = await from31.schemas({
+	test("writes a nullable reference the way openapi-generator reads one", async () => {
+		const other = { type: "integer" };
+		const { schemas, problems } = await from31.schemas({
 			State: state,
-			A: { anyOf: [reference("State"), { type: "null" }] },
-			B: { oneOf: [reference("State"), reference("State"), { type: "null" }] },
-			C: { oneOf: [{ type: ["string", "null"] }, { type: "integer" }, { type: "null" }] }
+			Other: other,
+			A: { description: "a", anyOf: [reference("State"), { type: "null" }] },
+			B: { oneOf: [reference("State"), reference("Other"), { type: "null" }] }
 		});
+		expect(schemas).toStrictEqual({
+			State: state,
+			Other: other,
+			A: { description: "a", ...reference("State"), nullable: true },
+			B: { oneOf: [{ ...reference("State"), nullable: true }, reference("Other")] }
+		});
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("reports a oneOf in which null already matches more than one member", async () => {
+		const { problems } = await from31.schemas({ C: { oneOf: [{ type: ["string", "null"] }, { type: "integer" }, { type: "null" }] } });
 		expect(problems).toStrictEqual([
-			{ severity: "error", pointer: "#/components/schemas/A", message: "OpenAPI 3.0.4 cannot make a reference nullable." },
-			{ severity: "error", pointer: "#/components/schemas/B", message: "OpenAPI 3.0.4 cannot make a reference nullable." },
 			{ severity: "error", pointer: "#/components/schemas/C", message: "OpenAPI 3.0.4 cannot say this `oneOf`: `null` matches more than one member." }
 		]);
 	});

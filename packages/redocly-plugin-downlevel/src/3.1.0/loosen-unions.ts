@@ -5,7 +5,6 @@ import { resolveSchema } from "../pointer.ts";
 
 const unions = ["oneOf", "anyOf"] as const;
 const merged = new Set(["type", "properties", "required", "items", "enum", "discriminator"]);
-const unrepresentable = Symbol("unrepresentable");
 
 /**
  * Replaces every `oneOf` and `anyOf` with one schema that accepts everything any
@@ -14,13 +13,14 @@ const unrepresentable = Symbol("unrepresentable");
  * Members of one type merge: an object carries every member's properties and
  * requires only what every member requires, an array loosens its items, and a
  * keyword survives when every member gives it the same value. Members of
- * different types leave `{}`. A `null` member makes the result nullable, which
- * a reference has no way to be.
+ * different types leave `{}`. A `null` member makes the result nullable; a
+ * reference is made nullable with `nullable: true` beside the `$ref`, the form
+ * openapi-generator reads, as `lowerNullMembers` explains.
  *
  * Runs only with `loosenUnions`; otherwise `lowerNullMembers` deals with the
  * `null` members and the unions stay.
  */
-export const loosenUnions: Transform = ({ version, loosenUnions: enabled }) => {
+export const loosenUnions: Transform = ({ loosenUnions: enabled }) => {
 	if (!enabled) return {};
 
 	let root: Node;
@@ -35,7 +35,7 @@ export const loosenUnions: Transform = ({ version, loosenUnions: enabled }) => {
 	const typesOf = (schema: Node): Array<string> | undefined =>
 		schema.type === undefined ? undefined : [schema.type].flat() as Array<string>;
 
-	const loosen = (members: Array<Node>): Node | typeof unrepresentable => {
+	const loosen = (members: Array<Node>): Node => {
 		let nullable = false;
 		const concrete: Array<Node> = [];
 
@@ -50,7 +50,7 @@ export const loosenUnions: Transform = ({ version, loosenUnions: enabled }) => {
 
 		if (concrete.length === 1) {
 			const [member] = concrete;
-			if (member.$ref !== undefined) return nullable ? unrepresentable : structuredClone(member);
+			if (member.$ref !== undefined) return nullable ? { ...structuredClone(member), nullable: true } : structuredClone(member);
 
 			const result = structuredClone(member);
 			const types = typesOf(result);
@@ -85,11 +85,7 @@ export const loosenUnions: Transform = ({ version, loosenUnions: enabled }) => {
 					declared.set(name, [...(declared.get(name) ?? []), property]);
 
 			const properties: Record<string, Node> = {};
-			for (const [name, declarations] of declared) {
-				const property = loosen(declarations);
-				if (property === unrepresentable) return unrepresentable;
-				properties[name] = property;
-			}
+			for (const [name, declarations] of declared) properties[name] = loosen(declarations);
 			result.properties = properties;
 		}
 
@@ -99,9 +95,7 @@ export const loosenUnions: Transform = ({ version, loosenUnions: enabled }) => {
 		if (required.length > 0) result.required = required;
 
 		if (schemas.every((schema) => schema.items)) {
-			const items = loosen(schemas.map((schema) => schema.items as Node));
-			if (items === unrepresentable) return unrepresentable;
-			result.items = items;
+			result.items = loosen(schemas.map((schema) => schema.items as Node));
 		}
 
 		return result;
@@ -114,13 +108,11 @@ export const loosenUnions: Transform = ({ version, loosenUnions: enabled }) => {
 			}
 		},
 		Schema: {
-			leave: (node, { report, location }) => {
+			leave: (node) => {
 				const keyword = unions.find((candidate) => Array.isArray(node[candidate]));
 				if (!keyword) return;
 
 				const result = loosen(node[keyword] as Array<Node>);
-				if (result === unrepresentable)
-					return report({ message: `OpenAPI ${version} cannot make a reference nullable.`, location });
 
 				const own = Object.fromEntries(
 					Object.entries(node).filter(([key]) => !unions.includes(key as never) && key !== "discriminator")

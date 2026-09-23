@@ -71,7 +71,7 @@ A layer runs all its checks first, so every problem in a release is reported at 
 | --- | --- |
 | `type: [X, "null"]` | `type: X`, `nullable: true` |
 | `type` naming several types | `anyOf` with one member per type |
-| a `null` member of `oneOf` / `anyOf` | `nullable` on one other member, so `null` still matches exactly one; reported where only references remain, and for a `oneOf` where another member already takes `null` |
+| a `null` member of `oneOf` / `anyOf` | `nullable` on one other member, so `null` still matches exactly one; a reference gets `nullable: true` beside its `$ref` (see [Nullable references](#nullable-references)); reported for a `oneOf` where another member already takes `null` |
 | numeric `exclusiveMinimum` / `exclusiveMaximum` | the limit in `minimum` / `maximum`, the flag `true`; the tighter bound where both are given |
 | schema `examples` | `example: examples[0]` |
 | `const` | `enum: [value]` |
@@ -108,6 +108,12 @@ With `loosenUnions`, each `oneOf` and `anyOf` becomes one schema that accepts ev
 3. Members of different types leave `{}`.
 
 The union's own `title` and `description` carry over, so a code generator names the merged object after the union.
+
+## Nullable references
+
+3.1 writes a nullable reference as `anyOf: [{$ref: X}, {type: "null"}]`. 3.0 has only `nullable`, which widens a `type` written beside it, and a reference has none. The plugin writes `$ref: X` with `nullable: true` beside it.
+
+The 3.0 text says keywords beside a `$ref` are ignored, so by the letter this pair accepts no `null`. openapi-generator reads it as a nullable reference, and writes the same pair itself when it simplifies that `anyOf` ([`ModelUtils.java`](https://github.com/OpenAPITools/openapi-generator/blob/v7.25.0/modules/openapi-generator/src/main/java/org/openapitools/codegen/utils/ModelUtils.java#L2597-L2625), on by default). It is the form 3.0 descriptions have used for nullable references in practice.
 
 ## Limits
 

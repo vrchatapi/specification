@@ -19,9 +19,15 @@ const acceptsNull = (schema: Node) => typesOf(schema)?.includes("null") ?? true;
  * say that, so it is reported. A member without a `type` counts as taking
  * `null`.
  *
+ * A reference has no `type` to widen, so `nullable: true` goes beside the
+ * `$ref`. 3.0 says keywords beside a `$ref` are ignored, but openapi-generator
+ * reads that pair as a nullable reference, and writes it itself when it
+ * simplifies the same union.
+ *
  * Runs unless `loosenUnions` is set, in which case the unions go altogether.
  *
  * https://spec.openapis.org/oas/v3.0.3#fixed-fields-19
+ * https://github.com/OpenAPITools/openapi-generator/blob/v7.25.0/modules/openapi-generator/src/main/java/org/openapitools/codegen/utils/ModelUtils.java#L2597-L2625
  */
 export const lowerNullMembers: Transform = ({ version, loosenUnions }) => {
 	if (loosenUnions) return {};
@@ -45,13 +51,12 @@ export const lowerNullMembers: Transform = ({ version, loosenUnions }) => {
 
 				const addNull = (member: Node) => {
 					const types = typesOf(member);
-					if (types && !types.includes("null")) member.type = [...types, "null"];
+					if (member.$ref !== undefined) member.nullable = true;
+					else if (types && !types.includes("null")) member.type = [...types, "null"];
 				};
 
 				if (rest.length === 1) {
 					const [member] = rest;
-					if (member.$ref !== undefined) return report({ message: `OpenAPI ${version} cannot make a reference nullable.`, location });
-
 					delete node[keyword];
 					const own = { ...node };
 					for (const key of Object.keys(node)) delete node[key];
@@ -67,9 +72,7 @@ export const lowerNullMembers: Transform = ({ version, loosenUnions }) => {
 					return;
 				}
 
-				const target = rest.find((member) => member.$ref === undefined && typesOf(member) !== undefined);
-				if (!target) return report({ message: `OpenAPI ${version} cannot make a reference nullable.`, location });
-
+				const target = rest.find((member) => member.$ref === undefined && typesOf(member) !== undefined) ?? rest.find((member) => member.$ref !== undefined)!;
 				addNull(target);
 				node[keyword] = rest;
 			}
