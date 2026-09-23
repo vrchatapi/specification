@@ -56,7 +56,9 @@ properties:
     items:
       $ref: ./CalendarEventPlatform.yaml
   recurrence:
-    $ref: ./CalendarEventRecurrence.yaml
+    anyOf:
+      - $ref: ./CalendarEventRecurrence.yaml
+      - type: "null"
   roleIds:
     type: [array, "null"]
     description: Group roles that may join this event
