@@ -53,7 +53,7 @@ describe("type", () => {
 		});
 		expect(schemas).toStrictEqual({
 			A: { anyOf: [{ type: "string" }, { type: "integer" }], minLength: 1 },
-			B: { anyOf: [{ type: "string", nullable: true }, { type: "integer", nullable: true }] }
+			B: { anyOf: [{ type: "string", nullable: true }, { type: "integer" }] }
 		});
 		expect(problems).toStrictEqual([]);
 	});
@@ -216,20 +216,39 @@ describe("null members", () => {
 		expect(problems).toStrictEqual([]);
 	});
 
-	test("makes every member of an anyOf nullable", async () => {
-		const { schemas } = await from31.schemas({ A: { anyOf: [{ type: "string" }, { type: "integer" }, { type: "null" }] } });
-		expect(schemas).toStrictEqual({ A: { anyOf: [{ type: "string", nullable: true }, { type: "integer", nullable: true }] } });
+	test("makes one member of a union nullable, so null still matches exactly one", async () => {
+		const { schemas, problems } = await from31.schemas({
+			State: state,
+			A: { anyOf: [{ type: "string" }, { type: "integer" }, { type: "null" }] },
+			B: { oneOf: [{ type: "string" }, reference("State"), { type: "null" }] },
+			C: { oneOf: [reference("State"), { type: "integer" }, { type: "null" }] }
+		});
+		expect(schemas).toStrictEqual({
+			State: state,
+			A: { anyOf: [{ type: "string", nullable: true }, { type: "integer" }] },
+			B: { oneOf: [{ type: "string", nullable: true }, reference("State")] },
+			C: { oneOf: [reference("State"), { type: "integer", nullable: true }] }
+		});
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("lets an anyOf member that already takes null stand for the null member", async () => {
+		const { schemas, problems } = await from31.schemas({ A: { anyOf: [{ type: ["string", "null"] }, { type: "integer" }, { type: "null" }] } });
+		expect(schemas).toStrictEqual({ A: { anyOf: [{ type: "string", nullable: true }, { type: "integer" }] } });
+		expect(problems).toStrictEqual([]);
 	});
 
 	test("reports what nullable cannot reach", async () => {
 		const { problems } = await from31.schemas({
 			State: state,
 			A: { anyOf: [reference("State"), { type: "null" }] },
-			B: { oneOf: [{ type: "string" }, { type: "integer" }, { type: "null" }] }
+			B: { oneOf: [reference("State"), reference("State"), { type: "null" }] },
+			C: { oneOf: [{ type: ["string", "null"] }, { type: "integer" }, { type: "null" }] }
 		});
 		expect(problems).toStrictEqual([
 			{ severity: "error", pointer: "#/components/schemas/A", message: "OpenAPI 3.0.4 cannot make a reference nullable." },
-			{ severity: "error", pointer: "#/components/schemas/B", message: "OpenAPI 3.0.4 cannot make a `oneOf` nullable: `null` would match every member." }
+			{ severity: "error", pointer: "#/components/schemas/B", message: "OpenAPI 3.0.4 cannot make a reference nullable." },
+			{ severity: "error", pointer: "#/components/schemas/C", message: "OpenAPI 3.0.4 cannot say this `oneOf`: `null` matches more than one member." }
 		]);
 	});
 });

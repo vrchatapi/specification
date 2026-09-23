@@ -5,12 +5,19 @@ const unions = ["oneOf", "anyOf"] as const;
 
 const typesOf = (schema: Node) => (schema.type === undefined ? undefined : ([schema.type].flat() as Array<string>));
 const isNull = (schema: Node) => typesOf(schema)?.every((type) => type === "null") === true;
+const acceptsNull = (schema: Node) => typesOf(schema)?.includes("null") ?? true;
 
 /**
  * 3.1 makes a union nullable with a `{type: "null"}` member; 3.0 has only
- * `nullable`, which widens the `type` beside it. A union left with one member
- * becomes that member, nullable. An `anyOf` makes each member nullable, since
- * matching several is allowed. A `oneOf` cannot: `null` would match them all.
+ * `nullable`, which widens the `type` beside it. The `null` member goes, and
+ * one other member takes `null` instead: the first one written inline with a
+ * `type`, so a `oneOf` still finds exactly one match for `null`. A union left
+ * with one member becomes that member.
+ *
+ * Where another member already takes `null`, an `anyOf` needs nothing more,
+ * and a `oneOf` rejected `null` all along, since it matched twice; 3.0 cannot
+ * say that, so it is reported. A member without a `type` counts as taking
+ * `null`.
  *
  * Runs unless `loosenUnions` is set, in which case the unions go altogether.
  *
@@ -53,12 +60,17 @@ export const lowerNullMembers: Transform = ({ version, loosenUnions }) => {
 					return;
 				}
 
-				if (keyword === "oneOf")
-					return report({ message: `OpenAPI ${version} cannot make a \`oneOf\` nullable: \`null\` would match every member.`, location });
-				if (rest.some((member) => member.$ref !== undefined))
-					return report({ message: `OpenAPI ${version} cannot make a reference nullable.`, location });
+				if (rest.some((member) => acceptsNull(resolveSchema(root, member)))) {
+					if (keyword === "oneOf")
+						return report({ message: `OpenAPI ${version} cannot say this \`oneOf\`: \`null\` matches more than one member.`, location });
+					node[keyword] = rest;
+					return;
+				}
 
-				rest.forEach(addNull);
+				const target = rest.find((member) => member.$ref === undefined && typesOf(member) !== undefined);
+				if (!target) return report({ message: `OpenAPI ${version} cannot make a reference nullable.`, location });
+
+				addNull(target);
 				node[keyword] = rest;
 			}
 		}

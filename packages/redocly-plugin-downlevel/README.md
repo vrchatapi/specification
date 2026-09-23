@@ -71,7 +71,7 @@ A layer runs all its checks first, so every problem in a release is reported at 
 | --- | --- |
 | `type: [X, "null"]` | `type: X`, `nullable: true` |
 | `type` naming several types | `anyOf` with one member per type |
-| a `null` member of `oneOf` / `anyOf` | `nullable` on the one remaining member, or on every member of an `anyOf`; reported for a `oneOf` of several and for a reference |
+| a `null` member of `oneOf` / `anyOf` | `nullable` on one other member, so `null` still matches exactly one; reported where only references remain, and for a `oneOf` where another member already takes `null` |
 | numeric `exclusiveMinimum` / `exclusiveMaximum` | the limit in `minimum` / `maximum`, the flag `true`; the tighter bound where both are given |
 | schema `examples` | `example: examples[0]` |
 | `const` | `enum: [value]` |
