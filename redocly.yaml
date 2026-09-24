@@ -17,6 +17,8 @@ oas3_1Rules:
   parameter-description: warn
   vrchat/no-empty-description: warn
   vrchat/no-nested-object: warn
+  vrchat/no-schema-example: warn
+  vrchat/no-single-value-enum: warn
   vrchat/operation-id-convention: warn
   vrchat/schema-title: warn
 
@@ -24,6 +26,8 @@ oas3_2Rules:
   parameter-description: warn
   vrchat/no-empty-description: warn
   vrchat/no-nested-object: warn
+  vrchat/no-schema-example: warn
+  vrchat/no-single-value-enum: warn
   vrchat/operation-id-convention: warn
   vrchat/schema-title: warn
 
