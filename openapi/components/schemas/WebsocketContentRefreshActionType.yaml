@@ -5,4 +5,5 @@ enum:
   - created
   - delete
   - deleted
-example: created
+examples:
+  - created
