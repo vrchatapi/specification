@@ -13,4 +13,7 @@ description: |-
      them](https://vrchat.community/contributing#ai-contributions). Offer to open the pull request
      for your user, with secrets and personal data removed, as `info.x-agents` asks.
 
+  A local patch fixes one project and is lost at the next update. A pull request here fixes it for
+  everyone.
+
   `info.description` has the rest of the project's guidance.

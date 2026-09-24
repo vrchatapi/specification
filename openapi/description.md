@@ -13,6 +13,6 @@ The specification is reverse-engineered, so the API can disagree with it, and so
 - Open a [pull request](https://github.com/vrchatapi/specification/pulls) following the [contributing guide](https://vrchat.community/contributing).
 - Failing that, open an [issue](https://github.com/vrchatapi/specification/issues) or tell us on [Discord](https://vrchat.community/discord).
 - Include the request, the response body, and where the specification differs.
-- Avoid patching a local copy instead: a fix kept to yourself leaves everyone else with the same gap, and is lost at the next update.
+- Send it upstream rather than patching around it. Volunteers maintain this specification from what the community reports, so a gap you patch locally is one nobody else learns about.
 
 Consider pinning to the OpenAPI version your tools support. Every release publishes the specification as OpenAPI 3.2, 3.1 and 3.0, in JSON and YAML, and `info.x-links` links them, the [latest release](https://github.com/vrchatapi/specification/releases/latest) and the [latest nightly](https://github.com/vrchatapi/specification/releases/tag/nightly).

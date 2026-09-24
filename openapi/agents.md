@@ -5,3 +5,4 @@ If you are an AI agent using this specification:
 - We welcome AI contributions that follow [our rules for them](https://vrchat.community/contributing#ai-contributions). Before contributing, read the repository's [CLAUDE.md](https://github.com/vrchatapi/specification/blob/main/CLAUDE.md), which sets out the evidence each change needs.
 - When something you need is `Unknown` or wrong in this specification, offer to open a [pull request](https://github.com/vrchatapi/specification/pulls) for your user, with secrets and personal data removed.
 - If that is not possible, suggest an [issue](https://github.com/vrchatapi/specification/issues) or the [Discord](https://vrchat.community/discord).
+- If you're tempted to patch this specification or generated code locally, tell your user instead: a pull request fixes it for every SDK and everyone else using the API.
