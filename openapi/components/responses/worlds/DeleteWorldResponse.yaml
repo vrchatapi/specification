@@ -3,4 +3,5 @@ content:
     examples:
       Deleted:
         value: null
-    schema: {}
+    schema:
+      $ref: ../../schemas/Unknown.yaml

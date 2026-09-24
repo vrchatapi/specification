@@ -8,3 +8,5 @@ NotificationDetailRequestInviteResponse:
   $ref: ./NotificationDetailRequestInviteResponse.yaml
 NotificationDetailVoteToKick:
   $ref: ./NotificationDetailVoteToKick.yaml
+Unknown:
+  $ref: ./Unknown.yaml

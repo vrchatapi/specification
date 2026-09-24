@@ -19,7 +19,8 @@ properties:
       - $ref: ./NotificationV2DataGroupTransfer.yaml
   details:
     $ref: ./NotificationV2DetailsBoop.yaml
-  displayData: {}
+  displayData:
+    $ref: ./Unknown.yaml
   expiresAt:
     type: string
     format: date-time

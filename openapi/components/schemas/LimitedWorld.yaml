@@ -17,7 +17,8 @@ properties:
     $ref: ./InstanceContentSettings.yaml
   disabledPropAbilities:
     type: array
-    items: {}
+    items:
+      $ref: ./Unknown.yaml
   favorites:
     type: integer
     default: 0

@@ -77,8 +77,10 @@ properties:
       - type: "null"
   name:
     type: string
-  nameplateId: {}
-  nameplateUrl: {}
+  nameplateId:
+    $ref: ./Unknown.yaml
+  nameplateUrl:
+    $ref: ./Unknown.yaml
   onlineMemberCount:
     type: integer
   ownerId:

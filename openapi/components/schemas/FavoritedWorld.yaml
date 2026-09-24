@@ -20,7 +20,8 @@ properties:
     minLength: 0
   disabledPropAbilities:
     type: array
-    items: {}
+    items:
+      $ref: ./Unknown.yaml
   favoriteGroup:
     type: string
     minLength: 1

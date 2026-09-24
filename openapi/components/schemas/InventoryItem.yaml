@@ -3,7 +3,8 @@ type: object
 properties:
   acquisition:
     type: string
-  attribution: {}
+  attribution:
+    $ref: ./Unknown.yaml
   collections:
     type: array
     items:

@@ -219,7 +219,8 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
-  temporaryExpiryDate: {}
+  temporaryExpiryDate:
+    $ref: ./Unknown.yaml
   travelingToInstance:
     type: string
   travelingToLocation:
