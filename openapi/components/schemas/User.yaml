@@ -55,11 +55,17 @@ properties:
     type: boolean
     description: "Either their `friendKey`, or empty string if you are not friends. Unknown usage."
   last_activity:
-    type: string
-    description: Either a date-time or empty string.
+    anyOf:
+      - type: string
+        format: date-time
+      - type: string
+        const: ""
   last_login:
-    type: string
-    description: Either a date-time or empty string.
+    anyOf:
+      - type: string
+        format: date-time
+      - type: string
+        const: ""
   last_mobile:
     type:
       - string
