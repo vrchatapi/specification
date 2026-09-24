@@ -7,7 +7,8 @@ properties:
   description:
     type: string
     description: Description of the gallery.
-    example: Example Description
+    examples:
+      - Example Description
     minLength: 0
   id:
     $ref: ./GroupGalleryID.yaml
@@ -15,26 +16,36 @@ properties:
     type: boolean
     description: Whether the gallery is members only.
     default: false
-    example: false
+    examples:
+      - false
   name:
     type: string
     description: Name of the gallery.
-    example: Example Gallery
+    examples:
+      - Example Gallery
     minLength: 1
   roleIdsToAutoApprove:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToManage:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToSubmit:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToView:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./GroupRoleID.yaml
   updatedAt:

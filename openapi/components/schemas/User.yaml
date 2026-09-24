@@ -6,9 +6,13 @@ properties:
   acceptedTOSVersion:
     type: integer
   accountDeletionDate:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   accountDeletionLog:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items: {}
   ageVerificationStatus:
     $ref: ./AgeVerificationStatus.yaml
@@ -57,7 +61,9 @@ properties:
     type: string
     description: Either a date-time or empty string.
   last_mobile:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   last_platform:
     $ref: ./Platform.yaml
   location:

@@ -6,15 +6,18 @@ properties:
     type: boolean
   iconUrl:
     type: string
-    example: vrchat://category_hangout
+    examples:
+      - vrchat://category_hangout
   id:
     $ref: ./InstanceCategoryID.yaml
   name:
     type: string
-    example: Hangout
+    examples:
+      - Hangout
   order:
     type: integer
-    example: 0
+    examples:
+      - 0
 required:
   - deleted
   - iconUrl

@@ -7,6 +7,7 @@ description: >-
 properties:
   error:
     type: string
-    example: You're not who I was expecting!
+    examples:
+      - You're not who I was expecting!
 required:
   - error

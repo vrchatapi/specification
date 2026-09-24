@@ -3,17 +3,25 @@ type: object
 description: May be null when attempting to retrieve group membership for a user who is not part of the group
 properties:
   acceptedByDisplayName:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: Only missing when explicitly fetching own user.
   acceptedById:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: Only missing when explicitly fetching own user.
   bannedAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: Only missing when explicitly fetching own user.
     format: date-time
   createdAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: Only missing when explicitly fetching own user.
     format: date-time
   groupId:
@@ -27,7 +35,8 @@ properties:
     type: boolean
     description: Whether the user is representing the group. This makes the group show up above the name tag in-game.
     default: false
-    example: true
+    examples:
+      - true
   isSubscribedToAnnouncements:
     type: boolean
     default: false
@@ -35,17 +44,23 @@ properties:
     type: boolean
     description: Only missing when explicitly fetching own user.
   joinedAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   lastPostReadAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   mRoleIds:
     type: array
     items:
       $ref: ./GroupRoleID.yaml
   managerNotes:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: Only missing when explicitly fetching own user.
   membershipStatus:
     $ref: ./GroupMemberStatus.yaml
@@ -61,7 +76,8 @@ properties:
     $ref: ./UserID.yaml
   visibility:
     type: string
-    example: visible
+    examples:
+      - visible
 required:
   - groupId
   - id

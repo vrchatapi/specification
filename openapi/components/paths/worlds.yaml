@@ -21,6 +21,7 @@ paths:
           schema:
             type: string
             enum:
+              - friends
               - me
         - $ref: ../parameters.yaml#/userIdQuery
         - $ref: ../parameters.yaml#/number
@@ -41,6 +42,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
     post:

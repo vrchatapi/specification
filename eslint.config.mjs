@@ -106,8 +106,21 @@ export default configure({
 				]
 			}
 		],
+		"yaml/block-sequence": ["error", "always"],
 		"yaml/sort-sequence-values": [
 			"error",
+			{
+				pathPattern: "(^|\\.)type$",
+				order: [
+					{
+						valuePattern: "^(?!null$)",
+						order: {
+							type: "asc"
+						}
+					},
+					"null"
+				]
+			},
 			{
 				pathPattern: "^(?!.*x-enum-varnames).*",
 				order: [

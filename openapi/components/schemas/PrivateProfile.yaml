@@ -10,7 +10,9 @@ properties:
   isFriend:
     type: boolean
   note:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   status:
     $ref: ./UserStatus.yaml
   statusDescription:

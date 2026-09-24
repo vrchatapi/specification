@@ -5,4 +5,5 @@ enum:
   - afterDate
   - afterOccurrences
 default: afterDate
-example: afterOccurrences
+examples:
+  - afterOccurrences

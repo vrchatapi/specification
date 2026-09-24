@@ -2,7 +2,9 @@ title: Badge
 type: object
 properties:
   assignedAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: only present in CurrentUser badges
     format: date-time
   badgeDescription:
@@ -15,14 +17,18 @@ properties:
   badgeName:
     type: string
   hidden:
-    type: [boolean, "null"]
+    type:
+      - boolean
+      - "null"
     description: only present in CurrentUser badges
   isQuantifiable:
     type: boolean
   showcased:
     type: boolean
   updatedAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: only present in CurrentUser badges
     format: date-time
 required:

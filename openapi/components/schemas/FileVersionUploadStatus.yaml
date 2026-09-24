@@ -9,15 +9,18 @@ properties:
     minItems: 0
   fileName:
     type: string
-    example: Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage
+    examples:
+      - Avatar-MyAvatar-Un.file_00000000-0000-0000-0000-000000000000.1.unitypackage
     minLength: 1
   maxParts:
     type: integer
-    example: 1000
+    examples:
+      - 1000
     minimum: 1
   nextPartNumber:
     type: integer
-    example: 0
+    examples:
+      - 0
     minimum: 0
   parts:
     type: array
@@ -26,7 +29,8 @@ properties:
     minItems: 0
   uploadId:
     type: string
-    example: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
+    examples:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..xxxxxxxxxxxxxxxxxxxxxxx
     minLength: 1
 required:
   - etags

@@ -7,4 +7,5 @@ enum:
   - weekly
   - yearly
 default: weekly
-example: weekly
+examples:
+  - weekly

@@ -3,6 +3,7 @@ type: object
 properties:
   isFollowing:
     type: boolean
-    example: true
+    examples:
+      - true
 required:
   - isFollowing

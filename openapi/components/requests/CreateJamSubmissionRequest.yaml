@@ -5,11 +5,13 @@ properties:
   contentId:
     type: string
     description: The id of the uploaded content (e.g., avatar, world) being submitted.
-    example: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
+    examples:
+      - avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
   description:
     type: string
     description: A description of the content being submitted.
-    example: My awesomely unique avatar for the jam!
+    examples:
+      - My awesomely unique avatar for the jam!
 required:
   - contentId
   - description

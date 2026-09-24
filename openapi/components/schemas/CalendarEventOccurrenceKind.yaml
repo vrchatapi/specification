@@ -6,4 +6,5 @@ enum:
   - series
   - single
 default: single
-example: single
+examples:
+  - single

@@ -2,9 +2,13 @@ title: RepresentedGroup
 type: object
 properties:
   bannerId:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   bannerUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   description:
     type: string
   discriminator:
@@ -12,9 +16,13 @@ properties:
   groupId:
     $ref: ./GroupID.yaml
   iconId:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   iconUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   isRepresenting:
     type: boolean
   memberCount:

@@ -9,4 +9,5 @@ enum:
   - square
   - star
 default: square
-example: circle
+examples:
+  - circle

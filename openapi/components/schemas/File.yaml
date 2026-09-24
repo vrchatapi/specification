@@ -5,7 +5,8 @@ properties:
     $ref: ./ImageAnimationStyle.yaml
   extension:
     type: string
-    example: .unitypackage
+    examples:
+      - .unitypackage
     minLength: 1
   frames:
     type: integer
@@ -27,10 +28,12 @@ properties:
     $ref: ./MIMEType.yaml
   modifiedThumbnailFileName:
     type: string
-    example: thumbnails/file_00000000-0000-0000-0000-000000000000.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.1.modified-thumbnail-256.png
+    examples:
+      - thumbnails/file_00000000-0000-0000-0000-000000000000.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.1.modified-thumbnail-256.png
   name:
     type: string
-    example: Example File
+    examples:
+      - Example File
     minLength: 0
   ownerId:
     $ref: ./UserID.yaml

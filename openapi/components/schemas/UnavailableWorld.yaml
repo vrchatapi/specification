@@ -4,7 +4,8 @@ description: "Stands in for a world the API will not describe. `name` and `autho
 properties:
   authorName:
     type: string
-    example: ???
+    examples:
+      - ???
   capacity:
     type: integer
   id:
@@ -15,12 +16,14 @@ properties:
     type: boolean
   name:
     type: string
-    example: ???
+    examples:
+      - ???
   occupants:
     type: integer
   thumbnailImageUrl:
     type: string
-    example: https://assets.vrchat.com/default/unavailable-world.png
+    examples:
+      - https://assets.vrchat.com/default/unavailable-world.png
 required:
   - authorName
   - capacity

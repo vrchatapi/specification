@@ -9,7 +9,9 @@ properties:
       - $ref: ./UserID.yaml
       - type: "null"
   createdAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   editorId:
     anyOf:
@@ -28,15 +30,23 @@ properties:
       - $ref: ./FileID.yaml
       - type: "null"
   imageUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   roleIds:
     $ref: ./GroupRoleIDList.yaml
   text:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   title:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   updatedAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   visibility:
     type: string

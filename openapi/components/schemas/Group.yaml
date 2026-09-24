@@ -3,10 +3,12 @@ type: object
 properties:
   ageVerificationBetaCode:
     type: string
-    example: abc1234
+    examples:
+      - abc1234
   ageVerificationBetaSlots:
     type: number
-    example: 500
+    examples:
+      - 500
   ageVerificationSlotsAvailable:
     type: boolean
   allowGroupJoinPrompt:
@@ -16,9 +18,13 @@ properties:
     items:
       type: string
   bannerId:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   bannerUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   createdAt:
     type: string
     format: date-time
@@ -31,9 +37,13 @@ properties:
     items:
       $ref: ./GroupGallery.yaml
   iconId:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   iconUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   id:
     $ref: ./GroupID.yaml
   isVerified:
@@ -46,7 +56,9 @@ properties:
     items:
       type: string
   lastPostCreatedAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   links:
     type: array
@@ -74,12 +86,16 @@ properties:
   privacy:
     $ref: ./GroupPrivacy.yaml
   roles:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     description: Only returned if ?includeRoles=true is specified.
     items:
       $ref: ./GroupRole.yaml
   rules:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   shortCode:
     $ref: ./GroupShortCode.yaml
   storeId:

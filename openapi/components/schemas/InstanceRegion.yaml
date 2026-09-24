@@ -8,4 +8,5 @@ enum:
   - us
   - use
 default: us
-example: us
+examples:
+  - us

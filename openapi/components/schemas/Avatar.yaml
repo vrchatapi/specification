@@ -39,7 +39,9 @@ properties:
     type: string
     minLength: 1
   listingDate:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   lock:
     type: boolean
   lowestPrice:
@@ -93,9 +95,13 @@ properties:
     type: object
     properties:
       primary:
-        type: ["null", string]
+        type:
+          - string
+          - "null"
       secondary:
-        type: ["null", string]
+        type:
+          - string
+          - "null"
       supplementary:
         type: array
         items:
@@ -129,7 +135,8 @@ properties:
   version:
     type: integer
     default: 0
-    example: 68
+    examples:
+      - 68
     minimum: 0
 required:
   - authorId

@@ -30,19 +30,23 @@ properties:
     properties:
       Default:
         type: string
-        example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+        examples:
+          - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
         format: uri
       Pico:
         type: string
-        example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+        examples:
+          - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
         format: uri
       Quest:
         type: string
-        example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+        examples:
+          - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
         format: uri
       XRElite:
         type: string
-        example: https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+        examples:
+          - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
         format: uri
   address:
     type: string
@@ -200,7 +204,8 @@ properties:
   currentTOSVersion:
     type: integer
     description: Current version number of the Terms of Service
-    example: 7
+    examples:
+      - 7
     minimum: 0
   defaultAvatar:
     $ref: ./AvatarID.yaml
@@ -407,7 +412,8 @@ properties:
       properties:
         timeout:
           type: integer
-          example: -1
+          examples:
+            - -1
   maxUserEmoji:
     type: integer
     description: The maximum number of custom emoji each user may have at a given time.
@@ -418,7 +424,8 @@ properties:
     default: 18
   maximumUnityVersionForUploads:
     type: string
-    example: 2023.0.0f0
+    examples:
+      - 2023.0.0f0
   minSupportedClientBuildNumber:
     type: object
     description: Minimum supported client build number for various platforms
@@ -504,7 +511,8 @@ properties:
   player-url-resolver-version-gfn-override:
     type: string
     description: Overrides `player-url-resolver-version` on GeForce Now.
-    example: 2026-07-04-GFN
+    examples:
+      - 2026-07-04-GFN
   profileDefaults:
     $ref: ./APIConfigProfileDefaults.yaml
   propComponentList:

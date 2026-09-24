@@ -11,4 +11,5 @@ enum:
   - unmute
   - unmuteChat
 default: unmute
-example: unmute
+examples:
+  - unmute

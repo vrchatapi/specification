@@ -5,4 +5,5 @@ enum:
   - include
   - skip
 default: include
-example: include
+examples:
+  - include

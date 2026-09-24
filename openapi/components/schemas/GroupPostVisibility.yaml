@@ -3,4 +3,5 @@ type: string
 enum:
   - group
   - public
-example: public
+examples:
+  - public

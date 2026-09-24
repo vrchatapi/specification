@@ -23,7 +23,9 @@ properties:
   currentAvatarThumbnailImageUrl:
     $ref: ./CurrentAvatarThumbnailImageUrl.yaml
   date_joined:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   developerType:
     $ref: ./DeveloperType.yaml
@@ -38,10 +40,14 @@ properties:
   isFriend:
     type: boolean
   last_activity:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   last_mobile:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   last_platform:
     $ref: ./Platform.yaml

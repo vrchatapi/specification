@@ -18,7 +18,8 @@ properties:
     minLength: 1
   message:
     type: string
-    example: This is a generated invite to VRChat Hub
+    examples:
+      - This is a generated invite to VRChat Hub
   receiverUserId:
     $ref: ./UserID.yaml
   senderUserId:

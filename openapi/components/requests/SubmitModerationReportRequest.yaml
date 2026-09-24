@@ -17,15 +17,18 @@ properties:
   category:
     type: string
     description: Valid values are the keys of the object `$.reportOptions[type]` from `GET /config`. Descriptions of these are found at `$.reportCategories[type]`.
-    example: behavior
+    examples:
+      - behavior
   contentId:
     type: string
     description: The id of the user, group, world, avatar, inventory item, print, etc. being reported.
-    example: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+    examples:
+      - usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
   description:
     type: string
     description: The subjective reason for the report
-    example: iz bulli
+    examples:
+      - iz bulli
   details:
     type: object
     description: |-
@@ -57,11 +60,13 @@ properties:
   reason:
     type: string
     description: Valid values are the strings in the array `$.reportOptions[type][category]` from `GET /config`. Descriptions of these are found at `$.reportReasons[type]`.
-    example: child
+    examples:
+      - child
   type:
     type: string
     description: Valid values are the keys of the object `$.reportOptions` from `GET /config`.
-    example: user
+    examples:
+      - user
 required:
   - category
   - contentId

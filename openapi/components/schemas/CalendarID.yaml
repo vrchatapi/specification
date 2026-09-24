@@ -1,3 +1,4 @@
 title: CalendarID
 type: string
-example: cal_6b182f0c-61ef-4bdf-97fe-94f63bcba27b
+examples:
+  - cal_6b182f0c-61ef-4bdf-97fe-94f63bcba27b

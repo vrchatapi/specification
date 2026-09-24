@@ -14,4 +14,5 @@ enum:
   - product
   - sticker
 default: gallery
-example: emojianimated
+examples:
+  - emojianimated

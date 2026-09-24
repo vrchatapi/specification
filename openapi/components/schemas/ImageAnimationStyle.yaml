@@ -29,4 +29,5 @@ enum:
   - splash
   - stop
   - zzz
-example: bats
+examples:
+  - bats

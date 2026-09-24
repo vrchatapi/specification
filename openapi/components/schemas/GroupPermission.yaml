@@ -6,7 +6,8 @@ properties:
     type: boolean
     description: Whether the user is allowed to add this permission to a role.
     default: false
-    example: true
+    examples:
+      - true
   dependsOn:
     type: array
     description: Other permission names this one is listed against.
@@ -15,17 +16,21 @@ properties:
   displayName:
     type: string
     description: The display name of the permission.
-    example: Manage Group Data
+    examples:
+      - Manage Group Data
   help:
     type: string
     description: Human-readable description of the permission.
-    example: Allows role to edit group details (name, description, joinState, initialRoles, etc).
+    examples:
+      - Allows role to edit group details (name, description, joinState, initialRoles, etc).
   isManagementPermission:
     type: boolean
     description: Whether this permission is a "management" permission.
     default: false
-    example: true
+    examples:
+      - true
   name:
     type: string
     description: The name of the permission.
-    example: group-data-manage
+    examples:
+      - group-data-manage

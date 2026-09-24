@@ -16,4 +16,5 @@ enum:
   - roleplaying
   - wellness
 default: other
-example: performance
+examples:
+  - performance

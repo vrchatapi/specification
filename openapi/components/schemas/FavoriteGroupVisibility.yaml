@@ -5,4 +5,5 @@ enum:
   - private
   - public
 default: private
-example: private
+examples:
+  - private

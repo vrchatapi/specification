@@ -3,33 +3,40 @@ type: object
 properties:
   amount:
     type: integer
-    example: 399
+    examples:
+      - 399
   balance:
     type: integer
-    example: 399
+    examples:
+      - 399
   date:
     type: string
     format: date-time
   fromUserDisplayName:
     type: string
-    example: VRChat
+    examples:
+      - VRChat
   listingDisplayName:
     type: string
-    example: Lucky Red Envelope
+    examples:
+      - Lucky Red Envelope
   listingType:
     $ref: ./ProductListingType.yaml
   platform:
     type: string
     description: Where (first- or third-party) the purchase was made
-    example: VRChat
+    examples:
+      - VRChat
   purchaseId:
     $ref: ./ProductPurchaseID.yaml
   reason:
     type: integer
-    example: 3002
+    examples:
+      - 3002
   reasonLabel:
     type: string
-    example: Promo Credit
+    examples:
+      - Promo Credit
   transactionId:
     type: integer
   transactionLineId:

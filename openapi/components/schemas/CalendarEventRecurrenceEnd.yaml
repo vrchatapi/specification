@@ -9,7 +9,8 @@ properties:
   date:
     type: string
     description: Required for "afterDate" - The date and time after which the event will stop being scheduled, **without timezone or offset**
-    example: 2026-12-31T23:59:00
+    examples:
+      - 2026-12-31T23:59:00
   type:
     $ref: ./CalendarEventRecurrenceEndType.yaml
 required:

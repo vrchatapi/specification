@@ -12,7 +12,9 @@ properties:
     type: string
     format: date-time
   deletedAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   description:
     type: string
@@ -60,7 +62,9 @@ properties:
       - $ref: ./CalendarEventRecurrence.yaml
       - type: "null"
   roleIds:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     description: Group roles that may join this event
     items:
       $ref: ./GroupRoleID.yaml
@@ -81,7 +85,8 @@ properties:
     minLength: 1
   type:
     type: string
-    example: event
+    examples:
+      - event
   updatedAt:
     type: string
     format: date-time

@@ -2,14 +2,18 @@ title: CreateGroupRequest
 type: object
 properties:
   bannerId:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     default: null
   description:
     type: string
     maxLength: 250
     minLength: 0
   iconId:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     default: null
   joinState:
     $ref: ../schemas/GroupJoinState.yaml

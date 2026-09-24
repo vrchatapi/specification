@@ -10,7 +10,8 @@ properties:
       type: string
   created_at:
     type: string
-    example: "2025-06-13T05:00:45.455Z"
+    examples:
+      - "2025-06-13T05:00:45.455Z"
     format: date-time
   defaultAttributes:
     $ref: ./InventoryDefaultAttributes.yaml
@@ -23,8 +24,11 @@ properties:
     items:
       $ref: ./InventoryEquipSlot.yaml
   expiryDate:
-    type: ["null", string]
-    example: "2025-06-13T05:00:45.455Z"
+    type:
+      - string
+      - "null"
+    examples:
+      - "2025-06-13T05:00:45.455Z"
     format: date-time
   flags:
     type: array
@@ -61,15 +65,18 @@ properties:
     $ref: ./InventoryTemplateID.yaml
   template_created_at:
     type: string
-    example: "2025-06-09T16:31:40.785Z"
+    examples:
+      - "2025-06-09T16:31:40.785Z"
     format: date-time
   template_updated_at:
     type: string
-    example: "2025-06-25T00:34:14.578Z"
+    examples:
+      - "2025-06-25T00:34:14.578Z"
     format: date-time
   updated_at:
     type: string
-    example: "2025-06-25T00:34:15.965Z"
+    examples:
+      - "2025-06-25T00:34:15.965Z"
     format: date-time
   userAttributes:
     $ref: ./InventoryUserAttributes.yaml

@@ -6,4 +6,5 @@ enum:
   - queued
   - waiting
 default: waiting
-example: complete
+examples:
+  - complete

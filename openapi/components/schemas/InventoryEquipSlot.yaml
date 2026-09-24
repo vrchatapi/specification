@@ -9,4 +9,5 @@ enum:
   - profileEffect
   - warp
 default: ""
-example: drone
+examples:
+  - drone

@@ -10,4 +10,5 @@ enum:
   - usw
   - usx
 default: us
-example: eu
+examples:
+  - eu

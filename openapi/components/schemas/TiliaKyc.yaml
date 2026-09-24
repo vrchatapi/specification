@@ -4,15 +4,18 @@ properties:
   account_id:
     type: string
     description: Tilia account identifier.
-    example: acct_2YYRz9C5xbJWrhI5RLWPnwDLMyq
+    examples:
+      - acct_2YYRz9C5xbJWrhI5RLWPnwDLMyq
   kyc_id:
     type: string
     description: KYC verification identifier.
-    example: kyc_2tDKpjafhPTG729ceA2oIcsQlWA
+    examples:
+      - kyc_2tDKpjafhPTG729ceA2oIcsQlWA
   kyc_requirements:
     type: string
     description: Requirement state reported by Tilia.
-    example: NONE
+    examples:
+      - NONE
   match_checks:
     type: array
     description: Match checks returned by Tilia.
@@ -21,7 +24,8 @@ properties:
   pii_level:
     type: string
     description: PII verification level.
-    example: FULL
+    examples:
+      - FULL
   rules:
     type: array
     description: Additional rules returned by Tilia.
@@ -30,7 +34,8 @@ properties:
   state:
     type: string
     description: Overall KYC state.
-    example: ACCEPT
+    examples:
+      - ACCEPT
   tilia_retry_rule_code:
     type: string
     description: Retry rule code returned by Tilia, if any.

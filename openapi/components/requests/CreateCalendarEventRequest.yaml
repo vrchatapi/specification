@@ -7,7 +7,8 @@ properties:
     $ref: ../schemas/CalendarEventCategory.yaml
   closeInstanceAfterEndMinutes:
     type: integer
-    example: 5
+    examples:
+      - 5
   description:
     type: string
     minLength: 1
@@ -19,10 +20,12 @@ properties:
     type: boolean
   guestEarlyJoinMinutes:
     type: integer
-    example: 5
+    examples:
+      - 5
   hostEarlyJoinMinutes:
     type: integer
-    example: 60
+    examples:
+      - 60
   imageId:
     $ref: ../schemas/FileID.yaml
   isDraft:
@@ -50,7 +53,8 @@ properties:
   sendCreationNotification:
     type: boolean
     description: Send notification to group members.
-    example: false
+    examples:
+      - false
   startsAt:
     type: string
     description: Time the event starts at
@@ -66,12 +70,14 @@ properties:
   title:
     type: string
     description: Event title
-    example: Performance Event!
+    examples:
+      - Performance Event!
     maxLength: 64
     minLength: 1
   usesInstanceOverflow:
     type: boolean
-    example: true
+    examples:
+      - true
 required:
   - accessType
   - category

@@ -14,7 +14,8 @@ properties:
     format: date-time
   id:
     type: string
-    example: beta_872e10d7-699d-42cb-9e70-2373a9a044e1
+    examples:
+      - beta_872e10d7-699d-42cb-9e70-2373a9a044e1
   lastSynchronizedAt:
     type: string
     format: date-time

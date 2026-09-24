@@ -3,10 +3,13 @@ type: object
 properties:
   announcement:
     type: integer
-    example: 1
+    examples:
+      - 1
   informational:
     type: integer
-    example: 89
+    examples:
+      - 89
   promotional:
     type: integer
-    example: 10
+    examples:
+      - 10

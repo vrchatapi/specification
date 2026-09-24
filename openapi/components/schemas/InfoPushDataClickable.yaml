@@ -21,7 +21,8 @@ properties:
       - OpenWorldDetails
       - OpenWorldsMenu
       - scrollToShelf
-    example: OpenURL
+    examples:
+      - OpenURL
     minLength: 1
 required:
   - command

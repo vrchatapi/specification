@@ -10,4 +10,5 @@ enum:
   - TU
   - WE
 default: SU
-example: FR
+examples:
+  - FR

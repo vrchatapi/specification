@@ -14,7 +14,8 @@ properties:
     minLength: 1
   capacity:
     type: integer
-    example: 8
+    examples:
+      - 8
     maximum: 40
     minimum: 0
   description:
@@ -32,10 +33,13 @@ properties:
   platform:
     $ref: ../schemas/Platform.yaml
   previewYoutubeId:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   recommendedCapacity:
     type: integer
-    example: 4
+    examples:
+      - 4
   releaseStatus:
     $ref: ../schemas/ReleaseStatus.yaml
   tags:
@@ -48,7 +52,8 @@ properties:
   unityVersion:
     type: string
     default: 5.3.4p1
-    example: 2022.3.6f1
+    examples:
+      - 2022.3.6f1
     minLength: 1
   urlList:
     type: array

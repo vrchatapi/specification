@@ -18,7 +18,8 @@ properties:
   timezone:
     type: string
     description: The timezone the event will be scheduled in, in Area/Location format
-    example: America/Chicago
+    examples:
+      - America/Chicago
 required:
   - frequency
   - interval

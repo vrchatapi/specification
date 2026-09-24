@@ -1,3 +1,4 @@
 title: GroupShortCode
 type: string
-example: VRCHAT
+examples:
+  - VRCHAT

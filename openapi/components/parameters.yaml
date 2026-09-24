@@ -12,7 +12,8 @@ actorIds:
   in: query
   schema:
     type: string
-    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+    examples:
+      - usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
 adminAssetBundleId:
   name: adminAssetBundleId
   description: Must be a valid admin asset bundle ID.
@@ -20,7 +21,8 @@ adminAssetBundleId:
   in: path
   schema:
     type: string
-    example: aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d
+    examples:
+      - aab_e159e72c-ce54-4fbe-8c37-96af02f6d18d
 assetReviewId:
   name: assetReviewId
   description: Must be an valid asset review ID.
@@ -70,7 +72,8 @@ betaName:
   in: path
   schema:
     type: string
-    example: ios-closed-beta
+    examples:
+      - ios-closed-beta
 branch:
   name: branch
   description: Specifies which git branch the site should load frontend source code from.
@@ -95,7 +98,8 @@ calendarDiscoveryCategories:
   schema:
     type: string
     description: Comma-separated list of calendar event categories
-    example: "avatars,exploration,gaming,roleplaying,music,performance"
+    examples:
+      - "avatars,exploration,gaming,roleplaying,music,performance"
 calendarDiscoveryFeatured:
   name: featuredResults
   description: Filter for calendar event discovery.
@@ -110,7 +114,8 @@ calendarDiscoveryMinimumInterestCount:
   in: query
   schema:
     type: integer
-    example: 5
+    examples:
+      - 5
 calendarDiscoveryMinimumRemainingMinutes:
   name: minimumRemainingMinutes
   description: Filter for calendar event discovery.
@@ -118,7 +123,8 @@ calendarDiscoveryMinimumRemainingMinutes:
   in: query
   schema:
     type: integer
-    example: 10
+    examples:
+      - 10
 calendarDiscoveryNextCursor:
   name: nextCursor
   description: Cursor returned from previous calendar discovery queries (see nextCursor property of the schema CalendarEventDiscovery).
@@ -155,7 +161,8 @@ calendarDiscoveryTags:
   schema:
     type: string
     description: Comma-separated list of calendar event tags
-    example: vrc_event_group_fair
+    examples:
+      - vrc_event_group_fair
 calendarDiscoveryUpcomingOffsetMinutes:
   name: upcomingOffsetMinutes
   description: Filter for calendar event discovery.
@@ -163,7 +170,8 @@ calendarDiscoveryUpcomingOffsetMinutes:
   in: query
   schema:
     type: integer
-    example: 10080
+    examples:
+      - 10080
 calendarId:
   name: calendarId
   description: Must be a valid calendar ID.
@@ -178,7 +186,8 @@ calendarSearchTerm:
   in: query
   schema:
     type: string
-    example: game night
+    examples:
+      - game night
 confirmEmailToken:
   name: verify_email
   description: Token to verify email.
@@ -186,7 +195,8 @@ confirmEmailToken:
   in: query
   schema:
     type: string
-    example: eml_00000000-0000-0000-0000-000000000000
+    examples:
+      - eml_00000000-0000-0000-0000-000000000000
 confirmEmailUserId:
   name: id
   description: Target user for which to verify email.
@@ -261,7 +271,8 @@ eventTypes:
   in: query
   schema:
     type: string
-    example: group.member.remove,group.instance.kick
+    examples:
+      - group.member.remove,group.instance.kick
 excludeUserId:
   name: excludeUserId
   description: Exclude by UserID.
@@ -322,7 +333,8 @@ fileType:
       - delta
       - file
       - signature
-    example: file
+    examples:
+      - file
 fromUserId:
   name: fromUserId
   description: Must be a valid user ID.
@@ -350,7 +362,8 @@ groupByDuration:
   in: query
   schema:
     type: string
-    example: days
+    examples:
+      - days
 groupGalleryId:
   name: groupGalleryId
   description: Must be a valid group gallery ID.
@@ -567,7 +580,8 @@ isInternalVariant:
   in: query
   schema:
     type: boolean
-    example: false
+    examples:
+      - false
 jamId:
   name: jamId
   description: Must be a valid jam ID.
@@ -596,7 +610,8 @@ limit:
   in: query
   schema:
     type: integer
-    example: 100
+    examples:
+      - 100
 listingTypeFilter:
   name: listingType
   description: Filter user listings by category. Observed values include `otp` and `subscription`.
@@ -604,7 +619,8 @@ listingTypeFilter:
   in: query
   schema:
     type: string
-    example: otp
+    examples:
+      - otp
 managementPov:
   name: managementPov
   description: Return stores from the seller management point of view.
@@ -612,7 +628,8 @@ managementPov:
   in: query
   schema:
     type: boolean
-    example: true
+    examples:
+      - true
 maxUnityVersion:
   name: maxUnityVersion
   description: The maximum Unity version supported by the asset.
@@ -641,7 +658,8 @@ metricDateEnd:
   in: query
   schema:
     type: string
-    example: 2026-04-04T21:59:59.999Z
+    examples:
+      - 2026-04-04T21:59:59.999Z
 metricDateStart:
   name: metricDateStart
   description: Lower bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps.
@@ -649,7 +667,8 @@ metricDateStart:
   in: query
   schema:
     type: string
-    example: 2026-03-28T23:00:00.000Z
+    examples:
+      - 2026-03-28T23:00:00.000Z
 minUnityVersion:
   name: minUnityVersion
   description: The minimum Unity version supported by the asset.
@@ -888,7 +907,8 @@ steamId:
   in: query
   schema:
     type: string
-    example: game night
+    examples:
+      - game night
 storeId:
   name: storeId
   required: true
@@ -935,7 +955,8 @@ targetIds:
   in: query
   schema:
     type: string
-    example: usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
+    examples:
+      - usr_00000000-0000-0000-0000-000000000000,usr_11111111-1111-1111-1111-111111111111
 toUserId:
   name: toUserId
   description: Must be a valid user ID.
@@ -1020,7 +1041,8 @@ versionId:
   in: path
   schema:
     type: integer
-    example: 1
+    examples:
+      - 1
     minimum: 1
 worldId:
   name: worldId
@@ -1036,7 +1058,8 @@ xPlatform:
   in: header
   schema:
     type: string
-    example: standalonewindows
+    examples:
+      - standalonewindows
 xStore:
   name: X-Store
   description: The store the tutorial belongs to, recorded as sent.
@@ -1044,4 +1067,5 @@ xStore:
   in: header
   schema:
     type: string
-    example: steam
+    examples:
+      - steam

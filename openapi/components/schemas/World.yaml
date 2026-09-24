@@ -8,7 +8,8 @@ properties:
     minLength: 1
   capacity:
     type: integer
-    example: 8
+    examples:
+      - 8
   created_at:
     type: string
     format: date-time
@@ -23,7 +24,8 @@ properties:
   favorites:
     type: integer
     default: 0
-    example: 12024
+    examples:
+      - 12024
     minimum: 0
   featured:
     type: boolean
@@ -31,7 +33,8 @@ properties:
   heat:
     type: integer
     default: 0
-    example: 5
+    examples:
+      - 5
     minimum: 0
   id:
     $ref: ./WorldID.yaml
@@ -54,7 +57,8 @@ properties:
     type: boolean
   labsPublicationDate:
     type: string
-    example: none
+    examples:
+      - none
     minLength: 1
   name:
     type: string
@@ -65,7 +69,8 @@ properties:
     type: integer
     description: Will always be `0` when unauthenticated.
     default: 0
-    example: 47
+    examples:
+      - 47
     minimum: 0
   organization:
     type: string
@@ -74,29 +79,36 @@ properties:
   popularity:
     type: integer
     default: 0
-    example: 8
+    examples:
+      - 8
     minimum: 0
   previewYoutubeId:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   privateOccupants:
     type: integer
     description: Will always be `0` when unauthenticated.
     default: 0
-    example: 1
+    examples:
+      - 1
     minimum: 0
   publicOccupants:
     type: integer
     description: Will always be `0` when unauthenticated.
     default: 0
-    example: 46
+    examples:
+      - 46
     minimum: 0
   publicationDate:
     type: string
-    example: none
+    examples:
+      - none
     minLength: 1
   recommendedCapacity:
     type: integer
-    example: 4
+    examples:
+      - 4
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   slimInstances:
@@ -130,12 +142,14 @@ properties:
   version:
     type: integer
     default: 0
-    example: 68
+    examples:
+      - 68
     minimum: 0
   visits:
     type: integer
     default: 0
-    example: 9988675
+    examples:
+      - 9988675
     minimum: 0
 required:
   - authorId

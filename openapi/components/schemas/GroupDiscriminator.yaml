@@ -1,3 +1,4 @@
 title: GroupDiscriminator
 type: string
-example: "0000"
+examples:
+  - "0000"
