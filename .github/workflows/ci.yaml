@@ -82,11 +82,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/setup@v2
         with:
           runtime: bun@latest
           cache: true
+
+      - name: version a build of a released version as the next nightly
+        run: |
+          version=$(yq '.info.version' openapi/openapi.yaml)
+
+          version_sha=$(
+            git rev-list -n 1 "v$version" 2>/dev/null \
+            || git rev-list -n 1 "release/$version" 2>/dev/null \
+            || echo ""
+          )
+
+          if [ "$version_sha" != "" ]; then
+            version=$(pnpm semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
+          fi
+
+          echo "version=$version" >> $GITHUB_ENV
 
       - run: bun --bun run bundle
 
@@ -146,13 +164,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-
-      - uses: pnpm/setup@v2
-        with:
-          runtime: bun@latest
-          cache: true
 
       - uses: actions/download-artifact@v8
         with:
@@ -164,61 +175,14 @@ jobs:
         run: |
           version=$(jq -r '.info.version' dist/openapi.json)
 
-          version_sha=$(
-            git rev-list -n 1 "v$version" 2>/dev/null \
-            || git rev-list -n 1 "release/$version" 2>/dev/null \
-            || echo ""
-          )
-
-          if [ "$version_sha" == "" ]; then
-            echo "prerelease=false" >> $GITHUB_ENV
-          else
+          if [[ "$version" == *-nightly.* ]]; then
             echo "prerelease=true" >> $GITHUB_ENV
-            version=$(pnpm semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
+          else
+            echo "prerelease=false" >> $GITHUB_ENV
           fi
 
           echo "version=$version" >> $GITHUB_ENV
           echo "version=$version" >> $GITHUB_OUTPUT
-
-      - name: set the nightly version
-        if: env.prerelease == 'true'
-        run: |
-          for file in dist/*.json; do
-            jq --arg v "${{ env.version }}" '.info.version = $v' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
-          done
-          for file in dist/*.yaml; do
-            yq eval ".info.version = \"${{ env.version }}\"" -i "$file"
-          done
-
-      - name: link each document to this release's other versions, the latest release and the latest nightly
-        run: |
-          releases="https://github.com/vrchatapi/specification/releases"
-          base="$releases/download/v${{ env.version }}"
-
-          for file in dist/openapi*.json dist/openapi*.yaml; do
-            name=$(basename "$file")
-            case "$name" in
-              openapi-test.yaml) continue ;;
-              openapi-internal*) prefix=openapi-internal separator=+ ;;
-              *) prefix=openapi separator=- ;;
-            esac
-
-            links=$(jq -nc --arg releases "$releases" --arg base "$base" --arg prefix "$prefix" --arg separator "$separator" --arg name "$name" --arg format "${name##*.}" '[
-              {name: $prefix, title: "OpenAPI 3.2"},
-              {name: "\($prefix)\($separator)3.1", title: "OpenAPI 3.1"},
-              {name: "\($prefix)\($separator)3.0", title: "OpenAPI 3.0"}
-              | ("json", "yaml") as $format
-              | {rel: "alternate", href: "\($base)/\(.name).\($format)", type: "application/openapi+\($format)", title: "\(.title), \($format | ascii_upcase)"}
-            ] + [
-              {rel: "latest-version", href: "\($releases)/latest/download/\($name)", type: "application/openapi+\($format)", title: "Latest release"},
-              {rel: "working-copy", href: "\($releases)/download/nightly/\($name)", type: "application/openapi+\($format)", title: "Latest nightly"}
-            ]')
-
-            case "$file" in
-              *.json) jq --argjson links "$links" '.info["x-links"] = $links' "$file" > "$file.tmp" && mv "$file.tmp" "$file" ;;
-              *.yaml) LINKS="$links" yq eval '.info["x-links"] = env(LINKS)' -i "$file" ;;
-            esac
-          done
 
       - name: create release
         if: env.prerelease == 'false'
