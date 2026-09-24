@@ -20,6 +20,7 @@ oas3_1Rules:
   vrchat/no-schema-example: warn
   vrchat/no-single-value-enum: warn
   vrchat/operation-id-convention: warn
+  vrchat/prefer-unknown: warn
   vrchat/schema-title: warn
 
 oas3_2Rules:
@@ -29,7 +30,9 @@ oas3_2Rules:
   vrchat/no-schema-example: warn
   vrchat/no-single-value-enum: warn
   vrchat/operation-id-convention: warn
+  vrchat/prefer-unknown: warn
   vrchat/schema-title: warn
+
 
 apis:
   modern:
