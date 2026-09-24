@@ -139,6 +139,8 @@ jobs:
       - lint
       - bundle
     if: ${{ !failure() && !cancelled() && github.event_name != 'schedule' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[no release]') }}
+    concurrency:
+      group: release
     outputs:
       version: ${{ steps.metadata.outputs.version }}
 
@@ -178,11 +180,7 @@ jobs:
           echo "version=$version" >> $GITHUB_ENV
           echo "version=$version" >> $GITHUB_OUTPUT
 
-      - name: create release
-        if: env.prerelease == 'false'
-        run: gh release create v${{ env.version }} dist/* --generate-notes
-
-      - name: create release (nightly)
+      - name: set the nightly version
         if: env.prerelease == 'true'
         run: |
           for file in dist/*.json; do
@@ -192,9 +190,51 @@ jobs:
             yq eval ".info.version = \"${{ env.version }}\"" -i "$file"
           done
 
+      - name: link each document to this release's other versions, the latest release and the latest nightly
+        run: |
+          releases="https://github.com/vrchatapi/specification/releases"
+          base="$releases/download/v${{ env.version }}"
+
+          for file in dist/openapi*.json dist/openapi*.yaml; do
+            name=$(basename "$file")
+            case "$name" in
+              openapi-test.yaml) continue ;;
+              openapi-internal*) prefix=openapi-internal separator=+ ;;
+              *) prefix=openapi separator=- ;;
+            esac
+
+            links=$(jq -nc --arg releases "$releases" --arg base "$base" --arg prefix "$prefix" --arg separator "$separator" --arg name "$name" --arg format "${name##*.}" '[
+              {name: $prefix, title: "OpenAPI 3.2"},
+              {name: "\($prefix)\($separator)3.1", title: "OpenAPI 3.1"},
+              {name: "\($prefix)\($separator)3.0", title: "OpenAPI 3.0"}
+              | ("json", "yaml") as $format
+              | {rel: "alternate", href: "\($base)/\(.name).\($format)", type: "application/openapi+\($format)", title: "\(.title), \($format | ascii_upcase)"}
+            ] + [
+              {rel: "latest-version", href: "\($releases)/latest/download/\($name)", type: "application/openapi+\($format)", title: "Latest release"},
+              {rel: "working-copy", href: "\($releases)/download/nightly/\($name)", type: "application/openapi+\($format)", title: "Latest nightly"}
+            ]')
+
+            case "$file" in
+              *.json) jq --argjson links "$links" '.info["x-links"] = $links' "$file" > "$file.tmp" && mv "$file.tmp" "$file" ;;
+              *.yaml) LINKS="$links" yq eval '.info["x-links"] = env(LINKS)' -i "$file" ;;
+            esac
+          done
+
+      - name: create release
+        if: env.prerelease == 'false'
+        run: gh release create v${{ env.version }} dist/* --generate-notes
+
+      - name: create release (nightly)
+        if: env.prerelease == 'true'
+        run: |
           gh release create v${{ env.version }} dist/* \
             --generate-notes \
             --prerelease
+
+      - name: refresh the nightly release
+        run: |
+          gh release upload nightly dist/* --clobber
+          gh release edit nightly --notes "The latest build from main, currently v${{ env.version }}. Its files are replaced whenever a new build is published."
 
   release_dispatch:
     uses: ./.github/workflows/release_dispatch.yaml
