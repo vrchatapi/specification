@@ -13,7 +13,8 @@ properties:
     type: string
     description: "Always a zero in string form, despite how many parts uploaded."
     default: "0"
-    example: "0"
+    examples:
+      - "0"
     maxLength: 1
     minLength: 1
   nextPartNumber:
@@ -21,7 +22,8 @@ properties:
     type: string
     description: "Always a zero in string form, despite how many parts uploaded."
     default: "0"
-    example: "0"
+    examples:
+      - "0"
     maxLength: 1
     minLength: 1
 required:

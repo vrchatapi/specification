@@ -4,15 +4,18 @@ additionalProperties: false
 properties:
   android:
     type: integer
-    example: 1
+    examples:
+      - 1
     minimum: 0
   ios:
     type: integer
-    example: 1
+    examples:
+      - 1
     minimum: 0
   standalonewindows:
     type: integer
-    example: 5
+    examples:
+      - 5
     minimum: 0
 required:
   - android

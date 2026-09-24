@@ -18,7 +18,8 @@ properties:
     minLength: 1
   id:
     type: string
-    example: launch-beta
+    examples:
+      - launch-beta
     minLength: 1
   isEnabled:
     type: boolean

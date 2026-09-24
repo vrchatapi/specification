@@ -35,7 +35,8 @@ properties:
         format: date-time
       winnersSelected:
         type: ["null", string]
-        example: null
+        examples:
+          - null
         format: date-time
   submissionContentGateDate:
     type: ["null", string]

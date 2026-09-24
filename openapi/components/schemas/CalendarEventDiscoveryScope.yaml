@@ -5,4 +5,5 @@ enum:
   - live
   - upcoming
 default: upcoming
-example: upcoming
+examples:
+  - upcoming

@@ -8,7 +8,8 @@ properties:
     $ref: ./InstanceVibeID.yaml
   title:
     type: string
-    example: adventure
+    examples:
+      - adventure
 required:
   - deleted
   - id

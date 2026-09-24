@@ -35,8 +35,9 @@ properties:
     type: boolean
   link:
     type: ["null", string]
-    example: "event:grp_00000000-0000-0000-0000-000000000000,cal_00000000-0000-0000\
-      -0000-000000000000"
+    examples:
+      - "event:grp_00000000-0000-0000-0000-000000000000,cal_00000000-0000-0000\
+        -0000-000000000000"
   linkText:
     type: ["null", string]
   linkTextKey:
@@ -49,7 +50,8 @@ properties:
     $ref: ./UserID.yaml
   relatedNotificationsId:
     type: ["null", string]
-    example: cal_00000000-0000-0000-0000-000000000000
+    examples:
+      - cal_00000000-0000-0000-0000-000000000000
   requireSeen:
     type: boolean
   responses:

@@ -3,11 +3,13 @@ type: object
 properties:
   secureName:
     type: string
-    example: 7eavhhng
+    examples:
+      - 7eavhhng
     minLength: 1
   shortName:
     type: ["null", string]
-    example: 02u7yz8j
+    examples:
+      - 02u7yz8j
     minLength: 1
 required:
   - secureName

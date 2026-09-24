@@ -3,10 +3,12 @@ type: object
 properties:
   ageVerificationBetaCode:
     type: string
-    example: abc1234
+    examples:
+      - abc1234
   ageVerificationBetaSlots:
     type: number
-    example: 500
+    examples:
+      - 500
   ageVerificationSlotsAvailable:
     type: boolean
   allowGroupJoinPrompt:

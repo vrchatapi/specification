@@ -17,4 +17,5 @@ enum:
   - image/tiff
   - image/webp
 default: image/jpeg
-example: image/jpeg
+examples:
+  - image/jpeg

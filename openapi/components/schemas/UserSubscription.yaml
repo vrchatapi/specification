@@ -6,19 +6,22 @@ properties:
     default: true
   amount:
     type: number
-    example: 9999
+    examples:
+      - 9999
   created_at:
     type: string
     format: date-time
   description:
     type: string
-    example: VRChat Plus (Yearly)
+    examples:
+      - VRChat Plus (Yearly)
   expires:
     type: string
     format: date-time
   id:
     type: string
-    example: vrchatplus-yearly
+    examples:
+      - vrchatplus-yearly
     minLength: 1
   isBulkGift:
     type: boolean
@@ -38,16 +41,19 @@ properties:
     $ref: ./TransactionStatus.yaml
   steamItemId:
     type: string
-    example: "5000"
+    examples:
+      - "5000"
     minLength: 1
   store:
     type: string
     description: Which "Store" it came from. Right now only Stores are "Steam" and "Admin".
-    example: Steam
+    examples:
+      - Steam
     minLength: 1
   tier:
     type: integer
-    example: 5
+    examples:
+      - 5
   transactionId:
     $ref: ./TransactionID.yaml
   updated_at:

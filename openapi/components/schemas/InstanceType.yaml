@@ -6,4 +6,5 @@ enum:
   - hidden
   - private
   - public
-example: hidden
+examples:
+  - hidden

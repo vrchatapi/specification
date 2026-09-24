@@ -44,7 +44,8 @@ properties:
     properties:
       locationType:
         type: string
-        example: undefined
+        examples:
+          - undefined
       worldId:
         $ref: ./WorldID.yaml
       worldName:

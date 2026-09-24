@@ -9,16 +9,19 @@ properties:
     type: boolean
     description: Send notification to group members.
     default: false
-    example: false
+    examples:
+      - false
   text:
     type: string
     description: Post text
-    example: Come join us for the event!
+    examples:
+      - Come join us for the event!
     minLength: 1
   title:
     type: string
     description: Post title
-    example: Event is starting soon!
+    examples:
+      - Event is starting soon!
     minLength: 1
   visibility:
     $ref: ../schemas/GroupPostVisibility.yaml

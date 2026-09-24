@@ -27,7 +27,8 @@ properties:
     type: boolean
     description: Whether the user is representing the group. This makes the group show up above the name tag in-game.
     default: false
-    example: true
+    examples:
+      - true
   isSubscribedToAnnouncements:
     type: boolean
     default: false
@@ -61,7 +62,8 @@ properties:
     $ref: ./UserID.yaml
   visibility:
     type: string
-    example: visible
+    examples:
+      - visible
 required:
   - groupId
   - id

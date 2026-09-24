@@ -4,26 +4,29 @@ properties:
   country:
     type: string
     default: US
-    example: SE
+    examples:
+      - SE
     minLength: 2
   currency:
     type: string
     default: USD
-    example: EUR
+    examples:
+      - EUR
     minLength: 3
   state:
     type: string
   status:
     type: string
-    example: Trusted
+    examples:
+      - Trusted
     minLength: 1
 required:
   - country
   - currency
   - state
   - status
-example:
-  country: SE
-  currency: EUR
-  state: ""
-  status: Trusted
+examples:
+  - country: SE
+    currency: EUR
+    state: ""
+    status: Trusted

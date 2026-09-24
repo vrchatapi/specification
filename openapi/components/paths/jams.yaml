@@ -23,7 +23,8 @@ paths:
           in: query
           schema:
             type: string
-            example: avatar
+            examples:
+              - avatar
       security:
         - authCookie: []
       responses:

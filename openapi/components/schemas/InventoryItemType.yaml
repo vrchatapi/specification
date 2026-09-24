@@ -12,4 +12,5 @@ enum:
   - sticker
   - warpeffect
 default: bundle
-example: prop
+examples:
+  - prop

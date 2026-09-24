@@ -13,4 +13,5 @@ enum:
   - unique
   - vrc_plus_exclusive
 default: instantiatable
-example: consumable
+examples:
+  - consumable

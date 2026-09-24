@@ -6,4 +6,5 @@ enum:
   - plus
   - public
 default: members
-example: members
+examples:
+  - members

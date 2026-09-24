@@ -6,4 +6,5 @@ enum:
   - permission
   - product
 default: permission
-example: permission
+examples:
+  - permission

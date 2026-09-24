@@ -14,7 +14,8 @@ properties:
     minLength: 1
   capacity:
     type: integer
-    example: 8
+    examples:
+      - 8
     maximum: 40
     minimum: 0
   description:
@@ -41,7 +42,8 @@ properties:
   unityVersion:
     type: string
     default: 5.3.4p1
-    example: 2022.3.6f1
+    examples:
+      - 2022.3.6f1
     minLength: 1
 required:
   - assetUrl

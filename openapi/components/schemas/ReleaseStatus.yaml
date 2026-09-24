@@ -6,4 +6,5 @@ enum:
   - private
   - public
 default: public
-example: public
+examples:
+  - public

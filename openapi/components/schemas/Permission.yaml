@@ -36,7 +36,8 @@ properties:
     $ref: ./PermissionID.yaml
   name:
     type: string
-    example: permission-invite-photos
+    examples:
+      - permission-invite-photos
     minLength: 1
   ownerDisplayName:
     type: string

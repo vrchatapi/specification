@@ -2,4 +2,5 @@ title: TutorialKey
 type: string
 description: "The ID of a tutorial. A platform tutorial is `{platform}:{store}:v1`, taken from the `X-Platform` and `X-Store` headers, with `undefined` for a header the request left out. Other tutorials take a longer form, such as `platform-agnostic:custom:onboarding-tutorial-world:v1`."
 default: undefined:undefined:v1
-example: standalonewindows:steam:v1
+examples:
+  - standalonewindows:steam:v1

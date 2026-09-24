@@ -3,17 +3,21 @@ type: object
 properties:
   assetUrl:
     type: ["null", string]
-    example: https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
+    examples:
+      - https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
   assetUrlObject:
     type: object
-    example: {}
+    examples:
+      - {}
   assetVersion:
     type: integer
-    example: 4
+    examples:
+      - 4
     minimum: 0
   created_at:
     type: ["null", string]
-    example: "2020-09-10T06:13:27.777Z"
+    examples:
+      - "2020-09-10T06:13:27.777Z"
     format: date-time
   id:
     $ref: ./UnityPackageID.yaml
@@ -21,34 +25,40 @@ properties:
     type: ["null", string]
   impostorizerVersion:
     type: string
-    example: 0.17.0
+    examples:
+      - 0.17.0
   performanceRating:
     $ref: ./PerformanceRatings.yaml
   platform:
     $ref: ./Platform.yaml
   pluginUrl:
     type: string
-    example: ""
+    examples:
+      - ""
   pluginUrlObject:
     type: object
-    example: {}
+    examples:
+      - {}
   scanStatus:
     type: string
   unitySortNumber:
     type: integer
-    example: 20180414000
+    examples:
+      - 20180414000
     format: int64
     minimum: 0
   unityVersion:
     type: string
     default: 5.3.4p1
-    example: 2022.3.6f1
+    examples:
+      - 2022.3.6f1
     minLength: 1
   variant:
     type: string
   worldSignature:
     type: ["null", string]
-    example: AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ==
+    examples:
+      - AHiPAWerwCpeYrxDthF5TU2SdUWEWnm43UAn8PKRXlS8k8tVRQ==
 required:
   - assetVersion
   - id

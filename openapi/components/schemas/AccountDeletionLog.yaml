@@ -13,4 +13,5 @@ properties:
     type: string
     description: Typically "Deletion requested" or "Deletion canceled". Other messages like "Deletion completed" may exist, but are these are not possible to see as a regular user.
     default: Deletion requested
-    example: Deletion requested
+    examples:
+      - Deletion requested

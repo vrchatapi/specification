@@ -58,7 +58,8 @@ properties:
       type: string
   mediaType:
     type: string
-    example: video
+    examples:
+      - video
   name:
     oneOf:
       - type: string
@@ -89,7 +90,8 @@ properties:
       - $ref: ./LocalizedString.yaml
   version:
     type: string
-    example: 2021.3.4
+    examples:
+      - 2021.3.4
     minLength: 1
   videoFileId:
     $ref: ./FileID.yaml

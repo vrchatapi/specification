@@ -8,7 +8,8 @@ properties:
     minLength: 1
   capacity:
     type: integer
-    example: 8
+    examples:
+      - 8
   created_at:
     type: string
     format: date-time
@@ -20,12 +21,14 @@ properties:
   favorites:
     type: integer
     default: 0
-    example: 12024
+    examples:
+      - 12024
     minimum: 0
   heat:
     type: integer
     default: 0
-    example: 5
+    examples:
+      - 5
     minimum: 0
   id:
     $ref: ./WorldID.yaml
@@ -36,7 +39,8 @@ properties:
     type: boolean
   labsPublicationDate:
     type: string
-    example: none
+    examples:
+      - none
     minLength: 1
   name:
     type: string
@@ -44,7 +48,8 @@ properties:
   occupants:
     type: integer
     default: 0
-    example: 47
+    examples:
+      - 47
     minimum: 0
   organization:
     type: string
@@ -55,17 +60,20 @@ properties:
   popularity:
     type: integer
     default: 0
-    example: 8
+    examples:
+      - 8
     minimum: 0
   previewYoutubeId:
     type: ["null", string]
   publicationDate:
     type: string
-    example: none
+    examples:
+      - none
     minLength: 1
   recommendedCapacity:
     type: integer
-    example: 16
+    examples:
+      - 16
   releaseStatus:
     $ref: ./ReleaseStatus.yaml
   storeId:
@@ -92,7 +100,8 @@ properties:
   visits:
     type: integer
     default: 0
-    example: 9988675
+    examples:
+      - 9988675
     minimum: 0
 required:
   - authorId

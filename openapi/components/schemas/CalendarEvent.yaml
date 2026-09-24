@@ -81,7 +81,8 @@ properties:
     minLength: 1
   type:
     type: string
-    example: event
+    examples:
+      - event
   updatedAt:
     type: string
     format: date-time

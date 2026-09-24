@@ -6,4 +6,5 @@ description: >-
 enum:
   - canny
   - furality
-example: canny
+examples:
+  - canny

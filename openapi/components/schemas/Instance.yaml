@@ -8,7 +8,8 @@ properties:
   active:
     type: boolean
     default: true
-    example: true
+    examples:
+      - true
   ageGate:
     type: [boolean, "null"]
   calendarEntryId:
@@ -16,10 +17,12 @@ properties:
   canRequestInvite:
     type: boolean
     default: true
-    example: true
+    examples:
+      - true
   capacity:
     type: integer
-    example: 8
+    examples:
+      - 8
     minimum: 0
   categoryId:
     anyOf:
@@ -80,7 +83,8 @@ properties:
     description: The keys of languageRatio, ordered by their share of the instance.
     items:
       type: string
-      example: en
+      examples:
+        - en
   languagesIso639:
     type: array
     items:
@@ -91,11 +95,13 @@ properties:
     type: ["null", string]
   n_users:
     type: integer
-    example: 6
+    examples:
+      - 6
     minimum: 0
   name:
     type: string
-    example: "12345"
+    examples:
+      - "12345"
     minLength: 1
   nonce:
     type: string
@@ -116,11 +122,13 @@ properties:
     type: boolean
   queueSize:
     type: integer
-    example: 6
+    examples:
+      - 6
     minimum: 0
   recommendedCapacity:
     type: integer
-    example: 6
+    examples:
+      - 6
     minimum: 0
   region:
     $ref: ./InstanceRegion.yaml
@@ -128,34 +136,39 @@ properties:
     type: boolean
   secureName:
     type: string
-    example: 7eavhhng
+    examples:
+      - 7eavhhng
     minLength: 1
   shortName:
     type: ["null", string]
-    example: 02u7yz8j
+    examples:
+      - 02u7yz8j
     minLength: 1
   strict:
     type: boolean
   tags:
     type: array
     description: "The tags array on Instances usually contain the language tags of the people in the instance. "
-    example:
-      - language_eng
-      - language_jpn
-      - show_social_rank
+    examples:
+      -
+        - language_eng
+        - language_jpn
+        - show_social_rank
     items:
       $ref: ./Tag.yaml
   type:
     $ref: ./InstanceType.yaml
   userCount:
     type: integer
-    example: 6
+    examples:
+      - 6
     minimum: 0
   userIcons:
     type: array
     items:
       type: string
-      example: https://api.vrchat.cloud/api/1/image/file_12ca2b06-c08d-4023-b06f-b60691d9946e/1/256
+      examples:
+        - https://api.vrchat.cloud/api/1/image/file_12ca2b06-c08d-4023-b06f-b60691d9946e/1/256
   users:
     type: array
     description: The users field is present on instances created by the requesting user.

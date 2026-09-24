@@ -135,7 +135,8 @@ paths:
           in: query
           schema:
             type: string
-            example: startTime_ascending
+            examples:
+              - startTime_ascending
       security:
         - authCookie: []
       responses:

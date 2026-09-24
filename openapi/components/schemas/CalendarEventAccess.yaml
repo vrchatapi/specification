@@ -5,4 +5,5 @@ enum:
   - group
   - public
 default: public
-example: group
+examples:
+  - group

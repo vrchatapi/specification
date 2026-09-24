@@ -21,7 +21,8 @@ properties:
     type: string
   groupPool:
     type: string
-    example: mine
+    examples:
+      - mine
   index:
     type: integer
     minimum: 0
@@ -57,7 +58,8 @@ properties:
     additionalProperties: true
   personalizedResults:
     type: string
-    example: include
+    examples:
+      - include
   platform:
     type: string
     description: 'Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.'
@@ -66,7 +68,8 @@ properties:
     type: ["null", string]
   scope:
     type: string
-    example: all
+    examples:
+      - all
   shortName:
     oneOf:
       - type: string
@@ -88,7 +91,8 @@ properties:
     description: |-
       Tag to filter content for this row. Not a `Tag`: that type forbids the
       empty string, which this field uses for a row that is not tag-filtered.
-    example: admin_spotlight_pc
+    examples:
+      - admin_spotlight_pc
   tags:
     type: [array, "null"]
     items:
@@ -96,13 +100,16 @@ properties:
   type:
     type: string
     description: Type is not present if it is a world.
-    example: avatar
+    examples:
+      - avatar
   upcomingOffsetMinutes:
     type: integer
-    example: 10080
+    examples:
+      - 10080
   worldPool:
     type: string
-    example: trending
+    examples:
+      - trending
 required:
   - name
   - platform

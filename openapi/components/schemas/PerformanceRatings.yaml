@@ -8,4 +8,5 @@ enum:
   - None
   - Poor
   - VeryPoor
-example: Excellent
+examples:
+  - Excellent

@@ -11,17 +11,18 @@ properties:
   data:
     type: object
     description: The data associated with the event. The format of this data is dependent on the event type.
-    example:
-      description:
-        new: "My exciting new group. It's pretty nifty!"
-        old: "My exciting new group.  It's pretty nifty!"
-      joinState:
-        new: request
-        old: closed
+    examples:
+      - description:
+          new: "My exciting new group. It's pretty nifty!"
+          old: "My exciting new group.  It's pretty nifty!"
+        joinState:
+          new: request
+          old: closed
   description:
     type: string
     description: A human-readable description of the event.
-    example: Group role updated
+    examples:
+      - Group role updated
   eventType:
     $ref: ./GroupAuditLogEntryType.yaml
   groupId:

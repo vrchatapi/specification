@@ -4,5 +4,6 @@ content:
     schema:
       type: integer
       description: Number of online users
-      example: 12345
+      examples:
+        - 12345
       minimum: 0

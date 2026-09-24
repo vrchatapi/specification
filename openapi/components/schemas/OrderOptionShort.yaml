@@ -4,4 +4,5 @@ enum:
   - asc
   - desc
 default: desc
-example: desc
+examples:
+  - desc

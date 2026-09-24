@@ -9,13 +9,15 @@ properties:
   bulkSize:
     type: integer
     description: How many subscriptions a gifted bundle grants.
-    example: 5
+    examples:
+      - 5
   description:
     type: string
   discountPercentage:
     type: integer
     description: Discount applied to a gifted bundle.
-    example: 10
+    examples:
+      - 10
   googlePlanId:
     type: string
   googleProductId:
@@ -45,10 +47,10 @@ required:
   - period
   - steamItemId
   - tier
-example:
-  id: vrchatplus-yearly
-  description: VRChat Plus (Yearly)
-  amount: 9999
-  period: year
-  steamItemId: "5000"
-  tier: 5
+examples:
+  - id: vrchatplus-yearly
+    description: VRChat Plus (Yearly)
+    amount: 9999
+    period: year
+    steamItemId: "5000"
+    tier: 5

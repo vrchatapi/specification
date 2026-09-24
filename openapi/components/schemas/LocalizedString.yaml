@@ -5,11 +5,13 @@ properties:
   fallback:
     type: string
     description: The text to show when `key` cannot be resolved.
-    example: carnival
+    examples:
+      - carnival
   key:
     type: string
     description: The localization key.
-    example: SuggestedSearch/Carnival/Name/carnival
+    examples:
+      - SuggestedSearch/Carnival/Name/carnival
 required:
   - fallback
   - key

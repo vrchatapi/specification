@@ -38,14 +38,16 @@ paths:
           in: query
           schema:
             type: string
-            example: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
+            examples:
+              - avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
         - name: version
           description: The version of the agreement (currently 1)
           required: true
           in: query
           schema:
             type: integer
-            example: 1
+            examples:
+              - 1
       security:
         - authCookie: []
       responses:
@@ -326,7 +328,8 @@ paths:
           in: query
           schema:
             type: integer
-            example: 1
+            examples:
+              - 1
             minimum: 0
       security:
         - authCookie: []

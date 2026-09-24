@@ -20,4 +20,5 @@ enum:
   - trust
   - updated
 default: popularity
-example: popularity
+examples:
+  - popularity

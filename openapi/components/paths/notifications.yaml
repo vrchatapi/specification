@@ -18,7 +18,8 @@ paths:
           in: query
           schema:
             type: string
-            example: all
+            examples:
+              - all
         - name: sent
           deprecated: true
           description: Return notifications sent by the user. Must be false or omitted.
@@ -35,7 +36,8 @@ paths:
           in: query
           schema:
             type: string
-            example: five_minutes_ago
+            examples:
+              - five_minutes_ago
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
       security:

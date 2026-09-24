@@ -42,7 +42,8 @@ properties:
     type: string
   membershipStatus:
     type: string
-    example: member
+    examples:
+      - member
   permissions:
     type: array
     items:
@@ -55,4 +56,5 @@ properties:
     $ref: ./UserID.yaml
   visibility:
     type: string
-    example: visible
+    examples:
+      - visible

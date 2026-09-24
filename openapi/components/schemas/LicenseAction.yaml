@@ -4,4 +4,5 @@ enum:
   - have
   - wear
 default: have
-example: have
+examples:
+  - have
