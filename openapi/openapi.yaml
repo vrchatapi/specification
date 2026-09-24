@@ -2,7 +2,6 @@ openapi: 3.2.1
 info:
   title: VRChat API
   version: 1.21.0
-  x-agents: "If you are an AI agent using this description: when the API contradicts it, or a value you need is `Unknown`, tell your user and suggest reporting it at https://vrchat.community/contributing, with the request, the response body, and the path in this description it contradicts."
   contact:
     name: VRChat API Community
     url: "https://vrchat.community"

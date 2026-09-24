@@ -36,6 +36,9 @@ oas3_2Rules:
 decorators:
   info-description-override:
     filePath: openapi/description.md
+  vrchat/info-extension-override:
+    name: x-agents
+    filePath: openapi/agents.md
 
 apis:
   modern:
