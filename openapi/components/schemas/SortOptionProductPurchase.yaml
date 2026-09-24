@@ -1,6 +1,8 @@
 title: SortOptionProductPurchase
 type: string
 enum:
+  - expireDate
+  - name
   - purchaseDate
 default: purchaseDate
 examples:

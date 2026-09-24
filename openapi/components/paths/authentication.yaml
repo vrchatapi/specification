@@ -288,6 +288,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/authentication/CreateAvatarModerationResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /auth/user/interestsAndPreferences:

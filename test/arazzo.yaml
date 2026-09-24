@@ -400,6 +400,25 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: create-global-avatar-moderation-invalid-type
+    summary: createGlobalAvatarModeration names the moderation types it accepts
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-global-avatar-moderation
+        operationId: $sourceDescriptions.default.createGlobalAvatarModeration
+        requestBody:
+          contentType: application/json
+          payload:
+            avatarModerationType: x
+            targetAvatarId: avtr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: create-global-avatar-moderation-unauthenticated
     summary: createGlobalAvatarModeration refuses an anonymous caller
     parameters:
@@ -1324,6 +1343,24 @@ workflows:
             value: usr_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: search-avatars-invalid-user
+    summary: searchAvatars names the values user accepts
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-avatars
+        operationId: $sourceDescriptions.default.searchAvatars
+        parameters:
+          - name: user
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
 
   - workflowId: search-avatars-query-parameters
     summary: searchAvatars with every fillable query parameter
@@ -2859,6 +2896,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-product-purchases-invalid-sort
+    summary: getProductPurchases names the values sort accepts
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-product-purchases
+        operationId: $sourceDescriptions.default.getProductPurchases
+        parameters:
+          - name: buyerId
+            in: query
+            value: $workflows.session.outputs.userId
+          - name: sort
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: get-product-purchases-query-parameters
     summary: getProductPurchases with every fillable query parameter
     parameters:
@@ -2889,6 +2947,48 @@ workflows:
           - name: sort
             in: query
             value: purchaseDate
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-product-purchases-sort-expire-date
+    summary: getProductPurchases sorted by expiry
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-product-purchases
+        operationId: $sourceDescriptions.default.getProductPurchases
+        parameters:
+          - name: buyerId
+            in: query
+            value: $workflows.session.outputs.userId
+          - name: sort
+            in: query
+            value: expireDate
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-product-purchases-sort-name
+    summary: getProductPurchases sorted by name
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-product-purchases
+        operationId: $sourceDescriptions.default.getProductPurchases
+        parameters:
+          - name: buyerId
+            in: query
+            value: $workflows.session.outputs.userId
+          - name: sort
+            in: query
+            value: name
         successCriteria:
           - condition: $statusCode == 200
 
@@ -11425,6 +11525,42 @@ workflows:
         operationId: $sourceDescriptions.default.searchWorlds
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: search-worlds-friends
+    summary: searchWorlds for the worlds of the caller's friends
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-worlds
+        operationId: $sourceDescriptions.default.searchWorlds
+        parameters:
+          - name: user
+            in: query
+            value: friends
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: search-worlds-invalid-user
+    summary: searchWorlds names the values user accepts
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-worlds
+        operationId: $sourceDescriptions.default.searchWorlds
+        parameters:
+          - name: user
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
 
   - workflowId: search-worlds-query-parameters
     summary: searchWorlds with every fillable query parameter

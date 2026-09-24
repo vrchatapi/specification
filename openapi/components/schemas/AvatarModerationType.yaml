@@ -1,6 +1,5 @@
 title: AvatarModerationType
 type: string
-enum:
-  - block
+const: block
 examples:
   - block

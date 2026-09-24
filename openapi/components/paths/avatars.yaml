@@ -35,8 +35,7 @@ paths:
           in: query
           schema:
             type: string
-            enum:
-              - me
+            const: me
         - $ref: ../parameters.yaml#/userIdQuery
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/order
@@ -53,6 +52,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/avatars/AvatarListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
     post:

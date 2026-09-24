@@ -7,12 +7,10 @@ description: >-
 properties:
   error:
     type: string
-    enum:
-      - The endpoint you're looking for is not implemented by our system.
+    const: The endpoint you're looking for is not implemented by our system.
   status_code:
     type: integer
-    enum:
-      - 404
+    const: 404
 required:
   - error
   - status_code
