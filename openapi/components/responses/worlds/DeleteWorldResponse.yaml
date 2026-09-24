@@ -1,0 +1,6 @@
+content:
+  application/json:
+    examples:
+      Deleted:
+        value: null
+    schema: {}

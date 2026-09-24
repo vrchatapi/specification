@@ -603,7 +603,8 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200": {}
+        "200":
+          $ref: ../responses/groups/CreateGroupInviteSuccess.yaml
         "400":
           $ref: ../responses/groups/GroupInviteBadRequestError.yaml
         "401":
@@ -625,7 +626,8 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200": {}
+        "200":
+          $ref: ../responses/groups/DeleteGroupInviteSuccess.yaml
         "400":
           $ref: ../responses/groups/DeleteGroupInviteBadRequestError.yaml
         "401":

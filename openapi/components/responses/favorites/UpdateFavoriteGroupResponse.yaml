@@ -1,0 +1,7 @@
+content:
+  application/json:
+    examples:
+      Updated:
+        value: {}
+    schema:
+      type: object

@@ -206,7 +206,8 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200": {}
+        "200":
+          $ref: ../responses/worlds/DeleteWorldResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
