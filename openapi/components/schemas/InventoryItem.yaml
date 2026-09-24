@@ -24,7 +24,9 @@ properties:
     items:
       $ref: ./InventoryEquipSlot.yaml
   expiryDate:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     examples:
       - "2025-06-13T05:00:45.455Z"
     format: date-time

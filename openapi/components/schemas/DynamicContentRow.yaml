@@ -2,11 +2,15 @@ title: DynamicContentRow
 type: object
 properties:
   anyStyle:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       type: string
   anyTag:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       type: string
   avatarSpecific:
@@ -50,7 +54,9 @@ properties:
   nonFeaturedResults:
     type: string
   notag:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       type: string
   params:
@@ -65,7 +71,9 @@ properties:
     description: 'Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.'
     minLength: 1
   region:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   scope:
     type: string
     examples:
@@ -85,16 +93,22 @@ properties:
     type: string
     minLength: 1
   style:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   tag:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: |-
       Tag to filter content for this row. Not a `Tag`: that type forbids the
       empty string, which this field uses for a row that is not tag-filtered.
     examples:
       - admin_spotlight_pc
   tags:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./Tag.yaml
   type:

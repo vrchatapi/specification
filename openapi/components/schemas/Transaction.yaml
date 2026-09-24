@@ -9,7 +9,9 @@ properties:
     type: string
     format: date-time
   error:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   id:
     $ref: ./TransactionID.yaml
   isGift:

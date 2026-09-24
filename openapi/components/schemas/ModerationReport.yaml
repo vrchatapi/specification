@@ -13,7 +13,9 @@ properties:
   contentName:
     type: string
   contentThumbnailImageUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   description:
     type: string
     description: The subjective reason for the report

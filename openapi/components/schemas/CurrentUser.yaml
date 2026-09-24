@@ -12,10 +12,14 @@ properties:
       - 7
     minimum: 0
   accountDeletionDate:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date
   accountDeletionLog:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./AccountDeletionLog.yaml
   activeFriends:
@@ -139,7 +143,9 @@ properties:
     type: string
     format: date-time
   last_mobile:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   last_platform:
     $ref: ./Platform.yaml
@@ -188,7 +194,9 @@ properties:
     items:
       type: string
   queuedInstance:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   receiveMobileInvitations:
     type: boolean
   state:
@@ -225,7 +233,9 @@ properties:
   twoFactorAuthEnabled:
     type: boolean
   twoFactorAuthEnabledDate:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   unsubscribe:
     type: boolean
@@ -233,9 +243,13 @@ properties:
     type: string
     format: date-time
   userLanguage:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   userLanguageCode:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   username:
     type: string
     description: Your own unique name, used during login. Distinct from

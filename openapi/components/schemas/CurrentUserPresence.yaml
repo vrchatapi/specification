@@ -4,7 +4,9 @@ properties:
   avatarImageUrl:
     type: string
   avatarThumbnail:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   banner:
     type: string
   bannerColor:
@@ -20,7 +22,9 @@ properties:
   displayName:
     type: string
   groups:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./GroupID.yaml
   iconFrame:
@@ -30,12 +34,18 @@ properties:
   id:
     $ref: ./UserID.yaml
   instance:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   instanceType:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: either an InstanceType or an empty string
   isRejoining:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   nameplateEffect:
     type: string
   platform:
@@ -46,18 +56,26 @@ properties:
   profileEffect:
     type: string
   profilePicOverride:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   status:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     description: either a UserStatus or empty string
   travelingToInstance:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   travelingToWorld:
     anyOf:
       - $ref: ./LocationID.yaml
       - type: "null"
   userIcon:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   world:
     anyOf:
       - $ref: ./WorldID.yaml

@@ -2,9 +2,13 @@ title: ProfileRepresentedGroup
 type: object
 properties:
   bannerUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   iconUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   id:
     $ref: ./GroupID.yaml
   name:

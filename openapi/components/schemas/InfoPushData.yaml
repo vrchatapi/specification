@@ -47,7 +47,9 @@ properties:
   imageFileId:
     $ref: ./FileID.yaml
   imageUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   ipsQuery:
     $ref: ./InfoPushIpsQuery.yaml
   isNew:
@@ -68,7 +70,9 @@ properties:
     $ref: ./InfoPushDataClickable.yaml
   overrideName: {}
   rows:
-    type: [integer, "null"]
+    type:
+      - integer
+      - "null"
     description: Number of rows to render.
   search:
     $ref: ./InfoPushDataSearch.yaml
@@ -81,7 +85,9 @@ properties:
   template:
     type: string
   thumbnailImageUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   title:
     type: string
   tooltipDescription:

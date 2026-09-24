@@ -19,7 +19,9 @@ properties:
       - $ref: ./FileID.yaml
       - type: "null"
   imageUrl:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   roleIds:
     $ref: ./GroupRoleIDList.yaml
   text:

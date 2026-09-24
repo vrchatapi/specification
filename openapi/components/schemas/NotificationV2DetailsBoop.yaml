@@ -5,7 +5,9 @@ properties:
   emojiId:
     $ref: ../schemas/EmojiID.yaml
   emojiVersion:
-    type: [integer, "null"]
+    type:
+      - integer
+      - "null"
   inventoryItemId:
     $ref: ../schemas/InventoryItemID.yaml
 required:

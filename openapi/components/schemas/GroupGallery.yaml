@@ -25,19 +25,27 @@ properties:
       - Example Gallery
     minLength: 1
   roleIdsToAutoApprove:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToManage:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToSubmit:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./GroupRoleID.yaml
   roleIdsToView:
-    type: [array, "null"]
+    type:
+      - array
+      - "null"
     items:
       $ref: ./GroupRoleID.yaml
   updatedAt:

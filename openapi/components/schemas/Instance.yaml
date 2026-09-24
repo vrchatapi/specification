@@ -11,9 +11,13 @@ properties:
     examples:
       - true
   ageGate:
-    type: [boolean, "null"]
+    type:
+      - boolean
+      - "null"
   calendarEntryId:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   canRequestInvite:
     type: boolean
     default: true
@@ -34,7 +38,9 @@ properties:
     description: Always returns "unknown".
     minLength: 1
   closedAt:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     format: date-time
   contentSettings:
     $ref: ./InstanceContentSettings.yaml
@@ -46,12 +52,16 @@ properties:
       - $ref: ./UserID.yaml
       - type: "null"
   description:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   disabledPropAbilities:
     type: array
     items: {}
   displayName:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   dominantLanguage:
     type: string
   friends:
@@ -60,11 +70,15 @@ properties:
     type: boolean
     default: false
   gameServerVersion:
-    type: [integer, "null"]
+    type:
+      - integer
+      - "null"
   groupAccessType:
     $ref: ./GroupAccessType.yaml
   hardClose:
-    type: [boolean, "null"]
+    type:
+      - boolean
+      - "null"
   hasCapacityForYou:
     type: boolean
   hidden:
@@ -74,7 +88,9 @@ properties:
   instanceId:
     $ref: ./InstanceID.yaml
   instancePersistenceEnabled:
-    type: [boolean, "null"]
+    type:
+      - boolean
+      - "null"
   languageRatio:
     type: object
     additionalProperties: true
@@ -92,7 +108,9 @@ properties:
   location:
     $ref: ./LocationID.yaml
   minimumAvatarPerformance:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
   n_users:
     type: integer
     examples:
@@ -115,7 +133,9 @@ properties:
   platforms:
     $ref: ./InstancePlatforms.yaml
   playerPersistenceEnabled:
-    type: [boolean, "null"]
+    type:
+      - boolean
+      - "null"
   private:
     $ref: ./UserID.yaml
   queueEnabled:
@@ -140,7 +160,9 @@ properties:
       - 7eavhhng
     minLength: 1
   shortName:
-    type: ["null", string]
+    type:
+      - string
+      - "null"
     examples:
       - 02u7yz8j
     minLength: 1
