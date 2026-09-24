@@ -1,4 +1,3 @@
-description: Returns a list of TokenBundle objects.
 content:
   application/json:
     schema:

@@ -1,4 +1,3 @@
-description: Returns a user's public profile.
 content:
   application/json:
     schema:

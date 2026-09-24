@@ -1,4 +1,3 @@
-description: Successful response after initiating or completing a group transfer.
 content:
   application/json:
     examples:

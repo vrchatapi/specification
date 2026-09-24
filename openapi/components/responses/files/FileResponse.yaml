@@ -1,4 +1,3 @@
-description: Returns a single File object.
 content:
   application/json:
     examples:

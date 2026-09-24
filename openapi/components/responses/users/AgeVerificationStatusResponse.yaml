@@ -1,4 +1,3 @@
-description: Returns a single AgeVerificationStatusResult object.
 content:
   application/json:
     schema:

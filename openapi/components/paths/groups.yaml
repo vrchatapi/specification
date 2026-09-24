@@ -603,8 +603,7 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200":
-          description: OK
+        "200": {}
         "400":
           $ref: ../responses/groups/GroupInviteBadRequestError.yaml
         "401":
@@ -626,8 +625,7 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200":
-          description: OK
+        "200": {}
         "400":
           $ref: ../responses/groups/DeleteGroupInviteBadRequestError.yaml
         "401":
@@ -677,8 +675,7 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200":
-          description: OK
+        "200": {}
         "403":
           $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
@@ -1018,8 +1015,7 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200":
-          description: OK
+        "200": {}
         "400":
           description: You can't cancel a join request if you didn't request to join․
         "403":
@@ -1045,8 +1041,7 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200":
-          description: OK
+        "200": {}
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":

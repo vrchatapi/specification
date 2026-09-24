@@ -50,8 +50,7 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200":
-          description: OK
+        "200": {}
     delete:
       operationId: clearFavoriteGroup
       summary: Clear Favorite Group

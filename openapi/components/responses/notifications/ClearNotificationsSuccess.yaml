@@ -1,4 +1,3 @@
-description: Successful response after clearing all notifications.
 content:
   application/json:
     examples:

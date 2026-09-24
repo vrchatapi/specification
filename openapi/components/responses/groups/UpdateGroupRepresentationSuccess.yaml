@@ -1,4 +1,3 @@
-description: Successful response after updating group representation.
 content:
   application/json:
     examples:

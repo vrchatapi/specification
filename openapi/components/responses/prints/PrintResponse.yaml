@@ -1,4 +1,3 @@
-description: Returns a single Print object.
 content:
   application/json:
     schema:

@@ -1,4 +1,3 @@
-description: Returns a single AvatarModerationCreated object
 content:
   application/json:
     schema:
