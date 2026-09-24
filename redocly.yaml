@@ -33,6 +33,9 @@ oas3_2Rules:
   vrchat/prefer-unknown: warn
   vrchat/schema-title: warn
 
+decorators:
+  info-description-override:
+    filePath: openapi/description.md
 
 apis:
   modern:
