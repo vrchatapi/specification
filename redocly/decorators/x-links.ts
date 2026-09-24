@@ -12,11 +12,14 @@ import type { Oas3Decorator } from "@redocly/openapi-core";
  * its API alias, which is its output file name, since Redocly hands a decorator
  * its API's configuration without `output`.
  *
+ * The links are written as the root is left, after every `info` decorator, so
+ * they follow `info.description` rather than pushing it further down.
+ *
  * https://github.com/Redocly/redocly-cli/blob/main/packages/core/src/config/config.ts
  */
 export const xLinks: Oas3Decorator = ({ releases, formats, versions, documents }) => ({
-	Info: {
-		leave: (info, { report, location, config }) => {
+	Root: {
+		leave: ({ info }, { report, location, config }) => {
 			const file = config?._alias ?? "";
 			const extension = extname(file);
 			const stem = file.slice(0, file.length - extension.length);
@@ -25,7 +28,7 @@ export const xLinks: Oas3Decorator = ({ releases, formats, versions, documents }
 				stem === evergreen || (versions as Array<string>).some((version) => template.replace("{version}", version) === stem));
 
 			if (!family) {
-				report({ message: `\`x-links\` has no family in \`documents\` for the API \`${file}\`.`, location: location.child("x-links"), forceSeverity: "error" });
+				report({ message: `\`x-links\` has no family in \`documents\` for the API \`${file}\`.`, location: location.child(["info", "x-links"]), forceSeverity: "error" });
 				return;
 			}
 
