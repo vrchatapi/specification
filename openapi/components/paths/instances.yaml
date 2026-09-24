@@ -114,6 +114,36 @@ paths:
           $ref: ../responses/instances/InstanceResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+    put:
+      operationId: updateInstance
+      summary: Update Instance
+      description: |-
+        Set or remove the calendar event linked to a group instance.
+
+        Updating a group instance requires both the `group-instance-manage` and `group-instance-calendar-link` permissions.
+
+        The event must begin within the next six hours or have ended within the previous six hours.
+      tags:
+        - instances
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateInstanceRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceResponse.yaml
+        "400":
+          $ref: ../responses/instances/InstanceUpdateValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/instances/InstanceUpdateForbiddenError.yaml
+        "404":
+          $ref: ../responses/instances/InstanceUpdateNotFoundError.yaml
     delete:
       operationId: closeInstance
       summary: Close Instance

@@ -1,0 +1,16 @@
+description: Error response when the caller lacks permission to manage the instance or its calendar link
+content:
+  application/json:
+    examples:
+      Missing Calendar Link Permission Example:
+        value:
+          error:
+            message: You're not allowed to create or change an instance linked to an event․
+            status_code: 403
+      Missing Instance Management Permission Example:
+        value:
+          error:
+            message: "You're not allowed to edit this instance․"
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml
