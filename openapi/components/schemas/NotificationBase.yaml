@@ -1,0 +1,36 @@
+title: NotificationBase
+type: object
+properties:
+  created_at:
+    type: string
+    format: date-time
+  id:
+    type: string
+    minLength: 1
+  message:
+    type: string
+    examples:
+      - This is a generated invite to VRChat Hub
+  receiverUserId:
+    $ref: ./UserID.yaml
+    description: Not included in notification objects received from the REST API
+  seen:
+    type: boolean
+    description: Not included in notification objects received from the Websocket API
+    default: false
+  senderUserId:
+    $ref: ./UserID.yaml
+  senderUsername:
+    type:
+      - string
+      - "null"
+    description: The name of the user who sent the notification.
+    minLength: 1
+  type:
+    $ref: ./NotificationType.yaml
+required:
+  - created_at
+  - id
+  - message
+  - senderUserId
+  - type

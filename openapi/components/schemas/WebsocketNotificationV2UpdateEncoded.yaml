@@ -1,0 +1,12 @@
+title: WebsocketNotificationV2UpdateEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketNotificationV2Update.yaml
+    x-vrchat-double-encoding-type: WebsocketNotificationV2Update
+required:
+  - content
+x-vrchat-double-encoding: true

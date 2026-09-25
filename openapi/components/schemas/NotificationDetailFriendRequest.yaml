@@ -1,0 +1,6 @@
+title: NotificationDetailFriendRequest
+type: object
+properties:
+  # This exists to force generators to generate this struct, since it's referenced "manually" via `x-vrchat-double-encoding-type`
+  dontDeletePls:
+    type: integer

@@ -1,0 +1,12 @@
+title: WebsocketResponseNotificationEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketResponseNotification.yaml
+    x-vrchat-double-encoding-type: WebsocketResponseNotification
+required:
+  - content
+x-vrchat-double-encoding: true

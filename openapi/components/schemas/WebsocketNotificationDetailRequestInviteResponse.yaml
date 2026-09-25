@@ -1,0 +1,7 @@
+title: WebsocketNotificationDetailRequestInviteResponse
+type: object
+properties:
+  details:
+    $ref: ./NotificationDetailRequestInviteResponse.yaml
+required:
+  - details

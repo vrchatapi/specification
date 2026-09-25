@@ -1,0 +1,7 @@
+title: WebsocketGroupMemberUpdated
+type: object
+properties:
+  member:
+    $ref: ./GroupMemberLimitedUser.yaml
+required:
+  - member

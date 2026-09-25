@@ -1,0 +1,7 @@
+title: WebsocketGroupJoined
+type: object
+properties:
+  groupId:
+    $ref: ./GroupID.yaml
+required:
+  - groupId

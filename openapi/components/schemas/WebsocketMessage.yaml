@@ -1,0 +1,4 @@
+title: WebsocketMessage
+oneOf:
+  - $ref: ./WebsocketMessageNormal.yaml
+  - $ref: ./WebsocketMessageDoubleJson.yaml

@@ -1,0 +1,12 @@
+title: WebsocketNotificationV2DeleteEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketNotificationV2Delete.yaml
+    x-vrchat-double-encoding-type: WebsocketNotificationV2Delete
+required:
+  - content
+x-vrchat-double-encoding: true
