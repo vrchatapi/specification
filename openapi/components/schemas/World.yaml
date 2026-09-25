@@ -20,7 +20,8 @@ properties:
     minLength: 0
   disabledPropAbilities:
     type: array
-    items: {}
+    items:
+      $ref: ./Unknown.yaml
   favorites:
     type: integer
     default: 0
@@ -50,7 +51,8 @@ properties:
         A fixed triple of instance id, occupant count, and the share of
         occupants per language code. OpenAPI 3.0 cannot type the positions
         individually, so the members are only bounded by length.
-      items: {}
+      items:
+        $ref: ./Unknown.yaml
       maxItems: 3
       minItems: 3
   isHypeTrainEligible:
@@ -113,7 +115,8 @@ properties:
     $ref: ./ReleaseStatus.yaml
   slimInstances:
     type: array
-    items: {}
+    items:
+      $ref: ./Unknown.yaml
   storeId:
     $ref: ./StoreID.yaml
   tags:

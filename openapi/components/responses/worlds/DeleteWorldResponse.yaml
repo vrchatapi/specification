@@ -1,0 +1,7 @@
+content:
+  application/json:
+    examples:
+      Deleted:
+        value: null
+    schema:
+      $ref: ../../schemas/Unknown.yaml

@@ -45,8 +45,10 @@ properties:
     type: boolean
   name:
     type: string
-  nameplateId: {}
-  nameplateUrl: {}
+  nameplateId:
+    $ref: ./Unknown.yaml
+  nameplateUrl:
+    $ref: ./Unknown.yaml
   ownerId:
     $ref: ./UserID.yaml
   privacy:

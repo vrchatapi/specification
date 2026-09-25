@@ -1,7 +1,8 @@
 title: InventoryTemplate
 type: object
 properties:
-  attribution: {}
+  attribution:
+    $ref: ./Unknown.yaml
   authorId:
     $ref: ./UserID.yaml
   collections:

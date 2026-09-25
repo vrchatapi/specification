@@ -1,4 +1,3 @@
-description: Returns an InventoryItem object.
 content:
   application/json:
     schema:

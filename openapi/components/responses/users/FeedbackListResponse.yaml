@@ -1,4 +1,3 @@
-description: Returns a list of Feedback objects.
 content:
   application/json:
     schema:

@@ -1,4 +1,3 @@
-description: Returns a single GroupGalleryImage object.
 content:
   application/json:
     schema:

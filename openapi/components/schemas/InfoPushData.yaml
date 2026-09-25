@@ -68,7 +68,8 @@ properties:
       - $ref: ./LocalizedString.yaml
   onPressed:
     $ref: ./InfoPushDataClickable.yaml
-  overrideName: {}
+  overrideName:
+    $ref: ./Unknown.yaml
   rows:
     type:
       - integer
@@ -81,7 +82,8 @@ properties:
       - type: string
       - type: "null"
       - $ref: ./LocalizedString.yaml
-  showInWorldIds: {}
+  showInWorldIds:
+    $ref: ./Unknown.yaml
   template:
     type: string
   thumbnailImageUrl:

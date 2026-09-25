@@ -1,4 +1,3 @@
-description: Returns a list of InventoryDrop objects.
 content:
   application/json:
     schema:

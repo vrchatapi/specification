@@ -82,11 +82,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/setup@v2
         with:
           runtime: bun@latest
           cache: true
+
+      - name: version a build of a released version as the next nightly
+        run: |
+          version=$(yq '.info.version' openapi/openapi.yaml)
+
+          version_sha=$(
+            git rev-list -n 1 "v$version" 2>/dev/null \
+            || git rev-list -n 1 "release/$version" 2>/dev/null \
+            || echo ""
+          )
+
+          if [ "$version_sha" != "" ]; then
+            version=$(pnpm semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
+          fi
+
+          echo "version=$version" >> $GITHUB_ENV
 
       - run: bun --bun run bundle
 
@@ -139,18 +157,13 @@ jobs:
       - lint
       - bundle
     if: ${{ !failure() && !cancelled() && github.event_name != 'schedule' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[no release]') }}
+    concurrency:
+      group: release
     outputs:
       version: ${{ steps.metadata.outputs.version }}
 
     steps:
       - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-
-      - uses: pnpm/setup@v2
-        with:
-          runtime: bun@latest
-          cache: true
 
       - uses: actions/download-artifact@v8
         with:
@@ -162,17 +175,10 @@ jobs:
         run: |
           version=$(jq -r '.info.version' dist/openapi.json)
 
-          version_sha=$(
-            git rev-list -n 1 "v$version" 2>/dev/null \
-            || git rev-list -n 1 "release/$version" 2>/dev/null \
-            || echo ""
-          )
-
-          if [ "$version_sha" == "" ]; then
-            echo "prerelease=false" >> $GITHUB_ENV
-          else
+          if [[ "$version" == *-nightly.* ]]; then
             echo "prerelease=true" >> $GITHUB_ENV
-            version=$(pnpm semver $version -i)-nightly.$(git rev-list --count "$version_sha"..HEAD)
+          else
+            echo "prerelease=false" >> $GITHUB_ENV
           fi
 
           echo "version=$version" >> $GITHUB_ENV
@@ -185,16 +191,14 @@ jobs:
       - name: create release (nightly)
         if: env.prerelease == 'true'
         run: |
-          for file in dist/*.json; do
-            jq --arg v "${{ env.version }}" '.info.version = $v' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
-          done
-          for file in dist/*.yaml; do
-            yq eval ".info.version = \"${{ env.version }}\"" -i "$file"
-          done
-
           gh release create v${{ env.version }} dist/* \
             --generate-notes \
             --prerelease
+
+      - name: refresh the nightly release
+        run: |
+          gh release upload nightly dist/* --clobber
+          gh release edit nightly --notes "The latest build from main, currently v${{ env.version }}. Its files are replaced whenever a new build is published."
 
   release_dispatch:
     uses: ./.github/workflows/release_dispatch.yaml

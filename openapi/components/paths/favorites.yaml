@@ -51,7 +51,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          description: OK
+          $ref: ../responses/favorites/UpdateFavoriteGroupResponse.yaml
     delete:
       operationId: clearFavoriteGroup
       summary: Clear Favorite Group

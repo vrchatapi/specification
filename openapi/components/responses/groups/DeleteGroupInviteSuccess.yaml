@@ -1,0 +1,10 @@
+content:
+  application/json:
+    examples:
+      Uninvited:
+        value:
+          success:
+            message: VRChatWiki has been uninvited.
+            status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

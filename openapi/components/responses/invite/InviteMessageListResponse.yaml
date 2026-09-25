@@ -1,4 +1,3 @@
-description: Returns a list of InviteMessage objects.
 content:
   application/json:
     schema:

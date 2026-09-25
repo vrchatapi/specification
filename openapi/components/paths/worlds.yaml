@@ -207,7 +207,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          description: OK
+          $ref: ../responses/worlds/DeleteWorldResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
@@ -295,8 +295,7 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200":
-          description: OK
+        "200": {}
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
@@ -343,8 +342,7 @@ paths:
       security:
         - authCookie: []
       responses:
-        "200":
-          description: OK
+        "200": {}
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "404":

@@ -95,7 +95,8 @@ properties:
     $ref: ./Color.yaml
   themes:
     type: array
-    items: {}
+    items:
+      $ref: ./Unknown.yaml
   totalPublicWorldsCount:
     type: integer
   trustTags:

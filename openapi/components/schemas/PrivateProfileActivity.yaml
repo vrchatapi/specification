@@ -4,11 +4,17 @@ properties:
   instanceId:
     $ref: ./InstanceID.yaml
   last_activity:
-    type: string
-    description: Either a date-time or an empty string.
+    anyOf:
+      - type: string
+        format: date-time
+      - type: string
+        const: ""
   last_login:
-    type: string
-    description: Either a date-time or an empty string.
+    anyOf:
+      - type: string
+        format: date-time
+      - type: string
+        const: ""
   location:
     $ref: ./LocationID.yaml
   platform:

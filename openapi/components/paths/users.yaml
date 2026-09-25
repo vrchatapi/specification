@@ -196,7 +196,6 @@ paths:
         - authCookie: []
       responses:
         "200":
-          description: OK
           content:
             application/json:
               schema:
@@ -426,7 +425,6 @@ paths:
         - authCookie: []
       responses:
         "200":
-          description: OK
           content:
             application/json:
               schema:

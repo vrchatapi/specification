@@ -1,4 +1,3 @@
-description: Returns the API's health.
 content:
   application/json:
     examples:

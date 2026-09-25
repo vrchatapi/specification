@@ -1,0 +1,10 @@
+content:
+  application/json:
+    examples:
+      Invited:
+        value:
+          success:
+            message: VRChatWiki has been invited!
+            status_code: 200
+    schema:
+      $ref: ../../schemas/Success.yaml

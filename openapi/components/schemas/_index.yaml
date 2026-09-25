@@ -34,6 +34,9 @@ NotificationDetailVoteToKickEncoded:
 NotificationV2:
   $ref: ./NotificationV2.yaml
 
+Unknown:
+  $ref: ./Unknown.yaml
+
 WebsocketClearNotification:
   $ref: ./WebsocketClearNotification.yaml
 WebsocketContentRefresh:

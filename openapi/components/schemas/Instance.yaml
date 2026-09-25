@@ -46,7 +46,8 @@ properties:
     $ref: ./InstanceContentSettings.yaml
   creationLanguages:
     type: array
-    items: {}
+    items:
+      $ref: ./Unknown.yaml
   creatorId:
     anyOf:
       - $ref: ./UserID.yaml
@@ -57,7 +58,8 @@ properties:
       - "null"
   disabledPropAbilities:
     type: array
-    items: {}
+    items:
+      $ref: ./Unknown.yaml
   displayName:
     type:
       - string

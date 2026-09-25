@@ -1,7 +1,8 @@
 title: InfoPush
 type: object
 properties:
-  clientMinVersion: {}
+  clientMinVersion:
+    $ref: ./Unknown.yaml
   createdAt:
     type: string
     format: date-time

@@ -1,4 +1,3 @@
-description: Returns a single Notification object.
 content:
   application/json:
     examples:

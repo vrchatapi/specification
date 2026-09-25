@@ -1,4 +1,3 @@
-description: Successful response after blocking a Group.
 content:
   application/json:
     examples:

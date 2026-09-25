@@ -1,4 +1,3 @@
-description: Returns a users Friend Status.
 content:
   application/json:
     examples:
