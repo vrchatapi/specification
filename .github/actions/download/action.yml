@@ -6,6 +6,11 @@ description: >-
   otherwise.
 
 inputs:
+  tag:
+    description: >-
+      The Tag from which to fetch the bundle
+    required: false
+    default: latest
   bundle:
     description: >-
       Bundle to fetch.
@@ -31,5 +36,5 @@ runs:
       run: >-
         curl -Lfo "${{ inputs.bundle }}" "${{ inputs.url
         || github.event.client_payload.artifacts[inputs.bundle]
-        || format('https://github.com/vrchatapi/specification/releases/latest/download/{0}', inputs.bundle) }}"
+        || format('https://github.com/vrchatapi/specification/releases/{0}/download/{1}', inputs.tag, inputs.bundle) }}"
       shell: bash
