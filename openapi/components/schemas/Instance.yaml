@@ -64,6 +64,10 @@ properties:
     type:
       - string
       - "null"
+  displayVibeId:
+    anyOf:
+      - $ref: ./InstanceVibeID.yaml
+      - type: "null"
   dominantLanguage:
     type: string
   friends:
