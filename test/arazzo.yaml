@@ -1576,10 +1576,6 @@ workflows:
             endsAt: $steps.ends-at.outputs.value
         successCriteria:
           - condition: $statusCode == 200
-        onFailure:
-          - name: stop
-            type: end
-
         outputs:
           calendarId: $response.body#/id
 
