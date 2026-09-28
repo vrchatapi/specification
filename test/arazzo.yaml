@@ -2131,6 +2131,13 @@ workflows:
 
   - workflowId: calendar-event-lifecycle
     summary: Create a calendar event on an owned group, read it, update it, delete it
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     failureActions:
@@ -2176,26 +2183,6 @@ workflows:
         outputs:
           value: $response.body#/stdout
 
-      - stepId: own-groups
-        x-security:
-          - schemeName: authCookie
-            values:
-              apiKey: $workflows.session.outputs.sessionToken
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: create-event
         x-security:
           - schemeName: authCookie
@@ -2205,7 +2192,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -2234,7 +2221,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: calendarId
             in: path
             value: $steps.create-event.outputs.calendarId
@@ -2251,7 +2238,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: calendarId
             in: path
             value: $steps.create-event.outputs.calendarId
@@ -2272,7 +2259,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: calendarId
             in: path
             value: $steps.create-event.outputs.calendarId
@@ -5828,6 +5815,13 @@ workflows:
 
   - workflowId: get-group-member-not-member
     summary: getGroupMember answers null for a user outside the group
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -5835,28 +5829,12 @@ workflows:
         values:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: get-group-member
         operationId: $sourceDescriptions.default.getGroupMember
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: userId
             in: path
             value: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
@@ -6070,6 +6048,13 @@ workflows:
 
   - workflowId: group-announcement-lifecycle
     summary: Create a group announcement, then delete it
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -6081,28 +6066,12 @@ workflows:
         type: goto
         stepId: delete-announcement
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: create-announcement
         operationId: $sourceDescriptions.default.createGroupAnnouncement
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -6120,7 +6089,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
         onFailure:
@@ -6129,6 +6098,13 @@ workflows:
 
   - workflowId: group-gallery-lifecycle
     summary: Create a group gallery, update it, delete it
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -6140,28 +6116,12 @@ workflows:
         type: goto
         stepId: delete-gallery
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: create-gallery
         operationId: $sourceDescriptions.default.createGroupGallery
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -6182,7 +6142,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: groupGalleryId
             in: path
             value: $steps.create-gallery.outputs.galleryId
@@ -6199,7 +6159,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: groupGalleryId
             in: path
             value: $steps.create-gallery.outputs.galleryId
@@ -6211,7 +6171,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: groupGalleryId
             in: path
             value: $steps.create-gallery.outputs.galleryId
@@ -6227,7 +6187,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: groupGalleryId
             in: path
             value: $steps.create-gallery.outputs.galleryId
@@ -6239,6 +6199,13 @@ workflows:
 
   - workflowId: group-member-role
     summary: Grant a role to the owner, then take it away
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -6250,28 +6217,12 @@ workflows:
         type: goto
         stepId: delete-role
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: create-role
         operationId: $sourceDescriptions.default.createGroupRole
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -6294,7 +6245,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: userId
             in: path
             value: $workflows.session.outputs.userId
@@ -6309,7 +6260,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: userId
             in: path
             value: $workflows.session.outputs.userId
@@ -6324,7 +6275,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: groupRoleId
             in: path
             value: $steps.create-role.outputs.roleId
@@ -6336,6 +6287,13 @@ workflows:
 
   - workflowId: group-post-lifecycle
     summary: Create a group post, update it, delete it
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -6347,28 +6305,12 @@ workflows:
         type: goto
         stepId: delete-post
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: create-post
         operationId: $sourceDescriptions.default.addGroupPost
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -6390,7 +6332,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: notificationId
             in: path
             value: $steps.create-post.outputs.postId
@@ -6409,7 +6351,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: notificationId
             in: path
             value: $steps.create-post.outputs.postId
@@ -6421,6 +6363,13 @@ workflows:
 
   - workflowId: group-reads
     summary: Group reads against an existing membership
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -6428,28 +6377,12 @@ workflows:
         values:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: group
         operationId: $sourceDescriptions.default.getGroup
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6458,7 +6391,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6467,7 +6400,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6476,7 +6409,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6485,7 +6418,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6494,7 +6427,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6503,7 +6436,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6512,7 +6445,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6521,7 +6454,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: query
             in: query
             value: test
@@ -6533,7 +6466,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: userId
             in: path
             value: $workflows.session.outputs.userId
@@ -6545,7 +6478,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6554,7 +6487,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6563,7 +6496,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6572,7 +6505,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
@@ -6581,12 +6514,19 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
 
   - workflowId: group-role-lifecycle
     summary: Create a group role, update it, delete it
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -6598,28 +6538,12 @@ workflows:
         type: goto
         stepId: delete-role
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: create-role
         operationId: $sourceDescriptions.default.createGroupRole
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -6643,7 +6567,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: groupRoleId
             in: path
             value: $steps.create-role.outputs.roleId
@@ -6660,7 +6584,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
           - name: groupRoleId
             in: path
             value: $steps.create-role.outputs.roleId
@@ -6672,6 +6596,13 @@ workflows:
 
   - workflowId: group-update
     summary: Rename the group, confirm it applied, restore the name
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -6679,29 +6610,12 @@ workflows:
         values:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-          name: $response.body#/0/name
-
       - stepId: rename
         operationId: $sourceDescriptions.default.updateGroup
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -6715,7 +6629,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -10447,6 +10361,13 @@ workflows:
 
   - workflowId: group-cancel-request
     summary: Cancelling a join request we never made
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -10454,33 +10375,24 @@ workflows:
         values:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: cancel-request
         operationId: $sourceDescriptions.default.cancelGroupRequest
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 400
 
   - workflowId: group-owner-cannot-leave
     summary: The owner is refused when leaving their own group
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -10488,33 +10400,37 @@ workflows:
         values:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
+      - stepId: fixture-group
+        operationId: $sourceDescriptions.default.getGroup
         parameters:
-          - name: userId
+          - name: groupId
             in: path
-            value: $workflows.session.outputs.userId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 200
-          - condition: $response.body#/0/ownerId == $workflows.session.outputs.userId
+          - condition: $response.body#/ownerId == $workflows.session.outputs.userId
         onFailure:
           - name: stop
             type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
 
       - stepId: leave
         operationId: $sourceDescriptions.default.leaveGroup
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         successCriteria:
           - condition: $statusCode == 403
 
   - workflowId: group-representation
     summary: Represent the group, then stop representing it
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -10522,28 +10438,12 @@ workflows:
         values:
           apiKey: $workflows.session.outputs.sessionToken
     steps:
-      - stepId: own-groups
-        operationId: $sourceDescriptions.default.getUserGroups
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/0/groupId != null
-        onFailure:
-          - name: stop
-            type: end
-
-        outputs:
-          groupId: $response.body#/0/groupId
-
       - stepId: represent
         operationId: $sourceDescriptions.default.updateGroupRepresentation
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -10575,7 +10475,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $steps.own-groups.outputs.groupId
+            value: $inputs.groupId
         requestBody:
           contentType: application/json
           payload:

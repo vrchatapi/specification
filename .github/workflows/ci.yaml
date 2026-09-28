@@ -229,6 +229,7 @@ jobs:
           VRCHAT_PASSWORD: ${{ secrets.VRCHAT_PASSWORD }}
           VRCHAT_TOTP_SECRET: ${{ secrets.VRCHAT_TOTP_SECRET }}
           VRCHAT_FRIEND_ID: ${{ secrets.VRCHAT_FRIEND_ID }}
+          VRCHAT_GROUP_ID: ${{ secrets.VRCHAT_GROUP_ID }}
 
       - if: "!cancelled()"
         uses: actions/upload-artifact@v7

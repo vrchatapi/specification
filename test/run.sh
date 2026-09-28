@@ -22,6 +22,7 @@ fi
 # An empty input is worse than a missing one: respect sends the literal
 # `{userId}` in the path.
 : "${VRCHAT_FRIEND_ID:?unset — see test/.env.example}"
+: "${VRCHAT_GROUP_ID:?unset — see test/.env.example}"
 : "${VRCHAT_EMAIL:?unset — see test/.env.example}"
 
 mkdir -p test/.out/har
@@ -77,6 +78,7 @@ redocly respect test/arazzo.yaml \
 	--har-output "$capture" \
 	--json-output "$report" \
 	--input friendId="$VRCHAT_FRIEND_ID" \
+	--input groupId="$VRCHAT_GROUP_ID" \
 	--input username="${VRCHAT_USERNAME:-$VRCHAT_EMAIL}" \
 	--input email="$VRCHAT_EMAIL" \
 	--severity "$TEST_SEVERITY" \
