@@ -13,13 +13,21 @@ const acronyms = /[A-Z]{2,}/g;
  * generated client and a redirect on the docs site, which is more than the
  * spelling is worth.
  */
-export function isCamelCase(value: string) {
-	if (value === camelCase(value)) return true;
+function isCase(value: string, convert: (value: string) => string) {
+	if (value === convert(value)) return true;
 
 	const spelled = value.replaceAll(acronyms, (run, index: number) => {
 		const acronym = /[a-z]/.test(value[index + run.length] ?? "") ? run.slice(0, -1) : run;
 		return pascalCase(acronym) + run.slice(acronym.length);
 	});
 
-	return camelCase(spelled) === spelled || spelled === camelCase(value);
+	return convert(spelled) === spelled || spelled === convert(value);
+}
+
+export function isCamelCase(value: string) {
+	return isCase(value, camelCase);
+}
+
+export function isPascalCase(value: string) {
+	return isCase(value, pascalCase);
 }
