@@ -40,7 +40,7 @@
 		"@redocly/openapi-core": "^2.53.3"
 	},
 	"devDependencies": {
-		"@redocly/openapi-core": "^2.53.3",
+		"@redocly/openapi-core": "^2.54.3",
 		"@types/bun": "^1.4.2",
 		"@types/node": "^24.13.6",
 		"typescript": "^6.0.3"

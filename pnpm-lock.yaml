@@ -30,11 +30,11 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       '@redocly/cli':
-        specifier: ^2.53.3
-        version: 2.53.3
+        specifier: ^2.54.3
+        version: 2.54.3
       '@redocly/openapi-core':
-        specifier: ^2.53.3
-        version: 2.53.3
+        specifier: ^2.54.3
+        version: 2.54.3
       '@types/bun':
         specifier: ^1.4.2
         version: 1.4.2
@@ -72,8 +72,8 @@ importers:
   packages/redocly-plugin-downlevel:
     devDependencies:
       '@redocly/openapi-core':
-        specifier: ^2.53.3
-        version: 2.53.3
+        specifier: ^2.54.3
+        version: 2.54.3
       '@types/bun':
         specifier: ^1.4.2
         version: 1.4.2
@@ -1143,16 +1143,16 @@ packages:
   '@redocly/ajv@8.18.3':
     resolution: {integrity: sha512-l42u0of3hY98sN2A+M4qTX1O/KrpgGH32Hu9kP2GtHyD5Dfqq86PKFLe5dwaD8DEnNmlOlll2BAmeEtf0DaySg==}
 
-  '@redocly/cli@2.53.3':
-    resolution: {integrity: sha512-hzNAWzHCOZ05vwRx0ehTxNeJaxxizjGV505eKtfs9MR/8ieD/8lYhAK4GF5FaqRRwOEpLO0PvzQwBSKYXmxhRA==}
+  '@redocly/cli@2.54.3':
+    resolution: {integrity: sha512-tgjCjKm9NjcbN0N04dylwUw8eZzematq07JHm+dVyPkAfA/eZEN57En7jpUYrPvwOb53MJLfDB/0qJ5iz/4eHQ==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
     hasBin: true
 
-  '@redocly/config@0.56.0':
-    resolution: {integrity: sha512-sGEC13BWOSKgFEHSPmFmTHpRt+zfNOc4+5+COe3Z4TD37glshCzM8qaeX7fIddGf6akRSs1tz3j+2FZVEQtCWw==}
+  '@redocly/config@0.57.0':
+    resolution: {integrity: sha512-mpxsAe0/PzfD0B03oeJUaNUNMaJPPyqznfIJtl7YMn+Fw0Qo14+ZRl16sab+jZVZSiYPYtMYLunGZZozXPvyRw==}
 
-  '@redocly/openapi-core@2.53.3':
-    resolution: {integrity: sha512-dBh/k3+ahGFnNjlNkER8MZN9j1Lq186z4SG38DSHfX/j+xRMrZexJmb+A4xmGDdXUzFYZXSN6gU1FWUlRMNAYA==}
+  '@redocly/openapi-core@2.54.3':
+    resolution: {integrity: sha512-8RXEKuDnqhJhYB2vw0eZpowr2P/aytYTHcHmwk5Yb8WKNwokwM7dHnrIBwb7zwovzWYFvLI5RJ+d1FXUvjFjyg==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
 
   '@rollup/rollup-android-arm-eabi@4.63.4':
@@ -4595,16 +4595,16 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  '@redocly/cli@2.53.3': {}
+  '@redocly/cli@2.54.3': {}
 
-  '@redocly/config@0.56.0':
+  '@redocly/config@0.57.0':
     dependencies:
       json-schema-to-ts: 2.7.2
 
-  '@redocly/openapi-core@2.53.3':
+  '@redocly/openapi-core@2.54.3':
     dependencies:
       '@redocly/ajv': 8.18.3
-      '@redocly/config': 0.56.0
+      '@redocly/config': 0.57.0
       ajv: '@redocly/ajv@8.18.3'
       ajv-formats: 3.0.1(@redocly/ajv@8.18.3)
       colorette: 1.4.0
