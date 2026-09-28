@@ -1,0 +1,22 @@
+title: InfoPushDataPromotion
+type: object
+properties:
+  id:
+    type: string
+    examples:
+      - kaguyaEN-content
+  impressions:
+    type: integer
+    examples:
+      - 1
+  notification:
+    $ref: ./InfoPushDataPromotionNotification.yaml
+  type:
+    type: string
+    examples:
+      - notification
+required:
+  - id
+  - impressions
+  - notification
+  - type

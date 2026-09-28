@@ -1,0 +1,56 @@
+title: InfoPushDataContentSource
+type: object
+properties:
+  attributionResponseField:
+    type: string
+    examples:
+      - attributionId
+  computedParams:
+    type: object
+    additionalProperties:
+      type: string
+  endpoint:
+    type: string
+    examples:
+      - /api/1/instances/discover
+  kind:
+    type: string
+    examples:
+      - instanceDiscover
+  method:
+    type: string
+    examples:
+      - GET
+  pagination:
+    anyOf:
+      - $ref: ./InfoPushDataContentSourcePagination.yaml
+      - type: "null"
+  paramModifiability:
+    type: object
+    additionalProperties: true
+  params:
+    type: object
+    additionalProperties: true
+  responseType:
+    type: string
+    examples:
+      - instance
+  resultsField:
+    type: string
+    examples:
+      - instances
+  schemaVersion:
+    type: integer
+    examples:
+      - 1
+required:
+  - computedParams
+  - endpoint
+  - kind
+  - method
+  - pagination
+  - paramModifiability
+  - params
+  - responseType
+  - resultsField
+  - schemaVersion

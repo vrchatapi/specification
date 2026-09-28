@@ -1,0 +1,29 @@
+title: InfoPushDataPromotionNotification
+type: object
+properties:
+  body:
+    type: string
+    examples:
+      - Visit the store to check out the new Cosmic Princess Kaguya items!
+  command:
+    type: string
+    examples:
+      - OpenListingDetails
+  imageUrl:
+    type: string
+    examples:
+      - https://assets.vrchat.com/ips/assets/ipsai_4b9857b7-4396-488a-931a-cbd71a445e81.png
+  parameter:
+    type: string
+    examples:
+      - prod_efc9804b-d0d7-477b-ac4d-3b9663dca14b
+  title:
+    type: string
+    examples:
+      - Cosmic Princess Kaguya!
+required:
+  - body
+  - command
+  - imageUrl
+  - parameter
+  - title

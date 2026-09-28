@@ -19,6 +19,12 @@ properties:
     type: string
   contentList:
     $ref: ./DynamicContentRow.yaml
+  contentSource:
+    $ref: ./InfoPushDataContentSource.yaml
+  controls:
+    type: array
+    items:
+      $ref: ./InfoPushDataControl.yaml
   cta:
     $ref: ./InfoPushDataCallToAction.yaml
   deliveryBehavior:
@@ -67,14 +73,24 @@ properties:
       - type: string
       - $ref: ./LocalizedString.yaml
   onPressed:
-    $ref: ./InfoPushDataClickable.yaml
+    anyOf:
+      - $ref: ./InfoPushDataClickable.yaml
+      - type: "null"
   overrideName:
     $ref: ./Unknown.yaml
+  presentation:
+    $ref: ./InfoPushDataPresentation.yaml
+  promotion:
+    $ref: ./InfoPushDataPromotion.yaml
   rows:
     type:
       - integer
       - "null"
     description: Number of rows to render.
+  schemaVersion:
+    type: integer
+    examples:
+      - 1
   search:
     $ref: ./InfoPushDataSearch.yaml
   shortName:
@@ -84,6 +100,10 @@ properties:
       - $ref: ./LocalizedString.yaml
   showInWorldIds:
     $ref: ./Unknown.yaml
+  subtitle:
+    type: string
+    examples:
+      - Hangouts where everyone's still finding their feet
   template:
     type: string
   thumbnailImageUrl:

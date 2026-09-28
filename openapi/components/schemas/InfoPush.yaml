@@ -48,6 +48,10 @@ properties:
     type: array
     items:
       $ref: ./Tag.yaml
+  type:
+    type: string
+    examples:
+      - ContentShelf
   updatedAt:
     type: string
     format: date-time

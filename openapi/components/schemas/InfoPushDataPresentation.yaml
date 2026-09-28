@@ -1,0 +1,9 @@
+title: InfoPushDataPresentation
+type: object
+properties:
+  layout:
+    type: string
+    examples:
+      - EqualParts_4_Grid
+required:
+  - layout

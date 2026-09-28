@@ -1,0 +1,29 @@
+title: InfoPushDataContentSourcePagination
+type: object
+properties:
+  cursorParam:
+    type: string
+    examples:
+      - nextCursor
+  cursorResponseField:
+    type: string
+    examples:
+      - nextCursor
+  pageSize:
+    type: integer
+    examples:
+      - 50
+  pageSizeParam:
+    type: string
+    examples:
+      - n
+  style:
+    type: string
+    examples:
+      - cursor
+required:
+  - cursorParam
+  - cursorResponseField
+  - pageSize
+  - pageSizeParam
+  - style

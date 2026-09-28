@@ -1,0 +1,16 @@
+title: InfoPushDataControlOption
+type: object
+properties:
+  id:
+    type: string
+    examples:
+      - music
+  label:
+    $ref: ./LocalizedString.yaml
+  params:
+    type: object
+    additionalProperties: true
+required:
+  - id
+  - label
+  - params

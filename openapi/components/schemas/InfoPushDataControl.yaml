@@ -1,0 +1,37 @@
+title: InfoPushDataControl
+type: object
+properties:
+  control:
+    type: string
+    examples:
+      - select
+  display:
+    type: string
+    examples:
+      - overflow
+  id:
+    type: string
+    examples:
+      - categories
+  kind:
+    type: string
+    examples:
+      - filter
+  label:
+    $ref: ./LocalizedString.yaml
+  options:
+    type: array
+    items:
+      $ref: ./InfoPushDataControlOption.yaml
+  selection:
+    type: string
+    examples:
+      - multiple
+required:
+  - control
+  - display
+  - id
+  - kind
+  - label
+  - options
+  - selection
