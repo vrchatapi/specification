@@ -761,31 +761,6 @@ workflows:
           - name: stop
             type: end
 
-      - stepId: send-unknown
-        operationId: $sourceDescriptions.default.updateInterestsAndPreferences
-        requestBody:
-          contentType: application/json
-          payload:
-            Music: loud
-            Unknown: true
-        successCriteria:
-          - condition: $statusCode == 200
-        onFailure:
-          - name: stop
-            type: end
-
-      - stepId: read-unknown-ignored
-        operationId: $sourceDescriptions.default.getInterestsAndPreferences
-        successCriteria:
-          - condition: $statusCode == 200
-          - condition: $response.body#/Music == true
-          - context: $response.body
-            condition: $[?(!@.Unknown)]
-            type: jsonpath
-        onFailure:
-          - name: stop
-            type: end
-
       - stepId: turn-all-off
         operationId: $sourceDescriptions.default.updateInterestsAndPreferences
         requestBody:

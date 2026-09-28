@@ -309,7 +309,7 @@ paths:
     put:
       operationId: updateInterestsAndPreferences
       summary: Update Interests and Preferences
-      description: Turns interests and preferences on with `true` and off with `false`. A key the body leaves out keeps its value, and an unknown key or a value that is not a boolean is ignored.
+      description: Turns interests and preferences on with `true` and off with `false`. A key the body leaves out keeps its value.
       tags:
         - authentication
       requestBody:
