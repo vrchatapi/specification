@@ -20,6 +20,8 @@ import type { Oas3Decorator } from "@redocly/openapi-core";
 export const xLinks: Oas3Decorator = ({ releases, formats, versions, documents }) => ({
 	Root: {
 		leave: ({ info }, { report, location, config }) => {
+			if (info === undefined) return;
+
 			const file = config?._alias ?? "";
 			const extension = extname(file);
 			const stem = file.slice(0, file.length - extension.length);
