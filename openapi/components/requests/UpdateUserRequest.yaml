@@ -3,6 +3,9 @@ type: object
 properties:
   acceptedTOSVersion:
     type: integer
+  allowWorldsToCountFriendsInInstance:
+    type: boolean
+    description: 'The "Allow Worlds to Count Friends in Instance" setting, introduced under [Udon Methods for Friend Info](https://ask.vrchat.com/t/developer-update-24-september-2026/48972#p-90922-udon-methods-for-friend-info-13) in the Developer Update of September 24, 2026.'
   birthday:
     type: string
     format: date

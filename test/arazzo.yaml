@@ -9529,7 +9529,7 @@ workflows:
           - condition: $statusCode == 401
 
   - workflowId: profile-update-restore
-    summary: Update the writable profile fields, confirm they applied, restore them
+    summary: Change every profile field the current user reflects, confirm each applied, restore them
     parameters:
       - reference: $components.parameters.userAgent
     steps:
@@ -9570,6 +9570,7 @@ workflows:
           statusDescription: $response.body#/statusDescription
           isBoopingEnabled: $response.body#/isBoopingEnabled
           unsubscribe: $response.body#/unsubscribe
+          allowWorldsToCountFriendsInInstance: $response.body#/allowWorldsToCountFriendsInInstance
 
       - stepId: update-profile
         x-security:
@@ -9586,14 +9587,18 @@ workflows:
           payload:
             statusDescription: $steps.marker.outputs.value
             pronouns: they/them
-            status: active
-            isBoopingEnabled: $steps.current-before.outputs.isBoopingEnabled
-            unsubscribe: $steps.current-before.outputs.unsubscribe
+            status: ask me
+            isBoopingEnabled: false
+            unsubscribe: false
+            allowWorldsToCountFriendsInInstance: false
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/statusDescription == $steps.marker.outputs.value
           - condition: $response.body#/pronouns == 'they/them'
-          - condition: $response.body#/status == 'active'
+          - condition: $response.body#/status == 'ask me'
+          - condition: $response.body#/isBoopingEnabled == false
+          - condition: $response.body#/unsubscribe == false
+          - condition: $response.body#/allowWorldsToCountFriendsInInstance == false
 
       - stepId: verify-current-user
         x-security:
@@ -9604,6 +9609,11 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/statusDescription == $steps.marker.outputs.value
+          - condition: $response.body#/pronouns == 'they/them'
+          - condition: $response.body#/status == 'ask me'
+          - condition: $response.body#/isBoopingEnabled == false
+          - condition: $response.body#/unsubscribe == false
+          - condition: $response.body#/allowWorldsToCountFriendsInInstance == false
 
       - stepId: verify-get-user
         x-security:
@@ -9618,6 +9628,11 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/statusDescription == $steps.marker.outputs.value
+          - condition: $response.body#/pronouns == 'they/them'
+          - condition: $response.body#/status == 'ask me'
+          - condition: $response.body#/isBoopingEnabled == false
+          - condition: $response.body#/unsubscribe == false
+          - condition: $response.body#/allowWorldsToCountFriendsInInstance == false
 
       - stepId: restore-profile
         x-security:
@@ -9635,11 +9650,17 @@ workflows:
             statusDescription: $steps.current-before.outputs.statusDescription
             pronouns: $steps.current-before.outputs.pronouns
             status: $steps.current-before.outputs.status
+            isBoopingEnabled: $steps.current-before.outputs.isBoopingEnabled
+            unsubscribe: $steps.current-before.outputs.unsubscribe
+            allowWorldsToCountFriendsInInstance: $steps.current-before.outputs.allowWorldsToCountFriendsInInstance
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/statusDescription == $steps.current-before.outputs.statusDescription
           - condition: $response.body#/pronouns == $steps.current-before.outputs.pronouns
           - condition: $response.body#/status == $steps.current-before.outputs.status
+          - condition: $response.body#/isBoopingEnabled == $steps.current-before.outputs.isBoopingEnabled
+          - condition: $response.body#/unsubscribe == $steps.current-before.outputs.unsubscribe
+          - condition: $response.body#/allowWorldsToCountFriendsInInstance == $steps.current-before.outputs.allowWorldsToCountFriendsInInstance
 
       - stepId: verify-restored
         x-security:
@@ -9654,6 +9675,11 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/statusDescription == $steps.current-before.outputs.statusDescription
+          - condition: $response.body#/pronouns == $steps.current-before.outputs.pronouns
+          - condition: $response.body#/status == $steps.current-before.outputs.status
+          - condition: $response.body#/isBoopingEnabled == $steps.current-before.outputs.isBoopingEnabled
+          - condition: $response.body#/unsubscribe == $steps.current-before.outputs.unsubscribe
+          - condition: $response.body#/allowWorldsToCountFriendsInInstance == $steps.current-before.outputs.allowWorldsToCountFriendsInInstance
 
   - workflowId: get-invited-groups
     summary: Invited groups
