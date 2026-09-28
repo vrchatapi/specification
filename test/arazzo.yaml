@@ -367,6 +367,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: unblock-avatar
     steps:
       - stepId: block-avatar
         operationId: $sourceDescriptions.default.createGlobalAvatarModeration
@@ -399,6 +403,9 @@ workflows:
             value: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: create-global-avatar-moderation-invalid-type
     summary: createGlobalAvatarModeration names the moderation types it accepts
@@ -2126,6 +2133,10 @@ workflows:
     summary: Create a calendar event on an owned group, read it, update it, delete it
     parameters:
       - reference: $components.parameters.userAgent
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-event
     steps:
       - stepId: starts-at
         operationId: $sourceDescriptions.local.execute
@@ -2267,6 +2278,9 @@ workflows:
             value: $steps.create-event.outputs.calendarId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: search-calendar-events
     summary: Search events
@@ -3735,6 +3749,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: remove-favorite
     steps:
       - stepId: world-favorites
         operationId: $sourceDescriptions.default.getFavorites
@@ -3744,6 +3762,9 @@ workflows:
             value: world
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
       - stepId: add-favorite
         operationId: $sourceDescriptions.default.addFavorite
@@ -3800,6 +3821,9 @@ workflows:
             value: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
       - stepId: verify-favorite-removed
         operationId: $sourceDescriptions.default.removeFavorite
@@ -3809,6 +3833,9 @@ workflows:
             value: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
         successCriteria:
           - condition: $statusCode == 404
+        onFailure:
+          - name: stop
+            type: end
 
       - stepId: remove-unknown-favorite
         operationId: $sourceDescriptions.default.removeFavorite
@@ -3818,11 +3845,17 @@ workflows:
             value: avtr_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 404
+        onFailure:
+          - name: stop
+            type: end
 
       - stepId: favorite-limits
         operationId: $sourceDescriptions.default.getFavoriteLimits
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: get-favorites-query-parameters
     summary: getFavorites with every fillable query parameter
@@ -4077,6 +4110,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-file
     steps:
       - stepId: files-before
         operationId: $sourceDescriptions.default.getFiles
@@ -4086,6 +4123,9 @@ workflows:
             value: gallery
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
       - stepId: create-file
         operationId: $sourceDescriptions.default.createFile
@@ -4172,6 +4212,9 @@ workflows:
             value: $steps.create-file.outputs.fileId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
       - stepId: verify-file-deleted
         operationId: $sourceDescriptions.default.getFile
@@ -4181,6 +4224,9 @@ workflows:
             value: $steps.create-file.outputs.fileId
         successCriteria:
           - condition: $statusCode == 404
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: get-files-query-parameters
     summary: getFiles with every fillable query parameter
@@ -6030,6 +6076,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-announcement
     steps:
       - stepId: own-groups
         operationId: $sourceDescriptions.default.getUserGroups
@@ -6073,6 +6123,9 @@ workflows:
             value: $steps.own-groups.outputs.groupId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: group-gallery-lifecycle
     summary: Create a group gallery, update it, delete it
@@ -6082,6 +6135,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-gallery
     steps:
       - stepId: own-groups
         operationId: $sourceDescriptions.default.getUserGroups
@@ -6176,6 +6233,9 @@ workflows:
             value: $steps.create-gallery.outputs.galleryId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: group-member-role
     summary: Grant a role to the owner, then take it away
@@ -6185,6 +6245,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-role
     steps:
       - stepId: own-groups
         operationId: $sourceDescriptions.default.getUserGroups
@@ -6266,6 +6330,9 @@ workflows:
             value: $steps.create-role.outputs.roleId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: group-post-lifecycle
     summary: Create a group post, update it, delete it
@@ -6275,6 +6342,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-post
     steps:
       - stepId: own-groups
         operationId: $sourceDescriptions.default.getUserGroups
@@ -6344,6 +6415,9 @@ workflows:
             value: $steps.create-post.outputs.postId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: group-reads
     summary: Group reads against an existing membership
@@ -6519,6 +6593,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-role
     steps:
       - stepId: own-groups
         operationId: $sourceDescriptions.default.getUserGroups
@@ -6588,6 +6666,9 @@ workflows:
             value: $steps.create-role.outputs.roleId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: group-update
     summary: Rename the group, confirm it applied, restore the name
@@ -7212,6 +7293,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
     steps:
       - stepId: instance-categories
         operationId: $sourceDescriptions.default.getInstanceCategories
@@ -7271,6 +7356,9 @@ workflows:
             value: $steps.create-instance.outputs.instanceId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: instance-lifecycle
     summary: Creates a real private instance, then invites the account to it
@@ -8606,6 +8694,10 @@ workflows:
       - schemeName: authCookie
         values:
           apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: hide-notification
     steps:
       - stepId: create-instance
         operationId: $sourceDescriptions.default.createInstance
@@ -8693,6 +8785,9 @@ workflows:
             value: $steps.invite-self.outputs.notificationId
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: delete-all-notification-v2s-unauthenticated
     summary: deleteAllNotificationV2s refuses an anonymous caller
@@ -10034,6 +10129,10 @@ workflows:
     summary: Add a profile tag, confirm it applied, remove it, confirm it is gone
     parameters:
       - reference: $components.parameters.userAgent
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: restore
     steps:
       - stepId: verify-absent-first
         x-security:
@@ -10108,6 +10207,9 @@ workflows:
               - language_kor
         successCriteria:
           - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
       - stepId: verify-restored
         x-security:
@@ -10124,6 +10226,9 @@ workflows:
           - context: $response.body#/tags
             condition: ^(?!.*language_kor).*$
             type: regex
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: get-user-all-group-permissions
     summary: Group permissions
