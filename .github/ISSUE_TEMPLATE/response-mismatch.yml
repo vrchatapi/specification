@@ -1,0 +1,35 @@
+name: Response doesn't match
+description: A library fails to parse a response, or VRChat returns a field, type or value the specification doesn't describe.
+labels:
+  - "Type: Bug"
+body:
+  - type: markdown
+    attributes:
+      value: A library's error names the field but not the value that broke it. The raw response is what lets us fix it.
+  - type: input
+    id: operation
+    attributes:
+      label: Operation
+      description: The operation id or the request.
+      placeholder: getModerationReports, or GET /moderationReports
+    validations:
+      required: true
+  - type: textarea
+    id: response
+    attributes:
+      label: Response body
+      description: The JSON VRChat returned, or the object within it that failed. Redact anything personal, but keep each value's type. Replace a string with another string, and leave `null` as `null`.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error
+      description: The error your library raised, if any.
+      render: text
+  - type: input
+    id: library
+    attributes:
+      label: Library and version
+      placeholder: vrchatapi-csharp 1.21.0

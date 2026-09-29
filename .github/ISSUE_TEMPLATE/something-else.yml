@@ -1,0 +1,9 @@
+name: Something else
+description: A wrong description, a problem with the published bundles, or anything neither form above covers.
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What's wrong
+    validations:
+      required: true

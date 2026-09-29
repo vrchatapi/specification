@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask on Discord
+    url: https://discord.gg/qjZE9C9fkB
+    about: Questions about using the API or one of the libraries.
+  - name: Report a bug in one library
+    url: https://github.com/orgs/vrchatapi/repositories
+    about: Every library is generated from this specification, so a response one of them can't parse belongs here. A bug in a library's own code belongs in its repository.

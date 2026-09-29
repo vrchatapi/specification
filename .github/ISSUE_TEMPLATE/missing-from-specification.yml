@@ -1,0 +1,31 @@
+name: Missing from the specification
+description: An endpoint, parameter or field VRChat supports that the specification doesn't describe.
+labels:
+  - "Type: Enhancement"
+body:
+  - type: input
+    id: request
+    attributes:
+      label: Request
+      description: The method and path.
+      placeholder: GET /instanceCategories
+    validations:
+      required: true
+  - type: textarea
+    id: missing
+    attributes:
+      label: What's missing
+      description: The endpoint, parameter or field, and what it does.
+    validations:
+      required: true
+  - type: textarea
+    id: capture
+    attributes:
+      label: Request and response
+      description: A request you sent and the response VRChat returned. Redact anything personal, but keep each value's type.
+      render: text
+  - type: textarea
+    id: source
+    attributes:
+      label: Where it comes from
+      description: Where you saw it, such as the VRChat client, the website or a Developer Update. Link it if you can.
