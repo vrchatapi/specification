@@ -22,7 +22,9 @@ properties:
     examples:
       - iz bulli
   evidenceRequired:
-    type: boolean
+    type:
+      - boolean
+      - "null"
   id:
     $ref: ./ModerationReportID.yaml
   reason:
