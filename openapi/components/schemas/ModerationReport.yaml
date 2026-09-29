@@ -16,6 +16,9 @@ properties:
     type:
       - string
       - "null"
+  created:
+    type: string
+    format: date-time
   description:
     type: string
     description: The subjective reason for the report
@@ -42,6 +45,7 @@ required:
   - contentId
   - contentName
   - contentThumbnailImageUrl
+  - created
   - description
   - evidenceRequired
   - id
