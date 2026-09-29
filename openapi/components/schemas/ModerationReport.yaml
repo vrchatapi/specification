@@ -20,7 +20,9 @@ properties:
     type: string
     format: date-time
   description:
-    type: string
+    type:
+      - string
+      - "null"
     description: The subjective reason for the report
     examples:
       - iz bulli
