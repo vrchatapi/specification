@@ -602,6 +602,59 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: moderation-report-lifecycle
+    summary: Report the test account's own profile, find the report, then delete it
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-report
+    steps:
+      - stepId: submit-report
+        operationId: $sourceDescriptions.default.submitModerationReport
+        requestBody:
+          contentType: application/json
+          payload:
+            type: user
+            category: profile
+            reason: other
+            contentId: $workflows.session.outputs.userId
+            description: Please do not action this report. It is an automated test report filed by the VRChat API specification test suite (https://github.com/vrchatapi/specification) against its own test account. The suite deletes it moments after filing it.
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          reportId: $response.body#/id
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: find-report
+        operationId: $sourceDescriptions.default.getModerationReports
+        parameters:
+          - name: reportingUserId
+            in: query
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/totalCount == 1
+
+      - stepId: delete-report
+        operationId: $sourceDescriptions.default.deleteModerationReport
+        parameters:
+          - name: moderationReportId
+            in: path
+            value: $steps.submit-report.outputs.reportId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
   - workflowId: get-o-auth-redirect-code
     summary: Oauth redirect code
     parameters:
