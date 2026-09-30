@@ -2,10 +2,13 @@ title: GroupAuditLogEntryGroupRequestBlock
 type: object
 properties:
   data:
-    $ref: ./GroupAuditLogEntryDataGroupRequestBlock.yaml
+    $ref: ./GroupAuditLogEntryDataEmpty.yaml
   eventType:
     type: string
     const: group.request.block
+  targetId:
+    $ref: ./UserID.yaml
 required:
   - data
   - eventType
+  - targetId

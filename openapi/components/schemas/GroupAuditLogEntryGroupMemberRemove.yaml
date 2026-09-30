@@ -2,10 +2,13 @@ title: GroupAuditLogEntryGroupMemberRemove
 type: object
 properties:
   data:
-    $ref: ./GroupAuditLogEntryDataGroupMemberRemove.yaml
+    $ref: ./GroupAuditLogEntryDataEmpty.yaml
   eventType:
     type: string
     const: group.member.remove
+  targetId:
+    type: string
 required:
   - data
   - eventType
+  - targetId

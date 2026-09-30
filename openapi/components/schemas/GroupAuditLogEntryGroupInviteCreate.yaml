@@ -2,10 +2,13 @@ title: GroupAuditLogEntryGroupInviteCreate
 type: object
 properties:
   data:
-    $ref: ./GroupAuditLogEntryDataGroupInviteCreate.yaml
+    $ref: ./GroupAuditLogEntryDataEmpty.yaml
   eventType:
     type: string
     const: group.invite.create
+  targetId:
+    $ref: ./UserID.yaml
 required:
   - data
   - eventType
+  - targetId

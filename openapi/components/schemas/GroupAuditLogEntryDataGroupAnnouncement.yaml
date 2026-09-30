@@ -1,6 +1,5 @@
 title: GroupAuditLogEntryDataGroupAnnouncement
 type: object
-description: Data for group.announcement events.
 properties:
   authorId:
     $ref: ./UserID.yaml

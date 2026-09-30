@@ -1,6 +1,5 @@
 title: GroupAuditLogEntryDataGroupCalendarEventCreate
 type: object
-description: Data for group.calendarEvent.create events.
 properties:
   accessType:
     $ref: ./CalendarEventAccess.yaml

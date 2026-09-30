@@ -1,0 +1,12 @@
+title: GroupAuditLogEntryDataGroupMemberRole
+type: object
+properties:
+  roleId:
+    $ref: ./GroupRoleID.yaml
+    description: The ID of the role that was assigned or unassigned.
+  roleName:
+    type: string
+    description: The name of the role that was assigned or unassigned.
+required:
+  - roleId
+  - roleName

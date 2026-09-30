@@ -1,19 +1,16 @@
 title: GroupAuditLogEntryDataGroupInstanceCreate
 type: object
-description: Data for group.instance.create events.
 properties:
   calendarEntryId:
-    type:
-      - string
-      - "null"
     description: The calendar entry ID if the instance was created from a calendar event.
+    anyOf:
+      - $ref: ./CalendarID.yaml
+      - type: "null"
   groupAccessType:
     $ref: ./GroupAccessType.yaml
   roleIds:
-    type: array
+    $ref: ./GroupRoleIDList.yaml
     description: The role IDs that have access to the instance.
-    items:
-      $ref: ./GroupRoleID.yaml
 required:
   - calendarEntryId
   - groupAccessType

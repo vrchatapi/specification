@@ -1,38 +1,18 @@
 title: GroupAuditLogEntryDataGroupPostCreate
 type: object
-description: Data for group.post.create events.
 properties:
-  authorId:
-    $ref: ./UserID.yaml
-    description: The ID of the post author.
-  imageId:
-    description: The image file ID attached to the post.
-    anyOf:
-      - $ref: ./FileID.yaml
-      - type: "null"
   roleIds:
     type:
       - array
       - "null"
-    description: The role IDs that can see this post.
+    description: The role IDs that can see the post.
     items:
       $ref: ./GroupRoleID.yaml
   sendNotification:
     type: boolean
     description: Whether a notification was sent for this post.
-  text:
-    type: string
-    description: The text content of the post.
-  title:
-    type: string
-    description: The title of the post.
-  visibility:
-    $ref: ./GroupPostVisibility.yaml
 required:
-  - authorId
-  - imageId
   - roleIds
   - sendNotification
-  - text
-  - title
-  - visibility
+allOf:
+  - $ref: ./GroupAuditLogEntryDataGroupPost.yaml

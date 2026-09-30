@@ -1,5 +1,0 @@
-title: GroupAuditLogEntryDataGroupMemberRemove
-type: object
-description: Data for group.member.remove events.
-additionalProperties: false
-properties: {}

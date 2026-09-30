@@ -6,6 +6,9 @@ properties:
   eventType:
     type: string
     const: group.member.user.update
+  targetId:
+    type: string
 required:
   - data
   - eventType
+  - targetId

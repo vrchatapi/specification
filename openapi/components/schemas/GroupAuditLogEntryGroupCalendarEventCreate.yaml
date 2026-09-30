@@ -6,6 +6,9 @@ properties:
   eventType:
     type: string
     const: group.calendarEvent.create
+  targetId:
+    $ref: ./CalendarID.yaml
 required:
   - data
   - eventType
+  - targetId

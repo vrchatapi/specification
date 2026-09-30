@@ -1,5 +1,0 @@
-title: GroupAuditLogEntryDataGroupMemberJoin
-type: object
-description: Data for group.member.join events.
-additionalProperties: false
-properties: {}

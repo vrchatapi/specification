@@ -1,6 +1,6 @@
 title: GroupAuditLogEntryDataGroupGalleryUpdate
 type: object
-description: Data for group.gallery.update events. Carries only the fields the update changed.
+description: Carries only the fields the update changed.
 properties:
   membersOnly:
     $ref: ./GroupAuditLogEntryBooleanChange.yaml

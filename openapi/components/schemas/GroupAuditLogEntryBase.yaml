@@ -1,16 +1,15 @@
 title: GroupAuditLogEntryBase
 type: object
-description: Base schema for all group audit log entries containing common fields.
 properties:
   actorDisplayName:
     type: string
-    description: The display name of the actor who performed the action.
+    description: The display name of the user who performed the action.
   actorId:
     $ref: ./UserID.yaml
     description: The ID of the user who performed the action.
   created_at:
     type: string
-    description: The timestamp when the event occurred.
+    description: When the action was performed.
     format: date-time
   description:
     type: string
@@ -20,13 +19,10 @@ properties:
     description: The type of event that occurred.
   groupId:
     $ref: ./GroupID.yaml
-    description: The ID of the group this event belongs to.
+    description: The ID of the group the entry belongs to.
   id:
     $ref: ./GroupAuditLogID.yaml
     description: The unique ID of this audit log entry.
-  targetId:
-    type: string
-    description: Typically a UserID, GroupID, GroupRoleID, or Location, but could be other types of IDs.
 required:
   - actorDisplayName
   - actorId
@@ -35,4 +31,3 @@ required:
   - eventType
   - groupId
   - id
-  - targetId

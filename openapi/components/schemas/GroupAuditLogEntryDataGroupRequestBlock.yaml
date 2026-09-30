@@ -1,5 +1,0 @@
-title: GroupAuditLogEntryDataGroupRequestBlock
-type: object
-description: Data for group.request.block events.
-additionalProperties: false
-properties: {}

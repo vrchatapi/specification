@@ -1,15 +1,12 @@
 title: GroupAuditLogEntryDataGroupCalendarEventDelete
 type: object
-description: Data for group.calendarEvent.delete events.
 properties:
-  accessType:
-    $ref: ./CalendarEventAccess.yaml
   category:
     type: string
     description: The category of the event.
   closeInstanceAfterEndMinutes:
     type: integer
-    description: Minutes after event end to close the instance.
+    description: Minutes after the event ends to close the instance.
   createdAt:
     type: string
     description: The creation timestamp.
@@ -20,9 +17,6 @@ properties:
       - "null"
     description: The deletion timestamp.
     format: date-time
-  description:
-    type: string
-    description: The event description.
   durationInMs:
     type: integer
     description: The duration of the event in milliseconds.
@@ -35,15 +29,10 @@ properties:
     description: Whether the event is featured.
   guestEarlyJoinMinutes:
     type: integer
-    description: Minutes before start that guests can join.
+    description: Minutes before the start that guests can join.
   hostEarlyJoinMinutes:
     type: integer
-    description: Minutes before start that hosts can join.
-  imageId:
-    description: The image file ID.
-    anyOf:
-      - $ref: ./FileID.yaml
-      - type: "null"
+    description: Minutes before the start that hosts can join.
   interestedUserCount:
     type: integer
     description: The number of interested users.
@@ -61,10 +50,9 @@ properties:
     type:
       - string
       - "null"
-    description: The occurrence modified timestamp.
   ownerId:
     $ref: ./GroupID.yaml
-    description: The owner group ID.
+    description: The ID of the group that owns the event.
   platforms:
     type: array
     description: The supported platforms.
@@ -76,18 +64,17 @@ properties:
       - $ref: ./CalendarEventRecurrence.yaml
       - type: "null"
   roleIds:
-    description: The role IDs with access.
-    anyOf:
-      - type: array
-        description: The role IDs with access.
-        items:
-          $ref: ./GroupRoleID.yaml
-      - type: "null"
+    type:
+      - array
+      - "null"
+    description: Group roles that may join this event.
+    items:
+      $ref: ./GroupRoleID.yaml
   seriesId:
     type:
       - string
       - "null"
-    description: The series ID for recurring events.
+    description: The ID of the recurring series the event belongs to.
   shortCode:
     type:
       - string
@@ -102,12 +89,6 @@ properties:
     description: The event tags.
     items:
       type: string
-  title:
-    type: string
-    description: The event title.
-  type:
-    type: string
-    description: The type of calendar entry.
   updatedAt:
     type: string
     description: The last update timestamp.
@@ -116,18 +97,15 @@ properties:
     type: boolean
     description: Whether the event uses instance overflow.
 required:
-  - accessType
   - category
   - closeInstanceAfterEndMinutes
   - createdAt
   - deletedAt
-  - description
   - durationInMs
   - endsAt
   - featured
   - guestEarlyJoinMinutes
   - hostEarlyJoinMinutes
-  - imageId
   - interestedUserCount
   - isDraft
   - languages
@@ -141,7 +119,7 @@ required:
   - shortCode
   - startsAt
   - tags
-  - title
-  - type
   - updatedAt
   - usesInstanceOverflow
+allOf:
+  - $ref: ./GroupAuditLogEntryDataGroupCalendarEventCreate.yaml

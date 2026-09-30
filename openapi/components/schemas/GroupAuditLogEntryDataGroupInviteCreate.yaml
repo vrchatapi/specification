@@ -1,5 +1,0 @@
-title: GroupAuditLogEntryDataGroupInviteCreate
-type: object
-description: Data for group.invite.create events.
-additionalProperties: false
-properties: {}

@@ -1,17 +1,15 @@
 title: GroupAuditLogEntryDataGroupInstanceClose
 type: object
-description: Data for group.instance.close events.
 properties:
   groupAccessType:
     $ref: ./GroupAccessType.yaml
   roleIds:
+    type:
+      - array
+      - "null"
     description: The role IDs that have access to the instance.
-    anyOf:
-      - type: array
-        description: The role IDs that have access to the instance.
-        items:
-          $ref: ./GroupRoleID.yaml
-      - type: "null"
+    items:
+      $ref: ./GroupRoleID.yaml
 required:
   - groupAccessType
   - roleIds

@@ -1,6 +1,5 @@
 title: GroupAuditLogEntryDataGroupInstanceAnnouncement
 type: object
-description: Data for group.instance.announcement events.
 properties:
   message:
     type: string

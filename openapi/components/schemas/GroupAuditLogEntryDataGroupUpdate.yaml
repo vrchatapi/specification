@@ -1,6 +1,6 @@
 title: GroupAuditLogEntryDataGroupUpdate
 type: object
-description: Data for group.update events. Carries only the fields the update changed.
+description: Carries only the fields the update changed.
 properties:
   description:
     $ref: ./GroupAuditLogEntryStringChange.yaml

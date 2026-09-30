@@ -6,6 +6,9 @@ properties:
   eventType:
     type: string
     const: group.gallery.update
+  targetId:
+    $ref: ./GroupGalleryID.yaml
 required:
   - data
   - eventType
+  - targetId

@@ -2,10 +2,13 @@ title: GroupAuditLogEntryGroupRequestReject
 type: object
 properties:
   data:
-    $ref: ./GroupAuditLogEntryDataGroupRequestReject.yaml
+    $ref: ./GroupAuditLogEntryDataEmpty.yaml
   eventType:
     type: string
     const: group.request.reject
+  targetId:
+    $ref: ./UserID.yaml
 required:
   - data
   - eventType
+  - targetId

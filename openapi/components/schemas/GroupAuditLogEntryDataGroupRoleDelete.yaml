@@ -1,6 +1,5 @@
 title: GroupAuditLogEntryDataGroupRoleDelete
 type: object
-description: Data for group.role.delete events.
 properties:
   createdAt:
     type: string
@@ -9,44 +8,13 @@ properties:
   defaultRole:
     type: boolean
     description: Whether the role is the group's default role.
-  description:
-    type: string
-    description: The role description.
-  isAddedOnJoin:
-    type: boolean
-    description: Whether the role is automatically assigned on join.
   isManagementRole:
     type: boolean
     description: Whether the role is a management role.
-  isSelfAssignable:
-    type: boolean
-    description: Whether users can self-assign this role.
-  name:
-    type: string
-    description: The role name.
-  order:
-    type: integer
-    description: The display order of the role.
-  permissions:
-    type: array
-    description: The permissions assigned to this role.
-    items:
-      $ref: ./GroupPermissions.yaml
-  requiresPurchase:
-    type: boolean
-    description: Whether the role requires a purchase.
-  requiresTwoFactor:
-    type: boolean
-    description: Whether the role requires two-factor authentication.
 required:
   - createdAt
   - defaultRole
-  - description
-  - isAddedOnJoin
   - isManagementRole
-  - isSelfAssignable
-  - name
   - order
-  - permissions
-  - requiresPurchase
-  - requiresTwoFactor
+allOf:
+  - $ref: ./GroupAuditLogEntryDataGroupRole.yaml

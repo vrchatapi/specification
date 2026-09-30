@@ -1,5 +1,0 @@
-title: GroupAuditLogEntryDataGroupUserUnban
-type: object
-description: Data for group.user.unban events.
-additionalProperties: false
-properties: {}

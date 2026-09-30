@@ -2,10 +2,13 @@ title: GroupAuditLogEntryGroupRequestCreate
 type: object
 properties:
   data:
-    $ref: ./GroupAuditLogEntryDataGroupRequestCreate.yaml
+    $ref: ./GroupAuditLogEntryDataEmpty.yaml
   eventType:
     type: string
     const: group.request.create
+  targetId:
+    $ref: ./UserID.yaml
 required:
   - data
   - eventType
+  - targetId

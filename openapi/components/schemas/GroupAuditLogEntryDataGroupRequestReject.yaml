@@ -1,5 +1,0 @@
-title: GroupAuditLogEntryDataGroupRequestReject
-type: object
-description: Data for group.request.reject events.
-additionalProperties: false
-properties: {}

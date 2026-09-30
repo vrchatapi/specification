@@ -2,10 +2,13 @@ title: GroupAuditLogEntryGroupUserUnban
 type: object
 properties:
   data:
-    $ref: ./GroupAuditLogEntryDataGroupUserUnban.yaml
+    $ref: ./GroupAuditLogEntryDataEmpty.yaml
   eventType:
     type: string
     const: group.user.unban
+  targetId:
+    type: string
 required:
   - data
   - eventType
+  - targetId

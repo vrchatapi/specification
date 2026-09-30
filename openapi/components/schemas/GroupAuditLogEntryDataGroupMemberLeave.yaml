@@ -1,5 +1,0 @@
-title: GroupAuditLogEntryDataGroupMemberLeave
-type: object
-description: Data for group.member.leave events.
-additionalProperties: false
-properties: {}
