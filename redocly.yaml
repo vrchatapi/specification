@@ -10,7 +10,6 @@ rules:
   array-parameter-serialization: warn
   component-name-unique: warn
   path-not-include-query: warn
-  scalar-property-missing-example: warn
 
 oas3_0Rules:
   vrchat/no-empty-description: warn
