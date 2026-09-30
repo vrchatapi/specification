@@ -1,0 +1,48 @@
+title: GroupAuditLogEntryUnknown
+type: object
+description: An event whose `eventType` has no schema of its own.
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataUnknown.yaml
+  eventType:
+    type: string
+    not:
+      enum:
+        - group.announcement
+        - group.calendarEvent.create
+        - group.calendarEvent.delete
+        - group.gallery.create
+        - group.gallery.delete
+        - group.gallery.update
+        - group.instance.announcement
+        - group.instance.close
+        - group.instance.create
+        - group.instance.kick
+        - group.instance.warn
+        - group.invite.cancel
+        - group.invite.create
+        - group.member.join
+        - group.member.leave
+        - group.member.remove
+        - group.member.role.assign
+        - group.member.role.unassign
+        - group.member.user.update
+        - group.post.create
+        - group.post.delete
+        - group.post.update
+        - group.request.block
+        - group.request.create
+        - group.request.reject
+        - group.request.withdraw
+        - group.role.create
+        - group.role.delete
+        - group.role.update
+        - group.update
+        - group.user.ban
+        - group.user.unban
+  targetId:
+    type: string
+required:
+  - data
+  - eventType
+  - targetId

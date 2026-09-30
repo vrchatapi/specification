@@ -1,5 +1,41 @@
 title: GroupAuditLogEntryEvent
 description: The `eventType` of an audit log entry and the `data` that goes with it.
+discriminator:
+  defaultMapping: ./GroupAuditLogEntryUnknown.yaml
+  mapping:
+    group.announcement: ./GroupAuditLogEntryGroupAnnouncement.yaml
+    group.calendarEvent.create: ./GroupAuditLogEntryGroupCalendarEventCreate.yaml
+    group.calendarEvent.delete: ./GroupAuditLogEntryGroupCalendarEventDelete.yaml
+    group.gallery.create: ./GroupAuditLogEntryGroupGalleryCreate.yaml
+    group.gallery.delete: ./GroupAuditLogEntryGroupGalleryDelete.yaml
+    group.gallery.update: ./GroupAuditLogEntryGroupGalleryUpdate.yaml
+    group.instance.announcement: ./GroupAuditLogEntryGroupInstanceAnnouncement.yaml
+    group.instance.close: ./GroupAuditLogEntryGroupInstanceClose.yaml
+    group.instance.create: ./GroupAuditLogEntryGroupInstanceCreate.yaml
+    group.instance.kick: ./GroupAuditLogEntryGroupInstanceKick.yaml
+    group.instance.warn: ./GroupAuditLogEntryGroupInstanceWarn.yaml
+    group.invite.cancel: ./GroupAuditLogEntryGroupInviteCancel.yaml
+    group.invite.create: ./GroupAuditLogEntryGroupInviteCreate.yaml
+    group.member.join: ./GroupAuditLogEntryGroupMemberJoin.yaml
+    group.member.leave: ./GroupAuditLogEntryGroupMemberLeave.yaml
+    group.member.remove: ./GroupAuditLogEntryGroupMemberRemove.yaml
+    group.member.role.assign: ./GroupAuditLogEntryGroupMemberRoleAssign.yaml
+    group.member.role.unassign: ./GroupAuditLogEntryGroupMemberRoleUnassign.yaml
+    group.member.user.update: ./GroupAuditLogEntryGroupMemberUserUpdate.yaml
+    group.post.create: ./GroupAuditLogEntryGroupPostCreate.yaml
+    group.post.delete: ./GroupAuditLogEntryGroupPostDelete.yaml
+    group.post.update: ./GroupAuditLogEntryGroupPostUpdate.yaml
+    group.request.block: ./GroupAuditLogEntryGroupRequestBlock.yaml
+    group.request.create: ./GroupAuditLogEntryGroupRequestCreate.yaml
+    group.request.reject: ./GroupAuditLogEntryGroupRequestReject.yaml
+    group.request.withdraw: ./GroupAuditLogEntryGroupRequestWithdraw.yaml
+    group.role.create: ./GroupAuditLogEntryGroupRoleCreate.yaml
+    group.role.delete: ./GroupAuditLogEntryGroupRoleDelete.yaml
+    group.role.update: ./GroupAuditLogEntryGroupRoleUpdate.yaml
+    group.update: ./GroupAuditLogEntryGroupUpdate.yaml
+    group.user.ban: ./GroupAuditLogEntryGroupUserBan.yaml
+    group.user.unban: ./GroupAuditLogEntryGroupUserUnban.yaml
+  propertyName: eventType
 oneOf:
   - $ref: ./GroupAuditLogEntryGroupAnnouncement.yaml
   - $ref: ./GroupAuditLogEntryGroupCalendarEventCreate.yaml
@@ -33,3 +69,4 @@ oneOf:
   - $ref: ./GroupAuditLogEntryGroupUpdate.yaml
   - $ref: ./GroupAuditLogEntryGroupUserBan.yaml
   - $ref: ./GroupAuditLogEntryGroupUserUnban.yaml
+  - $ref: ./GroupAuditLogEntryUnknown.yaml
