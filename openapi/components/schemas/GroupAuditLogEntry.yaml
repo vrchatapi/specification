@@ -56,3 +56,4 @@ oneOf:
   - $ref: ./GroupAuditLogEntryGroupCalendarEventDelete.yaml
   - $ref: ./GroupAuditLogEntryGroupInviteCancel.yaml
   - $ref: ./GroupAuditLogEntryGroupRequestWithdraw.yaml
+  - $ref: ./GroupAuditLogEntryUnknown.yaml

@@ -1,0 +1,5 @@
+title: GroupAuditLogEntryUnknown
+description: Fallback schema for unrecognized group audit log event types with empty object data.
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
+  - $ref: ./GroupAuditLogEntryUnknownDetails.yaml
