@@ -3,14 +3,7 @@ type: object
 description: Data for group.calendarEvent.delete events.
 properties:
   accessType:
-    type: string
-    description: The access type of the event.
-    enum:
-      - friends
-      - invite
-      - members
-      - private
-      - public
+    $ref: ./CalendarEventAccess.yaml
   category:
     type: string
     description: The category of the event.
@@ -63,11 +56,7 @@ properties:
     items:
       type: string
   occurrenceKind:
-    type: string
-    description: The occurrence kind.
-    enum:
-      - recurring
-      - single
+    $ref: ./CalendarEventOccurrenceKind.yaml
   occurrenceModified:
     type:
       - string
@@ -84,8 +73,7 @@ properties:
   recurrence:
     description: The recurrence rule.
     anyOf:
-      - type: object
-        description: The recurrence rule.
+      - $ref: ./CalendarEventRecurrence.yaml
       - type: "null"
   roleIds:
     description: The role IDs with access.
@@ -120,9 +108,6 @@ properties:
   type:
     type: string
     description: The type of calendar entry.
-    enum:
-      - announcement
-      - event
   updatedAt:
     type: string
     description: The last update timestamp.

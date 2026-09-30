@@ -1,4 +1,11 @@
 title: GroupAuditLogEntryGroupInviteCancel
-allOf:
-  - $ref: ./GroupAuditLogEntryBase.yaml
-  - $ref: ./GroupAuditLogEntryGroupInviteCancelDetails.yaml
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupInviteCancel.yaml
+  eventType:
+    type: string
+    const: group.invite.cancel
+required:
+  - data
+  - eventType

@@ -1,4 +1,11 @@
 title: GroupAuditLogEntryGroupUserBan
-allOf:
-  - $ref: ./GroupAuditLogEntryBase.yaml
-  - $ref: ./GroupAuditLogEntryGroupUserBanDetails.yaml
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupUserBan.yaml
+  eventType:
+    type: string
+    const: group.user.ban
+required:
+  - data
+  - eventType

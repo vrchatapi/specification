@@ -1,0 +1,59 @@
+title: GroupAuditLogEntryDataGroupGalleryDelete
+type: object
+description: Data for group.gallery.delete events.
+properties:
+  createdAt:
+    type: string
+    description: The creation timestamp of the gallery.
+    format: date-time
+  description:
+    type: string
+    description: The gallery description.
+  membersOnly:
+    type: boolean
+    description: Whether the gallery is members only.
+  name:
+    type: string
+    description: The gallery name.
+  roleIdsToAutoApprove:
+    type:
+      - array
+      - "null"
+    description: The role IDs whose submissions are approved automatically.
+    items:
+      $ref: ./GroupRoleID.yaml
+  roleIdsToManage:
+    type:
+      - array
+      - "null"
+    description: The role IDs that can manage the gallery.
+    items:
+      $ref: ./GroupRoleID.yaml
+  roleIdsToSubmit:
+    type:
+      - array
+      - "null"
+    description: The role IDs that can submit to the gallery.
+    items:
+      $ref: ./GroupRoleID.yaml
+  roleIdsToView:
+    type:
+      - array
+      - "null"
+    description: The role IDs that can view the gallery.
+    items:
+      $ref: ./GroupRoleID.yaml
+  updatedAt:
+    type: string
+    description: The last update timestamp of the gallery.
+    format: date-time
+required:
+  - createdAt
+  - description
+  - membersOnly
+  - name
+  - roleIdsToAutoApprove
+  - roleIdsToManage
+  - roleIdsToSubmit
+  - roleIdsToView
+  - updatedAt

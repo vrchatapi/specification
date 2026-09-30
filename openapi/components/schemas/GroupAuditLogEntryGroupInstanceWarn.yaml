@@ -1,4 +1,11 @@
 title: GroupAuditLogEntryGroupInstanceWarn
-allOf:
-  - $ref: ./GroupAuditLogEntryBase.yaml
-  - $ref: ./GroupAuditLogEntryGroupInstanceWarnDetails.yaml
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupInstanceWarn.yaml
+  eventType:
+    type: string
+    const: group.instance.warn
+required:
+  - data
+  - eventType

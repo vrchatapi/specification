@@ -3,14 +3,7 @@ type: object
 description: Data for group.calendarEvent.create events.
 properties:
   accessType:
-    type: string
-    description: The access type of the event.
-    enum:
-      - friends
-      - invite
-      - members
-      - private
-      - public
+    $ref: ./CalendarEventAccess.yaml
   description:
     type: string
     description: The description of the calendar event.
@@ -25,9 +18,6 @@ properties:
   type:
     type: string
     description: The type of calendar entry.
-    enum:
-      - announcement
-      - event
 required:
   - accessType
   - description

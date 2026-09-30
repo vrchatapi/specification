@@ -11,7 +11,9 @@ properties:
       - $ref: ./FileID.yaml
       - type: "null"
   roleIds:
-    type: array
+    type:
+      - array
+      - "null"
     description: The role IDs that can see this post.
     items:
       $ref: ./GroupRoleID.yaml
@@ -25,11 +27,7 @@ properties:
     type: string
     description: The title of the post.
   visibility:
-    type: string
-    description: The visibility of the post.
-    enum:
-      - group
-      - public
+    $ref: ./GroupPostVisibility.yaml
 required:
   - authorId
   - imageId

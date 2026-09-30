@@ -7,7 +7,7 @@ properties:
     description: The announcement message.
   title:
     type: string
-    description: The announcement title. Currently, always "Instance Announcement"
+    description: The announcement title.
 required:
   - message
   - title

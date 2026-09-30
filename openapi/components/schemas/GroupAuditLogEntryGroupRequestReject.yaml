@@ -1,4 +1,11 @@
 title: GroupAuditLogEntryGroupRequestReject
-allOf:
-  - $ref: ./GroupAuditLogEntryBase.yaml
-  - $ref: ./GroupAuditLogEntryGroupRequestRejectDetails.yaml
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupRequestReject.yaml
+  eventType:
+    type: string
+    const: group.request.reject
+required:
+  - data
+  - eventType

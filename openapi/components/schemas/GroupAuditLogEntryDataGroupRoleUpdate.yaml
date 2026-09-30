@@ -1,37 +1,10 @@
 title: GroupAuditLogEntryDataGroupRoleUpdate
 type: object
-description: Data for group.role.update events.
+description: Data for group.role.update events. Carries only the fields the update changed.
 properties:
+  description:
+    $ref: ./GroupAuditLogEntryStringChange.yaml
   name:
-    type: object
-    description: The role name that was updated.
-    properties:
-      new:
-        type: string
-        description: The new role name.
-      old:
-        type: string
-        description: The old role name.
-    required:
-      - new
-      - old
+    $ref: ./GroupAuditLogEntryStringChange.yaml
   permissions:
-    type: object
-    description: The role permissions that were updated.
-    properties:
-      new:
-        type: array
-        description: The new permissions.
-        items:
-          type: string
-      old:
-        type: array
-        description: The old permissions.
-        items:
-          type: string
-    required:
-      - new
-      - old
-required:
-  - name
-  - permissions
+    $ref: ./GroupAuditLogEntryStringListChange.yaml

@@ -1,19 +1,6 @@
 title: GroupAuditLogEntryDataGroupMemberUserUpdate
 type: object
-description: Data for group.member.user.update events.
+description: Data for group.member.user.update events. Carries only the fields the update changed.
 properties:
   managerNotes:
-    type: object
-    description: The manager notes that were updated.
-    properties:
-      new:
-        type: string
-        description: The new manager notes.
-      old:
-        type: string
-        description: The old manager notes.
-    required:
-      - new
-      - old
-required:
-  - managerNotes
+    $ref: ./GroupAuditLogEntryStringChange.yaml

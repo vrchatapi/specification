@@ -1,4 +1,11 @@
 title: GroupAuditLogEntryGroupMemberRoleUnassign
-allOf:
-  - $ref: ./GroupAuditLogEntryBase.yaml
-  - $ref: ./GroupAuditLogEntryGroupMemberRoleUnassignDetails.yaml
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupMemberRoleUnassign.yaml
+  eventType:
+    type: string
+    const: group.member.role.unassign
+required:
+  - data
+  - eventType

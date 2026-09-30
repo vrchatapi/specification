@@ -1,4 +1,11 @@
 title: GroupAuditLogEntryGroupRequestWithdraw
-allOf:
-  - $ref: ./GroupAuditLogEntryBase.yaml
-  - $ref: ./GroupAuditLogEntryGroupRequestWithdrawDetails.yaml
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupRequestWithdraw.yaml
+  eventType:
+    type: string
+    const: group.request.withdraw
+required:
+  - data
+  - eventType

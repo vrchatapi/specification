@@ -1,0 +1,15 @@
+title: GroupAuditLogEntryUserIdChange
+type: object
+description: A user ID field's value before and after an update.
+properties:
+  new:
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
+  old:
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
+required:
+  - new
+  - old

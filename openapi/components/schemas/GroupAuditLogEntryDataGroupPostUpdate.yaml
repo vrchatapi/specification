@@ -1,0 +1,10 @@
+title: GroupAuditLogEntryDataGroupPostUpdate
+type: object
+description: Data for group.post.update events. Carries only the fields the update changed.
+properties:
+  editorId:
+    $ref: ./GroupAuditLogEntryUserIdChange.yaml
+  text:
+    $ref: ./GroupAuditLogEntryStringChange.yaml
+  title:
+    $ref: ./GroupAuditLogEntryStringChange.yaml

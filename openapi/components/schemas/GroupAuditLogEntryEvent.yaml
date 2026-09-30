@@ -1,0 +1,35 @@
+title: GroupAuditLogEntryEvent
+description: The `eventType` of an audit log entry and the `data` that goes with it.
+oneOf:
+  - $ref: ./GroupAuditLogEntryGroupAnnouncement.yaml
+  - $ref: ./GroupAuditLogEntryGroupCalendarEventCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupCalendarEventDelete.yaml
+  - $ref: ./GroupAuditLogEntryGroupGalleryCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupGalleryDelete.yaml
+  - $ref: ./GroupAuditLogEntryGroupGalleryUpdate.yaml
+  - $ref: ./GroupAuditLogEntryGroupInstanceAnnouncement.yaml
+  - $ref: ./GroupAuditLogEntryGroupInstanceClose.yaml
+  - $ref: ./GroupAuditLogEntryGroupInstanceCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupInstanceKick.yaml
+  - $ref: ./GroupAuditLogEntryGroupInstanceWarn.yaml
+  - $ref: ./GroupAuditLogEntryGroupInviteCancel.yaml
+  - $ref: ./GroupAuditLogEntryGroupInviteCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberJoin.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberLeave.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberRemove.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberRoleAssign.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberRoleUnassign.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberUserUpdate.yaml
+  - $ref: ./GroupAuditLogEntryGroupPostCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupPostDelete.yaml
+  - $ref: ./GroupAuditLogEntryGroupPostUpdate.yaml
+  - $ref: ./GroupAuditLogEntryGroupRequestBlock.yaml
+  - $ref: ./GroupAuditLogEntryGroupRequestCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupRequestReject.yaml
+  - $ref: ./GroupAuditLogEntryGroupRequestWithdraw.yaml
+  - $ref: ./GroupAuditLogEntryGroupRoleCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupRoleDelete.yaml
+  - $ref: ./GroupAuditLogEntryGroupRoleUpdate.yaml
+  - $ref: ./GroupAuditLogEntryGroupUpdate.yaml
+  - $ref: ./GroupAuditLogEntryGroupUserBan.yaml
+  - $ref: ./GroupAuditLogEntryGroupUserUnban.yaml

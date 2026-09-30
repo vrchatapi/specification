@@ -3,14 +3,7 @@ type: object
 description: Data for group.instance.close events.
 properties:
   groupAccessType:
-    type: string
-    description: The access type of the instance.
-    enum:
-      - friends
-      - invite
-      - members
-      - private
-      - public
+    $ref: ./GroupAccessType.yaml
   roleIds:
     description: The role IDs that have access to the instance.
     anyOf:

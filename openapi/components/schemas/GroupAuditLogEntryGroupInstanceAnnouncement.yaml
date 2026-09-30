@@ -1,4 +1,11 @@
 title: GroupAuditLogEntryGroupInstanceAnnouncement
-allOf:
-  - $ref: ./GroupAuditLogEntryBase.yaml
-  - $ref: ./GroupAuditLogEntryGroupInstanceAnnouncementDetails.yaml
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupInstanceAnnouncement.yaml
+  eventType:
+    type: string
+    const: group.instance.announcement
+required:
+  - data
+  - eventType

@@ -12,8 +12,6 @@ properties:
     type: string
     description: The timestamp when the event occurred.
     format: date-time
-  data:
-    $ref: ./GroupAuditLogEntryBaseData.yaml
   description:
     type: string
     description: A human-readable description of the event.
@@ -33,7 +31,6 @@ required:
   - actorDisplayName
   - actorId
   - created_at
-  - data
   - description
   - eventType
   - groupId

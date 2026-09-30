@@ -1,0 +1,11 @@
+title: GroupAuditLogEntryGroupGalleryCreate
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupGalleryCreate.yaml
+  eventType:
+    type: string
+    const: group.gallery.create
+required:
+  - data
+  - eventType

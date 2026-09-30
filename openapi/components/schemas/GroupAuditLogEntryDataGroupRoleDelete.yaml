@@ -1,22 +1,26 @@
-title: GroupAuditLogEntryDataGroupRoleCreate
+title: GroupAuditLogEntryDataGroupRoleDelete
 type: object
-description: Data for group.role.create events.
+description: Data for group.role.delete events.
 properties:
+  createdAt:
+    type: string
+    description: The creation timestamp of the role.
+    format: date-time
+  defaultRole:
+    type: boolean
+    description: Whether the role is the group's default role.
   description:
     type: string
     description: The role description.
-  groupId:
-    $ref: ./GroupID.yaml
-    description: The group ID.
   isAddedOnJoin:
     type: boolean
     description: Whether the role is automatically assigned on join.
+  isManagementRole:
+    type: boolean
+    description: Whether the role is a management role.
   isSelfAssignable:
     type: boolean
     description: Whether users can self-assign this role.
-  lastUpdatedByUserId:
-    $ref: ./UserID.yaml
-    description: The ID of the user who last updated the role.
   name:
     type: string
     description: The role name.
@@ -27,7 +31,7 @@ properties:
     type: array
     description: The permissions assigned to this role.
     items:
-      type: string
+      $ref: ./GroupPermissions.yaml
   requiresPurchase:
     type: boolean
     description: Whether the role requires a purchase.
@@ -35,12 +39,14 @@ properties:
     type: boolean
     description: Whether the role requires two-factor authentication.
 required:
+  - createdAt
+  - defaultRole
   - description
-  - groupId
   - isAddedOnJoin
+  - isManagementRole
   - isSelfAssignable
-  - lastUpdatedByUserId
   - name
+  - order
   - permissions
   - requiresPurchase
   - requiresTwoFactor

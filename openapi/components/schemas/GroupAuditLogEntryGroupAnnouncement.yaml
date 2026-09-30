@@ -1,0 +1,11 @@
+title: GroupAuditLogEntryGroupAnnouncement
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupAnnouncement.yaml
+  eventType:
+    type: string
+    const: group.announcement
+required:
+  - data
+  - eventType

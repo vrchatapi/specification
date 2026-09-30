@@ -1,0 +1,15 @@
+title: GroupAuditLogEntryStringListChange
+type: object
+description: A list field's value before and after an update.
+properties:
+  new:
+    type: array
+    items:
+      type: string
+  old:
+    type: array
+    items:
+      type: string
+required:
+  - new
+  - old
