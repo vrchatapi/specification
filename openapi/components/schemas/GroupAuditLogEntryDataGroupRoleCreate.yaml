@@ -1,4 +1,4 @@
-# can probably done via psudeocode Omit<GroupRole.yaml, "isManagementRole", "updatedAt">
+# can probably done via pseudocode Omit<GroupRole.yaml, "isManagementRole", "updatedAt">
 title: GroupAuditLogEntryDataGroupRoleCreate
 type: object
 description: Data for group.role.create events.

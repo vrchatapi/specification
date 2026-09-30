@@ -1,0 +1,10 @@
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupPostCreate.yaml
+  eventType:
+    type: string
+    const: group.post.create
+required:
+  - data
+  - eventType

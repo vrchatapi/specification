@@ -1,13 +1,4 @@
 title: GroupAuditLogEntryGroupRoleUpdate
 allOf:
   - $ref: ./GroupAuditLogEntryBase.yaml
-  - type: object
-    properties:
-      data:
-        $ref: ./GroupAuditLogEntryDataGroupRoleUpdate.yaml
-      eventType:
-        type: string
-        const: group.role.update
-    required:
-      - data
-      - eventType
+  - $ref: ./GroupAuditLogEntryGroupRoleUpdateDetails.yaml

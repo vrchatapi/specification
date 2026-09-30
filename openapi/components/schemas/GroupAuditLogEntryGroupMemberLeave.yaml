@@ -1,13 +1,4 @@
 title: GroupAuditLogEntryGroupMemberLeave
 allOf:
   - $ref: ./GroupAuditLogEntryBase.yaml
-  - type: object
-    properties:
-      data:
-        $ref: ./GroupAuditLogEntryDataGroupMemberLeave.yaml
-      eventType:
-        type: string
-        const: group.member.leave
-    required:
-      - data
-      - eventType
+  - $ref: ./GroupAuditLogEntryGroupMemberLeaveDetails.yaml

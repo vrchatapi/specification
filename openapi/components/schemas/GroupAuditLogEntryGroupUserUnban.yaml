@@ -1,13 +1,4 @@
 title: GroupAuditLogEntryGroupUserUnban
 allOf:
   - $ref: ./GroupAuditLogEntryBase.yaml
-  - type: object
-    properties:
-      data:
-        $ref: ./GroupAuditLogEntryDataGroupUserUnban.yaml
-      eventType:
-        type: string
-        const: group.user.unban
-    required:
-      - data
-      - eventType
+  - $ref: ./GroupAuditLogEntryGroupUserUnbanDetails.yaml

@@ -5,7 +5,12 @@ properties:
   accessType:
     type: string
     description: The access type of the event.
-    enum: [friends, invite, members, private, public]
+    enum:
+      - friends
+      - invite
+      - members
+      - private
+      - public
   category:
     type: string
     description: The category of the event.
@@ -17,9 +22,10 @@ properties:
     description: The creation timestamp.
     format: date-time
   deletedAt:
-    type: string
+    type:
+      - string
+      - "null"
     description: The deletion timestamp.
-    nullable: true
     format: date-time
   description:
     type: string
@@ -41,9 +47,10 @@ properties:
     type: integer
     description: Minutes before start that hosts can join.
   imageId:
-    $ref: ./FileID.yaml
     description: The image file ID.
-    nullable: true
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
   interestedUserCount:
     type: integer
     description: The number of interested users.
@@ -58,11 +65,14 @@ properties:
   occurrenceKind:
     type: string
     description: The occurrence kind.
-    enum: [recurring, single]
+    enum:
+      - recurring
+      - single
   occurrenceModified:
-    type: string
+    type:
+      - string
+      - "null"
     description: The occurrence modified timestamp.
-    nullable: true
   ownerId:
     $ref: ./GroupID.yaml
     description: The owner group ID.
@@ -72,23 +82,29 @@ properties:
     items:
       type: string
   recurrence:
-    type: object
     description: The recurrence rule.
-    nullable: true
+    anyOf:
+      - type: object
+        description: The recurrence rule.
+      - type: "null"
   roleIds:
-    type: array
     description: The role IDs with access.
-    nullable: true
-    items:
-      $ref: ./GroupRoleID.yaml
+    anyOf:
+      - type: array
+        description: The role IDs with access.
+        items:
+          $ref: ./GroupRoleID.yaml
+      - type: "null"
   seriesId:
-    type: string
+    type:
+      - string
+      - "null"
     description: The series ID for recurring events.
-    nullable: true
   shortCode:
-    type: string
+    type:
+      - string
+      - "null"
     description: The short code.
-    nullable: true
   startsAt:
     type: string
     description: The start timestamp.
@@ -104,7 +120,9 @@ properties:
   type:
     type: string
     description: The type of calendar entry.
-    enum: [announcement, event]
+    enum:
+      - announcement
+      - event
   updatedAt:
     type: string
     description: The last update timestamp.

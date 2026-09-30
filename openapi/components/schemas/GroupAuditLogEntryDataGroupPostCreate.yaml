@@ -6,9 +6,10 @@ properties:
     $ref: ./UserID.yaml
     description: The ID of the post author.
   imageId:
-    $ref: ./FileID.yaml
     description: The image file ID attached to the post.
-    nullable: true
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
   roleIds:
     type: array
     description: The role IDs that can see this post.
@@ -26,7 +27,9 @@ properties:
   visibility:
     type: string
     description: The visibility of the post.
-    enum: [group, public]
+    enum:
+      - group
+      - public
 required:
   - authorId
   - imageId

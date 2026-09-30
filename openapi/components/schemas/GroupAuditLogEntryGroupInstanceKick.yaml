@@ -1,13 +1,4 @@
 title: GroupAuditLogEntryGroupInstanceKick
 allOf:
   - $ref: ./GroupAuditLogEntryBase.yaml
-  - type: object
-    properties:
-      data:
-        $ref: ./GroupAuditLogEntryDataGroupInstanceKick.yaml
-      eventType:
-        type: string
-        const: group.instance.kick
-    required:
-      - data
-      - eventType
+  - $ref: ./GroupAuditLogEntryGroupInstanceKickDetails.yaml

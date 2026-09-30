@@ -1,13 +1,4 @@
 title: GroupAuditLogEntryGroupMemberRoleAssign
 allOf:
   - $ref: ./GroupAuditLogEntryBase.yaml
-  - type: object
-    properties:
-      data:
-        $ref: ./GroupAuditLogEntryDataGroupMemberRoleAssign.yaml
-      eventType:
-        type: string
-        const: group.member.role.assign
-    required:
-      - data
-      - eventType
+  - $ref: ./GroupAuditLogEntryGroupMemberRoleAssignDetails.yaml

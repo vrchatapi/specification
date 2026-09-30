@@ -1,13 +1,4 @@
 title: GroupAuditLogEntryGroupRequestCreate
 allOf:
   - $ref: ./GroupAuditLogEntryBase.yaml
-  - type: object
-    properties:
-      data:
-        $ref: ./GroupAuditLogEntryDataGroupRequestCreate.yaml
-      eventType:
-        type: string
-        const: group.request.create
-    required:
-      - data
-      - eventType
+  - $ref: ./GroupAuditLogEntryGroupRequestCreateDetails.yaml

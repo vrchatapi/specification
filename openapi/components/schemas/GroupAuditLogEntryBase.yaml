@@ -13,8 +13,7 @@ properties:
     description: The timestamp when the event occurred.
     format: date-time
   data:
-    type: object
-    description: The data associated with the event. The format of this data is dependent on the event type.
+    $ref: ./GroupAuditLogEntryBaseData.yaml
   description:
     type: string
     description: A human-readable description of the event.

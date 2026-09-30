@@ -1,13 +1,4 @@
 title: GroupAuditLogEntryGroupRoleCreate
 allOf:
   - $ref: ./GroupAuditLogEntryBase.yaml
-  - type: object
-    properties:
-      data:
-        $ref: ./GroupAuditLogEntryDataGroupRoleCreate.yaml
-      eventType:
-        type: string
-        const: group.role.create
-    required:
-      - data
-      - eventType
+  - $ref: ./GroupAuditLogEntryGroupRoleCreateDetails.yaml

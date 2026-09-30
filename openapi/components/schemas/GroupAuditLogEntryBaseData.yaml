@@ -1,0 +1,2 @@
+type: object
+description: The data associated with the event. The format of this data is dependent on the event type.

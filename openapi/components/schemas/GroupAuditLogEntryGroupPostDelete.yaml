@@ -1,13 +1,4 @@
 title: GroupAuditLogEntryGroupPostDelete
 allOf:
   - $ref: ./GroupAuditLogEntryBase.yaml
-  - type: object
-    properties:
-      data:
-        $ref: ./GroupAuditLogEntryDataGroupPostDelete.yaml
-      eventType:
-        type: string
-        const: group.post.delete
-    required:
-      - data
-      - eventType
+  - $ref: ./GroupAuditLogEntryGroupPostDeleteDetails.yaml

@@ -1,13 +1,4 @@
 title: GroupAuditLogEntryGroupMemberUserUpdate
 allOf:
   - $ref: ./GroupAuditLogEntryBase.yaml
-  - type: object
-    properties:
-      data:
-        $ref: ./GroupAuditLogEntryDataGroupMemberUserUpdate.yaml
-      eventType:
-        type: string
-        const: group.member.user.update
-    required:
-      - data
-      - eventType
+  - $ref: ./GroupAuditLogEntryGroupMemberUserUpdateDetails.yaml

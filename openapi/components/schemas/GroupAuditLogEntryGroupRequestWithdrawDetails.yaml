@@ -1,0 +1,10 @@
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupRequestWithdraw.yaml
+  eventType:
+    type: string
+    const: group.request.withdraw
+required:
+  - data
+  - eventType

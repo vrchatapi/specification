@@ -10,17 +10,20 @@ properties:
     description: The creation timestamp of the post.
     format: date-time
   editorId:
-    $ref: ./UserID.yaml
     description: The ID of the user who last edited the post.
-    nullable: true
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
   imageId:
-    $ref: ./GroupRoleID.yaml
     description: The image file ID attached to the post.
-    nullable: true
+    anyOf:
+      - $ref: ./GroupRoleID.yaml
+      - type: "null"
   imageUrl:
-    type: string
+    type:
+      - string
+      - "null"
     description: The URL of the post image.
-    nullable: true
     format: uri
   roleIds:
     type: array
@@ -40,7 +43,9 @@ properties:
   visibility:
     type: string
     description: The visibility of the post.
-    enum: [group, public]
+    enum:
+      - group
+      - public
 required:
   - authorId
   - createdAt

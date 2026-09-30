@@ -1,0 +1,10 @@
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupUserBan.yaml
+  eventType:
+    type: string
+    const: group.user.ban
+required:
+  - data
+  - eventType
