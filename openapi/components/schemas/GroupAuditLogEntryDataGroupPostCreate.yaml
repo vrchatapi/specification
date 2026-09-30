@@ -1,0 +1,18 @@
+title: GroupAuditLogEntryDataGroupPostCreate
+type: object
+properties:
+  roleIds:
+    type:
+      - array
+      - "null"
+    description: The role IDs that can see the post.
+    items:
+      $ref: ./GroupRoleID.yaml
+  sendNotification:
+    type: boolean
+    description: Whether a notification was sent for this post.
+required:
+  - roleIds
+  - sendNotification
+allOf:
+  - $ref: ./GroupAuditLogEntryDataGroupPost.yaml

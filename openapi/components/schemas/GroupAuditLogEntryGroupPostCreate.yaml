@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupPostCreate
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupPostCreate.yaml
+  eventType:
+    type: string
+    const: group.post.create
+  targetId:
+    $ref: ./NotificationID.yaml
+required:
+  - data
+  - eventType
+  - targetId

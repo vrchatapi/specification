@@ -1,0 +1,20 @@
+title: GroupAuditLogEntryDataGroupRoleDelete
+type: object
+properties:
+  createdAt:
+    type: string
+    description: The creation timestamp of the role.
+    format: date-time
+  defaultRole:
+    type: boolean
+    description: Whether the role is the group's default role.
+  isManagementRole:
+    type: boolean
+    description: Whether the role is a management role.
+required:
+  - createdAt
+  - defaultRole
+  - isManagementRole
+  - order
+allOf:
+  - $ref: ./GroupAuditLogEntryDataGroupRole.yaml

@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupMemberLeave
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataEmpty.yaml
+  eventType:
+    type: string
+    const: group.member.leave
+  targetId:
+    $ref: ./UserID.yaml
+required:
+  - data
+  - eventType
+  - targetId

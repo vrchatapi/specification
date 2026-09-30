@@ -1,0 +1,12 @@
+title: GroupAuditLogEntryDataGroupInstanceAnnouncement
+type: object
+properties:
+  message:
+    type: string
+    description: The announcement message.
+  title:
+    type: string
+    description: The announcement title.
+required:
+  - message
+  - title

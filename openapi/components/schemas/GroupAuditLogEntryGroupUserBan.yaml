@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupUserBan
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataEmpty.yaml
+  eventType:
+    type: string
+    const: group.user.ban
+  targetId:
+    $ref: ./UserID.yaml
+required:
+  - data
+  - eventType
+  - targetId

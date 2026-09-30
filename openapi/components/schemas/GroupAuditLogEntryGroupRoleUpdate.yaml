@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupRoleUpdate
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupRoleUpdate.yaml
+  eventType:
+    type: string
+    const: group.role.update
+  targetId:
+    $ref: ./GroupRoleID.yaml
+required:
+  - data
+  - eventType
+  - targetId

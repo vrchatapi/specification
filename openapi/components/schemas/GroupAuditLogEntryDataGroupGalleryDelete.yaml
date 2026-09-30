@@ -1,0 +1,16 @@
+title: GroupAuditLogEntryDataGroupGalleryDelete
+type: object
+properties:
+  createdAt:
+    type: string
+    description: The creation timestamp of the gallery.
+    format: date-time
+  updatedAt:
+    type: string
+    description: The last update timestamp of the gallery.
+    format: date-time
+required:
+  - createdAt
+  - updatedAt
+allOf:
+  - $ref: ./GroupAuditLogEntryDataGroupGalleryCreate.yaml

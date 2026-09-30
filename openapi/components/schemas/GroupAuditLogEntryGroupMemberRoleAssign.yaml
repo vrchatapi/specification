@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupMemberRoleAssign
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupMemberRole.yaml
+  eventType:
+    type: string
+    const: group.member.role.assign
+  targetId:
+    $ref: ./UserID.yaml
+required:
+  - data
+  - eventType
+  - targetId

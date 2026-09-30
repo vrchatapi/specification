@@ -1,0 +1,48 @@
+title: GroupAuditLogEntryDataGroupGalleryCreate
+type: object
+properties:
+  description:
+    type: string
+    description: The gallery description.
+  membersOnly:
+    type: boolean
+    description: Whether the gallery is members only.
+  name:
+    type: string
+    description: The gallery name.
+  roleIdsToAutoApprove:
+    type:
+      - array
+      - "null"
+    description: The role IDs whose submissions are approved automatically.
+    items:
+      $ref: ./GroupRoleID.yaml
+  roleIdsToManage:
+    type:
+      - array
+      - "null"
+    description: The role IDs that can manage the gallery.
+    items:
+      $ref: ./GroupRoleID.yaml
+  roleIdsToSubmit:
+    type:
+      - array
+      - "null"
+    description: The role IDs that can submit to the gallery.
+    items:
+      $ref: ./GroupRoleID.yaml
+  roleIdsToView:
+    type:
+      - array
+      - "null"
+    description: The role IDs that can view the gallery.
+    items:
+      $ref: ./GroupRoleID.yaml
+required:
+  - description
+  - membersOnly
+  - name
+  - roleIdsToAutoApprove
+  - roleIdsToManage
+  - roleIdsToSubmit
+  - roleIdsToView

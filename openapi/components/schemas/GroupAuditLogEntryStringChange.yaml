@@ -1,0 +1,11 @@
+title: GroupAuditLogEntryStringChange
+type: object
+description: A text field's value before and after an update.
+properties:
+  new:
+    type: string
+  old:
+    type: string
+required:
+  - new
+  - old

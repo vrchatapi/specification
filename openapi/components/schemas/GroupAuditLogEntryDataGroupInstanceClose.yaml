@@ -1,0 +1,15 @@
+title: GroupAuditLogEntryDataGroupInstanceClose
+type: object
+properties:
+  groupAccessType:
+    $ref: ./GroupAccessType.yaml
+  roleIds:
+    type:
+      - array
+      - "null"
+    description: The role IDs that have access to the instance.
+    items:
+      $ref: ./GroupRoleID.yaml
+required:
+  - groupAccessType
+  - roleIds

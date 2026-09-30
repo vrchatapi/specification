@@ -1,0 +1,26 @@
+title: GroupAuditLogEntryDataGroupAnnouncement
+type: object
+properties:
+  authorId:
+    $ref: ./UserID.yaml
+    description: The ID of the announcement author.
+  imageId:
+    description: The image file ID attached to the announcement.
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
+  sendNotification:
+    type: boolean
+    description: Whether a notification was sent for this announcement.
+  text:
+    type: string
+    description: The text content of the announcement.
+  title:
+    type: string
+    description: The title of the announcement.
+required:
+  - authorId
+  - imageId
+  - sendNotification
+  - text
+  - title

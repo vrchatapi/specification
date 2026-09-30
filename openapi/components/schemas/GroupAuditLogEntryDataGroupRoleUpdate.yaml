@@ -1,0 +1,10 @@
+title: GroupAuditLogEntryDataGroupRoleUpdate
+type: object
+description: Carries only the fields the update changed.
+properties:
+  description:
+    $ref: ./GroupAuditLogEntryStringChange.yaml
+  name:
+    $ref: ./GroupAuditLogEntryStringChange.yaml
+  permissions:
+    $ref: ./GroupAuditLogEntryStringListChange.yaml

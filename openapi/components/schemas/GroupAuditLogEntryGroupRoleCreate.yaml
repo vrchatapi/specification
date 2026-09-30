@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupRoleCreate
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupRoleCreate.yaml
+  eventType:
+    type: string
+    const: group.role.create
+  targetId:
+    $ref: ./GroupRoleID.yaml
+required:
+  - data
+  - eventType
+  - targetId

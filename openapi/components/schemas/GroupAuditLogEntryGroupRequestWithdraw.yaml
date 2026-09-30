@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupRequestWithdraw
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataEmpty.yaml
+  eventType:
+    type: string
+    const: group.request.withdraw
+  targetId:
+    $ref: ./UserID.yaml
+required:
+  - data
+  - eventType
+  - targetId

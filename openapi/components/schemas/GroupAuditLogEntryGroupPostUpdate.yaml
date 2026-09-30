@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupPostUpdate
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupPostUpdate.yaml
+  eventType:
+    type: string
+    const: group.post.update
+  targetId:
+    $ref: ./NotificationID.yaml
+required:
+  - data
+  - eventType
+  - targetId
