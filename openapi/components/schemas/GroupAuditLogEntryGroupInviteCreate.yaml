@@ -1,0 +1,13 @@
+title: GroupAuditLogEntryGroupInviteCreate
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
+  - type: object
+    properties:
+      data:
+        $ref: ./GroupAuditLogEntryDataGroupInviteCreate.yaml
+      eventType:
+        type: string
+        const: group.invite.create
+    required:
+      - data
+      - eventType

@@ -1,0 +1,37 @@
+title: GroupAuditLogEntryDataGroupRoleUpdate
+type: object
+description: Data for group.role.update events.
+properties:
+  name:
+    type: object
+    description: The role name that was updated.
+    properties:
+      new:
+        type: string
+        description: The new role name.
+      old:
+        type: string
+        description: The old role name.
+    required:
+      - new
+      - old
+  permissions:
+    type: object
+    description: The role permissions that were updated.
+    properties:
+      new:
+        type: array
+        description: The new permissions.
+        items:
+          type: string
+      old:
+        type: array
+        description: The old permissions.
+        items:
+          type: string
+    required:
+      - new
+      - old
+required:
+  - name
+  - permissions

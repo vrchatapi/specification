@@ -1,0 +1,13 @@
+title: GroupAuditLogEntryGroupInstanceClose
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
+  - type: object
+    properties:
+      data:
+        $ref: ./GroupAuditLogEntryDataGroupInstanceClose.yaml
+      eventType:
+        type: string
+        const: group.instance.close
+    required:
+      - data
+      - eventType

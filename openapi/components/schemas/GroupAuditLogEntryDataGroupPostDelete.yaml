@@ -1,0 +1,54 @@
+title: GroupAuditLogEntryDataGroupPostDelete
+type: object
+description: Data for group.post.delete events.
+properties:
+  authorId:
+    $ref: ./UserID.yaml
+    description: The ID of the post author.
+  createdAt:
+    type: string
+    description: The creation timestamp of the post.
+    format: date-time
+  editorId:
+    $ref: ./UserID.yaml
+    description: The ID of the user who last edited the post.
+    nullable: true
+  imageId:
+    $ref: ./GroupRoleID.yaml
+    description: The image file ID attached to the post.
+    nullable: true
+  imageUrl:
+    type: string
+    description: The URL of the post image.
+    nullable: true
+    format: uri
+  roleIds:
+    type: array
+    description: The role IDs that could see this post.
+    items:
+      $ref: ./GroupRoleID.yaml
+  text:
+    type: string
+    description: The text content of the post.
+  title:
+    type: string
+    description: The title of the post.
+  updatedAt:
+    type: string
+    description: The last update timestamp of the post.
+    format: date-time
+  visibility:
+    type: string
+    description: The visibility of the post.
+    enum: [group, public]
+required:
+  - authorId
+  - createdAt
+  - editorId
+  - imageId
+  - imageUrl
+  - roleIds
+  - text
+  - title
+  - updatedAt
+  - visibility

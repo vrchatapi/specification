@@ -1,0 +1,13 @@
+title: GroupAuditLogEntryGroupMemberJoin
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
+  - type: object
+    properties:
+      data:
+        $ref: ./GroupAuditLogEntryDataGroupMemberJoin.yaml
+      eventType:
+        type: string
+        const: group.member.join
+    required:
+      - data
+      - eventType

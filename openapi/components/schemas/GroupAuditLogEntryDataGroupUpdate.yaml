@@ -1,0 +1,25 @@
+title: GroupAuditLogEntryDataGroupUpdate
+type: object
+description: Data for group.update events.
+properties:
+  links:
+    type: object
+    description: The group links that were updated.
+    properties:
+      new:
+        type: array
+        description: The new links.
+        items:
+          type: string
+          format: uri
+      old:
+        type: array
+        description: The old links.
+        items:
+          type: string
+          format: uri
+    required:
+      - new
+      - old
+required:
+  - links

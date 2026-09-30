@@ -1,0 +1,13 @@
+title: GroupAuditLogEntryGroupRequestBlock
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
+  - type: object
+    properties:
+      data:
+        $ref: ./GroupAuditLogEntryDataGroupRequestBlock.yaml
+      eventType:
+        type: string
+        const: group.request.block
+    required:
+      - data
+      - eventType

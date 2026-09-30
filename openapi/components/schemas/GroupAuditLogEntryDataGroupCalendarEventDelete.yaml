@@ -1,0 +1,144 @@
+title: GroupAuditLogEntryDataGroupCalendarEventDelete
+type: object
+description: Data for group.calendarEvent.delete events.
+properties:
+  accessType:
+    type: string
+    description: The access type of the event.
+    enum: [friends, invite, members, private, public]
+  category:
+    type: string
+    description: The category of the event.
+  closeInstanceAfterEndMinutes:
+    type: integer
+    description: Minutes after event end to close the instance.
+  createdAt:
+    type: string
+    description: The creation timestamp.
+    format: date-time
+  deletedAt:
+    type: string
+    description: The deletion timestamp.
+    nullable: true
+    format: date-time
+  description:
+    type: string
+    description: The event description.
+  durationInMs:
+    type: integer
+    description: The duration of the event in milliseconds.
+  endsAt:
+    type: string
+    description: The end timestamp.
+    format: date-time
+  featured:
+    type: boolean
+    description: Whether the event is featured.
+  guestEarlyJoinMinutes:
+    type: integer
+    description: Minutes before start that guests can join.
+  hostEarlyJoinMinutes:
+    type: integer
+    description: Minutes before start that hosts can join.
+  imageId:
+    $ref: ./FileID.yaml
+    description: The image file ID.
+    nullable: true
+  interestedUserCount:
+    type: integer
+    description: The number of interested users.
+  isDraft:
+    type: boolean
+    description: Whether the event is a draft.
+  languages:
+    type: array
+    description: The languages for the event.
+    items:
+      type: string
+  occurrenceKind:
+    type: string
+    description: The occurrence kind.
+    enum: [recurring, single]
+  occurrenceModified:
+    type: string
+    description: The occurrence modified timestamp.
+    nullable: true
+  ownerId:
+    $ref: ./GroupID.yaml
+    description: The owner group ID.
+  platforms:
+    type: array
+    description: The supported platforms.
+    items:
+      type: string
+  recurrence:
+    type: object
+    description: The recurrence rule.
+    nullable: true
+  roleIds:
+    type: array
+    description: The role IDs with access.
+    nullable: true
+    items:
+      $ref: ./GroupRoleID.yaml
+  seriesId:
+    type: string
+    description: The series ID for recurring events.
+    nullable: true
+  shortCode:
+    type: string
+    description: The short code.
+    nullable: true
+  startsAt:
+    type: string
+    description: The start timestamp.
+    format: date-time
+  tags:
+    type: array
+    description: The event tags.
+    items:
+      type: string
+  title:
+    type: string
+    description: The event title.
+  type:
+    type: string
+    description: The type of calendar entry.
+    enum: [announcement, event]
+  updatedAt:
+    type: string
+    description: The last update timestamp.
+    format: date-time
+  usesInstanceOverflow:
+    type: boolean
+    description: Whether the event uses instance overflow.
+required:
+  - accessType
+  - category
+  - closeInstanceAfterEndMinutes
+  - createdAt
+  - deletedAt
+  - description
+  - durationInMs
+  - endsAt
+  - featured
+  - guestEarlyJoinMinutes
+  - hostEarlyJoinMinutes
+  - imageId
+  - interestedUserCount
+  - isDraft
+  - languages
+  - occurrenceKind
+  - occurrenceModified
+  - ownerId
+  - platforms
+  - recurrence
+  - roleIds
+  - seriesId
+  - shortCode
+  - startsAt
+  - tags
+  - title
+  - type
+  - updatedAt
+  - usesInstanceOverflow

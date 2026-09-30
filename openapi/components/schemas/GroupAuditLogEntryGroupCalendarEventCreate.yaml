@@ -1,0 +1,13 @@
+title: GroupAuditLogEntryGroupCalendarEventCreate
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
+  - type: object
+    properties:
+      data:
+        $ref: ./GroupAuditLogEntryDataGroupCalendarEventCreate.yaml
+      eventType:
+        type: string
+        const: group.calendarEvent.create
+    required:
+      - data
+      - eventType

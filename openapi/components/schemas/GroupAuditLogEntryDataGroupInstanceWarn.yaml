@@ -1,0 +1,9 @@
+title: GroupAuditLogEntryDataGroupInstanceWarn
+type: object
+description: Data for group.instance.warn events.
+properties:
+  location:
+    $ref: ./LocationID.yaml
+    description: The location string of the instance.
+required:
+  - location

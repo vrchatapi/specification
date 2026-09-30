@@ -1,0 +1,13 @@
+title: GroupAuditLogEntryGroupCalendarEventDelete
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
+  - type: object
+    properties:
+      data:
+        $ref: ./GroupAuditLogEntryDataGroupCalendarEventDelete.yaml
+      eventType:
+        type: string
+        const: group.calendarEvent.delete
+    required:
+      - data
+      - eventType

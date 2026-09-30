@@ -1,0 +1,28 @@
+title: GroupAuditLogEntryDataGroupCalendarEventCreate
+type: object
+description: Data for group.calendarEvent.create events.
+properties:
+  accessType:
+    type: string
+    description: The access type of the event.
+    enum: [friends, invite, members, private, public]
+  description:
+    type: string
+    description: The description of the calendar event.
+  imageId:
+    $ref: ./FileID.yaml
+    description: The image file ID for the event.
+    nullable: true
+  title:
+    type: string
+    description: The title of the calendar event.
+  type:
+    type: string
+    description: The type of calendar entry.
+    enum: [announcement, event]
+required:
+  - accessType
+  - description
+  - imageId
+  - title
+  - type

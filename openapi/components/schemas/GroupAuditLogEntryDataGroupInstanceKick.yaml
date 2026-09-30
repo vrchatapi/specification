@@ -1,0 +1,9 @@
+title: GroupAuditLogEntryDataGroupInstanceKick
+type: object
+description: Data for group.instance.kick events.
+properties:
+  location:
+    $ref: ./LocationID.yaml
+    description: The location string of the instance (worldID:instanceID~group(...)~groupAccessType(...)~region(...)).
+required:
+  - location

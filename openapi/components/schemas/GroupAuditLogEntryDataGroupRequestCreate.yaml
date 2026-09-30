@@ -1,0 +1,5 @@
+title: GroupAuditLogEntryDataGroupRequestCreate
+type: object
+description: Data for group.request.create events.
+additionalProperties: false
+properties: {}

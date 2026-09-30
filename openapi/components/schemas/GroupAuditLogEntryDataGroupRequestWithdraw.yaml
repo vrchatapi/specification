@@ -1,0 +1,5 @@
+title: GroupAuditLogEntryDataGroupRequestWithdraw
+type: object
+description: Data for group.request.withdraw events.
+additionalProperties: false
+properties: {}

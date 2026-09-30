@@ -1,0 +1,13 @@
+title: GroupAuditLogEntryGroupMemberRemove
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
+  - type: object
+    properties:
+      data:
+        $ref: ./GroupAuditLogEntryDataGroupMemberRemove.yaml
+      eventType:
+        type: string
+        const: group.member.remove
+    required:
+      - data
+      - eventType

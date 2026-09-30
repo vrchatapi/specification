@@ -1,0 +1,19 @@
+title: GroupAuditLogEntryDataGroupMemberUserUpdate
+type: object
+description: Data for group.member.user.update events.
+properties:
+  managerNotes:
+    type: object
+    description: The manager notes that were updated.
+    properties:
+      new:
+        type: string
+        description: The new manager notes.
+      old:
+        type: string
+        description: The old manager notes.
+    required:
+      - new
+      - old
+required:
+  - managerNotes

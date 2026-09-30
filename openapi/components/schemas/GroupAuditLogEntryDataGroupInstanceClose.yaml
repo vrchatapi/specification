@@ -1,0 +1,17 @@
+title: GroupAuditLogEntryDataGroupInstanceClose
+type: object
+description: Data for group.instance.close events.
+properties:
+  groupAccessType:
+    type: string
+    description: The access type of the instance.
+    enum: [friends, invite, members, private, public]
+  roleIds:
+    type: array
+    description: The role IDs that have access to the instance.
+    nullable: true
+    items:
+      $ref: ./GroupRoleID.yaml
+required:
+  - groupAccessType
+  - roleIds

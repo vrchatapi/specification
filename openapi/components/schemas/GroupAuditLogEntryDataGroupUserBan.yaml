@@ -1,0 +1,5 @@
+title: GroupAuditLogEntryDataGroupUserBan
+type: object
+description: Data for group.user.ban events.
+additionalProperties: false
+properties: {}

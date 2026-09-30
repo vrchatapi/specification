@@ -1,0 +1,13 @@
+title: GroupAuditLogEntryDataGroupInstanceAnnouncement
+type: object
+description: Data for group.instance.announcement events.
+properties:
+  message:
+    type: string
+    description: The announcement message.
+  title:
+    type: string
+    description: The announcement title. Currently, always "Instance Announcement"
+required:
+  - message
+  - title

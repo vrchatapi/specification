@@ -1,0 +1,5 @@
+title: GroupAuditLogEntryDataGroupInviteCancel
+type: object
+description: Data for group.invite.cancel events.
+additionalProperties: false
+properties: {}

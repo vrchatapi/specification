@@ -1,34 +1,58 @@
 title: GroupAuditLogEntry
-type: object
-properties:
-  actorDisplayName:
-    type: string
-  actorId:
-    $ref: ./UserID.yaml
-  created_at:
-    type: string
-    format: date-time
-  data:
-    type: object
-    description: The data associated with the event. The format of this data is dependent on the event type.
-    examples:
-      - description:
-          new: "My exciting new group. It's pretty nifty!"
-          old: "My exciting new group.  It's pretty nifty!"
-        joinState:
-          new: request
-          old: closed
-  description:
-    type: string
-    description: A human-readable description of the event.
-    examples:
-      - Group role updated
-  eventType:
-    $ref: ./GroupAuditLogEntryType.yaml
-  groupId:
-    $ref: ./GroupID.yaml
-  id:
-    $ref: ./GroupAuditLogID.yaml
-  targetId:
-    type: string
-    description: Typically a UserID, GroupID, GroupRoleID, or Location, but could be other types of IDs.
+description: A union of all group audit log entry types, discriminated by eventType.
+discriminator:
+  mapping:
+    group.calendarEvent.create: ./GroupAuditLogEntryGroupCalendarEventCreate.yaml
+    group.calendarEvent.delete: ./GroupAuditLogEntryGroupCalendarEventDelete.yaml
+    group.instance.announcement: ./GroupAuditLogEntryGroupInstanceAnnouncement.yaml
+    group.instance.close: ./GroupAuditLogEntryGroupInstanceClose.yaml
+    group.instance.create: ./GroupAuditLogEntryGroupInstanceCreate.yaml
+    group.instance.kick: ./GroupAuditLogEntryGroupInstanceKick.yaml
+    group.instance.warn: ./GroupAuditLogEntryGroupInstanceWarn.yaml
+    group.invite.cancel: ./GroupAuditLogEntryGroupInviteCancel.yaml
+    group.invite.create: ./GroupAuditLogEntryGroupInviteCreate.yaml
+    group.member.join: ./GroupAuditLogEntryGroupMemberJoin.yaml
+    group.member.leave: ./GroupAuditLogEntryGroupMemberLeave.yaml
+    group.member.remove: ./GroupAuditLogEntryGroupMemberRemove.yaml
+    group.member.role.assign: ./GroupAuditLogEntryGroupMemberRoleAssign.yaml
+    group.member.role.unassign: ./GroupAuditLogEntryGroupMemberRoleUnassign.yaml
+    group.member.user.update: ./GroupAuditLogEntryGroupMemberUserUpdate.yaml
+    group.post.create: ./GroupAuditLogEntryGroupPostCreate.yaml
+    group.post.delete: ./GroupAuditLogEntryGroupPostDelete.yaml
+    group.request.block: ./GroupAuditLogEntryGroupRequestBlock.yaml
+    group.request.create: ./GroupAuditLogEntryGroupRequestCreate.yaml
+    group.request.reject: ./GroupAuditLogEntryGroupRequestReject.yaml
+    group.request.withdraw: ./GroupAuditLogEntryGroupRequestWithdraw.yaml
+    group.role.create: ./GroupAuditLogEntryGroupRoleCreate.yaml
+    group.role.update: ./GroupAuditLogEntryGroupRoleUpdate.yaml
+    group.update: ./GroupAuditLogEntryGroupUpdate.yaml
+    group.user.ban: ./GroupAuditLogEntryGroupUserBan.yaml
+    group.user.unban: ./GroupAuditLogEntryGroupUserUnban.yaml
+  propertyName: eventType
+oneOf:
+  - $ref: ./GroupAuditLogEntryGroupInstanceKick.yaml
+  - $ref: ./GroupAuditLogEntryGroupInviteCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberJoin.yaml
+  - $ref: ./GroupAuditLogEntryGroupInstanceClose.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberLeave.yaml
+  - $ref: ./GroupAuditLogEntryGroupInstanceCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupPostCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupInstanceWarn.yaml
+  - $ref: ./GroupAuditLogEntryGroupRequestCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupUserBan.yaml
+  - $ref: ./GroupAuditLogEntryGroupRequestReject.yaml
+  - $ref: ./GroupAuditLogEntryGroupCalendarEventCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupRequestBlock.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberRoleAssign.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberRoleUnassign.yaml
+  - $ref: ./GroupAuditLogEntryGroupUpdate.yaml
+  - $ref: ./GroupAuditLogEntryGroupUserUnban.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberUserUpdate.yaml
+  - $ref: ./GroupAuditLogEntryGroupMemberRemove.yaml
+  - $ref: ./GroupAuditLogEntryGroupRoleUpdate.yaml
+  - $ref: ./GroupAuditLogEntryGroupInstanceAnnouncement.yaml
+  - $ref: ./GroupAuditLogEntryGroupRoleCreate.yaml
+  - $ref: ./GroupAuditLogEntryGroupPostDelete.yaml
+  - $ref: ./GroupAuditLogEntryGroupCalendarEventDelete.yaml
+  - $ref: ./GroupAuditLogEntryGroupInviteCancel.yaml
+  - $ref: ./GroupAuditLogEntryGroupRequestWithdraw.yaml
