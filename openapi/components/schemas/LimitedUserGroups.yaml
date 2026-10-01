@@ -55,3 +55,5 @@ properties:
     type: string
   shortCode:
     $ref: ./GroupShortCode.yaml
+  storeId:
+    $ref: ./StoreID.yaml

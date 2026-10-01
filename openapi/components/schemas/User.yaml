@@ -35,6 +35,8 @@ properties:
     format: date
   developerType:
     $ref: ./DeveloperType.yaml
+  discordId:
+    type: string
   displayName:
     type: string
     description: "A users visual display name. This is what shows up in-game, and can different from their `username`. Changing display name is restricted to a cooldown period."
