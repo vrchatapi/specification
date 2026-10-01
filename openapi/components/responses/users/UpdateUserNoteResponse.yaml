@@ -1,0 +1,11 @@
+description: An empty `note` clears the note and returns a string in place of the `UserNote`.
+content:
+  application/json:
+    examples:
+      Note Cleared:
+        value: User note cleared.
+    schema:
+      title: UpdateUserNoteResponse
+      oneOf:
+        - $ref: ../../schemas/UserNote.yaml
+        - type: string

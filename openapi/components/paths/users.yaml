@@ -114,7 +114,7 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/users/UserNoteResponse.yaml
+          $ref: ../responses/users/UpdateUserNoteResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/userNotes/{userNoteId}":
