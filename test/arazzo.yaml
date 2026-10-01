@@ -11200,6 +11200,318 @@ workflows:
             type: goto
             stepId: offline-counter
 
+  - workflowId: get-world-friend-instances
+    summary: Get the world of every online friend in one
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-world-friend-instances-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-world-friend-instances-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: false
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: friend-here
+            type: goto
+            stepId: get-user
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-friends-left
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: get-user
+        operationId: $sourceDescriptions.default.getUser
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: in-a-world
+            type: goto
+            stepId: get-world
+            criteria:
+              - context: $response.body#/worldId
+                condition: ^wrld_
+                type: regex
+          - name: not-in-a-world
+            type: goto
+            stepId: counter
+        outputs:
+          worldId: $response.body#/worldId
+          instanceId: $response.body#/instanceId
+
+      - stepId: get-world
+        operationId: $sourceDescriptions.default.getWorld
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: worldId
+            in: path
+            value: $steps.get-user.outputs.worldId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $steps.get-user.outputs.worldId
+        onSuccess:
+          - name: next-friend
+            type: goto
+            stepId: counter
+
+  - workflowId: get-instance-friend-instances
+    summary: Get the instance of every online friend in one
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-instance-friend-instances-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-instance-friend-instances-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: false
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: friend-here
+            type: goto
+            stepId: get-user
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-friends-left
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: get-user
+        operationId: $sourceDescriptions.default.getUser
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: in-a-world
+            type: goto
+            stepId: get-instance
+            criteria:
+              - context: $response.body#/worldId
+                condition: ^wrld_
+                type: regex
+          - name: not-in-a-world
+            type: goto
+            stepId: counter
+        outputs:
+          worldId: $response.body#/worldId
+          instanceId: $response.body#/instanceId
+
+      - stepId: get-instance
+        operationId: $sourceDescriptions.default.getInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: worldId
+            in: path
+            value: $steps.get-user.outputs.worldId
+          - name: instanceId
+            in: path
+            value: $steps.get-user.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/worldId == $steps.get-user.outputs.worldId
+        onSuccess:
+          - name: next-friend
+            type: goto
+            stepId: counter
+
+  - workflowId: friend-note-update-restore
+    summary: Writes a note on a friend, checks every read of it, then restores the original
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: friend
+        operationId: $sourceDescriptions.default.getFriends
+        parameters:
+          - name: offline
+            in: query
+            value: true
+          - name: n
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: friend-here
+            type: goto
+            stepId: read-original
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-friend
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: read-original
+        operationId: $sourceDescriptions.default.getUser
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+        outputs:
+          note: $response.body#/note
+
+      - stepId: update-note
+        operationId: $sourceDescriptions.default.updateUserNote
+        requestBody:
+          contentType: application/json
+          payload:
+            targetUserId: $steps.friend.outputs.friends#/0/id
+            note: Written by the specification test suite
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/targetUserId == $steps.friend.outputs.friends#/0/id
+          - condition: $response.body#/note == 'Written by the specification test suite'
+
+      - stepId: read-updated
+        operationId: $sourceDescriptions.default.getUser
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/note == 'Written by the specification test suite'
+
+      - stepId: restore-note
+        operationId: $sourceDescriptions.default.updateUserNote
+        requestBody:
+          contentType: application/json
+          payload:
+            targetUserId: $steps.friend.outputs.friends#/0/id
+            note: $steps.read-original.outputs.note
+        successCriteria:
+          - condition: $statusCode == 200
+
+      - stepId: read-restored
+        operationId: $sourceDescriptions.default.getUser
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/note == $steps.read-original.outputs.note
+
   - workflowId: get-user-unauthenticated
     summary: getUser refuses an anonymous caller
     parameters:
