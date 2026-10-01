@@ -10060,6 +10060,1146 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/id == $workflows.session.outputs.userId
 
+  - workflowId: get-user-friends
+    summary: Get every friend
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: online-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-user-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: online-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-user-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: online-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: false
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.online-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: online-friend-here
+            type: goto
+            stepId: online-get-user
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-online-friends-left
+            type: goto
+            stepId: offline-reset
+        outputs:
+          friends: $response.body
+
+      - stepId: online-get-user
+        operationId: $sourceDescriptions.default.getUser
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.online-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $steps.online-friend.outputs.friends#/0/id
+          - condition: $response.body#/isFriend == true
+        onSuccess:
+          - name: next-online-friend
+            type: goto
+            stepId: online-counter
+
+      - stepId: offline-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-user-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: offline-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-user-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: offline-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: true
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.offline-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: offline-friend-here
+            type: goto
+            stepId: offline-get-user
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-offline-friends-left
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: offline-get-user
+        operationId: $sourceDescriptions.default.getUser
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.offline-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/id == $steps.offline-friend.outputs.friends#/0/id
+          - condition: $response.body#/isFriend == true
+        onSuccess:
+          - name: next-offline-friend
+            type: goto
+            stepId: offline-counter
+
+  - workflowId: get-friend-status-friends
+    summary: Friend status of every friend
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: online-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-friend-status-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: online-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-friend-status-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: online-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: false
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.online-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: online-friend-here
+            type: goto
+            stepId: online-friend-status
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-online-friends-left
+            type: goto
+            stepId: offline-reset
+        outputs:
+          friends: $response.body
+
+      - stepId: online-friend-status
+        operationId: $sourceDescriptions.default.getFriendStatus
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.online-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/isFriend == true
+        onSuccess:
+          - name: next-online-friend
+            type: goto
+            stepId: online-counter
+
+      - stepId: offline-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-friend-status-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: offline-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-friend-status-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: offline-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: true
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.offline-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: offline-friend-here
+            type: goto
+            stepId: offline-friend-status
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-offline-friends-left
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: offline-friend-status
+        operationId: $sourceDescriptions.default.getFriendStatus
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.offline-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/isFriend == true
+        onSuccess:
+          - name: next-offline-friend
+            type: goto
+            stepId: offline-counter
+
+  - workflowId: get-mutuals-friends
+    summary: Mutuals with every friend
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: online-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-mutuals-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: online-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-mutuals-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: online-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: false
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.online-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: online-friend-here
+            type: goto
+            stepId: online-mutuals
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-online-friends-left
+            type: goto
+            stepId: offline-reset
+        outputs:
+          friends: $response.body
+
+      - stepId: online-mutuals
+        operationId: $sourceDescriptions.default.getMutuals
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.online-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-online-friend
+            type: goto
+            stepId: online-counter
+
+      - stepId: offline-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-mutuals-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: offline-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-mutuals-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: offline-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: true
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.offline-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: offline-friend-here
+            type: goto
+            stepId: offline-mutuals
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-offline-friends-left
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: offline-mutuals
+        operationId: $sourceDescriptions.default.getMutuals
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.offline-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-offline-friend
+            type: goto
+            stepId: offline-counter
+
+  - workflowId: get-mutual-friends-friends
+    summary: Mutual friends with every friend
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: online-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-mutual-friends-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: online-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-mutual-friends-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: online-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: false
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.online-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: online-friend-here
+            type: goto
+            stepId: online-mutual-friends
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-online-friends-left
+            type: goto
+            stepId: offline-reset
+        outputs:
+          friends: $response.body
+
+      - stepId: online-mutual-friends
+        operationId: $sourceDescriptions.default.getMutualFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.online-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-online-friend
+            type: goto
+            stepId: online-counter
+
+      - stepId: offline-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-mutual-friends-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: offline-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-mutual-friends-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: offline-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: true
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.offline-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: offline-friend-here
+            type: goto
+            stepId: offline-mutual-friends
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-offline-friends-left
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: offline-mutual-friends
+        operationId: $sourceDescriptions.default.getMutualFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.offline-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-offline-friend
+            type: goto
+            stepId: offline-counter
+
+  - workflowId: get-mutual-groups-friends
+    summary: Mutual groups with every friend
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: online-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-mutual-groups-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: online-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-mutual-groups-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: online-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: false
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.online-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: online-friend-here
+            type: goto
+            stepId: online-mutual-groups
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-online-friends-left
+            type: goto
+            stepId: offline-reset
+        outputs:
+          friends: $response.body
+
+      - stepId: online-mutual-groups
+        operationId: $sourceDescriptions.default.getMutualGroups
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.online-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-online-friend
+            type: goto
+            stepId: online-counter
+
+      - stepId: offline-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-mutual-groups-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: offline-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-mutual-groups-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: offline-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: true
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.offline-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: offline-friend-here
+            type: goto
+            stepId: offline-mutual-groups
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-offline-friends-left
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: offline-mutual-groups
+        operationId: $sourceDescriptions.default.getMutualGroups
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.offline-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-offline-friend
+            type: goto
+            stepId: offline-counter
+
+  - workflowId: get-user-groups-friends
+    summary: Groups of every friend
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: online-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-user-groups-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: online-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-user-groups-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: online-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: false
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.online-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: online-friend-here
+            type: goto
+            stepId: online-user-groups
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-online-friends-left
+            type: goto
+            stepId: offline-reset
+        outputs:
+          friends: $response.body
+
+      - stepId: online-user-groups
+        operationId: $sourceDescriptions.default.getUserGroups
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.online-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-online-friend
+            type: goto
+            stepId: online-counter
+
+      - stepId: offline-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-user-groups-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: offline-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-user-groups-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: offline-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: true
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.offline-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: offline-friend-here
+            type: goto
+            stepId: offline-user-groups
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-offline-friends-left
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: offline-user-groups
+        operationId: $sourceDescriptions.default.getUserGroups
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.offline-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-offline-friend
+            type: goto
+            stepId: offline-counter
+
+  - workflowId: get-user-represented-group-friends
+    summary: Represented group of every friend
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: online-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-user-represented-group-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: online-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-user-represented-group-friends-online-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: online-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: false
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.online-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: online-friend-here
+            type: goto
+            stepId: online-represented-group
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-online-friends-left
+            type: goto
+            stepId: offline-reset
+        outputs:
+          friends: $response.body
+
+      - stepId: online-represented-group
+        operationId: $sourceDescriptions.default.getUserRepresentedGroup
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.online-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-online-friend
+            type: goto
+            stepId: online-counter
+
+      - stepId: offline-reset
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - await Bun.write(process.argv[1], "0")
+              - test/.out/get-user-represented-group-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+
+      - stepId: offline-counter
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: bun
+            args:
+              - -e
+              - const offset = Number(await Bun.file(process.argv[1]).text());
+                await Bun.write(process.argv[1], String(offset + 1));
+                process.stdout.write(String(offset))
+              - test/.out/get-user-represented-group-friends-offline-offset
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        outputs:
+          offset: $response.body#/stdout
+
+      - stepId: offline-friend
+        operationId: $sourceDescriptions.default.getFriends
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: offline
+            in: query
+            value: true
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: $steps.offline-counter.outputs.offset
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: offline-friend-here
+            type: goto
+            stepId: offline-represented-group
+            criteria:
+              - condition: $response.body#/0/id != null
+          - name: no-offline-friends-left
+            type: end
+        outputs:
+          friends: $response.body
+
+      - stepId: offline-represented-group
+        operationId: $sourceDescriptions.default.getUserRepresentedGroup
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userId
+            in: path
+            value: $steps.offline-friend.outputs.friends#/0/id
+        successCriteria:
+          - condition: $statusCode == 200
+        onSuccess:
+          - name: next-offline-friend
+            type: goto
+            stepId: offline-counter
+
   - workflowId: get-user-unauthenticated
     summary: getUser refuses an anonymous caller
     parameters:
