@@ -22,6 +22,10 @@ properties:
       - "null"
     items:
       $ref: ./AccountDeletionLog.yaml
+  accountStanding:
+    type: string
+    examples:
+      - good
   activeFriends:
     type: array
     items:
