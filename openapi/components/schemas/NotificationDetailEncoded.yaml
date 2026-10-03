@@ -1,0 +1,26 @@
+title: NotificationDetail
+properties:
+  type:
+    $ref: ./NotificationType.yaml
+required:
+  - type
+discriminator:
+  mapping:
+    boop: ./NotificationDetailBoopEncoded.yaml
+    friendRequest: ./NotificationDetailFriendRequestEncoded.yaml
+    invite: ./NotificationDetailInviteEncoded.yaml
+    inviteResponse: ./NotificationDetailInviteResponseEncoded.yaml
+    message: ./NotificationDetailMessageEncoded.yaml
+    requestInvite: ./NotificationDetailRequestInviteEncoded.yaml
+    requestInviteResponse: ./NotificationDetailRequestInviteResponseEncoded.yaml
+    votetokick: ./NotificationDetailVoteToKickEncoded.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./NotificationDetailBoopEncoded.yaml
+  - $ref: ./NotificationDetailFriendRequestEncoded.yaml
+  - $ref: ./NotificationDetailInviteEncoded.yaml
+  - $ref: ./NotificationDetailInviteResponseEncoded.yaml
+  - $ref: ./NotificationDetailMessageEncoded.yaml
+  - $ref: ./NotificationDetailRequestInviteEncoded.yaml
+  - $ref: ./NotificationDetailRequestInviteResponseEncoded.yaml
+  - $ref: ./NotificationDetailVoteToKickEncoded.yaml

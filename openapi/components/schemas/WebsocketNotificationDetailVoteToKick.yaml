@@ -1,0 +1,7 @@
+title: WebsocketNotificationDetailVoteToKick
+type: object
+properties:
+  details:
+    $ref: ./NotificationDetailVoteToKick.yaml
+required:
+  - details

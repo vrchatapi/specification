@@ -1,0 +1,23 @@
+title: WebsocketNotificationDetail
+type: object
+properties:
+  type:
+    type: string
+required:
+  - type
+discriminator:
+  mapping:
+    boop: ./WebsocketNotificationDetailBoop.yaml
+    invite: ./WebsocketNotificationDetailInvite.yaml
+    invite-response: ./WebsocketNotificationDetailInviteResponse.yaml
+    request-invite: ./WebsocketNotificationDetailRequestInvite.yaml
+    request-invite-response: ./WebsocketNotificationDetailRequestInviteResponse.yaml
+    vote-to-kick: ./WebsocketNotificationDetailVoteToKick.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./WebsocketNotificationDetailBoop.yaml
+  - $ref: ./WebsocketNotificationDetailInvite.yaml
+  - $ref: ./WebsocketNotificationDetailInviteResponse.yaml
+  - $ref: ./WebsocketNotificationDetailRequestInvite.yaml
+  - $ref: ./WebsocketNotificationDetailRequestInviteResponse.yaml
+  - $ref: ./WebsocketNotificationDetailVoteToKick.yaml

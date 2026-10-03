@@ -1,0 +1,12 @@
+title: WebsocketUserBadgeAssignedEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketUserBadgeAssigned.yaml
+    x-vrchat-double-encoding-type: WebsocketUserBadgeAssigned
+required:
+  - content
+x-vrchat-double-encoding: true

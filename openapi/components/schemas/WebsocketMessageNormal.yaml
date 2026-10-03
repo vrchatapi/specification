@@ -1,0 +1,16 @@
+title: WebsocketMessageNormal
+properties:
+  type:
+    type: string
+required:
+  - type
+discriminator:
+  mapping:
+    clear-notification: ./WebsocketClearNotification.yaml
+    hide-notification: ./WebsocketHideNotification.yaml
+    see-notification: ./WebsocketSeeNotification.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./WebsocketSeeNotification.yaml
+  - $ref: ./WebsocketHideNotification.yaml
+  - $ref: ./WebsocketClearNotification.yaml
