@@ -2,7 +2,27 @@ title: GroupAuditLogEntryDataGroupUpdate
 type: object
 description: Carries only the fields the update changed.
 properties:
+  allowGroupJoinPrompt:
+    $ref: ./GroupAuditLogEntryBooleanChange.yaml
+  bannerId:
+    $ref: ./GroupAuditLogEntryFileIDChange.yaml
   description:
     $ref: ./GroupAuditLogEntryStringChange.yaml
+  iconId:
+    $ref: ./GroupAuditLogEntryFileIDChange.yaml
+  joinState:
+    $ref: ./GroupAuditLogEntryJoinStateChange.yaml
+  languages:
+    $ref: ./GroupAuditLogEntryStringListChange.yaml
   links:
+    $ref: ./GroupAuditLogEntryStringListChange.yaml
+  name:
+    $ref: ./GroupAuditLogEntryStringChange.yaml
+  nameplateId:
+    $ref: ./GroupAuditLogEntryFileIDChange.yaml
+  rules:
+    $ref: ./GroupAuditLogEntryStringChange.yaml
+  shortCode:
+    $ref: ./GroupAuditLogEntryStringChange.yaml
+  tags:
     $ref: ./GroupAuditLogEntryStringListChange.yaml

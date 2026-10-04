@@ -1,0 +1,11 @@
+title: GroupAuditLogEntryFileIDChange
+type: object
+description: A File ID field's value before and after an update.
+properties:
+  new:
+    $ref: ./FileID.yaml
+  old:
+    $ref: ./FileID.yaml
+required:
+  - new
+  - old
