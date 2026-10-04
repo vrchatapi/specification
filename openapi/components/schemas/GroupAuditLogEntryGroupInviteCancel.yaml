@@ -7,7 +7,7 @@ properties:
     type: string
     const: group.invite.cancel
   targetId:
-    type: string
+    $ref: ./UserID.yaml
 required:
   - data
   - eventType

@@ -7,7 +7,7 @@ properties:
     type: string
     const: group.user.unban
   targetId:
-    type: string
+    $ref: ./UserID.yaml
 required:
   - data
   - eventType
