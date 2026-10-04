@@ -4,7 +4,13 @@ description: Carries only the fields the update changed.
 properties:
   description:
     $ref: ./GroupAuditLogEntryStringChange.yaml
+  isAddedOnJoin:
+    $ref: ./GroupAuditLogEntryBooleanChange.yaml
+  isSelfAssignable:
+    $ref: ./GroupAuditLogEntryBooleanChange.yaml
   name:
     $ref: ./GroupAuditLogEntryStringChange.yaml
+  order:
+    $ref: ./GroupAuditLogEntryIntegerChange.yaml
   permissions:
     $ref: ./GroupAuditLogEntryStringListChange.yaml
