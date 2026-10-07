@@ -1,0 +1,25 @@
+title: GroupAuditLogEntryDataGroupCalendarEventCreate
+type: object
+properties:
+  accessType:
+    $ref: ./CalendarEventAccess.yaml
+  description:
+    type: string
+    description: The description of the calendar event.
+  imageId:
+    description: The image file ID for the event.
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
+  title:
+    type: string
+    description: The title of the calendar event.
+  type:
+    type: string
+    description: The type of calendar entry.
+required:
+  - accessType
+  - description
+  - imageId
+  - title
+  - type

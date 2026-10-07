@@ -1,0 +1,11 @@
+title: GroupAuditLogEntryBooleanChange
+type: object
+description: A boolean field's value before and after an update.
+properties:
+  new:
+    type: boolean
+  old:
+    type: boolean
+required:
+  - new
+  - old

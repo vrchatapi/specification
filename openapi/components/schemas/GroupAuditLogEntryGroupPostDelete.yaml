@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupPostDelete
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupPostDelete.yaml
+  eventType:
+    type: string
+    const: group.post.delete
+  targetId:
+    $ref: ./NotificationID.yaml
+required:
+  - data
+  - eventType
+  - targetId

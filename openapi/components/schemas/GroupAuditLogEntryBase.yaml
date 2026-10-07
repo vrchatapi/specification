@@ -1,0 +1,33 @@
+title: GroupAuditLogEntryBase
+type: object
+properties:
+  actorDisplayName:
+    type: string
+    description: The display name of the user who performed the action.
+  actorId:
+    $ref: ./UserID.yaml
+    description: The ID of the user who performed the action.
+  created_at:
+    type: string
+    description: When the action was performed.
+    format: date-time
+  description:
+    type: string
+    description: A human-readable description of the event.
+  eventType:
+    $ref: ./GroupAuditLogEntryType.yaml
+    description: The type of event that occurred.
+  groupId:
+    $ref: ./GroupID.yaml
+    description: The ID of the group the entry belongs to.
+  id:
+    $ref: ./GroupAuditLogID.yaml
+    description: The unique ID of this audit log entry.
+required:
+  - actorDisplayName
+  - actorId
+  - created_at
+  - description
+  - eventType
+  - groupId
+  - id

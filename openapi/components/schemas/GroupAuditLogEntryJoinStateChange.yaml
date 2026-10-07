@@ -1,0 +1,11 @@
+title: GroupAuditLogEntryJoinStateChange
+type: object
+description: A join state field's value before and after an update.
+properties:
+  new:
+    $ref: ./GroupJoinState.yaml
+  old:
+    $ref: ./GroupJoinState.yaml
+required:
+  - new
+  - old

@@ -1,0 +1,25 @@
+title: GroupAuditLogEntryDataGroupPost
+type: object
+properties:
+  authorId:
+    $ref: ./UserID.yaml
+    description: The ID of the post author.
+  imageId:
+    description: The image file ID attached to the post.
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
+  text:
+    type: string
+    description: The text content of the post.
+  title:
+    type: string
+    description: The title of the post.
+  visibility:
+    $ref: ./GroupPostVisibility.yaml
+required:
+  - authorId
+  - imageId
+  - text
+  - title
+  - visibility

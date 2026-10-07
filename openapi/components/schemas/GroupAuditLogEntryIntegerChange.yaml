@@ -1,0 +1,11 @@
+title: GroupAuditLogEntryIntegerChange
+type: object
+description: An integer field's value before and after an update.
+properties:
+  new:
+    type: integer
+  old:
+    type: integer
+required:
+  - new
+  - old

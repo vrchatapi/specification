@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupInstanceCreate
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupInstanceCreate.yaml
+  eventType:
+    type: string
+    const: group.instance.create
+  targetId:
+    $ref: ./LocationID.yaml
+required:
+  - data
+  - eventType
+  - targetId

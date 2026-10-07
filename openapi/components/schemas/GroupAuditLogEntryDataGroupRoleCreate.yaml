@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryDataGroupRoleCreate
+type: object
+properties:
+  groupId:
+    $ref: ./GroupID.yaml
+    description: The group ID.
+  lastUpdatedByUserId:
+    $ref: ./UserID.yaml
+    description: The ID of the user who last updated the role.
+required:
+  - groupId
+  - lastUpdatedByUserId
+allOf:
+  - $ref: ./GroupAuditLogEntryDataGroupRole.yaml

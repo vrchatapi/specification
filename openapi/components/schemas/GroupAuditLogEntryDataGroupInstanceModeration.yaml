@@ -1,0 +1,8 @@
+title: GroupAuditLogEntryDataGroupInstanceModeration
+type: object
+properties:
+  location:
+    $ref: ./LocationID.yaml
+    description: The instance the target was kicked from or warned in.
+required:
+  - location

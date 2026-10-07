@@ -1,0 +1,3 @@
+title: GroupAuditLogEntryDataUnknown
+type: object
+additionalProperties: true

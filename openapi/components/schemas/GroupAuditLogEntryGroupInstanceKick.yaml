@@ -1,0 +1,14 @@
+title: GroupAuditLogEntryGroupInstanceKick
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogEntryDataGroupInstanceModeration.yaml
+  eventType:
+    type: string
+    const: group.instance.kick
+  targetId:
+    $ref: ./UserID.yaml
+required:
+  - data
+  - eventType
+  - targetId

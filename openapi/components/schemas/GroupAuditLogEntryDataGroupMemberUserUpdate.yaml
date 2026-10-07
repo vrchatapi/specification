@@ -1,0 +1,6 @@
+title: GroupAuditLogEntryDataGroupMemberUserUpdate
+type: object
+description: Carries only the fields the update changed.
+properties:
+  managerNotes:
+    $ref: ./GroupAuditLogEntryStringChange.yaml

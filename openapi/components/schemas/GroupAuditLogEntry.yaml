@@ -1,34 +1,5 @@
 title: GroupAuditLogEntry
-type: object
-properties:
-  actorDisplayName:
-    type: string
-  actorId:
-    $ref: ./UserID.yaml
-  created_at:
-    type: string
-    format: date-time
-  data:
-    type: object
-    description: The data associated with the event. The format of this data is dependent on the event type.
-    examples:
-      - description:
-          new: "My exciting new group. It's pretty nifty!"
-          old: "My exciting new group.  It's pretty nifty!"
-        joinState:
-          new: request
-          old: closed
-  description:
-    type: string
-    description: A human-readable description of the event.
-    examples:
-      - Group role updated
-  eventType:
-    $ref: ./GroupAuditLogEntryType.yaml
-  groupId:
-    $ref: ./GroupID.yaml
-  id:
-    $ref: ./GroupAuditLogID.yaml
-  targetId:
-    type: string
-    description: Typically a UserID, GroupID, GroupRoleID, or Location, but could be other types of IDs.
+description: A group audit log entry. The shape of `data` depends on `eventType`.
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
+  - $ref: ./GroupAuditLogEntryEvent.yaml

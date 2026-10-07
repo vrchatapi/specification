@@ -1,0 +1,33 @@
+title: GroupAuditLogEntryDataGroupPostDelete
+type: object
+properties:
+  createdAt:
+    type: string
+    description: The creation timestamp of the post.
+    format: date-time
+  editorId:
+    description: The ID of the user who last edited the post.
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
+  imageUrl:
+    type:
+      - string
+      - "null"
+    description: The URL of the post image.
+    format: uri
+  roleIds:
+    $ref: ./GroupRoleIDList.yaml
+    description: The role IDs that could see the post.
+  updatedAt:
+    type: string
+    description: The last update timestamp of the post.
+    format: date-time
+required:
+  - createdAt
+  - editorId
+  - imageUrl
+  - roleIds
+  - updatedAt
+allOf:
+  - $ref: ./GroupAuditLogEntryDataGroupPost.yaml
