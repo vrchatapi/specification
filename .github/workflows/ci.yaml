@@ -8,6 +8,11 @@ on:
     - cron: "17 7 * * *"
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.event_name == 'push' && format('{0}-{1}', github.workflow, github.ref) || github.run_id }}
+  cancel-in-progress: false
+  queue: max
+
 env:
   GH_TOKEN: ${{ github.token }}
 
