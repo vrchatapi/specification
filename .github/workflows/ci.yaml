@@ -81,6 +81,8 @@ jobs:
   bundle:
     if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
+    outputs:
+      release: ${{ steps.version.outputs.release }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -92,23 +94,24 @@ jobs:
           cache: true
 
       - name: version the build for the branch it releases from
+        id: version
         run: |
           declared=$(yq -r '.info.version' openapi/openapi.yaml)
           latest=$(git tag --list 'v*' | sed 's/^v//' | xargs -r pnpm -s semver --range '*' | tail -n 1 || true)
 
+          release=true
+
           if [ "$GITHUB_REF_NAME" = stable ]; then
+            version=$declared
+
             if ! pnpm -s semver "$declared" > /dev/null; then
               echo "::error::$declared is not a version"
               exit 1
-            elif [ -z "$latest" ]; then
-              version=$declared
             elif git rev-parse --quiet --verify "refs/tags/v$declared" > /dev/null; then
-              version=$(pnpm -s semver --increment patch "$latest")
-            elif pnpm -s semver --range "<$latest" "$declared" > /dev/null; then
+              release=false
+            elif [ -n "$latest" ] && pnpm -s semver --range "<$latest" "$declared" > /dev/null; then
               echo "::error::$declared is below the latest release, $latest"
               exit 1
-            else
-              version=$declared
             fi
           else
             base=$(pnpm -s semver --increment patch "${latest:-$declared}")
@@ -117,6 +120,7 @@ jobs:
           fi
 
           echo "version=$version" >> "$GITHUB_ENV"
+          echo "release=$release" >> "$GITHUB_OUTPUT"
 
       - run: bun --bun run bundle
 
@@ -168,7 +172,7 @@ jobs:
     needs:
       - lint
       - bundle
-    if: ${{ !failure() && !cancelled() && github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/stable') && !contains(github.event.head_commit.message, '[no release]') }}
+    if: ${{ !failure() && !cancelled() && github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/stable') && needs.bundle.outputs.release == 'true' && !contains(github.event.head_commit.message, '[no release]') }}
     concurrency:
       group: release
     outputs:
