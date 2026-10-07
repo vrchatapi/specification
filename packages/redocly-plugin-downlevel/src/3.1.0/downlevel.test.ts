@@ -120,6 +120,26 @@ describe("unions", () => {
 		expect(schemas.Union).toStrictEqual({ type: "object", properties: { kind: { type: "string", enum: ["a", "b"] } } });
 	});
 
+	test("merges what each member reaches through allOf, letting a member's own declaration win", async () => {
+		const { schemas, problems } = await loosening.schemas({
+			Base: { type: "object", required: ["id", "kind"], properties: { id: { type: "string" }, kind: { type: "string" } } },
+			A: { type: "object", allOf: [reference("Base")], required: ["a"], properties: { kind: { type: "string", enum: ["a"] }, a: { type: "integer" } } },
+			B: { type: "object", allOf: [reference("Base")], required: ["b"], properties: { kind: { type: "string", enum: ["b"] }, b: { type: "integer" } } },
+			Union: { oneOf: [reference("A"), reference("B")] }
+		});
+		expect(schemas.Union).toStrictEqual({
+			type: "object",
+			required: ["id", "kind"],
+			properties: {
+				id: { type: "string" },
+				kind: { type: "string", enum: ["a", "b"] },
+				a: { type: "integer" },
+				b: { type: "integer" }
+			}
+		});
+		expect(problems).toStrictEqual([]);
+	});
+
 	test("loosens a union of single values into an enum, keeping each value's title, description and deprecation", async () => {
 		const { schemas, problems } = await loosening.schemas({
 			Status: {
