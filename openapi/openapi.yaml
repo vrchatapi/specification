@@ -1,7 +1,7 @@
 openapi: 3.2.1
 info:
   title: VRChat API
-  version: 1.21.1
+  version: 1.22.0
   contact:
     name: VRChat API Community
     url: "https://vrchat.community"
