@@ -191,4 +191,5 @@ apis:
     output: dist/openapi-test.yaml
     decorators:
       vrchat/close-schemas: on
+      vrchat/remove-discriminators: on
       vrchat/x-links: off
