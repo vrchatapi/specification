@@ -1,6 +1,4 @@
-description: >-
-  Error response when the instance does not exist or the requested calendar
-  event belongs to another group
+description: Error response when the instance does not exist or the requested calendar event belongs to another group
 content:
   application/json:
     examples:
