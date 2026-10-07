@@ -75,9 +75,6 @@ required:
   - ageVerificationStatus
   - ageVerified
   - allowAvatarCopying
-  - currentAvatarImageUrl
-  - currentAvatarTags
-  - currentAvatarThumbnailImageUrl
   - date_joined
   - developerType
   - displayName
