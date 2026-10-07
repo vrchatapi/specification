@@ -25,9 +25,9 @@ jobs:
           runtime: bun@latest
           cache: true
 
-      - if: github.event_name == 'push'
+      - if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
         run: |
-          changes=$(git diff --name-only --diff-filter=d "${{ github.event.commits[0].id }}~1" "${{ github.event.commits[0].id }}")
+          changes=$(git diff --name-only --diff-filter=d "${{ github.event.before }}" "${{ github.sha }}")
           {
             echo 'changes<<eof_${{ github.run_id }}'
             echo "$changes"
