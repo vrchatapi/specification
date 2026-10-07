@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./WebsocketGroupLeft.yaml
     x-vrchat-double-encoding-type: WebsocketGroupLeft
+  type:
+    type: string
+    const: group-left
 required:
   - content
+  - type
 x-vrchat-double-encoding: true

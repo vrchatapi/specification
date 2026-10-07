@@ -1,6 +1,24 @@
 title: Notification
-allOf:
-  - title: base
-    $ref: ./NotificationBase.yaml
-  - title: detail
-    $ref: ./NotificationDetailEncoded.yaml
+description: A notification. The shape of `details` depends on `type`.
+discriminator:
+  defaultMapping: ./NotificationUnknown.yaml
+  mapping:
+    boop: ./NotificationBoop.yaml
+    friendRequest: ./NotificationFriendRequest.yaml
+    invite: ./NotificationInvite.yaml
+    inviteResponse: ./NotificationInviteResponse.yaml
+    message: ./NotificationMessage.yaml
+    requestInvite: ./NotificationRequestInvite.yaml
+    requestInviteResponse: ./NotificationRequestInviteResponse.yaml
+    votetokick: ./NotificationVoteToKick.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./NotificationBoop.yaml
+  - $ref: ./NotificationFriendRequest.yaml
+  - $ref: ./NotificationInvite.yaml
+  - $ref: ./NotificationInviteResponse.yaml
+  - $ref: ./NotificationMessage.yaml
+  - $ref: ./NotificationRequestInvite.yaml
+  - $ref: ./NotificationRequestInviteResponse.yaml
+  - $ref: ./NotificationVoteToKick.yaml
+  - $ref: ./NotificationUnknown.yaml

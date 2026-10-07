@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./WebsocketFriendLocation.yaml
     x-vrchat-double-encoding-type: WebsocketFriendLocation
+  type:
+    type: string
+    const: friend-location
 required:
   - content
+  - type
 x-vrchat-double-encoding: true

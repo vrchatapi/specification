@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./WebsocketInstanceQueueJoined.yaml
     x-vrchat-double-encoding-type: WebsocketInstanceQueueJoined
+  type:
+    type: string
+    const: instance-queue-joined
 required:
   - content
+  - type
 x-vrchat-double-encoding: true

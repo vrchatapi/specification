@@ -1,12 +1,18 @@
-title: NotificationDetailVoteToKickEncoded
+title: NotificationVoteToKick
 type: object
 properties:
   details:
     type: string
+    description: A JSON-encoded string.
     contentMediaType: application/json
     contentSchema:
       $ref: ./NotificationDetailVoteToKick.yaml
     x-vrchat-double-encoding-type: NotificationDetailVoteToKick
+  type:
+    type: string
+    const: votetokick
 required:
   - details
-x-vrchat-double-encoding: true
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

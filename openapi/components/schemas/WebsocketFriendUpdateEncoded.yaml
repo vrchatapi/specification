@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./WebsocketFriendUpdate.yaml
     x-vrchat-double-encoding-type: WebsocketFriendUpdate
+  type:
+    type: string
+    const: friend-update
 required:
   - content
+  - type
 x-vrchat-double-encoding: true

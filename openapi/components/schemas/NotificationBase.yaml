@@ -26,11 +26,8 @@ properties:
       - "null"
     description: The name of the user who sent the notification.
     minLength: 1
-  type:
-    $ref: ./NotificationType.yaml
 required:
   - created_at
   - id
   - message
   - senderUserId
-  - type

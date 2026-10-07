@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./WebsocketResponseNotification.yaml
     x-vrchat-double-encoding-type: WebsocketResponseNotification
+  type:
+    type: string
+    const: response-notification
 required:
   - content
+  - type
 x-vrchat-double-encoding: true

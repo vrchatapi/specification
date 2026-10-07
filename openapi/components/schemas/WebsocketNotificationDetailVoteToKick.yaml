@@ -3,5 +3,11 @@ type: object
 properties:
   details:
     $ref: ./NotificationDetailVoteToKick.yaml
+  type:
+    type: string
+    const: vote-to-kick
 required:
   - details
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./WebsocketFriendOffline.yaml
     x-vrchat-double-encoding-type: WebsocketFriendOffline
+  type:
+    type: string
+    const: friend-offline
 required:
   - content
+  - type
 x-vrchat-double-encoding: true

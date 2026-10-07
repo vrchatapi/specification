@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./WebsocketUserBadgeAssigned.yaml
     x-vrchat-double-encoding-type: WebsocketUserBadgeAssigned
+  type:
+    type: string
+    const: user-badge-assigned
 required:
   - content
+  - type
 x-vrchat-double-encoding: true

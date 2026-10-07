@@ -1,12 +1,18 @@
-title: NotificationDetailInviteEncoded
+title: NotificationInvite
 type: object
 properties:
   details:
     type: string
+    description: A JSON-encoded string.
     contentMediaType: application/json
     contentSchema:
       $ref: ./NotificationDetailInvite.yaml
     x-vrchat-double-encoding-type: NotificationDetailInvite
+  type:
+    type: string
+    const: invite
 required:
   - details
-x-vrchat-double-encoding: true
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

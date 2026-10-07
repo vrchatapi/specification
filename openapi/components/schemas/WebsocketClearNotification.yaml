@@ -1,4 +1,8 @@
 title: WebsocketClearNotification
 type: object
-# Todo: is this correct, or is some special handling necessary in WebsocketMessageNormal?
-additionalProperties: false
+properties:
+  type:
+    type: string
+    const: clear-notification
+required:
+  - type

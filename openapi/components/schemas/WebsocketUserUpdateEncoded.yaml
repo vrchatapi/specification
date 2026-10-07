@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./WebsocketUserUpdate.yaml
     x-vrchat-double-encoding-type: WebsocketUserUpdate
+  type:
+    type: string
+    const: user-update
 required:
   - content
+  - type
 x-vrchat-double-encoding: true

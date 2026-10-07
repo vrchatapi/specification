@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./NotificationV2.yaml
     x-vrchat-double-encoding-type: NotificationV2
+  type:
+    type: string
+    const: notification-v2
 required:
   - content
+  - type
 x-vrchat-double-encoding: true

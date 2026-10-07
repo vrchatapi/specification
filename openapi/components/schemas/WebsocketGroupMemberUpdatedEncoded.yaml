@@ -7,6 +7,10 @@ properties:
     contentSchema:
       $ref: ./WebsocketGroupMemberUpdated.yaml
     x-vrchat-double-encoding-type: WebsocketGroupMemberUpdated
+  type:
+    type: string
+    const: group-member-updated
 required:
   - content
+  - type
 x-vrchat-double-encoding: true
