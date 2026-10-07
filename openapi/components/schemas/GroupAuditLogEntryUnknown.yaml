@@ -46,3 +46,5 @@ required:
   - data
   - eventType
   - targetId
+allOf:
+  - $ref: ./GroupAuditLogEntryBase.yaml
