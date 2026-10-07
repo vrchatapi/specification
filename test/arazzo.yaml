@@ -7174,10 +7174,6 @@ workflows:
     summary: Validate group instance calendar links and clean up every fixture
     parameters:
       - reference: $components.parameters.userAgent
-    x-security:
-      - schemeName: authCookie
-        values:
-          apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: in-window-starts-at
         operationId: $sourceDescriptions.local.execute
@@ -7295,6 +7291,10 @@ workflows:
 
       - stepId: create-instance-group
         operationId: $sourceDescriptions.default.createGroup
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         requestBody:
           contentType: application/json
           payload:
@@ -7314,6 +7314,10 @@ workflows:
 
       - stepId: create-linkable-event
         operationId: $sourceDescriptions.default.createGroupCalendarEvent
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: groupId
             in: path
@@ -7340,6 +7344,10 @@ workflows:
 
       - stepId: create-outside-window-event
         operationId: $sourceDescriptions.default.createGroupCalendarEvent
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: groupId
             in: path
@@ -7366,6 +7374,10 @@ workflows:
 
       - stepId: create-event-group
         operationId: $sourceDescriptions.default.createGroup
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         requestBody:
           contentType: application/json
           payload:
@@ -7386,6 +7398,10 @@ workflows:
 
       - stepId: create-cross-group-event
         operationId: $sourceDescriptions.default.createGroupCalendarEvent
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: groupId
             in: path
@@ -7412,6 +7428,10 @@ workflows:
 
       - stepId: create-group-instance
         operationId: $sourceDescriptions.default.createInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         requestBody:
           contentType: application/json
           payload:
@@ -7432,6 +7452,10 @@ workflows:
 
       - stepId: create-private-instance
         operationId: $sourceDescriptions.default.createInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         requestBody:
           contentType: application/json
           payload:
@@ -7451,6 +7475,10 @@ workflows:
 
       - stepId: link-instance-event
         operationId: $sourceDescriptions.default.updateInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: worldId
             in: path
@@ -7472,6 +7500,10 @@ workflows:
 
       - stepId: unlink-instance-event
         operationId: $sourceDescriptions.default.updateInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: worldId
             in: path
@@ -7493,6 +7525,10 @@ workflows:
 
       - stepId: reject-outside-window-link
         operationId: $sourceDescriptions.default.updateInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: worldId
             in: path
@@ -7515,6 +7551,10 @@ workflows:
 
       - stepId: reject-cross-group-link
         operationId: $sourceDescriptions.default.updateInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: worldId
             in: path
@@ -7537,6 +7577,10 @@ workflows:
 
       - stepId: reject-non-group-link
         operationId: $sourceDescriptions.default.updateInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: worldId
             in: path
@@ -7559,6 +7603,10 @@ workflows:
 
       - stepId: close-private-instance
         operationId: $sourceDescriptions.default.closeInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: worldId
             in: path
@@ -7575,6 +7623,10 @@ workflows:
 
       - stepId: close-group-instance
         operationId: $sourceDescriptions.default.closeInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: worldId
             in: path
@@ -7592,6 +7644,10 @@ workflows:
 
       - stepId: delete-event-group
         operationId: $sourceDescriptions.default.deleteGroup
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: groupId
             in: path
@@ -7605,6 +7661,10 @@ workflows:
 
       - stepId: delete-instance-group
         operationId: $sourceDescriptions.default.deleteGroup
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: groupId
             in: path
@@ -7667,10 +7727,6 @@ workflows:
     summary: updateInstance refuses an owned instance that does not exist
     parameters:
       - reference: $components.parameters.userAgent
-    x-security:
-      - schemeName: authCookie
-        values:
-          apiKey: $workflows.session.outputs.sessionToken
     steps:
       - stepId: instance-id
         operationId: $sourceDescriptions.local.execute
@@ -7695,6 +7751,10 @@ workflows:
 
       - stepId: update-instance
         operationId: $sourceDescriptions.default.updateInstance
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
         parameters:
           - name: worldId
             in: path
