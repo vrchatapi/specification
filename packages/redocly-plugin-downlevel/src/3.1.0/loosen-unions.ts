@@ -31,10 +31,11 @@ const rules: Record<string, Array<string>> = {
  * Replaces every `oneOf` and `anyOf` with one schema that accepts everything any
  * member accepts, for readers that take no unions.
  *
- * Members of one type merge: an object carries every member's properties and
- * requires only what every member requires, an array loosens its items, and a
- * keyword survives when every member gives it the same value. Members of
- * different types leave `{}`. A `null` member makes the result nullable; a
+ * Members of one type merge, each with what it reaches through `allOf` folded
+ * in and its own declaration of a property winning over its parts': an object
+ * carries every member's properties and requires only what every member
+ * requires, an array loosens its items, and a keyword survives when every
+ * member gives it the same value. Members of different types leave `{}`. A `null` member makes the result nullable; a
  * reference is made nullable with `nullable: true` beside the `$ref`, the form
  * openapi-generator reads, as `lowerNullMembers` explains.
  *
@@ -63,6 +64,22 @@ export const loosenUnions: Transform = ({ loosenUnions: enabled }) => {
 		const resolved = resolve(member);
 		const union = unions.map((keyword) => resolved[keyword]).find(Array.isArray) as Array<Node> | undefined;
 		return union ? union.flatMap(flatten) : [member];
+	};
+
+	const compose = (schema: Node): Node => {
+		if (!Array.isArray(schema.allOf)) return schema;
+
+		const { allOf, ...own } = schema;
+		const parts = [...(allOf as Array<Node>).map((part) => compose(resolve(part))), own];
+		const result: Node = Object.assign({}, ...parts);
+
+		const properties = Object.assign({}, ...parts.map((part) => part.properties ?? {}));
+		if (Object.keys(properties).length > 0) result.properties = properties;
+
+		const required = [...new Set(parts.flatMap((part) => (part.required ?? []) as Array<string>))];
+		if (required.length > 0) result.required = required;
+
+		return result;
 	};
 
 	const typesOf = (schema: Node): Array<string> | undefined =>
@@ -126,7 +143,7 @@ export const loosenUnions: Transform = ({ loosenUnions: enabled }) => {
 			return result;
 		}
 
-		const schemas = concrete.map(resolve);
+		const schemas = concrete.map((member) => compose(resolve(member)));
 		const typeSets = schemas.map((schema) => typesOf(schema)?.filter((type) => type !== "null"));
 
 		const enumerated = enumerate(schemas, typeSets, nullable);
