@@ -1,28 +1,21 @@
 name: Fetch a specification bundle
 description: >-
-  Leaves the requested bundle in the working directory, taken from this run's
-  artifacts when running inside the specification repository, from the release
-  that triggered the run when there is one, and from the release `tag` names
-  otherwise.
+  Leaves the requested bundle in the working directory: this run's artifact
+  inside the specification repository, and a release's asset anywhere else.
 
 inputs:
   tag:
     description: >-
-      Release to fetch the bundle from when no release triggered the run, such
-      as `nightly` or `v1.22.1`.
+      Release to fetch the bundle from, such as `nightly` or `v1.22.1`. Without
+      one, a release dispatch fetches the release it announces, pushes and pull
+      requests fetch `nightly`, and anything else fetches `latest`.
     required: false
-    default: latest
+    default: ""
   bundle:
     description: >-
       Bundle to fetch.
     required: false
     default: openapi.json
-  url:
-    description: >-
-      Where to fetch the bundle from, overriding both the triggering release and
-      the latest one.
-    required: false
-    default: ""
 
 runs:
   using: composite
@@ -34,10 +27,26 @@ runs:
         path: .
 
     - if: github.repository != 'vrchatapi/specification'
-      run: >-
-        curl -Lfo "${{ inputs.bundle }}" "${{ inputs.url
-        || github.event.client_payload.artifacts[inputs.bundle]
-        || format(inputs.tag == 'latest'
-        && 'https://github.com/vrchatapi/specification/releases/latest/download/{1}'
-        || 'https://github.com/vrchatapi/specification/releases/download/{0}/{1}', inputs.tag, inputs.bundle) }}"
+      env:
+        BUNDLE: ${{ inputs.bundle }}
+        EVENT: ${{ github.event_name }}
+        RELEASE: ${{ github.event.client_payload.version }}
+        TAG: ${{ inputs.tag }}
+      run: |
+        tag=$TAG
+        if [ -z "$tag" ]; then
+          case "$EVENT" in
+            repository_dispatch) tag="v$RELEASE" ;;
+            push | pull_request) tag=nightly ;;
+            *) tag=latest ;;
+          esac
+        fi
+
+        if [ "$tag" = latest ]; then
+          url="https://github.com/vrchatapi/specification/releases/latest/download/$BUNDLE"
+        else
+          url="https://github.com/vrchatapi/specification/releases/download/$tag/$BUNDLE"
+        fi
+
+        curl -Lfo "$BUNDLE" "$url"
       shell: bash
