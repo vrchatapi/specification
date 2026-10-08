@@ -1,0 +1,21 @@
+title: WebsocketContentRefresh
+type: object
+properties:
+  actionType:
+    $ref: ./WebsocketContentRefreshActionType.yaml
+  contentType:
+    $ref: ./WebsocketContentRefreshContentType.yaml
+  fileId:
+    $ref: ./FileID.yaml
+  itemId:
+    # TODO: is this correct?
+    $ref: ./InventoryTemplateID.yaml
+  itemType:
+    # TODO: is this correct?
+    $ref: ./InventoryItemType.yaml
+required:
+  - actionType
+  - contentType
+  - fileId
+  - itemId
+  - itemType

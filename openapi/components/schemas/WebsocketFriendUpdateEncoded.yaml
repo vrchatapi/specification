@@ -1,0 +1,15 @@
+title: WebsocketFriendUpdateEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendUpdate.yaml
+    x-vrchat-double-encoding-type: WebsocketFriendUpdate
+  type:
+    type: string
+    const: friend-update
+required:
+  - content
+  - type

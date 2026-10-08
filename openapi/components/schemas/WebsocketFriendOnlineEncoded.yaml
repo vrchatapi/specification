@@ -1,0 +1,15 @@
+title: WebsocketFriendOnlineEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendOnline.yaml
+    x-vrchat-double-encoding-type: WebsocketFriendOnline
+  type:
+    type: string
+    const: friend-online
+required:
+  - content
+  - type

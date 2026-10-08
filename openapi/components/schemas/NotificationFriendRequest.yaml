@@ -1,0 +1,17 @@
+title: NotificationFriendRequest
+type: object
+properties:
+  details:
+    type: string
+    description: A JSON-encoded string.
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./NotificationDetailFriendRequest.yaml
+  type:
+    type: string
+    const: friendRequest
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

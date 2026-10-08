@@ -1,0 +1,13 @@
+title: WebsocketFriendActive
+type: object
+properties:
+  platform:
+    $ref: ./Platform.yaml
+  user:
+    $ref: ./User.yaml
+  userId:
+    $ref: ./UserID.yaml
+required:
+  - platform
+  - user
+  - userId

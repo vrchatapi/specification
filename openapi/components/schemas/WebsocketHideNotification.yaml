@@ -1,0 +1,11 @@
+title: WebsocketHideNotification
+type: object
+properties:
+  content:
+    $ref: ./NotificationID.yaml
+  type:
+    type: string
+    const: hide-notification
+required:
+  - content
+  - type

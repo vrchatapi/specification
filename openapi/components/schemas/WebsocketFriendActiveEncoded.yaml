@@ -1,0 +1,15 @@
+title: WebsocketFriendActiveEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendActive.yaml
+    x-vrchat-double-encoding-type: WebsocketFriendActive
+  type:
+    type: string
+    const: friend-active
+required:
+  - content
+  - type

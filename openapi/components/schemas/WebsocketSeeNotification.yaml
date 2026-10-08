@@ -1,0 +1,11 @@
+title: WebsocketSeeNotification
+type: object
+properties:
+  content:
+    $ref: ./NotificationID.yaml
+  type:
+    type: string
+    const: see-notification
+required:
+  - content
+  - type

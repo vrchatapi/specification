@@ -1,43 +1,24 @@
 title: Notification
-type: object
-properties:
-  created_at:
-    type: string
-    format: date-time
-  details:
-    type: string
-    description: "**NOTICE:** This is not a JSON object when received from the REST API, but it is when received from the Websocket API. When received from the REST API, this is a json **encoded** object, meaning you have to json-de-encode to get the NotificationDetail object depending on the NotificationType."
-    default: "{}"
-    examples:
-      - "OneOf: {}, NotificationDetailBoop, NotificationDetailInvite, NotificationDetailInviteResponse, NotificationDetailRequestInvite, NotificationDetailRequestInviteResponse, NotificationDetailVoteToKick"
-  id:
-    type: string
-    minLength: 1
-  message:
-    type: string
-    examples:
-      - This is a generated invite to VRChat Hub
-  receiverUserId:
-    $ref: ./UserID.yaml
-    description: Not included in notification objects received from the REST API
-  seen:
-    type: boolean
-    description: Not included in notification objects received from the Websocket API
-    default: false
-  senderUserId:
-    $ref: ./UserID.yaml
-  senderUsername:
-    type:
-      - string
-      - "null"
-    description: The name of the user who sent the notification.
-    minLength: 1
-  type:
-    $ref: ./NotificationType.yaml
-required:
-  - created_at
-  - details
-  - id
-  - message
-  - senderUserId
-  - type
+description: A notification. The shape of `details` depends on `type`.
+discriminator:
+  defaultMapping: ./NotificationUnknown.yaml
+  mapping:
+    boop: ./NotificationBoop.yaml
+    friendRequest: ./NotificationFriendRequest.yaml
+    invite: ./NotificationInvite.yaml
+    inviteResponse: ./NotificationInviteResponse.yaml
+    message: ./NotificationMessage.yaml
+    requestInvite: ./NotificationRequestInvite.yaml
+    requestInviteResponse: ./NotificationRequestInviteResponse.yaml
+    votetokick: ./NotificationVoteToKick.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./NotificationBoop.yaml
+  - $ref: ./NotificationFriendRequest.yaml
+  - $ref: ./NotificationInvite.yaml
+  - $ref: ./NotificationInviteResponse.yaml
+  - $ref: ./NotificationMessage.yaml
+  - $ref: ./NotificationRequestInvite.yaml
+  - $ref: ./NotificationRequestInviteResponse.yaml
+  - $ref: ./NotificationVoteToKick.yaml
+  - $ref: ./NotificationUnknown.yaml

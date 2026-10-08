@@ -1,0 +1,24 @@
+title: NotificationUnknown
+type: object
+description: A notification whose `type` has no schema of its own.
+properties:
+  details:
+    type: string
+    description: A JSON-encoded string.
+  type:
+    type: string
+    not:
+      enum:
+        - boop
+        - friendRequest
+        - invite
+        - inviteResponse
+        - message
+        - requestInvite
+        - requestInviteResponse
+        - votetokick
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

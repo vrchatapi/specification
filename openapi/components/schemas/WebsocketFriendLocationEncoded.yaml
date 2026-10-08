@@ -1,0 +1,15 @@
+title: WebsocketFriendLocationEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendLocation.yaml
+    x-vrchat-double-encoding-type: WebsocketFriendLocation
+  type:
+    type: string
+    const: friend-location
+required:
+  - content
+  - type

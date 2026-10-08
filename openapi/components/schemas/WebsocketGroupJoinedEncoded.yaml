@@ -1,0 +1,15 @@
+title: WebsocketGroupJoinedEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketGroupJoined.yaml
+    x-vrchat-double-encoding-type: WebsocketGroupJoined
+  type:
+    type: string
+    const: group-joined
+required:
+  - content
+  - type

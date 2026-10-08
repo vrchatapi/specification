@@ -1,0 +1,10 @@
+title: WebsocketFriendAdd
+type: object
+properties:
+  user:
+    $ref: ./User.yaml
+  userId:
+    $ref: ./UserID.yaml
+required:
+  - user
+  - userId

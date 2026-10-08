@@ -1,0 +1,15 @@
+title: WebsocketUserUpdateEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketUserUpdate.yaml
+    x-vrchat-double-encoding-type: WebsocketUserUpdate
+  type:
+    type: string
+    const: user-update
+required:
+  - content
+  - type

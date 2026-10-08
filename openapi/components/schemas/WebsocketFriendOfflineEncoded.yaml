@@ -1,0 +1,15 @@
+title: WebsocketFriendOfflineEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendOffline.yaml
+    x-vrchat-double-encoding-type: WebsocketFriendOffline
+  type:
+    type: string
+    const: friend-offline
+required:
+  - content
+  - type

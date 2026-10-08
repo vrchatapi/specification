@@ -1,0 +1,18 @@
+title: NotificationBoop
+type: object
+properties:
+  details:
+    type: string
+    description: A JSON-encoded string.
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./NotificationDetailBoop.yaml
+    x-vrchat-double-encoding-type: NotificationDetailBoop
+  type:
+    type: string
+    const: boop
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

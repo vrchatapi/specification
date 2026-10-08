@@ -1,0 +1,20 @@
+title: WebsocketNotification
+description: A notification delivered over the websocket. The shape of `details` depends on `type`.
+discriminator:
+  defaultMapping: ./WebsocketNotificationUnknown.yaml
+  mapping:
+    boop: ./WebsocketNotificationDetailBoop.yaml
+    invite: ./WebsocketNotificationDetailInvite.yaml
+    invite-response: ./WebsocketNotificationDetailInviteResponse.yaml
+    request-invite: ./WebsocketNotificationDetailRequestInvite.yaml
+    request-invite-response: ./WebsocketNotificationDetailRequestInviteResponse.yaml
+    vote-to-kick: ./WebsocketNotificationDetailVoteToKick.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./WebsocketNotificationDetailBoop.yaml
+  - $ref: ./WebsocketNotificationDetailInvite.yaml
+  - $ref: ./WebsocketNotificationDetailInviteResponse.yaml
+  - $ref: ./WebsocketNotificationDetailRequestInvite.yaml
+  - $ref: ./WebsocketNotificationDetailRequestInviteResponse.yaml
+  - $ref: ./WebsocketNotificationDetailVoteToKick.yaml
+  - $ref: ./WebsocketNotificationUnknown.yaml

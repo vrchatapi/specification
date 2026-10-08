@@ -1,0 +1,19 @@
+title: WebsocketUserLocation
+type: object
+properties:
+  instance:
+    $ref: ./InstanceID.yaml
+  location:
+    $ref: ./LocationID.yaml
+  travelingToLocation:
+    $ref: ./LocationID.yaml
+  user:
+    $ref: ./User.yaml
+  userId:
+    $ref: ./UserID.yaml
+required:
+  - instance
+  - location
+  - travelingToLocation
+  - user
+  - userId
