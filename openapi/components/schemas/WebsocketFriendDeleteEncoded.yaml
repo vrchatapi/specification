@@ -13,4 +13,3 @@ properties:
 required:
   - content
   - type
-x-vrchat-double-encoding: true
