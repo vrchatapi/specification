@@ -1,3 +1,4 @@
+import { consistentDiscriminator } from "./consistent-discriminator.ts";
 import { noEmptyDescription } from "./no-empty-description.ts";
 import { noNestedObject } from "./no-nested-object.ts";
 import { noSchemaExample } from "./no-schema-example.ts";
@@ -7,6 +8,7 @@ import { preferUnknown } from "./prefer-unknown.ts";
 import { schemaTitle } from "./schema-title.ts";
 
 export const rules = {
+	"consistent-discriminator": consistentDiscriminator,
 	"no-empty-description": noEmptyDescription,
 	"no-nested-object": noNestedObject,
 	"no-schema-example": noSchemaExample,
