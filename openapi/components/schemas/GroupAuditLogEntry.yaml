@@ -36,7 +36,6 @@ discriminator:
     group.user.ban: ./GroupAuditLogEntryGroupUserBan.yaml
     group.user.unban: ./GroupAuditLogEntryGroupUserUnban.yaml
   propertyName: eventType
-  x-vrchatapi-downlevel-default-mapping: GroupAuditLogEntryUnknown
 oneOf:
   - $ref: ./GroupAuditLogEntryGroupAnnouncement.yaml
   - $ref: ./GroupAuditLogEntryGroupCalendarEventCreate.yaml
