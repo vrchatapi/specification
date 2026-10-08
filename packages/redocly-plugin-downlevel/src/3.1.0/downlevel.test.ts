@@ -108,6 +108,27 @@ describe("unions", () => {
 		expect(problems).toStrictEqual([]);
 	});
 
+	test("keeps a discriminator's extensions on the loosened schema", async () => {
+		const { schemas } = await loosening.schemas({
+			User: user,
+			Current: current,
+			State: state,
+			Union: { oneOf: [reference("User"), reference("Current")], discriminator: { propertyName: "id", "x-defaultMapping": "#/components/schemas/User" } }
+		});
+		expect(schemas.Union).toStrictEqual({
+			type: "object",
+			required: ["id"],
+			properties: {
+				id: { type: "string" },
+				name: { type: "string" },
+				state: reference("State"),
+				age: { type: "integer" },
+				email: { type: "string" }
+			},
+			"x-defaultMapping": "#/components/schemas/User"
+		});
+	});
+
 	test("loosens a property the members declare differently", async () => {
 		const { schemas } = await loosening.schemas({
 			Union: {
@@ -259,6 +280,25 @@ describe("unions", () => {
 			Intersection: { allOf: [reference("State"), { description: "s" }] }
 		});
 		expect(schemas.Intersection).toStrictEqual({ allOf: [reference("State"), { description: "s" }] });
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("moves a discriminator's extensions onto its schema, since 3.0 allows none on a discriminator, keeping what the schema sets", async () => {
+		const { schemas, problems } = await from31.schemas({
+			Cat: { type: "object" },
+			Dog: { type: "object" },
+			Pet: {
+				oneOf: [reference("Cat"), reference("Dog")],
+				discriminator: { propertyName: "kind", "x-defaultMapping": "#/components/schemas/Dog", "x-kept": false },
+				"x-kept": true
+			}
+		});
+		expect(schemas.Pet).toStrictEqual({
+			oneOf: [reference("Cat"), reference("Dog")],
+			discriminator: { propertyName: "kind" },
+			"x-kept": true,
+			"x-defaultMapping": "#/components/schemas/Dog"
+		});
 		expect(problems).toStrictEqual([]);
 	});
 });
@@ -463,7 +503,7 @@ describe("schema keywords", () => {
 		]);
 	});
 
-	test("drops schema identifiers and comments, keeping $anchor as its registry extension", async () => {
+	test("keeps $anchor as its registry extension, and identifiers and comments as x- extensions of the same name", async () => {
 		const { schemas } = await from31.schemas({
 			A: {
 				$schema: "https://json-schema.org/draft/2020-12/schema",
@@ -477,7 +517,19 @@ describe("schema keywords", () => {
 				type: "string"
 			}
 		});
-		expect(schemas).toStrictEqual({ A: { type: "string", "x-jsonschema-$anchor": "a" } });
+		expect(schemas).toStrictEqual({
+			A: {
+				type: "string",
+				"x-jsonschema-$anchor": "a",
+				"x-$schema": "https://json-schema.org/draft/2020-12/schema",
+				"x-$vocabulary": { "https://json-schema.org/draft/2020-12/vocab/core": true },
+				"x-$id": "a",
+				"x-id": "a",
+				"x-$dynamicAnchor": "a",
+				"x-$recursiveAnchor": true,
+				"x-$comment": "c"
+			}
+		});
 	});
 
 	test("writes the keywords the registry covers as x-jsonschema extensions, lowering the schemas inside them", async () => {
@@ -539,7 +591,7 @@ describe("schema keywords", () => {
 });
 
 describe("document", () => {
-	test("writes the fields 3.0 lacks as registry extensions, and drops the rest", async () => {
+	test("writes the fields 3.0 lacks as registry extensions, and the rest as x- extensions of the same name", async () => {
 		const { document, problems } = await from31({
 			jsonSchemaDialect: "https://spec.openapis.org/oas/3.1/dialect/base",
 			info: { title: "fixture", version: "1", summary: "s", license: { name: "MIT", identifier: "MIT" } },
@@ -547,12 +599,18 @@ describe("document", () => {
 		});
 		expect(document).toStrictEqual({
 			openapi: "3.0.4",
-			info: { title: "fixture", version: "1", license: { name: "MIT", "x-oai-license-identifier": "MIT" } },
+			info: { title: "fixture", version: "1", "x-summary": "s", license: { name: "MIT", "x-oai-license-identifier": "MIT" } },
 			"x-webhooks": { ping: { post: { responses: { 200: { description: "ok" } } } } },
 			paths: {},
 			components: {}
 		});
 		expect(problems).toStrictEqual([]);
+	});
+
+	test("keeps a dialect other than the 3.1 default as x-jsonSchemaDialect", async () => {
+		const { document } = await from31({ jsonSchemaDialect: "https://json-schema.org/draft/2020-12/schema" });
+		expect(document["x-jsonSchemaDialect"]).toBe("https://json-schema.org/draft/2020-12/schema");
+		expect(document).not.toHaveProperty("jsonSchemaDialect");
 	});
 
 	test("inlines path items from components", async () => {

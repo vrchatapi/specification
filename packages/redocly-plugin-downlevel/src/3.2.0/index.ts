@@ -4,6 +4,7 @@ import { dropFields } from "../builders/drop-fields.ts";
 import { extendFields } from "../builders/extend-fields.ts";
 import { inlineComponents } from "../builders/inline-components.ts";
 import { reportFields } from "../builders/report-fields.ts";
+import { vendorFields } from "../builders/vendor-fields.ts";
 import type { Layer } from "../layer.ts";
 import { describeResponses } from "./describe-responses.ts";
 import { dropDefaultAllowReserved } from "./drop-default-allow-reserved.ts";
@@ -54,8 +55,9 @@ export const layer: Layer = {
 			Encoding: { encoding: ["x-oai-encoding"], itemEncoding: ["x-oai-itemEncoding"] }
 		}),
 		inlineComponents("mediaTypes"),
-		dropFields({
-			Tag: ["summary", "parent", "kind"],
+		dropFields({ Tag: ["summary", "parent"] }),
+		vendorFields({
+			Tag: ["kind"],
 			MediaType: ["description"],
 			SecurityScheme: ["oauth2MetadataUrl"],
 			Discriminator: ["defaultMapping"]
