@@ -2,10 +2,16 @@ name: Fetch a specification bundle
 description: >-
   Leaves the requested bundle in the working directory, taken from this run's
   artifacts when running inside the specification repository, from the release
-  that triggered the run when there is one, and from the latest release
+  that triggered the run when there is one, and from the release `tag` names
   otherwise.
 
 inputs:
+  tag:
+    description: >-
+      Release to fetch the bundle from when no release triggered the run, such
+      as `nightly` or `v1.22.1`.
+    required: false
+    default: latest
   bundle:
     description: >-
       Bundle to fetch.
@@ -31,5 +37,7 @@ runs:
       run: >-
         curl -Lfo "${{ inputs.bundle }}" "${{ inputs.url
         || github.event.client_payload.artifacts[inputs.bundle]
-        || format('https://github.com/vrchatapi/specification/releases/latest/download/{0}', inputs.bundle) }}"
+        || format(inputs.tag == 'latest'
+        && 'https://github.com/vrchatapi/specification/releases/latest/download/{1}'
+        || 'https://github.com/vrchatapi/specification/releases/download/{0}/{1}', inputs.tag, inputs.bundle) }}"
       shell: bash
