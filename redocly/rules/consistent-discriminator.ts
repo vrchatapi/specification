@@ -8,9 +8,11 @@ const quote = (values: Iterable<string>) => [...values].map((value) => `\`${valu
 /**
  * A discriminated union names its members four times: in `oneOf`, as `mapping`
  * targets, as each member's discriminating `const`, and in the `not.enum` of
- * the `defaultMapping` fallback. Reports where those lists disagree.
+ * the `defaultMapping` fallback. Reports where those lists disagree, and a
+ * fallback listed anywhere but last, where a serde untagged variant must sit.
  *
  * https://spec.openapis.org/oas/v3.2.0.html#discriminator-object
+ * https://serde.rs/variant-attrs.html#untagged
  */
 export const consistentDiscriminator: Oas3Rule = () => ({
 	Schema: {
@@ -57,6 +59,13 @@ export const consistentDiscriminator: Oas3Rule = () => ({
 					report({ message: `\`${name}\` is in \`oneOf\` but \`mapping\` does not name it.`, location: location.child(["discriminator", "mapping"]) });
 
 			if (!fallback) return;
+
+			const last = members.at(-1);
+			if (!last?.$ref || resolve<Schema>(last).node !== fallback)
+				report({
+					message: `\`${nameOf(discriminator.defaultMapping!)}\` is the \`defaultMapping\` fallback, so it must be the last member of \`oneOf\`.`,
+					location: location.child([schema.oneOf ? "oneOf" : "anyOf"])
+				});
 
 			const excluded = (((fallback.properties as Record<string, Schema> | undefined)?.[property]?.not as Schema | undefined)?.enum ?? []) as Array<string>;
 			const values = Object.keys(discriminator.mapping);
