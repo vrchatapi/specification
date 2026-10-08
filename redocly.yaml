@@ -18,7 +18,6 @@ oas3_0Rules:
   vrchat/schema-title: warn
 
 oas3_1Rules:
-  vrchat/consistent-discriminator: error
   vrchat/no-empty-description: warn
   vrchat/no-nested-object: warn
   vrchat/no-schema-example: warn
