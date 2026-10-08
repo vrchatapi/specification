@@ -1,0 +1,12 @@
+title: NotificationDetailFriendRequestEncoded
+type: object
+properties:
+  details:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./NotificationDetailFriendRequest.yaml
+    x-vrchat-double-encoding-type: NotificationDetailFriendRequest
+required:
+  - details
+x-vrchat-double-encoding: true

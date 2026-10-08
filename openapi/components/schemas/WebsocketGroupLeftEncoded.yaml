@@ -1,0 +1,12 @@
+title: WebsocketGroupLeftEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketGroupLeft.yaml
+    x-vrchat-double-encoding-type: WebsocketGroupLeft
+required:
+  - content
+x-vrchat-double-encoding: true

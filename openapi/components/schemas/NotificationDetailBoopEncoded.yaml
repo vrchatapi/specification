@@ -1,0 +1,12 @@
+title: NotificationDetailBoopEncoded
+type: object
+properties:
+  details:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./NotificationDetailBoop.yaml
+    x-vrchat-double-encoding-type: NotificationDetailBoop
+required:
+  - details
+x-vrchat-double-encoding: true

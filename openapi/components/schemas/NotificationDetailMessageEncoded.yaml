@@ -1,0 +1,12 @@
+title: NotificationDetailMessageEncoded
+type: object
+properties:
+  details:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./NotificationDetailMessage.yaml
+    x-vrchat-double-encoding-type: NotificationDetailMessage
+required:
+  - details
+x-vrchat-double-encoding: true
