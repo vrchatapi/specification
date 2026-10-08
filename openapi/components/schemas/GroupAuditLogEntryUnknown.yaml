@@ -6,6 +6,7 @@ properties:
     $ref: ./GroupAuditLogEntryDataUnknown.yaml
   eventType:
     type: string
+    description: The type of event that occurred.
     not:
       enum:
         - group.announcement
