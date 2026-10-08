@@ -7,7 +7,6 @@ properties:
     contentMediaType: application/json
     contentSchema:
       $ref: ./NotificationDetailFriendRequest.yaml
-    x-vrchat-double-encoding-type: NotificationDetailFriendRequest
   type:
     type: string
     const: friendRequest
