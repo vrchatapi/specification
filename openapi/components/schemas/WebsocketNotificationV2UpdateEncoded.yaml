@@ -8,7 +8,6 @@ properties:
       $ref: ./WebsocketNotificationV2Update.yaml
     x-vrchat-double-encoding-type: WebsocketNotificationV2Update
   type:
-    type: string
     const: notification-v2-update
 required:
   - content

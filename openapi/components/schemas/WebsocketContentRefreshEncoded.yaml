@@ -8,7 +8,6 @@ properties:
       $ref: ./WebsocketContentRefresh.yaml
     x-vrchat-double-encoding-type: WebsocketContentRefresh
   type:
-    type: string
     const: content-refresh
 required:
   - content

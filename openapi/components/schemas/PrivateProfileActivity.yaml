@@ -7,14 +7,12 @@ properties:
     anyOf:
       - type: string
         format: date-time
-      - type: string
-        const: ""
+      - const: ""
   last_login:
     anyOf:
       - type: string
         format: date-time
-      - type: string
-        const: ""
+      - const: ""
   location:
     $ref: ./LocationID.yaml
   platform:

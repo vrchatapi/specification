@@ -4,7 +4,6 @@ properties:
   data:
     $ref: ./GroupAuditLogEntryDataGroupInstanceModeration.yaml
   eventType:
-    type: string
     const: group.instance.kick
   targetId:
     $ref: ./UserID.yaml

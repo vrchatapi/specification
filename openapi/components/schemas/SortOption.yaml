@@ -1,5 +1,4 @@
 title: SortOption
-type: string
 enum:
   - _created_at
   - _updated_at

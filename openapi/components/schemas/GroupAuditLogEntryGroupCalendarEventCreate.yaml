@@ -4,7 +4,6 @@ properties:
   data:
     $ref: ./GroupAuditLogEntryDataGroupCalendarEventCreate.yaml
   eventType:
-    type: string
     const: group.calendarEvent.create
   targetId:
     $ref: ./CalendarID.yaml

@@ -9,7 +9,6 @@ properties:
       $ref: ./NotificationDetailRequestInvite.yaml
     x-vrchat-double-encoding-type: NotificationDetailRequestInvite
   type:
-    type: string
     const: requestInvite
 required:
   - details

@@ -4,7 +4,6 @@ properties:
   data:
     $ref: ./GroupAuditLogEntryDataEmpty.yaml
   eventType:
-    type: string
     const: group.invite.create
   targetId:
     $ref: ./UserID.yaml

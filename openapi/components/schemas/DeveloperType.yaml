@@ -1,5 +1,4 @@
 title: DeveloperType
-type: string
 description: |-
   "none" User is a normal user
   "trusted" Unknown

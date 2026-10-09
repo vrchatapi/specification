@@ -1,5 +1,4 @@
 title: InventoryItemType
-type: string
 enum:
   - bundle
   - droneskin

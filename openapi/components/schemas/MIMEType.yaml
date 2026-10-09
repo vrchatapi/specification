@@ -1,5 +1,4 @@
 title: MIMEType
-type: string
 enum:
   - application/gzip
   - application/octet-stream

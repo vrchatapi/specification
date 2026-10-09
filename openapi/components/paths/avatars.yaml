@@ -34,7 +34,6 @@ paths:
           required: false
           in: query
           schema:
-            type: string
             const: me
         - $ref: ../parameters.yaml#/userIdQuery
         - $ref: ../parameters.yaml#/number

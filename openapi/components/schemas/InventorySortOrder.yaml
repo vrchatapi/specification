@@ -1,5 +1,4 @@
 title: InventorySortOrder
-type: string
 enum:
   - alphabetic
   - angry

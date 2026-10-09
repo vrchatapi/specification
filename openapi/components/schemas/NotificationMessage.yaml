@@ -8,7 +8,6 @@ properties:
     contentSchema:
       $ref: ./NotificationDetailMessage.yaml
   type:
-    type: string
     const: message
 required:
   - details

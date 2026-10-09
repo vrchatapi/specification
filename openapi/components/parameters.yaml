@@ -217,7 +217,6 @@ cosmeticItemType:
   required: true
   in: path
   schema:
-    type: string
     enum:
       - droneskin
       - iconFrame
@@ -328,7 +327,6 @@ fileType:
   required: true
   in: path
   schema:
-    type: string
     enum:
       - delta
       - file
@@ -1024,7 +1022,6 @@ variant:
   allowEmptyValue: true
   in: query
   schema:
-    type: string
     enum:
       - internal
       - public

@@ -7,7 +7,6 @@ properties:
     items:
       type: string
   command:
-    type: string
     enum:
       - CannedWorldSearch
       - OpenAccountUpgrade

@@ -4,7 +4,6 @@ properties:
   data:
     $ref: ./GroupAuditLogEntryDataGroupGalleryDelete.yaml
   eventType:
-    type: string
     const: group.gallery.delete
   targetId:
     $ref: ./GroupGalleryID.yaml

@@ -1,5 +1,4 @@
 title: AgeVerificationStatus
-type: string
 description: |
   `verified` is obsolete.
 

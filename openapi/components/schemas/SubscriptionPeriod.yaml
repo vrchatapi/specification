@@ -1,5 +1,4 @@
 title: SubscriptionPeriod
-type: string
 enum:
   - day
   - hour

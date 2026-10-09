@@ -9,7 +9,6 @@ properties:
       $ref: ./NotificationDetailVoteToKick.yaml
     x-vrchat-double-encoding-type: NotificationDetailVoteToKick
   type:
-    type: string
     const: votetokick
 required:
   - details

@@ -8,7 +8,6 @@ properties:
       $ref: ./WebsocketGroupRoleUpdated.yaml
     x-vrchat-double-encoding-type: WebsocketGroupRoleUpdated
   type:
-    type: string
     const: group-role-updated
 required:
   - content

@@ -1,5 +1,4 @@
 title: CreateProductRequestType
-type: string
 enum:
   - avatar
   - credit

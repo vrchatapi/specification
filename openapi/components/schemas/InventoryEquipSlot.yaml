@@ -1,5 +1,4 @@
 title: InventoryEquipSlot
-type: string
 enum:
   - ""
   - drone

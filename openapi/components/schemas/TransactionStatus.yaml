@@ -1,5 +1,4 @@
 title: TransactionStatus
-type: string
 enum:
   - active
   - chargeback

@@ -1,5 +1,4 @@
 title: ImageMask
-type: string
 description: Mask shape for images.
 enum:
   - circle

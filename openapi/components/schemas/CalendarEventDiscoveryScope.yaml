@@ -1,5 +1,4 @@
 title: CalendarEventDiscoveryScope
-type: string
 enum:
   - all
   - live

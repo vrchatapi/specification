@@ -1,5 +1,4 @@
 title: ContentFilter
-type: string
 description: Flags for content filtering
 enum:
   - content_adult

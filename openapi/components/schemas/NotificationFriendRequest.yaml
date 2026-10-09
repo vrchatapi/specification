@@ -8,7 +8,6 @@ properties:
     contentSchema:
       $ref: ./NotificationDetailFriendRequest.yaml
   type:
-    type: string
     const: friendRequest
 required:
   - details

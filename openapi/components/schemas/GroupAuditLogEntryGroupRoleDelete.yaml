@@ -4,7 +4,6 @@ properties:
   data:
     $ref: ./GroupAuditLogEntryDataGroupRoleDelete.yaml
   eventType:
-    type: string
     const: group.role.delete
   targetId:
     $ref: ./GroupRoleID.yaml

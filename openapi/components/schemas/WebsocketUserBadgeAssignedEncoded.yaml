@@ -8,7 +8,6 @@ properties:
       $ref: ./WebsocketUserBadgeAssigned.yaml
     x-vrchat-double-encoding-type: WebsocketUserBadgeAssigned
   type:
-    type: string
     const: user-badge-assigned
 required:
   - content

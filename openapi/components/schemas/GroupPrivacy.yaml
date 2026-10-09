@@ -1,5 +1,4 @@
 title: GroupPrivacy
-type: string
 enum:
   - default
   - private

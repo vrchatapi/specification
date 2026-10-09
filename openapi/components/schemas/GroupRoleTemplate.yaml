@@ -1,5 +1,4 @@
 title: GroupRoleTemplate
-type: string
 enum:
   - default
   - managedFree

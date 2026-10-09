@@ -1,5 +1,4 @@
 title: CalendarEventFrequency
-type: string
 description: The time unit used to specify how often a recurring event occurs.
 enum:
   - daily

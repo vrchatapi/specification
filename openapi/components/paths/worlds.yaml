@@ -19,7 +19,6 @@ paths:
           required: false
           in: query
           schema:
-            type: string
             enum:
               - friends
               - me

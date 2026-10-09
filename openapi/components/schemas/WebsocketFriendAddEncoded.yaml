@@ -8,7 +8,6 @@ properties:
       $ref: ./WebsocketFriendAdd.yaml
     x-vrchat-double-encoding-type: WebsocketFriendAdd
   type:
-    type: string
     const: friend-add
 required:
   - content

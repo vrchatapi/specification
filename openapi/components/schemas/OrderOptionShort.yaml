@@ -1,5 +1,4 @@
 title: OrderOptionShort
-type: string
 enum:
   - asc
   - desc

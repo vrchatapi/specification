@@ -1,5 +1,4 @@
 title: CreateFileRequestMIMEType
-type: string
 enum:
   - application/gzip
   - application/x-adminassetbundle

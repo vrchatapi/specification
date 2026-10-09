@@ -1,5 +1,4 @@
 title: OrderOption
-type: string
 enum:
   - ascending
   - descending

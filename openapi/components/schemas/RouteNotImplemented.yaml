@@ -6,10 +6,8 @@ description: >-
   `Error` object with `message` and `status_code` inside it.
 properties:
   error:
-    type: string
     const: The endpoint you're looking for is not implemented by our system.
   status_code:
-    type: integer
     const: 404
 required:
   - error

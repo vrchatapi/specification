@@ -8,7 +8,6 @@ properties:
       $ref: ./WebsocketFriendDelete.yaml
     x-vrchat-double-encoding-type: WebsocketFriendDelete
   type:
-    type: string
     const: friend-delete
 required:
   - content

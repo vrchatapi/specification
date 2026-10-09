@@ -9,7 +9,6 @@ properties:
       $ref: ./NotificationDetailBoop.yaml
     x-vrchat-double-encoding-type: NotificationDetailBoop
   type:
-    type: string
     const: boop
 required:
   - details

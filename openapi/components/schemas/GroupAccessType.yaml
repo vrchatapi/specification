@@ -1,5 +1,4 @@
 title: GroupAccessType
-type: string
 description: Group access type when the instance type is "group"
 enum:
   - members

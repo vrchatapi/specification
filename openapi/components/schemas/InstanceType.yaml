@@ -1,5 +1,4 @@
 title: InstanceType
-type: string
 enum:
   - friends
   - group

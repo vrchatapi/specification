@@ -4,7 +4,6 @@ properties:
   backgroundTextureId:
     type: string
   backgroundType:
-    type: string
     enum:
       - default
       - gradient
@@ -13,7 +12,6 @@ properties:
   bannerColor:
     $ref: ../schemas/Color.yaml
   bannerType:
-    type: string
     enum:
       - avatarBanner
       - color
