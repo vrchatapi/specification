@@ -96,7 +96,7 @@ properties:
   themes:
     type: array
     items:
-      $ref: ./Unknown.yaml
+      $ref: ./ProfileTheme.yaml
   totalPublicWorldsCount:
     type: integer
   trustTags:
