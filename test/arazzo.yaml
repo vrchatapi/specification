@@ -15028,6 +15028,117 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/bio == $steps.profile-before.outputs.bio
 
+  - workflowId: profile-background-gradient-update-restore
+    summary: Update the background gradient and clear the custom banner through the profile, confirm they applied, restore them
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: marker
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - openssl rand -hex 3 | tr -d '\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
+      - stepId: gradient-before
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.getPublicProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: asSelf
+            in: query
+            value: true
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          backgroundGradientTop: $response.body#/backgroundGradientTop
+          backgroundGradientBottom: $response.body#/backgroundGradientBottom
+          bannerCustomUrl: $response.body#/bannerCustomUrl
+
+      - stepId: update-profile
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            backgroundGradientTop: $steps.marker.outputs.value
+            backgroundGradientBottom: $steps.marker.outputs.value
+            bannerCustomUrl: ""
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/backgroundGradientTop == $steps.marker.outputs.value
+          - condition: $response.body#/backgroundGradientBottom == $steps.marker.outputs.value
+          - condition: $response.body#/bannerCustomUrl == ''
+
+      - stepId: verify-profile
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.getPublicProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: asSelf
+            in: query
+            value: true
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/backgroundGradientTop == $steps.marker.outputs.value
+          - condition: $response.body#/backgroundGradientBottom == $steps.marker.outputs.value
+          - condition: $response.body#/bannerCustomUrl == ''
+
+      - stepId: restore-profile
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            backgroundGradientTop: $steps.gradient-before.outputs.backgroundGradientTop
+            backgroundGradientBottom: $steps.gradient-before.outputs.backgroundGradientBottom
+            bannerCustomUrl: $steps.gradient-before.outputs.bannerCustomUrl
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/backgroundGradientTop == $steps.gradient-before.outputs.backgroundGradientTop
+          - condition: $response.body#/backgroundGradientBottom == $steps.gradient-before.outputs.backgroundGradientBottom
+          - condition: $response.body#/bannerCustomUrl == $steps.gradient-before.outputs.bannerCustomUrl
+
   - workflowId: update-profile-invalid-background-type
     summary: updateProfile refuses a backgroundType it does not know
     parameters:

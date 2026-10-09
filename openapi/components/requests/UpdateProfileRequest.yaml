@@ -1,6 +1,10 @@
 title: UpdateProfileRequest
 type: object
 properties:
+  backgroundGradientBottom:
+    $ref: ../schemas/Color.yaml
+  backgroundGradientTop:
+    $ref: ../schemas/Color.yaml
   backgroundTextureId:
     type: string
   backgroundType:
@@ -11,6 +15,8 @@ properties:
       - texture
   bannerColor:
     $ref: ../schemas/Color.yaml
+  bannerCustomUrl:
+    type: string
   bannerType:
     $ref: ../schemas/BannerType.yaml
   bio:
