@@ -1,8 +1,5 @@
 title: ProductType
-type: string
-enum:
-  - inventory
-  - listing
-  - role
-  - udon
 default: udon
+anyOf:
+  - $ref: ./CreateProductRequestType.yaml
+  - const: role

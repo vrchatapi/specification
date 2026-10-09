@@ -25,7 +25,7 @@ properties:
   platform:
     $ref: ../schemas/Platform.yaml
   releaseStatus:
-    $ref: ../schemas/ReleaseStatus.yaml
+    $ref: ../schemas/CreateAvatarRequestReleaseStatus.yaml
   tags:
     type: array
     items:

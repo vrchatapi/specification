@@ -52,6 +52,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/favorites/UpdateFavoriteGroupResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
     delete:
       operationId: clearFavoriteGroup
       summary: Clear Favorite Group
@@ -85,6 +87,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/favorites/FavoriteGroupListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /favorites:
@@ -168,6 +172,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/favorites/FavoriteGroupsByTypeResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/favorites/groups/{favoriteGroupType}/{favoriteGroupName}":
@@ -191,6 +197,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/favorites/FavoriteGroupContentsResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/favorites/{favoriteId}":

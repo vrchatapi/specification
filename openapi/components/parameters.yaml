@@ -553,12 +553,7 @@ inventorySortOrder:
   required: false
   in: query
   schema:
-    type: string
-    enum:
-      - newest
-      - newest_created
-      - oldest
-      - oldest_created
+    $ref: ./schemas/InventorySortOrder.yaml
 inventorySpawnItemId:
   name: id
   description: Id for inventory item spawning.
@@ -878,6 +873,13 @@ sort:
   in: query
   schema:
     $ref: ./schemas/SortOption.yaml
+sortAvatar:
+  name: sort
+  description: The sort order of the results.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/SortOptionAvatar.yaml
 sortProductPurchase:
   name: sort
   description: The sort order of the results.

@@ -8,7 +8,7 @@ properties:
   imageId:
     $ref: ../schemas/FileID.yaml
   productType:
-    $ref: ../schemas/ProductType.yaml
+    $ref: ../schemas/CreateProductRequestType.yaml
   tags:
     type: array
     items:

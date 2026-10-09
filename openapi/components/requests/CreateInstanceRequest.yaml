@@ -45,7 +45,7 @@ properties:
     type: boolean
     default: false
   region:
-    $ref: ../schemas/InstanceRegion.yaml
+    $ref: ../schemas/CreateInstanceRequestRegion.yaml
   roleIds:
     type: array
     description: Group roleIds that are allowed to join if the type is "group" and groupAccessType is "member"

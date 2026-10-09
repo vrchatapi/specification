@@ -352,6 +352,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/ProductListingResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/listing/{productId}":
@@ -438,6 +440,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/ProductResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/products/{productId}":

@@ -1,0 +1,17 @@
+title: InventorySortOrder
+type: string
+enum:
+  - alphabetic
+  - angry
+  - happy
+  - newest
+  - newest_created
+  - newest_template_created
+  - newest_updated
+  - oldest
+  - oldest_created
+  - oldest_template_created
+  - oldest_updated
+  - reverse-orthographic
+examples:
+  - newest

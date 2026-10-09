@@ -1,0 +1,5 @@
+title: CreateWorldRequestReleaseStatus
+type: string
+const: private
+examples:
+  - private

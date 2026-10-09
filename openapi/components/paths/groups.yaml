@@ -63,6 +63,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /groups/roleTemplates:
@@ -776,6 +778,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupMemberResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
@@ -901,6 +905,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupPostResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   "/groups/{groupId}/posts/{notificationId}":
@@ -924,6 +930,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupPostResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
@@ -1044,6 +1052,8 @@ paths:
         - authCookie: []
       responses:
         "200": {}
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":

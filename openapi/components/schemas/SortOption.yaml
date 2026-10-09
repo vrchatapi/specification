@@ -3,9 +3,12 @@ type: string
 enum:
   - _created_at
   - _updated_at
+  - contains
   - created
+  - exact
   - favorites
   - heat
+  - hotness
   - labsPublicationDate
   - magic
   - name
@@ -17,6 +20,7 @@ enum:
   - reportCount
   - reportScore
   - shuffle
+  - trending
   - trust
   - updated
 default: popularity

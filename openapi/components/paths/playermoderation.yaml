@@ -80,6 +80,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/playermoderation/PlayerModerationListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
     post:
@@ -102,6 +104,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/playermoderation/PlayerModerationResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /auth/user/unplayermoderate:
@@ -122,6 +126,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/playermoderation/PlayerModerationUnmoderatedSuccess.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
 components:

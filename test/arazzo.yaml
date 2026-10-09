@@ -425,6 +425,7 @@ workflows:
             targetAvatarId: avtr_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'avatarModerationType must be one of ［＂block＂］‚ not ＂x＂'
 
   - workflowId: create-global-avatar-moderation-unauthenticated
     summary: createGlobalAvatarModeration refuses an anonymous caller
@@ -1396,6 +1397,7 @@ workflows:
             value: x
         successCriteria:
           - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'user must be one of ［＂me＂］‚ not ＂x＂'
 
   - workflowId: search-avatars-query-parameters
     summary: searchAvatars with every fillable query parameter
@@ -1435,6 +1437,63 @@ workflows:
             value: me
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: search-avatars-invalid-sort
+    summary: searchAvatars refuses a sort it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-avatars
+        operationId: $sourceDescriptions.default.searchAvatars
+        parameters:
+          - name: sort
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'sort must be one of ［＂shuffle＂‚＂random＂‚＂created＂‚＂_created_at＂‚＂updated＂‚＂_updated_at＂‚＂order＂‚＂relevance＂‚＂name＂‚＂exact＂‚＂contains＂‚＂performance＂‚＂listingDate＂‚＂countMonthlySales＂‚＂trendRank＂］‚ not ＂x＂'
+
+  - workflowId: search-avatars-invalid-order
+    summary: searchAvatars refuses a order it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-avatars
+        operationId: $sourceDescriptions.default.searchAvatars
+        parameters:
+          - name: order
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'order must be one of ［＂ascending＂‚＂descending＂］‚ not ＂x＂'
+
+  - workflowId: search-avatars-invalid-release-status
+    summary: searchAvatars refuses a releaseStatus it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-avatars
+        operationId: $sourceDescriptions.default.searchAvatars
+        parameters:
+          - name: releaseStatus
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'releaseStatus must be one of ［＂public＂‚＂private＂‚＂hidden＂‚＂all＂］‚ not ＂x＂'
 
   - workflowId: search-avatars-unauthenticated
     summary: searchAvatars refuses an anonymous caller
@@ -1829,6 +1888,105 @@ workflows:
         onFailure:
           - name: stop
             type: end
+
+  - workflowId: create-group-calendar-event-invalid-access-type
+    summary: createGroupCalendarEvent refuses a accessType it does not know
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group-calendar-event
+        operationId: $sourceDescriptions.default.createGroupCalendarEvent
+        parameters:
+          - name: groupId
+            in: path
+            value: $inputs.groupId
+        requestBody:
+          contentType: application/json
+          payload:
+            accessType: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: accessType must be one of ［＂group＂‚＂public＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: create-group-calendar-event-invalid-category
+    summary: createGroupCalendarEvent refuses a category it does not know
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group-calendar-event
+        operationId: $sourceDescriptions.default.createGroupCalendarEvent
+        parameters:
+          - name: groupId
+            in: path
+            value: $inputs.groupId
+        requestBody:
+          contentType: application/json
+          payload:
+            accessType: group
+            category: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: category must be one of ［＂music＂‚＂gaming＂‚＂hangout＂‚＂roleplaying＂‚＂exploration＂‚＂film_media＂‚＂arts＂‚＂wellness＂‚＂education＂‚＂performance＂‚＂avatars＂‚＂dance＂‚＂other＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: create-group-calendar-event-invalid-platforms
+    summary: createGroupCalendarEvent refuses a platforms it does not know
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group-calendar-event
+        operationId: $sourceDescriptions.default.createGroupCalendarEvent
+        parameters:
+          - name: groupId
+            in: path
+            value: $inputs.groupId
+        requestBody:
+          contentType: application/json
+          payload:
+            accessType: group
+            platforms:
+              - x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: platforms entry must be one of ［＂standalonewindows＂‚＂android＂‚＂ios＂］‚ not ＂x＂
+            type: regex
 
   - workflowId: create-group-calendar-event-unauthenticated
     summary: createGroupCalendarEvent refuses an anonymous caller
@@ -2379,6 +2537,27 @@ workflows:
             value: id_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: create-product-invalid-product-type
+    summary: createProduct refuses a productType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-product
+        operationId: $sourceDescriptions.default.createProduct
+        requestBody:
+          contentType: application/json
+          payload:
+            productType: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: productType must be one of ［＂listing＂‚＂udon＂‚＂avatar＂‚＂inventory＂‚＂credit＂‚＂test_birdy＂］‚ not ＂x＂
+            type: regex
 
   - workflowId: create-product-unauthenticated
     summary: createProduct refuses an anonymous caller
@@ -2941,6 +3120,7 @@ workflows:
             value: x
         successCriteria:
           - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'sort must be one of ［＂purchaseDate＂‚＂expireDate＂‚＂name＂］‚ not ＂x＂'
 
   - workflowId: get-product-purchases-query-parameters
     summary: getProductPurchases with every fillable query parameter
@@ -3016,6 +3196,28 @@ workflows:
             value: name
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: get-product-purchases-invalid-order
+    summary: getProductPurchases refuses a order it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-product-purchases
+        operationId: $sourceDescriptions.default.getProductPurchases
+        parameters:
+          - name: order
+            in: query
+            value: x
+          - name: buyerId
+            in: query
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'order must be one of ［＂asc＂‚＂desc＂］‚ not ＂x＂'
 
   - workflowId: get-product-purchases-unauthenticated
     summary: getProductPurchases refuses an anonymous caller
@@ -3760,6 +3962,25 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/0/type == 'avatar'
+
+  - workflowId: get-favorite-groups-invalid-type
+    summary: getFavoriteGroups refuses a type it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-favorite-groups
+        operationId: $sourceDescriptions.default.getFavoriteGroups
+        parameters:
+          - name: type
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'type must be one of ［＂world＂‚＂vrcPlusWorld＂‚＂friend＂‚＂avatar＂］‚ not ＂x＂'
 
   - workflowId: get-favorite-groups-unauthenticated
     summary: getFavoriteGroups refuses an anonymous caller
@@ -4760,6 +4981,31 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: add-group-post-invalid-visibility
+    summary: addGroupPost refuses a visibility it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: add-group-post
+        operationId: $sourceDescriptions.default.addGroupPost
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            visibility: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: visibility must be one of ［＂public＂‚＂group＂］‚ not ＂x＂
+            type: regex
+
   - workflowId: add-group-post-unauthenticated
     summary: addGroupPost refuses an anonymous caller
     parameters:
@@ -4891,6 +5137,69 @@ workflows:
             value: grp_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: create-group-invalid-join-state
+    summary: createGroup refuses a joinState it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group
+        operationId: $sourceDescriptions.default.createGroup
+        requestBody:
+          contentType: application/json
+          payload:
+            joinState: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: joinState must be one of ［＂closed＂‚＂invite＂‚＂request＂‚＂open＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: create-group-invalid-privacy
+    summary: createGroup refuses a privacy it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group
+        operationId: $sourceDescriptions.default.createGroup
+        requestBody:
+          contentType: application/json
+          payload:
+            privacy: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: privacy must be one of ［＂default＂‚＂private＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: create-group-invalid-role-template
+    summary: createGroup refuses a roleTemplate it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group
+        operationId: $sourceDescriptions.default.createGroup
+        requestBody:
+          contentType: application/json
+          payload:
+            roleTemplate: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: roleTemplate must be one of ［＂default＂‚＂managedFree＂‚＂managedInvite＂‚＂managedRequest＂］‚ not ＂x＂
+            type: regex
 
   - workflowId: create-group-unauthenticated
     summary: createGroup refuses an anonymous caller
@@ -5933,6 +6242,35 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/0/user/id != null
 
+  - workflowId: get-group-members-invalid-sort
+    summary: getGroupMembers refuses a sort it does not know
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-members
+        operationId: $sourceDescriptions.default.getGroupMembers
+        parameters:
+          - name: sort
+            in: query
+            value: x
+          - name: groupId
+            in: path
+            value: $inputs.groupId
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'sort must be one of ［null‚＂joinedAt˸asc＂‚＂joinedAt˸desc＂］‚ not ＂x＂'
+
   - workflowId: get-group-members-unauthenticated
     summary: getGroupMembers refuses an anonymous caller
     parameters:
@@ -6879,6 +7217,34 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: respond-group-join-request-invalid-action
+    summary: respondGroupJoinRequest refuses a action it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: respond-group-join-request
+        operationId: $sourceDescriptions.default.respondGroupJoinRequest
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            action: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: action must be one of ［＂accept＂‚＂reject＂］‚ not ＂x＂
+            type: regex
+
   - workflowId: respond-group-join-request-unauthenticated
     summary: respondGroupJoinRequest refuses an anonymous caller
     parameters:
@@ -7077,6 +7443,34 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: update-group-member-invalid-visibility
+    summary: updateGroupMember refuses a visibility it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-group-member
+        operationId: $sourceDescriptions.default.updateGroupMember
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            visibility: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: visibility must be one of ［＂visible＂‚＂hidden＂‚＂friends＂］‚ not ＂x＂
+            type: regex
+
   - workflowId: update-group-member-unauthenticated
     summary: updateGroupMember refuses an anonymous caller
     parameters:
@@ -7121,6 +7515,34 @@ workflows:
             visibility: group
         successCriteria:
           - condition: $statusCode == 403
+
+  - workflowId: update-group-post-invalid-visibility
+    summary: updateGroupPost refuses a visibility it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-group-post
+        operationId: $sourceDescriptions.default.updateGroupPost
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: notificationId
+            in: path
+            value: not_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            visibility: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: visibility must be one of ［＂public＂‚＂group＂］‚ not ＂x＂
+            type: regex
 
   - workflowId: update-group-post-unauthenticated
     summary: updateGroupPost refuses an anonymous caller
@@ -8242,6 +8664,25 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-inventory-invalid-order
+    summary: getInventory refuses a order it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-inventory
+        operationId: $sourceDescriptions.default.getInventory
+        parameters:
+          - name: order
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'order must be one of ［＂newest_created＂‚＂oldest_created＂‚＂newest_updated＂‚＂oldest_updated＂‚＂newest_template_created＂‚＂oldest_template_created＂‚＂newest＂‚＂oldest＂‚＂alphabetic＂‚＂reverse-orthographic＂‚＂angry＂‚＂happy＂］‚ not ＂x＂'
+
   - workflowId: get-inventory-unauthenticated
     summary: getInventory refuses an anonymous caller
     parameters:
@@ -8576,6 +9017,31 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: get-invite-message-invalid-message-type
+    summary: getInviteMessage refuses a messageType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-invite-message
+        operationId: $sourceDescriptions.default.getInviteMessage
+        parameters:
+          - name: messageType
+            in: path
+            value: x
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: slot
+            in: path
+            value: 0
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'messageType must be one of ［＂message＂‚＂response＂‚＂request＂‚＂requestResponse＂］‚ not ＂x＂'
+
   - workflowId: get-invite-message-unauthenticated
     summary: getInviteMessage refuses an anonymous caller
     parameters:
@@ -8616,6 +9082,28 @@ workflows:
             value: message
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: get-invite-messages-invalid-message-type
+    summary: getInviteMessages refuses a messageType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-invite-messages
+        operationId: $sourceDescriptions.default.getInviteMessages
+        parameters:
+          - name: messageType
+            in: path
+            value: x
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'messageType must be one of ［＂message＂‚＂response＂‚＂request＂‚＂requestResponse＂］‚ not ＂x＂'
 
   - workflowId: get-invite-messages-unauthenticated
     summary: getInviteMessages refuses an anonymous caller
@@ -9662,6 +10150,25 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: get-player-moderations-invalid-type
+    summary: getPlayerModerations refuses a type it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-player-moderations
+        operationId: $sourceDescriptions.default.getPlayerModerations
+        parameters:
+          - name: type
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'type must be one of ［＂block＂‚＂mute＂‚＂muteChat＂‚＂unmute＂‚＂unmuteChat＂‚＂hideAvatar＂‚＂showAvatar＂‚＂interactOn＂‚＂interactOff＂］‚ not ＂x＂'
+
   - workflowId: get-player-moderations-unauthenticated
     summary: getPlayerModerations refuses an anonymous caller
     parameters:
@@ -9714,6 +10221,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: moderate-user-invalid-type
+    summary: moderateUser refuses a type it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: moderate-user
+        operationId: $sourceDescriptions.default.moderateUser
+        requestBody:
+          contentType: application/json
+          payload:
+            type: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: type must be one of ［＂block＂‚＂mute＂‚＂muteChat＂‚＂unmute＂‚＂unmuteChat＂‚＂hideAvatar＂‚＂showAvatar＂‚＂interactOn＂‚＂interactOff＂］‚ not ＂x＂
+            type: regex
+
   - workflowId: moderate-user-unauthenticated
     summary: moderateUser refuses an anonymous caller
     parameters:
@@ -9723,6 +10251,27 @@ workflows:
         operationId: $sourceDescriptions.default.moderateUser
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: unmoderate-user-invalid-type
+    summary: unmoderateUser refuses a type it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: unmoderate-user
+        operationId: $sourceDescriptions.default.unmoderateUser
+        requestBody:
+          contentType: application/json
+          payload:
+            type: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: type must be one of ［＂block＂‚＂mute＂‚＂muteChat＂‚＂unmute＂‚＂unmuteChat＂‚＂hideAvatar＂‚＂showAvatar＂‚＂interactOn＂‚＂interactOff＂］‚ not ＂x＂
+            type: regex
 
   - workflowId: unmoderate-user-unauthenticated
     summary: unmoderateUser refuses an anonymous caller
@@ -13172,6 +13721,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: create-world-invalid-release-status
+    summary: createWorld refuses a releaseStatus it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-world
+        operationId: $sourceDescriptions.default.createWorld
+        requestBody:
+          contentType: application/json
+          payload:
+            releaseStatus: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: releaseStatus must be one of ［＂private＂］‚ not ＂x＂
+            type: regex
+
   - workflowId: create-world-unauthenticated
     summary: createWorld refuses an anonymous caller
     parameters:
@@ -13298,6 +13868,25 @@ workflows:
             value: _created_at
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: get-active-worlds-invalid-release-status
+    summary: getActiveWorlds refuses a releaseStatus it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-active-worlds
+        operationId: $sourceDescriptions.default.getActiveWorlds
+        parameters:
+          - name: releaseStatus
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'releaseStatus must be one of ［＂public＂‚＂private＂‚＂hidden＂‚＂all＂］‚ not ＂x＂'
 
   - workflowId: get-active-worlds-unauthenticated
     summary: getActiveWorlds refuses an anonymous caller
@@ -13669,6 +14258,7 @@ workflows:
             value: x
         successCriteria:
           - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'user must be one of ［＂me＂‚＂friends＂］‚ not ＂x＂'
 
   - workflowId: search-worlds-query-parameters
     summary: searchWorlds with every fillable query parameter
@@ -13711,6 +14301,63 @@ workflows:
             value: me
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: search-worlds-invalid-sort
+    summary: searchWorlds refuses a sort it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-worlds
+        operationId: $sourceDescriptions.default.searchWorlds
+        parameters:
+          - name: sort
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'sort must be one of ［＂popularity＂‚＂heat＂‚＂trust＂‚＂shuffle＂‚＂random＂‚＂favorites＂‚＂reportScore＂‚＂reportCount＂‚＂publicationDate＂‚＂labsPublicationDate＂‚＂created＂‚＂_created_at＂‚＂updated＂‚＂_updated_at＂‚＂order＂‚＂relevance＂‚＂magic＂‚＂name＂‚＂exact＂‚＂contains＂‚＂hotness＂‚＂trending＂］‚ not ＂x＂'
+
+  - workflowId: search-worlds-invalid-order
+    summary: searchWorlds refuses a order it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-worlds
+        operationId: $sourceDescriptions.default.searchWorlds
+        parameters:
+          - name: order
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'order must be one of ［＂ascending＂‚＂descending＂］‚ not ＂x＂'
+
+  - workflowId: search-worlds-invalid-release-status
+    summary: searchWorlds refuses a releaseStatus it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-worlds
+        operationId: $sourceDescriptions.default.searchWorlds
+        parameters:
+          - name: releaseStatus
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'releaseStatus must be one of ［＂public＂‚＂private＂‚＂hidden＂‚＂all＂］‚ not ＂x＂'
 
   - workflowId: search-worlds-unauthenticated
     summary: searchWorlds refuses an anonymous caller
@@ -13929,6 +14576,7 @@ workflows:
             value: sticker
         successCriteria:
           - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'type must be one of ［＂portalskin＂‚＂droneskin＂‚＂warpeffect＂‚＂nameplateEffect＂‚＂profileEffect＂‚＂profileBackground＂‚＂iconFrame＂］‚ not ＂sticker＂'
 
   - workflowId: get-cosmetics-unauthenticated
     summary: getCosmetics refuses an anonymous caller
@@ -13968,6 +14616,28 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/favorites/0/world/id != null
+
+  - workflowId: get-favorite-group-contents-invalid-favorite-group-type
+    summary: getFavoriteGroupContents refuses a favoriteGroupType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-favorite-group-contents
+        operationId: $sourceDescriptions.default.getFavoriteGroupContents
+        parameters:
+          - name: favoriteGroupType
+            in: path
+            value: x
+          - name: favoriteGroupName
+            in: path
+            value: worlds1
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'type must be one of ［＂world＂‚＂vrcPlusWorld＂‚＂friend＂‚＂avatar＂］‚ not ＂x＂'
 
   - workflowId: get-favorite-group-contents-unauthenticated
     summary: getFavoriteGroupContents refuses an anonymous caller
@@ -14223,6 +14893,56 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/bio == $steps.profile-before.outputs.bio
 
+  - workflowId: update-profile-invalid-background-type
+    summary: updateProfile refuses a backgroundType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-profile
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            backgroundType: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: backgroundType must be one of ［＂default＂‚＂gradient＂‚＂texture＂‚＂inventory＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: update-profile-invalid-banner-type
+    summary: updateProfile refuses a bannerType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-profile
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            bannerType: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: bannerType must be one of ［＂color＂‚＂avatarBanner＂‚＂customImage＂］‚ not ＂x＂
+            type: regex
+
   - workflowId: update-profile-unauthenticated
     summary: updateProfile refuses an anonymous caller
     parameters:
@@ -14368,6 +15088,25 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/favoriteGroups/0/id != null
           - condition: $response.body#/maxFavoriteGroups != null
+
+  - workflowId: get-favorite-groups-by-type-invalid-favorite-group-type
+    summary: getFavoriteGroupsByType refuses a favoriteGroupType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-favorite-groups-by-type
+        operationId: $sourceDescriptions.default.getFavoriteGroupsByType
+        parameters:
+          - name: favoriteGroupType
+            in: path
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'type must be one of ［＂world＂‚＂vrcPlusWorld＂‚＂friend＂‚＂avatar＂］‚ not ＂x＂'
 
   - workflowId: get-favorite-groups-by-type-unauthenticated
     summary: getFavoriteGroupsByType refuses an anonymous caller
@@ -14515,3 +15254,332 @@ workflows:
             accessReduceDecorAnim: false
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: discover-calendar-events-invalid-scope
+    summary: discoverCalendarEvents refuses a scope it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-calendar-events
+        operationId: $sourceDescriptions.default.discoverCalendarEvents
+        parameters:
+          - name: scope
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'scope must be one of ［＂live＂‚＂upcoming＂‚＂all＂］‚ not ＂x＂'
+
+  - workflowId: discover-calendar-events-invalid-featured-results
+    summary: discoverCalendarEvents refuses a featuredResults it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-calendar-events
+        operationId: $sourceDescriptions.default.discoverCalendarEvents
+        parameters:
+          - name: featuredResults
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'featuredResults must be one of ［＂include＂‚＂exclude＂‚＂skip＂］‚ not ＂x＂'
+
+  - workflowId: discover-calendar-events-invalid-non-featured-results
+    summary: discoverCalendarEvents refuses a nonFeaturedResults it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-calendar-events
+        operationId: $sourceDescriptions.default.discoverCalendarEvents
+        parameters:
+          - name: nonFeaturedResults
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'nonFeaturedResults must be one of ［＂include＂‚＂exclude＂‚＂skip＂］‚ not ＂x＂'
+
+  - workflowId: discover-calendar-events-invalid-personalized-results
+    summary: discoverCalendarEvents refuses a personalizedResults it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-calendar-events
+        operationId: $sourceDescriptions.default.discoverCalendarEvents
+        parameters:
+          - name: personalizedResults
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'personalizedResults must be one of ［＂include＂‚＂exclude＂‚＂skip＂］‚ not ＂x＂'
+
+  - workflowId: create-avatar-invalid-release-status
+    summary: createAvatar refuses a releaseStatus it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-avatar
+        operationId: $sourceDescriptions.default.createAvatar
+        requestBody:
+          contentType: application/json
+          payload:
+            releaseStatus: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: releaseStatus must be one of ［＂public＂‚＂private＂‚＂hidden＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: update-avatar-invalid-release-status
+    summary: updateAvatar refuses a releaseStatus it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-avatar
+        operationId: $sourceDescriptions.default.updateAvatar
+        parameters:
+          - name: avatarId
+            in: path
+            value: avtr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            releaseStatus: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: releaseStatus must be one of ［＂public＂‚＂private＂‚＂hidden＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: update-favorite-group-invalid-visibility
+    summary: updateFavoriteGroup refuses a visibility it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-favorite-group
+        operationId: $sourceDescriptions.default.updateFavoriteGroup
+        parameters:
+          - name: favoriteGroupType
+            in: path
+            value: world
+          - name: favoriteGroupName
+            in: path
+            value: worlds1
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            visibility: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: visibility must be one of ［＂public＂‚＂private＂‚＂friends＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: add-favorite-invalid-type
+    summary: addFavorite refuses a type it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: add-favorite
+        operationId: $sourceDescriptions.default.addFavorite
+        requestBody:
+          contentType: application/json
+          payload:
+            type: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: type must be one of ［＂world＂‚＂vrcPlusWorld＂‚＂friend＂‚＂avatar＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: create-file-invalid-mime-type
+    summary: createFile refuses a mimeType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-file
+        operationId: $sourceDescriptions.default.createFile
+        requestBody:
+          contentType: application/json
+          payload:
+            mimeType: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: mimeType must be one of ［＂image⁄jpeg＂‚＂image⁄jpg＂‚＂image⁄png＂‚＂image⁄webp＂‚＂image⁄gif＂‚＂image⁄bmp＂‚＂image⁄svg＋xml＂‚＂image⁄tiff＂‚＂application⁄x-avatar＂‚＂application⁄x-avatarpart＂‚＂application⁄x-avatarbuilderresource＂‚＂application⁄x-prop＂‚＂application⁄x-world＂‚＂application⁄gzip＂‚＂application⁄x-adminassetbundle＂‚＂video⁄mp4＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: update-group-invalid-join-state
+    summary: updateGroup refuses a joinState it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-group
+        operationId: $sourceDescriptions.default.updateGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            joinState: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: joinState must be one of ［＂closed＂‚＂invite＂‚＂request＂‚＂open＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: create-instance-invalid-group-access-type
+    summary: createInstance refuses a groupAccessType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            groupAccessType: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: groupAccessType must be one of ［＂members＂‚＂plus＂‚＂public＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: create-instance-invalid-region
+    summary: createInstance refuses a region it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            region: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: region must be one of ［＂us＂‚＂use＂‚＂eu＂‚＂jp＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: create-instance-invalid-type
+    summary: createInstance refuses a type it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            type: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: type must be one of ［＂public＂‚＂group＂‚＂hidden＂‚＂friends＂‚＂private＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: create-product-listing-direct-invalid-listing-type
+    summary: createProductListingDirect refuses a listingType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-product-listing-direct
+        operationId: $sourceDescriptions.default.createProductListingDirect
+        requestBody:
+          contentType: application/json
+          payload:
+            listingType: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: listingType must be one of ［＂subscription＂‚＂duration＂‚＂instant＂‚＂permanent＂］‚ not ＂x＂
+            type: regex
+
+  - workflowId: update-user-invalid-status
+    summary: updateUser refuses a status it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-user
+        operationId: $sourceDescriptions.default.updateUser
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            status: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: status must be one of ［＂active＂‚＂offline＂‚＂busy＂‚＂ask me＂‚＂join me＂‚null‚null］‚ not ＂x＂
+            type: regex

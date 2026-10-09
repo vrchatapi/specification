@@ -51,6 +51,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/calendar/CalendarEventDiscoveryResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /calendar/featured:

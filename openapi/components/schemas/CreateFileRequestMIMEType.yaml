@@ -1,12 +1,12 @@
-title: MIMEType
+title: CreateFileRequestMIMEType
 type: string
 enum:
   - application/gzip
-  - application/octet-stream
+  - application/x-adminassetbundle
   - application/x-avatar
+  - application/x-avatarbuilderresource
+  - application/x-avatarpart
   - application/x-prop
-  - application/x-rsync-delta
-  - application/x-rsync-signature
   - application/x-world
   - image/bmp
   - image/gif
@@ -16,6 +16,6 @@ enum:
   - image/svg+xml
   - image/tiff
   - image/webp
-default: image/jpeg
+  - video/mp4
 examples:
-  - image/jpeg
+  - image/png
