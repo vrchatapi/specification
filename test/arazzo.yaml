@@ -13625,6 +13625,15 @@ workflows:
       - stepId: search-users
         operationId: $sourceDescriptions.default.searchUsers
         parameters:
+          - name: search
+            in: query
+            value: tupper
+          - name: sort
+            in: query
+            value: last_login
+          - name: customFields
+            in: query
+            value: displayName
           - name: isInternalVariant
             in: query
             value: false
@@ -13633,6 +13642,49 @@ workflows:
             value: 1
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: search-users-invalid-sort
+    summary: searchUsers refuses a sort it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-users
+        operationId: $sourceDescriptions.default.searchUsers
+        parameters:
+          - name: search
+            in: query
+            value: tupper
+          - name: sort
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'sort must be one of ［＂nuisanceFactor＂‚＂created＂‚＂_created_at＂‚＂last_login＂‚＂trust＂‚＂relevance＂‚＂magic＂‚＂name＂‚＂exact＂‚＂contains＂］‚ not ＂x＂'
+
+  - workflowId: search-users-invalid-custom-fields
+    summary: searchUsers refuses a custom field it does not accept
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-users
+        operationId: $sourceDescriptions.default.searchUsers
+        parameters:
+          - name: search
+            in: query
+            value: tupper
+          - name: customFields
+            in: query
+            value: displayName,bio
+        successCriteria:
+          - condition: $statusCode == 400
 
   - workflowId: search-users-unauthenticated
     summary: searchUsers refuses an anonymous caller

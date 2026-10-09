@@ -1,0 +1,4 @@
+title: UserSearchCustomFields
+type: string
+examples:
+  - displayName

@@ -12,5 +12,15 @@ content:
           error:
             message: "n must be a positive integer˸ '-1'"
             status_code: 400
+      Invalid Custom Field:
+        value:
+          error:
+            message: "\"Custom fields can not include the following: bio\""
+            status_code: 400
+      Invalid Sort:
+        value:
+          error:
+            message: sort must be one of ［＂nuisanceFactor＂‚＂created＂‚＂_created_at＂‚＂last_login＂‚＂trust＂‚＂relevance＂‚＂magic＂‚＂name＂‚＂exact＂‚＂contains＂］‚ not ＂x＂
+            status_code: 400
     schema:
       $ref: ../../schemas/Error.yaml

@@ -1,0 +1,14 @@
+title: UserSearchSort
+enum:
+  - _created_at
+  - contains
+  - created
+  - exact
+  - last_login
+  - magic
+  - name
+  - nuisanceFactor
+  - relevance
+  - trust
+examples:
+  - last_login

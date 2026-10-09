@@ -154,6 +154,16 @@ paths:
           in: query
           schema:
             type: string
+        - name: sort
+          description: The order to return users in.
+          in: query
+          schema:
+            $ref: ../schemas/UserSearchSort.yaml
+        - name: customFields
+          description: A comma-separated list of field names.
+          in: query
+          schema:
+            $ref: ../schemas/UserSearchCustomFields.yaml
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/offset
         - $ref: ../parameters.yaml#/isInternalVariant
