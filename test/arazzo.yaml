@@ -10823,6 +10823,8 @@ workflows:
           isBoopingEnabled: $response.body#/isBoopingEnabled
           unsubscribe: $response.body#/unsubscribe
           allowWorldsToCountFriendsInInstance: $response.body#/allowWorldsToCountFriendsInInstance
+          allowAvatarCopying: $response.body#/allowAvatarCopying
+          homeLocation: $response.body#/homeLocation
 
       - stepId: update-profile
         x-security:
@@ -10843,6 +10845,8 @@ workflows:
             isBoopingEnabled: false
             unsubscribe: false
             allowWorldsToCountFriendsInInstance: false
+            allowAvatarCopying: false
+            homeLocation: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/statusDescription == $steps.marker.outputs.value
@@ -10851,6 +10855,8 @@ workflows:
           - condition: $response.body#/isBoopingEnabled == false
           - condition: $response.body#/unsubscribe == false
           - condition: $response.body#/allowWorldsToCountFriendsInInstance == false
+          - condition: $response.body#/allowAvatarCopying == false
+          - condition: $response.body#/homeLocation == 'wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b'
 
       - stepId: verify-current-user
         x-security:
@@ -10866,6 +10872,8 @@ workflows:
           - condition: $response.body#/isBoopingEnabled == false
           - condition: $response.body#/unsubscribe == false
           - condition: $response.body#/allowWorldsToCountFriendsInInstance == false
+          - condition: $response.body#/allowAvatarCopying == false
+          - condition: $response.body#/homeLocation == 'wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b'
 
       - stepId: verify-get-user
         x-security:
@@ -10885,6 +10893,7 @@ workflows:
           - condition: $response.body#/isBoopingEnabled == false
           - condition: $response.body#/unsubscribe == false
           - condition: $response.body#/allowWorldsToCountFriendsInInstance == false
+          - condition: $response.body#/allowAvatarCopying == false
 
       - stepId: restore-profile
         x-security:
@@ -10905,6 +10914,8 @@ workflows:
             isBoopingEnabled: $steps.current-before.outputs.isBoopingEnabled
             unsubscribe: $steps.current-before.outputs.unsubscribe
             allowWorldsToCountFriendsInInstance: $steps.current-before.outputs.allowWorldsToCountFriendsInInstance
+            allowAvatarCopying: $steps.current-before.outputs.allowAvatarCopying
+            homeLocation: $steps.current-before.outputs.homeLocation
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/statusDescription == $steps.current-before.outputs.statusDescription
@@ -10913,6 +10924,8 @@ workflows:
           - condition: $response.body#/isBoopingEnabled == $steps.current-before.outputs.isBoopingEnabled
           - condition: $response.body#/unsubscribe == $steps.current-before.outputs.unsubscribe
           - condition: $response.body#/allowWorldsToCountFriendsInInstance == $steps.current-before.outputs.allowWorldsToCountFriendsInInstance
+          - condition: $response.body#/allowAvatarCopying == $steps.current-before.outputs.allowAvatarCopying
+          - condition: $response.body#/homeLocation == $steps.current-before.outputs.homeLocation
 
       - stepId: verify-restored
         x-security:
@@ -10932,6 +10945,7 @@ workflows:
           - condition: $response.body#/isBoopingEnabled == $steps.current-before.outputs.isBoopingEnabled
           - condition: $response.body#/unsubscribe == $steps.current-before.outputs.unsubscribe
           - condition: $response.body#/allowWorldsToCountFriendsInInstance == $steps.current-before.outputs.allowWorldsToCountFriendsInInstance
+          - condition: $response.body#/allowAvatarCopying == $steps.current-before.outputs.allowAvatarCopying
 
   - workflowId: get-invited-groups
     summary: Invited groups
