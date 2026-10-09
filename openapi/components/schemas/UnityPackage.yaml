@@ -38,7 +38,9 @@ properties:
   platform:
     $ref: ./Platform.yaml
   pluginUrl:
-    type: string
+    type:
+      - string
+      - "null"
     examples:
       - ""
   pluginUrlObject:
