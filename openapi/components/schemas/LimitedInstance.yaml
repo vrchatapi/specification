@@ -1,0 +1,170 @@
+title: LimitedInstance
+type: object
+properties:
+  active:
+    type: boolean
+    default: true
+    examples:
+      - true
+  capacity:
+    type: integer
+    examples:
+      - 8
+    minimum: 0
+  categoryId:
+    anyOf:
+      - $ref: ./InstanceCategoryID.yaml
+      - type: "null"
+  creationLanguages:
+    type: array
+    items:
+      $ref: ./Unknown.yaml
+  description:
+    type:
+      - string
+      - "null"
+  disabledPropAbilities:
+    type: array
+    items:
+      $ref: ./Unknown.yaml
+  displayName:
+    type:
+      - string
+      - "null"
+  displayVibeId:
+    anyOf:
+      - $ref: ./InstanceVibeID.yaml
+      - type: "null"
+  dominantLanguage:
+    type: string
+  full:
+    type: boolean
+    default: false
+  groupAccessType:
+    $ref: ./GroupAccessType.yaml
+  id:
+    $ref: ./InstanceID.yaml
+  instanceId:
+    $ref: ./InstanceID.yaml
+  languageRatio:
+    $ref: ./InstanceLanguageRatio.yaml
+  languages:
+    type: array
+    description: The keys of languageRatio, ordered by their share of the instance.
+    items:
+      type: string
+      examples:
+        - en
+  languagesIso639:
+    type: array
+    items:
+      $ref: ./LanguageCode.yaml
+  location:
+    $ref: ./LocationID.yaml
+  minimumAvatarPerformance:
+    type:
+      - string
+      - "null"
+  n_users:
+    type: integer
+    examples:
+      - 6
+    minimum: 0
+  ownerId:
+    $ref: ./InstanceOwnerId.yaml
+  permanent:
+    type: boolean
+    default: false
+  photonRegion:
+    $ref: ./Region.yaml
+  platforms:
+    $ref: ./InstancePlatforms.yaml
+  queueEnabled:
+    type: boolean
+  queueSize:
+    type: integer
+    examples:
+      - 6
+    minimum: 0
+  recommendedCapacity:
+    type: integer
+    examples:
+      - 6
+    minimum: 0
+  region:
+    $ref: ./InstanceRegion.yaml
+  roleRestricted:
+    type: boolean
+  shortName:
+    type:
+      - string
+      - "null"
+    examples:
+      - 02u7yz8j
+    minLength: 1
+  tags:
+    type: array
+    description: "The tags array on Instances usually contain the language tags of the people in the instance. "
+    examples:
+      -
+        - language_eng
+        - language_jpn
+        - show_social_rank
+    items:
+      $ref: ./Tag.yaml
+  type:
+    $ref: ./InstanceType.yaml
+  userCount:
+    type: integer
+    examples:
+      - 6
+    minimum: 0
+  userIcons:
+    type: array
+    items:
+      type: string
+      examples:
+        - https://api.vrchat.cloud/api/1/image/file_12ca2b06-c08d-4023-b06f-b60691d9946e/1/256
+  vibeIds:
+    type: array
+    items:
+      $ref: ./InstanceVibeID.yaml
+  world:
+    $ref: ./World.yaml
+  worldId:
+    $ref: ./WorldID.yaml
+required:
+  - active
+  - capacity
+  - categoryId
+  - creationLanguages
+  - description
+  - disabledPropAbilities
+  - displayName
+  - displayVibeId
+  - dominantLanguage
+  - full
+  - id
+  - instanceId
+  - languageRatio
+  - languages
+  - languagesIso639
+  - location
+  - minimumAvatarPerformance
+  - n_users
+  - ownerId
+  - permanent
+  - photonRegion
+  - platforms
+  - queueEnabled
+  - queueSize
+  - recommendedCapacity
+  - region
+  - shortName
+  - tags
+  - type
+  - userCount
+  - userIcons
+  - vibeIds
+  - world
+  - worldId

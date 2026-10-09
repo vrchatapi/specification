@@ -78,6 +78,30 @@ paths:
           $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /instances/discover:
+    get:
+      operationId: discoverInstances
+      summary: Discover Instances
+      description: Returns instances to discover, in an order that changes between requests.
+      tags:
+        - instances
+      parameters:
+        - $ref: ../parameters.yaml#/instanceDiscoveryNumber
+        - $ref: ../parameters.yaml#/instanceDiscoveryRegion
+        - $ref: ../parameters.yaml#/instanceDiscoveryPlatform
+        - $ref: ../parameters.yaml#/instanceDiscoveryWorldIds
+        - $ref: ../parameters.yaml#/instanceDiscoveryGroupIds
+        - $ref: ../parameters.yaml#/instanceDiscoveryVibes
+        - $ref: ../parameters.yaml#/instanceDiscoveryCategory
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceDiscoveryResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /instances/recent:
     get:
       operationId: getRecentLocations

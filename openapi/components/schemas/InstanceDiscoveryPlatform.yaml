@@ -1,0 +1,6 @@
+title: InstanceDiscoveryPlatform
+enum:
+  - android
+  - ios
+  - standalonewindows
+  - web

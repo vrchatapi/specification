@@ -264,6 +264,8 @@
   $ref: "./paths/instances.yaml#/paths/~1instances"
 /instances/active:
   $ref: "./paths/instances.yaml#/paths/~1instances~1active"
+/instances/discover:
+  $ref: "./paths/instances.yaml#/paths/~1instances~1discover"
 /instances/recent:
   $ref: "./paths/instances.yaml#/paths/~1instances~1recent"
 "/instances/s/{shortName}":

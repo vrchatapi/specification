@@ -8523,6 +8523,245 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: discover-instances
+    summary: Discovered instances
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/attributionId != null
+          - condition: $response.body#/instances/0/id != null
+
+  - workflowId: discover-instances-n-at-maximum
+    summary: discoverInstances with n at its maximum
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: n
+            in: query
+            value: 50
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/instances/49/id != null
+
+  - workflowId: discover-instances-n-over-maximum
+    summary: discoverInstances refuses an n above 50
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: n
+            in: query
+            value: 51
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: n exceeds maximum value˸ '51'
+            type: regex
+
+  - workflowId: discover-instances-in-region
+    summary: discoverInstances in one region
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: region
+            in: query
+            value: jp
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/instances/0/region == 'jp'
+
+  - workflowId: discover-instances-invalid-region
+    summary: discoverInstances refuses a region it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: region
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'region must be one of ［＂us＂‚＂use＂‚＂eu＂‚＂jp＂］‚ not ＂x＂'
+
+  - workflowId: discover-instances-for-platform
+    summary: discoverInstances for one platform
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: platform
+            in: query
+            value: android
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: discover-instances-invalid-platform
+    summary: discoverInstances refuses a platform it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: platform
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'platform must be one of ［＂standalonewindows＂‚＂android＂‚＂ios＂‚＂web＂］‚ not ＂x＂'
+
+  - workflowId: discover-instances-in-worlds
+    summary: discoverInstances in two worlds
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: worldId
+            in: query
+            value:
+              - wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+              - wrld_ac7f45ed-4b08-4552-9ad3-7e2ffc309e45
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: discover-instances-invalid-world
+    summary: discoverInstances refuses a worldId that is not a world ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: worldId
+            in: query
+            value:
+              - x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: worldId entry must be a 'wrld' ID˸ 'x'
+            type: regex
+
+  - workflowId: discover-instances-of-groups
+    summary: discoverInstances of one group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: groupId
+            in: query
+            value:
+              - grp_73821299-38ed-4a14-b0c6-8f7acd1fc290
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: discover-instances-with-vibes
+    summary: discoverInstances with one vibe
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: vibe
+            in: query
+            value:
+              - ivib_0073627d-ff28-43e3-b8c6-21460ab1a7b9
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: discover-instances-in-category
+    summary: discoverInstances in one category
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: category
+            in: query
+            value: icat_44bc6a70-493f-4f84-8a3b-1f290c864c2a
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: discover-instances-unauthenticated
+    summary: discoverInstances refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-recent-locations
     summary: Recent locations
     parameters:
