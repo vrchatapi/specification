@@ -52,6 +52,32 @@ paths:
           $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /instances/active:
+    get:
+      operationId: getActiveInstances
+      summary: List Active Instances
+      description: Returns active instances, the most populated first.
+      tags:
+        - instances
+      parameters:
+        - name: n
+          description: The number of instances to return.
+          required: false
+          in: query
+          schema:
+            type: integer
+            maximum: 50
+            minimum: 1
+        - $ref: ../parameters.yaml#/offset
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /instances/recent:
     get:
       operationId: getRecentLocations

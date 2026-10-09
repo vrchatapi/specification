@@ -47,6 +47,10 @@ properties:
       - {}
   scanStatus:
     type: string
+  transpilerVersion:
+    type: string
+    examples:
+      - 1.0.0
   unitySortNumber:
     type: integer
     examples:

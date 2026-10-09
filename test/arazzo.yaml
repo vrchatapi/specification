@@ -8454,6 +8454,71 @@ workflows:
         successCriteria:
           - condition: $statusCode == 404
 
+  - workflowId: get-active-instances
+    summary: Active instances
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: active-instances
+        operationId: $sourceDescriptions.default.getActiveInstances
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/0/id != null
+
+  - workflowId: get-active-instances-query-parameters
+    summary: getActiveInstances with every fillable query parameter, n at its maximum
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-active-instances
+        operationId: $sourceDescriptions.default.getActiveInstances
+        parameters:
+          - name: n
+            in: query
+            value: 50
+          - name: offset
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/49/id != null
+
+  - workflowId: get-active-instances-n-over-maximum
+    summary: getActiveInstances refuses an n above 50
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-active-instances
+        operationId: $sourceDescriptions.default.getActiveInstances
+        parameters:
+          - name: n
+            in: query
+            value: 51
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: get-active-instances-unauthenticated
+    summary: getActiveInstances refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-active-instances
+        operationId: $sourceDescriptions.default.getActiveInstances
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-recent-locations
     summary: Recent locations
     parameters:
