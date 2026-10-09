@@ -30,8 +30,6 @@ properties:
   profileEffect:
     $ref: ../schemas/InventoryTemplateID.yaml
   themeId:
-    anyOf:
-      - $ref: ../schemas/ProfileThemeID.yaml
-      - const: default
+    $ref: ../schemas/PublicProfileThemeID.yaml
   userIcon:
     type: string
