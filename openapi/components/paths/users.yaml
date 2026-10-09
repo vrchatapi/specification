@@ -353,8 +353,9 @@ paths:
       - $ref: ../parameters.yaml#/offset
     get:
       operationId: getUserFeedback
+      deprecated: true
       summary: Get User Feedback
-      description: Get user's submitted feedback
+      description: "Get user's submitted feedback. VRChat staff note that [moderation reports](https://vrchat.community/reference/get-moderation-reports) replace the feedback system in [Feedback deprecated](https://github.com/vrchatapi/specification/issues/535), December 5, 2025."
       tags:
         - users
       security:
