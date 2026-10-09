@@ -49,7 +49,7 @@ properties:
   bannerColor:
     $ref: ./Color.yaml
   bannerType:
-    type: string
+    $ref: ./BannerType.yaml
   bannerUrl:
     type: string
   completedTutorials:

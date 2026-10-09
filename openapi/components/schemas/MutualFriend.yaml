@@ -5,9 +5,7 @@ properties:
   bannerColor:
     $ref: ./Color.yaml
   bannerType:
-    type: string
-    examples:
-      - color
+    $ref: ./BannerType.yaml
   bannerUrl:
     type: string
   displayName:

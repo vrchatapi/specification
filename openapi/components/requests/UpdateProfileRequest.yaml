@@ -12,10 +12,7 @@ properties:
   bannerColor:
     $ref: ../schemas/Color.yaml
   bannerType:
-    enum:
-      - avatarBanner
-      - color
-      - customImage
+    $ref: ../schemas/BannerType.yaml
   bio:
     type: string
   bioLinks:

@@ -24,7 +24,7 @@ properties:
   bannerCustomUrl:
     type: string
   bannerType:
-    type: string
+    $ref: ./BannerType.yaml
   bannerUrl:
     type: string
   bio:

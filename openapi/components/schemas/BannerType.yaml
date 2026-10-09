@@ -1,0 +1,5 @@
+title: BannerType
+enum:
+  - avatarBanner
+  - color
+  - customImage
