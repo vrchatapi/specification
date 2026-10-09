@@ -90,7 +90,9 @@ properties:
   themeIconColor:
     $ref: ./Color.yaml
   themeId:
-    type: string
+    anyOf:
+      - $ref: ./ProfileThemeID.yaml
+      - const: default
   themeSubtextColor:
     $ref: ./Color.yaml
   themes:

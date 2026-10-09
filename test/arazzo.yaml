@@ -15078,6 +15078,29 @@ workflows:
             condition: bannerType must be one of ［＂color＂‚＂avatarBanner＂‚＂customImage＂］‚ not ＂x＂
             type: regex
 
+  - workflowId: update-profile-default-theme
+    summary: updateProfile selects the default theme
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-profile
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            themeId: default
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/themeId == 'default'
+
   - workflowId: update-profile-unauthenticated
     summary: updateProfile refuses an anonymous caller
     parameters:
