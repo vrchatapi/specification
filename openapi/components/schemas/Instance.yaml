@@ -98,8 +98,7 @@ properties:
       - boolean
       - "null"
   languageRatio:
-    type: object
-    additionalProperties: true
+    $ref: ./InstanceLanguageRatio.yaml
   languages:
     type: array
     description: The keys of languageRatio, ordered by their share of the instance.
