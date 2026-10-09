@@ -18,6 +18,7 @@ properties:
     format: date-time
   featured:
     type: boolean
+    default: false
   guestEarlyJoinMinutes:
     type: integer
     examples:
@@ -30,6 +31,7 @@ properties:
     $ref: ../schemas/FileID.yaml
   isDraft:
     type: boolean
+    default: true
   languages:
     type: array
     items:

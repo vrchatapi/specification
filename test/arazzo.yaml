@@ -2416,6 +2416,8 @@ workflows:
             endsAt: $steps.ends-at.outputs.value
         successCriteria:
           - condition: $statusCode == 200
+          - condition: $response.body#/isDraft == true
+          - condition: $response.body#/featured == false
         onFailure:
           - name: stop
             type: end
@@ -2458,8 +2460,10 @@ workflows:
           payload:
             title: Test renamed
             description: Updated by the test suite
+            isDraft: false
         successCriteria:
           - condition: $statusCode == 200
+          - condition: $response.body#/isDraft == false
 
       - stepId: delete-event
         x-security:
