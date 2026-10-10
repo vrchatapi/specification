@@ -8,9 +8,7 @@ properties:
     items:
       $ref: ./Unknown.yaml
   standing:
-    type: string
-    examples:
-      - good
+    $ref: ./AccountStandingStatus.yaml
 required:
   - issueClearDays
   - sanctions

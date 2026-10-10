@@ -1,0 +1,4 @@
+title: AccountStandingStatus
+type: string
+examples:
+  - good
