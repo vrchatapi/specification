@@ -1097,6 +1097,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupRoleResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
@@ -1123,6 +1125,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupRoleListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
     delete:

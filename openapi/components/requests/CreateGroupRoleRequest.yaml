@@ -1,9 +1,7 @@
-title: CreateGroupRequest
+title: CreateGroupRoleRequest
 type: object
 properties:
   description:
-    type: string
-  id:
     type: string
   isAddedOnJoin:
     type: boolean
@@ -23,3 +21,5 @@ properties:
   requiresTwoFactor:
     type: boolean
     default: false
+required:
+  - name

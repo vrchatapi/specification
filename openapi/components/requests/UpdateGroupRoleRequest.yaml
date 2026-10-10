@@ -7,7 +7,6 @@ properties:
     type: boolean
   isSelfAssignable:
     type: boolean
-    default: false
   name:
     type: string
   order:

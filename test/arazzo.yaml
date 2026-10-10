@@ -5593,6 +5593,31 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: create-group-role-invalid-body
+    summary: createGroupRole refuses a role without a name or with non-boolean flags
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group-role
+        operationId: $sourceDescriptions.default.createGroupRole
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            isAddedOnJoin: x
+            requiresPurchase: x
+            requiresTwoFactor: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "name is required․‚ name must be a string˸ 'undefined' - 'undefined'‚ isAddedOnJoin must be a boolean˸ 'x'‚ requiresTwoFactor must be a boolean˸ 'x'‚ requiresPurchase must be a boolean˸ 'x'"
+
   - workflowId: create-group-role-not-found
     summary: createGroupRole refuses a resource that does not exist
     parameters:
@@ -6978,7 +7003,7 @@ workflows:
             name: test
             description: Created by the test suite
             isAddedOnJoin: true
-            isSelfAssignable: false
+            isSelfAssignable: true
             permissions:
               - group-instance-join
             requiresTwoFactor: true
@@ -7013,7 +7038,7 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - context: $response.body
-            condition: $[0][?(@.id == {$steps.create-role.outputs.roleId} && (@.isAddedOnJoin == false && @.requiresTwoFactor == false))]
+            condition: $[0][?(@.id == {$steps.create-role.outputs.roleId} && ((@.isAddedOnJoin == false && @.requiresTwoFactor == false) && @.isSelfAssignable == true))]
             type: jsonpath
 
       - stepId: delete-role
@@ -7620,6 +7645,34 @@ workflows:
             value: grp_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: update-group-role-invalid-body
+    summary: updateGroupRole refuses non-boolean flags
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-group-role
+        operationId: $sourceDescriptions.default.updateGroupRole
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: groupRoleId
+            in: path
+            value: grol_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            isAddedOnJoin: x
+            isSelfAssignable: x
+            requiresTwoFactor: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "isSelfAssignable must be a boolean˸ 'x'‚ isAddedOnJoin must be a boolean˸ 'x'‚ requiresTwoFactor must be a boolean˸ 'x'"
 
   - workflowId: update-group-role-unauthenticated
     summary: updateGroupRole refuses an anonymous caller
