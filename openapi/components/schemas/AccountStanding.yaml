@@ -6,7 +6,7 @@ properties:
   sanctions:
     type: array
     items:
-      $ref: ./AccountStandingSanction.yaml
+      $ref: ./Unknown.yaml
   standing:
     $ref: ./AccountStandingStatus.yaml
 required:
