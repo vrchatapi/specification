@@ -1100,7 +1100,7 @@ paths:
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
-          $ref: ../responses/groups/GroupNotMemberError.yaml
+          $ref: ../responses/groups/CreateGroupRoleForbiddenError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
   "/groups/{groupId}/roles/{groupRoleId}":

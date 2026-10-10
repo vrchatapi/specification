@@ -5611,6 +5611,39 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: create-group-role-requires-purchase-forbidden
+    summary: createGroupRole refuses requiresPurchase from a group that cannot sell roles
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group-role
+        operationId: $sourceDescriptions.default.createGroupRole
+        parameters:
+          - name: groupId
+            in: path
+            value: $inputs.groupId
+        requestBody:
+          contentType: application/json
+          payload:
+            name: test-requires-purchase
+            requiresPurchase: true
+        successCriteria:
+          - condition: $statusCode == 403
+          - context: $response.body#/error/message
+            condition: '^"You don''t have permission to use requiresPurchase: true\."$'
+            type: regex
+
   - workflowId: create-group-role-unauthenticated
     summary: createGroupRole refuses an anonymous caller
     parameters:
@@ -6944,12 +6977,16 @@ workflows:
           payload:
             name: test
             description: Created by the test suite
+            isAddedOnJoin: true
             isSelfAssignable: false
             permissions:
               - group-instance-join
+            requiresTwoFactor: true
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/name == 'test'
+          - condition: $response.body#/isAddedOnJoin == true
+          - condition: $response.body#/requiresTwoFactor == true
         onFailure:
           - name: stop
             type: end
@@ -6971,8 +7008,13 @@ workflows:
           payload:
             name: test-renamed
             description: Updated by the test suite
+            isAddedOnJoin: false
+            requiresTwoFactor: false
         successCriteria:
           - condition: $statusCode == 200
+          - context: $response.body
+            condition: $[0][?(@.id == {$steps.create-role.outputs.roleId} && (@.isAddedOnJoin == false && @.requiresTwoFactor == false))]
+            type: jsonpath
 
       - stepId: delete-role
         operationId: $sourceDescriptions.default.deleteGroupRole

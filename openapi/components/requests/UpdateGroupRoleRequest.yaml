@@ -3,6 +3,8 @@ type: object
 properties:
   description:
     type: string
+  isAddedOnJoin:
+    type: boolean
   isSelfAssignable:
     type: boolean
     default: false
@@ -14,3 +16,5 @@ properties:
     type: array
     items:
       $ref: ../schemas/GroupPermissions.yaml
+  requiresTwoFactor:
+    type: boolean

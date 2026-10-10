@@ -5,6 +5,9 @@ properties:
     type: string
   id:
     type: string
+  isAddedOnJoin:
+    type: boolean
+    default: false
   isSelfAssignable:
     type: boolean
     default: false
@@ -14,3 +17,9 @@ properties:
     type: array
     items:
       $ref: ../schemas/GroupPermissions.yaml
+  requiresPurchase:
+    type: boolean
+    default: false
+  requiresTwoFactor:
+    type: boolean
+    default: false

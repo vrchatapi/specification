@@ -1,0 +1,16 @@
+description: Error response when the caller is not a member of the group, or may not create a role with `requiresPurchase` set.
+content:
+  application/json:
+    examples:
+      403 Not Group Member:
+        value:
+          error:
+            message: You're not a member․
+            status_code: 403
+      403 Requires Purchase Not Permitted:
+        value:
+          error:
+            message: '"You don''t have permission to use requiresPurchase: true."'
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml
