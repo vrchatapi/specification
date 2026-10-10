@@ -6,6 +6,7 @@ discriminator:
     group.announcement: ./GroupAuditLogEntryGroupAnnouncement.yaml
     group.calendarEvent.create: ./GroupAuditLogEntryGroupCalendarEventCreate.yaml
     group.calendarEvent.delete: ./GroupAuditLogEntryGroupCalendarEventDelete.yaml
+    group.create: ./GroupAuditLogEntryGroupCreate.yaml
     group.gallery.create: ./GroupAuditLogEntryGroupGalleryCreate.yaml
     group.gallery.delete: ./GroupAuditLogEntryGroupGalleryDelete.yaml
     group.gallery.update: ./GroupAuditLogEntryGroupGalleryUpdate.yaml
@@ -40,6 +41,7 @@ oneOf:
   - $ref: ./GroupAuditLogEntryGroupAnnouncement.yaml
   - $ref: ./GroupAuditLogEntryGroupCalendarEventCreate.yaml
   - $ref: ./GroupAuditLogEntryGroupCalendarEventDelete.yaml
+  - $ref: ./GroupAuditLogEntryGroupCreate.yaml
   - $ref: ./GroupAuditLogEntryGroupGalleryCreate.yaml
   - $ref: ./GroupAuditLogEntryGroupGalleryDelete.yaml
   - $ref: ./GroupAuditLogEntryGroupGalleryUpdate.yaml

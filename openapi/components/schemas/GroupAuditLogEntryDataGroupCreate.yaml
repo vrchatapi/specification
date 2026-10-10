@@ -1,0 +1,46 @@
+title: GroupAuditLogEntryDataGroupCreate
+type: object
+properties:
+  bannerId:
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
+  bannerVersion:
+    type: integer
+  description:
+    type: string
+  discoverability:
+    $ref: ./GroupAuditLogEntryDataGroupCreateDiscoverability.yaml
+  galleries:
+    type: array
+    items:
+      $ref: ./GroupAuditLogEntryDataGroupCreateGallery.yaml
+  iconId:
+    anyOf:
+      - $ref: ./FileID.yaml
+      - type: "null"
+  iconVersion:
+    type: integer
+  joinState:
+    $ref: ./GroupJoinState.yaml
+  name:
+    type: string
+  ownerId:
+    $ref: ./UserID.yaml
+  privacy:
+    $ref: ./GroupPrivacy.yaml
+  rules:
+    type: string
+  shortCode:
+    type: string
+required:
+  - bannerId
+  - description
+  - discoverability
+  - iconId
+  - joinState
+  - name
+  - ownerId
+  - privacy
+  - rules
+  - shortCode

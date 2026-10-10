@@ -12,6 +12,7 @@ properties:
         - group.announcement
         - group.calendarEvent.create
         - group.calendarEvent.delete
+        - group.create
         - group.gallery.create
         - group.gallery.delete
         - group.gallery.update

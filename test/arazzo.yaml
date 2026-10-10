@@ -5316,6 +5316,22 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+      - stepId: group-audit-logs
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.getGroupAuditLogs
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.create-group.outputs.groupId
+        successCriteria:
+          - condition: $statusCode == 200
+          - context: $response.body
+            condition: $[0].results[?(@.eventType == 'group.create')]
+            type: jsonpath
+
       - stepId: group-members
         x-security:
           - schemeName: authCookie

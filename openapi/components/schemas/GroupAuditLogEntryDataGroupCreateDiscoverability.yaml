@@ -1,0 +1,19 @@
+title: GroupAuditLogEntryDataGroupCreateDiscoverability
+type: object
+properties:
+  isDiscoverableComputed:
+    type: boolean
+  isModerationDiscoverable:
+    type: boolean
+  isModerationDiscoverableReason:
+    $ref: ./Unknown.yaml
+  isOverrideDiscoverable:
+    $ref: ./Unknown.yaml
+  isOverrideDiscoverableReason:
+    $ref: ./Unknown.yaml
+required:
+  - isDiscoverableComputed
+  - isModerationDiscoverable
+  - isModerationDiscoverableReason
+  - isOverrideDiscoverable
+  - isOverrideDiscoverableReason
