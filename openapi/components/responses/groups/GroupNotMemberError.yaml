@@ -5,7 +5,7 @@ content:
       403 Not Group Member:
         value:
           error:
-            message: You're not a member.
+            message: You're not a member․
             status_code: 403
     schema:
       $ref: ../../schemas/Error.yaml
