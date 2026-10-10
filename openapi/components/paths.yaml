@@ -44,6 +44,8 @@
   $ref: "./paths/authentication.yaml#/paths/~1auth~1twofactorauth~1totp~1verify"
 /auth/user:
   $ref: "./paths/authentication.yaml#/paths/~1auth~1user"
+/auth/user/accountStanding:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1accountStanding"
 /auth/user/avatarmoderations:
   $ref: "./paths/authentication.yaml#/paths/~1auth~1user~1avatarmoderations"
 /auth/user/favoritelimits:

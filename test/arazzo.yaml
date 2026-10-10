@@ -485,6 +485,30 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: get-account-standing
+    summary: Account standing
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: account-standing
+        operationId: $sourceDescriptions.default.getAccountStanding
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-account-standing-unauthenticated
+    summary: getAccountStanding refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-account-standing
+        operationId: $sourceDescriptions.default.getAccountStanding
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-current-user
     summary: Current user
     parameters:

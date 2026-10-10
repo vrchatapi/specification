@@ -1,0 +1,17 @@
+title: AccountStanding
+type: object
+properties:
+  issueClearDays:
+    type: integer
+  sanctions:
+    type: array
+    items:
+      $ref: ./Unknown.yaml
+  standing:
+    type: string
+    examples:
+      - good
+required:
+  - issueClearDays
+  - sanctions
+  - standing
