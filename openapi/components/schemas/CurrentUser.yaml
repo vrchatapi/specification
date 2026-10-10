@@ -23,9 +23,7 @@ properties:
     items:
       $ref: ./AccountDeletionLog.yaml
   accountStanding:
-    type: string
-    examples:
-      - good
+    $ref: ./AccountStandingStatus.yaml
   activeFriends:
     type: array
     items:
