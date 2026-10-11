@@ -14,7 +14,9 @@ properties:
     items:
       type: string
   avatarSpecific:
-    type: boolean
+    type:
+      - boolean
+      - "null"
   bannersTag:
     type: string
   categories:

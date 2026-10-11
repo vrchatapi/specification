@@ -5,5 +5,11 @@ properties:
     type: string
     examples:
       - EqualParts_4_Grid
+  pinnedDescription:
+    type: string
+  socialDisplay:
+    type: string
+    examples:
+      - groupHost
 required:
   - layout

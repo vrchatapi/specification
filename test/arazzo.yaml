@@ -2365,21 +2365,33 @@ workflows:
           - condition: $statusCode == 401
 
   - workflowId: calendar-event-lifecycle
-    summary: Create a calendar event on an owned group, read it, update it, delete it
-    inputs:
-      type: object
-      required:
-        - groupId
-      properties:
-        groupId:
-          type: string
+    summary: Create a calendar event on a throwaway group, read it, update it, delete it
     parameters:
       - reference: $components.parameters.userAgent
     failureActions:
       - name: cleanup
         type: goto
-        stepId: delete-event
+        stepId: delete-group
     steps:
+      - stepId: short-code
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sh
+            args:
+              - -c
+              - openssl rand -hex 2 | tr -d '\n'
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          value: $response.body#/stdout
+
       - stepId: starts-at
         operationId: $sourceDescriptions.local.execute
         requestBody:
@@ -2418,6 +2430,27 @@ workflows:
         outputs:
           value: $response.body#/stdout
 
+      - stepId: create-group
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.createGroup
+        requestBody:
+          contentType: application/json
+          payload:
+            name: Test Calendar
+            roleTemplate: default
+            shortCode: $steps.short-code.outputs.value
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          groupId: $response.body#/id
+
       - stepId: create-event
         x-security:
           - schemeName: authCookie
@@ -2427,7 +2460,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $inputs.groupId
+            value: $steps.create-group.outputs.groupId
         requestBody:
           contentType: application/json
           payload:
@@ -2442,9 +2475,6 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/isDraft == true
           - condition: $response.body#/featured == false
-        onFailure:
-          - name: stop
-            type: end
 
         outputs:
           calendarId: $response.body#/id
@@ -2458,7 +2488,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $inputs.groupId
+            value: $steps.create-group.outputs.groupId
           - name: calendarId
             in: path
             value: $steps.create-event.outputs.calendarId
@@ -2475,7 +2505,7 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $inputs.groupId
+            value: $steps.create-group.outputs.groupId
           - name: calendarId
             in: path
             value: $steps.create-event.outputs.calendarId
@@ -2498,10 +2528,23 @@ workflows:
         parameters:
           - name: groupId
             in: path
-            value: $inputs.groupId
+            value: $steps.create-group.outputs.groupId
           - name: calendarId
             in: path
             value: $steps.create-event.outputs.calendarId
+        successCriteria:
+          - condition: $statusCode == 200
+
+      - stepId: delete-group
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        operationId: $sourceDescriptions.default.deleteGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: $steps.create-group.outputs.groupId
         successCriteria:
           - condition: $statusCode == 200
         onFailure:
