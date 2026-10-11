@@ -13,6 +13,9 @@ concurrency:
   cancel-in-progress: false
   queue: max
 
+permissions:
+  contents: read
+
 env:
   GH_TOKEN: ${{ github.token }}
 
@@ -20,9 +23,11 @@ jobs:
   lint:
     if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - uses: pnpm/setup@v2
@@ -68,10 +73,13 @@ jobs:
 
       - name: assert no unused paths
         if: env.changes != ''
+        shell: bash
         run: |
           status=0
-          mapfile -t expected <<< "$(yq -re '.paths | keys' openapi/components/paths/*.yaml | yq -r 'sort_by(.) | .[]')"
-          mapfile -t actual <<< "$(yq -re 'sort_by(keys) | keys[]' openapi/components/paths.yaml)"
+          defined=$(yq -re '.paths | keys' openapi/components/paths/*.yaml | yq -r 'sort_by(.) | .[]')
+          referenced=$(yq -re 'sort_by(keys) | keys[]' openapi/components/paths.yaml)
+          mapfile -t expected <<< "$defined"
+          mapfile -t actual <<< "$referenced"
 
           for ((i = 0, j = 0; i < "${#expected[@]}"; i++)); do
               if [[ "${expected[$i]}" == "${actual[$j]}" ]]; then
@@ -89,11 +97,13 @@ jobs:
   bundle:
     if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       release: ${{ steps.version.outputs.release }}
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - uses: pnpm/setup@v2
@@ -153,6 +163,9 @@ jobs:
 
   build_javascript:
     needs: bundle
+    permissions:
+      contents: read
+      id-token: write
     uses: vrchatapi/vrchatapi-javascript/.github/workflows/ci.yaml@main
 
   build_rust:
@@ -177,17 +190,22 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs:
       - lint
       - bundle
     if: ${{ !failure() && !cancelled() && github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/stable') && needs.bundle.outputs.release == 'true' && !contains(github.event.head_commit.message, '[no release]') }}
     concurrency:
       group: release
+    permissions:
+      contents: write
     outputs:
       version: ${{ steps.metadata.outputs.version }}
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - uses: actions/download-artifact@v8
         with:
@@ -228,18 +246,23 @@ jobs:
   release_dispatch:
     uses: ./.github/workflows/release_dispatch.yaml
     needs: release
-    secrets: inherit
+    permissions: {}
+    secrets:
+      RELEASE_DISPATCH_TOKEN: ${{ secrets.RELEASE_DISPATCH_TOKEN }}
     with:
       version: ${{ needs.release.outputs.version }}
 
   test:
     if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[no test]')
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     concurrency:
       group: test
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - uses: pnpm/setup@v2
         with:
@@ -257,13 +280,6 @@ jobs:
           VRCHAT_GROUP_ID: ${{ secrets.VRCHAT_GROUP_ID }}
 
       - if: "!cancelled()"
-        uses: actions/upload-artifact@v7
-        with:
-          name: respect-report
-          path: test/.out/respect.json
-          retention-days: 1
-
-      - if: "!cancelled()"
         timeout-minutes: 2
         run: sh test/report.sh --format github
 
@@ -276,6 +292,7 @@ jobs:
         run: |
           status=0
           pnpm -s test:drift --max-findings 1000 --output test/.out/drift.txt || status=$?
+          pnpm -s test:drift --format json --output test/.out/redocly-test-drift.json || true
           cat test/.out/drift.txt
           {
             printf '### Drift\n\n```\n'
@@ -283,3 +300,26 @@ jobs:
             printf '```\n'
           } >> "$GITHUB_STEP_SUMMARY"
           exit $status
+
+      - if: "!cancelled()"
+        run: |
+          cp test/.out/har/arazzo.har test/.out/redocly-test.har
+          cp test/.out/respect.json test/.out/redocly-test.json
+
+      - if: "!cancelled()"
+        uses: actions/upload-artifact@v7
+        with:
+          name: redocly-test.har
+          path: test/.out/redocly-test.har
+
+      - if: "!cancelled()"
+        uses: actions/upload-artifact@v7
+        with:
+          name: redocly-test.json
+          path: test/.out/redocly-test.json
+
+      - if: "!cancelled()"
+        uses: actions/upload-artifact@v7
+        with:
+          name: redocly-test-drift.json
+          path: test/.out/redocly-test-drift.json

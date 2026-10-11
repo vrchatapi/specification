@@ -258,6 +258,8 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
 `pnpm test` reuses the cached session in `test/.out/`; delete
 `test/.out/session` to force a fresh login.
 
+Every CI `test` run uploads three artifacts, kept for the repository's artifact retention: `redocly-test.har`, the capture; `redocly-test.json`, the `respect` report; and `redocly-test-drift.json`, every drift finding, where the log shows at most a thousand. Read what CI saw with `gh run download <run-id> -n redocly-test.har -D <dir>` rather than rerunning the suite. CI and a local run drive the same account and fixture group, so never start a full local run while a CI `test` job is in progress.
+
 `oasdiff` (`~/go/bin/oasdiff`) diffs a release bundle against `dist/`. Read
 `docs/writing-changelogs.md` before writing release notes.
 
