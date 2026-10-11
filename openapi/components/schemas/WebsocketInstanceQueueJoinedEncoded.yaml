@@ -1,0 +1,14 @@
+title: WebsocketInstanceQueueJoinedEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketInstanceQueueJoined.yaml
+    x-vrchat-double-encoding-type: WebsocketInstanceQueueJoined
+  type:
+    const: instance-queue-joined
+required:
+  - content
+  - type

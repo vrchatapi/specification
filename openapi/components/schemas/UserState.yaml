@@ -1,5 +1,4 @@
 title: UserState
-type: string
 description: |-
   * "online" User is online in VRChat
   * "active" User is online, but not in VRChat

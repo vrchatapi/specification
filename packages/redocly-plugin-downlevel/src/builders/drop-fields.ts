@@ -1,8 +1,9 @@
 import type { Transform } from "../layer.ts";
 
 /**
- * Removes fields the lower version does not define and whose absence changes
- * nothing a reader validates: annotations, and hints a reader may ignore.
+ * Removes fields whose meaning an earlier transform has already written in the
+ * lower version's terms, or that mean nothing in the version being read.
+ * Anything else moves to an extension through `extendFields` or `vendorFields`.
  *
  * Keyed by Redocly node type, so a field is recognised by the object it is on.
  */

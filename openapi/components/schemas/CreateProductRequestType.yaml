@@ -1,0 +1,10 @@
+title: CreateProductRequestType
+enum:
+  - avatar
+  - credit
+  - inventory
+  - listing
+  - test_birdy
+  - udon
+examples:
+  - listing

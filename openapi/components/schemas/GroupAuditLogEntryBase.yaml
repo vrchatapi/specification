@@ -14,9 +14,6 @@ properties:
   description:
     type: string
     description: A human-readable description of the event.
-  eventType:
-    $ref: ./GroupAuditLogEntryType.yaml
-    description: The type of event that occurred.
   groupId:
     $ref: ./GroupID.yaml
     description: The ID of the group the entry belongs to.
@@ -28,6 +25,5 @@ required:
   - actorId
   - created_at
   - description
-  - eventType
   - groupId
   - id

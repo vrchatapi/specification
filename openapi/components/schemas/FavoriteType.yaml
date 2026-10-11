@@ -1,5 +1,4 @@
 title: FavoriteType
-type: string
 enum:
   - avatar
   - friend

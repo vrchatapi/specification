@@ -1,5 +1,4 @@
 title: SortOptionProductPurchase
-type: string
 enum:
   - expireDate
   - name

@@ -1,5 +1,4 @@
 title: AvatarModerationType
-type: string
 const: block
 examples:
   - block

@@ -1,0 +1,19 @@
+title: WebsocketNotificationUnknown
+type: object
+description: A notification whose `type` has no schema of its own.
+properties:
+  details: {}
+  type:
+    type: string
+    not:
+      enum:
+        - boop
+        - invite
+        - invite-response
+        - request-invite
+        - request-invite-response
+        - vote-to-kick
+required:
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

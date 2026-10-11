@@ -27,7 +27,7 @@ properties:
   bannerColor:
     $ref: ./Color.yaml
   bannerType:
-    type: string
+    $ref: ./BannerType.yaml
   bannerUrl:
     type: string
   date_joined:
@@ -61,14 +61,12 @@ properties:
     anyOf:
       - type: string
         format: date-time
-      - type: string
-        const: ""
+      - const: ""
   last_login:
     anyOf:
       - type: string
         format: date-time
-      - type: string
-        const: ""
+      - const: ""
   last_mobile:
     type:
       - string

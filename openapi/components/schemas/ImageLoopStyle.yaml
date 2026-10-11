@@ -1,5 +1,4 @@
 title: ImageLoopStyle
-type: string
 description: Animation looping style for images.
 enum:
   - linear

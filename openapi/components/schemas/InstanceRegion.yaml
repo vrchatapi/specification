@@ -1,12 +1,8 @@
 title: InstanceRegion
-type: string
 description: Instance region
-enum:
-  - eu
-  - jp
-  - unknown
-  - us
-  - use
 default: us
+anyOf:
+  - $ref: ./CreateInstanceRequestRegion.yaml
+  - const: unknown
 examples:
   - us

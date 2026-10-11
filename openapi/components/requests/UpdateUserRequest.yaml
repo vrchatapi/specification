@@ -3,6 +3,8 @@ type: object
 properties:
   acceptedTOSVersion:
     type: integer
+  allowAvatarCopying:
+    type: boolean
   allowWorldsToCountFriendsInInstance:
     type: boolean
     description: 'The "Allow Worlds to Count Friends in Instance" setting, introduced under [Udon Methods for Friend Info](https://ask.vrchat.com/t/developer-update-24-september-2026/48972#p-90922-udon-methods-for-friend-info-13) in the Developer Update of September 24, 2026.'
@@ -27,6 +29,8 @@ properties:
   hasSharedConnectionsOptOut:
     type: boolean
     description: Opt out of the Mutuals feature
+  homeLocation:
+    $ref: ../schemas/WorldID.yaml
   isBoopingEnabled:
     type: boolean
   password:

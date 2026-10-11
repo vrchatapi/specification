@@ -1,5 +1,4 @@
 title: MIMEType
-type: string
 enum:
   - application/gzip
   - application/octet-stream
@@ -13,7 +12,7 @@ enum:
   - image/jpeg
   - image/jpg
   - image/png
-  - image/svg＋xml
+  - image/svg+xml
   - image/tiff
   - image/webp
 default: image/jpeg

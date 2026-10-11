@@ -1,10 +1,13 @@
 title: UpdateProfileRequest
 type: object
 properties:
+  backgroundGradientBottom:
+    $ref: ../schemas/Color.yaml
+  backgroundGradientTop:
+    $ref: ../schemas/Color.yaml
   backgroundTextureId:
     type: string
   backgroundType:
-    type: string
     enum:
       - default
       - gradient
@@ -12,12 +15,10 @@ properties:
       - texture
   bannerColor:
     $ref: ../schemas/Color.yaml
-  bannerType:
+  bannerCustomUrl:
     type: string
-    enum:
-      - avatarBanner
-      - color
-      - customImage
+  bannerType:
+    $ref: ../schemas/BannerType.yaml
   bio:
     type: string
   bioLinks:
@@ -35,6 +36,6 @@ properties:
   profileEffect:
     $ref: ../schemas/InventoryTemplateID.yaml
   themeId:
-    type: string
+    $ref: ../schemas/PublicProfileThemeID.yaml
   userIcon:
     type: string

@@ -1,0 +1,14 @@
+title: WebsocketUserLocationEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketUserLocation.yaml
+    x-vrchat-double-encoding-type: WebsocketUserLocation
+  type:
+    const: user-location
+required:
+  - content
+  - type

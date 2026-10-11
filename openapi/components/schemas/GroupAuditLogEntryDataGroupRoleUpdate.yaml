@@ -14,3 +14,5 @@ properties:
     $ref: ./GroupAuditLogEntryIntegerChange.yaml
   permissions:
     $ref: ./GroupAuditLogEntryStringListChange.yaml
+  requiresTwoFactor:
+    $ref: ./GroupAuditLogEntryBooleanChange.yaml

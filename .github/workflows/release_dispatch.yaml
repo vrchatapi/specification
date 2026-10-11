@@ -5,6 +5,10 @@ on:
         description: The version to dispatch the release for.
         required: true
         type: string
+    secrets:
+      RELEASE_DISPATCH_TOKEN:
+        description: A token that can send repository dispatch events to every repository in the matrix.
+        required: true
   workflow_dispatch:
     inputs:
       version:
@@ -12,9 +16,12 @@ on:
         required: true
         type: string
 
+permissions: {}
+
 jobs:
   dispatch:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     strategy:
       matrix:
         repository:
@@ -26,11 +33,12 @@ jobs:
           - vrchatapi-rust
           - vrchatapi-dart
     steps:
-      - run: |
-          release=$(gh release view v${{ inputs.version }} --json id,tagName,url,isPrerelease,assets | jq -c '{
+      - shell: bash
+        run: |
+          release=$(gh release view "v$VERSION" --json id,tagName,url,isPrerelease,assets | jq -c --arg version "$VERSION" '{
             id,
             url,
-            version: "${{ inputs.version }}",
+            version: $version,
             prerelease: .isPrerelease,
             artifacts: (
               .assets
@@ -39,10 +47,11 @@ jobs:
             )
           }')
 
-          echo ${release}
+          echo "$release"
 
           jq -n --argjson payload "$release" '{ event_type: "release", client_payload: $payload }' \
           | gh api repos/{owner}/${{ matrix.repository }}/dispatches -X POST -i --input -
         env:
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.RELEASE_DISPATCH_TOKEN }}
+          VERSION: ${{ inputs.version }}

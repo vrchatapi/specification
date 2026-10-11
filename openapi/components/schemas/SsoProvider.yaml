@@ -1,5 +1,4 @@
 title: SsoProvider
-type: string
 description: >-
   A third-party service VRChat mints an SSO token for. Anything else is refused
   with "That is not a supported SSO provider."

@@ -1,0 +1,14 @@
+title: WebsocketFriendDeleteEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketFriendDelete.yaml
+    x-vrchat-double-encoding-type: WebsocketFriendDelete
+  type:
+    const: friend-delete
+required:
+  - content
+  - type

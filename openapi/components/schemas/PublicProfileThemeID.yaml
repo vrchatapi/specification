@@ -1,0 +1,4 @@
+title: PublicProfileThemeID
+anyOf:
+  - $ref: ./ProfileThemeID.yaml
+  - const: default

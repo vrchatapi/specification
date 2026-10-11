@@ -1,0 +1,11 @@
+description: Returns the current user's account standing.
+content:
+  application/json:
+    examples:
+      Good Standing:
+        value:
+          issueClearDays: 90
+          sanctions: []
+          standing: good
+    schema:
+      $ref: ../../schemas/AccountStanding.yaml

@@ -241,6 +241,20 @@ paths:
           $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /auth/user/accountStanding:
+    get:
+      operationId: getAccountStanding
+      summary: Get Account Standing
+      description: Returns the current user's account standing and the sanctions on their account.
+      tags:
+        - authentication
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/GetAccountStandingResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /auth/user/avatarmoderations:
     delete:
       operationId: deleteGlobalAvatarModeration

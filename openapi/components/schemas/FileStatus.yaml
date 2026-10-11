@@ -1,5 +1,4 @@
 title: FileStatus
-type: string
 enum:
   - complete
   - none

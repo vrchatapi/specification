@@ -1,0 +1,17 @@
+title: GroupAuditLogEntryDataGroupCreateGallery
+type: object
+properties:
+  _created_at:
+    type: string
+    format: date-time
+  _id:
+    $ref: ./GroupGalleryID.yaml
+  _updated_at:
+    type: string
+    format: date-time
+required:
+  - _created_at
+  - _id
+  - _updated_at
+allOf:
+  - $ref: ./GroupAuditLogEntryDataGroupGalleryCreate.yaml

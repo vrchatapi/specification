@@ -147,6 +147,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/files/FileResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
   /file/image:
     post:
       operationId: uploadImage

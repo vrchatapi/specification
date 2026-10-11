@@ -3,9 +3,10 @@ type: object
 properties:
   description:
     type: string
+  isAddedOnJoin:
+    type: boolean
   isSelfAssignable:
     type: boolean
-    default: false
   name:
     type: string
   order:
@@ -14,3 +15,5 @@ properties:
     type: array
     items:
       $ref: ../schemas/GroupPermissions.yaml
+  requiresTwoFactor:
+    type: boolean

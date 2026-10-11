@@ -1,0 +1,7 @@
+title: CreateAvatarRequestReleaseStatus
+enum:
+  - hidden
+  - private
+  - public
+examples:
+  - private

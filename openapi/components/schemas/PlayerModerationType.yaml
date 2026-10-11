@@ -1,5 +1,4 @@
 title: PlayerModerationType
-type: string
 enum:
   - block
   - hideAvatar

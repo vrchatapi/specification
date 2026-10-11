@@ -19,7 +19,6 @@ paths:
           required: false
           in: query
           schema:
-            type: string
             enum:
               - friends
               - me
@@ -94,6 +93,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/worlds/LimitedWorldListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /worlds/favorites:

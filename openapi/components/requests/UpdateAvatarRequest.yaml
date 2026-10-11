@@ -19,7 +19,7 @@ properties:
     type: string
     minLength: 1
   releaseStatus:
-    $ref: ../schemas/ReleaseStatus.yaml
+    $ref: ../schemas/UpdateAvatarRequestReleaseStatus.yaml
   tags:
     type: array
     items:

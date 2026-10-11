@@ -4,7 +4,6 @@ properties:
   data:
     $ref: ./GroupAuditLogEntryDataGroupPostDelete.yaml
   eventType:
-    type: string
     const: group.post.delete
   targetId:
     $ref: ./NotificationID.yaml

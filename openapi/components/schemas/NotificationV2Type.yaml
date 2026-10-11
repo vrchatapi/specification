@@ -1,5 +1,4 @@
 title: NotificationV2Type
-type: string
 enum:
   - avatarreview.failure
   - avatarreview.success

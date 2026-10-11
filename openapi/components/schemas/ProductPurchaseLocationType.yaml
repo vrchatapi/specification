@@ -1,5 +1,4 @@
 title: ProductPurchaseLocationType
-type: string
 enum:
   - client_avatar_marketplace
   - client_creator_store

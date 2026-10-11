@@ -1,5 +1,4 @@
 title: CalendarEventDiscoveryInclusion
-type: string
 enum:
   - exclude
   - include

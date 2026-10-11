@@ -4,7 +4,6 @@ properties:
   data:
     $ref: ./GroupAuditLogEntryDataGroupUpdate.yaml
   eventType:
-    type: string
     const: group.update
   targetId:
     $ref: ./GroupID.yaml

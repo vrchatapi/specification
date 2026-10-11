@@ -1,0 +1,16 @@
+title: NotificationMessage
+type: object
+properties:
+  details:
+    type: string
+    description: A JSON-encoded string.
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./NotificationDetailMessage.yaml
+  type:
+    const: message
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

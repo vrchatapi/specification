@@ -1,0 +1,12 @@
+title: WebsocketNotificationDetailBoop
+type: object
+properties:
+  details:
+    $ref: ./NotificationDetailBoop.yaml
+  type:
+    const: boop
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

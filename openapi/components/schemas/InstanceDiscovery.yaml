@@ -1,0 +1,12 @@
+title: InstanceDiscovery
+type: object
+properties:
+  attributionId:
+    $ref: ./AttributionID.yaml
+  instances:
+    type: array
+    items:
+      $ref: ./LimitedInstance.yaml
+required:
+  - attributionId
+  - instances

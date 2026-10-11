@@ -1,0 +1,14 @@
+title: WebsocketGroupRoleUpdatedEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketGroupRoleUpdated.yaml
+    x-vrchat-double-encoding-type: WebsocketGroupRoleUpdated
+  type:
+    const: group-role-updated
+required:
+  - content
+  - type

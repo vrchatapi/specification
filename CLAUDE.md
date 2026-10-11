@@ -76,6 +76,28 @@ find the traffic worth capturing. Guess widely, then let a request settle it.
 An inference no request settles stays out of the description. Say it to the
 user as an open question instead.
 
+## Pin a set the API lists
+
+A validation error that lists the allowed values settles the set: `sort must be one of ［＂purchaseDate＂‚＂expireDate＂‚＂name＂］‚ not ＂x＂` closes the `enum` on `getProductPurchases`. Give the workflow that provokes it a condition on the exact message, copied from the capture, so a value VRChat adds or removes fails that workflow instead of passing unseen:
+
+```yaml
+successCriteria:
+  - condition: $statusCode == 400
+  - condition: $response.body#/error/message == 'sort must be one of ［＂purchaseDate＂‚＂expireDate＂‚＂name＂］‚ not ＂x＂'
+```
+
+A message that also reports other fields, such as the required ones a probe left out, gets a `type: regex` criterion on the clause naming the set instead, so the pin follows the set and nothing else:
+
+```yaml
+successCriteria:
+  - condition: $statusCode == 400
+  - context: $response.body#/error/message
+    condition: region must be one of ［＂us＂‚＂use＂‚＂eu＂‚＂jp＂］‚ not ＂x＂
+    type: regex
+```
+
+Every closed `enum` a request can carry gets such a workflow, unless the API answers a wrong value without naming the set.
+
 ## Check with curl, document from a workflow
 
 One `curl` answers what a route does now, without running the suite. The session
@@ -165,6 +187,8 @@ the rule reports each one once, against the file it is written in. Pull the
 object out rather than adding a `title` in place, which would silence the rule
 without moving anything.
 
+A schema pulled out for one field of another is named after that parent, then the field, dropping the word they share: the `productType` of `CreateProductRequest` is `CreateProductRequestType`, the `region` of `CreateInstanceRequest` is `CreateInstanceRequestRegion`. Where a request accepts fewer values than the shared schema its responses use, it gets one of these rather than narrowing the shared one, and the shared one extends it with what only responses carry: `InstanceRegion` is `anyOf` `CreateInstanceRequestRegion` and `const: unknown`. JSON Schema has no other way to extend an enum ([json-schema-spec#979](https://github.com/json-schema-org/json-schema-spec/issues/979)), and openapi-generator merges such an `anyOf` back into one enum by default ([`SIMPLIFY_ONEOF_ANYOF_ENUM`](https://openapi-generator.tech/docs/customization/)).
+
 ## Comments
 
 Never add a YAML comment. A fact about the API belongs in a `description`.
@@ -233,6 +257,8 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
 
 `pnpm test` reuses the cached session in `test/.out/`; delete
 `test/.out/session` to force a fresh login.
+
+Every CI `test` run uploads three artifacts, kept for the repository's artifact retention: `redocly-test.har`, the capture; `redocly-test.json`, the `respect` report; and `redocly-test-drift.json`, every drift finding, where the log shows at most a thousand. Read what CI saw with `gh run download <run-id> -n redocly-test.har -D <dir>` rather than rerunning the suite. CI and a local run drive the same account and fixture group, so never start a full local run while a CI `test` job is in progress.
 
 `oasdiff` (`~/go/bin/oasdiff`) diffs a release bundle against `dist/`. Read
 `docs/writing-changelogs.md` before writing release notes.

@@ -1,5 +1,4 @@
 title: AgreementCode
-type: string
 description: The type of agreement.
 enum:
   - content.copyright.owned

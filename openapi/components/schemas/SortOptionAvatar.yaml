@@ -1,0 +1,19 @@
+title: SortOptionAvatar
+enum:
+  - _created_at
+  - _updated_at
+  - contains
+  - countMonthlySales
+  - created
+  - exact
+  - listingDate
+  - name
+  - order
+  - performance
+  - random
+  - relevance
+  - shuffle
+  - trendRank
+  - updated
+examples:
+  - relevance

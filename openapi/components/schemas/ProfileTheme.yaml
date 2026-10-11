@@ -1,0 +1,19 @@
+title: ProfileTheme
+type: object
+properties:
+  buttonColor:
+    $ref: ./Color.yaml
+  iconColor:
+    $ref: ./Color.yaml
+  id:
+    $ref: ./ProfileThemeID.yaml
+  name:
+    type: string
+  subtextColor:
+    $ref: ./Color.yaml
+required:
+  - buttonColor
+  - iconColor
+  - id
+  - name
+  - subtextColor

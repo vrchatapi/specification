@@ -1,0 +1,17 @@
+title: NotificationRequestInviteResponse
+type: object
+properties:
+  details:
+    type: string
+    description: A JSON-encoded string.
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./NotificationDetailRequestInviteResponse.yaml
+    x-vrchat-double-encoding-type: NotificationDetailRequestInviteResponse
+  type:
+    const: requestInviteResponse
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./NotificationBase.yaml

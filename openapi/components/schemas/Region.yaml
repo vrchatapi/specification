@@ -1,5 +1,4 @@
 title: Region
-type: string
 description: API/Photon region.
 enum:
   - eu

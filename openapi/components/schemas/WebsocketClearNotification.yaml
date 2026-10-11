@@ -1,0 +1,7 @@
+title: WebsocketClearNotification
+type: object
+properties:
+  type:
+    const: clear-notification
+required:
+  - type

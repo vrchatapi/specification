@@ -217,7 +217,6 @@ cosmeticItemType:
   required: true
   in: path
   schema:
-    type: string
     enum:
       - droneskin
       - iconFrame
@@ -328,7 +327,6 @@ fileType:
   required: true
   in: path
   schema:
-    type: string
     enum:
       - delta
       - file
@@ -441,6 +439,67 @@ include:
   in: query
   schema:
     $ref: ./schemas/Tag.yaml
+instanceDiscoveryCategory:
+  name: category
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/InstanceCategoryID.yaml
+instanceDiscoveryGroupIds:
+  name: groupId
+  description: Return only instances of these groups.
+  required: false
+  explode: true
+  in: query
+  schema:
+    type: array
+    items:
+      $ref: ./schemas/GroupID.yaml
+  style: form
+instanceDiscoveryNumber:
+  name: n
+  description: The number of instances to return.
+  required: false
+  in: query
+  schema:
+    type: integer
+    maximum: 50
+    minimum: 1
+instanceDiscoveryPlatform:
+  name: platform
+  description: The platform to discover instances for.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/InstanceDiscoveryPlatform.yaml
+instanceDiscoveryRegion:
+  name: region
+  description: Return only instances in this region.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/CreateInstanceRequestRegion.yaml
+instanceDiscoveryVibes:
+  name: vibe
+  required: false
+  explode: true
+  in: query
+  schema:
+    type: array
+    items:
+      $ref: ./schemas/InstanceVibeID.yaml
+  style: form
+instanceDiscoveryWorldIds:
+  name: worldId
+  description: Return only instances of these worlds.
+  required: false
+  explode: true
+  in: query
+  schema:
+    type: array
+    items:
+      $ref: ./schemas/WorldID.yaml
+  style: form
 instanceId:
   name: instanceId
   description: Must be a valid instance ID.
@@ -553,12 +612,7 @@ inventorySortOrder:
   required: false
   in: query
   schema:
-    type: string
-    enum:
-      - newest
-      - newest_created
-      - oldest
-      - oldest_created
+    $ref: ./schemas/InventorySortOrder.yaml
 inventorySpawnItemId:
   name: id
   description: Id for inventory item spawning.
@@ -878,6 +932,13 @@ sort:
   in: query
   schema:
     $ref: ./schemas/SortOption.yaml
+sortAvatar:
+  name: sort
+  description: The sort order of the results.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/SortOptionAvatar.yaml
 sortProductPurchase:
   name: sort
   description: The sort order of the results.
@@ -1022,7 +1083,6 @@ variant:
   allowEmptyValue: true
   in: query
   schema:
-    type: string
     enum:
       - internal
       - public

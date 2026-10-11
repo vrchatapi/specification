@@ -1,5 +1,4 @@
 title: StoreType
-type: string
 enum:
   - group
   - house

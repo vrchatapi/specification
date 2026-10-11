@@ -1,0 +1,37 @@
+title: WebsocketMessageUnknown
+type: object
+description: A websocket message whose `type` has no schema of its own.
+properties:
+  content: {}
+  type:
+    type: string
+    not:
+      enum:
+        - clear-notification
+        - content-refresh
+        - friend-active
+        - friend-add
+        - friend-delete
+        - friend-location
+        - friend-offline
+        - friend-online
+        - friend-update
+        - group-joined
+        - group-left
+        - group-member-updated
+        - group-role-updated
+        - hide-notification
+        - instance-queue-joined
+        - instance-queue-ready
+        - notification
+        - notification-v2
+        - notification-v2-delete
+        - notification-v2-update
+        - response-notification
+        - see-notification
+        - user-badge-assigned
+        - user-badge-unassigned
+        - user-location
+        - user-update
+required:
+  - type

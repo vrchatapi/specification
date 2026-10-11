@@ -1,0 +1,20 @@
+title: CreateFileRequestMIMEType
+enum:
+  - application/gzip
+  - application/x-adminassetbundle
+  - application/x-avatar
+  - application/x-avatarbuilderresource
+  - application/x-avatarpart
+  - application/x-prop
+  - application/x-world
+  - image/bmp
+  - image/gif
+  - image/jpeg
+  - image/jpg
+  - image/png
+  - image/svg+xml
+  - image/tiff
+  - image/webp
+  - video/mp4
+examples:
+  - image/png

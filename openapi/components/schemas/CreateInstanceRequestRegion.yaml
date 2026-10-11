@@ -1,0 +1,8 @@
+title: CreateInstanceRequestRegion
+enum:
+  - eu
+  - jp
+  - us
+  - use
+examples:
+  - us

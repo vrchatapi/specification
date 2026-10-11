@@ -4,8 +4,10 @@ import { dropFields } from "../builders/drop-fields.ts";
 import { extendFields } from "../builders/extend-fields.ts";
 import { inlineComponents } from "../builders/inline-components.ts";
 import { reportFields } from "../builders/report-fields.ts";
+import { vendorFields } from "../builders/vendor-fields.ts";
 import type { Layer } from "../layer.ts";
 import { reportRelativeUrls } from "../transforms/report-relative-urls.ts";
+import { dropDefaultDialect } from "./drop-default-dialect.ts";
 import { dropEmptyPathItems } from "./drop-empty-path-items.ts";
 import { loosenUnions } from "./loosen-unions.ts";
 import { lowerBooleanSchemas } from "./lower-boolean-schemas.ts";
@@ -17,6 +19,7 @@ import { lowerNullMembers } from "./lower-null-members.ts";
 import { lowerSchemaExamples } from "./lower-schema-examples.ts";
 import { lowerSchemaRules } from "./lower-schema-rules.ts";
 import { lowerTypes } from "./lower-types.ts";
+import { moveDiscriminatorExtensions } from "./move-discriminator-extensions.ts";
 import { reportOperations } from "./report-operations.ts";
 import { reportPlainNames } from "./report-plain-names.ts";
 import { requireFields } from "./require-fields.ts";
@@ -54,6 +57,7 @@ export const layer: Layer = {
 		lowerBooleanSchemas,
 		wrapReferenceSiblings,
 		dropFields({ Schema: ["nullable"] }),
+		moveDiscriminatorExtensions,
 		splitTypes,
 		loosenUnions,
 		lowerNullMembers,
@@ -84,7 +88,8 @@ export const layer: Layer = {
 				].map((keyword) => [keyword, [`x-jsonschema-${keyword}`]])
 			)
 		}),
-		dropFields({
+		dropDefaultDialect,
+		vendorFields({
 			Root: ["jsonSchemaDialect"],
 			Info: ["summary"],
 			Schema: ["$schema", "$vocabulary", "$id", "id", "$dynamicAnchor", "$recursiveAnchor", "$comment"]

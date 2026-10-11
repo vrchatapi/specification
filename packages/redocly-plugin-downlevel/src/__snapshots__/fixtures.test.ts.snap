@@ -713,16 +713,19 @@ exports[`fixtures learn/3.2/3.2-tags-example.yaml 1`] = `
           "description": "Core flight operations",
           "name": "flights",
           "x-displayName": "Flights",
+          "x-kind": "nav",
         },
         {
           "description": "Flights that cross country borders",
           "name": "international",
           "x-displayName": "International",
+          "x-kind": "nav",
         },
         {
           "description": "Flights within a single country",
           "name": "domestic",
           "x-displayName": "Domestic",
+          "x-kind": "nav",
         },
         {
           "description": "Information about flight delays",
@@ -732,6 +735,7 @@ exports[`fixtures learn/3.2/3.2-tags-example.yaml 1`] = `
           },
           "name": "delays",
           "x-displayName": "Delays",
+          "x-kind": "badge",
         },
       ],
       "x-tagGroups": [
@@ -1440,6 +1444,7 @@ exports[`fixtures oai/3.1/info-object-example.yaml 1`] = `
         "termsOfService": "https://example.com/terms/",
         "title": "Example Pet Store App",
         "version": "1.0.1",
+        "x-summary": "A pet store manager.",
       },
       "openapi": "3.0.4",
       "paths": {},
@@ -1462,6 +1467,7 @@ exports[`fixtures oai/3.1/info_summary.yaml 1`] = `
       "info": {
         "title": "API",
         "version": "1.0.0",
+        "x-summary": "My lovely API",
       },
       "openapi": "3.0.4",
       "paths": {},
@@ -1482,7 +1488,10 @@ exports[`fixtures oai/3.1/json_schema_dialect.yaml 1`] = `
     "document": {
       "components": {
         "schemas": {
-          "WithDollarSchema": {},
+          "WithDollarSchema": {
+            "x-$id": "locked-metaschema",
+            "x-$schema": "https://spec.openapis.org/oas/3.1/dialect/WORK-IN-PROGRESS",
+          },
         },
       },
       "info": {
@@ -1492,9 +1501,11 @@ exports[`fixtures oai/3.1/json_schema_dialect.yaml 1`] = `
         },
         "title": "My API",
         "version": "1.0.0",
+        "x-summary": "Testing jsonSchemaDialect",
       },
       "openapi": "3.0.4",
       "paths": {},
+      "x-jsonSchemaDialect": "https://spec.openapis.org/oas/3.1/dialect/WORK-IN-PROGRESS",
     },
     "loosened": "unchanged",
     "problems": [],
@@ -1518,6 +1529,7 @@ exports[`fixtures oai/3.1/license_identifier.yaml 1`] = `
         },
         "title": "API",
         "version": "1.0.0",
+        "x-summary": "My lovely API",
       },
       "openapi": "3.0.4",
       "paths": {},
@@ -4124,6 +4136,7 @@ exports[`fixtures oai/3.2/info-object-example.yaml 1`] = `
         "termsOfService": "https://example.com/terms/",
         "title": "Example Pet Store App",
         "version": "1.0.1",
+        "x-summary": "A pet store manager.",
       },
       "openapi": "3.0.4",
       "paths": {},
@@ -4178,6 +4191,7 @@ exports[`fixtures oai/3.2/info_summary.yaml 1`] = `
       "info": {
         "title": "API",
         "version": "1.0.0",
+        "x-summary": "My lovely API",
       },
       "openapi": "3.0.4",
       "paths": {},
@@ -4213,7 +4227,10 @@ exports[`fixtures oai/3.2/json_schema_dialect.yaml 1`] = `
     "document": {
       "components": {
         "schemas": {
-          "WithDollarSchema": {},
+          "WithDollarSchema": {
+            "x-$id": "locked-metaschema",
+            "x-$schema": "https://spec.openapis.org/oas/3.1/dialect/base",
+          },
         },
       },
       "info": {
@@ -4223,6 +4240,7 @@ exports[`fixtures oai/3.2/json_schema_dialect.yaml 1`] = `
         },
         "title": "My API",
         "version": "1.0.0",
+        "x-summary": "Testing jsonSchemaDialect",
       },
       "openapi": "3.0.4",
       "paths": {},
@@ -4277,6 +4295,7 @@ exports[`fixtures oai/3.2/license_identifier.yaml 1`] = `
         },
         "title": "API",
         "version": "1.0.0",
+        "x-summary": "My lovely API",
       },
       "openapi": "3.0.4",
       "paths": {},
@@ -4727,6 +4746,7 @@ exports[`fixtures oai/3.2/mega.yaml 1`] = `
                           "foo": "Foo",
                         },
                         "propertyName": "type",
+                        "x-defaultMapping": "Bar",
                         "x-extension": true,
                       },
                       "externalDocs": {
@@ -6669,11 +6689,13 @@ exports[`fixtures oai/3.2/tag-object-example.yaml 1`] = `
           "description": "Account update operations",
           "name": "account-updates",
           "x-displayName": "Account Updates",
+          "x-kind": "nav",
         },
         {
           "description": "Operations available to the partners network",
           "name": "partner",
           "x-displayName": "Partner",
+          "x-kind": "audience",
         },
         {
           "description": "Operations available to external consumers",
@@ -6683,6 +6705,7 @@ exports[`fixtures oai/3.2/tag-object-example.yaml 1`] = `
           },
           "name": "external",
           "x-displayName": "External",
+          "x-kind": "audience",
         },
       ],
       "x-tagGroups": [

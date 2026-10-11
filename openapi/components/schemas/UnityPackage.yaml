@@ -38,7 +38,9 @@ properties:
   platform:
     $ref: ./Platform.yaml
   pluginUrl:
-    type: string
+    type:
+      - string
+      - "null"
     examples:
       - ""
   pluginUrlObject:
@@ -47,6 +49,10 @@ properties:
       - {}
   scanStatus:
     type: string
+  transpilerVersion:
+    type: string
+    examples:
+      - 1.0.0
   unitySortNumber:
     type: integer
     examples:

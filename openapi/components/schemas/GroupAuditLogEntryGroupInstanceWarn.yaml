@@ -4,7 +4,6 @@ properties:
   data:
     $ref: ./GroupAuditLogEntryDataGroupInstanceModeration.yaml
   eventType:
-    type: string
     const: group.instance.warn
   targetId:
     $ref: ./UserID.yaml

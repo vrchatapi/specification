@@ -1,13 +1,13 @@
 import { describe, expect, test } from "bun:test";
 
-import { layer } from "../fixture.ts";
+import { layer, reference } from "../fixture.ts";
 
 const from32 = layer("3.2.0", "3.1.2");
 
 const ok = { 200: { description: "ok" } };
 
 describe("document", () => {
-	test("writes the fields 3.1 lacks as registry extensions, and drops the rest", async () => {
+	test("writes the fields 3.1 lacks as registry extensions, and the rest as x- extensions of the same name", async () => {
 		const { document, problems } = await from32({
 			$self: "https://example.com/openapi.yaml",
 			servers: [{ url: "https://example.com", name: "production" }],
@@ -31,13 +31,18 @@ describe("document", () => {
 			"x-oai-$self": "https://example.com/openapi.yaml",
 			info: { title: "fixture", version: "1" },
 			servers: [{ url: "https://example.com", "x-oai-name": "production" }],
-			tags: [{ name: "a", "x-displayName": "A" }, { name: "b" }],
+			tags: [{ name: "a", "x-displayName": "A", "x-kind": "nav" }, { name: "b" }],
 			"x-tagGroups": [{ name: "A", tags: ["a", "b"] }],
 			paths: { "/a": { get: { responses: { 200: { description: "ok", "x-oai-summary": "OK", "x-summary": "OK" } } } } },
 			components: {
 				securitySchemes: { key: { type: "apiKey", in: "header", name: "key", "x-oai-deprecated": true } },
 				schemas: {
-					Pet: { type: "object", discriminator: { propertyName: "kind" }, required: ["kind"], properties: { kind: { type: "string" } } },
+					Pet: {
+						type: "object",
+						discriminator: { propertyName: "kind", "x-defaultMapping": "#/components/schemas/Cat" },
+						required: ["kind"],
+						properties: { kind: { type: "string" } }
+					},
 					Cat: { type: "object" }
 				}
 			}
@@ -76,11 +81,11 @@ describe("tags", () => {
 			paths: { "/giftcards": { get: { tags: ["giftcards", "digital-delivery"], responses: ok } } }
 		});
 		expect(document.tags).toStrictEqual([
-			{ name: "products", "x-displayName": "Products", description: "All product operations" },
-			{ name: "books", "x-displayName": "Books & Literature" },
-			{ name: "cds", "x-displayName": "Music CDs" },
-			{ name: "giftcards", "x-displayName": "Gift Cards" },
-			{ name: "digital-delivery", "x-displayName": "Digital Delivery" }
+			{ name: "products", "x-displayName": "Products", description: "All product operations", "x-kind": "nav" },
+			{ name: "books", "x-displayName": "Books & Literature", "x-kind": "nav" },
+			{ name: "cds", "x-displayName": "Music CDs", "x-kind": "nav" },
+			{ name: "giftcards", "x-displayName": "Gift Cards", "x-kind": "nav" },
+			{ name: "digital-delivery", "x-displayName": "Digital Delivery", "x-kind": "badge" }
 		]);
 		expect(document["x-tagGroups"]).toStrictEqual([{ name: "Products", tags: ["products", "books", "cds", "giftcards"] }]);
 		expect(document.paths).toStrictEqual({
@@ -102,11 +107,11 @@ describe("tags", () => {
 	test("keeps the extensions the description already has", async () => {
 		const groups = [{ name: "Mine", tags: ["b"] }];
 		const { document } = await from32({
-			tags: [{ name: "a", summary: "A", "x-displayName": "Kept" }, { name: "b", parent: "a" }, { name: "new", summary: "New", kind: "badge" }],
+			tags: [{ name: "a", summary: "A", "x-displayName": "Kept" }, { name: "b", parent: "a" }, { name: "new", summary: "New", kind: "badge", "x-kind": "kept" }],
 			"x-tagGroups": groups,
 			paths: { "/a": { get: { tags: ["b", "new"], "x-badges": [{ name: "New" }, { name: "Beta" }], responses: ok } } }
 		});
-		expect(document.tags).toStrictEqual([{ name: "a", "x-displayName": "Kept" }, { name: "b" }, { name: "new", "x-displayName": "New" }]);
+		expect(document.tags).toStrictEqual([{ name: "a", "x-displayName": "Kept" }, { name: "b" }, { name: "new", "x-displayName": "New", "x-kind": "kept" }]);
 		expect(document["x-tagGroups"]).toStrictEqual(groups);
 		expect(document.paths).toStrictEqual({ "/a": { get: { tags: ["b", "new"], "x-badges": [{ name: "New" }, { name: "Beta" }], responses: ok } } });
 	});
@@ -413,6 +418,33 @@ describe("security", () => {
 			}
 		]);
 	});
+
+	test("keeps an OAuth2 metadata URL as x-oauth2MetadataUrl", async () => {
+		const flows = { clientCredentials: { tokenUrl: "https://example.com/token", scopes: {} } };
+		const { document } = await from32({
+			components: { securitySchemes: { oauth: { type: "oauth2", oauth2MetadataUrl: "https://example.com/.well-known/oauth-authorization-server", flows } } }
+		});
+		expect(document.components?.securitySchemes).toStrictEqual({
+			oauth: { type: "oauth2", "x-oauth2MetadataUrl": "https://example.com/.well-known/oauth-authorization-server", flows }
+		});
+	});
+});
+
+describe("discriminator", () => {
+	test("keeps an x-defaultMapping the description already carries", async () => {
+		const { schemas } = await from32.schemas({
+			Pet: {
+				oneOf: [reference("Cat")],
+				discriminator: { propertyName: "kind", defaultMapping: "#/components/schemas/Cat", "x-defaultMapping": "#/components/schemas/Kept" }
+			},
+			Cat: { type: "object" },
+			Kept: { type: "object" }
+		});
+		expect(schemas.Pet).toStrictEqual({
+			oneOf: [reference("Cat")],
+			discriminator: { propertyName: "kind", "x-defaultMapping": "#/components/schemas/Kept" }
+		});
+	});
 });
 
 describe("dialect", () => {
@@ -431,9 +463,9 @@ describe("media types", () => {
 		paths: { "/a": { get: { responses: { 200: { description: "ok", content: { [media]: value } } } } } }
 	});
 
-	test("drops a media type description, which only the published schema allows", async () => {
+	test("keeps a media type description as x-description, since only the published 3.1 schema allows the field", async () => {
 		const { document } = await from32(response("application/json", { description: "d", schema: { type: "object" } }));
-		expect(document.paths).toStrictEqual(response("application/json", { schema: { type: "object" } }).paths);
+		expect(document.paths).toStrictEqual(response("application/json", { "x-description": "d", schema: { type: "object" } }).paths);
 	});
 
 	test("reports encoding outside a request body", async () => {

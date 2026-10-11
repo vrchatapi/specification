@@ -1,5 +1,4 @@
 title: CalendarEventCategory
-type: string
 description: The activity intended to take place at an event
 enum:
   - arts
