@@ -228,12 +228,13 @@ jobs:
 
       - name: create release
         if: env.prerelease == 'false'
-        run: gh release create v${{ env.version }} dist/* --generate-notes
+        run: gh release create v${{ env.version }} dist/* --target "$GITHUB_SHA" --generate-notes
 
       - name: create release (nightly)
         if: env.prerelease == 'true'
         run: |
           gh release create v${{ env.version }} dist/* \
+            --target "$GITHUB_SHA" \
             --generate-notes \
             --prerelease
 
