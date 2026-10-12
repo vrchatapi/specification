@@ -45,7 +45,7 @@ Each layer does one of three things with a construct the release below it lacks:
 
 - **rewrite** it into the form the lower release uses, when that form means the same: `type: [string, "null"]` becomes `type: string` with `nullable: true`. Where the lower release has no field for it, the form is the extension its readers take the same thing from: the [OAI extension registry](https://spec.openapis.org/registry/extension/index.html)'s `x-oai-*` and `x-jsonschema-*` entries, and extensions the wider ecosystem reads, such as `x-displayName`. Every extension a reader uses is written, and one the description already carries is kept.
 - **drop** it, when it is an annotation or hint whose absence changes nothing a reader validates: `info.summary`, `servers[].name`, a discriminator's `defaultMapping`.
-- **report** it, when the lower release cannot say it, no extension carries it, and any rewrite would change what the description accepts or means: `prefixItems`, `in: querystring`, a `oneOf` that must admit `null`. A report is an error, so the bundle is not written. A construct written as an extension keeps its meaning for readers of that extension; a validator that knows none of them accepts more than the source does.
+- **report** it, when the lower release cannot say it, no extension carries it, and any rewrite would change what the description accepts or means: `unevaluatedItems`, `in: querystring`, a `oneOf` that must admit `null`. A report is an error, so the bundle is not written. A construct written as an extension keeps its meaning for readers of that extension; a validator that knows none of them accepts more than the source does.
 
 A layer runs all its checks first, so every problem in a release is reported at once, then its rewrites.
 
@@ -91,11 +91,12 @@ A layer runs all its checks first, so every problem in a release is reported at 
 | `components.pathItems` | inlined |
 | `license.identifier`, Schema `$anchor` | written as `x-oai-license-identifier`, `x-jsonschema-$anchor` |
 | `contains`, `minContains`, `maxContains`, `if`/`then`/`else`, `dependentSchemas`, `patternProperties`, `propertyNames`, `unevaluatedProperties` | written as their `x-jsonschema-*` extensions, once the schemas inside them are lowered |
+| `prefixItems` | `items: {anyOf: [...positions]}`, with the `items` that follow the positions as one more member and `maxItems` at the number of positions where `items` is `false`; the tuple kept as `x-prefixItems`, since the registry has no entry for it |
 | `webhooks` | written as `x-webhooks` |
 | `jsonSchemaDialect`, `info.summary`, `$schema`, `$id`, `$comment` and the other identifiers, a `nullable` 3.1 ignores | dropped |
 | an empty path item whose template has no path parameter | dropped |
 | no `paths` | `paths: {}` |
-| `prefixItems`, `unevaluatedItems`, `dependentRequired`, `$dynamicRef`, `$defs` and the other keywords 3.0 has no extension for; `mutualTLS`; an operation without `responses`; a `default` that does not match `type`; `readOnly` with `writeOnly`; a `$ref` fragment that is not a JSON Pointer; roles for a scheme other than OAuth 2 or OpenID Connect; a `requestBody` on GET, HEAD or DELETE; a link into `webhooks`; a relative metadata URL; `style` / `explode` / `allowReserved` in multipart | reported |
+| `unevaluatedItems`, `dependentRequired`, `$dynamicRef`, `$defs` and the other keywords 3.0 has no extension for; `mutualTLS`; an operation without `responses`; a `default` that does not match `type`; `readOnly` with `writeOnly`; a `$ref` fragment that is not a JSON Pointer; roles for a scheme other than OAuth 2 or OpenID Connect; a `requestBody` on GET, HEAD or DELETE; a link into `webhooks`; a relative metadata URL; `style` / `explode` / `allowReserved` in multipart | reported |
 
 ### Patch releases
 

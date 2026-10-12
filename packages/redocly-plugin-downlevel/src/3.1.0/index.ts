@@ -16,6 +16,7 @@ import { lowerConst } from "./lower-const.ts";
 import { lowerContent } from "./lower-content.ts";
 import { lowerMultipart } from "./lower-multipart.ts";
 import { lowerNullMembers } from "./lower-null-members.ts";
+import { lowerPrefixItems } from "./lower-prefix-items.ts";
 import { lowerSchemaExamples } from "./lower-schema-examples.ts";
 import { lowerSchemaRules } from "./lower-schema-rules.ts";
 import { lowerTypes } from "./lower-types.ts";
@@ -38,7 +39,6 @@ export const layer: Layer = {
 	checks: [
 		reportFields({
 			Schema: {
-				prefixItems: true,
 				dependentRequired: true,
 				dependencies: true,
 				unevaluatedItems: true,
@@ -54,6 +54,7 @@ export const layer: Layer = {
 		reportRelativeUrls
 	],
 	transforms: [
+		lowerPrefixItems,
 		lowerBooleanSchemas,
 		wrapReferenceSiblings,
 		dropFields({ Schema: ["nullable"] }),

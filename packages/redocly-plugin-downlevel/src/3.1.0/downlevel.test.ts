@@ -390,6 +390,31 @@ describe("schema keywords", () => {
 		expect(problems).toStrictEqual([]);
 	});
 
+	test("turns a closed tuple into items any position accepts, bounded by its length, keeping the positions in their extension", async () => {
+		const prefixItems = [{ type: "string" }, { type: "integer" }];
+		const { schemas, problems } = await from31.schemas({ A: { type: "array", prefixItems, items: false, minItems: 2 } });
+		expect(schemas).toStrictEqual({
+			A: { type: "array", items: { anyOf: prefixItems }, minItems: 2, maxItems: 2, "x-prefixItems": prefixItems }
+		});
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("lets the items of an open tuple take what follows the positions too", async () => {
+		const prefixItems = [{ type: "string" }];
+		const { schemas, problems } = await from31.schemas({ A: { type: "array", prefixItems, items: { type: "boolean" } } });
+		expect(schemas).toStrictEqual({
+			A: { type: "array", items: { anyOf: [{ type: "string" }, { type: "boolean" }] }, "x-prefixItems": prefixItems }
+		});
+		expect(problems).toStrictEqual([]);
+	});
+
+	test("leaves the items of a tuple that takes anything after its positions unconstrained", async () => {
+		const prefixItems = [{ type: "string" }];
+		const { schemas, problems } = await from31.schemas({ A: { type: "array", prefixItems } });
+		expect(schemas).toStrictEqual({ A: { type: "array", items: {}, "x-prefixItems": prefixItems } });
+		expect(problems).toStrictEqual([]);
+	});
+
 	test("keeps the first of a schema's examples, and all of them in their registry extension", async () => {
 		const { schemas, problems } = await from31.schemas({
 			A: { type: "string", examples: ["a", "b"] },
@@ -560,12 +585,10 @@ describe("schema keywords", () => {
 
 	test("reports keywords 3.0 does not have", async () => {
 		const { problems } = await from31.schemas({
-			A: { type: "array", prefixItems: [{ type: "string" }] },
 			C: { type: "object", definitions: { d: { type: "string" } }, dependencies: { a: ["b"] } },
 			D: { $recursiveRef: "#" }
 		});
 		expect(problems).toStrictEqual([
-			{ severity: "error", pointer: "#/components/schemas/A/prefixItems", message: "OpenAPI 3.0.4 has no `prefixItems`." },
 			{ severity: "error", pointer: "#/components/schemas/C/definitions", message: "OpenAPI 3.0.4 has no `definitions`." },
 			{ severity: "error", pointer: "#/components/schemas/C/dependencies", message: "OpenAPI 3.0.4 has no `dependencies`." },
 			{ severity: "error", pointer: "#/components/schemas/D/$recursiveRef", message: "OpenAPI 3.0.4 has no `$recursiveRef`." }
