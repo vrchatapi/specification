@@ -241,12 +241,13 @@ jobs:
         run: |
           status=0
           pnpm -s test:drift --max-findings 1000 --output test/.out/drift.txt || status=$?
-          pnpm -s test:drift --format json --output test/.out/redocly-test-drift.json || true
+          pnpm -s test:drift --format json --output test/.out/redocly-test-drift.json --coverage-output test/.out/redocly-test-coverage.json || true
           cat test/.out/drift.txt
           {
             printf '### Drift\n\n```\n'
             cat test/.out/drift.txt
-            printf '```\n'
+            printf '```\n\n### Coverage\n\n| | covered | total | |\n| --- | --- | --- | --- |\n'
+            jq -r '.totals | to_entries[] | "| \(.key) | \(.value.covered) | \(.value.total) | \(.value.covered * 100 / .value.total | floor)% |"' test/.out/redocly-test-coverage.json
           } >> "$GITHUB_STEP_SUMMARY"
           exit $status
 
@@ -272,3 +273,9 @@ jobs:
         with:
           name: redocly-test-drift.json
           path: test/.out/redocly-test-drift.json
+
+      - if: "!cancelled()"
+        uses: actions/upload-artifact@v7
+        with:
+          name: redocly-test-coverage.json
+          path: test/.out/redocly-test-coverage.json

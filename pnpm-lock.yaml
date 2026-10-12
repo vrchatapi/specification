@@ -30,11 +30,11 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       '@redocly/cli':
-        specifier: ^2.54.3
-        version: 2.54.3
+        specifier: ^2.62.1
+        version: 2.62.1
       '@redocly/openapi-core':
-        specifier: ^2.54.3
-        version: 2.54.3
+        specifier: ^2.62.1
+        version: 2.62.1
       '@types/bun':
         specifier: ^1.4.2
         version: 1.4.2
@@ -72,8 +72,8 @@ importers:
   packages/redocly-plugin-downlevel:
     devDependencies:
       '@redocly/openapi-core':
-        specifier: ^2.54.3
-        version: 2.54.3
+        specifier: ^2.62.1
+        version: 2.62.1
       '@types/bun':
         specifier: ^1.4.2
         version: 1.4.2
@@ -1143,16 +1143,16 @@ packages:
   '@redocly/ajv@8.18.3':
     resolution: {integrity: sha512-l42u0of3hY98sN2A+M4qTX1O/KrpgGH32Hu9kP2GtHyD5Dfqq86PKFLe5dwaD8DEnNmlOlll2BAmeEtf0DaySg==}
 
-  '@redocly/cli@2.54.3':
-    resolution: {integrity: sha512-tgjCjKm9NjcbN0N04dylwUw8eZzematq07JHm+dVyPkAfA/eZEN57En7jpUYrPvwOb53MJLfDB/0qJ5iz/4eHQ==}
+  '@redocly/cli@2.62.1':
+    resolution: {integrity: sha512-KdhRvUGkaom19U83mlRJE10T4svPf8EHCn9AGLgIHxqHgVTyjQMLyrOoIU46pV6Gtvbe3t035ckIDVYeqXC4VQ==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
     hasBin: true
 
-  '@redocly/config@0.57.0':
-    resolution: {integrity: sha512-mpxsAe0/PzfD0B03oeJUaNUNMaJPPyqznfIJtl7YMn+Fw0Qo14+ZRl16sab+jZVZSiYPYtMYLunGZZozXPvyRw==}
+  '@redocly/config@0.65.0':
+    resolution: {integrity: sha512-qjvfG2T7xrKYyiy6GtjPO6N8rESlVGHVYPoR2a14XYxhlXcgz83ZJf07nCE7nPS+Z1RR5yKLplMSUZK/UPxkgQ==}
 
-  '@redocly/openapi-core@2.54.3':
-    resolution: {integrity: sha512-8RXEKuDnqhJhYB2vw0eZpowr2P/aytYTHcHmwk5Yb8WKNwokwM7dHnrIBwb7zwovzWYFvLI5RJ+d1FXUvjFjyg==}
+  '@redocly/openapi-core@2.62.1':
+    resolution: {integrity: sha512-yZwoIHI73tZ5YJvp38dXC4MFafD5uVBIQ3N5x9Gx+gJyHJbHyEikRDpJMdMkBmlv9VCwX1JAXzEtwzvOoP1bVw==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
 
   '@rollup/rollup-android-arm-eabi@4.63.4':
@@ -2587,8 +2587,8 @@ packages:
   json-parse-even-better-errors@2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
 
-  json-schema-to-ts@2.7.2:
-    resolution: {integrity: sha512-R1JfqKqbBR4qE8UyBR56Ms30LL62/nlhoz+1UkfI/VE7p54Awu919FZ6ZUPG8zIa3XB65usPJgr1ONVncUGSaQ==}
+  json-schema-to-ts@3.1.1:
+    resolution: {integrity: sha512-+DWg8jCJG2TEnpy7kOm/7/AxaYoaRbjVB4LFZLySZlWn8exGs3A4OLJR966cVvU26N7X9TWxl+Jsw7dzAqKT6g==}
     engines: {node: '>=16'}
 
   json-schema-traverse@0.4.1:
@@ -2603,6 +2603,10 @@ packages:
   jsonc-eslint-parser@2.4.2:
     resolution: {integrity: sha512-1e4qoRgnn448pRuMvKGsFFymUCquZV0mpGgOyIKNgD3JVDTsVJyRBGH/Fm0tBb8WsWGgmB1mDe6/yJMQM37DUA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  jsonpath-rfc9535@1.3.0:
+    resolution: {integrity: sha512-3jFHya7oZ45aDxIIdx+/zQARahHXxFSMWBkcBUldfXpLS9VCXDJyTKt35kQfEXLqh0K3Ixw/9xFnvcDStaxh7Q==}
+    engines: {node: '>=20'}
 
   jssha@3.3.2:
     resolution: {integrity: sha512-0RhFxzijV4W0qTXa97D5b6twAWXX7SEOpw8qzAZyZ+oeGOP9e84PnDSLjl7SBB1vBQ+chSUwsZR06i1AzA+nEA==}
@@ -3246,8 +3250,8 @@ packages:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
 
-  ts-algebra@1.2.2:
-    resolution: {integrity: sha512-kloPhf1hq3JbCPOTYoOWDKxebWjNb2o/LKnNfkWhxVVisFFmMJPPdJeGoGmM+iRLyoXAR61e08Pb+vUXINg8aA==}
+  ts-algebra@2.0.0:
+    resolution: {integrity: sha512-FPAhNPFMrkwz76P7cdjdmiShwMynZYN6SgOujD1urY4oNm80Ou9oMdmbR45LotcKOXoy7wSmHkRFE6Mxbrhefw==}
 
   ts-api-utils@2.5.0:
     resolution: {integrity: sha512-OJ/ibxhPlqrMM0UiNHJ/0CKQkoKF243/AEmplt3qpRgkW8VG7IfOS41h7V8TjITqdByHzrjcS/2si+y4lIh8NA==}
@@ -4595,22 +4599,22 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  '@redocly/cli@2.54.3': {}
+  '@redocly/cli@2.62.1': {}
 
-  '@redocly/config@0.57.0':
-    dependencies:
-      json-schema-to-ts: 2.7.2
+  '@redocly/config@0.65.0': {}
 
-  '@redocly/openapi-core@2.54.3':
+  '@redocly/openapi-core@2.62.1':
     dependencies:
       '@redocly/ajv': 8.18.3
-      '@redocly/config': 0.57.0
+      '@redocly/config': 0.65.0
       ajv: '@redocly/ajv@8.18.3'
       ajv-formats: 3.0.1(@redocly/ajv@8.18.3)
       colorette: 1.4.0
       graphql: 16.14.2
       js-levenshtein: 1.1.6
       js-yaml: 5.4.2
+      json-schema-to-ts: 3.1.1
+      jsonpath-rfc9535: 1.3.0
       picomatch: 4.0.7
       pluralize: 8.0.0
       yaml-ast-parser: 0.0.43
@@ -6146,11 +6150,10 @@ snapshots:
 
   json-parse-even-better-errors@2.3.1: {}
 
-  json-schema-to-ts@2.7.2:
+  json-schema-to-ts@3.1.1:
     dependencies:
       '@babel/runtime': 7.29.7
-      '@types/json-schema': 7.0.15
-      ts-algebra: 1.2.2
+      ts-algebra: 2.0.0
 
   json-schema-traverse@0.4.1: {}
 
@@ -6164,6 +6167,8 @@ snapshots:
       eslint-visitor-keys: 3.4.3
       espree: 9.6.1
       semver: 7.8.5
+
+  jsonpath-rfc9535@1.3.0: {}
 
   jssha@3.3.2: {}
 
@@ -7000,7 +7005,7 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  ts-algebra@1.2.2: {}
+  ts-algebra@2.0.0: {}
 
   ts-api-utils@2.5.0(typescript@6.0.3):
     dependencies:
