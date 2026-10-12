@@ -1,0 +1,15 @@
+title: GroupAuditLogGroupInviteCancel
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogDataEmpty.yaml
+  eventType:
+    const: group.invite.cancel
+  targetId:
+    $ref: ./UserID.yaml
+required:
+  - data
+  - eventType
+  - targetId
+allOf:
+  - $ref: ./GroupAuditLogBase.yaml

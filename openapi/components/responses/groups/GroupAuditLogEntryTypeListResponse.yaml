@@ -3,4 +3,4 @@ content:
     schema:
       type: array
       items:
-        $ref: ../../schemas/GroupAuditLogEntryType.yaml
+        $ref: ../../schemas/GroupAuditLogType.yaml

@@ -1,0 +1,15 @@
+title: GroupAuditLogGroupRoleDelete
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogDataGroupRoleDelete.yaml
+  eventType:
+    const: group.role.delete
+  targetId:
+    $ref: ./GroupRoleID.yaml
+required:
+  - data
+  - eventType
+  - targetId
+allOf:
+  - $ref: ./GroupAuditLogBase.yaml

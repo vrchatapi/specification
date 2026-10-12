@@ -1,0 +1,15 @@
+title: GroupAuditLogGroupUpdate
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogDataGroupUpdate.yaml
+  eventType:
+    const: group.update
+  targetId:
+    $ref: ./GroupID.yaml
+required:
+  - data
+  - eventType
+  - targetId
+allOf:
+  - $ref: ./GroupAuditLogBase.yaml

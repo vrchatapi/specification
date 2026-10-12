@@ -1,0 +1,15 @@
+title: GroupAuditLogGroupRequestBlock
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogDataEmpty.yaml
+  eventType:
+    const: group.request.block
+  targetId:
+    $ref: ./UserID.yaml
+required:
+  - data
+  - eventType
+  - targetId
+allOf:
+  - $ref: ./GroupAuditLogBase.yaml

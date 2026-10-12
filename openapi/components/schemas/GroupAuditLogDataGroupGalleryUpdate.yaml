@@ -1,0 +1,8 @@
+title: GroupAuditLogDataGroupGalleryUpdate
+type: object
+description: Carries only the fields the update changed.
+properties:
+  membersOnly:
+    $ref: ./GroupAuditLogBooleanChange.yaml
+  name:
+    $ref: ./GroupAuditLogStringChange.yaml

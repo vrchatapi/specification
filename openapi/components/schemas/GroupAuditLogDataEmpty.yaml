@@ -1,0 +1,4 @@
+title: GroupAuditLogDataEmpty
+type: object
+additionalProperties: false
+properties: {}

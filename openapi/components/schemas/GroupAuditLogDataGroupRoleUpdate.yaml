@@ -1,0 +1,18 @@
+title: GroupAuditLogDataGroupRoleUpdate
+type: object
+description: Carries only the fields the update changed.
+properties:
+  description:
+    $ref: ./GroupAuditLogStringChange.yaml
+  isAddedOnJoin:
+    $ref: ./GroupAuditLogBooleanChange.yaml
+  isSelfAssignable:
+    $ref: ./GroupAuditLogBooleanChange.yaml
+  name:
+    $ref: ./GroupAuditLogStringChange.yaml
+  order:
+    $ref: ./GroupAuditLogIntegerChange.yaml
+  permissions:
+    $ref: ./GroupAuditLogStringListChange.yaml
+  requiresTwoFactor:
+    $ref: ./GroupAuditLogBooleanChange.yaml

@@ -1,0 +1,15 @@
+title: GroupAuditLogGroupGalleryDelete
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogDataGroupGalleryDelete.yaml
+  eventType:
+    const: group.gallery.delete
+  targetId:
+    $ref: ./GroupGalleryID.yaml
+required:
+  - data
+  - eventType
+  - targetId
+allOf:
+  - $ref: ./GroupAuditLogBase.yaml

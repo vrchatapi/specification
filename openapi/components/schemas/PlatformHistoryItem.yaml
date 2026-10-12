@@ -1,0 +1,13 @@
+title: PlatformHistoryItem
+type: object
+description: A platform the user was recorded on, and when.
+properties:
+  isMobile:
+    type: boolean
+  platform:
+    anyOf:
+      - $ref: ./Platform.yaml
+      - type: "null"
+  recorded:
+    type: string
+    format: date-time

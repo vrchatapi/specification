@@ -1,0 +1,15 @@
+title: GroupAuditLogGroupInstanceAnnouncement
+type: object
+properties:
+  data:
+    $ref: ./GroupAuditLogDataGroupInstanceAnnouncement.yaml
+  eventType:
+    const: group.instance.announcement
+  targetId:
+    $ref: ./LocationID.yaml
+required:
+  - data
+  - eventType
+  - targetId
+allOf:
+  - $ref: ./GroupAuditLogBase.yaml

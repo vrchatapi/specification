@@ -1,4 +1,4 @@
 content:
   application/json:
     schema:
-      $ref: ../../schemas/PaginatedGroupAuditLogEntryList.yaml
+      $ref: ../../schemas/PaginatedGroupAuditLogList.yaml

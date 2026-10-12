@@ -187,7 +187,7 @@ properties:
   platform_history:
     type: array
     items:
-      $ref: ./PlatformHistoryEntry.yaml
+      $ref: ./PlatformHistoryItem.yaml
   presence:
     $ref: ./CurrentUserPresence.yaml
   profileEffect:
