@@ -2,14 +2,14 @@ title: AvatarPerformance
 type: object
 properties:
   android:
-    type: string
+    $ref: ./PerformanceRatings.yaml
   android-sort:
     type: integer
   ios:
-    type: string
+    $ref: ./PerformanceRatings.yaml
   ios-sort:
     type: integer
   standalonewindows:
-    type: string
+    $ref: ./PerformanceRatings.yaml
   standalonewindows-sort:
     type: integer
