@@ -4,7 +4,7 @@ properties:
   favorites:
     type: array
     items:
-      $ref: ./FavoriteGroupContentsEntry.yaml
+      $ref: ./FavoriteGroupContentsItem.yaml
   totalCount:
     type: integer
 required:

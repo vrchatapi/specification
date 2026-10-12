@@ -1,0 +1,16 @@
+title: FavoriteGroupContentsItem
+description: A favorite alongside the object it points at. The object appears under a property named for the favorite's type.
+discriminator:
+  defaultMapping: ./FavoriteGroupContentsItemUnknown.yaml
+  mapping:
+    avatar: ./FavoriteGroupContentsItemAvatar.yaml
+    friend: ./FavoriteGroupContentsItemFriend.yaml
+    vrcPlusWorld: ./FavoriteGroupContentsItemVRCPlusWorld.yaml
+    world: ./FavoriteGroupContentsItemWorld.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./FavoriteGroupContentsItemAvatar.yaml
+  - $ref: ./FavoriteGroupContentsItemFriend.yaml
+  - $ref: ./FavoriteGroupContentsItemVRCPlusWorld.yaml
+  - $ref: ./FavoriteGroupContentsItemWorld.yaml
+  - $ref: ./FavoriteGroupContentsItemUnknown.yaml

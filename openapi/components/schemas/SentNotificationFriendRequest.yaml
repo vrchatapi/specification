@@ -1,0 +1,12 @@
+title: SentNotificationFriendRequest
+type: object
+properties:
+  details:
+    $ref: ./NotificationDetailFriendRequest.yaml
+  type:
+    const: friendRequest
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./SentNotificationBase.yaml

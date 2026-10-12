@@ -1,0 +1,11 @@
+title: FavoriteGroupContentsItemWorld
+type: object
+properties:
+  type:
+    const: world
+  world:
+    $ref: ./FavoriteGroupWorld.yaml
+required:
+  - type
+allOf:
+  - $ref: ./FavoriteGroupContentsItemBase.yaml

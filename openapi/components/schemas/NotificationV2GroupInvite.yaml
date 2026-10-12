@@ -1,0 +1,12 @@
+title: NotificationV2GroupInvite
+type: object
+properties:
+  data:
+    $ref: ./NotificationV2DataGroupInvite.yaml
+  type:
+    const: group.invite
+required:
+  - data
+  - type
+allOf:
+  - $ref: ./NotificationV2Base.yaml

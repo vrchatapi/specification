@@ -2,9 +2,7 @@ title: Transaction
 type: object
 properties:
   agreement:
-    oneOf:
-      - type: string
-      - $ref: ./TransactionAgreement.yaml
+    $ref: ./TransactionAgreementValue.yaml
   created_at:
     type: string
     format: date-time

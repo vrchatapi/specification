@@ -1,40 +1,24 @@
 title: SentNotification
-type: object
-properties:
-  created_at:
-    type: string
-    format: date-time
-  details:
-    oneOf:
-      - $ref: ./NotificationEmpty.yaml
-      - $ref: ./NotificationDetailBoop.yaml
-      - $ref: ./NotificationDetailInvite.yaml
-      - $ref: ./NotificationDetailInviteResponse.yaml
-      - $ref: ./NotificationDetailRequestInvite.yaml
-      - $ref: ./NotificationDetailRequestInviteResponse.yaml
-      - $ref: ./NotificationDetailVoteToKick.yaml
-  id:
-    type: string
-    minLength: 1
-  message:
-    type: string
-    examples:
-      - This is a generated invite to VRChat Hub
-  receiverUserId:
-    $ref: ./UserID.yaml
-  senderUserId:
-    $ref: ./UserID.yaml
-  senderUsername:
-    type: string
-    description: The name of the user who sent the notification.
-    minLength: 1
-  type:
-    $ref: ./NotificationType.yaml
-required:
-  - created_at
-  - details
-  - id
-  - message
-  - receiverUserId
-  - senderUserId
-  - type
+description: A notification as its sender receives it back. The shape of `details` depends on `type`.
+discriminator:
+  defaultMapping: ./SentNotificationUnknown.yaml
+  mapping:
+    boop: ./SentNotificationBoop.yaml
+    friendRequest: ./SentNotificationFriendRequest.yaml
+    invite: ./SentNotificationInvite.yaml
+    inviteResponse: ./SentNotificationInviteResponse.yaml
+    message: ./SentNotificationMessage.yaml
+    requestInvite: ./SentNotificationRequestInvite.yaml
+    requestInviteResponse: ./SentNotificationRequestInviteResponse.yaml
+    votetokick: ./SentNotificationVoteToKick.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./SentNotificationBoop.yaml
+  - $ref: ./SentNotificationFriendRequest.yaml
+  - $ref: ./SentNotificationInvite.yaml
+  - $ref: ./SentNotificationInviteResponse.yaml
+  - $ref: ./SentNotificationMessage.yaml
+  - $ref: ./SentNotificationRequestInvite.yaml
+  - $ref: ./SentNotificationRequestInviteResponse.yaml
+  - $ref: ./SentNotificationVoteToKick.yaml
+  - $ref: ./SentNotificationUnknown.yaml

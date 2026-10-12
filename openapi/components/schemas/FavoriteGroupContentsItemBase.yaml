@@ -1,0 +1,15 @@
+title: FavoriteGroupContentsItemBase
+type: object
+properties:
+  favoriteId:
+    type: string
+  id:
+    type: string
+  tags:
+    type: array
+    items:
+      type: string
+required:
+  - favoriteId
+  - id
+  - tags

@@ -1,0 +1,12 @@
+title: SentNotificationMessage
+type: object
+properties:
+  details:
+    $ref: ./NotificationDetailMessage.yaml
+  type:
+    const: message
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./SentNotificationBase.yaml

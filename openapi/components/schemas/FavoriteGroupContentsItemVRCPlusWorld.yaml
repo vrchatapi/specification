@@ -1,0 +1,9 @@
+title: FavoriteGroupContentsItemVRCPlusWorld
+type: object
+properties:
+  type:
+    const: vrcPlusWorld
+required:
+  - type
+allOf:
+  - $ref: ./FavoriteGroupContentsItemBase.yaml

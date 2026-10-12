@@ -1,0 +1,12 @@
+title: SentNotificationInvite
+type: object
+properties:
+  details:
+    $ref: ./NotificationDetailInvite.yaml
+  type:
+    const: invite
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./SentNotificationBase.yaml

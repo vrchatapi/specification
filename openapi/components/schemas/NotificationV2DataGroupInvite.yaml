@@ -1,0 +1,10 @@
+title: NotificationV2DataGroupInvite
+type: object
+properties:
+  groupName:
+    type: string
+  managerUserDisplayName:
+    type: string
+required:
+  - groupName
+  - managerUserDisplayName

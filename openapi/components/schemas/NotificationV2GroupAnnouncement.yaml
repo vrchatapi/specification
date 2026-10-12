@@ -1,0 +1,12 @@
+title: NotificationV2GroupAnnouncement
+type: object
+properties:
+  data:
+    $ref: ./NotificationV2DataGroupAnnouncement.yaml
+  type:
+    const: group.announcement
+required:
+  - data
+  - type
+allOf:
+  - $ref: ./NotificationV2Base.yaml

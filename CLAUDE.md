@@ -176,16 +176,9 @@ lands, and fix the links in any release notes that named it.
 
 ## One object, one file
 
-Every object schema lives in its own file under `openapi/components/schemas` and
-is reached by `$ref`. An object written inline inside another schema has no name,
-so each generated client invents its own, and a second schema that needs the same
-shape has to restate it.
+Every object schema, and every union of two or more types, lives in its own file under `openapi/components/schemas` and is reached by `$ref`. One written inline inside another schema has no name, so each generated client invents its own, and a second schema that needs the same shape has to restate it. A `$ref` made nullable with `anyOf: [$ref, {type: "null"}]` is not a union: clients read it as the referenced type.
 
-`vrchat/no-nested-object` is what catches this. A schema in its own file carries a
-title taken from that file, so an object without one is still nested somewhere;
-the rule reports each one once, against the file it is written in. Pull the
-object out rather than adding a `title` in place, which would silence the rule
-without moving anything.
+`vrchat/no-nested-object` is what catches this. A schema in its own file carries a title taken from that file, so one without a title is still nested somewhere; the rule reports each one once, against the file it is written in. Pull the schema out rather than adding a `title` in place, which would silence the rule without moving anything.
 
 A schema pulled out for one field of another is named after that parent, then the field, dropping the word they share: the `productType` of `CreateProductRequest` is `CreateProductRequestType`, the `region` of `CreateInstanceRequest` is `CreateInstanceRequestRegion`. Where a request accepts fewer values than the shared schema its responses use, it gets one of these rather than narrowing the shared one, and the shared one extends it with what only responses carry: `InstanceRegion` is `anyOf` `CreateInstanceRequestRegion` and `const: unknown`. JSON Schema has no other way to extend an enum ([json-schema-spec#979](https://github.com/json-schema-org/json-schema-spec/issues/979)), and openapi-generator merges such an `anyOf` back into one enum by default ([`SIMPLIFY_ONEOF_ANYOF_ENUM`](https://openapi-generator.tech/docs/customization/)).
 

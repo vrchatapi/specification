@@ -1,0 +1,112 @@
+title: NotificationV2Base
+type: object
+properties:
+  canDelete:
+    type: boolean
+  category:
+    $ref: ./NotificationV2Category.yaml
+  createdAt:
+    type: string
+    format: date-time
+  details:
+    $ref: ./NotificationV2DetailsBoop.yaml
+  displayData:
+    $ref: ./Unknown.yaml
+  expiresAt:
+    type: string
+    format: date-time
+  expiryAfterSeen:
+    type:
+      - integer
+      - "null"
+  id:
+    type: string
+  ignoreDND:
+    type: boolean
+  imageUrl:
+    type:
+      - string
+      - "null"
+  isSystem:
+    type: boolean
+  link:
+    type:
+      - string
+      - "null"
+    examples:
+      - "event:grp_00000000-0000-0000-0000-000000000000,cal_00000000-0000-0000-0000-000000000000"
+  linkText:
+    type:
+      - string
+      - "null"
+  linkTextKey:
+    type:
+      - string
+      - "null"
+  message:
+    type: string
+  messageKey:
+    type:
+      - string
+      - "null"
+  receiverUserId:
+    $ref: ./UserID.yaml
+  relatedNotificationsId:
+    type:
+      - string
+      - "null"
+    examples:
+      - cal_00000000-0000-0000-0000-000000000000
+  requireSeen:
+    type: boolean
+  responses:
+    type: array
+    items:
+      $ref: ./NotificationV2Response.yaml
+  seen:
+    type: boolean
+  senderUserId:
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"
+  senderUsername:
+    type:
+      - string
+      - "null"
+  title:
+    type: string
+  titleKey:
+    type:
+      - string
+      - "null"
+  updatedAt:
+    type: string
+    format: date-time
+  version:
+    type: integer
+    default: 2
+required:
+  - canDelete
+  - category
+  - createdAt
+  - expiresAt
+  - expiryAfterSeen
+  - id
+  - ignoreDND
+  - imageUrl
+  - isSystem
+  - link
+  - linkText
+  - linkTextKey
+  - message
+  - receiverUserId
+  - relatedNotificationsId
+  - requireSeen
+  - responses
+  - seen
+  - senderUserId
+  - senderUsername
+  - title
+  - titleKey
+  - updatedAt
+  - version

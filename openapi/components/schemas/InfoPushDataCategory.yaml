@@ -10,8 +10,6 @@ properties:
   maxCells:
     type: integer
   name:
-    oneOf:
-      - type: string
-      - $ref: ./LocalizedString.yaml
+    $ref: ./LocalizableString.yaml
   type:
     type: string

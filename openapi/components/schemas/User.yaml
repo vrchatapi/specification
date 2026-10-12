@@ -58,15 +58,9 @@ properties:
     type: boolean
     description: "Either their `friendKey`, or empty string if you are not friends. Unknown usage."
   last_activity:
-    anyOf:
-      - type: string
-        format: date-time
-      - const: ""
+    $ref: ./UserActivityTimestamp.yaml
   last_login:
-    anyOf:
-      - type: string
-        format: date-time
-      - const: ""
+    $ref: ./UserActivityTimestamp.yaml
   last_mobile:
     type:
       - string

@@ -1,0 +1,12 @@
+title: SentNotificationBoop
+type: object
+properties:
+  details:
+    $ref: ./NotificationDetailBoop.yaml
+  type:
+    const: boop
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./SentNotificationBase.yaml

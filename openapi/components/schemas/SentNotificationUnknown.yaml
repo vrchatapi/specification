@@ -1,0 +1,23 @@
+title: SentNotificationUnknown
+type: object
+description: A sent notification whose `type` has no schema of its own.
+properties:
+  details:
+    $ref: ./Unknown.yaml
+  type:
+    type: string
+    not:
+      enum:
+        - boop
+        - friendRequest
+        - invite
+        - inviteResponse
+        - message
+        - requestInvite
+        - requestInviteResponse
+        - votetokick
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./SentNotificationBase.yaml

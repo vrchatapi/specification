@@ -1,0 +1,4 @@
+title: LocalizableString
+oneOf:
+  - type: string
+  - $ref: ./LocalizedString.yaml

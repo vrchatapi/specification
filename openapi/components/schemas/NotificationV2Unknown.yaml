@@ -1,0 +1,17 @@
+title: NotificationV2Unknown
+type: object
+description: A notification whose `type` has no schema of its own.
+properties:
+  data:
+    $ref: ./NotificationV2Data.yaml
+  type:
+    $ref: ./NotificationV2Type.yaml
+    not:
+      enum:
+        - group.announcement
+        - group.invite
+required:
+  - data
+  - type
+allOf:
+  - $ref: ./NotificationV2Base.yaml

@@ -1,0 +1,4 @@
+title: TransactionAgreementValue
+oneOf:
+  - type: string
+  - $ref: ./TransactionAgreement.yaml

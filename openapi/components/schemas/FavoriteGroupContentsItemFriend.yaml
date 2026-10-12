@@ -1,0 +1,9 @@
+title: FavoriteGroupContentsItemFriend
+type: object
+properties:
+  type:
+    const: friend
+required:
+  - type
+allOf:
+  - $ref: ./FavoriteGroupContentsItemBase.yaml

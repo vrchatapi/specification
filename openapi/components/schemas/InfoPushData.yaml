@@ -30,9 +30,7 @@ properties:
   deliveryBehavior:
     $ref: ./InfoPushDataDeliveryBehavior.yaml
   description:
-    oneOf:
-      - type: string
-      - $ref: ./LocalizedString.yaml
+    $ref: ./LocalizableString.yaml
   disclaimerText:
     type: string
   domainList:
@@ -66,9 +64,7 @@ properties:
     examples:
       - video
   name:
-    oneOf:
-      - type: string
-      - $ref: ./LocalizedString.yaml
+    $ref: ./LocalizableString.yaml
   onPressed:
     anyOf:
       - $ref: ./InfoPushDataClickable.yaml
@@ -91,10 +87,9 @@ properties:
   search:
     $ref: ./InfoPushDataSearch.yaml
   shortName:
-    oneOf:
-      - type: string
+    anyOf:
+      - $ref: ./LocalizableString.yaml
       - type: "null"
-      - $ref: ./LocalizedString.yaml
   showInWorldIds:
     $ref: ./Unknown.yaml
   subtitle:
@@ -110,9 +105,7 @@ properties:
   title:
     type: string
   tooltipDescription:
-    oneOf:
-      - type: string
-      - $ref: ./LocalizedString.yaml
+    $ref: ./LocalizableString.yaml
   version:
     type: string
     examples:

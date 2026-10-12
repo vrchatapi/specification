@@ -1,0 +1,12 @@
+title: SentNotificationVoteToKick
+type: object
+properties:
+  details:
+    $ref: ./NotificationDetailVoteToKick.yaml
+  type:
+    const: votetokick
+required:
+  - details
+  - type
+allOf:
+  - $ref: ./SentNotificationBase.yaml

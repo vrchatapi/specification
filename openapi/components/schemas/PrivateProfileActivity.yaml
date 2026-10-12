@@ -4,15 +4,9 @@ properties:
   instanceId:
     $ref: ./InstanceID.yaml
   last_activity:
-    anyOf:
-      - type: string
-        format: date-time
-      - const: ""
+    $ref: ./UserActivityTimestamp.yaml
   last_login:
-    anyOf:
-      - type: string
-        format: date-time
-      - const: ""
+    $ref: ./UserActivityTimestamp.yaml
   location:
     $ref: ./LocationID.yaml
   platform:

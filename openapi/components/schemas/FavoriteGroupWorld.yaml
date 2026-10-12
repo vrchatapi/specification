@@ -1,0 +1,4 @@
+title: FavoriteGroupWorld
+oneOf:
+  - $ref: ./FavoritedWorld.yaml
+  - $ref: ./UnavailableWorld.yaml

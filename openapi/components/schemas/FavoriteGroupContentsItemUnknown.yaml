@@ -1,0 +1,16 @@
+title: FavoriteGroupContentsItemUnknown
+type: object
+description: A favorite whose `type` has no schema of its own.
+properties:
+  type:
+    type: string
+    not:
+      enum:
+        - avatar
+        - friend
+        - vrcPlusWorld
+        - world
+required:
+  - type
+allOf:
+  - $ref: ./FavoriteGroupContentsItemBase.yaml

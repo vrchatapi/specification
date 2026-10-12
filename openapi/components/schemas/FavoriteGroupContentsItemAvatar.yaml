@@ -1,0 +1,11 @@
+title: FavoriteGroupContentsItemAvatar
+type: object
+properties:
+  avatar:
+    $ref: ./Avatar.yaml
+  type:
+    const: avatar
+required:
+  - type
+allOf:
+  - $ref: ./FavoriteGroupContentsItemBase.yaml
