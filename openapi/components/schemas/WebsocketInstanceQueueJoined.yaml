@@ -1,7 +1,7 @@
 title: WebsocketInstanceQueueJoined
 type: object
 properties:
-  location:
+  instanceLocation:
     $ref: ./LocationID.yaml
   position:
     type: integer

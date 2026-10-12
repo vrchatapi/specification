@@ -1,0 +1,45 @@
+title: WebsocketUserUpdateUser
+type: object
+properties:
+  bio:
+    type: string
+  currentAvatar:
+    $ref: ./AvatarID.yaml
+  currentAvatarImageUrl:
+    type: string
+  currentAvatarThumbnailImageUrl:
+    type: string
+  displayName:
+    type: string
+  fallbackAvatar:
+    $ref: ./AvatarID.yaml
+  id:
+    $ref: ./UserID.yaml
+  profilePicOverride:
+    type: string
+  status:
+    $ref: ./UserStatus.yaml
+  statusDescription:
+    type: string
+  tags:
+    type: array
+    items:
+      - $ref: ./Tag.yaml
+  userIcon:
+    type: string
+  username:
+    type: string
+required:
+  - bio
+  - currentAvatar
+  - currentAvatarImageUrl
+  - currentAvatarThumbnailImageUrl
+  - displayName
+  - fallbackAvatar
+  - id
+  - profilePicOverride
+  - status
+  - statusDescription
+  - tags
+  - userIcon
+  - username

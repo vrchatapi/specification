@@ -4,7 +4,7 @@ properties:
   expiry:
     type: string
     format: date-time
-  location:
+  instanceLocation:
     $ref: ./LocationID.yaml
 required:
   - expiry

@@ -44,6 +44,10 @@ WebsocketContentRefresh:
   $ref: ./WebsocketContentRefresh.yaml
 WebsocketContentRefreshEncoded:
   $ref: ./WebsocketContentRefreshEncoded.yaml
+WebsocketEconomyUpdate:
+  $ref: ./WebsocketEconomyUpdate.yaml
+WebsocketEconomyUpdateEncoded:
+  $ref: ./WebsocketEconomyUpdateEncoded.yaml
 WebsocketFriendActive:
   $ref: ./WebsocketFriendActive.yaml
 WebsocketFriendActiveEncoded:
@@ -100,9 +104,17 @@ WebsocketInstanceQueueReadyEncoded:
   $ref: ./WebsocketInstanceQueueReadyEncoded.yaml
 WebsocketMessage:
   $ref: ./WebsocketMessage.yaml
+WebsocketMessageError:
+  $ref: ./WebsocketMessageError.yaml
 WebsocketMessageUnknown:
   $ref: ./WebsocketMessageUnknown.yaml
+WebsocketMessageUntyped:
+  $ref: ./WebsocketMessageUntyped.yaml
 
+WebsocketModifiedImageUpdate:
+  $ref: ./WebsocketModifiedImageUpdate.yaml
+WebsocketModifiedImageUpdateEncoded:
+  $ref: ./WebsocketModifiedImageUpdateEncoded.yaml
 WebsocketNotification:
   $ref: ./WebsocketNotification.yaml
 WebsocketNotificationDetailBoop:

@@ -1,0 +1,16 @@
+title: WebsocketModifiedImageUpdate
+type: object
+properties:
+  fileId:
+    $ref: ./FileID.yaml
+  pixelSize:
+    type: number
+  versionNumber:
+    type: number
+  needsProcessing:
+    type: boolean
+required:
+  - fileId
+  - pixelSize
+  - versionNumber
+  - needsProcessing

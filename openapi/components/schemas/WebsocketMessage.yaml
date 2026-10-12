@@ -5,6 +5,7 @@ discriminator:
   mapping:
     clear-notification: ./WebsocketClearNotification.yaml
     content-refresh: ./WebsocketContentRefreshEncoded.yaml
+    economy-update: ./WebsocketEconomyUpdateEncoded.yaml
     friend-active: ./WebsocketFriendActiveEncoded.yaml
     friend-add: ./WebsocketFriendAddEncoded.yaml
     friend-delete: ./WebsocketFriendDeleteEncoded.yaml
@@ -19,6 +20,7 @@ discriminator:
     hide-notification: ./WebsocketHideNotification.yaml
     instance-queue-joined: ./WebsocketInstanceQueueJoinedEncoded.yaml
     instance-queue-ready: ./WebsocketInstanceQueueReadyEncoded.yaml
+    modified-image-update: ./WebsocketModifiedImageUpdateEncoded.yaml
     notification: ./WebsocketNotificationEncoded.yaml
     notification-v2: ./WebsocketNotificationV2Encoded.yaml
     notification-v2-delete: ./WebsocketNotificationV2DeleteEncoded.yaml
@@ -33,6 +35,7 @@ discriminator:
 oneOf:
   - $ref: ./WebsocketClearNotification.yaml
   - $ref: ./WebsocketContentRefreshEncoded.yaml
+  - $ref: ./WebsocketEconomyUpdateEncoded.yaml
   - $ref: ./WebsocketFriendActiveEncoded.yaml
   - $ref: ./WebsocketFriendAddEncoded.yaml
   - $ref: ./WebsocketFriendDeleteEncoded.yaml
@@ -47,6 +50,7 @@ oneOf:
   - $ref: ./WebsocketHideNotification.yaml
   - $ref: ./WebsocketInstanceQueueJoinedEncoded.yaml
   - $ref: ./WebsocketInstanceQueueReadyEncoded.yaml
+  - $ref: ./WebsocketModifiedImageUpdateEncoded.yaml
   - $ref: ./WebsocketNotificationEncoded.yaml
   - $ref: ./WebsocketNotificationV2Encoded.yaml
   - $ref: ./WebsocketNotificationV2DeleteEncoded.yaml
