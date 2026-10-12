@@ -67,7 +67,8 @@ export const consistentDiscriminator: Oas3Rule = () => ({
 					location: location.child([schema.oneOf ? "oneOf" : "anyOf"])
 				});
 
-			const excluded = (((fallback.properties as Record<string, Schema> | undefined)?.[property]?.not as Schema | undefined)?.enum ?? []) as Array<string>;
+			const exclusion = (fallback.properties as Record<string, Schema> | undefined)?.[property]?.not as Schema | undefined;
+			const excluded = (exclusion?.enum ?? ("const" in (exclusion ?? {}) ? [exclusion!.const] : [])) as Array<string>;
 			const values = Object.keys(discriminator.mapping);
 			const missing = values.filter((value) => !excluded.includes(value));
 			const extra = excluded.filter((value) => !values.includes(value));

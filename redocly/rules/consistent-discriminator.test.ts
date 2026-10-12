@@ -45,6 +45,16 @@ describe("consistent-discriminator", () => {
 		expect(await messages({ Union: union(), A: member("a"), B: member("b"), Other: other(["a", "c"]) })).toStrictEqual(["`Other` must exclude exactly the mapped values: missing `b`, extra `c`."]);
 	});
 
+	test("reads a single excluded value written as const", async () => {
+		const schemas = { Union: union({ discriminator: { propertyName: "kind", mapping: { a: "#/components/schemas/A" }, defaultMapping: "#/components/schemas/Other" }, oneOf: [reference("A"), reference("Other")] }), A: member("a"), Other: { type: "object", properties: { kind: { type: "string", not: { const: "a" } } }, required: ["kind"] } };
+		expect(await messages(schemas)).toStrictEqual([]);
+	});
+
+	test("reports a single excluded const that is not the mapped value", async () => {
+		const schemas = { Union: union({ discriminator: { propertyName: "kind", mapping: { a: "#/components/schemas/A" }, defaultMapping: "#/components/schemas/Other" }, oneOf: [reference("A"), reference("Other")] }), A: member("a"), Other: { type: "object", properties: { kind: { type: "string", not: { const: "b" } } }, required: ["kind"] } };
+		expect(await messages(schemas)).toStrictEqual(["`Other` must exclude exactly the mapped values: missing `a`, extra `b`."]);
+	});
+
 	test("reports a fallback that is not the last member of oneOf", async () => {
 		const schemas = { Union: union({ oneOf: [reference("A"), reference("Other"), reference("B")] }), A: member("a"), B: member("b"), Other: other(["a", "b"]) };
 		expect(await messages(schemas)).toStrictEqual(["`Other` is the `defaultMapping` fallback, so it must be the last member of `oneOf`."]);
