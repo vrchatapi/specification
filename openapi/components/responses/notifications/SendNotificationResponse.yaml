@@ -1,14 +1,17 @@
 content:
   application/json:
     examples:
-      Example Friend Request Response:
+      Example Invite Response:
         value:
-          id: frq_00000000-0000-0000-0000-000000000000
-          type: friendRequest
-          created_at: "2021-01-01T00:00:00.000Z"
-          details: {}
-          message: ""
-          receiverUserId: usr_00000000-0000-0000-0000-000000000000
-          senderUserId: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+          id: not_23256056-a3f0-4ac6-99dd-06a58b3f06a9
+          type: invite
+          created_at: "2026-10-07T21:19:49.097Z"
+          details:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b:96583~private(usr_9439f8cc-1c6b-4dca-9a07-d2eccb570701)~canRequestInvite~region(use)
+            worldName: The Black Cat
+          message: This is a generated invite to The Black Cat
+          receiverUserId: usr_9439f8cc-1c6b-4dca-9a07-d2eccb570701
+          senderUserId: usr_9439f8cc-1c6b-4dca-9a07-d2eccb570701
+          senderUsername: 8cf3def6b8cea
     schema:
       $ref: ../../schemas/SentNotification.yaml
