@@ -14656,6 +14656,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-world-metadata-populated
+    summary: getWorldMetadata returns the metadata VRChat set on its Public Ban world
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: world-metadata
+        operationId: $sourceDescriptions.default.getWorldMetadata
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_5b89c79e-c340-4510-be1b-476e9fcdedcc
+        successCriteria:
+          - condition: $statusCode == 200
+          - context: $response.body
+            condition: $[?(@.metadata.BAN_INFO)]
+            type: jsonpath
+
   - workflowId: get-world-metadata-not-found
     summary: getWorldMetadata refuses a resource that does not exist
     parameters:
