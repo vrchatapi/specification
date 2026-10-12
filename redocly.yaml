@@ -9,6 +9,7 @@ plugins:
 rules:
   array-parameter-serialization: warn
   component-name-unique: warn
+  no-ambiguous-paths: off
   path-not-include-query: warn
 
 oas3_0Rules:
