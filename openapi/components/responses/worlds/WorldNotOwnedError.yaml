@@ -1,0 +1,11 @@
+description: The caller does not own the world. A world that does not exist answers the same.
+content:
+  application/json:
+    examples:
+      Not Owned:
+        value:
+          error:
+            message: Tried to modify someone else's world
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

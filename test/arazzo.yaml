@@ -407,6 +407,23 @@ workflows:
           - name: stop
             type: end
 
+  - workflowId: delete-global-avatar-moderation-unauthenticated
+    summary: deleteGlobalAvatarModeration refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: delete-global-avatar-moderation
+        operationId: $sourceDescriptions.default.deleteGlobalAvatarModeration
+        parameters:
+          - name: targetAvatarId
+            in: query
+            value: avtr_00000000-0000-0000-0000-000000000000
+          - name: avatarModerationType
+            in: query
+            value: block
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: create-global-avatar-moderation-invalid-type
     summary: createGlobalAvatarModeration names the moderation types it accepts
     parameters:
@@ -695,6 +712,16 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/code != null
 
+  - workflowId: get-o-auth-redirect-code-unauthenticated
+    summary: getOAuthRedirectCode refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-o-auth-redirect-code
+        operationId: $sourceDescriptions.default.getOAuthRedirectCode
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-recovery-codes-unauthenticated
     summary: getRecoveryCodes refuses an anonymous caller
     parameters:
@@ -760,6 +787,20 @@ workflows:
             value: test
         successCriteria:
           - condition: $statusCode == 400
+  - workflowId: get-sso-token-unauthenticated
+    summary: getSsoToken refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-sso-token
+        operationId: $sourceDescriptions.default.getSsoToken
+        parameters:
+          - name: provider
+            in: path
+            value: canny
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: interests-and-preferences-lifecycle
     summary: Turns every interest on, one off, then the rest off, reading each state back
     parameters:
@@ -1146,6 +1187,24 @@ workflows:
             value: avtr_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: enqueue-impostor-forbidden
+    summary: enqueueImpostor refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: enqueue-impostor
+        operationId: $sourceDescriptions.default.enqueueImpostor
+        parameters:
+          - name: avatarId
+            in: path
+            value: avtr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
 
   - workflowId: get-avatar-not-found
     summary: getAvatar refuses a resource that does not exist
@@ -1640,6 +1699,44 @@ workflows:
             value: avtr_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
         successCriteria:
           - condition: $statusCode == 400
+  - workflowId: update-avatar-invalid-body
+    summary: updateAvatar refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-avatar
+        operationId: $sourceDescriptions.default.updateAvatar
+        parameters:
+          - name: avatarId
+            in: path
+            value: avtr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: update-avatar-unauthenticated
+    summary: updateAvatar refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-avatar
+        operationId: $sourceDescriptions.default.updateAvatar
+        parameters:
+          - name: avatarId
+            in: path
+            value: avtr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: group-calendar-lifecycle
     summary: Creates a group and a calendar event on it, then removes both
     parameters:
@@ -1942,6 +2039,43 @@ workflows:
         onFailure:
           - name: stop
             type: end
+
+  - workflowId: get-group-calendar-event-not-found
+    summary: getGroupCalendarEvent refuses a resource that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-group-calendar-event
+        operationId: $sourceDescriptions.default.getGroupCalendarEvent
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: calendarId
+            in: path
+            value: cal_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: update-group-calendar-event-unauthenticated
+    summary: updateGroupCalendarEvent refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-group-calendar-event
+        operationId: $sourceDescriptions.default.updateGroupCalendarEvent
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: calendarId
+            in: path
+            value: cal_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 401
 
   - workflowId: create-group-calendar-event-invalid-access-type
     summary: createGroupCalendarEvent refuses a accessType it does not know
@@ -2740,6 +2874,20 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
           - condition: $response.body#/balance != null
+
+  - workflowId: get-balance-unauthenticated
+    summary: getBalance refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-balance
+        operationId: $sourceDescriptions.default.getBalance
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
 
   - workflowId: get-balance-earnings
     summary: Read balance earnings
@@ -3544,6 +3692,30 @@ workflows:
             value: all
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: get-store-shelves-missing-parameters
+    summary: getStoreShelves refuses a request without its required parameters
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-store-shelves
+        operationId: $sourceDescriptions.default.getStoreShelves
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: get-store-unauthenticated
+    summary: getStore refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-store
+        operationId: $sourceDescriptions.default.getStore
+        parameters:
+          - name: storeId
+            in: query
+            value: esto_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
 
   - workflowId: get-steam-transactions-unauthenticated
     summary: getSteamTransactions refuses an anonymous caller
@@ -4427,6 +4599,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-file-analysis-analysis-pending
+    summary: getFileAnalysis answers 202 for a file with no analysis
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-file-analysis
+        operationId: $sourceDescriptions.default.getFileAnalysis
+        parameters:
+          - name: fileId
+            in: path
+            value: file_00000000-0000-0000-0000-000000000000
+          - name: versionId
+            in: path
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 202
+
   - workflowId: get-file-analysis-not-found
     summary: getFileAnalysis refuses a resource that does not exist
     parameters:
@@ -4469,6 +4662,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-file-analysis-security-analysis-pending
+    summary: getFileAnalysisSecurity answers 202 for a file with no analysis
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-file-analysis-security
+        operationId: $sourceDescriptions.default.getFileAnalysisSecurity
+        parameters:
+          - name: fileId
+            in: path
+            value: file_00000000-0000-0000-0000-000000000000
+          - name: versionId
+            in: path
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 202
+
   - workflowId: get-file-analysis-security-not-found
     summary: getFileAnalysisSecurity refuses a resource that does not exist
     parameters:
@@ -4510,6 +4724,27 @@ workflows:
             value: 1
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: get-file-analysis-standard-analysis-pending
+    summary: getFileAnalysisStandard answers 202 for a file with no analysis
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-file-analysis-standard
+        operationId: $sourceDescriptions.default.getFileAnalysisStandard
+        parameters:
+          - name: fileId
+            in: path
+            value: file_00000000-0000-0000-0000-000000000000
+          - name: versionId
+            in: path
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 202
 
   - workflowId: get-file-analysis-standard-not-found
     summary: getFileAnalysisStandard refuses a resource that does not exist
@@ -4678,6 +4913,26 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-content-agreement-status-unauthenticated
+    summary: getContentAgreementStatus refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-content-agreement-status
+        operationId: $sourceDescriptions.default.getContentAgreementStatus
+        parameters:
+          - name: agreementCode
+            in: query
+            value: x
+          - name: contentId
+            in: query
+            value: avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11
+          - name: version
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-admin-asset-bundle-unauthenticated
     summary: getAdminAssetBundle refuses an anonymous caller
     parameters:
@@ -4832,6 +5087,23 @@ workflows:
         successCriteria:
           - condition: $statusCode == 404
 
+  - workflowId: boop-unauthenticated
+    summary: boop refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: boop
+        operationId: $sourceDescriptions.default.boop
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: delete-friend-request-not-found
     summary: deleteFriendRequest refuses a resource that does not exist
     parameters:
@@ -4847,6 +5119,24 @@ workflows:
           - name: userId
             in: path
             value: usr_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: delete-friend-request-nonexistent
+    summary: deleteFriendRequest answers 200 for a resource that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-friend-request
+        operationId: $sourceDescriptions.default.deleteFriendRequest
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 200
 
@@ -4877,6 +5167,24 @@ workflows:
             value: usr_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
+  - workflowId: friend-not-found
+    summary: friend refuses a user that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: friend
+        operationId: $sourceDescriptions.default.friend
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 404
+
   - workflowId: friend-request-lifecycle
     summary: Send a friend request, read the status it leaves, withdraw it
     inputs:
@@ -5200,6 +5508,30 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: add-group-gallery-image-invalid-body
+    summary: addGroupGalleryImage refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: add-group-gallery-image
+        operationId: $sourceDescriptions.default.addGroupGalleryImage
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: groupGalleryId
+            in: path
+            value: ggal_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: add-group-gallery-image-unauthenticated
     summary: addGroupGalleryImage refuses an anonymous caller
     parameters:
@@ -5238,6 +5570,30 @@ workflows:
           - name: groupRoleId
             in: path
             value: grol_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: add-group-member-role-not-member
+    summary: addGroupMemberRole refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: add-group-member-role
+        operationId: $sourceDescriptions.default.addGroupMemberRole
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+          - name: groupRoleId
+            in: path
+            value: grol_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -5322,6 +5678,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: ban-group-member-invalid-body
+    summary: banGroupMember refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: ban-group-member
+        operationId: $sourceDescriptions.default.banGroupMember
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: ban-group-member-unauthenticated
     summary: banGroupMember refuses an anonymous caller
     parameters:
@@ -5368,6 +5745,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: block-group-invalid-group-id
+    summary: blockGroup refuses a groupId that is not a group ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: block-group
+        operationId: $sourceDescriptions.default.blockGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: groupId must be an ID˸ 'x'
+            type: regex
+
   - workflowId: cancel-group-request-not-found
     summary: cancelGroupRequest refuses a resource that does not exist
     parameters:
@@ -5401,6 +5799,24 @@ workflows:
           - name: groupId
             in: path
             value: grp_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: cancel-group-transfer-not-member
+    summary: cancelGroupTransfer refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: cancel-group-transfer
+        operationId: $sourceDescriptions.default.cancelGroupTransfer
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -5490,6 +5906,24 @@ workflows:
         operationId: $sourceDescriptions.default.createGroup
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: get-group-audit-logs-not-member
+    summary: getGroupAuditLogs refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-audit-logs
+        operationId: $sourceDescriptions.default.getGroupAuditLogs
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
 
   - workflowId: group-lifecycle
     summary: Creates, updates and deletes a real group on the account
@@ -5777,6 +6211,84 @@ workflows:
           - name: stop
             type: end
 
+  - workflowId: get-group-members-nonexistent
+    summary: getGroupMembers answers 200 for a resource that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-members
+        operationId: $sourceDescriptions.default.getGroupMembers
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: create-group-invite-invalid-body
+    summary: createGroupInvite refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group-invite
+        operationId: $sourceDescriptions.default.createGroupInvite
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: get-group-invites-not-member
+    summary: getGroupInvites refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-invites
+        operationId: $sourceDescriptions.default.getGroupInvites
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: update-group-not-member
+    summary: updateGroup refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-group
+        operationId: $sourceDescriptions.default.updateGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: create-group-announcement-not-found
     summary: createGroupAnnouncement refuses a resource that does not exist
     parameters:
@@ -5796,6 +6308,27 @@ workflows:
           contentType: application/json
           payload:
             title: test
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: create-group-announcement-invalid-body
+    summary: createGroupAnnouncement refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group-announcement
+        operationId: $sourceDescriptions.default.createGroupAnnouncement
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
         successCriteria:
           - condition: $statusCode == 400
 
@@ -5834,6 +6367,27 @@ workflows:
             name: test
         successCriteria:
           - condition: $statusCode == 403
+
+  - workflowId: create-group-gallery-invalid-body
+    summary: createGroupGallery refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-group-gallery
+        operationId: $sourceDescriptions.default.createGroupGallery
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
 
   - workflowId: create-group-gallery-unauthenticated
     summary: createGroupGallery refuses an anonymous caller
@@ -6007,6 +6561,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: decline-group-invite-invalid-group-id
+    summary: declineGroupInvite refuses a groupId that is not a group ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: decline-group-invite
+        operationId: $sourceDescriptions.default.declineGroupInvite
+        parameters:
+          - name: groupId
+            in: path
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: groupId must be an ID˸ 'x'
+            type: regex
+
   - workflowId: delete-group-not-found
     summary: deleteGroup refuses a resource that does not exist
     parameters:
@@ -6057,6 +6632,24 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: delete-group-announcement-not-member
+    summary: deleteGroupAnnouncement refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-group-announcement
+        operationId: $sourceDescriptions.default.deleteGroupAnnouncement
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: delete-group-announcement-unauthenticated
     summary: deleteGroupAnnouncement refuses an anonymous caller
     parameters:
@@ -6089,6 +6682,27 @@ workflows:
           - name: groupGalleryId
             in: path
             value: ggal_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: delete-group-gallery-not-member
+    summary: deleteGroupGallery refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-group-gallery
+        operationId: $sourceDescriptions.default.deleteGroupGallery
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: groupGalleryId
+            in: path
+            value: ggal_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -6170,6 +6784,30 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: delete-group-invite-invalid-group-id
+    summary: deleteGroupInvite refuses a groupId that is not a group ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-group-invite
+        operationId: $sourceDescriptions.default.deleteGroupInvite
+        parameters:
+          - name: groupId
+            in: path
+            value: x
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: groupId must be an ID˸ 'x'
+            type: regex
+
   - workflowId: delete-group-post-not-found
     summary: deleteGroupPost refuses a resource that does not exist
     parameters:
@@ -6188,6 +6826,27 @@ workflows:
           - name: notificationId
             in: path
             value: not_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: delete-group-post-not-member
+    summary: deleteGroupPost refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-group-post
+        operationId: $sourceDescriptions.default.deleteGroupPost
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: notificationId
+            in: path
+            value: not_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -6226,6 +6885,27 @@ workflows:
           - name: groupRoleId
             in: path
             value: grol_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: delete-group-role-not-member
+    summary: deleteGroupRole refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-group-role
+        operationId: $sourceDescriptions.default.deleteGroupRole
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: groupRoleId
+            in: path
+            value: grol_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -6296,6 +6976,24 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: get-group-announcements-not-member
+    summary: getGroupAnnouncements refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-announcements
+        operationId: $sourceDescriptions.default.getGroupAnnouncements
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: get-group-announcements-unauthenticated
     summary: getGroupAnnouncements refuses an anonymous caller
     parameters:
@@ -6325,6 +7023,24 @@ workflows:
           - name: groupId
             in: path
             value: grp_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: get-group-audit-log-entry-types-not-member
+    summary: getGroupAuditLogEntryTypes refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-audit-log-entry-types
+        operationId: $sourceDescriptions.default.getGroupAuditLogEntryTypes
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -6389,6 +7105,24 @@ workflows:
           - name: groupId
             in: path
             value: grp_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: get-group-bans-not-member
+    summary: getGroupBans refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-bans
+        operationId: $sourceDescriptions.default.getGroupBans
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -6459,6 +7193,24 @@ workflows:
           - name: groupId
             in: path
             value: grp_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: get-group-instances-not-member
+    summary: getGroupInstances refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-instances
+        operationId: $sourceDescriptions.default.getGroupInstances
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -6657,6 +7409,24 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: get-group-permissions-not-member
+    summary: getGroupPermissions refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-permissions
+        operationId: $sourceDescriptions.default.getGroupPermissions
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: get-group-permissions-unauthenticated
     summary: getGroupPermissions refuses an anonymous caller
     parameters:
@@ -6703,6 +7473,45 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: get-group-requests-not-member
+    summary: getGroupRequests refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-requests
+        operationId: $sourceDescriptions.default.getGroupRequests
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: get-group-requests-invalid-group-id
+    summary: getGroupRequests refuses a groupId that is not a group ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-requests
+        operationId: $sourceDescriptions.default.getGroupRequests
+        parameters:
+          - name: groupId
+            in: path
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: groupId must be an ID˸ 'x'
+            type: regex
+
   - workflowId: get-group-role-templates
     summary: Group role templates
     parameters:
@@ -6745,6 +7554,24 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: get-group-roles-not-member
+    summary: getGroupRoles refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-roles
+        operationId: $sourceDescriptions.default.getGroupRoles
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: get-group-roles-unauthenticated
     summary: getGroupRoles refuses an anonymous caller
     parameters:
@@ -6774,6 +7601,24 @@ workflows:
           - name: groupId
             in: path
             value: grp_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: get-group-transferability-not-member
+    summary: getGroupTransferability refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-group-transferability
+        operationId: $sourceDescriptions.default.getGroupTransferability
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -6942,6 +7787,30 @@ workflows:
           - name: stop
             type: end
 
+  - workflowId: update-group-gallery-not-member
+    summary: updateGroupGallery refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-group-gallery
+        operationId: $sourceDescriptions.default.updateGroupGallery
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: groupGalleryId
+            in: path
+            value: ggal_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: group-member-role
     summary: Grant a role to the owner, then take it away
     inputs:
@@ -7030,6 +7899,30 @@ workflows:
           - name: stop
             type: end
 
+  - workflowId: remove-group-member-role-not-member
+    summary: removeGroupMemberRole refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: remove-group-member-role
+        operationId: $sourceDescriptions.default.removeGroupMemberRole
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+          - name: groupRoleId
+            in: path
+            value: grol_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: group-post-lifecycle
     summary: Create a group post, update it, delete it
     inputs:
@@ -7105,6 +7998,30 @@ workflows:
         onFailure:
           - name: stop
             type: end
+
+  - workflowId: update-group-post-not-member
+    summary: updateGroupPost refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-group-post
+        operationId: $sourceDescriptions.default.updateGroupPost
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: notificationId
+            in: path
+            value: not_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 403
 
   - workflowId: group-reads
     summary: Group reads against an existing membership
@@ -7263,6 +8180,24 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: search-group-members-missing-parameters
+    summary: searchGroupMembers refuses a request without its required parameters
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-group-members
+        operationId: $sourceDescriptions.default.searchGroupMembers
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: group-role-lifecycle
     summary: Create a group role, update it, delete it
     inputs:
@@ -7409,6 +8344,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: initiate-or-accept-group-transfer-not-member
+    summary: initiateOrAcceptGroupTransfer refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: initiate-or-accept-group-transfer
+        operationId: $sourceDescriptions.default.initiateOrAcceptGroupTransfer
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: initiate-or-accept-group-transfer-unauthenticated
     summary: initiateOrAcceptGroupTransfer refuses an anonymous caller
     parameters:
@@ -7454,6 +8410,27 @@ workflows:
             value: grp_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: join-group-invalid-group-id
+    summary: joinGroup refuses a groupId that is not a group ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: join-group
+        operationId: $sourceDescriptions.default.joinGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: groupId must be an ID˸ 'x'
+            type: regex
 
   - workflowId: kick-group-member-not-found
     summary: kickGroupMember refuses a resource that does not exist
@@ -7508,6 +8485,24 @@ workflows:
           - name: groupId
             in: path
             value: grp_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: leave-group-not-member
+    summary: leaveGroup refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: leave-group
+        operationId: $sourceDescriptions.default.leaveGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -7579,6 +8574,30 @@ workflows:
             action: accept
         successCriteria:
           - condition: $statusCode == 403
+
+  - workflowId: respond-group-join-request-invalid-body
+    summary: respondGroupJoinRequest refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: respond-group-join-request
+        operationId: $sourceDescriptions.default.respondGroupJoinRequest
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
 
   - workflowId: respond-group-join-request-invalid-action
     summary: respondGroupJoinRequest refuses a action it does not know
@@ -7712,6 +8731,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: unban-group-member-not-member
+    summary: unbanGroupMember refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: unban-group-member
+        operationId: $sourceDescriptions.default.unbanGroupMember
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: unban-group-member-unauthenticated
     summary: unbanGroupMember refuses an anonymous caller
     parameters:
@@ -7746,6 +8786,23 @@ workflows:
             value: grp_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
         successCriteria:
           - condition: $statusCode == 400
+
+  - workflowId: update-group-unauthenticated
+    summary: updateGroup refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-group
+        operationId: $sourceDescriptions.default.updateGroup
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 401
 
   - workflowId: update-group-gallery-not-found
     summary: updateGroupGallery refuses a resource that does not exist
@@ -7803,6 +8860,30 @@ workflows:
           - name: userId
             in: path
             value: usr_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: update-group-member-not-member
+    summary: updateGroupMember refuses a caller outside the group
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-group-member
+        operationId: $sourceDescriptions.default.updateGroupMember
+        parameters:
+          - name: groupId
+            in: path
+            value: grp_00000000-0000-0000-0000-000000000000
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
         successCriteria:
           - condition: $statusCode == 403
 
@@ -8487,6 +9568,19 @@ workflows:
         onFailure:
           - name: stop
             type: end
+
+  - workflowId: create-instance-invalid-body
+    summary: createInstance refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
 
   - workflowId: update-instance-unauthenticated
     summary: updateInstance refuses an anonymous caller
@@ -9329,6 +10423,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: equip-own-inventory-item-invalid-body
+    summary: equipOwnInventoryItem refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: equip-own-inventory-item
+        operationId: $sourceDescriptions.default.equipOwnInventoryItem
+        parameters:
+          - name: inventoryItemId
+            in: path
+            value: inv_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: get-inventory-query-parameters
     summary: getInventory with every fillable query parameter
     parameters:
@@ -9688,6 +10803,30 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-invite-message-forbidden
+    summary: getInviteMessage refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-invite-message
+        operationId: $sourceDescriptions.default.getInviteMessage
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+          - name: messageType
+            in: path
+            value: message
+          - name: slot
+            in: path
+            value: 0
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: get-invite-message-not-found
     summary: getInviteMessage refuses a resource that does not exist
     parameters:
@@ -9949,6 +11088,30 @@ workflows:
         successCriteria:
           - condition: $statusCode == 429
 
+  - workflowId: reset-invite-message-forbidden
+    summary: resetInviteMessage refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: reset-invite-message
+        operationId: $sourceDescriptions.default.resetInviteMessage
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+          - name: messageType
+            in: path
+            value: message
+          - name: slot
+            in: path
+            value: 0
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: invite-user-must-be-friends
     summary: inviteUser refuses a user who is not a friend
     parameters:
@@ -10033,6 +11196,31 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: reset-invite-message-invalid-message-type
+    summary: resetInviteMessage refuses a messageType it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: reset-invite-message
+        operationId: $sourceDescriptions.default.resetInviteMessage
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: messageType
+            in: path
+            value: x
+          - name: slot
+            in: path
+            value: 0
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'messageType must be one of ［＂message＂‚＂response＂‚＂request＂‚＂requestResponse＂］‚ not ＂x＂'
+
   - workflowId: update-invite-message-unauthenticated
     summary: updateInviteMessage refuses an anonymous caller
     parameters:
@@ -10052,6 +11240,33 @@ workflows:
             value: 0
         successCriteria:
           - condition: $statusCode == 401
+
+  - workflowId: update-invite-message-invalid-body
+    summary: updateInviteMessage refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-invite-message
+        operationId: $sourceDescriptions.default.updateInviteMessage
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: messageType
+            in: path
+            value: message
+          - name: slot
+            in: path
+            value: 0
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
 
   - workflowId: delete-jam-submission-not-found
     summary: deleteJamSubmission refuses a resource that does not exist
@@ -10170,6 +11385,24 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-jam-submissions-nonexistent
+    summary: getJamSubmissions answers 200 for a resource that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-jam-submissions
+        operationId: $sourceDescriptions.default.getJamSubmissions
+        parameters:
+          - name: jamId
+            in: path
+            value: jam_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 200
+
   - workflowId: submit-jam-content-not-found
     summary: submitJamContent refuses a resource that does not exist
     parameters:
@@ -10190,6 +11423,27 @@ workflows:
           payload:
             contentId: wrld_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
             description: test
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: submit-jam-content-invalid-body
+    summary: submitJamContent refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: submit-jam-content
+        operationId: $sourceDescriptions.default.submitJamContent
+        parameters:
+          - name: jamId
+            in: path
+            value: jam_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
         successCriteria:
           - condition: $statusCode == 400
 
@@ -10240,6 +11494,70 @@ workflows:
         operationId: $sourceDescriptions.default.getConfig
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: get-java-script-variant-unauthenticated
+    summary: getJavaScript refuses a variant to an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-java-script
+        operationId: $sourceDescriptions.default.getJavaScript
+        parameters:
+          - name: variant
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-java-script-non-public-variant
+    summary: getJavaScript refuses a non-public variant to a caller who is not an admin
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-java-script
+        operationId: $sourceDescriptions.default.getJavaScript
+        parameters:
+          - name: variant
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: get-css-variant-unauthenticated
+    summary: getCSS refuses a variant to an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-css
+        operationId: $sourceDescriptions.default.getCSS
+        parameters:
+          - name: variant
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-css-non-public-variant
+    summary: getCSS refuses a non-public variant to a caller who is not an admin
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-css
+        operationId: $sourceDescriptions.default.getCSS
+        parameters:
+          - name: variant
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 403
 
   - workflowId: get-current-online-users
     summary: Online users
@@ -10361,6 +11679,44 @@ workflows:
         operationId: $sourceDescriptions.default.getPermissions
         successCriteria:
           - condition: $statusCode == 403
+
+  - workflowId: delete-permission-unauthenticated
+    summary: deletePermission refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: delete-permission
+        operationId: $sourceDescriptions.default.deletePermission
+        parameters:
+          - name: permissionId
+            in: path
+            value: perm_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: update-permission-unauthenticated
+    summary: updatePermission refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-permission
+        operationId: $sourceDescriptions.default.updatePermission
+        parameters:
+          - name: permissionId
+            in: path
+            value: perm_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-permissions-unauthenticated
+    summary: getPermissions refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-permissions
+        operationId: $sourceDescriptions.default.getPermissions
+        successCriteria:
+          - condition: $statusCode == 401
 
   - workflowId: get-system-time
     summary: System time
@@ -10549,6 +11905,24 @@ workflows:
         onFailure:
           - name: stop
             type: end
+
+  - workflowId: get-notification-v2-forbidden
+    summary: getNotificationV2 refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-notification-v2
+        operationId: $sourceDescriptions.default.getNotificationV2
+        parameters:
+          - name: notificationId
+            in: path
+            value: not_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
 
   - workflowId: delete-all-notification-v2s-unauthenticated
     summary: deleteAllNotificationV2s refuses an anonymous caller
@@ -10845,6 +12219,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: respond-notification-v2-invalid-body
+    summary: respondNotificationV2 refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: respond-notification-v2
+        operationId: $sourceDescriptions.default.respondNotificationV2
+        parameters:
+          - name: notificationId
+            in: path
+            value: x
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: clear-all-player-moderations-unauthenticated
     summary: clearAllPlayerModerations refuses an anonymous caller
     parameters:
@@ -11090,6 +12485,24 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: delete-prop-forbidden
+    summary: deleteProp refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-prop
+        operationId: $sourceDescriptions.default.deleteProp
+        parameters:
+          - name: propId
+            in: path
+            value: prop_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: delete-prop-unauthenticated
     summary: deleteProp refuses an anonymous caller
     parameters:
@@ -11257,6 +12670,44 @@ workflows:
         successCriteria:
           - condition: $statusCode == 400
 
+  - workflowId: update-prop-forbidden
+    summary: updateProp refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-prop
+        operationId: $sourceDescriptions.default.updateProp
+        parameters:
+          - name: propId
+            in: path
+            value: prop_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: update-prop-unauthenticated
+    summary: updateProp refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-prop
+        operationId: $sourceDescriptions.default.updateProp
+        parameters:
+          - name: propId
+            in: path
+            value: prop_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: add-tags
     summary: Tag changes on another user are rejected
     parameters:
@@ -11315,6 +12766,27 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: check-user-persistence-exists-forbidden
+    summary: checkUserPersistenceExists refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: check-user-persistence-exists
+        operationId: $sourceDescriptions.default.checkUserPersistenceExists
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+          - name: worldId
+            in: path
+            value: wrld_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: check-user-persistence-exists-unauthenticated
     summary: checkUserPersistenceExists refuses an anonymous caller
     parameters:
@@ -11364,6 +12836,27 @@ workflows:
           - name: worldId
             in: path
             value: wrld_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: delete-user-persistence-forbidden
+    summary: deleteUserPersistence refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-user-persistence
+        operationId: $sourceDescriptions.default.deleteUserPersistence
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+          - name: worldId
+            in: path
+            value: wrld_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 403
 
@@ -13669,6 +15162,34 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: get-user-group-instances-for-group
+    summary: getUserGroupInstancesForGroup lists the account's instances in the fixture group
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-user-group-instances-for-group
+        operationId: $sourceDescriptions.default.getUserGroupInstancesForGroup
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+          - name: groupId
+            in: path
+            value: $inputs.groupId
+        successCriteria:
+          - condition: $statusCode == 200
+
   - workflowId: get-user-group-requests
     summary: Group requests
     parameters:
@@ -14235,6 +15756,20 @@ workflows:
         successCriteria:
           - condition: $statusCode == 404
 
+  - workflowId: search-active-users-unauthenticated
+    summary: searchActiveUsers refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: search-active-users
+        operationId: $sourceDescriptions.default.searchActiveUsers
+        parameters:
+          - name: search
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: search-users
     summary: Search users
     parameters:
@@ -14392,6 +15927,30 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
 
+  - workflowId: update-badge-forbidden
+    summary: updateBadge refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-badge
+        operationId: $sourceDescriptions.default.updateBadge
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+          - name: badgeId
+            in: path
+            value: bdg_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 403
+
   - workflowId: update-badge-unauthenticated
     summary: updateBadge refuses an anonymous caller
     parameters:
@@ -14540,6 +16099,24 @@ workflows:
             value: wrld_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: delete-world-forbidden
+    summary: deleteWorld refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-world
+        operationId: $sourceDescriptions.default.deleteWorld
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 403
 
   - workflowId: delete-world-unauthenticated
     summary: deleteWorld refuses an anonymous caller
@@ -14932,6 +16509,24 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: get-world-publish-status-nonexistent
+    summary: getWorldPublishStatus answers 200 for a resource that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-world-publish-status
+        operationId: $sourceDescriptions.default.getWorldPublishStatus
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 200
+
   - workflowId: get-world-publish-status-unauthenticated
     summary: getWorldPublishStatus refuses an anonymous caller
     parameters:
@@ -15000,6 +16595,20 @@ workflows:
               - author_tag_test
         successCriteria:
           - condition: $statusCode == 403
+
+  - workflowId: remove-world-tags-unauthenticated
+    summary: removeWorldTags refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: remove-world-tags
+        operationId: $sourceDescriptions.default.removeWorldTags
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
 
   - workflowId: search-worlds
     summary: Search worlds
@@ -15210,6 +16819,27 @@ workflows:
             value: wrld_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
         successCriteria:
           - condition: $statusCode == 400
+
+  - workflowId: update-world-forbidden
+    summary: updateWorld refuses the caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-world
+        operationId: $sourceDescriptions.default.updateWorld
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 403
 
   - workflowId: update-world-unauthenticated
     summary: updateWorld refuses an anonymous caller
@@ -16318,6 +17948,19 @@ workflows:
             condition: releaseStatus must be one of ［＂public＂‚＂private＂‚＂hidden＂］‚ not ＂x＂
             type: regex
 
+  - workflowId: create-avatar-invalid-body
+    summary: createAvatar refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-avatar
+        operationId: $sourceDescriptions.default.createAvatar
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: update-avatar-invalid-release-status
     summary: updateAvatar refuses a releaseStatus it does not know
     parameters:
@@ -16525,6 +18168,19 @@ workflows:
             condition: listingType must be one of ［＂subscription＂‚＂duration＂‚＂instant＂‚＂permanent＂］‚ not ＂x＂
             type: regex
 
+  - workflowId: create-product-listing-direct-invalid-body
+    summary: createProductListingDirect refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-product-listing-direct
+        operationId: $sourceDescriptions.default.createProductListingDirect
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: update-user-invalid-status
     summary: updateUser refuses a status it does not know
     parameters:
@@ -16549,3 +18205,76 @@ workflows:
           - context: $response.body#/error/message
             condition: status must be one of ［＂active＂‚＂offline＂‚＂busy＂‚＂ask me＂‚＂join me＂‚null‚null］‚ not ＂x＂
             type: regex
+
+  - workflowId: update-user-unauthenticated
+    summary: updateUser refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-user
+        operationId: $sourceDescriptions.default.updateUser
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: register-user-account-not-allowed
+    summary: registerUserAccount refuses sign-ups on this domain
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: register-user-account
+        operationId: $sourceDescriptions.default.registerUserAccount
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 403
+
+  - workflowId: set-group-gallery-file-order-invalid-body
+    summary: setGroupGalleryFileOrder refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: set-group-gallery-file-order
+        operationId: $sourceDescriptions.default.setGroupGalleryFileOrder
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: create-permission-invalid-body
+    summary: createPermission refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-permission
+        operationId: $sourceDescriptions.default.createPermission
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: create-prop-invalid-body
+    summary: createProp refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-prop
+        operationId: $sourceDescriptions.default.createProp
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400

@@ -86,6 +86,8 @@ paths:
           $ref: ../responses/authentication/CurrentUserLoginResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/authentication/RegistrationNotAllowedError.yaml
   /auth/twofactorauth:
     delete:
       operationId: disable2FA

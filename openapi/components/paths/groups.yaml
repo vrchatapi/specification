@@ -21,6 +21,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupGalleryFileOrderResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
   /groups:
@@ -131,6 +133,8 @@ paths:
           $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/groups/GroupNotMemberError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
     delete:
@@ -376,6 +380,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupGalleryResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
@@ -476,6 +482,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/groups/GroupGalleryImageResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":

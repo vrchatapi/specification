@@ -1,0 +1,11 @@
+description: Only an admin may fetch a variant other than the public one.
+content:
+  application/json:
+    examples:
+      Not An Admin:
+        value:
+          error:
+            message: Only admins can get non-public variants․
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

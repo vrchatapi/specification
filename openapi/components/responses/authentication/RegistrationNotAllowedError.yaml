@@ -1,0 +1,12 @@
+description: Registration is refused on this host.
+content:
+  application/json:
+    examples:
+      Sign-ups Not Allowed:
+        value:
+          error:
+            message: account sign-ups are not allowed on this domain. if you believe to have gotten this message in error, please contact support at help.vrchat.com
+            status_code: 403
+            waf_code: 15028
+    schema:
+      $ref: ../../schemas/Error.yaml

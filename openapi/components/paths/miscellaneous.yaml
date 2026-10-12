@@ -84,6 +84,10 @@ paths:
                 type: string
         "400":
           $ref: ../responses/system/DownloadSourceCodeAccessError.yaml
+        "401":
+          $ref: ../responses/system/FrontendVariantLoginRequiredError.yaml
+        "403":
+          $ref: ../responses/system/FrontendVariantAdminOnlyError.yaml
   /frontend/branches:
     get:
       operationId: getFrontendBranches
@@ -157,6 +161,10 @@ paths:
                 type: string
         "400":
           $ref: ../responses/system/DownloadSourceCodeAccessError.yaml
+        "401":
+          $ref: ../responses/system/FrontendVariantLoginRequiredError.yaml
+        "403":
+          $ref: ../responses/system/FrontendVariantAdminOnlyError.yaml
   /permissions:
     get:
       operationId: getPermissions
@@ -199,6 +207,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/permissions/PermissionResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":

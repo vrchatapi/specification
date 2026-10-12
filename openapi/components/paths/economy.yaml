@@ -262,6 +262,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/StoreShelfListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /economy/stores:

@@ -41,6 +41,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/props/PropResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
         "403":

@@ -1,0 +1,11 @@
+description: VRChat refuses to enqueue an impostor for the avatar. An avatar that does not exist answers the same.
+content:
+  application/json:
+    examples:
+      Refused:
+        value:
+          error:
+            message: Application error
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

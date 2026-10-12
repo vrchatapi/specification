@@ -7,5 +7,7 @@ properties:
   status_code:
     type: integer
     minimum: 100
+  waf_code:
+    type: integer
 required:
   - status_code

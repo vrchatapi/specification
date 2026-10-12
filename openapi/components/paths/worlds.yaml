@@ -194,6 +194,8 @@ paths:
           $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/worlds/WorldNotOwnedError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
     delete:
@@ -211,6 +213,8 @@ paths:
           $ref: ../responses/worlds/DeleteWorldResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/worlds/WorldNotOwnedError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
   "/worlds/{worldId}/addTags":

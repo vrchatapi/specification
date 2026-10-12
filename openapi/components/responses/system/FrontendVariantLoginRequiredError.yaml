@@ -1,0 +1,11 @@
+description: A variant other than the default needs a session.
+content:
+  application/json:
+    examples:
+      Not Logged In:
+        value:
+          error:
+            message: You must be logged in to view that variant․
+            status_code: 401
+    schema:
+      $ref: ../../schemas/Error.yaml

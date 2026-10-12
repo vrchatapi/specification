@@ -229,6 +229,8 @@ paths:
           $ref: ../responses/avatars/AvatarImpostorEnqueueResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/avatars/EnqueueImpostorForbiddenError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
   "/avatars/{avatarId}/select":
