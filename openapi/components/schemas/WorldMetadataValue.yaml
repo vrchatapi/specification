@@ -1,2 +1,3 @@
 title: WorldMetadataValue
 type: object
+additionalProperties: true
