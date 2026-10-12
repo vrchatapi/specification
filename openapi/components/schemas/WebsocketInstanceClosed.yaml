@@ -1,0 +1,7 @@
+title: WebsocketInstanceClosed
+type: object
+properties:
+  instanceLocation:
+    $ref: ./LocationID.yaml
+required:
+  - instanceLocation

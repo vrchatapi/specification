@@ -18,6 +18,7 @@ discriminator:
     group-member-updated: ./WebsocketGroupMemberUpdatedEncoded.yaml
     group-role-updated: ./WebsocketGroupRoleUpdatedEncoded.yaml
     hide-notification: ./WebsocketHideNotification.yaml
+    instance-closed: ./WebsocketInstanceClosedEncoded.yaml
     instance-queue-joined: ./WebsocketInstanceQueueJoinedEncoded.yaml
     instance-queue-ready: ./WebsocketInstanceQueueReadyEncoded.yaml
     modified-image-update: ./WebsocketModifiedImageUpdateEncoded.yaml
@@ -48,6 +49,7 @@ oneOf:
   - $ref: ./WebsocketGroupMemberUpdatedEncoded.yaml
   - $ref: ./WebsocketGroupRoleUpdatedEncoded.yaml
   - $ref: ./WebsocketHideNotification.yaml
+  - $ref: ./WebsocketInstanceClosedEncoded.yaml
   - $ref: ./WebsocketInstanceQueueJoinedEncoded.yaml
   - $ref: ./WebsocketInstanceQueueReadyEncoded.yaml
   - $ref: ./WebsocketModifiedImageUpdateEncoded.yaml

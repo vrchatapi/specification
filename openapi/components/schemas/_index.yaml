@@ -94,6 +94,10 @@ WebsocketGroupRoleUpdatedEncoded:
   $ref: ./WebsocketGroupRoleUpdatedEncoded.yaml
 WebsocketHideNotification:
   $ref: ./WebsocketHideNotification.yaml
+WebsocketInstanceClosed:
+  $ref: ./WebsocketInstanceClosed.yaml
+WebsocketInstanceClosedEncoded:
+  $ref: ./WebsocketInstanceClosedEncoded.yaml
 WebsocketInstanceQueueJoined:
   $ref: ./WebsocketInstanceQueueJoined.yaml
 WebsocketInstanceQueueJoinedEncoded:
