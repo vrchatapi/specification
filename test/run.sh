@@ -1,17 +1,9 @@
 #!/bin/sh
 # Drives the suite against the live API. Captures land in .out/har/, which
 # `coverage` and `drift` read as a folder.
-#
-# `schema check` stays a warning: it is the standing backlog of fields the
-# description gets wrong, and erroring on it would leave the suite always red.
 set -eu
 
 cd "$(dirname "$0")/.."
-
-# Braces in the value break `${VAR:=default}`.
-if [ -z "${TEST_SEVERITY:-}" ]; then
-	TEST_SEVERITY='{"SCHEMA_CHECK":"warn"}'
-fi
 
 if [ -f test/.env ]; then
 	set -a
@@ -81,5 +73,4 @@ redocly respect test/arazzo.yaml \
 	--input groupId="$VRCHAT_GROUP_ID" \
 	--input username="${VRCHAT_USERNAME:-$VRCHAT_EMAIL}" \
 	--input email="$VRCHAT_EMAIL" \
-	--severity "$TEST_SEVERITY" \
 	"$@"
