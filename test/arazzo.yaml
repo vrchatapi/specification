@@ -2292,6 +2292,46 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: discover-calendar-events-invalid-upcoming-sort
+    summary: discoverCalendarEvents refuses an upcomingSort it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-calendar-events
+        operationId: $sourceDescriptions.default.discoverCalendarEvents
+        parameters:
+          - name: upcomingSort
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'upcomingSort must be one of ［＂startTime_ascending＂‚＂startTime_descending＂‚＂follows_descending＂］‚ not ＂x＂'
+
+  - workflowId: discover-calendar-events-sorted
+    summary: discoverCalendarEvents sorts and requires a linked instance
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-calendar-events
+        operationId: $sourceDescriptions.default.discoverCalendarEvents
+        parameters:
+          - name: upcomingSort
+            in: query
+            value: follows_descending
+          - name: requireLinkedInstance
+            in: query
+            value: true
+        successCriteria:
+          - condition: $statusCode == 200
+
   - workflowId: follow-group-calendar-event-unauthenticated
     summary: followGroupCalendarEvent refuses an anonymous caller
     parameters:
@@ -10059,6 +10099,174 @@ workflows:
           - context: $response.body#/error/message
             condition: n exceeds maximum value˸ '51'
             type: regex
+
+  - workflowId: discover-instances-invalid-boost
+    summary: discoverInstances refuses a boost it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: boost
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - context: $response.body#/error/message
+            condition: boost entry must be one of ［＂friends＂‚＂myEvents＂‚＂myGroupEvents＂‚＂myGroups＂‚＂myFavoriteWorlds＂‚＂ALL＂］
+            type: regex
+
+  - workflowId: discover-instances-boost-outside-shelf
+    summary: discoverInstances refuses a boost outside a content shelf
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: boost
+            in: query
+            value: friends
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'boost friends reads what only GET ⁄api⁄1⁄infoPush⁄˸entryId⁄content receives; use a content shelf for it․'
+
+  - workflowId: discover-instances-invalid-mode
+    summary: discoverInstances refuses a mode it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: mode
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'mode must be one of ［＂random＂‚＂population＂‚＂active＂‚＂match＂］‚ not ＂x＂'
+
+  - workflowId: discover-instances-invalid-world-pool
+    summary: discoverInstances refuses a worldPool it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: worldPool
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'worldPool must be one of ［＂trending＂］‚ not ＂x＂'
+
+  - workflowId: discover-instances-any-world-tag-forbidden
+    summary: discoverInstances refuses anyWorldTag to the account
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: anyWorldTag
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'Discover filters you may not use˸ anyWorldTag'
+
+  - workflowId: discover-instances-not-world-tag-forbidden
+    summary: discoverInstances refuses notWorldTag to the account
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: notWorldTag
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'Discover filters you may not use˸ notWorldTag'
+
+  - workflowId: discover-instances-min-spots-left-forbidden
+    summary: discoverInstances refuses minSpotsLeft to the account
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: minSpotsLeft
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'Discover filters you may not use˸ minSpotsLeft'
+
+  - workflowId: discover-instances-filters
+    summary: discoverInstances filters by mode, pool, group hosting and occupancy
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: mode
+            in: query
+            value: active
+          - name: worldPool
+            in: query
+            value: trending
+          - name: groupHosted
+            in: query
+            value: false
+          - name: minOccupants
+            in: query
+            value: 1
+          - name: maxOccupants
+            in: query
+            value: 80
+          - name: n
+            in: query
+            value: 5
+        successCriteria:
+          - condition: $statusCode == 200
 
   - workflowId: discover-instances-in-region
     summary: discoverInstances in one region

@@ -1,0 +1,6 @@
+title: InstanceDiscoveryMode
+enum:
+  - active
+  - match
+  - population
+  - random

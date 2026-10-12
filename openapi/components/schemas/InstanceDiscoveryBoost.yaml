@@ -1,6 +1,5 @@
 title: InstanceDiscoveryBoost
-type: string
-x-unknown-enum:
+enum:
   - ALL
   - friends
   - myEvents

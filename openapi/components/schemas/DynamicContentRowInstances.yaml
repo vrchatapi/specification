@@ -8,7 +8,7 @@ properties:
   minOccupants:
     type: integer
   mode:
-    $ref: ./DynamicContentRowMode.yaml
+    $ref: ./InstanceDiscoveryMode.yaml
   n:
     type: integer
   params:

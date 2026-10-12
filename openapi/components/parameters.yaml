@@ -146,6 +146,12 @@ calendarDiscoveryPersonalized:
   in: query
   schema:
     $ref: ./schemas/CalendarEventDiscoveryInclusion.yaml
+calendarDiscoveryRequireLinkedInstance:
+  name: requireLinkedInstance
+  required: false
+  in: query
+  schema:
+    type: boolean
 calendarDiscoveryScope:
   name: scope
   description: Scope for calendar event discovery.
@@ -172,6 +178,12 @@ calendarDiscoveryUpcomingOffsetMinutes:
     type: integer
     examples:
       - 10080
+calendarDiscoveryUpcomingSort:
+  name: upcomingSort
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/CalendarEventDiscoverySort.yaml
 calendarId:
   name: calendarId
   description: Must be a valid calendar ID.
@@ -427,12 +439,40 @@ include:
   in: query
   schema:
     $ref: ./schemas/Tag.yaml
+instanceDiscoveryAnyWorldTag:
+  name: anyWorldTag
+  description: Not every account may use it; the others are answered 403.
+  required: false
+  explode: true
+  in: query
+  schema:
+    type: array
+    items:
+      type: string
+  style: form
+instanceDiscoveryBoost:
+  name: boost
+  description: Only `GET /infoPush/{entryId}/content` accepts it; this route answers 400 to any value.
+  required: false
+  explode: true
+  in: query
+  schema:
+    type: array
+    items:
+      $ref: ./schemas/InstanceDiscoveryBoost.yaml
+  style: form
 instanceDiscoveryCategory:
   name: category
   required: false
   in: query
   schema:
     $ref: ./schemas/InstanceCategoryID.yaml
+instanceDiscoveryGroupHosted:
+  name: groupHosted
+  required: false
+  in: query
+  schema:
+    type: boolean
 instanceDiscoveryGroupIds:
   name: groupId
   description: Return only instances of these groups.
@@ -443,6 +483,42 @@ instanceDiscoveryGroupIds:
     type: array
     items:
       $ref: ./schemas/GroupID.yaml
+  style: form
+instanceDiscoveryMaxOccupants:
+  name: maxOccupants
+  required: false
+  in: query
+  schema:
+    type: integer
+instanceDiscoveryMinOccupants:
+  name: minOccupants
+  required: false
+  in: query
+  schema:
+    type: integer
+instanceDiscoveryMinSpotsLeft:
+  name: minSpotsLeft
+  description: Not every account may use it; the others are answered 403.
+  required: false
+  in: query
+  schema:
+    type: integer
+instanceDiscoveryMode:
+  name: mode
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/InstanceDiscoveryMode.yaml
+instanceDiscoveryNotWorldTag:
+  name: notWorldTag
+  description: Not every account may use it; the others are answered 403.
+  required: false
+  explode: true
+  in: query
+  schema:
+    type: array
+    items:
+      type: string
   style: form
 instanceDiscoveryNumber:
   name: n
@@ -488,6 +564,12 @@ instanceDiscoveryWorldIds:
     items:
       $ref: ./schemas/WorldID.yaml
   style: form
+instanceDiscoveryWorldPool:
+  name: worldPool
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/InstanceDiscoveryWorldPool.yaml
 instanceId:
   name: instanceId
   description: Must be a valid instance ID.

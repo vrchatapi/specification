@@ -1,0 +1,11 @@
+description: The account may not use one of the filters it passed.
+content:
+  application/json:
+    examples:
+      Restricted Filter:
+        value:
+          error:
+            message: Discover filters you may not use˸ anyWorldTag
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

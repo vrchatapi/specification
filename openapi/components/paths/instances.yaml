@@ -93,6 +93,15 @@ paths:
         - $ref: ../parameters.yaml#/instanceDiscoveryGroupIds
         - $ref: ../parameters.yaml#/instanceDiscoveryVibes
         - $ref: ../parameters.yaml#/instanceDiscoveryCategory
+        - $ref: ../parameters.yaml#/instanceDiscoveryAnyWorldTag
+        - $ref: ../parameters.yaml#/instanceDiscoveryBoost
+        - $ref: ../parameters.yaml#/instanceDiscoveryGroupHosted
+        - $ref: ../parameters.yaml#/instanceDiscoveryMaxOccupants
+        - $ref: ../parameters.yaml#/instanceDiscoveryMinOccupants
+        - $ref: ../parameters.yaml#/instanceDiscoveryMinSpotsLeft
+        - $ref: ../parameters.yaml#/instanceDiscoveryMode
+        - $ref: ../parameters.yaml#/instanceDiscoveryNotWorldTag
+        - $ref: ../parameters.yaml#/instanceDiscoveryWorldPool
       security:
         - authCookie: []
       responses:
@@ -102,6 +111,8 @@ paths:
           $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/instances/DiscoverFilterForbiddenError.yaml
   /instances/recent:
     get:
       operationId: getRecentLocations

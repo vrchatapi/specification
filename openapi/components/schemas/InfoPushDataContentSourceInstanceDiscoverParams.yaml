@@ -22,7 +22,7 @@ properties:
       - $ref: ./Unknown.yaml
       - type: "null"
   mode:
-    $ref: ./DynamicContentRowMode.yaml
+    $ref: ./InstanceDiscoveryMode.yaml
   n:
     type: integer
     maximum: 50

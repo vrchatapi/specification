@@ -45,6 +45,8 @@ paths:
         - $ref: ../parameters.yaml#/calendarDiscoveryUpcomingOffsetMinutes
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/calendarDiscoveryNextCursor
+        - $ref: ../parameters.yaml#/calendarDiscoveryRequireLinkedInstance
+        - $ref: ../parameters.yaml#/calendarDiscoveryUpcomingSort
       security:
         - {}
         - authCookie: []
