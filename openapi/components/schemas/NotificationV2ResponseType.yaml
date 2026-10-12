@@ -1,14 +1,8 @@
 title: NotificationV2ResponseType
 type: string
-examples:
-  - >
-    Accept:
-      value: accept
-    Boop:
-      value: boop
-    Decline:
-      value: decline
-    Delete:
-      value: delete
-    Unsubscribe:
-      value: unsubscribe
+x-unknown-enum:
+  - accept
+  - boop
+  - decline
+  - delete
+  - unsubscribe

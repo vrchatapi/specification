@@ -42,6 +42,7 @@ oas3_2Rules:
 
 decorators:
   vrchat/add-implied-types: on
+  vrchat/unknown-enums: on
   info-description-override:
     filePath: openapi/description.md
   vrchat/info-extension-override:
@@ -199,4 +200,6 @@ apis:
       vrchat/close-schemas: on
       vrchat/reject-unknown: on
       vrchat/remove-discriminators: on
+      vrchat/unknown-enums:
+        close: true
       vrchat/x-links: off

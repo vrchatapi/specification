@@ -4830,7 +4830,7 @@ workflows:
             in: path
             value: usr_3f2a9c14-8d7b-4e05-a6c3-1b9e5d0f7a82
         successCriteria:
-          - condition: $statusCode == 400
+          - condition: $statusCode == 404
 
   - workflowId: delete-friend-request-not-found
     summary: deleteFriendRequest refuses a resource that does not exist
