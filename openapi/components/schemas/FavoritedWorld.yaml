@@ -21,7 +21,7 @@ properties:
   disabledPropAbilities:
     type: array
     items:
-      $ref: ./Unknown.yaml
+      type: string
   favoriteGroup:
     type: string
     minLength: 1

@@ -39,9 +39,13 @@ properties:
   name:
     type: string
   nameplateId:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   nameplateUrl:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   ownerId:
     $ref: ./UserID.yaml
   rules:

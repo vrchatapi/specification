@@ -4,4 +4,6 @@ content:
       Deleted:
         value: null
     schema:
-      $ref: ../../schemas/Unknown.yaml
+      anyOf:
+        - $ref: ../../schemas/Unknown.yaml
+        - type: "null"

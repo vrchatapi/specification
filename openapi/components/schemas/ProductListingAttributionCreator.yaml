@@ -5,4 +5,6 @@ properties:
   customName:
     type: string
   userId:
-    $ref: ./UserID.yaml
+    anyOf:
+      - $ref: ./UserID.yaml
+      - type: "null"

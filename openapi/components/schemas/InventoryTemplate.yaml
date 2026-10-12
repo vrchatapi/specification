@@ -2,7 +2,9 @@ title: InventoryTemplate
 type: object
 properties:
   attribution:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./ProductListingAttribution.yaml
+      - type: "null"
   authorId:
     $ref: ./UserID.yaml
   collections:

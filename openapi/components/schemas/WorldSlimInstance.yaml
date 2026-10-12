@@ -1,0 +1,17 @@
+title: WorldSlimInstance
+type: object
+properties:
+  gameServerVersion:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
+  instanceId:
+    $ref: ./InstanceID.yaml
+  languageRatio:
+    $ref: ./InstanceLanguageRatio.yaml
+  n_users:
+    type: integer
+required:
+  - instanceId
+  - languageRatio
+  - n_users

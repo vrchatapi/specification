@@ -59,7 +59,7 @@ properties:
   disabledPropAbilities:
     type: array
     items:
-      $ref: ./Unknown.yaml
+      type: string
   displayName:
     type:
       - string

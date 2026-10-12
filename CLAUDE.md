@@ -44,6 +44,8 @@ suite merely failed to reach.
 the same thing: no workflow reaches the case that would settle it. Add the
 workflow to `test/arazzo.yaml`; never close the gap by guessing.
 
+Write such a value as `$ref: Unknown`, and as `anyOf: [$ref: Unknown, {type: "null"}]` once a `null` is captured: `null` is evidence, not an unknown. `vrchat/reject-unknown` makes `Unknown` reject every value in `dist/openapi-test.yaml`, so the suite fails wherever it captures one, until the spec describes it.
+
 `required` cuts both ways. A property every observed response carries but that
 `required` omits is either required, or missing the workflow that shows it
 absent. A property in `required` that some response omits is neither.

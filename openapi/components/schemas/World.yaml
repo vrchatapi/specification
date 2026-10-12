@@ -21,7 +21,7 @@ properties:
   disabledPropAbilities:
     type: array
     items:
-      $ref: ./Unknown.yaml
+      type: string
   favorites:
     type: integer
     default: 0
@@ -47,14 +47,13 @@ properties:
     description: Will always be an empty list when unauthenticated.
     items:
       type: array
-      description: |-
-        A fixed triple of instance id, occupant count, and the share of
-        occupants per language code. OpenAPI 3.0 cannot type the positions
-        individually, so the members are only bounded by length.
-      items:
-        $ref: ./Unknown.yaml
-      maxItems: 3
+      description: An instance id, its occupant count, and the share of occupants per language code.
+      items: false
       minItems: 3
+      prefixItems:
+        - $ref: ./InstanceID.yaml
+        - type: integer
+        - $ref: ./InstanceLanguageRatio.yaml
   isHypeTrainEligible:
     type: boolean
   labsPublicationDate:
@@ -116,7 +115,7 @@ properties:
   slimInstances:
     type: array
     items:
-      $ref: ./Unknown.yaml
+      $ref: ./WorldSlimInstance.yaml
   storeId:
     $ref: ./StoreID.yaml
   tags:

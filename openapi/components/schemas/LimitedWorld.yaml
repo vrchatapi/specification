@@ -18,7 +18,7 @@ properties:
   disabledPropAbilities:
     type: array
     items:
-      $ref: ./Unknown.yaml
+      type: string
   favorites:
     type: integer
     default: 0

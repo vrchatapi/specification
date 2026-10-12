@@ -2,7 +2,9 @@ title: InfoPush
 type: object
 properties:
   clientMinVersion:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   createdAt:
     type: string
     format: date-time

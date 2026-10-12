@@ -6,11 +6,17 @@ properties:
   isModerationDiscoverable:
     type: boolean
   isModerationDiscoverableReason:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   isOverrideDiscoverable:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   isOverrideDiscoverableReason:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
 required:
   - isDiscoverableComputed
   - isModerationDiscoverable

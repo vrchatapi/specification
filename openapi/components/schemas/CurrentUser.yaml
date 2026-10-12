@@ -225,7 +225,9 @@ properties:
     items:
       $ref: ./Tag.yaml
   temporaryExpiryDate:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   travelingToInstance:
     type: string
   travelingToLocation:
@@ -258,8 +260,7 @@ properties:
       - "null"
   username:
     type: string
-    description: Your own unique name, used during login. Distinct from
-      `displayName`, and never returned for another user.
+    description: Your own unique name, used during login. Distinct from `displayName`, and never returned for another user.
   usesGeneratedPassword:
     type: boolean
   viveId:

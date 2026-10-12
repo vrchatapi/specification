@@ -3,8 +3,12 @@ type: object
 description: Attribution shown alongside a listing.
 properties:
   collaborationId:
-    type: string
+    type:
+      - string
+      - "null"
   creator:
     $ref: ./ProductListingAttributionCreator.yaml
   publisher:
-    $ref: ./ProductListingAttributionCreator.yaml
+    anyOf:
+      - $ref: ./ProductListingAttributionCreator.yaml
+      - type: "null"

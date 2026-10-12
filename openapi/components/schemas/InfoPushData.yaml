@@ -70,7 +70,9 @@ properties:
       - $ref: ./InfoPushDataClickable.yaml
       - type: "null"
   overrideName:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   presentation:
     $ref: ./InfoPushDataPresentation.yaml
   promotion:

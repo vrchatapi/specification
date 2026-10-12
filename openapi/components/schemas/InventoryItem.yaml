@@ -4,7 +4,9 @@ properties:
   acquisition:
     type: string
   attribution:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   collections:
     type: array
     items:
