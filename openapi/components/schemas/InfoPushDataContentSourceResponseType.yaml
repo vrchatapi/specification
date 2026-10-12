@@ -1,5 +1,0 @@
-title: InfoPushDataContentSourceResponseType
-type: string
-x-unknown-enum:
-  - calendarEntry
-  - instance

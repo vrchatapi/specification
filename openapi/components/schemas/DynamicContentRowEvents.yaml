@@ -1,0 +1,46 @@
+title: DynamicContentRowEvents
+type: object
+properties:
+  categories:
+    type: array
+    items:
+      type: string
+  featuredResults:
+    $ref: ./DynamicContentRowResultsInclusion.yaml
+  minimumInterestCount:
+    type: integer
+  minimumRemainingMinutes:
+    type: integer
+  nonFeaturedResults:
+    type: string
+  params:
+    $ref: ./DynamicContentRowParams.yaml
+  personalizedResults:
+    $ref: ./DynamicContentRowResultsInclusion.yaml
+  scope:
+    $ref: ./DynamicContentRowScope.yaml
+  tags:
+    type:
+      - array
+      - "null"
+    items:
+      $ref: ./Tag.yaml
+  type:
+    const: events
+  upcomingOffsetMinutes:
+    type: integer
+    examples:
+      - 10080
+required:
+  - categories
+  - featuredResults
+  - minimumInterestCount
+  - minimumRemainingMinutes
+  - nonFeaturedResults
+  - params
+  - personalizedResults
+  - scope
+  - type
+  - upcomingOffsetMinutes
+allOf:
+  - $ref: ./DynamicContentRowBase.yaml

@@ -1,0 +1,12 @@
+title: InfoPushContentShelf
+type: object
+properties:
+  data:
+    $ref: ./InfoPushContentShelfData.yaml
+  type:
+    const: ContentShelf
+required:
+  - data
+  - type
+allOf:
+  - $ref: ./InfoPushBase.yaml

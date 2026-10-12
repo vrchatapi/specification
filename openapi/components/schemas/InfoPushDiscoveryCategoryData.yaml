@@ -1,0 +1,25 @@
+title: InfoPushDiscoveryCategoryData
+type: object
+properties:
+  contentList:
+    $ref: ./DynamicContentRow.yaml
+  imageUrl:
+    type:
+      - string
+      - "null"
+  name:
+    $ref: ./LocalizableString.yaml
+  rows:
+    type:
+      - integer
+      - "null"
+    description: Number of rows to render.
+  thumbnailImageUrl:
+    type:
+      - string
+      - "null"
+required:
+  - contentList
+  - imageUrl
+  - rows
+  - thumbnailImageUrl

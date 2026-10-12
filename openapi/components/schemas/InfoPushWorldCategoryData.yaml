@@ -1,0 +1,19 @@
+title: InfoPushWorldCategoryData
+type: object
+properties:
+  contentList:
+    $ref: ./DynamicContentRow.yaml
+  hoverToJoin:
+    type: boolean
+  shortName:
+    anyOf:
+      - $ref: ./LocalizableString.yaml
+      - type: "null"
+  thumbnailImageUrl:
+    type:
+      - string
+      - "null"
+required:
+  - contentList
+allOf:
+  - $ref: ./InfoPushTileData.yaml

@@ -1,0 +1,45 @@
+title: DynamicContentRowWorlds
+type: object
+description: A row of worlds, which has no `type`, or a row whose `type` has no schema of its own.
+properties:
+  avatarSpecific:
+    type:
+      - boolean
+      - "null"
+  bannersTag:
+    type: string
+  index:
+    type: integer
+    minimum: 0
+  shortName:
+    anyOf:
+      - $ref: ./LocalizableString.yaml
+      - type: "null"
+  sortHeading:
+    $ref: ./DynamicContentRowSortHeading.yaml
+  sortOrder:
+    $ref: ./OrderOption.yaml
+  sortOwnership:
+    $ref: ./DynamicContentRowSortOwnership.yaml
+  tag:
+    type:
+      - string
+      - "null"
+    description: |-
+      Tag to filter content for this row. Not a `Tag`: that type forbids the
+      empty string, which this field uses for a row that is not tag-filtered.
+    examples:
+      - admin_spotlight_pc
+  type:
+    type: string
+    not:
+      enum:
+        - avatar
+        - events
+        - instances
+required:
+  - sortHeading
+  - sortOrder
+  - sortOwnership
+allOf:
+  - $ref: ./DynamicContentRowBase.yaml

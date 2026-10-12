@@ -1,0 +1,24 @@
+title: InfoPushOnboardingAvatarData
+type: object
+properties:
+  authorName:
+    type: string
+  avatarId:
+    $ref: ./AvatarID.yaml
+  bannerImageUrl:
+    type: string
+  finalName:
+    type: string
+  iconImageUrl:
+    type: string
+  overrideName:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
+required:
+  - authorName
+  - avatarId
+  - bannerImageUrl
+  - finalName
+  - iconImageUrl
+  - overrideName

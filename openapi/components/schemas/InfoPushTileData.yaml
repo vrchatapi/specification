@@ -1,0 +1,13 @@
+title: InfoPushTileData
+type: object
+properties:
+  iconImageUrl:
+    type: string
+  name:
+    $ref: ./LocalizableString.yaml
+  tooltipDescription:
+    $ref: ./LocalizableString.yaml
+required:
+  - iconImageUrl
+  - name
+  - tooltipDescription

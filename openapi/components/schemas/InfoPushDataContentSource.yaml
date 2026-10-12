@@ -1,46 +1,12 @@
 title: InfoPushDataContentSource
-type: object
-properties:
-  attributionResponseField:
-    type: string
-    examples:
-      - attributionId
-  computedParams:
-    $ref: ./InfoPushDataContentSourceComputedParams.yaml
-  endpoint:
-    type: string
-    examples:
-      - /api/1/instances/discover
-  kind:
-    $ref: ./InfoPushDataContentSourceKind.yaml
-  method:
-    type: string
-    examples:
-      - GET
-  pagination:
-    anyOf:
-      - $ref: ./InfoPushDataContentSourcePagination.yaml
-      - type: "null"
-  paramModifiability:
-    $ref: ./InfoPushDataContentSourceParamModifiability.yaml
-  params:
-    $ref: ./InfoPushDataContentSourceParams.yaml
-  responseType:
-    $ref: ./InfoPushDataContentSourceResponseType.yaml
-  resultsField:
-    $ref: ./InfoPushDataContentSourceResultsField.yaml
-  schemaVersion:
-    type: integer
-    examples:
-      - 1
-required:
-  - computedParams
-  - endpoint
-  - kind
-  - method
-  - pagination
-  - paramModifiability
-  - params
-  - responseType
-  - resultsField
-  - schemaVersion
+description: A ready-made request to an API route whose results the client shows. The fields depend on `kind`.
+discriminator:
+  defaultMapping: ./InfoPushDataContentSourceUnknown.yaml
+  mapping:
+    calendarDiscover: ./InfoPushDataContentSourceCalendarDiscover.yaml
+    instanceDiscover: ./InfoPushDataContentSourceInstanceDiscover.yaml
+  propertyName: kind
+oneOf:
+  - $ref: ./InfoPushDataContentSourceCalendarDiscover.yaml
+  - $ref: ./InfoPushDataContentSourceInstanceDiscover.yaml
+  - $ref: ./InfoPushDataContentSourceUnknown.yaml

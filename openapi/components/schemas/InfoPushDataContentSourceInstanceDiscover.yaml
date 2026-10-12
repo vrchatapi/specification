@@ -1,0 +1,26 @@
+title: InfoPushDataContentSourceInstanceDiscover
+type: object
+properties:
+  attributionResponseField:
+    type: string
+    x-unknown-enum:
+      - attributionId
+  endpoint:
+    const: /api/1/instances/discover
+  kind:
+    const: instanceDiscover
+  params:
+    $ref: ./InfoPushDataContentSourceInstanceDiscoverParams.yaml
+  responseType:
+    const: instance
+  resultsField:
+    const: instances
+required:
+  - attributionResponseField
+  - endpoint
+  - kind
+  - params
+  - responseType
+  - resultsField
+allOf:
+  - $ref: ./InfoPushDataContentSourceBase.yaml

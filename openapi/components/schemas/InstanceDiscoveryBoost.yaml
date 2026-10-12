@@ -1,0 +1,9 @@
+title: InstanceDiscoveryBoost
+type: string
+x-unknown-enum:
+  - ALL
+  - friends
+  - myEvents
+  - myFavoriteWorlds
+  - myGroupEvents
+  - myGroups

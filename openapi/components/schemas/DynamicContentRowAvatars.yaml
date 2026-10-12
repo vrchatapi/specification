@@ -1,0 +1,58 @@
+title: DynamicContentRowAvatars
+type: object
+properties:
+  anyStyle:
+    type:
+      - array
+      - "null"
+    items:
+      type: string
+  anyTag:
+    type:
+      - array
+      - "null"
+    items:
+      type: string
+  marketplace:
+    type: string
+  maxPrice:
+    type: integer
+  minPrice:
+    type: integer
+  notag:
+    type:
+      - array
+      - "null"
+    items:
+      type: string
+  params:
+    $ref: ./DynamicContentRowParams.yaml
+  sortHeading:
+    $ref: ./DynamicContentRowSortHeading.yaml
+  sortOrder:
+    $ref: ./OrderOption.yaml
+  sortOwnership:
+    $ref: ./DynamicContentRowSortOwnership.yaml
+  style:
+    type:
+      - string
+      - "null"
+  tag:
+    type:
+      - string
+      - "null"
+    description: |-
+      Tag to filter content for this row. Not a `Tag`: that type forbids the
+      empty string, which this field uses for a row that is not tag-filtered.
+    examples:
+      - admin_spotlight_pc
+  type:
+    const: avatar
+required:
+  - params
+  - sortHeading
+  - sortOrder
+  - sortOwnership
+  - type
+allOf:
+  - $ref: ./DynamicContentRowBase.yaml

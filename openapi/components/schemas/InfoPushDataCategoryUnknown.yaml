@@ -1,0 +1,15 @@
+title: InfoPushDataCategoryUnknown
+type: object
+description: A category whose `type` has no schema of its own.
+properties:
+  type:
+    type: string
+    not:
+      enum:
+        - articles
+        - groups
+        - worlds
+required:
+  - type
+allOf:
+  - $ref: ./InfoPushDataCategoryBase.yaml

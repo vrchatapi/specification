@@ -1,0 +1,38 @@
+title: InfoPushDataContentSourceInstanceDiscoverParams
+type: object
+properties:
+  anyWorldTag: &a1
+    type: array
+    items:
+      type: string
+  boost:
+    type: array
+    items:
+      $ref: ./InstanceDiscoveryBoost.yaml
+  groupHosted:
+    type: boolean
+  maxOccupants:
+    type: integer
+  minOccupants:
+    type: integer
+  minSpotsLeft:
+    type: integer
+  minSpread:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
+  mode:
+    $ref: ./DynamicContentRowMode.yaml
+  n:
+    type: integer
+    maximum: 50
+    minimum: 1
+  notWorldTag: *a1
+  worldId:
+    type: array
+    items:
+      $ref: ./WorldID.yaml
+  worldPool:
+    $ref: ./InstanceDiscoveryWorldPool.yaml
+required:
+  - n

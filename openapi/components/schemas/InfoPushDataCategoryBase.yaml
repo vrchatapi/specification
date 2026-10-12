@@ -1,0 +1,12 @@
+title: InfoPushDataCategoryBase
+type: object
+properties:
+  ids:
+    type: array
+    items:
+      type: string
+  name:
+    $ref: ./LocalizableString.yaml
+required:
+  - ids
+  - name

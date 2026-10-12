@@ -1,0 +1,4 @@
+title: InstanceDiscoveryWorldPool
+type: string
+x-unknown-enum:
+  - trending

@@ -1,0 +1,12 @@
+title: InfoPushAvatarCategoryData
+type: object
+properties:
+  contentList:
+    $ref: ./DynamicContentRow.yaml
+  imageUrl:
+    type:
+      - string
+      - "null"
+required:
+  - contentList
+  - imageUrl

@@ -1,0 +1,26 @@
+title: InfoPushOtherData
+type: object
+properties:
+  body:
+    type: string
+  cta:
+    $ref: ./InfoPushDataCallToAction.yaml
+  deliveryBehavior:
+    $ref: ./InfoPushDataDeliveryBehavior.yaml
+  imageFileId:
+    $ref: ./FileID.yaml
+  mediaType:
+    type: string
+    examples:
+      - video
+  promotion:
+    $ref: ./InfoPushDataPromotion.yaml
+  showInWorldIds:
+    $ref: ./Unknown.yaml
+  template:
+    type: string
+  videoFileId:
+    $ref: ./FileID.yaml
+  videoUrl:
+    type: string
+required: []

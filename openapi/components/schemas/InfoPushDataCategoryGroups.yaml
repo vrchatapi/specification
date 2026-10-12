@@ -1,0 +1,12 @@
+title: InfoPushDataCategoryGroups
+type: object
+properties:
+  maxCells:
+    type: integer
+  type:
+    const: groups
+required:
+  - maxCells
+  - type
+allOf:
+  - $ref: ./InfoPushDataCategoryBase.yaml

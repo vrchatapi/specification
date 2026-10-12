@@ -1,0 +1,10 @@
+title: InfoPushSearchData
+type: object
+properties:
+  name:
+    $ref: ./LocalizableString.yaml
+  search:
+    $ref: ./InfoPushDataSearch.yaml
+required:
+  - name
+  - search

@@ -1,0 +1,32 @@
+title: DynamicContentRowInstances
+type: object
+properties:
+  groupPool:
+    type: string
+    examples:
+      - mine
+  minOccupants:
+    type: integer
+  mode:
+    $ref: ./DynamicContentRowMode.yaml
+  n:
+    type: integer
+  params:
+    $ref: ./DynamicContentRowParams.yaml
+  region:
+    anyOf:
+      - $ref: ./InstanceRegion.yaml
+      - type: "null"
+  type:
+    const: instances
+  worldPool:
+    $ref: ./InstanceDiscoveryWorldPool.yaml
+required:
+  - minOccupants
+  - mode
+  - n
+  - params
+  - region
+  - type
+allOf:
+  - $ref: ./DynamicContentRowBase.yaml

@@ -1,0 +1,22 @@
+title: InfoPushDataContentSourceCalendarDiscoverParams
+type: object
+properties:
+  featuredResults:
+    $ref: ./CalendarEventDiscoveryInclusion.yaml
+  minimumInterestCount:
+    type: integer
+  requireLinkedInstance:
+    type: boolean
+  scope:
+    $ref: ./CalendarEventDiscoveryScope.yaml
+  upcomingOffsetMinutes:
+    type: integer
+  upcomingSort:
+    $ref: ./CalendarEventDiscoverySort.yaml
+required:
+  - featuredResults
+  - minimumInterestCount
+  - requireLinkedInstance
+  - scope
+  - upcomingOffsetMinutes
+  - upcomingSort

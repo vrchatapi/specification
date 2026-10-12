@@ -1,0 +1,18 @@
+title: InfoPushHelpArticleData
+type: object
+properties:
+  article:
+    $ref: ./InfoPushDataArticle.yaml
+  description:
+    $ref: ./LocalizableString.yaml
+  imageUrl:
+    type:
+      - string
+      - "null"
+  name:
+    $ref: ./LocalizableString.yaml
+required:
+  - article
+  - description
+  - imageUrl
+  - name

@@ -1,0 +1,12 @@
+title: InfoPushDataCategoryArticles
+type: object
+properties:
+  ipsQuery:
+    $ref: ./InfoPushIpsQuery.yaml
+  type:
+    const: articles
+required:
+  - ipsQuery
+  - type
+allOf:
+  - $ref: ./InfoPushDataCategoryBase.yaml

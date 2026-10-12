@@ -1,0 +1,10 @@
+title: InfoPushVersionData
+type: object
+properties:
+  version:
+    type: string
+    examples:
+      - 2021.3.4
+    minLength: 1
+required:
+  - version

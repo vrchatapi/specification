@@ -1,0 +1,15 @@
+title: InfoPushUrlConsentScreenData
+type: object
+properties:
+  disclaimerText:
+    type: string
+  domainList:
+    type: array
+    items:
+      $ref: ./InfoPushDataDomain.yaml
+  worldTag:
+    type: string
+required:
+  - disclaimerText
+  - domainList
+  - worldTag

@@ -1,0 +1,18 @@
+title: InfoPushLoadingScreenBannerData
+type: object
+properties:
+  category:
+    type: string
+  imageUrl:
+    type:
+      - string
+      - "null"
+  name:
+    $ref: ./LocalizableString.yaml
+  weight:
+    type: integer
+required:
+  - category
+  - imageUrl
+  - name
+  - weight

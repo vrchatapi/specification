@@ -1,0 +1,13 @@
+title: DynamicContentRowBase
+type: object
+properties:
+  name:
+    $ref: ./LocalizableString.yaml
+    minLength: 1
+  platform:
+    type: string
+    description: Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.
+    minLength: 1
+required:
+  - name
+  - platform

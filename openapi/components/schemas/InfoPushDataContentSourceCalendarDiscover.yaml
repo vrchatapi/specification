@@ -1,0 +1,21 @@
+title: InfoPushDataContentSourceCalendarDiscover
+type: object
+properties:
+  endpoint:
+    const: /api/1/calendar/discover
+  kind:
+    const: calendarDiscover
+  params:
+    $ref: ./InfoPushDataContentSourceCalendarDiscoverParams.yaml
+  responseType:
+    const: calendarEntry
+  resultsField:
+    const: results
+required:
+  - endpoint
+  - kind
+  - params
+  - responseType
+  - resultsField
+allOf:
+  - $ref: ./InfoPushDataContentSourceBase.yaml

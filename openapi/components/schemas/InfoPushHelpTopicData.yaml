@@ -1,0 +1,23 @@
+title: InfoPushHelpTopicData
+type: object
+properties:
+  description:
+    $ref: ./LocalizableString.yaml
+  imageUrl:
+    type:
+      - string
+      - "null"
+  ipsQuery:
+    $ref: ./InfoPushIpsQuery.yaml
+  isNew:
+    type: boolean
+  thumbnailImageUrl:
+    type:
+      - string
+      - "null"
+required:
+  - description
+  - ipsQuery
+  - isNew
+allOf:
+  - $ref: ./InfoPushTileData.yaml

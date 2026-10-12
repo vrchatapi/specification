@@ -1,0 +1,12 @@
+title: InfoPushAccessoriesCategoryData
+type: object
+properties:
+  listingIds:
+    type: array
+    items:
+      type: string
+  name:
+    $ref: ./LocalizableString.yaml
+required:
+  - listingIds
+  - name

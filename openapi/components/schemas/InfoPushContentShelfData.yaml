@@ -1,0 +1,43 @@
+title: InfoPushContentShelfData
+type: object
+properties:
+  contentSource:
+    $ref: ./InfoPushDataContentSource.yaml
+  controls:
+    type: array
+    items:
+      $ref: ./InfoPushDataControl.yaml
+  imageUrl:
+    type:
+      - string
+      - "null"
+  onPressed:
+    anyOf:
+      - $ref: ./InfoPushDataClickable.yaml
+      - type: "null"
+  presentation:
+    $ref: ./InfoPushDataPresentation.yaml
+  schemaVersion:
+    type: integer
+    x-unknown-enum:
+      - 1
+  subtitle:
+    type: string
+    examples:
+      - Hangouts where everyone's still finding their feet
+  thumbnailImageUrl:
+    type:
+      - string
+      - "null"
+  title:
+    type: string
+required:
+  - contentSource
+  - controls
+  - imageUrl
+  - onPressed
+  - presentation
+  - schemaVersion
+  - subtitle
+  - thumbnailImageUrl
+  - title

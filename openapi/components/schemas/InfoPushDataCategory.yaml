@@ -1,15 +1,14 @@
 title: InfoPushDataCategory
-type: object
-properties:
-  ids:
-    type: array
-    items:
-      type: string
-  ipsQuery:
-    $ref: ./InfoPushIpsQuery.yaml
-  maxCells:
-    type: integer
-  name:
-    $ref: ./LocalizableString.yaml
-  type:
-    type: string
+description: A category of content. The fields depend on `type`.
+discriminator:
+  defaultMapping: ./InfoPushDataCategoryUnknown.yaml
+  mapping:
+    articles: ./InfoPushDataCategoryArticles.yaml
+    groups: ./InfoPushDataCategoryGroups.yaml
+    worlds: ./InfoPushDataCategoryWorlds.yaml
+  propertyName: type
+oneOf:
+  - $ref: ./InfoPushDataCategoryArticles.yaml
+  - $ref: ./InfoPushDataCategoryGroups.yaml
+  - $ref: ./InfoPushDataCategoryWorlds.yaml
+  - $ref: ./InfoPushDataCategoryUnknown.yaml

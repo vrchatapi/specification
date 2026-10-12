@@ -1,0 +1,32 @@
+title: InfoPushDataContentSourceUnknown
+type: object
+description: A content source whose `kind` has no schema of its own.
+properties:
+  attributionResponseField:
+    type: string
+    examples:
+      - attributionId
+  endpoint:
+    type: string
+    examples:
+      - /api/1/instances/discover
+  kind:
+    type: string
+    not:
+      enum:
+        - calendarDiscover
+        - instanceDiscover
+  params:
+    $ref: ./InfoPushDataContentSourceParams.yaml
+  responseType:
+    type: string
+  resultsField:
+    type: string
+required:
+  - endpoint
+  - kind
+  - params
+  - responseType
+  - resultsField
+allOf:
+  - $ref: ./InfoPushDataContentSourceBase.yaml

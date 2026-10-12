@@ -1,0 +1,13 @@
+title: InfoPushMarketplacePageData
+type: object
+properties:
+  categories:
+    type: array
+    items:
+      $ref: ./InfoPushDataCategory.yaml
+  featuredAvatarCategoryId:
+    type: string
+required:
+  - categories
+allOf:
+  - $ref: ./InfoPushTileData.yaml

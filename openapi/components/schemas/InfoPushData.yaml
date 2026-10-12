@@ -1,123 +1,17 @@
 title: InfoPushData
-type: object
-properties:
-  article:
-    $ref: ./InfoPushDataArticle.yaml
-  authorName:
-    type: string
-  avatarId:
-    $ref: ./AvatarID.yaml
-  bannerImageUrl:
-    type: string
-  body:
-    type: string
-  categories:
-    type: array
-    items:
-      $ref: ./InfoPushDataCategory.yaml
-  category:
-    type: string
-  contentList:
-    $ref: ./DynamicContentRow.yaml
-  contentSource:
-    $ref: ./InfoPushDataContentSource.yaml
-  controls:
-    type: array
-    items:
-      $ref: ./InfoPushDataControl.yaml
-  cta:
-    $ref: ./InfoPushDataCallToAction.yaml
-  deliveryBehavior:
-    $ref: ./InfoPushDataDeliveryBehavior.yaml
-  description:
-    $ref: ./LocalizableString.yaml
-  disclaimerText:
-    type: string
-  domainList:
-    type: array
-    items:
-      $ref: ./InfoPushDataDomain.yaml
-  featuredAvatarCategoryId:
-    type: string
-  finalName:
-    type: string
-  hoverToJoin:
-    type: boolean
-  iconImageUrl:
-    type: string
-  imageFileId:
-    $ref: ./FileID.yaml
-  imageUrl:
-    type:
-      - string
-      - "null"
-  ipsQuery:
-    $ref: ./InfoPushIpsQuery.yaml
-  isNew:
-    type: boolean
-  listingIds:
-    type: array
-    items:
-      type: string
-  mediaType:
-    type: string
-    examples:
-      - video
-  name:
-    $ref: ./LocalizableString.yaml
-  onPressed:
-    anyOf:
-      - $ref: ./InfoPushDataClickable.yaml
-      - type: "null"
-  overrideName:
-    anyOf:
-      - $ref: ./Unknown.yaml
-      - type: "null"
-  presentation:
-    $ref: ./InfoPushDataPresentation.yaml
-  promotion:
-    $ref: ./InfoPushDataPromotion.yaml
-  rows:
-    type:
-      - integer
-      - "null"
-    description: Number of rows to render.
-  schemaVersion:
-    type: integer
-    examples:
-      - 1
-  search:
-    $ref: ./InfoPushDataSearch.yaml
-  shortName:
-    anyOf:
-      - $ref: ./LocalizableString.yaml
-      - type: "null"
-  showInWorldIds:
-    $ref: ./Unknown.yaml
-  subtitle:
-    type: string
-    examples:
-      - Hangouts where everyone's still finding their feet
-  template:
-    type: string
-  thumbnailImageUrl:
-    type:
-      - string
-      - "null"
-  title:
-    type: string
-  tooltipDescription:
-    $ref: ./LocalizableString.yaml
-  version:
-    type: string
-    examples:
-      - 2021.3.4
-    minLength: 1
-  videoFileId:
-    $ref: ./FileID.yaml
-  videoUrl:
-    type: string
-  weight:
-    type: integer
-  worldTag:
-    type: string
+description: The data of an item without `type`. Its fields depend on the item's tags.
+anyOf:
+  - $ref: ./InfoPushOnboardingAvatarData.yaml
+  - $ref: ./InfoPushHelpTopicData.yaml
+  - $ref: ./InfoPushDiscoveryCategoryData.yaml
+  - $ref: ./InfoPushHelpArticleData.yaml
+  - $ref: ./InfoPushLoadingScreenBannerData.yaml
+  - $ref: ./InfoPushMarketplacePageData.yaml
+  - $ref: ./InfoPushWorldCategoryData.yaml
+  - $ref: ./InfoPushUrlConsentScreenData.yaml
+  - $ref: ./InfoPushAvatarCategoryData.yaml
+  - $ref: ./InfoPushSearchData.yaml
+  - $ref: ./InfoPushAccessoriesCategoryData.yaml
+  - $ref: ./InfoPushBannerData.yaml
+  - $ref: ./InfoPushVersionData.yaml
+  - $ref: ./InfoPushOtherData.yaml

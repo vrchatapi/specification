@@ -1,0 +1,62 @@
+title: InfoPushBase
+type: object
+properties:
+  clientMinVersion:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
+  createdAt:
+    type: string
+    format: date-time
+  endDate:
+    type:
+      - string
+      - "null"
+    format: date-time
+  experiment:
+    $ref: ./InfoPushExperiment.yaml
+  hash:
+    type: string
+    description: Unknown usage, MD5
+    minLength: 1
+  id:
+    type: string
+    examples:
+      - launch-beta
+    minLength: 1
+  isEnabled:
+    type: boolean
+    default: true
+  priority:
+    type: integer
+  regions:
+    type: array
+    items:
+      type: string
+  releaseStatus:
+    $ref: ./ReleaseStatus.yaml
+  requireClientTags:
+    type: array
+    items:
+      type: string
+  startDate:
+    type:
+      - string
+      - "null"
+    format: date-time
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  updatedAt:
+    type: string
+    format: date-time
+required:
+  - createdAt
+  - hash
+  - id
+  - isEnabled
+  - priority
+  - releaseStatus
+  - tags
+  - updatedAt

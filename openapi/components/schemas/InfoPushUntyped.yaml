@@ -1,0 +1,14 @@
+title: InfoPushUntyped
+type: object
+description: An item without `type`, or one whose `type` has no schema of its own.
+properties:
+  data:
+    $ref: ./InfoPushData.yaml
+  type:
+    type: string
+    not:
+      const: ContentShelf
+required:
+  - data
+allOf:
+  - $ref: ./InfoPushBase.yaml

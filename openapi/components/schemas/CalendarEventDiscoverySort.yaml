@@ -1,0 +1,4 @@
+title: CalendarEventDiscoverySort
+type: string
+x-unknown-enum:
+  - startTime_ascending

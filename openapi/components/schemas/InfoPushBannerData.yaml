@@ -1,0 +1,15 @@
+title: InfoPushBannerData
+type: object
+properties:
+  imageUrl:
+    type:
+      - string
+      - "null"
+  name:
+    $ref: ./LocalizableString.yaml
+  onPressed:
+    anyOf:
+      - $ref: ./InfoPushDataClickable.yaml
+      - type: "null"
+required:
+  - imageUrl

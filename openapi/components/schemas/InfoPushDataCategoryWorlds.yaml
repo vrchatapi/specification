@@ -1,0 +1,12 @@
+title: InfoPushDataCategoryWorlds
+type: object
+properties:
+  maxCells:
+    type: integer
+  type:
+    const: worlds
+required:
+  - maxCells
+  - type
+allOf:
+  - $ref: ./InfoPushDataCategoryBase.yaml

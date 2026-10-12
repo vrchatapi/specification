@@ -1,0 +1,25 @@
+title: InfoPushDataContentSourceBase
+type: object
+properties:
+  computedParams:
+    $ref: ./InfoPushDataContentSourceComputedParams.yaml
+  method:
+    type: string
+    x-unknown-enum:
+      - GET
+  pagination:
+    anyOf:
+      - $ref: ./InfoPushDataContentSourcePagination.yaml
+      - type: "null"
+  paramModifiability:
+    $ref: ./InfoPushDataContentSourceParamModifiability.yaml
+  schemaVersion:
+    type: integer
+    x-unknown-enum:
+      - 1
+required:
+  - computedParams
+  - method
+  - pagination
+  - paramModifiability
+  - schemaVersion
