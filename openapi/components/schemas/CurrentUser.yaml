@@ -291,6 +291,7 @@ required:
   - id
   - isAdult
   - isFriend
+  - last_activity
   - last_login
   - last_mobile
   - last_platform

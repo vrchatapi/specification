@@ -8,6 +8,7 @@ import { noUnlistedPaths } from "./no-unlisted-paths.ts";
 import { operationIdConvention } from "./operation-id-convention.ts";
 import { preferUnknown } from "./prefer-unknown.ts";
 import { schemaTitle } from "./schema-title.ts";
+import { specificUnionMemberFirst } from "./specific-union-member-first.ts";
 
 export const rules = {
 	"consistent-discriminator": consistentDiscriminator,
@@ -19,5 +20,6 @@ export const rules = {
 	"no-unlisted-paths": noUnlistedPaths,
 	"operation-id-convention": operationIdConvention,
 	"prefer-unknown": preferUnknown,
-	"schema-title": schemaTitle
+	"schema-title": schemaTitle,
+	"specific-union-member-first": specificUnionMemberFirst
 };

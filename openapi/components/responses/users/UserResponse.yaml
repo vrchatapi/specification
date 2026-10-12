@@ -4,5 +4,5 @@ content:
     schema:
       title: UserResponse
       anyOf:
-        - $ref: ../../schemas/User.yaml
         - $ref: ../../schemas/CurrentUser.yaml
+        - $ref: ../../schemas/User.yaml

@@ -38,6 +38,7 @@ oas3_2Rules:
   vrchat/operation-id-convention: error
   vrchat/prefer-unknown: error
   vrchat/schema-title: error
+  vrchat/specific-union-member-first: error
 
 decorators:
   vrchat/add-implied-types: on
