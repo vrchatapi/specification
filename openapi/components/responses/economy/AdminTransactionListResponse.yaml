@@ -1,0 +1,24 @@
+content:
+  application/json:
+    examples:
+      Granted Subscription:
+        value:
+          - id: txn_cbc67d95-db21-4879-bbbb-09a38c4e7b2c
+            adminUserId: usr_5cd9007b-1802-45fe-92e2-0b6617639344
+            expiry: 2124-07-21T22:28:04.573Z
+            subscription:
+              id: vrchatplus-yearly
+              description: VRChat Plus (Yearly)
+              amount: 9999
+              googlePlanId: yearly
+              googleProductId: vrchat.plus.googleplay.yearly
+              oculusSku: vrchat-plus-oculus-yearly
+              period: year
+              picoSku: vrchat_plus_pico_yearly
+              steamItemId: "5000"
+              tier: 5
+            userId: usr_9439f8cc-1c6b-4dca-9a07-d2eccb570701
+    schema:
+      type: array
+      items:
+        $ref: ../../schemas/AdminTransaction.yaml

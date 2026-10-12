@@ -3372,6 +3372,73 @@ workflows:
         successCriteria:
           - condition: $statusCode == 404
 
+  - workflowId: admin-transaction-reads
+    summary: Lists the account's admin transactions and reads the first by id
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: admin-transactions
+        operationId: $sourceDescriptions.default.getAdminTransactions
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          transactionId: $response.body#/0/id
+
+      - stepId: admin-transaction
+        operationId: $sourceDescriptions.default.getAdminTransaction
+        parameters:
+          - name: transactionId
+            in: path
+            value: $steps.admin-transactions.outputs.transactionId
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-admin-transaction-not-found
+    summary: getAdminTransaction refuses a transaction that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-admin-transaction
+        operationId: $sourceDescriptions.default.getAdminTransaction
+        parameters:
+          - name: transactionId
+            in: path
+            value: txn_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: get-admin-transaction-unauthenticated
+    summary: getAdminTransaction refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-admin-transaction
+        operationId: $sourceDescriptions.default.getAdminTransaction
+        parameters:
+          - name: transactionId
+            in: path
+            value: txn_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-admin-transactions-unauthenticated
+    summary: getAdminTransactions refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-admin-transactions
+        operationId: $sourceDescriptions.default.getAdminTransactions
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-steam-transaction-unauthenticated
     summary: getSteamTransaction refuses an anonymous caller
     parameters:

@@ -1,0 +1,22 @@
+title: AdminTransaction
+type: object
+description: A subscription VRChat staff granted to the account.
+properties:
+  adminUserId:
+    $ref: ./UserID.yaml
+    description: The staff member who granted it.
+  expiry:
+    type: string
+    format: date-time
+  id:
+    $ref: ./TransactionID.yaml
+  subscription:
+    $ref: ./Subscription.yaml
+  userId:
+    $ref: ./UserID.yaml
+required:
+  - adminUserId
+  - expiry
+  - id
+  - subscription
+  - userId

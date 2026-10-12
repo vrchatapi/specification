@@ -4,7 +4,7 @@ info:
   description: Economy Docs Here
   version: "1.0"
 paths:
-  /Admin/transactions:
+  /admin/transactions:
     get:
       operationId: getAdminTransactions
       summary: Get Admin Transactions
@@ -15,11 +15,11 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/economy/TransactionListResponse.yaml
+          $ref: ../responses/economy/AdminTransactionListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
       x-internal: true
-  "/Admin/transactions/{transactionId}":
+  "/admin/transactions/{transactionId}":
     parameters:
       - $ref: ../parameters.yaml#/transactionId
     get:
@@ -35,42 +35,12 @@ paths:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/economy/TransactionResponse.yaml
+          $ref: ../responses/economy/AdminTransactionResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
       x-internal: true
-  /Steam/transactions:
-    get:
-      operationId: getSteamTransactions
-      summary: List Steam Transactions
-      description: Get all own Steam transactions.
-      tags:
-        - economy
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/economy/TransactionListResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
-  "/Steam/transactions/{transactionId}":
-    parameters:
-      - $ref: ../parameters.yaml#/transactionId
-    get:
-      operationId: getSteamTransaction
-      summary: Get Steam Transaction
-      description: "Get a single Steam transactions by ID. This returns the exact same
-        information as `getSteamTransactions`, so no point in using this
-        endpoint."
-      tags:
-        - economy
-      security:
-        - authCookie: []
-      responses:
-        "200":
-          $ref: ../responses/economy/TransactionResponse.yaml
-        "401":
-          $ref: ../responses/MissingCredentialsError.yaml
   "/assetReview/{assetReviewId}/notes":
     parameters:
       - $ref: ../parameters.yaml#/assetReviewId
@@ -491,6 +461,38 @@ paths:
       responses:
         "200":
           $ref: ../responses/economy/DeleteProductResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  /steam/transactions:
+    get:
+      operationId: getSteamTransactions
+      summary: List Steam Transactions
+      description: Get all own Steam transactions.
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/TransactionListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/steam/transactions/{transactionId}":
+    parameters:
+      - $ref: ../parameters.yaml#/transactionId
+    get:
+      operationId: getSteamTransaction
+      summary: Get Steam Transaction
+      description: "Get a single Steam transactions by ID. This returns the exact same
+        information as `getSteamTransactions`, so no point in using this
+        endpoint."
+      tags:
+        - economy
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/TransactionResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
   /subscriptions:

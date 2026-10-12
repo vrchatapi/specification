@@ -1,11 +1,7 @@
-/Admin/transactions:
-  $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions"
-"/Admin/transactions/{transactionId}":
-  $ref: "./paths/economy.yaml#/paths/~1Admin~1transactions~1{transactionId}"
-/Steam/transactions:
-  $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions"
-"/Steam/transactions/{transactionId}":
-  $ref: "./paths/economy.yaml#/paths/~1Steam~1transactions~1{transactionId}"
+/admin/transactions:
+  $ref: "./paths/economy.yaml#/paths/~1admin~1transactions"
+"/admin/transactions/{transactionId}":
+  $ref: "./paths/economy.yaml#/paths/~1admin~1transactions~1{transactionId}"
 "/adminassetbundles/{adminAssetBundleId}":
   $ref: "./paths/files.yaml#/paths/~1adminassetbundles~1{adminAssetBundleId}"
 /ageVerification/status:
@@ -378,6 +374,10 @@
   $ref: "./paths/inventory.yaml#/paths/~1reward~1redeem"
 "/sso/{provider}":
   $ref: "./paths/authentication.yaml#/paths/~1sso~1{provider}"
+/steam/transactions:
+  $ref: "./paths/economy.yaml#/paths/~1steam~1transactions"
+"/steam/transactions/{transactionId}":
+  $ref: "./paths/economy.yaml#/paths/~1steam~1transactions~1{transactionId}"
 /subscriptions:
   $ref: "./paths/economy.yaml#/paths/~1subscriptions"
 /tilia/status:
