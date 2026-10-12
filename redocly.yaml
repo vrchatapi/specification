@@ -1,16 +1,16 @@
 # See https://redoc.ly/docs/cli/configuration/ for more information.
 extends:
-  - recommended
+  - recommended-strict
 
 plugins:
   - ./redocly/plugin.ts
   - ./packages/redocly-plugin-downlevel/src/index.ts
 
 rules:
-  array-parameter-serialization: warn
-  component-name-unique: warn
+  array-parameter-serialization: error
+  component-name-unique: error
   no-ambiguous-paths: off
-  path-not-include-query: warn
+  path-not-include-query: error
 
 oas3_0Rules:
   vrchat/no-empty-description: warn
@@ -30,13 +30,14 @@ oas3_1Rules:
 oas3_2Rules:
   vrchat/consistent-discriminator: error
   vrchat/no-implied-type: error
-  vrchat/no-empty-description: warn
-  vrchat/no-nested-object: warn
-  vrchat/no-schema-example: warn
-  vrchat/no-single-value-enum: warn
-  vrchat/operation-id-convention: warn
-  vrchat/prefer-unknown: warn
-  vrchat/schema-title: warn
+  vrchat/no-empty-description: error
+  vrchat/no-nested-object: error
+  vrchat/no-schema-example: error
+  vrchat/no-single-value-enum: error
+  vrchat/no-unlisted-paths: error
+  vrchat/operation-id-convention: error
+  vrchat/prefer-unknown: error
+  vrchat/schema-title: error
 
 decorators:
   vrchat/add-implied-types: on

@@ -10,6 +10,11 @@ content:
           error:
             message: "imageUrl must be a URL˸ 'string'‚ assetUrl must be a URL˸ 'string'"
             status_code: 400
+      Missing Fields:
+        value:
+          error:
+            message: signatureMd5 is required․‚ signatureSizeInBytes is required․
+            status_code: 400
       Missing Seller:
         value:
           error:

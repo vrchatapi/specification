@@ -914,6 +914,36 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: confirm-email-missing-id
+    summary: confirmEmail refuses a request without the user id
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: confirm-email
+        operationId: $sourceDescriptions.default.confirmEmail
+        parameters:
+          - name: verify_email
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'id is required․'
+
+  - workflowId: verify-login-place-missing-user-id
+    summary: verifyLoginPlace refuses a request without the user id
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: verify-login-place
+        operationId: $sourceDescriptions.default.verifyLoginPlace
+        parameters:
+          - name: token
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'userId is required․'
+
   - workflowId: resend-email-confirmation-unauthenticated
     summary: resendEmailConfirmation refuses an anonymous caller
     parameters:
@@ -4580,6 +4610,118 @@ workflows:
             value: 1
         successCriteria:
           - condition: $statusCode == 200
+
+  - workflowId: get-admin-asset-bundle-unauthenticated
+    summary: getAdminAssetBundle refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-admin-asset-bundle
+        operationId: $sourceDescriptions.default.getAdminAssetBundle
+        parameters:
+          - name: adminAssetBundleId
+            in: path
+            value: aab_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: create-file-version-missing-signature
+    summary: createFileVersion refuses a version without its signature
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-file-version
+        operationId: $sourceDescriptions.default.createFileVersion
+        parameters:
+          - name: fileId
+            in: path
+            value: file_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'signatureMd5 is required․‚ signatureSizeInBytes is required․'
+
+  - workflowId: finish-file-data-upload-unauthenticated
+    summary: finishFileDataUpload refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: finish-file-data-upload
+        operationId: $sourceDescriptions.default.finishFileDataUpload
+        parameters:
+          - name: fileId
+            in: path
+            value: file_00000000-0000-0000-0000-000000000000
+          - name: versionId
+            in: path
+            value: 1
+          - name: fileType
+            in: path
+            value: file
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-file-data-upload-status-unauthenticated
+    summary: getFileDataUploadStatus refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-file-data-upload-status
+        operationId: $sourceDescriptions.default.getFileDataUploadStatus
+        parameters:
+          - name: fileId
+            in: path
+            value: file_00000000-0000-0000-0000-000000000000
+          - name: versionId
+            in: path
+            value: 1
+          - name: fileType
+            in: path
+            value: file
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-files-unauthenticated
+    summary: getFiles refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-files
+        operationId: $sourceDescriptions.default.getFiles
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: upload-gallery-image-unauthenticated
+    summary: uploadGalleryImage refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: upload-gallery-image
+        operationId: $sourceDescriptions.default.uploadGalleryImage
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: upload-icon-unauthenticated
+    summary: uploadIcon refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: upload-icon
+        operationId: $sourceDescriptions.default.uploadIcon
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: upload-image-unauthenticated
+    summary: uploadImage refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: upload-image
+        operationId: $sourceDescriptions.default.uploadImage
+        successCriteria:
+          - condition: $statusCode == 401
 
   - workflowId: submit-content-agreement-unauthenticated
     summary: submitContentAgreement refuses an anonymous caller
@@ -9913,6 +10055,16 @@ workflows:
         operationId: $sourceDescriptions.default.getJams
         successCriteria:
           - condition: $statusCode == 200
+  - workflowId: get-jams-unauthenticated
+    summary: getJams refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-jams
+        operationId: $sourceDescriptions.default.getJams
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: jam-reads
     summary: Reads the first jam, then its submissions
     parameters:
@@ -15226,6 +15378,46 @@ workflows:
           - name: favoriteGroupName
             in: path
             value: world1
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: clear-favorite-group-unauthenticated
+    summary: clearFavoriteGroup refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: clear-favorite-group
+        operationId: $sourceDescriptions.default.clearFavoriteGroup
+        parameters:
+          - name: favoriteGroupType
+            in: path
+            value: world
+          - name: favoriteGroupName
+            in: path
+            value: worlds1
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-favorite-group-unauthenticated
+    summary: getFavoriteGroup refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-favorite-group
+        operationId: $sourceDescriptions.default.getFavoriteGroup
+        parameters:
+          - name: favoriteGroupType
+            in: path
+            value: world
+          - name: favoriteGroupName
+            in: path
+            value: worlds1
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
 

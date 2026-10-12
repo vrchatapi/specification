@@ -28,71 +28,19 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
-          fetch-depth: 0
 
       - uses: pnpm/setup@v2
         with:
           runtime: bun@latest
           cache: true
 
-      - if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
-        run: |
-          changes=$(git diff --name-only --diff-filter=d "${{ github.event.before }}" "${{ github.sha }}")
-          {
-            echo 'changes<<eof_${{ github.run_id }}'
-            echo "$changes"
-            echo 'eof_${{ github.run_id }}'
-          } >> $GITHUB_ENV
-
-      - if: github.event_name == 'pull_request'
-        run: |
-          changes=$(git diff --name-only --diff-filter=d "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}")
-          {
-            echo 'changes<<eof_${{ github.run_id }}'
-            echo "$changes"
-            echo 'eof_${{ github.run_id }}'
-          } >> $GITHUB_ENV
-
-      - name: lint changed files
-        if: env.changes != ''
-        run: |
-          pattern=$(echo "${{ env.changes }}" | tr '\n' '|' | sed 's/|$//')
-          pnpm run lint-ci 2>&1 | grep -E "$pattern" || true
-          exit ${PIPESTATUS[0]:-1}
-
-      - name: lint files
-        if: env.changes == ''
-        continue-on-error: true
-        run: pnpm run lint-ci
+      - run: pnpm run lint-ci
 
       - name: test the redocly plugin
         run: bun test ./redocly
 
       - name: test and build redocly-plugin-downlevel
         run: pnpm run test:downlevel
-
-      - name: assert no unused paths
-        if: env.changes != ''
-        shell: bash
-        run: |
-          status=0
-          defined=$(yq -re '.paths | keys' openapi/components/paths/*.yaml | yq -r 'sort_by(.) | .[]')
-          referenced=$(yq -re 'sort_by(keys) | keys[]' openapi/components/paths.yaml)
-          mapfile -t expected <<< "$defined"
-          mapfile -t actual <<< "$referenced"
-
-          for ((i = 0, j = 0; i < "${#expected[@]}"; i++)); do
-              if [[ "${expected[$i]}" == "${actual[$j]}" ]]; then
-                  j=$((j + 1))
-              else
-                  status=2
-                  echo "Missing path: ${expected[$i]}" >&2;
-              fi
-          done;
-
-          if [[ "$status" -ne 0 ]]; then
-              exit "$status"
-          fi
 
   bundle:
     if: github.event_name != 'schedule'

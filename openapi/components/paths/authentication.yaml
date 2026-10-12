@@ -33,6 +33,8 @@ paths:
       responses:
         "302":
           $ref: ../responses/authentication/ConfirmEmailResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
   /auth/exists:
     get:
       operationId: checkUserExists
@@ -384,6 +386,8 @@ paths:
       responses:
         "302":
           $ref: ../responses/authentication/VerifyLoginPlaceResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
   /logout:
     put:
       operationId: logout

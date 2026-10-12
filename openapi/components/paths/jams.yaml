@@ -30,6 +30,8 @@ paths:
       responses:
         "200":
           $ref: ../responses/jams/JamListResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/jams/{jamId}":
     parameters:
       - $ref: ../parameters.yaml#/jamId

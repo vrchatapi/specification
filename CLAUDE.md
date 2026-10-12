@@ -216,7 +216,7 @@ Never add a YAML comment. A fact about the API belongs in a `description`.
 - The suite resolves `operationId` against the bundle, so a new path needs an
   entry in `openapi/components/paths.yaml` as well as its file under
   `openapi/components/paths/`. Without it every step naming the operation fails
-  as `Unknown operationId`.
+  as `Unknown operationId`, and `vrchat/no-unlisted-paths` fails the lint.
 - `pnpm test` validates against `dist/`, never `openapi/`. Run `pnpm bundle`
   first: a stale bundle passes checks the current schema fails, and hides the
   schema drift a fresh one reports.

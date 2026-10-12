@@ -3,6 +3,6 @@ content:
   application/json:
     schema:
       title: UserResponse
-      oneOf:
+      anyOf:
         - $ref: ../../schemas/User.yaml
         - $ref: ../../schemas/CurrentUser.yaml
