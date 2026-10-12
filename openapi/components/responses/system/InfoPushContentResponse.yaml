@@ -1,0 +1,51 @@
+description: The results of a content shelf.
+content:
+  application/json:
+    examples:
+      Calendar Entries:
+        value:
+          nextCursor: QTuP-Rb7HLyMKm4HfAaVkAKFtt-GqeoP4xxwEjQHzw9pkTZJfLLYoBEeqkpAVOPiGvMvb_ZCvoBZAZdpytIz9HehgJjySxZv9sO6K1vzLuF8YILom4_8X4VJ2fB582_FKyVPEzrdcFfM8muziHjdEE4cyHPRiIANAdDziTToVjHFUgp-EgE9je5oD4qtAq0DqY1SSRSpkNWOaijZtBRhXeSzxYyHGs_fzAin7f-kjSq_ua8ZQibYz_Qz1xdnNP7AhAMN7t2BakOJlE_wpHRUaUh3086lZwuonx8tAGuL6DLkYRkhl84
+          responseType: calendarEntry
+          results:
+            - id: cal_5b1a0248-dbbc-428f-9813-7a258d792b38
+              title: Anarchy Timeǃ
+              type: event
+              description: It is time to come hang out with us and be crazy
+              accessType: public
+              category: performance
+              closeInstanceAfterEndMinutes: 5
+              createdAt: 2026-05-11T14:50:19.060Z
+              deletedAt: null
+              durationInMs: 69480000
+              endsAt: 2026-10-13T16:48:00.000Z
+              featured: false
+              guestEarlyJoinMinutes: 5
+              hostEarlyJoinMinutes: 60
+              imageId: file_210d07c2-00da-468a-ae62-0bd56d43e156
+              imageUrl: https://api.vrchat.cloud/api/1/file/file_210d07c2-00da-468a-ae62-0bd56d43e156/1/file
+              interestedUserCount: 3
+              isDraft: false
+              languages: []
+              occurrenceKind: occurrence
+              ownerId: grp_e2f5d74b-137a-4e9e-9a63-087e22ac48e9
+              platforms: []
+              recurrence: null
+              roleIds: null
+              seriesId: cal_64c5113d-c29d-49d5-908a-1e46b3476d47
+              startsAt: 2026-10-12T21:30:00.000Z
+              tags:
+                - Anarchy
+                - Crazy
+                - Fun
+                - Hangout
+                - Music
+              updatedAt: 2026-05-11T14:50:19.060Z
+              usesInstanceOverflow: false
+      Instances:
+        value:
+          attributionId: attr_01a131e9-d61e-7024-9e0f-84a1e8c9ad79
+          nextCursor: null
+          responseType: instance
+          results: []
+    schema:
+      $ref: ../../schemas/InfoPushContent.yaml

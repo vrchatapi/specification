@@ -1,0 +1,20 @@
+title: InfoPushContentInstances
+type: object
+properties:
+  attributionId:
+    $ref: ./AttributionID.yaml
+  nextCursor:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
+  responseType:
+    const: instance
+  results:
+    type: array
+    items:
+      $ref: ./LimitedInstance.yaml
+required:
+  - attributionId
+  - nextCursor
+  - responseType
+  - results

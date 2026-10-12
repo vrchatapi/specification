@@ -1,0 +1,12 @@
+title: InfoPushContent
+description: The results of a content shelf's `contentSource`, as its `responseType` names them.
+discriminator:
+  defaultMapping: ./InfoPushContentUnknown.yaml
+  mapping:
+    calendarEntry: ./InfoPushContentCalendarEntries.yaml
+    instance: ./InfoPushContentInstances.yaml
+  propertyName: responseType
+oneOf:
+  - $ref: ./InfoPushContentInstances.yaml
+  - $ref: ./InfoPushContentCalendarEntries.yaml
+  - $ref: ./InfoPushContentUnknown.yaml

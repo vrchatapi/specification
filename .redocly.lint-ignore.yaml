@@ -24,6 +24,9 @@ openapi/components/paths/instances.yaml:
   operation-4xx-response:
     - "#/paths/~1instanceCategories/get/responses"
     - "#/paths/~1instanceVibes/get/responses"
+openapi/components/responses/system/InfoPushContentResponse.yaml:
+  no-invalid-media-type-examples:
+    - "#/content/application~1json/schema"
 openapi/components/responses/system/InfoPushListResponse.yaml:
   no-invalid-media-type-examples:
     - "#/content/application~1json/schema"

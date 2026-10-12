@@ -11814,6 +11814,136 @@ workflows:
         successCriteria:
           - condition: $statusCode == 400
 
+  - workflowId: get-info-push-content-calendar-pages
+    summary: Pages through the calendar content shelf
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: info-push-content-first-page
+        operationId: $sourceDescriptions.default.getInfoPushContent
+        parameters:
+          - name: entryId
+            in: path
+            value: ips_1fddd7dc-7d3f-4fc3-9e0a-f03378d4c520
+          - name: n
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/responseType == 'calendarEntry'
+        outputs:
+          nextCursor: $response.body#/nextCursor
+
+      - stepId: info-push-content-next-page
+        operationId: $sourceDescriptions.default.getInfoPushContent
+        parameters:
+          - name: entryId
+            in: path
+            value: ips_1fddd7dc-7d3f-4fc3-9e0a-f03378d4c520
+          - name: n
+            in: query
+            value: 1
+          - name: nextCursor
+            in: query
+            value: $steps.info-push-content-first-page.outputs.nextCursor
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-info-push-content-instances
+    summary: Results of the trending instances content shelf
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: info-push-content
+        operationId: $sourceDescriptions.default.getInfoPushContent
+        parameters:
+          - name: entryId
+            in: path
+            value: ips_b934c59d-0aad-4f8a-a9e3-27c1c4050151
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/responseType == 'instance'
+
+  - workflowId: get-info-push-content-invalid-entry-id
+    summary: getInfoPushContent refuses an entryId that is not an ips ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: info-push-content
+        operationId: $sourceDescriptions.default.getInfoPushContent
+        parameters:
+          - name: entryId
+            in: path
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: get-info-push-content-n-over-maximum
+    summary: getInfoPushContent refuses an n above 50
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: info-push-content
+        operationId: $sourceDescriptions.default.getInfoPushContent
+        parameters:
+          - name: entryId
+            in: path
+            value: ips_1fddd7dc-7d3f-4fc3-9e0a-f03378d4c520
+          - name: n
+            in: query
+            value: 51
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: get-info-push-content-not-found
+    summary: getInfoPushContent answers 404 for an ID no shelf has
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: info-push-content
+        operationId: $sourceDescriptions.default.getInfoPushContent
+        parameters:
+          - name: entryId
+            in: path
+            value: ips_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 404
+          - condition: $response.body#/error/message == 'Shelf not found'
+
+  - workflowId: get-info-push-content-unauthenticated
+    summary: getInfoPushContent refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: info-push-content
+        operationId: $sourceDescriptions.default.getInfoPushContent
+        parameters:
+          - name: entryId
+            in: path
+            value: ips_1fddd7dc-7d3f-4fc3-9e0a-f03378d4c520
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-info-push-quick-menu-banner
     summary: Info push quick menu banner
     parameters:

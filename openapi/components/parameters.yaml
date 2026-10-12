@@ -439,6 +439,31 @@ include:
   in: query
   schema:
     $ref: ./schemas/Tag.yaml
+infoPushContentNextCursor:
+  name: nextCursor
+  description: The `nextCursor` of the previous page. Only a content source with `pagination` pages.
+  required: false
+  in: query
+  schema:
+    type: string
+infoPushContentNumber:
+  name: n
+  description: The number of results to return. Only a content source with `pagination` pages.
+  required: false
+  in: query
+  schema:
+    type: integer
+    maximum: 50
+    minimum: 1
+infoPushEntryId:
+  name: entryId
+  description: The ID of a `ContentShelf` entry.
+  required: true
+  in: path
+  schema:
+    type: string
+    examples:
+      - ips_1fddd7dc-7d3f-4fc3-9e0a-f03378d4c520
 instanceDiscoveryAnyWorldTag:
   name: anyWorldTag
   description: Not every account may use it; the others are answered 403.

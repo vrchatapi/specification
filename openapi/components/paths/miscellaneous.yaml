@@ -141,6 +141,29 @@ paths:
           $ref: ../responses/system/InfoPushListResponse.yaml
         "400":
           $ref: ../responses/RequestValidationError.yaml
+  /infoPush/{entryId}/content:
+    parameters:
+      - $ref: ../parameters.yaml#/infoPushEntryId
+    get:
+      operationId: getInfoPushContent
+      summary: Get Content Shelf Results
+      description: Runs the `contentSource` of a `ContentShelf` entry and returns its results. It runs the source's own `params`, including filters the account may not pass to the source's endpoint directly.
+      tags:
+        - miscellaneous
+      parameters:
+        - $ref: ../parameters.yaml#/infoPushContentNumber
+        - $ref: ../parameters.yaml#/infoPushContentNextCursor
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/system/InfoPushContentResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/system/ShelfNotFoundError.yaml
   /js/app.js:
     get:
       operationId: getJavaScript

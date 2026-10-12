@@ -1,0 +1,9 @@
+description: No content shelf has that ID.
+content:
+  application/json:
+    example:
+      error:
+        message: Shelf not found
+        status_code: 404
+    schema:
+      $ref: ../../schemas/Error.yaml

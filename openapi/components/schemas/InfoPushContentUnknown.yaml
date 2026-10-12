@@ -1,0 +1,22 @@
+title: InfoPushContentUnknown
+type: object
+description: Content whose `responseType` has no schema of its own.
+properties:
+  nextCursor:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
+  responseType:
+    type: string
+    not:
+      enum:
+        - calendarEntry
+        - instance
+  results:
+    type: array
+    items:
+      $ref: ./Unknown.yaml
+required:
+  - nextCursor
+  - responseType
+  - results

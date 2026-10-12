@@ -1,0 +1,18 @@
+title: InfoPushContentCalendarEntries
+type: object
+properties:
+  nextCursor:
+    type:
+      - string
+      - "null"
+    description: Pass back as the `nextCursor` query parameter to read the page after this one.
+  responseType:
+    const: calendarEntry
+  results:
+    type: array
+    items:
+      $ref: ./CalendarEvent.yaml
+required:
+  - nextCursor
+  - responseType
+  - results
