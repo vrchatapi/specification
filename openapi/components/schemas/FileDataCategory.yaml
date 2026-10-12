@@ -1,0 +1,7 @@
+title: FileDataCategory
+enum:
+  - multipart
+  - queued
+  - simple
+default: queued
+minLength: 1

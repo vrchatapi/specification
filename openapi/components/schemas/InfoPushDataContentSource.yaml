@@ -12,9 +12,7 @@ properties:
     examples:
       - /api/1/instances/discover
   kind:
-    type: string
-    examples:
-      - instanceDiscover
+    $ref: ./InfoPushDataContentSourceKind.yaml
   method:
     type: string
     examples:
@@ -28,13 +26,9 @@ properties:
   params:
     $ref: ./InfoPushDataContentSourceParams.yaml
   responseType:
-    type: string
-    examples:
-      - instance
+    $ref: ./InfoPushDataContentSourceResponseType.yaml
   resultsField:
-    type: string
-    examples:
-      - instances
+    $ref: ./InfoPushDataContentSourceResultsField.yaml
   schemaVersion:
     type: integer
     examples:

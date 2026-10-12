@@ -2,12 +2,7 @@ title: FileData
 type: object
 properties:
   category:
-    enum:
-      - multipart
-      - queued
-      - simple
-    default: queued
-    minLength: 1
+    $ref: ./FileDataCategory.yaml
   fileName:
     type: string
     minLength: 1

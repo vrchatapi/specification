@@ -2,9 +2,7 @@ title: InfoPushDataPresentation
 type: object
 properties:
   layout:
-    type: string
-    examples:
-      - EqualParts_4_Grid
+    $ref: ./InfoPushDataPresentationLayout.yaml
   pinnedDescription:
     type: string
   socialDisplay:

@@ -49,9 +49,7 @@ properties:
   managerNotes:
     type: string
   membershipStatus:
-    type: string
-    examples:
-      - member
+    $ref: ./GroupMemberStatus.yaml
   permissions:
     type: array
     items:

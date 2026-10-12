@@ -1,0 +1,6 @@
+title: ProfileBackgroundType
+enum:
+  - default
+  - gradient
+  - inventory
+  - texture

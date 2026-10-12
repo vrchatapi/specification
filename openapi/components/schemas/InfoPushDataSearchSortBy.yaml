@@ -1,0 +1,5 @@
+title: InfoPushDataSearchSortBy
+type: string
+x-unknown-enum:
+  - popular
+  - relevance

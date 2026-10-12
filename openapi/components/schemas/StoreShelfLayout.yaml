@@ -1,0 +1,5 @@
+title: StoreShelfLayout
+type: string
+x-unknown-enum:
+  - col5
+  - highlightLeft

@@ -1,0 +1,9 @@
+title: CosmeticItemType
+enum:
+  - droneskin
+  - iconFrame
+  - nameplateEffect
+  - portalskin
+  - profileBackground
+  - profileEffect
+  - warpeffect

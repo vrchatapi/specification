@@ -1,0 +1,17 @@
+title: InfoPushCommand
+enum:
+  - CannedWorldSearch
+  - OpenAccountUpgrade
+  - OpenAvatarsMenu
+  - OpenHelpArticle
+  - OpenListingDetails
+  - OpenSafetyMenu
+  - OpenURL
+  - OpenVRCPlusMenu
+  - OpenVRChatStore
+  - OpenWorldDetails
+  - OpenWorldsMenu
+  - scrollToShelf
+examples:
+  - OpenURL
+minLength: 1

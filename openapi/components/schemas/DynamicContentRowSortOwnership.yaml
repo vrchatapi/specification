@@ -1,0 +1,7 @@
+title: DynamicContentRowSortOwnership
+type: string
+minLength: 1
+x-unknown-enum:
+  - any
+  - mine
+  - public

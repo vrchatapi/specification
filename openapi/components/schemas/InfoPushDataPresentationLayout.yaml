@@ -1,0 +1,10 @@
+title: InfoPushDataPresentationLayout
+type: string
+x-unknown-enum:
+  - EqualParts_3
+  - EqualParts_4
+  - EqualParts_4_Grid
+  - EqualParts_5
+  - Featured
+  - List
+  - Spotlight_5

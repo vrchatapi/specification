@@ -24,7 +24,7 @@ properties:
     items:
       type: string
   featuredResults:
-    type: string
+    $ref: ./DynamicContentRowResultsInclusion.yaml
   groupPool:
     type: string
     examples:
@@ -45,7 +45,7 @@ properties:
   minimumRemainingMinutes:
     type: integer
   mode:
-    type: string
+    $ref: ./DynamicContentRowMode.yaml
   n:
     type: integer
   name:
@@ -62,34 +62,27 @@ properties:
   params:
     $ref: ./DynamicContentRowParams.yaml
   personalizedResults:
-    type: string
-    examples:
-      - include
+    $ref: ./DynamicContentRowResultsInclusion.yaml
   platform:
     type: string
     description: 'Usually "ThisPlatformSupported", but can also be other values such as "all" or platform specific identifiers.'
     minLength: 1
   region:
-    type:
-      - string
-      - "null"
+    anyOf:
+      - $ref: ./InstanceRegion.yaml
+      - type: "null"
   scope:
-    type: string
-    examples:
-      - all
+    $ref: ./DynamicContentRowScope.yaml
   shortName:
     anyOf:
       - $ref: ./LocalizableString.yaml
       - type: "null"
   sortHeading:
-    type: string
-    minLength: 1
+    $ref: ./DynamicContentRowSortHeading.yaml
   sortOrder:
-    type: string
-    minLength: 1
+    $ref: ./OrderOption.yaml
   sortOwnership:
-    type: string
-    minLength: 1
+    $ref: ./DynamicContentRowSortOwnership.yaml
   style:
     type:
       - string

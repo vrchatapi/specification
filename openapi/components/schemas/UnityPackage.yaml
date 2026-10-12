@@ -44,7 +44,7 @@ properties:
   pluginUrlObject:
     $ref: ./UnityPackagePluginURLObject.yaml
   scanStatus:
-    type: string
+    $ref: ./UnityPackageScanStatus.yaml
   transpilerVersion:
     type: string
     examples:

@@ -14,7 +14,7 @@ properties:
   backgroundTextureId:
     type: string
   backgroundType:
-    type: string
+    $ref: ./ProfileBackgroundType.yaml
   badges:
     type: array
     items:

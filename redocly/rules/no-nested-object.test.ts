@@ -44,6 +44,26 @@ describe("no-nested-object", () => {
 		expect(await pointers({ Parent, Named: named })).toStrictEqual([]);
 	});
 
+	test("reports an enum written inside another schema", async () => {
+		const Parent = { title: "Parent", type: "object", properties: { child: { type: "string", enum: ["a", "b"] } } };
+		expect(await pointers({ Parent })).toStrictEqual(["#/components/schemas/Parent/properties/child"]);
+	});
+
+	test("reports a set of known values written inside another schema", async () => {
+		const Parent = { title: "Parent", type: "object", properties: { child: { type: "string", "x-unknown-enum": ["a", "b"] } } };
+		expect(await pointers({ Parent })).toStrictEqual(["#/components/schemas/Parent/properties/child"]);
+	});
+
+	test("accepts the values a fallback excludes", async () => {
+		const Parent = { title: "Parent", type: "object", properties: { kind: { type: "string", not: { enum: ["a", "b"] } } } };
+		expect(await pointers({ Parent })).toStrictEqual([]);
+	});
+
+	test("accepts a single const value", async () => {
+		const Parent = { title: "Parent", type: "object", properties: { kind: { type: "string", enum: ["a"] } } };
+		expect(await pointers({ Parent })).toStrictEqual([]);
+	});
+
 	test("accepts a union that carries its own title", async () => {
 		const Union = { title: "Union", oneOf: [{ type: "string" }, reference("Named")] };
 		expect(await pointers({ Union, Named: named })).toStrictEqual([]);

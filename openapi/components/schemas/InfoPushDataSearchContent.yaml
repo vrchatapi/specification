@@ -1,0 +1,5 @@
+title: InfoPushDataSearchContent
+type: string
+x-unknown-enum:
+  - world
+  - worlds

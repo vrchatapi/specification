@@ -7,21 +7,6 @@ properties:
     items:
       type: string
   command:
-    enum:
-      - CannedWorldSearch
-      - OpenAccountUpgrade
-      - OpenAvatarsMenu
-      - OpenHelpArticle
-      - OpenListingDetails
-      - OpenSafetyMenu
-      - OpenURL
-      - OpenVRCPlusMenu
-      - OpenVRChatStore
-      - OpenWorldDetails
-      - OpenWorldsMenu
-      - scrollToShelf
-    examples:
-      - OpenURL
-    minLength: 1
+    $ref: ./InfoPushCommand.yaml
 required:
   - command

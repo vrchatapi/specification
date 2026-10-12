@@ -10,6 +10,6 @@ properties:
   listingId:
     type: string
   listingType:
-    type: string
+    $ref: ./ProductListingType.yaml
   priceTokens:
     type: integer

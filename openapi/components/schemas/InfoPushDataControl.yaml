@@ -14,9 +14,7 @@ properties:
     examples:
       - categories
   kind:
-    type: string
-    examples:
-      - filter
+    $ref: ./InfoPushDataControlKind.yaml
   label:
     $ref: ./LocalizedString.yaml
   options:

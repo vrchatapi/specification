@@ -8,11 +8,7 @@ properties:
   backgroundTextureId:
     type: string
   backgroundType:
-    enum:
-      - default
-      - gradient
-      - inventory
-      - texture
+    $ref: ../schemas/ProfileBackgroundType.yaml
   bannerColor:
     $ref: ../schemas/Color.yaml
   bannerCustomUrl:

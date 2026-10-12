@@ -1,0 +1,6 @@
+title: UnityPackageScanStatus
+type: string
+x-unknown-enum:
+  - failed
+  - passed
+  - unscanned

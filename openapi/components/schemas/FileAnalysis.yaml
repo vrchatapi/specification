@@ -11,7 +11,7 @@ properties:
   fileSize:
     type: integer
   performanceRating:
-    type: string
+    $ref: ./PerformanceRatings.yaml
   success:
     type: boolean
   uncompressedSize:

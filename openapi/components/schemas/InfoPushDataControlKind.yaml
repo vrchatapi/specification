@@ -1,0 +1,4 @@
+title: InfoPushDataControlKind
+type: string
+x-unknown-enum:
+  - filter

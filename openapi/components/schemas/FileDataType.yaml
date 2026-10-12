@@ -1,0 +1,7 @@
+title: FileDataType
+enum:
+  - delta
+  - file
+  - signature
+examples:
+  - file

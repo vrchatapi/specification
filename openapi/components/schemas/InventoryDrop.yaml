@@ -14,7 +14,7 @@ properties:
       - "null"
     format: date-time
   dropStatus:
-    type: string
+    $ref: ./InventoryDropStatus.yaml
   endDropDate:
     type: string
     examples:

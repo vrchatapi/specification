@@ -35,8 +35,7 @@ properties:
   outstanding:
     type: integer
   period:
-    type: string
-    minLength: 1
+    $ref: ./SubscriptionPeriod.yaml
   recurringAmt:
     type: number
   startDate:

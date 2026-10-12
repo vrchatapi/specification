@@ -1,0 +1,6 @@
+title: DynamicContentRowMode
+type: string
+x-unknown-enum:
+  - match
+  - population
+  - random

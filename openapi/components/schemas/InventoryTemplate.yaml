@@ -21,7 +21,7 @@ properties:
   description:
     type: string
   dropStatus:
-    type: string
+    $ref: ./InventoryDropStatus.yaml
   equipSlots:
     type: array
     items:

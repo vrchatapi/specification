@@ -1,0 +1,5 @@
+title: InfoPushDataContentSourceKind
+type: string
+x-unknown-enum:
+  - calendarDiscover
+  - instanceDiscover

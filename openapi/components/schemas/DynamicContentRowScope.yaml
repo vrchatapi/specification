@@ -1,0 +1,5 @@
+title: DynamicContentRowScope
+type: string
+x-unknown-enum:
+  - all
+  - upcoming

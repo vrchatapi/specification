@@ -24,7 +24,7 @@ properties:
   shelfIconImageId:
     $ref: ./FileID.yaml
   shelfLayout:
-    type: string
+    $ref: ./StoreShelfLayout.yaml
   shelfMobileHeroBannerImageId:
     $ref: ./FileID.yaml
   shelfMobileLogoImageId:

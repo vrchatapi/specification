@@ -1,0 +1,5 @@
+title: DynamicContentRowResultsInclusion
+type: string
+x-unknown-enum:
+  - include
+  - skip

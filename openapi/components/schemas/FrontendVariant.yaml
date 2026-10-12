@@ -1,0 +1,5 @@
+title: FrontendVariant
+enum:
+  - internal
+  - public
+default: public

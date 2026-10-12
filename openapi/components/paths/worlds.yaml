@@ -19,9 +19,7 @@ paths:
           required: false
           in: query
           schema:
-            enum:
-              - friends
-              - me
+            $ref: ../schemas/SearchWorldsUser.yaml
         - $ref: ../parameters.yaml#/userIdQuery
         - $ref: ../parameters.yaml#/number
         - $ref: ../parameters.yaml#/order

@@ -6,7 +6,7 @@ properties:
     items:
       type: string
   command:
-    type: string
+    $ref: ./InfoPushCommand.yaml
   id:
     type: string
   name:
