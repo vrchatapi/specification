@@ -3,14 +3,14 @@ type: object
 properties:
   fileId:
     $ref: ./FileID.yaml
+  needsProcessing:
+    type: boolean
   pixelSize:
     type: number
   versionNumber:
     type: number
-  needsProcessing:
-    type: boolean
 required:
   - fileId
+  - needsProcessing
   - pixelSize
   - versionNumber
-  - needsProcessing

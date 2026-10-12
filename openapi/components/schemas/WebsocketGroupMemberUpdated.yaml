@@ -2,7 +2,7 @@ title: WebsocketGroupMemberUpdated
 type: object
 properties:
   member:
-    #Todo: Is this the correct GroupMember?
+    # Todo: Is this the correct GroupMember?
     $ref: ./GroupMemberLimitedUser.yaml
 required:
   - member
