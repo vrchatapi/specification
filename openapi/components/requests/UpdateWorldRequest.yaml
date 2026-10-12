@@ -27,6 +27,8 @@ properties:
   imageUrl:
     type: string
     minLength: 1
+  metadata:
+    $ref: ../schemas/UpdateWorldRequestMetadata.yaml
   name:
     type: string
     minLength: 1

@@ -1,3 +1,6 @@
 title: WorldMetadataValue
-type: object
+type:
+  - array
+  - object
 additionalProperties: true
+items: true

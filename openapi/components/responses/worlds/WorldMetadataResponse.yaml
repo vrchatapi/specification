@@ -1,4 +1,17 @@
 content:
   application/json:
+    examples:
+      Empty:
+        value:
+          id: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          metadata: {}
+      Populated:
+        value:
+          id: wrld_5b89c79e-c340-4510-be1b-476e9fcdedcc
+          metadata:
+            BAN_INFO:
+              - https://assets.vrchat.com/world/publicban/publicBan/timout01.png
+              - https://assets.vrchat.com/world/publicban/publicBan/timout02.png
+              - https://assets.vrchat.com/world/publicban/publicBan/timout03.png
     schema:
       $ref: ../../schemas/WorldMetadata.yaml

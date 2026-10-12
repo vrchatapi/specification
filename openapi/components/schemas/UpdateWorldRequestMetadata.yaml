@@ -1,0 +1,8 @@
+title: UpdateWorldRequestMetadata
+description: Replaces the world's metadata. A string is parsed as JSON.
+anyOf:
+  - $ref: ./WorldMetadataValue.yaml
+  - type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WorldMetadataValue.yaml
