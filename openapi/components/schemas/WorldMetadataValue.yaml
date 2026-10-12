@@ -1,6 +1,5 @@
 title: WorldMetadataValue
-type:
-  - array
-  - object
-additionalProperties: true
-items: true
+oneOf:
+  - $ref: ./WorldMetadataObject.yaml
+  - type: array
+    items: true
