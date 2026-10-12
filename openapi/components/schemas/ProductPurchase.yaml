@@ -40,16 +40,7 @@ properties:
   purchaseActive:
     type: boolean
   purchaseContext:
-    type: object
-    properties:
-      locationType:
-        type: string
-        examples:
-          - undefined
-      worldId:
-        $ref: ./WorldID.yaml
-      worldName:
-        type: string
+    $ref: ./ProductPurchaseContext.yaml
   purchaseCurrentStatus:
     type: string
   purchaseDate:

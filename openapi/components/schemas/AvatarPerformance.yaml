@@ -1,0 +1,15 @@
+title: AvatarPerformance
+type: object
+properties:
+  android:
+    type: string
+  android-sort:
+    type: integer
+  ios:
+    type: string
+  ios-sort:
+    type: integer
+  standalonewindows:
+    type: string
+  standalonewindows-sort:
+    type: integer

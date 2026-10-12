@@ -4,33 +4,11 @@ properties:
   breakdown:
     type: array
     items:
-      type: object
+      $ref: ./EarningsMetricsBucket.yaml
   sellerId:
     $ref: ./UserID.yaml
   totals:
-    type: object
-    properties:
-      otpEarnings:
-        type: integer
-        minimum: 0
-      otpPurchaseCount:
-        type: integer
-        minimum: 0
-      subscriberEarnings:
-        type: integer
-        minimum: 0
-      subscriberMonths:
-        type: integer
-        minimum: 0
-      totalEarnings:
-        type: integer
-        minimum: 0
-    required:
-      - otpEarnings
-      - otpPurchaseCount
-      - subscriberEarnings
-      - subscriberMonths
-      - totalEarnings
+    $ref: ./EarningsMetricsTotals.yaml
 required:
   - breakdown
   - sellerId

@@ -1,0 +1,10 @@
+title: APIConfigIOSVersion
+type: object
+properties:
+  major:
+    type: integer
+  minor:
+    type: integer
+required:
+  - major
+  - minor

@@ -1,0 +1,4 @@
+title: APIConfigLowMemoryGoHomeTimeout
+type: object
+additionalProperties:
+  $ref: ./APIConfigLowMemoryGoHomeTimeoutValue.yaml

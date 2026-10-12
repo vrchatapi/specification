@@ -1,0 +1,4 @@
+title: GroupRoleTemplatesResponse
+type: object
+additionalProperties:
+  $ref: ./GroupRoleTemplateValues.yaml

@@ -1,0 +1,12 @@
+title: APIConfigConstantsInstancePopulationBrackets
+type: object
+properties:
+  CROWDED:
+    $ref: ./APIConfigConstantsInstancePopulationBracket.yaml
+    description: Crowded population range
+  FEW:
+    $ref: ./APIConfigConstantsInstancePopulationBracket.yaml
+    description: Few population range
+  MANY:
+    $ref: ./APIConfigConstantsInstancePopulationBracket.yaml
+    description: Many population range

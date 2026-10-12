@@ -1,0 +1,6 @@
+title: APIConfigConstantsInstance
+type: object
+properties:
+  POPULATION_BRACKETS:
+    $ref: ./APIConfigConstantsInstancePopulationBrackets.yaml
+    description: Population brackets based on instance population

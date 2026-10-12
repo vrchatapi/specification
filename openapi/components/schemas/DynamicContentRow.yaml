@@ -62,8 +62,7 @@ properties:
     items:
       type: string
   params:
-    type: object
-    additionalProperties: true
+    $ref: ./DynamicContentRowParams.yaml
   personalizedResults:
     type: string
     examples:

@@ -1,0 +1,22 @@
+title: PermissionData
+type: object
+properties:
+  badges:
+    type: array
+    description: Badges afforded the user by this permission
+    items:
+      $ref: ./BadgeID.yaml
+  max:
+    type: integer
+    description: Maximum value afforded the user by this permission
+  maxFavoriteGroups:
+    $ref: ./PermissionDataMaxFavoriteGroups.yaml
+    description: Maximum favorite groups afforded the user by this permission
+  maxFavoritesPerGroup:
+    $ref: ./PermissionDataMaxFavoritesPerGroup.yaml
+    description: Maximum favorites per group afforded the user by this permission
+  tags:
+    type: array
+    description: Tags afforded the user by this permission
+    items:
+      $ref: ./Tag.yaml

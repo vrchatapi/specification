@@ -1,0 +1,15 @@
+title: AvatarStyles
+type: object
+properties:
+  primary:
+    type:
+      - string
+      - "null"
+  secondary:
+    type:
+      - string
+      - "null"
+  supplementary:
+    type: array
+    items:
+      type: string

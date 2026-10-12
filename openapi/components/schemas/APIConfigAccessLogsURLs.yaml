@@ -1,0 +1,23 @@
+title: APIConfigAccessLogsURLs
+type: object
+properties:
+  Default:
+    type: string
+    examples:
+      - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+    format: uri
+  Pico:
+    type: string
+    examples:
+      - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+    format: uri
+  Quest:
+    type: string
+    examples:
+      - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+    format: uri
+  XRElite:
+    type: string
+    examples:
+      - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
+    format: uri

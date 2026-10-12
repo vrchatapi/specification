@@ -38,10 +38,7 @@ properties:
   domainList:
     type: array
     items:
-      type: object
-      properties:
-        domain:
-          type: string
+      $ref: ./InfoPushDataDomain.yaml
   featuredAvatarCategoryId:
     type: string
   finalName:

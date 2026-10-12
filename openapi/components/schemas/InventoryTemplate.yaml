@@ -15,7 +15,7 @@ properties:
       - "2025-06-12T20:21:15.056Z"
     format: date-time
   defaultAttributes:
-    type: object
+    $ref: ./InventoryTemplateDefaultAttributes.yaml
   description:
     type: string
   dropStatus:

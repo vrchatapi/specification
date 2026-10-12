@@ -1,12 +1,4 @@
 title: InventoryDefaultAttributes
 type: object
 additionalProperties:
-  type: object
-  properties:
-    defaultValue:
-      type: string
-    validator:
-      type: object
-      properties:
-        type:
-          type: string
+  $ref: ./InventoryDefaultAttributesValue.yaml

@@ -1,0 +1,7 @@
+title: APIConfigLowMemoryGoHomeTimeoutValue
+type: object
+properties:
+  timeout:
+    type: integer
+    examples:
+      - -1

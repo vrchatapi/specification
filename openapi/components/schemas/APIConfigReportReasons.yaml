@@ -1,0 +1,4 @@
+title: APIConfigReportReasons
+type: object
+additionalProperties:
+  $ref: ./ReportReason.yaml

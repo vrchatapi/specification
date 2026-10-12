@@ -1,0 +1,7 @@
+title: InventoryDefaultAttributesValue
+type: object
+properties:
+  defaultValue:
+    type: string
+  validator:
+    $ref: ./InventoryDefaultAttributesValueValidator.yaml

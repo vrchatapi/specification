@@ -4,4 +4,4 @@ content:
     schema:
       type: array
       items:
-        type: object
+        $ref: ../../schemas/ProductPurchaseStack.yaml

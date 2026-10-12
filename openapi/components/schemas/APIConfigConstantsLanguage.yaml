@@ -1,0 +1,6 @@
+title: APIConfigConstantsLanguage
+type: object
+properties:
+  SPOKEN_LANGUAGE_OPTIONS:
+    $ref: ./APIConfigConstantsLanguageSpokenOptions.yaml
+    description: Supported spoken language options

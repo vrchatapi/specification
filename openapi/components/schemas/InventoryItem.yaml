@@ -50,8 +50,7 @@ properties:
   itemTypeLabel:
     type: string
   last_equipped:
-    type: object
-    additionalProperties: true
+    $ref: ./InventoryItemLastEquipped.yaml
   metadata:
     $ref: ./InventoryMetadata.yaml
   name:

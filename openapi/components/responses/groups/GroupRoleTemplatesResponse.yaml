@@ -1,6 +1,4 @@
 content:
   application/json:
     schema:
-      type: object
-      additionalProperties:
-        $ref: ../../schemas/GroupRoleTemplateValues.yaml
+      $ref: ../../schemas/GroupRoleTemplatesResponse.yaml

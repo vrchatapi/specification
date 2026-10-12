@@ -1,0 +1,4 @@
+title: APIConfigQuestMinimumLowMemoryThreshold
+type: object
+additionalProperties:
+  type: integer

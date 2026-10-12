@@ -9,12 +9,7 @@ properties:
   note:
     type: string
   targetUser:
-    type: object
-    properties:
-      id:
-        $ref: ./UserID.yaml
-      displayName:
-        type: string
+    $ref: ./UserNoteTargetUser.yaml
   targetUserId:
     $ref: ./UserID.yaml
   userId:

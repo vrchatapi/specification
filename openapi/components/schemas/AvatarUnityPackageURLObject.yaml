@@ -1,0 +1,5 @@
+title: AvatarUnityPackageURLObject
+type: object
+properties:
+  unityPackageUrl:
+    type: string

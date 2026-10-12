@@ -1,0 +1,11 @@
+title: APIConfigOfflineAnalysis
+type: object
+properties:
+  android:
+    type: boolean
+    description: Whether to allow offline analysis
+    default: true
+  standalonewindows:
+    type: boolean
+    description: Whether to allow offline analysis
+    default: true

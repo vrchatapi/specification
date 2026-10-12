@@ -4,15 +4,7 @@ properties:
   otp:
     type: array
     items:
-      type: object
-      properties:
-        code:
-          type: string
-        used:
-          type: boolean
-      required:
-        - code
-        - used
+      $ref: ./TwoFactorRecoveryCode.yaml
   requiresTwoFactorAuth:
     type: array
     items:

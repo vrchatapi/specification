@@ -1,0 +1,3 @@
+title: InfoPushDataContentSourceParams
+type: object
+additionalProperties: true

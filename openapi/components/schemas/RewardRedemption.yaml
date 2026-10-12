@@ -2,12 +2,7 @@ title: RewardRedemption
 type: object
 properties:
   data:
-    type: object
-    properties:
-      badge:
-        $ref: ./RewardBadge.yaml
-      item:
-        $ref: ./InventoryTemplate.yaml
+    $ref: ./RewardRedemptionData.yaml
   type:
     type: string
     description: One of `badge`, `item`, ...

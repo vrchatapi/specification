@@ -1,0 +1,4 @@
+title: InfoPushDataContentSourceComputedParams
+type: object
+additionalProperties:
+  type: string

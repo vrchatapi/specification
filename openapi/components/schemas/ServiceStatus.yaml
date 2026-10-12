@@ -11,7 +11,7 @@ properties:
   progress:
     type: array
     items:
-      type: object
+      $ref: ./ServiceStatusProgress.yaml
   requesterUserId:
     $ref: ./UserID.yaml
     description: The id of the user who requested this service.

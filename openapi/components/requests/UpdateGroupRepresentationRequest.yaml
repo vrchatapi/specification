@@ -1,0 +1,8 @@
+title: UpdateGroupRepresentationRequest
+type: object
+properties:
+  isRepresenting:
+    type: boolean
+    description: Whether the user is representing the group.
+required:
+  - isRepresenting

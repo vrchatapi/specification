@@ -26,28 +26,7 @@ properties:
     description: Unknown, probably voice optimization testing
     default: true
   accessLogsUrls:
-    type: object
-    properties:
-      Default:
-        type: string
-        examples:
-          - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
-        format: uri
-      Pico:
-        type: string
-        examples:
-          - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
-        format: uri
-      Quest:
-        type: string
-        examples:
-          - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
-        format: uri
-      XRElite:
-        type: string
-        examples:
-          - https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-output-logs#h_01HT1ZV67JGKX5AE4R1P28XMXR
-        format: uri
+    $ref: ./APIConfigAccessLogsURLs.yaml
   address:
     type: string
     description: VRChat's office address
@@ -90,27 +69,7 @@ properties:
     items:
       type: string
   avatarPerfLimiter:
-    type: object
-    properties:
-      AndroidMobile:
-        $ref: ./PerformanceLimiterInfo.yaml
-      PC:
-        $ref: ./PerformanceLimiterInfo.yaml
-      Pico:
-        $ref: ./PerformanceLimiterInfo.yaml
-      Quest:
-        $ref: ./PerformanceLimiterInfo.yaml
-      XRElite:
-        $ref: ./PerformanceLimiterInfo.yaml
-      iOSMobile:
-        $ref: ./PerformanceLimiterInfo.yaml
-    required:
-      - AndroidMobile
-      - PC
-      - Pico
-      - Quest
-      - XRElite
-      - iOSMobile
+    $ref: ./APIConfigAvatarPerfLimiter.yaml
   chatboxLogBufferSeconds:
     type: integer
     description: Unknown
@@ -385,35 +344,18 @@ properties:
     items:
       type: string
   iosVersion:
-    type: object
+    $ref: ./APIConfigIOSVersion.yaml
     description: Current version for iOS
-    properties:
-      major:
-        type: integer
-      minor:
-        type: integer
-    required:
-      - major
-      - minor
   jobsEmail:
     type: string
     description: VRChat's job application email
     minLength: 1
   loadingScreenWeights:
-    type: object
+    $ref: ./APIConfigLoadingScreenWeightsByAudience.yaml
     description: Relative weight of each info-push category on the loading screen, per audience.
-    additionalProperties:
-      $ref: ./APIConfigLoadingScreenWeights.yaml
   lowMemoryGoHomeTimeout:
-    type: object
+    $ref: ./APIConfigLowMemoryGoHomeTimeout.yaml
     description: Low-memory timeout, keyed by platform.
-    additionalProperties:
-      type: object
-      properties:
-        timeout:
-          type: integer
-          examples:
-            - -1
   maxUserEmoji:
     type: integer
     description: The maximum number of custom emoji each user may have at a given time.
@@ -427,42 +369,8 @@ properties:
     examples:
       - 2023.0.0f0
   minSupportedClientBuildNumber:
-    type: object
+    $ref: ./APIConfigMinSupportedClientBuildNumber.yaml
     description: Minimum supported client build number for various platforms
-    properties:
-      AppStore:
-        $ref: ./PlatformBuildInfo.yaml
-      Default:
-        $ref: ./PlatformBuildInfo.yaml
-      Firebase:
-        $ref: ./PlatformBuildInfo.yaml
-      FirebaseiOS:
-        $ref: ./PlatformBuildInfo.yaml
-      GooglePlay:
-        $ref: ./PlatformBuildInfo.yaml
-      PC:
-        $ref: ./PlatformBuildInfo.yaml
-      PicoStore:
-        $ref: ./PlatformBuildInfo.yaml
-      QuestAppLab:
-        $ref: ./PlatformBuildInfo.yaml
-      QuestStore:
-        $ref: ./PlatformBuildInfo.yaml
-      TestFlight:
-        $ref: ./PlatformBuildInfo.yaml
-      XRElite:
-        $ref: ./PlatformBuildInfo.yaml
-    required:
-      - AppStore
-      - Default
-      - Firebase
-      - FirebaseiOS
-      - GooglePlay
-      - PC
-      - PicoStore
-      - QuestStore
-      - TestFlight
-      - XRElite
   minimumUnityVersionForUploads:
     type: string
     description: Minimum Unity version required for uploading assets
@@ -476,17 +384,8 @@ properties:
     description: Used in-game to notify a user they aren't allowed to select avatars in private worlds
     minLength: 1
   offlineAnalysis:
-    type: object
+    $ref: ./APIConfigOfflineAnalysis.yaml
     description: Whether to allow offline analysis
-    properties:
-      android:
-        type: boolean
-        description: Whether to allow offline analysis
-        default: true
-      standalonewindows:
-        type: boolean
-        description: Whether to allow offline analysis
-        default: true
   photonNameserverOverrides:
     type: array
     description: Unknown
@@ -524,21 +423,17 @@ properties:
     type: string
     description: Public key, hex encoded
   questMinimumLowMemoryThreshold:
-    type: object
+    $ref: ./APIConfigQuestMinimumLowMemoryThreshold.yaml
     description: Low-memory threshold, keyed by platform.
-    additionalProperties:
-      type: integer
   reportCategories:
-    type: object
+    $ref: ./APIConfigReportCategories.yaml
     description: Categories available for reporting objectionable content
-    additionalProperties:
-      $ref: ./ReportCategory.yaml
   reportFormUrl:
     type: string
     description: URL to the report form
     default: "https://help.vrchat.com/hc/en-us/requests/new?ticket_form_id=1500000182242&tf_360056455174=user_report&tf_360057451993={userId}&tf_1500001445142={reportedId}&tf_subject={reason} {category} By {contentType} {reportedName}&tf_description={description}"
   reportOptions:
-    type: object
+    $ref: ./APIConfigReportOptions.yaml
     description: |-
       Options for reporting content.
       Select a key+value from this mapping as the `type` of the report.
@@ -546,17 +441,9 @@ properties:
       reportCategories[category] contains user-facing text to display for all possible categories.
       Select one value from the array at reportOptions[type][category] as the `reason` of the report.
       reportReasons[reason] contains user-facing text to display for all possible categories.
-    additionalProperties:
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          type: string
   reportReasons:
-    type: object
+    $ref: ./APIConfigReportReasons.yaml
     description: Reasons available for submitting a report
-    additionalProperties:
-      $ref: ./ReportReason.yaml
   requireAgeVerificationBetaTag:
     type: boolean
   sdkDeveloperFaqUrl:

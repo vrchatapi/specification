@@ -8,9 +8,7 @@ properties:
     examples:
       - https://api.vrchat.cloud/api/1/file/file_cd0caa7b-69ba-4715-8dfe-7d667a9d2537/65/file
   assetUrlObject:
-    type: object
-    examples:
-      - {}
+    $ref: ./UnityPackageAssetURLObject.yaml
   assetVersion:
     type: integer
     examples:
@@ -44,9 +42,7 @@ properties:
     examples:
       - ""
   pluginUrlObject:
-    type: object
-    examples:
-      - {}
+    $ref: ./UnityPackagePluginURLObject.yaml
   scanStatus:
     type: string
   transpilerVersion:

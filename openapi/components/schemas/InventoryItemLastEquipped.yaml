@@ -1,0 +1,3 @@
+title: InventoryItemLastEquipped
+type: object
+additionalProperties: true

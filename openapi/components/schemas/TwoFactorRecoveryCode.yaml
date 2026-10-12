@@ -1,0 +1,10 @@
+title: TwoFactorRecoveryCode
+type: object
+properties:
+  code:
+    type: string
+  used:
+    type: boolean
+required:
+  - code
+  - used

@@ -5,7 +5,7 @@ properties:
   id:
     $ref: ./WorldID.yaml
   metadata:
-    type: object
+    $ref: ./WorldMetadataValue.yaml
 required:
   - id
   - metadata

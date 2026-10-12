@@ -6,9 +6,7 @@ properties:
     examples:
       - attributionId
   computedParams:
-    type: object
-    additionalProperties:
-      type: string
+    $ref: ./InfoPushDataContentSourceComputedParams.yaml
   endpoint:
     type: string
     examples:
@@ -26,11 +24,9 @@ properties:
       - $ref: ./InfoPushDataContentSourcePagination.yaml
       - type: "null"
   paramModifiability:
-    type: object
-    additionalProperties: true
+    $ref: ./InfoPushDataContentSourceParamModifiability.yaml
   params:
-    type: object
-    additionalProperties: true
+    $ref: ./InfoPushDataContentSourceParams.yaml
   responseType:
     type: string
     examples:

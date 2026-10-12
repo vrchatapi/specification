@@ -4,7 +4,7 @@ properties:
   errors:
     type: array
     items:
-      type: object
+      $ref: ./InventoryConsumptionResultsError.yaml
   inventoryItems:
     type: array
     items:

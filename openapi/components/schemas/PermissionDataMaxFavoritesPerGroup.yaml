@@ -1,0 +1,4 @@
+title: PermissionDataMaxFavoritesPerGroup
+type: object
+additionalProperties:
+  type: integer

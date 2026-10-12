@@ -1,0 +1,22 @@
+title: APIConfigAvatarPerfLimiter
+type: object
+properties:
+  AndroidMobile:
+    $ref: ./PerformanceLimiterInfo.yaml
+  PC:
+    $ref: ./PerformanceLimiterInfo.yaml
+  Pico:
+    $ref: ./PerformanceLimiterInfo.yaml
+  Quest:
+    $ref: ./PerformanceLimiterInfo.yaml
+  XRElite:
+    $ref: ./PerformanceLimiterInfo.yaml
+  iOSMobile:
+    $ref: ./PerformanceLimiterInfo.yaml
+required:
+  - AndroidMobile
+  - PC
+  - Pico
+  - Quest
+  - XRElite
+  - iOSMobile

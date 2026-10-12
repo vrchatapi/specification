@@ -1,0 +1,15 @@
+title: AvatarPublishedListing
+type: object
+properties:
+  description:
+    type: string
+  displayName:
+    type: string
+  imageId:
+    type: string
+  listingId:
+    type: string
+  listingType:
+    type: string
+  priceTokens:
+    type: integer

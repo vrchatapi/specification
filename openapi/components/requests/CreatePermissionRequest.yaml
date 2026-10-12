@@ -1,0 +1,6 @@
+title: CreatePermissionRequest
+type: object
+required:
+  - name
+allOf:
+  - $ref: ./UpdatePermissionRequest.yaml

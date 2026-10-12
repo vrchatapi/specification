@@ -1,0 +1,4 @@
+title: APIConfigLoadingScreenWeightsByAudience
+type: object
+additionalProperties:
+  $ref: ./APIConfigLoadingScreenWeights.yaml

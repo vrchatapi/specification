@@ -1,0 +1,5 @@
+title: InventoryDefaultAttributesValueValidator
+type: object
+properties:
+  type:
+    type: string

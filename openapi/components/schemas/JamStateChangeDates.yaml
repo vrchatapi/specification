@@ -1,0 +1,25 @@
+title: JamStateChangeDates
+type: object
+properties:
+  closed:
+    type:
+      - string
+      - "null"
+    format: date-time
+  submissionsClosed:
+    type:
+      - string
+      - "null"
+    format: date-time
+  submissionsOpened:
+    type:
+      - string
+      - "null"
+    format: date-time
+  winnersSelected:
+    type:
+      - string
+      - "null"
+    examples:
+      - null
+    format: date-time

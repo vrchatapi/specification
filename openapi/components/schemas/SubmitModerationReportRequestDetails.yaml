@@ -1,0 +1,24 @@
+title: SubmitModerationReportRequestDetails
+type: object
+properties:
+  fileId:
+    $ref: ./FileID.yaml
+  holderId:
+    $ref: ./UserID.yaml
+  imageType:
+    type: string
+    description: Relevant detail for reports about image content, such as emoji.
+  instanceAgeGated:
+    type: boolean
+    description: Relevant detail for reports taking place from within an instance.
+  instanceType:
+    type: string
+    description: Relevant detail for reports taking place from within an instance.
+  suggestedWarnings:
+    type: array
+    description: Relevant detail for reports about content that might not be tagged properly.
+    items:
+      $ref: ./ContentFilter.yaml
+  userInSameInstance:
+    type: boolean
+    description: Relevant detail for reports involving another user in the same instance world.

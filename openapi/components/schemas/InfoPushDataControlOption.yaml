@@ -8,8 +8,7 @@ properties:
   label:
     $ref: ./LocalizedString.yaml
   params:
-    type: object
-    additionalProperties: true
+    $ref: ./InfoPushDataControlOptionParams.yaml
 required:
   - id
   - label

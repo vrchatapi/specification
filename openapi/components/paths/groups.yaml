@@ -972,13 +972,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                isRepresenting:
-                  type: boolean
-                  description: Whether the user is representing the group.
-              required:
-                - isRepresenting
+              $ref: ../requests/UpdateGroupRepresentationRequest.yaml
       security:
         - authCookie: []
       responses:

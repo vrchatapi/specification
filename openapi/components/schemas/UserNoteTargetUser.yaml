@@ -1,0 +1,7 @@
+title: UserNoteTargetUser
+type: object
+properties:
+  displayName:
+    type: string
+  id:
+    $ref: ./UserID.yaml

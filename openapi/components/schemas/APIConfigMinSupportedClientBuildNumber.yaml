@@ -1,0 +1,36 @@
+title: APIConfigMinSupportedClientBuildNumber
+type: object
+properties:
+  AppStore:
+    $ref: ./PlatformBuildInfo.yaml
+  Default:
+    $ref: ./PlatformBuildInfo.yaml
+  Firebase:
+    $ref: ./PlatformBuildInfo.yaml
+  FirebaseiOS:
+    $ref: ./PlatformBuildInfo.yaml
+  GooglePlay:
+    $ref: ./PlatformBuildInfo.yaml
+  PC:
+    $ref: ./PlatformBuildInfo.yaml
+  PicoStore:
+    $ref: ./PlatformBuildInfo.yaml
+  QuestAppLab:
+    $ref: ./PlatformBuildInfo.yaml
+  QuestStore:
+    $ref: ./PlatformBuildInfo.yaml
+  TestFlight:
+    $ref: ./PlatformBuildInfo.yaml
+  XRElite:
+    $ref: ./PlatformBuildInfo.yaml
+required:
+  - AppStore
+  - Default
+  - Firebase
+  - FirebaseiOS
+  - GooglePlay
+  - PC
+  - PicoStore
+  - QuestStore
+  - TestFlight
+  - XRElite

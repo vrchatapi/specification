@@ -1,0 +1,4 @@
+title: APIConfigReportOptions
+type: object
+additionalProperties:
+  $ref: ./APIConfigReportOptionsValue.yaml

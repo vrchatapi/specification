@@ -4,4 +4,4 @@ content:
       Updated:
         value: {}
     schema:
-      type: object
+      $ref: ../../schemas/UpdateFavoriteGroupResponse.yaml

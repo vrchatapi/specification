@@ -1,0 +1,9 @@
+title: APIConfigConstantsInstancePopulationBracket
+type: object
+properties:
+  max:
+    type: integer
+    description: Maximum population of an instance in the bracket
+  min:
+    type: integer
+    description: Minimum population of an instance in the bracket
