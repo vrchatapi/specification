@@ -1,2 +1,3 @@
 title: UpdateFavoriteGroupResponse
 type: object
+additionalProperties: true

@@ -1,2 +1,3 @@
 title: AvatarAssetURLObject
 type: object
+additionalProperties: true

@@ -1,2 +1,3 @@
 title: InventoryTemplateDefaultAttributes
 type: object
+additionalProperties: true

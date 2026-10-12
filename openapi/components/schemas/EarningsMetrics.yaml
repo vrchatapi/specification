@@ -4,7 +4,7 @@ properties:
   breakdown:
     type: array
     items:
-      $ref: ./EarningsMetricsBucket.yaml
+      $ref: ./Unknown.yaml
   sellerId:
     $ref: ./UserID.yaml
   totals:

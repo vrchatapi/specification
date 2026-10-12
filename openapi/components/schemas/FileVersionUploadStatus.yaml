@@ -5,7 +5,7 @@ properties:
     type: array
     description: Unknown
     items:
-      $ref: ./FileVersionUploadStatusETag.yaml
+      $ref: ./Unknown.yaml
     minItems: 0
   fileName:
     type: string
@@ -25,7 +25,7 @@ properties:
   parts:
     type: array
     items:
-      $ref: ./FileVersionUploadStatusPart.yaml
+      $ref: ./Unknown.yaml
     minItems: 0
   uploadId:
     type: string

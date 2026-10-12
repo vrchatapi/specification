@@ -3,4 +3,4 @@ content:
     schema:
       type: array
       items:
-        $ref: ../../schemas/BulkPurchase.yaml
+        $ref: ../../schemas/Unknown.yaml
