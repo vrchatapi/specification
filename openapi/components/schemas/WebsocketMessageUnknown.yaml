@@ -22,6 +22,7 @@ properties:
         - group-member-updated
         - group-role-updated
         - hide-notification
+        - instance-closed
         - instance-queue-joined
         - instance-queue-ready
         - modified-image-update
