@@ -8,4 +8,4 @@ properties:
     $ref: ./LocationID.yaml
 required:
   - expiry
-  - location
+  - instanceLocation

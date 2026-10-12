@@ -6,5 +6,5 @@ properties:
   position:
     type: integer
 required:
-  - location
+  - instanceLocation
   - position

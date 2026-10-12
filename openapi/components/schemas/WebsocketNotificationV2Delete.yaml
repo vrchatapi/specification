@@ -4,7 +4,7 @@ properties:
   ids:
     type: array
     items:
-      - $ref: ./NotificationID.yaml
+      $ref: ./NotificationID.yaml
   version:
     type: integer
 required:

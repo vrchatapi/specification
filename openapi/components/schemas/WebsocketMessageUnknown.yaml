@@ -9,6 +9,7 @@ properties:
       enum:
         - clear-notification
         - content-refresh
+        - economy-update
         - friend-active
         - friend-add
         - friend-delete
@@ -23,6 +24,7 @@ properties:
         - hide-notification
         - instance-queue-joined
         - instance-queue-ready
+        - modified-image-update
         - notification
         - notification-v2
         - notification-v2-delete
