@@ -2,7 +2,8 @@ title: WebsocketNotificationUnknown
 type: object
 description: A notification whose `type` has no schema of its own.
 properties:
-  details: {}
+  details:
+    $ref: ./Unknown.yaml
   type:
     type: string
     not:

@@ -1,4 +1,4 @@
-title: Listing
+title: ProductListing
 type: object
 properties:
   active:

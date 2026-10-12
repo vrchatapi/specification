@@ -1,4 +1,4 @@
-title: NotificationV2Encoded
+title: WebsocketNotificationV2Encoded
 type: object
 properties:
   content:

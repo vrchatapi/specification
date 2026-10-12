@@ -1,7 +1,6 @@
 title: AgreementCode
 description: The type of agreement.
-enum:
-  - content.copyright.owned
 default: content.copyright.owned
+const: content.copyright.owned
 examples:
   - content.copyright.owned

@@ -2,7 +2,8 @@ title: WebsocketMessageUnknown
 type: object
 description: A websocket message whose `type` has no schema of its own.
 properties:
-  content: {}
+  content:
+    $ref: ./Unknown.yaml
   type:
     type: string
     not:
