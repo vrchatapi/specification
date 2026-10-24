@@ -1,0 +1,7 @@
+title: ColonlessOffsetDateTime
+type: string
+description: A date and time in the form of an RFC 3339 `date-time`, except that the UTC offset can be written without its colon, as in `+0000`.
+examples:
+  - 2026-08-06T17:00:00.000+0000
+  - "2026-09-21T02:57:48.587Z"
+format: date-time

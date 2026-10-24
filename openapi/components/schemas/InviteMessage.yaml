@@ -21,8 +21,7 @@ properties:
     maximum: 11
     minimum: 0
   updatedAt:
-    type: string
-    format: date-time
+    $ref: ./ColonlessOffsetDateTime.yaml
 required:
   - canBeUpdated
   - id

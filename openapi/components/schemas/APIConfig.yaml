@@ -285,13 +285,9 @@ properties:
     type: string
     description: Unknown
   economyPauseEnd:
-    type: string
-    description: Unknown
-    format: date-time
+    $ref: ./ColonlessOffsetDateTime.yaml
   economyPauseStart:
-    type: string
-    description: Unknown
-    format: date-time
+    $ref: ./ColonlessOffsetDateTime.yaml
   economyPurchaseRepairEnabled:
     type: boolean
     description: Unknown
