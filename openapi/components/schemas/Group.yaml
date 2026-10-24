@@ -36,6 +36,8 @@ properties:
     type: array
     items:
       $ref: ./GroupGallery.yaml
+  groupId:
+    $ref: ./GroupID.yaml
   iconId:
     type:
       - string
