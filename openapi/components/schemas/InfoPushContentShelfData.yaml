@@ -19,8 +19,9 @@ properties:
     $ref: ./InfoPushDataPresentation.yaml
   schemaVersion:
     type: integer
-    x-unknown-enum:
+    enum:
       - 1
+    x-incomplete: true
   subtitle:
     type: string
     examples:

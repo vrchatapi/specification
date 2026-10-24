@@ -49,8 +49,8 @@ describe("no-nested-object", () => {
 		expect(await pointers({ Parent })).toStrictEqual(["#/components/schemas/Parent/properties/child"]);
 	});
 
-	test("reports a set of known values written inside another schema", async () => {
-		const Parent = { title: "Parent", type: "object", properties: { child: { type: "string", "x-unknown-enum": ["a", "b"] } } };
+	test("reports an incomplete enum written inside another schema", async () => {
+		const Parent = { title: "Parent", type: "object", properties: { child: { type: "string", enum: ["a", "b"], "x-incomplete": true } } };
 		expect(await pointers({ Parent })).toStrictEqual(["#/components/schemas/Parent/properties/child"]);
 	});
 

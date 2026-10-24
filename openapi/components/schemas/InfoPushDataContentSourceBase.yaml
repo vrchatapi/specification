@@ -5,8 +5,9 @@ properties:
     $ref: ./InfoPushDataContentSourceComputedParams.yaml
   method:
     type: string
-    x-unknown-enum:
+    enum:
       - GET
+    x-incomplete: true
   pagination:
     anyOf:
       - $ref: ./InfoPushDataContentSourcePagination.yaml
@@ -15,8 +16,9 @@ properties:
     $ref: ./InfoPushDataContentSourceParamModifiability.yaml
   schemaVersion:
     type: integer
-    x-unknown-enum:
+    enum:
       - 1
+    x-incomplete: true
 required:
   - computedParams
   - method

@@ -1,6 +1,7 @@
 title: UnityPackageScanStatus
 type: string
-x-unknown-enum:
+enum:
   - failed
   - passed
   - unscanned
+x-incomplete: true

@@ -1,7 +1,6 @@
 title: DynamicContentRowSortHeading
 type: string
-minLength: 1
-x-unknown-enum:
+enum:
   - active
   - heat
   - hotness
@@ -16,3 +15,5 @@ x-unknown-enum:
   - trendRank
   - trending
   - updated
+minLength: 1
+x-incomplete: true

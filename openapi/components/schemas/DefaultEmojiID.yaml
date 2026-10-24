@@ -1,7 +1,7 @@
 title: DefaultEmojiID
 type: string
 description: A default emoji.
-x-unknown-enum:
+enum:
   - default_angry
   - default_arrowpoint
   - default_bats
@@ -67,3 +67,4 @@ x-unknown-enum:
   - default_web
   - default_wow
   - default_zzz
+x-incomplete: true

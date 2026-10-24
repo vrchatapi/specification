@@ -25,6 +25,10 @@ describe("no-implied-type", () => {
 		]);
 	});
 
+	test("leaves the type of an incomplete enum, which the published bundles keep without the enum", async () => {
+		expect(await messages({ Mood: { title: "Mood", type: "string", enum: ["happy", "sad"], "x-incomplete": true } })).toStrictEqual([]);
+	});
+
 	test("leaves a type the values do not imply, and a type without enum or const", async () => {
 		expect(
 			await messages({

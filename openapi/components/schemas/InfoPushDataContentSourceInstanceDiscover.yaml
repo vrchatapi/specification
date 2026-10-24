@@ -3,8 +3,9 @@ type: object
 properties:
   attributionResponseField:
     type: string
-    x-unknown-enum:
+    enum:
       - attributionId
+    x-incomplete: true
   endpoint:
     const: /api/1/instances/discover
   kind:

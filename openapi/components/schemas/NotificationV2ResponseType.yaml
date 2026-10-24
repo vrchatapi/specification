@@ -1,9 +1,10 @@
 title: NotificationV2ResponseType
 type: string
-x-unknown-enum:
+enum:
   - accept
   - block
   - boop
   - decline
   - delete
   - unsubscribe
+x-incomplete: true

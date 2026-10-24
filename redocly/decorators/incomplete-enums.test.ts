@@ -4,15 +4,15 @@ import { describe, expect, test } from "bun:test";
 import plugin from "../plugin.ts";
 
 async function bundle(schemas: Record<string, unknown>, options: Record<string, unknown> = {}) {
-	const config = await createConfig({ plugins: [plugin()], decorators: { "vrchat/unknown-enums": { severity: "on", ...options } } });
+	const config = await createConfig({ plugins: [plugin()], decorators: { "vrchat/incomplete-enums": { severity: "on", ...options } } });
 	const source = JSON.stringify({ openapi: "3.2.0", info: { title: "fixture", version: "1" }, paths: {}, components: { schemas } });
 	return (await bundleFromString({ source, config })).bundle.parsed.components.schemas as Record<string, unknown>;
 }
 
-const Color = { title: "Color", type: "string", "x-unknown-enum": ["red", "green"] };
+const Color = { title: "Color", type: "string", enum: ["red", "green"], "x-incomplete": true };
 
-describe("unknown-enums", () => {
-	test("closes the schema on its known values in the test bundle", async () => {
+describe("incomplete-enums", () => {
+	test("keeps the known values as the enum in the test bundle", async () => {
 		const schemas = await bundle({ Color }, { close: true });
 		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", enum: ["red", "green"] });
 	});
@@ -27,8 +27,14 @@ describe("unknown-enums", () => {
 		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", examples: ["red"] });
 	});
 
-	test("leaves a schema without known values alone", async () => {
-		const Shade = { title: "Shade", type: "string", examples: ["dark"] };
+	test("leaves a complete enum alone", async () => {
+		const Shade = { title: "Shade", type: "string", enum: ["dark", "light"] };
+		expect((await bundle({ Shade })).Shade).toStrictEqual(Shade);
 		expect((await bundle({ Shade }, { close: true })).Shade).toStrictEqual(Shade);
+	});
+
+	test("leaves a schema without an enum alone", async () => {
+		const Name = { title: "Name", type: "string", examples: ["aries"] };
+		expect((await bundle({ Name }, { close: true })).Name).toStrictEqual(Name);
 	});
 });

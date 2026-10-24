@@ -1,4 +1,5 @@
 title: InfoPushDataControlKind
 type: string
-x-unknown-enum:
+enum:
   - filter
+x-incomplete: true

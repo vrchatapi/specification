@@ -1,5 +1,6 @@
 title: StoreShelfLayout
 type: string
-x-unknown-enum:
+enum:
   - col5
   - highlightLeft
+x-incomplete: true

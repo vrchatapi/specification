@@ -13,7 +13,7 @@ description: |-
   | `group` | `public` | | `groupPublic` |
   | `group` | `plus` | | `groupPlus` |
   | `group` | `members` | | `group` |
-x-unknown-enum:
+enum:
   - friends
   - friendsPlus
   - group
@@ -22,3 +22,4 @@ x-unknown-enum:
   - invite
   - invitePlus
   - public
+x-incomplete: true

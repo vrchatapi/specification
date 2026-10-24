@@ -1,7 +1,8 @@
 title: InventoryDropStatus
 type: string
-x-unknown-enum:
+enum:
   - active
   - draft
   - live
   - scheduled
+x-incomplete: true

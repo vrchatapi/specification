@@ -26,7 +26,13 @@ export function impliedType(schema: Record<string, unknown>): Array<JsonType> | 
 	return ordered.length === 1 ? ordered[0] : ordered;
 }
 
+/**
+ * Whether a schema's `type` restates what its `enum` or `const` already fixes.
+ * An incomplete enum's never does: the published bundles drop that `enum`, so
+ * its `type` is all a client sees.
+ */
 export function isImpliedType(schema: Record<string, unknown>): boolean {
+	if (schema["x-incomplete"] === true) return false;
 	const implied = impliedType(schema);
 	return implied !== undefined && JSON.stringify(schema.type) === JSON.stringify(implied);
 }

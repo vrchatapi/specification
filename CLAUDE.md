@@ -23,10 +23,11 @@ jq -r '[.log.entries[] | select(.request.url | contains("/users/")) | .response.
 - `nullable: true` means JSON `null` was captured. A field that is sometimes
   absent is not nullable.
 - Close an `enum` only when the set is known. Two observed values do not make a
-  set; a generated client will reject the third. Until it is known, list the
-  values seen so far as `x-unknown-enum: [...]`: `vrchat/unknown-enums` makes them
-  the `enum` in `dist/openapi-test.yaml`, so the suite fails on a new value, and
-  the `examples` everywhere else, so clients stay open to it.
+  set; a generated client will reject the third. Until it is known, write the
+  values seen so far as the `enum` and mark it `x-incomplete: true`:
+  `vrchat/incomplete-enums` keeps the `enum` in `dist/openapi-test.yaml`, so the
+  suite fails on a new value, and turns it into `examples` everywhere else, so
+  clients stay open to it.
 - `/config` returns decoy properties, plausible-looking names VRChat rerolls at
   random. Never document one, and keep `APIConfig` `additionalProperties: true`.
 
