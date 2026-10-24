@@ -14,17 +14,17 @@ const Color = { title: "Color", type: "string", enum: ["red", "green"], "x-incom
 describe("incomplete-enums", () => {
 	test("keeps the known values as the enum in the test bundle", async () => {
 		const schemas = await bundle({ Color }, { close: true });
-		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", enum: ["red", "green"] });
+		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", enum: ["red", "green"], "x-incomplete": true });
 	});
 
-	test("lists the known values as examples elsewhere", async () => {
+	test("lists the known values as examples elsewhere, still marked incomplete", async () => {
 		const schemas = await bundle({ Color });
-		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", examples: ["red", "green"] });
+		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", examples: ["red", "green"], "x-incomplete": true });
 	});
 
 	test("keeps examples a schema already gives", async () => {
 		const schemas = await bundle({ Color: { ...Color, examples: ["red"] } });
-		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", examples: ["red"] });
+		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", examples: ["red"], "x-incomplete": true });
 	});
 
 	test("leaves a complete enum alone", async () => {

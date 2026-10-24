@@ -27,7 +27,8 @@ jq -r '[.log.entries[] | select(.request.url | contains("/users/")) | .response.
   values seen so far as the `enum` and mark it `x-incomplete: true`:
   `vrchat/incomplete-enums` keeps the `enum` in `dist/openapi-test.yaml`, so the
   suite fails on a new value, and turns it into `examples` everywhere else, so
-  clients stay open to it.
+  clients stay open to it. Every bundle keeps `x-incomplete`, so a generator can
+  still offer the known values, as TypeScript's `'a' | 'b' | (string & {})`.
 - `/config` returns decoy properties, plausible-looking names VRChat rerolls at
   random. Never document one, and keep `APIConfig` `additionalProperties: true`.
 
