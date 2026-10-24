@@ -32,9 +32,9 @@ properties:
   period:
     $ref: ./SubscriptionPeriod.yaml
   periodAmount:
-    anyOf:
-      - $ref: ./Unknown.yaml
-      - type: "null"
+    type:
+      - integer
+      - "null"
   picoSku:
     type: string
     minLength: 1
