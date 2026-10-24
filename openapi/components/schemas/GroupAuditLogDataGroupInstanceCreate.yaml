@@ -9,8 +9,10 @@ properties:
   groupAccessType:
     $ref: ./GroupAccessType.yaml
   roleIds:
-    $ref: ./GroupRoleIDList.yaml
     description: The role IDs that have access to the instance.
+    anyOf:
+      - $ref: ./GroupRoleIDList.yaml
+      - type: "null"
 required:
   - calendarEntryId
   - groupAccessType
