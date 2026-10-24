@@ -14,7 +14,9 @@ properties:
     items:
       type: string
   marketplace:
-    type: string
+    type:
+      - string
+      - "null"
   maxPrice:
     type: integer
   minPrice:
@@ -27,6 +29,10 @@ properties:
       type: string
   params:
     $ref: ./DynamicContentRowParams.yaml
+  primaryStyle:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   sortHeading:
     $ref: ./DynamicContentRowSortHeading.yaml
   sortOrder:

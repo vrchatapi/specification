@@ -3,21 +3,33 @@ type: object
 properties:
   body:
     type: string
+  category:
+    type: string
   cta:
     $ref: ./InfoPushDataCallToAction.yaml
   deliveryBehavior:
     $ref: ./InfoPushDataDeliveryBehavior.yaml
   imageFileId:
     $ref: ./FileID.yaml
+  imageUrl:
+    type: string
   mediaType:
     type: string
     examples:
       - video
+  name:
+    type: string
+  onPressed:
+    $ref: ./InfoPushDataClickable.yaml
   promotion:
     $ref: ./InfoPushDataPromotion.yaml
   showInWorldIds:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   template:
+    type: string
+  title:
     type: string
   videoFileId:
     $ref: ./FileID.yaml

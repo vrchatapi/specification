@@ -11,6 +11,7 @@ enum:
   - OpenVRChatStore
   - OpenWorldDetails
   - OpenWorldsMenu
+  - event
   - scrollToShelf
 examples:
   - OpenURL
