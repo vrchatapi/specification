@@ -2,6 +2,7 @@ title: NotificationV2ResponseType
 type: string
 x-unknown-enum:
   - accept
+  - block
   - boop
   - decline
   - delete

@@ -11,7 +11,9 @@ properties:
   details:
     $ref: ./NotificationV2DetailsBoop.yaml
   displayData:
-    $ref: ./Unknown.yaml
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
   expiresAt:
     type: string
     format: date-time

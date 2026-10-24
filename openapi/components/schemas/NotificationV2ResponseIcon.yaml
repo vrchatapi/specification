@@ -1,6 +1,8 @@
 title: NotificationV2ResponseIcon
 type: string
 x-unknown-enum:
+  - ban
   - bell
   - bell-slash
+  - cancel
   - check
