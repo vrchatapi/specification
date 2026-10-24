@@ -78,6 +78,20 @@ paths:
           $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /instances/count:
+    get:
+      operationId: getInstanceCount
+      summary: Get Instance Count
+      description: Returns instance and event counts as of `asOf`.
+      tags:
+        - instances
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceCountResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /instances/discover:
     get:
       operationId: discoverInstances

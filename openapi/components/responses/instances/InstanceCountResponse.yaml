@@ -1,0 +1,5 @@
+description: Returns a single InstanceCount object.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/InstanceCount.yaml

@@ -1551,6 +1551,131 @@ workflows:
         successCriteria:
           - condition: $statusCode == 200
 
+  - workflowId: search-avatars-marketplace
+    summary: searchAvatars over the marketplace, paged with metadata
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-avatars
+        operationId: $sourceDescriptions.default.searchAvatars
+        parameters:
+          - name: marketplace
+            in: query
+            value: all
+          - name: metadata
+            in: query
+            value: true
+          - name: search
+            in: query
+            value: avatar
+          - name: minPrice
+            in: query
+            value: 0
+          - name: maxPrice
+            in: query
+            value: 100000
+          - name: performanceAtLeast
+            in: query
+            value: 0
+          - name: minAssetVersion
+            in: query
+            value: 0
+          - name: maxAssetVersion
+            in: query
+            value: 100
+          - name: n
+            in: query
+            value: 2
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/results/0/id != null
+
+  - workflowId: search-avatars-marketplace-without-metadata
+    summary: searchAvatars over the marketplace, as a bare list
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-avatars
+        operationId: $sourceDescriptions.default.searchAvatars
+        parameters:
+          - name: marketplace
+            in: query
+            value: paid
+          - name: n
+            in: query
+            value: 2
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/0/id != null
+
+  - workflowId: search-avatars-invalid-marketplace
+    summary: searchAvatars refuses a marketplace it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-avatars
+        operationId: $sourceDescriptions.default.searchAvatars
+        parameters:
+          - name: marketplace
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'marketplace must be one of ［＂paid＂‚＂free＂‚＂all＂］‚ not ＂x＂'
+
+  - workflowId: search-avatars-invalid-performance-at-least
+    summary: searchAvatars refuses a performanceAtLeast outside its range
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-avatars
+        operationId: $sourceDescriptions.default.searchAvatars
+        parameters:
+          - name: marketplace
+            in: query
+            value: all
+          - name: performanceAtLeast
+            in: query
+            value: 6
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'Invalid performanceAtLeast˸ must be positive integer between 0 and 5'
+
+  - workflowId: search-avatars-search-without-marketplace
+    summary: searchAvatars refuses a text search outside the marketplace
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-avatars
+        operationId: $sourceDescriptions.default.searchAvatars
+        parameters:
+          - name: search
+            in: query
+            value: avatar
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'Text search queries must specify a marketplace'
+
   - workflowId: search-avatars-invalid-sort
     summary: searchAvatars refuses a sort it does not know
     parameters:
@@ -3764,6 +3889,82 @@ workflows:
     steps:
       - stepId: get-steam-transactions
         operationId: $sourceDescriptions.default.getSteamTransactions
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-economy-subscriptions
+    summary: Lists the economy subscriptions the account holds
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: economy-subscriptions
+        operationId: $sourceDescriptions.default.getEconomySubscriptions
+        parameters:
+          - name: subscriberId
+            in: query
+            value: $workflows.session.outputs.userId
+          - name: n
+            in: query
+            value: 1
+          - name: offset
+            in: query
+            value: 0
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: get-economy-subscriptions-invalid-subscriber
+    summary: getEconomySubscriptions refuses a subscriberId that is not an ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: economy-subscriptions
+        operationId: $sourceDescriptions.default.getEconomySubscriptions
+        parameters:
+          - name: subscriberId
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "subscriberId must be an ID˸ 'x'"
+
+  - workflowId: get-economy-subscriptions-forbidden
+    summary: getEconomySubscriptions refuses another user's subscriptions
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: economy-subscriptions
+        operationId: $sourceDescriptions.default.getEconomySubscriptions
+        parameters:
+          - name: subscriberId
+            in: query
+            value: usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'You dont have permission to view these subscriptions'
+
+  - workflowId: get-economy-subscriptions-unauthenticated
+    summary: getEconomySubscriptions refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: economy-subscriptions
+        operationId: $sourceDescriptions.default.getEconomySubscriptions
+        parameters:
+          - name: subscriberId
+            in: query
+            value: usr_00000000-0000-0000-0000-000000000000
         successCriteria:
           - condition: $statusCode == 401
 
@@ -10202,6 +10403,111 @@ workflows:
             displayName: null
         successCriteria:
           - condition: $statusCode == 400
+
+  - workflowId: get-instance-count
+    summary: Counts the instances and events running now
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: instance-count
+        operationId: $sourceDescriptions.default.getInstanceCount
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/asOf != null
+
+  - workflowId: get-instance-count-unauthenticated
+    summary: getInstanceCount refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: instance-count
+        operationId: $sourceDescriptions.default.getInstanceCount
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: update-instance-display-name
+    summary: Renames an instance, refuses a null name, then closes it
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: rename-instance
+        operationId: $sourceDescriptions.default.updateInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        requestBody:
+          contentType: application/json
+          payload:
+            displayName: renamed
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/displayName == 'renamed'
+
+      - stepId: refuse-null-instance-name
+        operationId: $sourceDescriptions.default.updateInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        requestBody:
+          contentType: application/json
+          payload:
+            displayName: null
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "displayName must be a string˸ 'null' - 'object'‚ displayName must be a string˸ 'null'"
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
 
   - workflowId: get-instance
     summary: Instance lookup needs no session

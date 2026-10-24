@@ -1,0 +1,5 @@
+description: Returns a list of Avatar objects, wrapped in a paginated object when `metadata` is `true`.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/SearchAvatarsResult.yaml

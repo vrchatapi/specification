@@ -289,6 +289,32 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "403":
           $ref: ../responses/economy/StoresUnavailableError.yaml
+  /economy/subscriptions:
+    get:
+      operationId: getEconomySubscriptions
+      summary: List Economy Subscriptions
+      description: List a subscriber's economy subscriptions.
+      tags:
+        - economy
+      parameters:
+        - name: subscriberId
+          required: true
+          in: query
+          schema:
+            $ref: ../schemas/UserID.yaml
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/economy/EconomySubscriptionListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/economy/EconomySubscriptionsForbiddenError.yaml
   "/licenseGroups/{licenseGroupId}":
     parameters:
       - $ref: ../parameters.yaml#/licenseGroupId

@@ -1,0 +1,11 @@
+description: Error response when requesting another user's economy subscriptions.
+content:
+  application/json:
+    examples:
+      Permission Denied:
+        value:
+          error:
+            message: You dont have permission to view these subscriptions
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

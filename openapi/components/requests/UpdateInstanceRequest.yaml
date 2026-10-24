@@ -6,5 +6,5 @@ properties:
     anyOf:
       - $ref: ../schemas/CalendarID.yaml
       - type: "null"
-required:
-  - calendarEntryId
+  displayName:
+    type: string

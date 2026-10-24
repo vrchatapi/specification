@@ -1,0 +1,20 @@
+title: InstanceCount
+type: object
+properties:
+  asOf:
+    type: string
+    format: date-time
+  events:
+    type: integer
+    minimum: 0
+  friends:
+    type: integer
+    minimum: 0
+  instances:
+    type: integer
+    minimum: 0
+required:
+  - asOf
+  - events
+  - friends
+  - instances

@@ -21,9 +21,8 @@ paths:
     get:
       operationId: searchAvatars
       summary: Search Avatars
-      description: Search and list avatars by query filters. You can only search your
-        own or featured avatars. It is not possible as a normal user to search
-        other peoples avatars.
+      description: Search and list avatars by query filters. Without `marketplace`,
+        you can only search your own or featured avatars.
       tags:
         - avatars
       parameters:
@@ -46,11 +45,56 @@ paths:
         - $ref: ../parameters.yaml#/minUnityVersion
         - $ref: ../parameters.yaml#/platform
         - $ref: ../parameters.yaml#/isInternalVariant
+        - name: marketplace
+          description: Search avatars listed in the marketplace.
+          required: false
+          in: query
+          schema:
+            $ref: ../schemas/SearchAvatarsMarketplace.yaml
+        - name: search
+          description: Text to search for. Requires `marketplace`.
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: metadata
+          description: Wrap the results in an AvatarList.
+          required: false
+          in: query
+          schema:
+            type: boolean
+        - name: minPrice
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: maxPrice
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: performanceAtLeast
+          required: false
+          in: query
+          schema:
+            type: integer
+            maximum: 5
+            minimum: 0
+        - name: minAssetVersion
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: maxAssetVersion
+          required: false
+          in: query
+          schema:
+            type: integer
       security:
         - authCookie: []
       responses:
         "200":
-          $ref: ../responses/avatars/AvatarListResponse.yaml
+          $ref: ../responses/avatars/SearchAvatarsResponse.yaml
         "400":
           $ref: ../responses/RequestValidationError.yaml
         "401":

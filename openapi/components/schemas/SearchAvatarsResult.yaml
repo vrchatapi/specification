@@ -1,0 +1,6 @@
+title: SearchAvatarsResult
+oneOf:
+  - type: array
+    items:
+      $ref: ./Avatar.yaml
+  - $ref: ./AvatarList.yaml
