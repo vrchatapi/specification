@@ -1,0 +1,24 @@
+title: InstanceAccessType
+type: string
+description: |-
+  `type`, `groupAccessType` and `canRequestInvite` folded into one value.
+
+  | `type` | `groupAccessType` | `canRequestInvite` | `accessType` |
+  | --- | --- | --- | --- |
+  | `public` | | | `public` |
+  | `friends` | | | `friends` |
+  | `hidden` | | | `friendsPlus` |
+  | `private` | | `false` | `invite` |
+  | `private` | | `true` | `invitePlus` |
+  | `group` | `public` | | `groupPublic` |
+  | `group` | `plus` | | `groupPlus` |
+  | `group` | `members` | | `group` |
+x-unknown-enum:
+  - friends
+  - friendsPlus
+  - group
+  - groupPlus
+  - groupPublic
+  - invite
+  - invitePlus
+  - public

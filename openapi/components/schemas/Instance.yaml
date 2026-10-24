@@ -5,6 +5,8 @@ description: |-
   * `friends` field is only present if InstanceType is `friends` aka "Friends", and is instance creator.
   * `private` field is only present if InstanceType is `private` aka "Invite" or "Invite+", and is instance creator.
 properties:
+  accessType:
+    $ref: ./InstanceAccessType.yaml
   active:
     type: boolean
     default: true
@@ -210,6 +212,7 @@ properties:
   worldId:
     $ref: ./WorldID.yaml
 required:
+  - accessType
   - clientNumber
   - full
   - id

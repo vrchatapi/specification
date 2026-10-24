@@ -1,6 +1,8 @@
 title: LimitedInstance
 type: object
 properties:
+  accessType:
+    $ref: ./InstanceAccessType.yaml
   active:
     type: boolean
     default: true
@@ -134,6 +136,7 @@ properties:
   worldId:
     $ref: ./WorldID.yaml
 required:
+  - accessType
   - active
   - capacity
   - categoryId

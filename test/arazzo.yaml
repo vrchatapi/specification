@@ -9875,6 +9875,265 @@ workflows:
           - name: stop
             type: end
 
+  - workflowId: create-instance-friends
+    summary: Creates a friends instance, then closes it
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: friends
+            region: use
+            ownerId: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/type == 'friends'
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: create-instance-hidden
+    summary: Creates a friends+ instance, then closes it
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: hidden
+            region: use
+            ownerId: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/type == 'hidden'
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: create-instance-group-public
+    summary: Creates a public group instance, then closes it
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: group
+            region: use
+            ownerId: $inputs.groupId
+            groupAccessType: public
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/type == 'group'
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: create-instance-group-plus
+    summary: Creates a group+ instance, then closes it
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: group
+            region: use
+            ownerId: $inputs.groupId
+            groupAccessType: plus
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/type == 'group'
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: create-instance-group-members
+    summary: Creates a members-only group instance, then closes it
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: group
+            region: use
+            ownerId: $inputs.groupId
+            groupAccessType: members
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/type == 'group'
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
   - workflowId: instance-lifecycle
     summary: Creates a real private instance, then invites the account to it
     parameters:
