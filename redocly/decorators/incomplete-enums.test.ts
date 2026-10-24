@@ -22,11 +22,6 @@ describe("incomplete-enums", () => {
 		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", examples: ["red", "green"], "x-incomplete": true });
 	});
 
-	test("keeps examples a schema already gives", async () => {
-		const schemas = await bundle({ Color: { ...Color, examples: ["red"] } });
-		expect(schemas.Color).toStrictEqual({ title: "Color", type: "string", examples: ["red"], "x-incomplete": true });
-	});
-
 	test("leaves a complete enum alone", async () => {
 		const Shade = { title: "Shade", type: "string", enum: ["dark", "light"] };
 		expect((await bundle({ Shade })).Shade).toStrictEqual(Shade);

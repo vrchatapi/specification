@@ -5,7 +5,7 @@ export const incompleteEnums: Oas3Decorator = ({ close = false }: { close?: bool
 	Schema: {
 		leave: (schema) => {
 			if (close || schema["x-incomplete"] !== true || !Array.isArray(schema.enum)) return;
-			schema.examples ??= schema.enum;
+			schema.examples = schema.enum;
 			delete schema.enum;
 		}
 	}

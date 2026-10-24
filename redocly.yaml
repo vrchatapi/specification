@@ -30,6 +30,7 @@ oas3_1Rules:
 oas3_2Rules:
   vrchat/consistent-discriminator: error
   vrchat/no-implied-type: error
+  vrchat/no-incomplete-enum-examples: error
   vrchat/no-empty-description: error
   vrchat/no-nested-object: error
   vrchat/no-schema-example: error
