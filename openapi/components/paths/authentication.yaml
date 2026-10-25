@@ -35,6 +35,78 @@ paths:
           $ref: ../responses/authentication/ConfirmEmailResponse.yaml
         "400":
           $ref: ../responses/RequestValidationError.yaml
+  /auth/device/approve:
+    post:
+      operationId: approveDeviceAuth
+      summary: Approve Device Code
+      description: Approves a device code from `createDeviceCode`, logging the device that created it in as the current user.
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/DeviceAuthApproveRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/DeviceAuthApproveSuccess.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/authentication/DeviceCodeNotFoundError.yaml
+  /auth/device/code:
+    post:
+      operationId: createDeviceCode
+      summary: Create Device Code
+      description: Creates a code to log this device in from another one, where a logged-in person approves it. Poll `checkDeviceCode` until it is approved.
+      tags:
+        - authentication
+      security:
+        - {}
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/DeviceCodeResponse.yaml
+  /auth/device/info:
+    get:
+      operationId: getDeviceAuthInfo
+      summary: Get Device Code Info
+      description: Returns where a device code was created, for the person about to approve it with `approveDeviceAuth`.
+      tags:
+        - authentication
+      parameters:
+        - $ref: ../parameters.yaml#/userCode
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/DeviceAuthInfoResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/authentication/DeviceCodeNotFoundError.yaml
+  /auth/device/status:
+    post:
+      operationId: checkDeviceCode
+      summary: Check Device Code
+      description: Returns whether a device code from `createDeviceCode` has been approved.
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CheckDeviceCodeRequest.yaml
+      security: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/DeviceCodeStatusResponse.yaml
+        "400":
+          $ref: ../responses/authentication/CheckDeviceCodeError.yaml
   /auth/exists:
     get:
       operationId: checkUserExists
@@ -60,6 +132,25 @@ paths:
           $ref: ../responses/authentication/MissingParameterError.yaml
         "429":
           $ref: ../responses/authentication/CheckUserExistsRateLimitError.yaml
+  /auth/password:
+    put:
+      operationId: resetPassword
+      summary: Reset Password
+      description: Sends a password recovery email.
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/ResetPasswordRequest.yaml
+      security: []
+      responses:
+        "200":
+          $ref: ../responses/authentication/PasswordResetSuccess.yaml
+        "400":
+          $ref: ../responses/authentication/PasswordResetMissingEmailError.yaml
   /auth/register:
     post:
       operationId: registerUserAccount

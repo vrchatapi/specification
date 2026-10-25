@@ -1127,6 +1127,13 @@ transactionId:
   in: path
   schema:
     type: string
+userCode:
+  name: userCode
+  description: The `userCode` of a device code.
+  required: true
+  in: query
+  schema:
+    type: string
 userId:
   name: userId
   description: Must be a valid user ID.

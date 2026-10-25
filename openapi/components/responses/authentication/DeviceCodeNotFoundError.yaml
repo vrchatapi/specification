@@ -1,0 +1,11 @@
+description: Error response when no unexpired device code has this `userCode`.
+content:
+  application/json:
+    examples:
+      Device Code Not Found:
+        value:
+          error:
+            message: Device code not found or expired․
+            status_code: 404
+    schema:
+      $ref: ../../schemas/Error.yaml

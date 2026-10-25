@@ -1,0 +1,8 @@
+title: DeviceAuthApproveRequest
+type: object
+properties:
+  userCode:
+    type: string
+    description: The `userCode` of the device code to approve.
+required:
+  - userCode

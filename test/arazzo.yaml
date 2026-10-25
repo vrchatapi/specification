@@ -995,6 +995,264 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: device-code-pending
+    summary: Create a device code anonymously, then check it before anyone approves it
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-device-code
+        operationId: $sourceDescriptions.default.createDeviceCode
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          deviceCode: $response.body#/deviceCode
+      - stepId: check-device-code
+        operationId: $sourceDescriptions.default.checkDeviceCode
+        requestBody:
+          contentType: application/json
+          payload:
+            deviceCode: $steps.create-device-code.outputs.deviceCode
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/status == 'pending'
+
+  - workflowId: check-device-code-unknown
+    summary: checkDeviceCode refuses a code it never issued
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: wait-for-interval
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sleep
+            args:
+              - "6"
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+      - stepId: check-unknown-device-code
+        operationId: $sourceDescriptions.default.checkDeviceCode
+        requestBody:
+          contentType: application/json
+          payload:
+            deviceCode: x
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: create-device-code-authenticated
+    summary: createDeviceCode answers a logged-in caller too
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-device-code-authenticated
+        operationId: $sourceDescriptions.default.createDeviceCode
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: check-device-code-not-a-string
+    summary: checkDeviceCode refuses a code that is not a string
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: wait-for-interval
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sleep
+            args:
+              - "6"
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+      - stepId: check-numeric-device-code
+        operationId: $sourceDescriptions.default.checkDeviceCode
+        requestBody:
+          contentType: application/json
+          payload:
+            deviceCode: 1
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: check-device-code-without-code
+    summary: checkDeviceCode refuses a request without a deviceCode
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: wait-for-interval
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sleep
+            args:
+              - "6"
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+      - stepId: check-device-code-without-code
+        operationId: $sourceDescriptions.default.checkDeviceCode
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
+  - workflowId: reset-password
+    summary: resetPassword answers for an address that cannot receive mail
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: reset-password
+        operationId: $sourceDescriptions.default.resetPassword
+        requestBody:
+          contentType: application/json
+          payload:
+            email: specification-test@example.invalid
+        successCriteria:
+          - condition: $statusCode == 200
+
+  - workflowId: device-code-login
+    summary: Create a device code anonymously, approve it with the session, then check it
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-device-code
+        operationId: $sourceDescriptions.default.createDeviceCode
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          deviceCode: $response.body#/deviceCode
+          userCode: $response.body#/userCode
+      - stepId: get-device-auth-info
+        operationId: $sourceDescriptions.default.getDeviceAuthInfo
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        parameters:
+          - name: userCode
+            in: query
+            value: $steps.create-device-code.outputs.userCode
+        successCriteria:
+          - condition: $statusCode == 200
+      - stepId: approve-device-auth
+        operationId: $sourceDescriptions.default.approveDeviceAuth
+        x-security:
+          - schemeName: authCookie
+            values:
+              apiKey: $workflows.session.outputs.sessionToken
+        requestBody:
+          contentType: application/json
+          payload:
+            userCode: $steps.create-device-code.outputs.userCode
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/success == true
+      - stepId: wait-for-interval
+        operationId: $sourceDescriptions.local.execute
+        requestBody:
+          contentType: application/json
+          payload:
+            command: sleep
+            args:
+              - "6"
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/exitCode == 0
+      - stepId: check-approved-device-code
+        operationId: $sourceDescriptions.default.checkDeviceCode
+        requestBody:
+          contentType: application/json
+          payload:
+            deviceCode: $steps.create-device-code.outputs.deviceCode
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/user != null
+
+  - workflowId: get-device-auth-info-unauthenticated
+    summary: getDeviceAuthInfo refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-device-auth-info
+        operationId: $sourceDescriptions.default.getDeviceAuthInfo
+        parameters:
+          - name: userCode
+            in: query
+            value: XXXXXXXX
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: get-device-auth-info-unknown-code
+    summary: getDeviceAuthInfo refuses a code it never issued
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-unknown-device-auth-info
+        operationId: $sourceDescriptions.default.getDeviceAuthInfo
+        parameters:
+          - name: userCode
+            in: query
+            value: XXXXXXXX
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: approve-device-auth-unauthenticated
+    summary: approveDeviceAuth refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: approve-device-auth
+        operationId: $sourceDescriptions.default.approveDeviceAuth
+        requestBody:
+          contentType: application/json
+          payload:
+            userCode: XXXXXXXX
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: approve-device-auth-unknown-code
+    summary: approveDeviceAuth refuses a code it never issued
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: approve-unknown-device-auth
+        operationId: $sourceDescriptions.default.approveDeviceAuth
+        requestBody:
+          contentType: application/json
+          payload:
+            userCode: XXXXXXXX
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: reset-password-without-email
+    summary: resetPassword refuses a request without an email
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: reset-password-without-email
+        operationId: $sourceDescriptions.default.resetPassword
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+
   - workflowId: submit-moderation-report-unauthenticated
     summary: submitModerationReport refuses an anonymous caller
     parameters:

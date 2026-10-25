@@ -1,0 +1,14 @@
+description: Returns where the device code was created.
+content:
+  application/json:
+    examples:
+      Device Code Info:
+        value:
+          createdAt: 1792964421294
+          geolocation:
+            city: Toronto
+            country: CA
+            region: Ontario
+            regionCode: ON
+    schema:
+      $ref: ../../schemas/DeviceAuthInfo.yaml

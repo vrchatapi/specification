@@ -20,8 +20,18 @@
   $ref: "./paths/authentication.yaml#/paths/~1auth"
 /auth/confirmEmail:
   $ref: "./paths/authentication.yaml#/paths/~1auth~1confirmEmail"
+/auth/device/approve:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1device~1approve"
+/auth/device/code:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1device~1code"
+/auth/device/info:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1device~1info"
+/auth/device/status:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1device~1status"
 /auth/exists:
   $ref: "./paths/authentication.yaml#/paths/~1auth~1exists"
+/auth/password:
+  $ref: "./paths/authentication.yaml#/paths/~1auth~1password"
 /auth/permissions:
   $ref: "./paths/miscellaneous.yaml#/paths/~1auth~1permissions"
 /auth/register:

@@ -1,0 +1,9 @@
+description: The device code is approved, and the device that created it can now log in with `checkDeviceCode`.
+content:
+  application/json:
+    examples:
+      Approved:
+        value:
+          success: true
+    schema:
+      $ref: ../../schemas/DeviceAuthApproveResponse.yaml

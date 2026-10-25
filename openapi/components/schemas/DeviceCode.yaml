@@ -1,0 +1,30 @@
+title: DeviceCode
+type: object
+description: A code that logs this device in once someone approves it at `verificationUrl`.
+properties:
+  deviceCode:
+    type: string
+    description: Identifies this login attempt to `checkDeviceCode`.
+  expiresIn:
+    type: integer
+    description: Seconds until the code expires.
+  interval:
+    type: integer
+    description: Seconds to wait between calls to `checkDeviceCode`.
+  userCode:
+    type: string
+    description: The code a person enters at `verificationUrl` to approve the login.
+  verificationUrl:
+    type: string
+    format: uri
+  verificationUrlComplete:
+    type: string
+    description: "`verificationUrl` with the code already filled in."
+    format: uri
+required:
+  - deviceCode
+  - expiresIn
+  - interval
+  - userCode
+  - verificationUrl
+  - verificationUrlComplete

@@ -1,0 +1,7 @@
+title: CheckDeviceCodeRequest
+type: object
+properties:
+  deviceCode:
+    type: string
+required:
+  - deviceCode

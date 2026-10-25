@@ -25,6 +25,7 @@ words:
   - equippable
   - favoritelimits
   - favorited
+  - geolocation
   - giftable
   - homeworld
   - interactable
@@ -84,7 +85,9 @@ suggestWords:
 
 patterns:
   - name: ids
-    pattern: /\w{1,4}_[\w-]{36}/g
+    pattern: /\w{1,4}_[\w-]{32,36}/g
+  - name: device-user-codes
+    pattern: "/(userCode: |code=)[A-Z0-9]{8}/g"
   - name: extensions
     pattern: /\.\w+/g
   # VRChat substitutes lookalike characters into validation messages, and the
@@ -95,6 +98,7 @@ patterns:
 
 ignoreRegExpList:
   - ids
+  - device-user-codes
   - extensions
   - lookalikes
 

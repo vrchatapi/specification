@@ -1,0 +1,21 @@
+description: Error response when the device code is missing, not a string, unknown or expired.
+content:
+  application/json:
+    examples:
+      Code Not A String:
+        value:
+          error:
+            message: deviceCode must be a string˸ '1' - 'number'
+            status_code: 400
+      Expired Or Unknown Code:
+        value:
+          error:
+            message: expired_token
+            status_code: 400
+      Missing Code:
+        value:
+          error:
+            message: deviceCode is required․‚ deviceCode must be a string˸ 'undefined' - 'undefined'
+            status_code: 400
+    schema:
+      $ref: ../../schemas/Error.yaml

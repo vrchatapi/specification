@@ -10,6 +10,8 @@ openapi/components/paths/authentication.yaml:
   operation-2xx-response:
     - "#/paths/~1auth~1confirmEmail/get/responses"
     - "#/paths/~1auth~1verifyLoginPlace/get/responses"
+  operation-4xx-response:
+    - "#/paths/~1auth~1device~1code/post/responses"
 openapi/components/paths/avatars.yaml:
   operation-4xx-response:
     - "#/paths/~1avatarStyles/get/responses"

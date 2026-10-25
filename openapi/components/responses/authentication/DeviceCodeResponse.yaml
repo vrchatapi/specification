@@ -1,0 +1,14 @@
+description: Returns a new device code.
+content:
+  application/json:
+    examples:
+      Device Code:
+        value:
+          deviceCode: dc_gTCSGMaSlmuq5Yr7smfMVJrn3Ugp2seK
+          expiresIn: 300
+          interval: 5
+          userCode: U4RQANX4
+          verificationUrl: https://vrchat.com/home/device
+          verificationUrlComplete: https://vrchat.com/home/device?code=U4RQANX4&source=app
+    schema:
+      $ref: ../../schemas/DeviceCode.yaml

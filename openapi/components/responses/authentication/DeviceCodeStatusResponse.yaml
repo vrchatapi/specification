@@ -1,0 +1,9 @@
+description: Returns whether the device code has been approved.
+content:
+  application/json:
+    examples:
+      Pending:
+        value:
+          status: pending
+    schema:
+      $ref: ../../schemas/DeviceCodeStatus.yaml
