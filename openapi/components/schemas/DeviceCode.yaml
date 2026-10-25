@@ -1,19 +1,17 @@
 title: DeviceCode
 type: object
-description: A code that logs this device in once someone approves it at `verificationUrl`.
+description: A code that logs the device that created it in, once a logged-in user approves it with `approveDeviceAuth`.
 properties:
   deviceCode:
     type: string
     description: Identifies this login attempt to `checkDeviceCode`.
   expiresIn:
     type: integer
-    description: Seconds until the code expires.
   interval:
     type: integer
-    description: Seconds to wait between calls to `checkDeviceCode`.
   userCode:
     type: string
-    description: The code a person enters at `verificationUrl` to approve the login.
+    description: Identifies this login attempt to `getDeviceAuthInfo` and `approveDeviceAuth`.
   verificationUrl:
     type: string
     format: uri

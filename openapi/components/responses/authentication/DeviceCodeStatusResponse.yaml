@@ -7,3 +7,10 @@ content:
           status: pending
     schema:
       $ref: ../../schemas/DeviceCodeStatus.yaml
+headers:
+  Set-Cookie:
+    description: Once the code is approved, an `auth` cookie that logs this device in.
+    schema:
+      type: string
+      examples:
+        - "auth=authcookie_00000000-0000-0000-0000-000000000000; Max-Age=31556952; Path=/; Expires=Tue, 26 Oct 2027 03:41:38 GMT; HttpOnly; SameSite=Lax"

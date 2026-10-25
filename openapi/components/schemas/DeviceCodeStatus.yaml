@@ -1,13 +1,4 @@
 title: DeviceCodeStatus
-type: object
-properties:
-  status:
-    type: string
-    enum:
-      - pending
-    x-incomplete: true
-  user:
-    $ref: ./Unknown.yaml
-    description: Set once someone approves the code, when the response also logs this device in.
-required:
-  - status
+oneOf:
+  - $ref: ./DeviceCodePending.yaml
+  - $ref: ./DeviceCodeApproved.yaml

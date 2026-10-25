@@ -1,0 +1,10 @@
+title: DeviceCodePending
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - pending
+    x-incomplete: true
+required:
+  - status

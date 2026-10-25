@@ -1,10 +1,9 @@
 title: DeviceAuthInfo
 type: object
-description: Where a device code was created, shown to the person about to approve it.
+description: Where and when a device code was created.
 properties:
   createdAt:
     type: integer
-    description: When the device code was created, in milliseconds since the Unix epoch.
   geolocation:
     $ref: ./DeviceAuthInfoGeolocation.yaml
 required:

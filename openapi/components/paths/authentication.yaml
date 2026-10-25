@@ -61,7 +61,7 @@ paths:
     post:
       operationId: createDeviceCode
       summary: Create Device Code
-      description: Creates a code to log this device in from another one, where a logged-in person approves it. Poll `checkDeviceCode` until it is approved.
+      description: Creates a code that logs this device in once a logged-in user approves it with `approveDeviceAuth`. `checkDeviceCode` returns the user and sets the `auth` cookie once it is approved.
       tags:
         - authentication
       security:
@@ -92,7 +92,7 @@ paths:
     post:
       operationId: checkDeviceCode
       summary: Check Device Code
-      description: Returns whether a device code from `createDeviceCode` has been approved.
+      description: Returns whether a device code from `createDeviceCode` has been approved. Once it is, the response logs this device in as the user who approved it.
       tags:
         - authentication
       requestBody:

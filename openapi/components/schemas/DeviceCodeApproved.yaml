@@ -1,0 +1,7 @@
+title: DeviceCodeApproved
+type: object
+properties:
+  user:
+    $ref: ./CurrentUser.yaml
+required:
+  - user
