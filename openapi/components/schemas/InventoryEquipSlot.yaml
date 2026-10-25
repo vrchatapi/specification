@@ -3,10 +3,10 @@ enum:
   - ""
   - drone
   - iconFrame
+  - loadingscreen
   - nameplateEffect
   - portal
   - profileEffect
   - warp
 default: ""
-examples:
-  - drone
+x-incomplete: true

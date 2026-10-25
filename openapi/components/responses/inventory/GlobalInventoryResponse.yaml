@@ -1,0 +1,7 @@
+description: Returns the inventory items flagged `global`.
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        $ref: ../../schemas/GlobalInventoryItem.yaml

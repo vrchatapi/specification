@@ -1,0 +1,78 @@
+title: GlobalInventoryItem
+type: object
+description: An inventory item flagged `global`. It belongs to no account, so it carries no holder, quantity or timestamps.
+properties:
+  acquisition:
+    type: string
+  attribution:
+    $ref: ./GlobalInventoryItemAttribution.yaml
+  collections:
+    type: array
+    items:
+      type: string
+  defaultAttributes:
+    $ref: ./InventoryDefaultAttributes.yaml
+  description:
+    type: string
+  equipSlot:
+    $ref: ./InventoryEquipSlot.yaml
+  equipSlots:
+    type: array
+    items:
+      $ref: ./InventoryEquipSlot.yaml
+  flags:
+    type: array
+    items:
+      type: string
+  id:
+    $ref: ./InventoryItemID.yaml
+  imageUrl:
+    type: string
+  isArchived:
+    type: boolean
+  isSeen:
+    type: boolean
+  itemType:
+    $ref: ./InventoryItemType.yaml
+  itemTypeLabel:
+    type: string
+  metadata:
+    $ref: ./InventoryMetadata.yaml
+  name:
+    type: string
+  productId:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
+  tags:
+    type: array
+    items:
+      $ref: ./Tag.yaml
+  templateId:
+    $ref: ./InventoryTemplateID.yaml
+  userAttributes:
+    $ref: ./InventoryDefaultAttributes.yaml
+  validateUserAttributes:
+    type: boolean
+required:
+  - acquisition
+  - attribution
+  - collections
+  - defaultAttributes
+  - description
+  - equipSlot
+  - equipSlots
+  - flags
+  - id
+  - imageUrl
+  - isArchived
+  - isSeen
+  - itemType
+  - itemTypeLabel
+  - metadata
+  - name
+  - productId
+  - tags
+  - templateId
+  - userAttributes
+  - validateUserAttributes

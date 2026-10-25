@@ -1,0 +1,7 @@
+title: GlobalInventoryItemAttribution
+type: object
+properties:
+  creator:
+    $ref: ./GlobalInventoryItemAttributionCreator.yaml
+required:
+  - creator

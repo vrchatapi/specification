@@ -124,6 +124,20 @@ paths:
           $ref: ../responses/inventory/InventoryDropListResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /inventory/global:
+    get:
+      operationId: getGlobalInventory
+      summary: Get Global Inventory
+      description: Returns the inventory items flagged `global`.
+      tags:
+        - inventory
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/inventory/GlobalInventoryResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /inventory/spawn:
     parameters:
       - $ref: ../parameters.yaml#/inventorySpawnItemId

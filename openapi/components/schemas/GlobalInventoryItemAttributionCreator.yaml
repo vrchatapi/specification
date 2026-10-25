@@ -1,0 +1,10 @@
+title: GlobalInventoryItemAttributionCreator
+type: object
+properties:
+  customName:
+    type: string
+  userId:
+    type: string
+required:
+  - customName
+  - userId

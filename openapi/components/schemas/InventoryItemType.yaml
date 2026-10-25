@@ -4,6 +4,7 @@ enum:
   - droneskin
   - emoji
   - iconFrame
+  - loadingscreen
   - nameplateEffect
   - portalskin
   - profileEffect
@@ -11,5 +12,4 @@ enum:
   - sticker
   - warpeffect
 default: bundle
-examples:
-  - prop
+x-incomplete: true

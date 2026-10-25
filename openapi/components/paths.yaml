@@ -298,6 +298,8 @@
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1collections"
 /inventory/drops:
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1drops"
+/inventory/global:
+  $ref: "./paths/inventory.yaml#/paths/~1inventory~1global"
 /inventory/spawn:
   $ref: "./paths/inventory.yaml#/paths/~1inventory~1spawn"
 "/inventory/template/{inventoryTemplateId}":

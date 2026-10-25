@@ -11533,6 +11533,28 @@ workflows:
         operationId: $sourceDescriptions.default.getInventory
         successCriteria:
           - condition: $statusCode == 401
+  - workflowId: get-global-inventory
+    summary: Lists the inventory items flagged global
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: get-global-inventory
+        operationId: $sourceDescriptions.default.getGlobalInventory
+        successCriteria:
+          - condition: $statusCode == 200
+  - workflowId: get-global-inventory-unauthenticated
+    summary: getGlobalInventory refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: get-global-inventory
+        operationId: $sourceDescriptions.default.getGlobalInventory
+        successCriteria:
+          - condition: $statusCode == 401
   - workflowId: inventory-item-reads
     summary: Reads the oldest owned prop, then fetches it by id
     parameters:
