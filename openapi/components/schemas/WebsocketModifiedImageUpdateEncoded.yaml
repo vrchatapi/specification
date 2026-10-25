@@ -1,0 +1,14 @@
+title: WebsocketModifiedImageUpdateEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketModifiedImageUpdate.yaml
+    x-vrchat-double-encoding-type: WebsocketModifiedImageUpdate
+  type:
+    const: modified-image-update
+required:
+  - content
+  - type
