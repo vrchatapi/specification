@@ -38,6 +38,8 @@ properties:
       - type: "null"
   imageUrl:
     type: string
+  interestedFriendCount:
+    type: integer
   interestedUserCount:
     type: integer
   isDraft:
@@ -47,6 +49,8 @@ properties:
     description: Languages that might be spoken at this event
     items:
       $ref: ./LanguageCode.yaml
+  linkedInstanceCount:
+    type: integer
   occurrenceKind:
     $ref: ./CalendarEventOccurrenceKind.yaml
   occurrenceModified:
