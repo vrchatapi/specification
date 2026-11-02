@@ -55,8 +55,16 @@ properties:
     $ref: ./CalendarEventOccurrenceKind.yaml
   occurrenceModified:
     type: boolean
+  ownerIconUrl:
+    type: string
+    description: The icon of the group `ownerId` names.
+    examples:
+      - https://api.vrchat.cloud/api/1/image/file_4b6faa09-b491-450a-bad6-3cc431184e46/1/512
   ownerId:
     $ref: ./GroupID.yaml
+  ownerName:
+    type: string
+    description: The `name` of the group `ownerId` names.
   platforms:
     type: array
     items:
