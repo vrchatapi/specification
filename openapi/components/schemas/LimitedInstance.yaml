@@ -140,7 +140,9 @@ properties:
   userIcons:
     type: array
     items:
-      type: string
+      type:
+        - string
+        - "null"
       examples:
         - https://api.vrchat.cloud/api/1/image/file_12ca2b06-c08d-4023-b06f-b60691d9946e/1/256
   vibeIds:
@@ -159,7 +161,6 @@ required:
   - creationLanguages
   - description
   - disabledPropAbilities
-  - displayName
   - displayVibeId
   - dominantLanguage
   - friendIcons
