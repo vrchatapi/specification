@@ -10,6 +10,11 @@ properties:
   friends:
     type: integer
     minimum: 0
+  friendsEntryId:
+    type: string
+    description: The ID of a `ContentShelf` entry, whose results `getInfoPushContent` returns.
+    examples:
+      - ips_21b47fb1-5fe2-4a3d-b287-d65a084241ba
   instances:
     type: integer
     minimum: 0
@@ -17,4 +22,5 @@ required:
   - asOf
   - events
   - friends
+  - friendsEntryId
   - instances
