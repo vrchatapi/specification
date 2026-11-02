@@ -39,6 +39,10 @@ properties:
       - type: "null"
   dominantLanguage:
     type: string
+  friendIcons:
+    type: array
+    items:
+      $ref: ./Unknown.yaml
   full:
     type: boolean
     default: false
@@ -72,8 +76,20 @@ properties:
     examples:
       - 6
     minimum: 0
+  ownerIconUrl:
+    type:
+      - string
+      - "null"
+    description: The icon of the group `ownerId` names, or `null` when `ownerId` is.
+    examples:
+      - https://api.vrchat.cloud/api/1/image/file_529e2aec-7b4c-4c70-a3d4-9bca28580ccd/1/512
   ownerId:
     $ref: ./InstanceOwnerId.yaml
+  ownerName:
+    type:
+      - string
+      - "null"
+    description: The `name` of the group `ownerId` names, or `null` when `ownerId` is.
   permanent:
     type: boolean
     default: false
@@ -146,6 +162,7 @@ required:
   - displayName
   - displayVibeId
   - dominantLanguage
+  - friendIcons
   - full
   - id
   - instanceId
@@ -155,7 +172,9 @@ required:
   - location
   - minimumAvatarPerformance
   - n_users
+  - ownerIconUrl
   - ownerId
+  - ownerName
   - permanent
   - photonRegion
   - platforms
