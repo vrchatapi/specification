@@ -10982,6 +10982,25 @@ workflows:
           - condition: $statusCode == 400
           - condition: $response.body#/error/message == 'mode must be one of ［＂random＂‚＂population＂‚＂active＂‚＂match＂］‚ not ＂x＂'
 
+  - workflowId: discover-instances-invalid-capacity-limit
+    summary: discoverInstances refuses a capacityLimit it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: capacityLimit
+            in: query
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'capacityLimit must be one of ［＂recommended＂‚＂hard＂］‚ not ＂x＂'
+
   - workflowId: discover-instances-invalid-world-pool
     summary: discoverInstances refuses a worldPool it does not know
     parameters:
@@ -11057,6 +11076,25 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
           - condition: $response.body#/error/message == 'Discover filters you may not use˸ minSpotsLeft'
+
+  - workflowId: discover-instances-capacity-limit-forbidden
+    summary: discoverInstances refuses capacityLimit to the account
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: discover-instances
+        operationId: $sourceDescriptions.default.discoverInstances
+        parameters:
+          - name: capacityLimit
+            in: query
+            value: hard
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'Discover filters you may not use˸ capacityLimit'
 
   - workflowId: discover-instances-filters
     summary: discoverInstances filters by mode, pool, group hosting and occupancy

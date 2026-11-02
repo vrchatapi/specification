@@ -109,6 +109,7 @@ paths:
         - $ref: ../parameters.yaml#/instanceDiscoveryCategory
         - $ref: ../parameters.yaml#/instanceDiscoveryAnyWorldTag
         - $ref: ../parameters.yaml#/instanceDiscoveryBoost
+        - $ref: ../parameters.yaml#/instanceDiscoveryCapacityLimit
         - $ref: ../parameters.yaml#/instanceDiscoveryGroupHosted
         - $ref: ../parameters.yaml#/instanceDiscoveryMaxOccupants
         - $ref: ../parameters.yaml#/instanceDiscoveryMinOccupants

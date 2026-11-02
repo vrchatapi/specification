@@ -486,6 +486,13 @@ instanceDiscoveryBoost:
     items:
       $ref: ./schemas/InstanceDiscoveryBoost.yaml
   style: form
+instanceDiscoveryCapacityLimit:
+  name: capacityLimit
+  description: Not every account may use it; the others are answered 403.
+  required: false
+  in: query
+  schema:
+    $ref: ./schemas/InstanceDiscoveryCapacityLimit.yaml
 instanceDiscoveryCategory:
   name: category
   required: false
