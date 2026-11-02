@@ -4,6 +4,8 @@ properties:
   created_at:
     type: string
     format: date-time
+  displayCategory:
+    $ref: ./NotificationDisplayCategory.yaml
   id:
     type: string
     minLength: 1
@@ -21,6 +23,7 @@ properties:
     minLength: 1
 required:
   - created_at
+  - displayCategory
   - id
   - message
   - receiverUserId

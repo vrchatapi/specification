@@ -1,0 +1,6 @@
+title: NotificationDisplayCategory
+type: string
+enum:
+  - groups
+  - social
+x-incomplete: true

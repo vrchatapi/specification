@@ -10,6 +10,8 @@ properties:
     format: date-time
   details:
     $ref: ./NotificationV2DetailsBoop.yaml
+  displayCategory:
+    $ref: ./NotificationDisplayCategory.yaml
   displayData:
     anyOf:
       - $ref: ./Unknown.yaml
@@ -91,6 +93,7 @@ required:
   - canDelete
   - category
   - createdAt
+  - displayCategory
   - expiresAt
   - expiryAfterSeen
   - id
