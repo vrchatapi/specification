@@ -434,6 +434,8 @@
   $ref: "./paths/inventory.yaml#/paths/~1user~1{userId}~1inventory~1{inventoryItemId}"
 "/user/{userId}/listings":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1listings"
+"/user/{userId}/moderations":
+  $ref: "./paths/users.yaml#/paths/~1user~1{userId}~1moderations"
 "/user/{userId}/products":
   $ref: "./paths/economy.yaml#/paths/~1user~1{userId}~1products"
 "/user/{userId}/tilia/kyc":

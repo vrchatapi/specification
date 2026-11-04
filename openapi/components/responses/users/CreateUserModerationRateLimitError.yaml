@@ -1,0 +1,11 @@
+description: Error response when moderating the same user too often.
+content:
+  application/json:
+    examples:
+      Too Many Moderations:
+        value:
+          error:
+            message: Too many moderations being created at one player․
+            status_code: 429
+    schema:
+      $ref: ../../schemas/Error.yaml

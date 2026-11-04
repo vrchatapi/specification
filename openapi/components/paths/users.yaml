@@ -81,6 +81,36 @@ paths:
           $ref: ../responses/users/PrivateProfileResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/moderations":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      operationId: createUserModeration
+      summary: Create User Moderation
+      description: A `kick` bans the user from the instance in `worldId` and `instanceId`. They are not removed from it, but cannot join it again, even by invite.
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateUserModerationRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/CreateUserModerationResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/users/CreateUserModerationForbiddenError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
+        "429":
+          $ref: ../responses/users/CreateUserModerationRateLimitError.yaml
   /userNotes:
     get:
       operationId: getUserNotes

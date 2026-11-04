@@ -1,0 +1,7 @@
+title: CreateUserModerationResponse
+type: object
+properties:
+  id:
+    $ref: ./ModerationID.yaml
+required:
+  - id

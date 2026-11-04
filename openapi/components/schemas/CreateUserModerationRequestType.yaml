@@ -1,0 +1,25 @@
+title: CreateUserModerationRequestType
+enum:
+  - avatar
+  - ban
+  - banpubliconly
+  - chat
+  - emoji
+  - event
+  - gallery
+  - group
+  - hardban
+  - icon
+  - kick
+  - note
+  - nuisance
+  - print
+  - profile
+  - publicinstance
+  - sticker
+  - voice
+  - warn
+  - warning
+  - world
+examples:
+  - kick

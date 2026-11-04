@@ -1,0 +1,11 @@
+description: Error response when you are not allowed to moderate the user.
+content:
+  application/json:
+    examples:
+      Cannot Moderate User:
+        value:
+          error:
+            message: You cannot moderate this user․
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml
