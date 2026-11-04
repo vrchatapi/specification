@@ -1,4 +1,4 @@
-description: Error response when you are not allowed to moderate the user.
+description: Error response when the user in the path can't be moderated, such as when they aren't in the instance given by `worldId` and `instanceId`, either of those is missing, or the user is you.
 content:
   application/json:
     examples:
