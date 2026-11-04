@@ -14072,6 +14072,53 @@ workflows:
         successCriteria:
           - condition: $statusCode == 404
 
+  - workflowId: create-user-moderation-not-in-instance
+    summary: createUserModeration refuses a user who is not in the instance it names
+    inputs:
+      type: object
+      required:
+        - friendId
+      properties:
+        friendId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: create-user-moderation
+        operationId: $sourceDescriptions.default.createUserModeration
+        parameters:
+          - name: userId
+            in: path
+            value: $inputs.friendId
+        requestBody:
+          contentType: application/json
+          payload:
+            instanceId: $steps.create-instance.outputs.instanceId
+            reason: x
+            type: kick
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'You cannot moderate this user․'
+
   - workflowId: create-user-moderation-self
     summary: createUserModeration refuses the caller as its target
     parameters:
