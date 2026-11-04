@@ -2,7 +2,7 @@ openapi: 3.2.1
 info:
   title: playermoderation
   description: |-
-    There are two different moderation API's, "moderation" for Staff actions, and "playermoderation" for players.
+    There are two kinds of moderation here: player moderations, and moderations created through `createUserModeration`, such as an instance kick.
     PlayerModerations are user-generated actions towards others, such as muting them, blocking, or toggling interaction.
 
     Your global permission settings are stored locally on your computer.
@@ -130,6 +130,34 @@ paths:
           $ref: ../responses/RequestValidationError.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  "/user/{userId}/moderations":
+    parameters:
+      - $ref: ../parameters.yaml#/userId
+    post:
+      operationId: createUserModeration
+      summary: Create User Moderation
+      description: With `type` `kick`, bans the user in the path from the instance given by `worldId` and `instanceId`. The user is not removed from the instance, but cannot join it again, even by invite.
+      tags:
+        - playermoderation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateUserModerationRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/playermoderation/CreateUserModerationResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/playermoderation/CreateUserModerationForbiddenError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
 components:
   securitySchemes:
     $ref: ../securitySchemes.yaml
