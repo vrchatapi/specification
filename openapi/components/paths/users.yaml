@@ -109,8 +109,6 @@ paths:
           $ref: ../responses/users/CreateUserModerationForbiddenError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
-        "429":
-          $ref: ../responses/users/CreateUserModerationRateLimitError.yaml
   /userNotes:
     get:
       operationId: getUserNotes

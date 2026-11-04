@@ -14073,7 +14073,7 @@ workflows:
           - condition: $statusCode == 404
 
   - workflowId: create-user-moderation-self
-    summary: createUserModeration refuses the caller as its target, and rate limits a second attempt
+    summary: createUserModeration refuses the caller as its target
     parameters:
       - reference: $components.parameters.userAgent
     x-security:
@@ -14095,21 +14095,6 @@ workflows:
         successCriteria:
           - condition: $statusCode == 403
           - condition: $response.body#/error/message == 'You cannot moderate this user․'
-
-      - stepId: create-user-moderation-rate-limited
-        operationId: $sourceDescriptions.default.createUserModeration
-        parameters:
-          - name: userId
-            in: path
-            value: $workflows.session.outputs.userId
-        requestBody:
-          contentType: application/json
-          payload:
-            reason: x
-            type: kick
-        successCriteria:
-          - condition: $statusCode == 429
-          - condition: $response.body#/error/message == 'Too many moderations being created at one player․'
 
   - workflowId: create-user-moderation-unauthenticated
     summary: createUserModeration refuses an anonymous caller
