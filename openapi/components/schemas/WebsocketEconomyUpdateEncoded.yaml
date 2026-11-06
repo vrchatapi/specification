@@ -1,0 +1,14 @@
+title: WebsocketEconomyUpdateEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketEconomyUpdate.yaml
+    x-vrchat-double-encoding-type: WebsocketEconomyUpdate
+  type:
+    const: economy-update
+required:
+  - content
+  - type

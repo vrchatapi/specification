@@ -1,0 +1,14 @@
+title: WebsocketInstanceClosedEncoded
+type: object
+properties:
+  content:
+    type: string
+    contentMediaType: application/json
+    contentSchema:
+      $ref: ./WebsocketInstanceClosed.yaml
+    x-vrchat-double-encoding-type: WebsocketInstanceClosed
+  type:
+    const: instance-closed
+required:
+  - content
+  - type

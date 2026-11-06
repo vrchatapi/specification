@@ -1,0 +1,9 @@
+title: WebsocketMessageError
+type: object
+description: A websocket message, which indicates that some sort of error has occurred
+additionalProperties: true
+properties:
+  err:
+    type: string
+required:
+  - err

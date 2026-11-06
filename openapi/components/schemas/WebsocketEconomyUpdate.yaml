@@ -1,0 +1,7 @@
+title: WebsocketEconomyUpdate
+type: object
+properties:
+  dirtyPurchases:
+    type: boolean
+required:
+  - dirtyPurchases

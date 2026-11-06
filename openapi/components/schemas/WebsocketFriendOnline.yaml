@@ -7,10 +7,13 @@ properties:
     $ref: ./LocationID.yaml
   platform:
     $ref: ./Platform.yaml
+  user:
+    $ref: ./User.yaml
   userId:
     $ref: ./UserID.yaml
 required:
   - canRequestInvite
   - location
   - platform
+  - user
   - userId

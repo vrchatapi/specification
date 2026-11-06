@@ -1,0 +1,5 @@
+title: WebsocketMessageUntyped
+description: A websocket message whose `type` is unknown or missing
+anyOf:
+  - $ref: ./WebsocketMessageError.yaml
+  - $ref: ./WebsocketMessageUnknown.yaml
