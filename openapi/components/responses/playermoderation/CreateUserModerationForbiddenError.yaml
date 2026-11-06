@@ -1,0 +1,11 @@
+description: Error response when the user in the path can't be moderated, such as when they aren't in the instance given by `worldId` and `instanceId`, either of those is missing, or the user is you.
+content:
+  application/json:
+    examples:
+      Cannot Moderate User:
+        value:
+          error:
+            message: You cannot moderate this user․
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

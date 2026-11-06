@@ -1,0 +1,5 @@
+description: Returns the ID of the created moderation.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/CreateUserModerationResponse.yaml

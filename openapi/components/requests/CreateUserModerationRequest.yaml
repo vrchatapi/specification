@@ -1,0 +1,19 @@
+title: CreateUserModerationRequest
+type: object
+properties:
+  expires:
+    type: string
+    format: date-time
+  instanceId:
+    $ref: ../schemas/InstanceID.yaml
+  isPermanent:
+    type: boolean
+  reason:
+    type: string
+  type:
+    $ref: ../schemas/CreateUserModerationRequestType.yaml
+  worldId:
+    $ref: ../schemas/WorldID.yaml
+required:
+  - reason
+  - type

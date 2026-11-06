@@ -14025,6 +14025,138 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: create-user-moderation-invalid-type
+    summary: createUserModeration refuses a type it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-user-moderation
+        operationId: $sourceDescriptions.default.createUserModeration
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            reason: x
+            type: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'type must be one of ［＂ban＂‚＂note＂‚＂warning＂‚＂nuisance＂‚＂hardban＂‚＂kick＂‚＂warn＂‚＂banpubliconly＂‚＂publicinstance＂‚＂avatar＂‚＂world＂‚＂event＂‚＂group＂‚＂voice＂‚＂chat＂‚＂profile＂‚＂sticker＂‚＂emoji＂‚＂gallery＂‚＂print＂‚＂icon＂］‚ not ＂x＂'
+
+  - workflowId: create-user-moderation-not-found
+    summary: createUserModeration refuses a user that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-user-moderation
+        operationId: $sourceDescriptions.default.createUserModeration
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            reason: x
+            type: kick
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: create-user-moderation-not-in-instance
+    summary: createUserModeration refuses a user who is not in the instance it names
+    inputs:
+      type: object
+      required:
+        - friendId
+      properties:
+        friendId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: create-user-moderation
+        operationId: $sourceDescriptions.default.createUserModeration
+        parameters:
+          - name: userId
+            in: path
+            value: $inputs.friendId
+        requestBody:
+          contentType: application/json
+          payload:
+            instanceId: $steps.create-instance.outputs.instanceId
+            reason: x
+            type: kick
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'You cannot moderate this user․'
+
+  - workflowId: create-user-moderation-self
+    summary: createUserModeration refuses the caller as its target
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-user-moderation
+        operationId: $sourceDescriptions.default.createUserModeration
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            reason: x
+            type: kick
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'You cannot moderate this user․'
+
+  - workflowId: create-user-moderation-unauthenticated
+    summary: createUserModeration refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-user-moderation
+        operationId: $sourceDescriptions.default.createUserModeration
+        parameters:
+          - name: userId
+            in: path
+            value: usr_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: delete-all-user-persistence-data-unauthenticated
     summary: deleteAllUserPersistenceData refuses an anonymous caller
     parameters:
