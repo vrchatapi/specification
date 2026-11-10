@@ -36,5 +36,3 @@ properties:
       $ref: ./WorldID.yaml
   worldPool:
     $ref: ./InstanceDiscoveryWorldPool.yaml
-required:
-  - n
