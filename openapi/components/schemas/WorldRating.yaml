@@ -1,0 +1,10 @@
+title: WorldRating
+type: object
+additionalProperties: false
+properties:
+  value:
+    anyOf:
+      - $ref: ./WorldRatingValue.yaml
+      - type: "null"
+required:
+  - value

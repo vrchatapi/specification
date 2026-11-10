@@ -1,0 +1,7 @@
+title: SetWorldRatingRequest
+type: object
+properties:
+  value:
+    $ref: ../schemas/WorldRatingValue.yaml
+required:
+  - value

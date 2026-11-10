@@ -526,5 +526,7 @@
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1platform~1{publishedPlatform}"
 "/worlds/{worldId}/publish":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1publish"
+"/worlds/{worldId}/rating":
+  $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1rating"
 "/worlds/{worldId}/{instanceId}":
   $ref: "./paths/worlds.yaml#/paths/~1worlds~1{worldId}~1{instanceId}"

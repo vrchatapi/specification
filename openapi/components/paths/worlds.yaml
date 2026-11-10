@@ -350,6 +350,62 @@ paths:
           $ref: ../responses/MissingCredentialsError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
+  "/worlds/{worldId}/rating":
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+    get:
+      operationId: getWorldRating
+      summary: Get World Rating
+      description: Returns the rating the current user has given a world. `value` is `null` for a world they have not rated, and for a world ID no world carries.
+      tags:
+        - worlds
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/worlds/WorldRatingResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
+    put:
+      operationId: setWorldRating
+      summary: Set World Rating
+      description: Rates a world as the current user, replacing any rating they gave it before.
+      tags:
+        - worlds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/SetWorldRatingRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/worlds/WorldRatingResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
+    delete:
+      operationId: deleteWorldRating
+      summary: Delete World Rating
+      description: Removes the rating the current user has given a world.
+      tags:
+        - worlds
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/worlds/WorldRatingResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/worlds/{worldId}/{instanceId}":
     parameters:
       - $ref: ../parameters.yaml#/worldId

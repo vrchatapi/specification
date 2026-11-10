@@ -1,0 +1,6 @@
+title: WorldRatingValue
+enum:
+  - dislike
+  - like
+examples:
+  - like

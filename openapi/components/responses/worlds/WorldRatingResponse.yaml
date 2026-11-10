@@ -1,0 +1,11 @@
+content:
+  application/json:
+    examples:
+      Liked:
+        value:
+          value: like
+      Unrated:
+        value:
+          value: null
+    schema:
+      $ref: ../../schemas/WorldRating.yaml

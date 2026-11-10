@@ -17988,6 +17988,229 @@ workflows:
         successCriteria:
           - condition: $statusCode == 404
 
+  - workflowId: world-rating-lifecycle
+    summary: Likes a world, dislikes it, then removes the rating
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: delete-world-rating
+    steps:
+      - stepId: like-world
+        operationId: $sourceDescriptions.default.setWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        requestBody:
+          contentType: application/json
+          payload:
+            value: like
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/value == 'like'
+
+      - stepId: liked-world-rating
+        operationId: $sourceDescriptions.default.getWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/value == 'like'
+
+      - stepId: dislike-world
+        operationId: $sourceDescriptions.default.setWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        requestBody:
+          contentType: application/json
+          payload:
+            value: dislike
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/value == 'dislike'
+
+      - stepId: delete-world-rating
+        operationId: $sourceDescriptions.default.deleteWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/value == null
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: unrated-world-rating
+        operationId: $sourceDescriptions.default.getWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/value == null
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: get-world-rating-nonexistent
+    summary: getWorldRating answers for a well-formed ID no world carries
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: world-rating
+        operationId: $sourceDescriptions.default.getWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/value == null
+
+  - workflowId: get-world-rating-not-found
+    summary: getWorldRating refuses an ID that is not a world ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: world-rating
+        operationId: $sourceDescriptions.default.getWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: x
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: get-world-rating-unauthenticated
+    summary: getWorldRating refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: world-rating
+        operationId: $sourceDescriptions.default.getWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: set-world-rating-invalid-value
+    summary: setWorldRating refuses a value it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: set-world-rating
+        operationId: $sourceDescriptions.default.setWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        requestBody:
+          contentType: application/json
+          payload:
+            value: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'value must be one of ［＂like＂‚＂dislike＂］‚ not ＂x＂'
+
+  - workflowId: set-world-rating-not-found
+    summary: setWorldRating refuses an ID that is not a world ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: set-world-rating
+        operationId: $sourceDescriptions.default.setWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: x
+        requestBody:
+          contentType: application/json
+          payload:
+            value: like
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: set-world-rating-unauthenticated
+    summary: setWorldRating refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: set-world-rating
+        operationId: $sourceDescriptions.default.setWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        requestBody:
+          contentType: application/json
+          payload:
+            value: like
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: delete-world-rating-not-found
+    summary: deleteWorldRating refuses an ID that is not a world ID
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-world-rating
+        operationId: $sourceDescriptions.default.deleteWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: x
+        successCriteria:
+          - condition: $statusCode == 404
+
+  - workflowId: delete-world-rating-unauthenticated
+    summary: deleteWorldRating refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: delete-world-rating
+        operationId: $sourceDescriptions.default.deleteWorldRating
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: get-world-publish-status
     summary: World publish status
     parameters:
