@@ -1,0 +1,8 @@
+title: CreateInstanceRequestMinimumAvatarPerformance
+enum:
+  - Good
+  - Medium
+  - None
+  - Poor
+examples:
+  - Good

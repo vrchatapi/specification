@@ -10334,6 +10334,150 @@ workflows:
           - name: stop
             type: end
 
+  - workflowId: create-instance-with-languages
+    summary: Creates an instance carrying a language, then closes it
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+            languages:
+              - ja
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/creationLanguages/0 == 'ja'
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: create-instance-invalid-language
+    summary: createInstance refuses a language that is not a BCP-47 tag
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+            languages:
+              - x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "languages array entry errors˸ ［ 'languages entry' Not a well-formed BCP-47 language tag˸ x ］"
+
+  - workflowId: create-instance-with-minimum-avatar-performance
+    summary: Creates an instance carrying a minimum avatar performance, then closes it
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+            minimumAvatarPerformance: Good
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/minimumAvatarPerformance == 'Good'
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: create-instance-invalid-minimum-avatar-performance
+    summary: createInstance refuses a minimum avatar performance it does not know
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: private
+            region: use
+            ownerId: $workflows.session.outputs.userId
+            minimumAvatarPerformance: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'minimumAvatarPerformance must be one of ［＂None＂‚＂Poor＂‚＂Medium＂‚＂Good＂］‚ not ＂x＂'
+
   - workflowId: create-instance-friends
     summary: Creates a friends instance, then closes it
     parameters:

@@ -35,6 +35,13 @@ properties:
   inviteOnly:
     type: boolean
     default: false
+  languages:
+    type: array
+    description: Returned as the instance's `creationLanguages`.
+    items:
+      $ref: ../schemas/LanguageTag.yaml
+  minimumAvatarPerformance:
+    $ref: ../schemas/CreateInstanceRequestMinimumAvatarPerformance.yaml
   ownerId:
     $ref: ../schemas/InstanceOwnerId.yaml
   playerPersistenceEnabled:
