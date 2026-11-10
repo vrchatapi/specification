@@ -7,6 +7,10 @@ properties:
   events:
     type: integer
     minimum: 0
+  friendIcons:
+    type: array
+    items:
+      $ref: ./Unknown.yaml
   friends:
     type: integer
     minimum: 0
@@ -21,6 +25,7 @@ properties:
 required:
   - asOf
   - events
+  - friendIcons
   - friends
   - friendsEntryId
   - instances
