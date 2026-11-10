@@ -8,6 +8,10 @@ properties:
     default: true
     examples:
       - true
+  calendarEntryId:
+    anyOf:
+      - $ref: ./CalendarID.yaml
+      - type: "null"
   capacity:
     type: integer
     examples:
@@ -156,6 +160,7 @@ properties:
 required:
   - accessType
   - active
+  - calendarEntryId
   - capacity
   - categoryId
   - creationLanguages
