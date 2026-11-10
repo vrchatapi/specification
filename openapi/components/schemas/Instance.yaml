@@ -48,8 +48,9 @@ properties:
     $ref: ./InstanceContentSettings.yaml
   creationLanguages:
     type: array
+    description: The `languages` the instance was created with.
     items:
-      $ref: ./Unknown.yaml
+      $ref: ./LanguageTag.yaml
   creatorId:
     anyOf:
       - $ref: ./UserID.yaml
@@ -71,7 +72,8 @@ properties:
       - $ref: ./InstanceVibeID.yaml
       - type: "null"
   dominantLanguage:
-    type: string
+    $ref: ./LanguageTag.yaml
+    description: Empty while the instance has no users.
   friends:
     $ref: ./UserID.yaml
   full:
@@ -105,9 +107,7 @@ properties:
     type: array
     description: The keys of languageRatio, ordered by their share of the instance.
     items:
-      type: string
-      examples:
-        - en
+      $ref: ./LanguageTag.yaml
   languagesIso639:
     type: array
     items:

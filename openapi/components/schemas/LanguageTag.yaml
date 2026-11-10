@@ -1,0 +1,6 @@
+title: LanguageTag
+type: string
+description: A BCP-47 language tag.
+examples:
+  - en
+  - pt-BR
