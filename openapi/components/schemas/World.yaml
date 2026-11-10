@@ -1,6 +1,10 @@
 title: World
 type: object
 properties:
+  authorIconUrl:
+    type: string
+    examples:
+      - https://api.vrchat.cloud/api/1/image/file_115069da-fddc-45f2-b23b-caf88d69a3b4/1/256
   authorId:
     $ref: ./UserID.yaml
   authorName:
@@ -118,6 +122,10 @@ properties:
       $ref: ./WorldSlimInstance.yaml
   storeId:
     $ref: ./StoreID.yaml
+  supportedPlatforms:
+    type: array
+    items:
+      $ref: ./Platform.yaml
   tags:
     type: array
     items:
@@ -170,6 +178,7 @@ required:
   - publicationDate
   - recommendedCapacity
   - releaseStatus
+  - supportedPlatforms
   - tags
   - thumbnailImageUrl
   - updated_at

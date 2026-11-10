@@ -90,6 +90,10 @@ properties:
     $ref: ./ReleaseStatus.yaml
   storeId:
     $ref: ./StoreID.yaml
+  supportedPlatforms:
+    type: array
+    items:
+      $ref: ./Platform.yaml
   tags:
     type: array
     items:

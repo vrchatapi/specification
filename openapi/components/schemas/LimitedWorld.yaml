@@ -81,6 +81,10 @@ properties:
     $ref: ./ReleaseStatus.yaml
   storeId:
     $ref: ./StoreID.yaml
+  supportedPlatforms:
+    type: array
+    items:
+      $ref: ./Platform.yaml
   tags:
     type: array
     items:
@@ -122,6 +126,7 @@ required:
   - popularity
   - publicationDate
   - releaseStatus
+  - supportedPlatforms
   - tags
   - thumbnailImageUrl
   - unityPackages
