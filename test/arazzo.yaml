@@ -14191,7 +14191,7 @@ workflows:
             type: x
         successCriteria:
           - condition: $statusCode == 400
-          - condition: $response.body#/error/message == 'type must be one of ［＂ban＂‚＂note＂‚＂warning＂‚＂nuisance＂‚＂hardban＂‚＂kick＂‚＂warn＂‚＂banpubliconly＂‚＂publicinstance＂‚＂avatar＂‚＂world＂‚＂event＂‚＂group＂‚＂voice＂‚＂chat＂‚＂profile＂‚＂sticker＂‚＂emoji＂‚＂gallery＂‚＂print＂‚＂icon＂］‚ not ＂x＂'
+          - condition: $response.body#/error/message == 'type must be one of ［＂ban＂‚＂note＂‚＂warning＂‚＂nuisance＂‚＂hardban＂‚＂kick＂‚＂warn＂‚＂banpubliconly＂‚＂publicinstance＂‚＂avatar＂‚＂world＂‚＂event＂‚＂group＂‚＂voice＂‚＂chat＂‚＂profile＂‚＂sticker＂‚＂emoji＂‚＂gallery＂‚＂print＂‚＂icon＂‚＂userimage＂］‚ not ＂x＂'
 
   - workflowId: create-user-moderation-not-found
     summary: createUserModeration refuses a user that does not exist

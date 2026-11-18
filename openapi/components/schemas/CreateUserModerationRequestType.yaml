@@ -17,6 +17,7 @@ enum:
   - profile
   - publicinstance
   - sticker
+  - userimage
   - voice
   - warn
   - warning
