@@ -49,6 +49,10 @@ properties:
     type: array
     items:
       $ref: ./Unknown.yaml
+  friendOccupants:
+    type: array
+    items:
+      $ref: ./Unknown.yaml
   full:
     type: boolean
     default: false
@@ -169,6 +173,7 @@ required:
   - displayVibeId
   - dominantLanguage
   - friendIcons
+  - friendOccupants
   - full
   - id
   - instanceId
