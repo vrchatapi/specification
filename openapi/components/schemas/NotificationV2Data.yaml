@@ -6,3 +6,4 @@ oneOf:
   - $ref: ./NotificationV2DataEventAnnouncement.yaml
   - $ref: ./NotificationV2DataGroupInformative.yaml
   - $ref: ./NotificationV2DataGroupTransfer.yaml
+  - $ref: ./NotificationV2DataInstanceAnnouncement.yaml

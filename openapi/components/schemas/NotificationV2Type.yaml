@@ -15,6 +15,7 @@ enum:
   - group.joinRequest
   - group.post
   - group.transfer
+  - instance.announcement
   - invite.instance.contentGated
   - moderation.contentrestriction
   - moderation.notice

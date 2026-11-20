@@ -1,0 +1,16 @@
+title: NotificationV2DataInstanceAnnouncement
+type: object
+properties:
+  groupId:
+    $ref: ./GroupID.yaml
+  instanceId:
+    $ref: ./InstanceID.yaml
+  instanceLocation:
+    $ref: ./LocationID.yaml
+  worldId:
+    $ref: ./WorldID.yaml
+required:
+  - groupId
+  - instanceId
+  - instanceLocation
+  - worldId

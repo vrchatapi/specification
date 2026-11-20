@@ -93,7 +93,6 @@ required:
   - canDelete
   - category
   - createdAt
-  - displayCategory
   - expiresAt
   - expiryAfterSeen
   - id

@@ -169,5 +169,3 @@ WebsocketUserUpdate:
   $ref: ./WebsocketUserUpdate.yaml
 WebsocketUserUpdateEncoded:
   $ref: ./WebsocketUserUpdateEncoded.yaml
-WebsocketUserUpdateUser:
-  $ref: ./WebsocketUserUpdateUser.yaml
