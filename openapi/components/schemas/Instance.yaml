@@ -72,10 +72,10 @@ properties:
       - $ref: ./InstanceVibeID.yaml
       - type: "null"
   dominantLanguage:
+    description: Empty while the instance has no users.
     anyOf:
       - $ref: ./LanguageTag.yaml
       - type: "null"
-    description: Empty while the instance has no users.
   friends:
     $ref: ./UserID.yaml
   full:
