@@ -380,6 +380,10 @@
   $ref: "./paths/economy.yaml#/paths/~1products"
 "/products/{productId}":
   $ref: "./paths/economy.yaml#/paths/~1products~1{productId}"
+/profile/theme:
+  $ref: "./paths/users.yaml#/paths/~1profile~1theme"
+"/profile/theme/{themeId}":
+  $ref: "./paths/users.yaml#/paths/~1profile~1theme~1{themeId}"
 "/profile/{userId}":
   $ref: "./paths/users.yaml#/paths/~1profile~1{userId}"
 "/profile/{userId}/private":

@@ -1,0 +1,18 @@
+title: CreateProfileThemeRequest
+type: object
+properties:
+  buttonColor:
+    $ref: ../schemas/Color.yaml
+  iconColor:
+    $ref: ../schemas/Color.yaml
+  name:
+    type: string
+    maxLength: 12
+    minLength: 1
+  subtextColor:
+    $ref: ../schemas/Color.yaml
+required:
+  - buttonColor
+  - iconColor
+  - name
+  - subtextColor

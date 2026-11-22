@@ -18,6 +18,70 @@ paths:
           $ref: ../responses/users/AgeVerificationStatusResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /profile/theme:
+    post:
+      operationId: createProfileTheme
+      summary: Create Profile Theme
+      description: Creates a profile theme owned by the current user. `updateProfile` selects it by `themeId`, and its response lists the user's themes.
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateProfileThemeRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/ProfileThemeResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+  "/profile/theme/{themeId}":
+    parameters:
+      - $ref: ../parameters.yaml#/profileThemeId
+    put:
+      operationId: updateProfileTheme
+      summary: Update Profile Theme
+      description: Updates a profile theme owned by the current user. Properties left out keep their value.
+      tags:
+        - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/UpdateProfileThemeRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/ProfileThemeOkResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
+    delete:
+      operationId: deleteProfileTheme
+      summary: Delete Profile Theme
+      description: Deletes a profile theme owned by the current user.
+      tags:
+        - users
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/users/ProfileThemeOkResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "404":
+          $ref: ../responses/ResourceNotFoundError.yaml
   "/profile/{userId}":
     parameters:
       - $ref: ../parameters.yaml#/userId

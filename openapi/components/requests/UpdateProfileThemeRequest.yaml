@@ -1,0 +1,12 @@
+title: UpdateProfileThemeRequest
+type: object
+properties:
+  buttonColor:
+    $ref: ../schemas/Color.yaml
+  iconColor:
+    $ref: ../schemas/Color.yaml
+  name:
+    type: string
+    maxLength: 12
+  subtextColor:
+    $ref: ../schemas/Color.yaml

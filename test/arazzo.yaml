@@ -19526,6 +19526,307 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/themeId == 'default'
 
+  - workflowId: profile-theme-lifecycle
+    summary: Creates a profile theme, selects it, recolours it, then deletes it
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: select-default-theme
+    steps:
+      - stepId: create-theme
+        operationId: $sourceDescriptions.default.createProfileTheme
+        requestBody:
+          contentType: application/json
+          payload:
+            name: spec-test
+            buttonColor: 3cc92c
+            iconColor: ffffff
+            subtextColor: "000000"
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/name == 'spec-test'
+          - condition: $response.body#/buttonColor == '3cc92c'
+          - condition: $response.body#/iconColor == 'ffffff'
+          - condition: $response.body#/subtextColor == '000000'
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          themeId: $response.body#/id
+
+      - stepId: select-theme
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            themeId: $steps.create-theme.outputs.themeId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/themeId == $steps.create-theme.outputs.themeId
+          - condition: $response.body#/themeButtonColor == '3cc92c'
+
+      - stepId: update-theme
+        operationId: $sourceDescriptions.default.updateProfileTheme
+        parameters:
+          - name: themeId
+            in: path
+            value: $steps.create-theme.outputs.themeId
+        requestBody:
+          contentType: application/json
+          payload:
+            name: spec-renamed
+            buttonColor: "000000"
+        successCriteria:
+          - condition: $statusCode == 200
+
+      - stepId: read-updated-theme
+        operationId: $sourceDescriptions.default.getPublicProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/themeButtonColor == '000000'
+          - condition: $response.body#/themeIconColor == 'ffffff'
+
+      - stepId: refuse-invalid-update
+        operationId: $sourceDescriptions.default.updateProfileTheme
+        parameters:
+          - name: themeId
+            in: path
+            value: $steps.create-theme.outputs.themeId
+        requestBody:
+          contentType: application/json
+          payload:
+            name: specification-test-too-long
+            buttonColor: fff
+            iconColor: fff
+            subtextColor: fff
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "name exceeds maximum string length˸ 'specification-test-too-long'‚ 'iconColor' must be a full hex color code without ＃ prefix˸ 'fff'‚ 'buttonColor' must be a full hex color code without ＃ prefix˸ 'fff'‚ 'subtextColor' must be a full hex color code without ＃ prefix˸ 'fff'"
+
+      - stepId: select-default-theme
+        operationId: $sourceDescriptions.default.updateProfile
+        parameters:
+          - name: userId
+            in: path
+            value: $workflows.session.outputs.userId
+        requestBody:
+          contentType: application/json
+          payload:
+            themeId: default
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/themeId == 'default'
+          - condition: $response.body#/themes/0/name == 'spec-renamed'
+        onFailure:
+          - name: continue
+            type: goto
+            stepId: delete-theme
+
+      - stepId: delete-theme
+        operationId: $sourceDescriptions.default.deleteProfileTheme
+        parameters:
+          - name: themeId
+            in: path
+            value: $steps.create-theme.outputs.themeId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+      - stepId: delete-theme-again
+        operationId: $sourceDescriptions.default.deleteProfileTheme
+        parameters:
+          - name: themeId
+            in: path
+            value: $steps.create-theme.outputs.themeId
+        successCriteria:
+          - condition: $statusCode == 404
+          - condition: $response.body#/error/message == 'Theme Not Found'
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: create-profile-theme-invalid-body
+    summary: createProfileTheme refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-theme
+        operationId: $sourceDescriptions.default.createProfileTheme
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "name is required․‚ name must be a string˸ 'undefined' - 'undefined'‚ 'iconColor' is required‚ 'buttonColor' is required‚ 'subtextColor' is required"
+
+  - workflowId: create-profile-theme-invalid-values
+    summary: createProfileTheme refuses a long name and colours that are not six hexadecimal digits
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-theme
+        operationId: $sourceDescriptions.default.createProfileTheme
+        requestBody:
+          contentType: application/json
+          payload:
+            name: specification-test-too-long
+            buttonColor: ffffffff
+            iconColor: fff
+            subtextColor: FFFFFF
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "name exceeds maximum string length˸ 'specification-test-too-long'‚ 'iconColor' must be a full hex color code without ＃ prefix˸ 'fff'‚ 'buttonColor' must be a full hex color code without ＃ prefix˸ 'ffffffff'"
+
+  - workflowId: create-profile-theme-blank-name
+    summary: createProfileTheme refuses an empty name
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: create-theme
+        operationId: $sourceDescriptions.default.createProfileTheme
+        requestBody:
+          contentType: application/json
+          payload:
+            name: ""
+            buttonColor: 3cc92c
+            iconColor: ffffff
+            subtextColor: "000000"
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'name cannot be blank․'
+
+  - workflowId: create-profile-theme-unauthenticated
+    summary: createProfileTheme refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: create-theme
+        operationId: $sourceDescriptions.default.createProfileTheme
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: update-profile-theme-not-found
+    summary: updateProfileTheme refuses a theme that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-theme
+        operationId: $sourceDescriptions.default.updateProfileTheme
+        parameters:
+          - name: themeId
+            in: path
+            value: pft_00000000-0000-0000-0000-000000000000
+        requestBody:
+          contentType: application/json
+          payload:
+            name: x
+        successCriteria:
+          - condition: $statusCode == 404
+          - condition: $response.body#/error/message == 'Theme Not Found'
+
+  - workflowId: update-profile-theme-invalid-id
+    summary: updateProfileTheme refuses a theme ID of the wrong format
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: update-theme
+        operationId: $sourceDescriptions.default.updateProfileTheme
+        parameters:
+          - name: themeId
+            in: path
+            value: default
+        requestBody:
+          contentType: application/json
+          payload:
+            name: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "themeId must be an ID˸ 'default'"
+
+  - workflowId: update-profile-theme-unauthenticated
+    summary: updateProfileTheme refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: update-theme
+        operationId: $sourceDescriptions.default.updateProfileTheme
+        parameters:
+          - name: themeId
+            in: path
+            value: pft_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: delete-profile-theme-not-found
+    summary: deleteProfileTheme refuses a theme that does not exist
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: delete-theme
+        operationId: $sourceDescriptions.default.deleteProfileTheme
+        parameters:
+          - name: themeId
+            in: path
+            value: pft_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 404
+          - condition: $response.body#/error/message == 'Theme Not Found'
+
+  - workflowId: delete-profile-theme-unauthenticated
+    summary: deleteProfileTheme refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: delete-theme
+        operationId: $sourceDescriptions.default.deleteProfileTheme
+        parameters:
+          - name: themeId
+            in: path
+            value: pft_00000000-0000-0000-0000-000000000000
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: update-profile-unauthenticated
     summary: updateProfile refuses an anonymous caller
     parameters:

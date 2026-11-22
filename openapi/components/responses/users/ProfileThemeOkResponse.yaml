@@ -1,0 +1,5 @@
+description: The profile theme was changed.
+content:
+  text/plain:
+    schema:
+      const: ok

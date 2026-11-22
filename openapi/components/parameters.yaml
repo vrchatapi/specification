@@ -969,6 +969,13 @@ productPurchaseId:
   in: path
   schema:
     $ref: ./schemas/ProductPurchaseID.yaml
+profileThemeId:
+  name: themeId
+  description: Must be a valid profile theme ID.
+  required: true
+  in: path
+  schema:
+    $ref: ./schemas/ProfileThemeID.yaml
 propId:
   name: propId
   description: Prop ID.
