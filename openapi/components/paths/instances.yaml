@@ -17,6 +17,20 @@ paths:
       responses:
         "200":
           $ref: ../responses/instances/InstanceCategoryListResponse.yaml
+  /instanceOptions:
+    get:
+      operationId: getInstanceOptions
+      summary: Get Instance Options
+      description: Returns the categories an instance can be listed under and the vibes it can be tagged with, in one response.
+      tags:
+        - instances
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceOptionsResponse.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   /instanceVibes:
     get:
       operationId: getInstanceVibes
@@ -255,6 +269,33 @@ paths:
           $ref: ../responses/instances/InstanceCloseForbiddenError.yaml
         "404":
           $ref: ../responses/ResourceNotFoundError.yaml
+  "/instances/{worldId}:{instanceId}/announce":
+    parameters:
+      - $ref: ../parameters.yaml#/worldId
+      - $ref: ../parameters.yaml#/instanceId
+    post:
+      operationId: createInstanceAnnouncement
+      summary: Create Instance Announcement
+      description: Sends an announcement to a group instance. The caller must be present in the instance.
+      tags:
+        - instances
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../requests/CreateInstanceAnnouncementRequest.yaml
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/instances/InstanceAnnouncementResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
+        "403":
+          $ref: ../responses/instances/InstanceAnnouncementForbiddenError.yaml
   "/instances/{worldId}:{instanceId}/shortName":
     parameters:
       - $ref: ../parameters.yaml#/worldId

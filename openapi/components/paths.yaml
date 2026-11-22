@@ -270,6 +270,8 @@
   $ref: "./paths/miscellaneous.yaml#/paths/~1infoPush~1{entryId}~1content"
 /instanceCategories:
   $ref: "./paths/instances.yaml#/paths/~1instanceCategories"
+/instanceOptions:
+  $ref: "./paths/instances.yaml#/paths/~1instanceOptions"
 /instanceVibes:
   $ref: "./paths/instances.yaml#/paths/~1instanceVibes"
 /instances:
@@ -286,6 +288,8 @@
   $ref: "./paths/instances.yaml#/paths/~1instances~1s~1{shortName}"
 "/instances/{worldId}:{instanceId}":
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}"
+"/instances/{worldId}:{instanceId}/announce":
+  $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1announce"
 "/instances/{worldId}:{instanceId}/shortName":
   $ref: "./paths/instances.yaml#/paths/~1instances~1{worldId}:{instanceId}~1shortName"
 /inventory:

@@ -1,0 +1,15 @@
+title: InstanceOptions
+type: object
+description: The categories an instance can be listed under and the vibes it can be tagged with.
+properties:
+  categories:
+    type: array
+    items:
+      $ref: ./InstanceCategory.yaml
+  vibes:
+    type: array
+    items:
+      $ref: ./InstanceVibe.yaml
+required:
+  - categories
+  - vibes

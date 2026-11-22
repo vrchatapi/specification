@@ -10237,6 +10237,199 @@ workflows:
           - condition: $statusCode == 200
           - condition: $response.body#/0/id != null
 
+  - workflowId: get-instance-options
+    summary: Instance options carry the categories and the vibes
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: instance-options
+        operationId: $sourceDescriptions.default.getInstanceOptions
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/categories/0/id != null
+          - condition: $response.body#/vibes/0/id != null
+
+  - workflowId: get-instance-options-unauthenticated
+    summary: getInstanceOptions refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: instance-options
+        operationId: $sourceDescriptions.default.getInstanceOptions
+        successCriteria:
+          - condition: $statusCode == 401
+
+  - workflowId: create-instance-announcement-not-present
+    summary: createInstanceAnnouncement refuses a caller who is not in the group instance
+    inputs:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    failureActions:
+      - name: cleanup
+        type: goto
+        stepId: close-instance
+    steps:
+      - stepId: create-instance
+        operationId: $sourceDescriptions.default.createInstance
+        requestBody:
+          contentType: application/json
+          payload:
+            worldId: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+            type: group
+            region: use
+            ownerId: $inputs.groupId
+            groupAccessType: members
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+        outputs:
+          instanceId: $response.body#/instanceId
+
+      - stepId: announce
+        operationId: $sourceDescriptions.default.createInstanceAnnouncement
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        requestBody:
+          contentType: application/json
+          payload:
+            title: specification-test
+            message: specification-test
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'You must be present in the instance to send an announcement․'
+
+      - stepId: close-instance
+        operationId: $sourceDescriptions.default.closeInstance
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: $steps.create-instance.outputs.instanceId
+        successCriteria:
+          - condition: $statusCode == 200
+        onFailure:
+          - name: stop
+            type: end
+
+  - workflowId: create-instance-announcement-non-group-instance
+    summary: createInstanceAnnouncement refuses an instance no group owns
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: announce
+        operationId: $sourceDescriptions.default.createInstanceAnnouncement
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: "1"
+        requestBody:
+          contentType: application/json
+          payload:
+            title: specification-test
+            message: specification-test
+        successCriteria:
+          - condition: $statusCode == 403
+          - condition: $response.body#/error/message == 'Announcements can only be sent to group instances․'
+
+  - workflowId: create-instance-announcement-invalid-body
+    summary: createInstanceAnnouncement refuses a request without its required fields
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: announce
+        operationId: $sourceDescriptions.default.createInstanceAnnouncement
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: "1"
+        requestBody:
+          contentType: application/json
+          payload: {}
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'title is required․‚ message is required․'
+
+  - workflowId: create-instance-announcement-invalid-types
+    summary: createInstanceAnnouncement names the type each field takes
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: announce
+        operationId: $sourceDescriptions.default.createInstanceAnnouncement
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: "1"
+        requestBody:
+          contentType: application/json
+          payload:
+            title: 1
+            message: 1
+            imageId: 1
+            imageVersion: x
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == "title must be a string˸ '1' - 'number'‚ message must be a string˸ '1' - 'number'‚ imageId must be an ID˸ '1'‚ imageVersion must be an integer˸ 'x'"
+
+  - workflowId: create-instance-announcement-unauthenticated
+    summary: createInstanceAnnouncement refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: announce
+        operationId: $sourceDescriptions.default.createInstanceAnnouncement
+        parameters:
+          - name: worldId
+            in: path
+            value: wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b
+          - name: instanceId
+            in: path
+            value: "1"
+        requestBody:
+          contentType: application/json
+          payload:
+            title: specification-test
+            message: specification-test
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: create-instance-non-private-can-request-invite
     summary: createInstance refuses canRequestInvite outside a private instance
     parameters:

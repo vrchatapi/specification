@@ -1,0 +1,16 @@
+description: Error response when an announcement cannot be sent to the instance
+content:
+  application/json:
+    examples:
+      Non-Group Instance Example:
+        value:
+          error:
+            message: Announcements can only be sent to group instances․
+            status_code: 403
+      Not Present Example:
+        value:
+          error:
+            message: You must be present in the instance to send an announcement․
+            status_code: 403
+    schema:
+      $ref: ../../schemas/Error.yaml

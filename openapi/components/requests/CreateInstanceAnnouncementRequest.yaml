@@ -1,0 +1,14 @@
+title: CreateInstanceAnnouncementRequest
+type: object
+properties:
+  imageId:
+    type: string
+  imageVersion:
+    type: integer
+  message:
+    type: string
+  title:
+    type: string
+required:
+  - message
+  - title

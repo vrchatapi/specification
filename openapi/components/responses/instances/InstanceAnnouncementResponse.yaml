@@ -1,0 +1,5 @@
+description: The announcement was sent.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Unknown.yaml
