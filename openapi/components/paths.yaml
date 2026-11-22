@@ -202,6 +202,8 @@
   $ref: "./paths/groups.yaml#/paths/~1groups"
 /groups/roleTemplates:
   $ref: "./paths/groups.yaml#/paths/~1groups~1roleTemplates"
+/groups/strictsearch:
+  $ref: "./paths/groups.yaml#/paths/~1groups~1strictsearch"
 "/groups/{groupId}":
   $ref: "./paths/groups.yaml#/paths/~1groups~1{groupId}"
 "/groups/{groupId}/announcement":

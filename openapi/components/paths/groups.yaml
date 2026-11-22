@@ -83,6 +83,31 @@ paths:
           $ref: ../responses/groups/GroupRoleTemplatesResponse.yaml
         "401":
           $ref: ../responses/MissingCredentialsError.yaml
+  /groups/strictsearch:
+    get:
+      operationId: searchGroupsStrict
+      summary: Search Groups Strictly
+      description: Returns the groups whose short code matches the query. A query of the form `shortCode.discriminator` matches the one group carrying both.
+      tags:
+        - groups
+      parameters:
+        - name: query
+          description: A group short code, optionally followed by a full stop and a discriminator.
+          required: true
+          in: query
+          schema:
+            type: string
+        - $ref: ../parameters.yaml#/number
+        - $ref: ../parameters.yaml#/offset
+      security:
+        - authCookie: []
+      responses:
+        "200":
+          $ref: ../responses/groups/LimitedGroupListResponse.yaml
+        "400":
+          $ref: ../responses/RequestValidationError.yaml
+        "401":
+          $ref: ../responses/MissingCredentialsError.yaml
   "/groups/{groupId}":
     parameters:
       - $ref: ../parameters.yaml#/groupId

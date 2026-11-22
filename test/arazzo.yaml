@@ -9209,6 +9209,80 @@ workflows:
         successCriteria:
           - condition: $statusCode == 401
 
+  - workflowId: search-groups-strict
+    summary: Finds a group by its short code and discriminator
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-groups-strict
+        operationId: $sourceDescriptions.default.searchGroupsStrict
+        parameters:
+          - name: query
+            in: query
+            value: VRCHAT.0000
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/0/shortCode == 'VRCHAT'
+          - condition: $response.body#/0/discriminator == '0000'
+
+  - workflowId: search-groups-strict-short-code-only
+    summary: searchGroupsStrict matches a short code without a discriminator
+    parameters:
+      - reference: $components.parameters.userAgent
+    x-security:
+      - schemeName: authCookie
+        values:
+          apiKey: $workflows.session.outputs.sessionToken
+    steps:
+      - stepId: search-groups-strict
+        operationId: $sourceDescriptions.default.searchGroupsStrict
+        parameters:
+          - name: query
+            in: query
+            value: VRCHAT
+          - name: n
+            in: query
+            value: 2
+          - name: offset
+            in: query
+            value: 0
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.body#/0/id != null
+
+  - workflowId: search-groups-strict-empty-query
+    summary: searchGroupsStrict refuses an empty query
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: search-groups-strict
+        operationId: $sourceDescriptions.default.searchGroupsStrict
+        parameters:
+          - name: query
+            in: query
+            value: ""
+        successCriteria:
+          - condition: $statusCode == 400
+          - condition: $response.body#/error/message == 'query is required․'
+
+  - workflowId: search-groups-strict-unauthenticated
+    summary: searchGroupsStrict refuses an anonymous caller
+    parameters:
+      - reference: $components.parameters.userAgent
+    steps:
+      - stepId: search-groups-strict
+        operationId: $sourceDescriptions.default.searchGroupsStrict
+        parameters:
+          - name: query
+            in: query
+            value: VRCHAT.0000
+        successCriteria:
+          - condition: $statusCode == 401
+
   - workflowId: unban-group-member-not-found
     summary: unbanGroupMember refuses a resource that does not exist
     parameters:

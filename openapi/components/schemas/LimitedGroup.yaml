@@ -46,6 +46,8 @@ properties:
     anyOf:
       - $ref: ./Unknown.yaml
       - type: "null"
+  onlineMemberCount:
+    type: integer
   ownerId:
     $ref: ./UserID.yaml
   rules:
