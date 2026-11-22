@@ -10,7 +10,7 @@ properties:
   banner:
     type: string
   bannerColor:
-    $ref: ./Color.yaml
+    $ref: ./ColorOrEmpty.yaml
   bannerType:
     $ref: ./BannerType.yaml
   bannerUrl:

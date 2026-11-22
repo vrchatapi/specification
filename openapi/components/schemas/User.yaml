@@ -25,7 +25,7 @@ properties:
   appleDetails:
     $ref: ./ConnectedAccountDetails.yaml
   bannerColor:
-    $ref: ./Color.yaml
+    $ref: ./ColorOrEmpty.yaml
   bannerType:
     $ref: ./BannerType.yaml
   bannerUrl:

@@ -3,7 +3,7 @@ type: object
 description: User object received when querying your friends list
 properties:
   bannerColor:
-    $ref: ./Color.yaml
+    $ref: ./ColorOrEmpty.yaml
   bannerType:
     $ref: ./BannerType.yaml
   bannerUrl:

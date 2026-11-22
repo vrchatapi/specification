@@ -6,9 +6,9 @@ properties:
   ageVerified:
     $ref: ./AgeVerified.yaml
   backgroundGradientBottom:
-    $ref: ./Color.yaml
+    $ref: ./ColorOrEmpty.yaml
   backgroundGradientTop:
-    $ref: ./Color.yaml
+    $ref: ./ColorOrEmpty.yaml
   backgroundTemplateId:
     type: string
   backgroundTextureId:
@@ -20,7 +20,7 @@ properties:
     items:
       $ref: ./Badge.yaml
   bannerColor:
-    $ref: ./Color.yaml
+    $ref: ./ColorOrEmpty.yaml
   bannerCustomUrl:
     type: string
   bannerType:

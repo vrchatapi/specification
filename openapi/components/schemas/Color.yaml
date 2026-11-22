@@ -1,5 +1,6 @@
 title: Color
 type: string
-description: "Six hexadecimal digits, without a leading `#`. May be empty."
+description: "Six hexadecimal digits, without a leading `#`."
 examples:
   - 3cc92c
+pattern: "^[0-9A-Fa-f]{6}$"

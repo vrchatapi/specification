@@ -1,0 +1,4 @@
+title: ColorOrEmpty
+anyOf:
+  - $ref: ./Color.yaml
+  - const: ""
