@@ -1,4 +1,4 @@
 title: ColorOrEmpty
-anyOf:
-  - $ref: ./Color.yaml
-  - const: ""
+type: string
+description: "A `Color`, or an empty string."
+pattern: "^([0-9A-Fa-f]{6})?$"
