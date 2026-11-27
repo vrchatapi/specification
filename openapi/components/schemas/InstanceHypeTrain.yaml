@@ -1,0 +1,19 @@
+title: InstanceHypeTrain
+type: object
+properties:
+  current:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
+  history:
+    type: array
+    items:
+      $ref: ./HypeTrain.yaml
+  potentialTrain:
+    anyOf:
+      - $ref: ./Unknown.yaml
+      - type: "null"
+required:
+  - current
+  - history
+  - potentialTrain

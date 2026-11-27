@@ -1,0 +1,59 @@
+title: HypeTrain
+type: object
+properties:
+  campaignId:
+    type: string
+    examples:
+      - holiday-2026
+  cooldownSeconds:
+    type: integer
+    examples:
+      - 300
+  currentGiftCount:
+    type: integer
+    examples:
+      - 1
+  currentLevel:
+    type: integer
+    examples:
+      - 0
+  endDate:
+    type: string
+    examples:
+      - "2026-11-27T16:07:48.015Z"
+    format: date-time
+  hypeTrainId:
+    $ref: ./HypeTrainID.yaml
+  levels:
+    type: array
+    items:
+      $ref: ./HypeTrainLevel.yaml
+  startDate:
+    type: string
+    examples:
+      - "2026-11-27T16:02:47.916Z"
+    format: date-time
+  totalGiftContributors:
+    type: integer
+    examples:
+      - 1
+  totalGiftGoal:
+    type: integer
+    examples:
+      - 15
+  totalGiftsFromYouCount:
+    type: integer
+    examples:
+      - 0
+required:
+  - campaignId
+  - cooldownSeconds
+  - currentGiftCount
+  - currentLevel
+  - endDate
+  - hypeTrainId
+  - levels
+  - startDate
+  - totalGiftContributors
+  - totalGiftGoal
+  - totalGiftsFromYouCount

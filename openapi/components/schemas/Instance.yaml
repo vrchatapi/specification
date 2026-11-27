@@ -95,6 +95,8 @@ properties:
     type: boolean
   hidden:
     $ref: ./UserID.yaml
+  hypeTrain:
+    $ref: ./InstanceHypeTrain.yaml
   id:
     $ref: ./InstanceID.yaml
   instanceId:

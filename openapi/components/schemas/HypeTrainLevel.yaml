@@ -1,0 +1,19 @@
+title: HypeTrainLevel
+type: object
+properties:
+  giftsNeededToUnlock:
+    type: integer
+    examples:
+      - 5
+  level:
+    type: integer
+    examples:
+      - 1
+  reached:
+    type: boolean
+    examples:
+      - false
+required:
+  - giftsNeededToUnlock
+  - level
+  - reached
