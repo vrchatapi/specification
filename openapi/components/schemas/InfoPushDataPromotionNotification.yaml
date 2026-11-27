@@ -25,5 +25,4 @@ required:
   - body
   - command
   - imageUrl
-  - parameter
   - title
